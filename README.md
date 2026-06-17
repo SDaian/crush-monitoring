@@ -94,6 +94,23 @@ Reporters: `line` (console), `html` (`reports/html`), and `json`
    TEST_USER_EMAIL=...  TEST_USER_PASSWORD=...  npm run test:ui
    ```
 
+## Network access (Claude Code on the web)
+
+When running this suite from a Claude Code on the web cloud session, the
+environment's **network egress allowlist** must permit the monitored hosts in
+addition to the default trusted package registries (npm, etc. — needed for
+`npm install` and the Playwright browser download).
+
+Add the following to the environment's **Custom** allowed domains (configured
+in the cloud environment UI under **Network access**, not in this repo):
+
+| Domain                | Covers                                                        |
+| --------------------- | ------------------------------------------------------------- |
+| `*.crushsoftware.com` | `dev`, `stg`, and `prod` base URLs (see the `TARGET_ENV` table above) |
+
+With **None** or default **Trusted** access the API and UI checks cannot reach
+the target environments and will fail.
+
 ## Continuous monitoring (GitHub Actions)
 
 Two workflows in `.github/workflows/` run on a schedule across all three
