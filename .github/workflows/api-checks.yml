@@ -1,9 +1,12 @@
 name: API checks
 
 on:
-  schedule:
-    # Every 15 minutes.
-    - cron: '*/15 * * * *'
+  # PAUSED: scheduled runs are disabled until *.crushsoftware.com is reachable
+  # from CI (see README "Network access"). Re-enable by uncommenting the
+  # schedule block below. Manual runs via workflow_dispatch still work.
+  # schedule:
+  #   # Every 15 minutes.
+  #   - cron: '*/15 * * * *'
   workflow_dispatch:
 
 jobs:

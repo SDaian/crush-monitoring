@@ -123,6 +123,12 @@ non-zero if any host is unreachable, so it doubles as a CI/setup gate.
 
 ## Continuous monitoring (GitHub Actions)
 
+> **Scheduled runs are currently PAUSED.** The `schedule` triggers in both
+> workflows are commented out until `*.crushsoftware.com` is reachable from CI
+> (see [Network access](#network-access-claude-code-on-the-web)). Re-enable by
+> uncommenting the `schedule` block in each workflow. Manual
+> **workflow_dispatch** runs still work in the meantime.
+
 Two workflows in `.github/workflows/` run on a schedule across all three
 environments (`dev`, `stg`, `prod`) and can also be triggered manually via
 **workflow_dispatch**:
