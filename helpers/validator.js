@@ -59,20 +59,33 @@ export function validateSchema(data, schemaName) {
 }
 
 /**
- * Fetch a JSON endpoint with Playwright's request context, assert a 2xx
+ * Fetch a JSON endpoint with Playwright's request context, assert the expected
  * status, and validate the body against a saved schema.
+ *
+ * Some endpoints contract on a non-2xx status — e.g. an unauthenticated token
+ * refresh that is *supposed* to 401 with a structured error envelope. Pass
+ * `expectStatus` to assert that exact code; omit it to require any 2xx.
  *
  * @param {import('@playwright/test').APIRequestContext} request
  * @param {string} url - absolute or baseURL-relative endpoint path.
  * @param {string} schemaName - schema file name without ".schema.json".
+ * @param {{ expectStatus?: number }} [options]
  * @returns {Promise<object>} the parsed JSON body.
  */
-export async function checkEndpoint(request, url, schemaName) {
+export async function checkEndpoint(request, url, schemaName, { expectStatus } = {}) {
   const response = await request.get(url);
-  expect(
-    response.ok(),
-    `Expected 2xx from ${url}, got ${response.status()}`
-  ).toBeTruthy();
+
+  if (expectStatus === undefined) {
+    expect(
+      response.ok(),
+      `Expected 2xx from ${url}, got ${response.status()}`
+    ).toBeTruthy();
+  } else {
+    expect(
+      response.status(),
+      `Expected ${expectStatus} from ${url}, got ${response.status()}`
+    ).toBe(expectStatus);
+  }
 
   const body = await response.json();
   validateSchema(body, schemaName);
