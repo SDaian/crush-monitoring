@@ -1,0 +1,45 @@
+name: API checks
+
+on:
+  schedule:
+    # Every 15 minutes.
+    - cron: '*/15 * * * *'
+  workflow_dispatch:
+
+jobs:
+  api:
+    name: API schema checks (${{ matrix.env }})
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        env: [dev, stg, prod]
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run API checks
+        env:
+          TARGET_ENV: ${{ matrix.env }}
+        run: npm run test:api
+
+      - name: Slack alert on failure
+        if: failure()
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+        run: |
+          if [ -z "$SLACK_WEBHOOK_URL" ]; then
+            echo "SLACK_WEBHOOK_URL not set; skipping Slack alert."
+            exit 0
+          fi
+          curl -sf -X POST -H 'Content-type: application/json' \
+            --data "{\"text\":\":rotating_light: *API checks failed* on env \`${{ matrix.env }}\`\n<${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}|View run>\"}" \
+            "$SLACK_WEBHOOK_URL"
