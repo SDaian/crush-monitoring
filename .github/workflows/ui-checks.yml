@@ -32,6 +32,18 @@ jobs:
       - name: Run UI checks
         env:
           TARGET_ENV: ${{ matrix.env }}
+          # Credentials for the opt-in authenticated login journey, routed per
+          # environment. The test skips automatically where these are empty, so
+          # only environments with secrets configured run it. dev + stg are
+          # wired now; add `prod` here once its credentials exist.
+          TEST_USER_USERNAME: >-
+            ${{ (matrix.env == 'dev' && secrets.TEST_USER_USERNAME_DEV)
+             || (matrix.env == 'stg' && secrets.TEST_USER_USERNAME_STG)
+             || '' }}
+          TEST_USER_PASSWORD: >-
+            ${{ (matrix.env == 'dev' && secrets.TEST_USER_PASSWORD_DEV)
+             || (matrix.env == 'stg' && secrets.TEST_USER_PASSWORD_STG)
+             || '' }}
         run: npm run test:ui
 
       - name: Upload Playwright report on failure

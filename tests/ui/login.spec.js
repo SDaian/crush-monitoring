@@ -9,7 +9,9 @@ import { test, expect } from '@playwright/test';
 //   4. the auth backend is alive and correctly rejecting bad credentials.
 //
 // A real happy-path login is included but opt-in: it only runs when
-// TEST_USER_EMAIL / TEST_USER_PASSWORD are supplied (e.g. via CI secrets).
+// TEST_USER_USERNAME / TEST_USER_PASSWORD are supplied (e.g. via CI secrets).
+// In CI those are wired per-environment, so it exercises only the environments
+// that have credentials configured.
 
 const USERNAME = 'input#username';
 const PASSWORD = 'input#password';
@@ -81,17 +83,30 @@ test.describe('Login page', () => {
     await expect(page).toHaveURL(/\/login/);
   });
 
-  test('a known user can log in and reach an authenticated surface', async ({ page }) => {
-    const email = process.env.TEST_USER_EMAIL;
+  test('a known user can log in and reach an authenticated surface', async ({ page, context }) => {
+    const username = process.env.TEST_USER_USERNAME;
     const password = process.env.TEST_USER_PASSWORD;
-    test.skip(!email || !password, 'TEST_USER_EMAIL / TEST_USER_PASSWORD not set');
+    test.skip(!username || !password, 'TEST_USER_USERNAME / TEST_USER_PASSWORD not set');
 
     await page.goto('/login');
-    await page.fill(USERNAME, email);
+    await page.fill(USERNAME, username);
     await page.fill(PASSWORD, password);
-    await page.click(SUBMIT);
 
-    // A successful login leaves the login route for an authenticated surface.
-    await expect(page).not.toHaveURL(/\/login/, { timeout: 15_000 });
+    const [loginResponse] = await Promise.all([
+      page.waitForResponse(
+        (res) => res.request().method() === 'POST' && res.url().endsWith('/api/login')
+      ),
+      page.click(SUBMIT),
+    ]);
+    expect(loginResponse.status(), 'login should be accepted').toBe(200);
+
+    // A successful login leaves the login route for the authenticated app and
+    // surfaces the signed-in chrome.
+    await page.waitForURL((url) => !url.pathname.startsWith('/login'), { timeout: 15_000 });
+    await expect(page.getByRole('button', { name: /user menu/i })).toBeVisible();
+
+    // The session is established via a refresh-token cookie.
+    const cookieNames = (await context.cookies()).map((c) => c.name);
+    expect(cookieNames, 'a session cookie should be set').toContain('refresh_token');
   });
 });

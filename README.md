@@ -98,7 +98,8 @@ Reporters: `line` (console), `html` (`reports/html`), and `json`
    that runs only when credentials are supplied:
 
    ```bash
-   TEST_USER_EMAIL=...  TEST_USER_PASSWORD=...  npm run test:ui
+   # Crush login IDs are username@companycode, not email addresses.
+   TEST_USER_USERNAME=...  TEST_USER_PASSWORD=...  TARGET_ENV=dev  npm run test:ui
    ```
 
 ## Network access (Claude Code on the web)
@@ -152,14 +153,21 @@ environments (`dev`, `stg`, `prod`) and can also be triggered manually via
 
 ### Required secrets
 
-| Secret              | Used by              | Purpose                              |
-| ------------------- | -------------------- | ------------------------------------ |
-| `SLACK_WEBHOOK_URL` | both workflows       | Incoming webhook for failure alerts  |
+| Secret                    | Used by         | Purpose                                         |
+| ------------------------- | --------------- | ----------------------------------------------- |
+| `SLACK_WEBHOOK_URL`       | both workflows  | Incoming webhook for failure alerts             |
+| `TEST_USER_USERNAME_DEV`  | `ui-checks.yml` | Login ID (`username@companycode`) for **dev**   |
+| `TEST_USER_PASSWORD_DEV`  | `ui-checks.yml` | Password for the **dev** login user             |
+| `TEST_USER_USERNAME_STG`  | `ui-checks.yml` | Login ID for **stg**                            |
+| `TEST_USER_PASSWORD_STG`  | `ui-checks.yml` | Password for the **stg** login user             |
 
-To enable the opt-in happy-path login test, add `TEST_USER_EMAIL` and
-`TEST_USER_PASSWORD` as secrets and wire them into the `ui-checks.yml` job
-`env`. Without them that one test skips; the credential-free login checks run
-regardless.
+The opt-in happy-path login test runs per environment: `ui-checks.yml` routes
+the matching `*_DEV` / `*_STG` secret into `TEST_USER_USERNAME` /
+`TEST_USER_PASSWORD` for that matrix leg, and the test skips wherever they are
+empty. dev and stg are wired today; **prod** is intentionally not — add
+`TEST_USER_USERNAME_PROD` / `TEST_USER_PASSWORD_PROD` and the corresponding
+`matrix.env == 'prod'` branch in `ui-checks.yml` when a prod test account
+exists. The credential-free login checks run on every environment regardless.
 
 > Note: scheduled GitHub Actions only run from the repository's default
 > branch.
