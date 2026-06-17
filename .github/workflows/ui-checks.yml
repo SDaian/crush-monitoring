@@ -1,12 +1,9 @@
 name: UI checks
 
 on:
-  # PAUSED: scheduled runs are disabled until *.crushsoftware.com is reachable
-  # from CI (see README "Network access"). Re-enable by uncommenting the
-  # schedule block below. Manual runs via workflow_dispatch still work.
-  # schedule:
-  #   # Hourly.
-  #   - cron: '0 * * * *'
+  schedule:
+    # Hourly.
+    - cron: '0 * * * *'
   workflow_dispatch:
 
 jobs:
