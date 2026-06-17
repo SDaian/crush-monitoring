@@ -19,15 +19,17 @@ test.describe('Boot-time session refresh', () => {
 
     await page.goto('/login', { waitUntil: 'networkidle' });
 
+    // The probe fires on an unauthenticated load (issue #2: it does so even with
+    // no token). If a fix stops firing it, this drops to zero and the test trips.
     expect(
       refreshResponses.length,
-      'expected exactly one boot-time /api/login/refresh probe'
-    ).toBe(1);
+      'expected a boot-time /api/login/refresh probe'
+    ).toBeGreaterThanOrEqual(1);
 
-    const res = refreshResponses[0];
-    expect(res.status(), 'unauthenticated refresh should 401').toBe(401);
+    const unauthorized = refreshResponses.find((res) => res.status() === 401);
+    expect(unauthorized, 'an unauthenticated refresh probe should 401').toBeTruthy();
 
-    const body = await res.json();
+    const body = await unauthorized.json();
     expect(body.event?.eventCode, 'refresh 401 should carry the unauthorized envelope').toBe(
       'unauthorized'
     );
