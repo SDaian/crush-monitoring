@@ -111,6 +111,16 @@ in the cloud environment UI under **Network access**, not in this repo):
 With **None** or default **Trusted** access the API and UI checks cannot reach
 the target environments and will fail.
 
+To verify the allowlist is in effect, probe all three base URLs:
+
+```bash
+npm run check:connectivity
+```
+
+It reports each host as reachable or blocked, and calls out an egress-proxy
+denial (`host_not_allowed`) distinctly from the site being down. Exit code is
+non-zero if any host is unreachable, so it doubles as a CI/setup gate.
+
 ## Continuous monitoring (GitHub Actions)
 
 Two workflows in `.github/workflows/` run on a schedule across all three
