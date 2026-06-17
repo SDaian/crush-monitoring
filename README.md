@@ -8,8 +8,11 @@ Playwright project:
   `additionalProperties: false` plus a `required` list, so they catch **added,
   renamed, removed, and retyped** fields, not just outright failures.
 - **UI checks** (`tests/ui/`) — drive Chromium through critical journeys:
-  home-page render, a no-console-errors / no-failed-requests health check, and
-  a commented login-journey template.
+  landing-page render, a page-health check (no JS errors / no failed requests),
+  the login surface (form render, auth-guard redirect, username-format
+  validation, and an invalid-credentials rejection through the real auth
+  backend), and the forgot-password page. An opt-in happy-path login runs when
+  test credentials are supplied.
 
 Stack: [Playwright](https://playwright.dev) + [Ajv](https://ajv.js.org),
 ES modules, Node 20.
@@ -79,20 +82,63 @@ Reporters: `line` (console), `html` (`reports/html`), and `json`
 
    `checkEndpoint` fetches the URL with Playwright's request context, asserts a
    2xx status, and validates the body against `schemas/widgets.schema.json`.
-   `validateSchema(data, name)` is also exported for validating payloads you
-   already have in hand.
+   For endpoints that contract on a non-2xx status (e.g. an endpoint that is
+   supposed to `401`), pass `{ expectStatus: 401 }` — see
+   `tests/api/login-refresh.api.spec.js`. `validateSchema(data, name)` is also
+   exported for validating payloads you already have in hand.
 
 ## Adding a UI journey
 
 1. Add a spec in `tests/ui/`. Keep journeys high-value — render checks,
    health checks, and authenticated flows that matter to users.
-2. For authenticated flows, see `tests/ui/login.spec.js`: it's a skipped
-   template. Supply credentials via env vars / CI secrets, remove `.skip`, and
-   adapt the selectors:
+2. Prefer credential-free signals where possible — `tests/ui/login.spec.js`
+   checks the login surface, the auth-guard redirect, client-side validation,
+   and an invalid-credentials rejection through the real backend without any
+   account. For an authenticated happy path, that same file has an opt-in test
+   that runs only when credentials are supplied:
 
    ```bash
    TEST_USER_EMAIL=...  TEST_USER_PASSWORD=...  npm run test:ui
    ```
+
+## Network access (Claude Code on the web)
+
+When running this suite from a Claude Code on the web cloud session, the
+environment's **network egress allowlist** must permit the monitored hosts in
+addition to the default trusted package registries (npm, etc. — needed for
+`npm install` and the Playwright browser download).
+
+Add the following to the environment's **Custom** allowed domains (configured
+in the cloud environment UI under **Network access**, not in this repo):
+
+| Domain                | Covers                                                        |
+| --------------------- | ------------------------------------------------------------- |
+| `*.crushsoftware.com` | `dev`, `stg`, and `prod` base URLs (see the `TARGET_ENV` table above) |
+
+With **None** or default **Trusted** access the API and UI checks cannot reach
+the target environments and will fail.
+
+To verify the allowlist is in effect, probe all three base URLs:
+
+```bash
+npm run check:connectivity
+```
+
+It reports each host as reachable or blocked, and calls out an egress-proxy
+denial (`host_not_allowed`) distinctly from the site being down. Exit code is
+non-zero if any host is unreachable, so it doubles as a CI/setup gate.
+
+The browser-based UI checks see the egress proxy's TLS-interception certificate
+rather than the site's, so Chromium rejects it with `ERR_CERT_AUTHORITY_INVALID`
+from a cloud session. To run the UI project locally from behind the proxy, set
+`PLAYWRIGHT_IGNORE_HTTPS_ERRORS=1`:
+
+```bash
+PLAYWRIGHT_IGNORE_HTTPS_ERRORS=1 npm run test:ui
+```
+
+Leave it unset in CI — there is no intercepting proxy there, and certificate
+validation is part of what monitoring should catch.
 
 ## Continuous monitoring (GitHub Actions)
 
@@ -110,9 +156,10 @@ environments (`dev`, `stg`, `prod`) and can also be triggered manually via
 | ------------------- | -------------------- | ------------------------------------ |
 | `SLACK_WEBHOOK_URL` | both workflows       | Incoming webhook for failure alerts  |
 
-For the login journey you'll also want `TEST_USER_EMAIL` and
-`TEST_USER_PASSWORD` as secrets (and wired into the workflow `env`) once you
-enable it.
+To enable the opt-in happy-path login test, add `TEST_USER_EMAIL` and
+`TEST_USER_PASSWORD` as secrets and wire them into the `ui-checks.yml` job
+`env`. Without them that one test skips; the credential-free login checks run
+regardless.
 
 > Note: scheduled GitHub Actions only run from the repository's default
 > branch.

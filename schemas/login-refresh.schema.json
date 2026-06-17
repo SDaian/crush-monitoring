@@ -1,0 +1,51 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Unauthenticated token-refresh error envelope (GET /api/login/refresh)",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["event"],
+  "properties": {
+    "event": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "application",
+        "applicationName",
+        "endpoint",
+        "endpointName",
+        "environ",
+        "error",
+        "eventCode",
+        "eventDescription",
+        "eventName",
+        "event",
+        "ip",
+        "logLevel",
+        "logLevelName",
+        "node",
+        "pod",
+        "request",
+        "when"
+      ],
+      "properties": {
+        "application": { "type": "integer" },
+        "applicationName": { "type": "string", "const": "login" },
+        "endpoint": { "type": "integer" },
+        "endpointName": { "type": "string", "const": "refresh" },
+        "environ": { "type": "string" },
+        "error": { "type": "string" },
+        "eventCode": { "type": "string", "const": "unauthorized" },
+        "eventDescription": { "type": "string" },
+        "eventName": { "type": "string", "const": "Unauthorized" },
+        "event": { "type": "integer" },
+        "ip": { "type": "string" },
+        "logLevel": { "type": "integer" },
+        "logLevelName": { "type": "string" },
+        "node": { "type": "string" },
+        "pod": { "type": "string" },
+        "request": { "type": "string" },
+        "when": { "type": "string", "format": "date-time" }
+      }
+    }
+  }
+}

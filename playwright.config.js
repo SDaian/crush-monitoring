@@ -19,6 +19,11 @@ export default defineConfig({
 
   use: {
     baseURL: config.baseURL,
+    // Certs are validated by default so a TLS problem on the real site fails
+    // the check. Set PLAYWRIGHT_IGNORE_HTTPS_ERRORS=1 only to run locally from
+    // behind a TLS-intercepting egress proxy (e.g. a Claude Code on the web
+    // cloud session); leave it unset in CI.
+    ignoreHTTPSErrors: process.env.PLAYWRIGHT_IGNORE_HTTPS_ERRORS === '1',
     trace: 'retain-on-failure',
     screenshot: 'only-on-failure',
     video: 'retain-on-failure',
