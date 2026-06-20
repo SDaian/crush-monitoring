@@ -1,0 +1,52 @@
+{
+  "_comment": "WC2026 Grupo E, J2. Calibrado con datos al 2026-06-20: resultados J1 (Ecuador 0-1 Costa de Marfil; Curacao 1-7 Alemania), consenso Opta (Ecuador 86.1/9.2/4.7), odds FanDuel y O/U 3.5 Under -162. Lambdas construidas de abajo hacia arriba; ver notes.",
+  "meta": {
+    "home": "Ecuador",
+    "away": "Curacao",
+    "venue": "Arrowhead Stadium, Kansas City (EEUU)",
+    "date": "2026-06-20 20:00 EST",
+    "stage": "Mundial 2026 - Grupo E - Fecha 2",
+    "stakes": "Ambos perdieron la fecha 1: practicamente eliminacion para el perdedor. Ecuador firme favorito; Curacao (debutante, nacion mas chica en mundiales) viene de 1-7 con Alemania."
+  },
+  "calibration": {
+    "base_home": 1.35,
+    "base_away": 1.15,
+    "rho": -0.07,
+    "home": {
+      "name": "Ecuador",
+      "attack": 1.0,
+      "defense": 0.55,
+      "context": 1.0,
+      "notes": [
+        "Ataque modesto: equipo de Beccacece de bajo score (Under en 12 de 14). attack ~1.0 (media).",
+        "Defensa de elite (Pacho-PSG, Hincapie-Arsenal, Caicedo de 5): por eso baja MUCHO el lambda de Curacao -> defense 0.55.",
+        "Enfrenta a la peor defensa del torneo: el lambda sube a ~2.3 por el rival, no por brillar.",
+        "Debe ganar si o si; Curacao parara el micro tras el 1-7, lo que tapa algo su eficacia."
+      ]
+    },
+    "away": {
+      "name": "Curacao",
+      "attack": 0.7,
+      "defense": 1.7,
+      "context": 1.0,
+      "notes": [
+        "Defensa muy floja (7 goles en contra con Alemania): defense 1.7 (la mas leaky del grupo).",
+        "Ataque pobre frente a una zaga top: attack 0.7. Marco 1 a Alemania pero de forma aislada.",
+        "Se replegara para no recibir otra goleada; no se juega abrir el partido."
+      ]
+    }
+  },
+  "market": {
+    "odds": [1.125, 9.0, 21.0],
+    "supercomputer": [0.861, 0.092, 0.047]
+  },
+  "corners": {
+    "home_corners": 6.5,
+    "away_corners": 2.5
+  },
+  "cards": {
+    "referee_yellow_avg": 4.0,
+    "wc_discount": 0.9,
+    "mismatch_bump": 1.1
+  }
+}
