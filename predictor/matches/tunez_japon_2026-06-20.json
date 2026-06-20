@@ -1,0 +1,51 @@
+{
+  "_comment": "WC2026 grupo Paises Bajos/Suecia/Japon/Tunez, Fecha 2. Datos aportados por el usuario: J1 Suecia 5-1 Tunez; Japon 2-2 Paises Bajos. Cuotas casa Tunez 7.50 / Empate 4.33 / Japon 1.45. Sede neutral. Lambdas calibradas para alinear con el mercado de-vigorizado (Tunez 12.7 / X 21.9 / Japon 65.4).",
+  "meta": {
+    "home": "Tunez",
+    "away": "Japon",
+    "venue": "Sede neutral (Mundial 2026) - por confirmar",
+    "date": "2026-06-20 (Fecha 2 de grupo)",
+    "stage": "Mundial 2026 - Fase de grupos - Fecha 2",
+    "stakes": "Tunez viene de un 1-5 con Suecia: golpeado y casi obligado a ganar para no quedar eliminado. Japon empato 2-2 con Paises Bajos (buena imagen) y con un triunfo encarrila la clasificacion."
+  },
+  "calibration": {
+    "base_home": 1.25,
+    "base_away": 1.25,
+    "rho": -0.05,
+    "home": {
+      "name": "Tunez",
+      "attack": 0.71,
+      "defense": 1.26,
+      "context": 1.0,
+      "notes": [
+        "Ataque limitado y moral golpeada tras el 1-5: attack 0.71. Marco 1 a Suecia, poco mas.",
+        "Defensa que acaba de recibir 5: defense 1.26 (fragil ahora; normalmente es mas ordenada, regresion parcial).",
+        "Debe ir a ganar si o si -> se abrira y dejara espacios al contragolpe japones."
+      ]
+    },
+    "away": {
+      "name": "Japon",
+      "attack": 1.3,
+      "defense": 0.9,
+      "context": 1.0,
+      "notes": [
+        "Buen ataque vertical: le hizo 2 a Paises Bajos. attack 1.3.",
+        "Defensa solida pero no de elite mundial: defense 0.9.",
+        "Enfrenta a un Tunez que debe abrirse: escenario ideal para sus transiciones."
+      ]
+    }
+  },
+  "market": {
+    "odds": [7.50, 4.33, 1.45]
+  },
+  "corners": {
+    "home_corners": 3.5,
+    "away_corners": 5.5
+  },
+  "cards": {
+    "_referee": "ARBITRO NO CONFIRMADO aun. Placeholder con promedio generico de Mundial; bump por Tunez frustrado/yendo a buscar el partido. Recalibrar al conocer al juez.",
+    "referee_yellow_avg": 4.0,
+    "wc_discount": 0.9,
+    "mismatch_bump": 1.1
+  }
+}
