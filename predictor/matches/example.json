@@ -1,0 +1,49 @@
+{
+  "_comment": "Plantilla de ejemplo. NO son lambdas reales: reemplazar attack/defense/context con datos buscados (xG de clasificacion, ranking FIFA, ultimo partido, rival, contexto) antes de tomar como prediccion. La estructura muestra como construir el xG de abajo hacia arriba.",
+  "meta": {
+    "home": "Equipo Local",
+    "away": "Equipo Visitante",
+    "venue": "Estadio / Ciudad",
+    "date": "2026-06-XX",
+    "stage": "Fase de grupos - Grupo X",
+    "stakes": "Que se juega cada equipo (puntos, clasificacion, etc.)"
+  },
+  "calibration": {
+    "base_home": 1.35,
+    "base_away": 1.15,
+    "rho": -0.06,
+    "home": {
+      "name": "Equipo Local",
+      "attack": 1.15,
+      "defense": 0.95,
+      "context": 1.0,
+      "notes": [
+        "xG de clasificacion ~1.6/partido (ataque por encima de la media)",
+        "Defiende bien pero enfrenta un ataque vertical: defense 0.95"
+      ]
+    },
+    "away": {
+      "name": "Equipo Visitante",
+      "attack": 0.9,
+      "defense": 1.05,
+      "context": 0.95,
+      "notes": [
+        "Sin un 9 de area neto: baja eficacia frente a bloque poblado",
+        "Context 0.95: viene a especular un punto"
+      ]
+    }
+  },
+  "market": {
+    "odds": [2.10, 3.30, 3.60],
+    "supercomputer": [0.46, 0.28, 0.26]
+  },
+  "corners": {
+    "home_corners": 5.5,
+    "away_corners": 3.8
+  },
+  "cards": {
+    "referee_yellow_avg": 4.2,
+    "wc_discount": 0.85,
+    "mismatch_bump": 1.05
+  }
+}
