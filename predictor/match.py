@@ -101,12 +101,16 @@ def run_match(cfg: dict) -> MatchResult:
         data_unstable=cfg.get("data_unstable", False),
     )
 
+    def _clean(d: dict) -> dict:
+        # allow inline "_"-prefixed notes in config blocks without breaking ctor
+        return {k: v for k, v in d.items() if not k.startswith("_")}
+
     corners = None
     if cfg.get("corners"):
-        corners = CornersModel(**cfg["corners"]).markets()
+        corners = CornersModel(**_clean(cfg["corners"])).markets()
     cards = None
     if cfg.get("cards"):
-        cards = CardsModel(**cfg["cards"]).markets()
+        cards = CardsModel(**_clean(cfg["cards"])).markets()
 
     # Recommendation: pick the modal 1X2 outcome and the modal scoreline.
     outcome = max(
