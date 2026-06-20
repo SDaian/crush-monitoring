@@ -81,6 +81,55 @@ XIs are confirmed ~60 min before kickoff and can move the lambdas materially.
 Re-run with updated `attack`/`defense`/`context` (or a `lambdas_override`) and
 show the before/after.
 
+## Cómo pedir un partido nuevo
+
+Hay dos caminos según cuánto quieras intervenir.
+
+### Opción A — Decírselo al analista (lo más común)
+
+Pasá el partido y el asistente busca los datos (resultados recientes, xG,
+ranking FIFA, cuotas, árbitro, alineaciones), calibra los lambda, crea el JSON
+en `matches/`, lo corre y entrega el informe. Cuanto más contexto, mejor:
+
+- **Equipos y quién es local** (o si es cancha neutral).
+- **Fecha / fase**, si la sabés.
+- **Alineaciones confirmadas** (avisá ~60 min antes y se recalibra con el
+  antes/ahora).
+
+Ejemplos: *"Ahora Alemania vs Costa de Marfil, misma fase"* ·
+*"Argentina vs México, octavos, con los XI que te paso"* ·
+*"Brasil vs Croacia pero solo 1X2 y tarjetas"*.
+
+### Opción B — Correrlo vos mismo
+
+1. Copiá la plantilla y editala:
+
+   ```bash
+   cp predictor/matches/example.json predictor/matches/mi_partido.json
+   ```
+
+   Ajustá `attack` / `defense` / `context` (ratios alrededor de 1.0), las
+   `notes` con tu razonamiento, y `market.odds`, `corners`, `cards`.
+   Mirá `matches/ecuador_curacao_2026-06-20.json` como ejemplo real ya
+   calibrado (incluye árbitro para el mercado de tarjetas).
+
+2. Corrélo:
+
+   ```bash
+   python -m predictor predict predictor/matches/mi_partido.json
+   ```
+
+3. O una prueba rápida sin JSON, directo con lambdas:
+
+   ```bash
+   python -m predictor quick --home "Arg" --away "Bra" \
+       --lam-home 1.6 --lam-away 1.1 --rho -0.06 --odds 2.1 3.3 3.6
+   ```
+
+> Recordatorio: el modelo no adivina el futuro. Para partidos jugados/en curso
+> usa stats reales; para los próximos, calibra con lo último disponible y
+> siempre marca el margen de incertidumbre. Uso educativo / prode.
+
 ## Tests
 
 ```bash
