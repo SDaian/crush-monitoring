@@ -1,0 +1,56 @@
+{
+  "_comment": "WC2026 Grupo H, Fecha 2 (Hard Rock Stadium, Miami). J1: Uruguay 1-1 Arabia (flojo, Nunez fallo chances); Cabo Verde 0-0 ESPANA (bloque bajo durisimo, dejo el arco en cero a Espana). Cuotas bet365 Uruguay 1.478 / Empate 4.0 / CV 6.5 (Kalshi 68/23/11, Opta 67). Calibrado en linea con el mercado, con draw/Under elevados por la resiliencia DEMOSTRADA del bloque caboverdiano. ARBITRO/XI no confirmados -> tarjetas placeholder. Araujo (CB Uruguay) en duda.",
+  "meta": {
+    "home": "Uruguay",
+    "away": "Cabo Verde",
+    "venue": "Hard Rock Stadium, Miami (EEUU)",
+    "date": "2026-06-21",
+    "stage": "Mundial 2026 - Grupo H - Fecha 2",
+    "stakes": "Grupo H. Uruguay (Bielsa, Nunez, Valverde) favorito pero vino flojo (1-1 Arabia); Cabo Verde, debutante, viene de un historico 0-0 a Espana y se planta atras. Ganar encamina la clasificacion."
+  },
+  "calibration": {
+    "base_home": 1.25,
+    "base_away": 1.25,
+    "rho": -0.07,
+    "home": {
+      "name": "Uruguay",
+      "attack": 1.36,
+      "defense": 0.80,
+      "context": 1.0,
+      "notes": [
+        "Bielsa, Nunez, Valverde: ataque potente PERO romo en J1 (1-1 Arabia, Nunez fallo). Enfrenta el bloque que dejo a Espana en cero -> attack 1.36 (no inflado).",
+        "Calibrado en linea con el mercado (~63%), con riesgo de empate elevado (Cabo Verde ya demostro aguantar a un equipo top).",
+        "Defensa solida (Araujo en duda) -> defense 0.80."
+      ]
+    },
+    "away": {
+      "name": "Cabo Verde",
+      "attack": 0.60,
+      "defense": 1.06,
+      "context": 1.0,
+      "notes": [
+        "Bloque bajo MUY organizado: dejo el arco en cero a Espana -> defense 1.06 (mejor de lo que sugiere ser debutante).",
+        "Ataque minimo (no le marco a Espana) -> attack 0.60.",
+        "Se mete atras: partido trabado de pocos goles -> rho -0.07."
+      ]
+    }
+  },
+  "market": {
+    "odds": [1.478, 4.0, 6.5],
+    "supercomputer": [0.68, 0.23, 0.11]
+  },
+  "corners": {
+    "home_corners": 6.5,
+    "away_corners": 2.5
+  },
+  "cards": {
+    "_referee": "ARBITRO NO CONFIRMADO aun. Placeholder generico. Recalibrar al conocerlo.",
+    "referee_yellow_avg": 4.0,
+    "wc_discount": 0.85,
+    "mismatch_bump": 1.1
+  },
+  "lambdas_override": {
+    "home": 1.70,
+    "away": 0.60
+  }
+}

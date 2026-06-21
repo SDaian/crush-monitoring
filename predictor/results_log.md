@@ -17,6 +17,20 @@ Leyenda: ✅ acertado por la razón correcta · 🟡 acertado pero por azar/marg
 | 2026-06-20 | Ecuador vs Curaçao | 79.0 / 15.8 / 5.1 | ALTA | 0-0 (empate) | 🟡 |
 | 2026-06-21 | Túnez vs Japón | 14.7 / 21.7 / 63.6 | ALTA | 0-4 (gana Japón) | ✅ |
 | 2026-06-21 | España vs Arabia | 82.0 / 13.4 / 4.7 | ALTA | 4-0 (gana España) | ✅ |
+| 2026-06-21 | Egipto vs N. Zelanda | 58.2 / 24.4 / 17.4 | MEDIA | 0-0 (empate) | 🟡 |
+| 2026-06-21 | Bélgica vs Irán | 67.9 / 21.9 / 10.2 | ALTA | ⏳ en juego/pendiente | ⏳ |
+| 2026-06-21 | Uruguay vs Cabo Verde | 63.4 / 24.6 / 12.0 | ALTA | ⏳ por jugarse | ⏳ |
+
+### Patrón emergente: favoritos vs bloque bajo (clave)
+
+En la Fecha 2 hubo TRES 0-0 de favoritos frustrados por bloques bajos:
+Ecuador-Curaçao, Egipto-NZ y (en J1) Cabo Verde-España. Pero también dos
+goleadas (España 4-0, Japón 4-0). **Conclusión honesta:** "favorito rompe al
+bloque" tiene varianza enorme y NI mi bottom-up NI seguir al mercado acierta
+consistentemente. Mi bottom-up subestima al favorito ~8-9pts (lo corrijo al
+mercado), pero el empate (~24%) se materializa seguido. La lectura correcta no
+es "¿gana el favorito?" sino "el empate/Under vale más de lo que parece cuando
+el rival es un bloque bajo PROBADO". No sobre-actualizar con n pequeño.
 
 ## Calibración de xG (lo que de verdad importa)
 
