@@ -1,0 +1,55 @@
+{
+  "_comment": "WC2026 Grupo G, Fecha 2 (BC Place, Vancouver). J1: Egipto 1-1 Belgica (gran imagen, liderando casi todo); NZ 2-2 Iran (Elijah Just x2). Todos con 1 punto. Cuotas Egipto 1.60 / Empate 4.0 / NZ 5.5. Partido MAS PAREJO del grupo. Calibrado en linea con el mercado (leccion Espana/Belgica: no irse de contra). ARBITRO Y XI NO CONFIRMADOS aun -> tarjetas en placeholder.",
+  "meta": {
+    "home": "Egipto",
+    "away": "Nueva Zelanda",
+    "venue": "BC Place, Vancouver (Canada)",
+    "date": "2026-06-21",
+    "stage": "Mundial 2026 - Grupo G - Fecha 2",
+    "stakes": "Grupo G con los 4 en 1 punto. Egipto (Salah) busca su 1er triunfo mundialista en 9 intentos tras un gran 1-1 con Belgica; NZ corajoso (2-2 con Iran) tambien va por su 1er triunfo. Ganar deja a cualquiera muy cerca de octavos."
+  },
+  "calibration": {
+    "base_home": 1.25,
+    "base_away": 1.25,
+    "rho": -0.05,
+    "home": {
+      "name": "Egipto",
+      "attack": 1.25,
+      "defense": 0.80,
+      "context": 1.0,
+      "notes": [
+        "Salah + Trezeguet; tuvo de igual a igual a Belgica (le tiro 14, lidero casi todo). attack 1.25.",
+        "Calibrado en linea con el mercado (~59%): leccion Espana/Belgica, no subestimar al favorito por mi bottom-up.",
+        "Defensa solida: aguanto a Belgica hasta el final -> defense 0.80."
+      ]
+    },
+    "away": {
+      "name": "Nueva Zelanda",
+      "attack": 0.85,
+      "defense": 1.12,
+      "context": 1.0,
+      "notes": [
+        "Fisico, peligro a balon parado; Elijah Just le hizo 2 a Iran. NO se mete tan atras como Iran -> partido mas abierto (rho -0.05). attack 0.85.",
+        "Defensa floja: le hizo agua 2 veces a Iran -> defense 1.12.",
+        "82 del ranking FIFA: el mas debil del grupo, pero competitivo."
+      ]
+    }
+  },
+  "market": {
+    "odds": [1.60, 4.0, 5.5]
+  },
+  "corners": {
+    "home_corners": 5.5,
+    "away_corners": 3.8
+  },
+  "cards": {
+    "_referee": "ARBITRO NO CONFIRMADO aun. Placeholder generico de Mundial. Recalibrar al conocerlo.",
+    "referee_yellow_avg": 4.0,
+    "wc_discount": 0.85,
+    "mismatch_bump": 1.05
+  },
+  "lambdas_override": {
+    "home": 1.75,
+    "away": 0.85
+  }
+}
