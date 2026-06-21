@@ -14,8 +14,9 @@ Leyenda: ✅ acertado por la razón correcta · 🟡 acertado pero por azar/marg
 
 | Fecha | Partido | Modelo (L/X/V) | Confianza | Resultado real | 1X2 |
 |---|---|---|---|---|---|
-| 2026-06-20 | Ecuador vs Curaçao | 79.0 / 15.8 / 5.1 | ALTA | ⏳ no registrado | ⏳ |
+| 2026-06-20 | Ecuador vs Curaçao | 79.0 / 15.8 / 5.1 | ALTA | 0-0 (empate) | 🟡 |
 | 2026-06-21 | Túnez vs Japón | 14.7 / 21.7 / 63.6 | ALTA | 0-4 (gana Japón) | ✅ |
+| 2026-06-21 | España vs Arabia | 82.0 / 13.4 / 4.7 | ALTA | 4-0 (gana España) | ✅ |
 
 ## Calibración de xG (lo que de verdad importa)
 
@@ -23,6 +24,31 @@ Leyenda: ✅ acertado por la razón correcta · 🟡 acertado pero por azar/marg
 |---|---|---|---|---|
 | Túnez vs Japón | Japón | 2.00 | 2.07 | ✅ casi exacto |
 | Túnez vs Japón | Túnez | 0.855 | 0.05 | ❌ sobreestimado (Túnez fue nulo) |
+| España vs Arabia | España | 2.60 | 4 goles, 21 remates | ❌ subestimada (mi lean anti-mercado falló) |
+
+---
+
+## 2026-06-21 · España 4-0 Arabia Saudita (Grupo H, Fecha 2)
+
+**Predicción del modelo:** España 82.0% / Empate 13.4% / Arabia 4.7%. Me puse
+DELIBERADAMENTE ~4-7 pts por DEBAJO del mercado (86.4%), con tesis de "España
+roma sin 9, viene de 0-0 con Cabo Verde, valor en el empate".
+
+**Resultado real:** España 4-0, con 21 remates. España salió a arrasar (3-0 a
+los 27'). **Mi lean contrarian FALLÓ de lleno: el mercado tenía razón y yo no.**
+
+**Lectura honesta:**
+- ✅ 1X2: ganó el favorito (poco mérito, era el escenario fácil).
+- ❌ Mi sesgo "España no golea / valor en el empate" se comió una goleada. El
+  0-0 con Cabo Verde no era la norma, era el outlier; sobre-corregí por él.
+- 📌 Lección simétrica a Túnez-Japón: allá el mercado y yo coincidíamos y salió
+  bien; acá me separé del consenso y el consenso ganó. Separarse del mercado
+  es donde está el valor PERO también donde más se paga estar equivocado.
+- 💸 Apuesta del usuario (combi 6 patas, cuota 10.0, €30): cerró (cash out) en
+  **€214.29** (ganancia +€184). Aguantó más allá del cash out EV-óptimo del
+  descanso (~€80) y la varianza lo premió; de-riskeó bien cerrando a 85' con
+  4-0 (cierre justo-a-generoso). Buen RESULTADO; el proceso fue +varianza, no
+  +EV — un buen final no valida retroactivamente el camino más riesgoso.
 
 ---
 
@@ -67,7 +93,18 @@ combinada. El modelo fue transparente con lo que no controla (la magnitud).
 ALTA (alineado con mercado, Opta 86.1). Sugerido: gana Ecuador, marcador 2-0.
 xG: Ecuador 2.30, Curaçao 0.44.
 
-**Resultado real:** ⏳ no registrado.
+**Resultado real:** Ecuador 0-0 Curaçao. Eloy Room (arquero de Curaçao) hizo
+~15 atajadas, una de las mejores actuaciones individuales en la historia del
+Mundial. Ecuador 75% posesión, 642 pases, y no pudo romper el cero.
+
+**Lectura honesta:**
+- 🟡 1X2: el favorito NO ganó. El empate (que el modelo daba 26% — más que el
+  mercado) se dio. Mi escepticismo sobre "favorito romo vs bloque bajo" quedó
+  VALIDADO acá (a diferencia de España, donde el mismo escepticismo falló).
+- El marcador sugerido (2-0) erró, pero el modelo ya marcaba mucho riesgo de
+  empate y yo estaba por debajo del mercado en la goleada.
+- 📌 Dato de apuestas (prop de pases): Piero Hincapié terminó con 72 pases
+  (62/72, 86%) según Opta — el "142" que circulaba era Hincapié+Pacho COMBINADO.
 
 *(Corrección registrada: el árbitro de este partido NO era István Kovács; ese
 dato venía de una sola fuente y resultó erróneo — Kovács dirigió Túnez-Japón.)*
