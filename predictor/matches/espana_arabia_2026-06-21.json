@@ -14,13 +14,13 @@
     "rho": -0.07,
     "home": {
       "name": "Espana",
-      "attack": 1.5,
+      "attack": 1.59,
       "defense": 0.64,
       "context": 1.0,
       "notes": [
-        "Ataque de elite por volumen y posesion (campeon Euro 2024), pero SIN un 9 neto y con Yamal dosificado (no llega a 90, entro desde el banco vs Cabo Verde). attack 1.5 alto pero no inflado.",
-        "Justo no pudo romper el cero ante Cabo Verde: confirma la dificultad contra bloques bajos. Por eso me quedo POR DEBAJO del mercado (86%).",
-        "Defensa top (Laporte, Cubarsi, Rodri de escudo): por eso el lambda de Arabia es muy bajo -> defense 0.64."
+        "AJUSTE XI: Yamal ARRANCA de titular (aunque no jugaria 90) y entra Dani Olmo por Fabian -> mediocampo mas creativo. attack 1.5->1.59, achico la distancia con el mercado.",
+        "Sigo algo por DEBAJO del mercado (86%): no tiene 9 neto y viene de un 0-0 con Cabo Verde; la dificultad para romper bloques bajos persiste.",
+        "Laporte es DUDA (molestia); si no llega entra Eric Garcia. No mueve casi el xG (Eric Garcia tambien distribuye), pero SI afecta su prop de pases."
       ]
     },
     "away": {
@@ -36,8 +36,16 @@
     }
   },
   "market": {
-    "odds": [1.10, 10.5, 21.0],
-    "supercomputer": [0.89, 0.09, 0.04]
+    "odds": [
+      1.1,
+      10.5,
+      21.0
+    ],
+    "supercomputer": [
+      0.89,
+      0.09,
+      0.04
+    ]
   },
   "corners": {
     "home_corners": 7.5,
@@ -48,5 +56,9 @@
     "referee_yellow_avg": 4.2,
     "wc_discount": 0.85,
     "mismatch_bump": 1.12
+  },
+  "lambdas_override": {
+    "home": 2.6,
+    "away": 0.5
   }
 }
