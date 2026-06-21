@@ -3,10 +3,10 @@
   "meta": {
     "home": "Tunez",
     "away": "Japon",
-    "venue": "Sede neutral (Mundial 2026) - por confirmar",
+    "venue": "Estadio Monterrey, Guadalupe (Mexico) - Partido N.1000 de la historia mundialista",
     "date": "2026-06-20 (Fecha 2 de grupo)",
-    "stage": "Mundial 2026 - Fase de grupos - Fecha 2",
-    "stakes": "Tunez viene de un 1-5 con Suecia: golpeado y casi obligado a ganar para no quedar eliminado. Japon empato 2-2 con Paises Bajos (buena imagen) y con un triunfo encarrila la clasificacion."
+    "stage": "Mundial 2026 - Grupo F - Fecha 2",
+    "stakes": "Tunez viene de un 1-5 con Suecia: golpeado y casi obligado a ganar para no quedar eliminado, debut del DT Renard. Japon empato 2-2 con Paises Bajos (buena imagen) pero pierde a Kubo por lesion; con un triunfo encarrila la clasificacion."
   },
   "calibration": {
     "base_home": 1.25,
@@ -14,24 +14,24 @@
     "rho": -0.05,
     "home": {
       "name": "Tunez",
-      "attack": 0.71,
+      "attack": 0.76,
       "defense": 1.26,
       "context": 1.0,
       "notes": [
-        "Ataque limitado y moral golpeada tras el 1-5: attack 0.71. Marco 1 a Suecia, poco mas.",
-        "Defensa que acaba de recibir 5: defense 1.26 (fragil ahora; normalmente es mas ordenada, regresion parcial).",
-        "Debe ir a ganar si o si -> se abrira y dejara espacios al contragolpe japones."
+        "AJUSTE XI: debut de Renard (motivador, gano AFCON) + cambio a linea de 4 + must-win => algo mas organizado y con intencion. attack 0.71->0.76.",
+        "Defensa fragil tras el 1-5 pero con Renard reordenando: defense 1.26 (se sostiene).",
+        "Va a buscar el partido: deja espacios al contragolpe japones."
       ]
     },
     "away": {
       "name": "Japon",
-      "attack": 1.3,
+      "attack": 1.27,
       "defense": 0.9,
       "context": 1.0,
       "notes": [
-        "Buen ataque vertical: le hizo 2 a Paises Bajos. attack 1.3.",
-        "Defensa solida pero no de elite mundial: defense 0.9.",
-        "Enfrenta a un Tunez que debe abrirse: escenario ideal para sus transiciones."
+        "AJUSTE XI: Kubo AFUERA (lesion rodilla). Baja la creatividad: attack 1.3->1.27. Pero conserva a Nakamura y Kamada (ambos marcaron a Paises Bajos) y adelanta a Doan en un 3-4-2-1.",
+        "Mercado ya conocia la baja de Kubo al fijar la cuota 1.45, asi que el xG se mueve poco.",
+        "Defensa solida pero no de elite: defense 0.9."
       ]
     }
   },
@@ -43,9 +43,9 @@
     "away_corners": 5.5
   },
   "cards": {
-    "_referee": "ARBITRO NO CONFIRMADO aun. Placeholder con promedio generico de Mundial; bump por Tunez frustrado/yendo a buscar el partido. Recalibrar al conocer al juez.",
-    "referee_yellow_avg": 4.0,
-    "wc_discount": 0.9,
-    "mismatch_bump": 1.1
+    "_referee": "Istvan Kovacs (Rumania), CONFIRMADO por FIFA para el partido N.1000. Arbitro estricto (carrera 4.47; ultimos 10 ~4.8; algunas fuentes 5.1-5.4) pero modera en elite internacional (CL 24/25 2.71). Japon es muy disciplinado; Tunez frustrado y fisico.",
+    "referee_yellow_avg": 4.47,
+    "wc_discount": 0.82,
+    "mismatch_bump": 1.05
   }
 }
