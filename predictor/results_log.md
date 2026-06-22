@@ -20,6 +20,7 @@ Legend: ✅ right for the right reason · 🟡 right but by luck/margin ·
 | 2026-06-21 | Egypt vs N. Zealand | 58.2 / 24.4 / 17.4 | MEDIUM | 3-1 (Egypt win) | ✅ |
 | 2026-06-21 | Belgium vs Iran | 67.9 / 21.9 / 10.2 | HIGH | 0-0 (draw) | 🟡 |
 | 2026-06-21 | Uruguay vs Cape Verde | 63.4 / 24.6 / 12.0 | HIGH | 2-2 (draw) | 🟡 |
+| 2026-06-22 | Argentina vs Austria | 61.4 / 22.4 / 16.2 | HIGH | 2-0 (Argentina win) | ✅ |
 
 ### Emerging pattern: favorites vs low block (key)
 
@@ -161,3 +162,34 @@ total; 3 yellow cards. Referee Omar Al Ali.
   draw/Under value; open/attacking underdog -> back the favorite + goals.
 - 📌 User's combo (Egypt win + BTTS Yes + Under 5 cards) hit all three legs;
   cashed out at $106.
+
+---
+
+## 2026-06-22 · Argentina 2-0 Austria (Group J, MD2)
+
+**Model:** Argentina 61.4 / Draw 22.4 / Austria 16.2 (HIGH, aligned with market).
+Lambdas Argentina 1.95 / Austria 0.90, rho -0.05. Expected total goals 2.85.
+
+**Actual result:** Argentina 2-0. Won comfortably but controlled, not a goal-fest;
+Argentina dominated possession yet did NOT generate many corners (<5).
+
+**Honest read:**
+- ✅ 1X2: favorite won.
+- ❌ Over 2.5 missed (2-0 = 2 goals). Over was 54% (so ~46% to be Under) — within
+  range, mostly variance: Austria competed defensively enough and Argentina
+  converted efficiently rather than piling on.
+- ❌ **Corners calibration error (a real lesson, not just variance):** I set
+  Argentina corners λ 6.0; they finished under 5. **Dominance/possession does NOT
+  reliably translate into corners** — a side that attacks through the middle, or
+  whose opponent clears without conceding corners, can dominate with few corners.
+  Lower the corner-lambda assumption for possession-dominant favorites.
+- 💸 User's 4-leg Bet Builder (Over 2.5 + Messi G/A + Argentina win + Argentina
+  +4 corners) lost on the volume legs (corners, and Over 2.5). It was +EV by the
+  model (~+30%) but only ~26% to hit; losing was the expected outcome. The
+  failure mode is the recurring one: the RESULT (favorite wins) is robust, the
+  VOLUME props (corners/Over) carry the variance — and here the corner leg was
+  also over-modeled.
+
+**Takeaway:** trust the result/Messi-involvement reads more than goal/corner
+VOLUME reads; specifically recalibrate corners downward for favorites that
+dominate without a wing-heavy, corner-generating style.
