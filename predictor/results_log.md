@@ -17,7 +17,7 @@ Legend: ✅ right for the right reason · 🟡 right but by luck/margin ·
 | 2026-06-20 | Ecuador vs Curaçao | 79.0 / 15.8 / 5.1 | HIGH | 0-0 (draw) | 🟡 |
 | 2026-06-21 | Tunisia vs Japan | 14.7 / 21.7 / 63.6 | HIGH | 0-4 (Japan win) | ✅ |
 | 2026-06-21 | Spain vs Saudi Arabia | 82.0 / 13.4 / 4.7 | HIGH | 4-0 (Spain win) | ✅ |
-| 2026-06-21 | Egypt vs N. Zealand | 58.2 / 24.4 / 17.4 | MEDIUM | ⏳ to be played | ⏳ |
+| 2026-06-21 | Egypt vs N. Zealand | 58.2 / 24.4 / 17.4 | MEDIUM | 3-1 (Egypt win) | ✅ |
 | 2026-06-21 | Belgium vs Iran | 67.9 / 21.9 / 10.2 | HIGH | 0-0 (draw) | 🟡 |
 | 2026-06-21 | Uruguay vs Cape Verde | 63.4 / 24.6 / 12.0 | HIGH | 2-2 (draw) | 🟡 |
 
@@ -138,3 +138,26 @@ xG: Ecuador 2.30, Curaçao 0.44.
 
 *(Correction logged: the referee of this match was NOT István Kovács; that
 data came from a single source and turned out to be wrong — Kovács officiated Tunisia-Japan.)*
+
+---
+
+## 2026-06-21 · Egypt 3-1 New Zealand (Group G, MD2)
+
+**Model:** Egypt 58.2 / Draw 24.4 / NZ 17.4 (MEDIUM, aligned with market).
+Lambdas Egypt 1.75 / NZ 0.85, rho -0.05 (open game).
+
+**Actual result:** Egypt 3-1 (Egypt came from behind). Both teams scored; 4 goals
+total; 3 yellow cards. Referee Omar Al Ali.
+
+**Honest read — a POSITIVE counterpoint to the low-block 0-0s:**
+- ✅ 1X2: favorite won.
+- ✅ The key call was reading this as the OPEN game of the group: New Zealand is
+  NOT a low block (4-2-3-1, scored twice vs Iran), so I explicitly said the
+  "favorite frustrated by a low block" pattern did NOT apply and flagged
+  BTTS/Over as the value angle. Result: BTTS Yes, Over 3.5, favorite wins.
+  Correctly distinguished an open underdog (NZ) from a parked-bus one
+  (Cape Verde / Iran / Saudi).
+- Refinement confirmed: classify the underdog's setup first. Low block ->
+  draw/Under value; open/attacking underdog -> back the favorite + goals.
+- 📌 User's combo (Egypt win + BTTS Yes + Under 5 cards) hit all three legs;
+  cashed out at $106.

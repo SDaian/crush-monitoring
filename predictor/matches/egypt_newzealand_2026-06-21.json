@@ -51,5 +51,12 @@
   "lambdas_override": {
     "home": 1.75,
     "away": 0.85
+  },
+  "_postmatch": {
+    "result": "Egypt 3-1 New Zealand (Egypt came from behind). Both scored, 4 goals, 3 yellow cards.",
+    "model_1x2": "Egypt 58.2 / Draw 24.4 / NZ 17.4",
+    "verdict": "Favorite won. Key call validated: read this as the OPEN game of the group (NZ is not a low block) -> flagged BTTS/Over as the value, not the draw/Under. BTTS Yes, Over 3.5, favorite wins all landed.",
+    "lesson": "Classify the underdog's setup first. Open/attacking underdog (NZ) -> back the favorite + goals. Parked-bus underdog (Cape Verde / Iran / Saudi) -> draw/Under value. This game was the positive counterpoint to the low-block 0-0s.",
+    "user_bet": "Combo Egypt win + BTTS Yes + Under 5 cards: all 3 legs hit; cashed out at $106."
   }
 }
