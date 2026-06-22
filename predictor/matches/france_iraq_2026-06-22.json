@@ -1,0 +1,55 @@
+{
+  "_comment": "WC2026 Group I, Matchday 2 (Lincoln Financial Field, Philadelphia). MD1: France 3-1 Senegal; Iraq 1-4 Norway (leaky). Odds France -700 (1.143) / Draw +750 (8.50) / Iraq +2500 (26.0). Calibrated in line with the market (~85%): heavy favorite vs a leaky side (NOT a proven low block), so France should score freely. Corner lambda kept modest per the Argentina lesson (dominance != corners).",
+  "meta": {
+    "home": "France",
+    "away": "Iraq",
+    "venue": "Lincoln Financial Field, Philadelphia (USA)",
+    "date": "2026-06-22 17:00 ET",
+    "stage": "World Cup 2026 - Group I - Matchday 2",
+    "stakes": "France (3-1 Senegal) can secure qualification; Iraq (1-4 Norway, leaky) under pressure. Mbappe is 2 goals off the all-time WC scoring record."
+  },
+  "calibration": {
+    "base_home": 1.25,
+    "base_away": 1.25,
+    "rho": -0.06,
+    "home": {
+      "name": "France",
+      "attack": 1.55,
+      "defense": 0.65,
+      "context": 1.0,
+      "notes": [
+        "Elite attack (Mbappe, Dembele-type pace); beat Senegal 3-1. attack 1.55.",
+        "Calibrated in line with the market (~85%): heavy favorite, don't go below.",
+        "Top defense (Saliba, Upamecano) -> very low Iraq lambda, defense 0.65."
+      ]
+    },
+    "away": {
+      "name": "Iraq",
+      "attack": 0.55,
+      "defense": 1.40,
+      "context": 1.0,
+      "notes": [
+        "Leaky: conceded 4 to Norway -> defense 1.40. NOT a proven low block, so France should score multiple (unlike the Cape Verde/Iran cerrojos).",
+        "Weak attack vs an elite backline; scored 1 vs Norway -> attack 0.55.",
+        "May sit deep but its defense is poor, so few clean-sheet hopes -> rho -0.06."
+      ]
+    }
+  },
+  "market": {
+    "odds": [1.143, 8.50, 26.0]
+  },
+  "corners": {
+    "home_corners": 6.0,
+    "away_corners": 2.5
+  },
+  "cards": {
+    "_referee": "Drew Fischer (Canada), CONFIRMED. CONCACAF referee, career ~2.7-3.3 YC/match (low-to-moderate). International discount + small bump for a lopsided game (Iraq tactical fouls). Expect a low-card game.",
+    "referee_yellow_avg": 3.2,
+    "wc_discount": 0.88,
+    "mismatch_bump": 1.05
+  },
+  "lambdas_override": {
+    "home": 2.70,
+    "away": 0.45
+  }
+}
