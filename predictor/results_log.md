@@ -19,7 +19,7 @@ Leyenda: ✅ acertado por la razón correcta · 🟡 acertado pero por azar/marg
 | 2026-06-21 | España vs Arabia | 82.0 / 13.4 / 4.7 | ALTA | 4-0 (gana España) | ✅ |
 | 2026-06-21 | Egipto vs N. Zelanda | 58.2 / 24.4 / 17.4 | MEDIA | ⏳ por jugarse | ⏳ |
 | 2026-06-21 | Bélgica vs Irán | 67.9 / 21.9 / 10.2 | ALTA | 0-0 (empate) | 🟡 |
-| 2026-06-21 | Uruguay vs Cabo Verde | 63.4 / 24.6 / 12.0 | ALTA | ⏳ por jugarse | ⏳ |
+| 2026-06-21 | Uruguay vs Cabo Verde | 63.4 / 24.6 / 12.0 | ALTA | 2-2 (empate) | 🟡 |
 
 ### Patrón emergente: favoritos vs bloque bajo (clave)
 
@@ -36,6 +36,17 @@ el rival es un bloque bajo PROBADO". No sobre-actualizar con n pequeño.
 21.9% entró), PERO los reads de valor SÍ: con Irán en 5-4-1 marqué BTTS No (61%),
 Under 3.5 (76%) y "pocos goles" — todos ganaron. Acierto de proceso en los
 mercados de goles aunque el favorito no rompiera el cero.
+
+**Nota Uruguay-Cabo Verde 2-2 (refinamiento CLAVE del patrón):** Cabo Verde
+frustró a OTRO favorito (3er punto del debutante), confirmando el patrón. PERO
+fue 2-2, no 0-0 — y eso obliga a refinar dos cosas:
+1. "Bloque bajo" ≠ "inofensivo": subestimé el ataque de Cabo Verde (λ 0.60;
+   marcaron 2, incluido un golazo). Cuando el partido se abre y el favorito se
+   estira, el bloque SÍ genera y convierte. Su xG-for no es fijo ~0.
+2. El vehículo correcto de la tesis "favorito frustrado" es el EMPATE / doble
+   oportunidad, NO el Under/BTTS-No. Acá recomendé Under 2.5 (60%) y BTTS No
+   (62%) y AMBOS perdieron (2-2 = Over + BTTS Sí); el empate, en cambio, entró.
+   Lección: expresar "favorito no rompe al bloque" vía RESULTADO, no vía goles.
 
 ## Calibración de xG (lo que de verdad importa)
 

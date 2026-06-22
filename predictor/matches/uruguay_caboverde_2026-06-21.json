@@ -52,5 +52,13 @@
   "lambdas_override": {
     "home": 1.70,
     "away": 0.60
+  },
+  "_postmatch": {
+    "resultado": "Uruguay 2-2 Cabo Verde (CV lo empato dos veces; Uruguay casi lo gana al final). Partido abierto y ajustado.",
+    "modelo_1x2": "Uruguay 63.4 / Empate 24.6 / CV 12.0",
+    "veredicto": "Favorito frustrado OTRA VEZ por Cabo Verde (3er punto del debutante, tras el 0-0 a Espana). El 1X2 no acerto (gano el empate 24.6%, dentro de rango).",
+    "leccion_1": "Subestime el ataque de Cabo Verde (lambda 0.60; marcaron 2). 'Bloque bajo' NO es sinonimo de 'inofensivo': cuando el partido se abre y el favorito se estira, SI generan y convierten (incluido un golazo). Su xG-for depende del estado de juego, no es fijo en ~0.",
+    "leccion_2": "La tesis correcta para 'favorito frustrado por bloque bajo' es el EMPATE / doble oportunidad, NO el Under/BTTS-No. Aca pegue el empate como escenario vivo pero recomende Under 2.5 (60%) y BTTS No (62%) -> AMBOS PERDIERON (2-2 = Over 2.5 y BTTS Si). El vehiculo robusto de esa tesis es el resultado (empate), no los pocos goles.",
+    "ajuste_modelo": "Para futuros bloques bajos que ya mostraron pegada (Cabo Verde), subir su attack ~0.6->0.8 si el partido proyecta abierto, y expresar la tesis via empate/doble-oportunidad en vez de Under."
   }
 }
