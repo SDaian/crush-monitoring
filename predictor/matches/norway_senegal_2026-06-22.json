@@ -1,0 +1,56 @@
+{
+  "_comment": "WC2026 Group I, Matchday 2 (MetLife Stadium, NJ). MD1: Norway 4-1 Iraq (Haaland brace); Senegal 1-3 France (lost but competitive). Odds Norway +130 (2.30) / Draw +240 (3.40) / Senegal +210 (3.10); O/U 2.5. Opta 44.7/24.8/30.5. MOST BALANCED game so far -> LOW confidence, no strong read. Open game (both attack), rho -0.05.",
+  "meta": {
+    "home": "Norway",
+    "away": "Senegal",
+    "venue": "MetLife Stadium, New Jersey (USA)",
+    "date": "2026-06-22 20:00 ET",
+    "stage": "World Cup 2026 - Group I - Matchday 2",
+    "stakes": "Norway (3 pts, beat Iraq 4-1) can qualify with a win; Senegal (0 pts, lost to France) must respond or risk early exit. Haaland in red-hot form (scored in 11 straight for Norway)."
+  },
+  "calibration": {
+    "base_home": 1.25,
+    "base_away": 1.25,
+    "rho": -0.05,
+    "home": {
+      "name": "Norway",
+      "attack": 1.20,
+      "defense": 0.90,
+      "context": 1.0,
+      "notes": [
+        "Haaland-led attack (brace vs Iraq), red-hot form. attack 1.20 (the 4-1 was partly a weak Iraq).",
+        "Decent but not elite defense -> Senegal can score, defense 0.90.",
+        "Slight favorite only (~42%): this is a balanced game, calibrated to the market."
+      ]
+    },
+    "away": {
+      "name": "Senegal",
+      "attack": 1.15,
+      "defense": 1.03,
+      "context": 1.0,
+      "notes": [
+        "Quality, physical African side; lost 1-3 to France but competed and scored. attack 1.15.",
+        "Solid defense but Haaland is a handful -> defense 1.03.",
+        "Must win after losing to France: will go for it -> open match, rho -0.05."
+      ]
+    }
+  },
+  "market": {
+    "odds": [2.30, 3.40, 3.10],
+    "supercomputer": [0.447, 0.248, 0.305]
+  },
+  "corners": {
+    "home_corners": 5.0,
+    "away_corners": 4.5
+  },
+  "cards": {
+    "_referee": "Wilton Sampaio (Brazil), CONFIRMED. Strict CONMEBOL referee, career ~4.4-5.5 YC/match (high). International discount + bump for a competitive, physical, must-win match -> a HIGH-card game. Over cards is a value angle (book line likely set on an average ref).",
+    "referee_yellow_avg": 4.8,
+    "wc_discount": 0.85,
+    "mismatch_bump": 1.05
+  },
+  "lambdas_override": {
+    "home": 1.55,
+    "away": 1.30
+  }
+}
