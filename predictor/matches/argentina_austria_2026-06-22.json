@@ -53,5 +53,12 @@
   "lambdas_override": {
     "home": 1.95,
     "away": 0.90
+  },
+  "_postmatch": {
+    "result": "Argentina 2-0 Austria. Comfortable but controlled win; dominated possession but generated few corners (<5).",
+    "model_1x2": "Argentina 61.4 / Draw 22.4 / Austria 16.2",
+    "verdict": "Favorite won (1X2 correct). Volume props failed: Over 2.5 missed (2-0 = 2 goals; ~variance) and the corners leg missed.",
+    "lesson": "Corners calibration error (real, not just variance): Argentina corners lambda 6.0 was too high (finished <5). Dominance/possession does NOT reliably convert into corners when a team attacks centrally or the opponent clears without conceding. Recalibrate corner-lambda downward for possession-dominant favorites lacking a wing-heavy, corner-generating style.",
+    "user_bet": "4-leg Bet Builder (Over 2.5 + Messi G/A + Argentina win + Argentina +4 corners) lost on the volume legs (corners, Over 2.5). Was +EV by the model (~+30%) but only ~26% to hit; losing was the expected outcome."
   }
 }
