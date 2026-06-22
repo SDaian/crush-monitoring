@@ -1,0 +1,55 @@
+{
+  "_comment": "WC2026 Group J, Matchday 2 (AT&T Stadium, Arlington). MD1: Argentina 3-0 Algeria (Messi hat-trick); Austria 3-1 Jordan. Both on 3 points. FanDuel odds Argentina -185 (1.541) / Draw +310 (4.10) / Austria +550 (6.50); O/U 2.5. Calibrated in line with the market. Austria is a competitive European side (NOT a low block) -> open game, rho -0.05.",
+  "meta": {
+    "home": "Argentina",
+    "away": "Austria",
+    "venue": "AT&T Stadium, Arlington (USA)",
+    "date": "2026-06-22 13:00 ET",
+    "stage": "World Cup 2026 - Group J - Matchday 2",
+    "stakes": "Both won MD1 and sit on 3 points; the winner tops Group J and is all but qualified. Messi (16 WC goals) is one away from the outright all-time record."
+  },
+  "calibration": {
+    "base_home": 1.25,
+    "base_away": 1.25,
+    "rho": -0.05,
+    "home": {
+      "name": "Argentina",
+      "attack": 1.35,
+      "defense": 0.76,
+      "context": 1.0,
+      "notes": [
+        "World champion, elite attack (Messi hat-trick vs Algeria). attack 1.35.",
+        "Calibrated in line with the market (~62%): don't underrate an elite favorite.",
+        "Top-tier defense (Romero, Lisandro Martinez, E. Martinez) -> low Austria lambda, defense 0.76."
+      ]
+    },
+    "away": {
+      "name": "Austria",
+      "attack": 0.95,
+      "defense": 1.15,
+      "context": 1.0,
+      "notes": [
+        "Solid, physical European side (Alaba, Laimer, Danso); beat Jordan 3-1. NOT a low block: it competes and plays -> open game (rho -0.05). attack 0.95.",
+        "Organized but not elite at the back (conceded to Jordan) -> defense 1.15.",
+        "Will go toe-to-toe rather than park the bus, so more goals than a parked-bus matchup."
+      ]
+    }
+  },
+  "market": {
+    "odds": [1.541, 4.10, 6.50]
+  },
+  "corners": {
+    "home_corners": 6.0,
+    "away_corners": 3.5
+  },
+  "cards": {
+    "_referee": "Amin Mohamed Omar (Egypt), CONFIRMED. FIFA ref since 2017; career ~3.5-4.0 YC/match (moderate). International-context discount; small bump for a physical Austria. Not a lopsided block, so cards moderate.",
+    "referee_yellow_avg": 3.8,
+    "wc_discount": 0.88,
+    "mismatch_bump": 1.05
+  },
+  "lambdas_override": {
+    "home": 1.95,
+    "away": 0.90
+  }
+}
