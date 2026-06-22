@@ -1,0 +1,72 @@
+{
+  "_comment": "WC2026 Group H, Matchday 2 (Hard Rock Stadium, Miami). MD1: Uruguay 1-1 Saudi Arabia (poor, Nunez missed chances); Cape Verde 0-0 SPAIN (extremely tough low block, kept a clean sheet against Spain). bet365 odds Uruguay 1.478 / Draw 4.0 / CV 6.5 (Kalshi 68/23/11, Opta 67). Calibrated in line with the market, with draw/Under raised due to the DEMONSTRATED resilience of the Cape Verdean block. REFEREE/XI not confirmed -> cards placeholder. Araujo (Uruguay CB) doubtful.",
+  "meta": {
+    "home": "Uruguay",
+    "away": "Cape Verde",
+    "venue": "Hard Rock Stadium, Miami (USA)",
+    "date": "2026-06-21",
+    "stage": "World Cup 2026 - Group H - Matchday 2",
+    "stakes": "Group H. Uruguay (Bielsa, Nunez, Valverde) favorite but came in poor (1-1 Saudi Arabia); Cape Verde, a debutant, comes off a historic 0-0 against Spain and sits deep. A win sets up qualification."
+  },
+  "calibration": {
+    "base_home": 1.25,
+    "base_away": 1.25,
+    "rho": -0.07,
+    "home": {
+      "name": "Uruguay",
+      "attack": 1.36,
+      "defense": 0.8,
+      "context": 1.0,
+      "notes": [
+        "Bielsa, Nunez, Valverde: potent attack BUT blunt in MD1 (1-1 Saudi Arabia, Nunez missed). Faces the block that kept Spain scoreless -> attack 1.36 (not inflated).",
+        "Calibrated in line with the market (~63%), with elevated draw risk (Cape Verde already proved it can hold off a top team).",
+        "Solid defense (Araujo doubtful) -> defense 0.80."
+      ]
+    },
+    "away": {
+      "name": "Cape Verde",
+      "attack": 0.6,
+      "defense": 1.06,
+      "context": 1.0,
+      "notes": [
+        "VERY organized low block: kept a clean sheet against Spain -> defense 1.06 (better than being a debutant would suggest).",
+        "Minimal attack (didn't score against Spain) -> attack 0.60.",
+        "Sits deep: cagey match with few goals -> rho -0.07."
+      ]
+    }
+  },
+  "market": {
+    "odds": [
+      1.478,
+      4.0,
+      6.5
+    ],
+    "supercomputer": [
+      0.68,
+      0.23,
+      0.11
+    ]
+  },
+  "corners": {
+    "home_corners": 6.5,
+    "away_corners": 2.5
+  },
+  "cards": {
+    "_referee": "REFEREE NOT YET CONFIRMED. Generic placeholder. Recalibrate once known.",
+    "referee_yellow_avg": 4.0,
+    "wc_discount": 0.85,
+    "mismatch_bump": 1.1
+  },
+  "lambdas_override": {
+    "home": 1.7,
+    "away": 0.6
+  },
+  "_postmatch": {
+    "result": "Uruguay 2-2 Cape Verde (CV equalized twice; Uruguay nearly won it at the end). Open, tight match.",
+    "model_1x2": "Uruguay 63.4 / Draw 24.6 / CV 12.0",
+    "verdict": "Favorite frustrated AGAIN by Cape Verde (debutant's 3rd point, after the 0-0 against Spain). The 1X2 missed (the draw 24.6% came in, within range).",
+    "lesson_1": "I underestimated Cape Verde's attack (lambda 0.60; they scored 2). 'Low block' is NOT synonymous with 'harmless': when the match opens up and the favorite stretches, they DO create and convert (including a screamer). Their xG-for depends on the game state, it's not fixed at ~0.",
+    "lesson_2": "The correct thesis for 'favorite frustrated by a low block' is the DRAW / double chance, NOT the Under/BTTS-No. Here I nailed the draw as a live scenario but recommended Under 2.5 (60%) and BTTS No (62%) -> BOTH LOST (2-2 = Over 2.5 and BTTS Yes). The robust vehicle for that thesis is the result (draw), not low goals.",
+    "model_adjustment": "For future low blocks that have already shown bite (Cape Verde), raise their attack ~0.6->0.8 if the match projects open, and express the thesis via draw/double-chance instead of Under."
+  }
+}

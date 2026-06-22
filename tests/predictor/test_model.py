@@ -128,19 +128,19 @@ class TestValidate(unittest.TestCase):
 
 
 class TestConfidence(unittest.TestCase):
-    def test_clear_favorite_is_alta(self):
+    def test_clear_favorite_is_high(self):
         level, _ = confidence_index((0.80, 0.13, 0.07))
-        self.assertEqual(level, "ALTA")
+        self.assertEqual(level, "HIGH")
 
-    def test_even_match_is_baja(self):
+    def test_even_match_is_low(self):
         level, _ = confidence_index((0.40, 0.32, 0.28))
-        self.assertEqual(level, "BAJA")
+        self.assertEqual(level, "LOW")
 
     def test_divergence_downgrades(self):
         high, _ = confidence_index((0.62, 0.22, 0.16))
-        self.assertEqual(high, "ALTA")
+        self.assertEqual(high, "HIGH")
         downgraded, _ = confidence_index((0.62, 0.22, 0.16), market_divergence=0.10)
-        self.assertEqual(downgraded, "MEDIA")
+        self.assertEqual(downgraded, "MEDIUM")
 
 
 class TestIntegration(unittest.TestCase):
@@ -161,7 +161,7 @@ class TestIntegration(unittest.TestCase):
         self.assertAlmostEqual(
             res.markets.p_home + res.markets.p_draw + res.markets.p_away, 1.0, places=9
         )
-        self.assertIn(res.confidence_level, {"ALTA", "MEDIA", "BAJA"})
+        self.assertIn(res.confidence_level, {"HIGH", "MEDIUM", "LOW"})
         self.assertIsNotNone(res.market_divergence)
         self.assertIsNotNone(res.cards)
         self.assertGreater(res.markets.p_home, res.markets.p_away)

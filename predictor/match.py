@@ -56,8 +56,8 @@ def _team(d: dict) -> TeamInputs:
 def run_match(cfg: dict) -> MatchResult:
     meta_d = cfg.get("meta", {})
     meta = MatchMeta(
-        home=meta_d.get("home", cfg.get("calibration", {}).get("home", {}).get("name", "Local")),
-        away=meta_d.get("away", cfg.get("calibration", {}).get("away", {}).get("name", "Visitante")),
+        home=meta_d.get("home", cfg.get("calibration", {}).get("home", {}).get("name", "Home")),
+        away=meta_d.get("away", cfg.get("calibration", {}).get("away", {}).get("name", "Away")),
         venue=meta_d.get("venue", ""),
         date=meta_d.get("date", ""),
         stage=meta_d.get("stage", ""),
@@ -114,7 +114,7 @@ def run_match(cfg: dict) -> MatchResult:
 
     # Recommendation: pick the modal 1X2 outcome and the modal scoreline.
     outcome = max(
-        [("Local", markets.p_home), ("Empate", markets.p_draw), ("Visitante", markets.p_away)],
+        [("Home", markets.p_home), ("Draw", markets.p_draw), ("Away", markets.p_away)],
         key=lambda kv: kv[1],
     )
     top_score = markets.top_scorelines[0]

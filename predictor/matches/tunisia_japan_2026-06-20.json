@@ -1,0 +1,51 @@
+{
+  "_comment": "WC2026 group Netherlands/Sweden/Japan/Tunisia, Matchday 2. Data provided by the user: MD1 Sweden 5-1 Tunisia; Japan 2-2 Netherlands. Sportsbook odds Tunisia 7.50 / Draw 4.33 / Japan 1.45. Neutral venue. Lambdas calibrated to align with the de-vigged market (Tunisia 12.7 / X 21.9 / Japan 65.4).",
+  "meta": {
+    "home": "Tunisia",
+    "away": "Japan",
+    "venue": "Estadio Monterrey, Guadalupe (Mexico) - Match No. 1000 in World Cup history",
+    "date": "2026-06-20 (Group matchday 2)",
+    "stage": "World Cup 2026 - Group F - Matchday 2",
+    "stakes": "Tunisia comes off a 1-5 with Sweden: battered and almost obliged to win to avoid elimination, debut of coach Renard. Japan drew 2-2 with the Netherlands (good display) but lose Kubo to injury; a win puts qualification on track."
+  },
+  "calibration": {
+    "base_home": 1.25,
+    "base_away": 1.25,
+    "rho": -0.05,
+    "home": {
+      "name": "Tunisia",
+      "attack": 0.76,
+      "defense": 1.26,
+      "context": 1.0,
+      "notes": [
+        "XI ADJUSTMENT: Renard's debut (motivator, won AFCON) + switch to a back four + must-win => somewhat more organized and purposeful. attack 0.71->0.76.",
+        "Fragile defense after the 1-5 but with Renard reorganizing: defense 1.26 (holds up).",
+        "Will go for the match: leaves spaces for the Japanese counter."
+      ]
+    },
+    "away": {
+      "name": "Japan",
+      "attack": 1.27,
+      "defense": 0.9,
+      "context": 1.0,
+      "notes": [
+        "XI ADJUSTMENT: Kubo OUT (knee injury). Creativity drops: attack 1.3->1.27. But keeps Nakamura and Kamada (both scored against the Netherlands) and pushes Doan forward in a 3-4-2-1.",
+        "The market already knew about Kubo's absence when setting the 1.45 odds, so the xG barely moves.",
+        "Solid defense but not elite: defense 0.9."
+      ]
+    }
+  },
+  "market": {
+    "odds": [7.50, 4.33, 1.45]
+  },
+  "corners": {
+    "home_corners": 3.5,
+    "away_corners": 5.5
+  },
+  "cards": {
+    "_referee": "Istvan Kovacs (Romania), CONFIRMED by FIFA for match No. 1000. Strict referee (career 4.47; last 10 ~4.8; some sources 5.1-5.4) but moderates in elite international play (CL 24/25 2.71). Japan is very disciplined; Tunisia frustrated and physical.",
+    "referee_yellow_avg": 4.47,
+    "wc_discount": 0.82,
+    "mismatch_bump": 1.05
+  }
+}

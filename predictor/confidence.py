@@ -1,4 +1,4 @@
-"""Confidence index (ALTA / MEDIA / BAJA).
+"""Confidence index (HIGH / MEDIUM / LOW).
 
 Confidence describes how strong/clear the *expected* result is, NOT the chance
 of "getting it right". A low-confidence match that lands on the favorite does
@@ -16,7 +16,7 @@ from __future__ import annotations
 
 from typing import Optional, Tuple
 
-LEVELS = ["BAJA", "MEDIA", "ALTA"]
+LEVELS = ["LOW", "MEDIUM", "HIGH"]
 
 
 def confidence_index(
@@ -26,31 +26,31 @@ def confidence_index(
 ) -> Tuple[str, str]:
     """Return (level, rationale).
 
-    Thresholds on the top 1X2 probability: ~0.45 -> Baja, ~0.80 -> Alta.
+    Thresholds on the top 1X2 probability: ~0.45 -> Low, ~0.80 -> High.
     """
     top = max(one_x_two)
 
     if top >= 0.60:
-        idx = 2  # ALTA
+        idx = 2  # HIGH
     elif top >= 0.45:
-        idx = 1  # MEDIA
+        idx = 1  # MEDIUM
     else:
-        idx = 0  # BAJA
+        idx = 0  # LOW
 
-    reasons = [f"Favorito 1X2 al {top:.0%}"]
+    reasons = [f"1X2 favorite at {top:.0%}"]
 
     # Downgrade when sources disagree materially.
     if market_divergence is not None and market_divergence > 0.07:
         idx = max(0, idx - 1)
-        reasons.append(f"mercado diverge {market_divergence*100:.0f} pts (baja un nivel)")
+        reasons.append(f"market diverges {market_divergence*100:.0f} pts (down one level)")
     elif market_divergence is not None:
-        reasons.append("alineado con el mercado")
+        reasons.append("aligned with the market")
 
     if data_unstable:
         idx = max(0, idx - 1)
-        reasons.append("datos de base inestables (baja un nivel)")
+        reasons.append("unstable base data (down one level)")
 
     if idx == 0:
-        reasons.append("partido parejo: el modelo NO tiene lectura fuerte")
+        reasons.append("even match: the model has NO strong read")
 
     return LEVELS[idx], "; ".join(reasons)
