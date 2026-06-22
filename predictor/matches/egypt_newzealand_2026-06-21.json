@@ -1,0 +1,55 @@
+{
+  "_comment": "WC2026 Group G, Matchday 2 (BC Place, Vancouver). MD1: Egypt 1-1 Belgium (great display, leading almost throughout); NZ 2-2 Iran (Elijah Just x2). All on 1 point. Odds Egypt 1.60 / Draw 4.0 / NZ 5.5. MOST EVEN match in the group. Calibrated in line with the market (Spain/Belgium lesson: don't go contrarian). REFEREE AND XI NOT YET CONFIRMED -> cards as placeholder.",
+  "meta": {
+    "home": "Egypt",
+    "away": "New Zealand",
+    "venue": "BC Place, Vancouver (Canada)",
+    "date": "2026-06-21",
+    "stage": "World Cup 2026 - Group G - Matchday 2",
+    "stakes": "Group G with all 4 on 1 point. Egypt (Salah) chasing their 1st World Cup win in 9 attempts after a great 1-1 with Belgium; a gutsy NZ (2-2 with Iran) also goes for its 1st win. A win leaves either side very close to the round of 16."
+  },
+  "calibration": {
+    "base_home": 1.25,
+    "base_away": 1.25,
+    "rho": -0.05,
+    "home": {
+      "name": "Egypt",
+      "attack": 1.25,
+      "defense": 0.80,
+      "context": 1.0,
+      "notes": [
+        "Salah + Trezeguet; went toe to toe with Belgium (14 shots, led almost throughout). attack 1.25.",
+        "Calibrated in line with the market (~59%): Spain/Belgium lesson, don't underrate the favorite based on my bottom-up.",
+        "Solid defense: held off Belgium to the end -> defense 0.80."
+      ]
+    },
+    "away": {
+      "name": "New Zealand",
+      "attack": 0.85,
+      "defense": 1.12,
+      "context": 1.0,
+      "notes": [
+        "Physical, dangerous from set pieces; Elijah Just scored 2 against Iran. Does NOT sit as deep as Iran -> more open match (rho -0.05). attack 0.85.",
+        "Weak defense: leaked twice against Iran -> defense 1.12.",
+        "82nd in the FIFA ranking: the weakest in the group, but competitive."
+      ]
+    }
+  },
+  "market": {
+    "odds": [1.60, 4.0, 5.5]
+  },
+  "corners": {
+    "home_corners": 5.5,
+    "away_corners": 3.8
+  },
+  "cards": {
+    "_referee": "REFEREE NOT YET CONFIRMED. Generic World Cup placeholder. Recalibrate once known.",
+    "referee_yellow_avg": 4.0,
+    "wc_discount": 0.85,
+    "mismatch_bump": 1.05
+  },
+  "lambdas_override": {
+    "home": 1.75,
+    "away": 0.85
+  }
+}

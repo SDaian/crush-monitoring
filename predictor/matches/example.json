@@ -1,35 +1,35 @@
 {
-  "_comment": "Plantilla de ejemplo. NO son lambdas reales: reemplazar attack/defense/context con datos buscados (xG de clasificacion, ranking FIFA, ultimo partido, rival, contexto) antes de tomar como prediccion. La estructura muestra como construir el xG de abajo hacia arriba.",
+  "_comment": "Example template. These are NOT real lambdas: replace attack/defense/context with researched data (qualifying xG, FIFA ranking, last match, opponent, context) before treating as a prediction. The structure shows how to build the xG bottom-up.",
   "meta": {
-    "home": "Equipo Local",
-    "away": "Equipo Visitante",
-    "venue": "Estadio / Ciudad",
+    "home": "Home Team",
+    "away": "Away Team",
+    "venue": "Stadium / City",
     "date": "2026-06-XX",
-    "stage": "Fase de grupos - Grupo X",
-    "stakes": "Que se juega cada equipo (puntos, clasificacion, etc.)"
+    "stage": "Group stage - Group X",
+    "stakes": "What each team is playing for (points, qualification, etc.)"
   },
   "calibration": {
     "base_home": 1.35,
     "base_away": 1.15,
     "rho": -0.06,
     "home": {
-      "name": "Equipo Local",
+      "name": "Home Team",
       "attack": 1.15,
       "defense": 0.95,
       "context": 1.0,
       "notes": [
-        "xG de clasificacion ~1.6/partido (ataque por encima de la media)",
-        "Defiende bien pero enfrenta un ataque vertical: defense 0.95"
+        "Qualifying xG ~1.6/match (attack above average)",
+        "Defends well but faces a vertical attack: defense 0.95"
       ]
     },
     "away": {
-      "name": "Equipo Visitante",
+      "name": "Away Team",
       "attack": 0.9,
       "defense": 1.05,
       "context": 0.95,
       "notes": [
-        "Sin un 9 de area neto: baja eficacia frente a bloque poblado",
-        "Context 0.95: viene a especular un punto"
+        "Without a true penalty-box striker: low efficiency against a packed block",
+        "Context 0.95: comes to play for a point"
       ]
     }
   },

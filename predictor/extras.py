@@ -44,7 +44,7 @@ class CornersModel:
             "expected_away": self.away_corners,
             "over": {ln: over[ln] for ln in lines},
             "under": {ln: 1 - over[ln] for ln in lines},
-            "_caveat": "Corners son mas ruidosos que los goles; tomar como orientativo.",
+            "_caveat": "Corners are noisier than goals; treat as indicative only.",
         }
 
 
@@ -75,7 +75,7 @@ class CardsModel:
             "over": {ln: over[ln] for ln in lines},
             "under": {ln: 1 - over[ln] for ln in lines},
             "_caveat": (
-                "El predictor #1 es el ARBITRO, no los equipos. Es el mercado mas "
-                "impredecible: tratar como casi azar."
+                "The #1 predictor is the REFEREE, not the teams. It is the most "
+                "unpredictable market: treat as near random."
             ),
         }

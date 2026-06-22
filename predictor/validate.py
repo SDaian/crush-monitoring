@@ -49,24 +49,24 @@ def validation_table(
     supercomputer: Optional[Tuple[float, float, float]] = None,
 ) -> Tuple[str, Optional[float]]:
     """Build a comparison table string and return (table, max_divergence_vs_market)."""
-    rows = [ValidationRow("Modelo propio", *model)]
+    rows = [ValidationRow("Own model", *model)]
     div = None
     if market_odds is not None:
         fair = devig(*market_odds)
-        rows.append(ValidationRow("Mercado (de-vig)", fair["home"], fair["draw"], fair["away"]))
+        rows.append(ValidationRow("Market (de-vig)", fair["home"], fair["draw"], fair["away"]))
         div = max_divergence(model, (fair["home"], fair["draw"], fair["away"]))
     if supercomputer is not None:
-        rows.append(ValidationRow("Supercomputadora", *supercomputer))
+        rows.append(ValidationRow("Supercomputer", *supercomputer))
 
     width = max(len(r.label) for r in rows)
-    lines = [f"{'Fuente'.ljust(width)} |  Local |  Empate | Visitante"]
+    lines = [f"{'Source'.ljust(width)} |  Home |  Draw | Away"]
     lines.append("-" * (width + 32))
     for r in rows:
         lines.append(
             f"{r.label.ljust(width)} | {r.home:6.1%} | {r.draw:6.1%} | {r.away:6.1%}"
         )
     if div is not None:
-        flag = "OK (alineado)" if div <= 0.07 else "REVISAR calibracion (>7 pts)"
+        flag = "OK (aligned)" if div <= 0.07 else "REVIEW calibration (>7 pts)"
         lines.append("")
-        lines.append(f"Divergencia max modelo vs mercado: {div*100:.1f} pts -> {flag}")
+        lines.append(f"Max model vs market divergence: {div*100:.1f} pts -> {flag}")
     return "\n".join(lines), div

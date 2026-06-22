@@ -1,12 +1,12 @@
 {
-  "_comment": "WC2026 Grupo E, J2. Calibrado con datos al 2026-06-20: resultados J1 (Ecuador 0-1 Costa de Marfil; Curacao 1-7 Alemania), consenso Opta (Ecuador 86.1/9.2/4.7), odds FanDuel y O/U 3.5 Under -162. Lambdas construidas de abajo hacia arriba; ver notes.",
+  "_comment": "WC2026 Group E, MD2. Calibrated with data as of 2026-06-20: MD1 results (Ecuador 0-1 Ivory Coast; Curacao 1-7 Germany), Opta consensus (Ecuador 86.1/9.2/4.7), FanDuel odds and O/U 3.5 Under -162. Lambdas built bottom-up; see notes.",
   "meta": {
     "home": "Ecuador",
     "away": "Curacao",
-    "venue": "Arrowhead Stadium, Kansas City (EEUU)",
+    "venue": "Arrowhead Stadium, Kansas City (USA)",
     "date": "2026-06-20 20:00 EST",
-    "stage": "Mundial 2026 - Grupo E - Fecha 2",
-    "stakes": "Ambos perdieron la fecha 1: practicamente eliminacion para el perdedor. Ecuador firme favorito; Curacao (debutante, nacion mas chica en mundiales) viene de 1-7 con Alemania."
+    "stage": "World Cup 2026 - Group E - Matchday 2",
+    "stakes": "Both lost on matchday 1: practically elimination for the loser. Ecuador firm favorite; Curacao (debutant, smallest nation in World Cup history) comes off a 1-7 against Germany."
   },
   "calibration": {
     "base_home": 1.35,
@@ -18,10 +18,10 @@
       "defense": 0.55,
       "context": 1.0,
       "notes": [
-        "Ataque modesto: equipo de Beccacece de bajo score (Under en 12 de 14). attack ~1.0 (media).",
-        "Defensa de elite (Pacho-PSG, Hincapie-Arsenal, Caicedo de 5): por eso baja MUCHO el lambda de Curacao -> defense 0.55.",
-        "Enfrenta a la peor defensa del torneo: el lambda sube a ~2.3 por el rival, no por brillar.",
-        "Debe ganar si o si; Curacao parara el micro tras el 1-7, lo que tapa algo su eficacia."
+        "Modest attack: Beccacece's low-scoring side (Under in 12 of 14). attack ~1.0 (average).",
+        "Elite defense (Pacho-PSG, Hincapie-Arsenal, Caicedo holding): that's why it MUCH lowers Curacao's lambda -> defense 0.55.",
+        "Faces the worst defense in the tournament: the lambda rises to ~2.3 because of the opponent, not from brilliance.",
+        "Must win; Curacao will park the bus after the 1-7, which dampens its efficiency somewhat."
       ]
     },
     "away": {
@@ -30,9 +30,9 @@
       "defense": 1.7,
       "context": 1.0,
       "notes": [
-        "Defensa muy floja (7 goles en contra con Alemania): defense 1.7 (la mas leaky del grupo).",
-        "Ataque pobre frente a una zaga top: attack 0.7. Marco 1 a Alemania pero de forma aislada.",
-        "Se replegara para no recibir otra goleada; no se juega abrir el partido."
+        "Very weak defense (7 goals conceded against Germany): defense 1.7 (the leakiest in the group).",
+        "Poor attack against a top backline: attack 0.7. Scored 1 against Germany but in isolation.",
+        "Will sit back to avoid another rout; has no interest in opening up the match."
       ]
     }
   },
@@ -45,7 +45,7 @@
     "away_corners": 2.5
   },
   "cards": {
-    "_referee": "Istvan Kovacs (Rumania). Carrera 4.47 AM/PJ; Liga rumana 25/26 4.8; pero Champions 24/25 solo 2.71 -> modera mucho en elite internacional.",
+    "_referee": "Istvan Kovacs (Romania). Career 4.47 YC/match; Romanian league 25/26 4.8; but Champions League 24/25 only 2.71 -> moderates a lot in elite international play.",
     "referee_yellow_avg": 4.47,
     "wc_discount": 0.78,
     "mismatch_bump": 1.05

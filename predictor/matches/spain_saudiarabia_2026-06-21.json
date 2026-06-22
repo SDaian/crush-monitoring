@@ -1,0 +1,72 @@
+{
+  "_comment": "WC2026 Group H, Matchday 2. MD1: Spain 0-0 Cape Verde (embarrassing); Saudi Arabia 1-1 Uruguay. All on 1 point. FanDuel odds Spain -1000 (1.10) / Draw +950 (10.5) / Saudi Arabia +2000 (21.0). Kalshi 89/9/4. Venue Atlanta. Lambdas deliberately a bit BELOW the market: Spain without a true striker and with Yamal managed, against an organized low block.",
+  "meta": {
+    "home": "Spain",
+    "away": "Saudi Arabia",
+    "venue": "Mercedes-Benz Stadium, Atlanta (USA)",
+    "date": "2026-06-21 12:00 ET",
+    "stage": "World Cup 2026 - Group H - Matchday 2",
+    "stakes": "Group H with all 4 teams on 1 point. Spain comes off a 0-0 with Cape Verde (couldn't break the block) and needs to win; Saudi Arabia, buoyed after the 1-1 with Uruguay, will play to defend and counter."
+  },
+  "calibration": {
+    "base_home": 1.25,
+    "base_away": 1.25,
+    "rho": -0.07,
+    "home": {
+      "name": "Spain",
+      "attack": 1.59,
+      "defense": 0.64,
+      "context": 1.0,
+      "notes": [
+        "XI ADJUSTMENT: Yamal STARTS (though he wouldn't play 90) and Dani Olmo comes in for Fabian -> more creative midfield. attack 1.5->1.59, narrowing the gap with the market.",
+        "Still a bit BELOW the market (86%): no true striker and coming off a 0-0 with Cape Verde; the difficulty breaking down low blocks persists.",
+        "Laporte is DOUBTFUL (knock); if he doesn't make it, Eric Garcia comes in. Barely moves the xG (Eric Garcia also distributes), but it DOES affect his passes prop."
+      ]
+    },
+    "away": {
+      "name": "Saudi Arabia",
+      "attack": 0.65,
+      "defense": 1.31,
+      "context": 1.0,
+      "notes": [
+        "Organized low block; drew with Uruguay. Concedes volume against Spanish possession but doesn't fall apart easily -> defense 1.31 (not as leaky as a Curacao).",
+        "Limited attack on the counter; scored against Uruguay in isolation -> attack 0.65.",
+        "Sits deep: cagey match, hence rho -0.07."
+      ]
+    }
+  },
+  "market": {
+    "odds": [
+      1.1,
+      10.5,
+      21.0
+    ],
+    "supercomputer": [
+      0.89,
+      0.09,
+      0.04
+    ]
+  },
+  "corners": {
+    "home_corners": 7.5,
+    "away_corners": 2.0
+  },
+  "cards": {
+    "_referee": "Raphael Claus (Brazil), CONFIRMED. Career ~4.1-4.4 YC/match. CONMEBOL referee (tends to book a bit more); discount for the international context but a bump because a deep-sitting Saudi Arabia commits many tactical fouls.",
+    "referee_yellow_avg": 4.2,
+    "wc_discount": 0.85,
+    "mismatch_bump": 1.12
+  },
+  "lambdas_override": {
+    "home": 2.6,
+    "away": 0.5
+  },
+  "_postmatch": {
+    "result": "Spain 4-0 Saudi Arabia (3-0 by the 27th; 21 shots from Spain, Saudi Arabia 0-1 on target)",
+    "model_1x2": "Spain 82.0 / Draw 13.4 / Saudi Arabia 4.7",
+    "market_1x2": "Spain 86.4 / Draw 9.1 / Saudi Arabia 4.5",
+    "verdict": "My contrarian lean (~4.4 pts below the market) FAILED. Spain swept them aside. The market was right.",
+    "lesson": "Don't over-correct downward over ONE 0-0 against a low block. An elite team with dominant possession (European champion) ends up breaking down weak blocks; the 0-0 vs Cape Verde was the outlier, not the norm. For elite favorites aligned with a unanimous market (86-89%), respect the market unless there's strong and repeated evidence, not a single match. Had I recalibrated to ~2.9/0.45 (Spain ~86%) it would have been in line.",
+    "user_bet": "6-leg combo at odds 10.0, 30 EUR -> cash out 214.29 (+184). Held beyond the EV-optimal cash out at halftime (~80); +variance that paid off; closed well at 85'."
+  }
+}

@@ -1,0 +1,55 @@
+{
+  "_comment": "WC2026 Group G, Matchday 2 (SoFi Stadium, LA). MD1: Belgium 1-1 Egypt (poor); Iran 2-2 NZ. All on 1 point. Odds Belgium -230 (1.435) / Draw +360 (4.60) / Iran +650 (7.50). XI: Iran 5-4-1 (Taremi alone) = extreme low block; Belgium with De Bruyne + Lukaku. Calibrated IN LINE with the market (Spain lesson: don't go contrarian without strong evidence).",
+  "meta": {
+    "home": "Belgium",
+    "away": "Iran",
+    "venue": "SoFi Stadium, Los Angeles (USA)",
+    "date": "2026-06-21 15:00 ET",
+    "stage": "World Cup 2026 - Group G - Matchday 2",
+    "stakes": "Group G with all 4 on 1 point. Belgium favorite but came in poor (1-1 Egypt); a gutsy Iran (2-2 NZ) sets up a 5-4-1 to hold and counter through Taremi."
+  },
+  "calibration": {
+    "base_home": 1.25,
+    "base_away": 1.25,
+    "rho": -0.07,
+    "home": {
+      "name": "Belgium",
+      "attack": 1.45,
+      "defense": 0.87,
+      "context": 1.0,
+      "notes": [
+        "With De Bruyne (creator) + Lukaku (true striker) starting: HAS the tools to break down a low block (unlike Spain vs Cape Verde). attack 1.45.",
+        "Calibrated in line with the market (66-68%): Spain lesson, no going contrarian. My naive bottom-up was overvaluing Iran.",
+        "Defense: Courtois ok but the team conceded to Egypt -> defense 0.87."
+      ]
+    },
+    "away": {
+      "name": "Iran",
+      "attack": 0.55,
+      "defense": 1.05,
+      "context": 1.0,
+      "notes": [
+        "5-4-1 with Taremi ALONE up top: minimal attack -> attack 0.55. That's why I see their win chance (10%) below the market (12.7%).",
+        "Organized back five but not impenetrable (leaked twice to NZ) -> defense 1.05.",
+        "Sits deep: cagey match with few goals -> rho -0.07."
+      ]
+    }
+  },
+  "market": {
+    "odds": [1.435, 4.60, 7.50]
+  },
+  "corners": {
+    "home_corners": 7.0,
+    "away_corners": 2.0
+  },
+  "cards": {
+    "_referee": "Dario Herrera (Argentina), CONFIRMED. Strict/CONMEBOL referee: career ~4.9-5.7 YC/match. Discount for the international context but still high; slight bump because Iran sits deep with tactical fouls. Cards market relatively HIGH due to the referee factor.",
+    "referee_yellow_avg": 5.0,
+    "wc_discount": 0.85,
+    "mismatch_bump": 1.05
+  },
+  "lambdas_override": {
+    "home": 1.9,
+    "away": 0.6
+  }
+}
