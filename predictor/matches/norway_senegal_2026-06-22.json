@@ -52,5 +52,11 @@
   "lambdas_override": {
     "home": 1.60,
     "away": 1.35
+  },
+  "_postmatch": {
+    "result": "Norway 3-1 Senegal (Haaland brace). Both scored, 4 goals, 0 cards.",
+    "model_1x2": "Norway 42.8 / Draw 25.5 / Senegal 31.7 (LOW confidence)",
+    "verdict": "Open-game read validated: the most even match, called as open/high-BTTS, ended 3-1 with both scoring and 4 goals; the slight favorite won. Haaland delivered.",
+    "lesson": "Cards model big miss in the noisiest market: expected ~4.28 yellows (Sampaio card-happy signal) but actual was 0 (a ~1.4% tail event). Not a mean-calibration error; extreme variance. Reinforces: never lean on cards as a value read even with a strong referee signal -- the referee inclines the distribution, not a single game."
   }
 }
