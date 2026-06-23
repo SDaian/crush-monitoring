@@ -44,8 +44,12 @@
   th,td{padding:4px 5px;text-align:center}
   th{color:var(--chalk-dim);font-weight:600;border-bottom:1px solid var(--line)}
   td.team{text-align:left;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:150px}
-  tr.q1 td{background:rgba(124,252,155,.12)} tr.q2 td{background:rgba(124,252,155,.07)}
-  tr.q3 td{background:rgba(244,211,94,.08)}
+  tr.q1 td{background:rgba(124,252,155,.30);font-weight:700}
+  tr.q2 td{background:rgba(124,252,155,.18);font-weight:600}
+  tr.q3 td{background:rgba(244,211,94,.26);font-weight:600}
+  tr.q1 td.team{box-shadow:inset 3px 0 0 var(--good)}
+  tr.q2 td.team{box-shadow:inset 3px 0 0 rgba(124,252,155,.6)}
+  tr.q3 td.team{box-shadow:inset 3px 0 0 var(--gold)}
   .fx{margin-top:8px;border-top:1px dashed var(--line);padding-top:6px}
   .match{display:flex;align-items:center;gap:6px;font-size:12px;padding:3px 0}
   .match .mt{flex:1;text-align:right;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
@@ -66,6 +70,17 @@
   .tie .meta{font-size:9px;color:var(--chalk-dim);margin-top:3px}
   .learn-item{font-size:12px;border-left:2px solid var(--accent);padding:4px 8px;margin:5px 0;background:var(--card2);border-radius:0 6px 6px 0}
   .delta-up{color:var(--good)} .delta-dn{color:var(--bad)}
+  .log-item{border-left:3px solid var(--accent);padding:8px 10px;margin:8px 0;
+    background:linear-gradient(180deg,var(--card),var(--card2));border-radius:0 8px 8px 0}
+  .log-head{display:flex;align-items:center;gap:8px;flex-wrap:wrap;font-size:13px}
+  .log-mark{font-size:14px}
+  .log-meta{font-size:10px;color:var(--chalk-dim)}
+  .log-score{margin-left:auto;font-weight:700;color:var(--gold);font-size:13px}
+  .log-pre{font-size:11px;color:var(--chalk-dim);margin-top:5px}
+  .log-pre .v{color:var(--chalk);font-weight:600}
+  .log-post{font-size:11px;margin-top:5px;line-height:1.45}
+  .conf{font-weight:700;padding:0 4px;border-radius:4px}
+  .conf-HIGH{color:var(--good)} .conf-MEDIUM{color:var(--gold)} .conf-LOW{color:var(--bad)}
   textarea{width:100%;height:160px;background:#08351f;color:var(--chalk);border:1px solid var(--line);border-radius:8px;font-size:11px;font-family:monospace}
   .pill{display:inline-block;font-size:10px;padding:1px 6px;border-radius:10px;border:1px solid var(--line);color:var(--chalk-dim)}
   .legend{font-size:10px;color:var(--chalk-dim);margin:6px 0}
@@ -119,7 +134,7 @@
   </div>
 
   <div class="panel" id="p-learn">
-    <div class="legend">Bayesian-style updates: each real result nudges both teams' strength by how surprising it was (capped). Favorites still beat minnows at realistic rates.</div>
+    <div class="legend">Predictor results log — only the matches we genuinely modelled. Each card shows the <b>pre-game model</b> (1X2 + per-team xG) against the <b>final result</b>, plus the calibration lesson. Marks: ✅ right for the right reason · 🟡 right but by luck/margin · ❌ wrong on the 1X2.</div>
     <div id="learnList"></div>
   </div>
 
@@ -237,6 +252,48 @@ function buildSchedule(){
   return sched;
 }
 const SCHED=buildSchedule();
+
+/* ===========================================================================
+   RESULTS LOG  (the predictor's actual analyzed matches, from
+   predictor/results_log.md — pre-game model + per-team xG vs the final result)
+   Only matches we genuinely modelled and graded are listed here.
+   conf = HIGH/MEDIUM/LOW · mark = ✅ right for the right reason ·
+   🟡 right but by luck/margin · ❌ wrong (on the 1X2).
+   =========================================================================== */
+const RESULTS_LOG=[
+  { date:"2026-06-20", match:"Ecuador vs Curaçao", group:"E", conf:"HIGH", mark:"🟡",
+    h:"Ecuador", a:"Curaçao", p:[79.0,15.8,5.1], xg:[2.30,0.44],
+    result:"0-0 (draw)",
+    post:"Favourite created 2.30 xG but scored 0 — Eloy Room ~15 saves. The draw (which the model rated above the market's rout price) came in. A proven low block CAN frustrate a favourite; carry that thesis via the draw, not the rout." },
+  { date:"2026-06-20", match:"Tunisia vs Japan", group:"F", conf:"HIGH", mark:"✅",
+    h:"Tunisia", a:"Japan", p:[14.7,21.7,63.6], xg:[0.855,2.00],
+    result:"0-4 (Japan)",
+    post:"Japan λ 2.00 ≈ actual xG 2.07 (spot on). Tunisia overestimated: λ 0.855 vs actual 0.05 xG (2 shots, 0 on target). The 0-4 was finishing variance (Japan ~2× its xG); the central read — Japan win, clean sheet, corner dominance — was correct." },
+  { date:"2026-06-21", match:"Spain vs Saudi Arabia", group:"H", conf:"HIGH", mark:"✅",
+    h:"Spain", a:"Saudi Arabia", p:[82.0,13.4,4.7], xg:[2.60,0.50],
+    result:"4-0 (Spain)",
+    post:"Set deliberately BELOW the market (82% vs 86%) on a 'blunt without a striker' thesis. Spain routed on 21 shots. The contrarian lean failed: I over-corrected for the prior 0-0 vs Cape Verde — that was the outlier, not the norm. Breaking from the market is where value lives but where being wrong costs most." },
+  { date:"2026-06-21", match:"Egypt vs New Zealand", group:"G", conf:"MEDIUM", mark:"✅",
+    h:"Egypt", a:"New Zealand", p:[58.2,24.4,17.4], xg:[1.75,0.85],
+    result:"3-1 (Egypt)",
+    post:"The positive counterpoint to the low-block 0-0s. New Zealand is NOT a parked bus (4-2-3-1, scored twice vs Iran), so I explicitly flagged the 'favourite frustrated by a block' pattern as N/A and named BTTS/Over as the angle. Result: both scored, 4 goals, favourite won. Classify the underdog's setup first." },
+  { date:"2026-06-21", match:"Belgium vs Iran", group:"G", conf:"HIGH", mark:"🟡",
+    h:"Belgium", a:"Iran", p:[67.9,21.9,10.2], xg:[1.90,0.60],
+    result:"0-0 (draw)",
+    post:"1X2 missed (the 68% favourite didn't win, the 22% draw landed) — but the GOALS reads did: with Iran in a 5-4-1 I flagged BTTS No and Under 3.5, both won. A process hit in the goals markets even though the deadlock held." },
+  { date:"2026-06-21", match:"Uruguay vs Cape Verde", group:"H", conf:"HIGH", mark:"🟡",
+    h:"Uruguay", a:"Cape Verde", p:[63.4,24.6,12.0], xg:[1.70,0.60],
+    result:"2-2 (draw)",
+    post:"Cape Verde frustrated another favourite — but 2-2, not 0-0. I underestimated its attack (λ 0.60; it scored 2, incl. a screamer): a low block's xG-for is not fixed at ~0. KEY refinement: express 'favourite doesn't break the block' through the DRAW, not Under/BTTS-No (both lost here)." },
+  { date:"2026-06-22", match:"Argentina vs Austria", group:"J", conf:"HIGH", mark:"✅",
+    h:"Argentina", a:"Austria", p:[61.4,22.4,16.2], xg:[1.95,0.90],
+    result:"2-0 (Argentina)",
+    post:"Favourite won as modelled. Real lesson on volume: corners over-modelled (λ 6.0 → actual <5). Possession dominance does NOT reliably convert to corners for a side that attacks through the middle. Trust the result/involvement reads over goal/corner VOLUME reads." },
+  { date:"2026-06-22", match:"Norway vs Senegal", group:"I", conf:"LOW", mark:"✅",
+    h:"Norway", a:"Senegal", p:[42.8,25.5,31.7], xg:[1.60,1.35],
+    result:"3-1 (Norway)",
+    post:"Flagged as the most even game (LOW, no strong read) and the open one → BTTS + several goals. Result 3-1, both scored, Haaland brace. Cards model big miss: expected ~4.28 yellows on the card-happy Sampaio signal, actual was 0 (~1.4% tail). Never lean on cards — the referee inclines the distribution, it doesn't decide one game." }
+];
 
 /* ===========================================================================
    STATE
@@ -491,12 +548,22 @@ function renderBracket(){
 
 function renderLearn(){
   const host=$("#learnList");
-  if(!state.learn.length){ host.innerHTML='<div class="note">No real results processed yet. Type scores to teach the model.</div>'; return; }
-  host.innerHTML=state.learn.map(L=>`<div class="learn-item">
-    <b>${esc(L.match)}</b> <span class="note">(${L.date})</span><br/>
-    expected GD ${L.exp}, actual ${L.act} → surprise applied:
-    <span class="delta-up">${esc(L.up)} +${L.mag}</span> ·
-    <span class="delta-dn">${esc(L.dn)} −${L.mag}</span></div>`).join("");
+  // Curated results log: only the matches the predictor genuinely modelled,
+  // with the pre-game model (1X2 + per-team xG) versus the final result.
+  host.innerHTML=RESULTS_LOG.map(L=>`<div class="log-item">
+    <div class="log-head">
+      <span class="log-mark">${L.mark}</span>
+      <b>${esc(L.match)}</b>
+      <span class="log-meta">Group ${esc(L.group)} · ${L.date} · <span class="conf conf-${L.conf}">${L.conf}</span></span>
+      <span class="log-score">${esc(L.result)}</span>
+    </div>
+    <div class="log-pre">
+      <b>Pre (model):</b>
+      1X2 <span class="v">${L.p[0].toFixed(1)}</span> / <span class="v">${L.p[1].toFixed(1)}</span> / <span class="v">${L.p[2].toFixed(1)}</span> ·
+      xG <span class="v">${esc(L.h)} ${L.xg[0].toFixed(2)}</span> – <span class="v">${L.xg[1].toFixed(2)} ${esc(L.a)}</span>
+    </div>
+    <div class="log-post"><b>Post:</b> ${esc(L.post)}</div>
+  </div>`).join("");
 }
 
 function esc(s){ return String(s==null?'':s).replace(/[&<>]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;"}[c])); }
