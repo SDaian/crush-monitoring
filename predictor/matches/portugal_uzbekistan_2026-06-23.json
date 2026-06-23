@@ -51,5 +51,11 @@
   "lambdas_override": {
     "home": 2.2,
     "away": 0.68
+  },
+  "_postmatch": {
+    "result": "Portugal 4-0 Uzbekistan. Elite favorite routed the debutant; clean sheet, BTTS No, 4 goals.",
+    "model_1x2": "Portugal 71.6 / Draw 18.9 / Uzbekistan 9.5 (HIGH)",
+    "verdict": "1X2 hit (favorite won) and the goals reads all landed: clean sheet (50.7%), Over 2.5 (54.9%) and Over 3.5 (32.6%) all came in, BTTS No. The 4-0 margin was the high tail vs the xG (Portugal 2.20 -> 4 goals, ~1.8x finishing). The Spain-lesson alignment was vindicated: I bumped Portugal from 67% up to 71.6% to sit with the market instead of leaning below an elite favorite -- and, like Spain, it routed.",
+    "lesson": "Reinforces the pattern: against a genuinely weak/limited side (NOT a parked low block), an elite favorite does rout -- back favorite + goals, and never lean below the market. Spain 4-0, Japan 4-0 (away), Portugal 4-0 are the same archetype. The xG mean was right; the magnitude (4) is upside variance, not a model error."
   }
 }

@@ -23,7 +23,7 @@ Legend: ✅ right for the right reason · 🟡 right but by luck/margin ·
 | 2026-06-22 | Argentina vs Austria | 61.4 / 22.4 / 16.2 | HIGH | 2-0 (Argentina win) | ✅ |
 | 2026-06-22 | Norway vs Senegal | 42.8 / 25.5 / 31.7 | LOW | 3-1 (Norway win) | ✅ |
 | 2026-06-22 | Jordan vs Algeria | 15.6 / 23.2 / 61.2 | HIGH | 1-2 (Algeria win) | ✅ |
-| 2026-06-23 | Portugal vs Uzbekistan | 71.6 / 18.9 / 9.5 | HIGH | ⏳ pending | ⏳ |
+| 2026-06-23 | Portugal vs Uzbekistan | 71.6 / 18.9 / 9.5 | HIGH | 4-0 (Portugal win) | ✅ |
 
 ### Emerging pattern: favorites vs low block (key)
 
@@ -292,4 +292,21 @@ Bernardo Silva, Bruno Fernandes, Francisco Conceição; Ronaldo. No rotation aft
 the opener → **λ 2.20 unchanged, forecast locked at 71.6 / 18.9 / 9.5**. Referee
 still TBD at lock-in → cards intentionally not modelled.
 
-*To be graded after the match (xG vs actual, 1X2, lesson).*
+**Actual result:** Portugal 4-0 Uzbekistan. Clean sheet, BTTS No, 4 goals.
+
+**Honest read — favorite + goals validated, Spain lesson vindicated:**
+- ✅ 1X2: the 72% favourite won (low merit, the expected scenario).
+- ✅ **Goals reads all landed:** Portugal clean sheet (50.7%), Over 2.5 (54.9%)
+  and Over 3.5 (32.6%) all came in; BTTS No. The picture (favourite + goals,
+  not a low-block trap) was right.
+- 🟡 **Margin was the high tail:** modelled Portugal xG 2.20; they scored 4
+  (~1.8× finishing). The xG MEAN was well placed; the 4-0 itself is upside
+  variance (Portugal 4+ was the tail), same as Tunisia-Japan and Spain.
+- ✅ **Spain lesson vindicated:** I bumped Portugal from an initial 67% UP to
+  71.6% to sit with the market rather than lean below an elite favourite — and,
+  like Spain, it routed. Aligning up was correct.
+- 📌 **Pattern (3 cases now):** Spain 4-0, Japan 4-0 (away), Portugal 4-0 —
+  against a genuinely weak/limited side (NOT a parked low block), the elite
+  favourite routs. Back favourite + goals; never lean below the market here.
+  Distinct from the low-block 0-0s (Ecuador-Curaçao, Belgium-Iran), which are a
+  different archetype.
