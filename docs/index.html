@@ -392,7 +392,7 @@ const LS_KEY="wc2026_sim_v1";
 // Bump this whenever KNOWN results / schedule change. On load, a saved state
 // with an older DATA_VERSION auto-merges the latest official results (so the
 // app always shows the latest without the user having to Reset/Reload).
-const DATA_VERSION="2026-06-23.sim-groups-only";
+const DATA_VERSION="2026-06-23.third-place-fix";
 let state={ results:{}, strengths:{}, learn:[] };
 
 function freshStrengths(){ const s={}; for(const t in TEAMS) s[t]=TEAMS[t]; return s; }
@@ -539,7 +539,9 @@ const R16=[ {id:89,f:[73,74]},{id:90,f:[75,76]},{id:91,f:[77,78]},{id:92,f:[79,8
            {id:93,f:[81,82]},{id:94,f:[83,84]},{id:95,f:[85,86]},{id:96,f:[87,88]} ];
 const QF=[ {id:97,f:[89,90]},{id:98,f:[91,92]},{id:99,f:[93,94]},{id:100,f:[95,96]} ];
 const SF=[ {id:101,f:[97,98]},{id:102,f:[99,100]} ];
-const FIN=[ {id:104,f:[101,102]} ]; const THIRD={id:103,f:[101,102]};
+const FIN=[ {id:104,f:[101,102]} ];
+// 3rd-place match = the two SEMI-FINAL LOSERS (not the winners), hence losers:true.
+const THIRD={id:103,f:[101,102],losers:true};
 const KO_VENUE={ R32:"various ≈",R16:"various ≈",QF:["LA","Boston","KC","Miami"],
   SF:["Dallas","Atlanta"],F:"New York/NJ" };
 const KO_DATE={ 73:"2026-06-28",89:"2026-07-04",97:"2026-07-09",101:"2026-07-14",104:"2026-07-19",103:"2026-07-18" };
@@ -552,7 +554,8 @@ function slotTeam(code){
 // resolve a knockout tie's two teams; ko results stored in state.results by id (h,a)
 function koTeams(tie){
   if(tie.h!==undefined){ return [slotTeam(tie.h), slotTeam(tie.a)]; } // slot codes (live)
-  // from previous round feeders
+  if(tie.losers){ return tie.f.map(fid=>koLoser(fid)); }  // 3rd-place = SF losers
+  // from previous round feeders (winners advance)
   return tie.f.map(fid=>koWinner(fid));
 }
 function koWinner(id){
@@ -560,6 +563,13 @@ function koWinner(id){
   const [A,B]=koTeams(tie); const r=state.results[id];
   if(!A||!B) return null;
   if(r){ if(r.h>r.a)return A; if(r.a>r.h)return B; return r.pen===A?A:(r.pen===B?B:A); }
+  return null; // not decided
+}
+function koLoser(id){
+  const tie=allKO().find(t=>t.id===id); if(!tie) return null;
+  const [A,B]=koTeams(tie); const r=state.results[id];
+  if(!A||!B) return null;
+  if(r){ if(r.h>r.a)return B; if(r.a>r.h)return A; return r.pen===A?B:(r.pen===B?A:B); }
   return null; // not decided
 }
 function allKO(){ return R32MAP.concat(R16,QF,SF,FIN,[THIRD]); }
