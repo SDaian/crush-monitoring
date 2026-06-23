@@ -1,0 +1,49 @@
+{
+  "_comment": "WC2026 Group L. Standings before this match: England 3 pts (4-2 Croatia), Ghana 3 (1-0 Panama), Croatia 0, Panama 0. Top-of-group clash, both won MD1. England the clear quality side and attacking (scored 4 on Croatia) but leaked 2 -> not airtight at the back; Ghana organized, beat Panama 1-0, physical and can carry a threat (Kudus). Calibrated as a strong-favorite spot in line with the market; applying the Spain/Portugal lesson -> do NOT lean below an elite favourite. Referee/XIs not yet confirmed -> cards not modelled; recalibrate with confirmed lineups ~60 min before kickoff.",
+  "meta": {
+    "home": "England",
+    "away": "Ghana",
+    "venue": "World Cup 2026 (USA/Canada/Mexico) - neutral",
+    "date": "2026-06-23",
+    "stage": "World Cup 2026 - Group L",
+    "stakes": "Both on 3 points after MD1 wins (England 4-2 Croatia; Ghana 1-0 Panama). The winner takes control of Group L and is all but through. England the favourite on quality; Ghana a competitive, organized underdog."
+  },
+  "calibration": {
+    "base_home": 1.25,
+    "base_away": 1.25,
+    "rho": -0.07,
+    "home": {
+      "name": "England",
+      "attack": 1.55,
+      "defense": 0.95,
+      "context": 1.0,
+      "notes": [
+        "Elite attacking side (Bellingham, Saka, Kane, Foden); put 4 on Croatia. attack 1.55.",
+        "Conceded 2 to Croatia -> not airtight, Ghana can threaten. defense 0.95.",
+        "Calibrated in line with the market (~69%): don't lean below an elite favourite (Spain/Portugal lesson). rho -0.07."
+      ]
+    },
+    "away": {
+      "name": "Ghana",
+      "attack": 0.82,
+      "defense": 1.02,
+      "context": 1.0,
+      "notes": [
+        "Organized, physical African side; beat Panama 1-0. Kudus the main threat. attack 0.82.",
+        "Decent but not elite defense vs an England attack at this level. defense 1.02.",
+        "Competitive underdog; can nick a goal given England's leaky back line."
+      ]
+    }
+  },
+  "market": {
+    "odds": [1.42, 4.60, 7.50]
+  },
+  "corners": {
+    "home_corners": 6.0,
+    "away_corners": 3.5
+  },
+  "lambdas_override": {
+    "home": 2.05,
+    "away": 0.82
+  }
+}
