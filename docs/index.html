@@ -98,6 +98,7 @@
     <button class="act" id="simBtn">▶ Simulate pending</button>
     <button class="act" id="clrSimBtn">↺ Clear simulated</button>
     <button class="act" id="resetBtn">⟲ Reset all</button>
+    <button class="act" id="reloadBtn">↻ Reload data</button>
     <span class="note">Type a score = <b>real</b> result (drives learning). Empty = pending.</span>
   </div>
 
@@ -196,6 +197,23 @@ const KNOWN = {
 /* ---- round-robin fixture order for 4 teams ---- */
 const RR=[[0,1],[2,3],[0,2],[1,3],[3,0],[1,2]];
 
+/* Real Matchday-3 date + venue per group (key = group:minIdx-maxIdx). Verified
+   vs schedule sources; ≈ where the venue could not be confirmed. */
+const SCHED_REAL={
+  "A:0-2":{d:"2026-06-24",v:"Mexico City"}, "A:1-3":{d:"2026-06-24",v:"Monterrey"},
+  "B:0-1":{d:"2026-06-24",v:"Vancouver"},   "B:2-3":{d:"2026-06-24",v:"Seattle"},
+  "C:0-1":{d:"2026-06-24",v:"Miami"},       "C:2-3":{d:"2026-06-24",v:"Atlanta"},
+  "D:0-2":{d:"2026-06-25",v:"Los Angeles"}, "D:1-3":{d:"2026-06-25",v:"SF Bay Area"},
+  "E:0-2":{d:"2026-06-25",v:"≈"},           "E:1-3":{d:"2026-06-25",v:"≈"},
+  "F:1-2":{d:"2026-06-26",v:"≈"},           "F:0-3":{d:"2026-06-26",v:"≈"},
+  "G:1-2":{d:"2026-06-26",v:"Seattle"},     "G:0-3":{d:"2026-06-26",v:"Vancouver"},
+  "H:0-3":{d:"2026-06-26",v:"Guadalajara"}, "H:1-2":{d:"2026-06-26",v:"Houston"},
+  "I:0-2":{d:"2026-06-26",v:"Boston"},      "I:1-3":{d:"2026-06-26",v:"Toronto"},
+  "J:0-2":{d:"2026-06-27",v:"Dallas"},      "J:1-3":{d:"2026-06-27",v:"Kansas City"},
+  "K:0-2":{d:"2026-06-27",v:"Miami"},       "K:1-3":{d:"2026-06-27",v:"Atlanta"},
+  "L:0-2":{d:"2026-06-27",v:"≈"},           "L:1-3":{d:"2026-06-27",v:"≈"}
+};
+
 /* build full schedule (group matches id 1..72, knockout 73..104) — dates/venues ≈ */
 function buildSchedule(){
   const sched={}; let id=1; const gk=Object.keys(GROUPS);
@@ -207,6 +225,12 @@ function buildSchedule(){
       const m={id, g, i:pair[0], j:pair[1],
         date:date.toISOString().slice(0,10),
         venue:VENUES[(id-1)%VENUES.length], approx:true};
+      const key=g+":"+Math.min(pair[0],pair[1])+"-"+Math.max(pair[0],pair[1]);
+      if(SCHED_REAL[key]){
+        m.date=SCHED_REAL[key].d;
+        m.venue=SCHED_REAL[key].v;
+        m.approx=(SCHED_REAL[key].v==="≈");
+      }
       GROUPS[g].matches.push(m); sched[id]=m; id++;
     });
   });
@@ -551,6 +575,13 @@ $("#resetBtn").addEventListener("click",()=>{
   if(!confirm("Reset everything (results + learned strengths)?")) return;
   state={results:{},strengths:freshStrengths(),learn:[]}; seedKnown(); recomputeLearningFromScratch();
   renderAll(); save();
+});
+// Reload data: discard the locally cached state and reload from the current
+// code (latest KNOWN results / schedule). For mobile, where clearing browser
+// data is awkward and stale localStorage can hide code updates. No confirm().
+$("#reloadBtn").addEventListener("click",()=>{
+  try{ localStorage.removeItem(LS_KEY); }catch(e){}
+  location.reload();
 });
 $("#exportBtn").addEventListener("click",()=>{
   const blob=new Blob([JSON.stringify(state,null,2)],{type:"application/json"});
