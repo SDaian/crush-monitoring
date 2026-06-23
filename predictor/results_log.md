@@ -22,6 +22,7 @@ Legend: ✅ right for the right reason · 🟡 right but by luck/margin ·
 | 2026-06-21 | Uruguay vs Cape Verde | 63.4 / 24.6 / 12.0 | HIGH | 2-2 (draw) | 🟡 |
 | 2026-06-22 | Argentina vs Austria | 61.4 / 22.4 / 16.2 | HIGH | 2-0 (Argentina win) | ✅ |
 | 2026-06-22 | Norway vs Senegal | 42.8 / 25.5 / 31.7 | LOW | 3-1 (Norway win) | ✅ |
+| 2026-06-22 | Jordan vs Algeria | 15.6 / 23.2 / 61.2 | HIGH | ⏳ pending | ⏳ |
 
 ### Emerging pattern: favorites vs low block (key)
 
@@ -215,3 +216,30 @@ the most even match, no strong read). Lambdas 1.60 / 1.35, total xG 2.95.
   a market the model itself labels "near random". Reinforces the rule: do NOT
   lean on cards as a value read even with a strong referee signal; the referee
   inclines the distribution, it does not determine a single game.
+
+---
+
+## 2026-06-22 · Jordan vs Algeria (Group J, MD2) — ⏳ PENDING
+
+**Pre-match forecast (not yet played).** Both lost MD1 (Jordan 1-3 Austria;
+Algeria 0-3 Argentina) and sit on 0 points: a must-win for both.
+
+**Model:** Jordan 15.6 / Draw 23.2 / Algeria 61.2 (HIGH). Lambdas Jordan 0.82 /
+Algeria 1.85, total xG 2.67, rho -0.05. Monte Carlo (N=200k) converges:
+Home 15.5 / Draw 23.1 / Away 61.4 (max diff 0.14 pts vs closed form).
+
+**Calibration vs market:** de-vig market 15.8 / 22.6 / 61.6 (book margin 5.4%);
+max divergence 0.6 pts → aligned. No anti-market lean; Algeria is the quality
+side (Mahrez, Gouiri, Aouar, Amoura), Jordan a competitive but limited underdog.
+
+**Most probable scorelines:** 0-1 (12.3%), 0-2 (11.9%), 1-1 (11.0%), 1-2 (9.7%),
+0-0 (7.5%). Goals: Over 2.5 49.9% (a coin-flip total), BTTS 47.7%, Algeria clean
+sheet 44%.
+
+**Pre-match read:** Algeria should win but the margin is the uncertain part — a
+clean-sheet 0-1/0-2 is the central scenario, not a rout. The two open low-block
+risks logged this tournament (favourite frustrated 0-0) are a tail here too:
+Jordan will go for it (must-win), so the game is more likely to open up than to
+be parked. Recalibrate with the confirmed XIs ~60 min before kickoff.
+
+*To be graded after the match (xG vs actual, 1X2, lesson).*
