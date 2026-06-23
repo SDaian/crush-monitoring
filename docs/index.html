@@ -3,6 +3,9 @@
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"/>
+<meta http-equiv="Pragma" content="no-cache"/>
+<meta http-equiv="Expires" content="0"/>
 <title>World Cup 2026 — Tactics Board Simulator</title>
 <style>
   :root{
@@ -127,7 +130,8 @@
 <header>
   <h1>⚽ World Cup 2026 — Tactics-Board Simulator</h1>
   <div class="sub">Strength-based Poisson engine · auto-sorting FIFA tables · learns from real results · offline-saved
-    &nbsp;|&nbsp; <span class="approx">≈ flagged = approximate, not officially verified</span></div>
+    &nbsp;|&nbsp; <span class="approx">≈ flagged = approximate, not officially verified</span>
+    &nbsp;|&nbsp; <span class="note">data <b id="verStamp"></b></span></div>
 </header>
 
 <div class="wrap">
@@ -357,6 +361,10 @@ function calibFor(m){ if(!m) return null;
    STATE
    =========================================================================== */
 const LS_KEY="wc2026_sim_v1";
+// Bump this whenever KNOWN results / schedule change. On load, a saved state
+// with an older DATA_VERSION auto-merges the latest official results (so the
+// app always shows the latest without the user having to Reset/Reload).
+const DATA_VERSION="2026-06-23.j-alg";
 let state={ results:{}, strengths:{}, learn:[] };
 
 function freshStrengths(){ const s={}; for(const t in TEAMS) s[t]=TEAMS[t]; return s; }
@@ -379,10 +387,18 @@ function load(){
   const raw=localStorage.getItem(LS_KEY);
   if(raw){ try{ const o=JSON.parse(raw);
       state.results=o.results||{}; state.strengths=o.strengths||freshStrengths(); state.learn=o.learn||[];
+      if(o.dataVersion!==DATA_VERSION){
+        // New official data shipped since this state was saved: merge the latest
+        // KNOWN results on top (they overwrite stale/old values and add new ones;
+        // the user's own entries for non-KNOWN matches are preserved), then
+        // recompute learning and re-stamp the version.
+        seedKnown(); recomputeLearningFromScratch(); save();
+      }
       return; }catch(e){} }
   state.strengths=freshStrengths(); seedKnown(); recomputeLearningFromScratch(); save();
 }
-function save(){ try{ localStorage.setItem(LS_KEY,JSON.stringify(state)); }catch(e){} syncJsonArea(); }
+function save(){ state.dataVersion=DATA_VERSION;
+  try{ localStorage.setItem(LS_KEY,JSON.stringify(state)); }catch(e){} syncJsonArea(); }
 
 /* ===========================================================================
    ENGINE  (strength -> lambdas -> Poisson 1X2)
@@ -844,6 +860,7 @@ function syncJsonArea(){ const a=$("#jsonArea"); if(a) a.value=JSON.stringify(st
    BOOT
    =========================================================================== */
 load(); renderAll(); syncJsonArea();
+{ const vs=$("#verStamp"); if(vs) vs.textContent=DATA_VERSION; }
 </script>
 </body>
 </html>
