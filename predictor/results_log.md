@@ -23,6 +23,7 @@ Legend: ✅ right for the right reason · 🟡 right but by luck/margin ·
 | 2026-06-22 | Argentina vs Austria | 61.4 / 22.4 / 16.2 | HIGH | 2-0 (Argentina win) | ✅ |
 | 2026-06-22 | Norway vs Senegal | 42.8 / 25.5 / 31.7 | LOW | 3-1 (Norway win) | ✅ |
 | 2026-06-22 | Jordan vs Algeria | 15.6 / 23.2 / 61.2 | HIGH | 1-2 (Algeria win) | ✅ |
+| 2026-06-23 | Portugal vs Uzbekistan | 71.6 / 18.9 / 9.5 | HIGH | ⏳ pending | ⏳ |
 
 ### Emerging pattern: favorites vs low block (key)
 
@@ -259,3 +260,31 @@ margin; Jordan scored (competitive, as flagged). 3 goals total, BTTS Yes.
 - 📌 Process note: HIGH confidence was justified — the result landed in the
   central scenario. No new calibration lesson; this is the model behaving as
   designed on a correctly-read favourite.
+
+---
+
+## 2026-06-23 · Portugal vs Uzbekistan (Group K) — ⏳ PENDING
+
+**Pre-match forecast (not yet played).** Standings before kickoff: Colombia 3 pts
+(3-1 Uzbekistan), Portugal 1 (1-1 DR Congo), DR Congo 1, Uzbekistan 0. Portugal
+the clear quality side but drew their opener; Uzbekistan a World Cup debutant.
+
+**Model:** Portugal 71.6 / Draw 18.9 / Uzbekistan 9.5 (HIGH). Lambdas Portugal
+2.20 / Uzbekistan 0.68, total xG 2.88, rho -0.08. Monte Carlo (N=200k) converges:
+exact 71.6 / 18.9 / 9.5 vs sim 71.7 / 18.9 / 9.5 (max diff 0.10 pts).
+
+**Calibration vs market:** de-vig market ~72.8 / 17.2 / 10.0 (book margin 5.6%);
+max divergence 1.7 pts → aligned. **Applied the Spain lesson:** an initial λ of
+2.0 put Portugal at 67% (~6 pts BELOW market); bumped to 2.20 to sit in line with
+the market — don't lean below an elite favourite.
+
+**Most probable scorelines:** 2-0 (13.6%), 1-0 (11.8%), 3-0 (10.0%), 2-1 (9.2%),
+1-1 (9.0%). Goals: Over 2.5 54.9%, BTTS 44.5%, Portugal clean sheet 50.7%.
+
+**Pre-match read:** Portugal should win comfortably; the central scenario is a
+1-2 goal clean-sheet win (2-0/1-0/3-0), not necessarily a rout. Uzbekistan's path
+to value is the draw/Portugal-not-to-rout, but as a beaten debutant that is a
+tail. Recalibrate with confirmed XIs ~60 min before kickoff (Portugal rotation
+risk after the opener).
+
+*To be graded after the match (xG vs actual, 1X2, lesson).*
