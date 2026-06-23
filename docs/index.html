@@ -148,10 +148,10 @@ const VENUES = ["Mexico City","Guadalajara","Monterrey","Atlanta","Dallas","Hous
 
 // strength (approx). "~" teams flagged as less certain placements.
 const TEAMS = {
-  "Mexico":79,"South Korea":76,"South Africa":68,"New Caledonia":40,            // A ≈
+  "Mexico":79,"South Korea":76,"Czech Republic":75,"South Africa":68,           // A (confirmed)
   "Switzerland":81,"Canada":75,"Bosnia & Herz.":72,"Qatar":69,                  // B
   "Brazil":92,"Scotland":74,"Morocco":83,"Haiti":50,                            // C
-  "USA":79,"Australia":75,"Paraguay":70,"Jordan?":0,                            // D ≈ (placeholder filled below)
+  "USA":79,"Australia":75,"Turkey":78,"Paraguay":70,                            // D (confirmed)
   "Germany":88,"Ivory Coast":77,"Ecuador":79,"Curacao":48,                      // E
   "Netherlands":89,"Sweden":77,"Japan":80,"Tunisia":71,                         // F
   "Belgium":86,"Iran":73,"Egypt":74,"New Zealand":58,                           // G
@@ -161,16 +161,11 @@ const TEAMS = {
   "Portugal":90,"Uzbekistan":68,"Colombia":83,"DR Congo":70,                    // K
   "England":91,"Ghana":72,"Panama":70,"Croatia":84                              // L
 };
-delete TEAMS["Jordan?"];
-TEAMS["Egypt?"]=0; delete TEAMS["Egypt?"];
-// Group D fourth team (approx)
-TEAMS["Cabo?"]=0; delete TEAMS["Cabo?"];
-
 const GROUPS = {
-  A:{teams:["Mexico","South Korea","South Africa","New Caledonia"],approx:true},
+  A:{teams:["Mexico","South Korea","Czech Republic","South Africa"],approx:false},
   B:{teams:["Switzerland","Canada","Bosnia & Herz.","Qatar"],approx:false},
   C:{teams:["Brazil","Scotland","Morocco","Haiti"],approx:false},
-  D:{teams:["USA","Australia","Paraguay","Mexico"],approx:true}, // D4 fixed below
+  D:{teams:["USA","Australia","Turkey","Paraguay"],approx:false},
   E:{teams:["Germany","Ivory Coast","Ecuador","Curacao"],approx:false},
   F:{teams:["Netherlands","Sweden","Japan","Tunisia"],approx:false},
   G:{teams:["Belgium","Iran","Egypt","New Zealand"],approx:false},
@@ -180,12 +175,12 @@ const GROUPS = {
   K:{teams:["Portugal","Uzbekistan","Colombia","DR Congo"],approx:false},
   L:{teams:["England","Ghana","Panama","Croatia"],approx:false}
 };
-// fix Group D 4th (Mexico is in A); use a distinct approx team
-GROUPS.D.teams[3]="Cape Verde?"; TEAMS["Cape Verde?"]=60;
 
-// Real MD1/MD2 results already known this week (entered as REAL by default).
+// Real results already known (entered as REAL by default).
 const KNOWN = {
   // group:[ [i,j,h,a], ... ] indices into GROUPS[g].teams
+  A:[[0,3,2,0],[1,2,2,1],[2,3,1,1],[0,1,1,0]], // Mex2-0 RSA ; Kor2-1 Cze ; Cze1-1 RSA ; Mex1-0 Kor
+  D:[[0,3,4,1],[1,2,2,0],[0,1,2,0],[2,3,0,1]], // USA4-1 Par ; Aus2-0 Tur ; USA2-0 Aus ; Tur0-1 Par
   E:[[2,1,0,1],[3,0,1,7]],            // Ecuador0-1 IvoryCoast ; Curacao1-7 Germany
   F:[[1,3,5,1],[2,0,2,2]],            // Sweden5-1 Tunisia ; Japan2-2 Netherlands
   G:[[0,2,1,1],[1,3,2,2],[0,1,0,0]],  // Belgium1-1 Egypt ; Iran2-2 NZ ; Belgium0-0 Iran
