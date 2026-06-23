@@ -400,6 +400,10 @@ function thirdsRanked(){
   arr.forEach((r,k)=>{ r.rank=k+1; r.q=k<8; });
   return arr;
 }
+// Groups whose 3rd-placed team is currently among the 8 qualifying best thirds.
+function thirdGroupsQualified(){
+  const set=new Set(); thirdsRanked().forEach(r=>{ if(r.q) set.add(r.g); }); return set;
+}
 
 /* ===========================================================================
    KNOCKOUT  (≈ crossing map — structure correct, exact pairings need official check)
@@ -489,8 +493,9 @@ function renderGroups(){
 }
 function renderStandings(g){
   const tb=$("#tb-"+g); if(!tb) return; const s=groupStats(g);
+  const thirdQ=thirdGroupsQualified().has(g); // yellow only if this 3rd qualifies
   tb.innerHTML=s.map(r=>{
-    const cls=r.pos===1?"q1":r.pos===2?"q2":r.pos===3?"q3":"";
+    const cls=r.pos===1?"q1":r.pos===2?"q2":(r.pos===3&&thirdQ)?"q3":"";
     return `<tr class="${cls}"><td>${r.pos}</td><td class="team">${esc(r.t)}</td>
       <td>${r.P}</td><td>${r.W}</td><td>${r.D}</td><td>${r.L}</td><td>${r.GF}</td><td>${r.GA}</td>
       <td>${r.GD>0?'+':''}${r.GD}</td><td><b>${r.Pts}</b></td></tr>`;
@@ -573,7 +578,11 @@ function renderAll(){ renderGroups(); renderThirds(); renderBracket(); renderLea
 
 /* targeted update after a single score change (keeps scroll & focus) */
 function updateAfterScore(mid){
-  const m=SCHED[mid]; if(m){ renderStandings(m.g); // re-render only that group's standings tbody (no inputs)
+  const m=SCHED[mid]; if(m){
+    // Re-render ALL standings tbodies (they contain no inputs, so scroll/focus
+    // is preserved): one result can move another group's 3rd in/out of the
+    // qualifying best-thirds, which changes the yellow highlight group-wide.
+    for(const g in GROUPS) renderStandings(g);
     const A=GROUPS[m.g].teams[m.i],B=GROUPS[m.g].teams[m.j];
     const pr=$("#pr-"+mid); if(pr) pr.textContent=pctTriple(probs(st(A),st(B)));
   }
