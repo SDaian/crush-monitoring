@@ -45,5 +45,11 @@
   "lambdas_override": {
     "home": 2.05,
     "away": 0.82
+  },
+  "_postmatch": {
+    "result": "England 0-0 Ghana. The favorite was held scoreless by an organized Ghana; both kept a clean sheet.",
+    "model_1x2": "England 65.3 / Draw 21.4 / Ghana 13.3 (HIGH)",
+    "verdict": "1X2 missed: the 65% favorite did not win; the model's #2 outcome, the draw (21.4%), came in. This is the low-block frustration pattern again (Ecuador-Curaçao, Belgium-Iran). The bigger miss was the GOALS lean: I read this as an open game (BTTS ~49%, Over 2.5 55%) because England leaked 2 to Croatia -- instead it was a tight 0-0 (Under 1.5, BTTS No). England's 2.05 xG did not convert; Ghana's organization (not a parked bus, but disciplined) produced the stalemate.",
+    "lesson": "A strong attacking favorite can still be held scoreless by an organized side -- the draw/Under is the underweighted scenario. Crucially: do NOT infer 'open, high-BTTS game' just because the favorite's defense looked leaky in the prior match (England 4-2 Croatia). One leaky game is weak evidence; organization on the other side can flip it to 0-0. Joins Ecuador-Curaçao and Belgium-Iran as a frustrated-favorite 0-0."
   }
 }

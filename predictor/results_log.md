@@ -24,14 +24,15 @@ Legend: ✅ right for the right reason · 🟡 right but by luck/margin ·
 | 2026-06-22 | Norway vs Senegal | 42.8 / 25.5 / 31.7 | LOW | 3-1 (Norway win) | ✅ |
 | 2026-06-22 | Jordan vs Algeria | 15.6 / 23.2 / 61.2 | HIGH | 1-2 (Algeria win) | ✅ |
 | 2026-06-23 | Portugal vs Uzbekistan | 71.6 / 18.9 / 9.5 | HIGH | 4-0 (Portugal win) | ✅ |
-| 2026-06-23 | England vs Ghana | 65.3 / 21.4 / 13.3 | HIGH | ⏳ pending | ⏳ |
+| 2026-06-23 | England vs Ghana | 65.3 / 21.4 / 13.3 | HIGH | 0-0 (draw) | 🟡 |
 
 ### Emerging pattern: favorites vs low block (key)
 
-On these matchdays there were THREE 0-0 draws of favorites frustrated by low blocks:
-Ecuador-Curaçao (MD1), Cape Verde-Spain (MD1) and Belgium-Iran (MD2). But also
-two routs (Spain 4-0, Japan 4-0). **Honest conclusion:** "favorite breaks down the
-block" has enormous variance and NEITHER my bottom-up NOR following the market hits
+There have now been FOUR 0-0 draws of favorites frustrated by organized opponents:
+Ecuador-Curaçao (MD1), Cape Verde-Spain (MD1), Belgium-Iran (MD2) and
+England-Ghana (MD2). But also routs (Spain 4-0, Japan 4-0, Portugal 4-0). **Honest
+conclusion:** "favorite breaks down the block" has enormous variance and NEITHER my
+bottom-up NOR following the market hits
 consistently. My bottom-up underestimates the favorite by ~8-9pts (I correct it to
 the market), but the draw (~22-25%) materializes often. The correct reading is not
 "does the favorite win?" but "the draw/Under is worth more than it seems when
@@ -337,4 +338,19 @@ Portugal/Spain vs a minnow — Ghana is organized and England's back line is lea
 so BTTS is live (~49%) and the central scenario is a 1-2 goal win that may not be
 a clean sheet. Recalibrate with confirmed XIs ~60 min before kickoff.
 
-*To be graded after the match (xG vs actual, 1X2, lesson).*
+**Actual result:** England 0-0 Ghana. Scoreless; both kept a clean sheet.
+
+**Honest read — the favorite frustrated, AND my goals lean was wrong:**
+- 🟡 1X2: the 65% favourite did NOT win; the model's #2 outcome, the draw
+  (21.4%), came in. A 0-0 between two 3-point sides is within the distribution.
+- ❌ **Goals lean wrong (the real miss):** I read this as an OPEN game (BTTS 49%,
+  Over 2.5 55%) precisely because England leaked 2 to Croatia — instead it was a
+  tight 0-0 (Under 1.5, BTTS No). England's 2.05 xG did not convert; Ghana stayed
+  organized and disciplined.
+- 📌 **Lesson:** do NOT infer "open, high-BTTS game" from one leaky prior result.
+  A strong attacking favourite can still be held scoreless by an organized side;
+  the draw/Under is the underweighted scenario. This is the OPPOSITE error to the
+  rout archetype (Spain/Portugal 4-0) — the read hinges entirely on whether the
+  underdog is organized (Ghana, Iran, Curaçao → 0-0 live) or genuinely weak/open
+  (Saudi, Uzbekistan, NZ → favourite + goals). Joins Ecuador-Curaçao and
+  Belgium-Iran as a frustrated-favourite 0-0.
