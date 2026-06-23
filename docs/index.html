@@ -161,9 +161,7 @@
   <div class="bar">
     <button class="act" id="simBtn">▶ Simulate pending</button>
     <button class="act" id="clrSimBtn">↺ Clear simulated</button>
-    <button class="act" id="resetBtn">⟲ Reset all</button>
-    <button class="act" id="reloadBtn">↻ Reload data</button>
-    <span class="note">Type a score = <b>real</b> result (drives learning). Empty = pending.</span>
+    <span class="note">Simulations are not saved — reload (F5) to return to the official results.</span>
   </div>
 
   <div class="panel active" id="p-groups">
@@ -192,7 +190,7 @@
       <button class="act" id="exportBtn">⬇ Export JSON</button>
       <button class="act" id="importBtn">⬆ Import JSON</button>
       <input type="file" id="fileIn" accept="application/json" style="display:none"/>
-      <span class="note">Auto-saves to this browser (localStorage) on every change.</span>
+      <span class="note">Nothing is auto-saved. Export to keep a scenario as a file; reload (F5) returns to the official results.</span>
     </div>
     <div class="legend">State = results + learned strengths + log. Paste an official dataset here and Import to replace approximations.</div>
     <textarea id="jsonArea" spellcheck="false"></textarea>
@@ -388,11 +386,9 @@ function calibFor(m){ if(!m) return null;
 /* ===========================================================================
    STATE
    =========================================================================== */
-const LS_KEY="wc2026_sim_v1";
-// Bump this whenever KNOWN results / schedule change. On load, a saved state
-// with an older DATA_VERSION auto-merges the latest official results (so the
-// app always shows the latest without the user having to Reset/Reload).
-const DATA_VERSION="2026-06-23.third-place-fix";
+// Build/data stamp shown in the header. The app is stateless: nothing is
+// persisted, so reloading (F5) always returns to the official results.
+const DATA_VERSION="2026-06-23.stateless";
 let state={ results:{}, strengths:{}, learn:[] };
 
 function freshStrengths(){ const s={}; for(const t in TEAMS) s[t]=TEAMS[t]; return s; }
@@ -411,22 +407,12 @@ function seedKnown(){
   }
 }
 
+// Stateless: always start from the official results; nothing is read from or
+// written to localStorage, so F5 resets the app (simulations are in-memory only).
 function load(){
-  const raw=localStorage.getItem(LS_KEY);
-  if(raw){ try{ const o=JSON.parse(raw);
-      state.results=o.results||{}; state.strengths=o.strengths||freshStrengths(); state.learn=o.learn||[];
-      if(o.dataVersion!==DATA_VERSION){
-        // New official data shipped since this state was saved: merge the latest
-        // KNOWN results on top (they overwrite stale/old values and add new ones;
-        // the user's own entries for non-KNOWN matches are preserved), then
-        // recompute learning and re-stamp the version.
-        seedKnown(); recomputeLearningFromScratch(); save();
-      }
-      return; }catch(e){} }
-  state.strengths=freshStrengths(); seedKnown(); recomputeLearningFromScratch(); save();
+  state.strengths=freshStrengths(); seedKnown(); recomputeLearningFromScratch();
 }
-function save(){ state.dataVersion=DATA_VERSION;
-  try{ localStorage.setItem(LS_KEY,JSON.stringify(state)); }catch(e){} syncJsonArea(); }
+function save(){ syncJsonArea(); } // keep the JSON view in sync; no persistence
 
 /* ===========================================================================
    ENGINE  (strength -> lambdas -> Poisson 1X2)
@@ -886,18 +872,6 @@ $("#simBtn").addEventListener("click",()=>{
 $("#clrSimBtn").addEventListener("click",()=>{
   for(const id in state.results){ if(!state.results[id].real) delete state.results[id]; }
   renderAll(); save();
-});
-$("#resetBtn").addEventListener("click",()=>{
-  if(!confirm("Reset everything (results + learned strengths)?")) return;
-  state={results:{},strengths:freshStrengths(),learn:[]}; seedKnown(); recomputeLearningFromScratch();
-  renderAll(); save();
-});
-// Reload data: discard the locally cached state and reload from the current
-// code (latest KNOWN results / schedule). For mobile, where clearing browser
-// data is awkward and stale localStorage can hide code updates. No confirm().
-$("#reloadBtn").addEventListener("click",()=>{
-  try{ localStorage.removeItem(LS_KEY); }catch(e){}
-  location.reload();
 });
 $("#exportBtn").addEventListener("click",()=>{
   const blob=new Blob([JSON.stringify(state,null,2)],{type:"application/json"});
