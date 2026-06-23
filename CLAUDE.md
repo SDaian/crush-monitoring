@@ -51,6 +51,14 @@ The core task is **calibrated probabilities**, not betting. Therefore:
   cut filler, hedging, and repetition. Tables over prose. Lead with the result.
 - Still honor the brief's non-negotiables: be *correctly uncertain*, distinguish
   "most probable" from "certain", and flag when the model has no strong read.
+- **Always contrast with simulation.** Every match report must include the Monte
+  Carlo convergence check (100k-300k draws) showing exact vs simulated 1X2, to
+  confirm the closed-form numbers. Do not skip it (`--no-convergence`).
+- Include **per-team expected goals (xG)** and a **scorelines table** in every
+  report.
+
+The founding brief (role, methodology, calibration, confidence, post-match,
+tone) is recorded in `predictor/METHODOLOGY.md`.
 
 ## Working conventions
 
