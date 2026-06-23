@@ -1,0 +1,49 @@
+{
+  "_comment": "WC2026 Group K. Standings before this match: Portugal 1 pt (1-1 vs DR Congo), Colombia 3 (3-1 vs Uzbekistan), DR Congo 1, Uzbekistan 0. Portugal the clear quality side but drew their opener; Uzbekistan a World Cup debutant that lost 1-3 to Colombia. Calibrated as a strong-favorite vs limited-underdog spot, in line with the market. Referee/XIs not yet confirmed -> cards not modelled; recalibrate with confirmed lineups ~60 min before kickoff.",
+  "meta": {
+    "home": "Portugal",
+    "away": "Uzbekistan",
+    "venue": "World Cup 2026 (USA/Canada/Mexico) - neutral",
+    "date": "2026-06-23",
+    "stage": "World Cup 2026 - Group K",
+    "stakes": "Portugal (1 pt after a 1-1 draw with DR Congo) needs a win to take control of the group; Uzbekistan (0 pts, World Cup debutant, lost 1-3 to Colombia) must respond to stay alive. A clear favourite vs a limited underdog."
+  },
+  "calibration": {
+    "base_home": 1.25,
+    "base_away": 1.25,
+    "rho": -0.07,
+    "home": {
+      "name": "Portugal",
+      "attack": 1.56,
+      "defense": 0.80,
+      "context": 1.0,
+      "notes": [
+        "Elite squad; only drew 1-1 with a decent DR Congo in the opener (mild underperformance, not a level concern). attack 1.56.",
+        "Solid defensively -> low Uzbekistan lambda, defense 0.80.",
+        "Calibrated in line with the market (~73%): don't lean below an elite favourite (Spain lesson). Wants the win to control the group -> will push, rho -0.08."
+      ]
+    },
+    "away": {
+      "name": "Uzbekistan",
+      "attack": 0.70,
+      "defense": 1.14,
+      "context": 1.0,
+      "notes": [
+        "World Cup debutant; competitive but limited, lost 1-3 to Colombia (scored 1). attack 0.70.",
+        "Conceded 3 to Colombia -> defense 1.14.",
+        "Calibrated in line with the market: don't overrate the debutant."
+      ]
+    }
+  },
+  "market": {
+    "odds": [1.30, 5.50, 9.50]
+  },
+  "corners": {
+    "home_corners": 6.0,
+    "away_corners": 3.5
+  },
+  "lambdas_override": {
+    "home": 2.2,
+    "away": 0.68
+  }
+}
