@@ -1,0 +1,577 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<title>World Cup 2026 — Tactics Board Simulator</title>
+<style>
+  :root{
+    --felt:#0c5c3a; --felt2:#0a4e32; --chalk:#eaf3ec; --chalk-dim:#9fc4ad;
+    --line:rgba(234,243,236,.28); --gold:#f4d35e; --good:#7CFC9B; --bad:#ff8a8a;
+    --card:#0e4a32; --card2:#0b3f2b; --accent:#5cd6a0;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0}
+  body{
+    background:
+      radial-gradient(1200px 600px at 50% -10%, #11724a 0%, var(--felt) 45%, var(--felt2) 100%);
+    color:var(--chalk); font-family:"Segoe UI",system-ui,Roboto,Helvetica,Arial,sans-serif;
+    -webkit-text-size-adjust:100%; padding-bottom:60px;
+  }
+  .pitch-lines{position:fixed;inset:0;pointer-events:none;opacity:.5;z-index:0}
+  header{position:sticky;top:0;z-index:5;background:linear-gradient(#0a4e32,#0a4e32ee);
+    border-bottom:1px solid var(--line);padding:10px 12px}
+  header h1{margin:0;font-size:16px;letter-spacing:.5px}
+  header .sub{font-size:11px;color:var(--chalk-dim)}
+  .wrap{max-width:1100px;margin:0 auto;padding:10px;position:relative;z-index:1}
+  .tabs{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0}
+  .tab{cursor:pointer;border:1px solid var(--line);background:var(--card);color:var(--chalk);
+    padding:7px 12px;border-radius:18px;font-size:13px}
+  .tab.active{background:var(--accent);color:#06301f;font-weight:700;border-color:var(--accent)}
+  .panel{display:none}
+  .panel.active{display:block}
+  .bar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:6px 0 12px}
+  button.act{cursor:pointer;border:1px solid var(--line);background:var(--card2);color:var(--chalk);
+    padding:7px 11px;border-radius:8px;font-size:12px}
+  button.act:hover{border-color:var(--accent)}
+  .note{font-size:11px;color:var(--chalk-dim)}
+  .approx{color:var(--gold)}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:12px}
+  .group{background:linear-gradient(180deg,var(--card),var(--card2));border:1px solid var(--line);
+    border-radius:12px;padding:10px}
+  .group h3{margin:0 0 6px;font-size:14px;display:flex;justify-content:space-between;align-items:center}
+  table{width:100%;border-collapse:collapse;font-size:12px}
+  th,td{padding:4px 5px;text-align:center}
+  th{color:var(--chalk-dim);font-weight:600;border-bottom:1px solid var(--line)}
+  td.team{text-align:left;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:150px}
+  tr.q1 td{background:rgba(124,252,155,.12)} tr.q2 td{background:rgba(124,252,155,.07)}
+  tr.q3 td{background:rgba(244,211,94,.08)}
+  .fx{margin-top:8px;border-top:1px dashed var(--line);padding-top:6px}
+  .match{display:flex;align-items:center;gap:6px;font-size:12px;padding:3px 0}
+  .match .mt{flex:1;text-align:right;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .match .mt2{flex:1;text-align:left;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .match input{width:30px;background:#08351f;border:1px solid var(--line);color:var(--chalk);
+    text-align:center;border-radius:6px;padding:4px 0;font-size:13px}
+  .match input.real{border-color:var(--good)}
+  .prob{font-size:10px;color:var(--chalk-dim);min-width:96px;text-align:center}
+  .mid{font-size:10px;color:var(--chalk-dim)}
+  .mmeta{font-size:9px;color:var(--chalk-dim);text-align:center}
+  .thirds td.rankq{color:var(--good);font-weight:700}
+  .bracket{display:flex;gap:18px;overflow-x:auto;padding-bottom:10px}
+  .round{min-width:230px}
+  .round h4{font-size:12px;color:var(--gold);margin:4px 0;text-align:center}
+  .tie{background:var(--card2);border:1px solid var(--line);border-radius:8px;padding:6px;margin:6px 0;font-size:11px}
+  .tie .ln{display:flex;justify-content:space-between;gap:6px}
+  .tie .w{color:var(--good);font-weight:700}
+  .tie .meta{font-size:9px;color:var(--chalk-dim);margin-top:3px}
+  .learn-item{font-size:12px;border-left:2px solid var(--accent);padding:4px 8px;margin:5px 0;background:var(--card2);border-radius:0 6px 6px 0}
+  .delta-up{color:var(--good)} .delta-dn{color:var(--bad)}
+  textarea{width:100%;height:160px;background:#08351f;color:var(--chalk);border:1px solid var(--line);border-radius:8px;font-size:11px;font-family:monospace}
+  .pill{display:inline-block;font-size:10px;padding:1px 6px;border-radius:10px;border:1px solid var(--line);color:var(--chalk-dim)}
+  .legend{font-size:10px;color:var(--chalk-dim);margin:6px 0}
+  input[type=number]::-webkit-inner-spin-button{opacity:.3}
+</style>
+</head>
+<body>
+<svg class="pitch-lines" preserveAspectRatio="none" viewBox="0 0 100 100">
+  <rect x="2" y="2" width="96" height="96" fill="none" stroke="rgba(234,243,236,.18)" stroke-width=".25"/>
+  <line x1="50" y1="2" x2="50" y2="98" stroke="rgba(234,243,236,.18)" stroke-width=".25"/>
+  <circle cx="50" cy="50" r="9" fill="none" stroke="rgba(234,243,236,.18)" stroke-width=".25"/>
+</svg>
+
+<header>
+  <h1>⚽ World Cup 2026 — Tactics-Board Simulator</h1>
+  <div class="sub">Strength-based Poisson engine · auto-sorting FIFA tables · learns from real results · offline-saved
+    &nbsp;|&nbsp; <span class="approx">≈ flagged = approximate, not officially verified</span></div>
+</header>
+
+<div class="wrap">
+  <div class="tabs" id="tabs">
+    <div class="tab active" data-p="groups">Groups</div>
+    <div class="tab" data-p="thirds">Best Thirds</div>
+    <div class="tab" data-p="bracket">Knockout (M73–104)</div>
+    <div class="tab" data-p="learn">What was learned</div>
+    <div class="tab" data-p="data">Save / Data</div>
+  </div>
+
+  <div class="bar">
+    <button class="act" id="simBtn">▶ Simulate pending</button>
+    <button class="act" id="clrSimBtn">↺ Clear simulated</button>
+    <button class="act" id="resetBtn">⟲ Reset all</button>
+    <span class="note">Type a score = <b>real</b> result (drives learning). Empty = pending.</span>
+  </div>
+
+  <div class="panel active" id="p-groups">
+    <div class="legend">Standings auto-sort by FIFA criteria: Points → Goal difference → Goals for → head-to-head → goals scored.
+      Top 2 qualify (green); 3rd (gold) ranked separately. <span class="approx">≈ dates/venues/IDs and groups A & D are approximate.</span></div>
+    <div class="grid" id="groups"></div>
+  </div>
+
+  <div class="panel" id="p-thirds">
+    <div class="legend">The 8 best of the 12 third-placed teams advance to the Round of 32. Ranked by Points → GD → GF.</div>
+    <div class="group" style="max-width:560px"><table id="thirdsTable"></table></div>
+  </div>
+
+  <div class="panel" id="p-bracket">
+    <div class="legend">Knockout map (Match 73–104). <span class="approx">≈ The exact official R32 crossing map / thirds-slot table and per-tie venues &amp; dates need official verification — edit/import to correct.</span></div>
+    <div class="bracket" id="bracket"></div>
+  </div>
+
+  <div class="panel" id="p-learn">
+    <div class="legend">Bayesian-style updates: each real result nudges both teams' strength by how surprising it was (capped). Favorites still beat minnows at realistic rates.</div>
+    <div id="learnList"></div>
+  </div>
+
+  <div class="panel" id="p-data">
+    <div class="bar">
+      <button class="act" id="exportBtn">⬇ Export JSON</button>
+      <button class="act" id="importBtn">⬆ Import JSON</button>
+      <input type="file" id="fileIn" accept="application/json" style="display:none"/>
+      <span class="note">Auto-saves to this browser (localStorage) on every change.</span>
+    </div>
+    <div class="legend">State = results + learned strengths + log. Paste an official dataset here and Import to replace approximations.</div>
+    <textarea id="jsonArea" spellcheck="false"></textarea>
+  </div>
+</div>
+
+<script>
+"use strict";
+/* ===========================================================================
+   DATA  (≈ = approximate / not officially verified in this build)
+   Strengths 0–100 from FIFA-ranking + squad tiers (approximate).
+   Groups E–J confirmed this week; B,C,K,L from the published fixture list;
+   A & D are best-effort guesses. Dates/venues/IDs are approximate.
+   =========================================================================== */
+const VENUES = ["Mexico City","Guadalajara","Monterrey","Atlanta","Dallas","Houston",
+  "Kansas City","Los Angeles","SF Bay Area","Seattle","Vancouver","Toronto",
+  "New York/NJ","Philadelphia","Miami","Boston"];
+
+// strength (approx). "~" teams flagged as less certain placements.
+const TEAMS = {
+  "Mexico":79,"South Korea":76,"South Africa":68,"New Caledonia":40,            // A ≈
+  "Switzerland":81,"Canada":75,"Bosnia & Herz.":72,"Qatar":69,                  // B
+  "Brazil":92,"Scotland":74,"Morocco":83,"Haiti":50,                            // C
+  "USA":79,"Australia":75,"Paraguay":70,"Jordan?":0,                            // D ≈ (placeholder filled below)
+  "Germany":88,"Ivory Coast":77,"Ecuador":79,"Curacao":48,                      // E
+  "Netherlands":89,"Sweden":77,"Japan":80,"Tunisia":71,                         // F
+  "Belgium":86,"Iran":73,"Egypt":74,"New Zealand":58,                           // G
+  "Spain":94,"Cape Verde":58,"Saudi Arabia":69,"Uruguay":83,                    // H
+  "France":94,"Iraq":66,"Norway":81,"Senegal":82,                              // I
+  "Argentina":95,"Austria":79,"Jordan":66,"Algeria":76,                         // J
+  "Portugal":90,"Uzbekistan":68,"Colombia":83,"DR Congo":70,                    // K
+  "England":91,"Ghana":72,"Panama":70,"Croatia":84                              // L
+};
+delete TEAMS["Jordan?"];
+TEAMS["Egypt?"]=0; delete TEAMS["Egypt?"];
+// Group D fourth team (approx)
+TEAMS["Cabo?"]=0; delete TEAMS["Cabo?"];
+
+const GROUPS = {
+  A:{teams:["Mexico","South Korea","South Africa","New Caledonia"],approx:true},
+  B:{teams:["Switzerland","Canada","Bosnia & Herz.","Qatar"],approx:false},
+  C:{teams:["Brazil","Scotland","Morocco","Haiti"],approx:false},
+  D:{teams:["USA","Australia","Paraguay","Mexico"],approx:true}, // D4 fixed below
+  E:{teams:["Germany","Ivory Coast","Ecuador","Curacao"],approx:false},
+  F:{teams:["Netherlands","Sweden","Japan","Tunisia"],approx:false},
+  G:{teams:["Belgium","Iran","Egypt","New Zealand"],approx:false},
+  H:{teams:["Spain","Cape Verde","Saudi Arabia","Uruguay"],approx:false},
+  I:{teams:["France","Iraq","Norway","Senegal"],approx:false},
+  J:{teams:["Argentina","Austria","Jordan","Algeria"],approx:false},
+  K:{teams:["Portugal","Uzbekistan","Colombia","DR Congo"],approx:false},
+  L:{teams:["England","Ghana","Panama","Croatia"],approx:false}
+};
+// fix Group D 4th (Mexico is in A); use a distinct approx team
+GROUPS.D.teams[3]="Cape Verde?"; TEAMS["Cape Verde?"]=60;
+
+// Real MD1/MD2 results already known this week (entered as REAL by default).
+const KNOWN = {
+  // group:[ [i,j,h,a], ... ] indices into GROUPS[g].teams
+  E:[[2,1,0,1],[3,0,1,7]],            // Ecuador0-1 IvoryCoast ; Curacao1-7 Germany
+  F:[[1,3,5,1],[2,0,2,2]],            // Sweden5-1 Tunisia ; Japan2-2 Netherlands
+  G:[[0,2,1,1],[1,3,2,2],[0,1,0,0]],  // Belgium1-1 Egypt ; Iran2-2 NZ ; Belgium0-0 Iran
+  H:[[0,1,0,0],[3,2,1,1],[0,2,4,0],[3,1,2,2]], // Spain0-0 CV ; Uru1-1 Sau ; Spain4-0 Sau ; Uru2-2 CV
+  I:[[0,3,3,1],[2,1,4,1],[0,1,3,1],[2,3,3,1]], // Fra3-1 Sen ; Nor4-1 Iraq ; Fra3-1 Iraq ; Nor3-1 Sen
+  J:[[0,3,3,0],[1,2,3,1],[0,1,2,0]]   // Arg3-0 Alg ; Aut3-1 Jor ; Arg2-0 Aut
+};
+
+/* ---- round-robin fixture order for 4 teams ---- */
+const RR=[[0,1],[2,3],[0,2],[1,3],[3,0],[1,2]];
+
+/* build full schedule (group matches id 1..72, knockout 73..104) — dates/venues ≈ */
+function buildSchedule(){
+  const sched={}; let id=1; const gk=Object.keys(GROUPS);
+  const d0=new Date("2026-06-11");
+  gk.forEach((g,gi)=>{
+    GROUPS[g].matches=[];
+    RR.forEach((pair,mi)=>{
+      const date=new Date(d0); date.setDate(d0.getDate()+ gi + mi*2);
+      const m={id, g, i:pair[0], j:pair[1],
+        date:date.toISOString().slice(0,10),
+        venue:VENUES[(id-1)%VENUES.length], approx:true};
+      GROUPS[g].matches.push(m); sched[id]=m; id++;
+    });
+  });
+  return sched;
+}
+const SCHED=buildSchedule();
+
+/* ===========================================================================
+   STATE
+   =========================================================================== */
+const LS_KEY="wc2026_sim_v1";
+let state={ results:{}, strengths:{}, learn:[] };
+
+function freshStrengths(){ const s={}; for(const t in TEAMS) s[t]=TEAMS[t]; return s; }
+
+function seedKnown(){
+  for(const g in KNOWN){
+    KNOWN[g].forEach(r=>{
+      const [i,j,h,a]=r;
+      const m=GROUPS[g].matches.find(x=>x.i===i&&x.j===j) ||
+              GROUPS[g].matches.find(x=>(x.i===j&&x.j===i));
+      if(!m) return;
+      // align orientation
+      if(m.i===i) state.results[m.id]={h,a,real:true};
+      else state.results[m.id]={h:a,a:h,real:true};
+    });
+  }
+}
+
+function load(){
+  const raw=localStorage.getItem(LS_KEY);
+  if(raw){ try{ const o=JSON.parse(raw);
+      state.results=o.results||{}; state.strengths=o.strengths||freshStrengths(); state.learn=o.learn||[];
+      return; }catch(e){} }
+  state.strengths=freshStrengths(); seedKnown(); recomputeLearningFromScratch(); save();
+}
+function save(){ try{ localStorage.setItem(LS_KEY,JSON.stringify(state)); }catch(e){} syncJsonArea(); }
+
+/* ===========================================================================
+   ENGINE  (strength -> lambdas -> Poisson 1X2)
+   =========================================================================== */
+function fact(n){ let f=1; for(let k=2;k<=n;k++) f*=k; return f; }
+function pois(k,l){ return Math.exp(-l)*Math.pow(l,k)/fact(k); }
+const SUP=0.05, BASE=2.60, MAXG=8;
+
+function lambdas(sa,sb){
+  const sup=(sa-sb)*SUP;
+  return [Math.max(0.18,BASE/2+sup/2), Math.max(0.18,BASE/2-sup/2)];
+}
+function probs(sa,sb){
+  const [la,lb]=lambdas(sa,sb); let h=0,d=0,a=0;
+  const pa=[],pb=[];
+  for(let k=0;k<=MAXG;k++){ pa[k]=pois(k,la); pb[k]=pois(k,lb); }
+  for(let i=0;i<=MAXG;i++) for(let j=0;j<=MAXG;j++){
+    const p=pa[i]*pb[j]; if(i>j)h+=p; else if(i===j)d+=p; else a+=p;
+  }
+  const s=h+d+a; return {h:h/s,d:d/s,a:a/s,la,lb};
+}
+function st(t){ return state.strengths[t] ?? TEAMS[t] ?? 60; }
+
+/* sample a scoreline from the two lambdas */
+function samplePoisson(l){
+  const L=Math.exp(-l); let k=0,p=1;
+  do{ k++; p*=Math.random(); }while(p>L); return k-1;
+}
+
+/* ===========================================================================
+   STANDINGS  (FIFA tiebreakers)
+   =========================================================================== */
+function groupStats(g){
+  const teams=GROUPS[g].teams;
+  const row={}; teams.forEach(t=>row[t]={t,P:0,W:0,D:0,L:0,GF:0,GA:0,GD:0,Pts:0});
+  const playedPairs=[];
+  GROUPS[g].matches.forEach(m=>{
+    const r=state.results[m.id]; if(!r) return;
+    const A=teams[m.i],B=teams[m.j];
+    row[A].P++;row[B].P++;row[A].GF+=r.h;row[A].GA+=r.a;row[B].GF+=r.a;row[B].GA+=r.h;
+    if(r.h>r.a){row[A].W++;row[B].L++;row[A].Pts+=3;}
+    else if(r.h<r.a){row[B].W++;row[A].L++;row[B].Pts+=3;}
+    else {row[A].D++;row[B].D++;row[A].Pts++;row[B].Pts++;}
+    playedPairs.push({A,B,h:r.h,a:r.a});
+  });
+  teams.forEach(t=>row[t].GD=row[t].GF-row[t].GA);
+  const arr=teams.map(t=>row[t]);
+  arr.sort((x,y)=>cmpFIFA(x,y,playedPairs));
+  arr.forEach((r,k)=>r.pos=k+1);
+  return arr;
+}
+function cmpFIFA(x,y,pairs){
+  if(y.Pts!==x.Pts) return y.Pts-x.Pts;
+  if(y.GD!==x.GD) return y.GD-x.GD;
+  if(y.GF!==x.GF) return y.GF-x.GF;
+  // head-to-head (only the two of them)
+  let hx=0,hy=0;
+  pairs.forEach(p=>{
+    if((p.A===x.t&&p.B===y.t)){ if(p.h>p.a)hx+=3; else if(p.h<p.a)hy+=3; else {hx++;hy++;} }
+    if((p.A===y.t&&p.B===x.t)){ if(p.h>p.a)hy+=3; else if(p.h<p.a)hx+=3; else {hx++;hy++;} }
+  });
+  if(hy!==hx) return hy-hx;
+  return x.t.localeCompare(y.t); // drawn-lots placeholder (deterministic)
+}
+
+/* ===========================================================================
+   THIRDS
+   =========================================================================== */
+function thirdsRanked(){
+  const arr=[];
+  for(const g in GROUPS){ const s=groupStats(g); if(s[2]) arr.push(Object.assign({g},s[2])); }
+  arr.sort((x,y)=> y.Pts-x.Pts || y.GD-x.GD || y.GF-x.GF || x.t.localeCompare(y.t));
+  arr.forEach((r,k)=>{ r.rank=k+1; r.q=k<8; });
+  return arr;
+}
+
+/* ===========================================================================
+   KNOCKOUT  (≈ crossing map — structure correct, exact pairings need official check)
+   =========================================================================== */
+// R32 map: 16 ties. Each side = "X1"/"X2" (group winner/runner) or "T<n>" (nth best third).
+const R32MAP=[
+  {id:73,h:"A1",a:"T3"},{id:74,h:"C1",a:"D2"},{id:75,h:"E1",a:"T6"},{id:76,h:"G1",a:"H2"},
+  {id:77,h:"I1",a:"T8"},{id:78,h:"K1",a:"L2"},{id:79,h:"B1",a:"T5"},{id:80,h:"D1",a:"C2"},
+  {id:81,h:"F1",a:"T7"},{id:82,h:"H1",a:"G2"},{id:83,h:"J1",a:"T4"},{id:84,h:"L1",a:"K2"},
+  {id:85,h:"A2",a:"B2"},{id:86,h:"E2",a:"F2"},{id:87,h:"I2",a:"J2"},{id:88,h:"T1",a:"T2"}
+];
+// progression: pairs of R32 winners -> R16, etc. (bracket order)
+const R16=[ {id:89,f:[73,74]},{id:90,f:[75,76]},{id:91,f:[77,78]},{id:92,f:[79,80]},
+           {id:93,f:[81,82]},{id:94,f:[83,84]},{id:95,f:[85,86]},{id:96,f:[87,88]} ];
+const QF=[ {id:97,f:[89,90]},{id:98,f:[91,92]},{id:99,f:[93,94]},{id:100,f:[95,96]} ];
+const SF=[ {id:101,f:[97,98]},{id:102,f:[99,100]} ];
+const FIN=[ {id:104,f:[101,102]} ]; const THIRD={id:103,f:[101,102]};
+const KO_VENUE={ R32:"various ≈",R16:"various ≈",QF:["LA","Boston","KC","Miami"],
+  SF:["Dallas","Atlanta"],F:"New York/NJ" };
+const KO_DATE={ 73:"2026-06-28",89:"2026-07-04",97:"2026-07-09",101:"2026-07-14",104:"2026-07-19",103:"2026-07-18" };
+
+function winnerName(g,pos){ const s=groupStats(g); const r=s[pos-1]; return r? r.t : null; }
+function slotTeam(code){
+  if(code[0]==="T"){ const n=+code.slice(1); const th=thirdsRanked(); return th[n-1]? th[n-1].t : null; }
+  const g=code[0], pos=+code[1]; return winnerName(g,pos);
+}
+// resolve a knockout tie's two teams; ko results stored in state.results by id (h,a)
+function koTeams(tie){
+  if(tie.h!==undefined){ return [slotTeam(tie.h), slotTeam(tie.a)]; }
+  // from previous round feeders
+  return tie.f.map(fid=>koWinner(fid));
+}
+function koWinner(id){
+  const tie=allKO().find(t=>t.id===id); if(!tie) return null;
+  const [A,B]=koTeams(tie); const r=state.results[id];
+  if(!A||!B) return null;
+  if(r){ if(r.h>r.a)return A; if(r.a>r.h)return B; return r.pen===A?A:(r.pen===B?B:A); }
+  return null; // not decided
+}
+function allKO(){ return R32MAP.concat(R16,QF,SF,FIN,[THIRD]); }
+
+/* ===========================================================================
+   LEARNING  (bayesian-ish surprise update on REAL results)
+   =========================================================================== */
+const LK=0.9, LMAX=2.2; // learning gain & cap per match
+function applyLearn(m,r){
+  const A=GROUPS[m.g].teams[m.i], B=GROUPS[m.g].teams[m.j];
+  const [la,lb]=lambdas(st(A),st(B));
+  const expGD=la-lb, actGD=r.h-r.a, surprise=actGD-expGD;
+  let d=LK*surprise; d=Math.max(-LMAX,Math.min(LMAX,d));
+  state.strengths[A]=clamp(st(A)+d); state.strengths[B]=clamp(st(B)-d);
+  if(Math.abs(d)>=0.15){
+    state.learn.unshift({
+      date:m.date, match:`${A} ${r.h}-${r.a} ${B}`,
+      exp:expGD.toFixed(2), act:actGD.toFixed(0), d:d.toFixed(2),
+      up: d>=0? A:B, dn: d>=0? B:A, mag:Math.abs(d).toFixed(2)
+    });
+  }
+}
+function clamp(s){ return Math.max(30,Math.min(99,s)); }
+function recomputeLearningFromScratch(){
+  state.strengths=freshStrengths(); state.learn=[];
+  // apply REAL results in date order
+  const reals=[];
+  for(const id in state.results){ const r=state.results[id]; if(r&&r.real){ reals.push({m:SCHED[id],r}); } }
+  reals.sort((x,y)=> (x.m.date<y.m.date?-1:1));
+  reals.forEach(x=> x.m && applyLearn(x.m,x.r));
+}
+
+/* ===========================================================================
+   RENDER  (targeted — never re-render score inputs on input => scroll/focus kept)
+   =========================================================================== */
+const $=s=>document.querySelector(s);
+function pctTriple(p){ return `${Math.round(p.h*100)}/${Math.round(p.d*100)}/${Math.round(p.a*100)}`; }
+
+function renderGroups(){
+  const host=$("#groups"); host.innerHTML="";
+  for(const g in GROUPS){
+    const el=document.createElement("div"); el.className="group"; el.id="grp-"+g;
+    el.innerHTML=`<h3>Group ${g} ${GROUPS[g].approx?'<span class="approx pill">≈ teams</span>':''}</h3>
+      <table><thead><tr><th>#</th><th class="team">Team</th><th>P</th><th>W</th><th>D</th><th>L</th><th>GF</th><th>GA</th><th>GD</th><th>Pts</th></tr></thead>
+      <tbody id="tb-${g}"></tbody></table>
+      <div class="fx" id="fx-${g}"></div>`;
+    host.appendChild(el);
+    renderStandings(g); renderFixtures(g);
+  }
+}
+function renderStandings(g){
+  const tb=$("#tb-"+g); if(!tb) return; const s=groupStats(g);
+  tb.innerHTML=s.map(r=>{
+    const cls=r.pos===1?"q1":r.pos===2?"q2":r.pos===3?"q3":"";
+    return `<tr class="${cls}"><td>${r.pos}</td><td class="team">${esc(r.t)}</td>
+      <td>${r.P}</td><td>${r.W}</td><td>${r.D}</td><td>${r.L}</td><td>${r.GF}</td><td>${r.GA}</td>
+      <td>${r.GD>0?'+':''}${r.GD}</td><td><b>${r.Pts}</b></td></tr>`;
+  }).join("");
+}
+function renderFixtures(g){
+  const host=$("#fx-"+g); if(!host) return;
+  host.innerHTML=GROUPS[g].matches.map(m=>{
+    const A=GROUPS[g].teams[m.i],B=GROUPS[g].teams[m.j];
+    const r=state.results[m.id]||{};
+    const p=probs(st(A),st(B));
+    const realCls=(r.real?'real':'');
+    return `<div class="match" data-mid="${m.id}">
+      <span class="mt">${esc(A)}</span>
+      <input type="number" min="0" max="20" class="sc ${realCls}" data-mid="${m.id}" data-side="h" value="${r.h??''}"/>
+      <span class="mid">:</span>
+      <input type="number" min="0" max="20" class="sc ${realCls}" data-mid="${m.id}" data-side="a" value="${r.a??''}"/>
+      <span class="mt2">${esc(B)}</span>
+      <span class="prob" id="pr-${m.id}">${pctTriple(p)}</span>
+    </div>
+    <div class="mmeta">M${m.id} · ${m.date} · ${esc(m.venue)} <span class="approx">≈</span> ${r.real?'· <b style="color:var(--good)">real</b>':r.h!=null?'· sim':''}</div>`;
+  }).join("");
+}
+
+function renderThirds(){
+  const t=$("#thirdsTable"); const arr=thirdsRanked();
+  t.innerHTML=`<thead><tr><th>#</th><th class="team">Third-placed</th><th>Grp</th><th>Pts</th><th>GD</th><th>GF</th><th>Adv?</th></tr></thead><tbody>`+
+    arr.map(r=>`<tr><td class="${r.q?'rankq':''}">${r.rank}</td><td class="team">${esc(r.t)}</td><td>${r.g}</td>
+      <td>${r.Pts}</td><td>${r.GD>0?'+':''}${r.GD}</td><td>${r.GF}</td>
+      <td class="${r.q?'rankq':''}">${r.q?'✓':'—'}</td></tr>`).join("")+`</tbody>`;
+}
+
+function renderBracket(){
+  const host=$("#bracket"); host.innerHTML="";
+  const rounds=[["Round of 32",R32MAP,"R32"],["Round of 16",R16,"R16"],["Quarter-finals",QF,"QF"],
+    ["Semi-finals",SF,"SF"],["3rd place",[THIRD],"TP"],["Final",FIN,"F"]];
+  rounds.forEach(([title,ties])=>{
+    const col=document.createElement("div"); col.className="round";
+    col.innerHTML=`<h4>${title}</h4>`+ties.map(tie=>{
+      const [A,B]=koTeams(tie); const r=state.results[tie.id];
+      let pa="",pb="",wa="",wb="";
+      if(A&&B){ const p=probs(st(A),st(B)); pa=Math.round((p.h+p.d/2)*100)+"%"; pb=Math.round((p.a+p.d/2)*100)+"%"; }
+      if(r){ if(r.h>r.a)wa="w"; else if(r.a>r.h)wb="w"; }
+      const dt=KO_DATE[tie.id]?(" · "+KO_DATE[tie.id]):"";
+      const sc=r?` <b>${r.h}-${r.a}</b>`:"";
+      return `<div class="tie">
+        <div class="ln"><span class="${wa}">${esc(A||tie.h||'—')}</span><span>${A&&B?pa:''}</span></div>
+        <div class="ln"><span class="${wb}">${esc(B||tie.a||'—')}</span><span>${A&&B?pb:''}</span></div>
+        <div class="meta">M${tie.id}${dt} <span class="approx">≈</span>${sc}</div>
+      </div>`;
+    }).join("");
+    host.appendChild(col);
+  });
+}
+
+function renderLearn(){
+  const host=$("#learnList");
+  if(!state.learn.length){ host.innerHTML='<div class="note">No real results processed yet. Type scores to teach the model.</div>'; return; }
+  host.innerHTML=state.learn.map(L=>`<div class="learn-item">
+    <b>${esc(L.match)}</b> <span class="note">(${L.date})</span><br/>
+    expected GD ${L.exp}, actual ${L.act} → surprise applied:
+    <span class="delta-up">${esc(L.up)} +${L.mag}</span> ·
+    <span class="delta-dn">${esc(L.dn)} −${L.mag}</span></div>`).join("");
+}
+
+function esc(s){ return String(s==null?'':s).replace(/[&<>]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;"}[c])); }
+
+/* full render (used on load / import / reset only) */
+function renderAll(){ renderGroups(); renderThirds(); renderBracket(); renderLearn(); }
+
+/* targeted update after a single score change (keeps scroll & focus) */
+function updateAfterScore(mid){
+  const m=SCHED[mid]; if(m){ renderStandings(m.g); // re-render only that group's standings tbody (no inputs)
+    const A=GROUPS[m.g].teams[m.i],B=GROUPS[m.g].teams[m.j];
+    const pr=$("#pr-"+mid); if(pr) pr.textContent=pctTriple(probs(st(A),st(B)));
+  }
+  renderThirds(); renderBracket(); renderLearn();
+}
+
+/* ===========================================================================
+   EVENTS  (delegation; 'change' so we update once per edit, focus preserved)
+   =========================================================================== */
+document.addEventListener("change", e=>{
+  const inp=e.target.closest("input.sc"); if(!inp) return;
+  const mid=+inp.dataset.mid, side=inp.dataset.side;
+  const wrap=inp.closest(".match");
+  const hI=wrap.querySelector('input[data-side=h]'), aI=wrap.querySelector('input[data-side=a]');
+  const hv=hI.value.trim(), av=aI.value.trim();
+  if(hv===""&&av===""){ delete state.results[mid]; }
+  else{
+    const h=Math.max(0,Math.min(20,parseInt(hv||"0",10)));
+    const a=Math.max(0,Math.min(20,parseInt(av||"0",10)));
+    state.results[mid]={h,a,real:true}; // typed by user => real
+    hI.classList.add("real"); aI.classList.add("real");
+  }
+  recomputeLearningFromScratch();   // strengths depend on all real results
+  // refresh meta line of this match
+  updateMeta(mid);
+  updateAfterScore(mid);
+  save();
+});
+function updateMeta(mid){
+  const wrap=document.querySelector(`.match[data-mid="${mid}"]`); if(!wrap) return;
+  const meta=wrap.nextElementSibling; const m=SCHED[mid]; const r=state.results[mid];
+  if(meta&&m) meta.innerHTML=`M${m.id} · ${m.date} · ${esc(m.venue)} <span class="approx">≈</span> ${r&&r.real?'· <b style="color:var(--good)">real</b>':(r?'· sim':'')}`;
+}
+
+/* tabs */
+$("#tabs").addEventListener("click",e=>{
+  const t=e.target.closest(".tab"); if(!t) return;
+  document.querySelectorAll(".tab").forEach(x=>x.classList.remove("active"));
+  document.querySelectorAll(".panel").forEach(x=>x.classList.remove("active"));
+  t.classList.add("active"); $("#p-"+t.dataset.p).classList.add("active");
+});
+
+/* buttons */
+$("#simBtn").addEventListener("click",()=>{
+  // fill pending GROUP matches by sampling (marked sim, not real)
+  for(const id in SCHED){ if(!state.results[id]){
+    const m=SCHED[id]; const A=GROUPS[m.g].teams[m.i],B=GROUPS[m.g].teams[m.j];
+    const [la,lb]=lambdas(st(A),st(B));
+    state.results[id]={h:samplePoisson(la),a:samplePoisson(lb),real:false};
+  }}
+  // resolve knockout ties in order
+  allKO().forEach(tie=>{
+    const [A,B]=koTeams(tie); if(A&&B&&!state.results[tie.id]){
+      const [la,lb]=lambdas(st(A),st(B)); let h=samplePoisson(la),a=samplePoisson(lb);
+      if(h===a){ if(Math.random()<probs(st(A),st(B)).h/(probs(st(A),st(B)).h+probs(st(A),st(B)).a)) h++; else a++; }
+      state.results[tie.id]={h,a,real:false};
+    }
+  });
+  renderAll(); save();
+});
+$("#clrSimBtn").addEventListener("click",()=>{
+  for(const id in state.results){ if(!state.results[id].real) delete state.results[id]; }
+  renderAll(); save();
+});
+$("#resetBtn").addEventListener("click",()=>{
+  if(!confirm("Reset everything (results + learned strengths)?")) return;
+  state={results:{},strengths:freshStrengths(),learn:[]}; seedKnown(); recomputeLearningFromScratch();
+  renderAll(); save();
+});
+$("#exportBtn").addEventListener("click",()=>{
+  const blob=new Blob([JSON.stringify(state,null,2)],{type:"application/json"});
+  const u=URL.createObjectURL(blob); const a=document.createElement("a");
+  a.href=u; a.download="wc2026_state.json"; a.click(); URL.revokeObjectURL(u);
+});
+$("#importBtn").addEventListener("click",()=>$("#fileIn").click());
+$("#fileIn").addEventListener("change",e=>{
+  const f=e.target.files[0]; if(!f) return; const rd=new FileReader();
+  rd.onload=()=>{ try{ const o=JSON.parse(rd.result);
+    state.results=o.results||{}; state.strengths=o.strengths||freshStrengths(); state.learn=o.learn||[];
+    renderAll(); save(); alert("Imported."); }catch(err){ alert("Invalid JSON: "+err.message); } };
+  rd.readAsText(f);
+});
+function syncJsonArea(){ const a=$("#jsonArea"); if(a) a.value=JSON.stringify(state,null,2); }
+
+/* ===========================================================================
+   BOOT
+   =========================================================================== */
+load(); renderAll(); syncJsonArea();
+</script>
+</body>
+</html>
