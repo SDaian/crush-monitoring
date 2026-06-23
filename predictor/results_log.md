@@ -24,6 +24,7 @@ Legend: ✅ right for the right reason · 🟡 right but by luck/margin ·
 | 2026-06-22 | Norway vs Senegal | 42.8 / 25.5 / 31.7 | LOW | 3-1 (Norway win) | ✅ |
 | 2026-06-22 | Jordan vs Algeria | 15.6 / 23.2 / 61.2 | HIGH | 1-2 (Algeria win) | ✅ |
 | 2026-06-23 | Portugal vs Uzbekistan | 71.6 / 18.9 / 9.5 | HIGH | 4-0 (Portugal win) | ✅ |
+| 2026-06-23 | England vs Ghana | 65.3 / 21.4 / 13.3 | HIGH | ⏳ pending | ⏳ |
 
 ### Emerging pattern: favorites vs low block (key)
 
@@ -310,3 +311,30 @@ still TBD at lock-in → cards intentionally not modelled.
   favourite routs. Back favourite + goals; never lean below the market here.
   Distinct from the low-block 0-0s (Ecuador-Curaçao, Belgium-Iran), which are a
   different archetype.
+
+---
+
+## 2026-06-23 · England vs Ghana (Group L) — ⏳ PENDING
+
+**Pre-match forecast (not yet played).** Top-of-group clash: both on 3 points
+after MD1 (England 4-2 Croatia; Ghana 1-0 Panama). The winner takes control of
+Group L.
+
+**Model:** England 65.3 / Draw 21.4 / Ghana 13.3 (HIGH). Lambdas England 2.05 /
+Ghana 0.82, total xG 2.87, rho -0.07. Monte Carlo (N=200k) converges: exact
+65.3 / 21.4 / 13.3 vs sim 65.4 / 21.3 / 13.3 (max diff 0.08 pts).
+
+**Calibration vs market:** de-vig market ~66.8 / 20.6 / 12.6 (book margin 5.5%);
+max divergence 1.5 pts → aligned. Applied the Spain/Portugal lesson: England
+calibrated in line with the market, not below an elite favourite.
+
+**Most probable scorelines:** 2-0 (11.9%), 1-0 (11.0%), 1-1 (10.2%), 2-1 (9.8%),
+3-0 (8.1%). Goals: Over 2.5 54.7%, BTTS 49.4% (a coin-flip — England leaked 2 to
+Croatia and Ghana carry a threat via Kudus), England clean sheet 44.0%.
+
+**Pre-match read:** England should win but it is NOT the same clean archetype as
+Portugal/Spain vs a minnow — Ghana is organized and England's back line is leaky,
+so BTTS is live (~49%) and the central scenario is a 1-2 goal win that may not be
+a clean sheet. Recalibrate with confirmed XIs ~60 min before kickoff.
+
+*To be graded after the match (xG vs actual, 1X2, lesson).*
