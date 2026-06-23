@@ -38,6 +38,20 @@ decision-support / pool (prode) tool for educational use, not betting advice.
 - Match configs: `predictor/matches/*.json` (one reproducible config per match).
 - Results record: `predictor/results_log.md` (predicted vs actual, calibration notes).
 
+## Output conventions (IMPORTANT)
+
+The core task is **calibrated probabilities**, not betting. Therefore:
+
+- **Probabilities first.** The default deliverable is the match forecast (1X2,
+  goals markets, scorelines, confidence) and its calibration vs the market.
+- **No betting analysis unless explicitly requested.** Do NOT volunteer combos,
+  EV, value bets, cash-out advice, or bet-builder math. Only produce them when
+  the user explicitly asks, and always with the responsible-use caveat.
+- **Concise and concrete.** Report numbers and the short reasoning behind them;
+  cut filler, hedging, and repetition. Tables over prose. Lead with the result.
+- Still honor the brief's non-negotiables: be *correctly uncertain*, distinguish
+  "most probable" from "certain", and flag when the model has no strong read.
+
 ## Working conventions
 
 - Each analyzed match gets a JSON config under `predictor/matches/`, committed
