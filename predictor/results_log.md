@@ -21,6 +21,7 @@ Legend: ✅ right for the right reason · 🟡 right but by luck/margin ·
 | 2026-06-21 | Belgium vs Iran | 67.9 / 21.9 / 10.2 | HIGH | 0-0 (draw) | 🟡 |
 | 2026-06-21 | Uruguay vs Cape Verde | 63.4 / 24.6 / 12.0 | HIGH | 2-2 (draw) | 🟡 |
 | 2026-06-22 | Argentina vs Austria | 61.4 / 22.4 / 16.2 | HIGH | 2-0 (Argentina win) | ✅ |
+| 2026-06-22 | Norway vs Senegal | 42.8 / 25.5 / 31.7 | LOW | 3-1 (Norway win) | ✅ |
 
 ### Emerging pattern: favorites vs low block (key)
 
@@ -193,3 +194,24 @@ Argentina dominated possession yet did NOT generate many corners (<5).
 **Takeaway:** trust the result/Messi-involvement reads more than goal/corner
 VOLUME reads; specifically recalibrate corners downward for favorites that
 dominate without a wing-heavy, corner-generating style.
+
+---
+
+## 2026-06-22 · Norway 3-1 Senegal (Group I, MD2)
+
+**Model:** Norway 42.8 / Draw 25.5 / Senegal 31.7 (LOW confidence — flagged as
+the most even match, no strong read). Lambdas 1.60 / 1.35, total xG 2.95.
+
+**Actual result:** Norway 3-1 (Haaland brace). Both scored, 4 goals, **0 cards**.
+
+**Honest read:**
+- ✅ Open-game read VALIDATED: I called this the open match of the group (both
+  full-strength, attacking) and flagged BTTS + several goals as the picture.
+  Result: BTTS Yes, Over 3.5, 4 goals. The LOW-confidence slight favorite won.
+- ✅ Haaland delivered (brace), consistent with his red-hot form.
+- ❌ **Cards model: big miss (the noisiest market, as warned).** Expected ~4.28
+  yellows on the Sampaio (card-happy) signal; actual was 0. That is a ~1.4% tail
+  event (e^-4.28). Not a calibration error on the mean — it's extreme variance in
+  a market the model itself labels "near random". Reinforces the rule: do NOT
+  lean on cards as a value read even with a strong referee signal; the referee
+  inclines the distribution, it does not determine a single game.
