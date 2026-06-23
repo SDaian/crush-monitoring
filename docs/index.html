@@ -392,7 +392,7 @@ const LS_KEY="wc2026_sim_v1";
 // Bump this whenever KNOWN results / schedule change. On load, a saved state
 // with an older DATA_VERSION auto-merges the latest official results (so the
 // app always shows the latest without the user having to Reset/Reload).
-const DATA_VERSION="2026-06-23.r32-live";
+const DATA_VERSION="2026-06-23.sim-groups-only";
 let state={ results:{}, strengths:{}, learn:[] };
 
 function freshStrengths(){ const s={}; for(const t in TEAMS) s[t]=TEAMS[t]; return s; }
@@ -862,20 +862,15 @@ document.addEventListener("click",e=>{
 
 /* buttons */
 $("#simBtn").addEventListener("click",()=>{
-  // fill pending GROUP matches by sampling (marked sim, not real)
+  // fill pending GROUP-STAGE matches only (marked sim, not real).
+  // The knockout bracket is intentionally NOT auto-simulated: it stays the
+  // live "as it stands" derived from the group tables, and the user fills
+  // knockout scores manually when they want to.
   for(const id in SCHED){ if(!state.results[id]){
     const m=SCHED[id]; const A=GROUPS[m.g].teams[m.i],B=GROUPS[m.g].teams[m.j];
     const [la,lb]=lambdas(st(A),st(B));
     state.results[id]={h:samplePoisson(la),a:samplePoisson(lb),real:false};
   }}
-  // resolve knockout ties in order
-  allKO().forEach(tie=>{
-    const [A,B]=koTeams(tie); if(A&&B&&!state.results[tie.id]){
-      const [la,lb]=lambdas(st(A),st(B)); let h=samplePoisson(la),a=samplePoisson(lb);
-      if(h===a){ if(Math.random()<probs(st(A),st(B)).h/(probs(st(A),st(B)).h+probs(st(A),st(B)).a)) h++; else a++; }
-      state.results[tie.id]={h,a,real:false};
-    }
-  });
   renderAll(); save();
 });
 $("#clrSimBtn").addEventListener("click",()=>{
