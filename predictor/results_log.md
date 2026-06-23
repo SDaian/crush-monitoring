@@ -25,6 +25,7 @@ Legend: ✅ right for the right reason · 🟡 right but by luck/margin ·
 | 2026-06-22 | Jordan vs Algeria | 15.6 / 23.2 / 61.2 | HIGH | 1-2 (Algeria win) | ✅ |
 | 2026-06-23 | Portugal vs Uzbekistan | 71.6 / 18.9 / 9.5 | HIGH | 4-0 (Portugal win) | ✅ |
 | 2026-06-23 | England vs Ghana | 65.3 / 21.4 / 13.3 | HIGH | 0-0 (draw) | 🟡 |
+| 2026-06-23 | Croatia vs Panama | 58.6 / 24.9 / 16.5 | MEDIUM | ⏳ pending | ⏳ |
 
 ### Emerging pattern: favorites vs low block (key)
 
@@ -354,3 +355,33 @@ a clean sheet. Recalibrate with confirmed XIs ~60 min before kickoff.
   underdog is organized (Ghana, Iran, Curaçao → 0-0 live) or genuinely weak/open
   (Saudi, Uzbekistan, NZ → favourite + goals). Joins Ecuador-Curaçao and
   Belgium-Iran as a frustrated-favourite 0-0.
+
+---
+
+## 2026-06-23 · Croatia vs Panama (Group L) — ⏳ PENDING
+
+**Pre-match forecast (not yet played).** Both on 0 points after MD1 (Croatia 2-4
+England; Panama 0-1 Ghana), with England and Ghana on 4: a near-must-win
+six-pointer, the loser virtually eliminated.
+
+**Model:** Croatia 58.6 / Draw 24.9 / Panama 16.5 (MEDIUM). Lambdas Croatia 1.72 /
+Panama 0.80, total xG 2.52, rho -0.06. Monte Carlo (N=200k) converges: exact
+58.6 / 24.9 / 16.5 vs sim 58.7 / 24.7 / 16.6 (max diff 0.15 pts).
+
+**Calibration vs market:** de-vig market 58.5 / 24.3 / 17.2 (book margin 5.6%);
+max divergence 0.7 pts → tightly aligned. An initial λ of 1.85 put Croatia ~3.6
+pts ABOVE market; trimmed to 1.72 — applying the England-Ghana lesson, don't
+overrate the favourite against an organized underdog. Drops to MEDIUM (just under
+the 60% HIGH threshold).
+
+**Most probable scorelines:** 1-0 (13.2%), 2-0 (11.9%), 1-1 (11.7%), 2-1 (9.5%),
+0-0 (8.7%). Goals: Over 2.5 46.1% (lean Under), BTTS 45.9%, Croatia clean sheet
+44.9%.
+
+**Pre-match read:** Croatia the favourite but only modestly (MEDIUM) — Panama is
+organized and this is a tense, low-stakes-for-neither game where BOTH must win,
+which cuts both ways: it opens the game (both attack) yet the draw/Under is a
+live tail (total xG just 2.52). Central scenario a 1-0/2-0 Croatia win; a tight
+draw is very much in play. Recalibrate with confirmed XIs ~60 min before kickoff.
+
+*To be graded after the match (xG vs actual, 1X2, lesson).*
