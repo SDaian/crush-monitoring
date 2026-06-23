@@ -60,6 +60,8 @@
   .match input{width:30px;background:#08351f;border:1px solid var(--line);color:var(--chalk);
     text-align:center;border-radius:6px;padding:4px 0;font-size:13px}
   .match input.real{border-color:var(--good)}
+  .match input.locked{border-color:var(--good);background:#0a3d27;color:var(--good);
+    font-weight:700;cursor:default;opacity:1}
   .prob{font-size:10px;color:var(--chalk-dim);min-width:96px;text-align:center}
   .mid{font-size:10px;color:var(--chalk-dim)}
   .mmeta{font-size:9px;color:var(--chalk-dim);text-align:center}
@@ -117,7 +119,10 @@
   textarea{width:100%;height:160px;background:#08351f;color:var(--chalk);border:1px solid var(--line);border-radius:8px;font-size:11px;font-family:monospace}
   .pill{display:inline-block;font-size:10px;padding:1px 6px;border-radius:10px;border:1px solid var(--line);color:var(--chalk-dim)}
   .legend{font-size:10px;color:var(--chalk-dim);margin:6px 0}
-  input[type=number]::-webkit-inner-spin-button{opacity:.3}
+  /* hide the number spinner arrows everywhere (Chrome/Safari/Edge + Firefox) */
+  input[type=number]{-moz-appearance:textfield;appearance:textfield}
+  input[type=number]::-webkit-inner-spin-button,
+  input[type=number]::-webkit-outer-spin-button{-webkit-appearance:none;appearance:none;margin:0}
 </style>
 </head>
 <body>
@@ -287,6 +292,15 @@ function buildSchedule(){
 }
 const SCHED=buildSchedule();
 
+// Official results already played (seeded from KNOWN): these are LOCKED — their
+// score inputs are read-only so a played result can't be accidentally changed.
+const LOCKED_IDS=(()=>{ const s=new Set();
+  for(const g in KNOWN){ KNOWN[g].forEach(r=>{ const [i,j]=r;
+    const m=GROUPS[g].matches.find(x=>x.i===i&&x.j===j)
+          ||GROUPS[g].matches.find(x=>x.i===j&&x.j===i);
+    if(m) s.add(m.id); }); }
+  return s; })();
+
 /* ===========================================================================
    RESULTS LOG  (the predictor's actual analyzed matches, from
    predictor/results_log.md — pre-game model + per-team xG vs the final result)
@@ -326,7 +340,11 @@ const RESULTS_LOG=[
   { date:"2026-06-22", match:"Norway vs Senegal", group:"I", conf:"LOW", mark:"✅",
     h:"Norway", a:"Senegal", p:[42.8,25.5,31.7], xg:[1.60,1.35],
     result:"3-1 (Norway)",
-    post:"Flagged as the most even game (LOW, no strong read) and the open one → BTTS + several goals. Result 3-1, both scored, Haaland brace. Cards model big miss: expected ~4.28 yellows on the card-happy Sampaio signal, actual was 0 (~1.4% tail). Never lean on cards — the referee inclines the distribution, it doesn't decide one game." }
+    post:"Flagged as the most even game (LOW, no strong read) and the open one → BTTS + several goals. Result 3-1, both scored, Haaland brace. Cards model big miss: expected ~4.28 yellows on the card-happy Sampaio signal, actual was 0 (~1.4% tail). Never lean on cards — the referee inclines the distribution, it doesn't decide one game." },
+  { date:"2026-06-22", match:"Jordan vs Algeria", group:"J", conf:"HIGH", mark:"✅",
+    h:"Jordan", a:"Algeria", p:[15.6,23.2,61.2], xg:[0.82,1.85],
+    result:"1-2 (Algeria)",
+    post:"Clean calibration hit. The 61% favourite won, aligned with the market (0.6 pt divergence). The λ gap (1.85 vs 0.82) implied a 0-2/1-2 central band, and the actual 1-2 was the model's #4 scoreline (9.7%) right inside it. Expected total 2.67 vs actual 3 (Over 2.5 landed). Pre-match read validated: must-win Jordan went for it → BTTS Yes (47.7%), so the low-block 0-0 tail did not apply. No new lesson; HIGH confidence justified by the result landing in the central scenario." }
 ];
 
 /* ===========================================================================
@@ -364,7 +382,7 @@ const LS_KEY="wc2026_sim_v1";
 // Bump this whenever KNOWN results / schedule change. On load, a saved state
 // with an older DATA_VERSION auto-merges the latest official results (so the
 // app always shows the latest without the user having to Reset/Reload).
-const DATA_VERSION="2026-06-23.j-alg";
+const DATA_VERSION="2026-06-23.lock-learn";
 let state={ results:{}, strengths:{}, learn:[] };
 
 function freshStrengths(){ const s={}; for(const t in TEAMS) s[t]=TEAMS[t]; return s; }
@@ -583,16 +601,19 @@ function renderFixtures(g){
     const p=probs(st(A),st(B));
     const realCls=(r.real?'real':'');
     const cal=calibFor(m);
+    const locked=LOCKED_IDS.has(m.id);
+    const lk=locked?`class="sc locked" readonly tabindex="-1" title="Official result — locked"`
+                   :`class="sc ${realCls}"`;
     return `<div class="match ${cal?'has-cal':''}" data-mid="${m.id}">
       ${cal?'<span class="cal-dot" title="Calibrated forecast available">★</span>':'<span class="cal-dot empty"></span>'}
       <span class="mt">${esc(A)}</span>
-      <input type="number" min="0" max="20" class="sc ${realCls}" data-mid="${m.id}" data-side="h" value="${r.h??''}"/>
+      <input type="number" min="0" max="20" ${lk} data-mid="${m.id}" data-side="h" value="${r.h??''}"/>
       <span class="mid">:</span>
-      <input type="number" min="0" max="20" class="sc ${realCls}" data-mid="${m.id}" data-side="a" value="${r.a??''}"/>
+      <input type="number" min="0" max="20" ${lk} data-mid="${m.id}" data-side="a" value="${r.a??''}"/>
       <span class="mt2">${esc(B)}</span>
       <span class="prob" id="pr-${m.id}">${pctTriple(p)}</span>
     </div>
-    <div class="mmeta">M${m.id} · ${m.date} · ${esc(m.venue)} <span class="approx">≈</span> ${r.real?'· <b style="color:var(--good)">real</b>':r.h!=null?'· sim':''}
+    <div class="mmeta">M${m.id} · ${m.date} · ${esc(m.venue)} <span class="approx">≈</span> ${locked?'· <b style="color:var(--good)">🔒 official</b>':r.real?'· <b style="color:var(--good)">real</b>':r.h!=null?'· sim':''}
       ${cal?'<span class="cal-badge">★ calibrated</span>':''}
       <button class="acc-btn" data-mid="${m.id}">▸ Prediction (Monte Carlo)</button></div>
     <div class="acc" id="acc-${m.id}" data-mid="${m.id}" hidden></div>`;
@@ -760,6 +781,7 @@ function updateAfterScore(mid){
 document.addEventListener("change", e=>{
   const inp=e.target.closest("input.sc"); if(!inp) return;
   const mid=+inp.dataset.mid, side=inp.dataset.side;
+  if(LOCKED_IDS.has(mid)) return; // official result — not editable
   const wrap=inp.closest(".match");
   const hI=wrap.querySelector('input[data-side=h]'), aI=wrap.querySelector('input[data-side=a]');
   const hv=hI.value.trim(), av=aI.value.trim();
