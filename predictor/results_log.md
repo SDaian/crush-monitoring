@@ -284,7 +284,12 @@ the market — don't lean below an elite favourite.
 **Pre-match read:** Portugal should win comfortably; the central scenario is a
 1-2 goal clean-sheet win (2-0/1-0/3-0), not necessarily a rout. Uzbekistan's path
 to value is the draw/Portugal-not-to-rout, but as a beaten debutant that is a
-tail. Recalibrate with confirmed XIs ~60 min before kickoff (Portugal rotation
-risk after the opener).
+tail.
+
+**Lineup recalibration (CONFIRMED XIs):** Portugal start at full strength —
+Diogo Costa; Dalot, Tomás Araújo, Rúben Dias, Cancelo; Vitinha, João Neves;
+Bernardo Silva, Bruno Fernandes, Francisco Conceição; Ronaldo. No rotation after
+the opener → **λ 2.20 unchanged, forecast locked at 71.6 / 18.9 / 9.5**. Referee
+still TBD at lock-in → cards intentionally not modelled.
 
 *To be graded after the match (xG vs actual, 1X2, lesson).*
