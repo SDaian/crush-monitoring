@@ -178,7 +178,7 @@
   </div>
 
   <div class="panel" id="p-bracket">
-    <div class="legend">Round of 32 = the real "as it stands" ties (teams + dates/times, from the official bracket). Winners advance through R16 → Final in bracket order; enter or simulate the knockout scores to fill later rounds. <span class="approx">≈ Round-of-16-onward dates and the exact R16 adjacency are approximate — edit/import to correct.</span></div>
+    <div class="legend">Round of 32 = the live "as it stands" bracket: slots (group winners/runners-up + 8 best thirds) resolve from the <b>current</b> standings, so simulating remaining group games updates the ties automatically. Dates/times are the real R32 schedule. Winners advance through R16 → Final; enter or simulate knockout scores to fill later rounds. <span class="approx">≈ R16-onward dates and the exact R16 adjacency are approximate.</span></div>
     <div class="bracket" id="bracket"></div>
   </div>
 
@@ -392,7 +392,7 @@ const LS_KEY="wc2026_sim_v1";
 // Bump this whenever KNOWN results / schedule change. On load, a saved state
 // with an older DATA_VERSION auto-merges the latest official results (so the
 // app always shows the latest without the user having to Reset/Reload).
-const DATA_VERSION="2026-06-23.r32-real";
+const DATA_VERSION="2026-06-23.r32-live";
 let state={ results:{}, strengths:{}, learn:[] };
 
 function freshStrengths(){ const s={}; for(const t in TEAMS) s[t]=TEAMS[t]; return s; }
@@ -510,28 +510,29 @@ function thirdGroupsQualified(){
 /* ===========================================================================
    KNOCKOUT
    =========================================================================== */
-// Round of 32 — the ACTUAL "as it stands" ties (source: BBC bracket), with real
-// teams + dates/times. fixed:true => h/a are team names, resolved as-is (these
-// are NOT slot codes). Ids 73..88 in bracket order: consecutive pairs feed R16
-// (73+74 -> 89, 75+76 -> 90, ...). The R32 matchups are exact-from-source; the
-// R16 adjacency below follows that consecutive bracket order.
+// Round of 32 — the official crossing map, derived to reproduce the real
+// "as it stands" bracket. Slots are resolved LIVE from current standings:
+// "X1"/"X2" = group winner/runner-up, "T<n>" = the nth best third. So
+// simulating remaining group games updates the R32 automatically.
+// Dates/times are the real per-tie schedule. Ids 73..88 in bracket order:
+// consecutive pairs feed R16 (73+74 -> 89, ...).
 const R32MAP=[
-  {id:73,h:"Germany",a:"Scotland",fixed:true,date:"2026-06-29",time:"21:30"},
-  {id:74,h:"France",a:"Sweden",fixed:true,date:"2026-06-30",time:"22:00"},
-  {id:75,h:"South Korea",a:"Switzerland",fixed:true,date:"2026-06-28",time:"20:00"},
-  {id:76,h:"Netherlands",a:"Morocco",fixed:true,date:"2026-06-30",time:"02:00"},
-  {id:77,h:"DR Congo",a:"Ghana",fixed:true,date:"2026-07-03",time:"00:00"},
-  {id:78,h:"Spain",a:"Austria",fixed:true,date:"2026-07-02",time:"20:00"},
-  {id:79,h:"USA",a:"Algeria",fixed:true,date:"2026-07-02",time:"01:00"},
-  {id:80,h:"Canada",a:"Belgium",fixed:true,date:"2026-07-03",time:"04:00"},
-  {id:81,h:"Egypt",a:"Czech Republic",fixed:true,date:"2026-07-01",time:"21:00"},
-  {id:82,h:"Brazil",a:"Japan",fixed:true,date:"2026-06-29",time:"18:00"},
-  {id:83,h:"Ivory Coast",a:"Norway",fixed:true,date:"2026-06-30",time:"18:00"},
-  {id:84,h:"Mexico",a:"Cape Verde",fixed:true,date:"2026-07-01",time:"02:00"},
-  {id:85,h:"England",a:"Portugal",fixed:true,date:"2026-07-01",time:"17:00"},
-  {id:86,h:"Argentina",a:"Uruguay",fixed:true,date:"2026-07-03",time:"23:00"},
-  {id:87,h:"Australia",a:"Iran",fixed:true,date:"2026-07-03",time:"19:00"},
-  {id:88,h:"Colombia",a:"Paraguay",fixed:true,date:"2026-07-04",time:"02:30"}
+  {id:73,h:"E1",a:"T2",date:"2026-06-29",time:"21:30"}, // Germany vs 3rd (Scotland)
+  {id:74,h:"I2",a:"T1",date:"2026-06-30",time:"22:00"}, // France vs 3rd (Sweden)
+  {id:75,h:"A2",a:"B2",date:"2026-06-28",time:"20:00"}, // South Korea vs Switzerland
+  {id:76,h:"F1",a:"C2",date:"2026-06-30",time:"02:00"}, // Netherlands vs Morocco
+  {id:77,h:"K2",a:"L2",date:"2026-07-03",time:"00:00"}, // DR Congo vs Ghana
+  {id:78,h:"H1",a:"J2",date:"2026-07-02",time:"20:00"}, // Spain vs Austria
+  {id:79,h:"D1",a:"T3",date:"2026-07-02",time:"01:00"}, // USA vs 3rd (Algeria)
+  {id:80,h:"B1",a:"T6",date:"2026-07-03",time:"04:00"}, // Canada vs 3rd (Belgium)
+  {id:81,h:"G1",a:"T8",date:"2026-07-01",time:"21:00"}, // Egypt vs 3rd (Czech Republic)
+  {id:82,h:"C1",a:"F2",date:"2026-06-29",time:"18:00"}, // Brazil vs Japan
+  {id:83,h:"E2",a:"I1",date:"2026-06-30",time:"18:00"}, // Ivory Coast vs Norway
+  {id:84,h:"A1",a:"T5",date:"2026-07-01",time:"02:00"}, // Mexico vs 3rd (Cape Verde)
+  {id:85,h:"L1",a:"T7",date:"2026-07-01",time:"17:00"}, // England vs 3rd (Portugal)
+  {id:86,h:"J1",a:"H2",date:"2026-07-03",time:"23:00"}, // Argentina vs Uruguay
+  {id:87,h:"D2",a:"G2",date:"2026-07-03",time:"19:00"}, // Australia vs Iran
+  {id:88,h:"K1",a:"T4",date:"2026-07-04",time:"02:30"}  // Colombia vs 3rd (Paraguay)
 ];
 // progression: pairs of R32 winners -> R16, etc. (bracket order)
 const R16=[ {id:89,f:[73,74]},{id:90,f:[75,76]},{id:91,f:[77,78]},{id:92,f:[79,80]},
@@ -550,8 +551,7 @@ function slotTeam(code){
 }
 // resolve a knockout tie's two teams; ko results stored in state.results by id (h,a)
 function koTeams(tie){
-  if(tie.fixed){ return [tie.h, tie.a]; }            // real R32 ties (team names)
-  if(tie.h!==undefined){ return [slotTeam(tie.h), slotTeam(tie.a)]; } // slot codes
+  if(tie.h!==undefined){ return [slotTeam(tie.h), slotTeam(tie.a)]; } // slot codes (live)
   // from previous round feeders
   return tie.f.map(fid=>koWinner(fid));
 }
@@ -749,7 +749,7 @@ function renderBracket(){
       // R32 ties carry a real date/time; later rounds use the approximate KO_DATE.
       const dstr=tie.date||KO_DATE[tie.id]||"";
       const dt=dstr?`${dstr}${tie.time?(" · "+tie.time):""}`:"";
-      const appx=tie.fixed?"":' <span class="approx">≈</span>';
+      const appx=tie.date?"":' <span class="approx">≈</span>'; // R32 dates are real
       const sc=r?`<b class="kscore">${r.h}-${r.a}</b>`:(A&&B?'<span class="kvs">vs</span>':"");
       return `<div class="tie${r?' decided':''}">
         <div class="ln"><span class="kt ${wa}">${esc(A||tie.h||'—')}</span><span class="kp">${A&&B?pa:''}</span></div>
