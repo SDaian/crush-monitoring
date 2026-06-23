@@ -60,6 +60,25 @@
   .prob{font-size:10px;color:var(--chalk-dim);min-width:96px;text-align:center}
   .mid{font-size:10px;color:var(--chalk-dim)}
   .mmeta{font-size:9px;color:var(--chalk-dim);text-align:center}
+  .acc-btn{cursor:pointer;background:none;border:none;color:var(--accent);font-size:10px;
+    padding:0 0 0 4px;text-decoration:underline;font-family:inherit}
+  .acc{background:#08351f;border:1px solid var(--line);border-radius:8px;
+    padding:8px 10px;margin:4px 0 8px;font-size:11px}
+  .fc-xg{color:var(--chalk);margin-bottom:6px}
+  .fc-sec{color:var(--gold);font-size:10px;font-weight:700;text-transform:uppercase;
+    letter-spacing:.4px;margin:8px 0 4px;border-bottom:1px solid var(--line)}
+  .fc-bar{display:flex;align-items:center;gap:6px;margin:3px 0}
+  .fc-bar>span:first-child{flex:0 0 88px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:var(--chalk-dim)}
+  .fc-bar>b{flex:0 0 44px;text-align:right}
+  .fc-track{flex:1;height:8px;background:var(--card2);border-radius:5px;overflow:hidden}
+  .fc-fill{display:block;height:100%}
+  .fc-fill.win{background:var(--good)} .fc-fill.draw{background:var(--gold)} .fc-fill.loss{background:var(--bad)}
+  .fc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:3px 8px}
+  .fc-grid span{color:var(--chalk-dim)} .fc-grid b{color:var(--chalk)}
+  .fc-mc{width:100%;border-collapse:collapse;margin-top:4px}
+  .fc-mc th,.fc-mc td{border:1px solid var(--line);padding:3px 4px;text-align:center}
+  .fc-mc td:first-child,.fc-mc th:first-child{color:var(--chalk-dim);text-align:left}
+  .fc-note{color:var(--chalk-dim);font-size:9px;margin-top:6px;font-style:italic}
   .thirds td.rankq{color:var(--good);font-weight:700}
   .bracket{display:flex;gap:18px;overflow-x:auto;padding-bottom:10px}
   .round{min-width:230px}
@@ -516,8 +535,61 @@ function renderFixtures(g){
       <span class="mt2">${esc(B)}</span>
       <span class="prob" id="pr-${m.id}">${pctTriple(p)}</span>
     </div>
-    <div class="mmeta">M${m.id} · ${m.date} · ${esc(m.venue)} <span class="approx">≈</span> ${r.real?'· <b style="color:var(--good)">real</b>':r.h!=null?'· sim':''}</div>`;
+    <div class="mmeta">M${m.id} · ${m.date} · ${esc(m.venue)} <span class="approx">≈</span> ${r.real?'· <b style="color:var(--good)">real</b>':r.h!=null?'· sim':''}
+      <button class="acc-btn" data-mid="${m.id}">▸ Prediction (Monte Carlo)</button></div>
+    <div class="acc" id="acc-${m.id}" data-mid="${m.id}" hidden></div>`;
   }).join("");
+}
+
+/* Detailed per-match forecast (computed on demand when the accordion opens):
+   exact 1X2 + xG, goals markets, top scorelines, and a Monte Carlo
+   convergence check (independent-Poisson engine — the simulator's own model,
+   simpler than the predictor package's bivariate Poisson + Dixon-Coles). */
+function matchForecast(mid){
+  const m=SCHED[mid]; if(!m) return "";
+  const A=GROUPS[m.g].teams[m.i], B=GROUPS[m.g].teams[m.j];
+  const sa=st(A), sb=st(B); const [la,lb]=lambdas(sa,sb);
+  const MX=8, pa=[], pb=[];
+  for(let k=0;k<=MX;k++){ pa[k]=pois(k,la); pb[k]=pois(k,lb); }
+  let H=0,D=0,Aw=0,o15=0,o25=0,o35=0,btts=0,csA=0,csB=0; const cells=[];
+  for(let i=0;i<=MX;i++) for(let j=0;j<=MX;j++){
+    const p=pa[i]*pb[j], tot=i+j;
+    if(i>j)H+=p; else if(i===j)D+=p; else Aw+=p;
+    if(tot>=2)o15+=p; if(tot>=3)o25+=p; if(tot>=4)o35+=p;
+    if(i>0&&j>0)btts+=p; if(j===0)csA+=p; if(i===0)csB+=p;
+    cells.push({i,j,p});
+  }
+  const s=H+D+Aw||1; H/=s; D/=s; Aw/=s;
+  cells.sort((x,y)=>y.p-x.p); const top=cells.slice(0,6);
+  // Monte Carlo convergence check
+  const N=50000; let mh=0,md=0,ma=0;
+  for(let n=0;n<N;n++){ const x=samplePoisson(la),y=samplePoisson(lb);
+    if(x>y)mh++; else if(x===y)md++; else ma++; }
+  const sh=100*mh/N, sd=100*md/N, sma=100*ma/N;
+  const pct=v=>(100*v).toFixed(1);
+  const bar=(label,v,cls)=>`<div class="fc-bar"><span>${label}</span>
+    <span class="fc-track"><span class="fc-fill ${cls}" style="width:${(100*v).toFixed(1)}%"></span></span>
+    <b>${pct(v)}%</b></div>`;
+  return `
+   <div class="fc-xg">Model xG (λ): <b>${esc(A)} ${la.toFixed(2)}</b> – <b>${lb.toFixed(2)} ${esc(B)}</b>
+     · total ${(la+lb).toFixed(2)}</div>
+   <div class="fc-sec">1X2</div>
+   ${bar(esc(A),H,"win")}${bar("Draw",D,"draw")}${bar(esc(B),Aw,"loss")}
+   <div class="fc-sec">Goals markets</div>
+   <div class="fc-grid">
+     <span>Over 1.5 <b>${pct(o15)}%</b></span><span>Over 2.5 <b>${pct(o25)}%</b></span>
+     <span>Over 3.5 <b>${pct(o35)}%</b></span><span>BTTS <b>${pct(btts)}%</b></span>
+     <span>CS ${esc(A)} <b>${pct(csA)}%</b></span><span>CS ${esc(B)} <b>${pct(csB)}%</b></span>
+   </div>
+   <div class="fc-sec">Most probable scorelines</div>
+   <div class="fc-grid">${top.map(c=>`<span>${c.i}-${c.j} <b>${pct(c.p)}%</b></span>`).join("")}</div>
+   <div class="fc-sec">Monte Carlo convergence (N=${N.toLocaleString()})</div>
+   <table class="fc-mc"><tr><th></th><th>${esc(A)}</th><th>Draw</th><th>${esc(B)}</th></tr>
+     <tr><td>exact</td><td>${pct(H)}</td><td>${pct(D)}</td><td>${pct(Aw)}</td></tr>
+     <tr><td>sim</td><td>${sh.toFixed(1)}</td><td>${sd.toFixed(1)}</td><td>${sma.toFixed(1)}</td></tr>
+     <tr><td>diff</td><td>${Math.abs(100*H-sh).toFixed(2)}</td><td>${Math.abs(100*D-sd).toFixed(2)}</td><td>${Math.abs(100*Aw-sma).toFixed(2)}</td></tr>
+   </table>
+   <div class="fc-note">Simulator engine: independent Poisson (no Dixon-Coles). The deep predictor (repo) uses bivariate Poisson + DC.</div>`;
 }
 
 function renderThirds(){
@@ -586,6 +658,12 @@ function updateAfterScore(mid){
     const A=GROUPS[m.g].teams[m.i],B=GROUPS[m.g].teams[m.j];
     const pr=$("#pr-"+mid); if(pr) pr.textContent=pctTriple(probs(st(A),st(B)));
   }
+  // Refresh any open forecast accordion (strengths/probabilities just changed).
+  document.querySelectorAll('.acc[data-open="1"]').forEach(el=>{
+    el.innerHTML=matchForecast(+el.dataset.mid);
+    const b=document.querySelector(`.acc-btn[data-mid="${el.dataset.mid}"]`);
+    if(b) b.textContent="▾ Prediction (Monte Carlo)";
+  });
   renderThirds(); renderBracket(); renderLearn();
 }
 
@@ -614,7 +692,8 @@ document.addEventListener("change", e=>{
 function updateMeta(mid){
   const wrap=document.querySelector(`.match[data-mid="${mid}"]`); if(!wrap) return;
   const meta=wrap.nextElementSibling; const m=SCHED[mid]; const r=state.results[mid];
-  if(meta&&m) meta.innerHTML=`M${m.id} · ${m.date} · ${esc(m.venue)} <span class="approx">≈</span> ${r&&r.real?'· <b style="color:var(--good)">real</b>':(r?'· sim':'')}`;
+  if(meta&&m) meta.innerHTML=`M${m.id} · ${m.date} · ${esc(m.venue)} <span class="approx">≈</span> ${r&&r.real?'· <b style="color:var(--good)">real</b>':(r?'· sim':'')}`
+    +` <button class="acc-btn" data-mid="${m.id}">▸ Prediction (Monte Carlo)</button>`;
 }
 
 /* tabs */
@@ -623,6 +702,20 @@ $("#tabs").addEventListener("click",e=>{
   document.querySelectorAll(".tab").forEach(x=>x.classList.remove("active"));
   document.querySelectorAll(".panel").forEach(x=>x.classList.remove("active"));
   t.classList.add("active"); $("#p-"+t.dataset.p).classList.add("active");
+});
+
+/* per-match forecast accordion (computed lazily on open; delegated so it
+   survives re-renders) */
+document.addEventListener("click",e=>{
+  const b=e.target.closest(".acc-btn"); if(!b) return;
+  const mid=+b.dataset.mid; const el=$("#acc-"+mid); if(!el) return;
+  if(el.hasAttribute("hidden")){
+    el.innerHTML=matchForecast(mid); el.removeAttribute("hidden");
+    el.dataset.open="1"; b.textContent="▾ Prediction (Monte Carlo)";
+  } else {
+    el.setAttribute("hidden",""); el.innerHTML=""; el.dataset.open="";
+    b.textContent="▸ Prediction (Monte Carlo)";
+  }
 });
 
 /* buttons */
