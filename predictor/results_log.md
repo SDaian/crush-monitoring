@@ -22,7 +22,7 @@ Legend: ✅ right for the right reason · 🟡 right but by luck/margin ·
 | 2026-06-21 | Uruguay vs Cape Verde | 63.4 / 24.6 / 12.0 | HIGH | 2-2 (draw) | 🟡 |
 | 2026-06-22 | Argentina vs Austria | 61.4 / 22.4 / 16.2 | HIGH | 2-0 (Argentina win) | ✅ |
 | 2026-06-22 | Norway vs Senegal | 42.8 / 25.5 / 31.7 | LOW | 3-1 (Norway win) | ✅ |
-| 2026-06-22 | Jordan vs Algeria | 15.6 / 23.2 / 61.2 | HIGH | ⏳ pending | ⏳ |
+| 2026-06-22 | Jordan vs Algeria | 15.6 / 23.2 / 61.2 | HIGH | 1-2 (Algeria win) | ✅ |
 
 ### Emerging pattern: favorites vs low block (key)
 
@@ -219,10 +219,10 @@ the most even match, no strong read). Lambdas 1.60 / 1.35, total xG 2.95.
 
 ---
 
-## 2026-06-22 · Jordan vs Algeria (Group J, MD2) — ⏳ PENDING
+## 2026-06-22 · Jordan 1-2 Algeria (Group J, MD2)
 
-**Pre-match forecast (not yet played).** Both lost MD1 (Jordan 1-3 Austria;
-Algeria 0-3 Argentina) and sit on 0 points: a must-win for both.
+**Pre-match forecast (graded below).** Both lost MD1 (Jordan 1-3 Austria;
+Algeria 0-3 Argentina) and sat on 0 points: a must-win for both.
 
 **Model:** Jordan 15.6 / Draw 23.2 / Algeria 61.2 (HIGH). Lambdas Jordan 0.82 /
 Algeria 1.85, total xG 2.67, rho -0.05. Monte Carlo (N=200k) converges:
@@ -242,4 +242,20 @@ risks logged this tournament (favourite frustrated 0-0) are a tail here too:
 Jordan will go for it (must-win), so the game is more likely to open up than to
 be parked. Recalibrate with the confirmed XIs ~60 min before kickoff.
 
-*To be graded after the match (xG vs actual, 1X2, lesson).*
+**Actual result:** Jordan 1-2 Algeria. Algeria won by the expected ~2-goal
+margin; Jordan scored (competitive, as flagged). 3 goals total, BTTS Yes.
+
+**Honest read — a clean calibration hit:**
+- ✅ 1X2: the 61% favourite won. Aligned with the market (0.6 pt divergence),
+  no anti-market lean — the correct, low-merit-but-well-placed call.
+- ✅ **xG / margin nailed:** the λ gap (Algeria 1.85 vs Jordan 0.82) implied a
+  ~1-goal-and-change edge, i.e. a 0-2 / 1-2 central band. Actual 1-2 was the
+  model's **#4 scoreline (9.7%)** and sat squarely in that band — not a rout,
+  not a slip. Expected total 2.67 vs actual 3 (Over 2.5 landed, 49.9% coin-flip).
+- ✅ **Pre-match read validated:** I explicitly said Jordan (must-win) would go
+  for it and the game was likelier to open than to be parked — so the low-block
+  0-0 tail did NOT apply here. Jordan duly scored (BTTS Yes 47.7% came in); the
+  Algeria clean sheet (44%) correctly did NOT.
+- 📌 Process note: HIGH confidence was justified — the result landed in the
+  central scenario. No new calibration lesson; this is the model behaving as
+  designed on a correctly-read favourite.

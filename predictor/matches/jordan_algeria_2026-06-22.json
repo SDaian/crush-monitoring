@@ -51,5 +51,11 @@
   "lambdas_override": {
     "home": 0.82,
     "away": 1.85
+  },
+  "_postmatch": {
+    "result": "Jordan 1-2 Algeria. Favorite won by the expected ~2-goal margin; Jordan scored (competitive), 3 goals, BTTS Yes.",
+    "model_1x2": "Jordan 15.6 / Draw 23.2 / Algeria 61.2 (HIGH)",
+    "verdict": "Clean calibration hit. The 61% favorite won, aligned with the market (0.6 pt divergence). The lambda gap (1.85 vs 0.82) implied a 0-2/1-2 central band, and the actual 1-2 was the model's #4 scoreline (9.7%) inside that band. Expected total 2.67 vs actual 3 (Over 2.5 landed). Pre-match read validated: must-win Jordan went for it (BTTS Yes), so the low-block 0-0 tail did not apply.",
+    "lesson": "No new lesson; the model behaved as designed on a correctly-read favorite. HIGH confidence justified by the result landing in the central scenario."
   }
 }
