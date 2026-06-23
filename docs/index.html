@@ -96,13 +96,23 @@
   .fc-sub-cal{color:var(--gold)} .fc-sub-sim{color:var(--accent)}
   .fc-tag{font-size:9px;font-weight:600;color:var(--chalk-dim)}
   .thirds td.rankq{color:var(--good);font-weight:700}
-  .bracket{display:flex;gap:18px;overflow-x:auto;padding-bottom:10px}
-  .round{min-width:230px}
-  .round h4{font-size:12px;color:var(--gold);margin:4px 0;text-align:center}
-  .tie{background:var(--card2);border:1px solid var(--line);border-radius:8px;padding:6px;margin:6px 0;font-size:11px}
-  .tie .ln{display:flex;justify-content:space-between;gap:6px}
-  .tie .w{color:var(--good);font-weight:700}
-  .tie .meta{font-size:9px;color:var(--chalk-dim);margin-top:3px}
+  .bracket{display:flex;gap:16px;overflow-x:auto;padding:4px 2px 14px}
+  .round{min-width:208px;display:flex;flex-direction:column;justify-content:center;gap:8px}
+  .round h4{font-size:11px;color:#06301f;background:var(--gold);margin:0 0 4px;text-align:center;
+    padding:4px 8px;border-radius:14px;font-weight:700;letter-spacing:.4px;position:sticky;top:0}
+  .tie{background:linear-gradient(180deg,var(--card),var(--card2));border:1px solid var(--line);
+    border-radius:10px;padding:7px 9px;font-size:12px;box-shadow:0 1px 3px rgba(0,0,0,.25)}
+  .tie.decided{border-color:rgba(124,252,155,.5)}
+  .tie .ln{display:flex;justify-content:space-between;align-items:center;gap:6px;padding:1px 0}
+  .tie .kt{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;flex:1}
+  .tie .kp{flex:0 0 38px;text-align:right;font-size:10px;color:var(--chalk-dim)}
+  .tie .kt.w{color:var(--good);font-weight:700}
+  .tie .kt.w::before{content:"▸ ";color:var(--good)}
+  .kmid{text-align:center;line-height:1;margin:1px 0}
+  .kmid .kvs{font-size:9px;color:var(--chalk-dim);letter-spacing:1px}
+  .kmid .kscore{color:var(--gold);font-size:13px}
+  .tie .meta{font-size:9px;color:var(--chalk-dim);margin-top:4px;border-top:1px solid var(--line);padding-top:3px}
+  .tie .meta .kmi{color:var(--accent)}
   .learn-item{font-size:12px;border-left:2px solid var(--accent);padding:4px 8px;margin:5px 0;background:var(--card2);border-radius:0 6px 6px 0}
   .delta-up{color:var(--good)} .delta-dn{color:var(--bad)}
   .log-item{border-left:3px solid var(--accent);padding:8px 10px;margin:8px 0;
@@ -168,7 +178,7 @@
   </div>
 
   <div class="panel" id="p-bracket">
-    <div class="legend">Knockout map (Match 73–104). <span class="approx">≈ The exact official R32 crossing map / thirds-slot table and per-tie venues &amp; dates need official verification — edit/import to correct.</span></div>
+    <div class="legend">Round of 32 = the real "as it stands" ties (teams + dates/times, from the official bracket). Winners advance through R16 → Final in bracket order; enter or simulate the knockout scores to fill later rounds. <span class="approx">≈ Round-of-16-onward dates and the exact R16 adjacency are approximate — edit/import to correct.</span></div>
     <div class="bracket" id="bracket"></div>
   </div>
 
@@ -382,7 +392,7 @@ const LS_KEY="wc2026_sim_v1";
 // Bump this whenever KNOWN results / schedule change. On load, a saved state
 // with an older DATA_VERSION auto-merges the latest official results (so the
 // app always shows the latest without the user having to Reset/Reload).
-const DATA_VERSION="2026-06-23.lock-learn";
+const DATA_VERSION="2026-06-23.r32-real";
 let state={ results:{}, strengths:{}, learn:[] };
 
 function freshStrengths(){ const s={}; for(const t in TEAMS) s[t]=TEAMS[t]; return s; }
@@ -498,14 +508,30 @@ function thirdGroupsQualified(){
 }
 
 /* ===========================================================================
-   KNOCKOUT  (≈ crossing map — structure correct, exact pairings need official check)
+   KNOCKOUT
    =========================================================================== */
-// R32 map: 16 ties. Each side = "X1"/"X2" (group winner/runner) or "T<n>" (nth best third).
+// Round of 32 — the ACTUAL "as it stands" ties (source: BBC bracket), with real
+// teams + dates/times. fixed:true => h/a are team names, resolved as-is (these
+// are NOT slot codes). Ids 73..88 in bracket order: consecutive pairs feed R16
+// (73+74 -> 89, 75+76 -> 90, ...). The R32 matchups are exact-from-source; the
+// R16 adjacency below follows that consecutive bracket order.
 const R32MAP=[
-  {id:73,h:"A1",a:"T3"},{id:74,h:"C1",a:"D2"},{id:75,h:"E1",a:"T6"},{id:76,h:"G1",a:"H2"},
-  {id:77,h:"I1",a:"T8"},{id:78,h:"K1",a:"L2"},{id:79,h:"B1",a:"T5"},{id:80,h:"D1",a:"C2"},
-  {id:81,h:"F1",a:"T7"},{id:82,h:"H1",a:"G2"},{id:83,h:"J1",a:"T4"},{id:84,h:"L1",a:"K2"},
-  {id:85,h:"A2",a:"B2"},{id:86,h:"E2",a:"F2"},{id:87,h:"I2",a:"J2"},{id:88,h:"T1",a:"T2"}
+  {id:73,h:"Germany",a:"Scotland",fixed:true,date:"2026-06-29",time:"21:30"},
+  {id:74,h:"France",a:"Sweden",fixed:true,date:"2026-06-30",time:"22:00"},
+  {id:75,h:"South Korea",a:"Switzerland",fixed:true,date:"2026-06-28",time:"20:00"},
+  {id:76,h:"Netherlands",a:"Morocco",fixed:true,date:"2026-06-30",time:"02:00"},
+  {id:77,h:"DR Congo",a:"Ghana",fixed:true,date:"2026-07-03",time:"00:00"},
+  {id:78,h:"Spain",a:"Austria",fixed:true,date:"2026-07-02",time:"20:00"},
+  {id:79,h:"USA",a:"Algeria",fixed:true,date:"2026-07-02",time:"01:00"},
+  {id:80,h:"Canada",a:"Belgium",fixed:true,date:"2026-07-03",time:"04:00"},
+  {id:81,h:"Egypt",a:"Czech Republic",fixed:true,date:"2026-07-01",time:"21:00"},
+  {id:82,h:"Brazil",a:"Japan",fixed:true,date:"2026-06-29",time:"18:00"},
+  {id:83,h:"Ivory Coast",a:"Norway",fixed:true,date:"2026-06-30",time:"18:00"},
+  {id:84,h:"Mexico",a:"Cape Verde",fixed:true,date:"2026-07-01",time:"02:00"},
+  {id:85,h:"England",a:"Portugal",fixed:true,date:"2026-07-01",time:"17:00"},
+  {id:86,h:"Argentina",a:"Uruguay",fixed:true,date:"2026-07-03",time:"23:00"},
+  {id:87,h:"Australia",a:"Iran",fixed:true,date:"2026-07-03",time:"19:00"},
+  {id:88,h:"Colombia",a:"Paraguay",fixed:true,date:"2026-07-04",time:"02:30"}
 ];
 // progression: pairs of R32 winners -> R16, etc. (bracket order)
 const R16=[ {id:89,f:[73,74]},{id:90,f:[75,76]},{id:91,f:[77,78]},{id:92,f:[79,80]},
@@ -524,7 +550,8 @@ function slotTeam(code){
 }
 // resolve a knockout tie's two teams; ko results stored in state.results by id (h,a)
 function koTeams(tie){
-  if(tie.h!==undefined){ return [slotTeam(tie.h), slotTeam(tie.a)]; }
+  if(tie.fixed){ return [tie.h, tie.a]; }            // real R32 ties (team names)
+  if(tie.h!==undefined){ return [slotTeam(tie.h), slotTeam(tie.a)]; } // slot codes
   // from previous round feeders
   return tie.f.map(fid=>koWinner(fid));
 }
@@ -719,12 +746,16 @@ function renderBracket(){
       let pa="",pb="",wa="",wb="";
       if(A&&B){ const p=probs(st(A),st(B)); pa=Math.round((p.h+p.d/2)*100)+"%"; pb=Math.round((p.a+p.d/2)*100)+"%"; }
       if(r){ if(r.h>r.a)wa="w"; else if(r.a>r.h)wb="w"; }
-      const dt=KO_DATE[tie.id]?(" · "+KO_DATE[tie.id]):"";
-      const sc=r?` <b>${r.h}-${r.a}</b>`:"";
-      return `<div class="tie">
-        <div class="ln"><span class="${wa}">${esc(A||tie.h||'—')}</span><span>${A&&B?pa:''}</span></div>
-        <div class="ln"><span class="${wb}">${esc(B||tie.a||'—')}</span><span>${A&&B?pb:''}</span></div>
-        <div class="meta">M${tie.id}${dt} <span class="approx">≈</span>${sc}</div>
+      // R32 ties carry a real date/time; later rounds use the approximate KO_DATE.
+      const dstr=tie.date||KO_DATE[tie.id]||"";
+      const dt=dstr?`${dstr}${tie.time?(" · "+tie.time):""}`:"";
+      const appx=tie.fixed?"":' <span class="approx">≈</span>';
+      const sc=r?`<b class="kscore">${r.h}-${r.a}</b>`:(A&&B?'<span class="kvs">vs</span>':"");
+      return `<div class="tie${r?' decided':''}">
+        <div class="ln"><span class="kt ${wa}">${esc(A||tie.h||'—')}</span><span class="kp">${A&&B?pa:''}</span></div>
+        <div class="kmid">${sc}</div>
+        <div class="ln"><span class="kt ${wb}">${esc(B||tie.a||'—')}</span><span class="kp">${A&&B?pb:''}</span></div>
+        <div class="meta"><span class="kmi">M${tie.id}</span>${dt?(" · "+dt):""}${appx}</div>
       </div>`;
     }).join("");
     host.appendChild(col);
