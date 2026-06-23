@@ -1,0 +1,49 @@
+{
+  "_comment": "WC2026 Group L. Standings before this match: England 4 pts, Ghana 4, Croatia 0 (lost 2-4 to England), Panama 0 (lost 0-1 to Ghana). Both Croatia and Panama have played once and sit on 0 -> a near-must-win six-pointer; the loser is virtually eliminated. Croatia the quality side (experienced, technical) but leaked 4 to England; Panama organized and low-scoring (0-1 Ghana). Both NEED the win -> likely an open-ish game (not a one-sided park-the-bus). Cards not modelled (referee TBD). CAUTION (England-Ghana lesson): Panama is organized, so a tight low-scoring game / draw is a live tail; don't over-lean on a Croatia rout.",
+  "meta": {
+    "home": "Croatia",
+    "away": "Panama",
+    "venue": "World Cup 2026 (USA/Canada/Mexico) - neutral",
+    "date": "2026-06-23",
+    "stage": "World Cup 2026 - Group L",
+    "stakes": "Both on 0 points after MD1 (Croatia 2-4 England; Panama 0-1 Ghana), with England and Ghana on 4: a near-must-win for both, the loser virtually eliminated. Croatia the favourite on quality; Panama an organized, limited underdog."
+  },
+  "calibration": {
+    "base_home": 1.25,
+    "base_away": 1.25,
+    "rho": -0.06,
+    "home": {
+      "name": "Croatia",
+      "attack": 1.22,
+      "defense": 0.95,
+      "context": 1.0,
+      "notes": [
+        "Experienced, technical European side; scored 2 vs England. attack 1.22.",
+        "Leaked 4 to England (open game), but Panama is far less threatening -> defense 0.95.",
+        "Calibrated in line with the market (~59%): an initial lambda of 1.85 put Croatia ~3.6 pts ABOVE market; trimmed to respect the England-Ghana lesson (organized underdog, don't overrate the favourite). Both must win -> open-ish, rho -0.06."
+      ]
+    },
+    "away": {
+      "name": "Panama",
+      "attack": 0.74,
+      "defense": 1.0,
+      "context": 1.0,
+      "notes": [
+        "Organized CONCACAF side; lost 0-1 to Ghana, blunt going forward. attack 0.74.",
+        "Disciplined but not elite vs Croatia's quality -> defense 1.0.",
+        "Must win too -> will have to come out, which opens the game (less of a low-block trap than England-Ghana)."
+      ]
+    }
+  },
+  "market": {
+    "odds": [1.62, 3.90, 5.50]
+  },
+  "corners": {
+    "home_corners": 5.5,
+    "away_corners": 3.5
+  },
+  "lambdas_override": {
+    "home": 1.72,
+    "away": 0.80
+  }
+}
