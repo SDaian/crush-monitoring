@@ -1,0 +1,55 @@
+{
+  "_comment": "WC2026 Group J, Matchday 2 (Levi's Stadium, SF Bay Area). MD1: both lost (Algeria 0-3 Argentina; Jordan 1-3 Austria) -> both 0 points, must-win. Odds Jordan +500 (6.00) / Draw +320 (4.20) / Algeria -185 (1.541). Opta Algeria 60.7%. Calibrated in line with the market: Algeria the quality side (Mahrez/Gouiri/Aouar), Jordan competitive underdog.",
+  "meta": {
+    "home": "Jordan",
+    "away": "Algeria",
+    "venue": "Levi's Stadium, San Francisco Bay Area (USA)",
+    "date": "2026-06-22 23:00 ET",
+    "stage": "World Cup 2026 - Group J - Matchday 2",
+    "stakes": "Both lost MD1 and are on 0 points: a must-win for both to stay alive. Algeria the favorite on quality; Jordan competitive (scored their historic first WC goal vs Austria)."
+  },
+  "calibration": {
+    "base_home": 1.25,
+    "base_away": 1.25,
+    "rho": -0.05,
+    "home": {
+      "name": "Jordan",
+      "attack": 0.75,
+      "defense": 1.14,
+      "context": 1.0,
+      "notes": [
+        "Organized, competitive underdog; scored their first-ever WC goal (Olwan) vs Austria. attack 0.75 (Al-Tamari the main threat).",
+        "Conceded 3 to Austria -> defense 1.14.",
+        "Must win, will go for it -> open-ish match (rho -0.05)."
+      ]
+    },
+    "away": {
+      "name": "Algeria",
+      "attack": 1.30,
+      "defense": 0.87,
+      "context": 1.0,
+      "notes": [
+        "Quality side: Mahrez, Gouiri, Aouar, Chaibi, Amoura. Lost 0-3 to Argentina (elite). attack 1.30.",
+        "Calibrated in line with the market (~61%): don't underrate the favorite.",
+        "Decent defense -> low Jordan lambda, defense 0.87."
+      ]
+    }
+  },
+  "market": {
+    "odds": [6.00, 4.20, 1.541]
+  },
+  "corners": {
+    "home_corners": 3.5,
+    "away_corners": 5.5
+  },
+  "cards": {
+    "_referee": "Slavko Vincic (Slovenia), CONFIRMED. Top UEFA referee, career ~4.1 YC/match (more lenient in elite UEFA, ~2.4 recent CL). International discount, neutral bump -> moderate cards (~3.5).",
+    "referee_yellow_avg": 4.1,
+    "wc_discount": 0.85,
+    "mismatch_bump": 1.0
+  },
+  "lambdas_override": {
+    "home": 0.82,
+    "away": 1.85
+  }
+}
