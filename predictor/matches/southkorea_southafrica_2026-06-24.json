@@ -1,0 +1,9 @@
+{
+  "_comment": "WC2026 Group A, MD3 (simultaneous). Standings before: Mexico 6, South Korea 3 (2-1 Czech, 0-1 Mexico), Czech 1, South Africa 1 (0-2 Mexico, 1-1 Czech). South Korea needs a result to secure a top-2 / best-third spot; South Africa must win for any chance. Both motivated. South Korea the better side (organized, beat Czech) but South Africa competitive. Modest favourite, near LOW/MEDIUM. Cards not modelled (referee TBD).",
+  "meta": {"home":"South Korea","away":"South Africa","venue":"World Cup 2026 - neutral","date":"2026-06-24","stage":"World Cup 2026 - Group A - MD3","stakes":"South Korea (3 pts) wants the win/point to qualify; South Africa (1 pt) must win to chase a third-place spot. Both have something to play for."},
+  "calibration": {"base_home":1.25,"base_away":1.25,"rho":-0.06,
+    "home":{"name":"South Korea","attack":1.08,"defense":0.96,"context":1.0,"notes":["Organized, technical Asian side; beat Czech 2-1, lost narrowly to Mexico. attack 1.08.","Decent defense 0.96.","Needs a result -> will play on the front foot."]},
+    "away":{"name":"South Africa","attack":0.85,"defense":1.05,"context":1.0,"notes":["Competitive; drew Czech 1-1, lost to Mexico. attack 0.85.","Must win -> will commit, but limited going forward. defense 1.05."]}},
+  "market": {"odds":[2.05,3.25,3.70]},
+  "lambdas_override": {"home":1.38,"away":1.00}
+}

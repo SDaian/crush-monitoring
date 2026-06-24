@@ -1,0 +1,9 @@
+{
+  "_comment": "WC2026 Group A, MD3 (simultaneous). Standings before: Mexico 6 pts (2-0 South Africa, 1-0 South Korea) ALREADY THROUGH and likely group winner; South Korea 3, Czech Republic 1 (1-2 South Korea, 1-1 South Africa), South Africa 1. Mexico qualified -> ROTATION / lower urgency likely; Czech must win (and need favours) to chase 3rd. This compresses the gap: Mexico still favourite but with a qualified-team discount. Cards not modelled (referee TBD).",
+  "meta": {"home":"Mexico","away":"Czech Republic","venue":"World Cup 2026 - neutral","date":"2026-06-24","stage":"World Cup 2026 - Group A - MD3","stakes":"Mexico already qualified (6 pts) and may rotate; Czech Republic (1 pt) must win to keep slim third-place hopes alive."},
+  "calibration": {"base_home":1.25,"base_away":1.25,"rho":-0.06,
+    "home":{"name":"Mexico","attack":1.22,"defense":0.95,"context":0.92,"notes":["Strong host, won both (3-0 aggregate, clean sheets). attack 1.22.","Solid defense 0.95.","Already through -> likely rotation/managed minutes, context 0.92."]},
+    "away":{"name":"Czech Republic","attack":1.0,"defense":1.05,"context":1.05,"notes":["Decent European side; lost narrowly to South Korea, drew South Africa. attack 1.0.","Must win -> will push, context 1.05.","defense 1.05."]}},
+  "market": {"odds":[1.95,3.30,3.90]},
+  "lambdas_override": {"home":1.45,"away":1.05}
+}

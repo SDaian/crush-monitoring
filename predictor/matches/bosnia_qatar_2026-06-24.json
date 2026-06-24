@@ -1,0 +1,9 @@
+{
+  "_comment": "WC2026 Group B, MD3 (simultaneous). Standings before: Switzerland 4, Canada 4, Bosnia 1 (1-1 Canada, 1-4 Switzerland), Qatar 1 (1-1 Switzerland, 0-6 Canada). Near-dead rubber: both can reach only 4 and Switzerland/Canada (on 4, playing each other) will leave at least one on 5+ -> Bosnia/Qatar almost certainly out. Pride/rotation game. Bosnia clearly the stronger side; Qatar weak (conceded 6 to Canada). Bosnia favourite + goals plausible, but flat-motivation caveat. Cards not modelled (referee TBD).",
+  "meta": {"home":"Bosnia & Herz.","away":"Qatar","venue":"World Cup 2026 - neutral","date":"2026-06-24","stage":"World Cup 2026 - Group B - MD3","stakes":"Both on 1 point and all but eliminated: a pride match. Bosnia the stronger side; Qatar weak and beaten 0-6 by Canada."},
+  "calibration": {"base_home":1.25,"base_away":1.25,"rho":-0.06,
+    "home":{"name":"Bosnia & Herz.","attack":1.22,"defense":1.0,"context":1.0,"notes":["Decent European side; competitive vs Canada (1-1), outclassed by Switzerland. attack 1.22.","Leaky at times. defense 1.0.","Dead rubber -> motivation uncertain, but quality edge clear."]},
+    "away":{"name":"Qatar","attack":0.72,"defense":1.12,"context":1.0,"notes":["Weak going forward; lost 0-6 to Canada, drew Switzerland. attack 0.72.","Porous defense. defense 1.12.","Likely eliminated -> flat."]}},
+  "market": {"odds":[1.80,3.60,4.50]},
+  "lambdas_override": {"home":1.62,"away":0.82}
+}

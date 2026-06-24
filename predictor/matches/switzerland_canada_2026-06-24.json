@@ -1,0 +1,9 @@
+{
+  "_comment": "WC2026 Group B, MD3 (simultaneous). Standings before: Switzerland 4 pts (1-1 Qatar, 4-1 Bosnia), Canada 4 (1-1 Bosnia, 6-0 Qatar), Bosnia 1, Qatar 1. Top-of-group decider: a DRAW sends BOTH through (Bosnia/Qatar can reach only 4 and meet each other), so both are content with a point -> risk of a cagey, lower-scoring game; but both also want top spot for a better R32 draw. Near-even match, Canada a hair ahead (host, 6-0 form). LOW confidence. Cards not modelled (referee TBD).",
+  "meta": {"home":"Switzerland","away":"Canada","venue":"World Cup 2026 - neutral","date":"2026-06-24","stage":"World Cup 2026 - Group B - MD3","stakes":"Both on 4 points; winner takes the group, a draw qualifies both. Bosnia/Qatar can't catch them if they draw."},
+  "calibration": {"base_home":1.25,"base_away":1.25,"rho":-0.08,
+    "home":{"name":"Switzerland","attack":1.12,"defense":0.95,"context":1.0,"notes":["Organized European side; beat Bosnia 4-1, drew Qatar. attack 1.12.","Solid at the back. defense 0.95.","Content with a draw (qualifies) -> cagey, rho -0.08."]},
+    "away":{"name":"Canada","attack":1.20,"defense":0.97,"context":1.0,"notes":["Host nation, attacking form (6-0 Qatar, 1-1 Bosnia). attack 1.20, slight host edge.","Decent defense. defense 0.97.","Also happy with a draw -> low-block risk on both sides."]}},
+  "market": {"odds":[2.55,3.20,2.75]},
+  "lambdas_override": {"home":1.25,"away":1.35}
+}

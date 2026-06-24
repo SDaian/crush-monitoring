@@ -393,7 +393,11 @@ const CALIB=[
   {g:"K",h:"Portugal",a:"Uzbekistan",lh:2.2,la:0.68,p:[71.6,18.9,9.5],o:[78.8,54.9,32.6],btts:44.5,cs:[50.7,11.1],tot:2.88,conf:"HIGH",sl:[["2-0",13.6],["1-0",11.8],["3-0",10.0],["2-1",9.2],["1-1",9.0],["3-1",6.8]]},
   {g:"L",h:"England",a:"Ghana",lh:2.05,la:0.82,p:[65.3,21.4,13.3],o:[78.7,54.7,32.4],btts:49.4,cs:[44.0,12.9],tot:2.87,conf:"HIGH",sl:[["2-0",11.9],["1-0",11.0],["1-1",10.2],["2-1",9.8],["3-0",8.1],["3-1",6.7]]},
   {g:"L",h:"Croatia",a:"Panama",lh:1.72,la:0.8,p:[58.6,24.9,16.5],o:[72.3,46.1,24.7],btts:45.9,cs:[44.9,17.9],tot:2.52,conf:"MEDIUM",sl:[["1-0",13.2],["2-0",11.9],["1-1",11.7],["2-1",9.5],["0-0",8.7],["3-0",6.8]]},
-  {g:"K",h:"Colombia",a:"DR Congo",lh:1.65,la:0.88,p:[54.9,25.9,19.3],o:[72.6,46.4,24.9],btts:48.0,cs:[41.5,19.2],tot:2.53,conf:"MEDIUM",sl:[["1-0",12.4],["1-1",12.3],["2-0",10.8],["2-1",9.5],["0-0",8.7],["0-1",6.3]]}
+  {g:"K",h:"Colombia",a:"DR Congo",lh:1.65,la:0.88,p:[54.9,25.9,19.3],o:[72.6,46.4,24.9],btts:48.0,cs:[41.5,19.2],tot:2.53,conf:"MEDIUM",sl:[["1-0",12.4],["1-1",12.3],["2-0",10.8],["2-1",9.5],["0-0",8.7],["0-1",6.3]]},
+  {g:"B",h:"Switzerland",a:"Canada",lh:1.25,la:1.35,p:[33.5,28.4,38.2],o:[74.3,48.2,26.4],btts:53.9,cs:[25.9,28.7],tot:2.6,conf:"LOW",sl:[["1-1",13.5],["0-1",9.0],["1-2",8.5],["0-0",8.4],["1-0",8.3],["2-1",7.8]]},
+  {g:"B",h:"Bosnia & Herz.",a:"Qatar",lh:1.62,la:0.82,p:[55.7,26.1,18.2],o:[70.7,44.1,23.0],btts:45.6,cs:[44.0,19.8],tot:2.44,conf:"MEDIUM",sl:[["1-0",13.4],["1-1",12.3],["2-0",11.4],["0-0",9.4],["2-1",9.4],["0-1",6.5]]},
+  {g:"A",h:"Mexico",a:"Czech Republic",lh:1.45,la:1.05,p:[45.5,27.8,26.6],o:[72.0,45.6,24.2],btts:50.5,cs:[35.0,23.5],tot:2.5,conf:"MEDIUM",sl:[["1-1",13.2],["1-0",11.2],["2-1",9.1],["0-0",9.0],["2-0",8.6],["0-1",7.9]]},
+  {g:"A",h:"South Korea",a:"South Africa",lh:1.38,la:1.0,p:[44.8,28.7,26.5],o:[69.5,42.5,21.7],btts:48.1,cs:[36.8,25.2],tot:2.38,conf:"LOW",sl:[["1-1",13.5],["1-0",12.0],["0-0",10.0],["2-0",8.8],["2-1",8.8],["0-1",8.5]]}
 ];
 // lookup: matches a fixture (either orientation) to its calibrated entry
 const CALIB_MAP={};
@@ -408,7 +412,7 @@ function calibFor(m){ if(!m) return null;
    =========================================================================== */
 // Build/data stamp shown in the header. The app is stateless: nothing is
 // persisted, so reloading (F5) always returns to the official results.
-const DATA_VERSION="2026-06-24.cro-pan-result";
+const DATA_VERSION="2026-06-24.grpAB-finals";
 let state={ results:{}, strengths:{}, learn:[] };
 
 function freshStrengths(){ const s={}; for(const t in TEAMS) s[t]=TEAMS[t]; return s; }
