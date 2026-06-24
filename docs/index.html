@@ -412,7 +412,7 @@ function calibFor(m){ if(!m) return null;
    =========================================================================== */
 // Build/data stamp shown in the header. The app is stateless: nothing is
 // persisted, so reloading (F5) always returns to the official results.
-const DATA_VERSION="2026-06-24.kor-rsa-recal";
+const DATA_VERSION="2026-06-24.h2h-tiebreak";
 let state={ results:{}, strengths:{}, learn:[] };
 
 function freshStrengths(){ const s={}; for(const t in TEAMS) s[t]=TEAMS[t]; return s; }
@@ -467,7 +467,7 @@ function samplePoisson(l){
 }
 
 /* ===========================================================================
-   STANDINGS  (FIFA tiebreakers)
+   STANDINGS  (tiebreakers: Points -> Head-to-head -> Goal difference -> Goals)
    =========================================================================== */
 function groupStats(g){
   const teams=GROUPS[g].teams;
@@ -484,22 +484,41 @@ function groupStats(g){
   });
   teams.forEach(t=>row[t].GD=row[t].GF-row[t].GA);
   const arr=teams.map(t=>row[t]);
-  arr.sort((x,y)=>cmpFIFA(x,y,playedPairs));
-  arr.forEach((r,k)=>r.pos=k+1);
-  return arr;
+  return rankGroup(arr, playedPairs).map((r,k)=>(r.pos=k+1, r));
 }
-function cmpFIFA(x,y,pairs){
-  if(y.Pts!==x.Pts) return y.Pts-x.Pts;
-  if(y.GD!==x.GD) return y.GD-x.GD;
-  if(y.GF!==x.GF) return y.GF-x.GF;
-  // head-to-head (only the two of them)
-  let hx=0,hy=0;
-  pairs.forEach(p=>{
-    if((p.A===x.t&&p.B===y.t)){ if(p.h>p.a)hx+=3; else if(p.h<p.a)hy+=3; else {hx++;hy++;} }
-    if((p.A===y.t&&p.B===x.t)){ if(p.h>p.a)hy+=3; else if(p.h<p.a)hx+=3; else {hx++;hy++;} }
+/* Group ranking order (World Cup 2026 rule, per user): Points -> HEAD-TO-HEAD
+   among the teams level on points -> overall goal difference -> overall goals.
+   Head-to-head is a mini-table on the matches played BETWEEN exactly the tied
+   teams (H2H points -> H2H goal difference -> H2H goals), applied BEFORE the
+   overall GD/GF. Drawn-lots placeholder (name) last for determinism. */
+function rankGroup(arr, pairs){
+  const sorted=arr.slice().sort((a,b)=> b.Pts-a.Pts); // tier by points first
+  const out=[]; let i=0;
+  while(i<sorted.length){
+    let j=i; while(j<sorted.length && sorted[j].Pts===sorted[i].Pts) j++;
+    const tier=sorted.slice(i,j);
+    out.push(...(tier.length>1 ? resolveTier(tier,pairs) : tier));
+    i=j;
+  }
+  return out;
+}
+function resolveTier(tier, pairs){
+  const names=new Set(tier.map(t=>t.t));
+  const h={}; tier.forEach(t=> h[t.t]={pts:0,gd:0,gf:0});
+  pairs.forEach(p=>{                                   // only matches among the tied teams
+    if(!names.has(p.A)||!names.has(p.B)) return;
+    h[p.A].gf+=p.h; h[p.A].gd+=p.h-p.a;
+    h[p.B].gf+=p.a; h[p.B].gd+=p.a-p.h;
+    if(p.h>p.a) h[p.A].pts+=3; else if(p.h<p.a) h[p.B].pts+=3; else { h[p.A].pts++; h[p.B].pts++; }
   });
-  if(hy!==hx) return hy-hx;
-  return x.t.localeCompare(y.t); // drawn-lots placeholder (deterministic)
+  return tier.slice().sort((x,y)=>
+    (h[y.t].pts-h[x.t].pts) ||   // head-to-head points
+    (h[y.t].gd -h[x.t].gd ) ||   // head-to-head goal difference
+    (h[y.t].gf -h[x.t].gf ) ||   // head-to-head goals
+    (y.GD-x.GD) ||               // overall goal difference
+    (y.GF-x.GF) ||               // overall goals
+    x.t.localeCompare(y.t)       // drawn-lots placeholder
+  );
 }
 
 /* ===========================================================================
