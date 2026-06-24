@@ -26,7 +26,7 @@ Legend: ✅ right for the right reason · 🟡 right but by luck/margin ·
 | 2026-06-23 | Portugal vs Uzbekistan | 71.6 / 18.9 / 9.5 | HIGH | 4-0 (Portugal win) | ✅ |
 | 2026-06-23 | England vs Ghana | 65.3 / 21.4 / 13.3 | HIGH | 0-0 (draw) | 🟡 |
 | 2026-06-23 | Croatia vs Panama | 58.6 / 24.9 / 16.5 | MEDIUM | ⏳ pending | ⏳ |
-| 2026-06-24 | Colombia vs DR Congo | 54.9 / 25.9 / 19.3 | MEDIUM | ⏳ pending | ⏳ |
+| 2026-06-24 | Colombia vs DR Congo | 54.9 / 25.9 / 19.3 | MEDIUM | 1-0 (Colombia win) | ✅ |
 
 ### Emerging pattern: favorites vs low block (key)
 
@@ -413,4 +413,17 @@ organized and proven (Portugal 1-1), so the central scenario is a tight 1-0/1-1,
 not a comfortable win, and the draw (~26%) is very live. Lower-scoring game (total
 xG 2.53, lean Under 2.5). Recalibrate with confirmed XIs ~60 min before kickoff.
 
-*To be graded after the match (xG vs actual, 1X2, lesson).*
+**Actual result:** Colombia 1-0 DR Congo. Tight, low-scoring; Colombia clean
+sheet, BTTS No, 1 goal.
+
+**Honest read — a clean hit, every read landed:**
+- ✅ 1X2: the favourite won, by the model's **#1 scoreline (1-0, 12.4%)**.
+- ✅ **Goals reads all correct:** Under 2.5 (53.6%), BTTS No, Colombia clean
+  sheet (41.5%), low total — modelled xG 2.53, actual 1 goal.
+- ✅ **England-Ghana lesson applied up front, vindicated:** DR Congo had proven
+  organization (1-1 Portugal), so I refused to overrate Colombia (kept MEDIUM
+  55%, leaned Under) and called a tense 1-0 — exactly what happened.
+- 📌 The two archetypes are now well separated: PROVEN-organized underdog →
+  tight 1-0/1-1, draw live, Under (DR Congo, Ghana, Iran, Curaçao); genuinely
+  weak/open side → favourite + goals rout (Saudi, Uzbekistan, NZ). Reading which
+  is which is the whole job.
