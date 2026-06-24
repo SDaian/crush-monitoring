@@ -27,6 +27,10 @@ Legend: ✅ right for the right reason · 🟡 right but by luck/margin ·
 | 2026-06-23 | England vs Ghana | 65.3 / 21.4 / 13.3 | HIGH | 0-0 (draw) | 🟡 |
 | 2026-06-23 | Croatia vs Panama | 58.6 / 24.9 / 16.5 | MEDIUM | 1-0 (Croatia win) | ✅ |
 | 2026-06-24 | Colombia vs DR Congo | 54.9 / 25.9 / 19.3 | MEDIUM | 1-0 (Colombia win) | ✅ |
+| 2026-06-24 | Mexico vs Czech Rep. | 45.5 / 27.8 / 26.6 | MEDIUM | ⏳ pending | ⏳ |
+| 2026-06-24 | South Korea vs S. Africa | 44.8 / 28.7 / 26.5 | LOW | ⏳ pending | ⏳ |
+| 2026-06-24 | Switzerland vs Canada | 33.5 / 28.4 / 38.2 | LOW | ⏳ pending | ⏳ |
+| 2026-06-24 | Bosnia & Herz. vs Qatar | 55.7 / 26.1 / 18.2 | MEDIUM | ⏳ pending | ⏳ |
 
 ### Emerging pattern: favorites vs low block (key)
 
@@ -437,3 +441,32 @@ sheet, BTTS No, 1 goal.
   tight 1-0/1-1, draw live, Under (DR Congo, Ghana, Iran, Curaçao); genuinely
   weak/open side → favourite + goals rout (Saudi, Uzbekistan, NZ). Reading which
   is which is the whole job.
+
+---
+
+## 2026-06-24 · Group A & B finals (MD3, simultaneous) — ⏳ PENDING
+
+All four kick off at once; qualification scenarios shape behaviour (qualified
+teams may rotate; teams needing a result push). Cards not modelled (referees TBD).
+
+**Group A**
+- **Mexico vs Czech Republic** — Mexico 45.5 / Draw 27.8 / Czech 26.6 (MEDIUM).
+  λ 1.45 / 1.05, xG 2.50. Market 47.8 / 28.3 / 23.9 (div 2.7, aligned). Mexico
+  already through (6 pts) → rotation/lower-urgency discount applied, which
+  compresses the gap; Czech must win. Central scenario a tight 1-1/1-0; the draw
+  is very live. MC converges (≤0.11 pts).
+- **South Korea vs South Africa** — SK 44.8 / Draw 28.7 / SA 26.5 (LOW, no strong
+  read). λ 1.38 / 1.00, xG 2.38. Market 45.8 / 28.9 / 25.4 (div 1.1). Both
+  motivated (SK wants a result, SA must win). Even-ish; modal score 1-1/1-0.
+
+**Group B**
+- **Switzerland vs Canada** — SUI 33.5 / Draw 28.4 / CAN 38.2 (LOW, no strong
+  read). λ 1.25 / 1.35, xG 2.60. Market 36.7 / 29.3 / 34.0 (div 4.1). Top-of-group
+  decider but a DRAW qualifies both → cagey risk, yet BTTS ~54% if it opens.
+  Canada a hair ahead (host, form). Genuinely even — coin-flip.
+- **Bosnia & Herz. vs Qatar** — Bosnia 55.7 / Draw 26.1 / Qatar 18.2 (MEDIUM).
+  λ 1.62 / 0.82, xG 2.44. Market 52.6 / 26.3 / 21.1 (div 3.0). Near-dead rubber;
+  Bosnia the clear quality side vs a weak Qatar (0-6 Canada), but flat-motivation
+  caveat. Central scenario a 1-0/2-0 Bosnia win.
+
+*To be graded after the matches (xG vs actual, 1X2, lesson).*
