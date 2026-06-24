@@ -28,7 +28,7 @@ Legend: ✅ right for the right reason · 🟡 right but by luck/margin ·
 | 2026-06-23 | Croatia vs Panama | 58.6 / 24.9 / 16.5 | MEDIUM | 1-0 (Croatia win) | ✅ |
 | 2026-06-24 | Colombia vs DR Congo | 54.9 / 25.9 / 19.3 | MEDIUM | 1-0 (Colombia win) | ✅ |
 | 2026-06-24 | Mexico vs Czech Rep. | 45.5 / 27.8 / 26.6 | MEDIUM | ⏳ pending | ⏳ |
-| 2026-06-24 | South Korea vs S. Africa | 44.8 / 28.7 / 26.5 | LOW | ⏳ pending | ⏳ |
+| 2026-06-24 | South Korea vs S. Africa | 58.3 / 26.2 / 15.5 | MEDIUM | ⏳ pending | ⏳ |
 | 2026-06-24 | Switzerland vs Canada | 33.5 / 28.4 / 38.2 | LOW | ⏳ pending | ⏳ |
 | 2026-06-24 | Bosnia & Herz. vs Qatar | 55.7 / 26.1 / 18.2 | MEDIUM | ⏳ pending | ⏳ |
 
@@ -455,9 +455,13 @@ teams may rotate; teams needing a result push). Cards not modelled (referees TBD
   already through (6 pts) → rotation/lower-urgency discount applied, which
   compresses the gap; Czech must win. Central scenario a tight 1-1/1-0; the draw
   is very live. MC converges (≤0.11 pts).
-- **South Korea vs South Africa** — SK 44.8 / Draw 28.7 / SA 26.5 (LOW, no strong
-  read). λ 1.38 / 1.00, xG 2.38. Market 45.8 / 28.9 / 25.4 (div 1.1). Both
-  motivated (SK wants a result, SA must win). Even-ish; modal score 1-1/1-0.
+- **South Korea vs South Africa** — SK 58.3 / Draw 26.2 / SA 15.5 (MEDIUM).
+  λ 1.60 / 0.70, xG 2.30. Market 55.2 / 26.1 / 18.8 (div 3.3). **RECALIBRATED:**
+  South Africa is virtually eliminated and does not control its own fate (flat
+  motivation), and its 1-1 with Czech was an isolated goal after being dominated
+  all match — so it is weaker AND flatter than the result implies. SK (controls
+  its fate, needs the win) is now a clearer favourite; low-scoring read (lean
+  Under, SK clean sheet ~50%), modal score 1-0. MC converges (≤0.12 pts).
 
 **Group B**
 - **Switzerland vs Canada** — SUI 33.5 / Draw 28.4 / CAN 38.2 (LOW, no strong
