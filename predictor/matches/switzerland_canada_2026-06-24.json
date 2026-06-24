@@ -5,5 +5,11 @@
     "home":{"name":"Switzerland","attack":1.12,"defense":0.95,"context":1.0,"notes":["Organized European side; beat Bosnia 4-1, drew Qatar. attack 1.12.","Solid at the back. defense 0.95.","Content with a draw (qualifies) -> cagey, rho -0.08."]},
     "away":{"name":"Canada","attack":1.20,"defense":0.97,"context":1.0,"notes":["Host nation, attacking form (6-0 Qatar, 1-1 Bosnia). attack 1.20, slight host edge.","Decent defense. defense 0.97.","Also happy with a draw -> low-block risk on both sides."]}},
   "market": {"odds":[2.55,3.20,2.75]},
-  "lambdas_override": {"home":1.25,"away":1.35}
+  "lambdas_override": {"home":1.25,"away":1.35},
+  "_postmatch": {
+    "result": "Switzerland 2-1 Canada. Both scored, 3 goals; Switzerland wins the group, Canada through as runner-up.",
+    "model_1x2": "Switzerland 33.5 / Draw 28.4 / Canada 38.2 (LOW, coin-flip)",
+    "verdict": "Flagged as a coin-flip with NO strong read (LOW). The slight 1X2 lean (Canada 38%) missed -- Switzerland (33.5%) won -- but that is exactly the kind of even game where the favourite tag is meaningless. The game-SHAPE read landed: I expected an open-ish game with BTTS live (53.9%) and it was 2-1, both scoring, 3 goals (Over 2.5). Both qualified regardless, as the model already had them at ~100% to advance.",
+    "lesson": "On a true coin-flip, grade the process not the side: the open/BTTS read was right; the marginal 1X2 lean is noise. No calibration change."
+  }
 }

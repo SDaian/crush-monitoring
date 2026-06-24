@@ -29,8 +29,8 @@ Legend: ✅ right for the right reason · 🟡 right but by luck/margin ·
 | 2026-06-24 | Colombia vs DR Congo | 54.9 / 25.9 / 19.3 | MEDIUM | 1-0 (Colombia win) | ✅ |
 | 2026-06-24 | Mexico vs Czech Rep. | 45.5 / 27.8 / 26.6 | MEDIUM | ⏳ pending | ⏳ |
 | 2026-06-24 | South Korea vs S. Africa | 58.3 / 26.2 / 15.5 | MEDIUM | ⏳ pending | ⏳ |
-| 2026-06-24 | Switzerland vs Canada | 33.5 / 28.4 / 38.2 | LOW | ⏳ pending | ⏳ |
-| 2026-06-24 | Bosnia & Herz. vs Qatar | 55.7 / 26.1 / 18.2 | MEDIUM | ⏳ pending | ⏳ |
+| 2026-06-24 | Switzerland vs Canada | 33.5 / 28.4 / 38.2 | LOW | 2-1 (Switzerland win) | 🟡 |
+| 2026-06-24 | Bosnia & Herz. vs Qatar | 55.7 / 26.1 / 18.2 | MEDIUM | 3-1 (Bosnia win) | ✅ |
 
 ### Emerging pattern: favorites vs low block (key)
 
@@ -463,14 +463,15 @@ teams may rotate; teams needing a result push). Cards not modelled (referees TBD
   its fate, needs the win) is now a clearer favourite; low-scoring read (lean
   Under, SK clean sheet ~50%), modal score 1-0. MC converges (≤0.12 pts).
 
-**Group B**
+**Group B** (both PLAYED)
 - **Switzerland vs Canada** — SUI 33.5 / Draw 28.4 / CAN 38.2 (LOW, no strong
-  read). λ 1.25 / 1.35, xG 2.60. Market 36.7 / 29.3 / 34.0 (div 4.1). Top-of-group
-  decider but a DRAW qualifies both → cagey risk, yet BTTS ~54% if it opens.
-  Canada a hair ahead (host, form). Genuinely even — coin-flip.
+  read). λ 1.25 / 1.35, xG 2.60. **RESULT: Switzerland 2-1 🟡** — coin-flip; the
+  marginal Canada lean missed but the open/BTTS read landed (both scored, 3
+  goals, Over 2.5). Switzerland win the group, Canada through 2nd. Both were
+  already ~100% to advance.
 - **Bosnia & Herz. vs Qatar** — Bosnia 55.7 / Draw 26.1 / Qatar 18.2 (MEDIUM).
-  λ 1.62 / 0.82, xG 2.44. Market 52.6 / 26.3 / 21.1 (div 3.0). Near-dead rubber;
-  Bosnia the clear quality side vs a weak Qatar (0-6 Canada), but flat-motivation
-  caveat. Central scenario a 1-0/2-0 Bosnia win.
+  λ 1.62 / 0.82, xG 2.44. **RESULT: Bosnia 3-1 ✅** — quality side won as called
+  (dead-rubber caveat didn't bite); Over (4 goals) and Bosnia overperformed xG.
+  Despite the win Bosnia finish 3rd on GD (Canada 2nd; H2H was 1-1).
 
-*To be graded after the matches (xG vs actual, 1X2, lesson).*
+*Group A finals (Mexico-Czech, South Korea-South Africa) still pending.*
