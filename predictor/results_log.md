@@ -26,6 +26,7 @@ Legend: ✅ right for the right reason · 🟡 right but by luck/margin ·
 | 2026-06-23 | Portugal vs Uzbekistan | 71.6 / 18.9 / 9.5 | HIGH | 4-0 (Portugal win) | ✅ |
 | 2026-06-23 | England vs Ghana | 65.3 / 21.4 / 13.3 | HIGH | 0-0 (draw) | 🟡 |
 | 2026-06-23 | Croatia vs Panama | 58.6 / 24.9 / 16.5 | MEDIUM | ⏳ pending | ⏳ |
+| 2026-06-24 | Colombia vs DR Congo | 54.9 / 25.9 / 19.3 | MEDIUM | ⏳ pending | ⏳ |
 
 ### Emerging pattern: favorites vs low block (key)
 
@@ -383,5 +384,33 @@ organized and this is a tense, low-stakes-for-neither game where BOTH must win,
 which cuts both ways: it opens the game (both attack) yet the draw/Under is a
 live tail (total xG just 2.52). Central scenario a 1-0/2-0 Croatia win; a tight
 draw is very much in play. Recalibrate with confirmed XIs ~60 min before kickoff.
+
+*To be graded after the match (xG vs actual, 1X2, lesson).*
+
+---
+
+## 2026-06-24 · Colombia vs DR Congo (Group K) — ⏳ PENDING
+
+**Pre-match forecast (not yet played).** Standings before kickoff: Portugal 4 pts,
+Colombia 3 (3-1 Uzbekistan), DR Congo 1 (1-1 Portugal), Uzbekistan 0. Colombia the
+quality side; DR Congo competitive (held Portugal 1-1).
+
+**Model:** Colombia 54.9 / Draw 25.9 / DR Congo 19.3 (MEDIUM). Lambdas Colombia
+1.65 / DR Congo 0.88, total xG 2.53, rho -0.06. Monte Carlo (N=200k) converges:
+exact 54.9 / 25.9 / 19.3 vs sim 55.0 / 25.7 / 19.3 (max diff 0.15 pts).
+
+**Calibration vs market:** de-vig market 55.3 / 25.7 / 19.0 (book margin 5.2%);
+max divergence 0.4 pts → tightly aligned out of the box. Applied the England-Ghana
+lesson up front: DR Congo held Portugal 1-1, so this is NOT a rout spot — Colombia
+calibrated in line with the market (MEDIUM, 55%), with the draw/Under kept live.
+
+**Most probable scorelines:** 1-0 (12.4%), 1-1 (12.3%), 2-0 (10.8%), 2-1 (9.5%),
+0-0 (8.7%). Goals: Over 2.5 46.4% (lean Under), BTTS 48.0%, Colombia clean sheet
+41.5%.
+
+**Pre-match read:** Colombia the favourite but only modestly — DR Congo are
+organized and proven (Portugal 1-1), so the central scenario is a tight 1-0/1-1,
+not a comfortable win, and the draw (~26%) is very live. Lower-scoring game (total
+xG 2.53, lean Under 2.5). Recalibrate with confirmed XIs ~60 min before kickoff.
 
 *To be graded after the match (xG vs actual, 1X2, lesson).*

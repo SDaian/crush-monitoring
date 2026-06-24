@@ -1,0 +1,49 @@
+{
+  "_comment": "WC2026 Group K. Standings before this match: Portugal 4 pts, Colombia 3 (3-1 Uzbekistan), DR Congo 1 (1-1 Portugal), Uzbekistan 0 (eliminated). Colombia the quality CONMEBOL side (Luis Diaz, James, attacking) but DR Congo is NOT a minnow -- they held Portugal 1-1, organized and competitive. So this is a competitive-favorite spot, NOT a rout: applying the England-Ghana lesson, calibrate Colombia in line with the market and keep the draw/Under live. A win likely qualifies Colombia; DR Congo needs points. Cards not modelled (referee TBD).",
+  "meta": {
+    "home": "Colombia",
+    "away": "DR Congo",
+    "venue": "World Cup 2026 (USA/Canada/Mexico) - neutral",
+    "date": "2026-06-24",
+    "stage": "World Cup 2026 - Group K",
+    "stakes": "Colombia (3 pts, beat Uzbekistan 3-1) can all but qualify with a win; DR Congo (1 pt, held Portugal 1-1) needs points to stay alive. Colombia the favourite on quality; DR Congo a competitive, organized underdog."
+  },
+  "calibration": {
+    "base_home": 1.25,
+    "base_away": 1.25,
+    "rho": -0.06,
+    "home": {
+      "name": "Colombia",
+      "attack": 1.32,
+      "defense": 0.90,
+      "context": 1.0,
+      "notes": [
+        "Quality attacking CONMEBOL side (Luis Diaz, James, Duran); beat Uzbekistan 3-1. attack 1.32.",
+        "Solid but not airtight at the back -> DR Congo can threaten, defense 0.90.",
+        "Calibrated in line with the market (~57%): DR Congo held Portugal 1-1, so this is NOT a rout spot (England-Ghana lesson). rho -0.06."
+      ]
+    },
+    "away": {
+      "name": "DR Congo",
+      "attack": 0.85,
+      "defense": 0.97,
+      "context": 1.0,
+      "notes": [
+        "Organized, athletic African side; held Portugal 1-1 (no minnow). attack 0.85.",
+        "Disciplined defensively, but Colombia's quality is a step up -> defense 0.97.",
+        "Needs points -> will compete; draw/Under is a live tail."
+      ]
+    }
+  },
+  "market": {
+    "odds": [1.72, 3.70, 5.00]
+  },
+  "corners": {
+    "home_corners": 5.5,
+    "away_corners": 4.0
+  },
+  "lambdas_override": {
+    "home": 1.65,
+    "away": 0.88
+  }
+}
