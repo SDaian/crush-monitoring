@@ -47,6 +47,8 @@
   th,td{padding:4px 5px;text-align:center}
   th{color:var(--chalk-dim);font-weight:600;border-bottom:1px solid var(--line)}
   td.team{text-align:left;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:150px}
+  td.qcol{font-weight:600}
+  .qok{color:var(--good)} .qmid{color:var(--gold)} .qlow{color:var(--chalk-dim)} .qno{color:var(--bad)}
   tr.q1 td{background:rgba(124,252,155,.30);font-weight:700}
   tr.q2 td{background:rgba(124,252,155,.18);font-weight:600}
   tr.q3 td{background:rgba(244,211,94,.26);font-weight:600}
@@ -162,6 +164,7 @@
     <button class="act" id="simBtn">▶ Simulate pending</button>
     <button class="act" id="clrSimBtn">↺ Clear simulated</button>
     <span class="note">Simulations are not saved — reload (F5) to return to the official results.</span>
+    <span class="note" id="qualStatus"></span>
   </div>
 
   <div class="panel active" id="p-groups">
@@ -412,7 +415,7 @@ function calibFor(m){ if(!m) return null;
    =========================================================================== */
 // Build/data stamp shown in the header. The app is stateless: nothing is
 // persisted, so reloading (F5) always returns to the official results.
-const DATA_VERSION="2026-06-24.h2h-tiebreak";
+const DATA_VERSION="2026-06-24.qual-col";
 let state={ results:{}, strengths:{}, learn:[] };
 
 function freshStrengths(){ const s={}; for(const t in TEAMS) s[t]=TEAMS[t]; return s; }
@@ -537,6 +540,115 @@ function thirdGroupsQualified(){
 }
 
 /* ===========================================================================
+   QUALIFICATION ODDS  (Monte Carlo over the PENDING group matches)
+   Per run: keep played/locked results, sample every pending match from the
+   strength-based lambdas, rank each group (Points -> H2H -> GD -> Goals), then
+   advance the top 2 of every group + the 8 best thirds (R32). The % is how
+   often each team advances. Decided teams converge to ~100% / ~0%.
+
+   qualMC() is a PURE, self-contained numeric simulator (its own sampler +
+   ranking) so the exact same code runs inline (instant low-N estimate) AND
+   inside a Web Worker (the precise pass in the background, no UI freeze).
+   =========================================================================== */
+let QUAL={}, QUAL_N=0; // team -> probability (0..1), and the sim count behind it
+const QUAL_BIG=50000;  // background precise pass (50k: SE ~0.2%, integer % is stable;
+                       // higher is statistical overkill — 4k/100k/1M give the same %)
+
+// Build a serializable model of the current group stage (fixed results + lambdas
+// for pending matches). Passed to qualMC both inline and via postMessage.
+function buildQualModel(){
+  const groups=[];
+  for(const g in GROUPS){
+    const teams=GROUPS[g].teams.slice();
+    const fixtures=GROUPS[g].matches.map(m=>{
+      const r=state.results[m.id];
+      if(r) return {i:m.i,j:m.j,gh:r.h,ga:r.a};
+      const [la,lb]=lambdas(st(teams[m.i]),st(teams[m.j]));
+      return {i:m.i,j:m.j,la,lb};
+    });
+    groups.push({teams,fixtures});
+  }
+  return groups;
+}
+
+// PURE: must reference only its own inner functions + Math (so it survives being
+// stringified into a Worker). Returns {N, p:{team->prob}}.
+function qualMC(model, N){
+  function sp(l){ const L=Math.exp(-l); let k=0,p=1; do{ k++; p*=Math.random(); }while(p>L); return k-1; }
+  function rankIdx(T,pts,gd,gf,hg,pl){
+    let idx=[]; for(let k=0;k<T;k++) idx.push(k);
+    idx.sort((a,b)=> pts[b]-pts[a]);
+    const out=[]; let i=0;
+    while(i<T){
+      let j=i; while(j<T && pts[idx[j]]===pts[idx[i]]) j++;
+      const tier=idx.slice(i,j);
+      if(tier.length>1){
+        const hp={},hd={},hf={};
+        for(const t of tier){ hp[t]=0; hd[t]=0; hf[t]=0; }
+        for(let a=0;a<tier.length;a++) for(let b=a+1;b<tier.length;b++){
+          const x=tier[a],y=tier[b];
+          if(pl[x][y]){ const gx=hg[x][y], gy=hg[y][x];
+            hf[x]+=gx; hf[y]+=gy; hd[x]+=gx-gy; hd[y]+=gy-gx;
+            if(gx>gy) hp[x]+=3; else if(gx<gy) hp[y]+=3; else { hp[x]++; hp[y]++; }
+          }
+        }
+        tier.sort((x,y)=> (hp[y]-hp[x])||(hd[y]-hd[x])||(hf[y]-hf[x])||(gd[y]-gd[x])||(gf[y]-gf[x])||(x-y));
+      }
+      for(const t of tier) out.push(t);
+      i=j;
+    }
+    return out;
+  }
+  const G=model.length;
+  const count={};
+  for(const grp of model) for(const t of grp.teams) count[t]=0;
+  for(let n=0;n<N;n++){
+    const thirds=[];
+    for(let gi=0; gi<G; gi++){
+      const grp=model[gi]; const T=grp.teams.length;
+      const pts=new Array(T).fill(0), gd=new Array(T).fill(0), gf=new Array(T).fill(0);
+      const hg=[], pl=[];
+      for(let a=0;a<T;a++){ hg.push(new Array(T).fill(0)); pl.push(new Array(T).fill(0)); }
+      for(const f of grp.fixtures){
+        let h,a; if(f.gh!==undefined){ h=f.gh; a=f.ga; } else { h=sp(f.la); a=sp(f.lb); }
+        pts[f.i]+= h>a?3:(h===a?1:0); pts[f.j]+= a>h?3:(a===h?1:0);
+        gd[f.i]+=h-a; gd[f.j]+=a-h; gf[f.i]+=h; gf[f.j]+=a;
+        hg[f.i][f.j]=h; hg[f.j][f.i]=a; pl[f.i][f.j]=1; pl[f.j][f.i]=1;
+      }
+      const ord=rankIdx(T,pts,gd,gf,hg,pl);
+      count[grp.teams[ord[0]]]++; count[grp.teams[ord[1]]]++;     // top 2
+      const ti=ord[2]; thirds.push({t:grp.teams[ti],pts:pts[ti],gd:gd[ti],gf:gf[ti]}); // 3rd
+    }
+    thirds.sort((x,y)=> (y.pts-x.pts)||(y.gd-x.gd)||(y.gf-x.gf));
+    for(let k=0;k<8 && k<thirds.length;k++) count[thirds[k].t]++;
+  }
+  const p={}; for(const t in count) p[t]=count[t]/N;
+  return {N, p};
+}
+
+let _qualWorker=null, _qualGen=0;
+function applyQual(res){ QUAL=res.p; QUAL_N=res.N; const el=$("#qualStatus");
+  if(el) el.textContent="Q% from "+(res.N>=1000?(res.N/1000)+"k":res.N)+" simulations"; }
+function computeQual(){
+  const model=buildQualModel();
+  const pend=model.reduce((s,g)=> s+g.fixtures.filter(f=>f.gh===undefined).length, 0);
+  if(!pend){ applyQual(qualMC(model,1)); return; }   // fully decided -> deterministic
+  applyQual(qualMC(model, 4000));                     // instant estimate so the column shows now
+  // Precise pass (<=50k) in a background Worker (no UI freeze); refine when done.
+  if(typeof Worker!=="undefined" && typeof Blob!=="undefined" && typeof URL!=="undefined"){
+    try{
+      _qualGen++; const gen=_qualGen;
+      if(_qualWorker) _qualWorker.terminate();
+      const src=qualMC.toString()+"\nonmessage=function(e){ postMessage(qualMC(e.data.model,e.data.N)); };";
+      _qualWorker=new Worker(URL.createObjectURL(new Blob([src],{type:"application/javascript"})));
+      _qualWorker.onmessage=function(e){ if(gen!==_qualGen) return;   // ignore stale runs
+        applyQual(e.data); for(const g in GROUPS) renderStandings(g); };
+      _qualWorker.postMessage({model, N:QUAL_BIG});
+    }catch(err){ applyQual(qualMC(model, 30000)); } // fallback if Workers unavailable
+  } else { applyQual(qualMC(model, 30000)); }
+}
+
+/* ===========================================================================
    KNOCKOUT
    =========================================================================== */
 // Round of 32 — the official crossing map, derived to reproduce the real
@@ -642,7 +754,7 @@ function renderGroups(){
   for(const g in GROUPS){
     const el=document.createElement("div"); el.className="group"; el.id="grp-"+g;
     el.innerHTML=`<h3>Group ${g} ${GROUPS[g].approx?'<span class="approx pill">≈ teams</span>':''}</h3>
-      <table><thead><tr><th>#</th><th class="team">Team</th><th>P</th><th>W</th><th>D</th><th>L</th><th>GF</th><th>GA</th><th>GD</th><th>Pts</th></tr></thead>
+      <table><thead><tr><th>#</th><th class="team">Team</th><th>P</th><th>W</th><th>D</th><th>L</th><th>GF</th><th>GA</th><th>GD</th><th>Pts</th><th title="Probability of reaching the Round of 32 (Monte Carlo over pending matches)">Q%</th></tr></thead>
       <tbody id="tb-${g}"></tbody></table>
       <div class="fx" id="fx-${g}"></div>`;
     host.appendChild(el);
@@ -656,7 +768,7 @@ function renderStandings(g){
     const cls=r.pos===1?"q1":r.pos===2?"q2":(r.pos===3&&thirdQ)?"q3":"";
     return `<tr class="${cls}"><td>${r.pos}</td><td class="team">${esc(r.t)}</td>
       <td>${r.P}</td><td>${r.W}</td><td>${r.D}</td><td>${r.L}</td><td>${r.GF}</td><td>${r.GA}</td>
-      <td>${r.GD>0?'+':''}${r.GD}</td><td><b>${r.Pts}</b></td></tr>`;
+      <td>${r.GD>0?'+':''}${r.GD}</td><td><b>${r.Pts}</b></td><td class="qcol">${fmtQual(QUAL[r.t])}</td></tr>`;
   }).join("");
 }
 function renderFixtures(g){
@@ -822,9 +934,16 @@ function renderLearn(){
 }
 
 function esc(s){ return String(s==null?'':s).replace(/[&<>]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;"}[c])); }
+function fmtQual(v){
+  if(v==null) return "";
+  if(v>=0.9995) return '<b class="qok">✓</b>';
+  if(v<=0.0005) return '<span class="qno">0</span>';
+  const p=Math.round(v*100); const c=p>=66?'qok':p>=33?'qmid':'qlow';
+  return `<span class="${c}">${p}</span>`;
+}
 
 /* full render (used on load / import / reset only) */
-function renderAll(){ renderGroups(); renderThirds(); renderBracket(); renderLearn(); }
+function renderAll(){ computeQual(); renderGroups(); renderThirds(); renderBracket(); renderLearn(); }
 
 /* targeted update after a single score change (keeps scroll & focus) */
 function updateAfterScore(mid){
@@ -832,6 +951,7 @@ function updateAfterScore(mid){
     // Re-render ALL standings tbodies (they contain no inputs, so scroll/focus
     // is preserved): one result can move another group's 3rd in/out of the
     // qualifying best-thirds, which changes the yellow highlight group-wide.
+    computeQual(); // refresh qualification odds (a result shifts every group)
     for(const g in GROUPS) renderStandings(g);
     const A=GROUPS[m.g].teams[m.i],B=GROUPS[m.g].teams[m.j];
     const pr=$("#pr-"+mid); if(pr) pr.textContent=pctTriple(probs(st(A),st(B)));
