@@ -45,5 +45,11 @@
   "lambdas_override": {
     "home": 1.72,
     "away": 0.80
+  },
+  "_postmatch": {
+    "result": "Croatia 1-0 Panama. Tight, low-scoring win; Croatia clean sheet, BTTS No, 1 goal total.",
+    "model_1x2": "Croatia 58.6 / Draw 24.9 / Panama 16.5 (MEDIUM)",
+    "verdict": "Clean hit. The favorite won by the model's #1 scoreline (1-0, 13.2%). Every read landed: Under 2.5 (53.9%), BTTS No, Croatia clean sheet (44.9%), low total (xG 2.52 -> 1 goal). The trim-to-market was right: I cut Croatia from an initial 62% down to 58.6% (organized Panama, England-Ghana lesson) and called a tense 1-0 -- exactly what happened.",
+    "lesson": "Second straight 1-0 hit (with Colombia 1-0 DR Congo) where the proven-organized-underdog read produced a tight, low-scoring favourite win. Trimming an over-confident initial lambda toward the market keeps the draw/Under correctly live; don't inflate a modest favourite vs a disciplined side."
   }
 }

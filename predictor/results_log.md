@@ -25,7 +25,7 @@ Legend: ✅ right for the right reason · 🟡 right but by luck/margin ·
 | 2026-06-22 | Jordan vs Algeria | 15.6 / 23.2 / 61.2 | HIGH | 1-2 (Algeria win) | ✅ |
 | 2026-06-23 | Portugal vs Uzbekistan | 71.6 / 18.9 / 9.5 | HIGH | 4-0 (Portugal win) | ✅ |
 | 2026-06-23 | England vs Ghana | 65.3 / 21.4 / 13.3 | HIGH | 0-0 (draw) | 🟡 |
-| 2026-06-23 | Croatia vs Panama | 58.6 / 24.9 / 16.5 | MEDIUM | ⏳ pending | ⏳ |
+| 2026-06-23 | Croatia vs Panama | 58.6 / 24.9 / 16.5 | MEDIUM | 1-0 (Croatia win) | ✅ |
 | 2026-06-24 | Colombia vs DR Congo | 54.9 / 25.9 / 19.3 | MEDIUM | 1-0 (Colombia win) | ✅ |
 
 ### Emerging pattern: favorites vs low block (key)
@@ -385,7 +385,17 @@ which cuts both ways: it opens the game (both attack) yet the draw/Under is a
 live tail (total xG just 2.52). Central scenario a 1-0/2-0 Croatia win; a tight
 draw is very much in play. Recalibrate with confirmed XIs ~60 min before kickoff.
 
-*To be graded after the match (xG vs actual, 1X2, lesson).*
+**Actual result:** Croatia 1-0 Panama. Tight, low-scoring; Croatia clean sheet,
+BTTS No, 1 goal.
+
+**Honest read — a clean hit:**
+- ✅ 1X2: the favourite won, by the model's **#1 scoreline (1-0, 13.2%)**.
+- ✅ **Goals reads all correct:** Under 2.5 (53.9%), BTTS No, Croatia clean sheet
+  (44.9%); modelled xG 2.52, actual 1 goal.
+- ✅ **Trim-to-market vindicated:** I cut Croatia from an initial 62% down to
+  58.6% (organized Panama, England-Ghana lesson) — a tense 1-0 followed.
+- 📌 Second straight 1-0 (with Colombia 1-0 DR Congo): the proven-organized
+  underdog read keeps producing tight, low-scoring favourite wins.
 
 ---
 
