@@ -27,6 +27,8 @@ Legend: ✅ right for the right reason · 🟡 right but by luck/margin ·
 | 2026-06-23 | England vs Ghana | 65.3 / 21.4 / 13.3 | HIGH | 0-0 (draw) | 🟡 |
 | 2026-06-23 | Croatia vs Panama | 58.6 / 24.9 / 16.5 | MEDIUM | 1-0 (Croatia win) | ✅ |
 | 2026-06-24 | Colombia vs DR Congo | 54.9 / 25.9 / 19.3 | MEDIUM | 1-0 (Colombia win) | ✅ |
+| 2026-06-24 | Scotland vs Brazil | 14.4 / 24.0 / 61.7 | HIGH | ⏳ pending | ⏳ |
+| 2026-06-24 | Morocco vs Haiti | 69.5 / 21.9 / 8.5 | HIGH | ⏳ pending | ⏳ |
 | 2026-06-24 | Mexico vs Czech Rep. | 45.5 / 27.8 / 26.6 | MEDIUM | ⏳ pending | ⏳ |
 | 2026-06-24 | South Korea vs S. Africa | 58.3 / 26.2 / 15.5 | MEDIUM | ⏳ pending | ⏳ |
 | 2026-06-24 | Switzerland vs Canada | 33.5 / 28.4 / 38.2 | LOW | 2-1 (Switzerland win) | 🟡 |
@@ -475,3 +477,24 @@ teams may rotate; teams needing a result push). Cards not modelled (referees TBD
   Despite the win Bosnia finish 3rd on GD (Canada 2nd; H2H was 1-1).
 
 *Group A finals (Mexico-Czech, South Korea-South Africa) still pending.*
+
+---
+
+## 2026-06-24 · Group C finals (MD3) — ⏳ PENDING
+
+Standings before: Brazil 4, Morocco 4, Scotland 3, Haiti 0.
+
+- **Scotland vs Brazil** — Scotland 14.4 / Draw 24.0 / Brazil 61.7 (HIGH).
+  λ 0.75 / 1.80, xG 2.55. Market 14.7 / 23.8 / 61.5 (div 0.3, tightly aligned).
+  Brazil the clear favourite but it was HELD 1-1 by an organized Morocco, and
+  Scotland is exactly that kind of disciplined, low-scoring side — so the
+  organized-underdog caution applies: central scenario a 0-1/0-2 Brazil win, but
+  the draw (~24%) is a live tail; don't assume a rout. MC converges (≤0.02 pts).
+- **Morocco vs Haiti** — Morocco 69.5 / Draw 21.9 / Haiti 8.5 (HIGH). λ 1.82 /
+  0.48, xG 2.30. Market 68.7 / 20.3 / 11.0 (div 2.5). Haiti is genuinely weak and
+  open (0 goals, conceded 4) → favourite+goals archetype, NOT a low block. Applied
+  the Spain lesson: an initial λ of 1.65 sat ~3.5 pts BELOW market, bumped to 1.82
+  to sit with it. Morocco is itself low-scoring, so a controlled 1-0/2-0 win (lean
+  Under, Morocco clean sheet ~62%) is likelier than a blowout. MC converges.
+
+*To be graded after the matches (xG vs actual, 1X2, lesson).*

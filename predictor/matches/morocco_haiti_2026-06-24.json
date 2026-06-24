@@ -1,0 +1,9 @@
+{
+  "_comment": "WC2026 Group C, MD3. Standings before: Brazil 4, Morocco 4 (1-1 Brazil, 1-0 Scotland), Scotland 3, Haiti 0 (0-1 Scotland, 0-3 Brazil; 0 goals, conceded 4). Haiti is GENUINELY WEAK and open (no goals, leaky) -> the favourite+goals archetype (like Saudi / Uzbekistan), NOT a parked low block. Morocco the clear quality side and wins comfortably, BUT Morocco is itself low-scoring/pragmatic (only 2 goals in two games), so expect a controlled win rather than a Spain/Portugal-style blowout. Home = Morocco, away = Haiti. Cards not modelled (referee TBD).",
+  "meta": {"home":"Morocco","away":"Haiti","venue":"World Cup 2026 - neutral","date":"2026-06-24","stage":"World Cup 2026 - Group C - MD3","stakes":"Morocco (4 pts) qualifies with a win; Haiti (0 pts) is virtually eliminated. Morocco a strong favourite vs a weak, beaten Haiti."},
+  "calibration": {"base_home":1.25,"base_away":1.25,"rho":-0.06,
+    "home":{"name":"Morocco","attack":1.30,"defense":0.85,"context":1.0,"notes":["Quality, organized; beat Scotland 1-0, drew Brazil 1-1. Efficient but low-scoring (2 GF in two games). attack 1.30.","Strong defense vs a blunt Haiti. defense 0.85.","Clear favourite; controlled win more likely than a blowout."]},
+    "away":{"name":"Haiti","attack":0.55,"defense":1.10,"context":1.0,"notes":["Genuinely weak and open: 0 goals, conceded 4 (0-1 Scotland, 0-3 Brazil). attack 0.55.","Leaky -> Morocco scores. defense 1.10.","Virtually eliminated, open side -> favourite + goals, not a low block."]}},
+  "market": {"odds":[1.36,4.60,8.50]},
+  "lambdas_override": {"home":1.82,"away":0.48}
+}
