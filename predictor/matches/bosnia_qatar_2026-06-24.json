@@ -5,5 +5,11 @@
     "home":{"name":"Bosnia & Herz.","attack":1.22,"defense":1.0,"context":1.0,"notes":["Decent European side; competitive vs Canada (1-1), outclassed by Switzerland. attack 1.22.","Leaky at times. defense 1.0.","Dead rubber -> motivation uncertain, but quality edge clear."]},
     "away":{"name":"Qatar","attack":0.72,"defense":1.12,"context":1.0,"notes":["Weak going forward; lost 0-6 to Canada, drew Switzerland. attack 0.72.","Porous defense. defense 1.12.","Likely eliminated -> flat."]}},
   "market": {"odds":[1.80,3.60,4.50]},
-  "lambdas_override": {"home":1.62,"away":0.82}
+  "lambdas_override": {"home":1.62,"away":0.82},
+  "_postmatch": {
+    "result": "Bosnia 3-1 Qatar. Bosnia won comfortably; Qatar scored once. 4 goals.",
+    "model_1x2": "Bosnia 55.7 / Draw 26.1 / Qatar 18.2 (MEDIUM)",
+    "verdict": "1X2 hit -- the quality side won as called. The dead-rubber motivation caveat did not bite: Bosnia were clearly better and won by two. The total ran Over (4 goals vs a slight Under lean) and Bosnia overperformed their xG (1.62 -> 3); Qatar's goal denied the modelled clean sheet, but the central read (comfortable Bosnia win) was correct. Despite the win Bosnia finish 3rd on GD (Canada 2nd via better GD; H2H was a 1-1 draw).",
+    "lesson": "Clear quality gap vs a weak side -> back the favourite even in a dead rubber; the 3-1 margin is upside finishing variance around a correct mean."
+  }
 }
