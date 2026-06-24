@@ -397,7 +397,7 @@ const CALIB=[
   {g:"B",h:"Switzerland",a:"Canada",lh:1.25,la:1.35,p:[33.5,28.4,38.2],o:[74.3,48.2,26.4],btts:53.9,cs:[25.9,28.7],tot:2.6,conf:"LOW",sl:[["1-1",13.5],["0-1",9.0],["1-2",8.5],["0-0",8.4],["1-0",8.3],["2-1",7.8]]},
   {g:"B",h:"Bosnia & Herz.",a:"Qatar",lh:1.62,la:0.82,p:[55.7,26.1,18.2],o:[70.7,44.1,23.0],btts:45.6,cs:[44.0,19.8],tot:2.44,conf:"MEDIUM",sl:[["1-0",13.4],["1-1",12.3],["2-0",11.4],["0-0",9.4],["2-1",9.4],["0-1",6.5]]},
   {g:"A",h:"Mexico",a:"Czech Republic",lh:1.45,la:1.05,p:[45.5,27.8,26.6],o:[72.0,45.6,24.2],btts:50.5,cs:[35.0,23.5],tot:2.5,conf:"MEDIUM",sl:[["1-1",13.2],["1-0",11.2],["2-1",9.1],["0-0",9.0],["2-0",8.6],["0-1",7.9]]},
-  {g:"A",h:"South Korea",a:"South Africa",lh:1.38,la:1.0,p:[44.8,28.7,26.5],o:[69.5,42.5,21.7],btts:48.1,cs:[36.8,25.2],tot:2.38,conf:"LOW",sl:[["1-1",13.5],["1-0",12.0],["0-0",10.0],["2-0",8.8],["2-1",8.8],["0-1",8.5]]}
+  {g:"A",h:"South Korea",a:"South Africa",lh:1.6,la:0.7,p:[58.3,26.2,15.5],o:[67.6,40.4,20.1],btts:40.9,cs:[49.7,20.2],tot:2.3,conf:"MEDIUM",sl:[["1-0",15.4],["2-0",12.8],["1-1",11.9],["0-0",10.7],["2-1",9.0],["3-0",6.8]]}
 ];
 // lookup: matches a fixture (either orientation) to its calibrated entry
 const CALIB_MAP={};
@@ -412,7 +412,7 @@ function calibFor(m){ if(!m) return null;
    =========================================================================== */
 // Build/data stamp shown in the header. The app is stateless: nothing is
 // persisted, so reloading (F5) always returns to the official results.
-const DATA_VERSION="2026-06-24.grpAB-finals";
+const DATA_VERSION="2026-06-24.kor-rsa-recal";
 let state={ results:{}, strengths:{}, learn:[] };
 
 function freshStrengths(){ const s={}; for(const t in TEAMS) s[t]=TEAMS[t]; return s; }
