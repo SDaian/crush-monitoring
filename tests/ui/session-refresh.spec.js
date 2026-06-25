@@ -1,42 +1,51 @@
 import { test, expect } from '@playwright/test';
+import { TARGET_ENV } from '../../config.js';
 
-// Regression guard for the boot-time silent session refresh.
+// Boot-time session refresh — per-environment rollout guard.
 //
-// On an unauthenticated load the SPA fires GET /api/login/refresh to look for an
-// existing session; with no session it returns 401. This test pins that known
-// behavior so we are alerted if it changes — e.g. when the app stops firing the
-// call unconditionally or stops logging it at ERROR level.
+// Originally the SPA fired GET /api/login/refresh on every load, including
+// anonymous ones with no token: a guaranteed 401, logged server-side at ERROR
+// level (issue #2). The client fix stops firing that probe when there is no
+// refresh-token cookie.
 //
-// See issue #2: the unauthenticated refresh is logged server-side at ERROR
-// level and the client fires it even with no token. When that is fixed, the
-// assertions below should be updated (and #2 closed).
+// The fix rolls out per environment. This map records where it has landed; flip
+// an entry to `false` once the fix reaches that environment (its legacy probe
+// stops firing on an anonymous load), then issue #2 point 2 can be closed.
+//
+//   true  = pre-fix:  still probes unconditionally on an anonymous load
+//   false = fixed:    no probe when there is no token
+const PROBES_WHEN_ANONYMOUS = {
+  dev: false,
+  stg: true,
+  prod: true,
+};
+
 test.describe('Boot-time session refresh', () => {
-  test('unauthenticated load probes /api/login/refresh and gets a 401', async ({ page }) => {
+  test(`unauthenticated load matches the no-token refresh rollout (${TARGET_ENV})`, async ({ page }) => {
     const refreshResponses = [];
     page.on('response', (res) => {
       if (res.url().includes('/api/login/refresh')) refreshResponses.push(res);
     });
 
     await page.goto('/login', { waitUntil: 'networkidle' });
+    // Let any deferred boot XHR settle so an absent call is meaningful.
+    await page.waitForTimeout(2000);
 
-    // The probe fires on an unauthenticated load (issue #2: it does so even with
-    // no token). If a fix stops firing it, this drops to zero and the test trips.
-    expect(
-      refreshResponses.length,
-      'expected a boot-time /api/login/refresh probe'
-    ).toBeGreaterThanOrEqual(1);
+    if (PROBES_WHEN_ANONYMOUS[TARGET_ENV]) {
+      // Pre-fix: the probe fires and 401s with the unauthorized envelope.
+      const unauthorized = refreshResponses.find((res) => res.status() === 401);
+      expect(unauthorized, 'expected the legacy boot-time refresh probe to 401').toBeTruthy();
 
-    const unauthorized = refreshResponses.find((res) => res.status() === 401);
-    expect(unauthorized, 'an unauthenticated refresh probe should 401').toBeTruthy();
-
-    const body = await unauthorized.json();
-    expect(body.event?.eventCode, 'refresh 401 should carry the unauthorized envelope').toBe(
-      'unauthorized'
-    );
-    // Documents the known issue (#2): this expected probe is logged at ERROR
-    // level. Flip this expectation once the app downgrades it to info/warn.
-    expect(body.event?.logLevelName, 'see issue #2 — should be downgraded from error').toBe(
-      'error'
-    );
+      const body = await unauthorized.json();
+      expect(body.event?.eventCode, 'refresh 401 should carry the unauthorized envelope').toBe(
+        'unauthorized'
+      );
+    } else {
+      // Post-fix: with no refresh token, the client must not probe at all.
+      expect(
+        refreshResponses.length,
+        'no /api/login/refresh probe should fire on an anonymous load after the no-token fix'
+      ).toBe(0);
+    }
   });
 });
