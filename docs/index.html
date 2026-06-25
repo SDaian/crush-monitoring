@@ -247,7 +247,7 @@ const KNOWN = {
   // group:[ [i,j,h,a], ... ] indices into GROUPS[g].teams
   A:[[0,3,2,0],[1,2,2,1],[2,3,1,1],[0,1,1,0]], // Mex2-0 RSA ; Kor2-1 Cze ; Cze1-1 RSA ; Mex1-0 Kor
   B:[[1,2,1,1],[3,0,1,1],[0,2,4,1],[1,3,6,0],[0,1,2,1],[2,3,3,1]], // Can1-1 Bos ; Qat1-1 Sui ; Sui4-1 Bos ; Can6-0 Qat ; Sui2-1 Can ; Bos3-1 Qat
-  C:[[0,2,1,1],[3,1,0,1],[1,2,0,1],[0,3,3,0]], // Bra1-1 Mar ; Hai0-1 Sco ; Sco0-1 Mar ; Bra3-0 Hai
+  C:[[0,2,1,1],[3,1,0,1],[1,2,0,1],[0,3,3,0],[0,1,3,0],[2,3,4,2]], // Bra1-1 Mar ; Hai0-1 Sco ; Sco0-1 Mar ; Bra3-0 Hai ; Bra3-0 Sco ; Mar4-2 Hai
   D:[[0,3,4,1],[1,2,2,0],[0,1,2,0],[2,3,0,1]], // USA4-1 Par ; Aus2-0 Tur ; USA2-0 Aus ; Tur0-1 Par
   E:[[0,3,7,1],[1,2,1,0],[0,1,2,1],[2,3,0,0]],// Ger7-1 Cur ; Civ1-0 Ecu ; Ger2-1 Civ ; Ecu0-0 Cur
   F:[[0,2,2,2],[1,3,5,1],[0,1,5,1],[2,3,4,0]],// Ned2-2 Jpn ; Swe5-1 Tun ; Ned5-1 Swe ; Jpn4-0 Tun
@@ -379,7 +379,15 @@ const RESULTS_LOG=[
   { date:"2026-06-24", match:"Bosnia & Herz. vs Qatar", group:"B", conf:"MEDIUM", mark:"✅",
     h:"Bosnia & Herz.", a:"Qatar", p:[55.7,26.1,18.2], xg:[1.62,0.82],
     result:"3-1 (Bosnia)",
-    post:"1X2 hit — the quality side won as called; the dead-rubber motivation caveat didn't bite. Over (4 goals vs a slight Under lean) and Bosnia overperformed xG (1.62 → 3); Qatar's goal denied the modelled clean sheet, but the central read (comfortable Bosnia win) was right. Despite winning, Bosnia finish 3rd on GD (Canada 2nd; H2H was a 1-1 draw)." }
+    post:"1X2 hit — the quality side won as called; the dead-rubber motivation caveat didn't bite. Over (4 goals vs a slight Under lean) and Bosnia overperformed xG (1.62 → 3); Qatar's goal denied the modelled clean sheet, but the central read (comfortable Bosnia win) was right. Despite winning, Bosnia finish 3rd on GD (Canada 2nd; H2H was a 1-1 draw)." },
+  { date:"2026-06-24", match:"Scotland vs Brazil", group:"C", conf:"HIGH", mark:"✅",
+    h:"Scotland", a:"Brazil", p:[14.4,24.0,61.7], xg:[0.75,1.80],
+    result:"0-3 (Brazil)",
+    post:"1X2 + texture both right: Brazil win, clean sheet (47.2%), Scotland blank (λ 0.75 → 0), BTTS No. The 3-0 margin was the high tail (Brazil 1.80 → 3); the 'draw is live / don't assume a rout' hedge didn't pay, but the central call (favourite win + clean sheet + underdog blank) was correct — the rout is upside variance an elite side can produce." },
+  { date:"2026-06-24", match:"Morocco vs Haiti", group:"C", conf:"HIGH", mark:"✅",
+    h:"Morocco", a:"Haiti", p:[69.5,21.9,8.5], xg:[1.82,0.48],
+    result:"4-2 (Morocco)",
+    post:"1X2 hit (70% favourite won) — but the GOALS model badly missed. I called a controlled low-scoring win (lean Under 2.5, BTTS No 68%, clean sheet 62%); it was a 6-goal game, both scoring. Morocco overperformed (1.82 → 4) and Haiti, modelled near-toothless (λ 0.48), scored 2. Lesson: dead-rubber goal VOLUME is high-variance — a low-stakes final-round game can blow open; trust the result read over the goals read, don't over-trust a tiny λ for a 'weak' side. Mirror of England-Ghana (there a control became a 0-0; here it became 4-2)." }
 ];
 
 /* ===========================================================================
@@ -425,7 +433,7 @@ function calibFor(m){ if(!m) return null;
    =========================================================================== */
 // Build/data stamp shown in the header. The app is stateless: nothing is
 // persisted, so reloading (F5) always returns to the official results.
-const DATA_VERSION="2026-06-24.grpC-finals";
+const DATA_VERSION="2026-06-24.grpC-results";
 let state={ results:{}, strengths:{}, learn:[] };
 
 function freshStrengths(){ const s={}; for(const t in TEAMS) s[t]=TEAMS[t]; return s; }

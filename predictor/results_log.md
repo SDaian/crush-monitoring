@@ -27,8 +27,8 @@ Legend: ✅ right for the right reason · 🟡 right but by luck/margin ·
 | 2026-06-23 | England vs Ghana | 65.3 / 21.4 / 13.3 | HIGH | 0-0 (draw) | 🟡 |
 | 2026-06-23 | Croatia vs Panama | 58.6 / 24.9 / 16.5 | MEDIUM | 1-0 (Croatia win) | ✅ |
 | 2026-06-24 | Colombia vs DR Congo | 54.9 / 25.9 / 19.3 | MEDIUM | 1-0 (Colombia win) | ✅ |
-| 2026-06-24 | Scotland vs Brazil | 14.4 / 24.0 / 61.7 | HIGH | ⏳ pending | ⏳ |
-| 2026-06-24 | Morocco vs Haiti | 69.5 / 21.9 / 8.5 | HIGH | ⏳ pending | ⏳ |
+| 2026-06-24 | Scotland vs Brazil | 14.4 / 24.0 / 61.7 | HIGH | 0-3 (Brazil win) | ✅ |
+| 2026-06-24 | Morocco vs Haiti | 69.5 / 21.9 / 8.5 | HIGH | 4-2 (Morocco win) | ✅ |
 | 2026-06-24 | Mexico vs Czech Rep. | 45.5 / 27.8 / 26.6 | MEDIUM | ⏳ pending | ⏳ |
 | 2026-06-24 | South Korea vs S. Africa | 58.3 / 26.2 / 15.5 | MEDIUM | ⏳ pending | ⏳ |
 | 2026-06-24 | Switzerland vs Canada | 33.5 / 28.4 / 38.2 | LOW | 2-1 (Switzerland win) | 🟡 |
@@ -69,6 +69,8 @@ it was 2-2, not 0-0 — and that forces two refinements:
 | Tunisia vs Japan | Japan | 2.00 | 2.07 | ✅ almost exact |
 | Tunisia vs Japan | Tunisia | 0.855 | 0.05 | ❌ overestimated (Tunisia was null) |
 | Spain vs Saudi Arabia | Spain | 2.60 | 4 goals, 21 shots | ❌ underestimated (my anti-market lean failed) |
+| Morocco vs Haiti | Haiti | 0.48 | 2 goals | ❌ overestimated low (a "weak" side scored 2 in a goal-fest) |
+| Morocco vs Haiti | Morocco | 1.82 | 4 goals | 🟡 mean low, finishing tail (controlled win became 4-2) |
 
 ---
 
@@ -485,16 +487,17 @@ teams may rotate; teams needing a result push). Cards not modelled (referees TBD
 Standings before: Brazil 4, Morocco 4, Scotland 3, Haiti 0.
 
 - **Scotland vs Brazil** — Scotland 14.4 / Draw 24.0 / Brazil 61.7 (HIGH).
-  λ 0.75 / 1.80, xG 2.55. Market 14.7 / 23.8 / 61.5 (div 0.3, tightly aligned).
-  Brazil the clear favourite but it was HELD 1-1 by an organized Morocco, and
-  Scotland is exactly that kind of disciplined, low-scoring side — so the
-  organized-underdog caution applies: central scenario a 0-1/0-2 Brazil win, but
-  the draw (~24%) is a live tail; don't assume a rout. MC converges (≤0.02 pts).
+  λ 0.75 / 1.80, xG 2.55. **RESULT: Scotland 0-3 Brazil ✅** — 1X2 + texture both
+  right: Brazil win, clean sheet (47.2%), Scotland blank, BTTS No. The 3-0 margin
+  was the high tail (Brazil 1.80 → 3); the "draw is live / don't assume a rout"
+  hedge didn't pay but the central call was correct. No calibration change.
 - **Morocco vs Haiti** — Morocco 69.5 / Draw 21.9 / Haiti 8.5 (HIGH). λ 1.82 /
-  0.48, xG 2.30. Market 68.7 / 20.3 / 11.0 (div 2.5). Haiti is genuinely weak and
-  open (0 goals, conceded 4) → favourite+goals archetype, NOT a low block. Applied
-  the Spain lesson: an initial λ of 1.65 sat ~3.5 pts BELOW market, bumped to 1.82
-  to sit with it. Morocco is itself low-scoring, so a controlled 1-0/2-0 win (lean
-  Under, Morocco clean sheet ~62%) is likelier than a blowout. MC converges.
+  0.48, xG 2.30. **RESULT: Morocco 4-2 Haiti ✅ (1X2) — but GOALS model badly
+  missed.** I called a controlled low-scoring win (lean Under 2.5, BTTS No 68%,
+  clean sheet 62%); it was a 6-goal game, both scoring. Morocco overperformed
+  (1.82 → 4) and Haiti, modelled near-toothless (λ 0.48), scored 2. **Lesson:**
+  dead-rubber goal VOLUME is high-variance — a low-stakes final-round game can
+  blow open; trust the result read over the goals read, and don't over-trust a
+  tiny λ for a "weak" side. Mirror of England-Ghana (a control became chaos).
 
-*To be graded after the matches (xG vs actual, 1X2, lesson).*
+*Group A finals (Mexico-Czech, South Korea-South Africa) still pending.*
