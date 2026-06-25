@@ -245,7 +245,7 @@ const GROUPS = {
 // Real results already known (entered as REAL by default).
 const KNOWN = {
   // group:[ [i,j,h,a], ... ] indices into GROUPS[g].teams
-  A:[[0,3,2,0],[1,2,2,1],[2,3,1,1],[0,1,1,0]], // Mex2-0 RSA ; Kor2-1 Cze ; Cze1-1 RSA ; Mex1-0 Kor
+  A:[[0,3,2,0],[1,2,2,1],[2,3,1,1],[0,1,1,0],[0,2,3,0],[1,3,0,1]], // Mex2-0 RSA ; Kor2-1 Cze ; Cze1-1 RSA ; Mex1-0 Kor ; Mex3-0 Cze ; RSA1-0 Kor
   B:[[1,2,1,1],[3,0,1,1],[0,2,4,1],[1,3,6,0],[0,1,2,1],[2,3,3,1]], // Can1-1 Bos ; Qat1-1 Sui ; Sui4-1 Bos ; Can6-0 Qat ; Sui2-1 Can ; Bos3-1 Qat
   C:[[0,2,1,1],[3,1,0,1],[1,2,0,1],[0,3,3,0],[0,1,3,0],[2,3,4,2]], // Bra1-1 Mar ; Hai0-1 Sco ; Sco0-1 Mar ; Bra3-0 Hai ; Bra3-0 Sco ; Mar4-2 Hai
   D:[[0,3,4,1],[1,2,2,0],[0,1,2,0],[2,3,0,1]], // USA4-1 Par ; Aus2-0 Tur ; USA2-0 Aus ; Tur0-1 Par
@@ -387,7 +387,15 @@ const RESULTS_LOG=[
   { date:"2026-06-24", match:"Morocco vs Haiti", group:"C", conf:"HIGH", mark:"✅",
     h:"Morocco", a:"Haiti", p:[69.5,21.9,8.5], xg:[1.82,0.48],
     result:"4-2 (Morocco)",
-    post:"1X2 hit (70% favourite won) — but the GOALS model badly missed. I called a controlled low-scoring win (lean Under 2.5, BTTS No 68%, clean sheet 62%); it was a 6-goal game, both scoring. Morocco overperformed (1.82 → 4) and Haiti, modelled near-toothless (λ 0.48), scored 2. Lesson: dead-rubber goal VOLUME is high-variance — a low-stakes final-round game can blow open; trust the result read over the goals read, don't over-trust a tiny λ for a 'weak' side. Mirror of England-Ghana (there a control became a 0-0; here it became 4-2)." }
+    post:"1X2 hit (70% favourite won) — but the GOALS model badly missed. I called a controlled low-scoring win (lean Under 2.5, BTTS No 68%, clean sheet 62%); it was a 6-goal game, both scoring. Morocco overperformed (1.82 → 4) and Haiti, modelled near-toothless (λ 0.48), scored 2. Lesson: dead-rubber goal VOLUME is high-variance — a low-stakes final-round game can blow open; trust the result read over the goals read, don't over-trust a tiny λ for a 'weak' side. Mirror of England-Ghana (there a control became a 0-0; here it became 4-2)." },
+  { date:"2026-06-24", match:"Mexico vs Czech Republic", group:"A", conf:"MEDIUM", mark:"✅",
+    h:"Mexico", a:"Czech Republic", p:[45.5,27.8,26.6], xg:[1.45,1.05],
+    result:"3-0 (Mexico)",
+    post:"1X2 hit, but for the wrong texture: I applied a rotation DISCOUNT (Mexico already qualified → compressed to 45.5%) and they routed 3-0 with a clean sheet. The discount was unjustified — Mexico overperformed (1.45 → 3). Same day the eliminated-team downgrade (South Korea-South Africa) also backfired: motivation/qualification adjustments are speculative; trust the strength/market baseline." },
+  { date:"2026-06-24", match:"South Korea vs South Africa", group:"A", conf:"MEDIUM", mark:"❌",
+    h:"South Korea", a:"South Africa", p:[58.3,26.2,15.5], xg:[1.60,0.70],
+    result:"0-1 (South Africa)",
+    post:"WRONG — the first outright 1X2 miss, and self-inflicted. I had RECALIBRATED South Africa DOWN (26.5% → 15.5%) on the 'virtually eliminated / flat motivation' narrative; the pre-recalibration number was closer. South Africa played well, scored late, won, and QUALIFIED 2nd — South Korea dropped to 3rd. Lesson: elimination ≠ rolling over; never convert a motivation narrative into a hard λ cut. Both of today's motivation tweaks backfired (Mexico discount → 3-0 rout; South Africa downgrade → 1-0 loss). Trust the strength/market baseline; only adjust for confirmed team news." }
 ];
 
 /* ===========================================================================
@@ -433,7 +441,7 @@ function calibFor(m){ if(!m) return null;
    =========================================================================== */
 // Build/data stamp shown in the header. The app is stateless: nothing is
 // persisted, so reloading (F5) always returns to the official results.
-const DATA_VERSION="2026-06-24.grpC-results";
+const DATA_VERSION="2026-06-24.grpA-results";
 let state={ results:{}, strengths:{}, learn:[] };
 
 function freshStrengths(){ const s={}; for(const t in TEAMS) s[t]=TEAMS[t]; return s; }

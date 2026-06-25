@@ -5,5 +5,11 @@
     "home":{"name":"South Korea","attack":1.18,"defense":0.92,"context":1.0,"notes":["Organized, technical Asian side; beat Czech 2-1, lost narrowly to Mexico. Needs the win and controls its fate. attack 1.18.","Faces a weak, flat opponent -> low South Africa lambda. defense 0.92.","On the front foot vs a demoralized side -> clearer favourite."]},
     "away":{"name":"South Africa","attack":0.68,"defense":1.10,"context":0.95,"notes":["Virtually eliminated, does not depend on itself -> flat motivation, context 0.95.","Its 1-1 with Czech was an ISOLATED goal after being dominated all match -> real attacking output much lower than the result. attack 0.68.","Shakier than 1 GA suggests (was outplayed). defense 1.10."]}},
   "market": {"odds":[1.70,3.60,5.00]},
-  "lambdas_override": {"home":1.60,"away":0.70}
+  "lambdas_override": {"home":1.60,"away":0.70},
+  "_postmatch": {
+    "result": "South Africa 1-0 South Korea. The 15.5% outcome came in; South Africa won and QUALIFIED 2nd, knocking South Korea to 3rd.",
+    "model_1x2": "South Korea 58.3 / Draw 26.2 / South Africa 15.5 (MEDIUM)",
+    "verdict": "WRONG -- the first outright 1X2 miss of the tournament, and self-inflicted. I had RECALIBRATED South Africa DOWN (lambda 1.00 -> 0.70, win prob 26.5% -> 15.5%) on the 'virtually eliminated / does not depend on itself -> flat motivation' narrative. That downgrade made the miss bigger: the pre-recalibration number (26.5%) was closer to reality. A team with nothing to lose played freely and won.",
+    "lesson": "MOTIVATION/ELIMINATION narratives are weak, speculative signals -- do NOT convert them into hard lambda cuts. 'Virtually eliminated' does not mean 'rolls over'; a pressure-free side can play loose and spoil. The market-aligned baseline was better than my motivation-adjusted one. Same day, the mirror error: Mexico (already qualified) was given a rotation DISCOUNT and instead routed 3-0. Both motivation adjustments backfired in opposite directions -- stop adjusting for motivation/qualification scenarios beyond a tiny nudge."
+  }
 }

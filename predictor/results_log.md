@@ -29,8 +29,8 @@ Legend: ✅ right for the right reason · 🟡 right but by luck/margin ·
 | 2026-06-24 | Colombia vs DR Congo | 54.9 / 25.9 / 19.3 | MEDIUM | 1-0 (Colombia win) | ✅ |
 | 2026-06-24 | Scotland vs Brazil | 14.4 / 24.0 / 61.7 | HIGH | 0-3 (Brazil win) | ✅ |
 | 2026-06-24 | Morocco vs Haiti | 69.5 / 21.9 / 8.5 | HIGH | 4-2 (Morocco win) | ✅ |
-| 2026-06-24 | Mexico vs Czech Rep. | 45.5 / 27.8 / 26.6 | MEDIUM | ⏳ pending | ⏳ |
-| 2026-06-24 | South Korea vs S. Africa | 58.3 / 26.2 / 15.5 | MEDIUM | ⏳ pending | ⏳ |
+| 2026-06-24 | Mexico vs Czech Rep. | 45.5 / 27.8 / 26.6 | MEDIUM | 3-0 (Mexico win) | ✅ |
+| 2026-06-24 | South Korea vs S. Africa | 58.3 / 26.2 / 15.5 | MEDIUM | 0-1 (S. Africa win) | ❌ |
 | 2026-06-24 | Switzerland vs Canada | 33.5 / 28.4 / 38.2 | LOW | 2-1 (Switzerland win) | 🟡 |
 | 2026-06-24 | Bosnia & Herz. vs Qatar | 55.7 / 26.1 / 18.2 | MEDIUM | 3-1 (Bosnia win) | ✅ |
 
@@ -453,19 +453,24 @@ sheet, BTTS No, 1 goal.
 All four kick off at once; qualification scenarios shape behaviour (qualified
 teams may rotate; teams needing a result push). Cards not modelled (referees TBD).
 
-**Group A**
+**Group A** (both PLAYED — the motivation lesson)
 - **Mexico vs Czech Republic** — Mexico 45.5 / Draw 27.8 / Czech 26.6 (MEDIUM).
-  λ 1.45 / 1.05, xG 2.50. Market 47.8 / 28.3 / 23.9 (div 2.7, aligned). Mexico
-  already through (6 pts) → rotation/lower-urgency discount applied, which
-  compresses the gap; Czech must win. Central scenario a tight 1-1/1-0; the draw
-  is very live. MC converges (≤0.11 pts).
+  λ 1.45 / 1.05. **RESULT: Mexico 3-0 ✅** on the 1X2, but I applied a rotation
+  DISCOUNT (already qualified → compressed to 45.5%) and Mexico instead routed
+  3-0 with a clean sheet. The discount was unjustified.
 - **South Korea vs South Africa** — SK 58.3 / Draw 26.2 / SA 15.5 (MEDIUM).
-  λ 1.60 / 0.70, xG 2.30. Market 55.2 / 26.1 / 18.8 (div 3.3). **RECALIBRATED:**
-  South Africa is virtually eliminated and does not control its own fate (flat
-  motivation), and its 1-1 with Czech was an isolated goal after being dominated
-  all match — so it is weaker AND flatter than the result implies. SK (controls
-  its fate, needs the win) is now a clearer favourite; low-scoring read (lean
-  Under, SK clean sheet ~50%), modal score 1-0. MC converges (≤0.12 pts).
+  λ 1.60 / 0.70. **RESULT: South Africa 1-0 ❌ — the first outright 1X2 miss, and
+  self-inflicted.** I had RECALIBRATED South Africa DOWN (26.5% → 15.5%) on the
+  "virtually eliminated / flat motivation" narrative; the pre-recalibration number
+  was closer. South Africa won and QUALIFIED 2nd, knocking South Korea to 3rd.
+
+**KEY LESSON — motivation/qualification adjustments backfired BOTH ways.** Same
+round: I downgraded an *eliminated* side (South Africa — they won) and discounted
+a *qualified* side (Mexico — they routed). Both speculative tweaks were wrong, in
+opposite directions. Elimination ≠ rolling over (a pressure-free team can play
+loose and spoil); qualification ≠ easing off (a host can still want to win big).
+**Rule going forward:** trust the strength/market baseline; only adjust for
+CONFIRMED rotation/team news, never for scenario/motivation guesses.
 
 **Group B** (both PLAYED)
 - **Switzerland vs Canada** — SUI 33.5 / Draw 28.4 / CAN 38.2 (LOW, no strong
@@ -478,7 +483,7 @@ teams may rotate; teams needing a result push). Cards not modelled (referees TBD
   (dead-rubber caveat didn't bite); Over (4 goals) and Bosnia overperformed xG.
   Despite the win Bosnia finish 3rd on GD (Canada 2nd; H2H was 1-1).
 
-*Group A finals (Mexico-Czech, South Korea-South Africa) still pending.*
+*Group A finals now PLAYED — see the Group A section above (Mexico 3-0; South Africa 1-0 South Korea).*
 
 ---
 
@@ -500,4 +505,4 @@ Standings before: Brazil 4, Morocco 4, Scotland 3, Haiti 0.
   blow open; trust the result read over the goals read, and don't over-trust a
   tiny λ for a "weak" side. Mirror of England-Ghana (a control became chaos).
 
-*Group A finals (Mexico-Czech, South Korea-South Africa) still pending.*
+*Group A finals now PLAYED — see the Group A section above (Mexico 3-0; South Africa 1-0 South Korea).*

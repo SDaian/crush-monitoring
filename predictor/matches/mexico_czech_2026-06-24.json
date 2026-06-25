@@ -5,5 +5,11 @@
     "home":{"name":"Mexico","attack":1.22,"defense":0.95,"context":0.92,"notes":["Strong host, won both (3-0 aggregate, clean sheets). attack 1.22.","Solid defense 0.95.","Already through -> likely rotation/managed minutes, context 0.92."]},
     "away":{"name":"Czech Republic","attack":1.0,"defense":1.05,"context":1.05,"notes":["Decent European side; lost narrowly to South Korea, drew South Africa. attack 1.0.","Must win -> will push, context 1.05.","defense 1.05."]}},
   "market": {"odds":[1.95,3.30,3.90]},
-  "lambdas_override": {"home":1.45,"away":1.05}
+  "lambdas_override": {"home":1.45,"away":1.05},
+  "_postmatch": {
+    "result": "Mexico 3-0 Czech Republic. Already-qualified Mexico routed; clean sheet.",
+    "model_1x2": "Mexico 45.5 / Draw 27.8 / Czech 26.6 (MEDIUM)",
+    "verdict": "1X2 hit (Mexico won) but for the WRONG reasons on texture: I applied a rotation/lower-urgency DISCOUNT (context 0.92, win prob compressed to 45.5%) because Mexico were already through -- and they came out and won 3-0. The discount was unjustified; Mexico overperformed (1.45 -> 3) and kept a clean sheet. Central read (tight 1-1/1-0) was the opposite of a 3-0 rout.",
+    "lesson": "The qualified-team rotation discount was wrong, the same day the eliminated-team motivation downgrade (South Korea-South Africa) was also wrong. Motivation/qualification adjustments are speculative and backfired both ways today -- a qualified host can still want to win big, an eliminated side can still spoil. Trust the strength/market baseline; reserve motivation tweaks for confirmed rotation news, not scenario guesses."
+  }
 }
