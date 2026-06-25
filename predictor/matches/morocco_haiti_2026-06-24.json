@@ -5,5 +5,11 @@
     "home":{"name":"Morocco","attack":1.30,"defense":0.85,"context":1.0,"notes":["Quality, organized; beat Scotland 1-0, drew Brazil 1-1. Efficient but low-scoring (2 GF in two games). attack 1.30.","Strong defense vs a blunt Haiti. defense 0.85.","Clear favourite; controlled win more likely than a blowout."]},
     "away":{"name":"Haiti","attack":0.55,"defense":1.10,"context":1.0,"notes":["Genuinely weak and open: 0 goals, conceded 4 (0-1 Scotland, 0-3 Brazil). attack 0.55.","Leaky -> Morocco scores. defense 1.10.","Virtually eliminated, open side -> favourite + goals, not a low block."]}},
   "market": {"odds":[1.36,4.60,8.50]},
-  "lambdas_override": {"home":1.82,"away":0.48}
+  "lambdas_override": {"home":1.82,"away":0.48},
+  "_postmatch": {
+    "result": "Morocco 4-2 Haiti. Morocco won but it was a 6-goal game; Haiti scored twice.",
+    "model_1x2": "Morocco 69.5 / Draw 21.9 / Haiti 8.5 (HIGH)",
+    "verdict": "1X2 hit -- the 70% favourite won. BUT the GOALS model missed badly: I called a controlled low-scoring win (lean Under 2.5 at 64%, BTTS No 68%, Morocco clean sheet 62%) and it was 4-2 -- six goals, both scoring, no clean sheet. Morocco overperformed (1.82 -> 4) AND Haiti, modelled as near-toothless (lambda 0.48 after 0 goals in two games), scored 2.",
+    "lesson": "Dead-rubber GOAL VOLUME is a trap: a low-stakes final-round game can blow open into a goal-fest even when both sides looked low-scoring. Don't over-trust a tiny lambda for a 'weak' side (0.48 implied ~0.5 goals; they scored 2) and don't lean Under just because the favourite had been pragmatic. The 1X2 was safe; the goals texture was the opposite of the model. Mirror of England-Ghana (there a favourite was held to 0-0; here a controlled win became 4-2) -- final-round texture is high-variance, trust the result read over the goals read."
+  }
 }

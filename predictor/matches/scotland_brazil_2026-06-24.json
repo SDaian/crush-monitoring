@@ -5,5 +5,11 @@
     "home":{"name":"Scotland","attack":0.80,"defense":1.0,"context":1.0,"notes":["Organized, disciplined, low-scoring (1 GF / 1 GA in two games). attack 0.80.","Compact but faces an elite attack. defense 1.0.","Must get a result -> will commit a little more, but tight by nature."]},
     "away":{"name":"Brazil","attack":1.55,"defense":0.85,"context":1.0,"notes":["Elite; beat Haiti 3-0 but was HELD 1-1 by organized Morocco. attack 1.55.","Strong defense -> low Scotland lambda. defense 0.85.","Calibrated in line with the market; organized Scotland keeps the draw live (don't assume a rout)."]}},
   "market": {"odds":[6.50,4.00,1.55]},
-  "lambdas_override": {"home":0.75,"away":1.80}
+  "lambdas_override": {"home":0.75,"away":1.80},
+  "_postmatch": {
+    "result": "Scotland 0-3 Brazil. Brazil cruised, clean sheet; Scotland blank.",
+    "model_1x2": "Scotland 14.4 / Draw 24.0 / Brazil 61.7 (HIGH)",
+    "verdict": "1X2 hit and the texture reads landed: Brazil win, Brazil clean sheet (47.2%), Scotland doesn't score (modelled lambda 0.75 -> 0 goals), BTTS No. Brazil overperformed (1.80 -> 3) so the 3-0 was the high tail of the margin (0-3 was the model's #6 scoreline). The 'don't assume a rout / draw is live' hedge didn't pay here, but it was a probability hedge, not a wrong central call -- Brazil's quality delivered the upside.",
+    "lesson": "Against an organized low-scoring underdog the central read (favourite win + clean sheet + underdog blank) was right; the rout itself is upside variance an elite side can produce. No calibration change."
+  }
 }
