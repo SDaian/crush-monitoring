@@ -1,0 +1,9 @@
+{
+  "_comment": "WC2026 Group I, MD3. Standings before: France 6 (3-1 Senegal, 3-1 Iraq), Norway 6 (4-1 Iraq, 3-1 Senegal), Iraq 0, Senegal 0. BOTH already qualified -> this decides 1st vs 2nd (seeding only). Two attacking sides (Norway scored 7, France 6 in two games) -> likely an open, higher-scoring game. MOTIVATION CAVEAT (post-Mexico/South-Africa lesson): both are through, but do NOT apply a rotation discount -- trust the strength baseline; a small nudge at most. France the marginally better side; Norway (Haaland) dangerous. Near-even, France a hair ahead. Home = Norway, away = France. Cards not modelled (referee TBD).",
+  "meta": {"home":"Norway","away":"France","venue":"World Cup 2026 - neutral","date":"2026-06-24","stage":"World Cup 2026 - Group I - MD3","stakes":"Both already qualified on 6 points; this decides who tops the group (seeding). France marginally the better side; Norway (Haaland) a live threat. Open, attacking game likely."},
+  "calibration": {"base_home":1.25,"base_away":1.25,"rho":-0.05,
+    "home":{"name":"Norway","attack":1.22,"defense":0.92,"context":1.0,"notes":["Haaland-led, scored 7 in two games (vs weaker Iraq/Senegal). attack 1.22.","Decent but not elite at the back vs France. defense 0.92.","Already through; open game, no motivation downgrade applied."]},
+    "away":{"name":"France","attack":1.35,"defense":0.85,"context":1.0,"notes":["Elite; won both 3-1. attack 1.35, marginally the better side.","Strong defense. defense 0.85.","Through as well; trust the strength baseline, not a rotation guess."]}},
+  "market": {"odds":[2.85,3.40,2.45]},
+  "lambdas_override": {"home":1.45,"away":1.60}
+}
