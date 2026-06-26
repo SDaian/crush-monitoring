@@ -36,7 +36,7 @@ Legend: ✅ right for the right reason · 🟡 right but by luck/margin ·
 | 2026-06-24 | Norway vs France | 34.2 / 25.1 / 40.7 | LOW | 1-4 (France win) | ✅ |
 | 2026-06-24 | Senegal vs Iraq | 54.7 / 25.3 / 20.0 | MEDIUM | 5-0 (Senegal win) | ✅ |
 | 2026-06-24 | Uruguay vs Spain | 25.9 / 26.3 / 47.9 | MEDIUM | ⏳ pending | ⏳ |
-| 2026-06-24 | Cape Verde vs Saudi Arabia | 46.1 / 28.0 / 25.9 | MEDIUM | ⏳ pending | ⏳ |
+| 2026-06-24 | Cape Verde vs Saudi Arabia | 42.1 / 28.3 / 29.7 | LOW | ⏳ pending | ⏳ |
 
 ### Emerging pattern: favorites vs low block (key)
 
@@ -556,9 +556,11 @@ Monte Carlo (N=200k) agrees to <0.2 pts on both.
   1.58, xG 2.68. Market 24.4 / 28.1 / 47.5 (div 1.8). Lifted Spain to sit with the
   market (don't lean below an elite favourite). Uruguay must-win → open game (BTTS
   54%). Top 3 scorelines: 1-1 (12.5%), 0-1 (10.2%), 1-2 (9.4%).
-- **Cape Verde vs Saudi Arabia** — Cape Verde 46.1 / Draw 28.0 / Saudi 25.9
-  (MEDIUM). λ 1.42 / 1.00, xG 2.42. Market 45.6 / 29.2 / 25.2 (div 1.2). Both
-  must-win → open; Cape Verde the slight, organized favourite. Top 3 scorelines:
-  1-1 (13.3%), 1-0 (12.0%), 0-0 (9.5%).
+- **Cape Verde vs Saudi Arabia** — Cape Verde 42.1 / Draw 28.3 / Saudi 29.7
+  (LOW). λ 1.36 / 1.10, xG 2.46. Market 43.4 / 29.2 / 27.4 (div 2.2). **RECALIBRATED
+  with team news:** Cape Verde lose suspended DF Sidny Lopes (2nd yellow vs Uruguay)
+  and Jovane Cabral (knock) is doubtful → trimmed; Saudi get Kanno back to steady the
+  midfield overrun by Spain → lifted. Gap narrows to a near-even, open must-win for
+  both (BTTS 50%). Top 3 scorelines: 1-1 (13.4%), 1-0 (11.0%), 0-0 (9.2%).
 
 *To be graded after the matches (xG vs actual, 1X2, lesson).*
