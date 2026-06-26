@@ -34,7 +34,7 @@ Legend: ✅ right for the right reason · 🟡 right but by luck/margin ·
 | 2026-06-24 | Switzerland vs Canada | 33.5 / 28.4 / 38.2 | LOW | 2-1 (Switzerland win) | 🟡 |
 | 2026-06-24 | Bosnia & Herz. vs Qatar | 55.7 / 26.1 / 18.2 | MEDIUM | 3-1 (Bosnia win) | ✅ |
 | 2026-06-24 | Norway vs France | 34.2 / 25.1 / 40.7 | LOW | ⏳ pending | ⏳ |
-| 2026-06-24 | Senegal vs Iraq | 45.5 / 28.2 / 26.2 | MEDIUM | ⏳ pending | ⏳ |
+| 2026-06-24 | Senegal vs Iraq | 54.7 / 25.3 / 20.0 | MEDIUM | ⏳ pending | ⏳ |
 
 ### Emerging pattern: favorites vs low block (key)
 
@@ -521,10 +521,14 @@ qualified pair, no elimination downgrade for the dead rubber — trust the basel
   read). λ 1.45 / 1.60, xG 3.05. Market 33.3 / 27.9 / 38.8 (div 2.8). Both through
   → seeding only; two attacking sides → open, high-scoring read (Over 2.5 58.8%,
   BTTS 61.6%). France marginally ahead; genuinely even — coin-flip with goals.
-- **Senegal vs Iraq** — Senegal 45.5 / Draw 28.2 / Iraq 26.2 (MEDIUM). λ 1.40 /
-  1.00, xG 2.40. Market 47.8 / 28.3 / 23.9 (div 2.3). Dead rubber; Senegal the
-  better side on paper vs a weak Iraq, modest favourite. NO elimination downgrade
-  (South Africa lesson); goals reads kept low-confidence (Morocco-Haiti lesson —
-  dead-rubber volume is high-variance). Modal score 1-1/1-0.
+- **Senegal vs Iraq** — Senegal 54.7 / Draw 25.3 / Iraq 20.0 (MEDIUM). λ 1.68 /
+  0.92, xG 2.60. Market 54.2 / 26.3 / 19.4 (div 1.0). **CORRECTION: Senegal is NOT
+  eliminated** — a win can take them through as a BEST THIRD, and that spot is
+  decided on goal difference, so Senegal is motivated to win BY A MARGIN. This is a
+  legitimate STRUCTURAL incentive (not the speculative motivation tweak that burned
+  us), so Senegal was lifted (1.40 → 1.68 λ, 45.5% → 54.7%) and the game opened up.
+  **Correctly-uncertain caveat:** Senegal is favoured to WIN (55%) but to win by
+  the 2+ margin they need is only **~30%** (by exactly 1: 24%, by 2: 17%, by 3+:
+  13%) — a comfortable best-third cushion is the minority scenario, not the base case.
 
 *To be graded after the matches (xG vs actual, 1X2, lesson).*
