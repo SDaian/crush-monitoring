@@ -33,6 +33,8 @@ Legend: ✅ right for the right reason · 🟡 right but by luck/margin ·
 | 2026-06-24 | South Korea vs S. Africa | 58.3 / 26.2 / 15.5 | MEDIUM | 0-1 (S. Africa win) | ❌ |
 | 2026-06-24 | Switzerland vs Canada | 33.5 / 28.4 / 38.2 | LOW | 2-1 (Switzerland win) | 🟡 |
 | 2026-06-24 | Bosnia & Herz. vs Qatar | 55.7 / 26.1 / 18.2 | MEDIUM | 3-1 (Bosnia win) | ✅ |
+| 2026-06-24 | Norway vs France | 34.2 / 25.1 / 40.7 | LOW | ⏳ pending | ⏳ |
+| 2026-06-24 | Senegal vs Iraq | 45.5 / 28.2 / 26.2 | MEDIUM | ⏳ pending | ⏳ |
 
 ### Emerging pattern: favorites vs low block (key)
 
@@ -506,3 +508,23 @@ Standings before: Brazil 4, Morocco 4, Scotland 3, Haiti 0.
   tiny λ for a "weak" side. Mirror of England-Ghana (a control became chaos).
 
 *Group A finals now PLAYED — see the Group A section above (Mexico 3-0; South Africa 1-0 South Korea).*
+
+---
+
+## 2026-06-24 · Group I finals (MD3) — ⏳ PENDING
+
+Standings before: France 6, Norway 6 (both already QUALIFIED), Senegal 0, Iraq 0
+(both ELIMINATED). Applied the motivation lesson: no rotation discount for the
+qualified pair, no elimination downgrade for the dead rubber — trust the baseline.
+
+- **Norway vs France** — Norway 34.2 / Draw 25.1 / France 40.7 (LOW, no strong
+  read). λ 1.45 / 1.60, xG 3.05. Market 33.3 / 27.9 / 38.8 (div 2.8). Both through
+  → seeding only; two attacking sides → open, high-scoring read (Over 2.5 58.8%,
+  BTTS 61.6%). France marginally ahead; genuinely even — coin-flip with goals.
+- **Senegal vs Iraq** — Senegal 45.5 / Draw 28.2 / Iraq 26.2 (MEDIUM). λ 1.40 /
+  1.00, xG 2.40. Market 47.8 / 28.3 / 23.9 (div 2.3). Dead rubber; Senegal the
+  better side on paper vs a weak Iraq, modest favourite. NO elimination downgrade
+  (South Africa lesson); goals reads kept low-confidence (Morocco-Haiti lesson —
+  dead-rubber volume is high-variance). Modal score 1-1/1-0.
+
+*To be graded after the matches (xG vs actual, 1X2, lesson).*
