@@ -36,7 +36,7 @@ Legend: ✅ right for the right reason · 🟡 right but by luck/margin ·
 | 2026-06-24 | Norway vs France | 34.2 / 25.1 / 40.7 | LOW | 1-4 (France win) | ✅ |
 | 2026-06-24 | Senegal vs Iraq | 54.7 / 25.3 / 20.0 | MEDIUM | 5-0 (Senegal win) | ✅ |
 | 2026-06-24 | Uruguay vs Spain | 23.8 / 25.3 / 50.8 | MEDIUM | ⏳ pending | ⏳ |
-| 2026-06-24 | Cape Verde vs Saudi Arabia | 42.1 / 28.3 / 29.7 | LOW | ⏳ pending | ⏳ |
+| 2026-06-24 | Cape Verde vs Saudi Arabia | 39.9 / 28.4 / 31.8 | LOW | ⏳ pending | ⏳ |
 
 ### Emerging pattern: favorites vs low block (key)
 

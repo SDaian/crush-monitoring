@@ -14,36 +14,42 @@
     "rho": -0.05,
     "home": {
       "name": "Cape Verde",
-      "attack": 1.05,
+      "attack": 1.0,
       "defense": 1.02,
       "context": 1.05,
       "notes": [
-        "Organized debutant that scores (0-0 Spain, 2-2 Uruguay), but Jovane Cabral (knock) DOUBTFUL trims the attack. attack 1.05.",
-        "Sidny Lopes SUSPENDED -> reshuffled, slightly weaker back line. defense 1.02.",
-        "Still the slight favourite and must-win -> open game."
+        "CONFIRMED 4-2-3-1, lone striker (Livramento); without Sidny Lopes (susp.), Jovane Cabral AND Garry Rodrigues -> modest attack. attack 1.00.",
+        "Reshuffled back line without Sidny Lopes. defense 1.02.",
+        "Must-win but attack depleted."
       ]
     },
     "away": {
       "name": "Saudi Arabia",
-      "attack": 1.0,
+      "attack": 1.05,
       "defense": 1.05,
       "context": 1.05,
       "notes": [
-        "Weak vs Spain (0-4) but drew Uruguay; KANNO RETURNS to steady the midfield -> more competitive. attack 1.00.",
-        "Cape Verde missing a defender helps Saudi. defense 1.05.",
-        "Also must-win -> both attack, open game."
+        "CONFIRMED 4-4-2 with TWO strikers (Mandash + Al-Buraikan) and Kanno steadying midfield -> more attacking than the lone-striker read. attack 1.05.",
+        "Cape Verde missing defenders helps. defense 1.05.",
+        "Must-win, set up aggressively."
       ]
     }
   },
   "market": {
     "odds": [
-      2.15,
+      2.3,
       3.2,
-      3.4
+      3.2
     ]
   },
   "lambdas_override": {
-    "home": 1.36,
-    "away": 1.1
+    "home": 1.32,
+    "away": 1.15
+  },
+  "_lineups": {
+    "_status": "CONFIRMED (images)",
+    "Cape Verde": "4-2-3-1: Vozinha; Paulo, Pico, Borges, Pina; Duarte, Lenini; Semedo, Monteiro, Mendes; Livramento. WITHOUT Sidny Lopes (suspended), Jovane Cabral AND Garry Rodrigues -> modest attack, lone striker.",
+    "Saudi Arabia": "4-4-2: Al-Owais; N.Al-Dawsari, Tambakti, Al-Amri, Boushal; S.Al-Dawsari, Kanno, Al-Khaibari, Abdulhamid; Mandash, Al-Buraikan. Kanno starts; TWO strikers -> more attacking.",
+    "_note": "Confirmed XIs nudge the game to near-even: Cape Verde attack a touch weaker (no Garry Rodrigues, lone striker), Saudi a touch more attacking (4-4-2, two forwards)."
   }
 }
