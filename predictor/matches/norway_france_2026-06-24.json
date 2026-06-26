@@ -5,5 +5,11 @@
     "home":{"name":"Norway","attack":1.22,"defense":0.92,"context":1.0,"notes":["Haaland-led, scored 7 in two games (vs weaker Iraq/Senegal). attack 1.22.","Decent but not elite at the back vs France. defense 0.92.","Already through; open game, no motivation downgrade applied."]},
     "away":{"name":"France","attack":1.35,"defense":0.85,"context":1.0,"notes":["Elite; won both 3-1. attack 1.35, marginally the better side.","Strong defense. defense 0.85.","Through as well; trust the strength baseline, not a rotation guess."]}},
   "market": {"odds":[2.85,3.40,2.45]},
-  "lambdas_override": {"home":1.45,"away":1.60}
+  "lambdas_override": {"home":1.45,"away":1.60},
+  "_postmatch": {
+    "result": "France 4-1 Norway. France top the group; an open, high-scoring game as called.",
+    "model_1x2": "Norway 34.2 / Draw 25.1 / France 40.7 (LOW, coin-flip with goals)",
+    "verdict": "1X2 hit (the slight favourite France won) AND the game-shape read landed perfectly: I called this the open, high-scoring match (Over 2.5 58.8%, Over 3.5 36.4%, BTTS 61.6%) and it was 4-1 -- 5 goals, both scoring. France overperformed (1.60 -> 4) so the 4-1 margin was the finishing tail, but on a LOW-confidence coin-flip the value was the open/goals read, which was spot on. No rotation discount was applied despite both being qualified, and that was correct -- France went full.",
+    "lesson": "Validates the no-motivation-discount rule for qualified teams (post-Mexico): they can still go full. And the open/Over/BTTS read on two attacking sides was right -- texture beats side on a coin-flip."
+  }
 }
