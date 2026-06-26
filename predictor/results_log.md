@@ -35,6 +35,8 @@ Legend: ✅ right for the right reason · 🟡 right but by luck/margin ·
 | 2026-06-24 | Bosnia & Herz. vs Qatar | 55.7 / 26.1 / 18.2 | MEDIUM | 3-1 (Bosnia win) | ✅ |
 | 2026-06-24 | Norway vs France | 34.2 / 25.1 / 40.7 | LOW | 1-4 (France win) | ✅ |
 | 2026-06-24 | Senegal vs Iraq | 54.7 / 25.3 / 20.0 | MEDIUM | 5-0 (Senegal win) | ✅ |
+| 2026-06-24 | Uruguay vs Spain | 25.9 / 26.3 / 47.9 | MEDIUM | ⏳ pending | ⏳ |
+| 2026-06-24 | Cape Verde vs Saudi Arabia | 46.1 / 28.0 / 25.9 | MEDIUM | ⏳ pending | ⏳ |
 
 ### Emerging pattern: favorites vs low block (key)
 
@@ -539,5 +541,24 @@ qualified pair, no elimination downgrade for the dead rubber — trust the basel
   attack) are a legitimate hard adjustment; SPECULATIVE motivation narratives
   (eliminated/demotivated) are the South Africa trap. This match is the clean
   positive example of the former.
+
+*To be graded after the matches (xG vs actual, 1X2, lesson).*
+
+---
+
+## 2026-06-24 · Group H finals (MD3) — ⏳ PENDING (crucial; extra-validated)
+
+Standings before: Spain 4, Uruguay 2, Cape Verde 2, Saudi Arabia 1. Crucial for
+2nd place and best-third. Extra validation: closed-form is exact and the DC-aware
+Monte Carlo (N=200k) agrees to <0.2 pts on both.
+
+- **Uruguay vs Spain** — Uruguay 25.9 / Draw 26.3 / Spain 47.9 (MEDIUM). λ 1.10 /
+  1.58, xG 2.68. Market 24.4 / 28.1 / 47.5 (div 1.8). Lifted Spain to sit with the
+  market (don't lean below an elite favourite). Uruguay must-win → open game (BTTS
+  54%). Top 3 scorelines: 1-1 (12.5%), 0-1 (10.2%), 1-2 (9.4%).
+- **Cape Verde vs Saudi Arabia** — Cape Verde 46.1 / Draw 28.0 / Saudi 25.9
+  (MEDIUM). λ 1.42 / 1.00, xG 2.42. Market 45.6 / 29.2 / 25.2 (div 1.2). Both
+  must-win → open; Cape Verde the slight, organized favourite. Top 3 scorelines:
+  1-1 (13.3%), 1-0 (12.0%), 0-0 (9.5%).
 
 *To be graded after the matches (xG vs actual, 1X2, lesson).*
