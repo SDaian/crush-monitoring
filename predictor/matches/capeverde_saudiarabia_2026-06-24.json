@@ -1,12 +1,12 @@
 {
-  "_comment": "WC2026 Group H, MD3. Standings before: Spain 4, Uruguay 2, Cape Verde 2 (0-0 Spain, 2-2 Uruguay), Saudi 1 (1-1 Uruguay, 0-4 Spain). BOTH need to win to qualify (Cape Verde for 2nd/best-third, Saudi for a slim chance) -> structural must-win for both -> open game. Cape Verde the slightly better side: organized AND can score (held Spain to 0-0, scored 2 vs Uruguay); Saudi weak (0-4 Spain) but drew Uruguay. Near-even, Cape Verde a small edge. Home = Cape Verde, away = Saudi Arabia. Cards not modelled (referee TBD).",
+  "_comment": "WC2026 Group H, MD3. RECALIBRATED with team news (~confirmed/predicted XIs). Cape Verde: Sidny Lopes SUSPENDED (2nd yellow vs Uruguay) -> loses a starting defender (weaker at the back); Jovane Cabral (knock) and Telmo Arcanjo (hamstring) DOUBTFUL -> attack slightly trimmed. Saudi: full squad, Mohamed Kanno RETURNS to the midfield that was overrun 4-0 by Spain -> more solid/competitive. Net: the gap NARROWS (Cape Verde a touch down, Saudi a touch up) -> a more even, open must-win for both. Modest adjustment only (lesson: adjust for confirmed team news, not narrative). Home = Cape Verde, away = Saudi Arabia. Referee/cards not modelled.",
   "meta": {
     "home": "Cape Verde",
     "away": "Saudi Arabia",
     "venue": "World Cup 2026 - neutral",
     "date": "2026-06-24",
     "stage": "World Cup 2026 - Group H - MD3",
-    "stakes": "Both need a win to qualify (Cape Verde for 2nd / best-third, Saudi for a slim chance). Crucial; open, both-go-for-it game. Cape Verde a slight favourite."
+    "stakes": "Both need a win to qualify (Cape Verde for 2nd/best-third, Saudi for a slim chance). Cape Verde missing suspended DF Sidny Lopes (and Jovane Cabral doubtful); Saudi get Kanno back to steady the midfield. A more even, open game than the pre-XI read."
   },
   "calibration": {
     "base_home": 1.25,
@@ -14,36 +14,36 @@
     "rho": -0.05,
     "home": {
       "name": "Cape Verde",
-      "attack": 1.1,
-      "defense": 1.0,
+      "attack": 1.05,
+      "defense": 1.02,
       "context": 1.05,
       "notes": [
-        "Organized debutant that also scores: 0-0 Spain, 2-2 Uruguay. attack 1.10, context 1.05 (must-win).",
-        "Resilient. defense 1.0.",
-        "Slight edge and motivated -> open game."
+        "Organized debutant that scores (0-0 Spain, 2-2 Uruguay), but Jovane Cabral (knock) DOUBTFUL trims the attack. attack 1.05.",
+        "Sidny Lopes SUSPENDED -> reshuffled, slightly weaker back line. defense 1.02.",
+        "Still the slight favourite and must-win -> open game."
       ]
     },
     "away": {
       "name": "Saudi Arabia",
-      "attack": 0.95,
-      "defense": 1.08,
+      "attack": 1.0,
+      "defense": 1.05,
       "context": 1.05,
       "notes": [
-        "Weak vs quality (0-4 Spain) but drew Uruguay. attack 0.95, context 1.05 (must-win too).",
-        "Leaky. defense 1.08.",
-        "Also needs the win -> both attack."
+        "Weak vs Spain (0-4) but drew Uruguay; KANNO RETURNS to steady the midfield -> more competitive. attack 1.00.",
+        "Cape Verde missing a defender helps Saudi. defense 1.05.",
+        "Also must-win -> both attack, open game."
       ]
     }
   },
   "market": {
     "odds": [
-      2.05,
+      2.15,
       3.2,
-      3.7
+      3.4
     ]
   },
   "lambdas_override": {
-    "home": 1.42,
-    "away": 1.0
+    "home": 1.36,
+    "away": 1.1
   }
 }
