@@ -1,12 +1,12 @@
 {
-  "_comment": "WC2026 Group H, MD3. Standings before: Spain 4 (0-0 Cape Verde, 4-0 Saudi), Uruguay 2 (1-1 Saudi, 2-2 Cape Verde), Cape Verde 2, Saudi 1. Spain the quality side and near-through; Uruguay (quality but two draws) needs points to qualify -> a structural must-win-ish (legitimate -> open game, not a speculative motivation tweak). Spain CAN be frustrated by organized sides (0-0 Cape Verde), but Uruguay is open (concedes and scores: 1-1, 2-2). Spain a moderate favourite. Home = Uruguay, away = Spain. Cards not modelled (referee TBD).",
+  "_comment": "WC2026 Group H, MD3. RECALIBRATED with team news (~confirmed XIs; GK 'Muslera' likely a search error, ignore). URUGUAY missing two KEY starters to injury: Ronald Araujo (best CB -> defense weaker) AND De Arrascaeta (main creator -> less chance creation); Darwin Nunez STARTS (Bielsa picks him over Vinas) -> more clinical up top, which OFFSETS the Arrascaeta loss on attack but not the Araujo loss on defense. SPAIN at full strength: Lamine Yamal STARTS (recovered) -> elite right wing vs Uruguay LB Juan M. Sanabria. Net: Spain MORE favoured (Uruguay leakier without Araujo, Spain at full power). Modest adjustment (confirmed team news only). Home = Uruguay, away = Spain. Cards not modelled.",
   "meta": {
     "home": "Uruguay",
     "away": "Spain",
     "venue": "World Cup 2026 - neutral",
     "date": "2026-06-24",
     "stage": "World Cup 2026 - Group H - MD3",
-    "stakes": "Spain (4 pts) is near-through and tops the group with a draw; Uruguay (2 pts) needs a result to qualify and will go for it. Crucial for 2nd place and best-third."
+    "stakes": "Spain (4 pts) near-through and at full strength (Lamine Yamal starts). Uruguay (2 pts) must win but are without Araujo (CB) and Arrascaeta (creator); Darwin Nunez starts. Crucial; Spain a clearer favourite than the pre-XI read."
   },
   "calibration": {
     "base_home": 1.25,
@@ -15,35 +15,35 @@
     "home": {
       "name": "Uruguay",
       "attack": 1.05,
-      "defense": 1.05,
+      "defense": 1.12,
       "context": 1.05,
       "notes": [
-        "Quality CONMEBOL side underperforming (1-1, 2-2); open both ways. attack 1.05, context 1.05 (must-win, will push).",
-        "Leaky (conceded in both). defense 1.05.",
-        "Genuinely needs points -> open game, rho -0.05."
+        "Darwin Nunez STARTS (clinical) but lost creator Arrascaeta -> attack ~neutral. attack 1.05, context 1.05 (must-win).",
+        "Without Araujo (best CB) the back line is weaker vs an elite Spain attack. defense 1.12.",
+        "Needs to win -> open game, rho -0.05."
       ]
     },
     "away": {
       "name": "Spain",
-      "attack": 1.45,
+      "attack": 1.5,
       "defense": 0.88,
       "context": 1.0,
       "notes": [
-        "Elite; 4-0 Saudi but 0-0 Cape Verde (can be frustrated by organized blocks). attack 1.45.",
+        "Elite and at FULL strength: Lamine Yamal starts (recovered). attack 1.50.",
         "Strong defense. defense 0.88.",
-        "Near-through; moderate favourite, not over-rated given Uruguay's quality."
+        "Clearer favourite now that Uruguay miss Araujo + Arrascaeta; lifted in line with the market."
       ]
     }
   },
   "market": {
     "odds": [
-      3.8,
-      3.3,
-      1.95
+      4.1,
+      3.4,
+      1.82
     ]
   },
   "lambdas_override": {
-    "home": 1.1,
-    "away": 1.58
+    "home": 1.08,
+    "away": 1.68
   }
 }
