@@ -95,8 +95,12 @@
   .fc-cal{border:1px solid var(--gold);background:rgba(244,211,94,.08);
     border-radius:8px;padding:6px 8px;margin-bottom:8px}
   .fc-sub{font-size:12px;font-weight:700;margin:2px 0 6px}
-  .fc-sub-cal{color:var(--gold)} .fc-sub-sim{color:var(--accent)}
+  .fc-sub-cal{color:var(--gold)} .fc-sub-sim{color:var(--accent)} .fc-sub-btd{color:#c79bff}
   .fc-tag{font-size:9px;font-weight:600;color:var(--chalk-dim)}
+  .fc-cmp{border:1px solid var(--line);border-radius:8px;padding:6px 8px;margin-bottom:8px;background:var(--card2)}
+  .fc-cmp-h{font-size:10px;font-weight:700;color:var(--chalk-dim);text-transform:uppercase;letter-spacing:.4px;margin-bottom:4px}
+  .fc-cmptab td:first-child{white-space:nowrap}
+  .fc-cmptab tr.cmp-cal td{color:var(--gold)} .fc-cmptab tr.cmp-sim td{color:var(--accent)} .fc-cmptab tr.cmp-btd td{color:#c79bff}
   .thirds td.rankq{color:var(--good);font-weight:700}
   .bracket{display:flex;gap:16px;overflow-x:auto;padding:4px 2px 14px}
   .round{min-width:208px;display:flex;flex-direction:column;justify-content:center;gap:8px}
@@ -453,7 +457,7 @@ function calibFor(m){ if(!m) return null;
    =========================================================================== */
 // Build/data stamp shown in the header. The app is stateless: nothing is
 // persisted, so reloading (F5) always returns to the official results.
-const DATA_VERSION="2026-06-24.cpv-ksa-xiconf";
+const DATA_VERSION="2026-06-24.engines";
 let state={ results:{}, strengths:{}, learn:[] };
 
 function freshStrengths(){ const s={}; for(const t in TEAMS) s[t]=TEAMS[t]; return s; }
@@ -498,6 +502,15 @@ function probs(sa,sb){
     const p=pa[i]*pb[j]; if(i>j)h+=p; else if(i===j)d+=p; else a+=p;
   }
   const s=h+d+a; return {h:h/s,d:d/s,a:a/s,la,lb};
+}
+/* Bradley-Terry-Davidson engine (1X2 ONLY, no goals): a logistic-in-strength
+   paired-comparison model with a draw term. k = strength scale, nu = draw
+   propensity (fitted so its 1X2 tracks the Poisson engine to ~1 pt). It cannot
+   produce goal markets/scorelines — that is exactly the trade-off. */
+const BTD_K=0.035, BTD_NU=0.72;
+function probsBTD(sa,sb){
+  const x=BTD_K*(sa-sb), eh=Math.exp(x), ea=Math.exp(-x), den=eh+ea+BTD_NU;
+  return {h:eh/den, d:BTD_NU/den, a:ea/den};
 }
 function st(t){ return state.strengths[t] ?? TEAMS[t] ?? 60; }
 
@@ -885,9 +898,24 @@ function matchForecast(mid){
      <tr><td>sim</td><td>${sh.toFixed(1)}</td><td>${sd.toFixed(1)}</td><td>${sma.toFixed(1)}</td></tr>
      <tr><td>diff</td><td>${Math.abs(100*H-sh).toFixed(2)}</td><td>${Math.abs(100*D-sd).toFixed(2)}</td><td>${Math.abs(100*Aw-sma).toFixed(2)}</td></tr>
    </table>
-   <div class="fc-note">Live strength-based engine (no Dixon-Coles). For the analyzed matches, compare with the calibrated forecast above.</div>`;
+   <div class="fc-note">Live strength-based engine (no Dixon-Coles). Compare with the other engines below.</div>`;
+  // --- Bradley-Terry-Davidson engine (1X2 only) ---
+  const bt=probsBTD(sa,sb);
+  const btd=`
+   <div class="fc-sub fc-sub-btd">📐 Bradley-Terry-Davidson <span class="fc-tag">paired-comparison · 1X2 only</span></div>
+   <div class="fc-sec">1X2</div>
+   ${bar(esc(A),bt.h,"win")}${bar("Draw",bt.d,"draw")}${bar(esc(B),bt.a,"loss")}
+   <div class="fc-note">Logistic strength model (k=${BTD_K}, ν=${BTD_NU}); no goal markets by design. Good sanity check on the 1X2; for scorelines/Over/BTTS use the engines above.</div>`;
   const cal=calibFor(m);
-  return cal ? calibratedPanel(cal)+sim : `<div class="fc-note fc-nocal">No calibrated forecast for this match — showing the generic simulator engine only.</div>`+sim;
+  // --- engine comparison header: 1X2 from every available engine ---
+  const row=(label,p,cls)=>`<tr class="${cls}"><td>${label}</td><td>${(p[0]).toFixed(1)}</td><td>${(p[1]).toFixed(1)}</td><td>${(p[2]).toFixed(1)}</td></tr>`;
+  const cmp=`<div class="fc-cmp"><div class="fc-cmp-h">Engine comparison · 1X2 (${esc(A)} / Draw / ${esc(B)})</div>
+   <table class="fc-mc fc-cmptab"><tr><th>engine</th><th>${esc(A)}</th><th>Draw</th><th>${esc(B)}</th></tr>
+   ${cal?row("★ Calibrated (biv.Poisson+DC)",[cal.p[0],cal.p[1],cal.p[2]],"cmp-cal"):""}
+   ${row("⚙ Simulator (indep.Poisson)",[H*100,D*100,Aw*100],"cmp-sim")}
+   ${row("📐 Bradley-Terry-Davidson",[bt.h*100,bt.d*100,bt.a*100],"cmp-btd")}
+   </table></div>`;
+  return cmp + (cal ? calibratedPanel(cal) : `<div class="fc-note fc-nocal">No calibrated forecast for this match — simulator + Bradley-Terry only.</div>`) + sim + btd;
 }
 
 /* Calibrated panel (deep predictor: bivariate Poisson + Dixon-Coles).
