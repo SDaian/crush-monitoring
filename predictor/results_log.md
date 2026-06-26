@@ -33,8 +33,8 @@ Legend: ✅ right for the right reason · 🟡 right but by luck/margin ·
 | 2026-06-24 | South Korea vs S. Africa | 58.3 / 26.2 / 15.5 | MEDIUM | 0-1 (S. Africa win) | ❌ |
 | 2026-06-24 | Switzerland vs Canada | 33.5 / 28.4 / 38.2 | LOW | 2-1 (Switzerland win) | 🟡 |
 | 2026-06-24 | Bosnia & Herz. vs Qatar | 55.7 / 26.1 / 18.2 | MEDIUM | 3-1 (Bosnia win) | ✅ |
-| 2026-06-24 | Norway vs France | 34.2 / 25.1 / 40.7 | LOW | ⏳ pending | ⏳ |
-| 2026-06-24 | Senegal vs Iraq | 54.7 / 25.3 / 20.0 | MEDIUM | ⏳ pending | ⏳ |
+| 2026-06-24 | Norway vs France | 34.2 / 25.1 / 40.7 | LOW | 1-4 (France win) | ✅ |
+| 2026-06-24 | Senegal vs Iraq | 54.7 / 25.3 / 20.0 | MEDIUM | 5-0 (Senegal win) | ✅ |
 
 ### Emerging pattern: favorites vs low block (key)
 
@@ -517,10 +517,11 @@ Standings before: France 6, Norway 6 (both already QUALIFIED), Senegal 0, Iraq 0
 (both ELIMINATED). Applied the motivation lesson: no rotation discount for the
 qualified pair, no elimination downgrade for the dead rubber — trust the baseline.
 
-- **Norway vs France** — Norway 34.2 / Draw 25.1 / France 40.7 (LOW, no strong
-  read). λ 1.45 / 1.60, xG 3.05. Market 33.3 / 27.9 / 38.8 (div 2.8). Both through
-  → seeding only; two attacking sides → open, high-scoring read (Over 2.5 58.8%,
-  BTTS 61.6%). France marginally ahead; genuinely even — coin-flip with goals.
+- **Norway vs France** — Norway 34.2 / Draw 25.1 / France 40.7 (LOW). λ 1.45 /
+  1.60, xG 3.05. **RESULT: France 4-1 ✅** — slight favourite won AND the open/
+  high-scoring read landed perfectly (5 goals, both scored: Over 2.5, Over 3.5,
+  BTTS all hit). No rotation discount despite both qualified → France went full;
+  correct. Texture beats side on a coin-flip.
 - **Senegal vs Iraq** — Senegal 54.7 / Draw 25.3 / Iraq 20.0 (MEDIUM). λ 1.68 /
   0.92, xG 2.60. Market 54.2 / 26.3 / 19.4 (div 1.0). **CORRECTION: Senegal is NOT
   eliminated** — a win can take them through as a BEST THIRD, and that spot is
@@ -530,5 +531,13 @@ qualified pair, no elimination downgrade for the dead rubber — trust the basel
   **Correctly-uncertain caveat:** Senegal is favoured to WIN (55%) but to win by
   the 2+ margin they need is only **~30%** (by exactly 1: 24%, by 2: 17%, by 3+:
   13%) — a comfortable best-third cushion is the minority scenario, not the base case.
+  **RESULT: Senegal 5-0 ✅** — the recalibration was vindicated (lifting Senegal on
+  the structural best-third incentive was right; they attacked and ran up the score).
+  The 5-0 landed in the favourable ~13% "by 3+" tail; the honest margin caveat still
+  held. Senegal finish 3rd on **GD 0** (up from -4) — strong best-third position.
+  **Lesson crystallised:** STRUCTURAL incentives (qualification + GD matters → lift,
+  attack) are a legitimate hard adjustment; SPECULATIVE motivation narratives
+  (eliminated/demotivated) are the South Africa trap. This match is the clean
+  positive example of the former.
 
 *To be graded after the matches (xG vs actual, 1X2, lesson).*

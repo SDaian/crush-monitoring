@@ -253,7 +253,7 @@ const KNOWN = {
   F:[[0,2,2,2],[1,3,5,1],[0,1,5,1],[2,3,4,0],[3,0,1,3],[1,2,1,1]],// Ned2-2 Jpn ; Swe5-1 Tun ; Ned5-1 Swe ; Jpn4-0 Tun ; Tun1-3 Ned ; Swe1-1 Jpn
   G:[[0,2,1,1],[1,3,2,2],[0,1,0,0],[2,3,3,1]],// Bel1-1 Egy ; Ira2-2 NZ ; Bel0-0 Ira ; Egy3-1 NZ
   H:[[0,1,0,0],[3,2,1,1],[0,2,4,0],[3,1,2,2]], // Spain0-0 CV ; Uru1-1 Sau ; Spain4-0 Sau ; Uru2-2 CV
-  I:[[0,3,3,1],[2,1,4,1],[0,1,3,1],[2,3,3,1]], // Fra3-1 Sen ; Nor4-1 Iraq ; Fra3-1 Iraq ; Nor3-1 Sen
+  I:[[0,3,3,1],[2,1,4,1],[0,1,3,1],[2,3,3,1],[0,2,4,1],[1,3,0,5]], // Fra3-1 Sen ; Nor4-1 Iraq ; Fra3-1 Iraq ; Nor3-1 Sen ; Fra4-1 Nor ; Iraq0-5 Sen
   J:[[0,3,3,0],[1,2,3,1],[0,1,2,0],[2,3,1,2]],  // Arg3-0 Alg ; Aut3-1 Jor ; Arg2-0 Aut ; Jor1-2 Alg
   K:[[0,3,1,1],[1,2,1,3],[0,1,4,0],[2,3,1,0]],  // Por1-1 CongoDR ; Uzb1-3 Col ; Por4-0 Uzb ; Col1-0 CongoDR
   L:[[0,3,4,2],[1,2,1,0],[0,1,0,0],[3,2,1,0]]   // Eng4-2 Cro ; Gha1-0 Pan ; Eng0-0 Gha ; Cro1-0 Pan
@@ -395,7 +395,15 @@ const RESULTS_LOG=[
   { date:"2026-06-24", match:"South Korea vs South Africa", group:"A", conf:"MEDIUM", mark:"❌",
     h:"South Korea", a:"South Africa", p:[58.3,26.2,15.5], xg:[1.60,0.70],
     result:"0-1 (South Africa)",
-    post:"WRONG — the first outright 1X2 miss, and self-inflicted. I had RECALIBRATED South Africa DOWN (26.5% → 15.5%) on the 'virtually eliminated / flat motivation' narrative; the pre-recalibration number was closer. South Africa played well, scored late, won, and QUALIFIED 2nd — South Korea dropped to 3rd. Lesson: elimination ≠ rolling over; never convert a motivation narrative into a hard λ cut. Both of today's motivation tweaks backfired (Mexico discount → 3-0 rout; South Africa downgrade → 1-0 loss). Trust the strength/market baseline; only adjust for confirmed team news." }
+    post:"WRONG — the first outright 1X2 miss, and self-inflicted. I had RECALIBRATED South Africa DOWN (26.5% → 15.5%) on the 'virtually eliminated / flat motivation' narrative; the pre-recalibration number was closer. South Africa played well, scored late, won, and QUALIFIED 2nd — South Korea dropped to 3rd. Lesson: elimination ≠ rolling over; never convert a motivation narrative into a hard λ cut. Both of today's motivation tweaks backfired (Mexico discount → 3-0 rout; South Africa downgrade → 1-0 loss). Trust the strength/market baseline; only adjust for confirmed team news." },
+  { date:"2026-06-24", match:"Norway vs France", group:"I", conf:"LOW", mark:"✅",
+    h:"Norway", a:"France", p:[34.2,25.1,40.7], xg:[1.45,1.60],
+    result:"1-4 (France)",
+    post:"Slight favourite France won AND the open/high-scoring read landed perfectly: I called this the goals match (Over 2.5 58.8%, Over 3.5 36.4%, BTTS 61.6%) and it was 4-1 — 5 goals, both scored. No rotation discount despite both qualified → France went full, correct. On a LOW-confidence coin-flip, the texture (Over/BTTS) was the value and it hit. France 4-1 is a finishing-tail margin around a correct read." },
+  { date:"2026-06-24", match:"Senegal vs Iraq", group:"I", conf:"MEDIUM", mark:"✅",
+    h:"Senegal", a:"Iraq", p:[54.7,25.3,20.0], xg:[1.68,0.92],
+    result:"5-0 (Senegal)",
+    post:"Recalibration vindicated. I lifted Senegal (45.5% → 54.7%, λ 1.40 → 1.68) on the legitimate STRUCTURAL incentive — a win + goal difference takes them through as a best third — and they ran up the score, exactly the thesis. The 5-0 landed in the favourable ~13% 'by 3+' tail; my honest caveat (a 2+ margin was only ~30%) still held. Senegal finish 3rd on GD 0 (up from -4), strong best-third position. Key distinction: STRUCTURAL incentives (qualification + GD matters) are a legitimate lift; SPECULATIVE motivation (eliminated/demotivated) is the South Africa trap." }
 ];
 
 /* ===========================================================================
@@ -443,7 +451,7 @@ function calibFor(m){ if(!m) return null;
    =========================================================================== */
 // Build/data stamp shown in the header. The app is stateless: nothing is
 // persisted, so reloading (F5) always returns to the official results.
-const DATA_VERSION="2026-06-24.senegal-recal";
+const DATA_VERSION="2026-06-24.grpI-results";
 let state={ results:{}, strengths:{}, learn:[] };
 
 function freshStrengths(){ const s={}; for(const t in TEAMS) s[t]=TEAMS[t]; return s; }

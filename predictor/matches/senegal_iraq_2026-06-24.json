@@ -5,5 +5,11 @@
     "home":{"name":"Senegal","attack":1.28,"defense":0.98,"context":1.05,"notes":["Quality side that underperformed; now PLAYING TO QUALIFY as a best third and the GD matters -> they will push for goals. attack 1.28, context 1.05 (real structural incentive, not a guess).","Decent defensively vs a weak Iraq. defense 0.98.","Clearer favourite and goal-hungry -> open game, rho -0.05."]},
     "away":{"name":"Iraq","attack":0.82,"defense":1.12,"context":1.0,"notes":["Weak; lost both, conceded 7. attack 0.82.","Leaky, and Senegal will attack -> higher Iraq-conceded. defense 1.12.","Effectively out (GD -6); pride only, but no over-downgrade."]}},
   "market": {"odds":[1.70,3.50,4.75]},
-  "lambdas_override": {"home":1.68,"away":0.92}
+  "lambdas_override": {"home":1.68,"away":0.92},
+  "_postmatch": {
+    "result": "Senegal 5-0 Iraq. Senegal demolished Iraq and got the big margin they needed -- finish 3rd on GD 0 (up from -4), in strong best-third position.",
+    "model_1x2": "Senegal 54.7 / Draw 25.3 / Iraq 20.0 (MEDIUM)",
+    "verdict": "1X2 hit, and the RECALIBRATION was vindicated: lifting Senegal (1.40 -> 1.68, 45.5% -> 54.7%) on the legitimate STRUCTURAL incentive (a win + GD takes them through as a best third) was the right call -- they came out attacking and ran up the score, exactly the thesis. The 5-0 is well into the upside tail (the model had 'win by 3+' at 13.3%), so Senegal massively overperformed xG. The correctly-uncertain caveat still stood: I told the user a 2+ margin was only ~30% -- it landed in that favourable tail, which is honest, not a miss.",
+    "lesson": "Distinguish STRUCTURAL incentives (qualification + GD matters -> lift, attack) from SPECULATIVE motivation narratives (eliminated/demotivated -> the South Africa trap). The former is a legitimate, hard adjustment; the latter is not. Here the structural lift was right; the magnitude (5-0) was tail variance an attacking side can produce against a broken opponent."
+  }
 }
