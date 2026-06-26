@@ -1,0 +1,49 @@
+{
+  "_comment": "WC2026 Group H, MD3. Standings before: Spain 4, Uruguay 2, Cape Verde 2 (0-0 Spain, 2-2 Uruguay), Saudi 1 (1-1 Uruguay, 0-4 Spain). BOTH need to win to qualify (Cape Verde for 2nd/best-third, Saudi for a slim chance) -> structural must-win for both -> open game. Cape Verde the slightly better side: organized AND can score (held Spain to 0-0, scored 2 vs Uruguay); Saudi weak (0-4 Spain) but drew Uruguay. Near-even, Cape Verde a small edge. Home = Cape Verde, away = Saudi Arabia. Cards not modelled (referee TBD).",
+  "meta": {
+    "home": "Cape Verde",
+    "away": "Saudi Arabia",
+    "venue": "World Cup 2026 - neutral",
+    "date": "2026-06-24",
+    "stage": "World Cup 2026 - Group H - MD3",
+    "stakes": "Both need a win to qualify (Cape Verde for 2nd / best-third, Saudi for a slim chance). Crucial; open, both-go-for-it game. Cape Verde a slight favourite."
+  },
+  "calibration": {
+    "base_home": 1.25,
+    "base_away": 1.25,
+    "rho": -0.05,
+    "home": {
+      "name": "Cape Verde",
+      "attack": 1.1,
+      "defense": 1.0,
+      "context": 1.05,
+      "notes": [
+        "Organized debutant that also scores: 0-0 Spain, 2-2 Uruguay. attack 1.10, context 1.05 (must-win).",
+        "Resilient. defense 1.0.",
+        "Slight edge and motivated -> open game."
+      ]
+    },
+    "away": {
+      "name": "Saudi Arabia",
+      "attack": 0.95,
+      "defense": 1.08,
+      "context": 1.05,
+      "notes": [
+        "Weak vs quality (0-4 Spain) but drew Uruguay. attack 0.95, context 1.05 (must-win too).",
+        "Leaky. defense 1.08.",
+        "Also needs the win -> both attack."
+      ]
+    }
+  },
+  "market": {
+    "odds": [
+      2.05,
+      3.2,
+      3.7
+    ]
+  },
+  "lambdas_override": {
+    "home": 1.42,
+    "away": 1.0
+  }
+}
