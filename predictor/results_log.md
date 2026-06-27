@@ -35,8 +35,8 @@ Legend: ✅ right for the right reason · 🟡 right but by luck/margin ·
 | 2026-06-24 | Bosnia & Herz. vs Qatar | 55.7 / 26.1 / 18.2 | MEDIUM | 3-1 (Bosnia win) | ✅ |
 | 2026-06-24 | Norway vs France | 34.2 / 25.1 / 40.7 | LOW | 1-4 (France win) | ✅ |
 | 2026-06-24 | Senegal vs Iraq | 54.7 / 25.3 / 20.0 | MEDIUM | 5-0 (Senegal win) | ✅ |
-| 2026-06-24 | Uruguay vs Spain | 23.8 / 25.3 / 50.8 | MEDIUM | ⏳ pending | ⏳ |
-| 2026-06-24 | Cape Verde vs Saudi Arabia | 39.9 / 28.4 / 31.8 | LOW | ⏳ pending | ⏳ |
+| 2026-06-24 | Uruguay vs Spain | 23.8 / 25.3 / 50.8 | MEDIUM | 0-1 (Spain win) | ✅ |
+| 2026-06-24 | Cape Verde vs Saudi Arabia | 39.9 / 28.4 / 31.8 | LOW | 0-0 (draw) | 🟡 |
 
 ### Emerging pattern: favorites vs low block (key)
 
@@ -553,10 +553,10 @@ Standings before: Spain 4, Uruguay 2, Cape Verde 2, Saudi Arabia 1. Crucial for
 Monte Carlo (N=200k) agrees to <0.2 pts on both.
 
 - **Uruguay vs Spain** — Uruguay 23.8 / Draw 25.3 / Spain 50.8 (MEDIUM). λ 1.08 /
-  1.68, xG 2.76. Market 22.4 / 27.0 / 50.5 (div 1.7). **RECALIBRATED with team news:**
-  Uruguay miss Araujo (best CB → leakier defence) and Arrascaeta (creator); Darwin
-  Nunez starts (offsets attack). Spain at FULL strength — Lamine Yamal starts. Spain
-  a clearer favourite now. Top 3 scorelines: 1-1 (12.1%), 0-1 (10.1%), 1-2 (9.6%).
+  1.68. **RESULT: Spain 0-1 ✅** — XI recalibration vindicated: Spain (full strength,
+  Lamine) won by the model's #2 scoreline (0-1), clean sheet; Uruguay, without
+  creator Arrascaeta, blanked. Confirmed-XI adjustment = the legitimate kind, and it
+  paid off.
 - **Cape Verde vs Saudi Arabia** — Cape Verde 42.1 / Draw 28.3 / Saudi 29.7
   (LOW). λ 1.36 / 1.10, xG 2.46. Market 43.4 / 29.2 / 27.4 (div 2.2). **RECALIBRATED
   with team news:** Cape Verde lose suspended DF Sidny Lopes (2nd yellow vs Uruguay)
