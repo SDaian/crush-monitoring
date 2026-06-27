@@ -260,7 +260,7 @@ const KNOWN = {
   I:[[0,3,3,1],[2,1,4,1],[0,1,3,1],[2,3,3,1],[0,2,4,1],[1,3,0,5]], // Fra3-1 Sen ; Nor4-1 Iraq ; Fra3-1 Iraq ; Nor3-1 Sen ; Fra4-1 Nor ; Iraq0-5 Sen
   J:[[0,3,3,0],[1,2,3,1],[0,1,2,0],[2,3,1,2]],  // Arg3-0 Alg ; Aut3-1 Jor ; Arg2-0 Aut ; Jor1-2 Alg
   K:[[0,3,1,1],[1,2,1,3],[0,1,4,0],[2,3,1,0]],  // Por1-1 CongoDR ; Uzb1-3 Col ; Por4-0 Uzb ; Col1-0 CongoDR
-  L:[[0,3,4,2],[1,2,1,0],[0,1,0,0],[3,2,1,0]]   // Eng4-2 Cro ; Gha1-0 Pan ; Eng0-0 Gha ; Cro1-0 Pan
+  L:[[0,3,4,2],[1,2,1,0],[0,1,0,0],[3,2,1,0],[2,0,0,2],[3,1,2,1]]   // Eng4-2 Cro ; Gha1-0 Pan ; Eng0-0 Gha ; Cro1-0 Pan ; Pan0-2 Eng ; Cro2-1 Gha
 };
 
 /* ---- round-robin fixture order for 4 teams ---- */
@@ -423,7 +423,15 @@ const RESULTS_LOG=[
   { date:"2026-06-25", match:"New Zealand vs Belgium", group:"G", conf:"HIGH", mark:"✅",
     h:"New Zealand", a:"Belgium", p:[16.8,21.6,61.6], xg:[0.98,2.05],
     result:"1-5 (Belgium)",
-    post:"Full process hit. Favourite won and every goals read landed: 6 goals (Over 2.5 58.3% / Over 3.5 35.9%), BTTS Yes (54.9%). Recalibration vindicated: the first pass sat 5.2 pts below the market on Belgium and I lifted it on the 'don't fade an elite favourite vs an OPEN side' lesson (Spain). Belgium had been blunt vs organized blocks (1 goal in 2), but vs an open New Zealand it finally broke through — and then some. The 5-1 margin is upside-tail finishing (λ 2.05), but side, volume and texture were all right. Belgium top Group G on GD." }
+    post:"Full process hit. Favourite won and every goals read landed: 6 goals (Over 2.5 58.3% / Over 3.5 35.9%), BTTS Yes (54.9%). Recalibration vindicated: the first pass sat 5.2 pts below the market on Belgium and I lifted it on the 'don't fade an elite favourite vs an OPEN side' lesson (Spain). Belgium had been blunt vs organized blocks (1 goal in 2), but vs an open New Zealand it finally broke through — and then some. The 5-1 margin is upside-tail finishing (λ 2.05), but side, volume and texture were all right. Belgium top Group G on GD." },
+  { date:"2026-06-26", match:"Panama vs England", group:"L", conf:"HIGH", mark:"✅",
+    h:"Panama", a:"England", p:[8.6,20.9,70.5], xg:[0.52,1.92],
+    result:"0-2 (England)",
+    post:"Full process hit. England won by the model's #2 scoreline (0-2, 16.1%), clean sheet (59.5%), BTTS No (64.9%), Under 2.5 (55.9%); xG 1.92 → 2 goals, near-exact. The 'favourite vs organized block' caveat resolved benignly: Panama parked the bus but England broke through cleanly without a rout. The draw/0-0 tail (priced ~21%/9%) didn't fire but was the correct correctly-uncertain hedge. England win the group; Panama out." },
+  { date:"2026-06-26", match:"Croatia vs Ghana", group:"L", conf:"MEDIUM", mark:"✅",
+    h:"Croatia", a:"Ghana", p:[52.2,27.1,20.7], xg:[1.52,0.86],
+    result:"2-1 (Croatia)",
+    post:"1X2 hit and the STRUCTURAL read vindicated: Croatia needed the win for 2nd, attacked, and got it. λ excellent (Croatia 1.52 → 2, Ghana 0.86 → 1). The thirds cross-check paid off exactly: Croatia winning → 2nd direct, Ghana losing → a safe 4-pt third. Only texture miss was goals: leaned Under 2.5 / BTTS No, but it was 2-1 (Over + BTTS Yes). Lesson: an already-safe block (Ghana qualified even in defeat) plays more openly than a cornered must-not-concede bus — don't over-short BTTS there." }
 ];
 
 /* ===========================================================================
@@ -477,7 +485,7 @@ function calibFor(m){ if(!m) return null;
    =========================================================================== */
 // Build/data stamp shown in the header. The app is stateless: nothing is
 // persisted, so reloading (F5) always returns to the official results.
-const DATA_VERSION="2026-06-26.grpL-md3-calibrated+orientfix";
+const DATA_VERSION="2026-06-26.grpL-results";
 let state={ results:{}, strengths:{}, learn:[] };
 
 function freshStrengths(){ const s={}; for(const t in TEAMS) s[t]=TEAMS[t]; return s; }

@@ -6,5 +6,11 @@
     "home":{"name":"Croatia","attack":1.22,"defense":0.95,"context":1.05,"notes":["Quality, Modric-led; scored 2 vs England. MUST WIN -> attacks (legitimate structural incentive, not a motivation guess). attack 1.22, context 1.05.","Decent but not airtight at the back (conceded 4 to England). defense 0.95.","Goal-hungry by necessity, rho -0.05 (open)."]},
     "away":{"name":"Ghana","attack":0.85,"defense":0.92,"context":1.0,"notes":["Stingy, organized: 0-0 England, conceded 0 all group. attack 0.85 (low, plays for the point).","Hard to break down -> keeps the draw/Under live. defense 0.92.","A draw qualifies them 2nd -> will sit deep and protect it."]}},
   "market": {"odds":[1.90,3.30,4.20]},
-  "lambdas_override": {"home":1.52,"away":0.86}
+  "lambdas_override": {"home":1.52,"away":0.86},
+  "_postmatch": {
+    "result": "Croatia 2-1 Ghana. Croatia win and take 2nd (6 pts, GD 0), qualifying directly; Ghana finish 3rd on 4 pts (GD 0) and go through as one of the best thirds -- exactly the thirds-table scenario.",
+    "model_1x2": "Croatia 52.2 / Draw 27.1 / Ghana 20.7 (MEDIUM)",
+    "verdict": "1X2 hit and, more importantly, the STRUCTURAL read was vindicated: Croatia needed the win for 2nd, came out attacking, and got it. The lambdas were excellent -- Croatia 1.52 -> 2 goals, Ghana 0.86 -> 1 -- so the xG calibration was spot on. The thirds cross-check also paid off: Croatia winning -> 2nd direct, and Ghana losing -> a safe 4-pt third, precisely as flagged. The only texture miss was the goals envelope: I leaned Under 2.5 (57.5%) and BTTS No (54.3%), but it was 2-1 (Over + BTTS Yes). Ghana's block leaked a goal -- and since Ghana were already virtually qualified (a loss still made them a safe third), they had no need to lock down 0-0, which fits the slightly more open game.",
+    "lesson": "STRUCTURAL incentive (must-win for 2nd + GD safety) correctly drove the attacking lift and the side call. Refinement on texture: when the underdog block is ALREADY safe (Ghana qualified even in defeat), it has less reason to sit ultra-deep -> don't over-short BTTS/Over the way you would against a desperate, must-not-concede bus. Stakes shape game-state, and a comfortable block plays more openly than a cornered one."
+  }
 }

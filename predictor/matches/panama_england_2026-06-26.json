@@ -5,5 +5,11 @@
     "home":{"name":"Panama","attack":0.62,"defense":1.05,"context":1.0,"notes":["Eliminated, scored 0 in two games, but organized: lost both only 0-1. attack 0.62 (no over-downgrade -- South Africa lesson).","Disciplined block, concedes ~1/game. defense 1.05.","Nothing to play for on points, but pride + a parked bus -> can frustrate."]},
     "away":{"name":"England","attack":1.45,"defense":0.82,"context":1.0,"notes":["Quality side, beat Croatia 4-2; real firepower (Kane/Bellingham). attack 1.45.","Strong defense, kept Ghana to 0. defense 0.82.","Favourite but a proven low block keeps the draw/Under live -> don't overrate the rout."]}},
   "market": {"odds":[9.50,5.00,1.33]},
-  "lambdas_override": {"home":0.52,"away":1.92}
+  "lambdas_override": {"home":0.52,"away":1.92},
+  "_postmatch": {
+    "result": "Panama 0-2 England. England win the group (7 pts, GD +4); Panama finish last (0 pts) and out.",
+    "model_1x2": "Panama 8.6 / Draw 20.9 / England 70.5 (HIGH)",
+    "verdict": "Full process hit. England won by the model's #2 scoreline (0-2, 16.1%), kept the clean sheet (59.5%), and the goals reads all landed: BTTS No (64.9%), Under 2.5 (55.9%). xG England 1.92 -> 2 goals, almost exact. The 'favourite vs organized block' caveat resolved on the benign side: Panama parked the bus but England broke through cleanly without a rout (2-0, right on lambda), so the draw/Under value tail did not fire but was correctly priced as the minority scenario.",
+    "lesson": "When a favourite faces a disciplined low block, 2-0/2 goals on-lambda is the modal break-through, not a rout — and not a 0-0 either. Pricing the draw/Under as a live-but-minority tail (here ~21% draw, 9% 0-0) was the honest middle: it didn't hit, but it was the correctly-uncertain hedge, and the central 0-1/0-2 call carried the match."
+  }
 }
