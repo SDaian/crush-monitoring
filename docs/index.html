@@ -477,7 +477,7 @@ function calibFor(m){ if(!m) return null;
    =========================================================================== */
 // Build/data stamp shown in the header. The app is stateless: nothing is
 // persisted, so reloading (F5) always returns to the official results.
-const DATA_VERSION="2026-06-26.grpL-md3-calibrated";
+const DATA_VERSION="2026-06-26.grpL-md3-calibrated+orientfix";
 let state={ results:{}, strengths:{}, learn:[] };
 
 function freshStrengths(){ const s={}; for(const t in TEAMS) s[t]=TEAMS[t]; return s; }
@@ -927,11 +927,15 @@ function matchForecast(mid){
    ${bar(esc(A),bt.h,"win")}${bar("Draw",bt.d,"draw")}${bar(esc(B),bt.a,"loss")}
    <div class="fc-note">Logistic strength model (k=${BTD_K}, ν=${BTD_NU}); no goal markets by design. Good sanity check on the 1X2; for scorelines/Over/BTTS use the engines above.</div>`;
   const cal=calibFor(m);
+  // The calibrated entry stores p[] in its OWN home/away orientation (cal.h/cal.a),
+  // which can be the reverse of this fixture's home(A)/away(B). Re-orient by team
+  // name so the comparison columns (A / Draw / B) line up with the simulator/BTD rows.
+  const calP = cal ? (cal.h===A ? [cal.p[0],cal.p[1],cal.p[2]] : [cal.p[2],cal.p[1],cal.p[0]]) : null;
   // --- engine comparison header: 1X2 from every available engine ---
   const row=(label,p,cls)=>`<tr class="${cls}"><td>${label}</td><td>${(p[0]).toFixed(1)}</td><td>${(p[1]).toFixed(1)}</td><td>${(p[2]).toFixed(1)}</td></tr>`;
   const cmp=`<div class="fc-cmp"><div class="fc-cmp-h">Engine comparison · 1X2 (${esc(A)} / Draw / ${esc(B)})</div>
    <table class="fc-mc fc-cmptab"><tr><th>engine</th><th>${esc(A)}</th><th>Draw</th><th>${esc(B)}</th></tr>
-   ${cal?row("★ Calibrated (biv.Poisson+DC)",[cal.p[0],cal.p[1],cal.p[2]],"cmp-cal"):""}
+   ${calP?row("★ Calibrated (biv.Poisson+DC)",calP,"cmp-cal"):""}
    ${row("⚙ Simulator (indep.Poisson)",[H*100,D*100,Aw*100],"cmp-sim")}
    ${row("📐 Bradley-Terry-Davidson",[bt.h*100,bt.d*100,bt.a*100],"cmp-btd")}
    </table></div>`;
