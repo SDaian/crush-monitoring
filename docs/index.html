@@ -255,7 +255,7 @@ const KNOWN = {
   D:[[0,3,4,1],[1,2,2,0],[0,1,2,0],[2,3,0,1],[0,2,2,3],[1,3,0,0]], // USA4-1 Par ; Aus2-0 Tur ; USA2-0 Aus ; Tur0-1 Par ; USA2-3 Tur ; Aus0-0 Par
   E:[[0,3,7,1],[1,2,1,0],[0,1,2,1],[2,3,0,0],[0,2,1,2],[1,3,2,0]],// Ger7-1 Cur ; Civ1-0 Ecu ; Ger2-1 Civ ; Ecu0-0 Cur ; Ger1-2 Ecu ; Civ2-0 Cur
   F:[[0,2,2,2],[1,3,5,1],[0,1,5,1],[2,3,4,0],[3,0,1,3],[1,2,1,1]],// Ned2-2 Jpn ; Swe5-1 Tun ; Ned5-1 Swe ; Jpn4-0 Tun ; Tun1-3 Ned ; Swe1-1 Jpn
-  G:[[0,2,1,1],[1,3,2,2],[0,1,0,0],[2,3,3,1]],// Bel1-1 Egy ; Ira2-2 NZ ; Bel0-0 Ira ; Egy3-1 NZ
+  G:[[0,2,1,1],[1,3,2,2],[0,1,0,0],[2,3,3,1],[2,1,1,1],[3,0,1,5]],// Bel1-1 Egy ; Ira2-2 NZ ; Bel0-0 Ira ; Egy3-1 NZ ; Egy1-1 Ira ; NZ1-5 Bel
   H:[[0,1,0,0],[3,2,1,1],[0,2,4,0],[3,1,2,2],[0,3,1,0],[1,2,0,0]], // Spain0-0 CV ; Uru1-1 Sau ; Spain4-0 Sau ; Uru2-2 CV ; Spain1-0 Uru ; CV0-0 Sau
   I:[[0,3,3,1],[2,1,4,1],[0,1,3,1],[2,3,3,1],[0,2,4,1],[1,3,0,5]], // Fra3-1 Sen ; Nor4-1 Iraq ; Fra3-1 Iraq ; Nor3-1 Sen ; Fra4-1 Nor ; Iraq0-5 Sen
   J:[[0,3,3,0],[1,2,3,1],[0,1,2,0],[2,3,1,2]],  // Arg3-0 Alg ; Aut3-1 Jor ; Arg2-0 Aut ; Jor1-2 Alg
@@ -415,7 +415,15 @@ const RESULTS_LOG=[
   { date:"2026-06-24", match:"Cape Verde vs Saudi Arabia", group:"H", conf:"LOW", mark:"🟡",
     h:"Cape Verde", a:"Saudi Arabia", p:[39.9,28.4,31.8], xg:[1.32,1.15],
     result:"0-0 (draw)",
-    post:"Flagged as a near-even coin-flip (LOW, no strong read); the draw (28.4%) came in — the tightest version, 0-0. The CONFIRMED-XI recalibration (both attacks depleted → even + lower-scoring) was directionally right: I cut Cape Verde with the lone-striker XI and the game was indeed goalless (Under 1.5 was only 28.7%). No 1X2 edge to be right about — there genuinely wasn't a favourite. Cape Verde still qualify 2nd; a depleted must-win cancelled into 0-0." }
+    post:"Flagged as a near-even coin-flip (LOW, no strong read); the draw (28.4%) came in — the tightest version, 0-0. The CONFIRMED-XI recalibration (both attacks depleted → even + lower-scoring) was directionally right: I cut Cape Verde with the lone-striker XI and the game was indeed goalless (Under 1.5 was only 28.7%). No 1X2 edge to be right about — there genuinely wasn't a favourite. Cape Verde still qualify 2nd; a depleted must-win cancelled into 0-0." },
+  { date:"2026-06-25", match:"Egypt vs Iran", group:"G", conf:"MEDIUM", mark:"🟡",
+    h:"Egypt", a:"Iran", p:[45.6,30.8,23.6], xg:[1.25,0.82],
+    result:"1-1 (draw)",
+    post:"1X2 side missed (the 46% favourite didn't win) but the recalibrated thesis landed. After Iran confirmed a 5-4-1 with Taremi as a lone striker I trimmed both λ toward the draw/Under — and 1-1 came in: a top-3 scoreline (13.7%), the draw priced above market, total 2 goals = Under 2.5 (65.8%). Only BTTS missed (leaned No 59.3%, was Yes). Same family as Belgium-Iran 0-0: an organized block frustrates the favourite, cashed via the DRAW, not BTTS-No. Egypt still finish 2nd; Iran 3rd, best-third contention." },
+  { date:"2026-06-25", match:"New Zealand vs Belgium", group:"G", conf:"HIGH", mark:"✅",
+    h:"New Zealand", a:"Belgium", p:[16.8,21.6,61.6], xg:[0.98,2.05],
+    result:"1-5 (Belgium)",
+    post:"Full process hit. Favourite won and every goals read landed: 6 goals (Over 2.5 58.3% / Over 3.5 35.9%), BTTS Yes (54.9%). Recalibration vindicated: the first pass sat 5.2 pts below the market on Belgium and I lifted it on the 'don't fade an elite favourite vs an OPEN side' lesson (Spain). Belgium had been blunt vs organized blocks (1 goal in 2), but vs an open New Zealand it finally broke through — and then some. The 5-1 margin is upside-tail finishing (λ 2.05), but side, volume and texture were all right. Belgium top Group G on GD." }
 ];
 
 /* ===========================================================================
@@ -467,7 +475,7 @@ function calibFor(m){ if(!m) return null;
    =========================================================================== */
 // Build/data stamp shown in the header. The app is stateless: nothing is
 // persisted, so reloading (F5) always returns to the official results.
-const DATA_VERSION="2026-06-25.grpG-md3-calibrated";
+const DATA_VERSION="2026-06-25.grpG-results";
 let state={ results:{}, strengths:{}, learn:[] };
 
 function freshStrengths(){ const s={}; for(const t in TEAMS) s[t]=TEAMS[t]; return s; }

@@ -10,5 +10,11 @@
     "_comment": "Confirmed/projected XIs (RotoWire/Sky, ~60 min pre-KO). Iran's shape is the key signal: a 5-4-1 ultra-defensive block with Taremi as the LONE striker -> pure containment, which REINFORCES the organized-underdog/Under read (cf. England-Ghana). Egypt field a full-strength attack (Salah + Marmoush both start). Net adjustment vs the strength baseline: trim Egypt 1.30 -> 1.25 (a packed 5-man box is harder to break) and Iran 0.92 -> 0.82 (a lone striker behind a bus generates little), tilting toward the draw/Under tail while keeping Egypt the favourite.",
     "home":{"team":"Egypt","formation":"4-2-3-1","xi":["Shobeir","Hany","Yasser Ibrahim","Ramy Rabia","El Fotouh","Lasheen","Marwan Attia","Ziko","Emam Ashour","Salah","Marmoush"]},
     "away":{"team":"Iran","formation":"5-4-1","xi":["Beiranvand","Rezaeian","Kanaanizadegan","Khalilzadeh","Nemati","Mohammadi","Ezatolahi","Ghoddos","Mohebi","Yousefi","Taremi"]}
+  },
+  "_postmatch": {
+    "result": "Egypt 1-1 Iran. The draw and the low-scoring read both landed; Egypt finish 2nd (5 pts, GD +2), Belgium top the group on GD (+4), Iran 3rd on 3 pts (GD 0, in best-third contention), New Zealand out.",
+    "model_1x2": "Egypt 45.6 / Draw 30.8 / Iran 23.6 (MEDIUM, post-XI)",
+    "verdict": "1X2 'side' missed (the 46% favourite did not win) but the recalibrated thesis was RIGHT: after Iran confirmed a 5-4-1 with Taremi as a lone striker I trimmed both lambdas toward the draw/Under, and that is exactly what happened. 1-1 was a top-3 scoreline (13.7%), the draw was rated well above its market-implied value once flagged, and the total (2 goals) hit the Under 2.5 (65.8%). The one goals-market that missed was BTTS: I leaned No (59.3%) and it was Yes (1-1). Same family as Belgium-Iran 0-0 and Uruguay-Cape Verde 2-2: a proven organized block frustrates the favourite, and the honest vehicle is the RESULT (draw), not BTTS-No.",
+    "lesson": "Reading Iran's confirmed bus (5-4-1, lone striker) and tilting to the draw/Under was the correct, non-speculative XI adjustment — it is structural shape, not a motivation guess. Keep expressing 'favourite frustrated by an organized block' through the DRAW; do not also short BTTS, because even a parked block converts the odd chance (here Iran's single goal made it BTTS Yes)."
   }
 }

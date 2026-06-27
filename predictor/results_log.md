@@ -37,6 +37,8 @@ Legend: ✅ right for the right reason · 🟡 right but by luck/margin ·
 | 2026-06-24 | Senegal vs Iraq | 54.7 / 25.3 / 20.0 | MEDIUM | 5-0 (Senegal win) | ✅ |
 | 2026-06-24 | Uruguay vs Spain | 23.8 / 25.3 / 50.8 | MEDIUM | 0-1 (Spain win) | ✅ |
 | 2026-06-24 | Cape Verde vs Saudi Arabia | 39.9 / 28.4 / 31.8 | LOW | 0-0 (draw) | 🟡 |
+| 2026-06-25 | Egypt vs Iran | 45.6 / 30.8 / 23.6 | MEDIUM | 1-1 (draw) | 🟡 |
+| 2026-06-25 | New Zealand vs Belgium | 16.8 / 21.6 / 61.6 | HIGH | 1-5 (Belgium win) | ✅ |
 
 ### Emerging pattern: favorites vs low block (key)
 
@@ -565,3 +567,40 @@ Monte Carlo (N=200k) agrees to <0.2 pts on both.
   both (BTTS 50%). Top 3 scorelines: 1-1 (13.4%), 1-0 (11.0%), 0-0 (9.2%).
 
 *To be graded after the matches (xG vs actual, 1X2, lesson).*
+
+---
+
+## 2026-06-25 · Group G finals (MD3) — graded
+
+Standings before: Egypt 4, Belgium 2, Iran 2, New Zealand 1. Both matches were
+recalibrated with the confirmed XIs (`_lineups` blocks). Final table: **Belgium 1st**
+(5 pts, GD +4), **Egypt 2nd** (5 pts, GD +2; Belgium win the head-to-head tie on GD
+after the 1-1 between them), **Iran 3rd** (3 pts, GD 0 — best-third contention),
+New Zealand 4th and out.
+
+- **Egypt vs Iran** — Egypt 45.6 / Draw 30.8 / Iran 23.6 (MEDIUM). λ 1.25 / 0.82,
+  xG 2.07. Market 44.2 / 30.0 / 25.8 (div 2.2). **RESULT: 1-1 🟡.** The 1X2 *side*
+  missed (the 46% favourite did not win) but the recalibrated thesis landed: after
+  Iran confirmed a **5-4-1 with Taremi as a lone striker** I trimmed both λ toward the
+  draw/Under, and that is exactly what came in. 1-1 was a top-3 scoreline (13.7%), the
+  draw was priced above its market value once flagged, and the 2-goal total hit Under
+  2.5 (65.8%). The lone goals-market miss was BTTS (leaned No 59.3%, came in Yes). Same
+  family as Belgium-Iran 0-0 and Uruguay-Cape Verde 2-2: a proven organized block
+  frustrates the favourite, and the honest vehicle is the **draw (result)**, not
+  BTTS-No — even a parked block converts the odd chance.
+- **New Zealand vs Belgium** — NZ 16.8 / Draw 21.6 / Belgium 61.6 (HIGH). λ 0.98 /
+  2.05, xG 3.03. Market 14.5 / 23.5 / 62.0 (div 2.3). **RESULT: 1-5 Belgium ✅** —
+  full process hit. Favourite won, and every goals read landed: 6 goals (Over 2.5
+  58.3% / Over 3.5 35.9%), BTTS Yes (54.9%). The **recalibration was vindicated**: the
+  first pass sat 5.2 pts below the market on Belgium and I lifted it on the "don't fade
+  an elite favourite vs an OPEN side" lesson (Spain). Belgium had been blunt vs
+  organized blocks (1 goal in 2 vs Egypt/Iran) but, facing an open New Zealand rather
+  than a low block, it finally broke through — and then some. The 5-1 margin is in the
+  upside tail (λ 2.05 → 5 goals = finishing overperformance), but side, volume and
+  texture were all correct.
+
+**Lesson crystallised (Group G MD3):** classify the underdog's setup FIRST. Against a
+confirmed bus (Iran 5-4-1) tilt to the draw/Under and express it via the RESULT;
+against an OPEN side (New Zealand) never lean below an elite favourite. Both XI-driven
+adjustments were the legitimate, structural kind (shape, not motivation) — and both
+graded out right.

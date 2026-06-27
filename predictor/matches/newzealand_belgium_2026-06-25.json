@@ -10,5 +10,11 @@
     "_comment": "Confirmed/projected XIs (RotoWire/Sports Mole, ~60 min pre-KO). Two offsetting changes for Belgium: (a) Nathan Ngoy is SUSPENDED (red card vs Iran) -> Theate deputises, a small downgrade on the first-choice CB pairing; (b) Doku is back in the squad after paternity leave, restoring attacking depth. Otherwise a full-strength side (Courtois, De Bruyne, Tielemans, Trossard, Lukaku). New Zealand name an unchanged XI (Wood up top), still an open side. Net: the two Belgium changes roughly cancel on attack, but the missing first-choice CB nudges NZ's scoring up a touch (0.92 -> 0.98); Belgium's 2.05 holds. Still aligned with the market and HIGH confidence.",
     "home":{"team":"New Zealand","formation":"4-2-3-1","xi":["Crocombe","Cacace","Boxall","Bindon","Old","Stamenic","Bell","Just","Garbett","Singh","Wood"]},
     "away":{"team":"Belgium","formation":"4-3-3","xi":["Courtois","Meunier","Theate","Mechele","Castagne","Onana","Tielemans","De Bruyne","Saelemaekers","Trossard","Lukaku"]}
+  },
+  "_postmatch": {
+    "result": "New Zealand 1-5 Belgium. Belgium routed an open NZ and topped Group G on goal difference (+4); New Zealand finish last (1 pt) and are out.",
+    "model_1x2": "New Zealand 16.8 / Draw 21.6 / Belgium 61.6 (HIGH, post-XI)",
+    "verdict": "Full process hit. 1X2 favourite landed, and EVERY goals read was right: total 6 goals (Over 2.5 58.3% / Over 3.5 35.9% both in), BTTS Yes (54.9%). Most importantly the RECALIBRATION was vindicated: the first pass sat 5.2 pts below the market on Belgium and I lifted it on the 'do not fade an elite favourite vs an open side' lesson (Spain). Belgium had been blunt vs organized blocks (1 goal in 2 vs Egypt/Iran), but vs an OPEN New Zealand — not a low block — it finally broke through, exactly the archetype. The 5-1 margin is in the upside tail (Belgium lambda 2.05 -> 5 goals = finishing overperformance), but the direction, side, and goal volume were all correct.",
+    "lesson": "Confirms two rules at once: (1) do not lean below an elite favourite when the opponent is OPEN rather than a parked bus — classify the underdog's setup first (cf. Egypt-NZ); (2) Belgium's earlier bluntness was opponent-shape-dependent, not a true downgrade. The margin overshoot is honest variance an elite attack produces against a stretched, must-win minnow."
   }
 }
