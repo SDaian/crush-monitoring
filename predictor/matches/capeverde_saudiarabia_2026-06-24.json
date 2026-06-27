@@ -51,5 +51,11 @@
     "Cape Verde": "4-2-3-1: Vozinha; Paulo, Pico, Borges, Pina; Duarte, Lenini; Semedo, Monteiro, Mendes; Livramento. WITHOUT Sidny Lopes (suspended), Jovane Cabral AND Garry Rodrigues -> modest attack, lone striker.",
     "Saudi Arabia": "4-4-2: Al-Owais; N.Al-Dawsari, Tambakti, Al-Amri, Boushal; S.Al-Dawsari, Kanno, Al-Khaibari, Abdulhamid; Mandash, Al-Buraikan. Kanno starts; TWO strikers -> more attacking.",
     "_note": "Confirmed XIs nudge the game to near-even: Cape Verde attack a touch weaker (no Garry Rodrigues, lone striker), Saudi a touch more attacking (4-4-2, two forwards)."
+  },
+  "_postmatch": {
+    "result": "Cape Verde 0-0 Saudi Arabia. Goalless; both depleted attacks cancelled out.",
+    "model_1x2": "Cape Verde 39.9 / Draw 28.4 / Saudi 31.8 (LOW, coin-flip)",
+    "verdict": "Flagged as a near-even coin-flip with NO strong read; the draw (28.4%) came in -- the tightest version, 0-0. The CONFIRMED-XI recalibration (both attacks depleted -> lower-scoring, more even) was directionally RIGHT: I cut Cape Verde with the lone-striker XI and the game was indeed low-scoring (0 goals, Under 1.5 which was only 28.7%). No decisive 1X2 winner because there genuinely wasn't a favourite. Cape Verde still qualify 2nd; the draw was enough.",
+    "lesson": "On a true coin-flip, grade the texture: the 'even + low-scoring' read (post-XI) was right; the 1X2 had no edge to be right about. A depleted must-win can cancel into 0-0."
   }
 }

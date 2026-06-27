@@ -51,5 +51,11 @@
     "Uruguay": "Muslera (GK, confirmed); WITHOUT Ronald Araujo (CB) and De Arrascaeta (creator), both injured; Darwin Nunez STARTS.",
     "Spain": "Full strength; Lamine Yamal STARTS (recovered).",
     "_note": "All key items confirmed -> recalibration locked: Uruguay 23.8 / Draw 25.3 / Spain 50.8 (MEDIUM). lambdas 1.08 / 1.68 unchanged from the team-news recalibration."
+  },
+  "_postmatch": {
+    "result": "Spain 1-0 Uruguay (Uruguay 0-1 Spain). Spain controlled, clean sheet; Uruguay blanked.",
+    "model_1x2": "Uruguay 23.8 / Draw 25.3 / Spain 50.8 (MEDIUM, after XI recalibration)",
+    "verdict": "Clean hit and the XI recalibration was VINDICATED. The team-news move (Spain up to 50.8% at full strength with Lamine; Uruguay down without Araujo + Arrascaeta) was right: Spain won by the model's #2 scoreline (0-1, 10.1%), kept a clean sheet (34%), and Uruguay -- missing their creator Arrascaeta -- failed to score, exactly the depleted-attack read. Controlled 1-0, Under 2.5.",
+    "lesson": "Confirmed-XI adjustments (Araujo+Arrascaeta out, Lamine in) are the LEGITIMATE kind of recalibration -- they paid off, unlike the speculative motivation tweaks. Trust real team news."
   }
 }
