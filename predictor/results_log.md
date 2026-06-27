@@ -39,6 +39,8 @@ Legend: ✅ right for the right reason · 🟡 right but by luck/margin ·
 | 2026-06-24 | Cape Verde vs Saudi Arabia | 39.9 / 28.4 / 31.8 | LOW | 0-0 (draw) | 🟡 |
 | 2026-06-25 | Egypt vs Iran | 45.6 / 30.8 / 23.6 | MEDIUM | 1-1 (draw) | 🟡 |
 | 2026-06-25 | New Zealand vs Belgium | 16.8 / 21.6 / 61.6 | HIGH | 1-5 (Belgium win) | ✅ |
+| 2026-06-26 | Panama vs England | 8.6 / 20.9 / 70.5 | HIGH | 0-2 (England win) | ✅ |
+| 2026-06-26 | Croatia vs Ghana | 52.2 / 27.1 / 20.7 | MEDIUM | 2-1 (Croatia win) | ✅ |
 
 ### Emerging pattern: favorites vs low block (key)
 
@@ -604,3 +606,39 @@ confirmed bus (Iran 5-4-1) tilt to the draw/Under and express it via the RESULT;
 against an OPEN side (New Zealand) never lean below an elite favourite. Both XI-driven
 adjustments were the legitimate, structural kind (shape, not motivation) — and both
 graded out right.
+
+---
+
+## 2026-06-26 · Group L finals (MD3) — graded
+
+Standings before: England 4, Ghana 4, Croatia 3, Panama 0. Analysis explicitly
+cross-checked against the **best-thirds table** (top 8 of 12; FIFA pts → GD → GF).
+Final table: **England 1st** (7 pts, GD +4), **Croatia 2nd** (6 pts, GD 0),
+**Ghana 3rd** (4 pts, GD 0 → qualifies as a best third), Panama 4th and out.
+
+- **Panama vs England** — Panama 8.6 / Draw 20.9 / England 70.5 (HIGH). λ 0.52 /
+  1.92, xG 2.44. Market 10.0 / 18.9 / 71.1 (div 2.0). **RESULT: 0-2 England ✅** —
+  full process hit. England won by the model's #2 scoreline (0-2, 16.1%), clean sheet
+  (59.5%), BTTS No (64.9%), Under 2.5 (55.9%); xG 1.92 → 2 goals, near-exact. The
+  'favourite vs organized block' caveat resolved benignly: Panama parked the bus but
+  England broke through cleanly without a rout. The draw/Under tail (priced ~21% / 9%
+  0-0) didn't fire but was the correct correctly-uncertain hedge. **Lesson:** vs a
+  disciplined low block, 2 goals on-λ is the modal break-through — not a rout, not a
+  0-0; price the draw as a live minority, lead with 0-1/0-2.
+- **Croatia vs Ghana** — Croatia 52.2 / Draw 27.1 / Ghana 20.7 (MEDIUM). λ 1.52 /
+  0.86, xG 2.38. Market 49.3 / 28.4 / 22.3 (div 2.9). **RESULT: 2-1 Croatia ✅** — 1X2
+  hit and the STRUCTURAL read vindicated: Croatia needed the win for 2nd, attacked, and
+  got it. λ were excellent (Croatia 1.52 → 2, Ghana 0.86 → 1). The **thirds
+  cross-check paid off exactly**: Croatia winning → 2nd direct, Ghana losing → a safe
+  4-pt third — both as flagged. Only texture miss was the goals envelope: leaned Under
+  2.5 / BTTS No, but it was 2-1 (Over + BTTS Yes). **Lesson (new):** when the underdog
+  block is ALREADY safe (Ghana qualified even in defeat), it has less reason to sit
+  ultra-deep → don't over-short BTTS/Over as you would against a desperate must-not-
+  concede bus. Game-state is shaped by stakes: a comfortable block plays more openly
+  than a cornered one.
+
+**Thirds-table call, graded:** the pre-match analysis said Croatia needed only to
+avoid defeat (a draw = a safe 4-pt third) and that Ghana was virtually through in
+every outcome (even a loss = a safe third). Croatia went one better and won outright
+(2nd, direct); Ghana lost but qualified 3rd on 4 pts — both landed precisely as the
+best-thirds cross-check predicted.
