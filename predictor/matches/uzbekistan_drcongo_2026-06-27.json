@@ -6,5 +6,10 @@
     "home":{"name":"Uzbekistan","attack":0.85,"defense":1.12,"context":1.0,"notes":["Weak; lost both, conceded 7. attack 0.85 (no over-downgrade -- South Africa lesson).","Leaky, and DR Congo will push. defense 1.12.","Eliminated; pride only."]},
     "away":{"name":"DR Congo","attack":1.10,"defense":0.95,"context":1.08,"notes":["Organized (held Portugal 1-1), rating 70. attack 1.10.","MUST WIN by a margin for a best third -> legitimate STRUCTURAL lift, context 1.08 (not a motivation guess).","Decent defensively vs a weak Uzbekistan. defense 0.95."]}},
   "market": {"odds":[3.30,3.20,2.00]},
-  "lambdas_override": {"home":0.92,"away":1.38}
+  "lambdas_override": {"home":0.92,"away":1.38},
+  "_lineups": {
+    "_comment": "Confirmed/projected XIs (RotoWire/Sports Mole/SI, ~60 min pre-KO). They VALIDATE the calibration: coach Desabre is reported to abandon the back five for a FOUR-man defence 'given the need for goals' -> DR Congo go more attacking, exactly the structural must-win-by-margin thesis behind the context 1.08 lift. The side is talented (Wan-Bissaka, Mbemba, Masuaku; Bakambu + Wissa up top). Uzbekistan (Cannavaro) are fully fit but on a four-match losing run and weak (conceded 7), set up 3-4-3 with Shomurodov. No lambda change: the lineups confirm DR Congo as the motivated, goal-hungry favourite and Uzbekistan as the leaky, eliminated side.",
+    "home":{"team":"Uzbekistan","formation":"3-4-3","xi":["Yusupov","Khusanov","Abdullaev","Ashurmatov","Karimov","Mozgovoy","Shukurov","Nasrullaev","Fayzullaev","Urunov","Shomurodov"]},
+    "away":{"team":"DR Congo","formation":"4-2-3-1","xi":["Mpasi","Wan-Bissaka","Mbemba","Tuanzebe","Masuaku","Mukau","Moutoussamy","Kayembe","Sadiki","Bakambu","Wissa"]}
+  }
 }
