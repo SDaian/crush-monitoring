@@ -1,0 +1,9 @@
+{
+  "_comment": "WC2026 Group G, MD3. Standings before: Egypt 4 (1-1 Belgium, 3-1 NZ), Belgium 2, Iran 2 (2-2 NZ, 0-0 Belgium), NZ 1. Egypt near-top and the quality side (Salah); Iran is a PROVEN organized/defensive side (held Belgium 0-0) -> the organized-underdog archetype (England-Ghana / Colombia-DR Congo): Egypt favourite but the DRAW/Under is a live tail, don't overrate a rout. Iran needs a result too -> must-win edge. Home = Egypt, away = Iran. Cards not modelled (referee TBD).",
+  "meta": {"home":"Egypt","away":"Iran","venue":"World Cup 2026 - neutral","date":"2026-06-25","stage":"World Cup 2026 - Group G - MD3","stakes":"Egypt (4 pts) tops the group with a draw; Iran (2 pts) needs a result to qualify. Egypt the quality side; Iran organized and hard to break down."},
+  "calibration": {"base_home":1.25,"base_away":1.25,"rho":-0.06,
+    "home":{"name":"Egypt","attack":1.15,"defense":0.95,"context":1.0,"notes":["Salah-led; beat NZ 3-1, drew Belgium 1-1. attack 1.15.","Decent defense. defense 0.95.","Favourite but Iran's organization keeps the draw/Under live (held Belgium 0-0)."]},
+    "away":{"name":"Iran","attack":0.88,"defense":0.92,"context":1.0,"notes":["Organized, defensive: 0-0 Belgium, 2-2 NZ. attack 0.88.","Hard to break down. defense 0.92.","Needs a result -> will compete; low-scoring read."]}},
+  "market": {"odds":[2.10,3.10,3.60]},
+  "lambdas_override": {"home":1.30,"away":0.92}
+}

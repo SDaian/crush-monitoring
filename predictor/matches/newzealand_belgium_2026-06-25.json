@@ -1,0 +1,9 @@
+{
+  "_comment": "WC2026 Group G, MD3. Standings before: Egypt 4, Belgium 2 (1-1 Egypt, 0-0 Iran), Iran 2, NZ 1 (2-2 Iran, 1-3 Egypt). Belgium the clear quality side but BLUNT so far (1 goal in 2, frustrated by organized Egypt and Iran). NZ is OPEN, not a low block (2-2 Iran, conceded 3 to Egypt) -> the favourite+goals archetype (cf. Egypt-NZ, where backing favourite + goals was right). Both must-win-ish (Belgium for safety, NZ for any chance) -> open game. Belgium should finally break through vs an open NZ. Home = NZ, away = Belgium. Cards not modelled (referee TBD). RECALIBRATION: first pass sat 5.2 pts BELOW the market on Belgium (56.8% vs market-implied 62.0%). This is the recurring 'do not lean below an elite favourite vs an open opponent' lesson (Spain): NZ is open (not a low block) so there is no organized-underdog reason to fade Belgium. Lifted Belgium 1.85 -> 2.05 and trimmed NZ 1.00 -> 0.92 to align with the market.",
+  "meta": {"home":"New Zealand","away":"Belgium","venue":"World Cup 2026 - neutral","date":"2026-06-25","stage":"World Cup 2026 - Group G - MD3","stakes":"Belgium (2 pts) likely need a win to be safe; NZ (1 pt) must win for any chance. Belgium the clear favourite vs an open NZ; expect goals."},
+  "calibration": {"base_home":1.25,"base_away":1.25,"rho":-0.05,
+    "home":{"name":"New Zealand","attack":0.95,"defense":1.15,"context":1.0,"notes":["Open side: drew Iran 2-2, lost 1-3 to Egypt (concedes and scores). attack 0.95.","Leaky -> Belgium should score. defense 1.15.","Must win -> commits, opens the game further."]},
+    "away":{"name":"Belgium","attack":1.40,"defense":0.88,"context":1.0,"notes":["Quality but blunt vs organized sides (1 goal in 2); NZ is OPEN, not a low block -> Belgium breaks through. attack 1.40.","Solid defense. defense 0.88.","Favourite + goals archetype; aligned with market."]}},
+  "market": {"odds":[6.50,4.00,1.52]},
+  "lambdas_override": {"home":0.92,"away":2.05}
+}
