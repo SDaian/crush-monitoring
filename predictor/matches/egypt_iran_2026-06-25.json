@@ -5,5 +5,10 @@
     "home":{"name":"Egypt","attack":1.15,"defense":0.95,"context":1.0,"notes":["Salah-led; beat NZ 3-1, drew Belgium 1-1. attack 1.15.","Decent defense. defense 0.95.","Favourite but Iran's organization keeps the draw/Under live (held Belgium 0-0)."]},
     "away":{"name":"Iran","attack":0.88,"defense":0.92,"context":1.0,"notes":["Organized, defensive: 0-0 Belgium, 2-2 NZ. attack 0.88.","Hard to break down. defense 0.92.","Needs a result -> will compete; low-scoring read."]}},
   "market": {"odds":[2.10,3.10,3.60]},
-  "lambdas_override": {"home":1.30,"away":0.92}
+  "lambdas_override": {"home":1.25,"away":0.82},
+  "_lineups": {
+    "_comment": "Confirmed/projected XIs (RotoWire/Sky, ~60 min pre-KO). Iran's shape is the key signal: a 5-4-1 ultra-defensive block with Taremi as the LONE striker -> pure containment, which REINFORCES the organized-underdog/Under read (cf. England-Ghana). Egypt field a full-strength attack (Salah + Marmoush both start). Net adjustment vs the strength baseline: trim Egypt 1.30 -> 1.25 (a packed 5-man box is harder to break) and Iran 0.92 -> 0.82 (a lone striker behind a bus generates little), tilting toward the draw/Under tail while keeping Egypt the favourite.",
+    "home":{"team":"Egypt","formation":"4-2-3-1","xi":["Shobeir","Hany","Yasser Ibrahim","Ramy Rabia","El Fotouh","Lasheen","Marwan Attia","Ziko","Emam Ashour","Salah","Marmoush"]},
+    "away":{"team":"Iran","formation":"5-4-1","xi":["Beiranvand","Rezaeian","Kanaanizadegan","Khalilzadeh","Nemati","Mohammadi","Ezatolahi","Ghoddos","Mohebi","Yousefi","Taremi"]}
+  }
 }
