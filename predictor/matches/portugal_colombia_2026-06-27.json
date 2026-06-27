@@ -6,5 +6,10 @@
     "home":{"name":"Portugal","attack":1.20,"defense":0.88,"context":1.0,"notes":["Quality side (rating 90); beat Uzbekistan 4-0, drew DR Congo 1-1. attack 1.20.","Strong defense. defense 0.88.","Already through but must win to top the group; no rotation discount on speculation (Mexico lesson)."]},
     "away":{"name":"Colombia","attack":1.0,"defense":0.92,"context":1.0,"notes":["Efficient (3-1 Uzbekistan, 1-0 DR Congo), rating 83. attack 1.0.","Organized at the back. defense 0.92.","Top of the group; only needs a draw -> may sit deeper and counter. No motivation tweak, just class."]}},
   "market": {"odds":[2.10,3.30,3.30]},
-  "lambdas_override": {"home":1.50,"away":1.08}
+  "lambdas_override": {"home":1.50,"away":1.12},
+  "_lineups": {
+    "_comment": "Confirmed/projected XIs (RotoWire/Sports Mole/beIN, ~60 min pre-KO). The key signal CONFIRMS the no-rotation calibration: despite both being through, Roberto Martinez fields a STRONG Portugal (Ronaldo + Bruno Fernandes in a 4-2-3-1) chasing the top seed and a kinder knockout path -> no rotation discount, exactly the Mexico/Norway-France lesson. Colombia ALSO name a full-strength side (the James / Luis Diaz / Luis Suarez front three) rather than resting on the draw they need -> small upward nudge for Colombia (1.08 -> 1.12), which also tightens the fit to the market. Net: both confirmed strong, the seeding-game read holds, Portugal the class favourite with Colombia a live, full-strength counter. Lambdas essentially unchanged.",
+    "home":{"team":"Portugal","formation":"4-2-3-1","xi":["Costa","Cancelo","Veiga","Dias","Mendes","Vitinha","Neves","Felix","Fernandes","Neto","Ronaldo"]},
+    "away":{"team":"Colombia","formation":"4-3-3","xi":["Vargas","Munoz","Davinson Sanchez","Lucumi","Mojica","Lerma","Puerta","Arias","James Rodriguez","Luis Suarez","Luis Diaz"]}
+  }
 }
