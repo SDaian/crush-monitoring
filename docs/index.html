@@ -510,7 +510,7 @@ function calibFor(m){ if(!m) return null;
    =========================================================================== */
 // Build/data stamp shown in the header. The app is stateless: nothing is
 // persisted, so reloading (F5) always returns to the official results.
-const DATA_VERSION="2026-06-28.r32-tie-detail";
+const DATA_VERSION="2026-06-28.r32-tie-detail-parity";
 let state={ results:{}, strengths:{}, learn:[] };
 
 function freshStrengths(){ const s={}; for(const t in TEAMS) s[t]=TEAMS[t]; return s; }
@@ -1023,45 +1023,86 @@ function renderThirds(){
    Strength-based engine, knockout-aware: advancement = 90' + extra time +
    penalties. Mirrors the predictor's --knockout report. */
 function koForecast(a,b,tie){
-  const sa=st(a), sb=st(b); const [la,lb]=lambdas(sa,sb);
-  const MX=MAXG, pa=[],pb=[];
+  const A=a, B=b, sa=st(A), sb=st(B); const [la,lb]=lambdas(sa,sb);
+  const lae=la/3, lbe=lb/3, MX=MAXG, pa=[],pb=[];
   for(let k=0;k<=MX;k++){ pa[k]=pois(k,la); pb[k]=pois(k,lb); }
-  let H=0,D=0,Aw=0,o15=0,o25=0,o35=0,btts=0; const cells=[];
+  let H=0,D=0,Aw=0,o15=0,o25=0,o35=0,btts=0,csA=0,csB=0; const cells=[];
   for(let i=0;i<=MX;i++) for(let j=0;j<=MX;j++){
     const p=pa[i]*pb[j], tot=i+j;
     if(i>j)H+=p; else if(i===j)D+=p; else Aw+=p;
     if(tot>=2)o15+=p; if(tot>=3)o25+=p; if(tot>=4)o35+=p;
-    if(i>0&&j>0)btts+=p; cells.push({i,j,p});
+    if(i>0&&j>0)btts+=p; if(j===0)csA+=p; if(i===0)csB+=p; cells.push({i,j,p});
   }
   const s=H+D+Aw||1; H/=s; D/=s; Aw/=s;
   cells.sort((x,y)=>y.p-x.p); const top=cells.slice(0,6);
-  // extra-time mini-match (1/3 goal rate) for the ET/penalty split
-  const lae=la/3,lbe=lb/3; let eh=0,ed=0,ea=0; const ea2=[],eb2=[];
+  // extra-time mini-match (1/3 goal rate) -> closed-form ET draw share for the split
+  let eh=0,ed=0,ea=0; const ea2=[],eb2=[];
   for(let k=0;k<=MX;k++){ ea2[k]=pois(k,lae); eb2[k]=pois(k,lbe); }
   for(let i=0;i<=MX;i++) for(let j=0;j<=MX;j++){ const p=ea2[i]*eb2[j]; if(i>j)eh+=p; else if(i===j)ed+=p; else ea+=p; }
   const es=eh+ed+ea||1; ed/=es;
-  const adv=koAdvance(sa,sb), pPens=D*ed;
+  const advS=koAdvance(sa,sb), pPens=D*ed;
+  const bt=probsBTD(sa,sb), advB=bt.h+bt.d*0.5; // BTD: no goal model -> split the draw
+  // --- Monte Carlo: sample the FULL knockout resolution 90' -> extra time ->
+  // penalties (same 50k engine as a group match, adapted to advancement). ---
+  const N=50000; let mh=0,md=0,ma=0, advA=0;
+  for(let n=0;n<N;n++){
+    const x=samplePoisson(la), y=samplePoisson(lb);
+    if(x>y){ mh++; advA++; continue; }
+    if(x<y){ ma++; continue; }
+    md++;                                          // level after 90' -> extra time
+    const ex=samplePoisson(lae), ey=samplePoisson(lbe);
+    if(ex>ey){ advA++; continue; }
+    if(ex<ey){ continue; }
+    if(Math.random()<0.5) advA++;                  // still level -> penalties
+  }
+  const sh=100*mh/N, sd=100*md/N, sma=100*ma/N, sAdv=100*advA/N;
   const pct=v=>(100*v).toFixed(1);
   const bar=(label,v,cls)=>`<div class="fc-bar"><span>${esc(label)}</span>
-    <span class="fc-track"><span class="fc-fill ${cls}" style="width:${(100*v).toFixed(1)}%"></span></span><b>${pct(v)}%</b></div>`;
+    <span class="fc-track"><span class="fc-fill ${cls}" style="width:${(100*v).toFixed(1)}%"></span></span>
+    <b>${pct(v)}%</b></div>`;
+  // --- ⚙ Simulator engine (knockout-aware) ---
+  const sim=`
+   <div class="fc-sub fc-sub-sim">⚙ Simulator engine <span class="fc-tag">independent Poisson · knockout · live</span></div>
+   <div class="fc-xg">Model xG (λ): <b>${esc(A)} ${la.toFixed(2)}</b> – <b>${lb.toFixed(2)} ${esc(B)}</b>
+     · total ${(la+lb).toFixed(2)}</div>
+   <div class="fc-sec">Advances (90′ + extra time + penalties)</div>
+   ${bar(esc(A),advS,"win")}${bar(esc(B),1-advS,"loss")}
+   <div class="fc-grid"><span>Settled in 90′ <b>${pct(1-D)}%</b></span><span>Extra time <b>${pct(D)}%</b></span>
+     <span>Penalties <b>${pct(pPens)}%</b></span><span></span></div>
+   <div class="fc-sec">90′ result (draw → extra time)</div>
+   ${bar(esc(A),H,"win")}${bar("Draw → ET",D,"draw")}${bar(esc(B),Aw,"loss")}
+   <div class="fc-sec">Goals markets (90′)</div>
+   <div class="fc-grid">
+     <span>Over 1.5 <b>${pct(o15)}%</b></span><span>Over 2.5 <b>${pct(o25)}%</b></span>
+     <span>Over 3.5 <b>${pct(o35)}%</b></span><span>BTTS <b>${pct(btts)}%</b></span>
+     <span>CS ${esc(A)} <b>${pct(csA)}%</b></span><span>CS ${esc(B)} <b>${pct(csB)}%</b></span>
+   </div>
+   <div class="fc-sec">Most probable scorelines (90′)</div>
+   <div class="fc-grid">${top.map(c=>`<span>${c.i}-${c.j} <b>${pct(c.p)}%</b></span>`).join("")}</div>
+   <div class="fc-sec">Monte Carlo convergence (N=${N.toLocaleString()})</div>
+   <table class="fc-mc"><tr><th></th><th>${esc(A)}</th><th>Draw</th><th>${esc(B)}</th><th>${esc(A)} adv.</th></tr>
+     <tr><td>exact</td><td>${pct(H)}</td><td>${pct(D)}</td><td>${pct(Aw)}</td><td>${pct(advS)}</td></tr>
+     <tr><td>sim</td><td>${sh.toFixed(1)}</td><td>${sd.toFixed(1)}</td><td>${sma.toFixed(1)}</td><td>${sAdv.toFixed(1)}</td></tr>
+     <tr><td>diff</td><td>${Math.abs(100*H-sh).toFixed(2)}</td><td>${Math.abs(100*D-sd).toFixed(2)}</td><td>${Math.abs(100*Aw-sma).toFixed(2)}</td><td>${Math.abs(100*advS-sAdv).toFixed(2)}</td></tr>
+   </table>
+   <div class="fc-note">Knockout: a draw goes to extra time (a 30′ mini-match at ⅓ the goal rate) then penalties (coin-flip). The MC samples the FULL resolution (90′→ET→pens) and converges to the closed-form advancement.</div>`;
+  // --- 📐 Bradley-Terry-Davidson (1X2 only; advancement = split the draw) ---
+  const btd=`
+   <div class="fc-sub fc-sub-btd">📐 Bradley-Terry-Davidson <span class="fc-tag">paired-comparison · 1X2 only</span></div>
+   <div class="fc-sec">Advances (draw split 50/50 — no goal model for ET)</div>
+   ${bar(esc(A),advB,"win")}${bar(esc(B),1-advB,"loss")}
+   <div class="fc-sec">90′ result</div>
+   ${bar(esc(A),bt.h,"win")}${bar("Draw → ET",bt.d,"draw")}${bar(esc(B),bt.a,"loss")}
+   <div class="fc-note">Logistic strength model (k=${BTD_K}, ν=${BTD_NU}); no goal markets, so its advancement just splits the 90′ draw. Sanity check on the side; for goals/scorelines use the simulator.</div>`;
+  // --- engine comparison header: advancement from every available engine ---
+  const row=(label,p,cls)=>`<tr class="${cls}"><td>${label}</td><td>${(p[0]).toFixed(1)}</td><td>${(p[1]).toFixed(1)}</td></tr>`;
   const dstr=tie&&tie.date?(tie.date+(tie.time?" · "+tie.time:"")+(tie.v?" · "+tie.v:"")):"";
-  return `<div class="fc-cmp">
-    <div class="fc-cmp-h">Knockout forecast — ${esc(a)} vs ${esc(b)}${dstr?" · "+dstr:""}</div>
-    <div class="fc-sec">Advances (90′ + extra time + penalties)</div>
-    ${bar(a,adv,"win")}${bar(b,1-adv,"loss")}
-    <div class="fc-grid">
-      <span>Settled in 90′ <b>${pct(1-D)}%</b></span><span>Goes to extra time <b>${pct(D)}%</b></span>
-      <span>Goes to penalties <b>${pct(pPens)}%</b></span><span></span></div>
-    <div class="fc-sec">90′ result (a draw sends it to extra time)</div>
-    ${bar(a,H,"win")}${bar("Draw → ET",D,"draw")}${bar(b,Aw,"loss")}
-    <div class="fc-xg">Model xG (λ): <b>${esc(a)} ${la.toFixed(2)}</b> – <b>${lb.toFixed(2)} ${esc(b)}</b> · total ${(la+lb).toFixed(2)}</div>
-    <div class="fc-sec">Goals (90′)</div>
-    <div class="fc-grid"><span>Over 1.5 <b>${pct(o15)}%</b></span><span>Over 2.5 <b>${pct(o25)}%</b></span>
-      <span>Over 3.5 <b>${pct(o35)}%</b></span><span>BTTS <b>${pct(btts)}%</b></span></div>
-    <div class="fc-sec">Most probable scorelines (90′)</div>
-    <div class="fc-grid">${top.map(c=>`<span>${c.i}-${c.j} <b>${pct(c.p)}%</b></span>`).join("")}</div>
-    <div class="fc-note">No draw in a knockout: level after 90′ → extra time (a 30′ mini-match at ⅓ the goal rate) → penalties (coin-flip, near-random). Strength-based engine; for the deep-calibrated version of a tie, see its match config.</div>
-  </div>`;
+  const cmp=`<div class="fc-cmp"><div class="fc-cmp-h">Knockout — who advances (${esc(A)} / ${esc(B)})${dstr?" · "+dstr:""}</div>
+   <table class="fc-mc fc-cmptab"><tr><th>engine</th><th>${esc(A)}</th><th>${esc(B)}</th></tr>
+   ${row("⚙ Simulator (90′+ET+pens)",[advS*100,(1-advS)*100],"cmp-sim")}
+   ${row("📐 Bradley-Terry-Davidson",[advB*100,(1-advB)*100],"cmp-btd")}
+   </table></div>`;
+  return cmp + sim + btd;
 }
 
 function renderBracket(){
