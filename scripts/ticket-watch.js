@@ -93,6 +93,27 @@ const AVAILABLE_HINTS = [
   'continuar',
 ];
 
+// Bot-protection / WAF interstitials (Akamai-style) that FIFA serves to
+// datacenter IPs. These are NOT the ticket page — treat them as "blocked", not
+// as an availability state, so we never raise a misleading "page changed" alert.
+const BLOCK_PAGE_HINTS = [
+  'a critical request has been detected',
+  'request has been detected and therefore blocked',
+  'bad request',
+  'access denied',
+  'fifa service desk',
+  'pardon our interruption',
+  'are you a human',
+];
+
+/** True if the rendered text looks like a bot-protection block page. */
+function isBlockPage(text, status) {
+  const t = text.toLowerCase();
+  const matched = BLOCK_PAGE_HINTS.some((k) => t.includes(k));
+  // A short 403 body is also a strong block signal on its own.
+  return matched || (status === 403 && t.length < 2000);
+}
+
 /** Classify rendered page text into a coarse availability state. */
 function classify(text) {
   const t = text.toLowerCase();
@@ -189,6 +210,16 @@ async function check() {
     }
 
     const excerpt = text.replace(/\s+/g, ' ').trim().slice(0, 400);
+
+    // A bot-protection interstitial is not a reading — report it as blocked so
+    // the caller treats it like an unreachable check, not a content change.
+    if (isBlockPage(text, status)) {
+      return {
+        ok: false,
+        detail: `bot-protection block page (HTTP ${status}) — FIFA blocked this IP; run from a residential IP, not a datacenter/CI runner`,
+      };
+    }
+
     return { ok: true, state: classify(text), sig: signature(text), excerpt, status };
   } finally {
     await browser.close();

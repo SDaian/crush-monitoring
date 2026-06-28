@@ -169,11 +169,19 @@ Configure it under **Settings → Secrets and variables → Actions**:
 | `TICKET_WATCH_SELECTOR` | variable | Narrow what is hashed (optional)                    |
 
 With no notifier secrets set, the workflow still runs and the detected state
-shows in the Actions run log. Two caveats: **(1)** GitHub only fires *scheduled*
-workflows from the **default branch**, so polling starts once this branch is
-merged to `main` — until then use the **Run workflow** button
-(`workflow_dispatch`); **(2)** GitHub's scheduler is best-effort and may delay
-or skip ticks under load.
+shows in the Actions run log. Caveats:
+
+1. **FIFA blocks datacenter IPs.** In testing, GitHub-hosted runners hit FIFA's
+   bot-protection WAF and got a `403` "request blocked" page instead of the real
+   ticket page. The watcher now detects that and reports `BLOCKED` (failing the
+   run) rather than a misleading "page changed". So a hosted runner is good for
+   validating the job, but **for real monitoring run the watcher from a
+   residential IP** (your own machine, or a self-hosted runner on a home
+   network).
+2. GitHub only fires *scheduled* workflows from the **default branch**, so
+   polling starts once this branch is merged to `main` — until then use the
+   **Run workflow** button (`workflow_dispatch`).
+3. GitHub's scheduler is best-effort and may delay or skip ticks under load.
 
 ## Network access (Claude Code on the web)
 
