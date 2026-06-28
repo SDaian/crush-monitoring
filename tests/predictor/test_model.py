@@ -70,6 +70,63 @@ class TestKnockout(unittest.TestCase):
         skew = knockout_odds(1.3, 1.3, rho=-0.06, pens_home=0.6)
         self.assertGreater(skew.adv_home, base.adv_home)
 
+    def test_advance_matches_simulation(self):
+        # Contrast the closed-form chaining (90' -> extra time -> penalties)
+        # with a Monte Carlo that samples from the SAME Dixon-Coles matrices and
+        # resolves the tie the same way. They must agree within sampling noise.
+        import random
+        from predictor.model import build_score_matrix
+
+        lh, la, rho = 1.40, 1.02, -0.08
+        sm90 = build_score_matrix(lh, la, rho)
+        smet = build_score_matrix(lh / 3, la / 3, rho)
+
+        def flatten(sm):
+            cells, cum, t = [], [], 0.0
+            for i in range(sm.max_goals + 1):
+                for j in range(sm.max_goals + 1):
+                    p = sm.matrix[i][j]
+                    if p > 0:
+                        t += p
+                        cells.append((i, j))
+                        cum.append(t)
+            return cells, cum
+
+        c90, u90 = flatten(sm90)
+        cet, uet = flatten(smet)
+        rng = random.Random(20260628)
+
+        def pick(cells, cum):
+            x = rng.random() * cum[-1]
+            lo, hi = 0, len(cum) - 1
+            while lo < hi:
+                m = (lo + hi) // 2
+                if x <= cum[m]:
+                    hi = m
+                else:
+                    lo = m + 1
+            return cells[lo]
+
+        n, home = 40000, 0
+        for _ in range(n):
+            i, j = pick(c90, u90)
+            if i > j:
+                home += 1
+                continue
+            if i < j:
+                continue
+            ei, ej = pick(cet, uet)
+            if ei > ej:
+                home += 1
+                continue
+            if ei < ej:
+                continue
+            if rng.random() < 0.5:
+                home += 1
+        sim = home / n
+        ko = knockout_odds(lh, la, rho)
+        self.assertAlmostEqual(sim, ko.adv_home, delta=0.01)  # within 1 pt at N=40k
+
 
 class TestDixonColes(unittest.TestCase):
     def test_tau_unaffected_above_one(self):
