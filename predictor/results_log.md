@@ -43,6 +43,8 @@ Legend: ✅ right for the right reason · 🟡 right but by luck/margin ·
 | 2026-06-26 | Croatia vs Ghana | 52.2 / 27.1 / 20.7 | MEDIUM | 2-1 (Croatia win) | ✅ |
 | 2026-06-27 | Portugal vs Colombia | 45.3 / 26.9 / 27.7 | MEDIUM | 0-0 (draw) | 🟡 |
 | 2026-06-27 | Uzbekistan vs DR Congo | 24.4 / 28.7 / 46.9 | MEDIUM | 1-3 (DR Congo win) | ✅ |
+| 2026-06-27 | Argentina vs Jordan | 84.0 / 12.3 / 3.7 | HIGH | 3-1 (Argentina win) | ✅ |
+| 2026-06-27 | Austria vs Algeria | 39.5 / 28.9 / 31.7 | LOW | 3-3 (draw) | 🟡 |
 
 ### Emerging pattern: favorites vs low block (key)
 
@@ -676,3 +678,43 @@ TOP of the best-thirds table and RAISED the 8th/last-qualifying bar from South K
 third-place math was recomputed once K finished: with the bar at Iran (GD 0), a J third
 on 3 pts (negative GD) can no longer sneak in, so only a DRAW (Algeria → 4-pt third)
 now saves the J third. A late strong third reshapes the whole cut-line.
+
+---
+
+## 2026-06-27 · Group J finals (MD3) — graded · GROUP STAGE COMPLETE
+
+Standings before: Argentina 6, Austria 3, Algeria 3, Jordan 0. Final table:
+**Argentina 1st** (9 pts, GD +7), **Austria 2nd** (4 pts, GD 0), **Algeria 3rd**
+(4 pts, GD −2 → qualifies as the 6th-best third), Jordan 4th and out.
+
+- **Argentina vs Jordan** — Argentina 84.0 / Draw 12.3 / Jordan 3.7 (HIGH). λ 2.62 /
+  0.42, xG 3.04. Market 84.4 / 11.1 / 4.5 (div 1.2). **RESULT: 3-1 ✅** — heavy-favourite
+  hit; xG 2.62 → 3 goals, near-exact; Jordan's consolation made it Over. A formality
+  with no qualification stakes, correctly modelled. The earlier alignment lift
+  (77% → 84%) was the right call (don't fade an elite favourite).
+- **Austria vs Algeria** — Austria 39.5 / Draw 28.9 / Algeria 31.7 (LOW). λ 1.28 /
+  1.12, xG 2.40. Market 37.9 / 29.0 / 33.1 (div 1.6). **RESULT: 3-3 draw 🟡.** The
+  QUALIFICATION call was a clean process hit — the 200k Monte Carlo said the only
+  outcome sending both through is a draw (Austria 2nd on GD, Algeria a 4-pt third), and
+  that a J 4-pt third would raise the cut-line and bump Iran out — all of which happened
+  to the letter. On the match it grades 🟡: the DRAW (28.9%, the qualification-critical
+  outcome) landed, but the GOALS texture missed badly — modelled tight (total 2.40,
+  Under 2.5 57%, top scoreline 1-1), it was a 3-3 thriller. **Lesson:** when BOTH sides
+  are content with a draw, that predicts the RESULT, not the Under — with neither
+  desperate to defend, the game can open up (3-3) rather than close down.
+
+**Final best-thirds table (all 12 groups complete; top 8 qualify):**
+DR Congo (4,+1,4) · Sweden (4,0,7) · Ecuador (4,0,2) · Ghana (4,0,2) · Bosnia (4,−1,5) ·
+**Algeria (4,−2,5)** · Paraguay (4,−2,2) · Senegal (3,+1,7) — IN.
+Iran (3,0,3) · South Korea (3,−1,2) · Scotland (3,−3,1) · Uruguay (2,−1,3) — OUT.
+Algeria's 3-3 draw delivered the 4-pt third that finally knocked Iran out, exactly as
+the cross-group simulation projected. The thirds Monte Carlo was the single
+highest-value tool of the group stage's closing rounds.
+
+## Group-stage scorecard
+
+31 matches graded: **21 ✅ · 9 🟡 · 1 ❌**. The lone ❌ (South Korea–South Africa) was
+the speculative-motivation trap (downgrading a "virtually eliminated" side); every
+🟡 was a frustrated-favourite draw or a coin-flip where the texture/value read was
+right but the side wasn't. Net process record: the side or the texture landed in 30
+of 31, and the model's biggest late-stage edge was the best-thirds simulation.

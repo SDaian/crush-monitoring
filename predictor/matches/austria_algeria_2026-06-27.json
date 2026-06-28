@@ -6,5 +6,11 @@
     "home":{"name":"Austria","attack":1.08,"defense":1.0,"context":1.0,"notes":["Rating 79; beat Jordan 3-1, competitive 0-2 loss to Argentina. attack 1.08, slight edge.","Average defense (GD 0). defense 1.0.","Must win for 2nd outright; a draw also leaves them 2nd on GD -> less desperate than Algeria."]},
     "away":{"name":"Algeria","attack":1.0,"defense":1.05,"context":1.02,"notes":["Rating 76; beat Jordan 2-1, lost 0-3 to Argentina (GD -2). attack 1.0.","Slightly leakier. defense 1.05.","Most to play for: a win = 2nd; a draw = 3rd but a safe 4-pt third; a loss likely eliminates -> small structural lift, context 1.02."]}},
   "market": {"odds":[2.45,3.20,2.80]},
-  "lambdas_override": {"home":1.28,"away":1.12}
+  "lambdas_override": {"home":1.28,"away":1.12},
+  "_postmatch": {
+    "result": "Austria 3-3 Algeria. The DRAW -- the biscotto outcome the thirds analysis centred on. Austria finish 2nd (4 pts, GD 0), Algeria 3rd (4 pts, GD -2) and BOTH qualify; Algeria comes in as the 6th-best third on 4 points, which knocks Iran (3/0/3) OUT of the last qualifying spot. Exactly the predicted scenario.",
+    "model_1x2": "Austria 39.5 / Draw 28.9 / Algeria 31.7 (LOW)",
+    "verdict": "The QUALIFICATION call was a clean process hit: the 200k Monte Carlo said the only outcome that sends both through is a draw (Austria 2nd on GD, Algeria a 4-pt third), and that a J 4-pt third would raise the cut-line and bump Iran out -- all of which happened to the letter. On the match itself it grades 🟡: this was a LOW coin-flip and the DRAW (28.9%, the model's #2 outcome and the qualification-critical one) landed, but the GOALS texture missed badly -- I modelled a tight game (total xG 2.40, Under 2.5 57%, top scoreline 1-1) and it was a 3-3 thriller (6 goals, Over 3.5). Two sides both needing only a draw produced an open, end-to-end game rather than a cagey one.",
+    "lesson": "Two reinforcing lessons. (1) The thirds Monte Carlo earned its keep: mapping the cut-line and the cross-group cascade (Algeria's 4-pt third bumping Iran) was precise and decision-relevant -- this is where the model adds the most value late in a group stage. (2) Texture caveat: when BOTH sides are content with a draw for qualification, do NOT assume that means a low-scoring game -- with neither side desperate to defend a lead, the game can open up (3-3) rather than close down. 'A draw suits both' predicts the RESULT, not necessarily the Under."
+  }
 }

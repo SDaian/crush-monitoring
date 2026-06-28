@@ -14,6 +14,7 @@ from predictor.model import (  # noqa: E402
     derive_markets,
     poisson_pmf,
     dc_tau,
+    knockout_odds,
 )
 from predictor.calibrate import MatchCalibration, TeamInputs, suggest_rho  # noqa: E402
 from predictor.confidence import confidence_index  # noqa: E402
@@ -34,6 +35,40 @@ class TestPoisson(unittest.TestCase):
     def test_zero_lambda(self):
         self.assertEqual(poisson_pmf(0, 0.0), 1.0)
         self.assertEqual(poisson_pmf(3, 0.0), 0.0)
+
+
+class TestKnockout(unittest.TestCase):
+    def test_advance_sums_to_one(self):
+        ko = knockout_odds(1.6, 1.1, rho=-0.06)
+        self.assertAlmostEqual(ko.adv_home + ko.adv_away, 1.0, places=9)
+
+    def test_home_breakdown_sums_to_advance(self):
+        ko = knockout_odds(1.6, 1.1, rho=-0.06)
+        self.assertAlmostEqual(
+            ko.win_reg + ko.win_et + ko.win_pens, ko.adv_home, places=9
+        )
+
+    def test_favourite_advances_more_than_90min_win(self):
+        # The stronger side should advance MORE than its bare 90' win prob,
+        # because it also wins a share of the extra-time/penalty resolution.
+        from predictor.model import derive_markets, build_score_matrix
+
+        reg = derive_markets(build_score_matrix(1.7, 1.0, -0.06))
+        ko = knockout_odds(1.7, 1.0, rho=-0.06)
+        self.assertGreater(ko.adv_home, reg.p_home)
+        self.assertGreater(ko.adv_home, 0.5)
+
+    def test_even_match_coinflip_pens(self):
+        # Identical sides -> 50/50 advancement, and the penalty split is even.
+        ko = knockout_odds(1.3, 1.3, rho=-0.06)
+        self.assertAlmostEqual(ko.adv_home, 0.5, places=6)
+        self.assertAlmostEqual(ko.adv_away, 0.5, places=6)
+
+    def test_pens_skew_respected(self):
+        # A shootout skew toward the home side raises its advancement.
+        base = knockout_odds(1.3, 1.3, rho=-0.06, pens_home=0.5)
+        skew = knockout_odds(1.3, 1.3, rho=-0.06, pens_home=0.6)
+        self.assertGreater(skew.adv_home, base.adv_home)
 
 
 class TestDixonColes(unittest.TestCase):

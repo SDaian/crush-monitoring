@@ -5,5 +5,11 @@
     "home":{"name":"Argentina","attack":1.45,"defense":0.78,"context":1.0,"notes":["Dominant (rating 95): 3-0 Algeria, 2-0 Austria, two clean sheets. attack 1.45.","Elite defense, 0 conceded. defense 0.78.","1st all but locked; possible light rotation but no speculative discount (Mexico lesson)."]},
     "away":{"name":"Jordan","attack":0.60,"defense":1.15,"context":1.0,"notes":["Weak (66), 0 pts, conceded 5. attack 0.60 (no over-downgrade).","Leaky vs a top side. defense 1.15.","Eliminated; pride only."]}},
   "market": {"odds":[1.12,8.50,21.0]},
-  "lambdas_override": {"home":2.62,"away":0.42}
+  "lambdas_override": {"home":2.62,"away":0.42},
+  "_postmatch": {
+    "result": "Argentina 3-1 Jordan. Argentina win the group with a perfect nine points (GD +7); Jordan finish last (0 pts) and out, as expected.",
+    "model_1x2": "Argentina 84.0 / Draw 12.3 / Jordan 3.7 (HIGH)",
+    "verdict": "1X2 hit comfortably. Argentina won as the heavy favourite; the 3-1 sits right in the modal band (xG 2.62 -> 3 goals, near-exact) and Jordan's consolation made it Over 2.5 / not the clean sheet (37% miss, the minority branch). No qualification stakes -- a formality, correctly modelled. The earlier market-alignment lift (77% -> 84%) was the right call: do not fade an elite favourite.",
+    "lesson": "Standard heavy-favourite hit; the only note is the upheld rule from the recalibration -- aligning to the market on a 7-pt under-lean was correct (Spain/elite-favourite lesson). Dead-rubber-for-Jordan but Argentina went full; no rotation discount was applied and Argentina indeed scored three."
+  }
 }
