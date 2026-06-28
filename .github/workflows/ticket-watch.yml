@@ -14,6 +14,11 @@ on:
     # Every 15 minutes (GitHub's scheduler is best-effort and may delay/skip).
     - cron: '*/15 * * * *'
   workflow_dispatch:
+  # TEMPORARY: exercise the job on the PR before merge. Removed before merging.
+  pull_request:
+    paths:
+      - '.github/workflows/ticket-watch.yml'
+      - 'scripts/ticket-watch.js'
 
 # Never run two checks at once; let an in-flight check finish.
 concurrency:
