@@ -518,7 +518,7 @@ function calibFor(m){ if(!m) return null;
    =========================================================================== */
 // Build/data stamp shown in the header. The app is stateless: nothing is
 // persisted, so reloading (F5) always returns to the official results.
-const DATA_VERSION="2026-06-28.r32-canada-result";
+const DATA_VERSION="2026-06-29.r32-brazil-japan-calib";
 let state={ results:{}, strengths:{}, learn:[] };
 
 function freshStrengths(){ const s={}; for(const t in TEAMS) s[t]=TEAMS[t]; return s; }
@@ -1028,7 +1028,8 @@ function calibratedPanel(c){
    repo predictor with --knockout). adv = [home,away] advancement; et/pens = the
    resolution split; p = 90' 1X2. Looked up by team pair (either orientation). */
 const KO_CALIB=[
-  {h:"Canada",a:"South Africa",lh:1.40,la:1.02,p:[44.7,28.9,26.4],adv:[60.4,39.6],et:28.9,pens:15.4,o:[70.6,43.6,22.5],btts:49.2,cs:[36.1,24.7],tot:2.42,conf:"LOW",sl:[["1-1",13.7],["1-0",11.4],["0-0",9.9],["2-1",8.9],["2-0",8.7],["0-1",8.1]]}
+  {h:"Canada",a:"South Africa",lh:1.40,la:1.02,p:[44.7,28.9,26.4],adv:[60.4,39.6],et:28.9,pens:15.4,o:[70.6,43.6,22.5],btts:49.2,cs:[36.1,24.7],tot:2.42,conf:"LOW",sl:[["1-1",13.7],["1-0",11.4],["0-0",9.9],["2-1",8.9],["2-0",8.7],["0-1",8.1]]},
+  {h:"Brazil",a:"Japan",lh:1.85,la:0.95,p:[57.9,23.8,18.4],adv:[72.2,27.8],et:23.8,pens:11.5,o:[77.5,53.1,30.8],btts:52.3,cs:[38.7,15.7],tot:2.80,conf:"MEDIUM",sl:[["1-1",11.3],["1-0",10.6],["2-0",10.4],["2-1",9.9],["0-0",6.7],["3-0",6.4]]}
 ];
 const KO_CALIB_MAP={};
 KO_CALIB.forEach(c=>{ KO_CALIB_MAP[c.h+"|"+c.a]=c; KO_CALIB_MAP[c.a+"|"+c.h]=c; });
