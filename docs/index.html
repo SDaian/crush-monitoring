@@ -267,6 +267,14 @@ const KNOWN = {
   L:[[0,3,4,2],[1,2,1,0],[0,1,0,0],[3,2,1,0],[2,0,0,2],[3,1,2,1]]   // Eng4-2 Cro ; Gha1-0 Pan ; Eng0-0 Gha ; Cro1-0 Pan ; Pan0-2 Eng ; Cro2-1 Gha
 };
 
+// Official KNOCKOUT results, keyed by bracket tie id, stored in the tie's own
+// home/away orientation (see R32MAP). Seeded + LOCKED like the group results so
+// the bracket shows them as played and they feed the next round. pen: shootout
+// winner (team name) when a tie is level after extra time.
+const KO_KNOWN = {
+  75: {h:0, a:1}  // R32: South Africa 0-1 Canada (Canada advance) — settled in 90'
+};
+
 /* ---- round-robin fixture order for 4 teams ---- */
 const RR=[[0,1],[2,3],[0,2],[1,3],[3,0],[1,2]];
 
@@ -318,6 +326,7 @@ const LOCKED_IDS=(()=>{ const s=new Set();
     const m=GROUPS[g].matches.find(x=>x.i===i&&x.j===j)
           ||GROUPS[g].matches.find(x=>x.i===j&&x.j===i);
     if(m) s.add(m.id); }); }
+  for(const id in KO_KNOWN) s.add(+id);   // official knockout results are locked too
   return s; })();
 
 /* ===========================================================================
@@ -509,7 +518,7 @@ function calibFor(m){ if(!m) return null;
    =========================================================================== */
 // Build/data stamp shown in the header. The app is stateless: nothing is
 // persisted, so reloading (F5) always returns to the official results.
-const DATA_VERSION="2026-06-28.r32-tie-calibrated-inline";
+const DATA_VERSION="2026-06-28.r32-canada-result";
 let state={ results:{}, strengths:{}, learn:[] };
 
 function freshStrengths(){ const s={}; for(const t in TEAMS) s[t]=TEAMS[t]; return s; }
@@ -526,6 +535,9 @@ function seedKnown(){
       else state.results[m.id]={h:a,a:h,real:true};
     });
   }
+  // Seed official knockout results (already in tie orientation) so the bracket
+  // shows them as played and they feed the next round.
+  for(const id in KO_KNOWN){ state.results[+id]={...KO_KNOWN[id],real:true}; }
 }
 
 // Stateless: always start from the official results; nothing is read from or

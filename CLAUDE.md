@@ -96,6 +96,22 @@ recurring bug. When a match result comes in, update **every** relevant place:
 6. `docs/index.html` → bump `DATA_VERSION` so existing visitors auto-merge the
    new data on load (no manual Reset/Reload needed).
 
+**Knockout-stage results** use a parallel set of structures (the group `KNOWN`
+path does not apply — knockout ties aren't in `GROUPS`). When a knockout tie is
+played, update **every** relevant place:
+
+1. `predictor/matches/<tie>.json` — add the `_postmatch` block.
+2. `predictor/results_log.md` — add the summary row and the knockout section
+   (report **advancement**, not 1X2 — a knockout has no draw).
+3. `docs/index.html` → `KO_KNOWN` — add `<tieId>: {h,a[,pen]}` in the tie's own
+   home/away orientation (see `R32MAP`). It is auto-seeded into `state.results`
+   and auto-locked (added to `LOCKED_IDS`), so the bracket shows it as played and
+   it feeds the next round.
+4. `docs/index.html` → `KO_CALIB` — if the tie was modelled with the deep
+   predictor, add/keep its calibrated entry (regenerate from `--json --knockout`;
+   include `adv`, `et`, `pens`). The per-tie accordion shows the gold ★ panel.
+5. `docs/index.html` → bump `DATA_VERSION`.
+
 ### Web-app invariants (don't regress these)
 
 - **Played results are locked.** Any match seeded from `KNOWN` is read-only

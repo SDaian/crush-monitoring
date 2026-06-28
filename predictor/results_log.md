@@ -45,6 +45,7 @@ Legend: ✅ right for the right reason · 🟡 right but by luck/margin ·
 | 2026-06-27 | Uzbekistan vs DR Congo | 24.4 / 28.7 / 46.9 | MEDIUM | 1-3 (DR Congo win) | ✅ |
 | 2026-06-27 | Argentina vs Jordan | 84.0 / 12.3 / 3.7 | HIGH | 3-1 (Argentina win) | ✅ |
 | 2026-06-27 | Austria vs Algeria | 39.5 / 28.9 / 31.7 | LOW | 3-3 (draw) | 🟡 |
+| 2026-06-28 | Canada vs South Africa (R32) | 44.7 / 28.9 / 26.4 | LOW | 1-0 (Canada, adv.) | ✅ |
 
 ### Emerging pattern: favorites vs low block (key)
 
@@ -718,3 +719,25 @@ the speculative-motivation trap (downgrading a "virtually eliminated" side); eve
 🟡 was a frustrated-favourite draw or a coin-flip where the texture/value read was
 right but the side wasn't. Net process record: the side or the texture landed in 30
 of 31, and the model's biggest late-stage edge was the best-thirds simulation.
+
+---
+
+# KNOCKOUT STAGE
+
+The model now reports ADVANCEMENT (90' → extra time → penalties), not 1X2, since a
+knockout has no draw. The closed-form chaining is Monte-Carlo-validated (sim vs exact
+< 0.05 pts at 300k; see test_model.py).
+
+## 2026-06-28 · Round of 32 — Canada 1-0 South Africa ✅
+
+- **Canada vs South Africa** — 90': Canada 44.7 / Draw 28.9 / South Africa 26.4 (LOW);
+  advancement **Canada 60.4 / South Africa 39.6**. λ 1.40 / 1.02, xG 2.42, Under 2.5
+  56%, top scoreline 1-1 then **1-0 (11.4%)**. Market (90') 46.9 / 28.4 / 24.7 (div
+  2.2). **RESULT: 1-0 Canada, settled in 90' — Canada advance.** Clean process hit on
+  BOTH side and texture: a tight, low-scoring grind that the favourite edged 1-0,
+  exactly as modelled. **Key:** I deliberately did NOT over-downgrade South Africa
+  (my single worst group miss) — respecting the low block is why the model expected a
+  narrow 1-0 over a rout, and why advancement (60.4%) sat well above the 90' win
+  (44.7%). The ET/penalty tail (29% / 15%) didn't need to fire. **Lesson:** the
+  knockout framing earns its keep — a disciplined underdog compresses the margin and
+  raises the ET/penalty share, so report advancement, not the 90' win.
