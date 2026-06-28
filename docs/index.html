@@ -122,7 +122,7 @@
   .tie.koclick{cursor:pointer} .tie.koclick:hover{border-color:var(--gold)}
   .tie.koclick.sel{border-color:var(--gold);box-shadow:0 0 0 1px var(--gold) inset}
   .tie .meta .kdet{color:var(--gold);float:right}
-  #ko-detail{margin-top:10px;max-width:560px}
+  .koacc{width:min(92vw,340px);font-size:11px}
   .learn-item{font-size:12px;border-left:2px solid var(--accent);padding:4px 8px;margin:5px 0;background:var(--card2);border-radius:0 6px 6px 0}
   .delta-up{color:var(--good)} .delta-dn{color:var(--bad)}
   .log-item{border-left:3px solid var(--accent);padding:8px 10px;margin:8px 0;
@@ -189,7 +189,6 @@
   <div class="panel" id="p-bracket">
     <div class="legend">Round of 32 = the <b>official</b> bracket (group stage complete, ties now fixed). The % on each team is its <b>advancement</b> probability from the knockout model — 90′ result → extra time (30′ mini-match at ⅓ the goal rate) → penalties (coin-flip) — not a 90′ win%, so it already folds in ET/shootouts. Dates/times/venues are the real R32 schedule. Winners advance through R16 → Final; enter or simulate knockout scores to fill later rounds. <span class="approx">≈ R16-onward dates and the exact R16 adjacency are approximate.</span></div>
     <div class="bracket" id="bracket"></div>
-    <div id="ko-detail" hidden></div>
   </div>
 
   <div class="panel" id="p-learn">
@@ -510,7 +509,7 @@ function calibFor(m){ if(!m) return null;
    =========================================================================== */
 // Build/data stamp shown in the header. The app is stateless: nothing is
 // persisted, so reloading (F5) always returns to the official results.
-const DATA_VERSION="2026-06-28.r32-tie-detail-parity";
+const DATA_VERSION="2026-06-28.r32-tie-calibrated-inline";
 let state={ results:{}, strengths:{}, learn:[] };
 
 function freshStrengths(){ const s={}; for(const t in TEAMS) s[t]=TEAMS[t]; return s; }
@@ -1011,6 +1010,51 @@ function calibratedPanel(c){
   </div>`;
 }
 
+/* Deep-calibrated knockout ties (bivariate Poisson + Dixon-Coles, baked from the
+   repo predictor with --knockout). adv = [home,away] advancement; et/pens = the
+   resolution split; p = 90' 1X2. Looked up by team pair (either orientation). */
+const KO_CALIB=[
+  {h:"Canada",a:"South Africa",lh:1.40,la:1.02,p:[44.7,28.9,26.4],adv:[60.4,39.6],et:28.9,pens:15.4,o:[70.6,43.6,22.5],btts:49.2,cs:[36.1,24.7],tot:2.42,conf:"LOW",sl:[["1-1",13.7],["1-0",11.4],["0-0",9.9],["2-1",8.9],["2-0",8.7],["0-1",8.1]]}
+];
+const KO_CALIB_MAP={};
+KO_CALIB.forEach(c=>{ KO_CALIB_MAP[c.h+"|"+c.a]=c; KO_CALIB_MAP[c.a+"|"+c.h]=c; });
+// Return the calibrated entry oriented to home=A, away=B (flips if stored reversed).
+function koCalibFor(A,B){
+  const c=KO_CALIB_MAP[A+"|"+B]; if(!c) return null;
+  if(c.h===A) return c;
+  return {h:A,a:B,lh:c.la,la:c.lh,p:[c.p[2],c.p[1],c.p[0]],adv:[c.adv[1],c.adv[0]],
+    et:c.et,pens:c.pens,o:c.o,btts:c.btts,cs:[c.cs[1],c.cs[0]],tot:c.tot,conf:c.conf,
+    sl:c.sl.map(x=>[x[0].split("-").reverse().join("-"),x[1]])};
+}
+/* Gold ★ Calibrated panel for a knockout tie (mirrors calibratedPanel, KO-aware). */
+function koCalibratedPanel(c){
+  const conf=`<span class="conf conf-${c.conf}">${c.conf}</span>`;
+  const sum=c.p[0]+c.p[1]+c.p[2]||1, adsum=c.adv[0]+c.adv[1]||1;
+  const bar=(label,v,den,cls)=>`<div class="fc-bar"><span>${esc(label)}</span>
+    <span class="fc-track"><span class="fc-fill ${cls}" style="width:${(100*v/den).toFixed(1)}%"></span></span>
+    <b>${v.toFixed(1)}%</b></div>`;
+  return `<div class="fc-cal">
+   <div class="fc-sub fc-sub-cal">★ Calibrated forecast <span class="fc-tag">bivariate Poisson + Dixon-Coles · knockout · ${conf}</span></div>
+   <div class="fc-xg">Calibrated xG (λ): <b>${esc(c.h)} ${c.lh.toFixed(2)}</b> – <b>${c.la.toFixed(2)} ${esc(c.a)}</b>
+     · total ${c.tot.toFixed(2)}</div>
+   <div class="fc-sec">Advances (90′ + extra time + penalties)</div>
+   ${bar(c.h,c.adv[0],adsum,"win")}${bar(c.a,c.adv[1],adsum,"loss")}
+   <div class="fc-grid"><span>Settled in 90′ <b>${(100-c.et).toFixed(1)}%</b></span><span>Extra time <b>${c.et.toFixed(1)}%</b></span>
+     <span>Penalties <b>${c.pens.toFixed(1)}%</b></span><span></span></div>
+   <div class="fc-sec">90′ result (draw → extra time)</div>
+   ${bar(c.h,c.p[0],sum,"win")}${bar("Draw → ET",c.p[1],sum,"draw")}${bar(c.a,c.p[2],sum,"loss")}
+   <div class="fc-sec">Goals markets (90′)</div>
+   <div class="fc-grid">
+     <span>Over 1.5 <b>${c.o[0].toFixed(1)}%</b></span><span>Over 2.5 <b>${c.o[1].toFixed(1)}%</b></span>
+     <span>Over 3.5 <b>${c.o[2].toFixed(1)}%</b></span><span>BTTS <b>${c.btts.toFixed(1)}%</b></span>
+     <span>CS ${esc(c.h)} <b>${c.cs[0].toFixed(1)}%</b></span><span>CS ${esc(c.a)} <b>${c.cs[1].toFixed(1)}%</b></span>
+   </div>
+   <div class="fc-sec">Most probable scorelines (90′)</div>
+   <div class="fc-grid">${c.sl.map(s=>`<span>${esc(s[0])} <b>${s[1].toFixed(1)}%</b></span>`).join("")}</div>
+   <div class="fc-note">Exact closed-form (bottom-up xG calibration, de-vigged vs market); advancement = 90′→extra time→penalties, Monte Carlo convergence verified in the repo.</div>
+  </div>`;
+}
+
 function renderThirds(){
   const t=$("#thirdsTable"); const arr=thirdsRanked();
   t.innerHTML=`<thead><tr><th>#</th><th class="team">Third-placed</th><th>Grp</th><th>Pts</th><th>GD</th><th>GF</th><th>Adv?</th></tr></thead><tbody>`+
@@ -1095,14 +1139,16 @@ function koForecast(a,b,tie){
    ${bar(esc(A),bt.h,"win")}${bar("Draw → ET",bt.d,"draw")}${bar(esc(B),bt.a,"loss")}
    <div class="fc-note">Logistic strength model (k=${BTD_K}, ν=${BTD_NU}); no goal markets, so its advancement just splits the 90′ draw. Sanity check on the side; for goals/scorelines use the simulator.</div>`;
   // --- engine comparison header: advancement from every available engine ---
+  const kc=koCalibFor(A,B); // deep-calibrated entry, oriented to home=A
   const row=(label,p,cls)=>`<tr class="${cls}"><td>${label}</td><td>${(p[0]).toFixed(1)}</td><td>${(p[1]).toFixed(1)}</td></tr>`;
   const dstr=tie&&tie.date?(tie.date+(tie.time?" · "+tie.time:"")+(tie.v?" · "+tie.v:"")):"";
   const cmp=`<div class="fc-cmp"><div class="fc-cmp-h">Knockout — who advances (${esc(A)} / ${esc(B)})${dstr?" · "+dstr:""}</div>
    <table class="fc-mc fc-cmptab"><tr><th>engine</th><th>${esc(A)}</th><th>${esc(B)}</th></tr>
+   ${kc?row("★ Calibrated (biv.Poisson+DC)",[kc.adv[0],kc.adv[1]],"cmp-cal"):""}
    ${row("⚙ Simulator (90′+ET+pens)",[advS*100,(1-advS)*100],"cmp-sim")}
    ${row("📐 Bradley-Terry-Davidson",[advB*100,(1-advB)*100],"cmp-btd")}
    </table></div>`;
-  return cmp + sim + btd;
+  return cmp + (kc ? koCalibratedPanel(kc) : `<div class="fc-note fc-nocal">No calibrated config for this tie yet — simulator + Bradley-Terry only.</div>`) + sim + btd;
 }
 
 function renderBracket(){
@@ -1122,15 +1168,17 @@ function renderBracket(){
       const dt=dstr?`${dstr}${tie.time?(" · "+tie.time):""}${tie.v?(" · "+tie.v):""}`:"";
       const appx=tie.date?"":' <span class="approx">≈</span>'; // R32 dates are real
       const sc=r?`<b class="kscore">${r.h}-${r.a}</b>`:(A&&B?'<span class="kvs">vs</span>':"");
-      // Ties with both teams known are tappable -> open the knockout detail panel.
+      // Ties with both teams known are tappable -> open a detail accordion
+      // right below this tie (in its own column), like the group match cards.
       const click=(A&&B)?` koclick" data-koa="${esc(A)}" data-kob="${esc(B)}" data-koid="${tie.id}` : "";
       const hint=(A&&B)?`<span class="kdet">▸ details</span>`:"";
+      const acc=(A&&B)?`<div class="acc koacc" id="koacc-${tie.id}" hidden></div>`:"";
       return `<div class="tie${r?' decided':''}${click}">
         <div class="ln"><span class="kt ${wa}">${esc(A||tie.h||'—')}</span><span class="kp">${A&&B?pa:''}</span></div>
         <div class="kmid">${sc}</div>
         <div class="ln"><span class="kt ${wb}">${esc(B||tie.a||'—')}</span><span class="kp">${A&&B?pb:''}</span></div>
         <div class="meta"><span class="kmi">M${tie.id}</span>${dt?(" · "+dt):""}${appx} ${hint}</div>
-      </div>`;
+      </div>${acc}`;
     }).join("");
     host.appendChild(col);
   });
@@ -1243,19 +1291,17 @@ document.addEventListener("click",e=>{
 });
 
 /* knockout per-tie detail: tap a tie (both teams known) to open its forecast
-   in #ko-detail; tap the same tie again to close. */
+   in the accordion right below it; tap the same tie again to close. */
 document.addEventListener("click",e=>{
   const t=e.target.closest(".tie.koclick"); if(!t) return;
-  const det=$("#ko-detail"); if(!det) return;
-  const a=t.dataset.koa, b=t.dataset.kob, id=t.dataset.koid;
+  const id=t.dataset.koid; const el=$("#koacc-"+id); if(!el) return;
+  const a=t.dataset.koa, b=t.dataset.kob;
   const tie=allKO().find(x=>String(x.id)===String(id));
-  document.querySelectorAll(".tie.koclick.sel").forEach(x=>x.classList.remove("sel"));
-  if(det.dataset.open===String(id)){
-    det.setAttribute("hidden",""); det.innerHTML=""; det.dataset.open="";
+  if(el.hasAttribute("hidden")){
+    el.innerHTML=koForecast(a,b,tie||{}); el.removeAttribute("hidden");
+    t.classList.add("sel");
   } else {
-    det.innerHTML=koForecast(a,b,tie||{}); det.removeAttribute("hidden");
-    det.dataset.open=String(id); t.classList.add("sel");
-    det.scrollIntoView({behavior:"smooth",block:"nearest"});
+    el.setAttribute("hidden",""); el.innerHTML=""; t.classList.remove("sel");
   }
 });
 
