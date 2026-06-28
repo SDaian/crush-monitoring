@@ -1,0 +1,9 @@
+{
+  "_comment": "WC2026 Group J, MD3. Standings before: Argentina 6 (3-0 Algeria, 2-0 Austria, GD +5, GA 0) ALREADY top and effectively assured of 1st; Austria 3, Algeria 3, Jordan 0 (1-3 Austria, 1-2 Algeria) eliminated. Argentina the dominant side (rating 95, two clean sheets); Jordan weak (66) and out. Argentina a huge favourite. Possible light rotation with 1st all but locked, but NO speculative rotation discount (Mexico lesson) -> only a small trim. Home = Argentina, away = Jordan. Cards not modelled (referee TBD).",
+  "meta": {"home":"Argentina","away":"Jordan","venue":"World Cup 2026 - neutral","date":"2026-06-27","stage":"World Cup 2026 - Group J - MD3","stakes":"Argentina (6 pts) all but assured of topping the group; Jordan (0 pts) eliminated. Argentina a heavy favourite; the result barely affects J's qualification picture, which hinges on Austria-Algeria."},
+  "calibration": {"base_home":1.25,"base_away":1.25,"rho":-0.06,
+    "home":{"name":"Argentina","attack":1.45,"defense":0.78,"context":1.0,"notes":["Dominant (rating 95): 3-0 Algeria, 2-0 Austria, two clean sheets. attack 1.45.","Elite defense, 0 conceded. defense 0.78.","1st all but locked; possible light rotation but no speculative discount (Mexico lesson)."]},
+    "away":{"name":"Jordan","attack":0.60,"defense":1.15,"context":1.0,"notes":["Weak (66), 0 pts, conceded 5. attack 0.60 (no over-downgrade).","Leaky vs a top side. defense 1.15.","Eliminated; pride only."]}},
+  "market": {"odds":[1.12,8.50,21.0]},
+  "lambdas_override": {"home":2.62,"away":0.42}
+}
