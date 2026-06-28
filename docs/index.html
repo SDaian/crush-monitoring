@@ -252,6 +252,24 @@ const GROUPS = {
   L:{teams:["England","Ghana","Panama","Croatia"],approx:false}
 };
 
+// Flag emoji per team (England/Scotland use the GB subdivision tag flags).
+const TEAM_FLAG={
+  "Mexico":"🇲🇽","South Korea":"🇰🇷","Czech Republic":"🇨🇿","South Africa":"🇿🇦",
+  "Switzerland":"🇨🇭","Canada":"🇨🇦","Bosnia & Herz.":"🇧🇦","Qatar":"🇶🇦",
+  "Brazil":"🇧🇷","Scotland":"🏴󠁧󠁢󠁳󠁣󠁴󠁿","Morocco":"🇲🇦","Haiti":"🇭🇹",
+  "USA":"🇺🇸","Australia":"🇦🇺","Turkey":"🇹🇷","Paraguay":"🇵🇾",
+  "Germany":"🇩🇪","Ivory Coast":"🇨🇮","Ecuador":"🇪🇨","Curacao":"🇨🇼",
+  "Netherlands":"🇳🇱","Sweden":"🇸🇪","Japan":"🇯🇵","Tunisia":"🇹🇳",
+  "Belgium":"🇧🇪","Iran":"🇮🇷","Egypt":"🇪🇬","New Zealand":"🇳🇿",
+  "Spain":"🇪🇸","Cape Verde":"🇨🇻","Saudi Arabia":"🇸🇦","Uruguay":"🇺🇾",
+  "France":"🇫🇷","Iraq":"🇮🇶","Norway":"🇳🇴","Senegal":"🇸🇳",
+  "Argentina":"🇦🇷","Austria":"🇦🇹","Jordan":"🇯🇴","Algeria":"🇩🇿",
+  "Portugal":"🇵🇹","Uzbekistan":"🇺🇿","Colombia":"🇨🇴","DR Congo":"🇨🇩",
+  "England":"🏴󠁧󠁢󠁥󠁮󠁧󠁿","Ghana":"🇬🇭","Panama":"🇵🇦","Croatia":"🇭🇷"
+};
+function flag(t){ return TEAM_FLAG[t]||"🏳️"; }
+function tf(t){ return flag(t)+" "+esc(t); }   // flag + escaped team name
+
 // Real results already known (entered as REAL by default).
 const KNOWN = {
   // group:[ [i,j,h,a], ... ] indices into GROUPS[g].teams
@@ -520,7 +538,7 @@ function calibFor(m){ if(!m) return null;
    =========================================================================== */
 // Build/data stamp shown in the header. The app is stateless: nothing is
 // persisted, so reloading (F5) always returns to the official results.
-const DATA_VERSION="2026-06-29.r32-calmark-layoutfix";
+const DATA_VERSION="2026-06-29.flags";
 let state={ results:{}, strengths:{}, learn:[] };
 
 function freshStrengths(){ const s={}; for(const t in TEAMS) s[t]=TEAMS[t]; return s; }
@@ -895,7 +913,7 @@ function renderStandings(g){
   const thirdQ=thirdGroupsQualified().has(g); // yellow only if this 3rd qualifies
   tb.innerHTML=s.map(r=>{
     const cls=r.pos===1?"q1":r.pos===2?"q2":(r.pos===3&&thirdQ)?"q3":"";
-    return `<tr class="${cls}"><td>${r.pos}</td><td class="team">${esc(r.t)}</td>
+    return `<tr class="${cls}"><td>${r.pos}</td><td class="team">${tf(r.t)}</td>
       <td>${r.P}</td><td>${r.W}</td><td>${r.D}</td><td>${r.L}</td><td>${r.GF}</td><td>${r.GA}</td>
       <td>${r.GD>0?'+':''}${r.GD}</td><td><b>${r.Pts}</b></td><td class="qcol">${fmtQual(QUAL[r.t])}</td></tr>`;
   }).join("");
@@ -913,11 +931,11 @@ function renderFixtures(g){
                    :`class="sc ${realCls}"`;
     return `<div class="match ${cal?'has-cal':''}" data-mid="${m.id}">
       ${cal?'<span class="cal-dot" title="Calibrated forecast available">★</span>':'<span class="cal-dot empty"></span>'}
-      <span class="mt">${esc(A)}</span>
+      <span class="mt">${tf(A)}</span>
       <input type="number" min="0" max="20" ${lk} data-mid="${m.id}" data-side="h" value="${r.h??''}"/>
       <span class="mid">:</span>
       <input type="number" min="0" max="20" ${lk} data-mid="${m.id}" data-side="a" value="${r.a??''}"/>
-      <span class="mt2">${esc(B)}</span>
+      <span class="mt2">${tf(B)}</span>
       <span class="prob" id="pr-${m.id}">${pctTriple(p)}</span>
     </div>
     <div class="mmeta">M${m.id} · ${m.date} · ${esc(m.venue)} <span class="approx">≈</span> ${locked?'· <b style="color:var(--good)">🔒 official</b>':r.real?'· <b style="color:var(--good)">real</b>':r.h!=null?'· sim':''}
@@ -958,10 +976,10 @@ function matchForecast(mid){
     <b>${pct(v)}%</b></div>`;
   const sim=`
    <div class="fc-sub fc-sub-sim">⚙ Simulator engine <span class="fc-tag">independent Poisson · live</span></div>
-   <div class="fc-xg">Model xG (λ): <b>${esc(A)} ${la.toFixed(2)}</b> – <b>${lb.toFixed(2)} ${esc(B)}</b>
+   <div class="fc-xg">Model xG (λ): <b>${tf(A)} ${la.toFixed(2)}</b> – <b>${lb.toFixed(2)} ${tf(B)}</b>
      · total ${(la+lb).toFixed(2)}</div>
    <div class="fc-sec">1X2</div>
-   ${bar(esc(A),H,"win")}${bar("Draw",D,"draw")}${bar(esc(B),Aw,"loss")}
+   ${bar(tf(A),H,"win")}${bar("Draw",D,"draw")}${bar(tf(B),Aw,"loss")}
    <div class="fc-sec">Goals markets</div>
    <div class="fc-grid">
      <span>Over 1.5 <b>${pct(o15)}%</b></span><span>Over 2.5 <b>${pct(o25)}%</b></span>
@@ -982,7 +1000,7 @@ function matchForecast(mid){
   const btd=`
    <div class="fc-sub fc-sub-btd">📐 Bradley-Terry-Davidson <span class="fc-tag">paired-comparison · 1X2 only</span></div>
    <div class="fc-sec">1X2</div>
-   ${bar(esc(A),bt.h,"win")}${bar("Draw",bt.d,"draw")}${bar(esc(B),bt.a,"loss")}
+   ${bar(tf(A),bt.h,"win")}${bar("Draw",bt.d,"draw")}${bar(tf(B),bt.a,"loss")}
    <div class="fc-note">Logistic strength model (k=${BTD_K}, ν=${BTD_NU}); no goal markets by design. Good sanity check on the 1X2; for scorelines/Over/BTTS use the engines above.</div>`;
   const cal=calibFor(m);
   // The calibrated entry stores p[] in its OWN home/away orientation (cal.h/cal.a),
@@ -1010,10 +1028,10 @@ function calibratedPanel(c){
     <b>${v.toFixed(1)}%</b></div>`;
   return `<div class="fc-cal">
    <div class="fc-sub fc-sub-cal">★ Calibrated forecast <span class="fc-tag">bivariate Poisson + Dixon-Coles · ${conf}</span></div>
-   <div class="fc-xg">Calibrated xG (λ): <b>${esc(c.h)} ${c.lh.toFixed(2)}</b> – <b>${c.la.toFixed(2)} ${esc(c.a)}</b>
+   <div class="fc-xg">Calibrated xG (λ): <b>${flag(c.h)} ${esc(c.h)} ${c.lh.toFixed(2)}</b> – <b>${c.la.toFixed(2)} ${flag(c.a)} ${esc(c.a)}</b>
      · total ${c.tot.toFixed(2)}</div>
    <div class="fc-sec">1X2</div>
-   ${bar(c.h,c.p[0],"win")}${bar("Draw",c.p[1],"draw")}${bar(c.a,c.p[2],"loss")}
+   ${bar(flag(c.h)+" "+c.h,c.p[0],"win")}${bar("Draw",c.p[1],"draw")}${bar(flag(c.a)+" "+c.a,c.p[2],"loss")}
    <div class="fc-sec">Goals markets</div>
    <div class="fc-grid">
      <span>Over 1.5 <b>${c.o[0].toFixed(1)}%</b></span><span>Over 2.5 <b>${c.o[1].toFixed(1)}%</b></span>
@@ -1052,14 +1070,14 @@ function koCalibratedPanel(c){
     <b>${v.toFixed(1)}%</b></div>`;
   return `<div class="fc-cal">
    <div class="fc-sub fc-sub-cal">★ Calibrated forecast <span class="fc-tag">bivariate Poisson + Dixon-Coles · knockout · ${conf}</span></div>
-   <div class="fc-xg">Calibrated xG (λ): <b>${esc(c.h)} ${c.lh.toFixed(2)}</b> – <b>${c.la.toFixed(2)} ${esc(c.a)}</b>
+   <div class="fc-xg">Calibrated xG (λ): <b>${flag(c.h)} ${esc(c.h)} ${c.lh.toFixed(2)}</b> – <b>${c.la.toFixed(2)} ${flag(c.a)} ${esc(c.a)}</b>
      · total ${c.tot.toFixed(2)}</div>
    <div class="fc-sec">Advances (90′ + extra time + penalties)</div>
-   ${bar(c.h,c.adv[0],adsum,"win")}${bar(c.a,c.adv[1],adsum,"loss")}
+   ${bar(flag(c.h)+" "+c.h,c.adv[0],adsum,"win")}${bar(flag(c.a)+" "+c.a,c.adv[1],adsum,"loss")}
    <div class="fc-grid"><span>Settled in 90′ <b>${(100-c.et).toFixed(1)}%</b></span><span>Extra time <b>${c.et.toFixed(1)}%</b></span>
      <span>Penalties <b>${c.pens.toFixed(1)}%</b></span><span></span></div>
    <div class="fc-sec">90′ result (draw → extra time)</div>
-   ${bar(c.h,c.p[0],sum,"win")}${bar("Draw → ET",c.p[1],sum,"draw")}${bar(c.a,c.p[2],sum,"loss")}
+   ${bar(flag(c.h)+" "+c.h,c.p[0],sum,"win")}${bar("Draw → ET",c.p[1],sum,"draw")}${bar(flag(c.a)+" "+c.a,c.p[2],sum,"loss")}
    <div class="fc-sec">Goals markets (90′)</div>
    <div class="fc-grid">
      <span>Over 1.5 <b>${c.o[0].toFixed(1)}%</b></span><span>Over 2.5 <b>${c.o[1].toFixed(1)}%</b></span>
@@ -1075,7 +1093,7 @@ function koCalibratedPanel(c){
 function renderThirds(){
   const t=$("#thirdsTable"); const arr=thirdsRanked();
   t.innerHTML=`<thead><tr><th>#</th><th class="team">Third-placed</th><th>Grp</th><th>Pts</th><th>GD</th><th>GF</th><th>Adv?</th></tr></thead><tbody>`+
-    arr.map(r=>`<tr><td class="${r.q?'rankq':''}">${r.rank}</td><td class="team">${esc(r.t)}</td><td>${r.g}</td>
+    arr.map(r=>`<tr><td class="${r.q?'rankq':''}">${r.rank}</td><td class="team">${tf(r.t)}</td><td>${r.g}</td>
       <td>${r.Pts}</td><td>${r.GD>0?'+':''}${r.GD}</td><td>${r.GF}</td>
       <td class="${r.q?'rankq':''}">${r.q?'✓':'—'}</td></tr>`).join("")+`</tbody>`;
 }
@@ -1118,20 +1136,20 @@ function koForecast(a,b,tie){
   }
   const sh=100*mh/N, sd=100*md/N, sma=100*ma/N, sAdv=100*advA/N;
   const pct=v=>(100*v).toFixed(1);
-  const bar=(label,v,cls)=>`<div class="fc-bar"><span>${esc(label)}</span>
+  const bar=(label,v,cls)=>`<div class="fc-bar"><span>${label}</span>
     <span class="fc-track"><span class="fc-fill ${cls}" style="width:${(100*v).toFixed(1)}%"></span></span>
     <b>${pct(v)}%</b></div>`;
   // --- ⚙ Simulator engine (knockout-aware) ---
   const sim=`
    <div class="fc-sub fc-sub-sim">⚙ Simulator engine <span class="fc-tag">independent Poisson · knockout · live</span></div>
-   <div class="fc-xg">Model xG (λ): <b>${esc(A)} ${la.toFixed(2)}</b> – <b>${lb.toFixed(2)} ${esc(B)}</b>
+   <div class="fc-xg">Model xG (λ): <b>${tf(A)} ${la.toFixed(2)}</b> – <b>${lb.toFixed(2)} ${tf(B)}</b>
      · total ${(la+lb).toFixed(2)}</div>
    <div class="fc-sec">Advances (90′ + extra time + penalties)</div>
-   ${bar(esc(A),advS,"win")}${bar(esc(B),1-advS,"loss")}
+   ${bar(tf(A),advS,"win")}${bar(tf(B),1-advS,"loss")}
    <div class="fc-grid"><span>Settled in 90′ <b>${pct(1-D)}%</b></span><span>Extra time <b>${pct(D)}%</b></span>
      <span>Penalties <b>${pct(pPens)}%</b></span><span></span></div>
    <div class="fc-sec">90′ result (draw → extra time)</div>
-   ${bar(esc(A),H,"win")}${bar("Draw → ET",D,"draw")}${bar(esc(B),Aw,"loss")}
+   ${bar(tf(A),H,"win")}${bar("Draw → ET",D,"draw")}${bar(tf(B),Aw,"loss")}
    <div class="fc-sec">Goals markets (90′)</div>
    <div class="fc-grid">
      <span>Over 1.5 <b>${pct(o15)}%</b></span><span>Over 2.5 <b>${pct(o25)}%</b></span>
@@ -1151,9 +1169,9 @@ function koForecast(a,b,tie){
   const btd=`
    <div class="fc-sub fc-sub-btd">📐 Bradley-Terry-Davidson <span class="fc-tag">paired-comparison · 1X2 only</span></div>
    <div class="fc-sec">Advances (draw split 50/50 — no goal model for ET)</div>
-   ${bar(esc(A),advB,"win")}${bar(esc(B),1-advB,"loss")}
+   ${bar(tf(A),advB,"win")}${bar(tf(B),1-advB,"loss")}
    <div class="fc-sec">90′ result</div>
-   ${bar(esc(A),bt.h,"win")}${bar("Draw → ET",bt.d,"draw")}${bar(esc(B),bt.a,"loss")}
+   ${bar(tf(A),bt.h,"win")}${bar("Draw → ET",bt.d,"draw")}${bar(tf(B),bt.a,"loss")}
    <div class="fc-note">Logistic strength model (k=${BTD_K}, ν=${BTD_NU}); no goal markets, so its advancement just splits the 90′ draw. Sanity check on the side; for goals/scorelines use the simulator.</div>`;
   // --- engine comparison header: advancement from every available engine ---
   const kc=koCalibFor(A,B); // deep-calibrated entry, oriented to home=A
@@ -1195,9 +1213,9 @@ function renderBracket(){
       const hint=(A&&B)?`<span class="kdet">▸ details</span>`:"";
       const acc=(A&&B)?`<div class="acc koacc" id="koacc-${tie.id}" hidden></div>`:"";
       return `<div class="tie${klass}${click}">
-        <div class="ln"><span class="kt ${wa}">${esc(A||tie.h||'—')}</span><span class="kp">${A&&B?pa:''}</span></div>
+        <div class="ln"><span class="kt ${wa}">${A?tf(A):esc(tie.h||'—')}</span><span class="kp">${A&&B?pa:''}</span></div>
         <div class="kmid">${sc}</div>
-        <div class="ln"><span class="kt ${wb}">${esc(B||tie.a||'—')}</span><span class="kp">${A&&B?pb:''}</span></div>
+        <div class="ln"><span class="kt ${wb}">${B?tf(B):esc(tie.a||'—')}</span><span class="kp">${A&&B?pb:''}</span></div>
         <div class="meta"><span class="kmi">M${tie.id}</span>${dt?(" · "+dt):""}${appx} ${calBadge}${hint}</div>
       </div>${acc}`;
     }).join("");
