@@ -60,6 +60,7 @@ npm run report
 | `npm run test:ui`   | Run only the UI project                      |
 | `npm run test:headed` | Run the UI project with a headed browser   |
 | `npm run report`    | Open the last HTML report                    |
+| `npm run watch:tickets` | Check FWC26 ticket availability once (add `-- --watch` to loop) |
 
 Reporters: `line` (console), `html` (`reports/html`), and `json`
 (`results.json`). Traces, screenshots, and video are retained on failure.
@@ -101,6 +102,53 @@ Reporters: `line` (console), `html` (`reports/html`), and `json`
    # Crush login IDs are username@companycode, not email addresses.
    TEST_USER_USERNAME=...  TEST_USER_PASSWORD=...  TARGET_ENV=dev  npm run test:ui
    ```
+
+## World Cup 2026 ticket availability watcher
+
+`scripts/ticket-watch.js` is a **logged-out, read-only** availability notifier
+for a single public FIFA ticketing page. It renders the page in headless
+Chromium (the page is a SPA, so a plain HTTP GET sees nothing), best-effort
+classifies it as `AVAILABLE` / `SOLD_OUT` / `UNKNOWN`, and notifies you **only
+when the page content changes** — for example, when a sold-out product becomes
+available.
+
+**What it does not do, by design:** it does not log in, use your account, add to
+cart, or attempt a purchase. It only reads a public page, at low frequency. This
+keeps it lower-risk and friendlier to FIFA's terms of service. Automating a
+logged-in checkout is what gets accounts suspended — and is out of scope here.
+Treat the detection as a heads-up: when notified, open the page and complete any
+purchase manually, yourself.
+
+```bash
+# One check, print result, exit (exit 0 = checked, 2 = blocked/unreachable):
+npm run watch:tickets
+
+# Keep watching on an interval (every ~5 min by default, minimum 2):
+npm run watch:tickets -- --watch
+```
+
+Configure it with environment variables (copy `.env.example` to `.env`):
+
+| Variable                | Purpose                                                         |
+| ----------------------- | --------------------------------------------------------------- |
+| `TICKET_URL`            | Page to watch (defaults to the FWC26 shop seat-selection URL)   |
+| `TICKET_WATCH_SELECTOR` | Optional CSS selector to narrow what is hashed (fewer false hits) |
+| `CHECK_INTERVAL_MIN`    | Minutes between checks in `--watch` mode (min 2)                |
+| `TELEGRAM_BOT_TOKEN` + `TELEGRAM_CHAT_ID` | Optional Telegram notifications              |
+| `TICKET_WATCH_WEBHOOK`  | Optional generic webhook (Discord/Slack); receives `{text}` JSON |
+
+State (last-seen content signature) is kept in `.ticket-watch-state.json`, which
+is gitignored. With no notifier configured it still works and prints to the
+console.
+
+**Caveats, honestly:** (1) the classification is keyword-based heuristics, so
+always confirm manually; (2) FIFA's site uses bot-mitigation (queue/Akamai-style)
+that may rate-limit or challenge automated access even when logged out — keep the
+interval polite; (3) this host is **not** reachable from a Claude Code on the web
+session (the egress proxy returns `host_not_allowed`), so run the watcher from a
+machine that can reach FIFA's site. For continuous use, schedule the single-run
+mode with your OS scheduler (cron / Task Scheduler) rather than leaving `--watch`
+running.
 
 ## Network access (Claude Code on the web)
 

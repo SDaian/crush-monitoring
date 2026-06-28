@@ -10,6 +10,9 @@ playwright-report/
 # Environment files
 .env
 
+# Ticket watcher local state (not source)
+.ticket-watch-state.json
+
 # Logs
 npm-debug.log*
 yarn-debug.log*
