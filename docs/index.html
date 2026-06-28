@@ -863,7 +863,9 @@ function recomputeLearningFromScratch(){
   state.strengths=freshStrengths(); state.learn=[];
   // apply REAL results in date order
   const reals=[];
-  for(const id in state.results){ const r=state.results[id]; if(r&&r.real){ reals.push({m:SCHED[id],r}); } }
+  // Only GROUP matches feed strength learning; knockout results (no SCHED entry)
+  // are seeded into state.results but must be skipped here.
+  for(const id in state.results){ const r=state.results[id]; if(r&&r.real&&SCHED[id]){ reals.push({m:SCHED[id],r}); } }
   reals.sort((x,y)=> (x.m.date<y.m.date?-1:1));
   reals.forEach(x=> x.m && applyLearn(x.m,x.r));
 }
