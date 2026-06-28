@@ -150,38 +150,12 @@ machine that can reach FIFA's site. For continuous use, schedule the single-run
 mode with your OS scheduler (cron / Task Scheduler) rather than leaving `--watch`
 running.
 
-### Running it in GitHub Actions (hosted runner)
-
-`.github/workflows/ticket-watch.yml` runs the single-shot check every ~15
-minutes on a GitHub-hosted `ubuntu-latest` runner (which *can* reach FIFA's
-site). It only notifies when the page content changes; the last-seen signature
-is persisted between runs with a rolling `actions/cache` entry, so a fresh
-runner does not re-alert every cycle.
-
-Configure it under **Settings → Secrets and variables → Actions**:
-
-| Name                    | Kind     | Purpose                                              |
-| ----------------------- | -------- | --------------------------------------------------- |
-| `TELEGRAM_BOT_TOKEN`    | secret   | Telegram bot token (optional notifier)              |
-| `TELEGRAM_CHAT_ID`      | secret   | Telegram chat id to message (optional notifier)     |
-| `TICKET_WATCH_WEBHOOK`  | secret   | Discord/Slack-style webhook (optional notifier)     |
-| `TICKET_URL`            | variable | Override the watched page (optional; has a default) |
-| `TICKET_WATCH_SELECTOR` | variable | Narrow what is hashed (optional)                    |
-
-With no notifier secrets set, the workflow still runs and the detected state
-shows in the Actions run log. Caveats:
-
-1. **FIFA blocks datacenter IPs.** In testing, GitHub-hosted runners hit FIFA's
-   bot-protection WAF and got a `403` "request blocked" page instead of the real
-   ticket page. The watcher now detects that and reports `BLOCKED` (failing the
-   run) rather than a misleading "page changed". So a hosted runner is good for
-   validating the job, but **for real monitoring run the watcher from a
-   residential IP** (your own machine, or a self-hosted runner on a home
-   network).
-2. GitHub only fires *scheduled* workflows from the **default branch**, so
-   polling starts once this branch is merged to `main` — until then use the
-   **Run workflow** button (`workflow_dispatch`).
-3. GitHub's scheduler is best-effort and may delay or skip ticks under load.
+> **Why no scheduled CI workflow?** A GitHub-hosted runner was tested and FIFA's
+> bot-protection WAF blocked the datacenter IP with a `403` "request blocked"
+> page instead of the real ticket page (the watcher detects this and reports
+> `BLOCKED`). Automated/cloud checks are therefore not viable — **run the watcher
+> from a residential IP** (your own machine, or a self-hosted runner on a home
+> network), via the OS scheduler as above.
 
 ## Network access (Claude Code on the web)
 
