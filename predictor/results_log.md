@@ -41,6 +41,8 @@ Legend: ✅ right for the right reason · 🟡 right but by luck/margin ·
 | 2026-06-25 | New Zealand vs Belgium | 16.8 / 21.6 / 61.6 | HIGH | 1-5 (Belgium win) | ✅ |
 | 2026-06-26 | Panama vs England | 8.6 / 20.9 / 70.5 | HIGH | 0-2 (England win) | ✅ |
 | 2026-06-26 | Croatia vs Ghana | 52.2 / 27.1 / 20.7 | MEDIUM | 2-1 (Croatia win) | ✅ |
+| 2026-06-27 | Portugal vs Colombia | 45.3 / 26.9 / 27.7 | MEDIUM | 0-0 (draw) | 🟡 |
+| 2026-06-27 | Uzbekistan vs DR Congo | 24.4 / 28.7 / 46.9 | MEDIUM | 1-3 (DR Congo win) | ✅ |
 
 ### Emerging pattern: favorites vs low block (key)
 
@@ -642,3 +644,35 @@ avoid defeat (a draw = a safe 4-pt third) and that Ghana was virtually through i
 every outcome (even a loss = a safe third). Croatia went one better and won outright
 (2nd, direct); Ghana lost but qualified 3rd on 4 pts — both landed precisely as the
 best-thirds cross-check predicted.
+
+---
+
+## 2026-06-27 · Group K finals (MD3) — graded
+
+Standings before: Colombia 6, Portugal 4, DR Congo 1, Uzbekistan 0. Final table:
+**Colombia 1st** (7 pts), **Portugal 2nd** (5 pts), **DR Congo 3rd** (4 pts, GD +1,
+GF 4 → qualifies as a best third), Uzbekistan 4th and out.
+
+- **Portugal vs Colombia** — Portugal 45.3 / Draw 26.9 / Colombia 27.7 (MEDIUM). λ
+  1.50 / 1.12, xG 2.62. Market 44.0 / 28.0 / 28.0 (div 1.3, post-XI). **RESULT: 0-0
+  🟡.** The seeding game ended in the cagey draw the stakes invited. 1X2 side missed
+  (the 45% favourite didn't win) but this was a genuine near-coin-flip between two
+  already-qualified sides, and Colombia needed only the draw to top the group — they
+  got exactly that (0-0 a top-6 scoreline, Under 2.5 51%). **Lesson:** two qualified
+  sides, one needing only a point, is a structural recipe for a low-event draw — the
+  draw/Under is underpriced vs the nominal favourite.
+- **Uzbekistan vs DR Congo** — Uzbekistan 24.4 / Draw 28.7 / DR Congo 46.9 (MEDIUM). λ
+  0.92 / 1.38, xG 2.30. Market 27.2 / 28.0 / 44.8 (div 2.8). **RESULT: 1-3 DR Congo
+  ✅** — 1X2 hit and the STRUCTURAL read fully vindicated (Senegal archetype). DR Congo
+  had to win BY A MARGIN to chase a best third (GD is the tiebreak); I applied the
+  legitimate structural lift and flagged the confirmed switch to a back four 'for
+  goals' as validation — they delivered a 3-1 with the GD that secured a strong 3rd.
+  They scored 3 vs λ 1.38 (finishing upside tail), but side, must-win-by-margin thesis
+  and qualification consequence all landed.
+
+**Thirds cut-line moved (key):** DR Congo's strong 3rd (4 pts, +1, 4) jumped to the
+TOP of the best-thirds table and RAISED the 8th/last-qualifying bar from South Korea
+(3/−1/2) to **Iran (3/0/3)** — knocking South Korea OUT. This is why the Austria-Algeria
+third-place math was recomputed once K finished: with the bar at Iran (GD 0), a J third
+on 3 pts (negative GD) can no longer sneak in, so only a DRAW (Algeria → 4-pt third)
+now saves the J third. A late strong third reshapes the whole cut-line.
