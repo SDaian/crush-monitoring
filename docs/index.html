@@ -121,8 +121,10 @@
   .tie .meta .kmi{color:var(--accent)}
   .tie.koclick{cursor:pointer} .tie.koclick:hover{border-color:var(--gold)}
   .tie.koclick.sel{border-color:var(--gold);box-shadow:0 0 0 1px var(--gold) inset}
+  .tie.hascal{border-left:3px solid var(--gold)}
   .tie .meta .kdet{color:var(--gold);float:right}
-  .koacc{width:min(92vw,340px);font-size:11px}
+  .koacc{font-size:11px}
+  .round.kowide{min-width:min(94vw,360px)}  /* widen the column so an open detail fits */
   .learn-item{font-size:12px;border-left:2px solid var(--accent);padding:4px 8px;margin:5px 0;background:var(--card2);border-radius:0 6px 6px 0}
   .delta-up{color:var(--good)} .delta-dn{color:var(--bad)}
   .log-item{border-left:3px solid var(--accent);padding:8px 10px;margin:8px 0;
@@ -518,7 +520,7 @@ function calibFor(m){ if(!m) return null;
    =========================================================================== */
 // Build/data stamp shown in the header. The app is stateless: nothing is
 // persisted, so reloading (F5) always returns to the official results.
-const DATA_VERSION="2026-06-29.r32-brazil-japan-calib";
+const DATA_VERSION="2026-06-29.r32-calmark-layoutfix";
 let state={ results:{}, strengths:{}, learn:[] };
 
 function freshStrengths(){ const s={}; for(const t in TEAMS) s[t]=TEAMS[t]; return s; }
@@ -1185,14 +1187,18 @@ function renderBracket(){
       const sc=r?`<b class="kscore">${r.h}-${r.a}</b>`:(A&&B?'<span class="kvs">vs</span>':"");
       // Ties with both teams known are tappable -> open a detail accordion
       // right below this tie (in its own column), like the group match cards.
+      // A gold ★ marks ties that have a deep-calibrated forecast (KO_CALIB).
+      const hasCal=(A&&B)&&!!koCalibFor(A,B);
+      const klass=(r?' decided':'')+(hasCal?' hascal':'');
       const click=(A&&B)?` koclick" data-koa="${esc(A)}" data-kob="${esc(B)}" data-koid="${tie.id}` : "";
+      const calBadge=hasCal?`<span class="cal-badge" title="Deep-calibrated forecast available">★ cal</span> `:"";
       const hint=(A&&B)?`<span class="kdet">▸ details</span>`:"";
       const acc=(A&&B)?`<div class="acc koacc" id="koacc-${tie.id}" hidden></div>`:"";
-      return `<div class="tie${r?' decided':''}${click}">
+      return `<div class="tie${klass}${click}">
         <div class="ln"><span class="kt ${wa}">${esc(A||tie.h||'—')}</span><span class="kp">${A&&B?pa:''}</span></div>
         <div class="kmid">${sc}</div>
         <div class="ln"><span class="kt ${wb}">${esc(B||tie.a||'—')}</span><span class="kp">${A&&B?pb:''}</span></div>
-        <div class="meta"><span class="kmi">M${tie.id}</span>${dt?(" · "+dt):""}${appx} ${hint}</div>
+        <div class="meta"><span class="kmi">M${tie.id}</span>${dt?(" · "+dt):""}${appx} ${calBadge}${hint}</div>
       </div>${acc}`;
     }).join("");
     host.appendChild(col);
@@ -1306,17 +1312,21 @@ document.addEventListener("click",e=>{
 });
 
 /* knockout per-tie detail: tap a tie (both teams known) to open its forecast
-   in the accordion right below it; tap the same tie again to close. */
+   in the accordion right below it. One open at a time; the tie's column widens
+   (.kowide) so the panel fits without overflowing into the next round. */
 document.addEventListener("click",e=>{
   const t=e.target.closest(".tie.koclick"); if(!t) return;
   const id=t.dataset.koid; const el=$("#koacc-"+id); if(!el) return;
-  const a=t.dataset.koa, b=t.dataset.kob;
-  const tie=allKO().find(x=>String(x.id)===String(id));
-  if(el.hasAttribute("hidden")){
-    el.innerHTML=koForecast(a,b,tie||{}); el.removeAttribute("hidden");
-    t.classList.add("sel");
-  } else {
-    el.setAttribute("hidden",""); el.innerHTML=""; t.classList.remove("sel");
+  const wasOpen=!el.hasAttribute("hidden");
+  // collapse any open detail + reset selection/width
+  document.querySelectorAll(".koacc:not([hidden])").forEach(x=>{ x.setAttribute("hidden",""); x.innerHTML=""; });
+  document.querySelectorAll(".tie.koclick.sel").forEach(x=>x.classList.remove("sel"));
+  document.querySelectorAll(".round.kowide").forEach(x=>x.classList.remove("kowide"));
+  if(!wasOpen){
+    const tie=allKO().find(x=>String(x.id)===String(id));
+    el.innerHTML=koForecast(t.dataset.koa,t.dataset.kob,tie||{}); el.removeAttribute("hidden");
+    t.classList.add("sel"); t.closest(".round").classList.add("kowide");
+    el.scrollIntoView({behavior:"smooth",block:"nearest"});
   }
 });
 
