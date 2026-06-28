@@ -23,7 +23,13 @@ import json
 import sys
 
 from .match import load_match_file, run_match
-from .report import render
+from .model import knockout_odds
+from .report import render, render_knockout
+
+
+def _knockout_for(result) -> "object":
+    sm = result.score_matrix
+    return knockout_odds(sm.lam_home, sm.lam_away, rho=sm.rho)
 
 
 def _cmd_predict(args: argparse.Namespace) -> int:
@@ -43,9 +49,13 @@ def _cmd_predict(args: argparse.Namespace) -> int:
             "recommendation": result.recommendation,
             "market_divergence": result.market_divergence,
         }
+        if args.knockout:
+            payload["knockout"] = _knockout_for(result).as_dict()
         print(json.dumps(payload, indent=2, ensure_ascii=False))
     else:
         print(render(result, include_convergence=not args.no_convergence))
+        if args.knockout:
+            print(render_knockout(result, _knockout_for(result)))
     return 0
 
 
@@ -63,6 +73,8 @@ def _cmd_quick(args: argparse.Namespace) -> int:
         cfg["market"] = {"odds": args.odds}
     result = run_match(cfg)
     print(render(result, include_convergence=not args.no_convergence))
+    if args.knockout:
+        print(render_knockout(result, _knockout_for(result)))
     return 0
 
 
@@ -77,6 +89,11 @@ def build_parser() -> argparse.ArgumentParser:
     pred.add_argument("config", help="Path to the match JSON config.")
     pred.add_argument("--json", action="store_true", help="Emit JSON instead of text report.")
     pred.add_argument("--no-convergence", action="store_true", help="Skip Monte Carlo check.")
+    pred.add_argument(
+        "--knockout",
+        action="store_true",
+        help="Add single-elimination advancement (90' + extra time + penalties).",
+    )
     pred.set_defaults(func=_cmd_predict)
 
     quick = sub.add_parser("quick", help="One-off prediction from raw lambdas.")
@@ -93,6 +110,11 @@ def build_parser() -> argparse.ArgumentParser:
         help="Decimal market odds for de-vig validation.",
     )
     quick.add_argument("--no-convergence", action="store_true")
+    quick.add_argument(
+        "--knockout",
+        action="store_true",
+        help="Add single-elimination advancement (90' + extra time + penalties).",
+    )
     quick.set_defaults(func=_cmd_quick)
 
     return p

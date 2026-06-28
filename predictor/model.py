@@ -187,3 +187,86 @@ def derive_markets(
         exp_total_goals=xg_home + xg_away,
         top_scorelines=scorelines[:top_n],
     )
+
+
+# --------------------------------------------------------------------------- #
+# Knockout resolution (single-elimination): who ADVANCES, not who wins in 90'
+# --------------------------------------------------------------------------- #
+
+
+@dataclass
+class KnockoutOdds:
+    """Advancement probabilities for a single-elimination tie.
+
+    A knockout has no draw: a level game after 90' goes to extra time, and a
+    level game after extra time goes to penalties. ``adv_home + adv_away == 1``.
+    """
+
+    adv_home: float
+    adv_away: float
+    # decomposition of how the home side advances (all out of 1.0):
+    win_reg: float       # P(home wins inside 90')
+    win_et: float        # P(level after 90', home wins in extra time)
+    win_pens: float      # P(level after 90' and ET, home wins the shootout)
+    p_draw_reg: float    # P(level after 90') -- i.e. P(goes to extra time)
+    p_pens: float        # P(goes to penalties)
+
+    def as_dict(self) -> dict:
+        return {
+            "advance": {"home": self.adv_home, "away": self.adv_away},
+            "home_breakdown": {
+                "win_regulation": self.win_reg,
+                "win_extra_time": self.win_et,
+                "win_penalties": self.win_pens,
+            },
+            "goes_to_extra_time": self.p_draw_reg,
+            "goes_to_penalties": self.p_pens,
+        }
+
+
+def knockout_odds(
+    lam_home: float,
+    lam_away: float,
+    rho: float = -0.06,
+    max_goals: int = 10,
+    et_fraction: float = 1.0 / 3.0,
+    pens_home: float = 0.5,
+) -> KnockoutOdds:
+    """Probability each side ADVANCES from a single-elimination tie.
+
+    Three stages, chained:
+      1. 90' regulation -- the usual Dixon-Coles score matrix.
+      2. If level, extra time (30'): a fresh mini-match with the lambdas scaled
+         by ``et_fraction`` (default 30/90 = 1/3 of the per-team goal rate).
+      3. If still level, a penalty shootout, modelled as near-random
+         (``pens_home`` default 0.5 -- shootouts are empirically close to a
+         coin-flip; pass a slight skew if you want to favour the stronger side).
+
+    Returns advancement probabilities plus a decomposition so the report can
+    show how often the tie is settled in 90', in ET, or on penalties.
+    """
+    reg = derive_markets(build_score_matrix(lam_home, lam_away, rho, max_goals))
+    p_home_90, p_draw_90, p_away_90 = reg.p_home, reg.p_draw, reg.p_away
+
+    et = derive_markets(
+        build_score_matrix(
+            lam_home * et_fraction, lam_away * et_fraction, rho, max_goals
+        )
+    )
+    p_home_et, p_draw_et = et.p_home, et.p_draw
+
+    win_reg = p_home_90
+    win_et = p_draw_90 * p_home_et
+    p_pens = p_draw_90 * p_draw_et
+    win_pens = p_pens * pens_home
+
+    adv_home = win_reg + win_et + win_pens
+    return KnockoutOdds(
+        adv_home=adv_home,
+        adv_away=1.0 - adv_home,
+        win_reg=win_reg,
+        win_et=win_et,
+        win_pens=win_pens,
+        p_draw_reg=p_draw_90,
+        p_pens=p_pens,
+    )

@@ -14,11 +14,39 @@
 from __future__ import annotations
 
 from .match import MatchResult
+from .model import KnockoutOdds
 from .simulate import convergence_report
 
 
 def _pct(x: float) -> str:
     return f"{x:6.1%}"
+
+
+def render_knockout(result: MatchResult, ko: KnockoutOdds) -> str:
+    """Render the single-elimination advancement block (appended to the report).
+
+    A knockout has no draw: the 90' draw probability is resolved through extra
+    time and then penalties, so the deliverable is who ADVANCES.
+    """
+    meta = result.meta
+    out = []
+    out.append("")
+    out.append("[K] KNOCKOUT — WHO ADVANCES (90' + extra time + penalties)")
+    out.append(f"  {meta.home:<24} {ko.adv_home:6.1%}")
+    out.append(f"  {meta.away:<24} {ko.adv_away:6.1%}")
+    out.append("  ----------------------------------------------")
+    out.append(f"  Settled in 90'        : {1 - ko.p_draw_reg:6.1%}")
+    out.append(f"  Goes to extra time    : {ko.p_draw_reg:6.1%}")
+    out.append(f"  Goes to penalties     : {ko.p_pens:6.1%}")
+    out.append(
+        f"  How {meta.home} advances: "
+        f"reg {ko.win_reg:.1%} · ET {ko.win_et:.1%} · pens {ko.win_pens:.1%}"
+    )
+    out.append(
+        "  (Extra time = a 30' mini-match at 1/3 of the goal rate; penalties "
+        "modelled as a coin-flip — shootouts are near-random.)"
+    )
+    return "\n".join(out)
 
 
 def render(result: MatchResult, include_convergence: bool = True) -> str:
