@@ -5,5 +5,11 @@
     "home":{"name":"Canada","attack":1.18,"defense":0.95,"context":1.0,"notes":["Rating 75; attacking (8 goals in the group) but the 6-0 vs Qatar inflates it and they lost 1-2 to Switzerland, the one strong side faced. attack 1.18.","Decent but not airtight defensively. defense 0.95.","Favourite by class; must break down a packed block."]},
     "away":{"name":"South Africa","attack":0.90,"defense":0.92,"context":1.0,"notes":["Rating 68; organized, low-scoring grinder (1-0 South Korea, 1-1 Czech, scores late). attack 0.90 -- NO over-downgrade (they were my worst group miss).","Disciplined, hard to break down. defense 0.92 -> keeps it tight and low-scoring.","Knockout: the tight game drags toward ET/penalties, where the underdog's advancement odds rise."]}},
   "market": {"odds":[2.00,3.30,3.80]},
-  "lambdas_override": {"home":1.40,"away":1.02}
+  "lambdas_override": {"home":1.40,"away":1.02},
+  "_postmatch": {
+    "result": "Canada 1-0 South Africa. Canada advance to the Round of 16. Settled in 90' -- no extra time needed.",
+    "model_1x2": "Canada 44.7 / Draw 28.9 / South Africa 26.4 (LOW, 90'); advancement Canada 60.4 / South Africa 39.6",
+    "verdict": "Clean process hit. The favourite advanced, and the TEXTURE was exactly the read: a tight, low-scoring grind (1-0 was a top-3 scoreline at 11.4%; Under 2.5 was 56%). xG Canada 1.40 -> 1 goal, near-exact; South Africa 1.02 -> 0, their low block kept it tight (BTTS No). Crucially I did NOT over-downgrade South Africa this time (they were my single worst group miss) -- I respected the block, which is why the model expected a narrow 1-0 rather than a rout, and that is what happened. It was settled in 90' (the model's 71% branch), so the ET/penalty tail did not need to fire.",
+    "lesson": "The knockout-aware read held: respect a disciplined low block -> expect a tight, low-scoring tie that the favourite edges (or that drags to ET/penalties). The advancement framing (Canada 60.4%) correctly sat above the 90' win (44.7%) -- and here the favourite simply closed it out in regulation. The South-Africa lesson (don't fade the grinder) was applied and validated."
+  }
 }
