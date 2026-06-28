@@ -150,6 +150,31 @@ machine that can reach FIFA's site. For continuous use, schedule the single-run
 mode with your OS scheduler (cron / Task Scheduler) rather than leaving `--watch`
 running.
 
+### Running it in GitHub Actions (hosted runner)
+
+`.github/workflows/ticket-watch.yml` runs the single-shot check every ~15
+minutes on a GitHub-hosted `ubuntu-latest` runner (which *can* reach FIFA's
+site). It only notifies when the page content changes; the last-seen signature
+is persisted between runs with a rolling `actions/cache` entry, so a fresh
+runner does not re-alert every cycle.
+
+Configure it under **Settings → Secrets and variables → Actions**:
+
+| Name                    | Kind     | Purpose                                              |
+| ----------------------- | -------- | --------------------------------------------------- |
+| `TELEGRAM_BOT_TOKEN`    | secret   | Telegram bot token (optional notifier)              |
+| `TELEGRAM_CHAT_ID`      | secret   | Telegram chat id to message (optional notifier)     |
+| `TICKET_WATCH_WEBHOOK`  | secret   | Discord/Slack-style webhook (optional notifier)     |
+| `TICKET_URL`            | variable | Override the watched page (optional; has a default) |
+| `TICKET_WATCH_SELECTOR` | variable | Narrow what is hashed (optional)                    |
+
+With no notifier secrets set, the workflow still runs and the detected state
+shows in the Actions run log. Two caveats: **(1)** GitHub only fires *scheduled*
+workflows from the **default branch**, so polling starts once this branch is
+merged to `main` — until then use the **Run workflow** button
+(`workflow_dispatch`); **(2)** GitHub's scheduler is best-effort and may delay
+or skip ticks under load.
+
 ## Network access (Claude Code on the web)
 
 When running this suite from a Claude Code on the web cloud session, the
