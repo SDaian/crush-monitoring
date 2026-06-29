@@ -47,6 +47,7 @@ Legend: ✅ right for the right reason · 🟡 right but by luck/margin ·
 | 2026-06-27 | Austria vs Algeria | 39.5 / 28.9 / 31.7 | LOW | 3-3 (draw) | 🟡 |
 | 2026-06-28 | Canada vs South Africa (R32) | 44.7 / 28.9 / 26.4 | LOW | 1-0 (Canada, adv.) | ✅ |
 | 2026-06-29 | Brazil vs Japan (R32) | 58.7 / 24.3 / 16.9 | MEDIUM | 2-1 (Brazil, adv.) | ✅ |
+| 2026-06-29 | Germany vs Paraguay (R32) | 58.9 / 25.3 / 15.8 | MEDIUM | 1-1, Paraguay adv. (pens) | 🟡 |
 
 ### Emerging pattern: favorites vs low block (key)
 
@@ -758,3 +759,23 @@ knockout has no draw. The closed-form chaining is Monte-Carlo-validated (sim vs 
   tipped to goals. **Lesson:** on a single key absence (Kubo out), don't over-trim a
   quality side's attack; Japan still scored and pushed it to the wire. Side right, goals
   lean a coin-flip that landed Over.
+
+## 2026-06-29 · Round of 32 — Germany 1-1 Paraguay (Paraguay win on pens) 🟡
+
+- **Germany vs Paraguay** — 90': Germany 58.9 / Draw 25.3 / Paraguay 15.8 (MEDIUM);
+  advancement **Germany 74.4 / Paraguay 25.6**. λ 1.72 / 0.78, xG 2.50, Under 2.5 54%,
+  top scoreline **1-0 (13.2%)**, 1-1 at 11.9%; **goes to penalties 12.9%**. Market (90')
+  61.1 / 23.1 / 15.8 (div 2.2). **RESULT: 1-1, Paraguay win the shootout — PARAGUAY
+  ADVANCE** (the upset of the round). Marked 🟡, not ❌: the advancement SIDE missed, but
+  the game played out almost exactly as framed and the upset came through the precise
+  mechanism the model priced. The favourite-vs-organized-block read was right on shape —
+  a tight, low-scoring 1-1 (a top-3 scoreline, Under 2.5) that Paraguay's disciplined
+  block dragged to a shootout (the ~13% penalties branch), where Paraguay won the 50/50
+  lottery. I had explicitly set Paraguay's advancement (25.6%) ABOVE its 90' win (15.8%)
+  precisely because a tight game gives the underdog penalty equity — and it cashed.
+  **Lesson:** an upset of a well-calibrated favourite is the priced tail landing, not a
+  process failure (unlike South Korea–South Africa, which was a speculative misjudgement).
+  A correctly-priced 74% favourite still goes out ~1 in 4, decided by the irreducible
+  shootout coin-flip. The advancement framing earned its keep: it located Paraguay's real
+  chance in the penalty lottery, not in winning in 90'. Only texture miss: BTTS leaned No,
+  came in Yes (both scored once).
