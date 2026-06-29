@@ -292,7 +292,8 @@ const KNOWN = {
 // the bracket shows them as played and they feed the next round. pen: shootout
 // winner (team name) when a tie is level after extra time.
 const KO_KNOWN = {
-  75: {h:0, a:1}  // R32: South Africa 0-1 Canada (Canada advance) — settled in 90'
+  75: {h:0, a:1},  // R32: South Africa 0-1 Canada (Canada advance) — settled in 90'
+  81: {h:2, a:1}   // R32: Brazil 2-1 Japan (Brazil advance) — late winner, settled in 90'
 };
 
 /* ---- round-robin fixture order for 4 teams ---- */
@@ -538,7 +539,7 @@ function calibFor(m){ if(!m) return null;
    =========================================================================== */
 // Build/data stamp shown in the header. The app is stateless: nothing is
 // persisted, so reloading (F5) always returns to the official results.
-const DATA_VERSION="2026-06-29.brazil-japan-xi";
+const DATA_VERSION="2026-06-29.r32-brazil-result";
 let state={ results:{}, strengths:{}, learn:[] };
 
 function freshStrengths(){ const s={}; for(const t in TEAMS) s[t]=TEAMS[t]; return s; }

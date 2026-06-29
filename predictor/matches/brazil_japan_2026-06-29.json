@@ -12,5 +12,11 @@
     "_confirmed": "High-confidence: Brazil without Raphinha (injured), Neymar a super-sub, 4-3-3 with Rayan + Cunha + Vinicius. Japan without Kubo (ruled out), Itakura doubtful, a 3-4-2-1 with Ueda up top, Ito + Kamada as the two, Doan + Nakamura as wing-backs. The lambdas hinge on these (Raphinha out, Kubo out, Japan cautious) -- the exact Japan GK + back three are NOT confirmed in the sources and are left approximate; they do not move the model.",
     "home":{"team":"Brazil","formation":"4-3-3","xi":["Alisson","Danilo","Marquinhos","Gabriel Magalhaes","Douglas Santos","Bruno Guimaraes","Casemiro","Lucas Paqueta","Rayan","Matheus Cunha","Vinicius Junior"]},
     "away":{"team":"Japan","formation":"3-4-2-1","xi_confirmed":["Ueda","Ito","Kamada","Doan","Nakamura"],"xi_approx_backline":["GK ?","CB ?","CB ?","CB ?","DM ?","DM ?"]}
+  },
+  "_postmatch": {
+    "result": "Brazil 2-1 Japan. A very tight tie that Brazil won with a late winner; settled in 90', Brazil advance to the Round of 16.",
+    "model_1x2": "Brazil 58.7 / Draw 24.3 / Japan 16.9 (MEDIUM, 90'); advancement Brazil 73.5 / Japan 26.5",
+    "verdict": "Advancement call (the knockout deliverable) was right: the clear favourite went through, and the CLOSENESS fits perfectly -- a 2-1 settled by a last-minute goal is exactly the kind of game Japan's 26.5% advancement priced (it nearly went to extra time). 2-1 was a top-4 scoreline (9.7%). The one texture wrinkle: post-XI I trimmed both attacks expecting a more controlled, lower-scoring game (Under 2.5 51%, BTTS No 51.7%), but Japan scored and it was Over 2.5 / BTTS Yes -- those were coin-flips that tipped to the goals side, so the 'Japan contained without Kubo' lean was marginally too strong. Japan still threatened and made Brazil work to the last kick.",
+    "lesson": "Two-part: (1) the favourite-advances read held and the advancement % correctly captured the closeness (a near-ET 2-1). (2) On a single key absence (Kubo out), don't over-trim a quality side's attack -- Japan still scored and pushed it to the wire. The side was right; the goals lean was a coin-flip that landed Over."
   }
 }
