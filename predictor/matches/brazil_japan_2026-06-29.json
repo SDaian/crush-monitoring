@@ -6,5 +6,11 @@
     "away":{"name":"Japan","attack":1.05,"defense":1.0,"context":1.0,"notes":["In form (rating 80): held the Netherlands 2-2, beat Tunisia 4-0, drew Sweden. Technical and attacking -- NOT a low block. attack 1.05 (no under-rating).","Organized but will commit forward. defense 1.0.","Quality enough to take it to extra time -> advancement above a typical underdog."]}},
   "market": {"odds":[1.62,3.90,5.50]},
   "_recal": "First pass sat 9.3 pts BELOW the market on Brazil (49.2% vs 58.5%): respecting Japan's form is fair, but Japan being good does not override Brazil being ELITE -- the do-not-fade-an-elite-favourite lesson (Spain/Argentina). Lifted Brazil 1.62 -> 1.85 and trimmed Japan 1.08 -> 0.95 to align with the market while keeping the open-game read (still BTTS/Over live).",
-  "lambdas_override": {"home":1.85,"away":0.95}
+  "lambdas_override": {"home":1.78,"away":0.85},
+  "_lineups": {
+    "_comment": "Confirmed/projected XIs (RotoWire/SI/ESPN, ~60 min pre-KO). Two changes, BOTH trimming attacks but Japan more: (1) Brazil are WITHOUT the injured Raphinha (a key wide threat); Ancelotti starts the young Rayan wide with Matheus Cunha central, and Neymar is fit only as a super-sub -> a slightly lighter Brazil attack, so 1.85 -> 1.78. (2) Japan lose their main creator Takefusa Kubo (ruled out) and set up in a cautious 3-4-2-1 (back three + wing-backs Doan/Nakamura), with Itakura doubtful -> a more contained, less creative Japan, so 0.95 -> 0.85. Net: Japan is weakened MORE than Brazil (Kubo is central to their play), so Brazil's edge nudges up a touch and the game projects lower-scoring (both missing creators, Japan sitting deeper). Brazil remain the clear favourite.",
+    "_confirmed": "High-confidence: Brazil without Raphinha (injured), Neymar a super-sub, 4-3-3 with Rayan + Cunha + Vinicius. Japan without Kubo (ruled out), Itakura doubtful, a 3-4-2-1 with Ueda up top, Ito + Kamada as the two, Doan + Nakamura as wing-backs. The lambdas hinge on these (Raphinha out, Kubo out, Japan cautious) -- the exact Japan GK + back three are NOT confirmed in the sources and are left approximate; they do not move the model.",
+    "home":{"team":"Brazil","formation":"4-3-3","xi":["Alisson","Danilo","Marquinhos","Gabriel Magalhaes","Douglas Santos","Bruno Guimaraes","Casemiro","Lucas Paqueta","Rayan","Matheus Cunha","Vinicius Junior"]},
+    "away":{"team":"Japan","formation":"3-4-2-1","xi_confirmed":["Ueda","Ito","Kamada","Doan","Nakamura"],"xi_approx_backline":["GK ?","CB ?","CB ?","CB ?","DM ?","DM ?"]}
+  }
 }
