@@ -117,6 +117,7 @@
   .kmid{text-align:center;line-height:1;margin:1px 0}
   .kmid .kvs{font-size:9px;color:var(--chalk-dim);letter-spacing:1px}
   .kmid .kscore{color:var(--gold);font-size:13px}
+  .kmid .kpen{color:var(--chalk-dim);font-size:9px;font-weight:700} /* penalty-shootout marker */
   .tie .meta{font-size:9px;color:var(--chalk-dim);margin-top:4px;border-top:1px solid var(--line);padding-top:3px}
   .tie .meta .kmi{color:var(--accent)}
   .tie.koclick{cursor:pointer} .tie.koclick:hover{border-color:var(--gold)}
@@ -293,7 +294,8 @@ const KNOWN = {
 // winner (team name) when a tie is level after extra time.
 const KO_KNOWN = {
   75: {h:0, a:1},  // R32: South Africa 0-1 Canada (Canada advance) — settled in 90'
-  81: {h:2, a:1}   // R32: Brazil 2-1 Japan (Brazil advance) — late winner, settled in 90'
+  81: {h:2, a:1},  // R32: Brazil 2-1 Japan (Brazil advance) — late winner, settled in 90'
+  73: {h:1, a:1, pen:"Paraguay"}  // R32: Germany 1-1 Paraguay, Paraguay win on penalties
 };
 
 /* ---- round-robin fixture order for 4 teams ---- */
@@ -539,7 +541,7 @@ function calibFor(m){ if(!m) return null;
    =========================================================================== */
 // Build/data stamp shown in the header. The app is stateless: nothing is
 // persisted, so reloading (F5) always returns to the official results.
-const DATA_VERSION="2026-06-29.r32-germany-paraguay-calib";
+const DATA_VERSION="2026-06-29.r32-paraguay-upset";
 let state={ results:{}, strengths:{}, learn:[] };
 
 function freshStrengths(){ const s={}; for(const t in TEAMS) s[t]=TEAMS[t]; return s; }
@@ -1199,12 +1201,12 @@ function renderBracket(){
       let pa="",pb="",wa="",wb="";
       // Advancement % via the knockout model (90' + extra time + penalties).
       if(A&&B){ const adv=koAdvance(st(A),st(B)); pa=Math.round(adv*100)+"%"; pb=Math.round((1-adv)*100)+"%"; }
-      if(r){ if(r.h>r.a)wa="w"; else if(r.a>r.h)wb="w"; }
+      if(r){ if(r.h>r.a)wa="w"; else if(r.a>r.h)wb="w"; else if(r.pen===A)wa="w"; else if(r.pen===B)wb="w"; }
       // R32 ties carry a real date/time/venue; later rounds use the approximate KO_DATE.
       const dstr=tie.date||KO_DATE[tie.id]||"";
       const dt=dstr?`${dstr}${tie.time?(" · "+tie.time):""}${tie.v?(" · "+tie.v):""}`:"";
       const appx=tie.date?"":' <span class="approx">≈</span>'; // R32 dates are real
-      const sc=r?`<b class="kscore">${r.h}-${r.a}</b>`:(A&&B?'<span class="kvs">vs</span>':"");
+      const sc=r?`<b class="kscore">${r.h}-${r.a}${r.pen?'<span class="kpen"> p</span>':''}</b>`:(A&&B?'<span class="kvs">vs</span>':"");
       // Ties with both teams known are tappable -> open a detail accordion
       // right below this tie (in its own column), like the group match cards.
       // A gold ★ marks ties that have a deep-calibrated forecast (KO_CALIB).
