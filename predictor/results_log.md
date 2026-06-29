@@ -46,6 +46,7 @@ Legend: ✅ right for the right reason · 🟡 right but by luck/margin ·
 | 2026-06-27 | Argentina vs Jordan | 84.0 / 12.3 / 3.7 | HIGH | 3-1 (Argentina win) | ✅ |
 | 2026-06-27 | Austria vs Algeria | 39.5 / 28.9 / 31.7 | LOW | 3-3 (draw) | 🟡 |
 | 2026-06-28 | Canada vs South Africa (R32) | 44.7 / 28.9 / 26.4 | LOW | 1-0 (Canada, adv.) | ✅ |
+| 2026-06-29 | Brazil vs Japan (R32) | 58.7 / 24.3 / 16.9 | MEDIUM | 2-1 (Brazil, adv.) | ✅ |
 
 ### Emerging pattern: favorites vs low block (key)
 
@@ -741,3 +742,19 @@ knockout has no draw. The closed-form chaining is Monte-Carlo-validated (sim vs 
   (44.7%). The ET/penalty tail (29% / 15%) didn't need to fire. **Lesson:** the
   knockout framing earns its keep — a disciplined underdog compresses the margin and
   raises the ET/penalty share, so report advancement, not the 90' win.
+
+## 2026-06-29 · Round of 32 — Brazil 2-1 Japan ✅
+
+- **Brazil vs Japan** — 90': Brazil 58.7 / Draw 24.3 / Japan 16.9 (MEDIUM, post-XI);
+  advancement **Brazil 73.5 / Japan 26.5**. λ 1.78 / 0.85, xG 2.63, Under 2.5 51%, top
+  scoreline **1-0 (12.2%)**, 2-1 at 9.7%. Market (90') 58.5 / 24.3 / 17.2 (div 0.3).
+  **RESULT: 2-1 Brazil, won with a last-minute goal — Brazil advance.** Advancement
+  call right (the favourite went through) and the CLOSENESS fit: a 2-1 settled in the
+  last minute is exactly what Japan's 26.5% advancement priced (it nearly went to ET).
+  Confirmed-XI recalibration: Brazil without Raphinha (1.85→1.78), Japan without Kubo +
+  cautious 3-4-2-1 (0.95→0.85) — that aligned the side to the market (0.3 div). **Texture
+  wrinkle:** I trimmed both attacks expecting a lower-scoring controlled game (Under 2.5
+  51%, BTTS No 51.7%), but Japan scored and it was Over 2.5 / BTTS Yes — coin-flips that
+  tipped to goals. **Lesson:** on a single key absence (Kubo out), don't over-trim a
+  quality side's attack; Japan still scored and pushed it to the wire. Side right, goals
+  lean a coin-flip that landed Over.
