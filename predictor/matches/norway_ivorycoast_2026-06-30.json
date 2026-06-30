@@ -6,5 +6,11 @@
     "away":{"name":"Ivory Coast","attack":0.95,"defense":0.90,"context":1.0,"notes":["Organized, solid defensively (GA 2; beat Ecuador 1-0). defense 0.90 -- hard to break down, keeps it tight.","Limited going forward (GF 4). attack 0.95.","Structure can neutralise Norway -> tight game, live for ET/penalties."]}},
   "market": {"odds":[2.00,3.40,3.80]},
   "_recal": "First pass leaned 3 pts above the market on Ivory Coast (27.9% vs 24.9%): respecting their organization is fair, but the market makes Norway a slightly clearer favourite (Haaland's goal threat). Lifted NOR 1.45 -> 1.50 and trimmed CIV 1.10 -> 1.05 to align; still a near coin-flip.",
-  "lambdas_override": {"home":1.50,"away":1.05}
+  "lambdas_override": {"home":1.50,"away":1.05},
+  "_postmatch": {
+    "result": "Norway 2-1 Ivory Coast, winner in the 93rd minute -> NORWAY ADVANCE. Settled in 90' (stoppage time), the late goal avoided extra time. Breaks the round's run of penalty upsets.",
+    "model_1x2": "Norway 46.9 / Draw 27.4 / Ivory Coast 25.8 (MEDIUM, 90'); advancement Norway 62.0 / Ivory Coast 38.0",
+    "verdict": "Clean process hit. The (slight) favourite advanced and the texture/closeness were right: I called this one of the round's closest ties -- a near coin-flip (Norway 46.9% in 90') that the favourite edges -- and Norway edged it 2-1 with a 93rd-minute winner, the classic tight-tie-decided-late shape. 2-1 was a top-3 scoreline (9.2%), BTTS Yes matched the 51% read, both scored. The 93' winner means it nearly went to extra time (the model's 27% ET branch) -- so Ivory Coast's 38% advancement was right to be high, they were a kick away from taking it deeper. A favourite finally got through after two penalty upsets, and it was the side the model favoured.",
+    "lesson": "Confirms the advancement framing on a coin-flip: a 46.9% 90' favourite that is the marginal pick still advances ~62% once you fold in ET/penalties, and here it cashed in regulation via a late winner. The closeness (decided at 93') validates the LOW/MEDIUM, no-strong-read call and the high (38%) underdog advancement -- it was genuinely a near-thing."
+  }
 }

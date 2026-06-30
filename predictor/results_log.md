@@ -49,6 +49,7 @@ Legend: ✅ right for the right reason · 🟡 right but by luck/margin ·
 | 2026-06-29 | Brazil vs Japan (R32) | 58.7 / 24.3 / 16.9 | MEDIUM | 2-1 (Brazil, adv.) | ✅ |
 | 2026-06-29 | Germany vs Paraguay (R32) | 58.9 / 25.3 / 15.8 | MEDIUM | 1-1, Paraguay adv. (pens) | 🟡 |
 | 2026-06-30 | Netherlands vs Morocco (R32) | 50.4 / 26.0 / 23.6 | MEDIUM | 1-1, Morocco adv. (pens) | 🟡 |
+| 2026-06-30 | Norway vs Ivory Coast (R32) | 46.9 / 27.4 / 25.8 | MEDIUM | 2-1 (Norway, adv.) | ✅ |
 
 ### Emerging pattern: favorites vs low block (key)
 
@@ -798,3 +799,19 @@ knockout has no draw. The closed-form chaining is Monte-Carlo-validated (sim vs 
   carries real shootout equity — two days, two shootout upsets (Paraguay, Morocco), both
   located correctly by the advancement framing. Penalties stay a 50/50 the model won't
   fake-predict; this round they kept landing for the underdog.
+
+## 2026-06-30 · Round of 32 — Norway 2-1 Ivory Coast ✅
+
+- **Norway vs Ivory Coast** — 90': Norway 46.9 / Draw 27.4 / Ivory Coast 25.8 (MEDIUM);
+  advancement **Norway 62.0 / Ivory Coast 38.0**. λ 1.50 / 1.05, xG 2.55, top scoreline
+  **1-1 (13.0%)**, 2-1 at 9.2%, BTTS Yes 51%; **goes to penalties 14%** (the round's
+  highest). Market (90') 47.3 / 27.8 / 24.9 (div 0.9). **RESULT: 2-1 Norway, a 93rd-minute
+  winner — Norway advance** (settled in 90'; the late goal avoided ET). Clean process hit:
+  I called this one of the round's closest ties — a near coin-flip the favourite edges —
+  and Norway edged it 2-1 with a stoppage-time winner, the classic tight-tie-decided-late
+  shape. 2-1 was a top-3 scoreline, BTTS Yes matched, both scored. The 93' winner means it
+  nearly went to extra time (the 27% ET branch), so Ivory Coast's high 38% advancement was
+  right — they were a kick from taking it deeper. **Note:** a favourite finally advanced
+  after two penalty upsets, and it was the side the model marginally favoured. The
+  advancement framing held on a coin-flip: a 46.9% 90' favourite still advances ~62% once
+  ET/penalties fold in, and here it cashed in regulation.
