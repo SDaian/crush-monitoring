@@ -48,6 +48,7 @@ Legend: ✅ right for the right reason · 🟡 right but by luck/margin ·
 | 2026-06-28 | Canada vs South Africa (R32) | 44.7 / 28.9 / 26.4 | LOW | 1-0 (Canada, adv.) | ✅ |
 | 2026-06-29 | Brazil vs Japan (R32) | 58.7 / 24.3 / 16.9 | MEDIUM | 2-1 (Brazil, adv.) | ✅ |
 | 2026-06-29 | Germany vs Paraguay (R32) | 58.9 / 25.3 / 15.8 | MEDIUM | 1-1, Paraguay adv. (pens) | 🟡 |
+| 2026-06-30 | Netherlands vs Morocco (R32) | 50.4 / 26.0 / 23.6 | MEDIUM | 1-1, Morocco adv. (pens) | 🟡 |
 
 ### Emerging pattern: favorites vs low block (key)
 
@@ -779,3 +780,21 @@ knockout has no draw. The closed-form chaining is Monte-Carlo-validated (sim vs 
   shootout coin-flip. The advancement framing earned its keep: it located Paraguay's real
   chance in the penalty lottery, not in winning in 90'. Only texture miss: BTTS leaned No,
   came in Yes (both scored once).
+
+## 2026-06-30 · Round of 32 — Netherlands 1-1 Morocco (Morocco win on pens) 🟡
+
+- **Netherlands vs Morocco** — 90': Netherlands 50.4 / Draw 26.0 / Morocco 23.6 (MEDIUM);
+  advancement **Netherlands 65.2 / Morocco 34.8**. λ 1.64 / 1.05, xG 2.69, top scoreline
+  **1-1 (12.4%)**, BTTS Yes 53%; **goes to penalties 13%**. Market (90') 50.3 / 27.0 /
+  22.7 (div 1.0). **RESULT: 1-1, Morocco win the shootout — MOROCCO ADVANCE** — the second
+  straight favourite out on penalties (after Germany). Marked 🟡: the side missed, but the
+  read was excellent. I set Morocco's advancement at **34.8%** (the strongest underdog of
+  the round, well above its 23.6% 90' win) and explicitly flagged them as a quality,
+  pedigree side (held Brazil, 2022 semis) that could drag it to penalties — 'don't discount
+  Morocco'. The game obliged: a tight, competitive **1-1** (the model's top scoreline,
+  BTTS Yes exactly the 53% read), no rout, into a shootout (the ~13% branch), Morocco won
+  the 50/50. Texture spot-on; only the coin-flip decided it. **Pattern (R32):** in tight
+  knockout ties the favourite's edge is smaller than the 90' line and a quality underdog
+  carries real shootout equity — two days, two shootout upsets (Paraguay, Morocco), both
+  located correctly by the advancement framing. Penalties stay a 50/50 the model won't
+  fake-predict; this round they kept landing for the underdog.
