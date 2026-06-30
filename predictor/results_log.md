@@ -50,6 +50,7 @@ Legend: ✅ right for the right reason · 🟡 right but by luck/margin ·
 | 2026-06-29 | Germany vs Paraguay (R32) | 58.9 / 25.3 / 15.8 | MEDIUM | 1-1, Paraguay adv. (pens) | 🟡 |
 | 2026-06-30 | Netherlands vs Morocco (R32) | 50.4 / 26.0 / 23.6 | MEDIUM | 1-1, Morocco adv. (pens) | 🟡 |
 | 2026-06-30 | Norway vs Ivory Coast (R32) | 46.9 / 27.4 / 25.8 | MEDIUM | 2-1 (Norway, adv.) | ✅ |
+| 2026-06-30 | France vs Sweden (R32) | 68.0 / 19.6 / 12.5 | HIGH | 3-0 (France, adv.) | ✅ |
 
 ### Emerging pattern: favorites vs low block (key)
 
@@ -815,3 +816,21 @@ knockout has no draw. The closed-form chaining is Monte-Carlo-validated (sim vs 
   after two penalty upsets, and it was the side the model marginally favoured. The
   advancement framing held on a coin-flip: a 46.9% 90' favourite still advances ~62% once
   ET/penalties fold in, and here it cashed in regulation.
+
+## 2026-06-30 · Round of 32 — France 3-0 Sweden ✅
+
+- **France vs Sweden** — 90': France 68.0 / Draw 19.6 / Sweden 12.5 (HIGH, post-XI);
+  advancement **France 80.7 / Sweden 19.3**. λ 2.22 / 0.85, xG 3.07, Over 2.5 59%, top
+  scoreline **2-0 (11.4%)**; **goes to penalties only 8.8%** (lowest of the round). Market
+  (90') ~69 (div 0.8). **RESULT: 3-0 France (Mbappe brace) — France advance comfortably.**
+  The round's cleanest process hit. The favourite+goals call was exact: a comfortable win
+  WITH goals and a CLEAN SHEET, not a tight grind. Over 2.5 ✅, France clean sheet ✅
+  (42.7% read), xG 2.22 → 3 goals. Confirmed-XI note: France full strength (no rotation —
+  knockout, nobody rests); Sweden's Isak/Gyokeres threat opened my goals read, but France's
+  elite defence (Saliba/Upamecano) shut them out (BTTS No, against the small nudge).
+  **Archetype validated:** I flagged France as the round's clearest favourite (80.7%, lowest
+  shootout risk) BECAUSE Sweden is OPEN and leaky, not an organized low block — and it was a
+  comfortable 3-0, the textbook favourite-advances-clean case that contrasts with the round's
+  penalty upsets (Germany-Paraguay, Netherlands-Morocco, both tight low-block ties).
+  **Lesson:** classify the underdog first — large gap + open/leaky underdog = favourite+goals
+  (comfortable, low shootout risk); large gap + organized block = tight, real upset equity.
