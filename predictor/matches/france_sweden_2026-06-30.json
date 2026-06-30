@@ -6,5 +6,10 @@
     "away":{"name":"Sweden","attack":0.85,"defense":1.12,"context":1.0,"notes":["Attacking but the 5-1 vs Tunisia inflates the record; lost 1-5 to the Netherlands. attack 0.85.","LEAKY (conceded 7, not an organized block) -> France should score freely. defense 1.12.","Can score (7 goals) -> BTTS/Over live, but outgunned; lower ET/penalty risk than the tight ties."]}},
   "market": {"odds":[1.36,4.80,8.00]},
   "_recal": "First pass sat 4.4 pts below the market on France (64.4% vs ~69%): France is ELITE (94) and dominant, so don't fade them -- the Spain/Argentina lesson. Lifted FRA 2.00 -> 2.18 and trimmed SWE 0.82 -> 0.78 to align; still favourite+goals.",
-  "lambdas_override": {"home":2.18,"away":0.78}
+  "lambdas_override": {"home":2.22,"away":0.85},
+  "_lineups": {
+    "_comment": "Confirmed/projected XIs (Al Jazeera/RotoWire, ~60 min pre-KO). Two confirmations that keep France the heavy favourite but open the game up: (1) France name a FULL-STRENGTH side despite topping the group on a perfect nine -- Mbappe, Dembele, Olise, Doue all start, no rotation (Saliba questionable but starts; Thuram out, calf). This confirms the no-rotation-discount calibration (Mexico lesson). (2) Sweden start a genuinely dangerous front line -- Isak + Gyokeres + Elanga, two elite strikers -- so they carry real goal threat (BTTS/Over more live than a typical 18% underdog), BUT they are without CB Isak Hien (injured), leaving their already-leaky defence weaker still. Net adjustment: France 2.18 -> 2.22 (Hien out, Sweden's defence weaker) and Sweden 0.78 -> 0.85 (Isak/Gyokeres threat). The SIDE barely moves (France stays ~68%, aligned), but the game projects MORE open/higher-scoring -- a clear favourite that should win with goals rather than grind, and the lowest shootout risk of the round.",
+    "home":{"team":"France","formation":"4-2-3-1","xi":["Maignan","Kounde","Upamecano","Saliba","Hernandez","Tchouameni","Rabiot","Olise","Dembele","Doue","Mbappe"]},
+    "away":{"team":"Sweden","formation":"3-4-3","xi":["Zetterstrom","Lagerbielke","Lindelof","Gudmundsson","Bernhardsson","Bergvall","Ayari","Stroud","Elanga","Gyokeres","Isak"]}
+  }
 }
