@@ -6,5 +6,11 @@
     "away":{"name":"Morocco","attack":1.05,"defense":0.95,"context":1.0,"notes":["Quality, organized, tournament pedigree (2022 semis); held Brazil 1-1, beat Scotland 1-0. attack 1.05 -- a genuine threat, not a low block.","Solid, well-drilled defence. defense 0.95.","Knockout: good enough to take it to extra time -> advancement well above a typical underdog."]}},
   "market": {"odds":[1.85,3.45,4.10]},
   "_recal": "First pass leaned 3.6 pts above the market on Morocco (26.3% vs 22.7%): Morocco's pedigree is real, but the market (the sharper anchor) sees the Netherlands a clearer favourite. Lifted NED 1.58 -> 1.64 and trimmed MAR 1.12 -> 1.05 to align, while keeping Morocco a live underdog.",
-  "lambdas_override": {"home":1.64,"away":1.05}
+  "lambdas_override": {"home":1.64,"away":1.05},
+  "_postmatch": {
+    "result": "Netherlands 1-1 Morocco, Morocco win on penalties -> MOROCCO ADVANCE. The second straight favourite eliminated on penalties in this round (after Germany).",
+    "model_1x2": "Netherlands 50.4 / Draw 26.0 / Morocco 23.6 (MEDIUM, 90'); advancement Netherlands 65.2 / Morocco 34.8",
+    "verdict": "Mark 🟡: the advancement SIDE missed (the favourite went out), but the read was about as good as it gets short of calling the upset outright. I explicitly priced Morocco's advancement at 34.8% -- well above its 90' win (23.6%) -- and flagged them as a quality, pedigree side (held Brazil, 2022 semis) that could drag it to extra time/penalties, warning 'don't discount Morocco'. The game played out exactly so: a tight, competitive 1-1 (the model's TOP scoreline at 12.4%, BTTS Yes as the 53% read), no rout, dragged to a shootout (the ~13% penalties branch), and Morocco won the 50/50. The texture was spot-on (1-1, both score); only the shootout coin-flip decided it, for the underdog. Not a process error -- the model rated Morocco the strongest underdog of the round and it cashed.",
+    "lesson": "Reinforces Germany-Paraguay from a day earlier: in tight knockout ties the favourite's edge is smaller than the 90' line suggests, and a QUALITY underdog (Morocco) carries real penalty-lottery equity -- hence advancement, not 90' win, is the honest deliverable. Two shootout upsets in two days; the model located both underdogs' chances correctly. Penalties remain a 50/50 the model won't pretend to predict; this round they kept landing for the underdog."
+  }
 }
