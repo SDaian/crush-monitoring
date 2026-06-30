@@ -296,7 +296,8 @@ const KO_KNOWN = {
   75: {h:0, a:1},  // R32: South Africa 0-1 Canada (Canada advance) — settled in 90'
   81: {h:2, a:1},  // R32: Brazil 2-1 Japan (Brazil advance) — late winner, settled in 90'
   73: {h:1, a:1, pen:"Paraguay"},  // R32: Germany 1-1 Paraguay, Paraguay win on penalties
-  76: {h:1, a:1, pen:"Morocco"}    // R32: Netherlands 1-1 Morocco, Morocco win on penalties
+  76: {h:1, a:1, pen:"Morocco"},   // R32: Netherlands 1-1 Morocco, Morocco win on penalties
+  82: {h:1, a:2}                    // R32: Ivory Coast 1-2 Norway (Norway advance) — 93' winner, settled in 90'
 };
 
 /* ---- round-robin fixture order for 4 teams ---- */
@@ -542,7 +543,7 @@ function calibFor(m){ if(!m) return null;
    =========================================================================== */
 // Build/data stamp shown in the header. The app is stateless: nothing is
 // persisted, so reloading (F5) always returns to the official results.
-const DATA_VERSION="2026-06-30.r32-norway-ivorycoast-calib";
+const DATA_VERSION="2026-06-30.r32-norway-result";
 let state={ results:{}, strengths:{}, learn:[] };
 
 function freshStrengths(){ const s={}; for(const t in TEAMS) s[t]=TEAMS[t]; return s; }
