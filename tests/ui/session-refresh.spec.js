@@ -16,7 +16,7 @@ import { TARGET_ENV } from '../../config.js';
 //   false = fixed:    no probe when there is no token
 const PROBES_WHEN_ANONYMOUS = {
   dev: false,
-  stg: true,
+  stg: false,
   prod: true,
 };
 
