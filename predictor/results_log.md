@@ -879,13 +879,17 @@ knockout has no draw. The closed-form chaining is Monte-Carlo-validated (sim vs 
 - **Belgium vs Senegal** — 90': Belgium 46.9 / Draw 26.4 / Senegal 26.7 (MEDIUM);
   advancement **Belgium 61.4 / Senegal 38.6**. λ 1.56 / 1.12, xG 2.68, Over 2.5 50%, BTTS
   54%, top scoreline **1-1 (12.6%)**; ET 26.4%, pens 13.2%. Market (90') div 1.4. **RESULT:
-  3-2 Belgium AFTER EXTRA TIME (winner at 120+5) — Belgium advance.** Textbook process hit:
+  3-2 Belgium AFTER EXTRA TIME (winner at 120+5) — Belgium advance. Senegal led 2-0 and
+  Belgium equalised to 2-2 at 90' before winning in ET.** Textbook process hit:
   I flagged this as one of the round's closest ties AND an OPEN, end-to-end, higher-scoring
   game (BTTS/Over live) — not a low-block grind — with a dangerous Senegal and real ET/penalty
   risk. It delivered a **five-goal thriller** (BTTS Yes ✅, way Over ✅), level after 90', into
   extra time (the 26% ET branch), decided by the favourite with the last kick (120+5). Belgium
   advanced as the slight favourite (61.4%), the exact split — Senegal (38.6%) a kick from going
-  further. **Lesson:** the open-vs-open archetype (two attacking sides, small gap) predicts a
+  further. And the comeback texture matched England's: Senegal went **2-0 up** before Belgium
+  clawed it back to 2-2 by 90' and won it in ET — a quality favourite absorbing a two-goal blow,
+  not folding. **Lesson:** the open-vs-open archetype (two attacking sides, small gap) predicts a
   HIGH-scoring, close, deep tie — the opposite texture of the tight low-block ties that grind
   to penalties. Don't confuse 'close tie' with 'low-scoring tie'; shape depends on both sides'
-  attacking intent, and Senegal's attack produced an end-to-end 3-2.
+  attacking intent, and Senegal's attack produced an end-to-end 3-2. And, echoing England's HT
+  comeback, don't write off a quality side for an early/large deficit: Belgium recovered a 2-0.
