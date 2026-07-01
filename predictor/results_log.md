@@ -51,6 +51,7 @@ Legend: ✅ right for the right reason · 🟡 right but by luck/margin ·
 | 2026-06-30 | Netherlands vs Morocco (R32) | 50.4 / 26.0 / 23.6 | MEDIUM | 1-1, Morocco adv. (pens) | 🟡 |
 | 2026-06-30 | Norway vs Ivory Coast (R32) | 46.9 / 27.4 / 25.8 | MEDIUM | 2-1 (Norway, adv.) | ✅ |
 | 2026-06-30 | France vs Sweden (R32) | 68.0 / 19.6 / 12.5 | HIGH | 3-0 (France, adv.) | ✅ |
+| 2026-07-01 | Mexico vs Ecuador (R32) | 48.6 / 29.1 / 22.3 | MEDIUM | 2-0 (Mexico, adv.) | ✅ |
 
 ### Emerging pattern: favorites vs low block (key)
 
@@ -834,3 +835,22 @@ knockout has no draw. The closed-form chaining is Monte-Carlo-validated (sim vs 
   penalty upsets (Germany-Paraguay, Netherlands-Morocco, both tight low-block ties).
   **Lesson:** classify the underdog first — large gap + open/leaky underdog = favourite+goals
   (comfortable, low shootout risk); large gap + organized block = tight, real upset equity.
+
+## 2026-07-01 · Round of 32 — Mexico 2-0 Ecuador ✅
+
+- **Mexico vs Ecuador** — 90': Mexico 48.6 / Draw 29.1 / Ecuador 22.3 (MEDIUM);
+  advancement **Mexico 65.1 / Ecuador 34.9**. λ 1.42 / 0.88, xG 2.30, Under 2.5 60%, top
+  scoreline **1-1 (13.5%)**, 2-0 at 10.1%, Mexico clean sheet 41.5%; **goes to penalties
+  15.7%** (2nd-highest of the round). Market (90') ~49 (div 1.0). **RESULT: 2-0 Mexico,
+  clean sheet — the host advance, settled in 90'.** Clean process hit on side and texture:
+  the defensive/low-scoring read landed (clean sheet ✅, Under 2.5 ✅, BTTS No), 2-0 a top-4
+  scoreline, xG 1.42 → 2 goals. My central pick leaned a touch more cautious (1-0, with a
+  'might go to penalties' hedge), but Mexico controlled it into a comfortable 2-0 — the
+  ~16% shootout branch was the minority that didn't fire. **Mexico BROKE the round's
+  tight-tie-to-penalties pattern** (which took out Germany and Netherlands): an equal-rated
+  coin-flip on paper, but Mexico's elite defence (0 conceded in the group, another clean
+  sheet) shut Ecuador out, and once they got the second it was never tight enough for the
+  lottery. **Lesson:** an ELITE defence changes the tight-tie math — it is not simply
+  'defensive tie → penalties'; if one side can't be broken down and converts a modest edge,
+  they close it in 90'. The clean-sheet probability (Mexico's 41.5%, highest of the tight
+  ties) was the tell for a controlled win over a coin-flip.
