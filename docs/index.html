@@ -551,7 +551,7 @@ function calibFor(m){ if(!m) return null;
    =========================================================================== */
 // Build/data stamp shown in the header. The app is stateless: nothing is
 // persisted, so reloading (F5) always returns to the official results.
-const DATA_VERSION="2026-07-01.heatmap-bold-colors";
+const DATA_VERSION="2026-07-01.heatmap-translucent";
 let state={ results:{}, strengths:{}, learn:[] };
 
 function freshStrengths(){ const s={}; for(const t in TEAMS) s[t]=TEAMS[t]; return s; }
@@ -1123,13 +1123,14 @@ function renderThirds(){
 function scorelineHeatmap(cells, A, B){
   const G=4, grid=Array.from({length:G+1},()=>Array(G+1).fill(0)); let maxp=0;
   cells.forEach(c=>{ if(c.i<=G&&c.j<=G){ grid[c.i][c.j]=c.p; if(c.p>maxp)maxp=c.p; } });
-  // bold heat gradient: dark green (low) -> gold (mid) -> orange (high), solid.
+  // heat gradient green (low) -> gold (mid) -> orange (high), TRANSLUCENT so it
+  // reads soft over the panel background.
   const lerp=(a,b,u)=>Math.round(a+(b-a)*u);
   const heat=t=>{ let r,g,b; if(t<0.5){const u=t*2; r=lerp(11,244,u);g=lerp(52,211,u);b=lerp(32,94,u);}
-    else {const u=(t-0.5)*2; r=lerp(244,238,u);g=lerp(211,102,u);b=lerp(94,33,u);} return `rgb(${r},${g},${b})`; };
+    else {const u=(t-0.5)*2; r=lerp(244,238,u);g=lerp(211,102,u);b=lerp(94,33,u);}
+    return `rgba(${r},${g},${b},${(0.10+0.6*t).toFixed(2)})`; };
   const cell=(i,j)=>{ const p=grid[i][j], t=maxp>0?p/maxp:0;
-    const col=t>0.30?'#0a2a18':'var(--chalk)';
-    return `<td class="hm-cell${i===j?' hm-diag':''}" style="background:${heat(t)};color:${col}" title="${esc(A)} ${i}-${j} ${esc(B)}: ${(p*100).toFixed(1)}%">${p>=0.005?(p*100).toFixed(0)+'%':''}</td>`;
+    return `<td class="hm-cell${i===j?' hm-diag':''}" style="background:${heat(t)}" title="${esc(A)} ${i}-${j} ${esc(B)}: ${(p*100).toFixed(1)}%">${p>=0.005?(p*100).toFixed(0)+'%':''}</td>`;
   };
   let body=''; for(let i=0;i<=G;i++){ body+=`<tr><th>${i}</th>${Array.from({length:G+1},(_,j)=>cell(i,j)).join('')}</tr>`; }
   const head=`<tr><th class="hm-corner">${flag(A)}↓ ${flag(B)}→</th>${Array.from({length:G+1},(_,j)=>`<th>${j}</th>`).join('')}</tr>`;
