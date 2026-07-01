@@ -6,5 +6,11 @@
     "away":{"name":"Ecuador","attack":0.92,"defense":0.90,"context":1.0,"notes":["Organized, defensive (GA 2); beat Germany 2-1 -> can pull an upset. defense 0.90.","Low-scoring (GF 2). attack 0.92.","Altitude side itself -> Mexico's altitude edge neutralised; only modest home gap. Tight game, live for ET/penalties."]}},
   "market": {"odds":[1.90,3.20,4.40]},
   "_recal": "First pass sat 4.5 pts below the market on Mexico (44.8% vs ~49%): I under-weighted the host's home edge. The market makes Mexico a clearer (if modest) favourite. Lifted MEX 1.32 -> 1.42 and trimmed ECU 0.92 -> 0.88 to align; still a tight, low-scoring tie.",
-  "lambdas_override": {"home":1.42,"away":0.88}
+  "lambdas_override": {"home":1.42,"away":0.88},
+  "_postmatch": {
+    "result": "Mexico 2-0 Ecuador. The host advance with a clean sheet, settled in 90' -- no shootout drama. Breaks the round's tight-tie-to-penalties pattern.",
+    "model_1x2": "Mexico 48.6 / Draw 29.1 / Ecuador 22.3 (MEDIUM, 90'); advancement Mexico 65.1 / Ecuador 34.9",
+    "verdict": "Clean process hit on side and texture. The favourite advanced, and the DEFENSIVE/low-scoring read was right: Mexico kept a clean sheet (41.5% read), it was Under 2.5 (60% read), BTTS No, and 2-0 was a top-4 scoreline (10.1%). xG 1.42 -> 2 goals, on the nose. My central pick leaned slightly more cautious (1-0, with a 'might go to penalties' hedge), but Mexico controlled it into a comfortable 2-0 -- the shootout scenario (the ~16% I flagged) was the minority branch that didn't fire. NOTABLY, Mexico BROKE the round's tight-tie-to-penalties pattern (which took out Germany and Netherlands) -- their elite defence (0 conceded across the group, another clean sheet here) shut Ecuador out, and once they nicked a second it was never tight enough for the lottery. The home-edge alignment (lifting Mexico to the market) was right; a modest but real host advantage, and Ecuador's altitude neutralised the altitude part exactly as noted.",
+    "lesson": "A genuinely ELITE defence changes the tight-tie math: it is not simply 'defensive tie -> penalties'. If one side cannot be broken down (Mexico, 0 conceded in the group) and converts even a modest edge, they close it out in 90' rather than gambling on the shootout. The clean-sheet probability was the tell -- Mexico's 41.5% clean-sheet read (highest of the tight ties) foreshadowed a controlled win, not a coin-flip. Weight defensive quality, not just 'is it tight'."
+  }
 }
