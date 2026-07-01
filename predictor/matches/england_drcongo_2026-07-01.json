@@ -6,5 +6,11 @@
     "away":{"name":"DR Congo","attack":0.90,"defense":1.05,"context":1.0,"notes":["Real attacking threat (Wissa, Bakambu; held Portugal 1-1, 3-1 Uzbekistan). attack 0.90 -- can score, not a pure low block.","Concedes (GA 3, lost to Colombia). defense 1.05 -> England should score.","Clear underdog but capable of a goal; lower ET/penalty risk than the tight ties."]}},
   "market": {"odds":[1.42,4.60,7.50]},
   "_recal": "First pass sat 6 pts below the market on England (60.7% vs ~67%): I over-credited DR Congo's attacking threat -- England (91 vs 70) is a heavy favourite the market prices clearly. Lifted ENG 1.90 -> 2.10 and trimmed DRC 0.88 -> 0.80 to align (don't fade an elite favourite); still a favourite+goals lean.",
-  "lambdas_override": {"home":2.10,"away":0.80}
+  "lambdas_override": {"home":2.10,"away":0.80},
+  "_postmatch": {
+    "result": "England 2-1 DR Congo (Kane brace). England came from 1-0 down at half-time to win and advance to the Round of 16, where they meet Mexico. Settled in 90'.",
+    "model_1x2": "England 66.9 / Draw 20.5 / DR Congo 12.6 (HIGH, 90'); advancement England 80.1 / DR Congo 19.9",
+    "verdict": "Pre-match call right and the favourite+goals archetype confirmed. England advanced as the 80.1% favourite, won 2-1 (Over 2.5, a top-4 scoreline at 9.7%), and DR Congo nicked one exactly as flagged ('DR Congo can score, not a pure low block' -> BTTS Yes). Kane's brace is the star delivering. The drama: DR Congo led 1-0 at HALF-TIME, and the in-play recalc correctly swung to DR Congo (advancement ~54%) -- a goal up with 45' to play genuinely favours the underdog -- but I noted England still had the means to turn it (2H xG edge ~1.2 vs 0.4), and they did. Both models were coherent: pre-match said England likely; the live model said close-but-Congo-ahead-yet-England-can-recover; England recovered. A quality favourite absorbing an early blow and winning is exactly what an 80% side does.",
+    "lesson": "A strong pre-match favourite that goes behind early is still very much live -- the in-play number correctly swings to the underdog (game-state: a lead with time left is worth a lot), but the favourite's quality means they often recover, so don't over-react to a half-time deficit for an elite side. And DR Congo scoring validated the 'can nick one, not a pure low block' read. The pre-match 80% and the HT ~54%-Congo were BOTH honest snapshots of different information states."
+  }
 }

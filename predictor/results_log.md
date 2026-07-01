@@ -52,6 +52,7 @@ Legend: ✅ right for the right reason · 🟡 right but by luck/margin ·
 | 2026-06-30 | Norway vs Ivory Coast (R32) | 46.9 / 27.4 / 25.8 | MEDIUM | 2-1 (Norway, adv.) | ✅ |
 | 2026-06-30 | France vs Sweden (R32) | 68.0 / 19.6 / 12.5 | HIGH | 3-0 (France, adv.) | ✅ |
 | 2026-07-01 | Mexico vs Ecuador (R32) | 48.6 / 29.1 / 22.3 | MEDIUM | 2-0 (Mexico, adv.) | ✅ |
+| 2026-07-01 | England vs DR Congo (R32) | 66.9 / 20.5 / 12.6 | HIGH | 2-1 (England, adv.) | ✅ |
 
 ### Emerging pattern: favorites vs low block (key)
 
@@ -854,3 +855,20 @@ knockout has no draw. The closed-form chaining is Monte-Carlo-validated (sim vs 
   'defensive tie → penalties'; if one side can't be broken down and converts a modest edge,
   they close it in 90'. The clean-sheet probability (Mexico's 41.5%, highest of the tight
   ties) was the tell for a controlled win over a coin-flip.
+
+## 2026-07-01 · Round of 32 — England 2-1 DR Congo ✅ (came from 1-0 down at HT)
+
+- **England vs DR Congo** — 90': England 66.9 / Draw 20.5 / DR Congo 12.6 (HIGH);
+  advancement **England 80.1 / DR Congo 19.9**. λ 2.10 / 0.80, xG 2.90, Over 2.5 55%, top
+  scoreline **2-0 (12.1%)**, 2-1 at 9.7%; pens 9.5%. Market (90') ~67 (div 0.1). **RESULT:
+  2-1 England (Kane brace) — England advance, from 1-0 down at half-time.** Pre-match call
+  right, favourite+goals confirmed: England won 2-1 (Over 2.5, a top-4 scoreline), and DR
+  Congo nicked one exactly as flagged ('can score, not a pure low block' → BTTS Yes). The
+  drama: **DR Congo led 1-0 at HALF-TIME, and an in-play recalc correctly swung to DR Congo
+  (advancement ~54%)** — a goal up with 45' left genuinely favours the underdog — but I noted
+  England still had the means to turn it (2H xG edge ~1.2 vs 0.4), and Kane delivered.
+  **Lesson:** a strong pre-match favourite that goes behind early is still very much live —
+  the in-play number rightly swings to the underdog, but the favourite's quality means they
+  often recover; don't over-react to a HT deficit for an elite side. The pre-match 80% and
+  the HT ~54%-Congo were BOTH honest snapshots of different information states. England meet
+  Mexico in the R16.
