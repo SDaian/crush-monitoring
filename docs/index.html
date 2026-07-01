@@ -85,6 +85,12 @@
   .fc-mc{width:100%;border-collapse:collapse;margin-top:4px}
   .fc-mc th,.fc-mc td{border:1px solid var(--line);padding:3px 4px;text-align:center}
   .fc-mc td:first-child,.fc-mc th:first-child{color:var(--chalk-dim);text-align:left}
+  /* scoreline heatmap (home goals rows × away goals cols, coloured by probability) */
+  .fc-hm{border-collapse:collapse;margin:2px 0 2px;font-size:9px;font-variant-numeric:tabular-nums}
+  .fc-hm th{color:var(--chalk-dim);font-weight:700;padding:1px 2px;text-align:center;font-size:9px}
+  .fc-hm .hm-corner{font-size:8px;white-space:nowrap}
+  .fc-hm td.hm-cell{min-width:22px;height:15px;text-align:center;border:1px solid rgba(0,0,0,.28)}
+  .fc-hm td.hm-diag{box-shadow:inset 0 0 0 1px rgba(255,255,255,.35)}
   .fc-note{color:var(--chalk-dim);font-size:9px;margin-top:6px;font-style:italic}
   .fc-nocal{margin:0 0 6px}
   .cal-dot{flex:0 0 12px;text-align:center;color:var(--gold);font-size:11px}
@@ -545,7 +551,7 @@ function calibFor(m){ if(!m) return null;
    =========================================================================== */
 // Build/data stamp shown in the header. The app is stateless: nothing is
 // persisted, so reloading (F5) always returns to the official results.
-const DATA_VERSION="2026-07-01.r32-england-drcongo-calib";
+const DATA_VERSION="2026-07-01.scoreline-heatmap";
 let state={ results:{}, strengths:{}, learn:[] };
 
 function freshStrengths(){ const s={}; for(const t in TEAMS) s[t]=TEAMS[t]; return s; }
@@ -995,6 +1001,7 @@ function matchForecast(mid){
    </div>
    <div class="fc-sec">Most probable scorelines</div>
    <div class="fc-grid">${top.map(c=>`<span>${c.i}-${c.j} <b>${pct(c.p)}%</b></span>`).join("")}</div>
+   ${scorelineHeatmap(cells, A, B)}
    <div class="fc-sec">Monte Carlo convergence (N=${N.toLocaleString()})</div>
    <table class="fc-mc"><tr><th></th><th>${esc(A)}</th><th>Draw</th><th>${esc(B)}</th></tr>
      <tr><td>exact</td><td>${pct(H)}</td><td>${pct(D)}</td><td>${pct(Aw)}</td></tr>
@@ -1111,6 +1118,21 @@ function renderThirds(){
       <td class="${r.q?'rankq':''}">${r.q?'✓':'—'}</td></tr>`).join("")+`</tbody>`;
 }
 
+/* Scoreline heatmap: home goals (rows 0-5) x away goals (cols 0-5), each cell
+   shaded by its exact probability from the score matrix. Diagonal = draws. */
+function scorelineHeatmap(cells, A, B){
+  const G=5, grid=Array.from({length:G+1},()=>Array(G+1).fill(0)); let maxp=0;
+  cells.forEach(c=>{ if(c.i<=G&&c.j<=G){ grid[c.i][c.j]=c.p; if(c.p>maxp)maxp=c.p; } });
+  const cell=(i,j)=>{ const p=grid[i][j], t=maxp>0?p/maxp:0;
+    const bg=`rgba(244,211,94,${(0.06+0.9*t).toFixed(3)})`, col=t>0.5?'#0a2a18':'var(--chalk)';
+    return `<td class="hm-cell${i===j?' hm-diag':''}" style="background:${bg};color:${col}" title="${esc(A)} ${i}-${j} ${esc(B)}: ${(p*100).toFixed(1)}%">${p>=0.005?(p*100).toFixed(0):''}</td>`;
+  };
+  let body=''; for(let i=0;i<=G;i++){ body+=`<tr><th>${i}</th>${Array.from({length:G+1},(_,j)=>cell(i,j)).join('')}</tr>`; }
+  const head=`<tr><th class="hm-corner">${flag(A)}↓ ${flag(B)}→</th>${Array.from({length:G+1},(_,j)=>`<th>${j}</th>`).join('')}</tr>`;
+  return `<div class="fc-sec">Scoreline heatmap — ${esc(A)} (rows) × ${esc(B)} (cols), %</div>
+    <table class="fc-hm">${head}${body}</table>`;
+}
+
 /* Per-tie knockout detail panel (shown in #ko-detail when a R32 tie is tapped).
    Strength-based engine, knockout-aware: advancement = 90' + extra time +
    penalties. Mirrors the predictor's --knockout report. */
@@ -1171,6 +1193,7 @@ function koForecast(a,b,tie){
    </div>
    <div class="fc-sec">Most probable scorelines (90′)</div>
    <div class="fc-grid">${top.map(c=>`<span>${c.i}-${c.j} <b>${pct(c.p)}%</b></span>`).join("")}</div>
+   ${scorelineHeatmap(cells, A, B)}
    <div class="fc-sec">Monte Carlo convergence (N=${N.toLocaleString()})</div>
    <table class="fc-mc"><tr><th></th><th>${esc(A)}</th><th>Draw</th><th>${esc(B)}</th><th>${esc(A)} adv.</th></tr>
      <tr><td>exact</td><td>${pct(H)}</td><td>${pct(D)}</td><td>${pct(Aw)}</td><td>${pct(advS)}</td></tr>
