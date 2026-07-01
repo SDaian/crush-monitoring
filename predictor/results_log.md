@@ -53,6 +53,7 @@ Legend: ✅ right for the right reason · 🟡 right but by luck/margin ·
 | 2026-06-30 | France vs Sweden (R32) | 68.0 / 19.6 / 12.5 | HIGH | 3-0 (France, adv.) | ✅ |
 | 2026-07-01 | Mexico vs Ecuador (R32) | 48.6 / 29.1 / 22.3 | MEDIUM | 2-0 (Mexico, adv.) | ✅ |
 | 2026-07-01 | England vs DR Congo (R32) | 66.9 / 20.5 / 12.6 | HIGH | 2-1 (England, adv.) | ✅ |
+| 2026-07-01 | Belgium vs Senegal (R32) | 46.9 / 26.4 / 26.7 | MEDIUM | 3-2 aet (Belgium, adv.) | ✅ |
 
 ### Emerging pattern: favorites vs low block (key)
 
@@ -872,3 +873,19 @@ knockout has no draw. The closed-form chaining is Monte-Carlo-validated (sim vs 
   often recover; don't over-react to a HT deficit for an elite side. The pre-match 80% and
   the HT ~54%-Congo were BOTH honest snapshots of different information states. England meet
   Mexico in the R16.
+
+## 2026-07-01 · Round of 32 — Belgium 3-2 Senegal (aet, 120+5 winner) ✅
+
+- **Belgium vs Senegal** — 90': Belgium 46.9 / Draw 26.4 / Senegal 26.7 (MEDIUM);
+  advancement **Belgium 61.4 / Senegal 38.6**. λ 1.56 / 1.12, xG 2.68, Over 2.5 50%, BTTS
+  54%, top scoreline **1-1 (12.6%)**; ET 26.4%, pens 13.2%. Market (90') div 1.4. **RESULT:
+  3-2 Belgium AFTER EXTRA TIME (winner at 120+5) — Belgium advance.** Textbook process hit:
+  I flagged this as one of the round's closest ties AND an OPEN, end-to-end, higher-scoring
+  game (BTTS/Over live) — not a low-block grind — with a dangerous Senegal and real ET/penalty
+  risk. It delivered a **five-goal thriller** (BTTS Yes ✅, way Over ✅), level after 90', into
+  extra time (the 26% ET branch), decided by the favourite with the last kick (120+5). Belgium
+  advanced as the slight favourite (61.4%), the exact split — Senegal (38.6%) a kick from going
+  further. **Lesson:** the open-vs-open archetype (two attacking sides, small gap) predicts a
+  HIGH-scoring, close, deep tie — the opposite texture of the tight low-block ties that grind
+  to penalties. Don't confuse 'close tie' with 'low-scoring tie'; shape depends on both sides'
+  attacking intent, and Senegal's attack produced an end-to-end 3-2.

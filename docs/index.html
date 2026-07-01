@@ -306,7 +306,8 @@ const KO_KNOWN = {
   82: {h:1, a:2},                   // R32: Ivory Coast 1-2 Norway (Norway advance) — 93' winner, settled in 90'
   74: {h:3, a:0},                   // R32: France 3-0 Sweden (France advance) — Mbappe brace, settled in 90'
   83: {h:2, a:0},                   // R32: Mexico 2-0 Ecuador (Mexico advance) — clean sheet, settled in 90'
-  84: {h:2, a:1}                    // R32: England 2-1 DR Congo (England advance) — Kane brace, came from 1-0 down at HT
+  84: {h:2, a:1},                   // R32: England 2-1 DR Congo (England advance) — Kane brace, came from 1-0 down at HT
+  80: {h:3, a:2, aet:true}          // R32: Belgium 3-2 Senegal after extra time (winner at 120+5) — Belgium advance
 };
 
 /* ---- round-robin fixture order for 4 teams ---- */
@@ -552,7 +553,7 @@ function calibFor(m){ if(!m) return null;
    =========================================================================== */
 // Build/data stamp shown in the header. The app is stateless: nothing is
 // persisted, so reloading (F5) always returns to the official results.
-const DATA_VERSION="2026-07-01.r32-belgium-senegal-calib";
+const DATA_VERSION="2026-07-01.r32-belgium-result";
 let state={ results:{}, strengths:{}, learn:[] };
 
 function freshStrengths(){ const s={}; for(const t in TEAMS) s[t]=TEAMS[t]; return s; }
@@ -1245,7 +1246,7 @@ function renderBracket(){
       const dstr=tie.date||KO_DATE[tie.id]||"";
       const dt=dstr?`${dstr}${tie.time?(" · "+tie.time):""}${tie.v?(" · "+tie.v):""}`:"";
       const appx=tie.date?"":' <span class="approx">≈</span>'; // R32 dates are real
-      const sc=r?`<b class="kscore">${r.h}-${r.a}${r.pen?'<span class="kpen"> p</span>':''}</b>`:(A&&B?'<span class="kvs">vs</span>':"");
+      const sc=r?`<b class="kscore">${r.h}-${r.a}${r.pen?'<span class="kpen"> p</span>':(r.aet?'<span class="kpen"> aet</span>':'')}</b>`:(A&&B?'<span class="kvs">vs</span>':"");
       // Ties with both teams known are tappable -> open a detail accordion
       // right below this tie (in its own column), like the group match cards.
       // A gold ★ marks ties that have a deep-calibrated forecast (KO_CALIB).
