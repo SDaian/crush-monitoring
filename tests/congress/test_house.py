@@ -69,7 +69,7 @@ class TestPtrText(unittest.TestCase):
         self.trades = parse_ptr_text(text, _ref())
 
     def test_row_count_and_ids(self):
-        self.assertEqual(len(self.trades), 4)
+        self.assertEqual(len(self.trades), 5)
         self.assertEqual(self.trades[0].id, "house:20026381:0")
 
     def test_simple_row(self):
@@ -107,6 +107,23 @@ class TestPtrText(unittest.TestCase):
         self.assertEqual(t.asset, "U.S. Treasury Bills")
         self.assertEqual(t.asset_type, "Government Security")
         self.assertEqual(t.type, "buy")
+
+    def test_description_captured_as_comment(self):
+        # The ITOT row has a "D:" description; it lands in `comment`.
+        self.assertEqual(
+            self.trades[1].comment, "Sold to rebalance the family trust."
+        )
+        self.assertIsNone(self.trades[1].option)  # not an option → no detail
+
+    def test_option_detail_parsed(self):
+        t = self.trades[4]
+        self.assertEqual(t.ticker, "UBER")
+        self.assertEqual(t.asset_type, "Option")
+        self.assertIn("200 call options", t.comment)
+        self.assertEqual(t.option, {
+            "type": "call", "strike": 50.0,
+            "expiration": "2027-03-19", "contracts": 200,
+        })
 
     def test_index_metadata_propagated(self):
         t = self.trades[0]

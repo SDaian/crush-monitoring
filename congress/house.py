@@ -20,7 +20,13 @@ import re
 import zipfile
 from dataclasses import dataclass
 
-from .normalize import Trade, parse_amount, parse_date, parse_tx_type
+from .normalize import (
+    Trade,
+    parse_amount,
+    parse_date,
+    parse_option_detail,
+    parse_tx_type,
+)
 
 INDEX_URL = (
     "https://disclosures-clerk.house.gov/public_disc/financial-pdfs/{year}FD.zip"
@@ -209,8 +215,16 @@ def parse_ptr_text(text: str, ref: HouseFilingRef) -> list[Trade]:
             continue
         if pending is None or _SKIP.search(line):
             continue
-        if _META.match(line):
-            pending["closed"] = True  # metadata ends the asset-name block
+        meta = _META.match(line)
+        if meta:
+            # The "D:" line is the filer's free-text description (for options
+            # it carries the strike/expiration/contract count). Capture it;
+            # the other markers just end the asset-name block.
+            if meta.group(1) == "D":
+                desc = line[meta.end():].strip()
+                if desc:
+                    pending["desc"] = desc
+            pending["closed"] = True
             continue
         if pending["amount"].rstrip().endswith(("-", "–")):
             # A wrapped amount lands at the end of the continuation line
@@ -264,6 +278,8 @@ def parse_ptr_text(text: str, ref: HouseFilingRef) -> list[Trade]:
                 source_url=ref.url,
                 state=ref.state,
                 district=ref.district,
+                comment=row.get("desc"),
+                option=parse_option_detail(row.get("desc")),
             )
         )
     if not trades:

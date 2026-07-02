@@ -22,7 +22,13 @@ import re
 from dataclasses import dataclass
 from html.parser import HTMLParser
 
-from .normalize import Trade, parse_amount, parse_date, parse_tx_type
+from .normalize import (
+    Trade,
+    parse_amount,
+    parse_date,
+    parse_option_detail,
+    parse_tx_type,
+)
 
 BASE = "https://efdsearch.senate.gov"
 HOME_URL = f"{BASE}/search/home/"
@@ -250,6 +256,9 @@ def parse_ptr_html(html: str, ref: SenateFilingRef) -> list[Trade]:
         kind, partial = parse_tx_type(tx_type)
         lo, hi, label = parse_amount(amount)
         ticker_clean = ticker.strip().strip("-").strip() or None
+        # The 9th cell is the filer's Comment (option strike/expiry etc.).
+        comment = cells[8].strip() if len(cells) > 8 else ""
+        comment = comment if comment and comment not in ("--", "—") else None
         trades.append(
             Trade(
                 id=f"senate:{ref.filing_id}:{len(trades)}",
@@ -268,6 +277,8 @@ def parse_ptr_html(html: str, ref: SenateFilingRef) -> list[Trade]:
                 amount_label=label,
                 filing_id=ref.filing_id,
                 source_url=ref.url,
+                comment=comment,
+                option=parse_option_detail(comment),
             )
         )
     if not trades:
