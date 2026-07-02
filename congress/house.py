@@ -185,6 +185,9 @@ def parse_ptr_text(text: str, ref: HouseFilingRef) -> list[Trade]:
     Raises ``HouseError``/``ValueError`` when nothing parses (the caller
     records the filing as a parse error and links the PDF instead).
     """
+    # pdfplumber renders some glyph gaps as NUL bytes ("F\x00\x00 S\x00: New"),
+    # which \s does not match — normalize them to spaces before any regex.
+    text = text.replace("\x00", " ")
     pending: dict | None = None
     rows: list[dict] = []
 

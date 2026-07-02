@@ -118,6 +118,17 @@ class TestPtrText(unittest.TestCase):
         with self.assertRaises(HouseError):
             parse_ptr_text("PERIODIC TRANSACTION REPORT\nno rows here\n", _ref())
 
+    def test_nul_padded_metadata_not_appended_to_asset(self):
+        # Live regression: pdfplumber renders some glyph gaps as NUL bytes,
+        # so the metadata markers arrive as "F\x00\x00 S\x00: New".
+        text = (
+            "JT US Treasury Bill P 12/12/2025 12/15/2025 $100,001 - $250,000\n"
+            "F\x00\x00\x00\x00\x00 S\x00\x00\x00\x00\x00: New\n"
+            "I\x00\x00\x00 P\x00\x00 O\x00\x00 Yes No\n"
+        )
+        trades = parse_ptr_text(text, _ref())
+        self.assertEqual(trades[0].asset, "US Treasury Bill")
+
     def test_wide_space_metadata_not_appended_to_asset(self):
         # Live regression: the PDF pads metadata markers with wide spacing
         # ("F      S     : New", "S          O : ..."), which must be treated
