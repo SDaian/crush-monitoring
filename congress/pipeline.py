@@ -212,7 +212,9 @@ def run(
         log("no changes" if not result.changed else "dry run: not writing")
         return result
 
-    output["meta"] = _build_meta(output, state, today, cutoff, generated_at)
+    output["meta"] = _build_meta(
+        output, state, today, cutoff, generated_at, roster
+    )
     output_path.parent.mkdir(parents=True, exist_ok=True)
     output_path.write_text(dump_output(output), encoding="utf-8")
     save_state(state, state_path)
@@ -242,7 +244,12 @@ def _content_key(output: dict) -> str:
 
 
 def _build_meta(
-    output: dict, state: dict, today: date, cutoff: str, generated_at: str | None
+    output: dict,
+    state: dict,
+    today: date,
+    cutoff: str,
+    generated_at: str | None,
+    roster: Roster,
 ) -> dict:
     prev_version = output.get("meta", {}).get("data_version", "")
     stamp = today.isoformat()
@@ -268,5 +275,10 @@ def _build_meta(
             ),
             "filings_skipped": len(output["skipped_filings"]),
         },
-        "featured": load_featured(),
+        # Resolve featured names to roster display names so the page's
+        # exact-match member filter lines up with the trade rows.
+        "featured": [
+            (roster.find(name) or {"name": name})["name"]
+            for name in load_featured()
+        ],
     }

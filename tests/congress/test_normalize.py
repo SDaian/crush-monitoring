@@ -103,7 +103,7 @@ class TestRoster(unittest.TestCase):
     def test_alias_hit(self):
         entry = self.roster.find("McCaul, Michael T.")
         self.assertIsNotNone(entry)
-        self.assertEqual(entry["name"], "Michael McCaul")
+        self.assertEqual(entry["name"], "Michael T. McCaul")
         self.assertEqual(entry["party"], "R")
 
     def test_middle_token_fallback(self):
@@ -145,7 +145,7 @@ def _trade(**kw):
 class TestEnrich(unittest.TestCase):
     def test_roster_fills_and_renames(self):
         t = enrich(_trade(), Roster.load())
-        self.assertEqual(t.member, "Michael McCaul")
+        self.assertEqual(t.member, "Michael T. McCaul")
         self.assertEqual((t.party, t.state, t.district), ("R", "TX", "TX-10"))
 
     def test_miss_keeps_scraped_fields(self):
