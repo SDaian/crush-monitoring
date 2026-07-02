@@ -1,0 +1,50 @@
+{
+"meta": {
+ "_comment": "SAMPLE data generated from tests/congress/fixtures so docs/trades.html renders before the first live run; the pipeline discards it (meta._sample) and replaces it with real Senate eFD / House Clerk data.",
+ "generated_at": "2026-07-02T00:00:00Z",
+ "data_version": "2026-07-02.1",
+ "window": {
+  "from": "2025-01-01",
+  "to": "2026-07-02"
+ },
+ "counts": {
+  "trades": 12,
+  "members": 3,
+  "filings_processed": 9,
+  "filings_skipped": 6
+ },
+ "featured": [
+  "Nancy Pelosi",
+  "Ro Khanna",
+  "Marjorie Taylor Greene",
+  "Michael McCaul",
+  "Josh Gottheimer",
+  "Cleo Fields",
+  "Tommy Tuberville",
+  "Dave McCormick"
+ ],
+ "_sample": true
+},
+"trades": [
+  {"id":"house:20026381:3","chamber":"house","member":"Michael McCaul","party":"R","state":"TX","district":"TX-10","ticker":null,"asset":"U.S. Treasury Bills","asset_type":"Government Security","type":"buy","partial":false,"owner":null,"tx_date":"2026-05-28","filing_date":"2026-06-20","amount_lo":250001,"amount_hi":500000,"amount_label":"$250,001 - $500,000","filing_id":"20026381","source_url":"https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20026381.pdf"},
+  {"id":"house:20026381:2","chamber":"house","member":"Michael McCaul","party":"R","state":"TX","district":"TX-10","ticker":"AAPL","asset":"Apple Inc. - Common Stock","asset_type":"Stock","type":"sell","partial":false,"owner":null,"tx_date":"2026-05-22","filing_date":"2026-06-20","amount_lo":100001,"amount_hi":250000,"amount_label":"$100,001 - $250,000","filing_id":"20026381","source_url":"https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20026381.pdf"},
+  {"id":"house:20026381:1","chamber":"house","member":"Michael McCaul","party":"R","state":"TX","district":"TX-10","ticker":"ITOT","asset":"iShares Core S&P Total U.S. Stock Market ETF","asset_type":"ETF","type":"sell","partial":true,"owner":"JT","tx_date":"2026-05-20","filing_date":"2026-06-20","amount_lo":1001,"amount_hi":15000,"amount_label":"$1,001 - $15,000","filing_id":"20026381","source_url":"https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20026381.pdf"},
+  {"id":"house:20026381:0","chamber":"house","member":"Michael McCaul","party":"R","state":"TX","district":"TX-10","ticker":"NVDA","asset":"NVIDIA Corporation - Common Stock","asset_type":"Stock","type":"buy","partial":false,"owner":"SP","tx_date":"2026-05-14","filing_date":"2026-06-20","amount_lo":15001,"amount_hi":50000,"amount_label":"$15,001 - $50,000","filing_id":"20026381","source_url":"https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20026381.pdf"},
+  {"id":"senate:abcd1234-0000-4e0a-9d2b-1111abcd5678:3","chamber":"senate","member":"Tommy Tuberville","party":"R","state":"AL","district":null,"ticker":"VOO","asset":"Vanguard S&P 500 ETF","asset_type":"Other Securities","type":"exchange","partial":false,"owner":"DC","tx_date":"2026-05-20","filing_date":"2026-06-15","amount_lo":1001,"amount_hi":15000,"amount_label":"$1,001 - $15,000","filing_id":"abcd1234-0000-4e0a-9d2b-1111abcd5678","source_url":"https://efdsearch.senate.gov/search/view/ptr/abcd1234-0000-4e0a-9d2b-1111abcd5678/"},
+  {"id":"senate:abcd1234-0000-4e0a-9d2b-1111abcd5678:2","chamber":"senate","member":"Tommy Tuberville","party":"R","state":"AL","district":null,"ticker":null,"asset":"Alabama Municipal Bond Series 2031","asset_type":"Municipal Security","type":"sell","partial":false,"owner":"JT","tx_date":"2026-05-18","filing_date":"2026-06-15","amount_lo":1001,"amount_hi":15000,"amount_label":"$1,001 - $15,000","filing_id":"abcd1234-0000-4e0a-9d2b-1111abcd5678","source_url":"https://efdsearch.senate.gov/search/view/ptr/abcd1234-0000-4e0a-9d2b-1111abcd5678/"},
+  {"id":"senate:abcd1234-0000-4e0a-9d2b-1111abcd5678:1","chamber":"senate","member":"Tommy Tuberville","party":"R","state":"AL","district":null,"ticker":"NVDA","asset":"NVIDIA Corporation","asset_type":"Stock","type":"sell","partial":true,"owner":"SP","tx_date":"2026-05-13","filing_date":"2026-06-15","amount_lo":50001,"amount_hi":100000,"amount_label":"$50,001 - $100,000","filing_id":"abcd1234-0000-4e0a-9d2b-1111abcd5678","source_url":"https://efdsearch.senate.gov/search/view/ptr/abcd1234-0000-4e0a-9d2b-1111abcd5678/"},
+  {"id":"senate:abcd1234-0000-4e0a-9d2b-1111abcd5678:0","chamber":"senate","member":"Tommy Tuberville","party":"R","state":"AL","district":null,"ticker":"MSFT","asset":"Microsoft Corporation","asset_type":"Stock","type":"buy","partial":false,"owner":null,"tx_date":"2026-05-12","filing_date":"2026-06-15","amount_lo":15001,"amount_hi":50000,"amount_label":"$15,001 - $50,000","filing_id":"abcd1234-0000-4e0a-9d2b-1111abcd5678","source_url":"https://efdsearch.senate.gov/search/view/ptr/abcd1234-0000-4e0a-9d2b-1111abcd5678/"},
+  {"id":"senate:eeee2222-1111-4c3d-8a4f-222233334444:3","chamber":"senate","member":"Dave McCormick","party":"R","state":"PA","district":null,"ticker":"VOO","asset":"Vanguard S&P 500 ETF","asset_type":"Other Securities","type":"exchange","partial":false,"owner":"DC","tx_date":"2026-05-20","filing_date":"2026-06-01","amount_lo":1001,"amount_hi":15000,"amount_label":"$1,001 - $15,000","filing_id":"eeee2222-1111-4c3d-8a4f-222233334444","source_url":"https://efdsearch.senate.gov/search/view/ptr/eeee2222-1111-4c3d-8a4f-222233334444/"},
+  {"id":"senate:eeee2222-1111-4c3d-8a4f-222233334444:2","chamber":"senate","member":"Dave McCormick","party":"R","state":"PA","district":null,"ticker":null,"asset":"Alabama Municipal Bond Series 2031","asset_type":"Municipal Security","type":"sell","partial":false,"owner":"JT","tx_date":"2026-05-18","filing_date":"2026-06-01","amount_lo":1001,"amount_hi":15000,"amount_label":"$1,001 - $15,000","filing_id":"eeee2222-1111-4c3d-8a4f-222233334444","source_url":"https://efdsearch.senate.gov/search/view/ptr/eeee2222-1111-4c3d-8a4f-222233334444/"},
+  {"id":"senate:eeee2222-1111-4c3d-8a4f-222233334444:1","chamber":"senate","member":"Dave McCormick","party":"R","state":"PA","district":null,"ticker":"NVDA","asset":"NVIDIA Corporation","asset_type":"Stock","type":"sell","partial":true,"owner":"SP","tx_date":"2026-05-13","filing_date":"2026-06-01","amount_lo":50001,"amount_hi":100000,"amount_label":"$50,001 - $100,000","filing_id":"eeee2222-1111-4c3d-8a4f-222233334444","source_url":"https://efdsearch.senate.gov/search/view/ptr/eeee2222-1111-4c3d-8a4f-222233334444/"},
+  {"id":"senate:eeee2222-1111-4c3d-8a4f-222233334444:0","chamber":"senate","member":"Dave McCormick","party":"R","state":"PA","district":null,"ticker":"MSFT","asset":"Microsoft Corporation","asset_type":"Stock","type":"buy","partial":false,"owner":null,"tx_date":"2026-05-12","filing_date":"2026-06-01","amount_lo":15001,"amount_hi":50000,"amount_label":"$15,001 - $50,000","filing_id":"eeee2222-1111-4c3d-8a4f-222233334444","source_url":"https://efdsearch.senate.gov/search/view/ptr/eeee2222-1111-4c3d-8a4f-222233334444/"}
+],
+"skipped_filings": [
+  {"chamber":"house","member":"Cleo Fields","filing_date":"2026-06-19","reason":"paper","filing_id":"20026310","source_url":"https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20026310.pdf"},
+  {"chamber":"house","member":"Nancy Pelosi","filing_date":"2026-06-18","reason":"paper","filing_id":"20026290","source_url":"https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20026290.pdf"},
+  {"chamber":"house","member":"Ro Khanna","filing_date":"2026-06-17","reason":"paper","filing_id":"20026255","source_url":"https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20026255.pdf"},
+  {"chamber":"house","member":"Marjorie Taylor Greene","filing_date":"2026-06-12","reason":"paper","filing_id":"20026101","source_url":"https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20026101.pdf"},
+  {"chamber":"house","member":"Wendy Atlarge","filing_date":"2026-06-05","reason":"paper","filing_id":"20026044","source_url":"https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20026044.pdf"},
+  {"chamber":"senate","member":"Jane Q Paperfiler","filing_date":"2026-04-20","reason":"paper","filing_id":"ffff3333-2222-4d4e-9b5a-333344445555","source_url":"https://efdsearch.senate.gov/search/view/paper/ffff3333-2222-4d4e-9b5a-333344445555/"}
+]
+}
