@@ -116,19 +116,14 @@ class TestComputeReturns(unittest.TestCase):
                "asset_type": "Option"}
         self.assertEqual(distinct_buy_tickers([opt]), [])
 
-    def test_implausible_returns_dropped(self):
-        # A ticker that "10x'd" since the buy is a likely data artifact → drop.
-        weird = PriceSeries({"2025-01-02": 10.0, "2026-06-02": 130.0})  # +1200%
-        sane = PriceSeries(parse_history(AAPL))
-        trades = [
-            self._trade("bad", "ZZZ", "buy", "2025-01-02"),
-            self._trade("ok", "AAPL", "buy", "2026-05-29"),
-        ]
-        returns, prices, stats = compute_returns(
-            trades, {"ZZZ": weird, "AAPL": sane})
-        self.assertEqual(set(returns), {"ok"})   # the +1200% one is dropped
-        self.assertEqual(stats["dropped_anomalies"], 1)
-        self.assertNotIn("ZZZ", prices)
+    def test_large_real_gains_are_kept(self):
+        # A genuine multi-fold winner (e.g. a chip stock in an AI run) is not
+        # second-guessed — we trust the source's price.
+        big = PriceSeries({"2025-01-02": 71.0, "2026-06-02": 976.0})  # +1274%
+        trades = [self._trade("mu", "MU", "buy", "2025-01-02")]
+        returns, prices, stats = compute_returns(trades, {"MU": big})
+        self.assertEqual(set(returns), {"mu"})
+        self.assertGreater(returns["mu"]["pct"], 1000)
 
     def test_select_tickers_featured_plus_top(self):
         # 3 GME buys, 1 XYZ buy; top_n=1 keeps GME, and featured is unioned in.
