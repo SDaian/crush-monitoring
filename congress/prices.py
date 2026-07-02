@@ -185,6 +185,11 @@ def buy_return(series: PriceSeries, tx_date: str) -> dict | None:
 # them even though they carry a ticker (mirrors the page's guard).
 NON_EQUITY = {"Option", "Cryptocurrency"}
 
+# A single-name equity moving beyond ~6x (or losing >90%) since the buy is far
+# more likely a data artifact — a wrong-instrument match or an unadjusted stock
+# split — than a real return. Drop those rather than print a misleading number.
+MAX_ABS_PCT = 500.0
+
 
 def compute_returns(trades: list[dict], series_by_ticker: dict[str, PriceSeries]):
     """Build the returns map for every priceable buy.
@@ -192,10 +197,12 @@ def compute_returns(trades: list[dict], series_by_ticker: dict[str, PriceSeries]
     Returns ``(returns_by_id, prices_by_ticker, stats)`` where
     ``returns_by_id`` maps trade id → {entry_date, entry_close, pct, …}, and
     ``prices_by_ticker`` maps ticker → {asof_date, asof_close} for tooltips.
+    Implausible-magnitude returns (likely data errors) are dropped and counted.
     """
     returns: dict[str, dict] = {}
     prices: dict[str, dict] = {}
     total_buys = 0
+    dropped = 0
     for t in trades:
         if t.get("type") != "buy" or not t.get("ticker"):
             continue
@@ -207,6 +214,9 @@ def compute_returns(trades: list[dict], series_by_ticker: dict[str, PriceSeries]
             continue
         rec = buy_return(series, t["tx_date"])
         if rec is None:
+            continue
+        if abs(rec["pct"]) > MAX_ABS_PCT:
+            dropped += 1
             continue
         returns[t["id"]] = {
             "entry_date": rec["entry_date"],
@@ -221,6 +231,7 @@ def compute_returns(trades: list[dict], series_by_ticker: dict[str, PriceSeries]
         "total_buys": total_buys,
         "priced_buys": len(returns),
         "tickers": len(prices),
+        "dropped_anomalies": dropped,
     }
     return returns, prices, stats
 
