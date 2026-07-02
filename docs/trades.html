@@ -187,6 +187,7 @@
     <button class="act" id="clearBtn">✕ Clear</button>
   </div>
 
+  <div class="note" id="retLegend" style="margin:2px 2px 6px"></div>
   <div class="count" id="countLine"></div>
   <div class="tblwrap">
     <table id="tbl">
@@ -203,6 +204,8 @@
       <b>estimated</b> dollar totals below cover the <b>last 90 days by trade date</b>;
       amounts are STOCK Act brackets, so the dollar figure is a midpoint estimate,
       not an exact sum. Any ticker is searchable — the cards are quick picks.
+      <b>Since buy</b> shows how the stock moved after each disclosed buy date
+      (est., Stooq close) — a stock-performance follow-through, not the member's profit.
     </div>
     <div class="cards" id="tickerCards"></div>
     <div class="filters">
@@ -236,6 +239,7 @@ const COLS = [
   {key:"asset",   label:"Asset"},
   {key:"type",    label:"Type"},
   {key:"amount_lo",label:"Amount", num:true},
+  {key:"_ret",    label:"Since buy", num:true},
   {key:"tx_date", label:"Traded", num:true},
   {key:"filing_date",label:"Filed", num:true},
   {key:"source_url",label:"Filing", nosort:true},
@@ -243,6 +247,9 @@ const COLS = [
 const PAGE = 200;
 
 let DATA = null;
+let RET = {};       // trade id -> {entry_date, entry_close, pct}
+let PRICES = {};    // ticker -> {asof_date, asof_close}
+let retSample = false;
 let state = {q:"", chamber:"", party:"", type:"", range:"", member:"",
              sortKey:"filing_date", sortDir:-1, shown:PAGE,
              focusTicker:"MU", focusRange:"90"};
@@ -269,14 +276,39 @@ function filtered(){
   );
 }
 
+// An option's or coin's price move isn't the underlying stock's, so never
+// show a "since buy" equity return for those even though they carry a ticker.
+const RET_BLOCK = new Set(["Option", "Cryptocurrency"]);
+function retFor(t){
+  if (t.type !== "buy" || RET_BLOCK.has(t.asset_type)) return null;
+  return RET[t.id];
+}
+
+function sortVal(t, k){
+  if (k === "_ret"){ const r = retFor(t); return r ? r.pct : -Infinity; }
+  return t[k] ?? "";
+}
+
 function sorted(rows){
   const k = state.sortKey, dir = state.sortDir;
   return rows.slice().sort((a,b) => {
-    const va = a[k] ?? "", vb = b[k] ?? "";
+    const va = sortVal(a, k), vb = sortVal(b, k);
     if (va < vb) return -dir;
     if (va > vb) return dir;
     return a.id < b.id ? -1 : 1;
   });
+}
+
+function retCell(t){
+  const r = retFor(t);
+  if (!r) return '<span class="muted">—</span>';
+  const px = PRICES[t.ticker];
+  const tip = `Stock ${r.pct >= 0 ? "up" : "down"} since the disclosed buy — `
+    + `entry $${r.entry_close} on ${r.entry_date}`
+    + (px ? ` → $${px.asof_close} on ${px.asof_date}` : "")
+    + ` (estimate, not member profit)`;
+  return `<span class="${r.pct >= 0 ? "buy" : "sell"}" title="${esc(tip)}">`
+    + `${r.pct >= 0 ? "+" : ""}${r.pct}%</span>`;
 }
 
 function typeCell(t){
@@ -306,6 +338,7 @@ function renderRows(){
     <td>${esc(t.asset)}${t.asset_type ? `<span class="chip">${esc(t.asset_type)}</span>` : ""}</td>
     <td>${typeCell(t)}</td>
     <td class="num">${esc(t.amount_label)}</td>
+    <td class="num">${retCell(t)}</td>
     <td class="num">${esc(t.tx_date)}</td>
     <td class="num">${esc(t.filing_date)}</td>
     <td><a href="${esc(t.source_url)}" target="_blank" rel="noopener" title="official filing">source ↗</a></td>
@@ -490,6 +523,18 @@ function renderTickerDetail(){
     .sort((a,b) => (b[1].buy+b[1].sell+b[1].exch) - (a[1].buy+a[1].sell+a[1].exch));
   const tradeRows = s.rows.slice().sort((a,b) => a.tx_date < b.tx_date ? 1 : -1);
 
+  // Median "since buy" return across the priced buys in view.
+  const pcts = s.rows.map(retFor).filter(Boolean).map(r => r.pct).sort((a,b)=>a-b);
+  let medHtml = "";
+  if (pcts.length){
+    const m = pcts.length % 2
+      ? pcts[(pcts.length-1)/2]
+      : (pcts[pcts.length/2-1] + pcts[pcts.length/2]) / 2;
+    medHtml = `<span>median return since buy:
+      <b class="${m>=0?"buy":"sell"}">${m>=0?"+":""}${Math.round(m*10)/10}%</b>
+      <span class="est">(${pcts.length} priced · est.)</span></span>`;
+  }
+
   box.innerHTML =
     `<h3>${esc(tk)} <span class="note">${esc(co)}</span> ${rangeToggle()}</h3>
      <div class="tksummary">
@@ -497,6 +542,7 @@ function renderTickerDetail(){
        <span><span class="buy">${s.buy} buy</span> · <span class="sell">${s.sell} sell</span>${s.exch ? ` · ${s.exch} exchange` : ""}</span>
        <span><b>${s.members}</b> member${s.members===1?"":"s"}</span>
        <span>est. bought <b>${fmtMoney(s.buyEst)}</b> · est. sold <b>${fmtMoney(s.sellEst)}</b> <span class="est">(bracket midpoints)</span></span>
+       ${medHtml}
      </div>
      <div class="memberbreak">
        ${members.map(([name, m]) => `<div class="mrow">
@@ -506,12 +552,13 @@ function renderTickerDetail(){
      </div>
      <div class="tblwrap" style="margin-top:8px">
        <table><thead><tr>
-         <th>Member</th><th>Type</th><th>Amount</th><th>Traded</th><th>Filed</th><th>Filing</th>
+         <th>Member</th><th>Type</th><th>Amount</th><th>Since buy</th><th>Traded</th><th>Filed</th><th>Filing</th>
        </tr></thead><tbody>
        ${tradeRows.map(t => `<tr>
          <td>${memberCell(t)}</td>
          <td>${typeCell(t)}</td>
          <td class="num">${esc(t.amount_label)}</td>
+         <td class="num">${retCell(t)}</td>
          <td class="num">${esc(t.tx_date)}</td>
          <td class="num">${esc(t.filing_date)}</td>
          <td><a href="${esc(t.source_url)}" target="_blank" rel="noopener" title="official filing">source ↗</a></td>
@@ -626,9 +673,29 @@ async function boot(){
     $("verStamp").textContent = "unavailable";
     return;
   }
+  // Return-since-buy estimates (optional — page still works without it).
+  try {
+    const rr = await fetch("data/returns.json", {cache:"no-store"});
+    if (rr.ok){
+      const rd = await rr.json();
+      RET = rd.returns || {};
+      PRICES = rd.prices || {};
+      retSample = !!rd.meta?._sample;
+    }
+  } catch (err) { /* returns are optional */ }
+
   $("verStamp").textContent =
     `${DATA.meta.data_version || "?"} · ${(DATA.meta.counts?.trades ?? 0).toLocaleString("en-US")} trades`;
   if (DATA.meta._sample) $("sampleBanner").style.display = "";
+  const retLegend = $("retLegend");
+  if (retLegend){
+    retLegend.innerHTML =
+      `<b>Since buy</b> = the stock's price change since the disclosed <b>buy</b> date `
+      + `(estimate, Stooq daily close) — <b>not</b> the member's realized profit `
+      + `(holding, later sells, dividends and size are unknown). Only listed US `
+      + `equities price; options/bonds/foreign names show “—”.`
+      + (retSample ? ` <span class="est">· returns shown are sample data until the first live refresh</span>` : "");
+  }
   renderSkips();
   wire();
   renderAll();

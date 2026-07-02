@@ -49,16 +49,24 @@ jobs:
           fi
           python3 -m congress fetch $EXTRA 2>&1 | tee fetch.log
 
+      - name: Estimate return-since-buy (non-fatal)
+        run: |
+          # Prices move daily even when no new filing arrives, so this runs
+          # every day. A Stooq outage must not fail the whole refresh.
+          python3 -m congress prices 2>&1 | tee -a fetch.log \
+            || echo "::warning::price refresh failed; keeping prior returns.json"
+
       - name: Commit refreshed data
         run: |
-          if git diff --quiet -- docs/data/congress-trades.json congress/state.json congress/members.json; then
-            echo "No new trades."
+          FILES="docs/data/congress-trades.json congress/state.json congress/members.json docs/data/returns.json"
+          if git diff --quiet -- $FILES; then
+            echo "No new trades or price changes."
             exit 0
           fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add docs/data/congress-trades.json congress/state.json congress/members.json
-          git commit -m "congress: trades refresh ($(date -u +%F))"
+          git add $FILES
+          git commit -m "congress: trades + returns refresh ($(date -u +%F))"
           # The branch may have moved while the fetch ran; rebase our data
           # commit on top rather than failing the push.
           git pull --rebase origin "${GITHUB_REF_NAME}"
