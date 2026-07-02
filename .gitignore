@@ -18,3 +18,7 @@ yarn-error.log*
 # Python
 __pycache__/
 *.pyc
+
+# Congress fetcher scratch output (Action artifacts, never committed)
+debug-dump/
+fetch.log
