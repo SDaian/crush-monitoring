@@ -189,9 +189,15 @@ def run(
             processed[fid] = source.ref_filing_date(ref)
 
     # Re-enrich every stored trade so a roster refresh fills party/state on
-    # trades ingested before the member existed in members.json.
+    # trades ingested before the member existed in members.json. Skipped
+    # filings get the same name normalization ("Rohit Khanna" → "Ro Khanna")
+    # so the page can attribute them to featured members.
     for t in trades.values():
         enrich_dict(t, roster)
+    for s in skipped.values():
+        entry = roster.find(s["member"], chamber=s["chamber"])
+        if entry:
+            s["member"] = entry["name"]
 
     # Prune everything (trades, skips, state) outside the two-year window.
     kept = {i: t for i, t in trades.items() if t["filing_date"] >= cutoff}

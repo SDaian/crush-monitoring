@@ -284,21 +284,28 @@ function renderFeatured(){
   const since = daysAgo(90);
   $("featured").innerHTML = (DATA.meta.featured || []).map(name => {
     const mine = DATA.trades.filter(t => t.member === name);
+    const mySkips = (DATA.skipped_filings || []).filter(s => s.member === name);
     const recent = mine.filter(t => t.tx_date >= since);
     const buys = recent.filter(t => t.type === "buy").length;
     const sells = recent.filter(t => t.type === "sell").length;
-    const info = mine[0];
+    const info = mine[0] || mySkips[0];
     const who = info ? [info.chamber === "senate" ? "Senate" : "House",
                         info.party, info.district || info.state].filter(Boolean).join(" · ") : "no filings in window";
     const last = mine[0];
+    // Some members (e.g. Khanna, McCaul) file on paper: scanned images no
+    // tracker can parse. Say so instead of showing a misleading zero.
+    const body = (!mine.length && mySkips.length)
+      ? `<div class="note" style="margin-top:6px">📄 ${mySkips.length} paper filings — scanned, not machine-readable</div>
+         <div class="last">Latest: <a href="${esc(mySkips[0].source_url)}" target="_blank" rel="noopener">official filing (${esc(mySkips[0].filing_date)}) ↗</a></div>`
+      : `${splitBar(buys, sells)}
+         <div class="note" style="margin-top:2px">${recent.length} trades in 90 days</div>
+         <div class="last">${last
+           ? `Last: <span class="${last.type}">${esc(last.type)}</span> ${esc(last.ticker || last.asset)} · ${esc(last.amount_label)} · ${esc(last.tx_date)}`
+           : "—"}</div>`;
     return `<div class="fcard ${state.member === name ? "sel" : ""}" data-m="${esc(name)}">
       <div class="name">${esc(name)}</div>
       <div class="who">${esc(who)}</div>
-      ${splitBar(buys, sells)}
-      <div class="note" style="margin-top:2px">${recent.length} trades in 90 days</div>
-      <div class="last">${last
-        ? `Last: <span class="${last.type}">${esc(last.type)}</span> ${esc(last.ticker || last.asset)} · ${esc(last.amount_label)} · ${esc(last.tx_date)}`
-        : "—"}</div>
+      ${body}
     </div>`;
   }).join("");
 }

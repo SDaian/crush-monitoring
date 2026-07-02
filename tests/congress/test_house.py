@@ -118,6 +118,26 @@ class TestPtrText(unittest.TestCase):
         with self.assertRaises(HouseError):
             parse_ptr_text("PERIODIC TRANSACTION REPORT\nno rows here\n", _ref())
 
+    def test_wide_space_metadata_not_appended_to_asset(self):
+        # Live regression: the PDF pads metadata markers with wide spacing
+        # ("F      S     : New", "S          O : ..."), which must be treated
+        # as metadata, not asset-name continuations.
+        text = (
+            "SP Virginia Commlth 5.00% 09/15/29 S 05/20/2026 05/21/2026 $1,001 - $15,000\n"
+            "F      S     : New\n"
+            "S          O : Stocks, Bonds, & Mutual Funds\n"
+            "D          : 6\n"
+        )
+        trades = parse_ptr_text(text, _ref())
+        self.assertEqual(trades[0].asset, "Virginia Commlth 5.00% 09/15/29")
+
+    def test_trailing_filing_status_stripped_from_asset(self):
+        # Live regression: some PDFs wrap "F S: New" so a bare "F S" trails
+        # the asset name on the row line.
+        text = "JT US Treasury Bill F S P 12/12/2025 12/15/2025 $100,001 - $250,000\n"
+        trades = parse_ptr_text(text, _ref())
+        self.assertEqual(trades[0].asset, "US Treasury Bill")
+
 
 @unittest.skipUnless(
     importlib.util.find_spec("pdfplumber"), "pdfplumber not installed"
