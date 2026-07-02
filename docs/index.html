@@ -309,7 +309,8 @@ const KO_KNOWN = {
   83: {h:2, a:0},                   // R32: Mexico 2-0 Ecuador (Mexico advance) — clean sheet, settled in 90'
   84: {h:2, a:1},                   // R32: England 2-1 DR Congo (England advance) — Kane brace, came from 1-0 down at HT
   80: {h:3, a:2, aet:true},         // R32: Belgium 3-2 Senegal after extra time (winner at 120+5) — Belgium advance
-  79: {h:2, a:0}                     // R32: USA 2-0 Bosnia (USA advance) — host wins with a clean sheet, settled in 90'
+  79: {h:2, a:0},                    // R32: USA 2-0 Bosnia (USA advance) — host wins with a clean sheet, settled in 90'
+  78: {h:3, a:0}                     // R32: Spain 3-0 Austria (Spain advance) — rout + clean sheet, settled in 90'
 };
 
 /* ---- round-robin fixture order for 4 teams ---- */
@@ -555,7 +556,7 @@ function calibFor(m){ if(!m) return null;
    =========================================================================== */
 // Build/data stamp shown in the header. The app is stateless: nothing is
 // persisted, so reloading (F5) always returns to the official results.
-const DATA_VERSION="2026-07-02.r32-spain-austria-forecast";
+const DATA_VERSION="2026-07-02.r32-spain-austria-result";
 let state={ results:{}, strengths:{}, learn:[] };
 
 function freshStrengths(){ const s={}; for(const t in TEAMS) s[t]=TEAMS[t]; return s; }

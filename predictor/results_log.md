@@ -55,6 +55,7 @@ Legend: ✅ right for the right reason · 🟡 right but by luck/margin ·
 | 2026-07-01 | England vs DR Congo (R32) | 66.9 / 20.5 / 12.6 | HIGH | 2-1 (England, adv.) | ✅ |
 | 2026-07-01 | Belgium vs Senegal (R32) | 46.9 / 26.4 / 26.7 | MEDIUM | 3-2 aet (Belgium, adv.) | ✅ |
 | 2026-07-02 | USA vs Bosnia & Herz. (R32) | 55.4 / 23.9 / 20.6 | MEDIUM | 2-0 (USA, adv.) | ✅ |
+| 2026-07-02 | Spain vs Austria (R32) | 69.7 / 19.0 / 11.3 | HIGH | 3-0 (Spain, adv.) | ✅ |
 
 ### Emerging pattern: favorites vs low block (key)
 
@@ -918,3 +919,25 @@ knockout has no draw. The closed-form chaining is Monte-Carlo-validated (sim vs 
   open 'both teams score' texture; they can win it clean. The 35% clean-sheet read was the
   tell that a shut-out win was well within range, not a minority story. USA now meet Belgium
   in the Round of 16.
+
+## 2026-07-02 · Round of 32 — Spain 3-0 Austria (Spain advance) ✅
+
+- **Spain vs Austria** — 90': Spain 69.7 / Draw 19.0 / Austria 11.3 (HIGH);
+  advancement **Spain 82.2 / Austria 17.8**. λ 2.25 / 0.80, xG 3.05, Over 2.5 59%, BTTS
+  50%, Spain clean sheet 44.9% / Austria clean sheet 10.5%, top scoreline **2-0 (12.0%)**
+  (3-0 at 9.0%); ET 19.0%, pens 8.5%. Market (90') aligned on the first pass (div 1.5).
+  **RESULT: Spain 3-0 Austria — a rout + clean sheet, settled in 90'.** Textbook process
+  hit: Spain advanced as the 82.2% pick, won by three (3-0 a top-5 scoreline), kept a clean
+  sheet (the 44.9% branch — the single most likely defensive outcome), and it was Over 2.5
+  exactly as the 3.05 xG implied. **Vindicates the Spain lesson applied pre-match:** I read
+  Austria's openness (attacking-but-leaky, GA 6) as feeding Spain's ROUT profile — the
+  opposite of the 0-0-vs-Cape-Verde block — and did NOT fade the elite favourite (held it
+  market-aligned at 69.7%, HIGH). Spain routed, as the 'don't fade Spain when the game
+  opens' pattern predicts. Austria's attack (BTTS 50% lean) never showed against Spain's
+  elite defence — the low-BTTS / high-clean-sheet branch. **Lesson:** the Spain rout
+  archetype is now **2-for-2** at this event (4-0 Saudi, 3-0 Austria) — an elite side blunted
+  by a deep block will ROUT an open, leaky opponent that gives it space. Classify the
+  underdog FIRST: Austria was attacking-and-leaky (not a block), so the rout was the base
+  case, not the tail — align up/with the market, never fade. The 45% clean-sheet read
+  foreshadowed a controlled shut-out, not the 'both score' texture BTTS 50% might suggest.
+  Spain meet the Portugal–Croatia winner in the Round of 16.
