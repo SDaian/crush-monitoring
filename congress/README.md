@@ -68,9 +68,9 @@ The dev sandbox used to build this cannot reach the government domains, so
 the parsers were written against `tests/congress/fixtures/`. When a live run
 surprises us (eFD CSRF details, House PDF layout variance), the loop is:
 grab the run's debug artifacts → fix the parser → update the fixtures so the
-tests encode reality → push. A temporary push trigger on the development
-branch (capped at `--limit 25`) exists for exactly this loop and is removed
-before merge to `main`.
+tests encode reality → push. For that loop, temporarily add a `push` trigger
+for the development branch to the workflow (capped with `--limit 25`) and
+remove it again before merging to `main`.
 
 Known simplification: amendment filings are treated as separate filings
 (deduped by filing id only), so an amended trade can appear twice — once per

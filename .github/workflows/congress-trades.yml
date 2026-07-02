@@ -9,13 +9,6 @@ on:
         description: "Max new filings per chamber this run (empty = no cap)"
         required: false
         default: ""
-  # TEMPORARY while the feature branch is being live-tested: every push
-  # exercises the real government endpoints with a small cap. Remove this
-  # trigger (and the branch condition below) before merging to main.
-  push:
-    branches:
-      - claude/politician-stock-trading-qfo6p1
-
 permissions:
   contents: write
 
@@ -49,9 +42,7 @@ jobs:
       - name: Fetch new filings
         run: |
           set -o pipefail # tee must not mask the fetcher's exit code
-          if [ "${{ github.event_name }}" = "push" ]; then
-            EXTRA="--limit 25 --debug-dump debug-dump"
-          elif [ -n "${{ github.event.inputs.limit }}" ]; then
+          if [ -n "${{ github.event.inputs.limit }}" ]; then
             EXTRA="--limit ${{ github.event.inputs.limit }} --debug-dump debug-dump"
           else
             EXTRA="" # full scheduled run: no dump (it would be huge)
