@@ -10,43 +10,49 @@ realized profit — holding period, later sells, dividends and position size
 are all unknown, and the STOCK Act discloses a trade date, not a fill price
 (so we use that day's close as a proxy). The page must label it accordingly.
 
-Prices come from the free Yahoo Finance chart API (JSON, no API key). We use
-the **adjusted** close so stock splits and dividends don't distort the
-estimate. Stooq — the obvious free CSV source — now gates automated requests
-behind a JavaScript anti-bot challenge, so it cannot be used headless.
+Prices come from Twelve Data (https://twelvedata.com), a keyed provider whose
+free tier (800 calls/day, 8/min) is reachable from CI — unlike Stooq (which
+now JS-walls automated requests) and Yahoo (which 429s shared runner IPs).
+The API key is read from the ``CONGRESS_PRICES_KEY`` environment variable and
+never written to any file, log or URL that gets printed.
 
-Only the network fetch lives in ``fetch_raw`` (via ``congress.http``);
-parsing and the return math are pure stdlib, so tests run offline.
+Only ``fetch_raw`` / ``make_session`` touch the network; parsing and the
+return math are pure stdlib, so tests run offline against a JSON fixture.
 """
 
 from __future__ import annotations
 
 import bisect
 import json
+import os
 import re
-from datetime import datetime, timezone
+import time
 
-# 3 years of daily candles comfortably covers the current + previous calendar
-# year window the tracker keeps.
-YAHOO_HOST = "https://query1.finance.yahoo.com"
-CHART_PATH = "/v8/finance/chart/{symbol}?range=3y&interval=1d"
-# Yahoo 429s anonymous/datacenter requests; a browser UA plus a cookie+crumb
-# session (below) is what lets CI reach the chart API — the same handshake
-# yfinance uses.
-BROWSER_UA = (
-    "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 "
-    "(KHTML, like Gecko) Chrome/124.0 Safari/537.36"
-)
+TD_HOST = "https://api.twelvedata.com"
+# Cover the current + previous calendar year window (plus a margin so a buy
+# early in the window still has a prior close). 1500 daily bars ≈ 6 years.
+TD_OUTPUTSIZE = 1500
+TD_INTERVAL = "1day"
+# Free tier: 8 requests/minute. Pace at 8s to stay comfortably under.
+TD_MIN_INTERVAL = 8.0
+BROWSER_UA = "crush-monitoring congress-trades bot (+https://github.com/SDaian/crush-monitoring)"
+
+ENV_KEY = "CONGRESS_PRICES_KEY"
+
+_last_request = 0.0
 
 
-def make_price_session():
-    """A requests.Session primed with Yahoo cookies + crumb.
+def api_key() -> str:
+    return os.environ.get(ENV_KEY, "").strip()
 
-    Anonymous requests from shared CI IPs get 429'd; establishing the cookie
-    Yahoo sets on its consent host and fetching a crumb makes the session look
-    like a real browser and lifts the block. Network-only, so imported lazily
-    and never touched by the offline tests.
-    """
+
+def td_symbol(ticker: str) -> str:
+    """Map a disclosed ticker to a Twelve Data symbol (uppercase, trimmed)."""
+    return ticker.strip().upper()
+
+
+def make_session():
+    """A plain requests.Session with a UA and retry/backoff on 429/5xx."""
     import requests
     from requests.adapters import HTTPAdapter
     from urllib3.util.retry import Retry
@@ -55,61 +61,64 @@ def make_price_session():
     session.headers["User-Agent"] = BROWSER_UA
     retry = Retry(
         total=2,
-        backoff_factor=1,
+        backoff_factor=2,
         status_forcelist=(429, 500, 502, 503, 504),
         allowed_methods=None,
         respect_retry_after_header=True,
     )
     session.mount("https://", HTTPAdapter(max_retries=retry))
-    crumb = ""
-    try:  # cookie handshake, then a crumb tied to that cookie
-        session.get("https://fc.yahoo.com/", timeout=10)
-        resp = session.get(f"{YAHOO_HOST}/v1/test/getcrumb", timeout=10)
-        text = resp.text.strip()
-        if resp.ok and text and "<" not in text:
-            crumb = text
-    except Exception:
-        pass
-    session.crumb = crumb
     return session
 
 
-def yahoo_symbol(ticker: str) -> str:
-    """Map a disclosed ticker to a Yahoo symbol.
+def _pace() -> None:
+    global _last_request
+    wait = TD_MIN_INTERVAL - (time.monotonic() - _last_request)
+    if wait > 0:
+        time.sleep(wait)
+    _last_request = time.monotonic()
 
-    Yahoo uppercases and writes share classes with a hyphen (``BRK.B`` →
-    ``BRK-B``); ADRs like ``TSM`` are unchanged.
+
+def fetch_raw(session, ticker: str, key: str) -> str:
+    """Download a ticker's raw Twelve Data time_series JSON (network).
+
+    The key is sent as a query param; callers must never print the request
+    URL (it would leak the key). Errors are surfaced by the caller with the
+    key redacted.
     """
-    return re.sub(r"[^A-Z0-9]+", "-", ticker.strip().upper()).strip("-")
+    _pace()
+    params = {
+        "symbol": td_symbol(ticker),
+        "interval": TD_INTERVAL,
+        "outputsize": TD_OUTPUTSIZE,
+        "apikey": key,
+    }
+    resp = session.get(f"{TD_HOST}/time_series", params=params, timeout=30)
+    resp.raise_for_status()
+    return resp.text
 
 
 def parse_history(body: str) -> dict[str, float]:
-    """Parse a Yahoo chart JSON body into ``{iso_date: adjusted_close}``.
+    """Parse a Twelve Data time_series JSON body into ``{iso_date: close}``.
 
-    Returns an empty dict for the unknown-symbol / no-data case.
+    Returns an empty dict for the error / unknown-symbol / rate-limited case
+    (Twelve Data answers those with ``{"status": "error", ...}``).
     """
     try:
         data = json.loads(body)
     except (ValueError, TypeError):
         return {}
-    chart = (data or {}).get("chart") or {}
-    results = chart.get("result") or []
-    if chart.get("error") or not results:
-        return {}
-    res = results[0]
-    stamps = res.get("timestamp") or []
-    indicators = res.get("indicators") or {}
-    adj = (indicators.get("adjclose") or [{}])[0].get("adjclose")
-    quote = (indicators.get("quote") or [{}])[0].get("close")
-    closes = adj if adj is not None else quote
-    if not stamps or not closes:
+    if not isinstance(data, dict) or data.get("status") != "ok":
         return {}
     hist: dict[str, float] = {}
-    for ts, close in zip(stamps, closes):
-        if close is None:
+    for row in data.get("values") or []:
+        d = str(row.get("datetime", "")).strip()[:10]
+        raw = str(row.get("close", "")).strip()
+        if not re.fullmatch(r"\d{4}-\d{2}-\d{2}", d) or not raw:
             continue
-        iso = datetime.fromtimestamp(ts, tz=timezone.utc).date().isoformat()
-        hist[iso] = float(close)
+        try:
+            hist[d] = float(raw)
+        except ValueError:
+            continue
     return hist
 
 
@@ -143,22 +152,9 @@ class PriceSeries:
         return d, self.hist[d]
 
 
-def fetch_raw(session, ticker: str) -> str:
-    """Download a ticker's raw Yahoo chart JSON body (network)."""
-    import urllib.parse
-
-    from .http import polite_get
-
-    url = YAHOO_HOST + CHART_PATH.format(symbol=yahoo_symbol(ticker))
-    crumb = getattr(session, "crumb", "")
-    if crumb:
-        url += "&crumb=" + urllib.parse.quote(crumb, safe="")
-    return polite_get(session, url).text
-
-
-def fetch_history(session, ticker: str) -> PriceSeries:
-    """Download and parse a ticker's Yahoo daily history (network)."""
-    return PriceSeries(parse_history(fetch_raw(session, ticker)))
+def fetch_history(session, ticker: str, key: str) -> PriceSeries:
+    """Download and parse a ticker's Twelve Data daily history (network)."""
+    return PriceSeries(parse_history(fetch_raw(session, ticker, key)))
 
 
 def buy_return(series: PriceSeries, tx_date: str) -> dict | None:
@@ -181,6 +177,11 @@ def buy_return(series: PriceSeries, tx_date: str) -> dict | None:
     }
 
 
+# Assets whose "return" isn't the underlying equity's move, so we never price
+# them even though they carry a ticker (mirrors the page's guard).
+NON_EQUITY = {"Option", "Cryptocurrency"}
+
+
 def compute_returns(trades: list[dict], series_by_ticker: dict[str, PriceSeries]):
     """Build the returns map for every priceable buy.
 
@@ -193,6 +194,8 @@ def compute_returns(trades: list[dict], series_by_ticker: dict[str, PriceSeries]
     total_buys = 0
     for t in trades:
         if t.get("type") != "buy" or not t.get("ticker"):
+            continue
+        if t.get("asset_type") in NON_EQUITY:
             continue
         total_buys += 1
         series = series_by_ticker.get(t["ticker"])
@@ -219,6 +222,22 @@ def compute_returns(trades: list[dict], series_by_ticker: dict[str, PriceSeries]
 
 
 def distinct_buy_tickers(trades: list[dict]) -> list[str]:
-    """Every ticker that appears on at least one buy, sorted."""
-    return sorted({t["ticker"] for t in trades
-                   if t.get("type") == "buy" and t.get("ticker")})
+    """Every ticker on at least one equity buy, sorted (options/crypto excl.)."""
+    return sorted({
+        t["ticker"] for t in trades
+        if t.get("type") == "buy" and t.get("ticker")
+        and t.get("asset_type") not in NON_EQUITY
+    })
+
+
+def select_tickers(trades: list[dict], featured: list[str], top_n: int) -> list[str]:
+    """Featured tickers plus the ``top_n`` most-traded — the set worth the
+    free-tier quota. Buys of the long tail keep showing “—”."""
+    from collections import Counter
+    counts = Counter(
+        t["ticker"] for t in trades
+        if t.get("type") == "buy" and t.get("ticker")
+        and t.get("asset_type") not in NON_EQUITY
+    )
+    top = [tk for tk, _ in counts.most_common(top_n)]
+    return sorted(set(featured) | set(top))

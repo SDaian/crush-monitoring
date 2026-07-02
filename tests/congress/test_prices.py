@@ -9,22 +9,20 @@ from congress.prices import (
     compute_returns,
     distinct_buy_tickers,
     parse_history,
-    yahoo_symbol,
+    select_tickers,
+    td_symbol,
 )
 
 FIXTURES = Path(__file__).parent / "fixtures"
-AAPL = (FIXTURES / "yahoo_aapl.json").read_text()
+AAPL = (FIXTURES / "td_aapl.json").read_text()
 
 
 class TestSymbol(unittest.TestCase):
     def test_plain(self):
-        self.assertEqual(yahoo_symbol("AAPL"), "AAPL")
-
-    def test_share_class_dot_becomes_hyphen(self):
-        self.assertEqual(yahoo_symbol("BRK.B"), "BRK-B")
+        self.assertEqual(td_symbol("AAPL"), "AAPL")
 
     def test_whitespace_and_case(self):
-        self.assertEqual(yahoo_symbol(" msft "), "MSFT")
+        self.assertEqual(td_symbol(" msft "), "MSFT")
 
 
 class TestParse(unittest.TestCase):
@@ -36,10 +34,11 @@ class TestParse(unittest.TestCase):
         self.assertEqual(self.hist["2026-06-02"], 197.4)
         self.assertEqual(len(self.hist), 5)
 
-    def test_unlisted_returns_empty(self):
-        # Yahoo's not-found / error / anti-bot bodies all yield no series.
-        self.assertEqual(parse_history('{"chart":{"result":null,"error":{"code":"Not Found"}}}'), {})
-        self.assertEqual(parse_history("<!DOCTYPE html><html>bot check</html>"), {})
+    def test_error_body_returns_empty(self):
+        # Twelve Data's not-found / rate-limit bodies all yield no series.
+        self.assertEqual(parse_history('{"code":404,"message":"symbol not found","status":"error"}'), {})
+        self.assertEqual(parse_history('{"code":429,"message":"out of credits","status":"error"}'), {})
+        self.assertEqual(parse_history("<html>gateway</html>"), {})
         self.assertEqual(parse_history(""), {})
 
 
@@ -111,6 +110,24 @@ class TestComputeReturns(unittest.TestCase):
             self._trade("d", "NVDA", "buy", "w"),
         ]
         self.assertEqual(distinct_buy_tickers(trades), ["AAPL", "NVDA"])
+
+    def test_options_and_crypto_excluded(self):
+        opt = {"id": "o", "ticker": "NVDA", "type": "buy", "tx_date": "x",
+               "asset_type": "Option"}
+        self.assertEqual(distinct_buy_tickers([opt]), [])
+
+    def test_select_tickers_featured_plus_top(self):
+        # 3 GME buys, 1 XYZ buy; top_n=1 keeps GME, and featured is unioned in.
+        trades = [
+            self._trade("a", "GME", "buy", "x"),
+            self._trade("b", "GME", "buy", "y"),
+            self._trade("c", "GME", "buy", "z"),
+            self._trade("d", "XYZ", "buy", "w"),
+        ]
+        got = select_tickers(trades, ["AAPL"], top_n=1)
+        self.assertIn("GME", got)      # most-traded
+        self.assertIn("AAPL", got)     # featured, even with no trades
+        self.assertNotIn("XYZ", got)   # long tail dropped
 
 
 if __name__ == "__main__":
