@@ -56,8 +56,14 @@
   }
   .panel2 h3{margin:0 0 8px;font-size:14px}
   .trow{display:flex;align-items:center;gap:8px;margin:4px 0;font-size:12.5px}
-  .trow .tk{width:64px;font-weight:700}
+  .trow .tklabel{
+    width:220px;min-width:0;overflow:hidden;text-overflow:ellipsis;
+    white-space:nowrap;
+  }
+  .trow .tk{font-weight:700}
+  .trow .co{color:var(--chalk-dim);font-size:11.5px;margin-left:6px}
   .trow .track{flex:1}
+  @media (max-width:640px){ .trow .tklabel{width:130px} }
   .trow .bar{display:flex;height:9px;border-radius:4px;overflow:hidden}
   .trow .ct{width:130px;color:var(--chalk-dim);text-align:right}
   .filters{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0;align-items:center}
@@ -310,17 +316,35 @@ function renderFeatured(){
   }).join("");
 }
 
+function cleanCompany(name){
+  // Strip disclosure boilerplate from an asset name so it reads as a
+  // company: trailing "$200?"-style fragments, then share-class suffixes
+  // ("- Common Stock", "New Common Stock", "- Class A Common Stock",
+  // "- Ordinary Shares").
+  return name
+    .replace(/\s*\$\S*\??\s*$/, "")
+    .replace(/[-\s]*(new\s+)?(class\s+[a-z]\s+)?(common stock|ordinary shares|common shares)\s*$/i, "")
+    .replace(/\s+/g, " ").replace(/[-\s]+$/, "").trim();
+}
+
 function renderTopTickers(){
   const since = daysAgo(90);
   const agg = new Map();
   for (const t of DATA.trades){
     if (!t.ticker || t.tx_date < since) continue;
-    const e = agg.get(t.ticker) || {buy:0, sell:0};
+    const e = agg.get(t.ticker) || {buy:0, sell:0, names:{}};
     if (t.type === "buy") e.buy++; else if (t.type === "sell") e.sell++;
+    e.names[t.asset] = (e.names[t.asset] || 0) + 1;
     agg.set(t.ticker, e);
   }
   const top = [...agg.entries()]
-    .map(([tk, e]) => ({tk, ...e, total: e.buy + e.sell}))
+    .map(([tk, e]) => ({
+      tk, ...e,
+      total: e.buy + e.sell,
+      company: cleanCompany(
+        Object.entries(e.names).sort((a,b) => b[1] - a[1])[0][0]
+      ),
+    }))
     .filter(r => r.total > 0)
     .sort((a,b) => b.total - a.total || (a.tk < b.tk ? -1 : 1))
     .slice(0, 10);
@@ -329,9 +353,9 @@ function renderTopTickers(){
     const w = 100 * r.total / max;
     const bw = 100 * r.buy / r.total;
     return `<div class="trow">
-      <span class="tk">${esc(r.tk)}</span>
+      <span class="tklabel" title="${esc(r.company)}"><span class="tk">${esc(r.tk)}</span><span class="co">${esc(r.company)}</span></span>
       <div class="track">
-        <div class="bar" style="width:${w}%" role="img" aria-label="${r.tk}: ${r.buy} buys, ${r.sell} sells">
+        <div class="bar" style="width:${w}%" role="img" aria-label="${esc(r.tk)} (${esc(r.company)}): ${r.buy} buys, ${r.sell} sells">
           ${r.buy ? `<span style="width:${bw}%;background:var(--good)"></span>` : ""}
           ${r.sell ? `<span style="width:${100-bw}%;background:var(--bad);margin-left:${r.buy?2:0}px"></span>` : ""}
         </div>
