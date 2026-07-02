@@ -260,9 +260,9 @@ def _cmd_prices(args: argparse.Namespace) -> int:
             series_by_ticker[tk] = series
         else:
             unlisted += 1
-            if unlisted <= 3:  # diagnose why a ticker prices as empty
+            if unlisted <= 3:  # surface why a ticker prices as empty (ops aid)
                 head = " ".join(raw.split())[:160]
-                print(f"  [debug] {tk} ({prices.stooq_symbol(tk)}) empty; body: {head!r}")
+                print(f"  [debug] {tk} ({prices.yahoo_symbol(tk)}) empty; body: {head!r}")
         if i % 25 == 0:
             print(f"  priced {i}/{len(tickers)} tickers…")
 

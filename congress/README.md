@@ -19,8 +19,7 @@ marked processed), so they self-heal after a parser fix.
 ## Return since buy (`prices.py` → `docs/data/returns.json`)
 
 For every disclosed **buy** of a listed US equity, `congress prices` estimates
-how the stock has performed since the trade date, using free
-[Stooq](https://stooq.com) daily-close CSVs (no API key). Per buy it stores the
+how the stock has performed since the trade date, using the free Yahoo Finance chart API (JSON, no API key). Per buy it stores the
 entry close (the trade date's close, or the prior session), and the % change to
 the latest available close.
 
@@ -30,7 +29,7 @@ unknown, and the STOCK Act discloses a trade *date*, not a fill price. Only
 listed US equities price; options, bonds, foreign and delisted names are left
 out (the page shows "—"). The number is intentionally an estimate.
 
-Only `prices.fetch_history` touches the network; parsing and the return math are
+Only `prices.fetch_raw` touches the network; parsing and the return math are
 pure stdlib, so `tests/congress/test_prices.py` runs offline against a CSV
 fixture. Run standalone with `python3 -m congress prices` (add `--limit N` to
 price only the first N tickers while testing).

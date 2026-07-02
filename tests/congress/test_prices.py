@@ -9,26 +9,27 @@ from congress.prices import (
     compute_returns,
     distinct_buy_tickers,
     parse_history,
-    stooq_symbol,
+    yahoo_symbol,
 )
 
 FIXTURES = Path(__file__).parent / "fixtures"
+AAPL = (FIXTURES / "yahoo_aapl.json").read_text()
 
 
 class TestSymbol(unittest.TestCase):
     def test_plain(self):
-        self.assertEqual(stooq_symbol("AAPL"), "aapl.us")
+        self.assertEqual(yahoo_symbol("AAPL"), "AAPL")
 
     def test_share_class_dot_becomes_hyphen(self):
-        self.assertEqual(stooq_symbol("BRK.B"), "brk-b.us")
+        self.assertEqual(yahoo_symbol("BRK.B"), "BRK-B")
 
     def test_whitespace_and_case(self):
-        self.assertEqual(stooq_symbol(" msft "), "msft.us")
+        self.assertEqual(yahoo_symbol(" msft "), "MSFT")
 
 
 class TestParse(unittest.TestCase):
     def setUp(self):
-        self.hist = parse_history((FIXTURES / "stooq_aapl.csv").read_text())
+        self.hist = parse_history(AAPL)
 
     def test_dates_and_closes(self):
         self.assertEqual(self.hist["2026-05-29"], 192.5)
@@ -36,13 +37,15 @@ class TestParse(unittest.TestCase):
         self.assertEqual(len(self.hist), 5)
 
     def test_unlisted_returns_empty(self):
-        self.assertEqual(parse_history("No data\n"), {})
+        # Yahoo's not-found / error / anti-bot bodies all yield no series.
+        self.assertEqual(parse_history('{"chart":{"result":null,"error":{"code":"Not Found"}}}'), {})
+        self.assertEqual(parse_history("<!DOCTYPE html><html>bot check</html>"), {})
         self.assertEqual(parse_history(""), {})
 
 
 class TestSeries(unittest.TestCase):
     def setUp(self):
-        self.s = PriceSeries(parse_history((FIXTURES / "stooq_aapl.csv").read_text()))
+        self.s = PriceSeries(parse_history(AAPL))
 
     def test_exact_day(self):
         self.assertEqual(self.s.close_on_or_before("2026-05-29"), ("2026-05-29", 192.5))
@@ -63,7 +66,7 @@ class TestSeries(unittest.TestCase):
 
 class TestBuyReturn(unittest.TestCase):
     def setUp(self):
-        self.s = PriceSeries(parse_history((FIXTURES / "stooq_aapl.csv").read_text()))
+        self.s = PriceSeries(parse_history(AAPL))
 
     def test_pct_from_entry_to_latest(self):
         rec = buy_return(self.s, "2026-05-29")
@@ -85,7 +88,7 @@ class TestComputeReturns(unittest.TestCase):
 
     def test_only_priceable_buys_get_returns(self):
         series = {"AAPL": PriceSeries(
-            parse_history((FIXTURES / "stooq_aapl.csv").read_text()))}
+            parse_history(AAPL))}
         trades = [
             self._trade("a", "AAPL", "buy", "2026-05-29"),   # priced
             self._trade("b", "AAPL", "sell", "2026-05-29"),  # sells ignored
