@@ -57,7 +57,7 @@ jobs:
         run: |
           # Prices move daily even when no new filing arrives, so this runs
           # every day. A price-source outage must not fail the whole refresh.
-          python3 -m congress prices --limit 6 2>&1 | tee -a fetch.log \
+          python3 -m congress prices 2>&1 | tee -a fetch.log \
             || echo "::warning::price refresh failed; keeping prior returns.json"
 
       - name: Commit refreshed data
