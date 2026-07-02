@@ -1,0 +1,67 @@
+{
+  "_comment": "Member roster joined onto scraped trades by name (party/state/district). Seeded by hand with the featured watchlist; regenerate the full chamber roster with `python3 -m congress roster` (downloads unitedstates/congress-legislators). Aliases cover the filer-name spellings used on eFD / House Clerk filings.",
+  "members": [
+    {
+      "name": "Nancy Pelosi",
+      "chamber": "house",
+      "party": "D",
+      "state": "CA",
+      "district": "CA-11",
+      "aliases": ["Pelosi, Nancy", "Hon. Nancy Pelosi"]
+    },
+    {
+      "name": "Ro Khanna",
+      "chamber": "house",
+      "party": "D",
+      "state": "CA",
+      "district": "CA-17",
+      "aliases": ["Khanna, Ro", "Hon. Ro Khanna", "Rohit Khanna"]
+    },
+    {
+      "name": "Marjorie Taylor Greene",
+      "chamber": "house",
+      "party": "R",
+      "state": "GA",
+      "district": "GA-14",
+      "aliases": ["Greene, Marjorie Taylor", "Hon. Marjorie Taylor Greene"]
+    },
+    {
+      "name": "Michael McCaul",
+      "chamber": "house",
+      "party": "R",
+      "state": "TX",
+      "district": "TX-10",
+      "aliases": ["McCaul, Michael T.", "Hon. Michael T. McCaul", "Michael T. McCaul"]
+    },
+    {
+      "name": "Josh Gottheimer",
+      "chamber": "house",
+      "party": "D",
+      "state": "NJ",
+      "district": "NJ-5",
+      "aliases": ["Gottheimer, Josh", "Hon. Josh Gottheimer", "Joshua Gottheimer"]
+    },
+    {
+      "name": "Cleo Fields",
+      "chamber": "house",
+      "party": "D",
+      "state": "LA",
+      "district": "LA-6",
+      "aliases": ["Fields, Cleo", "Hon. Cleo Fields"]
+    },
+    {
+      "name": "Tommy Tuberville",
+      "chamber": "senate",
+      "party": "R",
+      "state": "AL",
+      "aliases": ["Tuberville, Tommy", "Thomas H Tuberville", "Tuberville, Thomas H."]
+    },
+    {
+      "name": "Dave McCormick",
+      "chamber": "senate",
+      "party": "R",
+      "state": "PA",
+      "aliases": ["McCormick, David H.", "David H McCormick", "David McCormick"]
+    }
+  ]
+}

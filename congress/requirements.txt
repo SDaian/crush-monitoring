@@ -1,0 +1,4 @@
+# Installed only by .github/workflows/congress-trades.yml (and optionally in
+# dev). Parsers stay stdlib-importable so tests/congress runs without these.
+requests>=2.31,<3
+pdfplumber>=0.11,<0.12
