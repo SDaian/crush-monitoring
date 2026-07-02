@@ -97,6 +97,10 @@ def make_house_source(
         if not text:
             raise pipeline.PaperFiling(ref.url)
         _dump(debug_dir, f"house-{ref.doc_id}.txt", text)
+        if ref.doc_id in {"20034836", "20034693"}:  # TEMP option-format probe
+            print(f"===DUMP {ref.doc_id}===")
+            print(text[:3500])
+            print(f"===END {ref.doc_id}===")
         return house.parse_ptr_text(text, ref)
 
     return pipeline.ChamberSource(
