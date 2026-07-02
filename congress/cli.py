@@ -251,14 +251,18 @@ def _cmd_prices(args: argparse.Namespace) -> int:
     unlisted = 0
     for i, tk in enumerate(tickers, 1):
         try:
-            series = prices.fetch_history(session, tk)
+            raw = prices.fetch_raw(session, tk)
         except Exception as exc:  # a single bad ticker must not abort the run
             print(f"  {tk}: fetch error: {exc}")
             continue
+        series = prices.PriceSeries(prices.parse_history(raw))
         if series:
             series_by_ticker[tk] = series
         else:
             unlisted += 1
+            if unlisted <= 3:  # diagnose why a ticker prices as empty
+                head = " ".join(raw.split())[:160]
+                print(f"  [debug] {tk} ({prices.stooq_symbol(tk)}) empty; body: {head!r}")
         if i % 25 == 0:
             print(f"  priced {i}/{len(tickers)} tickers…")
 

@@ -95,13 +95,17 @@ class PriceSeries:
         return d, self.hist[d]
 
 
-def fetch_history(session, ticker: str) -> PriceSeries:
-    """Download and parse a ticker's Stooq daily history (network)."""
+def fetch_raw(session, ticker: str) -> str:
+    """Download a ticker's raw Stooq CSV body (network)."""
     from .http import polite_get
 
     url = STOOQ_URL.format(symbol=stooq_symbol(ticker))
-    text = polite_get(session, url).text
-    return PriceSeries(parse_history(text))
+    return polite_get(session, url).text
+
+
+def fetch_history(session, ticker: str) -> PriceSeries:
+    """Download and parse a ticker's Stooq daily history (network)."""
+    return PriceSeries(parse_history(fetch_raw(session, ticker)))
 
 
 def buy_return(series: PriceSeries, tx_date: str) -> dict | None:
