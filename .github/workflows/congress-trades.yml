@@ -50,6 +50,10 @@ jobs:
           python3 -m congress fetch $EXTRA 2>&1 | tee fetch.log
 
       - name: Estimate return-since-buy (non-fatal)
+        env:
+          # Accept the key whether it was added as an Actions *secret* (preferred)
+          # or an Actions *variable* — both live under the same settings page.
+          CONGRESS_PRICES_KEY: ${{ secrets.CONGRESS_PRICES_KEY || vars.CONGRESS_PRICES_KEY }}
         run: |
           # Prices move daily even when no new filing arrives, so this runs
           # every day. A price-source outage must not fail the whole refresh.
