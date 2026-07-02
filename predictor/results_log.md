@@ -54,6 +54,7 @@ Legend: ✅ right for the right reason · 🟡 right but by luck/margin ·
 | 2026-07-01 | Mexico vs Ecuador (R32) | 48.6 / 29.1 / 22.3 | MEDIUM | 2-0 (Mexico, adv.) | ✅ |
 | 2026-07-01 | England vs DR Congo (R32) | 66.9 / 20.5 / 12.6 | HIGH | 2-1 (England, adv.) | ✅ |
 | 2026-07-01 | Belgium vs Senegal (R32) | 46.9 / 26.4 / 26.7 | MEDIUM | 3-2 aet (Belgium, adv.) | ✅ |
+| 2026-07-02 | USA vs Bosnia & Herz. (R32) | 55.4 / 23.9 / 20.6 | MEDIUM | 0-2 (Bosnia, adv.) | ❌ |
 
 ### Emerging pattern: favorites vs low block (key)
 
@@ -893,3 +894,25 @@ knockout has no draw. The closed-form chaining is Monte-Carlo-validated (sim vs 
   to penalties. Don't confuse 'close tie' with 'low-scoring tie'; shape depends on both sides'
   attacking intent, and Senegal's attack produced an end-to-end 3-2. And, echoing England's HT
   comeback, don't write off a quality side for an early/large deficit: Belgium recovered a 2-0.
+
+## 2026-07-02 · Round of 32 — USA 0-2 Bosnia & Herz. (Bosnia advance) ❌
+
+- **USA vs Bosnia & Herz.** — 90': USA 55.4 / Draw 23.9 / Bosnia 20.6 (MEDIUM);
+  advancement **USA 69.6 / Bosnia 30.4**. λ 1.85 / 1.05, xG 2.90, Over 2.5 55%, BTTS
+  55%, USA clean sheet 35% / Bosnia clean sheet 15.7%, top scoreline **1-1 (11.3%)**;
+  ET 23.9%, pens 11.4%. Market (90') aligned on the first pass (div 1.7). **RESULT: USA
+  0-2 Bosnia — the HOST is ELIMINATED at home, Bosnia advance, settled in 90'.** A
+  priced-tail **upset**: model and market both made USA the clear favourite (69.6% to
+  advance), but Bosnia won outright from the ~20.6% away-win / 30.4% advance branch, and
+  did it in regulation. Two low-probability things landed at once — the attacking host was
+  **shut out** (Bosnia's 15.7% clean-sheet branch) and the exact 0-2 wasn't in the top-6
+  (all USA-leaning) scorelines. What the pre-match note got right: I flagged USA as
+  **attacking-but-LEAKY** (lost 2-3 to Turkey, GA 4) and Bosnia as a dangerous scoring
+  underdog — the leaky half bit (conceded 2), the attacking half no-showed (0). Unlike
+  Germany/Netherlands (lost the coin-flip on penalties → 🟡), this favourite was beaten in
+  regulation → a full miss (❌). **Lesson:** a leaky favourite carries real two-way variance
+  — the same open-game read that makes them 'favourite+goals' also leaves their fragile
+  defence exposed on a quiet attacking night, turning the game into a shut-out loss. Don't
+  retrofit: USA 69.6% was honest and market-aligned; ~1 in 3 of these ties goes to the
+  underdog, and this was one. Home advantage doesn't save a side that can't score on the
+  night. Bosnia now meet Belgium in the Round of 16.
