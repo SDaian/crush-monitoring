@@ -179,12 +179,15 @@ def _cmd_roster(args: argparse.Namespace) -> int:
     by_name = {m["name"]: m for m in existing["members"]}
     party_map = {"Democrat": "D", "Republican": "R", "Independent": "I"}
     members = []
+    seen_names = set()
     for leg in data:
         term = leg["terms"][-1]
         name_parts = leg["name"]
-        name = name_parts.get(
-            "official_full", f"{name_parts['first']} {name_parts['last']}"
-        )
+        first = name_parts.get("first", "")
+        last = name_parts.get("last", "")
+        middle = name_parts.get("middle")
+        nickname = name_parts.get("nickname")
+        name = name_parts.get("official_full", f"{first} {last}")
         chamber = "senate" if term["type"] == "sen" else "house"
         state = term.get("state")
         entry = {
@@ -195,11 +198,28 @@ def _cmd_roster(args: argparse.Namespace) -> int:
         }
         if chamber == "house" and term.get("district") is not None:
             entry["district"] = f"{state}-{term['district']}"
-        aliases = {f"{name_parts['last']}, {name_parts['first']}"}
+        # Filers mix legal names, nicknames and middle names across eFD and
+        # the Clerk index, so alias every combination the source data gives.
+        aliases = {
+            f"{last}, {first}",
+            f"{first} {last}",
+        }
+        if middle:
+            aliases.update({f"{first} {middle} {last}", f"{middle} {last}"})
+        if nickname:
+            aliases.update({f"{nickname} {last}", f"{last}, {nickname}"})
+            if middle:
+                aliases.add(f"{nickname} {middle} {last}")
         aliases.update(by_name.get(name, {}).get("aliases", []))
         aliases.discard(name)
         entry["aliases"] = sorted(aliases)
         members.append(entry)
+        seen_names.add(name)
+    # Preserve hand-curated entries that the download does not include
+    # (e.g. seed aliases for members missing from legislators-current).
+    for name, entry in by_name.items():
+        if name not in seen_names:
+            members.append(entry)
     members.sort(key=lambda m: m["name"])
     MEMBERS_PATH.write_text(
         json.dumps(

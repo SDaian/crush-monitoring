@@ -166,6 +166,16 @@ class Roster:
     def find(self, raw_name: str, chamber: str | None = None) -> dict | None:
         key = canonical_name(raw_name)
         hit = self._exact.get(key) or self._loose.get(_first_last_key(key))
+        if hit is None:
+            # Filers often use a leading initial with their middle name
+            # ("A. Mitchell McConnell" for Mitch McConnell): drop the initial
+            # and retry against middle-name aliases.
+            tokens = key.split()
+            if len(tokens) > 2 and re.fullmatch(r"[a-z]\.?", tokens[0]):
+                retry = " ".join(tokens[1:])
+                hit = self._exact.get(retry) or self._loose.get(
+                    _first_last_key(retry)
+                )
         if hit and chamber and hit.get("chamber") not in (None, chamber):
             return None
         return hit

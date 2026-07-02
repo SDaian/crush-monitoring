@@ -117,6 +117,13 @@ class TestRoster(unittest.TestCase):
     def test_unknown_member_is_none(self):
         self.assertIsNone(self.roster.find("Jane Q. Nobody"))
 
+    def test_leading_initial_dropped_on_retry(self):
+        # Live eFD regression: "A. Mitchell McConnell, Jr." must reach the
+        # "Mitchell McConnell" alias once the leading initial is dropped.
+        entry = self.roster.find("A. Mitchell McConnell, Jr.", chamber="senate")
+        self.assertIsNotNone(entry)
+        self.assertEqual(entry["name"], "Mitch McConnell")
+
     def test_featured_all_resolve(self):
         for name in load_featured():
             self.assertIsNotNone(self.roster.find(name), name)
