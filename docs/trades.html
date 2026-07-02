@@ -55,6 +55,27 @@
     padding:12px;margin:12px 0;
   }
   .panel2 h3{margin:0 0 8px;font-size:14px}
+  .tabs{display:flex;gap:6px;margin:14px 0 4px;flex-wrap:wrap}
+  .tab{
+    background:var(--card2);border:1px solid var(--line);border-radius:8px 8px 0 0;
+    padding:8px 14px;cursor:pointer;font-size:13px;color:var(--chalk-dim);
+    border-bottom:none;
+  }
+  .tab.active{background:var(--card);color:var(--chalk);font-weight:700;border-color:var(--gold)}
+  .panel{display:none}
+  .panel.active{display:block}
+  .tksummary{display:flex;flex-wrap:wrap;gap:8px 22px;margin:6px 0 10px;font-size:12.5px}
+  .tksummary b{color:var(--chalk)}
+  .est{color:var(--chalk-dim);font-size:11px;font-style:italic}
+  .memberbreak{margin:8px 0}
+  .memberbreak .mrow{display:flex;gap:8px;font-size:12.5px;margin:3px 0}
+  .memberbreak .mrow .mn{flex:1}
+  .rangetoggle{display:inline-flex;gap:4px;margin-left:8px}
+  .rangetoggle button{
+    background:var(--card);color:var(--chalk-dim);border:1px solid var(--line);
+    border-radius:6px;padding:3px 9px;font-size:11.5px;cursor:pointer;
+  }
+  .rangetoggle button.on{color:var(--chalk);border-color:var(--gold)}
   .trow{display:flex;align-items:center;gap:8px;margin:4px 0;font-size:12.5px}
   .trow .tklabel{
     width:220px;min-width:0;overflow:hidden;text-overflow:ellipsis;
@@ -126,6 +147,12 @@
     (<code>file://</code>), serve the folder instead: <code>python3 -m http.server</code> in <code>docs/</code>.
   </div>
 
+  <div class="tabs" id="tabs">
+    <div class="tab active" data-p="all">📊 All trades</div>
+    <div class="tab" data-p="ticker">🔎 Ticker focus</div>
+  </div>
+
+  <div class="panel active" id="p-all">
   <div class="cards" id="featured"></div>
 
   <div class="panel2">
@@ -168,6 +195,22 @@
     </table>
   </div>
   <div style="margin:10px 0"><button class="act" id="moreBtn" style="display:none">Show 200 more</button></div>
+  </div><!-- /#p-all -->
+
+  <div class="panel" id="p-ticker">
+    <div class="legend">
+      Pick a ticker to see who in Congress traded it. Counts and the
+      <b>estimated</b> dollar totals below cover the <b>last 90 days by trade date</b>;
+      amounts are STOCK Act brackets, so the dollar figure is a midpoint estimate,
+      not an exact sum. Any ticker is searchable — the cards are quick picks.
+    </div>
+    <div class="cards" id="tickerCards"></div>
+    <div class="filters">
+      <input type="search" id="tq" placeholder="Analyze any ticker (e.g. AAPL)…"/>
+      <button class="act" id="tClearBtn">✕ Clear</button>
+    </div>
+    <div class="panel2" id="tickerDetail"></div>
+  </div><!-- /#p-ticker -->
 
   <details class="skips" id="skips" style="display:none">
     <summary></summary>
@@ -201,7 +244,8 @@ const PAGE = 200;
 
 let DATA = null;
 let state = {q:"", chamber:"", party:"", type:"", range:"", member:"",
-             sortKey:"filing_date", sortDir:-1, shown:PAGE};
+             sortKey:"filing_date", sortDir:-1, shown:PAGE,
+             focusTicker:"MU", focusRange:"90"};
 
 const $ = id => document.getElementById(id);
 const esc = s => String(s ?? "").replace(/[&<>"']/g,
@@ -365,6 +409,130 @@ function renderTopTickers(){
   }).join("") : '<div class="note">No ticker trades in the last 90 days.</div>';
 }
 
+// ---- Ticker focus tab -----------------------------------------------------
+const FEATURED_TICKERS = ["MU","INTC","NVDA","TSM","AMD","AVGO","TSLA","MSFT"];
+
+function notionalMid(t){
+  // Estimated dollar size of one trade from its disclosed bracket. The
+  // open-ended top bracket ($50,000,001 +) has no upper bound, so use its
+  // floor. Everything here is an estimate — amounts are brackets, not exact.
+  return t.amount_hi != null ? (t.amount_lo + t.amount_hi) / 2 : t.amount_lo;
+}
+
+function fmtMoney(n){
+  if (n >= 1e6) return "$" + (n/1e6).toFixed(n >= 1e7 ? 0 : 1) + "M";
+  if (n >= 1e3) return "$" + Math.round(n/1e3) + "k";
+  return "$" + Math.round(n);
+}
+
+function tickerCompany(ticker){
+  const names = {};
+  for (const t of DATA.trades)
+    if (t.ticker === ticker) names[t.asset] = (names[t.asset] || 0) + 1;
+  const top = Object.entries(names).sort((a,b) => b[1] - a[1])[0];
+  return top ? cleanCompany(top[0]) : "";
+}
+
+function tickerStats(ticker, sinceISO){
+  const rows = DATA.trades.filter(t =>
+    t.ticker === ticker && (!sinceISO || t.tx_date >= sinceISO));
+  const buy = rows.filter(t => t.type === "buy");
+  const sell = rows.filter(t => t.type === "sell");
+  const exch = rows.filter(t => t.type === "exchange");
+  return {
+    rows, n: rows.length,
+    buy: buy.length, sell: sell.length, exch: exch.length,
+    members: new Set(rows.map(t => t.member)).size,
+    buyEst: buy.reduce((s,t) => s + notionalMid(t), 0),
+    sellEst: sell.reduce((s,t) => s + notionalMid(t), 0),
+  };
+}
+
+function renderTickerCards(){
+  const since = daysAgo(90);
+  $("tickerCards").innerHTML = FEATURED_TICKERS.map(tk => {
+    const s = tickerStats(tk, since);
+    const co = tickerCompany(tk) || "—";
+    return `<div class="fcard ${state.focusTicker === tk ? "sel" : ""}" data-t="${esc(tk)}">
+      <div class="name">${esc(tk)}</div>
+      <div class="who">${esc(co)}</div>
+      ${splitBar(s.buy, s.sell)}
+      <div class="note" style="margin-top:2px">${s.n} trades in 90 days${s.exch ? ` · ${s.exch} exch` : ""}</div>
+    </div>`;
+  }).join("");
+}
+
+function renderTickerDetail(){
+  const tk = state.focusTicker;
+  const box = $("tickerDetail");
+  if (!tk){
+    box.innerHTML = '<div class="note">Pick a ticker above (or search) to see the breakdown.</div>';
+    return;
+  }
+  const win = state.focusRange === "all" ? "" : daysAgo(90);
+  const s = tickerStats(tk, win);
+  const co = tickerCompany(tk);
+  const label = state.focusRange === "all" ? "all time" : "last 90 days";
+  if (!s.n){
+    box.innerHTML =
+      `<h3>${esc(tk)} <span class="note">${esc(co)}</span></h3>
+       <div class="note">No trades for ${esc(tk)} in the ${label}.</div>
+       ${rangeToggle()}`;
+    return;
+  }
+  const byMember = {};
+  for (const t of s.rows){
+    const m = byMember[t.member] || (byMember[t.member] = {t, buy:0, sell:0, exch:0, est:0});
+    m[t.type === "exchange" ? "exch" : t.type]++;
+    m.est += notionalMid(t);
+  }
+  const members = Object.entries(byMember)
+    .sort((a,b) => (b[1].buy+b[1].sell+b[1].exch) - (a[1].buy+a[1].sell+a[1].exch));
+  const tradeRows = s.rows.slice().sort((a,b) => a.tx_date < b.tx_date ? 1 : -1);
+
+  box.innerHTML =
+    `<h3>${esc(tk)} <span class="note">${esc(co)}</span> ${rangeToggle()}</h3>
+     <div class="tksummary">
+       <span><b>${s.n}</b> trades (${label})</span>
+       <span><span class="buy">${s.buy} buy</span> · <span class="sell">${s.sell} sell</span>${s.exch ? ` · ${s.exch} exchange` : ""}</span>
+       <span><b>${s.members}</b> member${s.members===1?"":"s"}</span>
+       <span>est. bought <b>${fmtMoney(s.buyEst)}</b> · est. sold <b>${fmtMoney(s.sellEst)}</b> <span class="est">(bracket midpoints)</span></span>
+     </div>
+     <div class="memberbreak">
+       ${members.map(([name, m]) => `<div class="mrow">
+         <span class="mn">${esc(name)}${m.t.party ? `<span class="chip">${esc([m.t.party, m.t.district || m.t.state].filter(Boolean).join(" · "))}</span>` : ""}</span>
+         <span>${m.buy?`<span class="buy">${m.buy} buy</span> `:""}${m.sell?`<span class="sell">${m.sell} sell</span> `:""}${m.exch?`${m.exch} exch `:""}· <span class="est">~${fmtMoney(m.est)}</span></span>
+       </div>`).join("")}
+     </div>
+     <div class="tblwrap" style="margin-top:8px">
+       <table><thead><tr>
+         <th>Member</th><th>Type</th><th>Amount</th><th>Traded</th><th>Filed</th><th>Filing</th>
+       </tr></thead><tbody>
+       ${tradeRows.map(t => `<tr>
+         <td>${memberCell(t)}</td>
+         <td>${typeCell(t)}</td>
+         <td class="num">${esc(t.amount_label)}</td>
+         <td class="num">${esc(t.tx_date)}</td>
+         <td class="num">${esc(t.filing_date)}</td>
+         <td><a href="${esc(t.source_url)}" target="_blank" rel="noopener" title="official filing">source ↗</a></td>
+       </tr>`).join("")}
+       </tbody></table>
+     </div>`;
+}
+
+function rangeToggle(){
+  const on = state.focusRange;
+  return `<span class="rangetoggle">
+    <button data-r="90" class="${on!=="all"?"on":""}">90d</button>
+    <button data-r="all" class="${on==="all"?"on":""}">All time</button>
+  </span>`;
+}
+
+function renderTicker(){
+  renderTickerCards();
+  renderTickerDetail();
+}
+
 function renderSkips(){
   const skips = DATA.skipped_filings || [];
   $("skipNote").innerHTML = skips.length
@@ -384,6 +552,7 @@ function renderAll(){
   renderFeatured();
   renderTopTickers();
   renderRows();
+  renderTicker();
 }
 
 function wire(){
@@ -412,6 +581,38 @@ function wire(){
     state.member = state.member === card.dataset.m ? "" : card.dataset.m;
     state.shown = PAGE;
     renderFeatured(); renderRows();
+  });
+
+  // Tab switching
+  $("tabs").addEventListener("click", e => {
+    const tab = e.target.closest(".tab");
+    if (!tab) return;
+    for (const el of document.querySelectorAll(".tab")) el.classList.toggle("active", el === tab);
+    for (const el of document.querySelectorAll(".panel")) el.classList.toggle("active", el.id === "p-" + tab.dataset.p);
+  });
+
+  // Ticker focus: card pick, search, clear, range toggle
+  $("tickerCards").addEventListener("click", e => {
+    const card = e.target.closest(".fcard");
+    if (!card) return;
+    state.focusTicker = card.dataset.t;
+    $("tq").value = "";
+    renderTicker();
+  });
+  $("tq").addEventListener("input", e => {
+    state.focusTicker = e.target.value.trim().toUpperCase();
+    renderTicker();
+  });
+  $("tClearBtn").addEventListener("click", () => {
+    state.focusTicker = "MU"; state.focusRange = "90";
+    $("tq").value = "";
+    renderTicker();
+  });
+  $("tickerDetail").addEventListener("click", e => {
+    const btn = e.target.closest("button[data-r]");
+    if (!btn) return;
+    state.focusRange = btn.dataset.r;
+    renderTickerDetail();
   });
 }
 
