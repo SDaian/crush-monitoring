@@ -240,13 +240,12 @@ DEFAULT_RETURNS = pipeline.REPO_ROOT / "docs" / "data" / "returns.json"
 def _cmd_prices(args: argparse.Namespace) -> int:
     """Estimate 'return since buy' for every priceable disclosed buy."""
     from . import prices
-    from .http import make_session
 
     trades = json.loads(Path(args.trades).read_text(encoding="utf-8"))["trades"]
     tickers = prices.distinct_buy_tickers(trades)
     if args.limit:
         tickers = tickers[: args.limit]
-    session = make_session()
+    session = prices.make_price_session()
     series_by_ticker = {}
     unlisted = 0
     for i, tk in enumerate(tickers, 1):
@@ -280,7 +279,7 @@ def _cmd_prices(args: argparse.Namespace) -> int:
             "generated_at": datetime.now(timezone.utc).strftime(
                 "%Y-%m-%dT%H:%M:%SZ"
             ),
-            "source": "stooq.com",
+            "source": "finance.yahoo.com",
             **stats,
         },
         "prices": price_map,

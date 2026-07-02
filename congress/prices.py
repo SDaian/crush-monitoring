@@ -28,15 +28,50 @@ from datetime import datetime, timezone
 
 # 3 years of daily candles comfortably covers the current + previous calendar
 # year window the tracker keeps.
-YAHOO_URL = (
-    "https://query1.finance.yahoo.com/v8/finance/chart/{symbol}"
-    "?range=3y&interval=1d"
-)
-# Yahoo 429s the default python UA; look like a browser.
+YAHOO_HOST = "https://query1.finance.yahoo.com"
+CHART_PATH = "/v8/finance/chart/{symbol}?range=3y&interval=1d"
+# Yahoo 429s anonymous/datacenter requests; a browser UA plus a cookie+crumb
+# session (below) is what lets CI reach the chart API — the same handshake
+# yfinance uses.
 BROWSER_UA = (
     "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 "
     "(KHTML, like Gecko) Chrome/124.0 Safari/537.36"
 )
+
+
+def make_price_session():
+    """A requests.Session primed with Yahoo cookies + crumb.
+
+    Anonymous requests from shared CI IPs get 429'd; establishing the cookie
+    Yahoo sets on its consent host and fetching a crumb makes the session look
+    like a real browser and lifts the block. Network-only, so imported lazily
+    and never touched by the offline tests.
+    """
+    import requests
+    from requests.adapters import HTTPAdapter
+    from urllib3.util.retry import Retry
+
+    session = requests.Session()
+    session.headers["User-Agent"] = BROWSER_UA
+    retry = Retry(
+        total=2,
+        backoff_factor=1,
+        status_forcelist=(429, 500, 502, 503, 504),
+        allowed_methods=None,
+        respect_retry_after_header=True,
+    )
+    session.mount("https://", HTTPAdapter(max_retries=retry))
+    crumb = ""
+    try:  # cookie handshake, then a crumb tied to that cookie
+        session.get("https://fc.yahoo.com/", timeout=10)
+        resp = session.get(f"{YAHOO_HOST}/v1/test/getcrumb", timeout=10)
+        text = resp.text.strip()
+        if resp.ok and text and "<" not in text:
+            crumb = text
+    except Exception:
+        pass
+    session.crumb = crumb
+    return session
 
 
 def yahoo_symbol(ticker: str) -> str:
@@ -110,10 +145,15 @@ class PriceSeries:
 
 def fetch_raw(session, ticker: str) -> str:
     """Download a ticker's raw Yahoo chart JSON body (network)."""
+    import urllib.parse
+
     from .http import polite_get
 
-    url = YAHOO_URL.format(symbol=yahoo_symbol(ticker))
-    return polite_get(session, url, headers={"User-Agent": BROWSER_UA}).text
+    url = YAHOO_HOST + CHART_PATH.format(symbol=yahoo_symbol(ticker))
+    crumb = getattr(session, "crumb", "")
+    if crumb:
+        url += "&crumb=" + urllib.parse.quote(crumb, safe="")
+    return polite_get(session, url).text
 
 
 def fetch_history(session, ticker: str) -> PriceSeries:
