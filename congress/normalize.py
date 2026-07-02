@@ -117,12 +117,15 @@ _HONORIFICS = ("hon.", "hon", "mr.", "mr", "mrs.", "mrs", "ms.", "ms", "dr.",
                "dr", "senator", "sen.", "sen", "rep.", "rep",
                "representative")
 _SUFFIXES = {"jr", "jr.", "sr", "sr.", "ii", "iii", "iv", "v", "md", "m.d."}
+_TRAILING_SUFFIX = re.compile(r",?\s+(jr|sr|ii|iii|iv|v)\.?\s*$", re.I)
 
 
 def canonical_name(raw: str) -> str:
     """Lowercase lookup key: honorifics/suffixes stripped, 'Last, First'
     reordered to 'first last', whitespace collapsed."""
-    clean = raw.strip()
+    # Strip a trailing ", Jr."-style suffix BEFORE the comma reorder, or
+    # "A. Mitchell McConnell, Jr." would be read as last="…", first="Jr.".
+    clean = _TRAILING_SUFFIX.sub("", raw.strip())
     if "," in clean:
         last, _, first = clean.partition(",")
         clean = f"{first.strip()} {last.strip()}"
@@ -238,6 +241,21 @@ def enrich(trade: Trade, roster: Roster) -> Trade:
         trade.state = entry.get("state") or trade.state
         trade.district = entry.get("district") or trade.district
     return trade
+
+
+def enrich_dict(t: dict, roster: Roster) -> dict:
+    """Same as ``enrich`` for an already-serialized trade dict.
+
+    Applied to every stored trade on every pipeline run, so trades ingested
+    before a roster refresh pick up party/state retroactively.
+    """
+    entry = roster.find(t["member"], chamber=t["chamber"])
+    if entry:
+        t["member"] = entry["name"]
+        t["party"] = entry.get("party") or t["party"]
+        t["state"] = entry.get("state") or t["state"]
+        t["district"] = entry.get("district") or t["district"]
+    return t
 
 
 def trade_sort_key(t: dict) -> tuple:

@@ -89,6 +89,12 @@ class TestNames(unittest.TestCase):
     def test_whitespace_collapse(self):
         self.assertEqual(canonical_name("  Nancy   Pelosi "), "nancy pelosi")
 
+    def test_comma_suffix_does_not_hijack_reorder(self):
+        # Live eFD regression: ", Jr." must not be read as the first name.
+        self.assertEqual(canonical_name("A. Mitchell McConnell, Jr."),
+                         "a. mitchell mcconnell")
+        self.assertEqual(canonical_name("Fields, Cleo, Jr."), "cleo fields")
+
 
 class TestRoster(unittest.TestCase):
     def setUp(self):

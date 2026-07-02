@@ -21,6 +21,7 @@ from .normalize import (
     Roster,
     Trade,
     enrich,
+    enrich_dict,
     load_featured,
     prune_cutoff,
     trade_sort_key,
@@ -186,6 +187,11 @@ def run(
                 trades[trade.id] = enrich(trade, roster).to_dict()
                 result.new_trades += 1
             processed[fid] = source.ref_filing_date(ref)
+
+    # Re-enrich every stored trade so a roster refresh fills party/state on
+    # trades ingested before the member existed in members.json.
+    for t in trades.values():
+        enrich_dict(t, roster)
 
     # Prune everything (trades, skips, state) outside the two-year window.
     kept = {i: t for i, t in trades.items() if t["filing_date"] >= cutoff}

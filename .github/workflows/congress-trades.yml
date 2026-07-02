@@ -41,6 +41,11 @@ jobs:
       - name: Offline tests (parsers must be green before touching live sites)
         run: python3 -m unittest discover -s tests/congress -p 'test_*.py'
 
+      - name: Refresh member roster (non-fatal)
+        run: |
+          python3 -m congress roster \
+            || echo "::warning::roster refresh failed; using committed members.json"
+
       - name: Fetch new filings
         run: |
           set -o pipefail # tee must not mask the fetcher's exit code

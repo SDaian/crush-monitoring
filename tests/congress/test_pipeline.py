@@ -171,6 +171,19 @@ class PipelineTest(unittest.TestCase):
         self.assertEqual(trade["member"], "Tommy Tuberville")
         self.assertEqual(trade["party"], "R")
 
+    def test_stored_trades_re_enriched_on_later_runs(self):
+        # A trade stored before its member was in the roster gets party/state
+        # filled retroactively on the next run.
+        stored = _trade("f0", member="Tuberville, Thomas H.").to_dict()
+        self.assertIsNone(stored["party"])
+        self.output.write_text(dump_output({
+            "meta": {}, "trades": [stored], "skipped_filings": [],
+        }))
+        self._run([], lambda r: [])
+        trade = json.loads(self.output.read_text())["trades"][0]
+        self.assertEqual(trade["member"], "Tommy Tuberville")
+        self.assertEqual(trade["party"], "R")
+
     def test_dump_output_is_valid_json_one_trade_per_line(self):
         self._run([StubRef("f1"), StubRef("f2")],
                   lambda r: [_trade(r.fid)])
