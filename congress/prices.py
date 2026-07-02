@@ -10,58 +10,106 @@ realized profit — holding period, later sells, dividends and position size
 are all unknown, and the STOCK Act discloses a trade date, not a fill price
 (so we use that day's close as a proxy). The page must label it accordingly.
 
-Price data comes from Stooq (https://stooq.com), which serves free daily-close
-CSVs with no API key. Only the network fetch lives in ``fetch_history`` (via
-``congress.http``); parsing/return math is pure stdlib, so tests run offline.
+Prices come from the free Yahoo Finance chart API (JSON, no API key). We use
+the **adjusted** close so stock splits and dividends don't distort the
+estimate. Stooq — the obvious free CSV source — now gates automated requests
+behind a JavaScript anti-bot challenge, so it cannot be used headless.
+
+Only the network fetch lives in ``fetch_raw`` (via ``congress.http``);
+parsing and the return math are pure stdlib, so tests run offline.
 """
 
 from __future__ import annotations
 
 import bisect
+import json
 import re
-from datetime import date
+from datetime import datetime, timezone
 
-STOOQ_URL = "https://stooq.com/q/d/l/?s={symbol}&i=d"
+# 3 years of daily candles comfortably covers the current + previous calendar
+# year window the tracker keeps.
+YAHOO_HOST = "https://query1.finance.yahoo.com"
+CHART_PATH = "/v8/finance/chart/{symbol}?range=3y&interval=1d"
+# Yahoo 429s anonymous/datacenter requests; a browser UA plus a cookie+crumb
+# session (below) is what lets CI reach the chart API — the same handshake
+# yfinance uses.
+BROWSER_UA = (
+    "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 "
+    "(KHTML, like Gecko) Chrome/124.0 Safari/537.36"
+)
 
 
-def stooq_symbol(ticker: str) -> str:
-    """Map a disclosed ticker to a Stooq US symbol.
+def make_price_session():
+    """A requests.Session primed with Yahoo cookies + crumb.
 
-    Stooq lowercases and suffixes ``.us``; share-class dots become hyphens
-    (``BRK.B`` → ``brk-b.us``).
+    Anonymous requests from shared CI IPs get 429'd; establishing the cookie
+    Yahoo sets on its consent host and fetching a crumb makes the session look
+    like a real browser and lifts the block. Network-only, so imported lazily
+    and never touched by the offline tests.
     """
-    core = re.sub(r"[^a-z0-9]+", "-", ticker.strip().lower()).strip("-")
-    return f"{core}.us"
+    import requests
+    from requests.adapters import HTTPAdapter
+    from urllib3.util.retry import Retry
+
+    session = requests.Session()
+    session.headers["User-Agent"] = BROWSER_UA
+    retry = Retry(
+        total=2,
+        backoff_factor=1,
+        status_forcelist=(429, 500, 502, 503, 504),
+        allowed_methods=None,
+        respect_retry_after_header=True,
+    )
+    session.mount("https://", HTTPAdapter(max_retries=retry))
+    crumb = ""
+    try:  # cookie handshake, then a crumb tied to that cookie
+        session.get("https://fc.yahoo.com/", timeout=10)
+        resp = session.get(f"{YAHOO_HOST}/v1/test/getcrumb", timeout=10)
+        text = resp.text.strip()
+        if resp.ok and text and "<" not in text:
+            crumb = text
+    except Exception:
+        pass
+    session.crumb = crumb
+    return session
 
 
-def parse_history(csv_text: str) -> dict[str, float]:
-    """Parse a Stooq daily CSV into ``{iso_date: close}``.
+def yahoo_symbol(ticker: str) -> str:
+    """Map a disclosed ticker to a Yahoo symbol.
 
-    Returns an empty dict for the "no data" / unlisted case (Stooq answers
-    unknown symbols with a one-line body rather than a table).
+    Yahoo uppercases and writes share classes with a hyphen (``BRK.B`` →
+    ``BRK-B``); ADRs like ``TSM`` are unchanged.
     """
+    return re.sub(r"[^A-Z0-9]+", "-", ticker.strip().upper()).strip("-")
+
+
+def parse_history(body: str) -> dict[str, float]:
+    """Parse a Yahoo chart JSON body into ``{iso_date: adjusted_close}``.
+
+    Returns an empty dict for the unknown-symbol / no-data case.
+    """
+    try:
+        data = json.loads(body)
+    except (ValueError, TypeError):
+        return {}
+    chart = (data or {}).get("chart") or {}
+    results = chart.get("result") or []
+    if chart.get("error") or not results:
+        return {}
+    res = results[0]
+    stamps = res.get("timestamp") or []
+    indicators = res.get("indicators") or {}
+    adj = (indicators.get("adjclose") or [{}])[0].get("adjclose")
+    quote = (indicators.get("quote") or [{}])[0].get("close")
+    closes = adj if adj is not None else quote
+    if not stamps or not closes:
+        return {}
     hist: dict[str, float] = {}
-    header_seen = False
-    for line in csv_text.splitlines():
-        parts = line.split(",")
-        if not header_seen:
-            header_seen = True
-            # Header is "Date,Open,High,Low,Close,Volume"; anything else
-            # (e.g. "No data") means there is no series.
-            if parts[:1] != ["Date"]:
-                return {}
-            cols = {name: i for i, name in enumerate(parts)}
+    for ts, close in zip(stamps, closes):
+        if close is None:
             continue
-        if len(parts) < 5:
-            continue
-        d = parts[cols["Date"]].strip()
-        raw = parts[cols["Close"]].strip()
-        if not re.fullmatch(r"\d{4}-\d{2}-\d{2}", d) or not raw:
-            continue
-        try:
-            hist[d] = float(raw)
-        except ValueError:
-            continue
+        iso = datetime.fromtimestamp(ts, tz=timezone.utc).date().isoformat()
+        hist[iso] = float(close)
     return hist
 
 
@@ -95,13 +143,22 @@ class PriceSeries:
         return d, self.hist[d]
 
 
-def fetch_history(session, ticker: str) -> PriceSeries:
-    """Download and parse a ticker's Stooq daily history (network)."""
+def fetch_raw(session, ticker: str) -> str:
+    """Download a ticker's raw Yahoo chart JSON body (network)."""
+    import urllib.parse
+
     from .http import polite_get
 
-    url = STOOQ_URL.format(symbol=stooq_symbol(ticker))
-    text = polite_get(session, url).text
-    return PriceSeries(parse_history(text))
+    url = YAHOO_HOST + CHART_PATH.format(symbol=yahoo_symbol(ticker))
+    crumb = getattr(session, "crumb", "")
+    if crumb:
+        url += "&crumb=" + urllib.parse.quote(crumb, safe="")
+    return polite_get(session, url).text
+
+
+def fetch_history(session, ticker: str) -> PriceSeries:
+    """Download and parse a ticker's Yahoo daily history (network)."""
+    return PriceSeries(parse_history(fetch_raw(session, ticker)))
 
 
 def buy_return(series: PriceSeries, tx_date: str) -> dict | None:

@@ -142,7 +142,7 @@ from the official Senate eFD and House Clerk sites. Full details in
   `.github/workflows/congress-trades.yml`). To change the data, fix the
   generator and re-run it.
 - **Return-since-buy is an estimate — label it as such:** `congress/prices.py`
-  fetches Stooq daily closes (free, no API key) and records, per disclosed
+  fetches Yahoo Finance daily closes (free, no API key) and records, per disclosed
   **buy**, the stock's % change since the trade date. It is NOT the member's
   realized profit (holding/sells/dividends/position size unknown; entry uses
   the trade date's close, not the fill price). Keep that caveat visible on the
@@ -152,7 +152,7 @@ from the official Senate eFD and House Clerk sites. Full details in
   the Action) but **parsers must stay stdlib-importable** so
   `tests/congress` runs offline with no third-party deps — network code is
   confined to `congress/http.py`, pdfplumber to `house.extract_pdf_text`,
-  and Stooq to `prices.fetch_history`.
+  and the Yahoo chart API to `prices.fetch_raw`.
 - **Adding a featured member:** append the canonical name to
   `congress/featured.json` and make sure `congress/members.json` has an entry
   (with the filer-name spellings as `aliases`).
