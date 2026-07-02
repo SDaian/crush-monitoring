@@ -184,8 +184,12 @@ the [House Clerk](https://disclosures-clerk.house.gov) financial disclosures.
   `congress/requirements.txt` and are installed only by the Action.
 - `docs/data/congress-trades.json` — generated dataset (never hand-edited).
 - `docs/trades.html` — the tracker page: featured-member watchlist,
-  most-traded tickers, filterable table, every row linked to the official
-  filing.
+  most-traded tickers, a per-ticker "Ticker focus" tab, an estimated
+  "return since buy" per disclosed buy, and a filterable table with every
+  row linked to the official filing.
+- `docs/data/returns.json` — per-buy stock performance since the trade date,
+  estimated from free Stooq daily closes (no API key). A stock-performance
+  follow-through, **not** the member's realized profit.
 - `.github/workflows/congress-trades.yml` — daily refresh; auto-commits only
   when there are new filings.
 

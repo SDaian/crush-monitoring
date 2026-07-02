@@ -136,15 +136,23 @@ A separate Pages section tracking STOCK Act trade disclosures, sourced only
 from the official Senate eFD and House Clerk sites. Full details in
 `congress/README.md`. Conventions:
 
-- **Generated files are never hand-edited:** `docs/data/congress-trades.json`
-  and `congress/state.json` are written by `congress/pipeline.py` (daily via
+- **Generated files are never hand-edited:** `docs/data/congress-trades.json`,
+  `docs/data/returns.json` and `congress/state.json` are written by
+  `congress/pipeline.py` / `congress/prices.py` (daily via
   `.github/workflows/congress-trades.yml`). To change the data, fix the
-  fetcher and re-run it.
+  generator and re-run it.
+- **Return-since-buy is an estimate — label it as such:** `congress/prices.py`
+  fetches Stooq daily closes (free, no API key) and records, per disclosed
+  **buy**, the stock's % change since the trade date. It is NOT the member's
+  realized profit (holding/sells/dividends/position size unknown; entry uses
+  the trade date's close, not the fill price). Keep that caveat visible on the
+  page and only show it for equity-like assets (never options/crypto).
 - **Dependency policy:** `predictor/` stays pure-stdlib. `congress/` may use
   `requests` + `pdfplumber` (`congress/requirements.txt`, installed only by
   the Action) but **parsers must stay stdlib-importable** so
   `tests/congress` runs offline with no third-party deps — network code is
-  confined to `congress/http.py`, pdfplumber to `house.extract_pdf_text`.
+  confined to `congress/http.py`, pdfplumber to `house.extract_pdf_text`,
+  and Stooq to `prices.fetch_history`.
 - **Adding a featured member:** append the canonical name to
   `congress/featured.json` and make sure `congress/members.json` has an entry
   (with the filer-name spellings as `aliases`).
