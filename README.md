@@ -171,3 +171,33 @@ exists. The credential-free login checks run on every environment regardless.
 
 > Note: scheduled GitHub Actions only run from the repository's default
 > branch.
+
+## Congress stock-trades tracker (`congress/` + `docs/trades.html`)
+
+A separate GitHub Pages section that tracks stock buys/sells disclosed by US
+members of Congress under the STOCK Act, sourced **only from the official
+government sites**: the [Senate eFD system](https://efdsearch.senate.gov) and
+the [House Clerk](https://disclosures-clerk.house.gov) financial disclosures.
+
+- `congress/` — Python fetcher/normalizer (see `congress/README.md`). Parsers
+  are stdlib-only; the two scraper deps (`requests`, `pdfplumber`) live in
+  `congress/requirements.txt` and are installed only by the Action.
+- `docs/data/congress-trades.json` — generated dataset (never hand-edited).
+- `docs/trades.html` — the tracker page: featured-member watchlist,
+  most-traded tickers, filterable table, every row linked to the official
+  filing.
+- `.github/workflows/congress-trades.yml` — daily refresh; auto-commits only
+  when there are new filings.
+
+Honest-data caveats (shown on the page too): the law allows filings to lag
+trades by 30–45 days; amounts are legal brackets, never exact; paper/scanned
+filings cannot be parsed and are listed as skipped with a link. Educational
+tracker, not investment advice.
+
+```bash
+# offline tests (no network, no third-party deps)
+python3 -m unittest discover -s tests/congress -p 'test_*.py'
+
+# incremental fetch (needs pip install -r congress/requirements.txt)
+python3 -m congress fetch --limit 25 --dry-run
+```

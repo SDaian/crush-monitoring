@@ -129,3 +129,30 @@ played, update **every** relevant place:
   Keep the two visually distinct and correctly labelled.
 - After editing the inline script, syntax-check it (extract `<script>` →
   `node --check`) before committing.
+
+## Congress trades tracker (`congress/`, `docs/trades.html`)
+
+A separate Pages section tracking STOCK Act trade disclosures, sourced only
+from the official Senate eFD and House Clerk sites. Full details in
+`congress/README.md`. Conventions:
+
+- **Generated files are never hand-edited:** `docs/data/congress-trades.json`
+  and `congress/state.json` are written by `congress/pipeline.py` (daily via
+  `.github/workflows/congress-trades.yml`). To change the data, fix the
+  fetcher and re-run it.
+- **Dependency policy:** `predictor/` stays pure-stdlib. `congress/` may use
+  `requests` + `pdfplumber` (`congress/requirements.txt`, installed only by
+  the Action) but **parsers must stay stdlib-importable** so
+  `tests/congress` runs offline with no third-party deps — network code is
+  confined to `congress/http.py`, pdfplumber to `house.extract_pdf_text`.
+- **Adding a featured member:** append the canonical name to
+  `congress/featured.json` and make sure `congress/members.json` has an entry
+  (with the filer-name spellings as `aliases`).
+- **Run both test suites before committing:**
+  `python3 -m unittest discover -s tests/predictor -p 'test_*.py'` and
+  `python3 -m unittest discover -s tests/congress -p 'test_*.py'`.
+- The `node --check` rule for inline scripts applies to `docs/trades.html`
+  exactly as it does to `docs/index.html`.
+- **Honest labelling:** the page must keep the 30–45-day legal lag, the
+  bracket-only amounts, and the skipped paper filings visible. Never present
+  the tracker as real-time or as investment advice.

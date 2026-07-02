@@ -1,0 +1,415 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"/>
+<meta http-equiv="Pragma" content="no-cache"/>
+<meta http-equiv="Expires" content="0"/>
+<title>Congress Stock Trades — Tracker</title>
+<style>
+  :root{
+    --felt:#0c5c3a; --felt2:#0a4e32; --chalk:#eaf3ec; --chalk-dim:#9fc4ad;
+    --line:rgba(234,243,236,.28); --gold:#f4d35e; --good:#7CFC9B; --bad:#ff8a8a;
+    --card:#0e4a32; --card2:#0b3f2b; --accent:#5cd6a0;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0}
+  body{
+    background:
+      radial-gradient(1200px 600px at 50% -10%, #11724a 0%, var(--felt) 45%, var(--felt2) 100%);
+    color:var(--chalk);
+    font:14px/1.45 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+    min-height:100vh; padding-bottom:48px;
+  }
+  a{color:var(--accent)}
+  header{padding:18px 20px 6px}
+  header h1{margin:0;font-size:22px}
+  header .sub{color:var(--chalk-dim);font-size:12px;margin-top:4px}
+  .wrap{max-width:1100px;margin:0 auto;padding:0 16px}
+  .note{color:var(--chalk-dim);font-size:12px}
+  .legend{
+    background:var(--card2);border:1px solid var(--line);border-radius:10px;
+    padding:10px 12px;font-size:12.5px;color:var(--chalk-dim);margin:10px 0;
+  }
+  .legend b{color:var(--chalk)}
+  .banner-sample{
+    background:#4a3b0e;border:1px solid var(--gold);color:var(--gold);
+    border-radius:10px;padding:10px 12px;font-size:13px;margin:10px 0;
+  }
+  .cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:10px;margin:12px 0}
+  .fcard{
+    background:var(--card);border:1px solid var(--line);border-radius:10px;
+    padding:10px 12px;cursor:pointer;transition:border-color .15s;
+  }
+  .fcard:hover,.fcard.sel{border-color:var(--gold)}
+  .fcard .name{font-weight:700}
+  .fcard .who{color:var(--chalk-dim);font-size:11.5px;margin-bottom:6px}
+  .fcard .last{color:var(--chalk-dim);font-size:11.5px;margin-top:6px}
+  .split{display:flex;align-items:center;gap:8px;font-size:11.5px}
+  .splitbar{display:flex;flex:1;height:8px;border-radius:4px;overflow:hidden;background:rgba(0,0,0,.25)}
+  .splitbar .b{background:var(--good)}
+  .splitbar .s{background:var(--bad);margin-left:2px}
+  .panel2{
+    background:var(--card2);border:1px solid var(--line);border-radius:10px;
+    padding:12px;margin:12px 0;
+  }
+  .panel2 h3{margin:0 0 8px;font-size:14px}
+  .trow{display:flex;align-items:center;gap:8px;margin:4px 0;font-size:12.5px}
+  .trow .tk{width:64px;font-weight:700}
+  .trow .track{flex:1}
+  .trow .bar{display:flex;height:9px;border-radius:4px;overflow:hidden}
+  .trow .ct{width:130px;color:var(--chalk-dim);text-align:right}
+  .filters{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0;align-items:center}
+  .filters input[type=search],.filters select{
+    background:var(--card);color:var(--chalk);border:1px solid var(--line);
+    border-radius:8px;padding:7px 9px;font-size:13px;
+  }
+  .filters input[type=search]{flex:1;min-width:180px}
+  button.act{
+    background:var(--card);color:var(--chalk);border:1px solid var(--line);
+    border-radius:8px;padding:7px 12px;font-size:13px;cursor:pointer;
+  }
+  button.act:hover{border-color:var(--accent)}
+  .tblwrap{overflow-x:auto;border:1px solid var(--line);border-radius:10px;background:var(--card2)}
+  table{border-collapse:collapse;width:100%;font-size:12.5px;min-width:840px}
+  th,td{padding:7px 9px;text-align:left;border-bottom:1px solid rgba(234,243,236,.12);vertical-align:top}
+  th{
+    color:var(--chalk-dim);font-weight:600;cursor:pointer;user-select:none;
+    position:sticky;top:0;background:var(--card2);white-space:nowrap;
+  }
+  th .dir{color:var(--gold)}
+  td.num{white-space:nowrap}
+  tr:hover td{background:rgba(0,0,0,.15)}
+  .buy{color:var(--good);font-weight:700}
+  .sell{color:var(--bad);font-weight:700}
+  .exchange{color:var(--gold);font-weight:700}
+  .chip{
+    display:inline-block;border:1px solid var(--line);border-radius:999px;
+    padding:0 7px;font-size:10.5px;color:var(--chalk-dim);margin-left:6px;
+  }
+  .muted{color:var(--chalk-dim)}
+  .count{margin:8px 2px;font-size:12px;color:var(--chalk-dim)}
+  details.skips{margin:14px 0}
+  details.skips summary{cursor:pointer;color:var(--chalk-dim);font-size:12.5px}
+  details.skips li{font-size:12px;color:var(--chalk-dim);margin:3px 0}
+  #err{display:none}
+  footer{margin:22px 0 0;font-size:11.5px;color:var(--chalk-dim)}
+</style>
+</head>
+<body>
+<header>
+  <h1>📈 Congress Stock Trades</h1>
+  <div class="sub">Official STOCK Act disclosures — Senate eFD &amp; House Clerk · updated daily
+    &nbsp;|&nbsp; <span class="note">data <b id="verStamp">…</b></span>
+    &nbsp;|&nbsp; <a href="index.html">⚽ World Cup simulator</a></div>
+</header>
+
+<div class="wrap">
+  <div class="legend" id="honesty">
+    <b>Read this first:</b> by law, members disclose trades up to <b>30–45 days late</b>,
+    and amounts are only reported as <b>legal brackets</b> (e.g. $1,001–$15,000) — never exact values.
+    Trades may be by a spouse (SP), joint account (JT) or dependent child (DC).
+    <span id="skipNote"></span> Educational tracker, not investment advice.
+  </div>
+  <div class="banner-sample" id="sampleBanner" style="display:none">
+    ⚠️ This is <b>sample data</b> generated from test fixtures — the first live data refresh replaces it.
+  </div>
+  <div class="legend" id="err">
+    Could not load <code>data/congress-trades.json</code>. If you opened this file directly
+    (<code>file://</code>), serve the folder instead: <code>python3 -m http.server</code> in <code>docs/</code>.
+  </div>
+
+  <div class="cards" id="featured"></div>
+
+  <div class="panel2">
+    <h3>Most-traded tickers <span class="note">(last 90 days · <span class="buy">buy</span> vs <span class="sell">sell</span> counts)</span></h3>
+    <div id="topTickers"></div>
+  </div>
+
+  <div class="filters">
+    <input type="search" id="q" placeholder="Search member or ticker…"/>
+    <select id="fChamber">
+      <option value="">Chamber: all</option>
+      <option value="house">House</option>
+      <option value="senate">Senate</option>
+    </select>
+    <select id="fParty">
+      <option value="">Party: all</option>
+      <option value="D">Democratic</option>
+      <option value="R">Republican</option>
+      <option value="I">Independent</option>
+    </select>
+    <select id="fType">
+      <option value="">Type: all</option>
+      <option value="buy">Buy</option>
+      <option value="sell">Sell</option>
+      <option value="exchange">Exchange</option>
+    </select>
+    <select id="fRange">
+      <option value="90">Last 90 days</option>
+      <option value="365">Last year</option>
+      <option value="" selected>All data</option>
+    </select>
+    <button class="act" id="clearBtn">✕ Clear</button>
+  </div>
+
+  <div class="count" id="countLine"></div>
+  <div class="tblwrap">
+    <table id="tbl">
+      <thead><tr id="headRow"></tr></thead>
+      <tbody id="rows"></tbody>
+    </table>
+  </div>
+  <div style="margin:10px 0"><button class="act" id="moreBtn" style="display:none">Show 200 more</button></div>
+
+  <details class="skips" id="skips" style="display:none">
+    <summary></summary>
+    <ul id="skipList"></ul>
+  </details>
+
+  <footer>
+    Sources: <a href="https://efdsearch.senate.gov" rel="noopener">Senate eFD</a> ·
+    <a href="https://disclosures-clerk.house.gov" rel="noopener">House Clerk financial disclosures</a>.
+    Every row links to the official filing. Paper (scanned) filings cannot be parsed and are listed under
+    "skipped filings" with a link. Amount brackets are those defined by the STOCK Act.
+  </footer>
+</div>
+
+<script>
+"use strict";
+/* Congress trade tracker — reads data/congress-trades.json (generated by
+   congress/pipeline.py). Independent of the World Cup app in index.html. */
+
+const COLS = [
+  {key:"member",  label:"Member"},
+  {key:"ticker",  label:"Ticker"},
+  {key:"asset",   label:"Asset"},
+  {key:"type",    label:"Type"},
+  {key:"amount_lo",label:"Amount", num:true},
+  {key:"tx_date", label:"Traded", num:true},
+  {key:"filing_date",label:"Filed", num:true},
+  {key:"source_url",label:"Filing", nosort:true},
+];
+const PAGE = 200;
+
+let DATA = null;
+let state = {q:"", chamber:"", party:"", type:"", range:"", member:"",
+             sortKey:"filing_date", sortDir:-1, shown:PAGE};
+
+const $ = id => document.getElementById(id);
+const esc = s => String(s ?? "").replace(/[&<>"']/g,
+  c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+
+function daysAgo(n){
+  const d = new Date(); d.setDate(d.getDate() - n);
+  return d.toISOString().slice(0,10);
+}
+
+function filtered(){
+  const q = state.q.trim().toLowerCase();
+  const since = state.range ? daysAgo(+state.range) : "";
+  return DATA.trades.filter(t =>
+    (!state.member || t.member === state.member) &&
+    (!q || t.member.toLowerCase().includes(q) || (t.ticker||"").toLowerCase().includes(q)) &&
+    (!state.chamber || t.chamber === state.chamber) &&
+    (!state.party || t.party === state.party) &&
+    (!state.type || t.type === state.type) &&
+    (!since || t.tx_date >= since)
+  );
+}
+
+function sorted(rows){
+  const k = state.sortKey, dir = state.sortDir;
+  return rows.slice().sort((a,b) => {
+    const va = a[k] ?? "", vb = b[k] ?? "";
+    if (va < vb) return -dir;
+    if (va > vb) return dir;
+    return a.id < b.id ? -1 : 1;
+  });
+}
+
+function typeCell(t){
+  const word = t.type === "sell" && t.partial ? "sell (partial)" : t.type;
+  return `<span class="${t.type}">${esc(word)}</span>` +
+         (t.owner ? `<span class="chip" title="spouse / joint / dependent child">${esc(t.owner)}</span>` : "");
+}
+
+function memberCell(t){
+  const who = [t.party, t.district || t.state].filter(Boolean).join(" · ");
+  return `${esc(t.member)}${who ? `<span class="chip">${esc(who)}</span>` : ""}`;
+}
+
+function renderHead(){
+  $("headRow").innerHTML = COLS.map(c => {
+    const dir = state.sortKey === c.key ? `<span class="dir">${state.sortDir < 0 ? "▼" : "▲"}</span>` : "";
+    return `<th data-k="${c.key}" ${c.nosort ? 'data-nosort="1"' : ""}>${c.label} ${dir}</th>`;
+  }).join("");
+}
+
+function renderRows(){
+  const rows = sorted(filtered());
+  const slice = rows.slice(0, state.shown);
+  $("rows").innerHTML = slice.map(t => `<tr>
+    <td>${memberCell(t)}</td>
+    <td>${t.ticker ? `<b>${esc(t.ticker)}</b>` : '<span class="muted">—</span>'}</td>
+    <td>${esc(t.asset)}${t.asset_type ? `<span class="chip">${esc(t.asset_type)}</span>` : ""}</td>
+    <td>${typeCell(t)}</td>
+    <td class="num">${esc(t.amount_label)}</td>
+    <td class="num">${esc(t.tx_date)}</td>
+    <td class="num">${esc(t.filing_date)}</td>
+    <td><a href="${esc(t.source_url)}" target="_blank" rel="noopener" title="official filing">source ↗</a></td>
+  </tr>`).join("");
+  $("countLine").textContent =
+    `${rows.length.toLocaleString("en-US")} trades` +
+    (state.member ? ` — ${state.member} (click their card again to clear)` : "") +
+    ` · showing ${Math.min(state.shown, rows.length).toLocaleString("en-US")}`;
+  $("moreBtn").style.display = rows.length > state.shown ? "" : "none";
+}
+
+function splitBar(buys, sells){
+  const total = buys + sells || 1;
+  const bw = Math.round(100 * buys / total), sw = 100 - bw;
+  return `<div class="split">
+    <span class="buy">${buys}</span>
+    <div class="splitbar" role="img" aria-label="${buys} buys, ${sells} sells">
+      ${buys ? `<span class="b" style="width:${bw}%"></span>` : ""}
+      ${sells ? `<span class="s" style="width:${sw}%"></span>` : ""}
+    </div>
+    <span class="sell">${sells}</span>
+  </div>`;
+}
+
+function renderFeatured(){
+  const since = daysAgo(90);
+  $("featured").innerHTML = (DATA.meta.featured || []).map(name => {
+    const mine = DATA.trades.filter(t => t.member === name);
+    const mySkips = (DATA.skipped_filings || []).filter(s => s.member === name);
+    const recent = mine.filter(t => t.tx_date >= since);
+    const buys = recent.filter(t => t.type === "buy").length;
+    const sells = recent.filter(t => t.type === "sell").length;
+    const info = mine[0] || mySkips[0];
+    const who = info ? [info.chamber === "senate" ? "Senate" : "House",
+                        info.party, info.district || info.state].filter(Boolean).join(" · ") : "no filings in window";
+    const last = mine[0];
+    // Some members (e.g. Khanna, McCaul) file on paper: scanned images no
+    // tracker can parse. Say so instead of showing a misleading zero.
+    const body = (!mine.length && mySkips.length)
+      ? `<div class="note" style="margin-top:6px">📄 ${mySkips.length} paper filings — scanned, not machine-readable</div>
+         <div class="last">Latest: <a href="${esc(mySkips[0].source_url)}" target="_blank" rel="noopener">official filing (${esc(mySkips[0].filing_date)}) ↗</a></div>`
+      : `${splitBar(buys, sells)}
+         <div class="note" style="margin-top:2px">${recent.length} trades in 90 days</div>
+         <div class="last">${last
+           ? `Last: <span class="${last.type}">${esc(last.type)}</span> ${esc(last.ticker || last.asset)} · ${esc(last.amount_label)} · ${esc(last.tx_date)}`
+           : "—"}</div>`;
+    return `<div class="fcard ${state.member === name ? "sel" : ""}" data-m="${esc(name)}">
+      <div class="name">${esc(name)}</div>
+      <div class="who">${esc(who)}</div>
+      ${body}
+    </div>`;
+  }).join("");
+}
+
+function renderTopTickers(){
+  const since = daysAgo(90);
+  const agg = new Map();
+  for (const t of DATA.trades){
+    if (!t.ticker || t.tx_date < since) continue;
+    const e = agg.get(t.ticker) || {buy:0, sell:0};
+    if (t.type === "buy") e.buy++; else if (t.type === "sell") e.sell++;
+    agg.set(t.ticker, e);
+  }
+  const top = [...agg.entries()]
+    .map(([tk, e]) => ({tk, ...e, total: e.buy + e.sell}))
+    .filter(r => r.total > 0)
+    .sort((a,b) => b.total - a.total || (a.tk < b.tk ? -1 : 1))
+    .slice(0, 10);
+  const max = top[0]?.total || 1;
+  $("topTickers").innerHTML = top.length ? top.map(r => {
+    const w = 100 * r.total / max;
+    const bw = 100 * r.buy / r.total;
+    return `<div class="trow">
+      <span class="tk">${esc(r.tk)}</span>
+      <div class="track">
+        <div class="bar" style="width:${w}%" role="img" aria-label="${r.tk}: ${r.buy} buys, ${r.sell} sells">
+          ${r.buy ? `<span style="width:${bw}%;background:var(--good)"></span>` : ""}
+          ${r.sell ? `<span style="width:${100-bw}%;background:var(--bad);margin-left:${r.buy?2:0}px"></span>` : ""}
+        </div>
+      </div>
+      <span class="ct">${r.buy} buy · ${r.sell} sell</span>
+    </div>`;
+  }).join("") : '<div class="note">No ticker trades in the last 90 days.</div>';
+}
+
+function renderSkips(){
+  const skips = DATA.skipped_filings || [];
+  $("skipNote").innerHTML = skips.length
+    ? `<b>${skips.length}</b> filings could not be parsed (paper/scanned or parse error) — see the list at the bottom.`
+    : "";
+  if (!skips.length) return;
+  $("skips").style.display = "";
+  $("skips").querySelector("summary").textContent =
+    `Skipped filings (${skips.length}) — linked but not parsed`;
+  $("skipList").innerHTML = skips.map(s =>
+    `<li>${esc(s.member)} (${esc(s.chamber)}) · filed ${esc(s.filing_date)} · ${esc(s.reason)} ·
+     <a href="${esc(s.source_url)}" target="_blank" rel="noopener">official filing ↗</a></li>`).join("");
+}
+
+function renderAll(){
+  renderHead();
+  renderFeatured();
+  renderTopTickers();
+  renderRows();
+}
+
+function wire(){
+  $("q").addEventListener("input", e => { state.q = e.target.value; state.shown = PAGE; renderRows(); });
+  for (const [id, key] of [["fChamber","chamber"],["fParty","party"],["fType","type"],["fRange","range"]]){
+    $(id).addEventListener("change", e => { state[key] = e.target.value; state.shown = PAGE; renderRows(); });
+  }
+  $("clearBtn").addEventListener("click", () => {
+    state = {...state, q:"", chamber:"", party:"", type:"", range:"", member:"", shown:PAGE};
+    $("q").value = ""; $("fChamber").value = ""; $("fParty").value = "";
+    $("fType").value = ""; $("fRange").value = "";
+    renderAll();
+  });
+  $("moreBtn").addEventListener("click", () => { state.shown += PAGE; renderRows(); });
+  $("headRow").addEventListener("click", e => {
+    const th = e.target.closest("th");
+    if (!th || th.dataset.nosort) return;
+    const k = th.dataset.k;
+    if (state.sortKey === k) state.sortDir = -state.sortDir;
+    else { state.sortKey = k; state.sortDir = k === "member" || k === "ticker" ? 1 : -1; }
+    renderHead(); renderRows();
+  });
+  $("featured").addEventListener("click", e => {
+    const card = e.target.closest(".fcard");
+    if (!card) return;
+    state.member = state.member === card.dataset.m ? "" : card.dataset.m;
+    state.shown = PAGE;
+    renderFeatured(); renderRows();
+  });
+}
+
+async function boot(){
+  try {
+    const resp = await fetch("data/congress-trades.json", {cache:"no-store"});
+    if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
+    DATA = await resp.json();
+  } catch (err) {
+    $("err").style.display = "block";
+    $("verStamp").textContent = "unavailable";
+    return;
+  }
+  $("verStamp").textContent =
+    `${DATA.meta.data_version || "?"} · ${(DATA.meta.counts?.trades ?? 0).toLocaleString("en-US")} trades`;
+  if (DATA.meta._sample) $("sampleBanner").style.display = "";
+  renderSkips();
+  wire();
+  renderAll();
+}
+
+boot();
+</script>
+</body>
+</html>
