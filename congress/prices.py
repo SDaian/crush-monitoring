@@ -90,6 +90,10 @@ def fetch_raw(session, ticker: str, key: str) -> str:
         "symbol": td_symbol(ticker),
         "interval": TD_INTERVAL,
         "outputsize": TD_OUTPUTSIZE,
+        # Disambiguate to the US listing — a bare ticker like "MU" can resolve
+        # to a foreign security on another exchange, returning a wildly wrong
+        # price and a bogus return.
+        "country": "United States",
         "apikey": key,
     }
     resp = session.get(f"{TD_HOST}/time_series", params=params, timeout=30)
