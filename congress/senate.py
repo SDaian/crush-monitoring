@@ -138,8 +138,17 @@ def search_ptrs(session, date_from: str, date_to: str = "") -> list[SenateFiling
     raise EfdError(f"eFD search exceeded {MAX_PAGES} pages; aborting")
 
 
+_DATE_CELL = re.compile(r"^\d{2}/\d{2}/\d{4}$")
+
+
 def parse_search_rows(payload: dict) -> list[SenateFilingRef]:
-    """Pure parser for one DataTables response page."""
+    """Pure parser for one DataTables response page.
+
+    Column layout has drifted before (an office/full-name text column sits
+    between the name and the report link), so the link and date cells are
+    located by content rather than by position; only first/last name are
+    trusted to be columns 0 and 1.
+    """
     if not isinstance(payload, dict) or "data" not in payload:
         raise EfdError(
             "eFD search payload missing 'data': " + _snippet(json.dumps(payload)[:500])
@@ -148,10 +157,16 @@ def parse_search_rows(payload: dict) -> list[SenateFilingRef]:
     for row in payload["data"]:
         if len(row) < 4:
             raise EfdError(f"eFD search row too short: {row!r}")
-        first, last, link_html, filed = row[0], row[1], row[2], row[3]
-        link = _LINK.search(link_html)
+        cells = [str(c) for c in row]
+        first, last = cells[0], cells[1]
+        link = next((m for m in map(_LINK.search, cells) if m), None)
         if not link:
-            raise EfdError(f"eFD search row link unparseable: {link_html!r}")
+            raise EfdError(f"eFD search row has no report link: {cells!r}")
+        filed = next(
+            (c.strip() for c in cells if _DATE_CELL.match(c.strip())), None
+        )
+        if not filed:
+            raise EfdError(f"eFD search row has no filed date: {cells!r}")
         href, title = link.group(1), re.sub(r"\s+", " ", link.group(2)).strip()
         url = href if href.startswith("http") else BASE + href
         filing_id = url.rstrip("/").rsplit("/", 1)[-1]

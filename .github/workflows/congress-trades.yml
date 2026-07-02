@@ -43,6 +43,7 @@ jobs:
 
       - name: Fetch new filings
         run: |
+          set -o pipefail # tee must not mask the fetcher's exit code
           if [ "${{ github.event_name }}" = "push" ]; then
             EXTRA="--limit 25 --debug-dump debug-dump"
           elif [ -n "${{ github.event.inputs.limit }}" ]; then

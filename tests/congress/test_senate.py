@@ -58,6 +58,14 @@ class TestSearchRows(unittest.TestCase):
         with self.assertRaises(EfdError):
             parse_search_rows({"recordsTotal": 0})
 
+    def test_row_without_link_raises(self):
+        with self.assertRaises(EfdError):
+            parse_search_rows({"data": [["A", "B", "office text", "06/15/2026"]]})
+
+    def test_row_without_date_raises(self):
+        with self.assertRaises(EfdError):
+            parse_search_rows({"data": [["A", "B", "<a href=\"/search/view/ptr/x/\">PTR</a>", "office"]]})
+
 
 class TestPtrHtml(unittest.TestCase):
     def setUp(self):
