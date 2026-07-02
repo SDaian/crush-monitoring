@@ -108,6 +108,7 @@
   th .dir{color:var(--gold)}
   td.num{white-space:nowrap}
   tr:hover td{background:rgba(0,0,0,.15)}
+  .opt{color:var(--gold);font-size:11px;margin-top:2px;white-space:normal}
   .buy{color:var(--good);font-weight:700}
   .sell{color:var(--bad);font-weight:700}
   .exchange{color:var(--gold);font-weight:700}
@@ -316,10 +317,26 @@ function retCell(t){
     + `${r.pct >= 0 ? "+" : ""}${r.pct}%</span>`;
 }
 
+function optionText(t){
+  // Only options carry this; show what the filer disclosed, never invented.
+  if (t.asset_type !== "Option" && !t.option) return "";
+  const o = t.option || {};
+  const bits = [];
+  if (o.type) bits.push(o.type.charAt(0).toUpperCase() + o.type.slice(1));
+  if (o.strike != null) bits.push("$" + o.strike);
+  if (o.expiration) bits.push("exp " + o.expiration);
+  if (o.contracts != null) bits.push(o.contracts + " contract" + (o.contracts === 1 ? "" : "s"));
+  if (bits.length) return bits.join(" · ");
+  return t.comment || "details not specified in filing";
+}
+
 function typeCell(t){
   const word = t.type === "sell" && t.partial ? "sell (partial)" : t.type;
-  return `<span class="${t.type}">${esc(word)}</span>` +
-         (t.owner ? `<span class="chip" title="spouse / joint / dependent child">${esc(t.owner)}</span>` : "");
+  let s = `<span class="${t.type}">${esc(word)}</span>` +
+    (t.owner ? `<span class="chip" title="spouse / joint / dependent child">${esc(t.owner)}</span>` : "");
+  const opt = optionText(t);
+  if (opt) s += `<div class="opt" title="${esc(t.comment || opt)}">🎟 ${esc(opt)}</div>`;
+  return s;
 }
 
 function memberCell(t){
