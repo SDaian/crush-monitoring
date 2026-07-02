@@ -111,6 +111,14 @@ class PipelineTest(unittest.TestCase):
         state = json.loads(self.state.read_text())
         self.assertIn("p1", state["processed"]["senate"])
 
+    def test_skipped_filing_member_name_normalized(self):
+        def fetch(r):
+            raise PaperFiling("scan")
+
+        self._run([StubRef("p1", member="Tuberville, Thomas H.")], fetch)
+        skip = json.loads(self.output.read_text())["skipped_filings"][0]
+        self.assertEqual(skip["member"], "Tommy Tuberville")
+
     def test_parse_error_skipped_then_recovered_on_retry(self):
         def broken(r):
             raise ValueError("bad row")

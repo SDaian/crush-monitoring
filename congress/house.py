@@ -157,15 +157,21 @@ _ROW = re.compile(
     r"(?P<d2>\d{2}/\d{2}/\d{4})\s+"
     r"(?P<amount>\$[\d,]+(?:\s*[-–]\s*\$?[\d,]*)?|None)\s*$"
 )
-# Per-row metadata continuations from the e-filing system (ignored).
-_META = re.compile(r"^\(?(F S|S O|D|C|L)\s*:\s*")
-# Boilerplate/header/footer lines (ignored, never appended to asset names).
+# Per-row metadata continuations from the e-filing system (ignored). The
+# PDF layout pads the markers with wide runs of spaces ("F      S     : New",
+# "S          O : ..."), so whitespace between the letters is flexible.
+_META = re.compile(r"^\(?(F\s+S|S\s+O|D|C|L)\s*:\s*")
+# Boilerplate/header/footer lines (ignored, never appended to asset names),
+# including the IPO question and the certification block at the end of the
+# form.
 _SKIP = re.compile(
     r"(clerk of the house|house of representatives|financial disclosure"
     r"|periodic transaction|filing id|state/district|transactions?$"
     r"|^id\s+owner\s+asset|^type\s+date|^asset\s+|notification|amount"
     r"|cap\.?\s*gains|^\*|initial public offering|^name:|^status:"
-    r"|^page \d|^https?://)",
+    r"|^page \d|^https?://"
+    r"|i\s+p\s+o|^yes\b|^no\b|certify|digitally signed|knowledge and belief"
+    r"|electronically filed|^signature)",
     re.I,
 )
 _TICKER = re.compile(r"\(([A-Z][A-Z0-9.\-]{0,9})\)")
@@ -227,6 +233,9 @@ def parse_ptr_text(text: str, ref: HouseFilingRef) -> list[Trade]:
         ticker_match = _TICKER.search(asset_full)
         code_match = _CODE.search(asset_full)
         asset_clean = _CODE.sub("", _TICKER.sub("", asset_full))
+        # Some PDFs wrap the "F S: New" filing-status marker so that a bare
+        # "F S" trails the asset name; strip it.
+        asset_clean = re.sub(r"\bF\s+S\s*$", "", asset_clean)
         asset_clean = re.sub(r"\s+", " ", asset_clean).strip(" -")
         trades.append(
             Trade(
