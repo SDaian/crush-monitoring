@@ -30,9 +30,19 @@ listed US equities price; options, bonds, foreign and delisted names are left
 out (the page shows "—"). The number is intentionally an estimate.
 
 Only `prices.fetch_raw` touches the network; parsing and the return math are
-pure stdlib, so `tests/congress/test_prices.py` runs offline against a CSV
+pure stdlib, so `tests/congress/test_prices.py` runs offline against a JSON
 fixture. Run standalone with `python3 -m congress prices` (add `--limit N` to
 price only the first N tickers while testing).
+
+**Status — live feed not yet connected.** Both free keyless feeds block GitHub
+Actions' shared IPs: Stooq serves a JavaScript anti-bot page, and Yahoo 429s
+the runner even with a cookie+crumb session. So `prices` currently prices
+nothing from CI; the writer detects a total miss and **keeps the existing
+`returns.json`** rather than clobbering it, and `docs/data/returns.json` ships
+a clearly-labelled **illustrative sample** (the page shows a placeholder
+banner). Wiring a real feed means a keyed provider (e.g. Twelve Data / Tiingo)
+via a repo secret, scoped to the most-traded tickers to fit the free quota —
+tracked as follow-up.
 
 ## Data-honesty constraints (by law, not by us)
 

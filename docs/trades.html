@@ -142,6 +142,11 @@
   <div class="banner-sample" id="sampleBanner" style="display:none">
     ⚠️ This is <b>sample data</b> generated from test fixtures — the first live data refresh replaces it.
   </div>
+  <div class="banner-sample" id="retSampleBanner" style="display:none">
+    ⚠️ The <b>“Since buy” returns are illustrative example figures, not real market data.</b>
+    A live price feed isn’t wired up yet, so these percentages are placeholders — don’t read anything into them.
+    (The trades themselves are real, from official filings.)
+  </div>
   <div class="legend" id="err">
     Could not load <code>data/congress-trades.json</code>. If you opened this file directly
     (<code>file://</code>), serve the folder instead: <code>python3 -m http.server</code> in <code>docs/</code>.
@@ -205,7 +210,7 @@
       amounts are STOCK Act brackets, so the dollar figure is a midpoint estimate,
       not an exact sum. Any ticker is searchable — the cards are quick picks.
       <b>Since buy</b> shows how the stock moved after each disclosed buy date
-      (est., Stooq close) — a stock-performance follow-through, not the member's profit.
+      (est., daily close) — a stock-performance follow-through, not the member's profit.
     </div>
     <div class="cards" id="tickerCards"></div>
     <div class="filters">
@@ -687,14 +692,16 @@ async function boot(){
   $("verStamp").textContent =
     `${DATA.meta.data_version || "?"} · ${(DATA.meta.counts?.trades ?? 0).toLocaleString("en-US")} trades`;
   if (DATA.meta._sample) $("sampleBanner").style.display = "";
+  if (retSample) $("retSampleBanner").style.display = "";
   const retLegend = $("retLegend");
   if (retLegend){
-    retLegend.innerHTML =
-      `<b>Since buy</b> = the stock's price change since the disclosed <b>buy</b> date `
-      + `(estimate, Stooq daily close) — <b>not</b> the member's realized profit `
-      + `(holding, later sells, dividends and size are unknown). Only listed US `
-      + `equities price; options/bonds/foreign names show “—”.`
-      + (retSample ? ` <span class="est">· returns shown are sample data until the first live refresh</span>` : "");
+    retLegend.innerHTML = retSample
+      ? `<b>Since buy</b> figures below are <b>illustrative placeholders, not real market data</b> — `
+        + `a live price feed isn’t connected yet.`
+      : `<b>Since buy</b> = the stock's price change since the disclosed <b>buy</b> date `
+        + `(estimate, daily close) — <b>not</b> the member's realized profit `
+        + `(holding, later sells, dividends and size are unknown). Only listed US `
+        + `equities price; options/bonds/foreign names show “—”.`;
   }
   renderSkips();
   wire();
