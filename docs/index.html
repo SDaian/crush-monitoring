@@ -555,7 +555,7 @@ function calibFor(m){ if(!m) return null;
    =========================================================================== */
 // Build/data stamp shown in the header. The app is stateless: nothing is
 // persisted, so reloading (F5) always returns to the official results.
-const DATA_VERSION="2026-07-02.r32-usa-bosnia-result-fix";
+const DATA_VERSION="2026-07-02.r32-spain-austria-forecast";
 let state={ results:{}, strengths:{}, learn:[] };
 
 function freshStrengths(){ const s={}; for(const t in TEAMS) s[t]=TEAMS[t]; return s; }
@@ -1075,7 +1075,8 @@ const KO_CALIB=[
   {h:"Mexico",a:"Ecuador",lh:1.42,la:0.88,p:[48.6,29.1,22.3],adv:[65.1,34.9],et:29.1,pens:15.7,o:[67.9,40.4,20.1],btts:45.4,cs:[41.5,24.2],tot:2.30,conf:"MEDIUM",sl:[["1-1",13.5],["1-0",13.2],["0-0",11.0],["2-0",10.1],["2-1",8.9],["0-1",7.8]]},
   {h:"England",a:"DR Congo",lh:2.10,la:0.80,p:[66.9,20.5,12.6],adv:[80.1,19.9],et:20.5,pens:9.5,o:[79.1,55.4,33.0],btts:48.9,cs:[44.9,12.2],tot:2.90,conf:"HIGH",sl:[["2-0",12.1],["1-0",11.0],["1-1",9.8],["2-1",9.7],["3-0",8.5],["3-1",6.8]]},
   {h:"Belgium",a:"Senegal",lh:1.56,la:1.12,p:[46.9,26.4,26.7],adv:[61.4,38.6],et:26.4,pens:13.2,o:[75.4,50.1,28.2],btts:53.8,cs:[32.6,21.0],tot:2.68,conf:"MEDIUM",sl:[["1-1",12.6],["1-0",10.1],["2-1",9.3],["2-0",8.3],["0-0",7.5],["0-1",7.1]]},
-  {h:"USA",a:"Bosnia & Herz.",lh:1.85,la:1.05,p:[55.4,23.9,20.6],adv:[69.6,30.4],et:23.9,pens:11.4,o:[79.2,55.4,33.0],btts:55.4,cs:[35.0,15.7],tot:2.90,conf:"MEDIUM",sl:[["1-1",11.3],["2-1",9.9],["1-0",9.5],["2-0",9.4],["0-0",6.1],["3-1",6.1]]}
+  {h:"USA",a:"Bosnia & Herz.",lh:1.85,la:1.05,p:[55.4,23.9,20.6],adv:[69.6,30.4],et:23.9,pens:11.4,o:[79.2,55.4,33.0],btts:55.4,cs:[35.0,15.7],tot:2.90,conf:"MEDIUM",sl:[["1-1",11.3],["2-1",9.9],["1-0",9.5],["2-0",9.4],["0-0",6.1],["3-1",6.1]]},
+  {h:"Spain",a:"Austria",lh:2.25,la:0.80,p:[69.7,19.0,11.3],adv:[82.2,17.8],et:19.0,pens:8.5,o:[81.3,58.8,36.4],btts:49.8,cs:[44.9,10.5],tot:3.05,conf:"HIGH",sl:[["2-0",12.0],["1-0",10.1],["2-1",9.6],["1-1",9.0],["3-0",9.0],["3-1",7.2]]}
 ];
 const KO_CALIB_MAP={};
 KO_CALIB.forEach(c=>{ KO_CALIB_MAP[c.h+"|"+c.a]=c; KO_CALIB_MAP[c.a+"|"+c.h]=c; });
