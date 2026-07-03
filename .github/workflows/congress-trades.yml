@@ -49,46 +49,47 @@ jobs:
           fi
           python3 -m congress fetch $EXTRA 2>&1 | tee fetch.log
 
-      - name: TEMP OGE probe (categories tail + full-text search)
+      - name: TEMP OGE probe (discover the President's 278-T view)
         run: |
           python3 - <<'PY'
           import re, requests
-          from urllib.parse import quote
           UA={"User-Agent":"Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Safari/537.36"}
           NSF="https://extapps2.oge.gov/201/Presiden.nsf"
-          BASE=f"{NSF}/PAS+Index"
           def get(url):
               try: return requests.get(url, headers=UA, timeout=60)
               except Exception as e:
                   print("  ERR", e); return None
-          CAT=re.compile(r'category="true"\s*>\s*<text>(.*?)</text>', re.S)
-          VE=re.compile(r"<viewentry\b[^>]*>.*?</viewentry>", re.S)
-          PDFRE=re.compile(r"PAS\+Index/([0-9A-Fa-f]+)/\$FILE/([^'&]+?\.pdf)")
-          # A) Dump the tail of the 216 collapsed categories (where 'T' sorts).
-          r=get(f"{BASE}?ReadViewEntries&OutputFormat=XML&Count=1000")
-          cats=[re.sub(r"\s+"," ",c).strip() for c in CAT.findall(r.text)]
-          print("A) total categories:", len(cats))
-          for c in cats:
-              if c[:1] in "STUV":
-                  print("   CAT:", c[:70])
-          # B) Domino full-text SearchView for the President's 278-T docs.
-          for q in ("Trump", "278-T", "Trump 278-T"):
-              u=f"{BASE}?SearchView&Query={quote(q)}&OutputFormat=XML&Count=80"
-              r=get(u)
+          # A) NSF homepage: harvest every internal link + view-like segment.
+          for entry in (f"{NSF}?Open", f"{NSF}/PAS+Index?OpenView"):
+              r=get(entry)
+              print("A)", entry, r.status_code if r else "n/a", "len", len(r.text) if r else 0)
               if not r: continue
-              ents=VE.findall(r.text)
-              pdfs=PDFRE.findall(r.text.replace("&apos;","'"))
-              print(f"B) SearchView Query={q!r} status={r.status_code} entries={len(ents)} pdfs={len(pdfs)}")
-              for h in pdfs[:15]:
-                  print("     PDF:", h[0], h[1][:70])
-          # C) DB-wide SearchSite fallback.
-          u=f"{NSF}?SearchView&Query={quote('Trump 278-T')}&OutputFormat=XML&Count=80"
-          r=get(u)
+              hrefs=re.findall(r'href=["\']([^"\']+)["\']', r.text, re.I)
+              inter=[h for h in hrefs if "Presiden.nsf" in h or h.startswith("/201")]
+              segs=sorted({re.sub(r"\?.*","",h).split("Presiden.nsf/")[-1].split("/")[0]
+                           for h in inter if "Presiden.nsf/" in h})
+              print("   view-like segments:", segs[:40])
+              for h in inter:
+                  if re.search(r"trump|278|periodic|ptr|preside", h, re.I):
+                      print("   LINK:", h[:120])
+          # B) The known doc's own page — sibling attachments / filer context.
+          UNID="18353894FE440B3685258D430031A337"
+          r=get(f"{NSF}/PAS+Index/{UNID}?OpenDocument")
+          print("B) OpenDocument", r.status_code if r else "n/a", "len", len(r.text) if r else 0)
           if r:
-              pdfs=PDFRE.findall(r.text.replace("&apos;","'"))
-              print("C) nsf SearchView status", r.status_code, "pdfs", len(pdfs), "len", len(r.text))
-              for h in pdfs[:15]:
-                  print("     PDF:", h[0], h[1][:70])
+              atts=re.findall(r"/\$FILE/([^\"'&?]+)", r.text)
+              print("   attachments:", atts[:10])
+              for m in re.findall(r'href=["\']([^"\']+)["\']', r.text):
+                  if re.search(r"trump|278|periodic|view", m, re.I):
+                      print("   DLINK:", m[:120])
+          # C) Try candidate view names for the President's PTRs.
+          for v in ("President","President+Trump","Periodic","PTR","Recent",
+                    "By+Date","278-T","Trump","xpPresident.xsp"):
+              u=f"{NSF}/{v}?ReadViewEntries&OutputFormat=XML&Count=40"
+              r=get(u)
+              n=len(re.findall(r"<viewentry\b",r.text)) if r else -1
+              has=bool(r and "trump" in r.text.lower())
+              print(f"C) view {v!r}: status={r.status_code if r else 'n/a'} entries={n} trump={has}")
           PY
 
       - name: Estimate return-since-buy (non-fatal)
