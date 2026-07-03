@@ -1,0 +1,10 @@
+{
+  "_comment": "Curated list of the President's OGE Form 278-T Periodic Transaction Reports. The President is NOT listed in OGE's browsable PAS Index view (that view covers Senate-confirmed appointees), and the Domino app offers no full-text search or President view, so his filings cannot be auto-discovered. Each 278-T PDF is reachable only by its stable Domino document UNID, tracked here. congress/oge.py fetches and OCR-parses each one on every run. To add a newly posted 278-T: append its `unid` and attachment `filename` (the report date is parsed from the filename; add an explicit `date` in YYYY-MM-DD if the filename has none). Source: extapps2.oge.gov/201/Presiden.nsf.",
+  "filer": "Donald J. Trump",
+  "filings": [
+    {
+      "unid": "18353894FE440B3685258D430031A337",
+      "filename": "Donald J. Trump 10.20.2025 278-T (2).pdf"
+    }
+  ]
+}

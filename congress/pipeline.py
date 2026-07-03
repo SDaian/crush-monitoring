@@ -144,7 +144,7 @@ def run(
     before = _content_key(output)
 
     for source in sources:
-        processed = state["processed"][source.chamber]
+        processed = state["processed"].setdefault(source.chamber, {})
         refs = [
             r
             for r in source.list_filings()
