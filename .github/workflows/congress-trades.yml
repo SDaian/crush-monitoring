@@ -49,42 +49,46 @@ jobs:
           fi
           python3 -m congress fetch $EXTRA 2>&1 | tee fetch.log
 
-      - name: TEMP OGE probe (enumeration strategy for Trump)
+      - name: TEMP OGE probe (categories tail + full-text search)
         run: |
           python3 - <<'PY'
           import re, requests
           from urllib.parse import quote
           UA={"User-Agent":"Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Safari/537.36"}
-          BASE="https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index"
+          NSF="https://extapps2.oge.gov/201/Presiden.nsf"
+          BASE=f"{NSF}/PAS+Index"
           def get(url):
-              r=requests.get(url, headers=UA, timeout=60); return r
+              try: return requests.get(url, headers=UA, timeout=60)
+              except Exception as e:
+                  print("  ERR", e); return None
           CAT=re.compile(r'category="true"\s*>\s*<text>(.*?)</text>', re.S)
           VE=re.compile(r"<viewentry\b[^>]*>.*?</viewentry>", re.S)
-          # A) categories only (no ExpandView) — should fit under the 1000 cap.
+          PDFRE=re.compile(r"PAS\+Index/([0-9A-Fa-f]+)/\$FILE/([^'&]+?\.pdf)")
+          # A) Dump the tail of the 216 collapsed categories (where 'T' sorts).
           r=get(f"{BASE}?ReadViewEntries&OutputFormat=XML&Count=1000")
           cats=[re.sub(r"\s+"," ",c).strip() for c in CAT.findall(r.text)]
-          print("A) categories:", len(cats))
-          trump=[c for c in cats if "trump" in c.lower()]
-          print("   trump categories:", trump)
-          # B) RestrictToCategory with the exact string.
-          if trump:
-              cat=trump[0]
-              for enc in (quote(cat, safe=""), quote(cat, safe="").replace("%20","+")):
-                  u=f"{BASE}?ReadViewEntries&OutputFormat=XML&RestrictToCategory={enc}&Count=200"
-                  r=get(u)
-                  ents=VE.findall(r.text)
-                  hrefs=re.findall(r"PAS\+Index/([0-9A-Fa-f]+)/\$FILE/([^'&]+?\.pdf)", r.text.replace("&apos;","'").replace("&#39;","'"))
-                  print(f"B) RestrictToCategory enc={enc[:40]}... -> entries={len(ents)} pdfs={len(hrefs)}")
-                  for h in hrefs[:12]:
-                      print("     PDF:", h[0], h[1])
-                  if hrefs: break
-          # C) Start pagination on the expanded view: does Start advance?
-          for start in (1, 1001, 2001):
-              r=get(f"{BASE}?ReadViewEntries&OutputFormat=XML&ExpandView&Start={start}&Count=1000")
+          print("A) total categories:", len(cats))
+          for c in cats:
+              if c[:1] in "STUV":
+                  print("   CAT:", c[:70])
+          # B) Domino full-text SearchView for the President's 278-T docs.
+          for q in ("Trump", "278-T", "Trump 278-T"):
+              u=f"{BASE}?SearchView&Query={quote(q)}&OutputFormat=XML&Count=80"
+              r=get(u)
+              if not r: continue
               ents=VE.findall(r.text)
-              cs=[re.sub(r"\s+"," ",c).strip() for c in CAT.findall(r.text)]
-              has=any("trump" in c.lower() for c in cs)
-              print(f"C) Start={start}: entries={len(ents)} cats={len(cs)} first={cs[0][:30] if cs else None!r} last={cs[-1][:30] if cs else None!r} trump={has}")
+              pdfs=PDFRE.findall(r.text.replace("&apos;","'"))
+              print(f"B) SearchView Query={q!r} status={r.status_code} entries={len(ents)} pdfs={len(pdfs)}")
+              for h in pdfs[:15]:
+                  print("     PDF:", h[0], h[1][:70])
+          # C) DB-wide SearchSite fallback.
+          u=f"{NSF}?SearchView&Query={quote('Trump 278-T')}&OutputFormat=XML&Count=80"
+          r=get(u)
+          if r:
+              pdfs=PDFRE.findall(r.text.replace("&apos;","'"))
+              print("C) nsf SearchView status", r.status_code, "pdfs", len(pdfs), "len", len(r.text))
+              for h in pdfs[:15]:
+                  print("     PDF:", h[0], h[1][:70])
           PY
 
       - name: Estimate return-since-buy (non-fatal)
