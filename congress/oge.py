@@ -1,14 +1,15 @@
 """OGE executive-branch 278-T ingester (Periodic Transaction Reports).
 
-The President and other PAS (Presidentially Appointed, Senate-confirmed)
-filers post OGE Form 278-T "Periodic Transaction Reports" to the U.S. Office
-of Government Ethics public-disclosure app — a Lotus Domino database at
-``extapps2.oge.gov/201/Presiden.nsf``. This module:
+The President posts OGE Form 278-T "Periodic Transaction Reports" to the U.S.
+Office of Government Ethics public-disclosure app — a Lotus Domino database at
+``extapps2.oge.gov/201/Presiden.nsf``. The President is **not** listed in that
+app's only browsable view ("PAS Index", which covers Senate-confirmed
+appointees), and the app exposes no full-text search, so his filings cannot be
+auto-discovered: they are reachable only by stable document UNID. This module:
 
-1. Enumerates a filer's 278-T documents from the categorized "PAS Index"
-   view (``?ReadViewEntries&OutputFormat=XML``), paginating past Domino's
-   1000-entry-per-response cap.
-2. Parses the transaction table out of each PDF.
+1. Reads the curated set of filings to ingest from ``oge_filings.json``
+   (one entry per 278-T PDF: its ``unid`` + attachment ``filename``).
+2. Fetches and parses the transaction table out of each scanned PDF.
 
 Unlike the House e-filed PTRs, the OGE 278-T PDFs are **scanned images with an
 OCR text layer**, so the extracted text is noisy: digits are mangled
@@ -21,10 +22,10 @@ digit errors. The President's disclosed transactions are managed-account
 purchases of corporate and municipal **bonds** (plus the odd bond ETF), so
 these rows carry no equity ticker.
 
-Only the two functions that hit the network (``fetch_view_page``,
-``fetch_pdf_bytes``) import ``requests``/``pdfplumber``; everything else is a
-pure function of ``str``/``bytes`` so the offline test suite runs without the
-scraper dependencies.
+Only ``fetch_trades`` (the PDF GET) and ``extract_pdf_text`` (pdfplumber) touch
+the network / binary deps; everything else — including the whole transaction
+parser — is a pure function of ``str``/``bytes``, so the offline test suite runs
+without the scraper dependencies.
 """
 
 from __future__ import annotations
