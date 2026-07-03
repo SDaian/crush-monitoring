@@ -172,6 +172,7 @@
       <option value="">Chamber: all</option>
       <option value="house">House</option>
       <option value="senate">Senate</option>
+      <option value="executive">Executive (President)</option>
     </select>
     <select id="fParty">
       <option value="">Party: all</option>
@@ -228,9 +229,13 @@
 
   <footer>
     Sources: <a href="https://efdsearch.senate.gov" rel="noopener">Senate eFD</a> ·
-    <a href="https://disclosures-clerk.house.gov" rel="noopener">House Clerk financial disclosures</a>.
+    <a href="https://disclosures-clerk.house.gov" rel="noopener">House Clerk financial disclosures</a> ·
+    <a href="https://extapps2.oge.gov/201/Presiden.nsf" rel="noopener">OGE 278-T (President)</a>.
     Every row links to the official filing. Paper (scanned) filings cannot be parsed and are listed under
     "skipped filings" with a link. Amount brackets are those defined by the STOCK Act.
+    The President's rows come from OGE Form 278-T Periodic Transaction Reports — scanned PDFs read by OCR;
+    they are managed-account purchases of corporate &amp; municipal bonds, so they carry no stock ticker and
+    no "since buy" return estimate.
   </footer>
 </div>
 
@@ -394,7 +399,12 @@ function renderFeatured(){
     const buys = recent.filter(t => t.type === "buy").length;
     const sells = recent.filter(t => t.type === "sell").length;
     const info = mine[0] || mySkips[0];
-    const who = info ? [info.chamber === "senate" ? "Senate" : "House",
+    const chamberLabel = info
+      ? (info.chamber === "senate" ? "Senate"
+        : info.chamber === "executive" ? "White House"
+        : "House")
+      : "";
+    const who = info ? [chamberLabel,
                         info.party, info.district || info.state].filter(Boolean).join(" · ") : "no filings in window";
     const last = mine[0];
     // Some members (e.g. Khanna, McCaul) file on paper: scanned images no

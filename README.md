@@ -174,10 +174,16 @@ exists. The credential-free login checks run on every environment regardless.
 
 ## Congress stock-trades tracker (`congress/` + `docs/trades.html`)
 
-A separate GitHub Pages section that tracks stock buys/sells disclosed by US
-members of Congress under the STOCK Act, sourced **only from the official
-government sites**: the [Senate eFD system](https://efdsearch.senate.gov) and
-the [House Clerk](https://disclosures-clerk.house.gov) financial disclosures.
+A separate GitHub Pages section that tracks stock buys/sells disclosed under the
+STOCK Act by US members of Congress — and the President's OGE Form 278-T
+periodic transaction reports — sourced **only from the official government
+sites**: the [Senate eFD system](https://efdsearch.senate.gov), the
+[House Clerk](https://disclosures-clerk.house.gov) financial disclosures, and
+[OGE](https://extapps2.oge.gov/201/Presiden.nsf) (executive 278-T). The
+President's disclosures are managed-account **bond** purchases from scanned,
+OCR-read 278-T PDFs, curated by document id in `congress/oge_filings.json`
+(he is not listed in any browsable OGE view); they carry no ticker or return
+estimate.
 
 - `congress/` — Python fetcher/normalizer (see `congress/README.md`). Parsers
   are stdlib-only; the two scraper deps (`requests`, `pdfplumber`) live in
