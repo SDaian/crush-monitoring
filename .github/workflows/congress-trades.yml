@@ -49,6 +49,38 @@ jobs:
           fi
           python3 -m congress fetch $EXTRA 2>&1 | tee fetch.log
 
+      - name: TEMP OGE probe (Trump 278-T format)
+        run: |
+          python3 - <<'PY'
+          import io, requests, pdfplumber
+          UA={"User-Agent":"Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Safari/537.36"}
+          def get(url, **k):
+              try:
+                  r=requests.get(url, headers=UA, timeout=30, **k); return r
+              except Exception as e:
+                  print("  ERR", e); return None
+          # 1) Can we enumerate Trump's filings via the Domino view as XML?
+          for view in [
+              "https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index?ReadViewEntries&OutputFormat=XML&count=40",
+              "https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index?OpenView&count=40",
+          ]:
+              r=get(view)
+              print("VIEW", r.status_code if r else "n/a", view)
+              if r and r.ok:
+                  print(" ".join(r.text.split())[:1800]); print("---")
+          # 2) What does a 278-T PDF's text look like?
+          for pdf in [
+              "https://www.whitehouse.gov/wp-content/uploads/2026/03/President-Donald-J.-Trump-Periodic-Transaction-Report-2.26.26-1.pdf",
+              "https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/18353894FE440B3685258D430031A337/$FILE/Donald%20J.%20Trump%2010.20.2025%20278-T%20(2).pdf",
+          ]:
+              r=get(pdf)
+              print("PDF", r.status_code if r else "n/a", len(r.content) if r else 0, pdf)
+              if r and r.ok and r.content[:4]==b"%PDF":
+                  with pdfplumber.open(io.BytesIO(r.content)) as doc:
+                      txt="\n".join((p.extract_text() or "") for p in doc.pages[:2])
+                  print("===PDFTEXT==="); print(txt[:4000]); print("===END==="); break
+          PY
+
       - name: Estimate return-since-buy (non-fatal)
         env:
           # Accept the key whether it was added as an Actions *secret* (preferred)
@@ -57,7 +89,7 @@ jobs:
         run: |
           # Prices move daily even when no new filing arrives, so this runs
           # every day. A price-source outage must not fail the whole refresh.
-          python3 -m congress prices 2>&1 | tee -a fetch.log \
+          python3 -m congress prices --top 0 --limit 1 2>&1 | tee -a fetch.log \
             || echo "::warning::price refresh failed; keeping prior returns.json"
 
       - name: Commit refreshed data
