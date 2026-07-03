@@ -59,6 +59,35 @@ Legend: ✅ right for the right reason · 🟡 right but by luck/margin ·
 | 2026-07-03 | Portugal vs Croatia (R32) | 45.7 / 27.2 / 27.1 | MEDIUM | 2-1 (Portugal, adv.) | ✅ |
 | 2026-07-03 | Switzerland vs Algeria (R32) | 53.1 / 24.0 / 22.9 | MEDIUM | 2-0 (Switzerland, adv.) | ✅ |
 
+### Standing calibration note: KNOCKOUT CAUTION (BTTS/Over bias)
+
+**Applies to every knockout tie from the R32 on.** Our attack/defense ratings are
+learned from the GROUP stage, where games are looser and more open. Knockout football
+is a different texture: teams play more cautiously and focus on not making mistakes,
+the underdog sits deeper when it can, transitions are fewer — so **fewer goals, more
+clean sheets, and lower BTTS** than the group-calibrated numbers imply. Evidence: in the
+'favourite vs open/leaky underdog' archetype I leaned **BTTS-Yes** and was wrong twice in
+a row — **USA 2-0 Bosnia** and **Switzerland 2-0 Algeria** — the leaky, attacking
+underdog was SHUT OUT both times. The SIDE and MARGIN reads were right (6/6 on
+advancement); the miss is specifically the goals TEXTURE.
+
+**Convention going forward (annotate, don't rewrite history):**
+- Do NOT auto-lean BTTS-Yes just because both sides looked leaky in the group stage.
+  Trust the clean-sheet branch — the clean-favourite-win cluster (2-0 / 2-1 / 1-0) is
+  heavier in knockouts than a naive 'both are leaky so both score' read.
+- Apply a mild **knockout tightening** when calibrating a tie: trim the UNDERDOG's lambda
+  a touch (via its `context` / the favourite's `defense`), which lowers total xG, lowers
+  BTTS/Over, and lifts the favourite's clean-sheet probability — *without* moving the 1X2
+  side (keep it market-aligned). Small, not surgical: a few percent, weighted to the
+  underdog.
+- A leaky underdog concedes freely but that does NOT guarantee it scores; a controlling
+  favourite blanks them at BOTH ends. Keep the ADVANCEMENT read (the deliverable) as is —
+  it has been accurate — and just temper the BTTS/Over lean.
+- Don't over-update either: n is small (2 clear cases). This tempers the goals texture; it
+  does not change side/margin, and an open, high-scoring tie is still possible (Belgium 3-2
+  Senegal went end-to-end). Weight the underdog's SHAPE first (organized block → tight;
+  open/leaky → favourite scores but may still keep a clean sheet).
+
 ### Emerging pattern: favorites vs low block (key)
 
 There have now been FOUR 0-0 draws of favorites frustrated by organized opponents:
