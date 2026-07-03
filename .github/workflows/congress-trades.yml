@@ -52,51 +52,54 @@ jobs:
       - name: TEMP OGE probe (Trump 278-T format)
         run: |
           python3 - <<'PY'
-          import io, re, requests, pdfplumber
+          import io, re, base64, requests, pdfplumber
           UA={"User-Agent":"Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Safari/537.36"}
           def get(url, **k):
               try:
-                  r=requests.get(url, headers=UA, timeout=45, **k); return r
+                  r=requests.get(url, headers=UA, timeout=60, **k); return r
               except Exception as e:
                   print("  ERR", e); return None
-          # 1) Enumerate the PAS Index view fully as XML, and find Trump's entries.
-          #    The view is categorized by filer; expand it to reach documents.
-          for view in [
-              "https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index?ReadViewEntries&OutputFormat=XML&ExpandView&count=400",
-              "https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index?ReadViewEntries&OutputFormat=XML&RestrictToCategory=Trump%2C+Donald+J.&count=60",
-          ]:
-              r=get(view)
-              print("VIEW", r.status_code if r else "n/a", view)
-              if r and r.ok:
-                  t=r.text
-                  print("  len", len(t))
-                  # Show any Trump-related slice with surrounding noteids/unids.
-                  low=t.lower()
-                  i=low.find("trump")
-                  if i>=0:
-                      print("  TRUMP-SLICE", " ".join(t[max(0,i-600):i+1600].split()))
-                  else:
-                      print("  no 'trump' in this view response; head:")
-                      print("  ", " ".join(t.split())[:1200])
-              print("---")
-          # 2) Test whether the OGE-hosted 278-T PDF has a real text layer.
-          #    (The whitehouse.gov copy is a scanned image — empty text.)
-          for pdf in [
-              "https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/18353894FE440B3685258D430031A337/$FILE/Donald%20J.%20Trump%2010.20.2025%20278-T%20(2).pdf",
-              "https://www.whitehouse.gov/wp-content/uploads/2026/03/President-Donald-J.-Trump-Periodic-Transaction-Report-2.26.26-1.pdf",
-          ]:
-              r=get(pdf)
-              print("PDF", r.status_code if r else "n/a", len(r.content) if r else 0, pdf)
-              if r and r.ok and r.content[:4]==b"%PDF":
-                  try:
-                      with pdfplumber.open(io.BytesIO(r.content)) as doc:
-                          npg=len(doc.pages)
-                          txt="\n".join((p.extract_text() or "") for p in doc.pages[:3])
-                          nimg=sum(len(p.images) for p in doc.pages[:3])
-                      print(f"  pages={npg} imgs(first3)={nimg} textlen={len(txt.strip())}")
-                      print("  ===PDFTEXT==="); print(txt[:3500]); print("  ===END===")
-                  except Exception as e:
-                      print("  pdf-open err", e)
+          def chunkb64(tag, data):
+              b=base64.b64encode(data).decode()
+              for i in range(0, len(b), 2000):
+                  print(f"{tag} {i//2000:03d} {b[i:i+2000]}")
+              print(f"{tag} END")
+          # 1) Enumerate the categorized PAS Index view fully (ExpandView), then
+          #    walk it: a category row sets the current filer; child rows carry
+          #    the document unid + $FILE pdf link. Collect Trump's 278-T docs.
+          r=get("https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index?ReadViewEntries&OutputFormat=XML&ExpandView&count=5000")
+          print("VIEW", r.status_code if r else "n/a", "len", len(r.text) if r else 0)
+          if r and r.ok:
+              t=r.text
+              # Split into <viewentry ...>...</viewentry> blocks in document order.
+              entries=re.findall(r"<viewentry\b[^>]*>.*?</viewentry>", t, re.S)
+              print("  entries", entries, sep=" count=") if False else print("  entries count", len(entries))
+              cur=None
+              trump=[]
+              for e in entries:
+                  cat=re.search(r'category="true".*?<text>(.*?)</text>', e, re.S)
+                  if cat:
+                      cur=re.sub(r"\s+"," ", cat.group(1)).strip()
+                      continue
+                  if cur and "trump" in cur.lower():
+                      unid=re.search(r'unid="([0-9A-F]+)"', e)
+                      href=re.search(r"PAS\+Index/([0-9A-F]+)/\$FILE/([^'&]+\.pdf)", e)
+                      label=re.search(r"</a>|;gt;([^<]*?)&lt;/a", e)
+                      print("  TRUMP-CAT:", cur)
+                      print("    ENTRY:", " ".join(e.split())[:600])
+                      if href:
+                          trump.append((href.group(1), href.group(2)))
+              print("  TRUMP DOCS:", trump)
+          # 2) Dump the FULL OGE-hosted 278-T text (all pages) as base64 for a
+          #    faithful offline fixture, plus per-page text lengths.
+          r=get("https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/18353894FE440B3685258D430031A337/$FILE/Donald%20J.%20Trump%2010.20.2025%20278-T%20(2).pdf")
+          print("PDF", r.status_code if r else "n/a", len(r.content) if r else 0)
+          if r and r.ok and r.content[:4]==b"%PDF":
+              with pdfplumber.open(io.BytesIO(r.content)) as doc:
+                  pages=[(p.extract_text() or "") for p in doc.pages]
+              print("  pages", len(pages), "lens", [len(p) for p in pages])
+              full="\n\f\n".join(pages)
+              chunkb64("OGEB64", full.encode())
           PY
 
       - name: Estimate return-since-buy (non-fatal)
