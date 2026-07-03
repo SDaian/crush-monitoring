@@ -6,5 +6,11 @@
     "away":{"name":"Croatia","attack":0.95,"defense":1.0,"context":1.0,"notes":["Experienced, savvy, tournament-tough (grind wins over Panama, Ghana); can score but not prolific. attack 0.95.","Organized (though shipped 4 to England in an open game); a control side that slows the tie. defense 1.0.","Knockout pedigree -> thrives deep; real extra-time/penalty upset equity."]}},
   "market": {"odds":[2.15,3.20,3.50]},
   "_recal": "First pass landed at Portugal 45.7 / Draw 27.2 / Croatia 27.1 vs market de-vig 43.7 / 29.4 / 26.9 -- max divergence 2.2 pts, ALIGNED (MEDIUM), no lift/trim needed. A genuinely close tie: Portugal the moderate favourite, Croatia a savvy, deep-tie underdog. High ET/penalty risk baked in (27% ET, 14% pens).",
-  "lambdas_override": {"home":1.50,"away":1.10}
+  "lambdas_override": {"home":1.50,"away":1.10},
+  "_postmatch": {
+    "result": "Portugal 2-1 Croatia. The favourite edges a tight one and advances to the Round of 16, where they meet Spain. Settled in 90' -- no shootout.",
+    "model_1x2": "Portugal 45.7 / Draw 27.2 / Croatia 27.1 (MEDIUM, 90'); advancement Portugal 60.6 / Croatia 39.4",
+    "verdict": "Clean process hit on side, shape and margin. Portugal advanced as the 60.6% pick, won by the odd goal (2-1 a top-3 scoreline at 9.2%), and Croatia scored exactly as flagged (BTTS Yes 52.6%; 'can score but not prolific'). The TEXTURE read was right: I explicitly said this was NOT the Austria/rout archetype but a close, tighter tie against an organized, savvy Croatia -- a one-goal game (mode 1-1) that Portugal, the moderate favourite, was more likely to nick. It did not need the extra-time/penalty branch I flagged as elevated (27% ET, 14% pens) -- Portugal closed it in regulation -- but that branch being live is exactly why a 2-1 (not a rout) was the expected shape. Contrast with the SAME-DAY Spain 3-0: I correctly separated the rout tie (Spain vs open/leaky Austria) from the grind tie (Portugal vs organized Croatia), and both landed -- a blowout and a one-goal edge respectively.",
+    "lesson": "Classifying the underdog's SHAPE (organized control side vs open/leaky) is what distinguished this 2-1 grind from the same-day Spain 3-0 rout. Croatia's knockout pedigree and Portugal's bluntness vs blocks correctly produced a tight, one-goal, deep-ish tie rather than a comfortable win -- the favourite advanced, but by the minimum, as the 60.6% (not 80%+) advancement number implied. Don't let a big rating on the favourite pull the forecast toward a rout when the opponent is built to slow the game."
+  }
 }

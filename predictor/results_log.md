@@ -56,6 +56,7 @@ Legend: ✅ right for the right reason · 🟡 right but by luck/margin ·
 | 2026-07-01 | Belgium vs Senegal (R32) | 46.9 / 26.4 / 26.7 | MEDIUM | 3-2 aet (Belgium, adv.) | ✅ |
 | 2026-07-02 | USA vs Bosnia & Herz. (R32) | 55.4 / 23.9 / 20.6 | MEDIUM | 2-0 (USA, adv.) | ✅ |
 | 2026-07-02 | Spain vs Austria (R32) | 69.7 / 19.0 / 11.3 | HIGH | 3-0 (Spain, adv.) | ✅ |
+| 2026-07-03 | Portugal vs Croatia (R32) | 45.7 / 27.2 / 27.1 | MEDIUM | 2-1 (Portugal, adv.) | ✅ |
 
 ### Emerging pattern: favorites vs low block (key)
 
@@ -941,3 +942,24 @@ knockout has no draw. The closed-form chaining is Monte-Carlo-validated (sim vs 
   case, not the tail — align up/with the market, never fade. The 45% clean-sheet read
   foreshadowed a controlled shut-out, not the 'both score' texture BTTS 50% might suggest.
   Spain meet the Portugal–Croatia winner in the Round of 16.
+
+## 2026-07-03 · Round of 32 — Portugal 2-1 Croatia (Portugal advance) ✅
+
+- **Portugal vs Croatia** — 90': Portugal 45.7 / Draw 27.2 / Croatia 27.1 (MEDIUM);
+  advancement **Portugal 60.6 / Croatia 39.4**. λ 1.50 / 1.10, xG 2.60, Over 2.5 48%
+  (slight Under), BTTS 52.6%, Portugal clean sheet 33.3% / Croatia 22.3%, top scoreline
+  **1-1 (13.0%)** (2-1 at 9.2%); ET 27.2%, pens 13.9%. Market (90') aligned (div 2.2).
+  **RESULT: Portugal 2-1 Croatia — the favourite edges a tight one, settled in 90'.** Clean
+  process hit on side, shape AND margin: Portugal advanced as the 60.6% pick, won by the odd
+  goal (2-1 a top-3 scoreline), and Croatia scored exactly as flagged (BTTS Yes; 'can score
+  but not prolific'). The **texture read was the point**: I explicitly said this was NOT the
+  Austria/rout archetype but a close, one-goal grind against an organized, savvy Croatia — a
+  1-1-mode tie the moderate favourite was more likely to nick. It didn't need the elevated
+  ET/penalty branch (27% ET, 14% pens) — Portugal closed it in regulation — but that branch
+  being live is exactly why a **2-1 (not a rout)** was the expected shape. **Same-day
+  contrast that both landed:** Spain 3-0 (rout vs open/leaky Austria) and Portugal 2-1
+  (grind vs organized Croatia) — the underdog's SHAPE, correctly separated, drove the two
+  very different forecasts. **Lesson:** don't let a big favourite rating pull the forecast
+  toward a rout when the opponent is built to slow the game; Croatia's pedigree + Portugal's
+  bluntness vs blocks correctly produced a minimum-margin advance (the 60.6%, not 80%+,
+  number). Portugal now meet Spain in the Round of 16.
