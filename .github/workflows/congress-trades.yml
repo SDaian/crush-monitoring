@@ -49,57 +49,23 @@ jobs:
           fi
           python3 -m congress fetch $EXTRA 2>&1 | tee fetch.log
 
-      - name: TEMP OGE probe (Trump 278-T format)
+      - name: TEMP OGE probe (Trump 278-T end-to-end via congress.oge)
         run: |
           python3 - <<'PY'
-          import io, re, base64, requests, pdfplumber
-          UA={"User-Agent":"Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Safari/537.36"}
-          def get(url, **k):
-              try:
-                  r=requests.get(url, headers=UA, timeout=60, **k); return r
-              except Exception as e:
-                  print("  ERR", e); return None
-          def chunkb64(tag, data):
-              b=base64.b64encode(data).decode()
-              for i in range(0, len(b), 2000):
-                  print(f"{tag} {i//2000:03d} {b[i:i+2000]}")
-              print(f"{tag} END")
-          # 1) Enumerate the categorized PAS Index view fully (ExpandView), then
-          #    walk it: a category row sets the current filer; child rows carry
-          #    the document unid + $FILE pdf link. Collect Trump's 278-T docs.
-          r=get("https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index?ReadViewEntries&OutputFormat=XML&ExpandView&count=5000")
-          print("VIEW", r.status_code if r else "n/a", "len", len(r.text) if r else 0)
-          if r and r.ok:
-              t=r.text
-              # Split into <viewentry ...>...</viewentry> blocks in document order.
-              entries=re.findall(r"<viewentry\b[^>]*>.*?</viewentry>", t, re.S)
-              print("  entries", entries, sep=" count=") if False else print("  entries count", len(entries))
-              cur=None
-              trump=[]
-              for e in entries:
-                  cat=re.search(r'category="true".*?<text>(.*?)</text>', e, re.S)
-                  if cat:
-                      cur=re.sub(r"\s+"," ", cat.group(1)).strip()
-                      continue
-                  if cur and "trump" in cur.lower():
-                      unid=re.search(r'unid="([0-9A-F]+)"', e)
-                      href=re.search(r"PAS\+Index/([0-9A-F]+)/\$FILE/([^'&]+\.pdf)", e)
-                      label=re.search(r"</a>|;gt;([^<]*?)&lt;/a", e)
-                      print("  TRUMP-CAT:", cur)
-                      print("    ENTRY:", " ".join(e.split())[:600])
-                      if href:
-                          trump.append((href.group(1), href.group(2)))
-              print("  TRUMP DOCS:", trump)
-          # 2) Dump the FULL OGE-hosted 278-T text (all pages) as base64 for a
-          #    faithful offline fixture, plus per-page text lengths.
-          r=get("https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/18353894FE440B3685258D430031A337/$FILE/Donald%20J.%20Trump%2010.20.2025%20278-T%20(2).pdf")
-          print("PDF", r.status_code if r else "n/a", len(r.content) if r else 0)
-          if r and r.ok and r.content[:4]==b"%PDF":
-              with pdfplumber.open(io.BytesIO(r.content)) as doc:
-                  pages=[(p.extract_text() or "") for p in doc.pages]
-              print("  pages", len(pages), "lens", [len(p) for p in pages])
-              full="\n\f\n".join(pages)
-              chunkb64("OGEB64", full.encode())
+          from congress import oge
+          from congress.http import make_session
+          s = make_session()
+          docs = oge.list_filings(s)
+          print("FILINGS", len(docs))
+          for d in docs:
+              print(f"  {d.filing_date}  {d.unid}  {d.filename!r}  label={d.label!r}")
+          if docs:
+              trades = oge.fetch_trades(s, docs[0])
+              print("FIRST FILING TRADES", len(trades), "from", docs[0].filename)
+              from collections import Counter
+              print("  brackets", dict(Counter(t.amount_label for t in trades)))
+              for t in trades[:5]:
+                  print(f"    {t.tx_date} {t.type} {t.amount_label} | {t.asset[:55]}")
           PY
 
       - name: Estimate return-since-buy (non-fatal)
