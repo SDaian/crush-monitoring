@@ -27,7 +27,7 @@ import sys
 from datetime import date, datetime, timezone
 from pathlib import Path
 
-from . import house, pipeline, senate
+from . import house, oge, pipeline, senate
 from .normalize import MEMBERS_PATH, prune_cutoff
 
 LEGISLATORS_URL = (
@@ -110,6 +110,35 @@ def make_house_source(
     )
 
 
+def make_executive_source(
+    session, debug_dir: Path | None
+) -> pipeline.ChamberSource:
+    def list_filings():
+        return oge.list_filings(session)
+
+    def fetch_trades(ref):
+        resp = oge.polite_get(
+            session, ref.url, headers={"User-Agent": oge.BROWSER_UA}
+        )
+        text = oge.extract_pdf_text(resp.content)
+        if not text.strip():
+            raise pipeline.PaperFiling(ref.url)
+        _dump(debug_dir, f"executive-{ref.unid}.txt", text)
+        return oge.parse_transactions(
+            text, unid=ref.unid, source_url=ref.url, filing_date=ref.filing_date
+        )
+
+    return pipeline.ChamberSource(
+        chamber="executive",
+        list_filings=list_filings,
+        fetch_trades=fetch_trades,
+        ref_id=lambda r: r.unid,
+        ref_member=lambda r: oge.FILER_NAME,
+        ref_filing_date=lambda r: r.filing_date,
+        ref_url=lambda r: r.url,
+    )
+
+
 # ---------------------------------------------------------------------------
 # Subcommands
 # ---------------------------------------------------------------------------
@@ -126,6 +155,8 @@ def _cmd_fetch(args: argparse.Namespace) -> int:
         sources.append(make_senate_source(session, cutoff, debug_dir))
     if args.chamber in ("both", "house"):
         sources.append(make_house_source(session, cutoff, today, debug_dir))
+    if args.chamber in ("both", "executive"):
+        sources.append(make_executive_source(session, debug_dir))
     result = pipeline.run(
         sources,
         today=today,
@@ -341,7 +372,8 @@ def build_parser() -> argparse.ArgumentParser:
     sub = p.add_subparsers(dest="command", required=True)
 
     fetch = sub.add_parser("fetch", help="Incremental fetch of new PTR filings.")
-    fetch.add_argument("--chamber", choices=("both", "senate", "house"),
+    fetch.add_argument("--chamber",
+                       choices=("both", "senate", "house", "executive"),
                        default="both")
     fetch.add_argument("--limit", type=int, default=None,
                        help="Max new filings per chamber this run.")
@@ -353,7 +385,7 @@ def build_parser() -> argparse.ArgumentParser:
     fetch.add_argument("--state", default=str(pipeline.DEFAULT_STATE))
     fetch.set_defaults(func=_cmd_fetch)
 
-    for chamber in ("senate", "house"):
+    for chamber in ("senate", "house", "executive"):
         alias = sub.add_parser(chamber, help=f"Fetch only the {chamber}.")
         alias.add_argument("--limit", type=int, default=None)
         alias.add_argument("--dry-run", action="store_true")
