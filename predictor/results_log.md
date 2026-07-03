@@ -57,6 +57,7 @@ Legend: ✅ right for the right reason · 🟡 right but by luck/margin ·
 | 2026-07-02 | USA vs Bosnia & Herz. (R32) | 55.4 / 23.9 / 20.6 | MEDIUM | 2-0 (USA, adv.) | ✅ |
 | 2026-07-02 | Spain vs Austria (R32) | 69.7 / 19.0 / 11.3 | HIGH | 3-0 (Spain, adv.) | ✅ |
 | 2026-07-03 | Portugal vs Croatia (R32) | 45.7 / 27.2 / 27.1 | MEDIUM | 2-1 (Portugal, adv.) | ✅ |
+| 2026-07-03 | Switzerland vs Algeria (R32) | 53.1 / 24.0 / 22.9 | MEDIUM | 2-0 (Switzerland, adv.) | ✅ |
 
 ### Emerging pattern: favorites vs low block (key)
 
@@ -963,3 +964,23 @@ knockout has no draw. The closed-form chaining is Monte-Carlo-validated (sim vs 
   toward a rout when the opponent is built to slow the game; Croatia's pedigree + Portugal's
   bluntness vs blocks correctly produced a minimum-margin advance (the 60.6%, not 80%+,
   number). Portugal now meet Spain in the Round of 16.
+
+## 2026-07-03 · Round of 32 — Switzerland 2-0 Algeria (Switzerland advance) ✅
+
+- **Switzerland vs Algeria** — 90': Switzerland 53.1 / Draw 24.0 / Algeria 22.9 (MEDIUM);
+  advancement **Switzerland 67.0 / Algeria 33.0**. λ 1.85 / 1.15, xG 3.00, Over 2.5 58%,
+  BTTS 58%, Switzerland clean sheet 31.7% / Algeria 15.7%, top scoreline **1-1 (11.2%)**
+  (2-0 at 8.5%); ET 24.0%, pens 11.3%. Market (90') aligned (div 2.6). **RESULT: Switzerland
+  2-0 Algeria — favourite advances with a clean sheet, settled in 90'.** Clean process hit
+  on side and margin: Switzerland advanced as the 67.0% pick, won 2-0 (a top-4 scoreline),
+  xG 1.85 → 2 goals on the nose. The **BTTS lean missed**: I read this as an open, both-score
+  game (BTTS 58%) given Algeria's attack (5 goals) and Switzerland's non-airtight defence
+  (GA 3), but the leaky underdog was **shut out** (the ~32% clean-sheet branch). 📌 **Pattern
+  (2 in a row):** in the 'favourite vs open/leaky underdog' archetype I have been
+  OVER-leaning BTTS-Yes — USA 2-0 Bosnia and now Switzerland 2-0 Algeria BOTH saw the leaky,
+  attacking underdog blanked while I leaned both-score. **Lesson:** a leaky underdog concedes
+  freely but that does NOT guarantee it scores; when the favourite controls the game it
+  blanks them at both ends. Trust the clean-sheet probability as a real branch, not a
+  minority story — the clean-favourite-win cluster (2-0/2-1/1-0) is heavier than a naive
+  'both are leaky so both score' read. Side and margin right; temper the BTTS lean in this
+  archetype. Switzerland now meet the Colombia–Ghana winner in the Round of 16.
