@@ -19,7 +19,7 @@ marked processed), so they self-heal after a parser fix.
 ## Return since buy (`prices.py` → `docs/data/returns.json`)
 
 For every disclosed **buy** of a listed US equity, `congress prices` estimates
-how the stock has performed since the trade date, using the free Yahoo Finance chart API (JSON, no API key). Per buy it stores the
+how the stock has performed since the trade date, using Twelve Data (free tier, key via the CONGRESS_PRICES_KEY secret). Per buy it stores the
 entry close (the trade date's close, or the prior session), and the % change to
 the latest available close.
 
@@ -34,15 +34,11 @@ pure stdlib, so `tests/congress/test_prices.py` runs offline against a JSON
 fixture. Run standalone with `python3 -m congress prices` (add `--limit N` to
 price only the first N tickers while testing).
 
-**Status — live feed not yet connected.** Both free keyless feeds block GitHub
-Actions' shared IPs: Stooq serves a JavaScript anti-bot page, and Yahoo 429s
-the runner even with a cookie+crumb session. So `prices` currently prices
-nothing from CI; the writer detects a total miss and **keeps the existing
-`returns.json`** rather than clobbering it, and `docs/data/returns.json` ships
-a clearly-labelled **illustrative sample** (the page shows a placeholder
-banner). Wiring a real feed means a keyed provider (e.g. Twelve Data / Tiingo)
-via a repo secret, scoped to the most-traded tickers to fit the free quota —
-tracked as follow-up.
+**Live feed: Twelve Data.** The daily Action reads the `CONGRESS_PRICES_KEY` repo secret and prices the featured + ~100 most-traded tickers (free tier is 800 calls/day, 8/min), which covers where the buy volume is; the long tail shows “—”. The key is passed only as an env var and never written to any file, log or committed URL. On a total miss (missing key / outage) the writer keeps the existing `returns.json` rather than clobbering it.
+
+
+
+**Option context.** For option trades we also capture the filer's free-text Description (House) / Comment (Senate) verbatim into `comment`, and parse out `option` = {type, strike, expiration, contracts} when disclosed (e.g. "Purchased 200 call options with a strike price of $50 and an expiration date of 3/19/27."). Disclosure is inconsistent — the page shows what the filer gave and "details not specified in filing" otherwise; quantity is only shown when the filer wrote it (it is not a required field).
 
 ## Data-honesty constraints (by law, not by us)
 

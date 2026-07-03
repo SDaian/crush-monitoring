@@ -12,10 +12,37 @@ from congress.normalize import (
     load_featured,
     parse_amount,
     parse_date,
+    parse_option_detail,
     parse_tx_type,
     prune_cutoff,
     trade_sort_key,
 )
+
+
+class TestOptionDetail(unittest.TestCase):
+    def test_full_call(self):
+        d = parse_option_detail(
+            "Purchased 200 call options with a strike price of $50 "
+            "and an expiration date of 3/19/27.")
+        self.assertEqual(d, {"type": "call", "strike": 50.0,
+                             "expiration": "2027-03-19", "contracts": 200})
+
+    def test_put_with_four_digit_year(self):
+        d = parse_option_detail(
+            "Sold 5 put options, strike $1,200.50, expires 06/20/2025")
+        self.assertEqual(d["type"], "put")
+        self.assertEqual(d["strike"], 1200.5)
+        self.assertEqual(d["expiration"], "2025-06-20")
+        self.assertEqual(d["contracts"], 5)
+
+    def test_partial_disclosure(self):
+        # Strike only — still return what the filer gave, nothing invented.
+        self.assertEqual(parse_option_detail("call, strike price of $80"),
+                         {"type": "call", "strike": 80.0})
+
+    def test_no_detail_is_none(self):
+        self.assertIsNone(parse_option_detail("Sold to rebalance the trust."))
+        self.assertIsNone(parse_option_detail(None))
 
 
 class TestAmounts(unittest.TestCase):

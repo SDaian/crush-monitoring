@@ -110,6 +110,54 @@ def parse_date(raw: str) -> str:
     raise ValueError(f"unrecognized date: {raw!r}")
 
 
+def _norm_short_date(raw: str) -> str | None:
+    """Parse a filer-written ``M/D/YY`` or ``M/D/YYYY`` date to ISO, or None."""
+    for fmt in ("%m/%d/%y", "%m/%d/%Y"):
+        try:
+            return datetime.strptime(raw.strip(), fmt).date().isoformat()
+        except ValueError:
+            continue
+    return None
+
+
+# Option details are filer free-text, e.g. "Purchased 200 call options with a
+# strike price of $50 and an expiration date of 3/19/27." Each attribute is
+# matched independently so partial disclosures (strike but no expiry, etc.)
+# still yield what the filer gave.
+_OPT_TYPE = re.compile(r"\b(call|put)s?\b", re.I)
+_OPT_STRIKE = re.compile(r"strike\s*(?:price)?\s*(?:of)?\s*\$?\s*([\d,]+(?:\.\d+)?)", re.I)
+_OPT_EXP = re.compile(r"expir\w*\s*(?:date)?\s*(?:of)?\s*(\d{1,2}/\d{1,2}/\d{2,4})", re.I)
+_OPT_CONTRACTS = re.compile(r"(\d+)\s+(?:call|put)s?\s+option", re.I)
+
+
+def parse_option_detail(text: str | None) -> dict | None:
+    """Extract {type, strike, expiration, contracts} from a filer description.
+
+    Returns None when the text names none of them — we never invent detail.
+    """
+    if not text:
+        return None
+    detail: dict = {}
+    m = _OPT_TYPE.search(text)
+    if m:
+        detail["type"] = m.group(1).lower()
+    m = _OPT_STRIKE.search(text)
+    if m:
+        try:
+            detail["strike"] = float(m.group(1).replace(",", ""))
+        except ValueError:
+            pass
+    m = _OPT_EXP.search(text)
+    if m:
+        iso = _norm_short_date(m.group(1))
+        if iso:
+            detail["expiration"] = iso
+    m = _OPT_CONTRACTS.search(text)
+    if m:
+        detail["contracts"] = int(m.group(1))
+    return detail or None
+
+
 # ---------------------------------------------------------------------------
 # Names and roster
 # ---------------------------------------------------------------------------
@@ -213,9 +261,11 @@ class Trade:
     asset_type: str | None = None
     partial: bool = False
     owner: str | None = None  # "SP" spouse | "JT" joint | "DC" dependent child | None = self
+    comment: str | None = None   # filer's free-text description, verbatim
+    option: dict | None = None   # {type, strike, expiration, contracts} when disclosed
 
     def to_dict(self) -> dict:
-        return {
+        d = {
             "id": self.id,
             "chamber": self.chamber,
             "member": self.member,
@@ -236,6 +286,12 @@ class Trade:
             "filing_id": self.filing_id,
             "source_url": self.source_url,
         }
+        # Only emit the option-detail keys when present, to keep rows compact.
+        if self.comment:
+            d["comment"] = self.comment
+        if self.option:
+            d["option"] = self.option
+        return d
 
 
 def enrich(trade: Trade, roster: Roster) -> Trade:
