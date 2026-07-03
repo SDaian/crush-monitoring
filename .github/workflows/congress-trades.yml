@@ -49,23 +49,6 @@ jobs:
           fi
           python3 -m congress fetch $EXTRA 2>&1 | tee fetch.log
 
-      - name: TEMP OGE probe (executive 278-T end-to-end via congress.oge)
-        run: |
-          python3 - <<'PY'
-          from collections import Counter
-          from congress import oge
-          from congress.http import make_session
-          s = make_session()
-          docs = oge.list_filings()
-          print("SEED FILINGS", len(docs))
-          for d in docs:
-              trades = oge.fetch_trades(s, d)
-              print(f"  {d.filing_date} {d.unid} -> {len(trades)} trades  ({d.filename})")
-              print("   brackets", dict(Counter(t.amount_label for t in trades)))
-              for t in trades[:3]:
-                  print(f"     {t.tx_date} {t.type} {t.amount_label} | {t.asset[:55]}")
-          PY
-
       - name: Estimate return-since-buy (non-fatal)
         env:
           # Accept the key whether it was added as an Actions *secret* (preferred)
@@ -74,7 +57,7 @@ jobs:
         run: |
           # Prices move daily even when no new filing arrives, so this runs
           # every day. A price-source outage must not fail the whole refresh.
-          python3 -m congress prices --top 0 --limit 1 2>&1 | tee -a fetch.log \
+          python3 -m congress prices 2>&1 | tee -a fetch.log \
             || echo "::warning::price refresh failed; keeping prior returns.json"
 
       - name: Commit refreshed data

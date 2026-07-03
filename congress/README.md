@@ -10,6 +10,26 @@ normalizes them into one schema, and accumulates them into
 |---|---|---|
 | Senate | `efdsearch.senate.gov` — disclaimer POST (CSRF) then the DataTables-style JSON search (`/search/report/data/`, report type 11 = PTR) | Electronic PTRs are HTML tables; paper filings (`/search/view/paper/…`) are scans |
 | House | `disclosures-clerk.house.gov` — yearly index ZIP `public_disc/financial-pdfs/<YEAR>FD.zip` (TSV; FilingType `P` = PTR) | `public_disc/ptr-pdfs/<YEAR>/<DocID>.pdf`; e-filed PTRs are text PDFs, paper ones are scans |
+| Executive (President) | `extapps2.oge.gov/201/Presiden.nsf` — OGE Form 278-T Periodic Transaction Reports. The President is **not** in OGE's browsable PAS Index view (appointees only) and the app exposes no search, so his filings are curated by stable document UNID in `oge_filings.json` | `.../PAS+Index/<UNID>/$FILE/<name>.pdf` — **scanned** PDFs with an OCR text layer |
+
+## Executive 278-T (`oge.py` → chamber `executive`)
+
+The President discloses trades on OGE Form 278-T. Unlike the House e-filed PDFs,
+these are **scanned images with a noisy OCR text layer** (digits misread as
+letters: `5`→`S`, `0`→`D`/`O`, `1`→`l`), so `oge.parse_transactions` anchors on
+the regular `<type> <date> No <amount>` tail of each row and **snaps the amount
+to the fixed STOCK Act brackets**, which corrects residual OCR errors. The
+President's disclosed transactions are managed-account **purchases of corporate
+& municipal bonds** (plus the odd bond ETF), so these rows carry **no equity
+ticker** and therefore no "return since buy".
+
+Because he is not listed in any browsable OGE view, the filings to ingest are
+curated in **`congress/oge_filings.json`** (one entry per 278-T PDF: its stable
+`unid` + attachment `filename`; the report date is parsed from the filename).
+The daily job re-fetches and re-parses each seeded UNID. **To add a newly posted
+278-T**, append its `unid` and `filename` to that file. Only `oge.fetch_trades`
+(the PDF GET) and `oge.extract_pdf_text` (pdfplumber) touch the network/binary
+deps; the parsing is pure and fixture-tested offline.
 
 Paper/scanned filings are never parsed: they are recorded in
 `skipped_filings` with a link and surfaced on the page. Parse-error filings
@@ -50,8 +70,11 @@ price only the first N tickers while testing).
 
 - `normalize.py` — `Trade` schema, bracket/type/date parsing, name
   canonicalization, roster join. Pure stdlib.
-- `senate.py` / `house.py` — listing + parsing per chamber. Parsers are pure
-  functions of `str`/`bytes` (fixture-testable offline).
+- `senate.py` / `house.py` / `oge.py` — listing + parsing per chamber
+  (`oge.py` covers the executive-branch 278-T). Parsers are pure functions of
+  `str`/`bytes` (fixture-testable offline).
+- `oge_filings.json` — curated list of the President's 278-T PDFs by UNID
+  (he is not in any browsable OGE view). Append new filings here.
 - `http.py` — the only module importing `requests`: shared UA, retries,
   ≥1 s spacing between requests.
 - `pipeline.py` — incremental orchestration: diff filings against

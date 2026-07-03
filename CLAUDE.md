@@ -133,14 +133,21 @@ played, update **every** relevant place:
 ## Congress trades tracker (`congress/`, `docs/trades.html`)
 
 A separate Pages section tracking STOCK Act trade disclosures, sourced only
-from the official Senate eFD and House Clerk sites. Full details in
-`congress/README.md`. Conventions:
+from the official Senate eFD, House Clerk, and OGE (executive-branch 278-T)
+sites. Full details in `congress/README.md`. Conventions:
 
 - **Generated files are never hand-edited:** `docs/data/congress-trades.json`,
   `docs/data/returns.json` and `congress/state.json` are written by
   `congress/pipeline.py` / `congress/prices.py` (daily via
   `.github/workflows/congress-trades.yml`). To change the data, fix the
   generator and re-run it.
+- **Executive 278-T (President) is a curated seed, not a scrape:**
+  `congress/oge_filings.json` lists the President's OGE Form 278-T Periodic
+  Transaction Reports by stable document UNID (he is not in any browsable OGE
+  view). `congress/oge.py` fetches + OCR-parses each on every run; the rows are
+  managed-account **bond** purchases (chamber `executive`, no ticker, no return
+  estimate). To track a newly posted 278-T, append its `unid` + `filename`.
+  This file *is* hand-maintained (unlike the generated data files above).
 - **Return-since-buy is an estimate — label it as such:** `congress/prices.py`
   fetches Twelve Data daily closes (free tier, key via the CONGRESS_PRICES_KEY secret) and records, per disclosed
   **buy**, the stock's % change since the trade date. It is NOT the member's
@@ -151,8 +158,8 @@ from the official Senate eFD and House Clerk sites. Full details in
   `requests` + `pdfplumber` (`congress/requirements.txt`, installed only by
   the Action) but **parsers must stay stdlib-importable** so
   `tests/congress` runs offline with no third-party deps — network code is
-  confined to `congress/http.py`, pdfplumber to `house.extract_pdf_text`,
-  and Twelve Data to `prices.fetch_raw`.
+  confined to `congress/http.py`, pdfplumber to `house.extract_pdf_text` /
+  `oge.extract_pdf_text`, and Twelve Data to `prices.fetch_raw`.
 - **Adding a featured member:** append the canonical name to
   `congress/featured.json` and make sure `congress/members.json` has an entry
   (with the filer-name spellings as `aliases`).
