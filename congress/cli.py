@@ -114,7 +114,7 @@ def make_executive_source(
     session, debug_dir: Path | None
 ) -> pipeline.ChamberSource:
     def list_filings():
-        return oge.list_filings(session)
+        return oge.list_filings()
 
     def fetch_trades(ref):
         resp = oge.polite_get(

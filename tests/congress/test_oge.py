@@ -6,31 +6,42 @@ from pathlib import Path
 
 from congress.oge import (
     OgeFiling,
+    filing_url,
+    parse_seed,
     parse_transactions,
-    parse_view_documents,
 )
 
 FIXTURES = Path(__file__).parent / "fixtures"
 
 
-class TestViewEnumeration(unittest.TestCase):
+class TestSeedFilings(unittest.TestCase):
     def setUp(self):
-        xml = (FIXTURES / "oge_pas_index.xml").read_text(encoding="utf-8")
-        self.docs = parse_view_documents([xml])
+        seed = {
+            "filer": "Donald J. Trump",
+            "filings": [
+                {
+                    "unid": "18353894FE440B3685258D430031A337",
+                    "filename": "Donald J. Trump 10.20.2025 278-T (2).pdf",
+                },
+                {  # explicit date overrides / supplements the filename
+                    "unid": "ABCDEF0123456789ABCDEF0123456789",
+                    "filename": "Donald J. Trump 278-T.pdf",
+                    "date": "2026-02-26",
+                },
+            ],
+        }
+        self.docs = parse_seed(seed)
 
-    def test_only_trump_278t_returned(self):
-        # Abizaid's annual (other filer) and Trump's annual 278 are excluded;
-        # only Trump's 278-T periodic report survives.
-        self.assertEqual(len(self.docs), 1)
-        doc = self.docs[0]
-        self.assertIsInstance(doc, OgeFiling)
-        self.assertEqual(doc.unid, "18353894FE440B3685258D430031A337")
+    def test_builds_one_ref_per_filing(self):
+        self.assertEqual(len(self.docs), 2)
+        self.assertIsInstance(self.docs[0], OgeFiling)
+        self.assertEqual(self.docs[0].unid, "18353894FE440B3685258D430031A337")
 
-    def test_document_fields(self):
-        doc = self.docs[0]
-        self.assertEqual(doc.filename, "Donald J. Trump 10.20.2025 278-T (2).pdf")
-        self.assertEqual(doc.filing_date, "2025-10-20")  # from the filename date
-        self.assertEqual(doc.label, "Periodic (10/20/2025)")
+    def test_filing_date_from_filename(self):
+        self.assertEqual(self.docs[0].filing_date, "2025-10-20")
+
+    def test_explicit_date_used_when_filename_has_none(self):
+        self.assertEqual(self.docs[1].filing_date, "2026-02-26")
 
     def test_url_is_encoded_and_absolute(self):
         url = self.docs[0].url
@@ -39,19 +50,20 @@ class TestViewEnumeration(unittest.TestCase):
         self.assertNotIn(" ", url)  # spaces in the filename are percent-encoded
         self.assertIn("278-T", url.replace("%20", " "))
 
-    def test_category_state_carries_across_pages(self):
-        # A filer split across two view responses is still captured: the
-        # category row on page 1, its document on page 2.
-        xml = (FIXTURES / "oge_pas_index.xml").read_text(encoding="utf-8")
-        cat_line = next(
-            ln for ln in xml.splitlines() if 'category="true"' in ln and "Trump" in ln
+    def test_filing_url_helper(self):
+        url = filing_url("DEADBEEF", "a b.pdf")
+        self.assertEqual(
+            url,
+            "https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/DEADBEEF/$FILE/a%20b.pdf",
         )
-        doc_line = next(ln for ln in xml.splitlines() if "278-T" in ln)
-        page1 = f"<viewentries>{cat_line}</viewentries>"
-        page2 = f"<viewentries>{doc_line}</viewentries>"
-        docs = parse_view_documents([page1, page2])
-        self.assertEqual(len(docs), 1)
-        self.assertEqual(docs[0].unid, "18353894FE440B3685258D430031A337")
+
+    def test_committed_seed_parses(self):
+        # The real committed seed must load and produce valid refs.
+        from congress.oge import load_seed
+        docs = load_seed()
+        self.assertTrue(docs)
+        for d in docs:
+            self.assertTrue(d.unid and d.filename and d.filing_date and d.url)
 
 
 class TestTransactionParsing(unittest.TestCase):

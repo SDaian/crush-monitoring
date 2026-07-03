@@ -29,9 +29,10 @@ scraper dependencies.
 
 from __future__ import annotations
 
+import json
 import re
 from dataclasses import dataclass
-from html import unescape
+from pathlib import Path
 from urllib.parse import quote
 
 from .http import polite_get
@@ -42,8 +43,6 @@ from .normalize import AMOUNT_BRACKETS, Trade, parse_date
 # ---------------------------------------------------------------------------
 OGE_HOST = "https://extapps2.oge.gov"
 VIEW_PATH = "/201/Presiden.nsf/PAS+Index"
-VIEW_URL = OGE_HOST + VIEW_PATH
-PAGE_SIZE = 1000  # Domino caps a ReadViewEntries response at 1000 entries
 
 # OGE's app is picky about non-browser agents; present a browser UA for its
 # requests only (the shared bot UA stays the default for the .gov chambers).
@@ -52,42 +51,29 @@ BROWSER_UA = (
     "(KHTML, like Gecko) Chrome/124.0 Safari/537.36"
 )
 
-# We track the sitting President. Categories in the view read
-# "Last, First[, MI], Agency, Position" — match on the name prefix so we do
-# not depend on the exact agency/position wording.
 FILER_NAME = "Donald J. Trump"
-FILER_CATEGORY_KEY = "trump, donald"
+
+# The President is NOT listed in OGE's browsable "PAS Index" view (that view
+# covers Senate-confirmed appointees only), and the Domino app exposes no
+# full-text search or President-specific view. His 278-T PDFs are reachable
+# only by their stable document UNID. So the set of filings to ingest is
+# curated in this seed file; the daily job re-fetches and re-parses each one.
+PACKAGE_DIR = Path(__file__).resolve().parent
+SEED_PATH = PACKAGE_DIR / "oge_filings.json"
 
 
-# ---------------------------------------------------------------------------
-# Listing: enumerate the filer's 278-T PDF documents from the Domino view
-# ---------------------------------------------------------------------------
 @dataclass
 class OgeFiling:
-    """One 278-T PDF attachment listed under the filer in the PAS Index view."""
+    """One 278-T PDF attachment (a Periodic Transaction Report)."""
 
     unid: str          # Domino universal id of the attachment's document
     filename: str      # e.g. "Donald J. Trump 10.20.2025 278-T (2).pdf"
     filing_date: str   # ISO, parsed from the filename date
     url: str           # absolute, URL-encoded download link
-    label: str         # the view's link text, e.g. "Periodic (10/20/2025)"
+    label: str         # short human label, e.g. "Periodic (2025-10-20)"
 
 
-_VIEWENTRY_RE = re.compile(r"<viewentry\b[^>]*>.*?</viewentry>", re.S)
-_CATEGORY_RE = re.compile(r'category="true"\s*>\s*<text>(.*?)</text>', re.S)
-_HREF_RE = re.compile(
-    r"href='(/201/Presiden\.nsf/PAS\+Index/([0-9A-Fa-f]+)/\$FILE/([^']+?\.pdf))'"
-    r"[^>]*>(?:<img[^>]*>)?([^<]*)</a>",
-    re.I,
-)
 _FILENAME_DATE_RE = re.compile(r"(\d{1,2})[.\-/](\d{1,2})[.\-/](\d{2,4})")
-
-
-def _entry_category(entry_xml: str) -> str | None:
-    m = _CATEGORY_RE.search(entry_xml)
-    if not m:
-        return None
-    return re.sub(r"\s+", " ", m.group(1)).strip()
 
 
 def _filename_date(filename: str) -> str | None:
@@ -104,51 +90,43 @@ def _filename_date(filename: str) -> str | None:
         return None
 
 
-def _documents_in_entry(entry_xml: str) -> list[OgeFiling]:
-    """Extract every 278-T PDF link from one (child) view entry."""
-    html = unescape(entry_xml)
+def filing_url(unid: str, filename: str) -> str:
+    """Build the absolute, URL-encoded $FILE download link for an attachment."""
+    path = f"{VIEW_PATH}/{unid}/$FILE/{filename}"
+    return OGE_HOST + quote(path, safe="/$:+")
+
+
+def parse_seed(data: dict) -> list[OgeFiling]:
+    """Turn the curated seed JSON into :class:`OgeFiling` refs."""
     out: list[OgeFiling] = []
-    for path, unid, filename, label in _HREF_RE.findall(html):
-        low = f"{filename} {label}".lower()
-        # Periodic Transaction Reports only — skip Annual/New-entrant 278s.
-        if "278-t" not in low and "periodic" not in low:
-            continue
-        url = OGE_HOST + quote(path, safe="/$:+")
+    for f in data.get("filings", []):
+        unid, filename = f["unid"], f["filename"]
         out.append(
             OgeFiling(
                 unid=unid,
-                filename=filename.strip(),
-                filing_date=_filename_date(filename) or "",
-                url=url,
-                label=re.sub(r"\s+", " ", label).strip(),
+                filename=filename,
+                filing_date=f.get("date") or _filename_date(filename) or "",
+                url=filing_url(unid, filename),
+                label=f.get("label")
+                or f"Periodic ({_filename_date(filename) or filename})",
             )
         )
     return out
 
 
-def parse_view_documents(pages: list[str], filer_key: str = FILER_CATEGORY_KEY) -> list[OgeFiling]:
-    """Walk the categorized view XML (in order) and collect the filer's docs.
+def load_seed(path: Path = SEED_PATH) -> list[OgeFiling]:
+    if not path.exists():
+        return []
+    return parse_seed(json.loads(path.read_text(encoding="utf-8")))
 
-    ``pages`` is the list of ReadViewEntries XML responses in ``Start`` order.
-    A category row sets the current filer; child rows under a matching filer
-    contribute their 278-T attachments. Category state carries across the page
-    boundary, so a filer split across two responses is still captured.
+
+def list_filings(session=None, seed_path: Path = SEED_PATH) -> list[OgeFiling]:
+    """Return the President's 278-T filings to ingest (from the seed file).
+
+    Listing needs no network — the seed *is* the list; ``session`` is accepted
+    only so the call site matches the other chambers' source wiring.
     """
-    docs: list[OgeFiling] = []
-    seen: set[str] = set()
-    current_matches = False
-    for xml in pages:
-        for entry in _VIEWENTRY_RE.findall(xml):
-            cat = _entry_category(entry)
-            if cat is not None:
-                current_matches = filer_key in cat.lower()
-                continue
-            if current_matches:
-                for doc in _documents_in_entry(entry):
-                    if doc.unid not in seen:
-                        seen.add(doc.unid)
-                        docs.append(doc)
-    return docs
+    return load_seed(seed_path)
 
 
 # ---------------------------------------------------------------------------
@@ -294,28 +272,6 @@ def parse_transactions(
 # ---------------------------------------------------------------------------
 # Network glue (the only functions that import requests / pdfplumber)
 # ---------------------------------------------------------------------------
-def fetch_view_page(session, start: int, count: int = PAGE_SIZE) -> str:
-    url = (
-        f"{VIEW_URL}?ReadViewEntries&OutputFormat=XML&ExpandView"
-        f"&Start={start}&Count={count}"
-    )
-    return polite_get(session, url, headers={"User-Agent": BROWSER_UA}).text
-
-
-def list_filings(session, max_pages: int = 6) -> list[OgeFiling]:
-    """Page through the PAS Index view and return the filer's 278-T docs."""
-    pages: list[str] = []
-    start = 1
-    for _ in range(max_pages):
-        xml = fetch_view_page(session, start)
-        pages.append(xml)
-        n = len(_VIEWENTRY_RE.findall(xml))
-        if n < PAGE_SIZE:
-            break
-        start += n
-    return parse_view_documents(pages)
-
-
 def extract_pdf_text(content: bytes) -> str:
     """Extract text from a 278-T PDF (all pages). Imports pdfplumber lazily."""
     import io

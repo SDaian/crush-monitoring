@@ -49,47 +49,21 @@ jobs:
           fi
           python3 -m congress fetch $EXTRA 2>&1 | tee fetch.log
 
-      - name: TEMP OGE probe (discover the President's 278-T view)
+      - name: TEMP OGE probe (executive 278-T end-to-end via congress.oge)
         run: |
           python3 - <<'PY'
-          import re, requests
-          UA={"User-Agent":"Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Safari/537.36"}
-          NSF="https://extapps2.oge.gov/201/Presiden.nsf"
-          def get(url):
-              try: return requests.get(url, headers=UA, timeout=60)
-              except Exception as e:
-                  print("  ERR", e); return None
-          # A) NSF homepage: harvest every internal link + view-like segment.
-          for entry in (f"{NSF}?Open", f"{NSF}/PAS+Index?OpenView"):
-              r=get(entry)
-              print("A)", entry, r.status_code if r else "n/a", "len", len(r.text) if r else 0)
-              if not r: continue
-              hrefs=re.findall(r'href=["\']([^"\']+)["\']', r.text, re.I)
-              inter=[h for h in hrefs if "Presiden.nsf" in h or h.startswith("/201")]
-              segs=sorted({re.sub(r"\?.*","",h).split("Presiden.nsf/")[-1].split("/")[0]
-                           for h in inter if "Presiden.nsf/" in h})
-              print("   view-like segments:", segs[:40])
-              for h in inter:
-                  if re.search(r"trump|278|periodic|ptr|preside", h, re.I):
-                      print("   LINK:", h[:120])
-          # B) The known doc's own page — sibling attachments / filer context.
-          UNID="18353894FE440B3685258D430031A337"
-          r=get(f"{NSF}/PAS+Index/{UNID}?OpenDocument")
-          print("B) OpenDocument", r.status_code if r else "n/a", "len", len(r.text) if r else 0)
-          if r:
-              atts=re.findall(r"/\$FILE/([^\"'&?]+)", r.text)
-              print("   attachments:", atts[:10])
-              for m in re.findall(r'href=["\']([^"\']+)["\']', r.text):
-                  if re.search(r"trump|278|periodic|view", m, re.I):
-                      print("   DLINK:", m[:120])
-          # C) Try candidate view names for the President's PTRs.
-          for v in ("President","President+Trump","Periodic","PTR","Recent",
-                    "By+Date","278-T","Trump","xpPresident.xsp"):
-              u=f"{NSF}/{v}?ReadViewEntries&OutputFormat=XML&Count=40"
-              r=get(u)
-              n=len(re.findall(r"<viewentry\b",r.text)) if r else -1
-              has=bool(r and "trump" in r.text.lower())
-              print(f"C) view {v!r}: status={r.status_code if r else 'n/a'} entries={n} trump={has}")
+          from collections import Counter
+          from congress import oge
+          from congress.http import make_session
+          s = make_session()
+          docs = oge.list_filings()
+          print("SEED FILINGS", len(docs))
+          for d in docs:
+              trades = oge.fetch_trades(s, d)
+              print(f"  {d.filing_date} {d.unid} -> {len(trades)} trades  ({d.filename})")
+              print("   brackets", dict(Counter(t.amount_label for t in trades)))
+              for t in trades[:3]:
+                  print(f"     {t.tx_date} {t.type} {t.amount_label} | {t.asset[:55]}")
           PY
 
       - name: Estimate return-since-buy (non-fatal)
