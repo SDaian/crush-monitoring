@@ -313,7 +313,8 @@ const KO_KNOWN = {
   78: {h:3, a:0},                    // R32: Spain 3-0 Austria (Spain advance) — rout + clean sheet, settled in 90'
   77: {h:2, a:1},                    // R32: Portugal 2-1 Croatia (Portugal advance) — favourite edges a tight one, settled in 90'
   87: {h:2, a:0},                    // R32: Switzerland 2-0 Algeria (Switzerland advance) — clean sheet, settled in 90'
-  86: {h:1, a:1, pen:"Egypt"}        // R32: Australia 1-1 Egypt (aet), Egypt win on penalties — tight tie to the lottery
+  86: {h:1, a:1, pen:"Egypt"},       // R32: Australia 1-1 Egypt (aet), Egypt win on penalties — tight tie to the lottery
+  85: {h:3, a:2, aet:true}           // R32: Argentina 3-2 Cape Verde after extra time (1-1 at 90') — favourite advances but the block scared them
 };
 
 /* ---- round-robin fixture order for 4 teams ---- */
@@ -559,7 +560,7 @@ function calibFor(m){ if(!m) return null;
    =========================================================================== */
 // Build/data stamp shown in the header. The app is stateless: nothing is
 // persisted, so reloading (F5) always returns to the official results.
-const DATA_VERSION="2026-07-03.r32-egypt-penalties-result";
+const DATA_VERSION="2026-07-03.r32-argentina-capeverde-result";
 let state={ results:{}, strengths:{}, learn:[] };
 
 function freshStrengths(){ const s={}; for(const t in TEAMS) s[t]=TEAMS[t]; return s; }

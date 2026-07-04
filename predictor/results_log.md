@@ -59,6 +59,7 @@ Legend: ✅ right for the right reason · 🟡 right but by luck/margin ·
 | 2026-07-03 | Portugal vs Croatia (R32) | 45.7 / 27.2 / 27.1 | MEDIUM | 2-1 (Portugal, adv.) | ✅ |
 | 2026-07-03 | Switzerland vs Algeria (R32) | 53.1 / 24.0 / 22.9 | MEDIUM | 2-0 (Switzerland, adv.) | ✅ |
 | 2026-07-03 | Australia vs Egypt (R32) | 31.8 / 32.7 / 35.5 | LOW | 1-1 pens (Egypt, adv.) | ✅ |
+| 2026-07-03 | Argentina vs Cape Verde (R32) | 79.3 / 15.4 / 5.2 | HIGH | 3-2 aet (Argentina, adv.) | ✅ |
 
 ### Standing calibration note: KNOCKOUT CAUTION (BTTS/Over bias)
 
@@ -1036,3 +1037,28 @@ knockout has no draw. The closed-form chaining is Monte-Carlo-validated (sim vs 
   working; a kick the other way (like Germany/Netherlands losing theirs → 🟡) would NOT have
   been a process error — the shootout is near-random by design. Egypt now meet the
   Argentina–Cape Verde winner in the Round of 16.
+
+## 2026-07-03 · Round of 32 — Argentina 3-2 Cape Verde (aet, 1-1 at 90') (Argentina advance) ✅
+
+- **Argentina vs Cape Verde** — 90': Argentina 79.3 / Draw 15.4 / Cape Verde 5.2 (HIGH);
+  advancement **Argentina 90.3 / Cape Verde 9.7**. λ 2.38 / 0.48, xG 2.86, Over 2.5 55%,
+  **BTTS-No 65%**, Argentina clean sheet 62% / Cape Verde 9%, top scoreline **2-0 (16.2%)**;
+  ET 15.4%, pens 6.9%. Recal: lifted ARG 2.10→2.38 to align UP with the market (Spain
+  lesson), trimming the draw 19%→15.4%. **RESULT: Argentina 3-2 after EXTRA TIME (1-1 at
+  90') — Argentina advance, but Cape Verde took them the distance and scored TWICE.** Right
+  on the DELIVERABLE (Argentina advanced as the 90.3% pick — ✅; the tie reaching ET is the
+  15.4% branch), but the **texture missed badly**, and that miss is the lesson. I predicted a
+  controlled low-margin win (2-0 modal, Argentina clean sheet 62%, CV BTTS-No 65%, CV λ just
+  0.48); instead Cape Verde — the **proven low block that held Spain 0-0** — held Argentina
+  1-1 through 90' AND scored two in a 3-2 thriller. Two calibration choices bit: **(1)** the
+  Spain-lesson alignment UP trimmed the draw/ET tail (19%→15.4%), fading a block that had
+  ALREADY smothered Spain — that tail deserved MORE weight, not less; **(2)** the
+  knockout-caution trim drove CV's attack toward zero (BTTS-No 65%), and they scored two.
+  📌 **Refinement to both standing notes (from the same-day Egypt contrast):** (a) the Spain
+  lesson is about the ADVANCE probability — keep aligning THAT up — but it must NOT flatten
+  the draw/ET tail against a PROVEN elite low block (Cape Verde belongs in the 'favourite vs
+  proven low block' pattern where the draw is worth more than it looks). (b) Knockout caution
+  lowers the GAME's goal expectation but must not zero out a specific underdog's scoring — a
+  block can still nick goals, especially in a tiring extra time. **Don't over-update on the
+  win:** Argentina DID advance as forecast (90%+); the correction is purely to the
+  texture/tail, not the side. Argentina now meet Egypt in the Round of 16.
