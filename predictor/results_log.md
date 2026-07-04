@@ -58,6 +58,7 @@ Legend: ✅ right for the right reason · 🟡 right but by luck/margin ·
 | 2026-07-02 | Spain vs Austria (R32) | 69.7 / 19.0 / 11.3 | HIGH | 3-0 (Spain, adv.) | ✅ |
 | 2026-07-03 | Portugal vs Croatia (R32) | 45.7 / 27.2 / 27.1 | MEDIUM | 2-1 (Portugal, adv.) | ✅ |
 | 2026-07-03 | Switzerland vs Algeria (R32) | 53.1 / 24.0 / 22.9 | MEDIUM | 2-0 (Switzerland, adv.) | ✅ |
+| 2026-07-03 | Australia vs Egypt (R32) | 31.8 / 32.7 / 35.5 | LOW | 1-1 pens (Egypt, adv.) | ✅ |
 
 ### Standing calibration note: KNOCKOUT CAUTION (BTTS/Over bias)
 
@@ -1013,3 +1014,25 @@ knockout has no draw. The closed-form chaining is Monte-Carlo-validated (sim vs 
   minority story — the clean-favourite-win cluster (2-0/2-1/1-0) is heavier than a naive
   'both are leaky so both score' read. Side and margin right; temper the BTTS lean in this
   archetype. Switzerland now meet the Colombia–Ghana winner in the Round of 16.
+
+## 2026-07-03 · Round of 32 — Australia 1-1 Egypt (aet), Egypt win on penalties (Egypt advance) ✅
+
+- **Australia vs Egypt** — 90': Australia 31.8 / Draw 32.7 / Egypt 35.5 (LOW, 'no strong
+  read'); advancement **Australia 47.9 / Egypt 52.1**. λ 0.98 / 1.05, xG 2.03, Over 2.5 33%
+  (heavy Under), BTTS-No 58%, clean sheet 35% / 37.5%, top scorelines **1-1 (14.6%)** and
+  **0-0 (14.2%)**; **ET 32.7%, pens 18.9% (the round's highest)**. Market (90') aligned (div
+  2.4). **RESULT: 1-1 after extra time, Egypt win on PENALTIES — Egypt advance.** Textbook
+  process hit on BOTH texture and side — as good as this archetype gets. I called it a near
+  coin-flip between two organized, low-scoring sides (LOW, 'no strong read') with the tight
+  low-block texture: xG 2.03, 1-1 the single most likely scoreline, BTTS-No, and the highest
+  ET/penalty risk of the round. It delivered **1-1 → extra time → penalties**, the central
+  scenario almost exactly, and the marginal favourite **Egypt (52.1%)** won the shootout and
+  advanced. The **knockout-caution** note paid off in the tight-tie direction: leaning the
+  goals texture DOWN (not the open both-score read) matched a 1-1 grind perfectly. 📌 The
+  goals-caution note is now validated in BOTH directions — favourite-clean-sheet (USA/Swiss
+  2-0) and tight-1-1-to-penalties (here). **Lesson:** when the model has NO strong 1X2 read
+  the honest deliverable IS 'this is 50/50 and likely to go deep', and the advancement split
+  (52/48) is the content, not a confident pick. Egypt winning the coin-flip is the process
+  working; a kick the other way (like Germany/Netherlands losing theirs → 🟡) would NOT have
+  been a process error — the shootout is near-random by design. Egypt now meet the
+  Argentina–Cape Verde winner in the Round of 16.
