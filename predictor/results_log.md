@@ -60,6 +60,7 @@ Legend: ✅ right for the right reason · 🟡 right but by luck/margin ·
 | 2026-07-03 | Switzerland vs Algeria (R32) | 53.1 / 24.0 / 22.9 | MEDIUM | 2-0 (Switzerland, adv.) | ✅ |
 | 2026-07-03 | Australia vs Egypt (R32) | 31.8 / 32.7 / 35.5 | LOW | 1-1 pens (Egypt, adv.) | ✅ |
 | 2026-07-03 | Argentina vs Cape Verde (R32) | 79.3 / 15.4 / 5.2 | HIGH | 3-2 aet (Argentina, adv.) | ✅ |
+| 2026-07-03 | Colombia vs Ghana (R32) | 54.7 / 27.4 / 17.9 | MEDIUM | 1-0 (Colombia, adv.) | ✅ |
 
 ### Standing calibration note: KNOCKOUT CAUTION (BTTS/Over bias)
 
@@ -1062,3 +1063,35 @@ knockout has no draw. The closed-form chaining is Monte-Carlo-validated (sim vs 
   block can still nick goals, especially in a tiring extra time. **Don't over-update on the
   win:** Argentina DID advance as forecast (90%+); the correction is purely to the
   texture/tail, not the side. Argentina now meet Egypt in the Round of 16.
+
+## 2026-07-03 · Round of 32 — Colombia 1-0 Ghana (Colombia advance) ✅ [R32 COMPLETE]
+
+- **Colombia vs Ghana** — 90': Colombia 54.7 / Draw 27.4 / Ghana 17.9 (MEDIUM);
+  advancement **Colombia 71.0 / Ghana 29.0**. λ 1.55 / 0.78, xG 2.33, Over 2.5 41% (Under
+  lean), BTTS-No 56%, Colombia clean sheet 46% / Ghana 21%, top scoreline **1-0 (14.1%)**;
+  ET 27.4%, pens 14.6%. Recal: lifted COL 1.40→1.55 to align UP with the market while KEEPING
+  the draw/ET tail fat (proven block) and NOT zeroing Ghana's attack. **RESULT: Colombia 1-0
+  Ghana — controlled low-margin win, clean sheet, settled in 90'.** The **cleanest process
+  hit of the round** — side, margin AND texture all nailed. Colombia advanced as the 71.0%
+  pick, won 1-0 (the single most likely scoreline at 14.1%), kept a clean sheet (the 45.8%
+  branch), Under 2.5 and BTTS-No — exactly the cagey low-total shape described. The synthesis
+  tie: **'clear favourite vs organized low block' resolves most often as a controlled 1-0/2-0
+  win in 90'** (not a rout, not a shootout), which is what the aligned-up-but-cautious
+  calibration predicted. The proven-block draw/ET tail (27%) simply didn't need to fire, but
+  pricing it was still correct. **Confirms the R32 method:** (1) align the ADVANCE probability
+  to the market (don't fade the favourite), (2) keep the goals texture conservative in
+  knockouts (BTTS-No, high clean sheet, low total), (3) keep the draw/ET tail fat against a
+  proven block but don't zero the underdog's attack. Colombia now meet Switzerland in the
+  Round of 16.
+
+### Round of 32 — final scorecard (16/16 ties graded)
+
+All 16 R32 ties were deep-calibrated and graded. **Advancement (the deliverable): 16/16 —
+every side the model made the favourite to advance did advance** (including the two coin-flip
+ties, Egypt and Belgium-Senegal, and the near-even Australia-Egypt where the 52% pick won the
+shootout). Texture hits were strong except two open-archetype BTTS misses (USA, Switzerland —
+leaky underdog shut out) and one texture miss on Argentina-Cape Verde (proven block took it to
+ET and scored twice, though Argentina still advanced). Key lessons banked for the R16: the
+knockout-caution note (conservative goals texture), and the refinement — align the ADVANCE
+probability up to the market, but keep the draw/ET tail fat against a proven low block and
+never zero the underdog's attack.
