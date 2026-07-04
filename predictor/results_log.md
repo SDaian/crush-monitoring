@@ -61,35 +61,44 @@ Legend: ✅ right for the right reason · 🟡 right but by luck/margin ·
 | 2026-07-03 | Australia vs Egypt (R32) | 31.8 / 32.7 / 35.5 | LOW | 1-1 pens (Egypt, adv.) | ✅ |
 | 2026-07-03 | Argentina vs Cape Verde (R32) | 79.3 / 15.4 / 5.2 | HIGH | 3-2 aet (Argentina, adv.) | ✅ |
 | 2026-07-03 | Colombia vs Ghana (R32) | 54.7 / 27.4 / 17.9 | MEDIUM | 1-0 (Colombia, adv.) | ✅ |
+| 2026-07-04 | Canada vs Morocco (R16) | 29.6 / 28.0 / 42.3 | LOW | 0-3 (Morocco, adv.) | ✅ |
 
-### Standing calibration note: KNOCKOUT CAUTION (BTTS/Over bias)
+### Standing calibration note: KNOCKOUT CAUTION → BTTS RULE (v2, quantified)
 
 **Applies to every knockout tie from the R32 on.** Our attack/defense ratings are
 learned from the GROUP stage, where games are looser and more open. Knockout football
 is a different texture: teams play more cautiously and focus on not making mistakes,
 the underdog sits deeper when it can, transitions are fewer — so **fewer goals, more
-clean sheets, and lower BTTS** than the group-calibrated numbers imply. Evidence: in the
-'favourite vs open/leaky underdog' archetype I leaned **BTTS-Yes** and was wrong twice in
-a row — **USA 2-0 Bosnia** and **Switzerland 2-0 Algeria** — the leaky, attacking
-underdog was SHUT OUT both times. The SIDE and MARGIN reads were right (6/6 on
-advancement); the miss is specifically the goals TEXTURE.
+clean sheets, and lower BTTS** than the group-calibrated numbers imply.
 
-**Convention going forward (annotate, don't rewrite history):**
-- Do NOT auto-lean BTTS-Yes just because both sides looked leaky in the group stage.
-  Trust the clean-sheet branch — the clean-favourite-win cluster (2-0 / 2-1 / 1-0) is
-  heavier in knockouts than a naive 'both are leaky so both score' read.
-- Apply a mild **knockout tightening** when calibrating a tie: trim the UNDERDOG's lambda
-  a touch (via its `context` / the favourite's `defense`), which lowers total xG, lowers
-  BTTS/Over, and lifts the favourite's clean-sheet probability — *without* moving the 1X2
-  side (keep it market-aligned). Small, not surgical: a few percent, weighted to the
-  underdog.
-- A leaky underdog concedes freely but that does NOT guarantee it scores; a controlling
-  favourite blanks them at BOTH ends. Keep the ADVANCEMENT read (the deliverable) as is —
-  it has been accurate — and just temper the BTTS/Over lean.
-- Don't over-update either: n is small (2 clear cases). This tempers the goals texture; it
-  does not change side/margin, and an open, high-scoring tie is still possible (Belgium 3-2
-  Senegal went end-to-end). Weight the underdog's SHAPE first (organized block → tight;
-  open/leaky → favourite scores but may still keep a clean sheet).
+**The BTTS bias is now confirmed (3-for-3), not small-n noise.** Every time I leaned
+**BTTS-Yes** on a 'favourite vs an attacking-looking underdog' tie, the favourite kept a
+CLEAN SHEET and the underdog was SHUT OUT: **USA 2-0 Bosnia**, **Switzerland 2-0 Algeria**,
+**Morocco 3-0 Canada**. The advancement SIDE was right every time; the miss is specifically
+the goals TEXTURE — I keep over-pricing the underdog's chance to score.
+
+**QUANTIFIED BTTS RULE going forward (annotate, don't rewrite history):**
+- **Default lean is BTTS-NO whenever there is a clear-ish favourite** (advancement ≳ 58%,
+  OR a class/form gap ≳ 6). In those ties the underdog is shut out far more often than
+  symmetric lambdas imply → the favourite's clean sheet is the base case.
+- **Mechanically: trim the UNDERDOG's lambda ~15–20%** (via its `attack` / `context`), on
+  top of base calibration, in every knockout tie with a favourite. This lifts the
+  favourite's clean-sheet probability and pulls BTTS toward No **without moving the 1X2/
+  advancement** (keep those market-aligned — they have been accurate). Weight the haircut to
+  the underdog; do NOT also trim the favourite (that would move the side).
+- **Reserve BTTS-Yes for GENUINELY EVEN ties** (advancement ~50/50) between two ATTACKING
+  sides — that is where both-score actually lands (Belgium 3-2 Senegal, Argentina-Cape Verde
+  went to 3-2 in ET, Australia 1-1 Egypt). Not for a favourite vs a merely 'leaky-looking'
+  minnow.
+- **Do not zero the underdog's attack** (Argentina-Cape Verde lesson): a ~15–20% haircut,
+  not annihilation — a proven block can still nick one, especially in a tiring extra time.
+- Secondary: don't discount a favourite in RED-HOT knockout form toward a coin-flip just
+  because the underdog has a venue/home edge (Morocco had just beaten Brazil-level
+  opposition and won 3-0 from a tie I mis-priced as ~57/43). Weight recent knockout form.
+- Still don't over-update the SIDE: this changes the goals texture and can nudge the margin
+  up for an in-form favourite; it does not flip who advances. Aggregate BTTS across all 17
+  graded knockout games is ~9 Yes / 8 No (~53%) — so the fix is about ATTRIBUTION (which
+  ties go BTTS), not a blanket 'no goals' prior.
 
 ### Emerging pattern: favorites vs low block (key)
 
@@ -1095,3 +1104,28 @@ ET and scored twice, though Argentina still advanced). Key lessons banked for th
 knockout-caution note (conservative goals texture), and the refinement — align the ADVANCE
 probability up to the market, but keep the draw/ET tail fat against a proven low block and
 never zero the underdog's attack.
+
+---
+
+## ROUND OF 16
+
+## 2026-07-04 · Round of 16 — Canada 0-3 Morocco (Morocco advance) ✅
+
+- **Canada vs Morocco** — 90': Canada 29.6 / Draw 28.0 / Morocco 42.3 (LOW, 'no strong
+  read'); advancement **Canada 42.8 / Morocco 57.2**. λ 1.15 / 1.42, xG 2.57, Over 2.5 47%,
+  **BTTS 53% (Yes lean)**, clean sheet Canada 24% / Morocco 32%, top scoreline **1-1 (13.4%)**;
+  ET 28%, pens 14.5%. Market (90') aligned (div 1.7). **RESULT: Canada 0-3 Morocco — Morocco
+  advance comprehensively with a clean sheet, settled in 90'; the co-host is out.** Right side
+  (Morocco advanced as the 57.2% pick — ✅) but TWO texture corrections fall out: **(1)** the
+  MARGIN blew past the near-even read — I priced it ~57/43 (LOW); Morocco won 3-0, playing like
+  the clear favourite their form implied (had just held Brazil 1-1 and knocked out the
+  Netherlands). I under-weighted red-hot Morocco and over-credited Canada's co-host edge (the
+  market also had Morocco only 40.6%, so partly variance — but 3-0 says Morocco was stronger
+  than priced). **(2)** the **BTTS-Yes lean (53%) was WRONG AGAIN** — Canada shut out. 📌 This
+  is the **THIRD straight** clean-sheet-for-the-favourite after a BTTS-Yes lean (USA 2-0,
+  Switzerland 2-0, Morocco 3-0). **Action taken:** upgraded the standing note to a QUANTIFIED
+  BTTS rule — default BTTS-NO when there's a clear-ish favourite (advancement ≳58% or gap ≳6),
+  mechanically trim the UNDERDOG's lambda ~15–20% (lifts favourite clean sheet, pulls BTTS to
+  No, WITHOUT moving the 1X2/advancement), and reserve BTTS-Yes for genuinely even ties between
+  two attacking sides. Also: don't discount a red-hot in-form favourite toward a coin-flip on a
+  venue edge. Morocco now meet the Paraguay–France winner in the quarter-finals.
