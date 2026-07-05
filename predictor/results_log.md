@@ -62,6 +62,7 @@ Legend: ✅ right for the right reason · 🟡 right but by luck/margin ·
 | 2026-07-03 | Argentina vs Cape Verde (R32) | 79.3 / 15.4 / 5.2 | HIGH | 3-2 aet (Argentina, adv.) | ✅ |
 | 2026-07-03 | Colombia vs Ghana (R32) | 54.7 / 27.4 / 17.9 | MEDIUM | 1-0 (Colombia, adv.) | ✅ |
 | 2026-07-04 | Canada vs Morocco (R16) | 29.6 / 28.0 / 42.3 | LOW | 0-3 (Morocco, adv.) | ✅ |
+| 2026-07-05 | France vs Paraguay (R16) | 77.7 / 16.2 / 6.1 | HIGH | 1-0 (France, adv.) | ✅ |
 
 ### Standing calibration note: KNOCKOUT CAUTION → BTTS RULE (v2, quantified)
 
@@ -1129,3 +1130,24 @@ never zero the underdog's attack.
   No, WITHOUT moving the 1X2/advancement), and reserve BTTS-Yes for genuinely even ties between
   two attacking sides. Also: don't discount a red-hot in-form favourite toward a coin-flip on a
   venue edge. Morocco now meet the Paraguay–France winner in the quarter-finals.
+
+## 2026-07-05 · Round of 16 — Paraguay 0-1 France (France advance) ✅ [BTTS rule validated]
+
+- **France vs Paraguay** — 90': France 77.7 / Draw 16.2 / Paraguay 6.1 (HIGH); advancement
+  **France 89.1 / Paraguay 10.9**. λ 2.35 / 0.53, xG 2.88, Over 2.5 55%, **BTTS-No 62%**, France
+  clean sheet 58.9% / Paraguay 9.5%, top scoreline **2-0 (15.5%)** (1-0 at 12.6%); ET 16.2%,
+  pens 7.2%. Recal: lifted FRA 2.20→2.35 to align with the market (don't fade the elite), and
+  applied the **new BTTS rule v2** — trimmed Paraguay's λ hard (0.53) for BTTS-No, without
+  zeroing the block. **RESULT: France 1-0 — controlled minimum-margin win, clean sheet, settled
+  in 90'.** Clean process hit, and — crucially — **the new BTTS rule landed on its FIRST
+  application**: I leaned BTTS-No / France clean sheet, and Paraguay was shut out (Under 2.5,
+  BTTS-No, both correct) — the OPPOSITE of the old both-score over-lean that had missed three
+  straight (USA, Switzerland, Morocco). 1-0 was a top-3 scoreline. Sub-modal note: the MARGIN
+  was the minimum (1-0 vs the 2-0 mode / rout-live read) because Paraguay did what a proven
+  block does — kept the score down and made France work; this is the 'don't zero the block' half
+  of the rule paying off (a live tail, not annihilation, matched a 1-0 grind not a 3-0 rout).
+  **Lesson:** the BTTS-rule upgrade is validated — trimming the underdog's λ correctly produced
+  the favourite-clean-sheet / BTTS-No texture that occurred. For 'elite favourite vs proven low
+  block', expect a CONTROLLED low-margin win with the favourite clean sheet (1-0/2-0),
+  advancement ~89% — which is what the calibration said. Keep applying it. France now meet
+  Morocco in the quarter-finals.
