@@ -706,17 +706,19 @@ function rollForward(member){
   // Live options: snapshot options + option buys since, expired contracts dropped, deduped.
   const today = daysAgo(0);
   const optMap = new Map();
-  const add = o => {
+  const add = (o, est) => {
     if (!o || !o.ticker || !o.expiration) return;  // need a date to confirm it's live
     if (o.expiration < today) return;               // expired
     const key = [o.ticker, o.type||"", o.strike||"", o.expiration].join("|");
-    if (!optMap.has(key)) optMap.set(key, o);
+    const prev = optMap.get(key);
+    if (!prev) optMap.set(key, {...o, est: est || 0});
+    else prev.est = Math.max(prev.est, est || 0);   // keep the larger disclosed size
   };
   for (const h of base) if (h.asset_type === "Option")
-    add({ticker:h.ticker, type:h.option&&h.option.type, strike:h.option&&h.option.strike, expiration:h.option&&h.option.expiration, owner:h.owner});
+    add({ticker:h.ticker, type:h.option&&h.option.type, strike:h.option&&h.option.strike, expiration:h.option&&h.option.expiration, owner:h.owner}, valueMid(h));
   for (const t of optTrades) if (t.type === "buy")
-    add({ticker:t.ticker, type:t.option&&t.option.type, strike:t.option&&t.option.strike, expiration:t.option&&t.option.expiration, owner:t.owner});
-  return {stocks, options:[...optMap.values()], filings:filings.size, snap, rec};
+    add({ticker:t.ticker, type:t.option&&t.option.type, strike:t.option&&t.option.strike, expiration:t.option&&t.option.expiration, owner:t.owner}, notionalMid(t));
+  return {stocks, options:[...optMap.values()].sort((a,b) => b.est - a.est), filings:filings.size, snap, rec};
 }
 
 function renderHoldCards(){
@@ -769,9 +771,21 @@ function rollForwardHtml(m){
         </div>`;
       }).join("")}
     </div>
-    ${rf.options.length ? `<div class="note" style="margin-top:10px"><b>Live options</b> (${rf.options.length}, expiry still ahead — snapshot + filings): ${
-      rf.options.slice(0, 16).map(o => `<span class="opt">🎟 ${esc(o.ticker)}${o.type?` ${esc(o.type)}`:""}${o.strike!=null?` $${esc(o.strike)}`:""} · exp ${esc(o.expiration)}</span>`).join(" ")}${rf.options.length > 16 ? ` <span class="est">+${rf.options.length - 16} more</span>` : ""}</div>` : ""}
-    ${exited.length ? `<div class="note" style="margin-top:6px"><b>Estimated sold down</b> (disclosed sells since the snapshot exceed its bracket value — coarse brackets can overstate this, so read as “heavily reduced”, not necessarily zero): ${exited.map(e => esc(e.ticker || e.asset)).join(", ")}</div>` : ""}
+    ${rf.options.length ? (() => {
+      const optMax = rf.options[0].est || 1;
+      return `<div class="note" style="margin-top:12px"><b>🎟 Live options</b> (${rf.options.length}, expiry still ahead — value brackets, expired dropped):</div>
+      <div style="margin-top:4px">
+        ${rf.options.map(o => {
+          const w = 100 * o.est / optMax;
+          const label = [o.type ? esc(o.type) : "option", o.strike != null ? "$" + esc(o.strike) : "", "· exp " + esc(o.expiration)].filter(Boolean).join(" ");
+          return `<div class="trow">
+            <span class="tklabel" title="${esc(o.ticker)} ${label}"><span class="tk">${esc(o.ticker)}</span><span class="co">${label}</span>${o.owner?`<span class="chip" title="spouse / joint / dependent child">${esc(o.owner)}</span>`:""}</span>
+            <div class="track"><div class="bar" style="width:${w}%;background:#e0b341" role="img" aria-label="${esc(o.ticker)} option ~${fmtMoney(o.est)}"></div></div>
+            <span class="ct">~${fmtMoney(o.est)}</span>
+          </div>`;
+        }).join("")}
+      </div>` ; })() : ""}
+    ${exited.length ? `<div class="note" style="margin-top:8px"><b>Estimated sold down</b> (disclosed sells since the snapshot exceed its bracket value — coarse brackets can overstate this, so read as “heavily reduced”, not necessarily zero): ${exited.map(e => esc(e.ticker || e.asset)).join(", ")}</div>` : ""}
     <div class="note" style="margin-top:8px">🔎 <b>Estimated current holdings</b> — the member's latest <b>annual report</b> (a year-end snapshot; values are STOCK Act <b>brackets</b>) rolled forward with every <b>transaction report</b> filed since. Sizes are bracket-midpoint estimates (<b>not</b> share counts), so read this as a directional photo, not an exact portfolio. Individual stocks + options only.</div>`;
 }
 
