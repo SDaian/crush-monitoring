@@ -49,6 +49,26 @@ jobs:
           fi
           python3 -m congress fetch $EXTRA 2>&1 | tee fetch.log
 
+      - name: Refresh featured-member holdings (non-fatal)
+        run: |
+          # Real stock composition from each featured member's latest annual
+          # financial-disclosure report. Rarely changes (annual), but cheap to
+          # re-check. A source outage must not fail the whole refresh.
+          python3 -m congress holdings 2>&1 | tee -a fetch.log \
+            || echo "::warning::holdings refresh failed; keeping prior holdings.json"
+          # Commit holdings here (not in the final step) so it lands even if the
+          # slow price step below stalls on a rate limit. Stage first, then test
+          # the *staged* diff — holdings.json may be a brand-new untracked file
+          # that a plain `git diff` would not see.
+          git add docs/data/holdings.json
+          if ! git diff --cached --quiet -- docs/data/holdings.json; then
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git commit -m "congress: holdings refresh ($(date -u +%F))"
+            git pull --rebase origin "${GITHUB_REF_NAME}"
+            git push
+          fi
+
       - name: Estimate return-since-buy (non-fatal)
         env:
           # Accept the key whether it was added as an Actions *secret* (preferred)
