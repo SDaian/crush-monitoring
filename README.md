@@ -190,9 +190,11 @@ estimate.
   `congress/requirements.txt` and are installed only by the Action.
 - `docs/data/congress-trades.json` — generated dataset (never hand-edited).
 - `docs/trades.html` — the tracker page: featured-member watchlist,
-  most-traded tickers, a per-ticker "Ticker focus" tab, an estimated
-  "return since buy" per disclosed buy, and a filterable table with every
-  row linked to the official filing.
+  most-traded tickers, a per-ticker "Ticker focus" tab, a "Holdings" tab
+  (an **inferred** net-composition per featured member — disclosed buys − sells
+  by bracket midpoint, explicitly *not* a real portfolio, since filings report
+  trades not positions), an estimated "return since buy" per disclosed buy, and
+  a filterable table with every row linked to the official filing.
 - `docs/data/returns.json` — per-buy stock performance since the trade date,
   estimated from Twelve Data (free tier, via a repo secret). A stock-performance
   follow-through, **not** the member's realized profit.

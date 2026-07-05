@@ -156,6 +156,7 @@
   <div class="tabs" id="tabs">
     <div class="tab active" data-p="all">📊 All trades</div>
     <div class="tab" data-p="ticker">🔎 Ticker focus</div>
+    <div class="tab" data-p="holdings">🧩 Holdings</div>
   </div>
 
   <div class="panel active" id="p-all">
@@ -222,6 +223,19 @@
     <div class="panel2" id="tickerDetail"></div>
   </div><!-- /#p-ticker -->
 
+  <div class="panel" id="p-holdings">
+    <div class="legend">
+      Estimated <b>net disclosed activity</b> for each featured member: total
+      <span class="buy">buys</span> minus <span class="sell">sells</span> per holding, sized by STOCK Act
+      bracket midpoints, over all data in the tracker. <b>This is not a real portfolio.</b>
+      Disclosures report <em>trades</em>, not positions — so this ignores holdings owned before the window,
+      exact amounts, dividends, and anything never traded or not disclosed. Read it as
+      “what they’ve been building,” not a statement of holdings.
+    </div>
+    <div class="cards" id="holdCards"></div>
+    <div class="panel2" id="holdDetail"></div>
+  </div><!-- /#p-holdings -->
+
   <details class="skips" id="skips" style="display:none">
     <summary></summary>
     <ul id="skipList"></ul>
@@ -263,7 +277,7 @@ let PRICES = {};    // ticker -> {asof_date, asof_close}
 let retSample = false;
 let state = {q:"", chamber:"", party:"", type:"", range:"", member:"",
              sortKey:"filing_date", sortDir:-1, shown:PAGE,
-             focusTicker:"MU", focusRange:"90"};
+             focusTicker:"MU", focusRange:"90", holdMember:null};
 
 const $ = id => document.getElementById(id);
 const esc = s => String(s ?? "").replace(/[&<>"']/g,
@@ -612,6 +626,111 @@ function renderTicker(){
   renderTickerDetail();
 }
 
+// ---- Holdings tab: inferred net composition per featured member -----------
+// Disclosures report TRADES, not positions, so this is an estimate of net
+// disclosed activity (buys − sells, bracket midpoints), NOT a real portfolio.
+function chamberName(ch){
+  return ch === "senate" ? "Senate" : ch === "executive" ? "White House" : "House";
+}
+
+function positionKey(t){
+  // Group by ticker when present; fall back to the (cleaned) asset name so
+  // no-ticker holdings — Trump's bonds, munis — still aggregate sensibly.
+  return t.ticker || cleanCompany(t.asset) || t.asset || "—";
+}
+
+function memberComposition(member){
+  const agg = new Map();
+  for (const t of DATA.trades){
+    if (t.member !== member) continue;
+    const key = positionKey(t);
+    let e = agg.get(key);
+    if (!e){ e = {key, ticker:t.ticker||null, asset:t.asset, buy:0, sell:0,
+                  buyEst:0, sellEst:0, n:0, last:t.tx_date}; agg.set(key, e); }
+    if (t.type === "buy"){ e.buy++; e.buyEst += notionalMid(t); }
+    else if (t.type === "sell"){ e.sell++; e.sellEst += notionalMid(t); }
+    e.n++;
+    if (t.tx_date > e.last) e.last = t.tx_date;
+  }
+  return [...agg.values()].map(e => ({
+    ...e,
+    net: e.buyEst - e.sellEst,
+    label: e.ticker || e.key,
+    company: e.ticker ? cleanCompany(e.asset) : "",
+  }));
+}
+
+function renderHoldCards(){
+  $("holdCards").innerHTML = (DATA.meta.featured || []).map(name => {
+    const longs = memberComposition(name).filter(e => e.net > 0);
+    const netLong = longs.reduce((s,e) => s + e.net, 0);
+    const info = DATA.trades.find(t => t.member === name);
+    const who = info ? [chamberName(info.chamber), info.party].filter(Boolean).join(" · ")
+                     : "no machine-readable trades";
+    return `<div class="fcard ${state.holdMember === name ? "sel" : ""}" data-h="${esc(name)}">
+      <div class="name">${esc(name)}</div>
+      <div class="who">${esc(who)}</div>
+      <div class="note" style="margin-top:4px">${longs.length} net position${longs.length===1?"":"s"} · est. ~${fmtMoney(netLong)}</div>
+    </div>`;
+  }).join("");
+}
+
+function renderHoldDetail(){
+  const m = state.holdMember;
+  const box = $("holdDetail");
+  if (!m){ box.innerHTML = '<div class="note">Pick a member above.</div>'; return; }
+  const comp = memberComposition(m).sort((a,b) => b.net - a.net);
+  const info = DATA.trades.find(t => t.member === m);
+  const skips = (DATA.skipped_filings || []).filter(s => s.member === m);
+  if (!comp.length){
+    box.innerHTML = `<h3>${esc(m)}</h3>
+      <div class="note">No machine-readable trades for ${esc(m)} in the tracker window.${
+        skips.length ? ` ${skips.length} paper filing(s) can’t be parsed — see the list at the bottom.` : ""}</div>`;
+    return;
+  }
+  const longs = comp.filter(e => e.net > 0);
+  const shorts = comp.filter(e => e.net < 0);   // net reduced / sold in-window
+  const flat = comp.filter(e => e.net === 0);
+  const netLong = longs.reduce((s,e) => s + e.net, 0) || 1;
+  const max = longs[0]?.net || 1;
+  const who = [chamberName(info.chamber), info.party, info.district || info.state].filter(Boolean).join(" · ");
+  box.innerHTML =
+    `<h3>${esc(m)} <span class="note">${esc(who)}</span></h3>
+     <div class="tksummary">
+       <span><b>${longs.length}</b> est. net position${longs.length===1?"":"s"}</span>
+       <span>est. net long <b>${fmtMoney(netLong)}</b> <span class="est">(bracket midpoints)</span></span>
+       ${shorts.length ? `<span><b>${shorts.length}</b> net reduced/sold</span>` : ""}
+     </div>
+     <div style="margin-top:8px">
+       ${longs.length ? longs.map(e => {
+         const w = 100 * e.net / max, share = 100 * e.net / netLong;
+         return `<div class="trow">
+           <span class="tklabel" title="${esc(e.company || e.label)}"><span class="tk">${esc(e.label)}</span><span class="co">${esc(e.company)}</span></span>
+           <div class="track"><div class="bar" style="width:${w}%;background:var(--good)" role="img" aria-label="${esc(e.label)}: est. net ${fmtMoney(e.net)}"></div></div>
+           <span class="ct">~${fmtMoney(e.net)} · ${Math.round(share)}%</span>
+         </div>`;
+       }).join("") : '<div class="note">No net-positive positions — this member is a net seller in-window.</div>'}
+     </div>
+     ${shorts.length ? `<div class="note" style="margin-top:10px"><b>Net reduced / sold</b> (more disclosed selling than buying in-window): ${
+        shorts.map(e => `${esc(e.label)} (~${fmtMoney(-e.net)})`).join(", ")}</div>` : ""}
+     ${flat.length ? `<div class="note" style="margin-top:4px">${flat.length} holding(s) netted ~$0 (bought and sold about evenly).</div>` : ""}
+     ${skips.length ? `<div class="note" style="margin-top:4px">📄 ${skips.length} paper filing(s) not machine-readable — excluded from this estimate.</div>` : ""}`;
+}
+
+function renderHoldings(){
+  if (!state.holdMember){
+    // Default to the featured member with the most parsed trades.
+    let best = null, bestN = -1;
+    for (const name of (DATA.meta.featured || [])){
+      const n = DATA.trades.reduce((c,t) => c + (t.member === name ? 1 : 0), 0);
+      if (n > bestN){ bestN = n; best = name; }
+    }
+    state.holdMember = best || (DATA.meta.featured || [])[0] || null;
+  }
+  renderHoldCards();
+  renderHoldDetail();
+}
+
 function renderSkips(){
   const skips = DATA.skipped_filings || [];
   $("skipNote").innerHTML = skips.length
@@ -632,6 +751,7 @@ function renderAll(){
   renderTopTickers();
   renderRows();
   renderTicker();
+  renderHoldings();
 }
 
 function wire(){
@@ -692,6 +812,14 @@ function wire(){
     if (!btn) return;
     state.focusRange = btn.dataset.r;
     renderTickerDetail();
+  });
+
+  // Holdings: pick a featured member to see their inferred net composition.
+  $("holdCards").addEventListener("click", e => {
+    const card = e.target.closest(".fcard");
+    if (!card) return;
+    state.holdMember = card.dataset.h;
+    renderHoldings();
   });
 }
 
