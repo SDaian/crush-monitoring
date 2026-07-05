@@ -72,18 +72,34 @@ class TestHouseAnnualAssets(unittest.TestCase):
             filing_date="2026-05-15", report_year=2025,
         )
 
-    def test_only_stock_rows_kept(self):
-        # [OP] options, [OL] partnerships, [BA] bank accounts are excluded.
+    def test_stocks_and_options_kept(self):
+        # [OL] partnerships and [BA] bank accounts are excluded; stocks AND
+        # options ([ST]/[OP]) are kept.
+        stocks = [x for x in self.h if x.asset_type == "Stock"]
+        options = [x for x in self.h if x.asset_type == "Option"]
         self.assertEqual(
-            sorted(x.ticker for x in self.h),
+            sorted(x.ticker for x in stocks),
             ["AAPL", "AMZN", "AVGO", "AXP", "GOOGL", "NVDA", "SQ", "T"],
         )
-        self.assertTrue(all(x.asset_type == "Stock" for x in self.h))
+        # GOOGL/AMZN/AAPL are also held as options (AVGO option row has no value).
+        self.assertEqual(sorted(x.ticker for x in options), ["AAPL", "AMZN", "GOOGL"])
         self.assertTrue(all(x.chamber == "house" for x in self.h))
+
+    def test_option_detail_parsed(self):
+        opt = next(x for x in self.h if x.asset_type == "Option" and x.ticker == "GOOGL")
+        # code wrapped onto the next line ("[OP] $5,000,000"); value from lo.
+        self.assertEqual((opt.value_lo, opt.value_hi), (1_000_001, 5_000_000))
+        self.assertEqual(opt.option, {
+            "type": "call", "strike": 150.0,
+            "expiration": "2026-01-16", "contracts": 50,
+        })
+        aapl_opt = next(x for x in self.h if x.asset_type == "Option" and x.ticker == "AAPL")
+        self.assertEqual(aapl_opt.option["strike"], 100.0)
+        self.assertEqual(aapl_opt.option["expiration"], "2027-01-15")
 
     def test_value_bracket_resolved_from_lo(self):
         # Upper bound wraps to the next line; resolved from the lower bound.
-        goog = next(x for x in self.h if x.ticker == "GOOGL")
+        goog = next(x for x in self.h if x.ticker == "GOOGL" and x.asset_type == "Stock")
         self.assertEqual((goog.value_lo, goog.value_hi), (5_000_001, 25_000_000))
         self.assertEqual(goog.value_label, "$5,000,001 - $25,000,000")
         att = next(x for x in self.h if x.ticker == "T")

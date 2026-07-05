@@ -28,7 +28,7 @@ from __future__ import annotations
 import re
 from dataclasses import dataclass
 
-from .normalize import AMOUNT_BRACKETS, parse_amount
+from .normalize import AMOUNT_BRACKETS, parse_amount, parse_option_detail
 from .senate import _OWNER_MAP, _TableParser
 
 # STOCK Act value brackets keyed by their (unique) lower bound, so a House row
@@ -58,9 +58,10 @@ class Holding:
     source_url: str
     filing_date: str       # ISO
     report_year: int | None = None
+    option: dict | None = None   # {type, strike, expiration, contracts} for options
 
     def to_dict(self) -> dict:
-        return {
+        d = {
             "member": self.member,
             "chamber": self.chamber,
             "ticker": self.ticker,
@@ -71,10 +72,17 @@ class Holding:
             "value_label": self.value_label,
             "owner": self.owner,
         }
+        if self.option:
+            d["option"] = self.option
+        return d
 
 
 def is_stock(h: Holding) -> bool:
     return h.asset_type == "Stock"
+
+
+def is_stock_or_option(h: Holding) -> bool:
+    return h.asset_type in ("Stock", "Option")
 
 
 # ---------------------------------------------------------------------------
@@ -101,6 +109,8 @@ def _split_ticker_paren(asset: str) -> tuple[str | None, str]:
 def normalize_asset_type(raw: str) -> str:
     """Collapse the source asset-type text into a coarse class."""
     r = raw.lower()
+    if "option" in r:
+        return "Option"
     if "exchange traded" in r or "etf" in r:
         return "ETF"
     if "mutual fund" in r or "fund" in r:
@@ -151,13 +161,14 @@ def parse_senate_annual_assets(
         except ValueError:
             continue  # account/wrapper rows have value "--" (not a holding)
         ticker, name = _split_ticker_prefix(asset)
+        atype = normalize_asset_type(raw_type)
         out.append(
             Holding(
                 member=member,
                 chamber="senate",
                 ticker=ticker,
                 asset=name,
-                asset_type=normalize_asset_type(raw_type),
+                asset_type=atype,
                 raw_type=re.sub(r"\s+", " ", raw_type).strip(),
                 value_lo=lo,
                 value_hi=hi,
@@ -166,6 +177,7 @@ def parse_senate_annual_assets(
                 source_url=source_url,
                 filing_date=filing_date,
                 report_year=report_year,
+                option=parse_option_detail(asset) if atype == "Option" else None,
             )
         )
     return out
@@ -182,19 +194,36 @@ def parse_senate_annual_assets(
 # (common stock) lines are kept; [OP] options, [OL] partnerships, [BA] bank
 # accounts, [MF]/[EF] funds, real estate, etc. are skipped (stocks only).
 _HOUSE_STOCK = re.compile(
-    r"^(?P<name>.+?)\s*\((?P<ticker>[A-Z][A-Z.]{0,6})\)\s*\[ST\]\s+"
+    r"^(?P<name>.+?)\s*\((?P<ticker>[A-Z][A-Z.]{0,6})\)\s*"
+    r"(?P<code>\[[A-Z]{2}\])?\s*"
     r"(?:(?P<owner>SP|JT|DC|JC)\s+)?"
     r"\$(?P<lo>[\d,]+)\b"
 )
+_HOUSE_LEADING_CODE = re.compile(r"^\[(?P<code>[A-Z]{2})\]")
 _HOUSE_CLASS_SUFFIX = re.compile(
     r"\s*[-,]?\s*(?:Class\s+[A-Z]\s*)?(?:Common Stock|Ordinary Shares|Units)\s*,?\s*$",
     re.I,
 )
+# Codes we surface as holdings: common stock and options. Everything else
+# ([EF]/[MF] funds, [BA] bank, [OL] partnership, [GS]/[CS] debt, real estate…)
+# is excluded.
+_HOUSE_CODE_TYPE = {"ST": "Stock", "OP": "Option"}
 
 
 def _clean_house_name(name: str) -> str:
     name = _HOUSE_CLASS_SUFFIX.sub("", name.strip())
     return re.sub(r"\s+", " ", name).strip(" ,-")
+
+
+def _house_option_detail(lines: list[str], idx: int) -> dict | None:
+    """Find the 'D: … call/put options …' description after an [OP] row."""
+    for j in range(idx + 1, min(idx + 4, len(lines))):
+        s = lines[j].strip()
+        if "option" in s.lower() and ":" in s:
+            det = parse_option_detail(s.split(":", 1)[1])
+            if det:
+                return det
+    return None
 
 
 def parse_house_annual_assets(
@@ -205,28 +234,44 @@ def parse_house_annual_assets(
     filing_date: str = "",
     report_year: int | None = None,
 ) -> list[Holding]:
-    """Parse individual **stock** holdings from a House annual FD Schedule A."""
+    """Parse individual **stock and option** holdings from a House Schedule A.
+
+    A Schedule A line looks like ``<name> (<TICKER>) [<CODE>] <owner> $lo - …``,
+    but the ``[<CODE>]`` sometimes wraps onto the next line (common for
+    ``[OP]``), so the code is read from the row line or the line below it. The
+    value's upper bound also wraps, so the bracket is resolved from its (unique)
+    lower bound.
+    """
+    lines = text.splitlines()
     out: list[Holding] = []
-    for line in text.splitlines():
-        m = _HOUSE_STOCK.match(line.strip())
+    for i, raw in enumerate(lines):
+        m = _HOUSE_STOCK.match(raw.strip())
         if not m:
             continue
         lo = int(m.group("lo").replace(",", ""))
         bracket = _BRACKET_BY_LO.get(lo)
         if bracket is None:
             continue  # not a recognized value bracket (e.g. an income figure)
-        blo, bhi, label = bracket
+        code = (m.group("code") or "").strip("[]")
+        if not code:  # code wrapped onto the next line?
+            nxt = lines[i + 1].strip() if i + 1 < len(lines) else ""
+            cm = _HOUSE_LEADING_CODE.match(nxt)
+            code = cm.group("code") if cm else ""
+        atype = _HOUSE_CODE_TYPE.get(code)
+        if atype is None:
+            continue  # not a stock or option
         name = _clean_house_name(m.group("name"))
         if not name:
             continue
+        blo, bhi, label = bracket
         out.append(
             Holding(
                 member=member,
                 chamber="house",
                 ticker=m.group("ticker"),
                 asset=name,
-                asset_type="Stock",
-                raw_type="[ST]",
+                asset_type=atype,
+                raw_type=f"[{code}]",
                 value_lo=blo,
                 value_hi=bhi,
                 value_label=label,
@@ -234,6 +279,7 @@ def parse_house_annual_assets(
                 source_url=source_url,
                 filing_date=filing_date,
                 report_year=report_year,
+                option=_house_option_detail(lines, i) if atype == "Option" else None,
             )
         )
     return out
@@ -365,4 +411,4 @@ def fetch_holdings(session, ref: AnnualRef, *, member: str) -> list[Holding]:
             text, member=member, source_url=ref.url,
             filing_date=ref.filing_date, report_year=ref.report_year,
         )
-    return [h for h in holds if is_stock(h)]
+    return [h for h in holds if is_stock_or_option(h)]

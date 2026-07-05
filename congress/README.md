@@ -65,13 +65,18 @@ price only the first N tickers while testing).
 The PTRs above disclose *trades*, not positions. A member's actual **holdings**
 live in their **annual** financial-disclosure report, which lists each asset
 with a year-end value bracket. `congress holdings` parses the **individual
-stocks** (only) out of each featured member's latest annual report and writes
-`docs/data/holdings.json` for the page's "Holdings" tab:
+stocks and options** out of each featured member's latest annual report and
+writes `docs/data/holdings.json` for the page's "Holdings" tab. The page then
+shows an **estimated current** portfolio: it takes the annual report as a
+baseline and **rolls it forward** with every PTR trade dated after the snapshot
+(buys add, sells subtract, new tickers appear, fully-sold names drop off;
+options past expiry are dropped). Parsing:
 
 - **House**: annual FD (`FilingType == 'O'` in the same yearly index ZIP), a
-  text PDF whose "Schedule A" lists `<name> (<TICKER>) [ST] <owner> $lo - …`.
-  The value's upper bound wraps to the next line, so the bracket is resolved
-  from its (unique) lower bound.
+  text PDF whose "Schedule A" lists `<name> (<TICKER>) [ST|OP] <owner> $lo - …`.
+  The asset-type code (`[ST]` stock / `[OP]` option) can wrap to the next line;
+  the value's upper bound wraps too, so the bracket is resolved from its
+  (unique) lower bound. Option strike/expiry come from the row's `D:` note.
 - **Senate**: the eFD "Annual Report" (`/search/view/annual/<uuid>/`), a
   structured HTML page whose Assets table has
   `# | Asset | Asset Type | Owner | Value | Income Type | Income`.
