@@ -317,7 +317,8 @@ const KO_KNOWN = {
   85: {h:3, a:2, aet:true},          // R32: Argentina 3-2 Cape Verde after extra time (1-1 at 90') — favourite advances but the block scared them
   88: {h:1, a:0},                    // R32: Colombia 1-0 Ghana (Colombia advance) — controlled low-margin win, clean sheet, settled in 90'
   90: {h:0, a:3},                    // R16: Canada 0-3 Morocco (Morocco advance) — comprehensive win + clean sheet, settled in 90'
-  89: {h:0, a:1}                     // R16: Paraguay 0-1 France (France advance) — controlled minimum-margin win, clean sheet, settled in 90'
+  89: {h:0, a:1},                    // R16: Paraguay 0-1 France (France advance) — controlled minimum-margin win, clean sheet, settled in 90'
+  93: {h:1, a:2}                     // R16: Brazil 1-2 Norway (Norway advance) — UPSET, Haaland brace, favourite eliminated, settled in 90'
 };
 
 /* ---- round-robin fixture order for 4 teams ---- */
@@ -563,7 +564,7 @@ function calibFor(m){ if(!m) return null;
    =========================================================================== */
 // Build/data stamp shown in the header. The app is stateless: nothing is
 // persisted, so reloading (F5) always returns to the official results.
-const DATA_VERSION="2026-07-05.r16-brazil-norway-forecast";
+const DATA_VERSION="2026-07-05.r16-norway-upset-result";
 let state={ results:{}, strengths:{}, learn:[] };
 
 function freshStrengths(){ const s={}; for(const t in TEAMS) s[t]=TEAMS[t]; return s; }

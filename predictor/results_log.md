@@ -63,6 +63,7 @@ Legend: ✅ right for the right reason · 🟡 right but by luck/margin ·
 | 2026-07-03 | Colombia vs Ghana (R32) | 54.7 / 27.4 / 17.9 | MEDIUM | 1-0 (Colombia, adv.) | ✅ |
 | 2026-07-04 | Canada vs Morocco (R16) | 29.6 / 28.0 / 42.3 | LOW | 0-3 (Morocco, adv.) | ✅ |
 | 2026-07-05 | France vs Paraguay (R16) | 77.7 / 16.2 / 6.1 | HIGH | 1-0 (France, adv.) | ✅ |
+| 2026-07-05 | Brazil vs Norway (R16) | 59.9 / 22.7 / 17.4 | MEDIUM | 1-2 (Norway, adv.) | ❌ |
 
 ### Standing calibration note: KNOCKOUT CAUTION → BTTS RULE (v2, quantified)
 
@@ -1151,3 +1152,25 @@ never zero the underdog's attack.
   block', expect a CONTROLLED low-margin win with the favourite clean sheet (1-0/2-0),
   advancement ~89% — which is what the calibration said. Keep applying it. France now meet
   Morocco in the quarter-finals.
+
+## 2026-07-05 · Round of 16 — Brazil 1-2 Norway (Norway advance) ❌ [BTTS nuance vindicated]
+
+- **Brazil vs Norway** — 90': Brazil 59.9 / Draw 22.7 / Norway 17.4 (MEDIUM); advancement
+  **Brazil 73.8 / Norway 26.2**. λ 1.98 / 0.98, xG 2.96, Over 2.5 57%, **BTTS 54.5% (near-neutral,
+  slight Yes)**, Brazil clean sheet 37.5% / Norway 13.8%, top scoreline **1-1 (10.8%)**; ET 22.7%,
+  pens 10.6%. **RESULT: Brazil 1-2 Norway — UPSET, Norway ELIMINATE Brazil, Haaland brace, settled
+  in 90'.** Wrong on the deliverable (❌: the 73.8% favourite is out) but right on the texture, and
+  the key judgement call was VINDICATED. This is a PRICED upset, not a mispricing — the market also
+  had Norway ~18% to win in 90'; a ~1-in-4 underdog advancing is exactly what 26% means, and it
+  landed. Crucially, I explicitly **REFUSED to apply the mechanical BTTS-No haircut** because
+  'Norway has Haaland and can score on anyone', kept BTTS near-neutral (54.5%) and trimmed Norway
+  only lightly — and **Haaland scored twice**. Had I blindly forced BTTS-No / hard-trimmed Norway
+  (as for a mid-tier minnow), I'd have compounded the error. **TWO lessons:** (1) VINDICATION of
+  the BTTS elite-striker nuance — never hard-trim an underdog with a genuine world-class striker;
+  Norway/Haaland is the exact exception the rule carved out, and keeping BTTS live was correct.
+  (2) NEW: an elite-striker underdog carries real UPSET EQUITY, not just BTTS-Yes — a Haaland can
+  win the game OUTRIGHT, not merely score in a loss; this class of underdog is where the
+  favourite's ~25% elimination tail actually fires. Don't over-update the SIDE (Brazil 74% was
+  correct process, market-aligned; ~1 in 4 goes to the underdog), but weight an elite-striker
+  underdog toward the upper end of its upset range. Norway now meet the Mexico–England winner in
+  the quarter-finals.
