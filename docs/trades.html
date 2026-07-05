@@ -225,12 +225,12 @@
 
   <div class="panel" id="p-holdings">
     <div class="legend">
-      Estimated <b>net disclosed activity</b> for each featured member: total
-      <span class="buy">buys</span> minus <span class="sell">sells</span> per holding, sized by STOCK Act
-      bracket midpoints, over all data in the tracker. <b>This is not a real portfolio.</b>
-      Disclosures report <em>trades</em>, not positions — so this ignores holdings owned before the window,
-      exact amounts, dividends, and anything never traded or not disclosed. Read it as
-      “what they’ve been building,” not a statement of holdings.
+      <b>Real stock holdings</b> from each featured member's latest <b>annual financial-disclosure report</b>
+      (House Schedule A · Senate annual report) — individual stocks with their year-end value bracket.
+      It's a <b>yearly snapshot</b>, values are <b>brackets</b> not exact, and only <b>individual stocks</b> are shown
+      (ETFs, funds, bonds, bank/retirement, real estate, private business are excluded).
+      Where a member's annual report is a <b>scan</b> (or the President's image-only OGE 278), holdings can't be read —
+      those fall back to an <b>inferred</b> net-trading estimate, clearly labelled as not a portfolio.
     </div>
     <div class="cards" id="holdCards"></div>
     <div class="panel2" id="holdDetail"></div>
@@ -274,6 +274,7 @@ const PAGE = 200;
 let DATA = null;
 let RET = {};       // trade id -> {entry_date, entry_close, pct}
 let PRICES = {};    // ticker -> {asof_date, asof_close}
+let HOLD = {};      // member -> {chamber, available, filing_date, report_year, source_url, stocks:[…]}
 let retSample = false;
 let state = {q:"", chamber:"", party:"", type:"", range:"", member:"",
              sortKey:"filing_date", sortDir:-1, shown:PAGE,
@@ -660,72 +661,120 @@ function memberComposition(member){
   }));
 }
 
+// Estimated dollar size of one holding from its disclosed value bracket
+// (open-ended top bracket uses its floor). Everything is an estimate.
+function valueMid(h){ return h.value_hi != null ? (h.value_lo + h.value_hi) / 2 : h.value_lo; }
+
+function realStocks(member){
+  const r = HOLD[member];
+  return (r && r.available && Array.isArray(r.stocks)) ? r.stocks : null;
+}
+
 function renderHoldCards(){
   $("holdCards").innerHTML = (DATA.meta.featured || []).map(name => {
-    const longs = memberComposition(name).filter(e => e.net > 0);
-    const netLong = longs.reduce((s,e) => s + e.net, 0);
     const info = DATA.trades.find(t => t.member === name);
-    const who = info ? [chamberName(info.chamber), info.party].filter(Boolean).join(" · ")
-                     : "no machine-readable trades";
+    const rec = HOLD[name] || {};
+    const who = [chamberName(rec.chamber || info?.chamber), info?.party].filter(Boolean).join(" · ") || "—";
+    const stocks = realStocks(name);
+    let body;
+    if (stocks){
+      const est = stocks.reduce((s,h) => s + valueMid(h), 0);
+      body = `<div class="note" style="margin-top:4px">${stocks.length} stock${stocks.length===1?"":"s"} · est. ~${fmtMoney(est)} <span class="est">(annual report)</span></div>`;
+    } else {
+      body = `<div class="note" style="margin-top:4px">annual report not machine-readable</div>`;
+    }
     return `<div class="fcard ${state.holdMember === name ? "sel" : ""}" data-h="${esc(name)}">
       <div class="name">${esc(name)}</div>
       <div class="who">${esc(who)}</div>
-      <div class="note" style="margin-top:4px">${longs.length} net position${longs.length===1?"":"s"} · est. ~${fmtMoney(netLong)}</div>
+      ${body}
     </div>`;
   }).join("");
+}
+
+function realHoldingsHtml(m){
+  const rec = HOLD[m];
+  const stocks = realStocks(m).slice().sort((a,b) => valueMid(b) - valueMid(a));
+  const total = stocks.reduce((s,h) => s + valueMid(h), 0) || 1;
+  const max = valueMid(stocks[0]) || 1;
+  const when = [rec.report_year ? `CY ${rec.report_year}` : "", rec.filing_date ? `filed ${rec.filing_date}` : ""].filter(Boolean).join(" · ");
+  const src = rec.source_url ? ` · <a href="${esc(rec.source_url)}" target="_blank" rel="noopener">official annual report ↗</a>` : "";
+  return `
+    <div class="tksummary">
+      <span><b>${stocks.length}</b> individual stock${stocks.length===1?"":"s"}</span>
+      <span>est. value <b>${fmtMoney(total)}</b> <span class="est">(bracket midpoints)</span></span>
+      <span class="est">annual snapshot${when ? " · " + esc(when) : ""}${src}</span>
+    </div>
+    <div style="margin-top:8px">
+      ${stocks.map(h => {
+        const v = valueMid(h), w = 100 * v / max, share = 100 * v / total;
+        return `<div class="trow">
+          <span class="tklabel" title="${esc(h.asset)}"><span class="tk">${esc(h.ticker || h.asset)}</span><span class="co">${esc(h.ticker ? h.asset : "")}</span>${h.owner?`<span class="chip" title="spouse / joint / dependent child">${esc(h.owner)}</span>`:""}</span>
+          <div class="track"><div class="bar" style="width:${w}%;background:var(--good)" role="img" aria-label="${esc(h.ticker||h.asset)}: ${esc(h.value_label)}"></div></div>
+          <span class="ct">${esc(h.value_label)} · ${Math.round(share)}%</span>
+        </div>`;
+      }).join("")}
+    </div>
+    <div class="note" style="margin-top:8px">Real holdings from the member's latest <b>annual financial-disclosure report</b> — a
+      <b>year-end snapshot</b> (values are STOCK Act brackets, not exact), showing <b>individual stocks only</b>
+      (ETFs, funds, bonds, bank/retirement accounts, real estate and private business are excluded).</div>`;
+}
+
+function inferredHtml(m){
+  const comp = memberComposition(m).sort((a,b) => b.net - a.net);
+  const longs = comp.filter(e => e.net > 0);
+  if (!longs.length) return "";
+  const netLong = longs.reduce((s,e) => s + e.net, 0) || 1;
+  const max = longs[0].net || 1;
+  return `
+    <div style="margin-top:8px">
+      ${longs.map(e => {
+        const w = 100 * e.net / max, share = 100 * e.net / netLong;
+        return `<div class="trow">
+          <span class="tklabel" title="${esc(e.company || e.label)}"><span class="tk">${esc(e.label)}</span><span class="co">${esc(e.company)}</span></span>
+          <div class="track"><div class="bar" style="width:${w}%;background:var(--accent,#6aa9ff)" role="img" aria-label="${esc(e.label)}"></div></div>
+          <span class="ct">~${fmtMoney(e.net)} · ${Math.round(share)}%</span>
+        </div>`;
+      }).join("")}
+    </div>`;
 }
 
 function renderHoldDetail(){
   const m = state.holdMember;
   const box = $("holdDetail");
   if (!m){ box.innerHTML = '<div class="note">Pick a member above.</div>'; return; }
-  const comp = memberComposition(m).sort((a,b) => b.net - a.net);
   const info = DATA.trades.find(t => t.member === m);
-  const skips = (DATA.skipped_filings || []).filter(s => s.member === m);
-  if (!comp.length){
-    box.innerHTML = `<h3>${esc(m)}</h3>
-      <div class="note">No machine-readable trades for ${esc(m)} in the tracker window.${
-        skips.length ? ` ${skips.length} paper filing(s) can’t be parsed — see the list at the bottom.` : ""}</div>`;
+  const rec = HOLD[m] || {};
+  const who = [chamberName(rec.chamber || info?.chamber), info?.party, info?.district || info?.state].filter(Boolean).join(" · ");
+  const head = `<h3>${esc(m)} <span class="note">${esc(who)}</span></h3>`;
+
+  if (realStocks(m)){
+    box.innerHTML = head + realHoldingsHtml(m);
     return;
   }
-  const longs = comp.filter(e => e.net > 0);
-  const shorts = comp.filter(e => e.net < 0);   // net reduced / sold in-window
-  const flat = comp.filter(e => e.net === 0);
-  const netLong = longs.reduce((s,e) => s + e.net, 0) || 1;
-  const max = longs[0]?.net || 1;
-  const who = [chamberName(info.chamber), info.party, info.district || info.state].filter(Boolean).join(" · ");
-  box.innerHTML =
-    `<h3>${esc(m)} <span class="note">${esc(who)}</span></h3>
-     <div class="tksummary">
-       <span><b>${longs.length}</b> est. net position${longs.length===1?"":"s"}</span>
-       <span>est. net long <b>${fmtMoney(netLong)}</b> <span class="est">(bracket midpoints)</span></span>
-       ${shorts.length ? `<span><b>${shorts.length}</b> net reduced/sold</span>` : ""}
-     </div>
-     <div style="margin-top:8px">
-       ${longs.length ? longs.map(e => {
-         const w = 100 * e.net / max, share = 100 * e.net / netLong;
-         return `<div class="trow">
-           <span class="tklabel" title="${esc(e.company || e.label)}"><span class="tk">${esc(e.label)}</span><span class="co">${esc(e.company)}</span></span>
-           <div class="track"><div class="bar" style="width:${w}%;background:var(--good)" role="img" aria-label="${esc(e.label)}: est. net ${fmtMoney(e.net)}"></div></div>
-           <span class="ct">~${fmtMoney(e.net)} · ${Math.round(share)}%</span>
-         </div>`;
-       }).join("") : '<div class="note">No net-positive positions — this member is a net seller in-window.</div>'}
-     </div>
-     ${shorts.length ? `<div class="note" style="margin-top:10px"><b>Net reduced / sold</b> (more disclosed selling than buying in-window): ${
-        shorts.map(e => `${esc(e.label)} (~${fmtMoney(-e.net)})`).join(", ")}</div>` : ""}
-     ${flat.length ? `<div class="note" style="margin-top:4px">${flat.length} holding(s) netted ~$0 (bought and sold about evenly).</div>` : ""}
-     ${skips.length ? `<div class="note" style="margin-top:4px">📄 ${skips.length} paper filing(s) not machine-readable — excluded from this estimate.</div>` : ""}`;
+
+  // No machine-readable annual report — explain, link, then fall back to the
+  // inferred net-trading-activity view (clearly labelled as NOT holdings).
+  const reason = rec.chamber === "executive"
+    ? "the President's annual OGE 278 is a scanned image (not machine-readable)"
+    : rec.source_url
+      ? "their latest annual report is a scan / not machine-readable"
+      : "no recent annual report was found in the tracker window";
+  const src = rec.source_url ? ` <a href="${esc(rec.source_url)}" target="_blank" rel="noopener">official annual report ↗</a>` : "";
+  const inferred = inferredHtml(m);
+  box.innerHTML = head +
+    `<div class="note" style="margin-top:4px">🔒 Real holdings unavailable — ${reason}.${src}</div>` +
+    (inferred
+      ? `<div class="note" style="margin-top:10px"><b>Inferred net trading activity</b> instead (disclosed buys − sells, bracket midpoints — <b>not</b> a portfolio):</div>${inferred}`
+      : `<div class="note" style="margin-top:8px">No machine-readable trades for ${esc(m)} either.</div>`);
 }
 
 function renderHoldings(){
   if (!state.holdMember){
-    // Default to the featured member with the most parsed trades.
-    let best = null, bestN = -1;
-    for (const name of (DATA.meta.featured || [])){
-      const n = DATA.trades.reduce((c,t) => c + (t.member === name ? 1 : 0), 0);
-      if (n > bestN){ bestN = n; best = name; }
-    }
-    state.holdMember = best || (DATA.meta.featured || [])[0] || null;
+    // Default to a member whose real holdings we actually have.
+    const feats = DATA.meta.featured || [];
+    state.holdMember = feats.find(n => realStocks(n))
+      || feats.find(n => DATA.trades.some(t => t.member === n))
+      || feats[0] || null;
   }
   renderHoldCards();
   renderHoldDetail();
@@ -843,6 +892,11 @@ async function boot(){
       retSample = !!rd.meta?._sample;
     }
   } catch (err) { /* returns are optional */ }
+  // Real annual-report holdings (optional — page still works without it).
+  try {
+    const hr = await fetch("data/holdings.json", {cache:"no-store"});
+    if (hr.ok) HOLD = (await hr.json()).holdings || {};
+  } catch (err) { /* holdings are optional */ }
 
   $("verStamp").textContent =
     `${DATA.meta.data_version || "?"} · ${(DATA.meta.counts?.trades ?? 0).toLocaleString("en-US")} trades`;

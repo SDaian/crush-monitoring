@@ -60,6 +60,32 @@ price only the first N tickers while testing).
 
 **Option context.** For option trades we also capture the filer's free-text Description (House) / Comment (Senate) verbatim into `comment`, and parse out `option` = {type, strike, expiration, contracts} when disclosed (e.g. "Purchased 200 call options with a strike price of $50 and an expiration date of 3/19/27."). Disclosure is inconsistent — the page shows what the filer gave and "details not specified in filing" otherwise; quantity is only shown when the filer wrote it (it is not a required field).
 
+## Real holdings (`holdings.py` → `docs/data/holdings.json`)
+
+The PTRs above disclose *trades*, not positions. A member's actual **holdings**
+live in their **annual** financial-disclosure report, which lists each asset
+with a year-end value bracket. `congress holdings` parses the **individual
+stocks** (only) out of each featured member's latest annual report and writes
+`docs/data/holdings.json` for the page's "Holdings" tab:
+
+- **House**: annual FD (`FilingType == 'O'` in the same yearly index ZIP), a
+  text PDF whose "Schedule A" lists `<name> (<TICKER>) [ST] <owner> $lo - …`.
+  The value's upper bound wraps to the next line, so the bracket is resolved
+  from its (unique) lower bound.
+- **Senate**: the eFD "Annual Report" (`/search/view/annual/<uuid>/`), a
+  structured HTML page whose Assets table has
+  `# | Asset | Asset Type | Owner | Value | Income Type | Income`.
+- **Executive (Trump)**: the annual OGE 278 is a ~250-page **scanned image** —
+  not machine-readable — so it's shown "link only", and the page falls back to
+  an inferred net-trading estimate.
+
+Only individual company stocks (`[ST]` / "…Stock") are kept — ETFs, funds,
+bonds, bank/retirement accounts, real estate and private business are excluded.
+It is a **yearly snapshot**, values are **brackets**, and scanned/paper annual
+reports can't be parsed (that member is marked `available: false`). Only the
+listing/fetch helpers touch the network; the two parsers are pure and
+fixture-tested offline (`tests/congress/test_holdings.py`).
+
 ## Data-honesty constraints (by law, not by us)
 
 - Filings may lag the trade by **30–45 days**.
@@ -73,6 +99,8 @@ price only the first N tickers while testing).
 - `senate.py` / `house.py` / `oge.py` — listing + parsing per chamber
   (`oge.py` covers the executive-branch 278-T). Parsers are pure functions of
   `str`/`bytes` (fixture-testable offline).
+- `holdings.py` — annual-report **holdings** (real portfolio) parser for the
+  featured members: House Schedule A (text PDF) + Senate annual report (HTML).
 - `oge_filings.json` — curated list of the President's 278-T PDFs by UNID
   (he is not in any browsable OGE view). Append new filings here.
 - `http.py` — the only module importing `requests`: shared UA, retries,
