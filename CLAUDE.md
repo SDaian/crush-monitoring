@@ -137,10 +137,19 @@ from the official Senate eFD, House Clerk, and OGE (executive-branch 278-T)
 sites. Full details in `congress/README.md`. Conventions:
 
 - **Generated files are never hand-edited:** `docs/data/congress-trades.json`,
-  `docs/data/returns.json` and `congress/state.json` are written by
-  `congress/pipeline.py` / `congress/prices.py` (daily via
+  `docs/data/returns.json`, `docs/data/holdings.json` and
+  `congress/state.json` are written by `congress/pipeline.py` /
+  `congress/prices.py` / `congress/holdings.py` (daily via
   `.github/workflows/congress-trades.yml`). To change the data, fix the
   generator and re-run it.
+- **Real holdings vs. trades:** PTRs disclose *trades*; a member's actual
+  positions come from their **annual** report. `congress/holdings.py` parses
+  the individual **stocks** (only) from each featured member's latest annual FD
+  (House Schedule A text PDF / Senate annual HTML) into `holdings.json` for the
+  page's Holdings tab. It's a yearly snapshot with bracket values; scanned
+  annual reports (and Trump's image-only OGE 278) are marked unavailable and the
+  page falls back to an inferred net-trading estimate. Label it honestly — never
+  present the bracket midpoints as exact or real-time.
 - **Executive 278-T (President) is a curated seed, not a scrape:**
   `congress/oge_filings.json` lists the President's OGE Form 278-T Periodic
   Transaction Reports by stable document UNID (he is not in any browsable OGE
