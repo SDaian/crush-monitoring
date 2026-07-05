@@ -225,12 +225,13 @@
 
   <div class="panel" id="p-holdings">
     <div class="legend">
-      <b>Real stock holdings</b> from each featured member's latest <b>annual financial-disclosure report</b>
-      (House Schedule A · Senate annual report) — individual stocks with their year-end value bracket.
-      It's a <b>yearly snapshot</b>, values are <b>brackets</b> not exact, and only <b>individual stocks</b> are shown
-      (ETFs, funds, bonds, bank/retirement, real estate, private business are excluded).
-      Where a member's annual report is a <b>scan</b> (or the President's image-only OGE 278), holdings can't be read —
-      those fall back to an <b>inferred</b> net-trading estimate, clearly labelled as not a portfolio.
+      <b>Estimated current holdings</b> per featured member: their latest <b>annual financial-disclosure report</b>
+      (House Schedule A · Senate annual report) as a baseline, <b>rolled forward</b> with every <b>transaction report</b>
+      filed since — so recent buys/sells update the year-end snapshot toward a live “photo”. Individual <b>stocks and
+      options</b> only (funds, bonds, bank/retirement, real estate, private business excluded). Values are STOCK Act
+      <b>brackets</b>, so sizes are midpoint estimates (<b>not</b> share counts) — directional, not exact. Where a
+      member's annual report is a <b>scan</b> (or the President's image-only OGE 278), it falls back to an inferred
+      net-trading estimate, clearly labelled.
     </div>
     <div class="cards" id="holdCards"></div>
     <div class="panel2" id="holdDetail"></div>
@@ -665,9 +666,57 @@ function memberComposition(member){
 // (open-ended top bracket uses its floor). Everything is an estimate.
 function valueMid(h){ return h.value_hi != null ? (h.value_lo + h.value_hi) / 2 : h.value_lo; }
 
-function realStocks(member){
+function hasReal(member){
   const r = HOLD[member];
-  return (r && r.available && Array.isArray(r.stocks)) ? r.stocks : null;
+  return !!(r && r.available && Array.isArray(r.stocks) && r.stocks.length);
+}
+function snapshotISO(rec){
+  // Annual reports value assets at the reporting year's end; roll forward with
+  // trades dated after that. Fall back to the filing date if year is unknown.
+  return rec.report_year ? (rec.report_year + "-12-31") : (rec.filing_date || "0000-00-00");
+}
+function isOptionTrade(t){ return t.asset_type === "Option" || !!t.option; }
+
+// Estimated CURRENT holdings = annual snapshot rolled forward with every PTR
+// trade dated after the snapshot. Bracket midpoints, NOT share counts — a
+// directional estimate, not an exact portfolio.
+function rollForward(member){
+  const rec = HOLD[member];
+  const snap = snapshotISO(rec);
+  const base = rec.stocks || [];
+  const map = new Map();  // ticker -> position
+  for (const h of base){
+    if (h.asset_type !== "Stock") continue;
+    const k = h.ticker || h.asset;
+    map.set(k, {ticker:h.ticker, asset:h.asset, base:valueMid(h), delta:0, buys:0, sells:0, inSnap:true, owner:h.owner});
+  }
+  const since = DATA.trades.filter(t => t.member === member && t.tx_date > snap);
+  const filings = new Set();
+  const optTrades = [];
+  for (const t of since){
+    filings.add(t.filing_id);
+    if (isOptionTrade(t)){ optTrades.push(t); continue; }
+    if (!t.ticker) continue;
+    let e = map.get(t.ticker);
+    if (!e){ e = {ticker:t.ticker, asset:t.asset, base:0, delta:0, buys:0, sells:0, inSnap:false, owner:t.owner}; map.set(t.ticker, e); }
+    if (t.type === "buy"){ e.delta += notionalMid(t); e.buys++; }
+    else if (t.type === "sell"){ e.delta -= notionalMid(t); e.sells++; }
+  }
+  const stocks = [...map.values()].map(e => ({...e, est: Math.max(0, e.base + e.delta)}));
+  // Live options: snapshot options + option buys since, expired contracts dropped, deduped.
+  const today = daysAgo(0);
+  const optMap = new Map();
+  const add = o => {
+    if (!o || !o.ticker || !o.expiration) return;  // need a date to confirm it's live
+    if (o.expiration < today) return;               // expired
+    const key = [o.ticker, o.type||"", o.strike||"", o.expiration].join("|");
+    if (!optMap.has(key)) optMap.set(key, o);
+  };
+  for (const h of base) if (h.asset_type === "Option")
+    add({ticker:h.ticker, type:h.option&&h.option.type, strike:h.option&&h.option.strike, expiration:h.option&&h.option.expiration, owner:h.owner});
+  for (const t of optTrades) if (t.type === "buy")
+    add({ticker:t.ticker, type:t.option&&t.option.type, strike:t.option&&t.option.strike, expiration:t.option&&t.option.expiration, owner:t.owner});
+  return {stocks, options:[...optMap.values()], filings:filings.size, snap, rec};
 }
 
 function renderHoldCards(){
@@ -675,11 +724,12 @@ function renderHoldCards(){
     const info = DATA.trades.find(t => t.member === name);
     const rec = HOLD[name] || {};
     const who = [chamberName(rec.chamber || info?.chamber), info?.party].filter(Boolean).join(" · ") || "—";
-    const stocks = realStocks(name);
     let body;
-    if (stocks){
-      const est = stocks.reduce((s,h) => s + valueMid(h), 0);
-      body = `<div class="note" style="margin-top:4px">${stocks.length} stock${stocks.length===1?"":"s"} · est. ~${fmtMoney(est)} <span class="est">(annual report)</span></div>`;
+    if (hasReal(name)){
+      const rf = rollForward(name);
+      const held = rf.stocks.filter(s => s.est > 0);
+      const est = held.reduce((s,e) => s + e.est, 0);
+      body = `<div class="note" style="margin-top:4px">${held.length} stock${held.length===1?"":"s"} · est. ~${fmtMoney(est)}${rf.options.length?` · ${rf.options.length} opt`:""} <span class="est">(current est.)</span></div>`;
     } else {
       body = `<div class="note" style="margin-top:4px">annual report not machine-readable</div>`;
     }
@@ -691,32 +741,38 @@ function renderHoldCards(){
   }).join("");
 }
 
-function realHoldingsHtml(m){
-  const rec = HOLD[m];
-  const stocks = realStocks(m).slice().sort((a,b) => valueMid(b) - valueMid(a));
-  const total = stocks.reduce((s,h) => s + valueMid(h), 0) || 1;
-  const max = valueMid(stocks[0]) || 1;
-  const when = [rec.report_year ? `CY ${rec.report_year}` : "", rec.filing_date ? `filed ${rec.filing_date}` : ""].filter(Boolean).join(" · ");
-  const src = rec.source_url ? ` · <a href="${esc(rec.source_url)}" target="_blank" rel="noopener">official annual report ↗</a>` : "";
+function rollForwardHtml(m){
+  const rf = rollForward(m), rec = rf.rec;
+  const held = rf.stocks.filter(s => s.est > 0).sort((a,b) => b.est - a.est);
+  const exited = rf.stocks.filter(s => s.inSnap && s.est <= 0);
+  const total = held.reduce((s,e) => s + e.est, 0) || 1;
+  const max = held[0]?.est || 1;
+  const when = rec.report_year ? `CY ${rec.report_year}` : (rec.filing_date || "");
+  const src = rec.source_url ? `<a href="${esc(rec.source_url)}" target="_blank" rel="noopener">annual report ↗</a>` : "";
   return `
     <div class="tksummary">
-      <span><b>${stocks.length}</b> individual stock${stocks.length===1?"":"s"}</span>
+      <span><b>${held.length}</b> est. stock position${held.length===1?"":"s"}</span>
       <span>est. value <b>${fmtMoney(total)}</b> <span class="est">(bracket midpoints)</span></span>
-      <span class="est">annual snapshot${when ? " · " + esc(when) : ""}${src}</span>
+      ${rf.options.length ? `<span><b>${rf.options.length}</b> live option${rf.options.length===1?"":"s"}</span>` : ""}
+      <span class="est">${esc(when)} snapshot + ${rf.filings} filing${rf.filings===1?"":"s"} since${src ? " · " + src : ""}</span>
     </div>
     <div style="margin-top:8px">
-      ${stocks.map(h => {
-        const v = valueMid(h), w = 100 * v / max, share = 100 * v / total;
+      ${held.map(e => {
+        const w = 100 * e.est / max, share = 100 * e.est / total;
+        const badge = !e.inSnap ? `<span class="chip" title="opened after the snapshot">new</span>`
+          : (e.delta > 1 ? `<span class="chip" title="added since snapshot">＋</span>`
+            : (e.delta < -1 ? `<span class="chip" title="trimmed since snapshot">－</span>` : ""));
         return `<div class="trow">
-          <span class="tklabel" title="${esc(h.asset)}"><span class="tk">${esc(h.ticker || h.asset)}</span><span class="co">${esc(h.ticker ? h.asset : "")}</span>${h.owner?`<span class="chip" title="spouse / joint / dependent child">${esc(h.owner)}</span>`:""}</span>
-          <div class="track"><div class="bar" style="width:${w}%;background:var(--good)" role="img" aria-label="${esc(h.ticker||h.asset)}: ${esc(h.value_label)}"></div></div>
-          <span class="ct">${esc(h.value_label)} · ${Math.round(share)}%</span>
+          <span class="tklabel" title="${esc(e.asset)}"><span class="tk">${esc(e.ticker || e.asset)}</span><span class="co">${esc(e.ticker ? e.asset : "")}</span>${e.owner?`<span class="chip" title="spouse / joint / dependent child">${esc(e.owner)}</span>`:""}${badge}</span>
+          <div class="track"><div class="bar" style="width:${w}%;background:var(--good)" role="img" aria-label="${esc(e.ticker||e.asset)}: est ${fmtMoney(e.est)}"></div></div>
+          <span class="ct">~${fmtMoney(e.est)} · ${Math.round(share)}%</span>
         </div>`;
       }).join("")}
     </div>
-    <div class="note" style="margin-top:8px">Real holdings from the member's latest <b>annual financial-disclosure report</b> — a
-      <b>year-end snapshot</b> (values are STOCK Act brackets, not exact), showing <b>individual stocks only</b>
-      (ETFs, funds, bonds, bank/retirement accounts, real estate and private business are excluded).</div>`;
+    ${rf.options.length ? `<div class="note" style="margin-top:10px"><b>Live options</b> (${rf.options.length}, expiry still ahead — snapshot + filings): ${
+      rf.options.slice(0, 16).map(o => `<span class="opt">🎟 ${esc(o.ticker)}${o.type?` ${esc(o.type)}`:""}${o.strike!=null?` $${esc(o.strike)}`:""} · exp ${esc(o.expiration)}</span>`).join(" ")}${rf.options.length > 16 ? ` <span class="est">+${rf.options.length - 16} more</span>` : ""}</div>` : ""}
+    ${exited.length ? `<div class="note" style="margin-top:6px"><b>Estimated sold down</b> (disclosed sells since the snapshot exceed its bracket value — coarse brackets can overstate this, so read as “heavily reduced”, not necessarily zero): ${exited.map(e => esc(e.ticker || e.asset)).join(", ")}</div>` : ""}
+    <div class="note" style="margin-top:8px">🔎 <b>Estimated current holdings</b> — the member's latest <b>annual report</b> (a year-end snapshot; values are STOCK Act <b>brackets</b>) rolled forward with every <b>transaction report</b> filed since. Sizes are bracket-midpoint estimates (<b>not</b> share counts), so read this as a directional photo, not an exact portfolio. Individual stocks + options only.</div>`;
 }
 
 function inferredHtml(m){
@@ -747,8 +803,8 @@ function renderHoldDetail(){
   const who = [chamberName(rec.chamber || info?.chamber), info?.party, info?.district || info?.state].filter(Boolean).join(" · ");
   const head = `<h3>${esc(m)} <span class="note">${esc(who)}</span></h3>`;
 
-  if (realStocks(m)){
-    box.innerHTML = head + realHoldingsHtml(m);
+  if (hasReal(m)){
+    box.innerHTML = head + rollForwardHtml(m);
     return;
   }
 
@@ -772,7 +828,7 @@ function renderHoldings(){
   if (!state.holdMember){
     // Default to a member whose real holdings we actually have.
     const feats = DATA.meta.featured || [];
-    state.holdMember = feats.find(n => realStocks(n))
+    state.holdMember = feats.find(n => hasReal(n))
       || feats.find(n => DATA.trades.some(t => t.member === n))
       || feats[0] || null;
   }

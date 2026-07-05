@@ -143,13 +143,15 @@ sites. Full details in `congress/README.md`. Conventions:
   `.github/workflows/congress-trades.yml`). To change the data, fix the
   generator and re-run it.
 - **Real holdings vs. trades:** PTRs disclose *trades*; a member's actual
-  positions come from their **annual** report. `congress/holdings.py` parses
-  the individual **stocks** (only) from each featured member's latest annual FD
-  (House Schedule A text PDF / Senate annual HTML) into `holdings.json` for the
-  page's Holdings tab. It's a yearly snapshot with bracket values; scanned
-  annual reports (and Trump's image-only OGE 278) are marked unavailable and the
-  page falls back to an inferred net-trading estimate. Label it honestly — never
-  present the bracket midpoints as exact or real-time.
+  positions come from their **annual** report. `congress/holdings.py` parses the
+  individual **stocks and options** from each featured member's latest annual FD
+  (House Schedule A text PDF / Senate annual HTML) into `holdings.json`. The
+  Holdings tab shows an **estimated current** portfolio: the annual snapshot
+  **rolled forward** with every PTR trade dated after it (buys add, sells
+  subtract, new tickers appear, sold-down names drop, expired options drop).
+  Scanned annual reports (and Trump's image-only OGE 278) are marked unavailable
+  and fall back to an inferred net-trading estimate. Label it honestly — bracket
+  **midpoints, not share counts**; a directional estimate, never exact/real-time.
 - **Executive 278-T (President) is a curated seed, not a scrape:**
   `congress/oge_filings.json` lists the President's OGE Form 278-T Periodic
   Transaction Reports by stable document UNID (he is not in any browsable OGE
