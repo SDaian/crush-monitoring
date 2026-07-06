@@ -30,6 +30,7 @@ import re
 AI_TICKERS: list[dict[str, str]] = [
     {"ticker": "NVDA", "name": "NVIDIA"},
     {"ticker": "AMD", "name": "Advanced Micro Devices"},
+    {"ticker": "INTC", "name": "Intel"},
     {"ticker": "AVGO", "name": "Broadcom"},
     {"ticker": "MU", "name": "Micron Technology"},
     {"ticker": "TSM", "name": "Taiwan Semiconductor (TSMC)"},
@@ -43,6 +44,8 @@ AI_TICKERS: list[dict[str, str]] = [
     {"ticker": "VRT", "name": "Vertiv Holdings"},
     {"ticker": "SMCI", "name": "Super Micro Computer"},
     {"ticker": "DELL", "name": "Dell Technologies"},
+    # Off-theme (not AI) but featured by request — YPF S.A. NYSE ADR (energy).
+    {"ticker": "YPF", "name": "YPF S.A. (ADR)"},
 ]
 
 # Trading-day windows (approximate calendar spans in sessions).
