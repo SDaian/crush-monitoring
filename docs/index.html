@@ -564,7 +564,7 @@ function calibFor(m){ if(!m) return null;
    =========================================================================== */
 // Build/data stamp shown in the header. The app is stateless: nothing is
 // persisted, so reloading (F5) always returns to the official results.
-const DATA_VERSION="2026-07-06.r16-mexico-england-forecast";
+const DATA_VERSION="2026-07-06.r16-spain-portugal-forecast";
 let state={ results:{}, strengths:{}, learn:[] };
 
 function freshStrengths(){ const s={}; for(const t in TEAMS) s[t]=TEAMS[t]; return s; }
@@ -1094,7 +1094,8 @@ const KO_CALIB=[
   {h:"Canada",a:"Morocco",lh:1.15,la:1.42,p:[29.6,28.0,42.3],adv:[42.8,57.2],et:28.0,pens:14.5,o:[73.6,47.4,25.7],btts:52.7,cs:[24.2,31.7],tot:2.57,conf:"LOW",sl:[["1-1",13.4],["0-1",10.0],["1-2",8.9],["0-0",8.5],["1-0",7.9],["0-2",7.7]]},
   {h:"France",a:"Paraguay",lh:2.35,la:0.53,p:[77.7,16.2,6.1],adv:[89.1,10.9],et:16.2,pens:7.2,o:[78.8,54.9,32.6],btts:37.8,cs:[58.9,9.5],tot:2.88,conf:"HIGH",sl:[["2-0",15.5],["1-0",12.6],["3-0",12.1],["2-1",8.2],["1-1",7.6],["4-0",7.1]]},
   {h:"Brazil",a:"Norway",lh:1.98,la:0.98,p:[59.9,22.7,17.4],adv:[73.8,26.2],et:22.7,pens:10.6,o:[80.2,56.8,34.4],btts:54.5,cs:[37.5,13.8],tot:2.96,conf:"MEDIUM",sl:[["1-1",10.8],["2-0",10.2],["2-1",10.0],["1-0",9.6],["3-0",6.7],["3-1",6.6]]},
-  {h:"Mexico",a:"England",lh:1.02,la:1.45,p:[25.6,28.4,46.0],adv:[38.3,61.7],et:28.4,pens:14.9,o:[71.6,44.8,23.6],btts:49.9,cs:[23.5,36.1],tot:2.47,conf:"MEDIUM",sl:[["1-1",13.5],["0-1",11.3],["0-0",9.5],["1-2",9.1],["0-2",8.9],["1-0",7.6]]}
+  {h:"Mexico",a:"England",lh:1.02,la:1.45,p:[25.6,28.4,46.0],adv:[38.3,61.7],et:28.4,pens:14.9,o:[71.6,44.8,23.6],btts:49.9,cs:[23.5,36.1],tot:2.47,conf:"MEDIUM",sl:[["1-1",13.5],["0-1",11.3],["0-0",9.5],["1-2",9.1],["0-2",8.9],["1-0",7.6]]},
+  {h:"Spain",a:"Portugal",lh:1.42,la:1.08,p:[43.8,28.5,27.7],adv:[59.2,40.8],et:28.5,pens:14.9,o:[72.3,45.6,24.2],btts:51.1,cs:[34.0,24.2],tot:2.50,conf:"LOW",sl:[["1-1",13.6],["1-0",10.6],["0-0",9.2],["2-1",8.9],["2-0",8.3],["0-1",7.9]]}
 ];
 const KO_CALIB_MAP={};
 KO_CALIB.forEach(c=>{ KO_CALIB_MAP[c.h+"|"+c.a]=c; KO_CALIB_MAP[c.a+"|"+c.h]=c; });
