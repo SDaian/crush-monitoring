@@ -64,6 +64,7 @@ Legend: ✅ right for the right reason · 🟡 right but by luck/margin ·
 | 2026-07-04 | Canada vs Morocco (R16) | 29.6 / 28.0 / 42.3 | LOW | 0-3 (Morocco, adv.) | ✅ |
 | 2026-07-05 | France vs Paraguay (R16) | 77.7 / 16.2 / 6.1 | HIGH | 1-0 (France, adv.) | ✅ |
 | 2026-07-05 | Brazil vs Norway (R16) | 59.9 / 22.7 / 17.4 | MEDIUM | 1-2 (Norway, adv.) | ❌ |
+| 2026-07-06 | Mexico vs England (R16) | 25.6 / 28.4 / 46.0 | MEDIUM | 2-3 (England, adv.) | ✅ |
 
 ### Standing calibration note: KNOCKOUT CAUTION → BTTS RULE (v2, quantified)
 
@@ -1174,3 +1175,25 @@ never zero the underdog's attack.
   correct process, market-aligned; ~1 in 4 goes to the underdog), but weight an elite-striker
   underdog toward the upper end of its upset range. Norway now meet the Mexico–England winner in
   the quarter-finals.
+
+## 2026-07-06 · Round of 16 — Mexico 2-3 England (England advance) ✅ [texture miss: total too low]
+
+- **Mexico vs England** — 90': Mexico 25.6 / Draw 28.4 / England 46.0 (MEDIUM); advancement
+  **Mexico 38.3 / England 61.7**. λ 1.02 / 1.45, xG 2.47, Over 2.5 45% (Under lean), BTTS 49.9%
+  (slight No), Mexico clean sheet 23.5% / England 36.1%, top scorelines **1-1 (13.5%) / 0-1 /
+  0-0**; ET 28.4%, pens 14.9%. Market (90') aligned (div 1.1). **RESULT: Mexico 2-3 England — a
+  five-goal thriller, the host is out, settled in 90'.** Right on the deliverable (England
+  advanced as the 61.7% pick — ✅, won by the odd goal) but a **clear TEXTURE miss**: I built a
+  TIGHT, LOW-scoring read on Mexico's 'elite' defence (Under 2.5 55%, top scorelines all
+  low-scoring, double-clean-sheet branch). Instead it was an OPEN 3-2 goal-fest (five goals, way
+  Over, BTTS-Yes). The premise failed: **Mexico's group clean sheets (0 conceded) were earned vs a
+  WEAK Group A** (South Africa, South Korea, Czech) + Ecuador, and that record did NOT transfer
+  against England's genuine top-tier attack (3 goals); England's own non-airtight defence shipped
+  2 to a Mexico that scores at home. My BTTS was near-neutral so the both-score direction wasn't
+  badly wrong, but the **TOTAL was — I anchored the goal expectation too low on a flattering group
+  defensive record**. **Lesson:** defensive records earned vs weak group opposition do NOT transfer
+  to a knockout vs an elite attack — don't anchor a low total on group clean sheets when the
+  opponent has genuine top-tier forwards. When BOTH sides have real attacking quality, the 'two
+  good defences → low/tight/Under' read is fragile; weight the QUALITY of the attacks each defence
+  will actually face, not the raw clean-sheet count vs minnows. Side (England 62%) right; correction
+  is to the TOTAL/Over. England now meet Norway in the quarter-finals.
