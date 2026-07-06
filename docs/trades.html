@@ -928,8 +928,8 @@ function renderHoldings(){
 // ---- AI stocks tab: mechanical indicators + signals + copy-paste prompts ---
 // Indicators only — the page never renders a buy/sell/hold verdict. Any such
 // judgement lives in the pre-filled prompt the user copies to their own LLM.
-const AI_ORDER = ["NVDA","AMD","AVGO","MU","TSM","ASML","SNDK","MSFT","GOOGL",
-                  "AMZN","META","TSLA","VRT","SMCI","DELL"];
+const AI_ORDER = ["NVDA","AMD","INTC","AVGO","MU","TSM","ASML","SNDK","MSFT",
+                  "GOOGL","AMZN","META","TSLA","VRT","SMCI","DELL","YPF"];
 
 function fmtPrice(n){ return n == null ? "—" : "$" + Number(n).toFixed(2); }
 function fmtVol(n){
