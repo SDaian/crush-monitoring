@@ -76,7 +76,7 @@ jobs:
             # --autostash: the fetch step may have left congress-trades.json /
             # state.json dirty (uncommitted); without it the rebase aborts with
             # "cannot pull with rebase: You have unstaged changes".
-            git pull --rebase --autostash origin "${GITHUB_REF_NAME}"
+            git pull --rebase --autostash -X theirs origin "${GITHUB_REF_NAME}"
             git push
           fi
 
@@ -106,7 +106,7 @@ jobs:
             git commit -m "congress: AI indicators refresh ($(date -u +%F))"
             # --autostash: fetch/holdings may have left other generated files
             # dirty; stash them across the rebase so it doesn't abort.
-            git pull --rebase --autostash origin "${GITHUB_REF_NAME}"
+            git pull --rebase --autostash -X theirs origin "${GITHUB_REF_NAME}"
             git push
           fi
 
@@ -127,7 +127,7 @@ jobs:
             git config user.name "github-actions[bot]"
             git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
             git commit -m "congress: morning report state ($(date -u +%F))"
-            git pull --rebase --autostash origin "${GITHUB_REF_NAME}"
+            git pull --rebase --autostash -X theirs origin "${GITHUB_REF_NAME}"
             git push
           fi
 
@@ -154,9 +154,11 @@ jobs:
           git add $FILES
           git commit -m "congress: trades + returns refresh ($(date -u +%F))"
           # The branch may have moved while the fetch ran; rebase our data
-          # commit on top rather than failing the push (--autostash guards any
-          # residual dirty files).
-          git pull --rebase --autostash origin "${GITHUB_REF_NAME}"
+          # commit on top rather than failing the push. --autostash guards any
+          # residual dirty files; -X theirs auto-resolves a conflict in a
+          # generated data file to THIS run's freshly-computed version (rebase
+          # "theirs" = the commit being replayed) instead of aborting exit 1.
+          git pull --rebase --autostash -X theirs origin "${GITHUB_REF_NAME}"
           git push
 
       - name: Upload fetch log and raw payloads
