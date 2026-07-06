@@ -65,6 +65,7 @@ Legend: ✅ right for the right reason · 🟡 right but by luck/margin ·
 | 2026-07-05 | France vs Paraguay (R16) | 77.7 / 16.2 / 6.1 | HIGH | 1-0 (France, adv.) | ✅ |
 | 2026-07-05 | Brazil vs Norway (R16) | 59.9 / 22.7 / 17.4 | MEDIUM | 1-2 (Norway, adv.) | ❌ |
 | 2026-07-06 | Mexico vs England (R16) | 25.6 / 28.4 / 46.0 | MEDIUM | 2-3 (England, adv.) | ✅ |
+| 2026-07-06 | Spain vs Portugal (R16) | 43.8 / 28.5 / 27.7 | LOW | 1-0 (Spain, adv., late) | ✅ |
 
 ### Standing calibration note: KNOCKOUT CAUTION → BTTS RULE (v2, quantified)
 
@@ -1197,3 +1198,24 @@ never zero the underdog's attack.
   good defences → low/tight/Under' read is fragile; weight the QUALITY of the attacks each defence
   will actually face, not the raw clean-sheet count vs minnows. Side (England 62%) right; correction
   is to the TOTAL/Over. England now meet Norway in the quarter-finals.
+
+## 2026-07-06 · Round of 16 — Portugal 0-1 Spain (Spain advance, late winner) ✅ [same-day A/B with Mexico-England]
+
+- **Spain vs Portugal** — 90': Spain 43.8 / Draw 28.5 / Portugal 27.7 (LOW); advancement
+  **Spain 59.2 / Portugal 40.8**. λ 1.42 / 1.08, xG 2.50, Over 2.5 46% (Under lean), BTTS 51.1%
+  (near-neutral), Spain clean sheet 34% / Portugal 24%, top scorelines **1-1 (13.6%) / 1-0 (10.6%)
+  / 0-0 (9.2%)**; ET 28.5%, pens 14.9%. Market (90') aligned (div 1.1). **RESULT: Spain 1-0
+  Portugal — a LATE winner in a tense, tight Iberian derby that stayed goalless deep; clean sheet,
+  settled in 90'.** Clean process hit — side, texture AND margin all right. Spain advanced as the
+  slight favourite (59.2%), won 1-0 (a top-2 scoreline), kept a clean sheet (the 34% branch), Under
+  2.5, BTTS-No — exactly the tight, low-scoring, two-elite-defences derby I described; the
+  near-neutral BTTS tipped to No as the texture implied, and a late goal decided a game that hovered
+  around 0-0 (the 9.2% scoreline) for long stretches. 📌 **Same-day A/B test with Mexico-England:**
+  BOTH were 'good defences → low total' reads. Spain-Portugal **1-0 (low read LANDED)** because both
+  defences are GENUINELY elite vs quality (Spain 0 conceded incl. vs Uruguay; Portugal held
+  Colombia); Mexico-England **3-2 (low read FAILED)** because Mexico's clean sheets were FLATTERED by
+  a weak group. **Lesson:** the 'two good defences → tight/Under/clean-sheet-decides' read is correct
+  when the defences are real against quality, and wrong when a record is group-flattered — calibrate
+  the total on the level each defence earned it at, not the raw clean-sheet count. In a near-coin-flip
+  derby the slight favourite with the better form/defence edges it by the odd (here, last-minute)
+  goal — advancement 59% → a 1-0. Spain now meet the USA–Belgium winner in the quarter-finals.
