@@ -137,11 +137,11 @@ from the official Senate eFD, House Clerk, and OGE (executive-branch 278-T)
 sites. Full details in `congress/README.md`. Conventions:
 
 - **Generated files are never hand-edited:** `docs/data/congress-trades.json`,
-  `docs/data/returns.json`, `docs/data/holdings.json` and
-  `congress/state.json` are written by `congress/pipeline.py` /
-  `congress/prices.py` / `congress/holdings.py` (daily via
-  `.github/workflows/congress-trades.yml`). To change the data, fix the
-  generator and re-run it.
+  `docs/data/returns.json`, `docs/data/holdings.json`,
+  `docs/data/ai-indicators.json` and `congress/state.json` are written by
+  `congress/pipeline.py` / `congress/prices.py` / `congress/holdings.py` /
+  `congress/indicators.py` (daily via `.github/workflows/congress-trades.yml`).
+  To change the data, fix the generator and re-run it.
 - **Real holdings vs. trades:** PTRs disclose *trades*; a member's actual
   positions come from their **annual** report. `congress/holdings.py` parses the
   individual **stocks and options** from each featured member's latest annual FD
@@ -165,6 +165,24 @@ sites. Full details in `congress/README.md`. Conventions:
   realized profit (holding/sells/dividends/position size unknown; entry uses
   the trade date's close, not the fill price). Keep that caveat visible on the
   page and only show it for equity-like assets (never options/crypto).
+- **AI-stocks tab is indicators + a mechanical summary, never advice:**
+  `congress/indicators.py` + `congress ai` compute *mechanical* daily technical
+  readings (RSI, moving averages, volume, 52-week range) for the fixed
+  `AI_TICKERS` universe → `docs/data/ai-indicators.json`, shown on the "🤖 AI
+  stocks" tab. The page shows a **transparent buy/sell/hold summary** (`aiScore`
+  in `docs/trades.html`) — a rule-based *tally* of the displayed indicators
+  (each votes buy/hold/sell), with the full breakdown visible and labelled
+  **"not investment advice"**. It is a reproducible mechanical read, **not** an
+  opaque recommendation; keep the breakdown + disclaimer, and never present it
+  as advice or hide how it's computed. It also states named *events* (golden
+  cross, RSI<30, new 52-wk high…) and offers a copy-paste prompt pre-filled with
+  the readings (and the mechanical read) for deeper analysis in the user's own
+  LLM. New signals
+  open a GitHub issue (email) via `congress/notify_signals.py`
+  (`python3 -m congress.notify_signals`, module form so the package's `http.py`
+  doesn't shadow stdlib `http`); dedup lives in `meta.emitted_signal_keys`.
+  Values are a **daily snapshot, not real-time**. The committed JSON ships as
+  `_sample` data (synthetic series, banner-flagged) until the first live refresh.
 - **Dependency policy:** `predictor/` stays pure-stdlib. `congress/` may use
   `requests` + `pdfplumber` (`congress/requirements.txt`, installed only by
   the Action) but **parsers must stay stdlib-importable** so

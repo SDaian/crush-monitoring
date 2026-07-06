@@ -11,6 +11,7 @@ on:
         default: ""
 permissions:
   contents: write
+  issues: write # open an issue (→ email) when a new AI technical signal fires
 
 concurrency:
   group: congress-trades
@@ -65,7 +66,40 @@ jobs:
             git config user.name "github-actions[bot]"
             git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
             git commit -m "congress: holdings refresh ($(date -u +%F))"
-            git pull --rebase origin "${GITHUB_REF_NAME}"
+            # --autostash: the fetch step may have left congress-trades.json /
+            # state.json dirty (uncommitted); without it the rebase aborts with
+            # "cannot pull with rebase: You have unstaged changes".
+            git pull --rebase --autostash origin "${GITHUB_REF_NAME}"
+            git push
+          fi
+
+      - name: Refresh AI technical indicators + notify on new signals (non-fatal)
+        env:
+          CONGRESS_PRICES_KEY: ${{ secrets.CONGRESS_PRICES_KEY || vars.CONGRESS_PRICES_KEY }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+        run: |
+          # Daily mechanical indicators (RSI / moving averages / volume / 52w)
+          # for the AI universe + named signals. Reuses the Twelve Data key.
+          # A source outage must not fail the whole refresh.
+          python3 -m congress ai 2>&1 | tee -a fetch.log \
+            || echo "::warning::AI indicators refresh failed; keeping prior ai-indicators.json"
+          # Open a GitHub issue (emails repo watchers) for each brand-new signal.
+          # Runs before the commit so a fresh file's new_signals are read; the
+          # dedup memory in the file prevents re-notifying next run.
+          python3 -m congress.notify_signals 2>&1 | tee -a fetch.log \
+            || echo "::warning::signal notification failed (non-fatal)"
+          # Commit here (not in the final step) so it lands even if the slow
+          # price step below stalls. Stage first, then test the staged diff —
+          # ai-indicators.json may be brand-new/untracked.
+          git add docs/data/ai-indicators.json
+          if ! git diff --cached --quiet -- docs/data/ai-indicators.json; then
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git commit -m "congress: AI indicators refresh ($(date -u +%F))"
+            # --autostash: fetch/holdings may have left other generated files
+            # dirty; stash them across the rebase so it doesn't abort.
+            git pull --rebase --autostash origin "${GITHUB_REF_NAME}"
             git push
           fi
 
@@ -92,8 +126,9 @@ jobs:
           git add $FILES
           git commit -m "congress: trades + returns refresh ($(date -u +%F))"
           # The branch may have moved while the fetch ran; rebase our data
-          # commit on top rather than failing the push.
-          git pull --rebase origin "${GITHUB_REF_NAME}"
+          # commit on top rather than failing the push (--autostash guards any
+          # residual dirty files).
+          git pull --rebase --autostash origin "${GITHUB_REF_NAME}"
           git push
 
       - name: Upload fetch log and raw payloads
