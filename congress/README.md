@@ -100,11 +100,13 @@ averages, period returns, volume vs. its 20-day average, and the 52-week range.
 `congress ai` fetches each ticker's daily history (reusing the Twelve Data
 key/session from `prices.py`) and writes `docs/data/ai-indicators.json`.
 
-- **Indicators only — never a verdict.** The module never emits buy / sell /
-  hold. The tab states the *event*; the reader draws the conclusion. Each ticker
-  carries two **copy-paste prompts** pre-filled with the current readings — the
-  buy/sell/hold question lives inside the prompt the user takes to their *own*
-  AI assistant, never on our page.
+- **Mechanical summary, never advice.** The Python module emits only numbers;
+  the page's `aiScore` derives a **transparent buy/sell/hold tally** from those
+  indicators (each votes buy/hold/sell, full breakdown shown, labelled "not
+  investment advice"). It is a reproducible rule-based read, not an opaque
+  recommendation. Each ticker also carries two **copy-paste prompts** pre-filled
+  with the readings (and that mechanical read) for a deeper, fundamentals-aware
+  analysis in the user's *own* AI assistant.
 - **Named signals + notification.** `compute_signals` detects events that fire
   on the latest bar — golden/death cross, RSI crossing 30/70, reclaiming/losing
   the 50-day, new 52-week high/low. New signals (deduped via
