@@ -152,6 +152,25 @@
   }
   .copybtn{margin-top:6px}
   .aisignals{display:flex;flex-wrap:wrap;gap:4px;align-items:center;margin:6px 0}
+  .scorepill{display:inline-block;border-radius:999px;padding:0 8px;font-size:10.5px;font-weight:700;border:1px solid var(--line);vertical-align:middle}
+  .scorepill.bull{color:var(--good);border-color:rgba(124,252,155,.5);background:rgba(124,252,155,.10)}
+  .scorepill.bear{color:var(--bad);border-color:rgba(255,138,138,.5);background:rgba(255,138,138,.10)}
+  .scorepill.neutral{color:var(--gold);border-color:rgba(244,211,94,.5);background:rgba(244,211,94,.10)}
+  .scorecard{border:1px solid var(--line);border-radius:10px;padding:10px 12px;margin:8px 0}
+  .scorecard.bull{border-color:rgba(124,252,155,.45);background:rgba(124,252,155,.06)}
+  .scorecard.bear{border-color:rgba(255,138,138,.45);background:rgba(255,138,138,.06)}
+  .scorecard.neutral{border-color:rgba(244,211,94,.45);background:rgba(244,211,94,.06)}
+  .scorehead{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;flex-wrap:wrap}
+  .scorelabel{font-size:20px;font-weight:800;line-height:1.1}
+  .scorecard.bull .scorelabel{color:var(--good)} .scorecard.bear .scorelabel{color:var(--bad)} .scorecard.neutral .scorelabel{color:var(--gold)}
+  .scoretally{text-align:right;font-size:12.5px;font-weight:700}
+  .scorewhy{margin-top:8px}
+  .scorewhy summary{cursor:pointer;color:var(--chalk-dim);font-size:12px}
+  .scorechecks{margin-top:6px}
+  .scr{display:flex;gap:8px;align-items:baseline;font-size:12px;margin:2px 0}
+  .scr > span:first-child{width:38px;font-weight:700;font-size:10.5px}
+  .scr .scrk{width:150px}
+  @media (max-width:640px){ .scr .scrk{width:auto} }
 </style>
 </head>
 <body>
@@ -261,10 +280,11 @@
     <div class="legend">
       <b>Mechanical technical indicators</b> for an AI-adjacent universe (chips, hyperscalers, data-center
       build-out) — RSI(14), moving averages, volume and the 52-week range, recomputed <b>daily</b> from
-      Twelve Data closes. These are <b>descriptive readings and named signals, not a buy/sell/hold verdict</b>:
-      the tracker states the event, you draw the conclusion. A <b>daily snapshot, not real-time</b>, and
-      <b>not investment advice</b>. A new signal opens a GitHub issue (email alert). Each ticker also carries a
-      ready-to-copy prompt — pre-filled with today's readings — to take to your own AI assistant for the analysis.
+      Twelve Data closes, plus a <b>transparent buy/sell/hold summary</b> that is just a <b>rule-based tally of those
+      indicators</b> (each casts a vote, full breakdown shown) — <b>not investment advice</b>, and blind to fundamentals,
+      news and your own goals. A <b>daily snapshot, not real-time</b>. A new signal opens a GitHub issue (email alert).
+      Each ticker also carries a ready-to-copy prompt — pre-filled with today's readings and the mechanical read — to take
+      to your own AI assistant for a deeper, fundamentals-aware analysis.
     </div>
     <div id="aiSignals" class="aisignals"></div>
     <div class="cards" id="aiCards"></div>
@@ -939,6 +959,36 @@ function sigTags(sigs){
   ).join("");
 }
 
+// Transparent mechanical scorecard: each indicator already shown on the page
+// casts a buy(+1)/hold(0)/sell(-1) vote; the votes sum to a headline read.
+// This is a rule-based tally, NOT investment advice — trend checks (price vs
+// the moving averages, 50d/200d alignment) dominate, with RSI (mean-reversion)
+// and short-term momentum as oscillators.
+function aiScore(a){
+  const checks = [];
+  const add = (label, vote, note) => checks.push({label, vote, note});
+  const cmp = (x, y) => x > y ? 1 : x < y ? -1 : 0;
+  if (a.price != null && a.sma20  != null) add("Price vs 20-day",  cmp(a.price, a.sma20),  `${fmtPrice(a.price)} vs ${fmtPrice(a.sma20)}`);
+  if (a.price != null && a.sma50  != null) add("Price vs 50-day",  cmp(a.price, a.sma50),  `${fmtPrice(a.price)} vs ${fmtPrice(a.sma50)}`);
+  if (a.price != null && a.sma200 != null) add("Price vs 200-day", cmp(a.price, a.sma200), `${fmtPrice(a.price)} vs ${fmtPrice(a.sma200)}`);
+  if (a.sma50 != null && a.sma200 != null) add("50-day vs 200-day", cmp(a.sma50, a.sma200), a.sma50 >= a.sma200 ? "golden alignment" : "death alignment");
+  if (a.rsi14 != null) add("RSI (14)", a.rsi14 < 30 ? 1 : a.rsi14 > 70 ? -1 : 0, `${a.rsi14} · ${rsiZone(a.rsi14)}`);
+  if (a.chg_1m != null) add("1-month momentum", cmp(a.chg_1m, 0), `${a.chg_1m}%`);
+  if (a.chg_1w != null) add("1-week momentum",  cmp(a.chg_1w, 0), `${a.chg_1w}%`);
+  const buys  = checks.filter(c => c.vote > 0).length;
+  const sells = checks.filter(c => c.vote < 0).length;
+  const holds = checks.filter(c => c.vote === 0).length;
+  const total = checks.length || 1;
+  const ratio = (buys - sells) / total;
+  let label, cls;
+  if (ratio >= 0.5)        { label = "Strong Buy";  cls = "bull"; }
+  else if (ratio >= 0.15)  { label = "Buy";         cls = "bull"; }
+  else if (ratio <= -0.5)  { label = "Strong Sell"; cls = "bear"; }
+  else if (ratio <= -0.15) { label = "Sell";        cls = "bear"; }
+  else                     { label = "Hold";        cls = "neutral"; }
+  return {label, cls, buys, sells, holds, checks, ratio};
+}
+
 function renderAiSignals(){
   // A short banner of the freshest signals across the universe (latest bar).
   const fired = aiTickers().flatMap(tk =>
@@ -954,8 +1004,9 @@ function renderAiCards(){
   $("aiCards").innerHTML = aiTickers().map(tk => {
     const a = AI[tk];
     const dot = (a.signals && a.signals.length) ? " 🔔" : "";
+    const sc = aiScore(a);
     return `<div class="fcard ${state.aiTicker === tk ? "sel" : ""}" data-a="${esc(tk)}">
-      <div class="name">${esc(tk)}${dot}</div>
+      <div class="name">${esc(tk)}${dot} <span class="scorepill ${sc.cls}" title="mechanical technical summary — not advice">${esc(sc.label)}</span></div>
       <div class="who">${esc(a.name || "")}</div>
       <div class="px">${fmtPrice(a.price)} <span style="font-size:12px">${pctSpan(a.chg_1d)}</span></div>
       <div class="metarow">
@@ -970,6 +1021,7 @@ function renderAiCards(){
 
 function aiPrompts(tk, a){
   const asof = a.asof_date || "latest close";
+  const sc = aiScore(a);
   const p1 =
 `Analyze the current trends in the stock market, focusing on ${a.name} ($${tk}). `
 + `Identify any emerging patterns and suggest possible investment opportunities. `
@@ -986,7 +1038,9 @@ function aiPrompts(tk, a){
 + `1-day ${a.chg_1d ?? "—"}%, RSI(14) ${a.rsi14 ?? "—"}, SMA20 ${fmtPrice(a.sma20)}, `
 + `SMA50 ${fmtPrice(a.sma50)}, SMA200 ${fmtPrice(a.sma200)}, `
 + `52-week range ${fmtPrice(a.low_52w)}–${fmtPrice(a.high_52w)}, `
-+ `volume ${fmtVol(a.volume)} vs 20-day avg ${fmtVol(a.avg_vol_20)}.`;
++ `volume ${fmtVol(a.volume)} vs 20-day avg ${fmtVol(a.avg_vol_20)}. `
++ `A simple mechanical tally of these indicators reads "${sc.label}" (${sc.buys} buy / ${sc.holds} hold / ${sc.sells} sell) — `
++ `weigh it against fundamentals and news before concluding.`;
   return [
     {title:"📈 Market-trend & opportunities prompt", text:p1},
     {title:"📊 Technical-analysis prompt (buy / sell / hold)", text:p2},
@@ -1014,11 +1068,39 @@ function renderAiDetail(){
   const cell = (k, v, x) =>
     `<div class="indcell"><div class="k">${k}</div><div class="v">${v}</div>${x?`<div class="x">${x}</div>`:""}</div>`;
 
+  const sc = aiScore(a);
+  const voteWord = v => v > 0 ? "buy" : v < 0 ? "sell" : "hold";
+  const voteCls  = v => v > 0 ? "up"  : v < 0 ? "down" : "flat";
+  const scoreHtml = `<div class="scorecard ${sc.cls}">
+      <div class="scorehead">
+        <div>
+          <div class="scorelabel">${esc(sc.label)}</div>
+          <div class="note">mechanical technical summary — <b>not investment advice</b></div>
+        </div>
+        <div class="scoretally">
+          <span class="up">${sc.buys} buy</span> ·
+          <span class="flat">${sc.holds} hold</span> ·
+          <span class="down">${sc.sells} sell</span>
+          <div class="note">across ${sc.checks.length} indicator checks</div>
+        </div>
+      </div>
+      <details class="scorewhy"><summary>How this is computed</summary>
+        <div class="scorechecks">${sc.checks.map(c =>
+          `<div class="scr"><span class="${voteCls(c.vote)}">${voteWord(c.vote).toUpperCase()}</span>
+            <span class="scrk">${esc(c.label)}</span>
+            <span class="note">${esc(c.note)}</span></div>`).join("")}</div>
+        <div class="note" style="margin-top:6px">A plain rule-based tally of the indicators shown below — trend checks
+          (price vs each moving average, 50d/200d alignment), RSI (oversold = buy, overbought = sell) and momentum each cast
+          one vote. It is <b>not</b> a recommendation and ignores fundamentals, news and your own risk/goals.</div>
+      </details>
+    </div>`;
+
   box.innerHTML =
     `<h3>${esc(tk)} <span class="note">${esc(a.name||"")}</span></h3>
      <div class="tksummary">
        <span><b>${fmtPrice(a.price)}</b> ${pctSpan(a.chg_1d)} <span class="est">daily close · as of ${esc(a.asof_date||"—")}</span></span>
      </div>
+     ${scoreHtml}
      ${a.signals && a.signals.length ? `<div style="margin:2px 0 8px">${sigTags(a.signals)}</div>` : ""}
      <div class="indgrid">
        ${cell("Change 1d / 1w / 1m", `${pctSpan(a.chg_1d)} / ${pctSpan(a.chg_1w)} / ${pctSpan(a.chg_1m)}`)}
@@ -1036,8 +1118,9 @@ function renderAiDetail(){
      </div>
      ${congress}
      <div class="legend" style="margin-top:10px">
-       These are mechanical readings from past daily closes — <b>not a recommendation</b>. For a written
-       analysis and a buy/sell/hold view, copy a prompt below (already filled with today's numbers) into your AI assistant.
+       The summary above is a <b>mechanical tally</b> of these readings, not a recommendation and blind to fundamentals,
+       news and your own goals. For a reasoned buy/sell/hold with those factors, copy a prompt below (already filled with
+       today's numbers — and this mechanical read) into your AI assistant.
      </div>
      ${aiPrompts(tk, a).map((p, i) => `<div class="promptcard">
         <h4>${p.title}</h4>
