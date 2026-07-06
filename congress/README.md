@@ -91,6 +91,34 @@ reports can't be parsed (that member is marked `available: false`). Only the
 listing/fetch helpers touch the network; the two parsers are pure and
 fixture-tested offline (`tests/congress/test_holdings.py`).
 
+## AI technical indicators (`indicators.py` → `docs/data/ai-indicators.json`)
+
+The page's **"🤖 AI stocks"** tab shows *mechanical* daily technical readings
+for a fixed AI-adjacent universe (chips, hyperscalers, data-center build-out —
+see `AI_TICKERS`): latest close, RSI(14, Wilder), 20/50/200-day moving
+averages, period returns, volume vs. its 20-day average, and the 52-week range.
+`congress ai` fetches each ticker's daily history (reusing the Twelve Data
+key/session from `prices.py`) and writes `docs/data/ai-indicators.json`.
+
+- **Indicators only — never a verdict.** The module never emits buy / sell /
+  hold. The tab states the *event*; the reader draws the conclusion. Each ticker
+  carries two **copy-paste prompts** pre-filled with the current readings — the
+  buy/sell/hold question lives inside the prompt the user takes to their *own*
+  AI assistant, never on our page.
+- **Named signals + notification.** `compute_signals` detects events that fire
+  on the latest bar — golden/death cross, RSI crossing 30/70, reclaiming/losing
+  the 50-day, new 52-week high/low. New signals (deduped via
+  `meta.emitted_signal_keys`) are surfaced in `meta.new_signals`;
+  `notify_signals.py` opens a GitHub **issue** per new signal (which emails repo
+  watchers). Runs as `python3 -m congress.notify_signals` — module form, so the
+  package's `http.py` doesn't shadow stdlib `http`. A burst (> 8) collapses into
+  one summary issue.
+- **Snapshot, not real-time; not advice.** Values are the previous session's
+  daily close. The indicator math and signal detection are pure stdlib and
+  fixture-tested offline (`tests/congress/test_indicators.py`,
+  `test_ai_cli.py`). The committed `ai-indicators.json` ships as clearly-labelled
+  `_sample` data until the first live refresh overwrites it.
+
 ## Data-honesty constraints (by law, not by us)
 
 - Filings may lag the trade by **30–45 days**.
