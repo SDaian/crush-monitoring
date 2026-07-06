@@ -123,6 +123,35 @@
   details.skips li{font-size:12px;color:var(--chalk-dim);margin:3px 0}
   #err{display:none}
   footer{margin:22px 0 0;font-size:11.5px;color:var(--chalk-dim)}
+  /* AI stocks tab */
+  .fcard .px{font-size:15px;font-weight:700;margin-top:4px}
+  .fcard .metarow{display:flex;justify-content:space-between;align-items:center;margin-top:4px;font-size:11.5px}
+  .up{color:var(--good)} .down{color:var(--bad)} .flat{color:var(--chalk-dim)}
+  .rsibadge{border:1px solid var(--line);border-radius:999px;padding:0 7px;font-size:10.5px}
+  .sigtag{
+    display:inline-block;border-radius:999px;padding:1px 9px;font-size:11px;
+    margin:2px 4px 2px 0;border:1px solid var(--line);white-space:nowrap;
+  }
+  .sigtag.bull{color:var(--good);border-color:rgba(124,252,155,.5);background:rgba(124,252,155,.08)}
+  .sigtag.bear{color:var(--bad);border-color:rgba(255,138,138,.5);background:rgba(255,138,138,.08)}
+  .sigtag.neutral{color:var(--gold);border-color:rgba(244,211,94,.5);background:rgba(244,211,94,.08)}
+  .indgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px;margin:10px 0}
+  .indcell{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:7px 9px}
+  .indcell .k{color:var(--chalk-dim);font-size:11px}
+  .indcell .v{font-size:14px;font-weight:700;margin-top:2px}
+  .indcell .x{color:var(--chalk-dim);font-size:11px;margin-top:1px}
+  .rngbar{position:relative;height:8px;border-radius:4px;background:rgba(0,0,0,.3);margin-top:6px}
+  .rngbar .dot{position:absolute;top:-3px;width:14px;height:14px;border-radius:50%;
+    background:var(--gold);transform:translateX(-50%);border:2px solid var(--card)}
+  .promptcard{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:10px 12px;margin:8px 0}
+  .promptcard h4{margin:0 0 6px;font-size:12.5px}
+  .promptbox{
+    width:100%;background:var(--card2);color:var(--chalk);border:1px solid var(--line);
+    border-radius:8px;padding:8px;font:12px/1.4 ui-monospace,Menlo,Consolas,monospace;
+    resize:vertical;min-height:96px;
+  }
+  .copybtn{margin-top:6px}
+  .aisignals{display:flex;flex-wrap:wrap;gap:4px;align-items:center;margin:6px 0}
 </style>
 </head>
 <body>
@@ -157,6 +186,7 @@
     <div class="tab active" data-p="all">📊 All trades</div>
     <div class="tab" data-p="ticker">🔎 Ticker focus</div>
     <div class="tab" data-p="holdings">🧩 Holdings</div>
+    <div class="tab" data-p="ai">🤖 AI stocks</div>
   </div>
 
   <div class="panel active" id="p-all">
@@ -223,6 +253,28 @@
     <div class="panel2" id="tickerDetail"></div>
   </div><!-- /#p-ticker -->
 
+  <div class="panel" id="p-ai">
+    <div class="banner-sample" id="aiSampleBanner" style="display:none">
+      ⚠️ These AI indicators are <b>sample data from a synthetic price series — not real market data.</b>
+      The daily refresh replaces them with real closes once the price feed runs.
+    </div>
+    <div class="legend">
+      <b>Mechanical technical indicators</b> for an AI-adjacent universe (chips, hyperscalers, data-center
+      build-out) — RSI(14), moving averages, volume and the 52-week range, recomputed <b>daily</b> from
+      Twelve Data closes. These are <b>descriptive readings and named signals, not a buy/sell/hold verdict</b>:
+      the tracker states the event, you draw the conclusion. A <b>daily snapshot, not real-time</b>, and
+      <b>not investment advice</b>. A new signal opens a GitHub issue (email alert). Each ticker also carries a
+      ready-to-copy prompt — pre-filled with today's readings — to take to your own AI assistant for the analysis.
+    </div>
+    <div id="aiSignals" class="aisignals"></div>
+    <div class="cards" id="aiCards"></div>
+    <div class="filters">
+      <input type="search" id="aiq" placeholder="Analyze an AI ticker (e.g. NVDA)…"/>
+      <button class="act" id="aiClearBtn">✕ Clear</button>
+    </div>
+    <div class="panel2" id="aiDetail"></div>
+  </div><!-- /#p-ai -->
+
   <div class="panel" id="p-holdings">
     <div class="legend">
       <b>Estimated current holdings</b> per featured member: their latest <b>annual financial-disclosure report</b>
@@ -276,10 +328,13 @@ let DATA = null;
 let RET = {};       // trade id -> {entry_date, entry_close, pct}
 let PRICES = {};    // ticker -> {asof_date, asof_close}
 let HOLD = {};      // member -> {chamber, available, filing_date, report_year, source_url, stocks:[…]}
+let AI = {};        // ticker -> {name, price, rsi14, sma20/50/200, …, signals:[…]}
+let AI_META = {};   // {new_signals:[…], …}
 let retSample = false;
+let aiSample = false;
 let state = {q:"", chamber:"", party:"", type:"", range:"", member:"",
              sortKey:"filing_date", sortDir:-1, shown:PAGE,
-             focusTicker:"MU", focusRange:"90", holdMember:null};
+             focusTicker:"MU", focusRange:"90", holdMember:null, aiTicker:"NVDA"};
 
 const $ = id => document.getElementById(id);
 const esc = s => String(s ?? "").replace(/[&<>"']/g,
@@ -850,6 +905,153 @@ function renderHoldings(){
   renderHoldDetail();
 }
 
+// ---- AI stocks tab: mechanical indicators + signals + copy-paste prompts ---
+// Indicators only — the page never renders a buy/sell/hold verdict. Any such
+// judgement lives in the pre-filled prompt the user copies to their own LLM.
+const AI_ORDER = ["NVDA","AMD","AVGO","MU","TSM","ASML","SNDK","MSFT","GOOGL",
+                  "AMZN","META","TSLA","VRT","SMCI","DELL"];
+
+function fmtPrice(n){ return n == null ? "—" : "$" + Number(n).toFixed(2); }
+function fmtVol(n){
+  if (n == null) return "—";
+  if (n >= 1e9) return (n/1e9).toFixed(2) + "B";
+  if (n >= 1e6) return (n/1e6).toFixed(1) + "M";
+  if (n >= 1e3) return Math.round(n/1e3) + "k";
+  return String(n);
+}
+function pctSpan(x){
+  if (x == null) return '<span class="flat">—</span>';
+  const cls = x > 0 ? "up" : x < 0 ? "down" : "flat";
+  return `<span class="${cls}">${x > 0 ? "+" : ""}${Number(x).toFixed(2)}%</span>`;
+}
+function rsiZone(r){
+  if (r == null) return "—";
+  return r < 30 ? "oversold" : r > 70 ? "overbought" : "neutral";
+}
+function aiTickers(){ // ordered, only those we actually have data for
+  const have = new Set(Object.keys(AI));
+  return AI_ORDER.filter(t => have.has(t)).concat(
+    [...have].filter(t => !AI_ORDER.includes(t)).sort());
+}
+function sigTags(sigs){
+  return (sigs || []).map(s =>
+    `<span class="sigtag ${esc(s.dir||"neutral")}" title="mechanical event on ${esc(s.asof)} — not advice">🔔 ${esc(s.label)}</span>`
+  ).join("");
+}
+
+function renderAiSignals(){
+  // A short banner of the freshest signals across the universe (latest bar).
+  const fired = aiTickers().flatMap(tk =>
+    (AI[tk].signals || []).map(s => ({tk, ...s})));
+  fired.sort((a,b) => a.asof < b.asof ? 1 : -1);
+  $("aiSignals").innerHTML = fired.length
+    ? `<span class="note">Latest signals:</span> ` + fired.slice(0, 8).map(s =>
+        `<span class="sigtag ${esc(s.dir||"neutral")}" title="${esc(s.asof)}">🔔 ${esc(s.tk)} · ${esc(s.label)}</span>`).join("")
+    : `<span class="note">No new signals on the latest session — indicators below are current.</span>`;
+}
+
+function renderAiCards(){
+  $("aiCards").innerHTML = aiTickers().map(tk => {
+    const a = AI[tk];
+    const dot = (a.signals && a.signals.length) ? " 🔔" : "";
+    return `<div class="fcard ${state.aiTicker === tk ? "sel" : ""}" data-a="${esc(tk)}">
+      <div class="name">${esc(tk)}${dot}</div>
+      <div class="who">${esc(a.name || "")}</div>
+      <div class="px">${fmtPrice(a.price)} <span style="font-size:12px">${pctSpan(a.chg_1d)}</span></div>
+      <div class="metarow">
+        <span class="rsibadge">RSI ${a.rsi14 == null ? "—" : Math.round(a.rsi14)} · ${esc(rsiZone(a.rsi14))}</span>
+        <span class="note">${a.sma50 != null && a.sma200 != null
+          ? (a.sma50 >= a.sma200 ? '<span class="up">50d›200d</span>' : '<span class="down">50d‹200d</span>')
+          : ""}</span>
+      </div>
+    </div>`;
+  }).join("");
+}
+
+function aiPrompts(tk, a){
+  const asof = a.asof_date || "latest close";
+  const p1 =
+`Analyze the current trends in the stock market, focusing on ${a.name} ($${tk}). `
++ `Identify any emerging patterns and suggest possible investment opportunities. `
++ `Take into account the latest earnings reports and sector news in your analysis.\n\n`
++ `For reference — $${tk} daily close as of ${asof}: price ${fmtPrice(a.price)}, `
++ `1-week ${a.chg_1w ?? "—"}%, 1-month ${a.chg_1m ?? "—"}%, RSI(14) ${a.rsi14 ?? "—"}, `
++ `50-day avg ${fmtPrice(a.sma50)}, 200-day avg ${fmtPrice(a.sma200)}, `
++ `volume ${fmtVol(a.volume)} vs 20-day avg ${fmtVol(a.avg_vol_20)}.`;
+  const p2 =
+`Using technical analysis, evaluate the stock of ${a.name} ($${tk}). `
++ `Analyze recent price movements, volume, and key indicators such as moving averages `
++ `and the RSI. Provide a recommendation to buy, sell, or hold.\n\n`
++ `Current readings ($${tk}, daily close ${asof}): price ${fmtPrice(a.price)}, `
++ `1-day ${a.chg_1d ?? "—"}%, RSI(14) ${a.rsi14 ?? "—"}, SMA20 ${fmtPrice(a.sma20)}, `
++ `SMA50 ${fmtPrice(a.sma50)}, SMA200 ${fmtPrice(a.sma200)}, `
++ `52-week range ${fmtPrice(a.low_52w)}–${fmtPrice(a.high_52w)}, `
++ `volume ${fmtVol(a.volume)} vs 20-day avg ${fmtVol(a.avg_vol_20)}.`;
+  return [
+    {title:"📈 Market-trend & opportunities prompt", text:p1},
+    {title:"📊 Technical-analysis prompt (buy / sell / hold)", text:p2},
+  ];
+}
+
+function renderAiDetail(){
+  const box = $("aiDetail");
+  const tk = state.aiTicker;
+  const a = AI[tk];
+  if (!a){
+    box.innerHTML = `<div class="note">No indicator data for ${esc(tk || "—")}.
+      The AI tab covers: ${aiTickers().join(", ") || "(pending first refresh)"}.</div>`;
+    return;
+  }
+  const rp = a.range_pos == null ? null : Math.max(0, Math.min(100, a.range_pos));
+  // Congressional angle — ties this ticker back to the tracker's actual data.
+  const s = (typeof tickerStats === "function") ? tickerStats(tk, "") : {n:0};
+  const congress = s.n
+    ? `<div class="note" style="margin-top:6px">🏛 <b>Congress:</b> ${s.n} disclosed trade${s.n===1?"":"s"} all-time
+        (<span class="buy">${s.buy} buy</span> · <span class="sell">${s.sell} sell</span>), ${s.members} member${s.members===1?"":"s"}.
+        <a href="#" data-goticker="${esc(tk)}">See who ↗</a></div>`
+    : `<div class="note" style="margin-top:6px">🏛 No congressional trades on record for $${esc(tk)}.</div>`;
+
+  const cell = (k, v, x) =>
+    `<div class="indcell"><div class="k">${k}</div><div class="v">${v}</div>${x?`<div class="x">${x}</div>`:""}</div>`;
+
+  box.innerHTML =
+    `<h3>${esc(tk)} <span class="note">${esc(a.name||"")}</span></h3>
+     <div class="tksummary">
+       <span><b>${fmtPrice(a.price)}</b> ${pctSpan(a.chg_1d)} <span class="est">daily close · as of ${esc(a.asof_date||"—")}</span></span>
+     </div>
+     ${a.signals && a.signals.length ? `<div style="margin:2px 0 8px">${sigTags(a.signals)}</div>` : ""}
+     <div class="indgrid">
+       ${cell("Change 1d / 1w / 1m", `${pctSpan(a.chg_1d)} / ${pctSpan(a.chg_1w)} / ${pctSpan(a.chg_1m)}`)}
+       ${cell("RSI (14)", a.rsi14 == null ? "—" : a.rsi14, rsiZone(a.rsi14))}
+       ${cell("Trend (50d vs 200d)", a.sma50 != null && a.sma200 != null
+          ? (a.sma50 >= a.sma200 ? '<span class="up">uptrend</span>' : '<span class="down">downtrend</span>') : "—",
+          a.sma50 != null && a.sma200 != null ? `50d ${fmtPrice(a.sma50)} · 200d ${fmtPrice(a.sma200)}` : "")}
+       ${cell("Price vs 50-day", a.vs_sma50 == null ? "—" : pctSpan(a.vs_sma50))}
+       ${cell("Price vs 200-day", a.vs_sma200 == null ? "—" : pctSpan(a.vs_sma200))}
+       ${cell("SMA 20", fmtPrice(a.sma20))}
+       ${cell("Volume vs 20d avg", a.rel_vol == null ? "—" : a.rel_vol + "×", `${fmtVol(a.volume)} vs ${fmtVol(a.avg_vol_20)}`)}
+       ${cell("52-week range", `${fmtPrice(a.low_52w)} – ${fmtPrice(a.high_52w)}`,
+          rp == null ? "" : `${Math.round(rp)}% of range` +
+          `<div class="rngbar"><div class="dot" style="left:${rp}%"></div></div>`)}
+     </div>
+     ${congress}
+     <div class="legend" style="margin-top:10px">
+       These are mechanical readings from past daily closes — <b>not a recommendation</b>. For a written
+       analysis and a buy/sell/hold view, copy a prompt below (already filled with today's numbers) into your AI assistant.
+     </div>
+     ${aiPrompts(tk, a).map((p, i) => `<div class="promptcard">
+        <h4>${p.title}</h4>
+        <textarea class="promptbox" id="prompt${i}" readonly>${esc(p.text)}</textarea>
+        <button class="act copybtn" data-copy="prompt${i}">📋 Copy prompt</button>
+      </div>`).join("")}`;
+}
+
+function renderAi(){
+  renderAiSignals();
+  renderAiCards();
+  renderAiDetail();
+}
+
 function renderSkips(){
   const skips = DATA.skipped_filings || [];
   $("skipNote").innerHTML = skips.length
@@ -871,6 +1073,7 @@ function renderAll(){
   renderRows();
   renderTicker();
   renderHoldings();
+  renderAi();
 }
 
 function wire(){
@@ -940,6 +1143,45 @@ function wire(){
     state.holdMember = card.dataset.h;
     renderHoldings();
   });
+
+  // AI stocks: pick a card, search a ticker, clear, copy a prompt, cross-link.
+  $("aiCards").addEventListener("click", e => {
+    const card = e.target.closest(".fcard");
+    if (!card) return;
+    state.aiTicker = card.dataset.a;
+    $("aiq").value = "";
+    renderAiCards(); renderAiDetail();
+  });
+  $("aiq").addEventListener("input", e => {
+    state.aiTicker = e.target.value.trim().toUpperCase();
+    renderAiCards(); renderAiDetail();
+  });
+  $("aiClearBtn").addEventListener("click", () => {
+    state.aiTicker = aiTickers()[0] || "NVDA";
+    $("aiq").value = "";
+    renderAiCards(); renderAiDetail();
+  });
+  $("aiDetail").addEventListener("click", e => {
+    const copy = e.target.closest("button[data-copy]");
+    if (copy){
+      const ta = $(copy.dataset.copy);
+      if (ta){
+        ta.select();
+        const done = () => { const o = copy.textContent; copy.textContent = "✓ Copied"; setTimeout(() => copy.textContent = o, 1400); };
+        if (navigator.clipboard?.writeText) navigator.clipboard.writeText(ta.value).then(done, () => { document.execCommand("copy"); done(); });
+        else { document.execCommand("copy"); done(); }
+      }
+      return;
+    }
+    const go = e.target.closest("a[data-goticker]");
+    if (go){
+      e.preventDefault();
+      state.focusTicker = go.dataset.goticker;
+      for (const el of document.querySelectorAll(".tab")) el.classList.toggle("active", el.dataset.p === "ticker");
+      for (const el of document.querySelectorAll(".panel")) el.classList.toggle("active", el.id === "p-ticker");
+      renderTicker();
+    }
+  });
 }
 
 async function boot(){
@@ -967,11 +1209,22 @@ async function boot(){
     const hr = await fetch("data/holdings.json", {cache:"no-store"});
     if (hr.ok) HOLD = (await hr.json()).holdings || {};
   } catch (err) { /* holdings are optional */ }
+  // AI technical indicators (optional — page still works without it).
+  try {
+    const ar = await fetch("data/ai-indicators.json", {cache:"no-store"});
+    if (ar.ok){
+      const ad = await ar.json();
+      AI = ad.tickers || {};
+      AI_META = ad.meta || {};
+      aiSample = !!ad.meta?._sample;
+    }
+  } catch (err) { /* AI indicators are optional */ }
 
   $("verStamp").textContent =
     `${DATA.meta.data_version || "?"} · ${(DATA.meta.counts?.trades ?? 0).toLocaleString("en-US")} trades`;
   if (DATA.meta._sample) $("sampleBanner").style.display = "";
   if (retSample) $("retSampleBanner").style.display = "";
+  if (aiSample) $("aiSampleBanner").style.display = "";
   const retLegend = $("retLegend");
   if (retLegend){
     retLegend.innerHTML = retSample
