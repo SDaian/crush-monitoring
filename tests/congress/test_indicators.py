@@ -146,5 +146,33 @@ class TestSignals(unittest.TestCase):
                          "NVDA|golden_cross|2026-07-06")
 
 
+class TestAiScore(unittest.TestCase):
+    def test_all_bullish_strong_buy(self):
+        # price above every MA, golden alignment, neutral RSI, positive momentum.
+        t = {"price": 100, "sma20": 90, "sma50": 80, "sma200": 70,
+             "rsi14": 55, "chg_1m": 5, "chg_1w": 2}
+        sc = ind.ai_score(t)
+        self.assertEqual(sc["label"], "Strong Buy")
+        self.assertEqual((sc["buys"], sc["holds"], sc["sells"]), (6, 1, 0))
+
+    def test_all_bearish_strong_sell(self):
+        t = {"price": 50, "sma20": 60, "sma50": 70, "sma200": 80,
+             "rsi14": 75, "chg_1m": -5, "chg_1w": -2}
+        self.assertEqual(ind.ai_score(t)["label"], "Strong Sell")
+
+    def test_mixed_holds(self):
+        # 2 buy, 2 sell, 3 hold → ratio 0 → Hold.
+        t = {"price": 100, "sma20": 90, "sma50": 110, "sma200": 95,
+             "rsi14": 50, "chg_1m": 0, "chg_1w": 0}
+        # votes: sma20 +1, sma50 -1, sma200 +1, 50v200(110>95) +1, rsi 0,
+        # chg_1m 0, chg_1w 0 → 3 buy / 1 sell / 3 hold → ratio 2/7 ≈ 0.29 → Buy
+        self.assertEqual(ind.ai_score(t)["label"], "Buy")
+
+    def test_partial_data(self):
+        sc = ind.ai_score({"price": 10, "sma20": 9})  # single check
+        self.assertEqual(sc["label"], "Strong Buy")  # 1/1
+        self.assertEqual(ind.ai_score({})["label"], "Hold")  # no checks
+
+
 if __name__ == "__main__":
     unittest.main()

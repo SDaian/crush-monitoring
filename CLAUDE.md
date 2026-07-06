@@ -183,6 +183,17 @@ sites. Full details in `congress/README.md`. Conventions:
   doesn't shadow stdlib `http`); dedup lives in `meta.emitted_signal_keys`.
   Values are a **daily snapshot, not real-time**. The committed JSON ships as
   `_sample` data (synthetic series, banner-flagged) until the first live refresh.
+  The page's `aiScore` and Python `indicators.ai_score` **must stay in sync**
+  (same checks + thresholds) — the report reuses the Python one.
+- **Morning report (email digest):** `congress/daily_report.py`
+  (`python3 -m congress.daily_report`) composes a dated GitHub issue → email
+  with the AI buy/sell/hold scorecard, overnight signals + rating flips, and
+  newly-filed disclosures. It runs from the daily Action's report step (guarded
+  to `schedule` or the `report` dispatch input) **before** the slow price step
+  so it's timely; the cron is set to **06:50 UTC ≈ 9am Madrid** (UTC cron does
+  not follow DST, so the local time drifts ±1h). It closes the prior day's
+  report issue and tracks the last issue number + ratings in
+  `congress/report_state.json` (generated; do not hand-edit).
 - **Dependency policy:** `predictor/` stays pure-stdlib. `congress/` may use
   `requests` + `pdfplumber` (`congress/requirements.txt`, installed only by
   the Action) but **parsers must stay stdlib-importable** so
