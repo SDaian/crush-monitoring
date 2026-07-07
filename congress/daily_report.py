@@ -172,20 +172,31 @@ def main() -> int:
         print("no REPO / token — skipping morning report")
         return 0
 
+    state = _load(STATE_JSON, {})
+    today_iso = datetime.now(timezone.utc).date().isoformat()
+    # Idempotent per day: if a report was already posted today (e.g. an early
+    # cron already ran, or this was triggered manually), don't post a second.
+    if state.get("date") == today_iso and state.get("issue_number"):
+        print(f"report already posted today (#{state['issue_number']}); skipping")
+        return 0
+
     trades = _load(TRADES_JSON, {}).get("trades", [])
     ai = _load(AI_JSON, {})
     ai_tickers = ai.get("tickers", {})
     new_signals = ai.get("meta", {}).get("new_signals", [])
-    state = _load(STATE_JSON, {})
     prev_ratings = state.get("ratings", {})
-    today_iso = datetime.now(timezone.utc).date().isoformat()
 
     report = build_report(trades, ai_tickers, new_signals, prev_ratings, today_iso)
     title = f"📋 Morning report — {today_iso}"
+    # Assign the issue to the repo owner (override with REPORT_ASSIGNEE) so
+    # GitHub emails them directly — assignees are notified regardless of whether
+    # they "watch" the repo, which is the reliable path for the alert.
+    assignee = os.environ.get("REPORT_ASSIGNEE") or repo.split("/")[0]
 
     try:
         status, issue = _gh("POST", f"{API}/repos/{repo}/issues", token,
-                            {"title": title, "body": report["markdown"]})
+                            {"title": title, "body": report["markdown"],
+                             "assignees": [assignee] if assignee else []})
         if not (200 <= status < 300):
             print(f"::warning::report issue POST returned {status}")
             return 0
