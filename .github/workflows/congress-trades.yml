@@ -2,13 +2,24 @@ name: Congress trades refresh
 
 on:
   schedule:
-    - cron: "17 9 * * *" # daily, off the :00 stampede
+    # Target ~9am Madrid (07:00 UTC summer). GitHub scheduled runs are
+    # best-effort and are frequently delayed 1–3h under load, so we bias EARLY
+    # (04:30 UTC) — an on-time run is ~06:30 Madrid, a typical delayed one still
+    # lands mid-morning rather than the afternoon. Early is safe ("before the
+    # day starts"); late is the failure mode. Cron is UTC and ignores DST, so
+    # the Madrid clock time drifts ±1h yearly. For guaranteed timing an external
+    # scheduler hitting the workflow_dispatch API would be needed.
+    - cron: "30 4 * * *"
   workflow_dispatch:
     inputs:
       limit:
         description: "Max new filings per chamber this run (empty = no cap)"
         required: false
         default: ""
+      report:
+        description: "Also send the morning report issue (true to test on demand)"
+        required: false
+        default: "false"
 permissions:
   contents: write
   issues: write # open an issue (→ email) when a new AI technical signal fires
@@ -69,7 +80,7 @@ jobs:
             # --autostash: the fetch step may have left congress-trades.json /
             # state.json dirty (uncommitted); without it the rebase aborts with
             # "cannot pull with rebase: You have unstaged changes".
-            git pull --rebase --autostash origin "${GITHUB_REF_NAME}"
+            git pull --rebase --autostash -X theirs origin "${GITHUB_REF_NAME}"
             git push
           fi
 
@@ -99,7 +110,28 @@ jobs:
             git commit -m "congress: AI indicators refresh ($(date -u +%F))"
             # --autostash: fetch/holdings may have left other generated files
             # dirty; stash them across the rebase so it doesn't abort.
-            git pull --rebase --autostash origin "${GITHUB_REF_NAME}"
+            git pull --rebase --autostash -X theirs origin "${GITHUB_REF_NAME}"
+            git push
+          fi
+
+      - name: Morning report → GitHub issue email (scheduled/on-demand, non-fatal)
+        if: github.event_name == 'schedule' || github.event.inputs.report == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+        run: |
+          # Compose the morning digest (AI scorecard + overnight signals +
+          # rating flips + new disclosures) and open a dated issue → email.
+          # Runs before the slow price step so it lands on time; reads the
+          # fresh working-tree trades/AI files. A failure must not fail the run.
+          python3 -m congress.daily_report 2>&1 | tee -a fetch.log \
+            || echo "::warning::morning report failed (non-fatal)"
+          git add congress/report_state.json
+          if ! git diff --cached --quiet -- congress/report_state.json; then
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git commit -m "congress: morning report state ($(date -u +%F))"
+            git pull --rebase --autostash -X theirs origin "${GITHUB_REF_NAME}"
             git push
           fi
 
@@ -126,9 +158,11 @@ jobs:
           git add $FILES
           git commit -m "congress: trades + returns refresh ($(date -u +%F))"
           # The branch may have moved while the fetch ran; rebase our data
-          # commit on top rather than failing the push (--autostash guards any
-          # residual dirty files).
-          git pull --rebase --autostash origin "${GITHUB_REF_NAME}"
+          # commit on top rather than failing the push. --autostash guards any
+          # residual dirty files; -X theirs auto-resolves a conflict in a
+          # generated data file to THIS run's freshly-computed version (rebase
+          # "theirs" = the commit being replayed) instead of aborting exit 1.
+          git pull --rebase --autostash -X theirs origin "${GITHUB_REF_NAME}"
           git push
 
       - name: Upload fetch log and raw payloads

@@ -183,6 +183,23 @@ sites. Full details in `congress/README.md`. Conventions:
   doesn't shadow stdlib `http`); dedup lives in `meta.emitted_signal_keys`.
   Values are a **daily snapshot, not real-time**. The committed JSON ships as
   `_sample` data (synthetic series, banner-flagged) until the first live refresh.
+  The page's `aiScore` and Python `indicators.ai_score` **must stay in sync**
+  (same checks + thresholds) — the report reuses the Python one.
+- **Morning report (email digest):** `congress/daily_report.py`
+  (`python3 -m congress.daily_report`) composes a dated GitHub issue → email
+  with the AI buy/sell/hold scorecard, overnight signals + rating flips, and
+  newly-filed disclosures. It runs from the daily Action's report step (guarded
+  to `schedule` or the `report` dispatch input) **before** the slow price step
+  so it's timely. The cron targets ~9am Madrid but is set **early (04:30 UTC)**
+  because GitHub scheduled runs are best-effort and often delayed 1–3h; early is
+  safe, late is the failure. It **assigns the issue to the repo owner**
+  (`REPORT_ASSIGNEE` override) so email reaches them without needing to "watch"
+  the repo, is **idempotent per day** (skips if `report_state.date == today`, so
+  a manual send + a delayed scheduled run don't double-post), closes the prior
+  day's report issue, and tracks the last issue number + ratings in
+  `congress/report_state.json` (generated; do not hand-edit). UTC cron ignores
+  DST so the Madrid clock time drifts ±1h; precise timing needs an external
+  scheduler hitting the `workflow_dispatch` API.
 - **Dependency policy:** `predictor/` stays pure-stdlib. `congress/` may use
   `requests` + `pdfplumber` (`congress/requirements.txt`, installed only by
   the Action) but **parsers must stay stdlib-importable** so

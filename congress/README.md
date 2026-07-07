@@ -121,6 +121,22 @@ key/session from `prices.py`) and writes `docs/data/ai-indicators.json`.
   `test_ai_cli.py`). The committed `ai-indicators.json` ships as clearly-labelled
   `_sample` data until the first live refresh overwrites it.
 
+## Morning report (`daily_report.py` → GitHub issue email)
+
+`congress daily_report` (run as `python3 -m congress.daily_report`) composes a
+short morning digest and opens a **dated GitHub issue** — which emails repo
+watchers — with three sections: the AI **buy/sell/hold scorecard**
+(`indicators.ai_score`, mirroring the page's `aiScore`), **signals overnight**
+(new mechanical signals + tickers whose rating flipped vs. yesterday), and
+**new congressional disclosures** (filed in the last few days). It closes the
+previous day's report issue and records the issue number + ratings in
+`congress/report_state.json` for the next run's diff. The daily Action runs it
+before the slow price step (guarded to the schedule or the `report` dispatch
+input), timed via the `06:50 UTC` cron to land near **9am Madrid** (UTC cron
+ignores DST, so the local time drifts ±1h). Pure stdlib except the GitHub API
+call; `build_report` is fixture-tested offline. It is **not investment advice** —
+the disclaimer rides at the top of every issue.
+
 ## Data-honesty constraints (by law, not by us)
 
 - Filings may lag the trade by **30–45 days**.

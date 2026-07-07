@@ -204,6 +204,54 @@ def signal_key(ticker: str, sig: dict) -> str:
     return f"{ticker}|{sig['type']}|{sig['asof']}"
 
 
+def ai_score(t: dict) -> dict:
+    """Mechanical buy/hold/sell tally from one ticker's indicators.
+
+    This MUST mirror ``aiScore`` in docs/trades.html exactly (same checks,
+    same thresholds) so the page and the morning report agree. Each check
+    votes buy(+1)/hold(0)/sell(-1); the net ratio maps to a label. It is a
+    transparent rule-based read, NOT investment advice.
+    """
+    def cmp(x, y):
+        return 1 if x > y else -1 if x < y else 0
+
+    votes: list[int] = []
+    p = t.get("price")
+    if p is not None and t.get("sma20") is not None:
+        votes.append(cmp(p, t["sma20"]))
+    if p is not None and t.get("sma50") is not None:
+        votes.append(cmp(p, t["sma50"]))
+    if p is not None and t.get("sma200") is not None:
+        votes.append(cmp(p, t["sma200"]))
+    if t.get("sma50") is not None and t.get("sma200") is not None:
+        votes.append(cmp(t["sma50"], t["sma200"]))
+    r = t.get("rsi14")
+    if r is not None:
+        votes.append(1 if r < 30 else -1 if r > 70 else 0)
+    if t.get("chg_1m") is not None:
+        votes.append(cmp(t["chg_1m"], 0))
+    if t.get("chg_1w") is not None:
+        votes.append(cmp(t["chg_1w"], 0))
+
+    buys = sum(1 for v in votes if v > 0)
+    sells = sum(1 for v in votes if v < 0)
+    holds = sum(1 for v in votes if v == 0)
+    total = len(votes) or 1
+    ratio = (buys - sells) / total
+    if ratio >= 0.5:
+        label = "Strong Buy"
+    elif ratio >= 0.15:
+        label = "Buy"
+    elif ratio <= -0.5:
+        label = "Strong Sell"
+    elif ratio <= -0.15:
+        label = "Sell"
+    else:
+        label = "Hold"
+    return {"label": label, "buys": buys, "sells": sells, "holds": holds,
+            "ratio": round(ratio, 3)}
+
+
 def compute_indicators(rows: list[dict]) -> dict | None:
     """Compute the descriptive indicator bundle for one ticker, or None.
 
