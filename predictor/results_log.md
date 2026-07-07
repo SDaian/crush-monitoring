@@ -66,6 +66,7 @@ Legend: ✅ right for the right reason · 🟡 right but by luck/margin ·
 | 2026-07-05 | Brazil vs Norway (R16) | 59.9 / 22.7 / 17.4 | MEDIUM | 1-2 (Norway, adv.) | ❌ |
 | 2026-07-06 | Mexico vs England (R16) | 25.6 / 28.4 / 46.0 | MEDIUM | 2-3 (England, adv.) | ✅ |
 | 2026-07-06 | Spain vs Portugal (R16) | 43.8 / 28.5 / 27.7 | LOW | 1-0 (Spain, adv., late) | ✅ |
+| 2026-07-07 | Argentina vs Egypt (R16) | 74.1 / 17.5 / 8.4 | HIGH | 3-2 (Argentina, adv., from 2-0 down) | ✅ |
 
 ### Standing calibration note: KNOCKOUT CAUTION → BTTS RULE (v2, quantified)
 
@@ -1219,3 +1220,27 @@ never zero the underdog's attack.
   the total on the level each defence earned it at, not the raw clean-sheet count. In a near-coin-flip
   derby the slight favourite with the better form/defence edges it by the odd (here, last-minute)
   goal — advancement 59% → a 1-0. Spain now meet the USA–Belgium winner in the quarter-finals.
+
+## 2026-07-07 · Round of 16 — Argentina 3-2 Egypt (Argentina advance, from 2-0 down) ✅ [texture miss: Argentina-specific]
+
+- **Argentina vs Egypt** — 90': Argentina 74.1 / Draw 17.5 / Egypt 8.4 (HIGH); advancement
+  **Argentina 86.1 / Egypt 13.9**. λ 2.35 / 0.68, xG 3.03, Over 2.5 58%, **BTTS-No 54.7%**,
+  Argentina clean sheet 50.7% / Egypt 9.5%, top scoreline **2-0 (13.3%)**; ET 17.5%, pens 7.7%.
+  Recal: lifted ARG 2.20→2.35 to align with the market (don't fade the elite); kept Egypt's attack
+  live (0.68, not zeroed) per the Cape Verde refinement. **RESULT: Argentina 3-2 — Egypt led 2-0
+  until the 80th minute before Argentina scored THREE late goals to win; settled in 90'.** Right on
+  the deliverable (Argentina advanced as the 86.1% pick — ✅) but badly wrong on the TEXTURE, and
+  it is the **SECOND straight time an organized underdog has taken Argentina to the brink**. I
+  forecast a controlled, comfortable, clean-sheet win (2-0 mode, BTTS-No, Argentina CS 50.7%);
+  instead Egypt (the 8.4% side) led **2-0 into the 80th** and scored TWICE, and it was a frantic
+  five-goal 3-2. My non-zeroed Egypt λ (0.68) was directionally right to keep their attack alive
+  (Cape Verde lesson), but 2 goals is a big tail off 0.68 and the clean-sheet read was outright
+  wrong. 📌 **TEAM-SPECIFIC note on ARGENTINA:** a reliable ADVANCEMENT bet (86% → through, as with
+  90% vs Cape Verde) but a BAD clean-sheet / controlled-win bet vs an organized block — TWICE now a
+  supposedly-inferior side scored TWO on them and pushed them to the wire (Cape Verde 3-2 aet from
+  2-0 down; Egypt 2-0 up until the 80th). **Lesson:** stop pricing Argentina's clean sheet high and
+  stop assuming a controlled 2-0 — weight their games toward HIGHER totals / BTTS-Yes / a live
+  comeback narrative, even as advancement stays ~85%. And the comeback pattern recurs across quality
+  sides (Belgium 2-0 down → won; England HT deficit → won; now Argentina 2-0 down → won): a top side
+  is NOT out at 2-0 down with 15–20 min left. Advancement right; the correction is Argentina-specific
+  — goals up, clean sheet down. Argentina now meet the Switzerland–Colombia winner in the QF.
