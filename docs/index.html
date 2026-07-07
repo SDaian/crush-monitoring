@@ -321,7 +321,9 @@ const KO_KNOWN = {
   93: {h:1, a:2},                    // R16: Brazil 1-2 Norway (Norway advance) — UPSET, Haaland brace, favourite eliminated, settled in 90'
   94: {h:2, a:3},                    // R16: Mexico 2-3 England (England advance) — five-goal thriller, host out, settled in 90'
   91: {h:0, a:1},                    // R16: Portugal 0-1 Spain (Spain advance) — tight Iberian derby, clean sheet, settled in 90'
-  95: {h:3, a:2}                     // R16: Argentina 3-2 Egypt (Argentina advance) — 2-0 down until the 80th, three late goals, settled in 90'
+  95: {h:3, a:2},                    // R16: Argentina 3-2 Egypt (Argentina advance) — 2-0 down until the 80th, three late goals, settled in 90'
+  92: {h:1, a:4},                    // R16: USA 1-4 Belgium (Belgium advance) — class side routs the co-host, settled in 90'
+  96: {h:0, a:0, pen:"Switzerland"}  // R16: Switzerland 0-0 Colombia (aet), Switzerland win on penalties — dead coin-flip to the lottery
 };
 
 /* ---- round-robin fixture order for 4 teams ---- */
@@ -567,7 +569,7 @@ function calibFor(m){ if(!m) return null;
    =========================================================================== */
 // Build/data stamp shown in the header. The app is stateless: nothing is
 // persisted, so reloading (F5) always returns to the official results.
-const DATA_VERSION="2026-07-07.r16-switzerland-colombia-forecast-R16COMPLETE";
+const DATA_VERSION="2026-07-07.r16-belgium-switzerland-results-R16DONE";
 let state={ results:{}, strengths:{}, learn:[] };
 
 function freshStrengths(){ const s={}; for(const t in TEAMS) s[t]=TEAMS[t]; return s; }

@@ -67,6 +67,8 @@ Legend: ✅ right for the right reason · 🟡 right but by luck/margin ·
 | 2026-07-06 | Mexico vs England (R16) | 25.6 / 28.4 / 46.0 | MEDIUM | 2-3 (England, adv.) | ✅ |
 | 2026-07-06 | Spain vs Portugal (R16) | 43.8 / 28.5 / 27.7 | LOW | 1-0 (Spain, adv., late) | ✅ |
 | 2026-07-07 | Argentina vs Egypt (R16) | 74.1 / 17.5 / 8.4 | HIGH | 3-2 (Argentina, adv., from 2-0 down) | ✅ |
+| 2026-07-07 | USA vs Belgium (R16) | 29.9 / 26.6 / 43.5 | LOW | 1-4 (Belgium, adv.) | ✅ |
+| 2026-07-07 | Switzerland vs Colombia (R16) | 34.6 / 29.9 / 35.5 | LOW | 0-0 pens (Switzerland, adv.) | ✅ |
 
 ### Standing calibration note: KNOCKOUT CAUTION → BTTS RULE (v2, quantified)
 
@@ -1244,3 +1246,57 @@ never zero the underdog's attack.
   sides (Belgium 2-0 down → won; England HT deficit → won; now Argentina 2-0 down → won): a top side
   is NOT out at 2-0 down with 15–20 min left. Advancement right; the correction is Argentina-specific
   — goals up, clean sheet down. Argentina now meet the Switzerland–Colombia winner in the QF.
+
+## 2026-07-07 · Round of 16 — USA 1-4 Belgium (Belgium advance) ✅ [BTTS right, margin under-rated]
+
+- **USA vs Belgium** — 90': USA 29.9 / Draw 26.6 / Belgium 43.5 (LOW); advancement **USA 42.3 /
+  Belgium 57.7**. λ 1.25 / 1.55, xG 2.80, Over 2.5 53%, BTTS 57% (near-neutral, slight Yes), USA
+  clean sheet 21% / Belgium 29%, top scoreline 1-1; ET 26.6%, pens 13.2%. Recal: trimmed USA
+  1.32→1.25 for over-crediting the co-host edge. **RESULT: USA 1-4 Belgium — a comprehensive win,
+  the co-host is out, settled in 90'.** Right side, **BTTS call vindicated, MARGIN badly
+  under-predicted**. Belgium advanced as the 57.7% pick (✅), and my BTTS decision was right: I KEPT
+  BTTS near-neutral/slight-Yes rather than forcing No, because 'USA is a HOME side with a genuine
+  attack, not a shut-out away-minnow' — and USA DID score (BTTS-Yes, five-goal Over). But I priced
+  this near a coin-flip; Belgium won 4-1, far above a coin-flip favourite. 📌 **STRENGTHENED co-host
+  lesson:** this is the SECOND co-host ROUTED by the class side (Canada 0-3 Morocco, USA 1-4
+  Belgium), both after I'd flagged and even trimmed the home over-credit. The co-host home edge has
+  been near-worthless against a clearly superior side — do NOT narrow a real class gap toward a
+  coin-flip on it; trim the home nudge HARDER (contrast Mexico, a genuinely elite-defence host who
+  WAS competitive — host edge helps a good side, not a merely-decent one being outclassed). **Lesson:**
+  side right, BTTS right (keep it live for a home side with a real attack), MARGIN/favourite-strength
+  under-rated — rate the class side higher and the co-host lower when they are outclassed. Belgium now
+  meet Spain in the quarter-finals.
+
+## 2026-07-07 · Round of 16 — Switzerland 0-0 Colombia (aet), Switzerland win on penalties (Switzerland advance) ✅ [texture nailed]
+
+- **Switzerland vs Colombia** — 90': Switzerland 34.6 / Draw 29.9 / Colombia 35.5 (LOW, 'no strong
+  read'); advancement **Switzerland 49.4 / Colombia 50.6**. λ 1.18 / 1.20, xG 2.38, Over 2.5 43%
+  (Under lean), BTTS 49.5% (near-neutral), clean sheet 30% / 31%, top scorelines **1-1 (14.2%) / 0-0
+  (10.3%)**; **ET 29.9%, pens 16.1% (highest of the R16)**. Market (90') aligned (div 0.3). **RESULT:
+  0-0 through extra time, Switzerland win on PENALTIES — Switzerland advance.** Textbook TEXTURE hit,
+  as good as a coin-flip tie gets. I called a dead coin-flip between two competent, well-defended
+  sides with a tight, low-scoring shape and the round's highest ET/penalty risk. It delivered **0-0 →
+  extra time → penalties** — the central scenario almost exactly (0-0 a top-2 scoreline; low total +
+  two good defences + near-even → straight to the lottery). The split was 50.6/49.4, and Switzerland
+  (the marginal 49.4% side) won the near-random shootout — the process working, exactly as
+  Australia-Egypt (a coin-flip that flagged 'likely to go deep' then went to penalties). **Lesson:**
+  the 'two competent, well-defended, near-even sides' profile IS the penalty-lottery zone; when the
+  model has no strong read (~50/50), the honest deliverable is 'coin-flip, likely deep', and the
+  shootout winner is near-random — not a process error. Also validated: aligning OFF the over-credited
+  nominal home edge (I trimmed Switzerland to make Colombia the marginal favourite) was right — the
+  tie was dead even, as re-priced. Switzerland now meet Argentina in the quarter-finals.
+
+### Round of 16 — final scorecard (8/8 ties graded)
+
+All 8 R16 ties were deep-calibrated and graded. **Advancement: 7/8** — the only miss was Brazil
+(the 73.8% favourite upset by Norway/Haaland, a priced ~26% tail). The others all advanced as the
+model's pick: France, Morocco, Spain, England, Argentina, Belgium, Switzerland. Texture scorecard:
+strong hits (France 1-0, Spain 1-0, Switzerland 0-0→pens all nailed the tight/low read; USA-Belgium
+BTTS-Yes right), and two instructive misses — Mexico-England (low read failed on a group-flattered
+defence → 3-2) and Argentina-Egypt (Argentina conceded 2, no clean sheet). **Key lessons banked for
+the QF:** (1) the quantified BTTS rule with its elite-striker exception (validated both ways: Haaland
+scored, France's low-block underdog was shut out); (2) don't transfer group-flattered defensive
+records to a knockout vs a real attack; (3) the co-host home edge is near-worthless vs a clearly
+superior side — trim it hard; (4) Argentina-specific: reliable advancement, bad clean-sheet bet —
+goals up. Quarter-finals set: France-Morocco (M97), Spain-Belgium (M98), Norway-England (M99),
+Argentina-Switzerland (M100).
