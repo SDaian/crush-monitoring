@@ -1,7 +1,12 @@
 """Offline tests for congress.daily_report.build_report (pure composition)."""
 
+import json
+import os
 import unittest
+from pathlib import Path
+from tempfile import TemporaryDirectory
 
+from congress import daily_report
 from congress.daily_report import build_report
 
 AI = {
@@ -57,6 +62,61 @@ class TestBuildReport(unittest.TestCase):
                          today_iso="2026-07-07")
         self.assertIn("No new signals or rating changes", r["markdown"])
         self.assertIn("No new disclosures", r["markdown"])
+
+
+class TestMainDelivery(unittest.TestCase):
+    """Exercise main() with the GitHub API + files stubbed."""
+
+    def setUp(self):
+        self._d = TemporaryDirectory()
+        base = Path(self._d.name)
+        (base / "trades.json").write_text(json.dumps({"trades": []}))
+        (base / "ai.json").write_text(json.dumps(
+            {"tickers": {}, "meta": {"new_signals": []}}))
+        self.state = base / "state.json"
+        self._orig = (daily_report.TRADES_JSON, daily_report.AI_JSON,
+                      daily_report.STATE_JSON, daily_report._gh)
+        daily_report.TRADES_JSON = base / "trades.json"
+        daily_report.AI_JSON = base / "ai.json"
+        daily_report.STATE_JSON = self.state
+        self.calls = []
+
+        def fake_gh(method, url, token, payload=None):
+            self.calls.append((method, url, payload))
+            return 201, {"number": 99}
+        daily_report._gh = fake_gh
+        os.environ["REPO"] = "SDaian/crush-monitoring"
+        os.environ["GH_TOKEN"] = "x"
+
+    def tearDown(self):
+        (daily_report.TRADES_JSON, daily_report.AI_JSON,
+         daily_report.STATE_JSON, daily_report._gh) = self._orig
+        os.environ.pop("REPO", None)
+        os.environ.pop("GH_TOKEN", None)
+        os.environ.pop("REPORT_ASSIGNEE", None)
+        self._d.cleanup()
+
+    def test_posts_and_assigns_to_owner(self):
+        self.assertEqual(daily_report.main(), 0)
+        post = [c for c in self.calls if c[0] == "POST"][0]
+        self.assertEqual(post[2]["assignees"], ["SDaian"])  # defaults to owner
+        saved = json.loads(self.state.read_text())
+        self.assertEqual(saved["issue_number"], 99)
+
+    def test_assignee_override(self):
+        os.environ["REPORT_ASSIGNEE"] = "someone-else"
+        daily_report.main()
+        post = [c for c in self.calls if c[0] == "POST"][0]
+        self.assertEqual(post[2]["assignees"], ["someone-else"])
+
+    def test_idempotent_same_day(self):
+        # A report already recorded for today → main() must not POST again.
+        from datetime import datetime, timezone
+        today = datetime.now(timezone.utc).date().isoformat()
+        self.state.write_text(json.dumps(
+            {"date": today, "issue_number": 42, "ratings": {}}))
+        self.assertEqual(daily_report.main(), 0)
+        self.assertEqual([c for c in self.calls if c[0] == "POST"], [])
 
 
 if __name__ == "__main__":
