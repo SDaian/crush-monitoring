@@ -287,9 +287,11 @@ def main() -> int:
 
     state = _load(STATE_JSON, {})
     today_iso = datetime.now(timezone.utc).date().isoformat()
+    force = os.environ.get("REPORT_FORCE", "").strip().lower() in ("1", "true", "yes")
     # Idempotent per day: if a report was already posted today (e.g. an early
-    # cron already ran, or this was triggered manually), don't post a second.
-    if state.get("date") == today_iso and state.get("issue_number"):
+    # cron already ran), don't post a second — UNLESS forced (an explicit
+    # on-demand send, which should always deliver).
+    if not force and state.get("date") == today_iso and state.get("issue_number"):
         print(f"report already posted today (#{state['issue_number']}); skipping")
         return 0
 

@@ -126,6 +126,18 @@ class TestMainDelivery(unittest.TestCase):
         self.assertEqual(daily_report.main(), 0)
         self.assertEqual([c for c in self.calls if c[0] == "POST"], [])
 
+    def test_force_overrides_idempotency(self):
+        from datetime import datetime, timezone
+        today = datetime.now(timezone.utc).date().isoformat()
+        self.state.write_text(json.dumps(
+            {"date": today, "issue_number": 42, "ratings": {}}))
+        os.environ["REPORT_FORCE"] = "true"
+        try:
+            daily_report.main()
+        finally:
+            os.environ.pop("REPORT_FORCE", None)
+        self.assertTrue([c for c in self.calls if c[0] == "POST"])  # posted anyway
+
 
 class TestEmail(unittest.TestCase):
     def setUp(self):
