@@ -127,6 +127,9 @@ jobs:
           SMTP_HOST: ${{ vars.SMTP_HOST }}
           SMTP_PORT: ${{ vars.SMTP_PORT }}
           REPORT_EMAIL_TO: ${{ vars.REPORT_EMAIL_TO }}
+          # An explicit on-demand run (report=true) always delivers, even if a
+          # report already went out today; the scheduled run stays idempotent.
+          REPORT_FORCE: ${{ github.event.inputs.report == 'true' && 'true' || '' }}
         run: |
           # Compose the morning digest (AI scorecard + overnight signals +
           # rating flips + new disclosures), email it via SMTP, and open a dated
