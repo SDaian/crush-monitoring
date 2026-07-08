@@ -122,7 +122,9 @@ jobs:
           # SMTP (optional) — primary delivery straight to the inbox, reliable
           # regardless of GitHub notification settings. Set SMTP_USER/SMTP_PASS
           # (e.g. a Gmail address + App Password) as repo secrets to enable.
-          SMTP_USER: ${{ secrets.SMTP_USER }}
+          # SMTP_USER (your email) isn't sensitive — accept it as a secret OR a
+          # variable so it works wherever you added it. SMTP_PASS stays secret.
+          SMTP_USER: ${{ secrets.SMTP_USER || vars.SMTP_USER }}
           SMTP_PASS: ${{ secrets.SMTP_PASS }}
           SMTP_HOST: ${{ vars.SMTP_HOST }}
           SMTP_PORT: ${{ vars.SMTP_PORT }}
