@@ -39,6 +39,14 @@ class TestBuildReport(unittest.TestCase):
         self.assertIn("🏛 New congressional disclosures", md)
         self.assertIn("Not investment advice", md)
 
+    def test_html_body(self):
+        html = self.r["html"]
+        self.assertIn("<table", html)
+        self.assertIn("<b>NVDA</b>", html)      # scorecard row
+        self.assertIn("Strong Buy", html)        # colored read label
+        self.assertIn("Nancy Pelosi", html)      # disclosure in window
+        self.assertNotIn("<script", html)        # escaped, no raw injection
+
     def test_scorecard_ratings(self):
         self.assertEqual(self.r["ratings"]["NVDA"], "Strong Buy")
         self.assertEqual(self.r["ratings"]["MSFT"], "Strong Sell")
@@ -117,6 +125,58 @@ class TestMainDelivery(unittest.TestCase):
             {"date": today, "issue_number": 42, "ratings": {}}))
         self.assertEqual(daily_report.main(), 0)
         self.assertEqual([c for c in self.calls if c[0] == "POST"], [])
+
+
+class TestEmail(unittest.TestCase):
+    def setUp(self):
+        self._smtp = daily_report.smtplib.SMTP
+        self.sent = []
+
+        class FakeSMTP:
+            def __init__(s, host, port, timeout=None):
+                s.host = host
+            def __enter__(s):
+                return s
+            def __exit__(s, *a):
+                return False
+            def starttls(s, context=None):
+                pass
+            def login(s, u, p):
+                s.creds = (u, p)
+            def send_message(s, msg):
+                self.sent.append(msg)
+        daily_report.smtplib.SMTP = FakeSMTP
+        for k in ("SMTP_USER", "SMTP_PASS", "SMTP_HOST", "SMTP_PORT", "REPORT_EMAIL_TO"):
+            os.environ.pop(k, None)
+
+    def tearDown(self):
+        daily_report.smtplib.SMTP = self._smtp
+        for k in ("SMTP_USER", "SMTP_PASS", "SMTP_HOST", "SMTP_PORT", "REPORT_EMAIL_TO"):
+            os.environ.pop(k, None)
+
+    def test_no_creds_skips(self):
+        self.assertFalse(daily_report.send_email("s", "t", "<p>h</p>"))
+        self.assertEqual(self.sent, [])
+
+    def test_sends_with_creds(self):
+        os.environ["SMTP_USER"] = "me@gmail.com"
+        os.environ["SMTP_PASS"] = "app-pw"
+        os.environ["REPORT_EMAIL_TO"] = "you@example.com"
+        self.assertTrue(daily_report.send_email("Subj", "text", "<p>html</p>"))
+        self.assertEqual(len(self.sent), 1)
+        msg = self.sent[0]
+        self.assertEqual(msg["To"], "you@example.com")
+        self.assertEqual(msg["From"], "me@gmail.com")
+        self.assertEqual(msg["Subject"], "Subj")
+        # multipart: has an HTML alternative
+        self.assertTrue(any(p.get_content_type() == "text/html"
+                            for p in msg.walk()))
+
+    def test_defaults_recipient_to_user(self):
+        os.environ["SMTP_USER"] = "solo@gmail.com"
+        os.environ["SMTP_PASS"] = "pw"
+        daily_report.send_email("s", "t", "<p>h</p>")
+        self.assertEqual(self.sent[0]["To"], "solo@gmail.com")
 
 
 if __name__ == "__main__":
