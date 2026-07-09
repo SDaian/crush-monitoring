@@ -124,8 +124,11 @@ key/session from `prices.py`) and writes `docs/data/ai-indicators.json`.
 ## Morning report (`daily_report.py` → GitHub issue email)
 
 `congress daily_report` (run as `python3 -m congress.daily_report`) composes a
-short morning digest and opens a **dated GitHub issue** — which emails repo
-watchers — with three sections: the AI **buy/sell/hold scorecard**
+short morning digest and delivers it **(1) by direct email via SMTP** (primary
+— set `SMTP_USER`/`SMTP_PASS` secrets, e.g. a Gmail address + App Password;
+optional `SMTP_HOST`/`SMTP_PORT`/`REPORT_EMAIL_TO` default to Gmail:587 and the
+sender) and **(2) as a dated GitHub issue** (archive + flip state, assigned to
+the owner). The digest has three sections: the AI **buy/sell/hold scorecard**
 (`indicators.ai_score`, mirroring the page's `aiScore`), **signals overnight**
 (new mechanical signals + tickers whose rating flipped vs. yesterday), and
 **new congressional disclosures** (filed in the last few days). It closes the

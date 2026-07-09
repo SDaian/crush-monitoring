@@ -186,9 +186,14 @@ sites. Full details in `congress/README.md`. Conventions:
   The page's `aiScore` and Python `indicators.ai_score` **must stay in sync**
   (same checks + thresholds) — the report reuses the Python one.
 - **Morning report (email digest):** `congress/daily_report.py`
-  (`python3 -m congress.daily_report`) composes a dated GitHub issue → email
-  with the AI buy/sell/hold scorecard, overnight signals + rating flips, and
-  newly-filed disclosures. It runs from the daily Action's report step (guarded
+  (`python3 -m congress.daily_report`) composes the AI buy/sell/hold scorecard,
+  overnight signals + rating flips, and newly-filed disclosures, then delivers
+  it two ways: **(1) direct email via SMTP** (primary, reliable regardless of
+  GitHub notification settings — enabled by the `SMTP_USER`/`SMTP_PASS` secrets,
+  e.g. a Gmail address + App Password; `SMTP_HOST`/`SMTP_PORT`/`REPORT_EMAIL_TO`
+  are optional `vars` defaulting to Gmail:587 and the sender), and **(2) a dated
+  GitHub issue** (archive + flip-diff state, assigned to the owner). `smtplib`
+  is stdlib so no new deps. It runs from the daily Action's report step (guarded
   to `schedule` or the `report` dispatch input) **before** the slow price step
   so it's timely. The cron targets ~9am Madrid but is set **early (04:30 UTC)**
   because GitHub scheduled runs are best-effort and often delayed 1–3h; early is

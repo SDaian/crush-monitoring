@@ -119,9 +119,23 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           REPO: ${{ github.repository }}
+          # SMTP (optional) — primary delivery straight to the inbox, reliable
+          # regardless of GitHub notification settings. Set SMTP_USER/SMTP_PASS
+          # (e.g. a Gmail address + App Password) as repo secrets to enable.
+          # SMTP_USER (your email) isn't sensitive — accept it as a secret OR a
+          # variable so it works wherever you added it. SMTP_PASS stays secret.
+          SMTP_USER: ${{ secrets.SMTP_USER || vars.SMTP_USER }}
+          SMTP_PASS: ${{ secrets.SMTP_PASS }}
+          SMTP_HOST: ${{ vars.SMTP_HOST }}
+          SMTP_PORT: ${{ vars.SMTP_PORT }}
+          REPORT_EMAIL_TO: ${{ vars.REPORT_EMAIL_TO }}
+          # An explicit on-demand run (report=true) always delivers, even if a
+          # report already went out today; the scheduled run stays idempotent.
+          REPORT_FORCE: ${{ github.event.inputs.report == 'true' && 'true' || '' }}
         run: |
           # Compose the morning digest (AI scorecard + overnight signals +
-          # rating flips + new disclosures) and open a dated issue → email.
+          # rating flips + new disclosures), email it via SMTP, and open a dated
+          # issue → also notifies via GitHub.
           # Runs before the slow price step so it lands on time; reads the
           # fresh working-tree trades/AI files. A failure must not fail the run.
           python3 -m congress.daily_report 2>&1 | tee -a fetch.log \
