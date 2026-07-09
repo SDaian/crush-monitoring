@@ -69,6 +69,7 @@ Legend: ✅ right for the right reason · 🟡 right but by luck/margin ·
 | 2026-07-07 | Argentina vs Egypt (R16) | 74.1 / 17.5 / 8.4 | HIGH | 3-2 (Argentina, adv., from 2-0 down) | ✅ |
 | 2026-07-07 | USA vs Belgium (R16) | 29.9 / 26.6 / 43.5 | LOW | 1-4 (Belgium, adv.) | ✅ |
 | 2026-07-07 | Switzerland vs Colombia (R16) | 34.6 / 29.9 / 35.5 | LOW | 0-0 pens (Switzerland, adv.) | ✅ |
+| 2026-07-09 | France vs Morocco (QF) | 55.4 / 26.3 / 18.3 | MEDIUM | 2-0 (France, adv.) | ✅ |
 
 ### Standing calibration note: KNOCKOUT CAUTION → BTTS RULE (v2, quantified)
 
@@ -1300,3 +1301,27 @@ records to a knockout vs a real attack; (3) the co-host home edge is near-worthl
 superior side — trim it hard; (4) Argentina-specific: reliable advancement, bad clean-sheet bet —
 goals up. Quarter-finals set: France-Morocco (M97), Spain-Belgium (M98), Norway-England (M99),
 Argentina-Switzerland (M100).
+
+---
+
+## QUARTER-FINALS
+
+## 2026-07-09 · Quarter-final — France 2-0 Morocco (France advance) ✅
+
+- **France vs Morocco** — 90': France 55.4 / Draw 26.3 / Morocco 18.3 (MEDIUM); advancement
+  **France 71.0 / Morocco 29.0**. λ 1.65 / 0.85, xG 2.50, Over 2.5 46% (Under lean), **BTTS-No
+  52.8%**, France clean sheet 42.7% / Morocco 19.2%, top scorelines **1-0 (12.6%) / 1-1 / 2-0
+  (11.2%)**; ET 26.3%, pens 13.6%. Market (90') aligned first pass (div 1.4). Extra validation:
+  independent 300k full-path advancement sim matched the closed form to 0.01 pts. **RESULT:
+  France 2-0 Morocco — controlled win, clean sheet, settled in 90'.** Clean process hit across
+  the board — side, margin and every texture read. France advanced as the 71.0% pick, won 2-0
+  (top-3 scoreline), kept a clean sheet (the 42.7% branch — the modal defensive outcome), Under
+  2.5 and BTTS-No exactly as the mild rule lean prescribed. The two-sided calibration threaded:
+  Morocco's elite organized defence suppressed France below rout levels (2, not 3-4), and
+  France's back line blanked Morocco's good-not-elite attack. The fat deep/ET tail (26%) never
+  fired — pricing it was still right for a proven penalty-winner; it just didn't come in. 📌
+  **France profile for the semis:** three straight knockout clean sheets (3-0, 1-0, 2-0) while
+  scoring 1-3 — price their clean sheet HIGH and opponents' totals LOW; the strongest side in
+  the draw on form. **BTTS rule now 3-for-3** on clear-favourite-vs-no-elite-striker ties since
+  the upgrade (Paraguay, Ghana, Morocco all shut out). France meet the Spain–Belgium winner in
+  the semi-finals.
