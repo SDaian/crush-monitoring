@@ -3,13 +3,17 @@ name: Congress trades refresh
 on:
   schedule:
     # Target ~9am Madrid (07:00 UTC summer). GitHub scheduled runs are
-    # best-effort and are frequently delayed 1–3h under load, so we bias EARLY
-    # (04:30 UTC) — an on-time run is ~06:30 Madrid, a typical delayed one still
-    # lands mid-morning rather than the afternoon. Early is safe ("before the
-    # day starts"); late is the failure mode. Cron is UTC and ignores DST, so
-    # the Madrid clock time drifts ±1h yearly. For guaranteed timing an external
-    # scheduler hitting the workflow_dispatch API would be needed.
+    # best-effort — frequently delayed 1–3h and sometimes DROPPED ENTIRELY. So
+    # we fire MULTIPLE times across the morning: GitHub would have to skip every
+    # one to miss a day, and the report is idempotent per day (report_state) so
+    # the first firing sends and the rest no-op the email. Public repo → the
+    # extra runs are free. Whichever fires first biases early ("before the day
+    # starts"), late is the failure mode. Cron is UTC and ignores DST (±1h drift
+    # over the year). For a hard timing guarantee an external scheduler hitting
+    # the workflow_dispatch API would still be needed.
     - cron: "30 4 * * *"
+    - cron: "0 6 * * *"
+    - cron: "0 8 * * *"
   workflow_dispatch:
     inputs:
       limit:

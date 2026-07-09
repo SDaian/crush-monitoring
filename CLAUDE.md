@@ -195,9 +195,11 @@ sites. Full details in `congress/README.md`. Conventions:
   GitHub issue** (archive + flip-diff state, assigned to the owner). `smtplib`
   is stdlib so no new deps. It runs from the daily Action's report step (guarded
   to `schedule` or the `report` dispatch input) **before** the slow price step
-  so it's timely. The cron targets ~9am Madrid but is set **early (04:30 UTC)**
-  because GitHub scheduled runs are best-effort and often delayed 1–3h; early is
-  safe, late is the failure. It **assigns the issue to the repo owner**
+  so it's timely. It targets ~9am Madrid via **multiple morning crons (04:30 /
+  06:00 / 08:00 UTC)** because GitHub scheduled runs are best-effort — delayed
+  1–3h and sometimes dropped entirely; firing several times means GitHub must
+  skip them all to miss a day, and the per-day idempotency makes only the first
+  firing send. Early is safe, late/missing is the failure. It **assigns the issue to the repo owner**
   (`REPORT_ASSIGNEE` override) so email reaches them without needing to "watch"
   the repo, is **idempotent per day** (skips if `report_state.date == today`, so
   a manual send + a delayed scheduled run don't double-post), closes the prior
