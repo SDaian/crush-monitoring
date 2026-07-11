@@ -70,6 +70,7 @@ Legend: ✅ right for the right reason · 🟡 right but by luck/margin ·
 | 2026-07-07 | USA vs Belgium (R16) | 29.9 / 26.6 / 43.5 | LOW | 1-4 (Belgium, adv.) | ✅ |
 | 2026-07-07 | Switzerland vs Colombia (R16) | 34.6 / 29.9 / 35.5 | LOW | 0-0 pens (Switzerland, adv.) | ✅ |
 | 2026-07-09 | France vs Morocco (QF) | 55.4 / 26.3 / 18.3 | MEDIUM | 2-0 (France, adv.) | ✅ |
+| 2026-07-09 | Spain vs Belgium (QF) | 53.4 / 26.7 / 19.9 | MEDIUM | 2-1 (Spain, adv., late) | ✅ |
 
 ### Standing calibration note: KNOCKOUT CAUTION → BTTS RULE (v2, quantified)
 
@@ -1325,3 +1326,26 @@ Argentina-Switzerland (M100).
   the draw on form. **BTTS rule now 3-for-3** on clear-favourite-vs-no-elite-striker ties since
   the upgrade (Paraguay, Ghana, Morocco all shut out). France meet the Spain–Belgium winner in
   the semi-finals.
+
+## 2026-07-09 · Quarter-final — Spain 2-1 Belgium (Spain advance, late winner) ✅
+
+- **Spain vs Belgium** — 90': Spain 53.4 / Draw 26.7 / Belgium 19.9 (MEDIUM); advancement
+  **Spain 69.0 / Belgium 31.0**. λ 1.62 / 0.90, xG 2.52, Over 2.5 46%, BTTS 48.5% (near-neutral,
+  mild No), Spain clean sheet 40.7% / Belgium 19.8%, top scorelines **1-1 (12.7%) / 1-0 / 2-0**
+  (2-1 at 9.5%); ET 26.7%, pens 13.8%. Market aligned first pass (div 0.4). Extended 500k
+  validation battery vs closed form: all metrics within 0.17 pts (the one flagged Over-2.5 seed
+  read was traced to sampling noise; three fresh seeds within ~1σ). **RESULT: Spain 2-1 Belgium —
+  the winner near the END of the match, Spain's SECOND straight late decider (after the
+  last-minute 1-0 vs Portugal); settled in 90'. Belgium's goal ends Spain's five-game shut-out
+  run.** Clean process hit on side and margin, with the BTTS nuance earning its keep: I
+  deliberately did NOT zero Belgium's firing attack (λ 0.90, BTTS near-neutral) despite Spain's
+  five straight clean sheets — and Belgium DID score. A hard BTTS-No trim would have been wrong;
+  the rule's distinction between a genuinely firing attack (4-1 USA, 3-2 Senegal) and a blunt one
+  held. Mild misses inside the hit (both near-coin-flips, no process error): Spain's clean sheet
+  (40.7% modal) didn't fire, and it tipped Over 2.5 (46%). 📌 **BTTS rule validated in BOTH
+  directions:** blunt underdogs get shut out (Paraguay, Ghana, Morocco), firing attacks score even
+  on elite defences (Belgium vs Spain). 📌 **SPAIN PROFILE for the semi:** two straight late
+  deciders — Spain grinds elite opponents and strikes as they tire late; advancement converts
+  (69% → through) but the clean sheet is no longer near-automatic vs real attacks. **France–Spain
+  semi-final:** the tournament's two best defences AND two most clinical attacks — expect tight,
+  low-scoring, late-deciding, with a fat ET tail. Spain meet France in SF M101.
