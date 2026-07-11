@@ -17,7 +17,7 @@ import { TARGET_ENV } from '../../config.js';
 const PROBES_WHEN_ANONYMOUS = {
   dev: false,
   stg: false,
-  prod: true,
+  prod: false,
 };
 
 test.describe('Boot-time session refresh', () => {
