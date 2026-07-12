@@ -152,6 +152,15 @@
     min-width: min(280px, 100%); /* never wider than the form row */
     max-width: 100%;
   }
+  @media (hover: none) and (pointer: coarse) {
+    .email-input {
+      /* iOS Safari auto-zooms the page (and never zooms back) when focusing
+         an input with font-size < 16px — the reported mobile horizontal
+         scroll. 16px on touch devices only; desktop keeps the prototype's
+         0.9rem. */
+      font-size: 1rem;
+    }
+  }
 
   /* ---------- disclosure feed (signature element) ---------- */
   .live-dot {
