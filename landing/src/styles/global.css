@@ -82,10 +82,10 @@
      (reading direction), transform-only (plans/004). End state matches
      the prototype's static 4px underline exactly.
      inline-block (not inline): absolutely-positioned children of INLINE
-     boxes hit a WebKit containing-block bug that manufactures a box wider
-     than the viewport on iOS Safari — the mobile horizontal-scroll report.
-     An inline-block gives the ::after a well-defined containing block in
-     every engine, with identical single-line layout. */
+     boxes have engine-dependent containing-block behavior (WebKit
+     especially); inline-block gives the ::after a well-defined containing
+     block everywhere, with identical single-line layout. (Preventive — the
+     actual mobile h-scroll report was iOS focus-zoom on a <16px input.) */
   .headline .underline-stamp {
     position: relative;
     display: inline-block;
