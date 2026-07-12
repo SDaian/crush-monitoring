@@ -15,13 +15,15 @@
 @import "@fontsource/ibm-plex-mono/600.css";
 
 @theme {
-  --color-paper: #FBFBF9;
-  --color-ink: #14161A;
-  --color-ink-soft: #5A5E66;
-  --color-rule: #E3E2DC;
-  --color-stamp: #C8102E;
-  --color-buy: #0E7C4A;
-  --color-sell: #B3261E;
+  /* PRD §6 tokens in OKLCH (converted losslessly from the spec's hex; all
+     text/background pairs verified ≥4.5:1 WCAG AA on paper). */
+  --color-paper: oklch(0.988 0.003 106.448); /* #FBFBF9 */
+  --color-ink: oklch(0.2 0.009 264.36); /* #14161A */
+  --color-ink-soft: oklch(0.481 0.014 264.438); /* #5A5E66 */
+  --color-rule: oklch(0.912 0.008 98.888); /* #E3E2DC */
+  --color-stamp: oklch(0.53 0.207 22.317); /* #C8102E */
+  --color-buy: oklch(0.517 0.121 156.294); /* #0E7C4A */
+  --color-sell: oklch(0.501 0.178 28.705); /* #B3261E */
 
   --font-sans: "Libre Franklin", ui-sans-serif, system-ui, sans-serif;
   --font-mono: "IBM Plex Mono", ui-monospace, monospace;
@@ -52,6 +54,13 @@
     color: var(--color-ink);
     font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    /* Missing weights/styles must fail visibly, never render browser-faked. */
+    font-synthesis: none;
+  }
+  ::selection {
+    background: var(--color-stamp);
+    color: var(--color-paper);
   }
   a:focus-visible,
   button:focus-visible,
@@ -66,8 +75,18 @@
     font-family: var(--font-mono);
   }
 
-  nav a {
+  nav a,
+  header > a {
     transition: color 150ms ease; /* chrome eases like the button (plans/001) */
+    position: relative;
+  }
+  /* Extend the small header links to a ~44px touch target without moving
+     a pixel of layout. */
+  nav a::after,
+  header > a::after {
+    content: "";
+    position: absolute;
+    inset: -14px -8px;
   }
 
   /* ---------- hero ---------- */
@@ -126,7 +145,7 @@
     border-color: var(--color-stamp);
   }
   .btn:active {
-    transform: scale(0.97); /* feedback on pointer-down (plans/002) */
+    transform: scale(0.96); /* feedback on pointer-down (plans/002) */
     /* Asymmetric timing (Apple §1): the press-in snaps; the release
        relaxes at the base rule's 160ms. */
     transition-duration: 0.15s, 0.15s, 0.15s, 100ms;
