@@ -33,6 +33,7 @@ const REVIEWS = [
       "late is weirdly gripping breakfast reading.",
     name: "Sarah K.",
     country: "United States",
+    flag: "🇺🇸",
   },
   {
     rating: 5,
@@ -43,6 +44,7 @@ const REVIEWS = [
       "I'm done.",
     name: "Miguel A.",
     country: "Spain",
+    flag: "🇪🇸",
   },
   {
     rating: 4,
@@ -52,6 +54,7 @@ const REVIEWS = [
       "why I trust it. Let me follow specific tickers and it's a five.",
     name: "Lena B.",
     country: "Germany",
+    flag: "🇩🇪",
   },
 ];
 const stars = (n: number) => "★".repeat(n) + "☆".repeat(5 - n);
@@ -303,7 +306,7 @@ const description =
                 {r.quote}
               </p>
               <footer class="mono mt-auto pt-5 text-[.72rem] uppercase tracking-[.1em] text-ink-soft">
-                {r.name} · {r.country}
+                {r.name} · {r.flag} {r.country}
               </footer>
             </article>
           ))
