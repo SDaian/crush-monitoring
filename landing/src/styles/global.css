@@ -111,6 +111,9 @@
   }
   .btn:active {
     transform: scale(0.97); /* feedback on pointer-down (plans/002) */
+    /* Asymmetric timing (Apple §1): the press-in snaps; the release
+       relaxes at the base rule's 160ms. */
+    transition-duration: 0.15s, 0.15s, 0.15s, 100ms;
   }
   .btn:disabled {
     opacity: 0.55;
