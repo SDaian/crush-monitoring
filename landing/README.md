@@ -1,9 +1,17 @@
 # Capitol Gains — landing page
 
-Standalone marketing page for the politician-trades tracker: it converts
+Standalone marketing site for the politician-trades tracker: it converts
 visitors into email subscribers for trade alerts. Astro (static, zero client
-JS except the signup form script), Tailwind CSS v4 with the design tokens in
-`src/styles/global.css` (`@theme`), self-hosted fonts.
+JS except the signup form and stats count-up scripts), Tailwind CSS v4 with
+the design tokens in `src/styles/global.css` (`@theme`), self-hosted fonts.
+
+Two pages, sharing `src/components/Header.astro` / `Footer.astro`:
+
+- `/` — the conversion page (hero, live feed, stats, teaser, CTA).
+- `/how-it-works` — the trust page: the full pipeline, the parsing tech and
+  the AI role (honestly bounded: AI builds the parsers, deterministic code
+  produces every published number), what the numbers mean, a sample email
+  built from the same real `disclosures.json` the feed uses, and an FAQ.
 
 The approved prototype in `prototype/capitol-trades-landing.html` is the
 visual source of truth, with four deliberate deviations agreed in the design
