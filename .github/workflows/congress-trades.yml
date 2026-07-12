@@ -65,6 +65,14 @@ jobs:
           fi
           python3 -m congress fetch $EXTRA 2>&1 | tee fetch.log
 
+      - name: Regenerate landing-page data (non-fatal)
+        run: |
+          # Feed + stats for the Capitol Gains landing page, derived from the
+          # trades JSON the fetch step just refreshed. Committed with the
+          # trades in the final step; the push triggers Vercel's rebuild.
+          python3 -m congress landing 2>&1 | tee -a fetch.log \
+            || echo "::warning::landing data refresh failed; keeping prior files"
+
       - name: Refresh featured-member holdings (non-fatal)
         run: |
           # Real stock composition from each featured member's latest annual
@@ -166,7 +174,7 @@ jobs:
 
       - name: Commit refreshed data
         run: |
-          FILES="docs/data/congress-trades.json congress/state.json congress/members.json docs/data/returns.json"
+          FILES="docs/data/congress-trades.json congress/state.json congress/members.json docs/data/returns.json landing/src/data/disclosures.json landing/src/data/stats.json"
           if git diff --quiet -- $FILES; then
             echo "No new trades or price changes."
             exit 0

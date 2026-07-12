@@ -1,0 +1,178 @@
+/* Capitol Gains landing — Tailwind v4 with the PRD §6 design tokens.
+   The prototype (landing/prototype/) is the visual source of truth; its
+   component CSS is ported below tokenized to the theme variables, so no
+   hex value exists outside the token set. */
+
+@import "tailwindcss";
+
+/* Self-hosted fonts (fontsource; font-display: swap is their default). */
+@import "@fontsource/libre-franklin/400.css";
+@import "@fontsource/libre-franklin/600.css";
+@import "@fontsource/libre-franklin/800.css";
+@import "@fontsource/libre-franklin/900.css";
+@import "@fontsource/ibm-plex-mono/400.css";
+@import "@fontsource/ibm-plex-mono/500.css";
+@import "@fontsource/ibm-plex-mono/600.css";
+
+@theme {
+  --color-paper: #FBFBF9;
+  --color-ink: #14161A;
+  --color-ink-soft: #5A5E66;
+  --color-rule: #E3E2DC;
+  --color-stamp: #C8102E;
+  --color-buy: #0E7C4A;
+  --color-sell: #B3261E;
+
+  --font-sans: "Libre Franklin", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+
+  --radius-*: initial; /* zero border-radius everywhere, per the tokens */
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    background: var(--color-paper);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+  a:focus-visible,
+  button:focus-visible,
+  input:focus-visible {
+    outline: 2px solid var(--color-stamp);
+    outline-offset: 2px;
+  }
+}
+
+@layer components {
+  .mono {
+    font-family: var(--font-mono);
+  }
+
+  /* ---------- hero ---------- */
+  .headline {
+    font-weight: 900;
+    letter-spacing: -0.035em;
+    line-height: 0.98;
+    font-size: clamp(2.6rem, 7.5vw, 5.6rem);
+    max-width: 16ch;
+  }
+  .headline .underline-stamp {
+    text-decoration: none;
+    background-image: linear-gradient(var(--color-stamp), var(--color-stamp));
+    background-repeat: no-repeat;
+    background-size: 100% 4px;
+    background-position: 0 96%;
+  }
+  .btn {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 14px 26px;
+    background: var(--color-ink);
+    color: var(--color-paper);
+    border: 1px solid var(--color-ink);
+    cursor: pointer;
+    transition: background 0.15s, color 0.15s, border-color 0.15s;
+  }
+  .btn:hover {
+    background: var(--color-stamp);
+    border-color: var(--color-stamp);
+  }
+  .btn:disabled {
+    opacity: 0.55;
+    cursor: wait;
+  }
+  .email-input {
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+    padding: 14px 16px;
+    border: 1px solid var(--color-ink);
+    background: transparent;
+    min-width: min(280px, 80vw);
+  }
+
+  /* ---------- disclosure feed (signature element) ---------- */
+  .live-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%; /* the one deliberate radius: it is a dot */
+    background: var(--color-stamp);
+    animation: pulse 1.6s infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.25; }
+  }
+
+  .feed-row {
+    display: grid;
+    grid-template-columns: 1.5fr 0.8fr 0.7fr 1fr 1fr;
+    gap: 12px;
+    align-items: center;
+    padding: 16px 4px;
+    border-bottom: 1px solid var(--color-rule);
+    font-family: var(--font-mono);
+    font-size: 0.83rem;
+    animation: drop 0.5s ease both;
+  }
+  @keyframes drop {
+    from { opacity: 0; transform: translateY(-6px); }
+    to { opacity: 1; transform: none; }
+  }
+  .feed-row:nth-child(3) { animation-delay: 0.08s; }
+  .feed-row:nth-child(4) { animation-delay: 0.16s; }
+  .feed-row:nth-child(5) { animation-delay: 0.24s; }
+  .feed-row:nth-child(6) { animation-delay: 0.32s; }
+
+  .feed-row .who {
+    font-family: var(--font-sans);
+    font-weight: 600;
+    font-size: 0.9rem;
+  }
+  .feed-row .who small {
+    display: block;
+    font-weight: 400;
+    color: var(--color-ink-soft);
+    font-size: 0.72rem;
+    margin-top: 2px;
+  }
+
+  /* ---------- stats strip ---------- */
+  .stat-n {
+    font-weight: 900;
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    letter-spacing: -0.03em;
+  }
+
+  @media (max-width: 760px) {
+    /* Mobile-first override agreed in the grilling session (Q9): the
+       filed-late column — the product's signature — stays visible on
+       mobile; only the amount hides. Deliberate deviation from the
+       prototype, which hid both. */
+    .feed-row {
+      grid-template-columns: 1.2fr 0.55fr 0.5fr 1fr;
+      font-size: 0.74rem;
+    }
+    .feed-row .amt {
+      display: none;
+    }
+    nav a:not(:last-child) {
+      display: none;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    * {
+      animation: none !important;
+      transition: none !important;
+    }
+  }
+}

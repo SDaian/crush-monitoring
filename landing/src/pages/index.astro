@@ -1,0 +1,311 @@
+---
+// Capitol Gains landing page. Visual source of truth: landing/prototype/
+// capitol-trades-landing.html, with the four deviations agreed in the
+// grilling session (see landing/docs/adr/ and landing/CONTEXT.md):
+// "Recent disclosures" header, truthful Structure/Signal copy, the
+// filed-late column visible on mobile, and every number real (generated
+// daily by `python3 -m congress landing`).
+import "../styles/global.css";
+import feed from "../data/disclosures.json";
+import stats from "../data/stats.json";
+
+const disclosures = feed.disclosures;
+
+const fmtTrades = stats.tradesThisYear.toLocaleString("en-US");
+const vol = stats.estVolumeThisYearUsd;
+const fmtVol =
+  vol >= 1e9 ? `$${(vol / 1e9).toFixed(1)}B` : `$${Math.round(vol / 1e6)}M`;
+const fmtLate = `${stats.pctFiledLate}%`;
+
+const SIGNUP_ENDPOINT = import.meta.env.PUBLIC_SIGNUP_ENDPOINT ?? "";
+
+const title = "Capitol Gains — Politician Stock Trades, Tracked";
+const description =
+  "Every stock trade a member of Congress disclosed — who traded, what, " +
+  "how much, and how late they filed it. Straight from official filings, " +
+  "in one daily email.";
+---
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:site_name" content="Capitol Gains" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+  </head>
+  <body>
+    <header
+      class="flex items-center justify-between border-b border-rule px-[5vw] py-5"
+    >
+      <div class="text-[1.05rem] font-black uppercase tracking-[-0.02em]">
+        Capitol <span class="text-stamp">Gains</span>
+      </div>
+      <nav>
+        <a
+          href="#feed"
+          class="mono ml-6 text-[.78rem] uppercase tracking-[.06em] text-ink-soft no-underline hover:text-ink focus-visible:text-ink"
+          >Live feed</a
+        >
+        <a
+          href="#how"
+          class="mono ml-6 text-[.78rem] uppercase tracking-[.06em] text-ink-soft no-underline hover:text-ink focus-visible:text-ink"
+          >How it works</a
+        >
+        <a
+          href="#join"
+          class="mono ml-6 text-[.78rem] uppercase tracking-[.06em] text-ink-soft no-underline hover:text-ink focus-visible:text-ink"
+          >Get alerts</a
+        >
+      </nav>
+    </header>
+
+    <section class="mx-auto max-w-[1200px] px-[5vw] pt-[9vh] pb-[6vh]">
+      <p class="mono mb-[22px] text-[.75rem] uppercase tracking-[.12em] text-ink-soft">
+        Congressional trading disclosures ·
+        <b class="font-semibold text-stamp">Updated daily from official filings</b>
+      </p>
+      <h1 class="headline">
+        They trade.<br />They file.<br /><span class="underline-stamp"
+          >You see it first.</span
+        >
+      </h1>
+      <p class="mt-[26px] max-w-[52ch] text-[1.05rem] leading-[1.65] text-ink-soft">
+        Every stock trade a member of Congress reports, pulled straight from
+        official disclosure filings and delivered to you the moment it lands —
+        who traded, what, how much, and how late they filed it.
+      </p>
+      <form
+        id="join"
+        class="mt-9 flex flex-wrap gap-3"
+        data-endpoint={SIGNUP_ENDPOINT}
+        novalidate
+      >
+        <label class="sr-only" for="email">Email address</label>
+        <input
+          class="email-input"
+          type="email"
+          id="email"
+          name="email"
+          placeholder="you@email.com"
+          autocomplete="email"
+          required
+        />
+        <button class="btn" type="submit">Get trade alerts</button>
+        <p
+          class="mono w-full text-[.78rem]"
+          id="form-status"
+          role="status"
+          aria-live="polite"
+        >
+        </p>
+      </form>
+      <p class="mono mt-3 text-[.72rem] text-ink-soft">
+        Free while in beta. No spam — one digest per day.
+      </p>
+    </section>
+
+    <section class="mx-auto max-w-[1200px] px-[5vw] pb-[10vh]" id="feed">
+      <div
+        class="flex items-baseline justify-between border-b-2 border-ink pb-2.5"
+      >
+        <h2 class="text-[.85rem] font-extrabold uppercase tracking-[.1em]">
+          Recent disclosures
+        </h2>
+        <span
+          class="mono flex items-center gap-[7px] text-[.72rem] uppercase tracking-[.1em] text-stamp"
+        >
+          <span class="live-dot" aria-hidden="true"></span>Filed this week
+        </span>
+      </div>
+
+      <div role="table" aria-label="Recent congressional stock disclosures">
+        <div role="row" class="sr-only">
+          <span role="columnheader">Member</span>
+          <span role="columnheader">Ticker</span>
+          <span role="columnheader">Side</span>
+          <span role="columnheader">Amount</span>
+          <span role="columnheader">Filing timeliness</span>
+        </div>
+        {
+          disclosures.map((d) => (
+            <div role="row" class="feed-row">
+              <div role="cell" class="who">
+                {d.member}
+                <small>
+                  {d.chamber} · {d.district}
+                </small>
+              </div>
+              <div role="cell">{d.ticker}</div>
+              <div
+                role="cell"
+                class={`font-semibold ${d.side === "BUY" ? "text-buy" : "text-sell"}`}
+              >
+                {d.side}
+              </div>
+              <div role="cell" class="amt">
+                {d.amountBucket}
+              </div>
+              <div
+                role="cell"
+                class={
+                  d.filedDaysLate > 0
+                    ? "font-medium text-stamp"
+                    : "text-ink-soft"
+                }
+                title="Late = filed beyond the STOCK Act's 45-day statutory maximum"
+              >
+                {d.filedDaysLate > 0
+                  ? `Filed ${d.filedDaysLate} day${d.filedDaysLate === 1 ? "" : "s"} late`
+                  : "Filed on time"}
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </section>
+
+    <section
+      class="grid grid-cols-3 border-t-2 border-t-ink border-b border-b-rule max-[760px]:grid-cols-1"
+      aria-label="Tracker statistics"
+    >
+      <div class="border-r border-rule px-[5vw] py-9 max-[760px]:border-r-0 max-[760px]:border-b max-[760px]:border-b-rule">
+        <div class="stat-n">{fmtTrades}</div>
+        <div class="mono mt-2 text-[.72rem] uppercase tracking-[.1em] text-ink-soft">
+          Trades tracked this year
+        </div>
+      </div>
+      <div class="border-r border-rule px-[5vw] py-9 max-[760px]:border-r-0 max-[760px]:border-b max-[760px]:border-b-rule">
+        <div class="stat-n">{fmtVol}</div>
+        <div class="mono mt-2 text-[.72rem] uppercase tracking-[.1em] text-ink-soft">
+          Estimated volume disclosed
+        </div>
+      </div>
+      <div
+        class="px-[5vw] py-9"
+        title="Late = filed beyond the STOCK Act's 45-day statutory maximum"
+      >
+        <div class="stat-n">{fmtLate}</div>
+        <div class="mono mt-2 text-[.72rem] uppercase tracking-[.1em] text-ink-soft">
+          Of filings arrived late
+          <span class="normal-case tracking-normal">
+            (beyond the 45-day legal deadline)</span
+          >
+        </div>
+      </div>
+    </section>
+
+    <section class="mx-auto max-w-[1200px] px-[5vw] py-[10vh]" id="how">
+      <h2 class="max-w-[20ch] text-[clamp(1.6rem,3.5vw,2.4rem)] font-black tracking-[-0.02em]">
+        From filing cabinet to your inbox in minutes.
+      </h2>
+      <div class="mt-12 grid grid-cols-3 gap-10 max-[760px]:grid-cols-1">
+        <div>
+          <span class="mono mb-3 block text-[.7rem] uppercase tracking-[.1em] text-stamp"
+            >01 · Source</span
+          >
+          <h3 class="mb-2.5 text-base font-extrabold">Official filings only</h3>
+          <p class="text-[.92rem] leading-[1.6] text-ink-soft">
+            We parse Periodic Transaction Reports directly from House and
+            Senate disclosure portals. No rumors, no scraped tweets — the paper
+            trail itself.
+          </p>
+        </div>
+        <div>
+          <span class="mono mb-3 block text-[.7rem] uppercase tracking-[.1em] text-stamp"
+            >02 · Structure</span
+          >
+          <h3 class="mb-2.5 text-base font-extrabold">Cleaned and comparable</h3>
+          <p class="text-[.92rem] leading-[1.6] text-ink-soft">
+            Tickers normalized, amounts bucketed, filing lag computed — so
+            every trade is comparable across members and time.
+          </p>
+        </div>
+        <div>
+          <span class="mono mb-3 block text-[.7rem] uppercase tracking-[.1em] text-stamp"
+            >03 · Signal</span
+          >
+          <h3 class="mb-2.5 text-base font-extrabold">Alerts that matter</h3>
+          <p class="text-[.92rem] leading-[1.6] text-ink-soft">
+            One daily digest of every new disclosure — who, what, how much,
+            and how late they filed. Member and ticker follows are next.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="border-t-2 border-ink px-[5vw] py-[10vh] text-center">
+      <h2 class="text-[clamp(1.8rem,4.5vw,3.2rem)] font-black tracking-[-0.03em]">
+        Public records, actually public.
+      </h2>
+      <p class="mx-auto mt-4 mb-8 max-w-[44ch] text-ink-soft">
+        The disclosures already exist. We just make them impossible to miss.
+      </p>
+      <a href="#join" class="btn inline-block no-underline">Start tracking free</a>
+    </section>
+
+    <footer
+      class="mono flex flex-wrap justify-between gap-2.5 border-t border-rule px-[5vw] py-6 text-[.7rem] text-ink-soft"
+    >
+      <span>© 2026 Capitol Gains</span>
+      <span>Data for informational purposes only. Not investment advice.</span>
+    </footer>
+
+    <script>
+      // FR-1: client-side validation, POST to the configured endpoint,
+      // inline success/error, no reload. With no endpoint configured
+      // (pre-launch), submitting reports that signups open soon.
+      const form = document.getElementById("join") as HTMLFormElement;
+      const email = document.getElementById("email") as HTMLInputElement;
+      const status = document.getElementById("form-status") as HTMLElement;
+      const button = form.querySelector("button") as HTMLButtonElement;
+      const endpoint = form.dataset.endpoint ?? "";
+
+      const say = (msg: string, isError: boolean) => {
+        status.textContent = msg;
+        status.classList.toggle("text-stamp", isError);
+        status.classList.toggle("text-buy", !isError && msg !== "");
+      };
+
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const value = email.value.trim();
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
+          say("Enter a valid email address.", true);
+          email.focus();
+          return;
+        }
+        if (!endpoint) {
+          say("Signups open soon — check back shortly.", false);
+          return;
+        }
+        button.disabled = true;
+        const label = button.textContent;
+        button.textContent = "Sending…";
+        try {
+          const res = await fetch(endpoint, {
+            method: "POST",
+            headers: { "Content-Type": "application/x-www-form-urlencoded" },
+            body: new URLSearchParams({ email: value }),
+          });
+          if (!res.ok) throw new Error(String(res.status));
+          say("You're on the list.", false);
+          form.reset();
+        } catch {
+          say("Something went wrong — try again.", true);
+        } finally {
+          button.disabled = false;
+          button.textContent = label;
+        }
+      });
+    </script>
+  </body>
+</html>
