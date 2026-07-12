@@ -39,3 +39,9 @@ _Avoid_: fast, prompt
 The STOCK Act value bracket a disclosure reports (e.g. $1,001–$15,000).
 Exact amounts are never disclosed and must never be implied.
 _Avoid_: amount, value, size (unqualified)
+
+**Recent disclosures**:
+The landing feed: five real disclosures from the trailing window of
+filings, distinct members, chosen for variety — a curated window, never
+the literal five latest (that claim would need the header "Latest").
+_Avoid_: latest disclosures, live feed (in copy; nav label is legacy)
