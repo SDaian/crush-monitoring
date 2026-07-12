@@ -74,6 +74,30 @@ Legend: ✅ right for the right reason · 🟡 right but by luck/margin ·
 | 2026-07-10 | England vs Norway (QF) | 50.6 / 25.1 / 24.2 | MEDIUM | 2-1 aet (England, adv.) | ✅ |
 | 2026-07-10 | Argentina vs Switzerland (QF) | 66.4 / 20.9 / 12.8 | HIGH | 3-1 aet (Argentina, adv.) | ✅ |
 
+### Standing note: CONCLUSIVE CALLS (semi-finals onward)
+
+**From the semi-finals on, every forecast must end with a committed BOTTOM LINE.** The
+rationale: every remaining team now has SIX measured tournament matches -- the profiles are
+no longer priors, they are validated evidence (France = control + clean sheets; Spain =
+grinds and strikes late; England = open games, real attack, leaky back, BTTS-Yes; Argentina
+= chaotic, ~3 goals, always concedes, often deep). With that much information, fence-sitting
+is a cop-out. The deliverable gains a decision layer ON TOP of (never instead of) the honest
+probabilities:
+
+- **THE CALL** -- who advances, and HOW (in 90' vs likely needing extra time), stated in one
+  committed sentence.
+- **THE SCORELINE** -- one committed scoreline pick, chosen from the model's top cluster and
+  adjusted by the banked team profiles (e.g. an Argentina game pick should carry goals even
+  if a bare 1-0 is marginally modal).
+- **THE MARKETS** -- a committed side for EACH headline market (1X2 lean, Over/Under 2.5,
+  BTTS): no 50/50 fence-sitting. If a market is 52/48, pick the 52 and SAY it is thin.
+- The probability distribution remains the honest core (per the founding brief: 'most
+  probable' is never 'certain'); the call is the decision-support summary. A conclusive call
+  that loses to a priced tail is NOT a process error -- grade the call AND the distribution
+  separately in the post-match.
+- Confidence grades stay honest (HIGH/MEDIUM/LOW) -- a LOW-confidence tie still gets a call,
+  explicitly labelled as a thin edge.
+
 ### Standing calibration note: KNOCKOUT CAUTION → BTTS RULE (v2, quantified)
 
 **Applies to every knockout tie from the R32 on.** Our attack/defense ratings are
