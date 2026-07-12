@@ -113,7 +113,7 @@ const description =
         </p>
       </form>
       <p class="mono mt-3 text-[.72rem] text-ink-soft">
-        Free while in beta. No spam — one digest per day.
+        Free while in beta. One email per day — always. No spam, ever.
       </p>
     </section>
 
@@ -305,7 +305,7 @@ const description =
             body: new URLSearchParams({ email: value }),
           });
           if (!res.ok) throw new Error(String(res.status));
-          say("You're on the list.", false);
+          say("You're on the list — one email per day, always.", false);
           form.reset();
         } catch {
           say("Something went wrong — try again.", true);
