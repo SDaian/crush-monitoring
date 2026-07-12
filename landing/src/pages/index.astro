@@ -270,9 +270,13 @@ const description =
       const endpoint = form.dataset.endpoint ?? "";
 
       const say = (msg: string, isError: boolean) => {
+        // Retrigger the rise-in entrance for each new message (plans/004).
+        status.classList.remove("is-in");
+        void status.offsetWidth; // restart the animation
         status.textContent = msg;
         status.classList.toggle("text-stamp", isError);
         status.classList.toggle("text-buy", !isError && msg !== "");
+        if (msg) status.classList.add("is-in");
       };
 
       form.addEventListener("submit", async (e) => {

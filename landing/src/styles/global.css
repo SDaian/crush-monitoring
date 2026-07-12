@@ -26,6 +26,10 @@
   --font-sans: "Libre Franklin", ui-sans-serif, system-ui, sans-serif;
   --font-mono: "IBM Plex Mono", ui-monospace, monospace;
 
+  /* Motion tokens (plans/001): strong ease-out — entrances start fast and
+     settle gracefully; the built-in `ease` is too weak for deliberate UI. */
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+
   --radius-*: initial; /* zero border-radius everywhere, per the tokens */
 }
 
@@ -52,6 +56,10 @@
     font-family: var(--font-mono);
   }
 
+  nav a {
+    transition: color 150ms ease; /* chrome eases like the button (plans/001) */
+  }
+
   /* ---------- hero ---------- */
   .headline {
     font-weight: 900;
@@ -60,12 +68,29 @@
     font-size: clamp(2.6rem, 7.5vw, 5.6rem);
     max-width: 16ch;
   }
+  /* Underline is stamped on once after load — scaleX from the left
+     (reading direction), transform-only (plans/004). End state matches
+     the prototype's static 4px underline exactly. */
   .headline .underline-stamp {
+    position: relative;
     text-decoration: none;
-    background-image: linear-gradient(var(--color-stamp), var(--color-stamp));
-    background-repeat: no-repeat;
-    background-size: 100% 4px;
-    background-position: 0 96%;
+  }
+  .headline .underline-stamp::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    /* Matches the prototype's background-position 0 96% (≈3.5px above the
+       box bottom at the clamp's max size). */
+    bottom: 0.04em;
+    height: 4px;
+    background: var(--color-stamp);
+    transform-origin: left;
+    animation: stamp-in 400ms var(--ease-out) 300ms both;
+  }
+  @keyframes stamp-in {
+    from { transform: scaleX(0); }
+    to { transform: scaleX(1); }
   }
   .btn {
     font-family: var(--font-mono);
@@ -77,15 +102,27 @@
     color: var(--color-paper);
     border: 1px solid var(--color-ink);
     cursor: pointer;
-    transition: background 0.15s, color 0.15s, border-color 0.15s;
+    transition: background 0.15s, color 0.15s, border-color 0.15s,
+      transform 160ms var(--ease-out);
   }
   .btn:hover {
     background: var(--color-stamp);
     border-color: var(--color-stamp);
   }
+  .btn:active {
+    transform: scale(0.97); /* feedback on pointer-down (plans/002) */
+  }
   .btn:disabled {
     opacity: 0.55;
     cursor: wait;
+  }
+  /* Completion feedback rises in at the causal moment (plans/004). */
+  #form-status.is-in {
+    animation: rise-in 200ms var(--ease-out) both;
+  }
+  @keyframes rise-in {
+    from { opacity: 0; transform: translateY(4px); }
+    to { opacity: 1; transform: none; }
   }
   .email-input {
     font-family: var(--font-mono);
@@ -118,7 +155,7 @@
     border-bottom: 1px solid var(--color-rule);
     font-family: var(--font-mono);
     font-size: 0.83rem;
-    animation: drop 0.5s ease both;
+    animation: drop 0.5s var(--ease-out) both;
   }
   @keyframes drop {
     from { opacity: 0; transform: translateY(-6px); }
@@ -166,13 +203,36 @@
     }
   }
 
+  /* Reduced motion = remove movement, keep comprehension (plans/003):
+     opacity/color feedback stays; translates, scales and the looping
+     pulse go. Every animated element still reaches its visible end state. */
+  @keyframes fade-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
   @media (prefers-reduced-motion: reduce) {
     html {
       scroll-behavior: auto;
     }
-    * {
-      animation: none !important;
-      transition: none !important;
+    .feed-row {
+      animation: fade-in 0.2s ease both;
+      animation-delay: 0s !important; /* no stagger under reduce */
+    }
+    .live-dot {
+      animation: none; /* static, still visible */
+    }
+    .btn {
+      transition: background 0.15s, color 0.15s, border-color 0.15s;
+    }
+    .btn:active {
+      transform: none; /* scale is movement */
+    }
+    .headline .underline-stamp::after {
+      animation: none;
+      transform: scaleX(1); /* fully drawn, statically */
+    }
+    #form-status.is-in {
+      animation: fade-in 0.2s ease both; /* fade only, no rise */
     }
   }
 }
