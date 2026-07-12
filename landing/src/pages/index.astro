@@ -19,6 +19,41 @@ const fmtLag = `${stats.medianLagDays} days`;
 
 const SIGNUP_ENDPOINT = import.meta.env.PUBLIC_SIGNUP_ENDPOINT ?? "";
 
+// PLACEHOLDER testimonials — fictional people and quotes, standing in until
+// real user feedback exists. Replace before launch (see the pre-launch
+// checklist in landing/README.md); never present fabricated reviews as real
+// on a live page.
+const REVIEWS = [
+  {
+    rating: 5,
+    title: "Finally readable",
+    quote:
+      "I used to dig through the disclosure portals' PDFs myself. Now it's " +
+      "in my inbox every morning, with the filing lag right next to each trade.",
+    name: "Sarah K.",
+    country: "United States",
+  },
+  {
+    rating: 5,
+    title: "The lag column is the story",
+    quote:
+      "Knowing a trade happened is one thing. Seeing it was disclosed 80 " +
+      "days past the deadline is what actually tells you something.",
+    name: "Miguel A.",
+    country: "Spain",
+  },
+  {
+    rating: 4,
+    title: "Simple and honest",
+    quote:
+      "No hype and no “buy signals” — just the filings, cleaned up. " +
+      "I'd love ticker follows, but the daily email already earns its place.",
+    name: "Lena B.",
+    country: "Germany",
+  },
+];
+const stars = (n: number) => "★".repeat(n) + "☆".repeat(5 - n);
+
 const title = "Capitol Gains — Politician Stock Trades, Tracked";
 const description =
   "Every stock trade a member of Congress disclosed — who traded, what, " +
@@ -238,6 +273,39 @@ const description =
             and how late they filed. Member and ticker follows are next.
           </p>
         </div>
+      </div>
+    </section>
+
+    <section
+      class="mx-auto max-w-[1200px] border-t border-rule px-[5vw] py-[10vh]"
+      id="reviews"
+    >
+      <div class="border-b-2 border-ink pb-2.5">
+        <h2 class="text-[.85rem] font-extrabold uppercase tracking-[.1em]">
+          What readers say
+        </h2>
+      </div>
+      <div class="mt-10 grid grid-cols-3 gap-6 max-[760px]:grid-cols-1">
+        {
+          REVIEWS.map((r) => (
+            <article class="flex flex-col border border-rule p-7">
+              <div
+                class="mono text-[.85rem] tracking-[.25em] text-stamp"
+                role="img"
+                aria-label={`Rated ${r.rating} out of 5 stars`}
+              >
+                {stars(r.rating)}
+              </div>
+              <h3 class="mt-4 mb-2.5 text-base font-extrabold">{r.title}</h3>
+              <p class="text-[.92rem] leading-[1.6] text-pretty text-ink-soft">
+                {r.quote}
+              </p>
+              <footer class="mono mt-auto pt-5 text-[.72rem] uppercase tracking-[.1em] text-ink-soft">
+                {r.name} · {r.country}
+              </footer>
+            </article>
+          ))
+        }
       </div>
     </section>
 
