@@ -1,0 +1,67 @@
+# Capitol Gains — landing page
+
+Standalone marketing page for the politician-trades tracker: it converts
+visitors into email subscribers for trade alerts. Astro (static, zero client
+JS except the signup form script), Tailwind CSS v4 with the design tokens in
+`src/styles/global.css` (`@theme`), self-hosted fonts.
+
+The approved prototype in `prototype/capitol-trades-landing.html` is the
+visual source of truth, with four deliberate deviations agreed in the design
+review (see `docs/adr/` and `CONTEXT.md`):
+
+1. Feed header reads **"Recent disclosures"** — the rows are a curated
+   window of real disclosures, not the literal five latest.
+2. The **02 · Structure** and **03 · Signal** copy claims only what the
+   product does (no committee assignments, no follows yet).
+3. On mobile the **filed-late column stays visible**; only the amount hides
+   (mobile-first audience must see the signature accusation).
+4. Every rendered number is **real** — feed and stats come from
+   `src/data/*.json`, generated daily from official filings.
+
+## Data
+
+`src/data/disclosures.json` and `src/data/stats.json` are **generated — do
+not edit by hand**:
+
+```bash
+# from the repo root
+python3 -m congress landing
+```
+
+The daily GitHub Action regenerates them after each trades refresh and
+commits them with the trades; the push to `main` triggers Vercel's rebuild,
+so the page tracks the data automatically. "Late" means past the STOCK
+Act's **45-day statutory maximum** (`docs/adr/0002`).
+
+## Develop
+
+```bash
+npm install
+npm run dev        # local dev server
+npm run build      # static build to dist/
+npm run preview    # serve the build
+```
+
+## Environment
+
+| Variable | Purpose |
+|---|---|
+| `PUBLIC_SIGNUP_ENDPOINT` | Signup provider endpoint the form POSTs `email=` to (form-encoded). **Unset** → submitting shows "Signups open soon" (pre-launch state). |
+
+## Deploy (Vercel)
+
+1. Import the GitHub repo in Vercel; set the project's **Root Directory**
+   to `landing/`. Framework preset: Astro (auto-detected).
+2. Set `PUBLIC_SIGNUP_ENDPOINT` in the project's environment variables once
+   a signup provider is chosen.
+3. Update `site` in `astro.config.mjs` to the real domain (sitemap and
+   canonical URLs derive from it).
+
+## Pre-launch checklist (open items from the design review)
+
+- [ ] Choose the signup provider and set `PUBLIC_SIGNUP_ENDPOINT`
+      (Buttondown suggested — it also sends the daily digest).
+- [ ] Analytics decision (the ≥3% conversion goal is unmeasurable without).
+- [ ] "Capitol Gains" trademark/domain clearance vs. the "Capitol Trades"
+      competitor.
+- [ ] Set the real domain in `astro.config.mjs`.

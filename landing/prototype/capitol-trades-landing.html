@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Capitol Gains — Politician Stock Trades, Tracked</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@400;600;800;900&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#FBFBF9;
+    --ink:#14161A;
+    --ink-soft:#5A5E66;
+    --rule:#E3E2DC;
+    --stamp:#C8102E;
+    --buy:#0E7C4A;
+    --sell:#B3261E;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Libre Franklin',sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  .mono{font-family:'IBM Plex Mono',monospace}
+
+  /* ---------- top bar ---------- */
+  header{
+    display:flex;justify-content:space-between;align-items:center;
+    padding:20px 5vw;border-bottom:1px solid var(--rule);
+  }
+  .brand{font-weight:900;letter-spacing:-0.02em;font-size:1.05rem;text-transform:uppercase}
+  .brand span{color:var(--stamp)}
+  nav a{
+    font-family:'IBM Plex Mono',monospace;font-size:.78rem;color:var(--ink-soft);
+    text-decoration:none;margin-left:24px;text-transform:uppercase;letter-spacing:.06em;
+  }
+  nav a:hover,nav a:focus-visible{color:var(--ink)}
+  a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(--stamp);outline-offset:2px}
+
+  /* ---------- hero ---------- */
+  .hero{padding:9vh 5vw 6vh;max-width:1200px;margin:0 auto}
+  .eyebrow{
+    font-family:'IBM Plex Mono',monospace;font-size:.75rem;letter-spacing:.12em;
+    text-transform:uppercase;color:var(--ink-soft);margin-bottom:22px;
+  }
+  .eyebrow b{color:var(--stamp);font-weight:600}
+  h1{
+    font-weight:900;letter-spacing:-0.035em;line-height:.98;
+    font-size:clamp(2.6rem,7.5vw,5.6rem);max-width:16ch;
+  }
+  h1 .underline{
+    background-image:linear-gradient(var(--stamp),var(--stamp));
+    background-repeat:no-repeat;background-size:100% 4px;background-position:0 96%;
+  }
+  .sub{
+    margin-top:26px;font-size:1.05rem;line-height:1.65;color:var(--ink-soft);max-width:52ch;
+  }
+  .cta-row{display:flex;gap:12px;margin-top:36px;flex-wrap:wrap}
+  .cta-row input{
+    font-family:'IBM Plex Mono',monospace;font-size:.9rem;padding:14px 16px;
+    border:1px solid var(--ink);background:transparent;min-width:min(280px,80vw);border-radius:0;
+  }
+  .btn{
+    font-family:'IBM Plex Mono',monospace;font-size:.85rem;letter-spacing:.06em;text-transform:uppercase;
+    padding:14px 26px;background:var(--ink);color:var(--paper);border:1px solid var(--ink);
+    cursor:pointer;border-radius:0;transition:background .15s,color .15s;
+  }
+  .btn:hover{background:var(--stamp);border-color:var(--stamp)}
+  .note{margin-top:12px;font-family:'IBM Plex Mono',monospace;font-size:.72rem;color:var(--ink-soft)}
+
+  /* ---------- signature: the disclosure feed ---------- */
+  .feed-wrap{max-width:1200px;margin:0 auto;padding:0 5vw 10vh}
+  .feed-head{
+    display:flex;justify-content:space-between;align-items:baseline;
+    border-bottom:2px solid var(--ink);padding-bottom:10px;margin-bottom:0;
+  }
+  .feed-head h2{font-size:.85rem;font-weight:800;text-transform:uppercase;letter-spacing:.1em}
+  .live{
+    font-family:'IBM Plex Mono',monospace;font-size:.72rem;color:var(--stamp);
+    text-transform:uppercase;letter-spacing:.1em;display:flex;align-items:center;gap:7px;
+  }
+  .dot{width:7px;height:7px;border-radius:50%;background:var(--stamp);animation:pulse 1.6s infinite}
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.25}}
+
+  .row{
+    display:grid;
+    grid-template-columns:1.5fr .8fr .7fr 1fr 1fr;
+    gap:12px;align-items:center;
+    padding:16px 4px;border-bottom:1px solid var(--rule);
+    font-family:'IBM Plex Mono',monospace;font-size:.83rem;
+    animation:drop .5s ease both;
+  }
+  @keyframes drop{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
+  .row .who{font-family:'Libre Franklin',sans-serif;font-weight:600;font-size:.9rem}
+  .row .who small{display:block;font-weight:400;color:var(--ink-soft);font-size:.72rem;margin-top:2px}
+  .side{font-weight:600}
+  .side.buy{color:var(--buy)} .side.sell{color:var(--sell)}
+  .late{color:var(--stamp);font-weight:500}
+  .ontime{color:var(--ink-soft)}
+  .row:nth-child(2){animation-delay:.08s}.row:nth-child(3){animation-delay:.16s}
+  .row:nth-child(4){animation-delay:.24s}.row:nth-child(5){animation-delay:.32s}
+
+  /* ---------- stats strip ---------- */
+  .stats{
+    border-top:2px solid var(--ink);border-bottom:1px solid var(--rule);
+    display:grid;grid-template-columns:repeat(3,1fr);
+  }
+  .stat{padding:36px 5vw;border-right:1px solid var(--rule)}
+  .stat:last-child{border-right:none}
+  .stat .n{font-weight:900;font-size:clamp(1.8rem,4vw,2.8rem);letter-spacing:-0.03em}
+  .stat .l{font-family:'IBM Plex Mono',monospace;font-size:.72rem;color:var(--ink-soft);
+    text-transform:uppercase;letter-spacing:.1em;margin-top:8px}
+
+  /* ---------- how ---------- */
+  .how{max-width:1200px;margin:0 auto;padding:10vh 5vw}
+  .how h2{font-weight:900;font-size:clamp(1.6rem,3.5vw,2.4rem);letter-spacing:-0.02em;max-width:20ch}
+  .how-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:40px;margin-top:48px}
+  .how-item h3{font-size:1rem;font-weight:800;margin-bottom:10px}
+  .how-item p{color:var(--ink-soft);font-size:.92rem;line-height:1.6}
+  .how-item .tag{
+    font-family:'IBM Plex Mono',monospace;font-size:.7rem;color:var(--stamp);
+    text-transform:uppercase;letter-spacing:.1em;display:block;margin-bottom:12px;
+  }
+
+  /* ---------- footer cta ---------- */
+  .final{border-top:2px solid var(--ink);padding:10vh 5vw;text-align:center}
+  .final h2{font-weight:900;font-size:clamp(1.8rem,4.5vw,3.2rem);letter-spacing:-0.03em}
+  .final p{color:var(--ink-soft);margin:16px auto 32px;max-width:44ch}
+  footer{
+    padding:24px 5vw;border-top:1px solid var(--rule);
+    font-family:'IBM Plex Mono',monospace;font-size:.7rem;color:var(--ink-soft);
+    display:flex;justify-content:space-between;flex-wrap:gap;gap:10px;flex-wrap:wrap;
+  }
+
+  @media (max-width:760px){
+    .row{grid-template-columns:1.3fr .7fr .9fr;font-size:.78rem}
+    .row .amt,.row .filed{display:none}
+    .stats{grid-template-columns:1fr}
+    .stat{border-right:none;border-bottom:1px solid var(--rule)}
+    .how-grid{grid-template-columns:1fr}
+    nav a:not(:last-child){display:none}
+  }
+  @media (prefers-reduced-motion:reduce){
+    *{animation:none!important;transition:none!important}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="brand">Capitol <span>Gains</span></div>
+  <nav>
+    <a href="#feed">Live feed</a>
+    <a href="#how">How it works</a>
+    <a href="#join">Get alerts</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <p class="eyebrow">Congressional trading disclosures · <b>Updated daily from official filings</b></p>
+  <h1>They trade.<br>They file.<br><span class="underline">You see it first.</span></h1>
+  <p class="sub">Every stock trade a member of Congress reports, pulled straight from official disclosure filings and delivered to you the moment it lands — who traded, what, how much, and how late they filed it.</p>
+  <div class="cta-row" id="join">
+    <input class="mono" type="email" placeholder="you@email.com" aria-label="Email address">
+    <button class="btn">Get trade alerts</button>
+  </div>
+  <p class="note">Free while in beta. No spam — one digest per day.</p>
+</section>
+
+<section class="feed-wrap" id="feed">
+  <div class="feed-head">
+    <h2>Latest disclosures</h2>
+    <span class="live"><span class="dot"></span>Filed this week</span>
+  </div>
+
+  <div class="row">
+    <div class="who">N. Pelosi <small>House · CA-11</small></div>
+    <div>NVDA</div>
+    <div class="side buy">BUY</div>
+    <div class="amt">$1M – $5M</div>
+    <div class="filed late">Filed 38 days late</div>
+  </div>
+  <div class="row">
+    <div class="who">T. Tuberville <small>Senate · AL</small></div>
+    <div>CLF</div>
+    <div class="side sell">SELL</div>
+    <div class="amt">$50K – $100K</div>
+    <div class="filed ontime">Filed on time</div>
+  </div>
+  <div class="row">
+    <div class="who">M. McCaul <small>House · TX-10</small></div>
+    <div>MSFT</div>
+    <div class="side buy">BUY</div>
+    <div class="amt">$250K – $500K</div>
+    <div class="filed late">Filed 12 days late</div>
+  </div>
+  <div class="row">
+    <div class="who">D. Crenshaw <small>House · TX-02</small></div>
+    <div>XOM</div>
+    <div class="side buy">BUY</div>
+    <div class="amt">$15K – $50K</div>
+    <div class="filed ontime">Filed on time</div>
+  </div>
+  <div class="row">
+    <div class="who">R. Blumenthal <small>Senate · CT</small></div>
+    <div>AAPL</div>
+    <div class="side sell">SELL</div>
+    <div class="amt">$100K – $250K</div>
+    <div class="filed late">Filed 9 days late</div>
+  </div>
+</section>
+
+<section class="stats">
+  <div class="stat"><div class="n">12,847</div><div class="l">Trades tracked this year</div></div>
+  <div class="stat"><div class="n">$1.2B</div><div class="l">Estimated volume disclosed</div></div>
+  <div class="stat"><div class="n">31%</div><div class="l">Of filings arrived late</div></div>
+</section>
+
+<section class="how" id="how">
+  <h2>From filing cabinet to your inbox in minutes.</h2>
+  <div class="how-grid">
+    <div class="how-item">
+      <span class="tag">01 · Source</span>
+      <h3>Official filings only</h3>
+      <p>We parse Periodic Transaction Reports directly from House and Senate disclosure portals. No rumors, no scraped tweets — the paper trail itself.</p>
+    </div>
+    <div class="how-item">
+      <span class="tag">02 · Structure</span>
+      <h3>Cleaned and comparable</h3>
+      <p>Tickers normalized, amounts bucketed, committee assignments attached — so you can see when a trade overlaps with a member's oversight work.</p>
+    </div>
+    <div class="how-item">
+      <span class="tag">03 · Signal</span>
+      <h3>Alerts that matter</h3>
+      <p>Follow specific members, tickers, or sectors. Get pinged the moment a matching disclosure is filed — including how late it was.</p>
+    </div>
+  </div>
+</section>
+
+<section class="final">
+  <h2>Public records, actually public.</h2>
+  <p>The disclosures already exist. We just make them impossible to miss.</p>
+  <a href="#join" class="btn" style="text-decoration:none">Start tracking free</a>
+</section>
+
+<footer>
+  <span>© 2026 Capitol Gains</span>
+  <span>Data for informational purposes only. Not investment advice.</span>
+</footer>
+
+</body>
+</html>

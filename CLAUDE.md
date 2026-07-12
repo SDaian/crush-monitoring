@@ -224,3 +224,24 @@ sites. Full details in `congress/README.md`. Conventions:
 - **Honest labelling:** the page must keep the 30–45-day legal lag, the
   bracket-only amounts, and the skipped paper filings visible. Never present
   the tracker as real-time or as investment advice.
+
+## Capitol Gains landing page (`landing/`, deployed on Vercel)
+
+A standalone Astro + Tailwind v4 marketing page (email-signup conversion for
+trade alerts). Its own bounded context: glossary in `landing/CONTEXT.md`,
+decisions in `landing/docs/adr/` (see also the root `CONTEXT-MAP.md`).
+Conventions:
+
+- The prototype in `landing/prototype/` is the **visual source of truth**;
+  the four agreed deviations are listed in `landing/README.md` — do not
+  "fix" them back to the prototype.
+- `landing/src/data/*.json` are **generated** by `python3 -m congress landing`
+  (daily via the Action, committed with the trades refresh) — never
+  hand-edit; every number on the page must be a true statement about real
+  disclosures. "Late" = past the 45-day statutory maximum (ADR 0002).
+- Design tokens live in `src/styles/global.css` `@theme`; no hex values
+  outside the token set; zero border-radius; IBM Plex Mono for all
+  data/labels/nav/form elements.
+- Static output only (no server runtime); the only client JS is the signup
+  form script (FR-1 contract: POST `email=` to `PUBLIC_SIGNUP_ENDPOINT`;
+  unset endpoint → "Signups open soon").

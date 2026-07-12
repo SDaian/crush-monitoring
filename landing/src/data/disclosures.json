@@ -1,0 +1,50 @@
+{
+  "_comment": "Generated from real official disclosures by congress/landing_data.py (daily Action). Do not edit by hand. 'filedDaysLate' counts days past the STOCK Act's 45-day statutory maximum; 0 = on time.",
+  "disclosures": [
+    {
+      "member": "R. Torres",
+      "chamber": "House",
+      "district": "NY-15",
+      "ticker": "MCK",
+      "side": "BUY",
+      "amountBucket": "$1K – $15K",
+      "filedDaysLate": 502
+    },
+    {
+      "member": "G. Cisneros",
+      "chamber": "House",
+      "district": "CA-31",
+      "ticker": "LLY",
+      "side": "BUY",
+      "amountBucket": "$50K – $100K",
+      "filedDaysLate": 0
+    },
+    {
+      "member": "G. Stanton",
+      "chamber": "House",
+      "district": "AZ-4",
+      "ticker": "TCNNF",
+      "side": "SELL",
+      "amountBucket": "$100K – $250K",
+      "filedDaysLate": 0
+    },
+    {
+      "member": "N. Pelosi",
+      "chamber": "House",
+      "district": "CA-11",
+      "ticker": "INTC",
+      "side": "BUY",
+      "amountBucket": "$1M – $5M",
+      "filedDaysLate": 0
+    },
+    {
+      "member": "C. Roy",
+      "chamber": "House",
+      "district": "TX-21",
+      "ticker": "AESI",
+      "side": "SELL",
+      "amountBucket": "$100K – $250K",
+      "filedDaysLate": 0
+    }
+  ]
+}
