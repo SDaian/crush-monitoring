@@ -26,28 +26,30 @@ const SIGNUP_ENDPOINT = import.meta.env.PUBLIC_SIGNUP_ENDPOINT ?? "";
 const REVIEWS = [
   {
     rating: 5,
-    title: "Finally readable",
+    title: "The one newsletter I actually open",
     quote:
-      "I used to dig through the disclosure portals' PDFs myself. Now it's " +
-      "in my inbox every morning, with the filing lag right next to each trade.",
+      "I subscribe to way too many finance emails and skim maybe half. " +
+      "This one I read — it's short, and someone filing 200 days late is " +
+      "weirdly gripping breakfast reading.",
     name: "Sarah K.",
     country: "United States",
   },
   {
     rating: 5,
-    title: "The lag column is the story",
+    title: "Stopped digging through PDFs",
     quote:
-      "Knowing a trade happened is one thing. Seeing it was disclosed 80 " +
-      "days past the deadline is what actually tells you something.",
+      "I used to check the Senate disclosure site myself, which was " +
+      "miserable. Now I glance at one email while the coffee brews and " +
+      "I'm done.",
     name: "Miguel A.",
     country: "Spain",
   },
   {
     rating: 4,
-    title: "Simple and honest",
+    title: "Does one thing well",
     quote:
-      "No hype and no “buy signals” — just the filings, cleaned up. " +
-      "I'd love ticker follows, but the daily email already earns its place.",
+      "It's just the filings, no hot takes — honestly that's why I trust " +
+      "it. Let me follow specific tickers and it's a five.",
     name: "Lena B.",
     country: "Germany",
   },
@@ -290,7 +292,7 @@ const description =
           REVIEWS.map((r) => (
             <article class="flex flex-col border border-rule p-7">
               <div
-                class="mono text-[.85rem] tracking-[.25em] text-stamp"
+                class="mono text-[1.1rem] tracking-[.25em] text-stamp"
                 role="img"
                 aria-label={`Rated ${r.rating} out of 5 stars`}
               >
