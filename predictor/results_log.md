@@ -72,6 +72,7 @@ Legend: ✅ right for the right reason · 🟡 right but by luck/margin ·
 | 2026-07-09 | France vs Morocco (QF) | 55.4 / 26.3 / 18.3 | MEDIUM | 2-0 (France, adv.) | ✅ |
 | 2026-07-09 | Spain vs Belgium (QF) | 53.4 / 26.7 / 19.9 | MEDIUM | 2-1 (Spain, adv., late) | ✅ |
 | 2026-07-10 | England vs Norway (QF) | 50.6 / 25.1 / 24.2 | MEDIUM | 2-1 aet (England, adv.) | ✅ |
+| 2026-07-10 | Argentina vs Switzerland (QF) | 66.4 / 20.9 / 12.8 | HIGH | 3-1 aet (Argentina, adv.) | ✅ |
 
 ### Standing calibration note: KNOCKOUT CAUTION → BTTS RULE (v2, quantified)
 
@@ -1370,3 +1371,24 @@ Argentina-Switzerland (M100).
   vs Brazil and England) — never BTTS-No a side with a world-class striker. (3) England profile
   holds: real attack, leaky defence, BTTS-Yes in 5 of 6. England meet the Argentina–Switzerland
   winner in SF M102 — an Argentina-England semi would be a goals fest by both teams' profiles.
+
+## 2026-07-10 · Quarter-final — Argentina 3-1 Switzerland (aet, 1-1 at 90') (Argentina advance) ✅ [QF COMPLETE]
+
+- **Argentina vs Switzerland** — 90': Argentina 66.4 / Draw 20.9 / Switzerland 12.8 (HIGH);
+  advancement **Argentina 79.8 / Switzerland 20.2**. λ 2.12 / 0.83, xG 2.95, Over 2.5 56.6%,
+  BTTS 50.4% (near-neutral, Argentina note), Argentina clean sheet capped at 43.6%, top-3
+  scoreline 1-1 (9.9%); **ET 20.9%**, pens 9.6%. Market aligned (div 1.0); 3-seed × 500k
+  validation fully converged (worst 0.12 pts). **RESULT: 1-1 at 90' → Argentina 3-1 in EXTRA
+  TIME.** Clean process hit, and the **Argentina-specific note is now 3-for-3**: (1) NO clean
+  sheet again — the organized-underdog profile scored on them a THIRD straight knockout (BTTS
+  near-neutral, not the rule's lean-No, was right); (2) GOALS UP again — three scored for the
+  third straight knockout (3-2, 3-2, 3-1), Over landed; (3) the capped clean sheet (43.6%) was
+  honest. Like England-Norway the same round, the layered forecast worked: an ~80% favourite
+  with a 21% ET branch is EXPECTED to sometimes need extra time — the priced path, not a scare.
+  Switzerland's 20.2% was exactly this script (drag it level, hope in the lottery) — they got to
+  the door; Argentina closed it in ET, no shootout. 📌 **Lesson:** the team-profile layer is
+  delivering consistent value — Argentina = reliable advancement, ~3 goals, always concedes,
+  often deep: price Over/BTTS-live/ET-fat, never a controlled clean-sheet win. **QF scorecard:
+  4/4 advancement** (France, Spain, England, Argentina — all as picked, two in ET). **Semis set:
+  France–Spain (M101, the two best defences — tight/low/late) and England–Argentina (M102, the
+  two most chaotic profiles — open/high-scoring/deep).**
