@@ -98,6 +98,21 @@ probabilities:
 - Confidence grades stay honest (HIGH/MEDIUM/LOW) -- a LOW-confidence tie still gets a call,
   explicitly labelled as a thin edge.
 
+**GRADING RUBRIC (semi-finals onward) -- the mark is earned by the BOTTOM LINE, not by the
+distribution.** Agreed with the user: advancement alone no longer earns a ✅.
+
+- ✅ **FULL HIT** -- THE CALL lands in full: the picked side advances AND in the predicted
+  manner (90' vs extra time), AND the committed markets (Over/Under, BTTS) land. Nailing the
+  exact committed scoreline on top upgrades it to 🎯 (bullseye), the highest grade.
+- 🟡 **PARTIAL** -- the picked side advances, but the manner or the committed markets miss
+  (e.g. called a 90' win and it needed extra time; called Over/BTTS-Yes and it went
+  Under/BTTS-No; scoreline shape far off). Also: the pick loses via the near-random penalty
+  shootout after the game script otherwise matched.
+- ❌ **MISS** -- the picked side is eliminated (except the pure shootout case above), or the
+  game shape contradicts the call outright.
+- The distribution is still graded in prose in the post-match (was the texture priced
+  honestly?), but the summary-table mark now reflects the bottom line alone.
+
 ### Standing calibration note: KNOCKOUT CAUTION → BTTS RULE (v2, quantified)
 
 **Applies to every knockout tie from the R32 on.** Our attack/defense ratings are
