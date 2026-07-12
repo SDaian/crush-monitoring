@@ -6,6 +6,8 @@
 // filed-late column visible on mobile, and every number real (generated
 // daily by `python3 -m congress landing`).
 import "../styles/global.css";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
 import feed from "../data/disclosures.json";
 import stats from "../data/stats.json";
 
@@ -83,34 +85,7 @@ const description =
     <meta name="twitter:description" content={description} />
   </head>
   <body>
-    <header
-      class="flex items-center justify-between border-b border-rule px-[5vw] py-5"
-    >
-      <a
-        href="#top"
-        class="text-[1.05rem] font-black uppercase tracking-[-0.02em] text-ink no-underline"
-        aria-label="Capitol Gains — back to top"
-      >
-        Capitol <span class="text-stamp">Gains</span>
-      </a>
-      <nav>
-        <a
-          href="#feed"
-          class="mono ml-6 text-[.78rem] uppercase tracking-[.06em] text-ink-soft no-underline hover:text-ink focus-visible:text-ink"
-          >Live feed</a
-        >
-        <a
-          href="#how"
-          class="mono ml-6 text-[.78rem] uppercase tracking-[.06em] text-ink-soft no-underline hover:text-ink focus-visible:text-ink"
-          >How it works</a
-        >
-        <a
-          href="#join"
-          class="mono ml-6 text-[.78rem] uppercase tracking-[.06em] text-ink-soft no-underline hover:text-ink focus-visible:text-ink"
-          >Get alerts</a
-        >
-      </nav>
-    </header>
+    <Header />
 
     <section class="mx-auto max-w-[1200px] px-[5vw] pt-[9vh] pb-[6vh]">
       <p class="mono mb-[22px] text-[.75rem] uppercase tracking-[.12em] text-ink-soft">
@@ -279,6 +254,11 @@ const description =
           </p>
         </div>
       </div>
+      <a
+        href="/how-it-works"
+        class="mono mt-12 inline-block text-[.78rem] uppercase tracking-[.06em] text-stamp no-underline hover:text-ink focus-visible:text-ink"
+        >Read the full pipeline →</a
+      >
     </section>
 
     <section
@@ -324,12 +304,7 @@ const description =
       <a href="#join" class="btn inline-block no-underline">Start tracking free</a>
     </section>
 
-    <footer
-      class="mono flex flex-wrap justify-between gap-2.5 border-t border-rule px-[5vw] py-6 text-[.7rem] text-ink-soft"
-    >
-      <span>© 2026 Capitol Gains</span>
-      <span>Data for informational purposes only. Not investment advice.</span>
-    </footer>
+    <Footer />
 
     <script>
       // Count the stats up when they scroll into view — once, ~900ms,
