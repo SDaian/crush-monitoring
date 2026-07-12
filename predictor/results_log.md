@@ -71,6 +71,7 @@ Legend: ✅ right for the right reason · 🟡 right but by luck/margin ·
 | 2026-07-07 | Switzerland vs Colombia (R16) | 34.6 / 29.9 / 35.5 | LOW | 0-0 pens (Switzerland, adv.) | ✅ |
 | 2026-07-09 | France vs Morocco (QF) | 55.4 / 26.3 / 18.3 | MEDIUM | 2-0 (France, adv.) | ✅ |
 | 2026-07-09 | Spain vs Belgium (QF) | 53.4 / 26.7 / 19.9 | MEDIUM | 2-1 (Spain, adv., late) | ✅ |
+| 2026-07-10 | England vs Norway (QF) | 50.6 / 25.1 / 24.2 | MEDIUM | 2-1 aet (England, adv.) | ✅ |
 
 ### Standing calibration note: KNOCKOUT CAUTION → BTTS RULE (v2, quantified)
 
@@ -1349,3 +1350,23 @@ Argentina-Switzerland (M100).
   (69% → through) but the clean sheet is no longer near-automatic vs real attacks. **France–Spain
   semi-final:** the tournament's two best defences AND two most clinical attacks — expect tight,
   low-scoring, late-deciding, with a fat ET tail. Spain meet France in SF M101.
+
+## 2026-07-10 · Quarter-final — England 2-1 Norway (aet, 1-1 at 90') (England advance) ✅
+
+- **England vs Norway** — 90': England 50.6 / Draw 25.1 / Norway 24.2 (MEDIUM); advancement
+  **England 64.9 / Norway 35.1**. λ 1.75 / 1.15, xG 2.90, Over 2.5 55%, **BTTS-Yes 57.2%**
+  (elite-striker exception: Norway NOT hard-trimmed), England clean sheet only 31.7%, top
+  scoreline **1-1 (11.8%)**; **ET 25.1%** (priced fat), pens 12.1%. Market aligned first pass
+  (div 0.7); 500k battery all OK. **RESULT: 1-1 at 90' — the MODAL scoreline — then England 2-1
+  in EXTRA TIME. England advance; Norway's run ends a kick or two from another upset.** As close
+  to a perfect forecast as this model produces: the side (64.9% → through), the modal 90'
+  scoreline (1-1), the FAT ET branch firing exactly as priced, BTTS-Yes landing (Norway scored on
+  England's leaky defence, as the elite-striker exception prescribed), and the open texture. The
+  layered advancement decomposition worked as designed: reg 50.6% did NOT fire, the ET branch
+  did — the favourite's class told in the extra 30' against a tiring underdog. 📌 **Lessons:**
+  (1) the layered (reg+ET+pens) forecast proves its worth — a ~65% favourite with a fat ET branch
+  is EXPECTED to sometimes need extra time; that is the priced path, not a scare. (2) The
+  elite-striker exception is decisively validated: Norway/Haaland scored in EVERY game (including
+  vs Brazil and England) — never BTTS-No a side with a world-class striker. (3) England profile
+  holds: real attack, leaky defence, BTTS-Yes in 5 of 6. England meet the Argentina–Switzerland
+  winner in SF M102 — an Argentina-England semi would be a goals fest by both teams' profiles.
