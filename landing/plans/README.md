@@ -15,6 +15,7 @@ token the others use; 003's reduced-motion rules reference 004's elements).
 
 Audit notes: entrances already animate only transform/opacity; no
 `scale(0)`, no `transition: all`, no animation on high-frequency actions —
-those were verified clean. Considered and rejected: stats count-up (fights
-the "these are records" personality) and a hero entrance stagger (the
-static hero against the animated feed is a deliberate contrast).
+those were verified clean. Considered and initially rejected: stats count-up — later added at the
+owner's request (scroll-triggered, once, reduced-motion-safe). Rejected
+and still out: hero entrance stagger (the static hero against the
+animated feed is a deliberate contrast).

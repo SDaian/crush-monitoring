@@ -15,7 +15,7 @@ const fmtTrades = stats.tradesThisYear.toLocaleString("en-US");
 const vol = stats.estVolumeThisYearUsd;
 const fmtVol =
   vol >= 1e9 ? `$${(vol / 1e9).toFixed(1)}B` : `$${Math.round(vol / 1e6)}M`;
-const fmtLate = `${stats.pctFiledLate}%`;
+const fmtLag = `${stats.medianLagDays} days`;
 
 const SIGNUP_ENDPOINT = import.meta.env.PUBLIC_SIGNUP_ENDPOINT ?? "";
 
@@ -193,16 +193,10 @@ const description =
           Estimated volume disclosed
         </div>
       </div>
-      <div
-        class="px-[5vw] py-9"
-        title="Late = filed beyond the STOCK Act's 45-day statutory maximum"
-      >
-        <div class="stat-n">{fmtLate}</div>
+      <div class="px-[5vw] py-9">
+        <div class="stat-n">{fmtLag}</div>
         <div class="mono mt-2 text-[.72rem] uppercase tracking-[.1em] text-ink-soft">
-          Of filings arrived late
-          <span class="normal-case tracking-normal">
-            (beyond the 45-day legal deadline)</span
-          >
+          Median delay, trade to disclosure
         </div>
       </div>
     </section>
@@ -262,6 +256,52 @@ const description =
       <span>© 2026 Capitol Gains</span>
       <span>Data for informational purposes only. Not investment advice.</span>
     </footer>
+
+    <script>
+      // Count the stats up when they scroll into view — once, ~900ms,
+      // ease-out. The real values are server-rendered (SEO / no-JS safe);
+      // reduced-motion users see them statically.
+      const statEls = Array.from(
+        document.querySelectorAll<HTMLElement>(".stat-n"),
+      );
+      const reduced = window.matchMedia(
+        "(prefers-reduced-motion: reduce)",
+      ).matches;
+      if (!reduced && "IntersectionObserver" in window && statEls.length) {
+        const ease = (x: number) => 1 - Math.pow(1 - x, 3);
+        const countUp = (el: HTMLElement) => {
+          const final = el.textContent ?? "";
+          const m = final.match(/([\d,]+)/);
+          if (!m || m.index === undefined) return;
+          const target = parseInt(m[1].replace(/,/g, ""), 10);
+          const withCommas = m[1].includes(",");
+          const prefix = final.slice(0, m.index);
+          const suffix = final.slice(m.index + m[1].length);
+          const t0 = performance.now();
+          const dur = 900;
+          const tick = (now: number) => {
+            const p = Math.min(1, (now - t0) / dur);
+            const v = Math.round(target * ease(p));
+            el.textContent =
+              prefix + (withCommas ? v.toLocaleString("en-US") : String(v)) + suffix;
+            if (p < 1) requestAnimationFrame(tick);
+          };
+          requestAnimationFrame(tick);
+        };
+        const io = new IntersectionObserver(
+          (entries) => {
+            for (const e of entries) {
+              if (e.isIntersecting) {
+                io.unobserve(e.target);
+                countUp(e.target as HTMLElement);
+              }
+            }
+          },
+          { threshold: 0.4 },
+        );
+        statEls.forEach((el) => io.observe(el));
+      }
+    </script>
 
     <script>
       // FR-1: client-side validation, POST to the configured endpoint,

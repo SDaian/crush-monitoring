@@ -137,6 +137,13 @@ class TestPayloads(unittest.TestCase):
                          round((1001+15000)/2 + (100_000+250_000)/2))
         # late share scopes by FILING year: 3 filings arrived in 2026, 2 late
         self.assertEqual(s["pctFiledLate"], 67)
+        # median trade→filing lag among this year's trades: gaps 10d and 89d
+        # → upper-median 89
+        self.assertEqual(s["medianLagDays"], 89)
+
+    def test_median_lag_empty_year(self):
+        s = ld.stats_payload([], today=date(2026, 7, 12))
+        self.assertEqual(s["medianLagDays"], 0)
 
     def test_write_files(self):
         with TemporaryDirectory() as d:

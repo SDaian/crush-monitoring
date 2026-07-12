@@ -239,6 +239,8 @@
     font-weight: 900;
     font-size: clamp(1.8rem, 4vw, 2.8rem);
     letter-spacing: -0.03em;
+    /* Digits change during the count-up — keep them from jittering. */
+    font-variant-numeric: tabular-nums;
   }
 
   @media (max-width: 760px) {

@@ -168,11 +168,18 @@ def stats_payload(trades: list[dict], today: date) -> dict:
     traded_this_year = [t for t in dated if (t.get("tx_date") or "").startswith(year)]
     filed_this_year = [t for t in dated if (t.get("filing_date") or "").startswith(year)]
     late = sum(1 for t in filed_this_year if days_late(t) > 0)
+    lags = sorted(
+        (date.fromisoformat(t["filing_date"]) - date.fromisoformat(t["tx_date"])).days
+        for t in traded_this_year
+    )
     return {
         "year": today.year,
         "tradesThisYear": len(traded_this_year),
         "estVolumeThisYearUsd": round(sum(_mid(t) for t in traded_this_year)),
         "pctFiledLate": round(100 * late / len(filed_this_year)) if filed_this_year else 0,
+        # The product's core tension: how long the public normally waits
+        # between a trade happening and learning about it.
+        "medianLagDays": lags[len(lags) // 2] if lags else 0,
     }
 
 
