@@ -96,9 +96,9 @@
     position: absolute;
     left: 0;
     right: 0;
-    /* Matches the prototype's background-position 0 96% (≈3.5px above the
-       box bottom at the clamp's max size). */
-    bottom: 0.04em;
+    /* Slightly below the prototype's placement — a beat of padding between
+       the glyphs and the stamp (user request), scaling with the font size. */
+    bottom: -0.04em;
     height: 4px;
     background: var(--color-stamp);
     transform-origin: left;
