@@ -37,6 +37,16 @@
   html {
     scroll-behavior: smooth;
   }
+  html,
+  body {
+    /* The page must never scroll horizontally. Content is verified to fit
+       at ≥320px; this contains engine quirks (WebKit inline-abspos, font
+       scaling) that can otherwise manufacture phantom overflow on phones.
+       `hidden` is the fallback for Safari < 16, `clip` avoids creating a
+       scroll container. */
+    overflow-x: hidden;
+    overflow-x: clip;
+  }
   body {
     background: var(--color-paper);
     color: var(--color-ink);
@@ -133,7 +143,8 @@
     padding: 14px 16px;
     border: 1px solid var(--color-ink);
     background: transparent;
-    min-width: min(280px, 80vw);
+    min-width: min(280px, 100%); /* never wider than the form row */
+    max-width: 100%;
   }
 
   /* ---------- disclosure feed (signature element) ---------- */
@@ -169,6 +180,13 @@
   .feed-row:nth-child(5) { animation-delay: 0.24s; }
   .feed-row:nth-child(6) { animation-delay: 0.32s; }
 
+  .feed-row > * {
+    /* Grid items default to min-width:auto; long mono strings (or wide
+       fallback-font metrics before the webfont lands) must wrap inside
+       their track instead of blowing the grid past the viewport. */
+    min-width: 0;
+    overflow-wrap: break-word;
+  }
   .feed-row .who {
     font-family: var(--font-sans);
     font-weight: 600;
