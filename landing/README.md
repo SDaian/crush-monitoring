@@ -65,3 +65,9 @@ npm run preview    # serve the build
 - [ ] "Capitol Gains" trademark/domain clearance vs. the "Capitol Trades"
       competitor.
 - [ ] Set the real domain in `astro.config.mjs`.
+- [ ] **Replace the placeholder testimonials.** The "What readers say"
+      section ships with fictional reviews (marked in `src/pages/index.astro`)
+      as a design stand-in. Swap them for real, permissioned user quotes —
+      or remove the section — before launch; fabricated reviews presented as
+      genuine on a live page would be deceptive (and illegal in several
+      markets).
