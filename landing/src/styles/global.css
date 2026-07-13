@@ -181,8 +181,23 @@
     min-width: min(280px, 100%); /* never wider than the form row */
     max-width: 100%;
   }
+  /* Contact-form fields: the signup input's look at full width. */
+  .contact-field {
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+    padding: 14px 16px;
+    border: 1px solid var(--color-ink);
+    background: transparent;
+    width: 100%;
+    color: var(--color-ink);
+  }
+  textarea.contact-field {
+    min-height: 130px;
+    resize: vertical;
+  }
   @media (hover: none) and (pointer: coarse) {
-    .email-input {
+    .email-input,
+    .contact-field {
       /* iOS Safari auto-zooms the page (and never zooms back) when focusing
          an input with font-size < 16px — the reported mobile horizontal
          scroll. 16px on touch devices only; desktop keeps the prototype's
