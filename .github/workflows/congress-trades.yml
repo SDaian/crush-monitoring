@@ -174,7 +174,7 @@ jobs:
 
       - name: Commit refreshed data
         run: |
-          FILES="docs/data/congress-trades.json congress/state.json congress/members.json docs/data/returns.json landing/src/data/disclosures.json landing/src/data/stats.json"
+          FILES="docs/data/congress-trades.json congress/state.json congress/members.json docs/data/returns.json landing/src/data/disclosures.json landing/src/data/stats.json landing/src/data/late.json"
           if git diff --quiet -- $FILES; then
             echo "No new trades or price changes."
             exit 0

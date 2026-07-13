@@ -1,0 +1,127 @@
+{
+  "_comment": "Generated from real official disclosures by congress/landing_data.py (daily Action). Do not edit by hand. 'filedDaysLate' counts days past the STOCK Act's 45-day statutory maximum; 0 = on time.",
+  "year": 2026,
+  "totalLateFilings": 260,
+  "worst": [
+    {
+      "member": "P. Jayapal",
+      "chamber": "House",
+      "district": "WA-7",
+      "ticker": "NWL",
+      "side": "SELL",
+      "amountBucket": "$1K – $15K",
+      "daysLate": 821,
+      "tradeDate": "2023-10-31",
+      "filedDate": "2026-03-15",
+      "lateCount": 1
+    },
+    {
+      "member": "E. Case",
+      "chamber": "House",
+      "district": "HI-1",
+      "ticker": "AAPL",
+      "side": "BUY",
+      "amountBucket": "$1K – $15K",
+      "daysLate": 645,
+      "tradeDate": "2024-05-16",
+      "filedDate": "2026-04-06",
+      "lateCount": 7
+    },
+    {
+      "member": "R. Torres",
+      "chamber": "House",
+      "district": "NY-15",
+      "ticker": "MCK",
+      "side": "BUY",
+      "amountBucket": "$1K – $15K",
+      "daysLate": 502,
+      "tradeDate": "2025-01-07",
+      "filedDate": "2026-07-08",
+      "lateCount": 1
+    },
+    {
+      "member": "T. Walberg",
+      "chamber": "House",
+      "district": "MI-5",
+      "ticker": "AMZN",
+      "side": "BUY",
+      "amountBucket": "$1K – $15K",
+      "daysLate": 436,
+      "tradeDate": "2025-02-07",
+      "filedDate": "2026-06-03",
+      "lateCount": 15
+    },
+    {
+      "member": "D. Webster",
+      "chamber": "House",
+      "district": "FL-11",
+      "ticker": "REXR",
+      "side": "SELL",
+      "amountBucket": "$15K – $50K",
+      "daysLate": 415,
+      "tradeDate": "2025-02-26",
+      "filedDate": "2026-06-01",
+      "lateCount": 1
+    },
+    {
+      "member": "J. Letlow",
+      "chamber": "House",
+      "district": "LA-5",
+      "ticker": "ABT",
+      "side": "BUY",
+      "amountBucket": "$1K – $15K",
+      "daysLate": 402,
+      "tradeDate": "2024-10-23",
+      "filedDate": "2026-01-13",
+      "lateCount": 186
+    },
+    {
+      "member": "J. Boozman",
+      "chamber": "Senate",
+      "district": "AR",
+      "ticker": "IVW",
+      "side": "SELL",
+      "amountBucket": "$1K – $15K",
+      "daysLate": 373,
+      "tradeDate": "2025-03-19",
+      "filedDate": "2026-05-11",
+      "lateCount": 9
+    },
+    {
+      "member": "V. Hoyle",
+      "chamber": "House",
+      "district": "OR-4",
+      "ticker": "LPLA",
+      "side": "SELL",
+      "amountBucket": "$1K – $15K",
+      "daysLate": 363,
+      "tradeDate": "2025-04-02",
+      "filedDate": "2026-05-15",
+      "lateCount": 1
+    },
+    {
+      "member": "J. Hickenlooper",
+      "chamber": "Senate",
+      "district": "CO",
+      "ticker": "PLTR",
+      "side": "SELL",
+      "amountBucket": "$1K – $15K",
+      "daysLate": 339,
+      "tradeDate": "2025-04-16",
+      "filedDate": "2026-05-05",
+      "lateCount": 3
+    },
+    {
+      "member": "K. Britt",
+      "chamber": "Senate",
+      "district": "AL",
+      "ticker": "XOM",
+      "side": "BUY",
+      "amountBucket": "$1K – $15K",
+      "daysLate": 242,
+      "tradeDate": "2025-04-14",
+      "filedDate": "2026-01-26",
+      "lateCount": 22
+    }
+  ]
+}

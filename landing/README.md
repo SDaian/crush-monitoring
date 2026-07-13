@@ -5,13 +5,19 @@ visitors into email subscribers for trade alerts. Astro (static, zero client
 JS except the signup form and stats count-up scripts), Tailwind CSS v4 with
 the design tokens in `src/styles/global.css` (`@theme`), self-hosted fonts.
 
-Two pages, sharing `src/components/Header.astro` / `Footer.astro`:
+Four pages, sharing `src/components/Header.astro` / `Footer.astro`:
 
 - `/` — the conversion page (hero, live feed, stats, teaser, CTA).
 - `/how-it-works` — the trust page: the full pipeline, the parsing tech and
   the AI role (honestly bounded: AI builds the parsers, deterministic code
   produces every published number), what the numbers mean, a sample email
   built from the same real `disclosures.json` the feed uses, and an FAQ.
+- `/late` — the late-filers leaderboard: the year's worst filing delays
+  from the generated `late.json` (one row per member — their worst filing —
+  ranked by days past the 45-day maximum, plus their late-filing count).
+- `/privacy` — privacy policy + terms in plain English (no cookies, no
+  trackers, email only, GDPR rights); linked from the footer and the
+  signup form's beta note.
 
 The approved prototype in `prototype/capitol-trades-landing.html` is the
 visual source of truth, with four deliberate deviations agreed in the design
@@ -28,8 +34,8 @@ review (see `docs/adr/` and `CONTEXT.md`):
 
 ## Data
 
-`src/data/disclosures.json` and `src/data/stats.json` are **generated — do
-not edit by hand**:
+`src/data/disclosures.json`, `src/data/stats.json` and `src/data/late.json`
+are **generated — do not edit by hand**:
 
 ```bash
 # from the repo root
@@ -73,6 +79,9 @@ npm run preview    # serve the build
 - [ ] "Capitol Gains" trademark/domain clearance vs. the "Capitol Trades"
       competitor.
 - [ ] Set the real domain in `astro.config.mjs`.
+- [ ] **Finish `/privacy` for launch:** name the chosen email provider in
+      section 03 and add a real contact address (today the page says "reply
+      to any email", which only works once emails exist).
 - [ ] **Replace the placeholder testimonials.** The "What readers say"
       section ships with fictional reviews (marked in `src/pages/index.astro`)
       as a design stand-in. Swap them for real, permissioned user quotes —
