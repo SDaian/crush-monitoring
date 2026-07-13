@@ -80,9 +80,9 @@ pages, follows — is recorded in the repo-root [`ROADMAP.md`](../ROADMAP.md).
 
 - [ ] Choose the signup provider and set `PUBLIC_SIGNUP_ENDPOINT`
       (Buttondown suggested — it also sends the daily digest).
-- [ ] Create a Web3Forms access key (free) and set
-      `PUBLIC_CONTACT_ENDPOINT` + `PUBLIC_CONTACT_KEY` in Vercel so the
-      contact form goes live (until then it shows "Contact opens soon").
+- [x] ~~Create a Web3Forms access key (free) and set
+      `PUBLIC_CONTACT_ENDPOINT` + `PUBLIC_CONTACT_KEY` in Vercel~~ — done;
+      contact form live and owner-tested (2026-07-13).
 - [ ] Analytics decision (the ≥3% conversion goal is unmeasurable without).
 - [ ] "Capitol Ledger" trademark/domain clearance vs. the "Capitol Trades"
       competitor.
