@@ -73,6 +73,9 @@ npm run preview    # serve the build
 3. Update `site` in `astro.config.mjs` to the real domain (sitemap and
    canonical URLs derive from it).
 
+Where the app goes after launch — storage stages, email tooling, member
+pages, follows — is recorded in the repo-root [`ROADMAP.md`](../ROADMAP.md).
+
 ## Pre-launch checklist (open items from the design review)
 
 - [ ] Choose the signup provider and set `PUBLIC_SIGNUP_ENDPOINT`

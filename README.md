@@ -217,3 +217,8 @@ python3 -m unittest discover -s tests/congress -p 'test_*.py'
 # incremental fetch (needs pip install -r congress/requirements.txt)
 python3 -m congress fetch --limit 25 --dry-run
 ```
+
+The tracker's marketing site is the Capitol Ledger landing (`landing/`,
+deployed on Vercel; see `landing/README.md`). The staged evolution plan for
+the whole app — storage, email tooling, member pages, follows — lives in
+[`ROADMAP.md`](./ROADMAP.md).
