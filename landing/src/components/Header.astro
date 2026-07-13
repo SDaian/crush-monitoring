@@ -1,11 +1,13 @@
 ---
 // Shared site header. `active` marks the current page in the nav; the brand
-// links home (a #top scroll when already there).
+// links home (a #top scroll when already there). Whether this IS the home
+// page comes from the URL, not from `active` — pages outside the nav (like
+// /privacy) pass no `active` but must still link back home.
 interface Props {
   active?: "how" | "late";
 }
 const { active } = Astro.props;
-const home = !active;
+const home = Astro.url.pathname === "/";
 
 const link =
   "mono ml-6 text-[.78rem] uppercase tracking-[.06em] no-underline " +
