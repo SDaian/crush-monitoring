@@ -225,6 +225,14 @@ sites. Full details in `congress/README.md`. Conventions:
   bracket-only amounts, and the skipped paper filings visible. Never present
   the tracker as real-time or as investment advice.
 
+## Roadmap (`ROADMAP.md`)
+
+The staged evolution plan (storage stages, email/contact tooling stages,
+member pages, follows, technologies to evaluate) lives in the repo-root
+`ROADMAP.md`. Stages are trigger-gated, not date-gated. **Keep it current**:
+when a stage ships, a trigger fires, or a decision changes, update the
+roadmap in the same PR.
+
 ## Capitol Ledger landing page (`landing/`, deployed on Vercel)
 
 A standalone Astro + Tailwind v4 marketing page (email-signup conversion for
