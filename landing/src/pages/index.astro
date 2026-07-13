@@ -23,6 +23,13 @@ const fmtLag = `${stats.medianLagDays} days`;
 
 const SIGNUP_ENDPOINT = import.meta.env.PUBLIC_SIGNUP_ENDPOINT ?? "";
 
+// Contact form contract (provider-agnostic, like the signup form): POST
+// form-encoded email+message to PUBLIC_CONTACT_ENDPOINT; if
+// PUBLIC_CONTACT_KEY is set it is sent as `access_key` (Web3Forms' shape).
+// Unset endpoint → pre-launch "opens soon" state.
+const CONTACT_ENDPOINT = import.meta.env.PUBLIC_CONTACT_ENDPOINT ?? "";
+const CONTACT_KEY = import.meta.env.PUBLIC_CONTACT_KEY ?? "";
+
 // PLACEHOLDER testimonials — fictional people and quotes, standing in until
 // real user feedback exists. Replace before launch (see the pre-launch
 // checklist in landing/README.md); never present fabricated reviews as real
@@ -322,6 +329,88 @@ const description =
       <a href="#join" class="btn inline-block no-underline">Start tracking free</a>
     </section>
 
+    <section class="border-t border-rule" id="contact">
+      <div class="mx-auto max-w-[1200px] px-[5vw] py-[10vh]">
+        <div class="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1 border-b-2 border-ink pb-2.5">
+          <h2 class="whitespace-nowrap text-[.85rem] font-extrabold uppercase tracking-[.1em]">
+            Contact
+          </h2>
+          <span class="mono text-[.72rem] uppercase tracking-[.1em] text-ink-soft">
+            We read everything
+          </span>
+        </div>
+        <div class="mt-10 grid grid-cols-[1fr_1.2fr] items-start gap-14 max-[760px]:grid-cols-1 max-[760px]:gap-9">
+          <div>
+            <h3 class="mb-3 text-[1.35rem] font-extrabold tracking-[-0.01em]">
+              Spotted something? Say it.
+            </h3>
+            <p class="mb-3.5 max-w-[44ch] text-[.95rem] leading-[1.65] text-pretty text-ink-soft">
+              Corrections beat compliments. If a number looks off, a filing is
+              missing, or you want Capitol Ledger to track something new —
+              write. Press and partnership notes land in the same inbox.
+            </p>
+            <p class="mono text-[.72rem] leading-[1.7] text-ink-soft">
+              Replies usually within a day.
+              <b class="font-semibold text-stamp">This form sends one message</b>
+              — it never subscribes you to anything.
+            </p>
+          </div>
+          <form
+            id="contact-form"
+            class="flex flex-col gap-[18px]"
+            data-endpoint={CONTACT_ENDPOINT}
+            data-key={CONTACT_KEY}
+            novalidate
+          >
+            <div>
+              <label
+                class="mono mb-[7px] block text-[.7rem] uppercase tracking-[.1em] text-ink-soft"
+                for="contact-email">Your email</label
+              >
+              <input
+                class="contact-field"
+                type="email"
+                id="contact-email"
+                name="email"
+                placeholder="you@email.com"
+                autocomplete="email"
+                required
+              />
+            </div>
+            <div>
+              <label
+                class="mono mb-[7px] block text-[.7rem] uppercase tracking-[.1em] text-ink-soft"
+                for="contact-message">Message</label
+              >
+              <textarea
+                class="contact-field"
+                id="contact-message"
+                name="message"
+                placeholder="A correction, a question, a request…"
+                required></textarea>
+            </div>
+            <!-- Honeypot: invisible to people, tempting to bots. -->
+            <input
+              class="sr-only"
+              type="text"
+              name="botcheck"
+              tabindex="-1"
+              autocomplete="off"
+              aria-hidden="true"
+            />
+            <button class="btn self-start" type="submit">Send message</button>
+            <p
+              class="mono text-[.78rem]"
+              id="contact-status"
+              role="status"
+              aria-live="polite"
+            >
+            </p>
+          </form>
+        </div>
+      </div>
+    </section>
+
     <Footer />
 
     <script>
@@ -419,6 +508,80 @@ const description =
         } finally {
           button.disabled = false;
           button.textContent = label;
+        }
+      });
+    </script>
+
+    <script>
+      // Contact form: same contract style as FR-1 — validate, POST
+      // form-encoded to the configured endpoint, inline feedback, no reload.
+      // A filled honeypot gets a silent fake success (don't tip off bots).
+      const cform = document.getElementById("contact-form") as HTMLFormElement;
+      const cemail = document.getElementById("contact-email") as HTMLInputElement;
+      const cmessage = document.getElementById(
+        "contact-message",
+      ) as HTMLTextAreaElement;
+      const cstatus = document.getElementById("contact-status") as HTMLElement;
+      const cbutton = cform.querySelector("button") as HTMLButtonElement;
+      const cendpoint = cform.dataset.endpoint ?? "";
+      const ckey = cform.dataset.key ?? "";
+
+      const csay = (msg: string, isError: boolean) => {
+        cstatus.classList.remove("is-in");
+        void cstatus.offsetWidth;
+        cstatus.textContent = msg;
+        cstatus.classList.toggle("text-stamp", isError);
+        cstatus.classList.toggle("text-buy", !isError && msg !== "");
+        if (msg) cstatus.classList.add("is-in");
+      };
+
+      cform.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const value = cemail.value.trim();
+        const message = cmessage.value.trim();
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
+          csay("Enter a valid email address.", true);
+          cemail.focus();
+          return;
+        }
+        if (!message) {
+          csay("Write a message first.", true);
+          cmessage.focus();
+          return;
+        }
+        const honeypot = cform.elements.namedItem("botcheck") as HTMLInputElement;
+        if (honeypot?.value) {
+          csay("Message sent — we usually reply within a day.", false);
+          cform.reset();
+          return;
+        }
+        if (!cendpoint) {
+          csay("Contact opens soon — check back shortly.", false);
+          return;
+        }
+        cbutton.disabled = true;
+        const label = cbutton.textContent;
+        cbutton.textContent = "Sending…";
+        try {
+          const fields: Record<string, string> = {
+            email: value,
+            message,
+            subject: "Capitol Ledger contact",
+          };
+          if (ckey) fields.access_key = ckey;
+          const res = await fetch(cendpoint, {
+            method: "POST",
+            headers: { "Content-Type": "application/x-www-form-urlencoded" },
+            body: new URLSearchParams(fields),
+          });
+          if (!res.ok) throw new Error(String(res.status));
+          csay("Message sent — we usually reply within a day.", false);
+          cform.reset();
+        } catch {
+          csay("Something went wrong — try again.", true);
+        } finally {
+          cbutton.disabled = false;
+          cbutton.textContent = label;
         }
       });
     </script>

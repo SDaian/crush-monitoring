@@ -61,6 +61,8 @@ npm run preview    # serve the build
 | Variable | Purpose |
 |---|---|
 | `PUBLIC_SIGNUP_ENDPOINT` | Signup provider endpoint the form POSTs `email=` to (form-encoded). **Unset** → submitting shows "Signups open soon" (pre-launch state). |
+| `PUBLIC_CONTACT_ENDPOINT` | Contact-form endpoint (POSTs form-encoded `email`, `message`, `subject`). Web3Forms chosen at launch: `https://api.web3forms.com/submit`. **Unset** → "Contact opens soon". |
+| `PUBLIC_CONTACT_KEY` | Sent as `access_key` with the contact POST when set (Web3Forms' auth shape). Public by design — it only routes submissions. |
 
 ## Deploy (Vercel)
 
@@ -75,6 +77,9 @@ npm run preview    # serve the build
 
 - [ ] Choose the signup provider and set `PUBLIC_SIGNUP_ENDPOINT`
       (Buttondown suggested — it also sends the daily digest).
+- [ ] Create a Web3Forms access key (free) and set
+      `PUBLIC_CONTACT_ENDPOINT` + `PUBLIC_CONTACT_KEY` in Vercel so the
+      contact form goes live (until then it shows "Contact opens soon").
 - [ ] Analytics decision (the ≥3% conversion goal is unmeasurable without).
 - [ ] "Capitol Ledger" trademark/domain clearance vs. the "Capitol Trades"
       competitor.
