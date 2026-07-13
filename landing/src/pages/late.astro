@@ -8,6 +8,7 @@ import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import late from "../data/late.json";
 import stats from "../data/stats.json";
+import Analytics from "@vercel/analytics/astro";
 
 const rows = late.worst;
 const fmtMonth = (iso: string) =>
@@ -39,6 +40,7 @@ const description =
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
+    <Analytics />
   </head>
   <body>
     <Header active="late" />
