@@ -21,7 +21,7 @@ const lateCount = all.filter((d) => d.filedDaysLate > 0).length;
 const lateText = (n: number) =>
   n > 0 ? `${n} day${n === 1 ? "" : "s"} late` : "on time";
 
-const title = "How it works — Capitol Gains";
+const title = "How it works — Capitol Ledger";
 const description =
   "From a member of Congress's trade to your inbox: where the disclosures " +
   "come from, how we parse them, what the numbers mean, and what the daily " +
@@ -40,7 +40,7 @@ const description =
     <meta property="og:type" content="website" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:site_name" content="Capitol Gains" />
+    <meta property="og:site_name" content="Capitol Ledger" />
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
@@ -260,7 +260,7 @@ const description =
         <div class="email relative border border-ink bg-white">
           <span class="email-stamp" aria-hidden="true">Sample</span>
           <div class="mono flex justify-between border-b border-rule px-[18px] py-3.5 text-[.7rem] uppercase tracking-[.1em] text-ink-soft">
-            <span>Capitol Gains Daily</span><span>07:00</span>
+            <span>Capitol Ledger Daily</span><span>07:00</span>
           </div>
           <div class="px-[18px] pt-4 pb-1.5 text-[.98rem] font-extrabold">
             {all.length} recent disclosures · {lateCount} filed late

@@ -363,7 +363,7 @@ DEFAULT_LANDING_DATA = pipeline.REPO_ROOT / "landing" / "src" / "data"
 
 
 def _cmd_landing(args: argparse.Namespace) -> int:
-    """Regenerate the Capitol Gains landing page's data files (feed + stats)
+    """Regenerate the Capitol Ledger landing page's data files (feed + stats)
     from the committed trades JSON. Pure local transform — no network."""
     from . import landing_data
 

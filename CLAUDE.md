@@ -225,7 +225,7 @@ sites. Full details in `congress/README.md`. Conventions:
   bracket-only amounts, and the skipped paper filings visible. Never present
   the tracker as real-time or as investment advice.
 
-## Capitol Gains landing page (`landing/`, deployed on Vercel)
+## Capitol Ledger landing page (`landing/`, deployed on Vercel)
 
 A standalone Astro + Tailwind v4 marketing page (email-signup conversion for
 trade alerts). Its own bounded context: glossary in `landing/CONTEXT.md`,
