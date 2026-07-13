@@ -1,4 +1,4 @@
-# Capitol Gains — landing page
+# Capitol Ledger — landing page
 
 Standalone marketing site for the politician-trades tracker: it converts
 visitors into email subscribers for trade alerts. Astro (static, zero client
@@ -76,7 +76,7 @@ npm run preview    # serve the build
 - [ ] Choose the signup provider and set `PUBLIC_SIGNUP_ENDPOINT`
       (Buttondown suggested — it also sends the daily digest).
 - [ ] Analytics decision (the ≥3% conversion goal is unmeasurable without).
-- [ ] "Capitol Gains" trademark/domain clearance vs. the "Capitol Trades"
+- [ ] "Capitol Ledger" trademark/domain clearance vs. the "Capitol Trades"
       competitor.
 - [ ] Set the real domain in `astro.config.mjs`.
 - [ ] **Finish `/privacy` for launch:** name the chosen email provider in

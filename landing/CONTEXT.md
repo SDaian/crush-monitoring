@@ -1,4 +1,4 @@
-# Capitol Gains Landing
+# Capitol Ledger Landing
 
 The marketing landing page for the politician-trades tracker. Its single job
 is converting visitors into email subscribers for trade alerts; every number
