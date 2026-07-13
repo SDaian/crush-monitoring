@@ -115,9 +115,10 @@
     position: absolute;
     left: 0;
     right: 0;
-    /* Slightly below the prototype's placement — a beat of padding between
-       the glyphs and the stamp (user request), scaling with the font size. */
-    bottom: -0.04em;
+    /* Below the prototype's placement — clears descenders (the g in
+       "filing", the y in "days") so the stamp never crosses a glyph, with a
+       beat of padding that scales with the font size (user requests). */
+    bottom: -0.13em;
     height: 4px;
     background: var(--color-stamp);
     transform-origin: left;
