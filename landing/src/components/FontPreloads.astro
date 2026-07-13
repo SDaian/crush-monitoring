@@ -1,0 +1,20 @@
+---
+// Preload the above-the-fold font subsets so they download from the first
+// byte of HTML instead of after the CSS is parsed — on most connections the
+// fonts are ready before first paint and there is no visible swap at all.
+// Only the weights the fold actually uses (headline 900, body 400, mono
+// 400/600); everything else swaps late behind the fontaine metric fallbacks
+// (see astro.config.mjs), which make that swap reflow-free.
+import franklin400 from "@fontsource/libre-franklin/files/libre-franklin-latin-400-normal.woff2?url";
+import franklin900 from "@fontsource/libre-franklin/files/libre-franklin-latin-900-normal.woff2?url";
+import mono400 from "@fontsource/ibm-plex-mono/files/ibm-plex-mono-latin-400-normal.woff2?url";
+import mono600 from "@fontsource/ibm-plex-mono/files/ibm-plex-mono-latin-600-normal.woff2?url";
+
+const fonts = [franklin900, franklin400, mono400, mono600];
+---
+
+{
+  fonts.map((href) => (
+    <link rel="preload" href={href} as="font" type="font/woff2" crossorigin />
+  ))
+}

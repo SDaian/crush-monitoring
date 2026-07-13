@@ -359,6 +359,25 @@ def _cmd_holdings(args: argparse.Namespace) -> int:
     return 0
 
 
+DEFAULT_LANDING_DATA = pipeline.REPO_ROOT / "landing" / "src" / "data"
+
+
+def _cmd_landing(args: argparse.Namespace) -> int:
+    """Regenerate the Capitol Ledger landing page's data files (feed + stats)
+    from the committed trades JSON. Pure local transform — no network."""
+    from . import landing_data
+
+    trades = json.loads(Path(args.trades).read_text(encoding="utf-8"))["trades"]
+    today = datetime.now(timezone.utc).date()
+    rows, stats = landing_data.write_files(trades, Path(args.output), today)
+    print(
+        f"landing data: {rows} feed rows; {stats['tradesThisYear']} trades "
+        f"in {stats['year']}, est ${stats['estVolumeThisYearUsd']:,} vol, "
+        f"{stats['pctFiledLate']}% late → {args.output}"
+    )
+    return 0
+
+
 FEATURED_TICKERS = ["MU", "INTC", "NVDA", "TSM", "AMD", "AVGO", "TSLA", "MSFT"]
 
 
@@ -623,6 +642,14 @@ def build_parser() -> argparse.ArgumentParser:
     )
     ai_p.add_argument("--output", default=str(DEFAULT_AI))
     ai_p.set_defaults(func=_cmd_ai)
+
+    landing_p = sub.add_parser(
+        "landing",
+        help="Regenerate the landing page's feed + stats data files.",
+    )
+    landing_p.add_argument("--trades", default=str(pipeline.DEFAULT_OUTPUT))
+    landing_p.add_argument("--output", default=str(DEFAULT_LANDING_DATA))
+    landing_p.set_defaults(func=_cmd_landing)
 
     return p
 

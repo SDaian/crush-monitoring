@@ -1,0 +1,51 @@
+---
+// Shared site header. `active` marks the current page in the nav; the brand
+// links home (a #top scroll when already there). Whether this IS the home
+// page comes from the URL, not from `active` — pages outside the nav (like
+// /privacy) pass no `active` but must still link back home.
+interface Props {
+  active?: "how" | "late";
+}
+const { active } = Astro.props;
+const home = Astro.url.pathname === "/";
+
+const link =
+  "mono ml-6 text-[.78rem] uppercase tracking-[.06em] no-underline " +
+  "hover:text-ink focus-visible:text-ink";
+---
+
+<header
+  class="flex items-center justify-between border-b border-rule px-[5vw] py-5"
+>
+  <a
+    href={home ? "#top" : "/"}
+    class="text-[1.05rem] font-black uppercase tracking-[-0.02em] text-ink no-underline"
+    aria-label="Capitol Ledger — home"
+  >
+    Capitol <span class="text-stamp">Ledger</span>
+  </a>
+  <nav>
+    <a href="/#feed" class={`${link} text-ink-soft`}>Live feed</a>
+    <a
+      href="/late"
+      class={`${link} ${
+        active === "late"
+          ? "border-b-2 border-stamp pb-[3px] text-ink"
+          : "text-ink-soft"
+      }`}
+      aria-current={active === "late" ? "page" : undefined}
+      >Late filers</a
+    >
+    <a
+      href="/how-it-works"
+      class={`${link} ${
+        active === "how"
+          ? "border-b-2 border-stamp pb-[3px] text-ink"
+          : "text-ink-soft"
+      }`}
+      aria-current={active === "how" ? "page" : undefined}
+      >How it works</a
+    >
+    <a href="/#join" class={`${link} text-ink-soft`}>Get alerts</a>
+  </nav>
+</header>

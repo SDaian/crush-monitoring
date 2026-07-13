@@ -1,0 +1,589 @@
+---
+// Capitol Ledger landing page. Visual source of truth: landing/prototype/
+// capitol-trades-landing.html, with the four deviations agreed in the
+// grilling session (see landing/docs/adr/ and landing/CONTEXT.md):
+// "Recent disclosures" header, truthful Structure/Signal copy, the
+// filed-late column visible on mobile, and every number real (generated
+// daily by `python3 -m congress landing`).
+import "../styles/global.css";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import FontPreloads from "../components/FontPreloads.astro";
+import feed from "../data/disclosures.json";
+import stats from "../data/stats.json";
+import Analytics from "@vercel/analytics/astro";
+
+const disclosures = feed.disclosures;
+
+const fmtTrades = stats.tradesThisYear.toLocaleString("en-US");
+const vol = stats.estVolumeThisYearUsd;
+const fmtVol =
+  vol >= 1e9 ? `$${(vol / 1e9).toFixed(1)}B` : `$${Math.round(vol / 1e6)}M`;
+const fmtLag = `${stats.medianLagDays} days`;
+
+const SIGNUP_ENDPOINT = import.meta.env.PUBLIC_SIGNUP_ENDPOINT ?? "";
+
+// Contact form contract (provider-agnostic, like the signup form): POST
+// form-encoded email+message to PUBLIC_CONTACT_ENDPOINT; if
+// PUBLIC_CONTACT_KEY is set it is sent as `access_key` (Web3Forms' shape).
+// Unset endpoint → pre-launch "opens soon" state.
+const CONTACT_ENDPOINT = import.meta.env.PUBLIC_CONTACT_ENDPOINT ?? "";
+const CONTACT_KEY = import.meta.env.PUBLIC_CONTACT_KEY ?? "";
+
+// PLACEHOLDER testimonials — fictional people and quotes, standing in until
+// real user feedback exists. Replace before launch (see the pre-launch
+// checklist in landing/README.md); never present fabricated reviews as real
+// on a live page.
+const REVIEWS = [
+  {
+    rating: 5,
+    title: "The one newsletter I actually open",
+    quote:
+      "I subscribe to way too many finance emails and skim maybe half. " +
+      "This one I actually read. It's short, and someone filing 200 days " +
+      "late is weirdly gripping breakfast reading.",
+    name: "Sarah K.",
+    country: "United States",
+    flag: "🇺🇸",
+  },
+  {
+    rating: 5,
+    title: "Stopped digging through PDFs",
+    quote:
+      "I used to check the Senate disclosure site myself, which was " +
+      "miserable. Now I glance at one email while the coffee brews and " +
+      "I'm done.",
+    name: "Miguel A.",
+    country: "Spain",
+    flag: "🇪🇸",
+  },
+  {
+    rating: 4,
+    title: "Does one thing well",
+    quote:
+      "No hype and no “buy signals”, just the filings. Honestly that's " +
+      "why I trust it. Let me follow specific tickers and it's a five.",
+    name: "Lena B.",
+    country: "Germany",
+    flag: "🇩🇪",
+  },
+];
+const stars = (n: number) => "★".repeat(n) + "☆".repeat(5 - n);
+
+const title = "Capitol Ledger — Politician Stock Trades, Tracked";
+const description =
+  "Every stock trade a politician disclosed, from Congress to the White " +
+  "House — who traded, what, how much, and how late they filed it. " +
+  "Straight from official filings, in one daily email.";
+---
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <FontPreloads />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:site_name" content="Capitol Ledger" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <Analytics />
+  </head>
+  <body>
+    <Header />
+
+    <section class="mx-auto max-w-[1200px] px-[5vw] pt-[9vh] pb-[6vh]">
+      <p class="mono mb-[22px] text-[.75rem] uppercase tracking-[.12em] text-ink-soft">
+        Politician trading disclosures ·
+        <b class="font-semibold text-stamp">Updated daily from official filings</b>
+      </p>
+      <h1 class="headline">
+        They trade.<br />They file.<br /><span class="underline-stamp"
+          >You see it first.</span
+        >
+      </h1>
+      <p class="mt-[26px] max-w-[52ch] text-[1.05rem] leading-[1.65] text-pretty text-ink-soft">
+        Every stock trade a politician reports — from Congress to the White
+        House — pulled straight from official disclosure filings and delivered
+        to you the moment it lands: who traded, what, how much, and how late
+        they filed it.
+      </p>
+      <form
+        id="join"
+        class="mt-9 flex flex-wrap gap-3"
+        data-endpoint={SIGNUP_ENDPOINT}
+        novalidate
+      >
+        <label class="sr-only" for="email">Email address</label>
+        <input
+          class="email-input"
+          type="email"
+          id="email"
+          name="email"
+          placeholder="you@email.com"
+          autocomplete="email"
+          required
+        />
+        <button class="btn" type="submit">Get trade alerts</button>
+        <p
+          class="mono w-full text-[.78rem]"
+          id="form-status"
+          role="status"
+          aria-live="polite"
+        >
+        </p>
+      </form>
+      <p class="mono mt-3 text-[.72rem] text-ink-soft">
+        <span class="max-[760px]:block"
+          >Free while in beta. One email per day — always.</span
+        >
+        <b class="font-semibold text-stamp">No spam, ever.</b>
+        <a
+          href="/privacy"
+          class="text-ink-soft underline underline-offset-2 hover:text-ink focus-visible:text-ink"
+          >Privacy matters</a
+        >
+      </p>
+    </section>
+
+    <section class="mx-auto max-w-[1200px] px-[5vw] pb-[10vh]" id="feed">
+      <div
+        class="flex items-baseline justify-between border-b-2 border-ink pb-2.5"
+      >
+        <h2 class="text-[.85rem] font-extrabold uppercase tracking-[.1em]">
+          Recent disclosures
+        </h2>
+        <span
+          class="mono flex items-center gap-[7px] text-[.72rem] uppercase tracking-[.1em] text-stamp"
+        >
+          <span class="live-dot" aria-hidden="true"></span>Filed this week
+        </span>
+      </div>
+
+      <div role="table" aria-label="Recent congressional stock disclosures">
+        <div role="row" class="sr-only">
+          <span role="columnheader">Member</span>
+          <span role="columnheader">Ticker</span>
+          <span role="columnheader">Side</span>
+          <span role="columnheader">Amount</span>
+          <span role="columnheader">Filing timeliness</span>
+        </div>
+        {
+          disclosures.map((d) => (
+            <div role="row" class="feed-row">
+              <div role="cell" class="who">
+                {d.member}
+                <small>
+                  {d.chamber} · {d.district}
+                </small>
+              </div>
+              <div role="cell">{d.ticker}</div>
+              <div
+                role="cell"
+                class={`font-semibold ${d.side === "BUY" ? "text-buy" : "text-sell"}`}
+              >
+                {d.side}
+              </div>
+              <div role="cell" class="amt">
+                {d.amountBucket}
+              </div>
+              <div
+                role="cell"
+                class={
+                  d.filedDaysLate > 0
+                    ? "font-medium text-stamp"
+                    : "text-ink-soft"
+                }
+                title="Late = filed beyond the STOCK Act's 45-day statutory maximum"
+              >
+                {d.filedDaysLate > 0
+                  ? `Filed ${d.filedDaysLate} day${d.filedDaysLate === 1 ? "" : "s"} late`
+                  : "Filed on time"}
+              </div>
+            </div>
+          ))
+        }
+      </div>
+      <a
+        href="/late"
+        class="mono mt-6 inline-block text-[.78rem] uppercase tracking-[.06em] text-stamp no-underline hover:text-ink focus-visible:text-ink"
+        >See the year's worst delays →</a
+      >
+    </section>
+
+    <section
+      class="grid grid-cols-3 border-t-2 border-t-ink border-b border-b-rule max-[760px]:grid-cols-1"
+      aria-label="Tracker statistics"
+    >
+      <div class="border-r border-rule px-[5vw] py-9 max-[760px]:border-r-0 max-[760px]:border-b max-[760px]:border-b-rule">
+        <div class="stat-n">{fmtTrades}</div>
+        <div class="mono mt-2 text-[.72rem] uppercase tracking-[.1em] text-ink-soft">
+          Trades tracked this year
+        </div>
+      </div>
+      <div class="border-r border-rule px-[5vw] py-9 max-[760px]:border-r-0 max-[760px]:border-b max-[760px]:border-b-rule">
+        <div class="stat-n">{fmtVol}</div>
+        <div class="mono mt-2 text-[.72rem] uppercase tracking-[.1em] text-ink-soft">
+          Estimated volume disclosed
+        </div>
+      </div>
+      <div class="px-[5vw] py-9">
+        <div class="stat-n">{fmtLag}</div>
+        <div class="mono mt-2 text-[.72rem] uppercase tracking-[.1em] text-ink-soft">
+          Median delay, trade to disclosure
+        </div>
+      </div>
+    </section>
+
+    <section class="mx-auto max-w-[1200px] px-[5vw] py-[10vh]" id="how">
+      <h2 class="max-w-[20ch] text-[clamp(1.6rem,3.5vw,2.4rem)] font-black leading-[1.15] tracking-[-0.02em] text-balance">
+        From filing cabinet to your inbox in minutes.
+      </h2>
+      <div class="mt-12 grid grid-cols-3 gap-10 max-[760px]:grid-cols-1">
+        <div>
+          <span class="mono mb-3 block text-[.7rem] uppercase tracking-[.1em] text-stamp"
+            >01 · Source</span
+          >
+          <h3 class="mb-2.5 text-base font-extrabold">Official filings only</h3>
+          <p class="text-[.92rem] leading-[1.6] text-pretty text-ink-soft">
+            We parse Periodic Transaction Reports directly from House and
+            Senate disclosure portals. No rumors, no scraped tweets — the paper
+            trail itself.
+          </p>
+        </div>
+        <div>
+          <span class="mono mb-3 block text-[.7rem] uppercase tracking-[.1em] text-stamp"
+            >02 · Structure</span
+          >
+          <h3 class="mb-2.5 text-base font-extrabold">Cleaned by AI-built parsers</h3>
+          <p class="text-[.92rem] leading-[1.6] text-pretty text-ink-soft">
+            Our AI-maintained pipeline normalizes tickers, buckets amounts,
+            and computes the filing lag — so every trade is comparable across
+            members and time.
+          </p>
+        </div>
+        <div>
+          <span class="mono mb-3 block text-[.7rem] uppercase tracking-[.1em] text-stamp"
+            >03 · Signal</span
+          >
+          <h3 class="mb-2.5 text-base font-extrabold">Alerts that matter</h3>
+          <p class="text-[.92rem] leading-[1.6] text-pretty text-ink-soft">
+            One daily digest of every new disclosure — who, what, how much,
+            and how late they filed. Member and ticker follows are next.
+          </p>
+        </div>
+      </div>
+      <a
+        href="/how-it-works"
+        class="mono mt-12 inline-block text-[.78rem] uppercase tracking-[.06em] text-stamp no-underline hover:text-ink focus-visible:text-ink"
+        >Read the full pipeline →</a
+      >
+    </section>
+
+    <section
+      class="mx-auto max-w-[1200px] border-t border-rule px-[5vw] py-[10vh]"
+      id="reviews"
+    >
+      <div class="border-b-2 border-ink pb-2.5">
+        <h2 class="text-[.85rem] font-extrabold uppercase tracking-[.1em]">
+          What readers say
+        </h2>
+      </div>
+      <div class="mt-10 grid grid-cols-3 gap-6 max-[760px]:grid-cols-1">
+        {
+          REVIEWS.map((r) => (
+            <article class="flex flex-col border border-rule p-7">
+              <div
+                class="mono text-[1.1rem] tracking-[.25em] text-stamp"
+                role="img"
+                aria-label={`Rated ${r.rating} out of 5 stars`}
+              >
+                {stars(r.rating)}
+              </div>
+              <h3 class="mt-4 mb-2.5 text-base font-extrabold">{r.title}</h3>
+              <p class="text-[.92rem] leading-[1.6] text-pretty text-ink-soft">
+                {r.quote}
+              </p>
+              <footer class="mono mt-auto pt-5 text-[.72rem] uppercase tracking-[.1em] text-ink-soft">
+                {r.name} · {r.flag} {r.country}
+              </footer>
+            </article>
+          ))
+        }
+      </div>
+    </section>
+
+    <section class="border-t-2 border-ink px-[5vw] py-[10vh] text-center">
+      <h2 class="text-[clamp(1.8rem,4.5vw,3.2rem)] font-black leading-[1.15] tracking-[-0.03em] text-balance">
+        Public records, actually public.
+      </h2>
+      <p class="mx-auto mt-4 mb-8 max-w-[44ch] text-pretty text-ink-soft">
+        The disclosures already exist. We just make them impossible to miss.
+      </p>
+      <a href="#join" class="btn inline-block no-underline">Start tracking free</a>
+    </section>
+
+    <section class="border-t border-rule" id="contact">
+      <div class="mx-auto max-w-[1200px] px-[5vw] py-[10vh]">
+        <div class="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1 border-b-2 border-ink pb-2.5">
+          <h2 class="whitespace-nowrap text-[.85rem] font-extrabold uppercase tracking-[.1em]">
+            Contact
+          </h2>
+          <span class="mono text-[.72rem] uppercase tracking-[.1em] text-ink-soft">
+            We read everything
+          </span>
+        </div>
+        <div class="mt-10 grid grid-cols-[1fr_1.2fr] items-start gap-14 max-[760px]:grid-cols-1 max-[760px]:gap-9">
+          <div>
+            <h3 class="mb-3 text-[1.35rem] font-extrabold tracking-[-0.01em]">
+              Spotted something? Say it.
+            </h3>
+            <p class="mb-3.5 max-w-[44ch] text-[.95rem] leading-[1.65] text-pretty text-ink-soft">
+              Corrections beat compliments. If a number looks off, a filing is
+              missing, or you want Capitol Ledger to track something new —
+              write. Press and partnership notes land in the same inbox.
+            </p>
+            <p class="mono text-[.72rem] leading-[1.7] text-ink-soft">
+              Replies usually within a day.
+              <b class="font-semibold text-stamp">This form sends one message</b>
+              — it never subscribes you to anything.
+            </p>
+          </div>
+          <form
+            id="contact-form"
+            class="flex flex-col gap-[18px]"
+            data-endpoint={CONTACT_ENDPOINT}
+            data-key={CONTACT_KEY}
+            novalidate
+          >
+            <div>
+              <label
+                class="mono mb-[7px] block text-[.7rem] uppercase tracking-[.1em] text-ink-soft"
+                for="contact-email">Your email</label
+              >
+              <input
+                class="contact-field"
+                type="email"
+                id="contact-email"
+                name="email"
+                placeholder="you@email.com"
+                autocomplete="email"
+                required
+              />
+            </div>
+            <div>
+              <label
+                class="mono mb-[7px] block text-[.7rem] uppercase tracking-[.1em] text-ink-soft"
+                for="contact-message">Message</label
+              >
+              <textarea
+                class="contact-field"
+                id="contact-message"
+                name="message"
+                placeholder="A correction, a question, a request…"
+                required></textarea>
+            </div>
+            <!-- Honeypot: invisible to people, tempting to bots. -->
+            <input
+              class="sr-only"
+              type="text"
+              name="botcheck"
+              tabindex="-1"
+              autocomplete="off"
+              aria-hidden="true"
+            />
+            <button class="btn self-start" type="submit">Send message</button>
+            <p
+              class="mono text-[.78rem]"
+              id="contact-status"
+              role="status"
+              aria-live="polite"
+            >
+            </p>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <Footer />
+
+    <script>
+      // Count the stats up when they scroll into view — once, ~900ms,
+      // ease-out. The real values are server-rendered (SEO / no-JS safe);
+      // reduced-motion users see them statically.
+      const statEls = Array.from(
+        document.querySelectorAll<HTMLElement>(".stat-n"),
+      );
+      const reduced = window.matchMedia(
+        "(prefers-reduced-motion: reduce)",
+      ).matches;
+      if (!reduced && "IntersectionObserver" in window && statEls.length) {
+        const ease = (x: number) => 1 - Math.pow(1 - x, 3);
+        const countUp = (el: HTMLElement) => {
+          const final = el.textContent ?? "";
+          const m = final.match(/([\d,]+)/);
+          if (!m || m.index === undefined) return;
+          const target = parseInt(m[1].replace(/,/g, ""), 10);
+          const withCommas = m[1].includes(",");
+          const prefix = final.slice(0, m.index);
+          const suffix = final.slice(m.index + m[1].length);
+          const t0 = performance.now();
+          const dur = 900;
+          const tick = (now: number) => {
+            const p = Math.min(1, (now - t0) / dur);
+            const v = Math.round(target * ease(p));
+            el.textContent =
+              prefix + (withCommas ? v.toLocaleString("en-US") : String(v)) + suffix;
+            if (p < 1) requestAnimationFrame(tick);
+          };
+          requestAnimationFrame(tick);
+        };
+        const io = new IntersectionObserver(
+          (entries) => {
+            for (const e of entries) {
+              if (e.isIntersecting) {
+                io.unobserve(e.target);
+                countUp(e.target as HTMLElement);
+              }
+            }
+          },
+          { threshold: 0.4 },
+        );
+        statEls.forEach((el) => io.observe(el));
+      }
+    </script>
+
+    <script>
+      // FR-1: client-side validation, POST to the configured endpoint,
+      // inline success/error, no reload. With no endpoint configured
+      // (pre-launch), submitting reports that signups open soon.
+      const form = document.getElementById("join") as HTMLFormElement;
+      const email = document.getElementById("email") as HTMLInputElement;
+      const status = document.getElementById("form-status") as HTMLElement;
+      const button = form.querySelector("button") as HTMLButtonElement;
+      const endpoint = form.dataset.endpoint ?? "";
+
+      const say = (msg: string, isError: boolean) => {
+        // Retrigger the rise-in entrance for each new message (plans/004).
+        status.classList.remove("is-in");
+        void status.offsetWidth; // restart the animation
+        status.textContent = msg;
+        status.classList.toggle("text-stamp", isError);
+        status.classList.toggle("text-buy", !isError && msg !== "");
+        if (msg) status.classList.add("is-in");
+      };
+
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const value = email.value.trim();
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
+          say("Enter a valid email address.", true);
+          email.focus();
+          return;
+        }
+        if (!endpoint) {
+          say("Signups open soon — check back shortly.", false);
+          return;
+        }
+        button.disabled = true;
+        const label = button.textContent;
+        button.textContent = "Sending…";
+        try {
+          const res = await fetch(endpoint, {
+            method: "POST",
+            headers: { "Content-Type": "application/x-www-form-urlencoded" },
+            body: new URLSearchParams({ email: value }),
+          });
+          if (!res.ok) throw new Error(String(res.status));
+          say("You're on the list — one email per day, always.", false);
+          form.reset();
+        } catch {
+          say("Something went wrong — try again.", true);
+        } finally {
+          button.disabled = false;
+          button.textContent = label;
+        }
+      });
+    </script>
+
+    <script>
+      // Contact form: same contract style as FR-1 — validate, POST
+      // form-encoded to the configured endpoint, inline feedback, no reload.
+      // A filled honeypot gets a silent fake success (don't tip off bots).
+      const cform = document.getElementById("contact-form") as HTMLFormElement;
+      const cemail = document.getElementById("contact-email") as HTMLInputElement;
+      const cmessage = document.getElementById(
+        "contact-message",
+      ) as HTMLTextAreaElement;
+      const cstatus = document.getElementById("contact-status") as HTMLElement;
+      const cbutton = cform.querySelector("button") as HTMLButtonElement;
+      const cendpoint = cform.dataset.endpoint ?? "";
+      const ckey = cform.dataset.key ?? "";
+
+      const csay = (msg: string, isError: boolean) => {
+        cstatus.classList.remove("is-in");
+        void cstatus.offsetWidth;
+        cstatus.textContent = msg;
+        cstatus.classList.toggle("text-stamp", isError);
+        cstatus.classList.toggle("text-buy", !isError && msg !== "");
+        if (msg) cstatus.classList.add("is-in");
+      };
+
+      cform.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const value = cemail.value.trim();
+        const message = cmessage.value.trim();
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
+          csay("Enter a valid email address.", true);
+          cemail.focus();
+          return;
+        }
+        if (!message) {
+          csay("Write a message first.", true);
+          cmessage.focus();
+          return;
+        }
+        const honeypot = cform.elements.namedItem("botcheck") as HTMLInputElement;
+        if (honeypot?.value) {
+          csay("Message sent — we usually reply within a day.", false);
+          cform.reset();
+          return;
+        }
+        if (!cendpoint) {
+          csay("Contact opens soon — check back shortly.", false);
+          return;
+        }
+        cbutton.disabled = true;
+        const label = cbutton.textContent;
+        cbutton.textContent = "Sending…";
+        try {
+          const fields: Record<string, string> = {
+            email: value,
+            message,
+            subject: "Capitol Ledger contact",
+          };
+          if (ckey) fields.access_key = ckey;
+          const res = await fetch(cendpoint, {
+            method: "POST",
+            headers: { "Content-Type": "application/x-www-form-urlencoded" },
+            body: new URLSearchParams(fields),
+          });
+          if (!res.ok) throw new Error(String(res.status));
+          csay("Message sent — we usually reply within a day.", false);
+          cform.reset();
+        } catch {
+          csay("Something went wrong — try again.", true);
+        } finally {
+          cbutton.disabled = false;
+          cbutton.textContent = label;
+        }
+      });
+    </script>
+  </body>
+</html>

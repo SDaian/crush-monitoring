@@ -1,0 +1,23 @@
+{
+  "name": "capitol-gains-landing",
+  "type": "module",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview"
+  },
+  "dependencies": {
+    "@astrojs/sitemap": "^3.7.3",
+    "@fontsource/ibm-plex-mono": "^5.2.5",
+    "@fontsource/libre-franklin": "^5.2.5",
+    "@tailwindcss/vite": "^4.1.0",
+    "@vercel/analytics": "^2.0.1",
+    "astro": "^5.7.0",
+    "tailwindcss": "^4.1.0"
+  },
+  "devDependencies": {
+    "fontaine": "^0.8.0"
+  }
+}

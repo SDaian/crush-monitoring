@@ -224,3 +224,51 @@ sites. Full details in `congress/README.md`. Conventions:
 - **Honest labelling:** the page must keep the 30–45-day legal lag, the
   bracket-only amounts, and the skipped paper filings visible. Never present
   the tracker as real-time or as investment advice.
+
+## Roadmap (`ROADMAP.md`)
+
+The staged evolution plan (storage stages, email/contact tooling stages,
+member pages, follows, technologies to evaluate) lives in the repo-root
+`ROADMAP.md`. Stages are trigger-gated, not date-gated. **Keep it current**:
+when a stage ships, a trigger fires, or a decision changes, update the
+roadmap in the same PR.
+
+**Roadmap collision check (IMPORTANT):** before merging any non-trivial
+change, check it against `ROADMAP.md` — it is easy to forget a stage exists.
+Ask three questions:
+
+1. **Does this ship (part of) a planned stage?** Then follow the stage's
+   agreed design (e.g. don't add a one-off datastore when storage stage 1/2
+   already prescribes SQLite/Supabase) and mark the stage's status.
+2. **Does this fire a trigger?** (e.g. adding member pages triggers storage
+   stage 1; adding accounts triggers stage 2 and contact stage 3.) Implement
+   the staged move — or consciously defer it and note that in the roadmap.
+3. **Does this collide with a stage or standing rule?** (e.g. a vendor choice
+   that conflicts with the endpoint contract, a data change that breaks the
+   git audit trail, collecting new visitor data without updating /privacy.)
+   Resolve the collision or update the roadmap decision — never ship the
+   contradiction silently.
+
+If none apply, just proceed — no note needed. If any apply, the roadmap edit
+belongs in the same PR as the change.
+
+## Capitol Ledger landing page (`landing/`, deployed on Vercel)
+
+A standalone Astro + Tailwind v4 marketing page (email-signup conversion for
+trade alerts). Its own bounded context: glossary in `landing/CONTEXT.md`,
+decisions in `landing/docs/adr/` (see also the root `CONTEXT-MAP.md`).
+Conventions:
+
+- The prototype in `landing/prototype/` is the **visual source of truth**;
+  the four agreed deviations are listed in `landing/README.md` — do not
+  "fix" them back to the prototype.
+- `landing/src/data/*.json` are **generated** by `python3 -m congress landing`
+  (daily via the Action, committed with the trades refresh) — never
+  hand-edit; every number on the page must be a true statement about real
+  disclosures. "Late" = past the 45-day statutory maximum (ADR 0002).
+- Design tokens live in `src/styles/global.css` `@theme`; no hex values
+  outside the token set; zero border-radius; IBM Plex Mono for all
+  data/labels/nav/form elements.
+- Static output only (no server runtime); the only client JS is the signup
+  form script (FR-1 contract: POST `email=` to `PUBLIC_SIGNUP_ENDPOINT`;
+  unset endpoint → "Signups open soon").

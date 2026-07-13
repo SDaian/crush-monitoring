@@ -1,0 +1,506 @@
+---
+// "How it works" — the trust page: the full pipeline from a member's trade
+// to the daily email, what the numbers mean, how the parsing actually works
+// (including where AI fits), and the fair questions. Design approved from
+// the mock in the owner's review; same tokens and editorial voice as the
+// landing page.
+import "../styles/global.css";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import FontPreloads from "../components/FontPreloads.astro";
+import feed from "../data/disclosures.json";
+import Analytics from "@vercel/analytics/astro";
+
+// The sample email is built from the same real disclosures the feed shows —
+// even the sample is a true statement (labelled SAMPLE because this exact
+// email was never sent).
+const all = feed.disclosures;
+const rows = all.slice(0, 4);
+const more = all.length - rows.length;
+const lateCount = all.filter((d) => d.filedDaysLate > 0).length;
+const lateText = (n: number) =>
+  n > 0 ? `${n} day${n === 1 ? "" : "s"} late` : "on time";
+
+const title = "How it works — Capitol Ledger";
+const description =
+  "From a member of Congress's trade to your inbox: where the disclosures " +
+  "come from, how we parse them, what the numbers mean, and what the daily " +
+  "email looks like.";
+---
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <FontPreloads />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:site_name" content="Capitol Ledger" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <Analytics />
+  </head>
+  <body>
+    <Header active="how" />
+
+    <section class="mx-auto max-w-[1200px] px-[5vw] pt-[9vh] pb-[7vh]">
+      <p class="mono mb-[22px] text-[.75rem] uppercase tracking-[.12em] text-ink-soft">
+        The pipeline · <b class="font-semibold text-stamp">Official sources only</b>
+      </p>
+      <h1 class="headline max-w-[18ch] text-[clamp(2.4rem,6.5vw,4.6rem)]">
+        Four steps from <span class="underline-stamp">their filing</span> to
+        your inbox.
+      </h1>
+      <p class="mt-[26px] max-w-[56ch] text-[1.05rem] leading-[1.65] text-pretty text-ink-soft">
+        Members of Congress must disclose their stock trades by law. This page
+        is the whole machine, end to end: where the paper comes from, what we
+        compute from it, and exactly what lands in your email.
+      </p>
+    </section>
+
+    <section class="mx-auto max-w-[1200px] px-[5vw] pt-[6vh]">
+      <div class="flex items-baseline justify-between border-b-2 border-ink pb-2.5">
+        <h2 class="text-[.85rem] font-extrabold uppercase tracking-[.1em]">
+          The pipeline
+        </h2>
+        <span class="mono text-[.72rem] uppercase tracking-[.1em] text-ink-soft">
+          Runs every morning
+        </span>
+      </div>
+
+      <div class="step">
+        <div class="step-n">01</div>
+        <div class="step-when">Day zero</div>
+        <div>
+          <h3>A member of Congress trades</h3>
+          <p>
+            A senator or representative (or their spouse) buys or sells a
+            stock. Under the <b>STOCK Act of 2012</b>, they must report it:
+            within 30 days of becoming aware, never more than
+            <b>45 days after the trade</b>.
+          </p>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-n">02</div>
+        <div class="step-when">Within 45 days · by law</div>
+        <div>
+          <h3>They file a disclosure</h3>
+          <p>
+            The trade appears in a <b>Periodic Transaction Report</b> on the
+            House Clerk or Senate eFD portal: buried in a PDF, amounts given
+            only in ranges, and sometimes filed months past the deadline.
+            Public in name, painful in practice.
+          </p>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-n">03</div>
+        <div class="step-when">Every morning</div>
+        <div>
+          <h3>We parse, clean, and compute</h3>
+          <p>
+            Our pipeline pulls the new filings daily, straight from the
+            official portals — nothing scraped from social media, no rumors.
+            Tickers are normalized, amounts bucketed, and the
+            <b>filing lag</b> computed for every trade: how many days you were
+            kept waiting.
+          </p>
+        </div>
+      </div>
+
+      <div class="step border-b-2! border-b-ink!">
+        <div class="step-n">04</div>
+        <div class="step-when">One email · Every day</div>
+        <div>
+          <h3>You see it first</h3>
+          <p>
+            Every new disclosure lands in a single daily digest — who traded,
+            what, how much, and how late they filed.
+            <b>One email per day, always.</b> No trading tips, no noise, no
+            spam.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="mx-auto max-w-[1200px] px-[5vw] pt-[10vh]">
+      <div class="flex items-baseline justify-between border-b-2 border-ink pb-2.5">
+        <h2 class="text-[.85rem] font-extrabold uppercase tracking-[.1em]">
+          Under the hood
+        </h2>
+        <span class="mono text-[.72rem] uppercase tracking-[.1em] text-stamp">
+          AI-powered
+        </span>
+      </div>
+      <div class="mt-10 border border-ink p-7 md:p-9">
+        <div class="def-k">AI-POWERED PIPELINE</div>
+        <h3 class="mt-3.5 mb-2.5 text-[1.35rem] font-extrabold tracking-[-0.01em]">
+          AI does the grunt work.
+        </h3>
+        <p class="max-w-[75ch] text-[.95rem] leading-[1.65] text-pretty text-ink-soft">
+          This pipeline is built, run, and maintained by AI. It writes the
+          parsers, adapts them the day a portal changes
+          its format, and tames the endless quirks of government paperwork:
+          work that used to take an engineering team days per format change,
+          done overnight. The one thing it never does is invent data. Every
+          published number is extracted from an official filing by
+          deterministic, tested code — AI builds the machine; it doesn't
+          write your rows.
+        </p>
+      </div>
+      <div class="mt-6 grid grid-cols-3 gap-6 max-[760px]:grid-cols-1">
+        <div class="def">
+          <div class="def-k">SENATE · eFD</div>
+          <h3>Structured HTML</h3>
+          <p>
+            Senate electronic filings publish as structured web tables. A
+            purpose-built parser reads the transaction rows directly — the
+            cleanest source in the system.
+          </p>
+        </div>
+        <div class="def">
+          <div class="def-k">HOUSE · PDF</div>
+          <h3>Text extraction + strict rules</h3>
+          <p>
+            House reports arrive as PDFs. We extract the embedded text layer
+            and match each transaction line against strict patterns — a line
+            that doesn't parse is flagged and counted, never guessed at.
+          </p>
+        </div>
+        <div class="def">
+          <div class="def-k">SCANS · OCR</div>
+          <h3>OCR, then honesty</h3>
+          <p>
+            Some filings are only scanned images. Those go through optical
+            character recognition, and anything we can't read reliably is
+            marked unavailable rather than published wrong.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="mx-auto max-w-[1200px] px-[5vw] pt-[10vh]">
+      <div class="flex items-baseline justify-between border-b-2 border-ink pb-2.5">
+        <h2 class="text-[.85rem] font-extrabold uppercase tracking-[.1em]">
+          What the numbers mean
+        </h2>
+        <span class="mono text-[.72rem] uppercase tracking-[.1em] text-ink-soft">
+          Honest by design
+        </span>
+      </div>
+      <div class="mt-10 grid grid-cols-3 gap-6 max-[760px]:grid-cols-1">
+        <div class="def">
+          <div class="def-k">Filed 502 days late</div>
+          <h3>The lag counter</h3>
+          <p>
+            The law allows 45 days from trade to disclosure. We count every
+            day beyond that. "On time" means within the legal window — the
+            clock only starts at day 46.
+            <a
+              href="/late"
+              class="mt-2 block font-medium text-stamp underline-offset-2 hover:underline"
+              >This year's worst delays →</a
+            >
+          </p>
+        </div>
+        <div class="def">
+          <div class="def-k">$1M – $5M</div>
+          <h3>Amount brackets</h3>
+          <p>
+            Members disclose ranges, not exact figures — that's all the law
+            requires. We show you the bracket as filed and never pretend to
+            more precision than the paper holds.
+          </p>
+        </div>
+        <div class="def">
+          <div class="def-k">EST. VOLUME</div>
+          <h3>Estimates, labelled</h3>
+          <p>
+            Totals use bracket midpoints and are always marked as estimates.
+            Every number on the site traces back to an official filing —
+            nothing is modelled, guessed, or made up.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="mx-auto max-w-[1200px] px-[5vw] pt-[10vh]">
+      <div class="flex items-baseline justify-between border-b-2 border-ink pb-2.5">
+        <h2 class="text-[.85rem] font-extrabold uppercase tracking-[.1em]">
+          The daily email
+        </h2>
+        <span class="mono text-[.72rem] uppercase tracking-[.1em] text-ink-soft">
+          What actually arrives
+        </span>
+      </div>
+      <div class="mt-10 grid grid-cols-2 items-start gap-12 max-[760px]:grid-cols-1">
+        <div>
+          <h3 class="mb-3 text-[1.35rem] font-extrabold tracking-[-0.01em]">
+            Short enough to read while the coffee brews.
+          </h3>
+          <p class="mb-3.5 text-[.95rem] leading-[1.65] text-pretty text-ink-soft">
+            Every disclosure filed since yesterday's digest, one line each:
+            member, ticker, side, bracket, and the filing lag. A quiet day in
+            Congress means a short email — we never pad it.
+          </p>
+          <p class="text-[.95rem] leading-[1.65] text-pretty text-ink-soft">
+            No "hot stocks", no analysis, no forwarded press releases. If they
+            didn't file it, we don't send it.
+          </p>
+        </div>
+        <div class="email relative border border-ink bg-white">
+          <span class="email-stamp" aria-hidden="true">Sample</span>
+          <div class="mono flex justify-between border-b border-rule px-[18px] py-3.5 text-[.7rem] uppercase tracking-[.1em] text-ink-soft">
+            <span>Capitol Ledger Daily</span><span>07:00</span>
+          </div>
+          <div class="px-[18px] pt-4 pb-1.5 text-[.98rem] font-extrabold">
+            {all.length} recent disclosures · {lateCount} filed late
+          </div>
+          {
+            rows.map((d) => (
+              <div class="erow">
+                <span class="erow-m">{d.member}</span>
+                <span>{d.ticker}</span>
+                <span
+                  class={`font-semibold ${d.side === "BUY" ? "text-buy" : "text-sell"}`}
+                >
+                  {d.side}
+                </span>
+                <span>{d.amountBucket}</span>
+                <span
+                  class={d.filedDaysLate > 0 ? "text-stamp" : "text-ink-soft"}
+                >
+                  {lateText(d.filedDaysLate)}
+                </span>
+              </div>
+            ))
+          }
+          <div class="mono border-t border-rule px-[18px] py-3 text-[.66rem] text-ink-soft">
+            {more > 0 ? `+ ${more} more · ` : ""}You get this because you
+            subscribed. Unsubscribe anytime.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="mx-auto max-w-[1200px] px-[5vw] py-[10vh]">
+      <div class="flex items-baseline justify-between border-b-2 border-ink pb-2.5">
+        <h2 class="text-[.85rem] font-extrabold uppercase tracking-[.1em]">
+          Fair questions
+        </h2>
+        <span class="mono text-[.72rem] uppercase tracking-[.1em] text-ink-soft">
+          Asked often
+        </span>
+      </div>
+      <div class="mt-10 grid grid-cols-2 gap-x-14 gap-y-10 max-[760px]:grid-cols-1">
+        <div class="qa">
+          <h3>Is this data really public?</h3>
+          <p>
+            Yes. Every row comes from disclosures members of Congress are
+            required to file under the STOCK Act. We read the official
+            portals — the same documents any citizen may request — and nothing
+            else.
+          </p>
+        </div>
+        <div class="qa">
+          <h3>Why do trades show up weeks after they happen?</h3>
+          <p>
+            Because the law allows it. Members have up to 45 days to disclose,
+            so the delay is built into the system — that's exactly why we
+            count and publish the lag on every trade.
+          </p>
+        </div>
+        <div class="qa">
+          <h3>Is this investment advice?</h3>
+          <p>
+            No. We publish public records in readable form, for information
+            only. We add no signals, no recommendations, and no predictions —
+            what you do with public information is up to you.
+          </p>
+        </div>
+        <div class="qa">
+          <h3>Why ranges instead of exact amounts?</h3>
+          <p>
+            Disclosures only require a bracket, like "$100,001 – $250,000".
+            Exact amounts don't exist in the public record, so you'll never
+            see one here — anyone showing exact figures is guessing.
+          </p>
+        </div>
+        <div class="qa">
+          <h3>How much does it cost?</h3>
+          <p>
+            Free while in beta. One email per day, always — and if that ever
+            changes, subscribers hear it from us first.
+          </p>
+        </div>
+        <div class="qa">
+          <h3>Do you cover every member?</h3>
+          <p>
+            We track every Periodic Transaction Report published on the House
+            and Senate portals. If a member files electronically, they're in.
+            Paper-only filings are flagged, not silently skipped.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="border-t-2 border-ink px-[5vw] py-[10vh] text-center">
+      <h2 class="text-[clamp(1.8rem,4.5vw,3.2rem)] font-black leading-[1.15] tracking-[-0.03em] text-balance">
+        Watch the watchdogs' portfolios.
+      </h2>
+      <p class="mx-auto mt-4 mb-8 max-w-[44ch] text-pretty text-ink-soft">
+        The disclosures already exist. We just make them impossible to miss.
+      </p>
+      <a href="/#join" class="btn inline-block no-underline">Get trade alerts</a>
+    </section>
+
+    <Footer />
+  </body>
+</html>
+
+<style>
+  /* Page-specific components; everything shared lives in global.css. */
+  .step {
+    display: grid;
+    grid-template-columns: 130px 170px 1fr;
+    gap: 32px;
+    align-items: start;
+    padding: 44px 4px;
+    border-bottom: 1px solid var(--color-rule);
+  }
+  .step-n {
+    font-family: var(--font-mono);
+    font-weight: 600;
+    font-size: 2.6rem;
+    letter-spacing: -0.02em;
+    line-height: 1;
+    color: var(--color-stamp);
+  }
+  .step-when {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-ink-soft);
+    padding-top: 10px;
+  }
+  .step h3 {
+    font-size: 1.35rem;
+    font-weight: 800;
+    letter-spacing: -0.01em;
+    margin-bottom: 10px;
+  }
+  .step p {
+    font-size: 0.95rem;
+    line-height: 1.65;
+    color: var(--color-ink-soft);
+    max-width: 58ch;
+  }
+  .step p b {
+    color: var(--color-ink);
+    font-weight: 600;
+  }
+
+  .def {
+    border: 1px solid var(--color-rule);
+    padding: 28px;
+  }
+  .def-k {
+    font-family: var(--font-mono);
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--color-stamp);
+  }
+  .def h3 {
+    font-size: 1rem;
+    font-weight: 800;
+    margin: 14px 0 10px;
+  }
+  .def p {
+    font-size: 0.88rem;
+    line-height: 1.6;
+    color: var(--color-ink-soft);
+  }
+
+  .email-stamp {
+    position: absolute;
+    top: 12px;
+    right: -12px;
+    transform: rotate(6deg);
+    background: var(--color-stamp);
+    color: var(--color-paper);
+    font-family: var(--font-mono);
+    font-size: 0.66rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    padding: 4px 10px;
+  }
+  .erow {
+    display: grid;
+    grid-template-columns: 1.3fr 0.6fr 0.5fr 0.9fr 1fr;
+    gap: 10px;
+    align-items: baseline;
+    padding: 12px 18px;
+    border-top: 1px solid var(--color-rule);
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+  }
+  .erow > * {
+    min-width: 0;
+    overflow-wrap: break-word;
+  }
+  .erow-m {
+    font-family: var(--font-sans);
+    font-weight: 600;
+    font-size: 0.82rem;
+  }
+
+  .qa h3 {
+    font-size: 0.98rem;
+    font-weight: 800;
+    margin-bottom: 8px;
+  }
+  .qa h3::before {
+    content: "Q · ";
+    color: var(--color-stamp);
+    font-family: var(--font-mono);
+    font-weight: 600;
+    font-size: 0.8rem;
+  }
+  .qa p {
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: var(--color-ink-soft);
+  }
+
+  @media (max-width: 760px) {
+    .step {
+      grid-template-columns: 64px 1fr;
+      grid-template-rows: auto auto;
+      gap: 8px 20px;
+      padding: 32px 0;
+    }
+    .step-n {
+      font-size: 1.9rem;
+      grid-row: span 2;
+    }
+    .step-when {
+      padding-top: 0;
+    }
+    .erow {
+      font-size: 0.66rem;
+      gap: 7px;
+      padding-left: 12px;
+      padding-right: 12px;
+    }
+  }
+</style>
