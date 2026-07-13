@@ -154,6 +154,69 @@ class TestPayloads(unittest.TestCase):
             self.assertEqual(len(disc["disclosures"]), 1)
             st = json.loads((out / "stats.json").read_text())
             self.assertEqual(st["tradesThisYear"], 1)
+            late = json.loads((out / "late.json").read_text())
+            self.assertIn("worst", late)
+
+
+class TestLatePayload(unittest.TestCase):
+    TODAY = date(2026, 7, 12)
+
+    def test_ranked_by_days_late_desc(self):
+        trades = [
+            T(member="Ann Mild", tx="2026-01-01", filed="2026-03-02", id="a"),   # 15 late
+            T(member="Bob Worse", tx="2025-11-01", filed="2026-03-01", id="b"),  # 75 late
+            T(member="Cal Ontime", tx="2026-05-01", filed="2026-06-01", id="c"), # on time
+        ]
+        p = ld.late_payload(trades, today=self.TODAY)
+        self.assertEqual([r["member"] for r in p["worst"]],
+                         ["B. Worse", "A. Mild"])
+        self.assertEqual(p["worst"][0]["daysLate"], 75)
+        self.assertEqual(p["totalLateFilings"], 2)
+
+    def test_one_row_per_member_keeps_worst_and_counts(self):
+        trades = [
+            T(member="Batch Filer", tx="2026-01-01", filed="2026-03-02", id="a"),  # 15
+            T(member="Batch Filer", tx="2025-10-01", filed="2026-03-02", id="b"),  # 107
+            T(member="Batch Filer", tx="2026-02-01", filed="2026-04-15", id="c"),  # 28
+        ]
+        p = ld.late_payload(trades, today=self.TODAY)
+        self.assertEqual(len(p["worst"]), 1)
+        self.assertEqual(p["worst"][0]["daysLate"], 107)
+        self.assertEqual(p["worst"][0]["lateCount"], 3)
+        self.assertEqual(p["totalLateFilings"], 3)
+
+    def test_scoped_by_filing_year(self):
+        trades = [
+            T(member="Old News", tx="2025-01-01", filed="2025-12-01", id="a"),  # late, filed 2025
+            T(member="Ed Fresh", tx="2024-11-01", filed="2026-03-01", id="b"),  # filed 2026
+        ]
+        p = ld.late_payload(trades, today=self.TODAY)
+        self.assertEqual([r["member"] for r in p["worst"]], ["E. Fresh"])
+
+    def test_row_shape(self):
+        p = ld.late_payload(
+            [T(member="Nancy Pelosi", tx="2026-01-01", filed="2026-04-01",
+               lo=1_000_001, hi=5_000_000, district="CA-11")],
+            today=self.TODAY)
+        r = p["worst"][0]
+        self.assertEqual(set(r), {"member", "chamber", "district", "ticker",
+                                  "side", "amountBucket", "daysLate",
+                                  "tradeDate", "filedDate", "lateCount"})
+        self.assertEqual(r["member"], "N. Pelosi")
+        self.assertEqual(r["daysLate"], 45)  # 90-day gap, 45 past the max
+        self.assertEqual(r["amountBucket"], "$1M – $5M")
+
+    def test_caps_at_count(self):
+        trades = [T(member=f"Mem Ber{i}", tx="2026-01-01", filed="2026-04-01",
+                    id=str(i)) for i in range(15)]
+        p = ld.late_payload(trades, today=self.TODAY)
+        self.assertEqual(len(p["worst"]), ld.LATE_BOARD_SIZE)
+        self.assertEqual(p["totalLateFilings"], 15)
+
+    def test_empty_ok(self):
+        p = ld.late_payload([], today=self.TODAY)
+        self.assertEqual(p["worst"], [])
+        self.assertEqual(p["totalLateFilings"], 0)
 
 
 if __name__ == "__main__":

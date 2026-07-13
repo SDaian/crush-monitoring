@@ -2,7 +2,7 @@
 // Shared site header. `active` marks the current page in the nav; the brand
 // links home (a #top scroll when already there).
 interface Props {
-  active?: "how";
+  active?: "how" | "late";
 }
 const { active } = Astro.props;
 const home = !active;
@@ -24,6 +24,16 @@ const link =
   </a>
   <nav>
     <a href="/#feed" class={`${link} text-ink-soft`}>Live feed</a>
+    <a
+      href="/late"
+      class={`${link} ${
+        active === "late"
+          ? "border-b-2 border-stamp pb-[3px] text-ink"
+          : "text-ink-soft"
+      }`}
+      aria-current={active === "late" ? "page" : undefined}
+      >Late filers</a
+    >
     <a
       href="/how-it-works"
       class={`${link} ${

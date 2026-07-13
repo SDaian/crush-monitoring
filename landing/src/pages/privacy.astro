@@ -1,0 +1,215 @@
+---
+// "/privacy" — privacy policy + terms of use, in the site's plain-English
+// voice. Written to be true today (no cookies, no trackers, signups not yet
+// open); revisit the "where it lives" section when the signup provider is
+// chosen (see the pre-launch checklist in landing/README.md).
+import "../styles/global.css";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+
+const LAST_UPDATED = "July 12, 2026";
+
+const title = "Privacy & terms — Capitol Gains";
+const description =
+  "What Capitol Gains collects (your email, nothing else), how it's used " +
+  "(one daily digest), and the terms of use. No cookies, no trackers, no " +
+  "selling data.";
+---
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:site_name" content="Capitol Gains" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+  </head>
+  <body>
+    <Header />
+
+    <section class="mx-auto max-w-[1200px] px-[5vw] pt-[9vh] pb-[6vh]">
+      <p class="mono mb-[22px] text-[.75rem] uppercase tracking-[.12em] text-ink-soft">
+        The fine print · <b class="font-semibold text-stamp">In plain English</b>
+      </p>
+      <h1 class="headline max-w-[18ch] text-[clamp(2.4rem,6.5vw,4.6rem)]">
+        Privacy &amp; <span class="underline-stamp">terms</span>.
+      </h1>
+      <p class="mono mt-[26px] text-[.72rem] uppercase tracking-[.1em] text-ink-soft">
+        Last updated {LAST_UPDATED}
+      </p>
+    </section>
+
+    <section class="mx-auto max-w-[1200px] px-[5vw]">
+      <div class="border border-ink p-7 md:p-9">
+        <div class="mono text-[.95rem] font-semibold text-stamp">
+          THE SHORT VERSION
+        </div>
+        <p class="mt-3.5 max-w-[75ch] text-[.95rem] leading-[1.65] text-pretty text-ink-soft">
+          We store your email address to send you one daily digest. That's the
+          whole business. Unsubscribe anytime and it's deleted. No cookies, no
+          trackers, no ads, and your address is never sold or shared for
+          marketing. Everything published on this site is public record.
+        </p>
+      </div>
+    </section>
+
+    <section class="mx-auto max-w-[1200px] px-[5vw] py-[8vh]">
+      <div class="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1 border-b-2 border-ink pb-2.5">
+        <h2 class="whitespace-nowrap text-[.85rem] font-extrabold uppercase tracking-[.1em]">
+          Privacy
+        </h2>
+        <span class="mono text-[.72rem] uppercase tracking-[.1em] text-ink-soft">
+          What we collect and why
+        </span>
+      </div>
+      <div class="mt-10 grid grid-cols-2 gap-x-14 gap-y-10 max-[760px]:grid-cols-1">
+        <div class="clause">
+          <div class="clause-k">01 · What we collect</div>
+          <h3>Your email address. That's it.</h3>
+          <p>
+            We collect your email when you subscribe — nothing else. No
+            account, no name, no payment details. Like any website, our
+            hosting provider keeps standard technical logs (IP address,
+            request time) for security and operations.
+          </p>
+        </div>
+        <div class="clause">
+          <div class="clause-k">02 · How we use it</div>
+          <h3>One daily digest. Nothing else.</h3>
+          <p>
+            Your address is used to send the daily disclosure digest you
+            signed up for, and — rarely — service notes about Capitol Gains
+            itself. It is never sold, rented, or shared with anyone for
+            marketing.
+          </p>
+        </div>
+        <div class="clause">
+          <div class="clause-k">03 · Where it lives</div>
+          <h3>With our email delivery provider.</h3>
+          <p>
+            Addresses are stored with the email service that sends the digest,
+            under its data-processing agreement; we'll name the provider here
+            when signups open. Unsubscribing removes your address from the
+            list.
+          </p>
+        </div>
+        <div class="clause">
+          <div class="clause-k">04 · Your rights</div>
+          <h3>Access, correction, deletion — anytime.</h3>
+          <p>
+            Subscribing is consent, and every email carries an unsubscribe
+            link that withdraws it. Under the GDPR and similar laws you can
+            also ask what we hold about you (your email address), correct it,
+            or have it deleted — reply to any Capitol Gains email and a human
+            will handle it.
+          </p>
+        </div>
+        <div class="clause">
+          <div class="clause-k">05 · Cookies &amp; tracking</div>
+          <h3>None.</h3>
+          <p>
+            This site sets no cookies and runs no analytics trackers or ad
+            pixels. Fonts are self-hosted, so your visit isn't reported to
+            any third party. If that ever changes, this page will say so
+            before it does.
+          </p>
+        </div>
+        <div class="clause">
+          <div class="clause-k">06 · The people in the data</div>
+          <h3>Public officials, public records.</h3>
+          <p>
+            The trades shown on this site concern members of Congress and are
+            taken from disclosures they are required by the STOCK Act to make
+            public. We republish those official records in the public
+            interest, unaltered in substance.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="mx-auto max-w-[1200px] px-[5vw] pb-[10vh]">
+      <div class="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1 border-b-2 border-ink pb-2.5">
+        <h2 class="whitespace-nowrap text-[.85rem] font-extrabold uppercase tracking-[.1em]">
+          Terms of use
+        </h2>
+        <span class="mono text-[.72rem] uppercase tracking-[.1em] text-ink-soft">
+          The deal
+        </span>
+      </div>
+      <div class="mt-10 grid grid-cols-2 gap-x-14 gap-y-10 max-[760px]:grid-cols-1">
+        <div class="clause">
+          <div class="clause-k">07 · Information, not advice</div>
+          <h3>Nothing here is investment advice.</h3>
+          <p>
+            Capitol Gains publishes public records in readable form, for
+            information only. We add no recommendations and no predictions.
+            Decisions you make from public information — including anything
+            you read here — are yours alone.
+          </p>
+        </div>
+        <div class="clause">
+          <div class="clause-k">08 · Accuracy, honestly</div>
+          <h3>As filed, best effort, no warranty.</h3>
+          <p>
+            We reproduce what the official filings say, including their delays
+            and their brackets. Filings can contain errors and amendments, and
+            parsing can too; for anything that matters, verify against the
+            original document on the House or Senate portal. The service is
+            provided "as is", without warranty.
+          </p>
+        </div>
+        <div class="clause">
+          <div class="clause-k">09 · Fair use of the site</div>
+          <h3>Share it; don't misrepresent it.</h3>
+          <p>
+            You're welcome to cite and share what you find here with
+            attribution. Don't republish it as if it were exact figures
+            (disclosures are ranges), and don't present it as our endorsement
+            of any trade, member, or strategy.
+          </p>
+        </div>
+        <div class="clause">
+          <div class="clause-k">10 · Changes</div>
+          <h3>This page is the record.</h3>
+          <p>
+            Free while in beta. If the service or these terms change in any
+            way that matters — pricing, providers, what we collect —
+            subscribers hear about it in the digest and this page is updated,
+            with the date stamp above.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <Footer />
+  </body>
+</html>
+
+<style>
+  .clause-k {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-stamp);
+  }
+  .clause h3 {
+    font-size: 0.98rem;
+    font-weight: 800;
+    margin: 10px 0 8px;
+  }
+  .clause p {
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: var(--color-ink-soft);
+  }
+</style>

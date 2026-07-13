@@ -1,0 +1,214 @@
+---
+// "/late" — the late-filers leaderboard: the year's worst filing delays,
+// straight from the generated late.json (one row per member, their single
+// worst filing, ranked by days past the STOCK Act's 45-day maximum). The
+// signature accusation as a page; every number is a real disclosure.
+import "../styles/global.css";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import late from "../data/late.json";
+import stats from "../data/stats.json";
+
+const rows = late.worst;
+const fmtMonth = (iso: string) =>
+  new Date(`${iso}T00:00:00Z`).toLocaleDateString("en-US", {
+    month: "short",
+    year: "numeric",
+    timeZone: "UTC",
+  });
+
+const title = `Late filers — the ${late.year} filing-delay leaderboard · Capitol Gains`;
+const description =
+  "The year's worst STOCK Act filing delays: members of Congress who " +
+  "disclosed their stock trades weeks or months past the 45-day legal " +
+  "maximum, ranked from official filings.";
+---
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:site_name" content="Capitol Gains" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+  </head>
+  <body>
+    <Header active="late" />
+
+    <section class="mx-auto max-w-[1200px] px-[5vw] pt-[9vh] pb-[7vh]">
+      <p class="mono mb-[22px] text-[.75rem] uppercase tracking-[.12em] text-ink-soft">
+        Accountability · <b class="font-semibold text-stamp"
+          >{late.totalLateFilings} late filings in {late.year}</b
+        >
+      </p>
+      <h1 class="headline max-w-[18ch] text-[clamp(2.4rem,6.5vw,4.6rem)]">
+        The law says <span class="underline-stamp">45 days</span>.
+      </h1>
+      <p class="mt-[26px] max-w-[56ch] text-[1.05rem] leading-[1.65] text-pretty text-ink-soft">
+        Every congressional stock trade must be disclosed within 45 days.
+        These are this year's longest waits — each row a real filing, counted
+        in days past the legal maximum. The usual penalty for missing it:
+        a $200 fee.
+      </p>
+    </section>
+
+    <section class="mx-auto max-w-[1200px] px-[5vw] pb-[6vh]">
+      <div class="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1 border-b-2 border-ink pb-2.5">
+        <h2 class="whitespace-nowrap text-[.85rem] font-extrabold uppercase tracking-[.1em]">
+          Worst delays · {late.year}
+        </h2>
+        <span class="mono text-[.72rem] uppercase tracking-[.1em] text-ink-soft">
+          One row per member · their worst filing
+        </span>
+      </div>
+
+      <div role="table" aria-label={`Longest disclosure delays of ${late.year}`}>
+        <div role="row" class="sr-only">
+          <span role="columnheader">Rank</span>
+          <span role="columnheader">Member</span>
+          <span role="columnheader">Ticker</span>
+          <span role="columnheader">Side</span>
+          <span role="columnheader">Amount</span>
+          <span role="columnheader">Delay</span>
+        </div>
+        {
+          rows.map((r, i) => (
+            <div role="row" class="lrow">
+              <div role="cell" class="lrank">
+                {String(i + 1).padStart(2, "0")}
+              </div>
+              <div role="cell" class="lwho">
+                {r.member}
+                <small>
+                  {r.chamber} · {r.district}
+                  {r.lateCount > 1
+                    ? ` · ${r.lateCount} late filings in ${late.year}`
+                    : ""}
+                </small>
+              </div>
+              <div role="cell">{r.ticker}</div>
+              <div
+                role="cell"
+                class={`font-semibold ${r.side === "BUY" ? "text-buy" : "text-sell"}`}
+              >
+                {r.side}
+              </div>
+              <div role="cell" class="amt">
+                {r.amountBucket}
+              </div>
+              <div role="cell" class="ldelay">
+                <span class="ldays">{r.daysLate.toLocaleString("en-US")}</span>
+                <small>
+                  days late · traded {fmtMonth(r.tradeDate)}, filed{" "}
+                  {fmtMonth(r.filedDate)}
+                </small>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+
+      <p class="mono mt-5 max-w-[80ch] text-[.72rem] leading-[1.7] text-ink-soft">
+        Counted from each trade date to its disclosure, minus the 45 days the
+        STOCK Act allows (<a
+          href="/how-it-works"
+          class="underline underline-offset-2 hover:text-ink focus-visible:text-ink"
+          >how we count</a
+        >). Amounts are the brackets as filed. This year,
+        {" "}{stats.pctFiledLate}% of all filings arrived late. Source: official
+        House and Senate disclosure portals, refreshed daily.
+      </p>
+    </section>
+
+    <section class="border-t-2 border-ink px-[5vw] py-[10vh] text-center">
+      <h2 class="text-[clamp(1.8rem,4.5vw,3.2rem)] font-black leading-[1.15] tracking-[-0.03em] text-balance">
+        Don't wait {rows.length ? rows[0].daysLate.toLocaleString("en-US") : "45"} days to find out.
+      </h2>
+      <p class="mx-auto mt-4 mb-8 max-w-[44ch] text-pretty text-ink-soft">
+        Every new disclosure — and how late it was — in one daily email.
+      </p>
+      <a href="/#join" class="btn inline-block no-underline">Get trade alerts</a>
+    </section>
+
+    <Footer />
+  </body>
+</html>
+
+<style>
+  .lrow {
+    display: grid;
+    grid-template-columns: 56px 1.5fr 0.6fr 0.55fr 0.9fr 1.2fr;
+    gap: 12px;
+    align-items: center;
+    padding: 20px 4px;
+    border-bottom: 1px solid var(--color-rule);
+    font-family: var(--font-mono);
+    font-size: 0.83rem;
+  }
+  .lrow > * {
+    min-width: 0;
+    overflow-wrap: break-word;
+  }
+  .lrank {
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: var(--color-stamp);
+  }
+  .lwho {
+    font-family: var(--font-sans);
+    font-weight: 600;
+    font-size: 0.95rem;
+  }
+  .lwho small {
+    display: block;
+    font-weight: 400;
+    color: var(--color-ink-soft);
+    font-size: 0.72rem;
+    margin-top: 2px;
+    font-family: var(--font-mono);
+  }
+  .ldelay {
+    text-align: right;
+  }
+  .ldays {
+    font-family: var(--font-sans);
+    font-weight: 900;
+    font-size: 1.7rem;
+    letter-spacing: -0.03em;
+    color: var(--color-stamp);
+    font-variant-numeric: tabular-nums;
+    line-height: 1;
+  }
+  .ldelay small {
+    display: block;
+    color: var(--color-ink-soft);
+    font-size: 0.66rem;
+    margin-top: 4px;
+  }
+
+  @media (max-width: 760px) {
+    .lrow {
+      grid-template-columns: 34px 1.4fr 0.55fr 1.1fr;
+      font-size: 0.74rem;
+      gap: 8px;
+    }
+    .lrow .amt,
+    .lrow > [role="cell"]:nth-child(4) {
+      display: none; /* amount + side hide; member, ticker, delay stay */
+    }
+    .lrank {
+      font-size: 0.9rem;
+    }
+    .ldays {
+      font-size: 1.3rem;
+    }
+  }
+</style>
