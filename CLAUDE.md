@@ -233,6 +233,25 @@ member pages, follows, technologies to evaluate) lives in the repo-root
 when a stage ships, a trigger fires, or a decision changes, update the
 roadmap in the same PR.
 
+**Roadmap collision check (IMPORTANT):** before merging any non-trivial
+change, check it against `ROADMAP.md` — it is easy to forget a stage exists.
+Ask three questions:
+
+1. **Does this ship (part of) a planned stage?** Then follow the stage's
+   agreed design (e.g. don't add a one-off datastore when storage stage 1/2
+   already prescribes SQLite/Supabase) and mark the stage's status.
+2. **Does this fire a trigger?** (e.g. adding member pages triggers storage
+   stage 1; adding accounts triggers stage 2 and contact stage 3.) Implement
+   the staged move — or consciously defer it and note that in the roadmap.
+3. **Does this collide with a stage or standing rule?** (e.g. a vendor choice
+   that conflicts with the endpoint contract, a data change that breaks the
+   git audit trail, collecting new visitor data without updating /privacy.)
+   Resolve the collision or update the roadmap decision — never ship the
+   contradiction silently.
+
+If none apply, just proceed — no note needed. If any apply, the roadmap edit
+belongs in the same PR as the change.
+
 ## Capitol Ledger landing page (`landing/`, deployed on Vercel)
 
 A standalone Astro + Tailwind v4 marketing page (email-signup conversion for

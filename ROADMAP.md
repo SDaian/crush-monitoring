@@ -75,6 +75,10 @@ Not commitments — things to test when their stage approaches.
 
 ## Standing rules
 
+- **Collision check on every ship:** before merging a non-trivial change,
+  check it against this file — does it ship a stage, fire a trigger, or
+  collide with a stage or rule below? (Full checklist in `CLAUDE.md` →
+  "Roadmap collision check".) Roadmap updates ride in the same PR.
 - Every number on a public page must trace to an official filing (see
   `landing/docs/adr/0001`); no stage may break that.
 - The privacy page is updated **before** any change to what is collected —
