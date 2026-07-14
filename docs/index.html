@@ -329,7 +329,8 @@ const KO_KNOWN = {
   97: {h:2, a:0},                    // QF: France 2-0 Morocco (France advance) — controlled win + clean sheet, settled in 90'
   98: {h:2, a:1},                    // QF: Spain 2-1 Belgium (Spain advance) — second straight late decider, settled in 90'
   99: {h:1, a:2, aet:true},          // QF: Norway 1-2 England after extra time (1-1 at 90') — England survive the Haaland test
-  100: {h:3, a:1, aet:true}          // QF: Argentina 3-1 Switzerland after extra time (1-1 at 90') — third straight deep, chaotic Argentina win
+  100: {h:3, a:1, aet:true},         // QF: Argentina 3-1 Switzerland after extra time (1-1 at 90') — third straight deep, chaotic Argentina win
+  101: {h:0, a:2}                    // SF: France 0-2 Spain (Spain to the FINAL) — Spain blank the best attack left; sixth clean sheet in seven
 };
 
 /* ---- round-robin fixture order for 4 teams ---- */
@@ -575,7 +576,7 @@ function calibFor(m){ if(!m) return null;
    =========================================================================== */
 // Build/data stamp shown in the header. The app is stateless: nothing is
 // persisted, so reloading (F5) always returns to the official results.
-const DATA_VERSION="2026-07-14.sf-bottomline-panel";
+const DATA_VERSION="2026-07-14.sf-spain-result";
 let state={ results:{}, strengths:{}, learn:[] };
 
 function freshStrengths(){ const s={}; for(const t in TEAMS) s[t]=TEAMS[t]; return s; }

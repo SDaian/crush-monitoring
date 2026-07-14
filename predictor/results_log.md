@@ -73,6 +73,7 @@ Legend: ✅ right for the right reason · 🟡 right but by luck/margin ·
 | 2026-07-09 | Spain vs Belgium (QF) | 53.4 / 26.7 / 19.9 | MEDIUM | 2-1 (Spain, adv., late) | ✅ |
 | 2026-07-10 | England vs Norway (QF) | 50.6 / 25.1 / 24.2 | MEDIUM | 2-1 aet (England, adv.) | ✅ |
 | 2026-07-10 | Argentina vs Switzerland (QF) | 66.4 / 20.9 / 12.8 | HIGH | 3-1 aet (Argentina, adv.) | ✅ |
+| 2026-07-14 | France vs Spain (SF) | 38.4 / 30.8 / 30.9 | LOW | 0-2 (Spain, adv.) — call: France 1-0 | ❌ |
 
 ### Standing note: CONCLUSIVE CALLS (semi-finals onward)
 
@@ -1431,3 +1432,30 @@ Argentina-Switzerland (M100).
   4/4 advancement** (France, Spain, England, Argentina — all as picked, two in ET). **Semis set:
   France–Spain (M101, the two best defences — tight/low/late) and England–Argentina (M102, the
   two most chaotic profiles — open/high-scoring/deep).**
+
+---
+
+## SEMI-FINALS
+
+## 2026-07-14 · Semi-final — France 0-2 Spain (SPAIN TO THE FINAL) ❌ [first miss of the conclusive-calls era]
+
+- **France vs Spain** — 90': France 38.4 / Draw 30.8 / Spain 30.9 (LOW); advancement
+  **France 54.3 / Spain 45.7**. λ 1.20 / 1.05, xG 2.25, Under 2.5 61%, BTTS-No 53.5%, clean
+  sheets FRA 35 / ESP 30; ET 30.8%, pens 17.0%. Market dead-on (div 0.1); 3-seed × 500k fully
+  converged. **BOTTOM LINE (committed): France 1-0 in 90', Under 2.5, BTTS-No.** **RESULT:
+  France 0-2 Spain — Spain BLANK the tournament's most productive attack (France's first
+  scoreless game in seven) and advance to the FINAL in 90'; their SIXTH clean sheet in seven.**
+  **Grade: ❌** under the strict rubric — the committed side was eliminated. Graded separately:
+  the DISTRIBUTION was honest and both committed markets landed (Under 2.5 ✅, BTTS-No ✅ —
+  'tight, low, clean-sheet-decides' was exactly the game); the call picked the wrong side of a
+  declared 54/46 coin-flip (Spain win 90' was priced 30.9%, and a 46% underdog advancing is the
+  other side of the coin, not a tail). **The instructive part:** I broke the near-even tie
+  toward FIREPOWER (France GF 16) and the 90'-closer profile; the more predictive signal was
+  Spain's DEFENCE (GA 1 in six, six clean sheets in seven, now including blanking France) —
+  defensive record vs quality kept transferring all tournament, while attacking production is
+  streakier. 📌 **TIE-BREAKER RULE (new):** in a near-even elite tie, break toward the ELITE
+  DEFENCE, not the elite attack. And 'closes in 90 minutes' is a winner's profile stat, not a
+  predictor of who wins — the game did settle in 90' as called, just for the other side. First
+  ❌ of the conclusive era: distribution right, markets right, side wrong — exactly the failure
+  mode the rubric exists to expose. **Spain await the England–Argentina winner in the final;
+  France go to the third-place match.**
