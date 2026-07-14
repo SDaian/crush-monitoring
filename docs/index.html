@@ -100,6 +100,8 @@
     padding:1px 6px;border-radius:9px;margin:0 2px}
   .fc-cal{border:1px solid var(--gold);background:rgba(244,211,94,.08);
     border-radius:8px;padding:6px 8px;margin-bottom:8px}
+  .fc-bl{border:1px dashed var(--gold);border-radius:6px;padding:6px 8px;margin:4px 0 6px}
+  .fc-bl-call{font-weight:700;color:var(--gold);font-size:12px;line-height:1.35;margin-bottom:5px}
   .fc-sub{font-size:12px;font-weight:700;margin:2px 0 6px}
   .fc-sub-cal{color:var(--gold)} .fc-sub-sim{color:var(--accent)} .fc-sub-btd{color:#c79bff}
   .fc-tag{font-size:9px;font-weight:600;color:var(--chalk-dim)}
@@ -573,7 +575,7 @@ function calibFor(m){ if(!m) return null;
    =========================================================================== */
 // Build/data stamp shown in the header. The app is stateless: nothing is
 // persisted, so reloading (F5) always returns to the official results.
-const DATA_VERSION="2026-07-14.sf-france-spain-forecast";
+const DATA_VERSION="2026-07-14.sf-bottomline-panel";
 let state={ results:{}, strengths:{}, learn:[] };
 
 function freshStrengths(){ const s={}; for(const t in TEAMS) s[t]=TEAMS[t]; return s; }
@@ -1112,7 +1114,8 @@ const KO_CALIB=[
   {h:"Spain",a:"Belgium",lh:1.62,la:0.90,p:[53.4,26.7,19.9],adv:[69.0,31.0],et:26.7,pens:13.8,o:[72.6,46.1,24.7],btts:48.5,cs:[40.7,19.8],tot:2.52,conf:"MEDIUM",sl:[["1-1",12.7],["1-0",12.1],["2-0",10.6],["2-1",9.5],["0-0",9.0],["0-1",6.3]]},
   {h:"England",a:"Norway",lh:1.75,la:1.15,p:[50.6,25.1,24.2],adv:[64.9,35.1],et:25.1,pens:12.1,o:[79.3,55.4,33.0],btts:57.2,cs:[31.7,17.4],tot:2.90,conf:"MEDIUM",sl:[["1-1",11.8],["2-1",9.7],["1-0",8.9],["2-0",8.4],["1-2",6.4],["0-0",6.3]]},
   {h:"Argentina",a:"Switzerland",lh:2.12,la:0.83,p:[66.4,20.9,12.8],adv:[79.8,20.2],et:20.9,pens:9.6,o:[80.1,56.6,34.2],btts:50.4,cs:[43.6,12.0],tot:2.95,conf:"HIGH",sl:[["2-0",11.8],["1-0",10.4],["1-1",9.9],["2-1",9.8],["3-0",8.3],["3-1",6.9]]},
-  {h:"France",a:"Spain",lh:1.20,la:1.05,p:[38.4,30.8,30.9],adv:[54.3,45.7],et:30.8,pens:17.0,o:[66.8,39.1,19.1],btts:46.5,cs:[35.0,30.1],tot:2.25,conf:"LOW",sl:[["1-1",14.3],["0-0",11.6],["1-0",11.6],["0-1",10.0],["2-1",8.0],["2-0",7.6]]}
+  {h:"France",a:"Spain",lh:1.20,la:1.05,p:[38.4,30.8,30.9],adv:[54.3,45.7],et:30.8,pens:17.0,o:[66.8,39.1,19.1],btts:46.5,cs:[35.0,30.1],tot:2.25,conf:"LOW",sl:[["1-1",14.3],["0-0",11.6],["1-0",11.6],["0-1",10.0],["2-1",8.0],["2-0",7.6]],
+   bl:{call:"France advance IN 90 MINUTES, by a single goal, in a game level or scoreless deep into the second half (thin edge: 54/46).",sl:"France 1-0",x12:"France (thin)",tot:"Under 2.5",btts:"No (thin)",risk:"Spain's late-strike pattern makes the final 20 minutes the danger zone; the 31% extra-time branch is the likeliest spoiler of the manner."}}
 ];
 const KO_CALIB_MAP={};
 KO_CALIB.forEach(c=>{ KO_CALIB_MAP[c.h+"|"+c.a]=c; KO_CALIB_MAP[c.a+"|"+c.h]=c; });
@@ -1122,7 +1125,8 @@ function koCalibFor(A,B){
   if(c.h===A) return c;
   return {h:A,a:B,lh:c.la,la:c.lh,p:[c.p[2],c.p[1],c.p[0]],adv:[c.adv[1],c.adv[0]],
     et:c.et,pens:c.pens,o:c.o,btts:c.btts,cs:[c.cs[1],c.cs[0]],tot:c.tot,conf:c.conf,
-    sl:c.sl.map(x=>[x[0].split("-").reverse().join("-"),x[1]])};
+    sl:c.sl.map(x=>[x[0].split("-").reverse().join("-"),x[1]]),
+    bl:c.bl}; // bottom line is written with team names -> orientation-safe as-is
 }
 /* Gold ★ Calibrated panel for a knockout tie (mirrors calibratedPanel, KO-aware). */
 function koCalibratedPanel(c){
@@ -1149,6 +1153,13 @@ function koCalibratedPanel(c){
    </div>
    <div class="fc-sec">Most probable scorelines (90′)</div>
    <div class="fc-grid">${c.sl.slice(0,4).map(s=>`<span>${esc(s[0])} <b>${s[1].toFixed(1)}%</b></span>`).join("")}</div>
+   ${c.bl?`<div class="fc-sec">🎯 Bottom line (committed call)</div>
+   <div class="fc-bl">
+     <div class="fc-bl-call">${esc(c.bl.call)}</div>
+     <div class="fc-grid"><span>Scoreline <b>${esc(c.bl.sl)}</b></span><span>1X2 <b>${esc(c.bl.x12)}</b></span>
+       <span>Total <b>${esc(c.bl.tot)}</b></span><span>BTTS <b>${esc(c.bl.btts)}</b></span></div>
+     <div class="fc-note">⚠ Declared risk: ${esc(c.bl.risk)}</div>
+   </div>`:``}
    <div class="fc-note">Exact closed-form (bottom-up xG calibration, de-vigged vs market); advancement = 90′→extra time→penalties, Monte Carlo convergence verified in the repo.</div>
   </div>`;
 }
