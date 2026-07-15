@@ -56,6 +56,13 @@ The core task is **calibrated probabilities**, not betting. Therefore:
   confirm the closed-form numbers. Do not skip it (`--no-convergence`).
 - Include **per-team expected goals (xG)** and a **scorelines table** in every
   report.
+- **Real market odds — ask, don't estimate.** The de-vig validation only works
+  against a REAL bookmaker line. If the current odds are unknown, ask the user
+  for the live board (1X2 at 90') before issuing the forecast; never silently
+  substitute a self-estimated line (it is circular — it echoes the model's own
+  priors instead of challenging them). If no real odds are available, label the
+  market row ESTIMATED and flag the conclusion as weaker. Record book + date in
+  the config's `market._source`.
 
 The founding brief (role, methodology, calibration, confidence, post-match,
 tone) is recorded in `predictor/METHODOLOGY.md`.

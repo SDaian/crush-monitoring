@@ -75,6 +75,19 @@ Legend: ✅ right for the right reason · 🟡 right but by luck/margin ·
 | 2026-07-10 | Argentina vs Switzerland (QF) | 66.4 / 20.9 / 12.8 | HIGH | 3-1 aet (Argentina, adv.) | ✅ |
 | 2026-07-14 | France vs Spain (SF) | 38.4 / 30.8 / 30.9 | LOW | 0-2 (Spain, adv.) — call: France 1-0 | ❌ |
 
+### Standing note: REAL MARKET ODDS — ask, don't estimate
+
+**Agreed with the user (2026-07-15, after the Argentina-England line flip):** the market
+validation step only works if the odds are REAL. When the current bookmaker line is not
+known, **ASK the user for the live odds** (1X2 at 90', ideally also the To-Qualify market)
+before issuing the forecast — do NOT silently substitute an estimated line. An estimated
+line built from the same ratings/priors as the model is circular: it echoes the model's
+bias instead of challenging it (exactly what happened in the Argentina-England semi, where
+my estimate had Argentina 44.7% and the real Bet365 board had England as the thin
+favourite with a fat 33% draw). If the user cannot provide odds, the forecast may still
+ship, but the market row must be explicitly labelled ESTIMATED and the bottom line flagged
+as weaker for it. Record the source (book, date) in `market._source`.
+
 ### Standing note: CONCLUSIVE CALLS (semi-finals onward)
 
 **From the semi-finals on, every forecast must end with a committed BOTTOM LINE.** The
