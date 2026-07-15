@@ -74,6 +74,7 @@ Legend: ✅ right for the right reason · 🟡 right but by luck/margin ·
 | 2026-07-10 | England vs Norway (QF) | 50.6 / 25.1 / 24.2 | MEDIUM | 2-1 aet (England, adv.) | ✅ |
 | 2026-07-10 | Argentina vs Switzerland (QF) | 66.4 / 20.9 / 12.8 | HIGH | 3-1 aet (Argentina, adv.) | ✅ |
 | 2026-07-14 | France vs Spain (SF) | 38.4 / 30.8 / 30.9 | LOW | 0-2 (Spain, adv.) — call: France 1-0 | ❌ |
+| 2026-07-15 | Argentina vs England (SF) | 31.7 / 33.0 / 35.3 | LOW | 2-1 (Argentina, adv.) — binding call: England 1-0; voided original call was Argentina 2-1 🎯 | ❌ |
 
 ### Standing note: REAL MARKET ODDS — ask, don't estimate
 
@@ -1472,3 +1473,30 @@ Argentina-Switzerland (M100).
   ❌ of the conclusive era: distribution right, markets right, side wrong — exactly the failure
   mode the rubric exists to expose. **Spain await the England–Argentina winner in the final;
   France go to the third-place match.**
+
+## 2026-07-15 · Semi-final — Argentina 2-1 England (ARGENTINA TO THE FINAL) ❌ [the capitulation game]
+
+- **Argentina vs England** — final calibration on the REAL Bet365 line (2.70/2.87/3.00 →
+  de-vig ENG 35.2 / X 33.1 / ARG 31.7): model Argentina 31.7 / Draw 33.0 / England 35.3 (LOW);
+  advancement **England 52.1 / Argentina 47.9**; total 1.97, Under 68.5%, BTTS-No 59.8%; ET 33%,
+  pens 19.3%. **BINDING BOTTOM LINE (re-issued on the real board): England 1-0 in 90', Under
+  2.5, BTTS-No.** **RESULT: Argentina 2-1 in 90' — Argentina advance to the FINAL vs Spain.**
+  **Grade: ❌** — the committed side was eliminated and both committed markets broke (3 goals →
+  Over; BTTS-Yes). **Full transparency: the VOIDED original call — issued on my estimated line,
+  withdrawn when the real board arrived — was 'Argentina 2-1 in 90′, Over 2.5, BTTS-Yes': the
+  EXACT result, a would-have-been 🎯.** The re-issue flipped a bullseye into a miss. **The
+  instructive part:** my measured evidence (Argentina 3 goals in every knockout; England
+  BTTS-Yes in 5 of 7; rating edge) said Argentina 2-1; a single recreational UK book pricing an
+  ENGLAND game said otherwise — the documented home-country bias I flagged on receipt and then
+  failed to act on. The recorded dissent ('if it opens up, the Under/BTTS-No legs break first')
+  was exactly right. The market is a control, not an oracle. 📌 **REFINEMENT to the real-odds
+  rule (refine, don't revert):** (a) real odds remain mandatory; (b) calibrate DEFERENCE to the
+  SOURCE — sharp books/exchanges (Pinnacle, Betfair) earn full alignment; a single recreational
+  book, especially a UK book on an England game, earns PARTIAL deference: correct the magnitude,
+  do not fully flip a side/texture call backed by a validated evidence base; (c) a dissent that
+  strong should CAP the capitulation — if the note says 'the Under legs break first', the bottom
+  line must not be Under. Don't over-learn (n=1): the align-up discipline came from cases where
+  the market was right about FAVOURITES; this was a near-coin-flip flipped by one biased book.
+  Argentina profile now **4-for-4** (scored 2-3, conceded, won — in 90' this time). **THE FINAL
+  IS SET: Spain (GA 2 in 8, six clean sheets — the wall) vs Argentina (chaos, goals, four
+  straight knockout wins) — the ultimate texture clash. Third place: France vs England.**
