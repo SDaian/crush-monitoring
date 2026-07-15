@@ -577,7 +577,7 @@ function calibFor(m){ if(!m) return null;
    =========================================================================== */
 // Build/data stamp shown in the header. The app is stateless: nothing is
 // persisted, so reloading (F5) always returns to the official results.
-const DATA_VERSION="2026-07-15.sf-argentina-result-FINAL-SET";
+const DATA_VERSION="2026-07-19.final-spain-argentina-forecast";
 let state={ results:{}, strengths:{}, learn:[] };
 
 function freshStrengths(){ const s={}; for(const t in TEAMS) s[t]=TEAMS[t]; return s; }
@@ -1119,7 +1119,9 @@ const KO_CALIB=[
   {h:"France",a:"Spain",lh:1.20,la:1.05,p:[38.4,30.8,30.9],adv:[54.3,45.7],et:30.8,pens:17.0,o:[66.8,39.1,19.1],btts:46.5,cs:[35.0,30.1],tot:2.25,conf:"LOW",sl:[["1-1",14.3],["0-0",11.6],["1-0",11.6],["0-1",10.0],["2-1",8.0],["2-0",7.6]],
    bl:{call:"France advance IN 90 MINUTES, by a single goal, in a game level or scoreless deep into the second half (thin edge: 54/46).",sl:"France 1-0",x12:"France (thin)",tot:"Under 2.5",btts:"No (thin)",risk:"Spain's late-strike pattern makes the final 20 minutes the danger zone; the 31% extra-time branch is the likeliest spoiler of the manner."}},
   {h:"Argentina",a:"England",lh:0.95,la:1.02,p:[31.7,33.0,35.3],adv:[47.9,52.1],et:33.0,pens:19.3,o:[59.5,31.5,13.8],btts:40.2,cs:[36.1,38.7],tot:1.97,conf:"LOW",sl:[["0-0",14.9],["1-1",14.5],["0-1",13.3],["1-0",12.3],["0-2",7.3],["1-2",6.9]],
-   bl:{call:"RE-ISSUED on the real Bet365 line: England advance, most likely in 90 minutes, in a tight, cagey, low-scoring semi (razor-thin 52/48; the tournament's fattest deep tail).",sl:"England 1-0",x12:"England (razor-thin)",tot:"Under 2.5",btts:"No",risk:"Closest call of the tournament: 33% extra time, 19% penalties. Dissent on record: both teams' measured profiles (Argentina 3 goals every knockout; England BTTS-Yes in 5 of 7) argue for MORE goals than the market line implies -- if it opens up, the Under/BTTS-No legs break first."}}
+   bl:{call:"RE-ISSUED on the real Bet365 line: England advance, most likely in 90 minutes, in a tight, cagey, low-scoring semi (razor-thin 52/48; the tournament's fattest deep tail).",sl:"England 1-0",x12:"England (razor-thin)",tot:"Under 2.5",btts:"No",risk:"Closest call of the tournament: 33% extra time, 19% penalties. Dissent on record: both teams' measured profiles (Argentina 3 goals every knockout; England BTTS-Yes in 5 of 7) argue for MORE goals than the market line implies -- if it opens up, the Under/BTTS-No legs break first."}},
+  {h:"Spain",a:"Argentina",lh:1.26,la:0.96,p:[42.2,30.6,27.2],adv:[58.6,41.4],et:30.6,pens:17.0,o:[66.1,38.3,18.9],btts:45.3,cs:[38.3,28.4],tot:2.22,conf:"LOW",sl:[["1-1",14.2],["1-0",12.6],["0-0",11.9],["0-1",9.4],["2-0",8.6],["2-1",8.3]],
+   bl:{call:"DOUBLE-CONFIRMED (blind model pass and the real Bet365 line converged within 1.4 pts): Spain win the World Cup IN 90 MINUTES -- the wall beats the chaos (58.6/41.4).",sl:"Spain 1-0",x12:"Spain",tot:"Under 2.5",btts:"No",risk:"Fat deep tail (31% extra time, 17% penalties -- near-random if reached); Argentina has scored in ALL SEVEN games (Messi), so the BTTS-No/Under legs carry real breakage risk; Spain strike late, so a nervy 0-0 deep into the game is fully in-script."}}
 ];
 const KO_CALIB_MAP={};
 KO_CALIB.forEach(c=>{ KO_CALIB_MAP[c.h+"|"+c.a]=c; KO_CALIB_MAP[c.a+"|"+c.h]=c; });
