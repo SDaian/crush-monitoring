@@ -577,7 +577,7 @@ function calibFor(m){ if(!m) return null;
    =========================================================================== */
 // Build/data stamp shown in the header. The app is stateless: nothing is
 // persisted, so reloading (F5) always returns to the official results.
-const DATA_VERSION="2026-07-19.final-spain-argentina-forecast";
+const DATA_VERSION="2026-07-18.thirdplace-france-england-passA";
 let state={ results:{}, strengths:{}, learn:[] };
 
 function freshStrengths(){ const s={}; for(const t in TEAMS) s[t]=TEAMS[t]; return s; }
@@ -1121,7 +1121,9 @@ const KO_CALIB=[
   {h:"Argentina",a:"England",lh:0.95,la:1.02,p:[31.7,33.0,35.3],adv:[47.9,52.1],et:33.0,pens:19.3,o:[59.5,31.5,13.8],btts:40.2,cs:[36.1,38.7],tot:1.97,conf:"LOW",sl:[["0-0",14.9],["1-1",14.5],["0-1",13.3],["1-0",12.3],["0-2",7.3],["1-2",6.9]],
    bl:{call:"RE-ISSUED on the real Bet365 line: England advance, most likely in 90 minutes, in a tight, cagey, low-scoring semi (razor-thin 52/48; the tournament's fattest deep tail).",sl:"England 1-0",x12:"England (razor-thin)",tot:"Under 2.5",btts:"No",risk:"Closest call of the tournament: 33% extra time, 19% penalties. Dissent on record: both teams' measured profiles (Argentina 3 goals every knockout; England BTTS-Yes in 5 of 7) argue for MORE goals than the market line implies -- if it opens up, the Under/BTTS-No legs break first."}},
   {h:"Spain",a:"Argentina",lh:1.26,la:0.96,p:[42.2,30.6,27.2],adv:[58.6,41.4],et:30.6,pens:17.0,o:[66.1,38.3,18.9],btts:45.3,cs:[38.3,28.4],tot:2.22,conf:"LOW",sl:[["1-1",14.2],["1-0",12.6],["0-0",11.9],["0-1",9.4],["2-0",8.6],["2-1",8.3]],
-   bl:{call:"DOUBLE-CONFIRMED (blind model pass and the real Bet365 line converged within 1.4 pts): Spain win the World Cup IN 90 MINUTES -- the wall beats the chaos (58.6/41.4).",sl:"Spain 1-0",x12:"Spain",tot:"Under 2.5",btts:"No",risk:"Fat deep tail (31% extra time, 17% penalties -- near-random if reached); Argentina has scored in ALL SEVEN games (Messi), so the BTTS-No/Under legs carry real breakage risk; Spain strike late, so a nervy 0-0 deep into the game is fully in-script."}}
+   bl:{call:"DOUBLE-CONFIRMED (blind model pass and the real Bet365 line converged within 1.4 pts): Spain win the World Cup IN 90 MINUTES -- the wall beats the chaos (58.6/41.4).",sl:"Spain 1-0",x12:"Spain",tot:"Under 2.5",btts:"No",risk:"Fat deep tail (31% extra time, 17% penalties -- near-random if reached); Argentina has scored in ALL SEVEN games (Messi), so the BTTS-No/Under legs carry real breakage risk; Spain strike late, so a nervy 0-0 deep into the game is fully in-script."}},
+  {h:"France",a:"England",lh:1.55,la:1.15,p:[45.7,26.9,27.4],adv:[60.4,39.6],et:26.9,pens:13.5,o:[76.0,50.6,28.6],btts:54.7,cs:[31.7,21.2],tot:2.70,conf:"LOW",sl:[["1-1",12.8],["1-0",9.6],["2-1",9.3],["2-0",8.1],["0-0",7.6],["0-1",6.9]],
+   bl:{call:"PROVISIONAL (model-only -- real Bet365 board pending): France win the bronze IN 90 MINUTES (60.4/39.6) in an open, both-score third-place game.",sl:"France 2-1",x12:"France",tot:"Over 2.5 (razor-thin)",btts:"Yes",risk:"Market row is ESTIMATED until the live board arrives -- the call is weaker for it. Third-place games are historically loose; rotations on both sides could swing texture either way, and the 27% ET branch is the usual manner-spoiler."}}
 ];
 const KO_CALIB_MAP={};
 KO_CALIB.forEach(c=>{ KO_CALIB_MAP[c.h+"|"+c.a]=c; KO_CALIB_MAP[c.a+"|"+c.h]=c; });

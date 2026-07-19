@@ -1,0 +1,61 @@
+{
+  "_comment": "WC2026 THIRD-PLACE MATCH (M103, 2026-07-18): France (SF loser to Spain) vs England (SF loser to Argentina). MEASURED PROFILES (8 matches each): FRANCE (rating 94) -- GF 16 / GA 5; three straight knockout clean sheets (Sweden, Paraguay, Morocco) before Spain blanked them 2-0 in the semi; the classiest side not in the final. ENGLAND (rating 91) -- GF 14 / GA 8; scored in SEVEN of eight (all but the 0-0 vs Ghana), BTTS-Yes in six of eight, leaky back, open games throughout. THIRD-PLACE CONTEXT (texture modifier): historically the most OPEN game of a tournament -- little at stake, rotations, loose legs -> goals up, caution down; this pushes Over/BTTS higher than a semi between the same sides and softens France's defensive edge. Class gap ~3 -> France the moderate favourite (better side, better tournament defence), England's ever-present attack keeps BTTS live. A/B PROTOCOL: PASS A (blind, estimation-only) issued first -- lambdas FRA 1.55 / ENG 1.15 -> France 45.7 / Draw 26.9 / England 27.4; advancement France 60.4 / England 39.6; total 2.70, Over 2.5 a coin-flip (50.6%), BTTS-Yes 54.7%. PASS B (real Bet365 board) PENDING -- the market row below is an ESTIMATE until the user supplies the live line; the bottom line is provisional (model-only) and will be re-issued/confirmed on the real board per the standing real-odds rule. Home = France (nominal; neutral venue). Cards not modelled (referee TBD).",
+  "meta": {
+    "home": "France",
+    "away": "England",
+    "venue": "World Cup 2026 - Third-place match (neutral)",
+    "date": "2026-07-18",
+    "stage": "World Cup 2026 - Third-place match",
+    "stakes": "Bronze medal. France (classiest side not in the final, GF 16, three KO clean sheets before Spain) the moderate favourite vs England (scored in 7 of 8, leaky back). Third-place context: the most open game of a tournament -- goals up, caution down. PROVISIONAL CALL (model-only, awaiting the real board): France 2-1 in 90'; Over 2.5 (thin); BTTS-Yes."
+  },
+  "calibration": {
+    "base_home": 1.25,
+    "base_away": 1.12,
+    "rho": -0.07,
+    "home": {
+      "name": "France",
+      "attack": 1.15,
+      "defense": 0.95,
+      "context": 1.0,
+      "notes": [
+        "Classiest attack in the game (GF 16, Mbappe); vs England's leaky back (GA 8) in an open third-place context -> should score 1-3. attack 1.15.",
+        "Excellent tournament defence (three KO clean sheets) but third-place looseness + likely rotations soften it. defense 0.95 (not the 0.85 of the serious rounds).",
+        "Moderate favourite by class; open context -> not a grind."
+      ]
+    },
+    "away": {
+      "name": "England",
+      "attack": 1.08,
+      "defense": 1.05,
+      "context": 1.0,
+      "notes": [
+        "Scored in SEVEN of eight (Kane); the most reliable scoring habit left. attack 1.08 -> BTTS-Yes is the honest lean.",
+        "Leaky all tournament (GA 8, conceded in 6 of 8). defense 1.05 -> France should break through.",
+        "Underdog by class but the open context suits their profile; live for goals at both ends."
+      ]
+    }
+  },
+  "market": {
+    "odds": [
+      2.05,
+      3.6,
+      3.6
+    ],
+    "_source": "ESTIMATED line (my construction) -- real Bet365 board PENDING from the user; per the standing rule the conclusion is flagged weaker until the live line replaces this."
+  },
+  "_recal": "PASS A (blind, estimation-only): lambdas FRA 1.55 / ENG 1.15 from profiles + the third-place openness modifier -> France 45.7 / Draw 26.9 / England 27.4; advancement France 60.4 / England 39.6; total 2.70, Over 2.5 50.6%, BTTS-Yes 54.7%, clean sheets FRA 31.7 / ENG 21.2; ET 26.9%, pens 13.5%. PASS B pending on the real Bet365 board.",
+  "_bottom_line_A_model_only": {
+    "call": "[PROVISIONAL -- model-only, real board pending] France win the bronze IN 90 MINUTES (advancement 60.4/39.6) in an open, both-score third-place game.",
+    "scoreline": "France 2-1",
+    "markets": {
+      "1x2": "France (45.7 vs 27.4)",
+      "total": "Over 2.5 (razor-thin, 50.6%)",
+      "btts": "Yes (54.7%)"
+    },
+    "basis": "Class edge + England's leaky back for the France side; the third-place openness modifier + England's 7-of-8 scoring habit for the goals texture. To be confirmed or re-issued when the real Bet365 line arrives."
+  },
+  "lambdas_override": {
+    "home": 1.55,
+    "away": 1.15
+  }
+}
