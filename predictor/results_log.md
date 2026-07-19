@@ -75,6 +75,7 @@ Legend: ✅ right for the right reason · 🟡 right but by luck/margin ·
 | 2026-07-10 | Argentina vs Switzerland (QF) | 66.4 / 20.9 / 12.8 | HIGH | 3-1 aet (Argentina, adv.) | ✅ |
 | 2026-07-14 | France vs Spain (SF) | 38.4 / 30.8 / 30.9 | LOW | 0-2 (Spain, adv.) — call: France 1-0 | ❌ |
 | 2026-07-15 | Argentina vs England (SF) | 31.7 / 33.0 / 35.3 | LOW | 2-1 (Argentina, adv.) — binding call: England 1-0; voided original call was Argentina 2-1 🎯 | ❌ |
+| 2026-07-18 | France vs England (3rd) | 45.7 / 26.9 / 27.4 | LOW | 4-6 (England, bronze) — call: France 2-1; Over ✅ BTTS ✅ | ❌ |
 
 ### Standing note: REAL MARKET ODDS — ask, don't estimate
 
@@ -1500,3 +1501,24 @@ Argentina-Switzerland (M100).
   Argentina profile now **4-for-4** (scored 2-3, conceded, won — in 90' this time). **THE FINAL
   IS SET: Spain (GA 2 in 8, six clean sheets — the wall) vs Argentina (chaos, goals, four
   straight knockout wins) — the ultimate texture clash. Third place: France vs England.**
+
+## 2026-07-18 · Third place — France 4-6 England (ENGLAND take the bronze) ❌ [the ten-goal circus]
+
+- **France vs England** — Pass A only (model-only; the real board never arrived, so per the
+  real-odds rule the call stayed PROVISIONAL and flagged weaker): France 45.7 / Draw 26.9 /
+  England 27.4 (LOW); advancement **France 60.4 / England 39.6**; total 2.70, Over 2.5 50.6%,
+  BTTS-Yes 54.7%. **PROVISIONAL BOTTOM LINE: France 2-1 in 90', Over 2.5, BTTS-Yes.** **RESULT:
+  France 4-6 England — a TEN-GOAL circus, settled in 90'; England win the bronze.** **Grade: ❌**
+  — the committed side lost (England won from the 27.4% branch) and the scoreline (2-1 vs 4-6)
+  was off by a factor of four. The committed markets both landed EMPHATICALLY: Over 2.5 ✅ (ten
+  goals) and BTTS-Yes ✅ (4 and 6) — the 'open, both-score third-place game' texture was
+  directionally exact, just radically under-scaled. Honest note: no Poisson-family model assigns
+  meaningful mass to a 4-6 (a many-sigma tail on ANY calibration); the miss to own is the SIDE —
+  France's (rotated) defence collapsed harder than England's, and England's attack — the most
+  reliable scoring habit of the tournament (now 8 of 9 games, six here) — out-gunned the class
+  edge. 📌 **Lesson:** third-place games break MODELS, not just forecasts — with stakes near
+  zero, defensive intensity (the foundation of every calibration) evaporates; treat third-place
+  fixtures as the HIGHEST-VARIANCE match type in football, cap confidence at LOW regardless of
+  the class gap, scale the openness modifier harder, and trust the class gap less (rotation
+  quality is unknowable pre-match). England close their tournament with the bronze. **One match
+  left: the FINAL — Spain vs Argentina.**

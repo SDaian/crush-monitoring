@@ -57,5 +57,12 @@
   "lambdas_override": {
     "home": 1.55,
     "away": 1.15
+  },
+  "_postmatch": {
+    "result": "France 4-6 England. ENGLAND take the bronze in a TEN-GOAL circus, settled in 90'. The wildest scoreline of the tournament by a mile.",
+    "model_1x2": "Pass A (model-only; Pass B never issued -- no real board arrived): France 45.7 / Draw 26.9 / England 27.4 (LOW); advancement France 60.4 / England 39.6. PROVISIONAL BOTTOM LINE: France 2-1 in 90', Over 2.5, BTTS-Yes.",
+    "grade": "❌ MISS on the side -- the committed pick (France) lost; England won from the 27.4% branch. The committed MARKETS both landed emphatically: Over 2.5 ✅ (10 goals vs the 2.5 line) and BTTS-Yes ✅ (4 and 6) -- the 'open, both-score third-place game' texture was directionally exact. The manner (90') also held. But side + scoreline (2-1 vs 4-6) miss, so ❌ under the strict rubric.",
+    "verdict": "The texture thesis was right and radically UNDER-SCALED. I applied a third-place openness modifier (lifted totals to 2.70, softened France's defence to 0.95) and flagged rotations as the swing risk -- reality delivered the extreme version: total goals 10, a >4x overshoot of the expected total, presumably heavy rotations on both sides and zero defensive intensity. Honest note: NO Poisson-family model assigns meaningful mass to a 4-6 (it is a many-sigma tail on any calibration) -- the miss to own is not 'failed to predict 10 goals' but the SIDE: I gave France the class edge and their (rotated) defence collapsed harder than England's; England's attack -- the single most reliable scoring habit of the tournament (now scored in 8 of 9, and 6 in one game) -- out-gunned them. Also for the record: Pass B never happened (no live board supplied), so the call stayed model-only and flagged weaker, exactly as the real-odds rule prescribes.",
+    "lesson": "Third-place games break MODELS, not just forecasts: with stakes near zero, defensive intensity -- the very thing every calibration is built on -- evaporates, and totals can land anywhere; treat third-place fixtures as the highest-variance match type in football and say so in the confidence note (cap confidence at LOW regardless of the class gap). The direction of the openness modifier is validated (Over/BTTS both landed) -- next time scale it HARDER and trust the class gap LESS (rotation quality is unknowable pre-match). England close their tournament having scored in 8 of 9 games; Kane's side leaves with the bronze. One match left: the FINAL, Spain-Argentina."
   }
 }
