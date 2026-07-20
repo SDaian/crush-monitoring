@@ -1559,3 +1559,21 @@ quantified BTTS rule + elite-striker exception held all tournament (blunt underd
 Haaland/Messi-class sides always dangerous). (5) Team profiles beat static ratings by the
 knockouts. (6) Real odds always — and a recorded dissent that strong should cap capitulation.
 An honest ledger, a worthy champion. End of World Cup 2026.
+---
+
+## NEXT PROJECT (to be scoped with the user): Argentine league adaptation
+
+The user's next tournament is likely the ARGENTINE LEAGUE (Liga Profesional). To be
+discussed before starting — a rough scoping note so the context is not lost:
+- REAL home advantage everywhere (no more neutral venues) -> per-team home/away splits
+  matter; base_home needs real calibration, and some venues (altitude n/a here, but
+  crowd intensity) deserve team-specific nudges.
+- League format, not knockout: the advancement module rests; the deliverable becomes
+  1X2/goals per matchday plus a STANDINGS/season simulator (the web app needs a new
+  page -- fixtures, table, maybe Monte Carlo season projections instead of a bracket).
+- Ratings from scratch: build from recent seasons + squad tiers, then let measured form
+  take over quickly (the tournament lesson: profiles beat static ratings).
+- Real odds always (standing rule) -- local books or an aggregator for each matchday.
+- Keep every standing lesson: BTTS rule + elite-striker exception, defence-transfers
+  tie-breaker, A/B blind-vs-market protocol, conclusive bottom lines with the strict
+  rubric, team-profile layer.
