@@ -76,6 +76,7 @@ Legend: ✅ right for the right reason · 🟡 right but by luck/margin ·
 | 2026-07-14 | France vs Spain (SF) | 38.4 / 30.8 / 30.9 | LOW | 0-2 (Spain, adv.) — call: France 1-0 | ❌ |
 | 2026-07-15 | Argentina vs England (SF) | 31.7 / 33.0 / 35.3 | LOW | 2-1 (Argentina, adv.) — binding call: England 1-0; voided original call was Argentina 2-1 🎯 | ❌ |
 | 2026-07-18 | France vs England (3rd) | 45.7 / 26.9 / 27.4 | LOW | 4-6 (England, bronze) — call: France 2-1; Over ✅ BTTS ✅ | ❌ |
+| 2026-07-19 | Spain vs Argentina (FINAL) | 42.2 / 30.6 / 27.2 | LOW | 1-0 aet (SPAIN CHAMPIONS) — call: Spain 1-0 in 90'; scoreline ✅ Under ✅ BTTS-No ✅, manner missed | 🟡 |
 
 ### Standing note: REAL MARKET ODDS — ask, don't estimate
 
@@ -1522,3 +1523,39 @@ Argentina-Switzerland (M100).
   the class gap, scale the openness modifier harder, and trust the class gap less (rotation
   quality is unknowable pre-match). England close their tournament with the bronze. **One match
   left: the FINAL — Spain vs Argentina.**
+
+---
+
+## 2026-07-19 · THE FINAL — Spain 1-0 Argentina (aet, 0-0 at 90') · SPAIN ARE WORLD CHAMPIONS 🟡
+
+- **Spain vs Argentina** — double-confirmed calibration (blind pass and the real Bet365 board
+  converged within 1.4 pts): Spain 42.2 / Draw 30.6 / Argentina 27.2 (LOW); advancement **Spain
+  58.6 / Argentina 41.4**; total 2.22, Under 2.5 61.7%, BTTS-No 54.7%; ET 30.6%, pens 17.0%.
+  **BINDING BOTTOM LINE: Spain win the World Cup IN 90 MINUTES, Spain 1-0, Under 2.5, BTTS-No.**
+  **RESULT: 0-0 at 90' — then Spain 1-0 in EXTRA TIME. SPAIN ARE WORLD CHAMPIONS.** **Grade: 🟡**
+  — one word from the bullseye: side ✅, EXACT scoreline ✅ (1-0), Under ✅, BTTS-No ✅ (Argentina
+  blanked for the first time in nine games); only the MANNER missed ('in 90 minutes' vs extra
+  time — the 30.6% branch, priced fat and explicitly declared the likeliest manner-spoiler). The
+  declared script played out line by line: 'a nervy 0-0 deep into the game is fully in-script',
+  'Spain strike late', 'the wall beats the chaos'.
+
+### TOURNAMENT CLOSING SYNTHESIS
+
+**The champion:** Spain — GA 1 and seven clean sheets in nine games; the wall blanked France's
+GF-16 attack and Argentina's 8-for-8 scoring streak in the last two games. Defensive record vs
+quality was the single most predictive stat of the tournament.
+
+**The ledger (knockout advancement picks):** R32 16/16 · R16 7/8 (Brazil-Norway the only miss,
+a priced Haaland tail) · QF 4/4 · SF 1/2 as distributions but 0/2 as conclusive calls
+(France-Spain side miss; Argentina-England: capitulated to a biased board and flipped a bullseye
+into a miss) · 3rd place ❌ (ten-goal circus) · FINAL 🟡 (exact scoreline, manner missed).
+
+**The method that survived contact:** (1) DEFENCE TRANSFERS, attack streaks — encode the
+elite-defence tie-breaker from round one. (2) The layered reg+ET+pens advancement forecast was
+the workhorse; manner is the hardest leg — call 'likely deep' whenever ET>28% instead of
+committing to 90'. (3) The A/B protocol (blind pass, then the real board) is permanent:
+convergence = confidence, divergence = interrogate the SOURCE before capitulating. (4) The
+quantified BTTS rule + elite-striker exception held all tournament (blunt underdogs blanked;
+Haaland/Messi-class sides always dangerous). (5) Team profiles beat static ratings by the
+knockouts. (6) Real odds always — and a recorded dissent that strong should cap capitulation.
+An honest ledger, a worthy champion. End of World Cup 2026.
