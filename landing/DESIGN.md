@@ -219,11 +219,12 @@ shared Astro components in `src/components/`.
   works" timeline (below). Frames the "why" between hero and proof.
 - **Scroll timeline** — a vertical pipeline whose stamp-red rail fills and whose
   steps light up as each reaches the reading line (numbered square nodes: neutral
-  → stamp outline when passed → stamp fill when active). Motion is *meaningful*
-  (literal progress through the pipeline), and it degrades honestly: no-JS renders
-  every step lit with a static rail; reduced motion draws it complete without
-  scroll coupling; `prefers-contrast: more` never dims. Shared component for the
-  home band and the /how-it-works pipeline.
+  → stamp outline when passed → stamp fill when active), each step's text **rising
+  in once** as it enters (nodes stay anchored). Motion is *meaningful* (literal
+  progress through the pipeline), and it degrades honestly: no-JS renders every
+  step lit with a static rail and no reveal; reduced motion draws it complete
+  without scroll coupling or reveal; `prefers-contrast: more` never dims. Shared
+  component for the home band and the /how-it-works pipeline.
 - **Source-trust row** — "Sourced only from" + the official portal names (House
   Clerk · Senate eFD · OGE 278-T), mono, placed near the primary CTA.
 - **Data primitives** — feed / disclosure row, the stat strip, definition card,

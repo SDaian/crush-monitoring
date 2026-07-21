@@ -374,6 +374,19 @@
   .timeline.is-scroll .tl-step.is-done {
     opacity: 1;
   }
+  /* Subtle entrance: each step's text rises in once as it enters view (the
+     node stays anchored to the rail). Only under .is-scroll, so no-JS and
+     reduced motion never hide it. `.is-in` is pre-set on already-visible
+     steps before first paint, so nothing flashes. */
+  .timeline.is-scroll .tl-body {
+    transition:
+      opacity 0.55s var(--ease-out),
+      transform 0.55s var(--ease-out);
+  }
+  .timeline.is-scroll .tl-body:not(.is-in) {
+    opacity: 0;
+    transform: translateY(12px);
+  }
   .timeline.is-static .tl-fill {
     transform: scaleY(1);
   }
