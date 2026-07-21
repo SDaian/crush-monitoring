@@ -219,5 +219,101 @@ class TestLatePayload(unittest.TestCase):
         self.assertEqual(p["totalLateFilings"], 0)
 
 
+def MT(member="Nancy Pelosi", ticker="NVDA", type="buy", lo=1001, hi=15000,
+       tx="2026-06-01", filed="2026-06-20", asset="NVIDIA Corp",
+       party="D", state="CA", district="CA-11", src="http://x/1"):
+    """A trade row with the extra fields the member payload reads."""
+    t = T(member=member, ticker=ticker, type=type, lo=lo, hi=hi, tx=tx,
+          filed=filed, state=state, district=district)
+    t.update(asset=asset, party=party, source_url=src)
+    return t
+
+
+HOLDINGS = {
+    "Nancy Pelosi": {
+        "available": True, "report_year": 2025, "filing_date": "2026-05-15",
+        "source_url": "http://x/annual",
+        "stocks": [
+            {"ticker": "NVDA", "asset": "NVIDIA Corp", "asset_type": "Stock",
+             "value_lo": 1_000_001, "value_hi": 5_000_000},
+            {"ticker": "AAPL", "asset": "Apple Inc.", "asset_type": "Stock",
+             "value_lo": 250_001, "value_hi": 500_000},
+        ],
+    },
+}
+
+
+class TestMemberPayload(unittest.TestCase):
+    def test_slugify(self):
+        self.assertEqual(ld.slugify("Nancy Pelosi"), "nancy-pelosi")
+        self.assertEqual(ld.slugify("Donald J. Trump"), "donald-j-trump")
+
+    def test_summary_and_tickers(self):
+        trades = [
+            MT(ticker="NVDA", tx="2026-06-01"),
+            MT(ticker="NVDA", tx="2026-05-01"),
+            MT(ticker="AAPL", type="sell", tx="2026-04-01"),
+            MT(member="Someone Else", ticker="TSLA"),  # excluded
+        ]
+        p = ld.member_payload("Nancy Pelosi", trades, HOLDINGS)
+        self.assertEqual(p["slug"], "nancy-pelosi")
+        self.assertEqual(p["summary"]["trades"], 3)
+        self.assertEqual(p["summary"]["distinctTickers"], 2)
+        self.assertEqual(p["summary"]["firstTx"], "2026-04-01")
+        self.assertEqual(p["summary"]["lastTx"], "2026-06-01")
+        self.assertEqual(p["topTickers"][0]["ticker"], "NVDA")
+        self.assertEqual(p["topTickers"][0]["count"], 2)
+
+    def test_trades_sorted_desc_and_capped(self):
+        trades = [MT(ticker=f"T{i}", tx=f"2026-06-{i:02d}") for i in range(1, 26)]
+        p = ld.member_payload("Nancy Pelosi", trades, {})
+        self.assertEqual(p["summary"]["trades"], 25)
+        self.assertEqual(p["tradesShown"], ld.MEMBER_TRADE_CAP)
+        self.assertEqual(len(p["trades"]), ld.MEMBER_TRADE_CAP)
+        # Most recent first.
+        self.assertEqual(p["trades"][0]["txDate"], "2026-06-25")
+
+    def test_late_share_rounds_but_worst_kept(self):
+        # One 100-day-late filing among many on-time → pctLate rounds to 0,
+        # but worstLate stays non-zero (the page shows "<1%", not "0%").
+        trades = [MT(tx="2026-01-01", filed="2026-02-10") for _ in range(99)]
+        trades.append(MT(tx="2026-01-01", filed="2026-05-25"))  # ~99 days late
+        p = ld.member_payload("Nancy Pelosi", trades, {})
+        self.assertEqual(p["summary"]["pctLate"], 1)  # 1/100
+        self.assertGreater(p["summary"]["worstLate"], 0)
+
+    def test_holdings_estimate(self):
+        p = ld.member_payload("Nancy Pelosi", [MT()], HOLDINGS)
+        h = p["holdings"]
+        self.assertTrue(h["available"])
+        self.assertEqual(h["reportYear"], 2025)
+        self.assertEqual(len(h["stocks"]), 2)
+        # Sorted by value desc: NVDA before AAPL.
+        self.assertEqual(h["stocks"][0]["ticker"], "NVDA")
+        self.assertIsNotNone(h["totalLabel"])
+
+    def test_holdings_absent_when_no_annual(self):
+        p = ld.member_payload("Nancy Pelosi", [MT()], {})
+        self.assertFalse(p["holdings"]["available"])
+        self.assertEqual(p["holdings"]["stocks"], [])
+        self.assertIsNone(p["holdings"]["totalLabel"])
+
+    def test_write_member_files_skips_zero_trade_members(self):
+        trades = [MT(member="Nancy Pelosi")]
+        with TemporaryDirectory() as d:
+            out = Path(d)
+            written = ld.write_member_files(
+                trades, HOLDINGS, out,
+                names=["Nancy Pelosi", "Ghost Member"],
+            )
+            self.assertEqual(written, ["nancy-pelosi"])
+            self.assertTrue((out / "members" / "nancy-pelosi.json").exists())
+            self.assertFalse((out / "members" / "ghost-member.json").exists())
+            index = json.loads((out / "members" / "_index.json").read_text())
+            self.assertEqual([m["slug"] for m in index["members"]],
+                             ["nancy-pelosi"])
+            self.assertIn("worstLate", index["members"][0])
+
+
 if __name__ == "__main__":
     unittest.main()

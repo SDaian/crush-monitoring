@@ -1,0 +1,404 @@
+---
+// "/members/<slug>" — one page per featured filer: their disclosed trades,
+// estimated holdings, most-traded tickers and filing timeliness, all from the
+// daily pipeline (landing/src/data/members/*.json). Built as static pages for
+// the featured set only; scaling to every member is the storage-stage-1
+// trigger in ROADMAP.md. Same editorial system as the rest of the site.
+import "../../styles/global.css";
+import Header from "../../components/Header.astro";
+import Footer from "../../components/Footer.astro";
+import Seo from "../../components/Seo.astro";
+
+export async function getStaticPaths() {
+  const all = import.meta.glob("../../data/members/*.json", { eager: true });
+  return Object.entries(all)
+    .filter(([path]) => !path.endsWith("/_index.json"))
+    .map(([, mod]) => {
+      const m = (mod as { default: any }).default;
+      return { params: { slug: m.slug }, props: { m } };
+    });
+}
+
+const { m } = Astro.props as { m: any };
+const s = m.summary;
+
+const partyName = { D: "Democrat", R: "Republican", I: "Independent" }[
+  m.party as string
+] ?? m.party;
+const seat = m.chamber === "Senate" ? `${partyName} · ${m.state}` : `${partyName} · ${m.district ?? m.state}`;
+
+const fmtDate = (iso: string | null) =>
+  iso
+    ? new Date(`${iso}T00:00:00Z`).toLocaleDateString("en-US", {
+        month: "short",
+        day: "numeric",
+        year: "numeric",
+        timeZone: "UTC",
+      })
+    : "—";
+const fmtMonth = (iso: string | null) =>
+  iso
+    ? new Date(`${iso}T00:00:00Z`).toLocaleDateString("en-US", {
+        month: "short",
+        year: "numeric",
+        timeZone: "UTC",
+      })
+    : "—";
+
+// "<1%" when a late filing exists but rounds to 0 — never "0%" beside a
+// non-zero worst delay (that reads as a contradiction).
+const pctLateLabel =
+  s.pctLate === 0 && s.worstLate > 0 ? "<1%" : `${s.pctLate}%`;
+const STAT_CARDS = [
+  { n: s.trades.toLocaleString("en-US"), l: "trades disclosed" },
+  { n: s.distinctTickers.toLocaleString("en-US"), l: "distinct tickers" },
+  { n: pctLateLabel, l: "filed late" },
+  {
+    n: s.worstLate ? s.worstLate.toLocaleString("en-US") : "0",
+    l: s.worstLate ? "days · worst delay" : "days late · worst",
+  },
+];
+
+const title = `${m.name} stock trades — every disclosed trade · Capitol Ledger`;
+const description =
+  `Every stock trade ${m.name} (${partyName}, ${m.state}) has disclosed ` +
+  `under the STOCK Act: ticker, amount bracket, and how late each filing ` +
+  `arrived. Straight from official records, updated daily.`;
+
+const schema = [
+  {
+    "@context": "https://schema.org",
+    "@type": "ProfilePage",
+    dateModified: s.lastTx ?? undefined,
+    mainEntity: {
+      "@type": "Person",
+      name: m.name,
+      jobTitle: m.chamber === "Senate" ? "U.S. Senator" : "Member of Congress",
+      affiliation: { "@type": "Organization", name: "United States Congress" },
+    },
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Dataset",
+    name: `${m.name} — disclosed stock trades`,
+    description,
+    creator: { "@type": "Organization", name: "Capitol Ledger" },
+    isAccessibleForFree: true,
+    license: "https://www.usa.gov/government-works",
+    temporalCoverage:
+      s.firstTx && s.lastTx ? `${s.firstTx}/${s.lastTx}` : undefined,
+  },
+];
+---
+
+<html lang="en">
+  <head>
+    <Seo
+      title={title}
+      description={description}
+      path={`/members/${m.slug}`}
+      schema={schema}
+    />
+  </head>
+  <body>
+    <Header active="members" />
+
+    <section class="mx-auto max-w-[75rem] px-[5vw] pt-[9vh] pb-[6vh]">
+      <p class="eyebrow mb-5">
+        Featured filer · <b class="font-semibold text-stamp">{seat}</b>
+      </p>
+      <h1 class="headline max-w-[16ch] text-[clamp(2.4rem,6.5vw,4.6rem)]">
+        {m.name}'s <span class="underline-stamp">stock trades</span>.
+      </h1>
+      <p class="mt-6 max-w-[58ch] text-[1.05rem] leading-[1.65] text-pretty text-ink-soft">
+        Every trade {m.name} has disclosed under the STOCK Act — {s.trades.toLocaleString("en-US")}
+        {" "}across {s.distinctTickers} tickers, from {fmtMonth(s.firstTx)} to
+        {" "}{fmtMonth(s.lastTx)}. Amounts are the brackets as filed; timing is
+        counted against the 45-day legal maximum.
+      </p>
+    </section>
+
+    <section class="mx-auto max-w-[75rem] px-[5vw] pb-[7vh]">
+      <div class="grid grid-cols-4 border-t border-ink max-[640px]:grid-cols-2">
+        {
+          STAT_CARDS.map((c) => (
+            <div class="statcard">
+              <div class="statnum">{c.n}</div>
+              <div class="statlabel">{c.l}</div>
+            </div>
+          ))
+        }
+      </div>
+    </section>
+
+    {
+      m.topTickers.length > 0 && (
+        <section class="mx-auto max-w-[75rem] px-[5vw] pb-[7vh]">
+          <div class="section-head">
+            <h2 class="section-title">Most-traded tickers</h2>
+            <span class="eyebrow">By number of disclosed trades</span>
+          </div>
+          <div class="mt-8 flex flex-wrap gap-3">
+            {m.topTickers.map((t: any) => (
+              <div class="chip">
+                <b>{t.ticker}</b>
+                <span>{t.count}×</span>
+              </div>
+            ))}
+          </div>
+        </section>
+      )
+    }
+
+    {
+      m.holdings.available && m.holdings.stocks.length > 0 && (
+        <section class="mx-auto max-w-[75rem] px-[5vw] pb-[7vh]">
+          <div class="section-head">
+            <h2 class="section-title whitespace-nowrap">Estimated holdings</h2>
+            <span class="eyebrow">
+              From the {m.holdings.reportYear} annual report
+            </span>
+          </div>
+          <p class="fineprint mt-4 max-w-[80ch]">
+            A directional estimate from {m.name}'s latest annual financial
+            disclosure — bracket midpoints, not share counts, and never
+            real-time. Totals sum the disclosed ranges: about{" "}
+            <b class="text-ink">{m.holdings.totalLabel}</b> across{" "}
+            {m.holdings.stocks.length} positions.
+          </p>
+          <div class="mt-7 grid grid-cols-2 gap-x-12 gap-y-1 max-[720px]:grid-cols-1">
+            {m.holdings.stocks.slice(0, 16).map((h: any) => (
+              <div class="hrow">
+                <span class="htick">{h.ticker}</span>
+                <span class="hname">{h.asset}</span>
+                <span class="hval">{h.valueLabel}</span>
+              </div>
+            ))}
+          </div>
+          {m.holdings.sourceUrl && (
+            <p class="fineprint mt-5">
+              Source:{" "}
+              <a
+                href={m.holdings.sourceUrl}
+                class="underline underline-offset-2 hover:text-ink"
+                rel="nofollow"
+              >
+                annual disclosure, filed {fmtMonth(m.holdings.filingDate)}
+              </a>
+              .
+            </p>
+          )}
+        </section>
+      )
+    }
+
+    <section class="mx-auto max-w-[75rem] px-[5vw] pb-[6vh]">
+      <div class="section-head">
+        <h2 class="section-title whitespace-nowrap">Disclosed trades</h2>
+        <span class="eyebrow">
+          Most recent {m.tradesShown} of {s.trades}
+        </span>
+      </div>
+
+      <div role="table" aria-label={`${m.name} disclosed trades`}>
+        {
+          m.trades.map((t: any) => (
+            <div role="row" class="trow">
+              <div role="cell" class="ttick">
+                {t.ticker}
+                <small>{t.asset}</small>
+              </div>
+              <div
+                role="cell"
+                class={`tside font-semibold ${t.side === "BUY" ? "text-buy" : "text-sell"}`}
+              >
+                {t.side}
+              </div>
+              <div role="cell" class="tamt">{t.amountBucket}</div>
+              <div role="cell" class="tdate">
+                {fmtDate(t.txDate)}
+                <small>filed {fmtDate(t.filedDate)}</small>
+              </div>
+              <div role="cell" class="tlate">
+                {t.daysLate && t.daysLate > 0 ? (
+                  <span class="latebad">{t.daysLate}d late</span>
+                ) : (
+                  <span class="lateok">on time</span>
+                )}
+                {t.sourceUrl && (
+                  <a
+                    href={t.sourceUrl}
+                    class="tsrc"
+                    rel="nofollow"
+                    aria-label="Official filing"
+                  >
+                    filing ↗
+                  </a>
+                )}
+              </div>
+            </div>
+          ))
+        }
+      </div>
+
+      <p class="fineprint mt-6 max-w-[80ch]">
+        Amounts are the brackets as filed; "days late" counts days past the
+        STOCK Act's 45-day maximum (<a
+          href="/how-it-works"
+          class="underline underline-offset-2 hover:text-ink">how we count</a
+        >). See the full searchable history on the
+        <a
+          href="/#feed"
+          class="underline underline-offset-2 hover:text-ink">live tracker</a
+        >. Source: official House and Senate disclosure portals.
+      </p>
+    </section>
+
+    <section class="border-t-2 border-ink px-[5vw] py-[10vh] text-center">
+      <h2 class="text-[clamp(1.8rem,4.5vw,3.2rem)] font-black leading-[1.15] tracking-[-0.03em] text-balance">
+        Know {m.name.split(" ").slice(-1)[0]}'s next trade first.
+      </h2>
+      <p class="mx-auto mt-4 mb-8 max-w-[44ch] text-pretty text-ink-soft">
+        Every new disclosure — theirs and everyone's — in one daily email.
+      </p>
+      <a href="/#join" class="btn inline-block no-underline">Get trade alerts</a>
+    </section>
+
+    <Footer />
+  </body>
+</html>
+
+<style>
+  .statcard {
+    border-bottom: 1px solid var(--color-ink);
+    border-right: 1px solid var(--color-rule);
+    padding: 1.5rem 1.25rem 1.5rem 0;
+  }
+  .statnum {
+    font-family: var(--font-sans);
+    font-weight: 900;
+    font-size: clamp(1.9rem, 4vw, 2.9rem);
+    letter-spacing: -0.03em;
+    line-height: 1;
+    font-variant-numeric: tabular-nums;
+    color: var(--color-stamp);
+  }
+  .statlabel {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    color: var(--color-ink-soft);
+    margin-top: 0.625rem;
+  }
+
+  .chip {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 0.5rem;
+    border: 1px solid var(--color-ink);
+    padding: 0.5rem 0.875rem;
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+  }
+  .chip b {
+    font-weight: 700;
+    letter-spacing: 0.02em;
+  }
+  .chip span {
+    color: var(--color-ink-soft);
+  }
+
+  .hrow {
+    display: grid;
+    grid-template-columns: 4.5rem 1fr auto;
+    gap: 0.75rem;
+    align-items: baseline;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid var(--color-rule);
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+  }
+  .htick {
+    font-weight: 700;
+    color: var(--color-ink);
+  }
+  .hname {
+    color: var(--color-ink-soft);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .hval {
+    font-weight: 600;
+    white-space: nowrap;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .trow {
+    display: grid;
+    grid-template-columns: 2fr 0.6fr 0.9fr 1.1fr 1fr;
+    gap: 0.75rem;
+    align-items: center;
+    padding: 1.1rem 0.25rem;
+    border-bottom: 1px solid var(--color-rule);
+    font-family: var(--font-mono);
+    font-size: 0.83rem;
+  }
+  .trow > * {
+    min-width: 0;
+  }
+  .ttick {
+    font-family: var(--font-sans);
+    font-weight: 700;
+    font-size: 0.95rem;
+  }
+  .ttick small,
+  .tdate small {
+    display: block;
+    font-family: var(--font-mono);
+    font-weight: 400;
+    font-size: 0.72rem;
+    color: var(--color-ink-soft);
+    margin-top: 0.125rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .tamt {
+    font-variant-numeric: tabular-nums;
+  }
+  .tlate {
+    text-align: right;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.25rem;
+  }
+  .latebad {
+    color: var(--color-stamp);
+    font-weight: 600;
+  }
+  .lateok {
+    color: var(--color-ink-soft);
+  }
+  .tsrc {
+    font-size: 0.72rem;
+    color: var(--color-ink-soft);
+    text-decoration: none;
+  }
+  .tsrc:hover {
+    color: var(--color-ink);
+  }
+
+  @media (max-width: 47.5rem) {
+    .trow {
+      grid-template-columns: 1.6fr 0.7fr 1fr;
+      font-size: 0.75rem;
+    }
+    .trow .tamt,
+    .trow .tdate {
+      display: none;
+    }
+  }
+</style>
