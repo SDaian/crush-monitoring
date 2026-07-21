@@ -103,14 +103,15 @@ Two families, two jobs. Both are self-hosted.
   not for eyebrows, labels, captions, or fine print. Small type earns emphasis
   from **mono + uppercase + tracking + color**, never from shrinking below the
   floor. (Values like `0.68rem`/`0.72rem` are out of spec.)
-- **Size in `rem`, never forced `px`.** Font sizes, widths, and spacing
-  (margin / padding / gap) all use `rem` — through Tailwind's rem-based scale
-  (`mt-6`, `p-4`, including fractional steps like `p-4.5` = `1.125rem`), **never
-  arbitrary `[…px]` values** — so everything scales with the user's text-size
-  setting. `ch` / `%` / `clamp()` are fine; `vw` / `vh` are allowed only for
-  fluid section gutters and vertical rhythm. The **only** `px` that remains is
-  hairline borders/rules (`1` / `2` / `3px`) and shadow offsets, where a
-  physical pixel is the intent.
+- **Size in `rem`, on the scale, never forced `px`.** Font sizes, widths, and
+  spacing (margin / padding / gap) use `rem` through Tailwind's **standard scale
+  steps** (`mt-6`, `p-4`, `gap-3`) — **never** arbitrary `[…px]` values and
+  **never off-grid/in-between** sizes (no `gap-4.5`, no `0.5625rem`). Snap spacing
+  to the scale. `ch` / `%` / `clamp()` are fine; `vw` / `vh` only for fluid
+  section gutters and vertical rhythm. `px` remains **solely** for hairline
+  borders/rules (`1` / `2` / `3px`) and shadow offsets. Off-grid (precise) values
+  are tolerated only where **geometry demands pixel-matched alignment** — e.g.
+  the timeline's rail/node offsets and the one padding that mirrors them.
 - **Tracking is size-specific.** Display/headline: tight, negative
   (≈ `-0.03` to `-0.04em`). Mono labels/eyebrows: **positive, uppercase**
   (`0.06`–`0.16em`). Body: near zero.
