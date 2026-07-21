@@ -317,6 +317,8 @@
     position: absolute;
     left: -78px;
     top: 20px;
+    z-index: 1; /* opaque node sits above the rail/fill — the line never
+                   shows through the square (it breaks cleanly at each node). */
     display: flex;
     align-items: center;
     justify-content: center;
