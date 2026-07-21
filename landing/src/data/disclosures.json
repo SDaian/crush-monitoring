@@ -2,13 +2,22 @@
   "_comment": "Generated from real official disclosures by congress/landing_data.py (daily Action). Do not edit by hand. 'filedDaysLate' counts days past the STOCK Act's 45-day statutory maximum; 0 = on time.",
   "disclosures": [
     {
-      "member": "D. Crenshaw",
+      "member": "W. Timmons",
       "chamber": "House",
-      "district": "TX-2",
-      "ticker": "META",
+      "district": "SC-4",
+      "ticker": "SPCX",
+      "side": "BUY",
+      "amountBucket": "$50K – $100K",
+      "filedDaysLate": 0
+    },
+    {
+      "member": "L. Lee",
+      "chamber": "House",
+      "district": "FL-15",
+      "ticker": "NOK",
       "side": "SELL",
-      "amountBucket": "$1K – $15K",
-      "filedDaysLate": 27
+      "amountBucket": "$15K – $50K",
+      "filedDaysLate": 24
     },
     {
       "member": "G. Cisneros",
@@ -35,15 +44,6 @@
       "ticker": "INTC",
       "side": "BUY",
       "amountBucket": "$1M – $5M",
-      "filedDaysLate": 0
-    },
-    {
-      "member": "J. Boozman",
-      "chamber": "Senate",
-      "district": "AR",
-      "ticker": "IEI",
-      "side": "SELL",
-      "amountBucket": "$50K – $100K",
       "filedDaysLate": 0
     }
   ]
