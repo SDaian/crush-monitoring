@@ -366,34 +366,20 @@
     background: var(--color-stamp);
     color: var(--color-paper);
   }
-  /* Focus effect only when scroll-driven; static/no-JS stays fully lit. */
-  .timeline.is-scroll .tl-step {
-    opacity: 0.42;
-  }
-  .timeline.is-scroll .tl-step.is-active,
-  .timeline.is-scroll .tl-step.is-done {
-    opacity: 1;
-  }
-  /* Subtle entrance: each step's text rises in once as it enters view (the
-     node stays anchored to the rail). Only under .is-scroll, so no-JS and
-     reduced motion never hide it. `.is-in` is pre-set on already-visible
-     steps before first paint, so nothing flashes. */
-  .timeline.is-scroll .tl-body {
-    transition:
-      opacity 0.55s var(--ease-out),
-      transform 0.55s var(--ease-out);
-  }
-  .timeline.is-scroll .tl-body:not(.is-in) {
-    opacity: 0;
-    transform: translateY(12px);
-  }
   .timeline.is-static .tl-fill {
     transform: scaleY(1);
   }
+  /* Word-by-word text reveal (Timeline.astro splits the title + body into
+     `.w` word spans and scrubs their opacity from dim to full as each word
+     passes the reading line). Enhancement only: no-JS, reduced motion and
+     high contrast render full-opacity text. The floor below covers the one
+     frame before the first scroll update; JS then sets each word inline. */
+  .timeline.is-scroll .w {
+    opacity: 0.18;
+  }
   @media (prefers-contrast: more) {
-    /* Never suppress contrast for the focus effect. */
-    .timeline.is-scroll .tl-step {
-      opacity: 1;
+    .timeline.is-scroll .w {
+      opacity: 1 !important;
     }
   }
   @media (max-width: 600px) {

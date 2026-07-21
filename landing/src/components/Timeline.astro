@@ -55,43 +55,51 @@ const n = (i: number) => String(i + 1).padStart(2, "0");
       return;
     }
 
+    // High contrast → don't scrub word opacity; render it complete + static.
+    if (window.matchMedia("(prefers-contrast: more)").matches) {
+      tl.classList.add("is-static");
+      return;
+    }
+
     tl.classList.add("is-scroll");
 
-    // Text reveal: each step's body rises in once as it enters. Pre-mark
-    // steps already in view (same synchronous tick as adding is-scroll) so
-    // they never flash hidden; observe the rest.
-    const bodies = steps
-      .map((st) => st.querySelector<HTMLElement>(".tl-body"))
-      .filter((el): el is HTMLElement => el !== null);
-    bodies.forEach((bd) => {
-      if (bd.getBoundingClientRect().top < window.innerHeight * 0.92) {
-        bd.classList.add("is-in");
-      }
-    });
-    if ("IntersectionObserver" in window) {
-      const revealIO = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((e) => {
-            if (e.isIntersecting) {
-              e.target.classList.add("is-in");
-              revealIO.unobserve(e.target);
+    // Word-by-word reveal (Kevin Powell's CSS scroll reveal, driven here in JS
+    // so it works in every browser incl. Safari/iOS): split each step's title
+    // and body into `.w` word spans, then scrub their opacity from dim to full
+    // as each word rises through the reading band. Splitting preserves inline
+    // elements (e.g. <b>) by recursing into them.
+    const wrapWords = (el: Element) => {
+      Array.from(el.childNodes).forEach((node) => {
+        if (node.nodeType === Node.TEXT_NODE) {
+          const text = node.textContent ?? "";
+          if (!text.trim()) return;
+          const frag = document.createDocumentFragment();
+          text.split(/(\s+)/).forEach((part) => {
+            if (part === "") return;
+            if (/^\s+$/.test(part)) {
+              frag.appendChild(document.createTextNode(part));
+            } else {
+              const span = document.createElement("span");
+              span.className = "w";
+              span.textContent = part;
+              frag.appendChild(span);
             }
           });
-        },
-        { threshold: 0.12, rootMargin: "0px 0px -8% 0px" },
-      );
-      bodies.forEach((bd) => {
-        if (!bd.classList.contains("is-in")) revealIO.observe(bd);
+          el.replaceChild(frag, node);
+        } else if (node.nodeType === Node.ELEMENT_NODE) {
+          wrapWords(node as Element);
+        }
       });
-    } else {
-      bodies.forEach((bd) => bd.classList.add("is-in"));
-    }
+    };
+    tl.querySelectorAll(".tl-title, .tl-text").forEach(wrapWords);
+    const words = Array.from(tl.querySelectorAll<HTMLElement>(".w"));
 
     let ticking = false;
 
     const update = () => {
       ticking = false;
-      const ref = window.innerHeight * 0.55; // the "reading line"
+      const vh = window.innerHeight;
+      const ref = vh * 0.55; // the "reading line" (rail fill + active node)
       const rb = rail.getBoundingClientRect();
       const frac = Math.max(0, Math.min(1, (ref - rb.top) / (rb.height || 1)));
       fill.style.transform = `scaleY(${frac})`;
@@ -107,6 +115,17 @@ const n = (i: number) => String(i + 1).padStart(2, "0");
         st.classList.toggle("is-active", i === active);
         st.classList.toggle("is-done", i < active);
       });
+
+      // Word scrub: full above `end`, dim below `start`, ramped between.
+      const start = vh * 0.86;
+      const end = vh * 0.42;
+      for (const w of words) {
+        const r = w.getBoundingClientRect();
+        const y = r.top + r.height / 2;
+        let t = (start - y) / (start - end);
+        t = t < 0 ? 0 : t > 1 ? 1 : t;
+        w.style.opacity = (0.18 + 0.82 * t).toFixed(3);
+      }
     };
 
     const onScroll = () => {
