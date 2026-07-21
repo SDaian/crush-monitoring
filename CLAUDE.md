@@ -273,6 +273,13 @@ Conventions:
   (daily via the Action, committed with the trades refresh) — never
   hand-edit; every number on the page must be a true statement about real
   disclosures. "Late" = past the 45-day statutory maximum (ADR 0002).
+- **Visual identity manual:** `landing/DESIGN.md` is the design-agnostic
+  identity + design system every page and redesign must follow (brand
+  essence, color/type/motion/voice rules, the component vocabulary,
+  a11y/perf requirements, governance). It is the source of truth for the
+  *look*; changing the system (a token, a type rule, a new primitive) means
+  editing `DESIGN.md` in the **same PR** as the code. When a design and the
+  manual disagree, the manual wins.
 - Design tokens live in `src/styles/global.css` `@theme`; no hex values
   outside the token set; zero border-radius; IBM Plex Mono for all
   data/labels/nav/form elements.

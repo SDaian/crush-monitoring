@@ -19,6 +19,12 @@ Four pages, sharing `src/components/Header.astro` / `Footer.astro`:
   trackers, email only, GDPR rights); linked from the footer and the
   signup form's beta note.
 
+**The visual identity and design system is `DESIGN.md`** — the design-agnostic
+manual (brand essence, color/type/motion/voice rules, the component vocabulary,
+accessibility/performance requirements) every page and future redesign must
+follow. Read it before changing anything visual; update it in the same PR when
+the system itself changes.
+
 The approved prototype in `prototype/capitol-trades-landing.html` is the
 visual source of truth, with four deliberate deviations agreed in the design
 review (see `docs/adr/` and `CONTEXT.md`):
