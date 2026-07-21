@@ -70,6 +70,7 @@ table is the meaning behind them.
 | `--color-stamp` | `oklch(0.53 0.207 22.317)` | `#C8102E` | **The single accent.** Brand, primary CTA, "late", live dot. Never decorative. |
 | `--color-buy` | `oklch(0.517 0.121 156.294)` | `#0E7C4A` | Data truth: a BUY. |
 | `--color-sell` | `oklch(0.501 0.178 28.705)` | `#B3261E` | Data truth: a SELL. |
+| `--color-wash` | `oklch(0.963 0.004 100)` | `#F4F3EE` | Faint newsprint tint for framed insets (e.g. the email-preview stage). One step off paper. |
 
 **Laws.**
 
@@ -194,24 +195,34 @@ agnostic building blocks** — the manual defines the primitive; a page's layout
 decides where they go. Canonical CSS lives in `src/styles/global.css` and the
 shared Astro components in `src/components/`.
 
-- **Header** — shared, single row: wordmark left; mono nav + one filled CTA
-  right; editorial rule beneath. Current page marked (stamp underline / active).
+- **Header** — shared, single row: wordmark left; mono nav + one filled **ink
+  pill** CTA right; **3px double ink rule** beneath (the masthead cue). Current
+  page marked with the stamp underline / active state.
 - **Footer** — shared: wordmark + identity blurb, a sitemap, the legal line.
 - **Section header** — a title (heavy sans, uppercase, tracked) + optional mono
   tag on the right, over a 2px ink rule. The canonical way to open a section.
 - **Eyebrow / kicker** — mono, uppercase, tracked, `ink-soft` with a stamp-red
   emphasis span. Sits above a headline.
 - **Headline + stamp underline** — the signature (see §4).
-- **Button (`.btn`)** — ink or stamp fill, mono uppercase label, sharp corners,
-  press feedback. Primary action is stamp red and rationed to one per view.
+- **Button** — mono uppercase label, sharp corners, press feedback. `.btn` is
+  ink-filled (secondary/utility); `.btn-stamp` is the **stamp-red primary**,
+  rationed to one per view (the two invert on hover).
 - **Form field + contract** — mono, bordered, sharp. Forms POST form-encoded to a
   `PUBLIC_*_ENDPOINT` env var (provider-agnostic); unset → an honest "opens soon"
   state; inline `role="status"` feedback with a rise-in. 16px font on touch
   (iOS-zoom guard).
-- **Data primitives** — feed / disclosure row, the "today's email" preview card,
-  the stat strip, definition card, review card, FAQ clause, leaderboard row. All
-  share: mono for data, `buy`/`sell`/`late` semantic colors, `min-width:0` cells
-  that wrap rather than overflow, and real data behind every value.
+- **Email-preview card** — the daily digest drawn as a broadsheet clipping: a
+  stamp "Today's email" tab, an ink-ruled masthead (from + subject with live
+  counts), disclosure rows, a mono footer. The hero **product shot**, framed on a
+  `wash` inset; built from the **real feed**, never mocked rows.
+- **Problem band** — a centered accusation headline + lede, over a three-column
+  Source / Structure / Signal explainer. Frames the "why" between hero and proof.
+- **Source-trust row** — "Sourced only from" + the official portal names (House
+  Clerk · Senate eFD · OGE 278-T), mono, placed near the primary CTA.
+- **Data primitives** — feed / disclosure row, the stat strip, definition card,
+  review card, FAQ clause, leaderboard row. All share: mono for data,
+  `buy`/`sell`/`late` semantic colors, `min-width:0` cells that wrap rather than
+  overflow, and real data behind every value.
 - **Live dot** — the one circle; pulses only to mean "live."
 
 Adding a component: express it in the tokens and these patterns; if it needs a new
