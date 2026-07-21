@@ -9,10 +9,14 @@ interface Props {
 const { active } = Astro.props;
 const home = Astro.url.pathname === "/";
 
+// Every nav link carries the 2px bottom border at all times (transparent
+// until active) so the active item's red underline can't shift its baseline
+// relative to the others.
 const link =
-  "mono ml-6 text-[.75rem] uppercase tracking-[.07em] no-underline " +
-  "hover:text-ink focus-visible:text-ink";
-const active_cls = "border-b-2 border-stamp pb-0.5 text-ink";
+  "mono ml-6 border-b-2 pb-0.5 text-[.75rem] uppercase tracking-[.07em] " +
+  "no-underline hover:text-ink focus-visible:text-ink";
+const active_cls = "border-stamp text-ink";
+const idle_cls = "border-transparent text-ink-soft";
 ---
 
 <header
@@ -26,20 +30,20 @@ const active_cls = "border-b-2 border-stamp pb-0.5 text-ink";
     Capitol <span class="text-stamp">Ledger</span>
   </a>
   <nav class="flex items-center">
-    <a href="/#feed" class={`${link} text-ink-soft`}>Live feed</a>
+    <a href="/#feed" class={`${link} ${idle_cls}`}>Live feed</a>
     <a
       href="/members"
-      class={`${link} ${active === "members" ? active_cls : "text-ink-soft"}`}
+      class={`${link} ${active === "members" ? active_cls : idle_cls}`}
       aria-current={active === "members" ? "page" : undefined}>Members</a
     >
     <a
       href="/late"
-      class={`${link} ${active === "late" ? active_cls : "text-ink-soft"}`}
+      class={`${link} ${active === "late" ? active_cls : idle_cls}`}
       aria-current={active === "late" ? "page" : undefined}>Late filers</a
     >
     <a
       href="/how-it-works"
-      class={`${link} ${active === "how" ? active_cls : "text-ink-soft"}`}
+      class={`${link} ${active === "how" ? active_cls : idle_cls}`}
       aria-current={active === "how" ? "page" : undefined}>How it works</a
     >
     <a

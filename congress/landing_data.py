@@ -301,6 +301,16 @@ def member_payload(name: str, trades: list[dict], holdings: dict) -> dict:
     stocks = h.get("stocks", []) if h.get("available") else []
     hlo = sum(s.get("value_lo") or 0 for s in stocks)
     hhi = sum(s.get("value_hi") or 0 for s in stocks)
+
+    # Each position's share of the portfolio, by bracket midpoint over the WHOLE
+    # portfolio (not just the displayed top slice), so the shares are honest.
+    def _stock_mid(s: dict) -> float:
+        lo, hi = s.get("value_lo"), s.get("value_hi")
+        if lo is None:
+            return 0.0
+        return (lo + (hi if hi is not None else lo)) / 2
+    total_mid = sum(_stock_mid(s) for s in stocks)
+
     holdings_block = {
         "available": bool(h.get("available")),
         "filingDate": h.get("filing_date"),
@@ -312,6 +322,9 @@ def member_payload(name: str, trades: list[dict], holdings: dict) -> dict:
             "asset": s.get("asset") or "",
             "type": s.get("asset_type") or "",
             "valueLabel": compact_bucket(s.get("value_lo"), s.get("value_hi")),
+            "pctPortfolio": (
+                round(100 * _stock_mid(s) / total_mid, 1) if total_mid else None
+            ),
         } for s in sorted(
             stocks,
             key=lambda s: -(s.get("value_hi") or s.get("value_lo") or 0),
@@ -323,7 +336,11 @@ def member_payload(name: str, trades: list[dict], holdings: dict) -> dict:
         "name": name,
         "party": ref.get("party"),
         "state": ref.get("state"),
-        "chamber": ("Senate" if ref.get("chamber") == "senate" else "House"),
+        # Executive-branch filers (OGE 278-T, e.g. the President) are neither
+        # House nor Senate — don't mislabel them as "House".
+        "chamber": {"senate": "Senate", "executive": "Executive"}.get(
+            ref.get("chamber"), "House"
+        ),
         "district": ref.get("district"),
         "summary": {
             "trades": len(ts),
