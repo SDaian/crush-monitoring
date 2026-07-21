@@ -128,7 +128,7 @@ const description =
 
     <!-- ===== Hero: promise + signup (left), live "today's email" (right) ===== -->
     <section
-      class="mx-auto max-w-[1200px] border-b-[3px] border-double border-ink px-[5vw] pt-[7vh] pb-[6vh]"
+      class="mx-auto max-w-[75rem] border-b-[3px] border-double border-ink px-[5vw] pt-[7vh] pb-[6vh]"
       id="feed"
     >
       <div class="hero-grid">
@@ -151,7 +151,7 @@ const description =
           </p>
           <form
             id="join"
-            class="mt-7 flex flex-wrap max-w-[440px] max-[840px]:flex-col"
+            class="mt-7 flex flex-wrap max-w-[27.5rem] max-[840px]:flex-col"
             data-endpoint={SIGNUP_ENDPOINT}
             novalidate
           >
@@ -176,7 +176,7 @@ const description =
             >
             </p>
           </form>
-          <p class="mono mt-3 text-[.72rem] text-ink-soft">
+          <p class="mono mt-3 text-[.75rem] text-ink-soft">
             <span class="max-[760px]:block"
               >Free while in beta · one email per day — always.</span
             >
@@ -187,11 +187,11 @@ const description =
               >Privacy matters</a
             >
           </p>
-          <div class="mt-7 border-t border-rule pt-[18px]">
-            <div class="mono mb-[9px] text-[.58rem] uppercase tracking-[.15em] text-ink-soft">
+          <div class="mt-7 border-t border-rule pt-4.5">
+            <div class="mono mb-2.25 text-[.75rem] uppercase tracking-[.15em] text-ink-soft">
               Sourced only from
             </div>
-            <div class="mono flex flex-wrap gap-x-5 gap-y-1 text-[.74rem] font-semibold text-ink/70">
+            <div class="mono flex flex-wrap gap-x-5 gap-y-1 text-[.75rem] font-semibold text-ink/70">
               <span>House Clerk</span><span>Senate eFD</span><span>OGE 278-T</span>
             </div>
           </div>
@@ -236,7 +236,7 @@ const description =
           </div>
           <a
             href="/late"
-            class="mono mt-4 inline-block text-[.72rem] uppercase tracking-[.06em] text-stamp no-underline hover:text-ink focus-visible:text-ink"
+            class="mono mt-4 inline-block text-[.75rem] uppercase tracking-[.06em] text-stamp no-underline hover:text-ink focus-visible:text-ink"
             >See the year's worst delays →</a
           >
         </div>
@@ -244,12 +244,12 @@ const description =
     </section>
 
     <!-- ===== Problem band + how it works ===== -->
-    <section class="mx-auto max-w-[1200px] px-[5vw] pt-[10vh]">
+    <section class="mx-auto max-w-[75rem] px-[5vw] pt-[10vh]">
       <div class="text-center">
         <h2 class="mx-auto max-w-[22ch] text-[clamp(1.9rem,4vw,3.1rem)] font-black leading-[1.08] tracking-[-0.03em] text-balance">
           They don't hide the trades. They just bury them.
         </h2>
-        <p class="mx-auto mt-[18px] max-w-[54ch] text-pretty text-[1.02rem] leading-[1.6] text-ink-soft">
+        <p class="mx-auto mt-4.5 max-w-[54ch] text-pretty text-[1.02rem] leading-[1.6] text-ink-soft">
           The disclosures are technically public — scattered across three
           government portals, locked in PDFs, filed weeks or months late. We
           read all of it, every morning, so you don't have to.
@@ -258,7 +258,7 @@ const description =
       <div class="mt-14">
         <Timeline steps={HOW_STEPS} />
       </div>
-      <div class="mx-auto max-w-[760px] pl-[78px] max-[600px]:pl-[58px]">
+      <div class="mx-auto max-w-[47.5rem] pl-19.5 max-[600px]:pl-14.5">
         <a
           href="/how-it-works"
           class="mono mt-4 inline-block text-[.78rem] uppercase tracking-[.06em] text-stamp no-underline hover:text-ink focus-visible:text-ink"
@@ -274,19 +274,19 @@ const description =
     >
       <div class="border-r border-rule px-[5vw] py-9 max-[760px]:border-r-0 max-[760px]:border-b max-[760px]:border-b-rule">
         <div class="stat-n">{fmtTrades}</div>
-        <div class="mono mt-2 text-[.72rem] uppercase tracking-[.1em] text-ink-soft">
+        <div class="eyebrow mt-2">
           Trades tracked this year
         </div>
       </div>
       <div class="border-r border-rule px-[5vw] py-9 max-[760px]:border-r-0 max-[760px]:border-b max-[760px]:border-b-rule">
         <div class="stat-n">{fmtVol}</div>
-        <div class="mono mt-2 text-[.72rem] uppercase tracking-[.1em] text-ink-soft">
+        <div class="eyebrow mt-2">
           Estimated volume disclosed
         </div>
       </div>
       <div class="px-[5vw] py-9">
         <div class="stat-n">{fmtLag}</div>
-        <div class="mono mt-2 text-[.72rem] uppercase tracking-[.1em] text-ink-soft">
+        <div class="eyebrow mt-2">
           Median delay, trade to disclosure
         </div>
       </div>
@@ -294,11 +294,11 @@ const description =
 
     <!-- ===== Reviews ===== -->
     <section
-      class="mx-auto max-w-[1200px] px-[5vw] py-[10vh]"
+      class="mx-auto max-w-[75rem] px-[5vw] py-[10vh]"
       id="reviews"
     >
       <div class="border-b-2 border-ink pb-2.5">
-        <h2 class="text-[.85rem] font-extrabold uppercase tracking-[.1em]">
+        <h2 class="section-title">
           What readers say
         </h2>
       </div>
@@ -317,7 +317,7 @@ const description =
               <p class="text-[.92rem] leading-[1.6] text-pretty text-ink-soft">
                 {r.quote}
               </p>
-              <footer class="mono mt-auto pt-5 text-[.72rem] uppercase tracking-[.1em] text-ink-soft">
+              <footer class="eyebrow mt-auto pt-5">
                 {r.name} · {r.flag} {r.country}
               </footer>
             </article>
@@ -339,12 +339,12 @@ const description =
 
     <!-- ===== Contact ===== -->
     <section class="border-t border-rule" id="contact">
-      <div class="mx-auto max-w-[1200px] px-[5vw] py-[10vh]">
-        <div class="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1 border-b-2 border-ink pb-2.5">
-          <h2 class="whitespace-nowrap text-[.85rem] font-extrabold uppercase tracking-[.1em]">
+      <div class="mx-auto max-w-[75rem] px-[5vw] py-[10vh]">
+        <div class="section-head">
+          <h2 class="section-title whitespace-nowrap">
             Contact
           </h2>
-          <span class="mono text-[.72rem] uppercase tracking-[.1em] text-ink-soft">
+          <span class="eyebrow">
             We read everything
           </span>
         </div>
@@ -358,7 +358,7 @@ const description =
               missing, or you want Capitol Ledger to track something new —
               write. Press and partnership notes land in the same inbox.
             </p>
-            <p class="mono text-[.72rem] leading-[1.7] text-ink-soft">
+            <p class="mono text-[.75rem] leading-[1.7] text-ink-soft">
               Replies usually within a day.
               <b class="font-semibold text-stamp">This form sends one message</b>
               — it never subscribes you to anything.
@@ -366,14 +366,14 @@ const description =
           </div>
           <form
             id="contact-form"
-            class="flex flex-col gap-[18px]"
+            class="flex flex-col gap-4.5"
             data-endpoint={CONTACT_ENDPOINT}
             data-key={CONTACT_KEY}
             novalidate
           >
             <div>
               <label
-                class="mono mb-[7px] block text-[.7rem] uppercase tracking-[.1em] text-ink-soft"
+                class="eyebrow mb-1.75 block"
                 for="contact-email">Your email</label
               >
               <input
@@ -388,7 +388,7 @@ const description =
             </div>
             <div>
               <label
-                class="mono mb-[7px] block text-[.7rem] uppercase tracking-[.1em] text-ink-soft"
+                class="eyebrow mb-1.75 block"
                 for="contact-message">Message</label
               >
               <textarea
@@ -601,16 +601,16 @@ const description =
       .hero-grid {
         display: grid;
         grid-template-columns: 1.22fr 1fr;
-        gap: 44px;
+        gap: 2.75rem;
         align-items: center;
       }
       .kicker {
         display: flex;
         align-items: baseline;
-        gap: 9px;
-        margin-bottom: 20px;
+        gap: 0.5625rem;
+        margin-bottom: 1.25rem;
         font-family: var(--font-mono);
-        font-size: 0.68rem;
+        font-size: 0.75rem;
         font-weight: 600;
         text-transform: uppercase;
         letter-spacing: 0.15em;
@@ -618,7 +618,7 @@ const description =
       }
       .kicker .live-dot {
         position: relative;
-        top: 1px;
+        top: 0.0625rem;
         flex: none;
       }
 
@@ -628,16 +628,16 @@ const description =
         min-width: 0;
         background: var(--color-wash);
         border: 1px solid var(--color-rule);
-        padding: 26px;
+        padding: 1.625rem;
       }
       .tagm {
         display: inline-block;
-        margin-bottom: -1px;
-        padding: 4px 10px;
+        margin-bottom: -0.0625rem;
+        padding: 0.25rem 0.625rem;
         background: var(--color-stamp);
         color: var(--color-paper);
         font-family: var(--font-mono);
-        font-size: 0.58rem;
+        font-size: 0.75rem;
         letter-spacing: 0.16em;
         text-transform: uppercase;
       }
@@ -647,7 +647,7 @@ const description =
         box-shadow: 0 22px 44px -26px rgba(20, 22, 26, 0.3);
       }
       .mail-hd {
-        padding: 15px 18px;
+        padding: 0.9375rem 1.125rem;
         border-bottom: 2px solid var(--color-ink);
       }
       .mail-from {
@@ -656,19 +656,19 @@ const description =
         letter-spacing: -0.01em;
       }
       .mail-subj {
-        margin-top: 3px;
-        font-size: 0.7rem;
+        margin-top: 0.1875rem;
+        font-size: 0.75rem;
         color: var(--color-ink-soft);
       }
       .mrow {
         display: grid;
         grid-template-columns: 1.2fr 0.55fr 0.5fr 0.95fr;
-        gap: 8px;
+        gap: 0.5rem;
         align-items: baseline;
-        padding: 11px 18px;
+        padding: 0.6875rem 1.125rem;
         border-bottom: 1px solid var(--color-rule);
         font-family: var(--font-mono);
-        font-size: 0.7rem;
+        font-size: 0.75rem;
       }
       .mrow > * {
         min-width: 0;
@@ -680,15 +680,15 @@ const description =
         font-size: 0.8rem;
       }
       .mail-ft {
-        padding: 11px 18px;
-        font-size: 0.62rem;
+        padding: 0.6875rem 1.125rem;
+        font-size: 0.75rem;
         color: var(--color-ink-soft);
       }
 
-      @media (max-width: 840px) {
+      @media (max-width:52.5rem) {
         .hero-grid {
           grid-template-columns: 1fr;
-          gap: 32px;
+          gap: 2rem;
         }
       }
     </style>

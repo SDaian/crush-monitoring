@@ -5,7 +5,7 @@
 
 @import "tailwindcss";
 
-/* Self-hosted fonts (fontsource; font-display: swap is their default). */
+/* Self-hosted fonts (fontsource; font-display:swap is their default). */
 @import "@fontsource/libre-franklin/400.css";
 @import "@fontsource/libre-franklin/600.css";
 @import "@fontsource/libre-franklin/800.css";
@@ -18,15 +18,15 @@
   /* PRD §6 tokens in OKLCH (converted losslessly from the spec's hex; all
      text/background pairs verified ≥4.5:1 WCAG AA on paper). */
   --color-paper: oklch(0.988 0.003 106.448); /* #FBFBF9 */
-  --color-ink: oklch(0.2 0.009 264.36); /* #14161A */
-  --color-ink-soft: oklch(0.481 0.014 264.438); /* #5A5E66 */
-  --color-rule: oklch(0.912 0.008 98.888); /* #E3E2DC */
-  --color-stamp: oklch(0.53 0.207 22.317); /* #C8102E */
-  --color-buy: oklch(0.517 0.121 156.294); /* #0E7C4A */
-  --color-sell: oklch(0.501 0.178 28.705); /* #B3261E */
+  --color-ink:oklch(0.2 0.009 264.36); /* #14161A */
+  --color-ink-soft:oklch(0.481 0.014 264.438); /* #5A5E66 */
+  --color-rule:oklch(0.912 0.008 98.888); /* #E3E2DC */
+  --color-stamp:oklch(0.53 0.207 22.317); /* #C8102E */
+  --color-buy:oklch(0.517 0.121 156.294); /* #0E7C4A */
+  --color-sell:oklch(0.501 0.178 28.705); /* #B3261E */
   /* Faint newsprint tint for framed insets (e.g. the email-preview stage);
      one step off paper, still within the token set (DESIGN.md §3). */
-  --color-wash: oklch(0.963 0.004 100); /* #F4F3EE */
+  --color-wash:oklch(0.963 0.004 100); /* #F4F3EE */
 
   /* The "* fallback" families are generated at build time by fontaine
      (astro.config.mjs): local Arial / Courier New with size-adjust and
@@ -36,7 +36,7 @@
      fallback", not "Libre Franklin fallback") because fontsource declares
      font-family unquoted and fontaine parses only the first token — keep
      these in sync with the generated @font-face rules in the built CSS. */
-  --font-sans: "Libre Franklin", "Libre fallback", ui-sans-serif, system-ui,
+  --font-sans:"Libre Franklin", "Libre fallback", ui-sans-serif, system-ui,
     sans-serif;
   --font-mono: "IBM Plex Mono", "IBM fallback", ui-monospace, monospace;
 
@@ -87,9 +87,52 @@
     font-family: var(--font-mono);
   }
 
+  /* ---------- reusable typographic primitives ----------
+     Shared patterns live here so they change in ONE place; Tailwind
+     utilities still override per use (e.g. `eyebrow text-stamp`,
+     `section-title whitespace-nowrap`). Minimum size is the 0.75rem floor
+     (DESIGN.md §4). */
+
+  /* Small mono label:section tags, stat labels, kickers, captions. */
+  .eyebrow {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-ink-soft);
+  }
+
+  /* The bold section heading (paired with .section-head). */
+  .section-title {
+    font-size: 0.85rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-ink);
+  }
+
+  /* The section heading row:title left, optional mono tag right, over the
+     0.125rem ink rule; wraps cleanly on narrow screens. */
+  .section-head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.25rem 1.5rem;
+    padding-bottom: 0.625rem;
+    border-bottom: 2px solid var(--color-ink);
+  }
+
+  /* Mono small print:the signup beta note, footer, fine print. */
+  .fineprint {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--color-ink-soft);
+  }
+
   nav a,
   header > a {
-    transition: color 150ms ease; /* chrome eases like the button (plans/001) */
+    transition:color 150ms ease; /* chrome eases like the button (plans/001) */
     position: relative;
   }
   /* Extend the small header links to a ~44px touch target without moving
@@ -98,7 +141,7 @@
   header > a::after {
     content: "";
     position: absolute;
-    inset: -14px -8px;
+    inset: -0.875rem -0.5rem;
   }
 
   /* ---------- hero ---------- */
@@ -114,9 +157,9 @@
      the prototype's static 4px underline exactly.
      inline-block (not inline): absolutely-positioned children of INLINE
      boxes have engine-dependent containing-block behavior (WebKit
-     especially); inline-block gives the ::after a well-defined containing
+     especially); inline-block gives the::after a well-defined containing
      block everywhere, with identical single-line layout. (Preventive — the
-     actual mobile h-scroll report was iOS focus-zoom on a <16px input.) */
+     actual mobile h-scroll report was iOS focus-zoom on a <1rem input.) */
   .headline .underline-stamp {
     position: relative;
     display: inline-block;
@@ -131,26 +174,26 @@
        "filing", the y in "days") so the stamp never crosses a glyph, with a
        beat of padding that scales with the font size (user requests). */
     bottom: -0.13em;
-    height: 4px;
+    height: 0.25rem;
     background: var(--color-stamp);
     transform-origin: left;
     animation: stamp-in 400ms var(--ease-out) 300ms both;
   }
   @keyframes stamp-in {
-    from { transform: scaleX(0); }
-    to { transform: scaleX(1); }
+    from { transform:scaleX(0); }
+    to { transform:scaleX(1); }
   }
   .btn {
     font-family: var(--font-mono);
     font-size: 0.85rem;
     letter-spacing: 0.06em;
     text-transform: uppercase;
-    padding: 14px 26px;
+    padding: 0.875rem 1.625rem;
     background: var(--color-ink);
     color: var(--color-paper);
     border: 1px solid var(--color-ink);
     cursor: pointer;
-    transition: background 0.15s, color 0.15s, border-color 0.15s,
+    transition:background 0.15s, color 0.15s, border-color 0.15s,
       transform 160ms var(--ease-out);
   }
   .btn:hover {
@@ -168,7 +211,7 @@
     border-color: var(--color-ink);
   }
   .btn:active {
-    transform: scale(0.96); /* feedback on pointer-down (plans/002) */
+    transform:scale(0.96); /* feedback on pointer-down (plans/002) */
     /* Asymmetric timing (Apple §1): the press-in snaps; the release
        relaxes at the base rule's 160ms. */
     transition-duration: 0.15s, 0.15s, 0.15s, 100ms;
@@ -182,33 +225,33 @@
     animation: rise-in 200ms var(--ease-out) both;
   }
   @keyframes rise-in {
-    from { opacity: 0; transform: translateY(4px); }
-    to { opacity: 1; transform: none; }
+    from { opacity:0; transform:translateY(0.25rem); }
+    to { opacity:1; transform:none; }
   }
   .email-input {
     font-family: var(--font-mono);
     font-size: 0.9rem;
-    padding: 14px 16px;
+    padding: 0.875rem 1rem;
     border: 1px solid var(--color-ink);
     background: transparent;
-    min-width: min(280px, 100%); /* never wider than the form row */
+    min-width:min(17.5rem, 100%); /* never wider than the form row */
     max-width: 100%;
   }
-  /* Contact-form fields: the signup input's look at full width. */
+  /* Contact-form fields:the signup input's look at full width. */
   .contact-field {
     font-family: var(--font-mono);
     font-size: 0.9rem;
-    padding: 14px 16px;
+    padding: 0.875rem 1rem;
     border: 1px solid var(--color-ink);
     background: transparent;
     width: 100%;
     color: var(--color-ink);
   }
   textarea.contact-field {
-    min-height: 130px;
+    min-height: 8.125rem;
     resize: vertical;
   }
-  @media (hover: none) and (pointer: coarse) {
+  @media (hover:none) and (pointer: coarse) {
     .email-input,
     .contact-field {
       /* iOS Safari auto-zooms the page (and never zooms back) when focusing
@@ -221,36 +264,36 @@
 
   /* ---------- disclosure feed (signature element) ---------- */
   .live-dot {
-    width: 7px;
-    height: 7px;
-    border-radius: 50%; /* the one deliberate radius: it is a dot */
+    width: 0.4375rem;
+    height: 0.4375rem;
+    border-radius: 50%; /* the one deliberate radius:it is a dot */
     background: var(--color-stamp);
     animation: pulse 1.6s infinite;
   }
   @keyframes pulse {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.25; }
+    0%, 100% { opacity:1; }
+    50% { opacity:0.25; }
   }
 
   .feed-row {
     display: grid;
     grid-template-columns: 1.5fr 0.8fr 0.7fr 1fr 1fr;
-    gap: 12px;
+    gap: 0.75rem;
     align-items: center;
-    padding: 16px 4px;
+    padding: 1rem 0.25rem;
     border-bottom: 1px solid var(--color-rule);
     font-family: var(--font-mono);
     font-size: 0.83rem;
     animation: drop 0.5s var(--ease-out) both;
   }
   @keyframes drop {
-    from { opacity: 0; transform: translateY(-6px); }
-    to { opacity: 1; transform: none; }
+    from { opacity:0; transform:translateY(-0.375rem); }
+    to { opacity:1; transform:none; }
   }
-  .feed-row:nth-child(3) { animation-delay: 0.08s; }
-  .feed-row:nth-child(4) { animation-delay: 0.16s; }
-  .feed-row:nth-child(5) { animation-delay: 0.24s; }
-  .feed-row:nth-child(6) { animation-delay: 0.32s; }
+  .feed-row:nth-child(3) { animation-delay:0.08s; }
+  .feed-row:nth-child(4) { animation-delay:0.16s; }
+  .feed-row:nth-child(5) { animation-delay:0.24s; }
+  .feed-row:nth-child(6) { animation-delay:0.32s; }
 
   .feed-row > * {
     /* Grid items default to min-width:auto; long mono strings (or wide
@@ -268,28 +311,28 @@
     display: block;
     font-weight: 400;
     color: var(--color-ink-soft);
-    font-size: 0.72rem;
-    margin-top: 2px;
+    font-size: 0.75rem;
+    margin-top: 0.125rem;
   }
 
   /* ---------- scroll timeline (Timeline.astro) ----------
-     Default (no-JS) state: every step lit and readable, a static hairline
+     Default (no-JS) state:every step lit and readable, a static hairline
      rail — a plain numbered timeline. `.is-scroll` (added by JS when motion
      is allowed) dims upcoming steps and reveals them on scroll; `.is-static`
      (reduced motion) draws it complete without coupling to scroll. */
   .timeline {
     position: relative;
-    max-width: 760px;
+    max-width: 47.5rem;
     margin: 0 auto;
-    padding-left: 78px;
+    padding-left: 4.875rem;
   }
   .tl-rail,
   .tl-fill {
     position: absolute;
-    left: 27px;
-    top: 18px;
-    bottom: 18px;
-    width: 2px;
+    left: 1.6875rem;
+    top: 1.125rem;
+    bottom: 1.125rem;
+    width: 0.125rem;
   }
   .tl-rail {
     background: var(--color-rule);
@@ -307,7 +350,7 @@
   }
   .tl-step {
     position: relative;
-    padding: 24px 0 46px;
+    padding: 1.5rem 0 2.875rem;
     transition: opacity 0.35s var(--ease-out);
   }
   .tl-step:last-child {
@@ -315,15 +358,15 @@
   }
   .tl-node {
     position: absolute;
-    left: -78px;
-    top: 20px;
-    z-index: 1; /* opaque node sits above the rail/fill — the line never
+    left: -4.875rem;
+    top: 1.25rem;
+    z-index:1; /* opaque node sits above the rail/fill — the line never
                    shows through the square (it breaks cleanly at each node). */
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 54px;
-    height: 54px;
+    width: 3.375rem;
+    height: 3.375rem;
     background: var(--color-paper);
     border: 2px solid var(--color-rule);
     color: var(--color-ink-soft);
@@ -334,18 +377,17 @@
   }
   .tl-label {
     font-family: var(--font-mono);
-    font-size: 0.68rem;
+    font-size: 0.75rem;
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.12em;
     color: var(--color-stamp);
-    margin-bottom: 10px;
   }
   .tl-title {
     font-weight: 800;
     font-size: clamp(1.2rem, 2.2vw, 1.5rem);
     letter-spacing: -0.01em;
-    margin-bottom: 9px;
+    margin-bottom: 0.5625rem;
   }
   .tl-text {
     font-size: 0.98rem;
@@ -372,30 +414,30 @@
   }
   /* Word-by-word text reveal (Timeline.astro splits the title + body into
      `.w` word spans and scrubs their opacity from dim to full as each word
-     passes the reading line). Enhancement only: no-JS, reduced motion and
+     passes the reading line). Enhancement only:no-JS, reduced motion and
      high contrast render full-opacity text. The floor below covers the one
      frame before the first scroll update; JS then sets each word inline. */
   .timeline.is-scroll .w {
     opacity: 0.18;
   }
-  @media (prefers-contrast: more) {
+  @media (prefers-contrast:more) {
     .timeline.is-scroll .w {
       opacity: 1 !important;
     }
   }
-  @media (max-width: 600px) {
+  @media (max-width:37.5rem) {
     .timeline {
-      padding-left: 58px;
+      padding-left: 3.625rem;
     }
     .tl-rail,
     .tl-fill {
-      left: 20px;
+      left: 1.25rem;
     }
     .tl-node {
-      left: -58px;
-      top: 18px;
-      width: 42px;
-      height: 42px;
+      left: -3.625rem;
+      top: 1.125rem;
+      width: 2.625rem;
+      height: 2.625rem;
       font-size: 0.82rem;
     }
   }
@@ -409,14 +451,14 @@
     font-variant-numeric: tabular-nums;
   }
 
-  @media (max-width: 760px) {
+  @media (max-width:47.5rem) {
     /* Mobile-first override agreed in the grilling session (Q9): the
        filed-late column — the product's signature — stays visible on
        mobile; only the amount hides. Deliberate deviation from the
        prototype, which hid both. */
     .feed-row {
       grid-template-columns: 1.2fr 0.55fr 0.5fr 1fr;
-      font-size: 0.74rem;
+      font-size: 0.75rem;
     }
     .feed-row .amt {
       display: none;
@@ -430,32 +472,32 @@
      opacity/color feedback stays; translates, scales and the looping
      pulse go. Every animated element still reaches its visible end state. */
   @keyframes fade-in {
-    from { opacity: 0; }
-    to { opacity: 1; }
+    from { opacity:0; }
+    to { opacity:1; }
   }
-  @media (prefers-reduced-motion: reduce) {
+  @media (prefers-reduced-motion:reduce) {
     html {
       scroll-behavior: auto;
     }
     .feed-row {
       animation: fade-in 0.2s ease both;
-      animation-delay: 0s !important; /* no stagger under reduce */
+      animation-delay:0s !important; /* no stagger under reduce */
     }
     .live-dot {
-      animation: none; /* static, still visible */
+      animation:none; /* static, still visible */
     }
     .btn {
       transition: background 0.15s, color 0.15s, border-color 0.15s;
     }
     .btn:active {
-      transform: none; /* scale is movement */
+      transform:none; /* scale is movement */
     }
     .headline .underline-stamp::after {
       animation: none;
-      transform: scaleX(1); /* fully drawn, statically */
+      transform:scaleX(1); /* fully drawn, statically */
     }
     #form-status.is-in {
-      animation: fade-in 0.2s ease both; /* fade only, no rise */
+      animation:fade-in 0.2s ease both; /* fade only, no rise */
     }
   }
 }
