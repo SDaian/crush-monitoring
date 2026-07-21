@@ -56,6 +56,37 @@ const n = (i: number) => String(i + 1).padStart(2, "0");
     }
 
     tl.classList.add("is-scroll");
+
+    // Text reveal: each step's body rises in once as it enters. Pre-mark
+    // steps already in view (same synchronous tick as adding is-scroll) so
+    // they never flash hidden; observe the rest.
+    const bodies = steps
+      .map((st) => st.querySelector<HTMLElement>(".tl-body"))
+      .filter((el): el is HTMLElement => el !== null);
+    bodies.forEach((bd) => {
+      if (bd.getBoundingClientRect().top < window.innerHeight * 0.92) {
+        bd.classList.add("is-in");
+      }
+    });
+    if ("IntersectionObserver" in window) {
+      const revealIO = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((e) => {
+            if (e.isIntersecting) {
+              e.target.classList.add("is-in");
+              revealIO.unobserve(e.target);
+            }
+          });
+        },
+        { threshold: 0.12, rootMargin: "0px 0px -8% 0px" },
+      );
+      bodies.forEach((bd) => {
+        if (!bd.classList.contains("is-in")) revealIO.observe(bd);
+      });
+    } else {
+      bodies.forEach((bd) => bd.classList.add("is-in"));
+    }
+
     let ticking = false;
 
     const update = () => {
