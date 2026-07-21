@@ -38,7 +38,7 @@ from datetime import date, datetime, timedelta, timezone
 from email.message import EmailMessage
 from pathlib import Path
 
-from . import indicators, pipeline
+from . import analytics, indicators, pipeline
 
 API = "https://api.github.com"
 TRADES_JSON = pipeline.REPO_ROOT / "docs" / "data" / "congress-trades.json"
@@ -87,7 +87,8 @@ def _esc(s) -> str:
 
 
 def build_report(trades: list[dict], ai_tickers: dict, new_signals: list[dict],
-                 prev_ratings: dict, today_iso: str) -> dict:
+                 prev_ratings: dict, today_iso: str,
+                 traffic: dict | None = None) -> dict:
     """Compose the digest in both markdown (GitHub issue) and HTML (email).
     Pure — no I/O. Returns ``{markdown, html, ratings, counts}`` where
     ``ratings`` is ticker→label for the next run's flip diff."""
@@ -179,9 +180,15 @@ def build_report(trades: list[dict], ai_tickers: dict, new_signals: list[dict],
     else:
         disclosures_md += "_No new disclosures in this window._\n"
 
+    # --- Section 4 (optional): site traffic from Vercel Web Analytics ---
+    traffic_md, traffic_html = "", ""
+    if traffic:
+        traffic_md, traffic_html = analytics.format_block(traffic)
+        traffic_md = "\n" + traffic_md + "\n"
+
     markdown = (
         f"_{DISCLAIMER}_\n\n"
-        f"{scorecard}\n\n{signals_md}\n{disclosures_md}\n"
+        f"{scorecard}\n\n{signals_md}\n{disclosures_md}\n{traffic_md}"
         f"---\n_Full tracker: [AI stocks & trades]({TRACKER_URL})._"
     )
 
@@ -209,6 +216,7 @@ def build_report(trades: list[dict], ai_tickers: dict, new_signals: list[dict],
         "<h2>🔔 Signals overnight</h2>" + sig_block +
         f"<h2>🏛 New congressional disclosures <span style='font-weight:400;font-size:13px'>"
         f"(filed since {cutoff})</span></h2>" + _ul(disc_html, "No new disclosures in this window.") +
+        traffic_html +
         f"<hr><p style='font-size:12px'>Full tracker: <a href='{TRACKER_URL}'>AI stocks &amp; trades</a></p></div>"
     )
 
@@ -301,7 +309,11 @@ def main() -> int:
     new_signals = ai.get("meta", {}).get("new_signals", [])
     prev_ratings = state.get("ratings", {})
 
-    report = build_report(trades, ai_tickers, new_signals, prev_ratings, today_iso)
+    # Site traffic (Vercel Web Analytics) — non-fatal; None unless VERCEL_TOKEN
+    # + VERCEL_PROJECT_ID are set, so the report never fails on analytics.
+    traffic = analytics.daily_summary(today_iso)
+    report = build_report(trades, ai_tickers, new_signals, prev_ratings,
+                          today_iso, traffic=traffic)
     title = f"📋 Morning report — {today_iso}"
 
     # Primary delivery: direct email via SMTP (reliable regardless of GitHub
