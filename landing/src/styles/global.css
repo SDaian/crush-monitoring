@@ -350,7 +350,7 @@
   }
   .tl-step {
     position: relative;
-    padding: 1.5rem 0 2.875rem;
+    padding: 1.5rem 0;
     transition: opacity 0.35s var(--ease-out);
   }
   .tl-step:last-child {
