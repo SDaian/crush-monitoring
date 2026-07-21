@@ -1,0 +1,357 @@
+{
+  "_comment": "Generated from real official disclosures by congress/landing_data.py (daily Action). Do not edit by hand.",
+  "slug": "nancy-pelosi",
+  "name": "Nancy Pelosi",
+  "party": "D",
+  "state": "CA",
+  "chamber": "House",
+  "district": "CA-11",
+  "summary": {
+    "trades": 31,
+    "distinctTickers": 13,
+    "firstTx": "2024-12-20",
+    "lastTx": "2026-05-29",
+    "pctLate": 0,
+    "worstLate": 0
+  },
+  "topTickers": [
+    {
+      "ticker": "NVDA",
+      "count": 6,
+      "asset": "NVIDIA Corporation - Common Stock"
+    },
+    {
+      "ticker": "AAPL",
+      "count": 5,
+      "asset": "Apple Inc. - Common Stock"
+    },
+    {
+      "ticker": "GOOGL",
+      "count": 4,
+      "asset": "Alphabet Inc. - Class A Common Stock"
+    },
+    {
+      "ticker": "AMZN",
+      "count": 4,
+      "asset": "Amazon.com, Inc. - Common Stock"
+    },
+    {
+      "ticker": "TEM",
+      "count": 2,
+      "asset": "Tempus AI, Inc. - Class A Common Stock $100,000"
+    },
+    {
+      "ticker": "VST",
+      "count": 2,
+      "asset": "Vistra Corp. Common Stock"
+    }
+  ],
+  "trades": [
+    {
+      "ticker": "INTC",
+      "asset": "Intel Corporation - Common Stock",
+      "side": "BUY",
+      "amountBucket": "$1M – $5M",
+      "txDate": "2026-05-29",
+      "filedDate": "2026-06-23",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20034836.pdf"
+    },
+    {
+      "ticker": "UBER",
+      "asset": "Uber Technologies, Inc. Common Stock",
+      "side": "BUY",
+      "amountBucket": "$500K – $1M",
+      "txDate": "2026-05-29",
+      "filedDate": "2026-06-23",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20034836.pdf"
+    },
+    {
+      "ticker": "AB",
+      "asset": "AllianceBernstein Holding L.P. Units",
+      "side": "BUY",
+      "amountBucket": "$1M – $5M",
+      "txDate": "2026-01-16",
+      "filedDate": "2026-01-23",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20033725.pdf"
+    },
+    {
+      "ticker": "GOOGL",
+      "asset": "Alphabet Inc. - Class A Common Stock",
+      "side": "BUY",
+      "amountBucket": "$500K – $1M",
+      "txDate": "2026-01-16",
+      "filedDate": "2026-01-23",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20033725.pdf"
+    },
+    {
+      "ticker": "NVDA",
+      "asset": "NVIDIA Corporation - Common Stock",
+      "side": "BUY",
+      "amountBucket": "$250K – $500K",
+      "txDate": "2026-01-16",
+      "filedDate": "2026-01-23",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20033725.pdf"
+    },
+    {
+      "ticker": "TEM",
+      "asset": "Tempus AI, Inc. - Class A Common Stock $100,000",
+      "side": "BUY",
+      "amountBucket": "$50K – $200",
+      "txDate": "2026-01-16",
+      "filedDate": "2026-01-23",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20033725.pdf"
+    },
+    {
+      "ticker": "VST",
+      "asset": "Vistra Corp. Common Stock",
+      "side": "BUY",
+      "amountBucket": "$100K – $250K",
+      "txDate": "2026-01-16",
+      "filedDate": "2026-01-23",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20033725.pdf"
+    },
+    {
+      "ticker": "AMZN",
+      "asset": "Amazon.com, Inc. - Common Stock",
+      "side": "BUY",
+      "amountBucket": "$500K – $1M",
+      "txDate": "2026-01-16",
+      "filedDate": "2026-01-23",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20033725.pdf"
+    },
+    {
+      "ticker": "NVDA",
+      "asset": "NVIDIA Corporation - Common Stock",
+      "side": "BUY",
+      "amountBucket": "$100K – $250K",
+      "txDate": "2025-12-30",
+      "filedDate": "2026-01-23",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20033725.pdf"
+    },
+    {
+      "ticker": "PYPL",
+      "asset": "PayPal Holdings, Inc. - Common Stock",
+      "side": "SELL",
+      "amountBucket": "$250K – $500K",
+      "txDate": "2025-12-30",
+      "filedDate": "2026-01-23",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20033725.pdf"
+    },
+    {
+      "ticker": "DIS",
+      "asset": "Walt Disney Company",
+      "side": "SELL",
+      "amountBucket": "$1M – $5M",
+      "txDate": "2025-12-30",
+      "filedDate": "2026-01-23",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20033725.pdf"
+    },
+    {
+      "ticker": "GOOGL",
+      "asset": "Alphabet Inc. - Class A Common Stock",
+      "side": "BUY",
+      "amountBucket": "$250K – $500K",
+      "txDate": "2025-12-30",
+      "filedDate": "2026-01-23",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20033725.pdf"
+    },
+    {
+      "ticker": "GOOGL",
+      "asset": "Alphabet Inc. - Class A Common Stock",
+      "side": "SELL",
+      "amountBucket": "$1M – $5M",
+      "txDate": "2025-12-30",
+      "filedDate": "2026-01-23",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20033725.pdf"
+    },
+    {
+      "ticker": "AMZN",
+      "asset": "Amazon.com, Inc. - Common Stock",
+      "side": "BUY",
+      "amountBucket": "$100K – $250K",
+      "txDate": "2025-12-30",
+      "filedDate": "2026-01-23",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20033725.pdf"
+    },
+    {
+      "ticker": "AAPL",
+      "asset": "Apple Inc. - Common Stock",
+      "side": "BUY",
+      "amountBucket": "$250K – $500K",
+      "txDate": "2025-12-30",
+      "filedDate": "2026-01-23",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20033725.pdf"
+    },
+    {
+      "ticker": "AAPL",
+      "asset": "Apple Inc. - Common Stock",
+      "side": "SELL",
+      "amountBucket": "$5M – $25M",
+      "txDate": "2025-12-30",
+      "filedDate": "2026-01-23",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20033725.pdf"
+    },
+    {
+      "ticker": "NVDA",
+      "asset": "NVIDIA Corporation - Common Stock",
+      "side": "SELL",
+      "amountBucket": "$1M – $5M",
+      "txDate": "2025-12-24",
+      "filedDate": "2026-01-23",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20033725.pdf"
+    },
+    {
+      "ticker": "AMZN",
+      "asset": "Amazon.com, Inc. - Common Stock",
+      "side": "SELL",
+      "amountBucket": "$1M – $5M",
+      "txDate": "2025-12-24",
+      "filedDate": "2026-01-23",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20033725.pdf"
+    },
+    {
+      "ticker": "AAPL",
+      "asset": "Apple Inc. - Common Stock",
+      "side": "SELL",
+      "amountBucket": "$5M – $25M",
+      "txDate": "2025-12-24",
+      "filedDate": "2026-01-23",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20033725.pdf"
+    },
+    {
+      "ticker": "AAPL",
+      "asset": "Apple Inc. - Common Stock",
+      "side": "SELL",
+      "amountBucket": "$100K – $250K",
+      "txDate": "2025-10-22",
+      "filedDate": "2025-10-24",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20033337.pdf"
+    }
+  ],
+  "tradesShown": 20,
+  "holdings": {
+    "available": true,
+    "filingDate": "2026-05-15",
+    "reportYear": 2025,
+    "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/financial-pdfs/2025/10075701.pdf",
+    "totalLabel": "$49M – $233M",
+    "stocks": [
+      {
+        "ticker": "GOOGL",
+        "asset": "Alphabet Inc. - Class A",
+        "type": "Stock",
+        "valueLabel": "$5M – $25M"
+      },
+      {
+        "ticker": "AMZN",
+        "asset": "Amazon.com, Inc.",
+        "type": "Stock",
+        "valueLabel": "$5M – $25M"
+      },
+      {
+        "ticker": "AAPL",
+        "asset": "Apple Inc.",
+        "type": "Stock",
+        "valueLabel": "$5M – $25M"
+      },
+      {
+        "ticker": "AVGO",
+        "asset": "Broadcom Inc.",
+        "type": "Stock",
+        "valueLabel": "$5M – $25M"
+      },
+      {
+        "ticker": "MSFT",
+        "asset": "Microsoft Corporation",
+        "type": "Stock",
+        "valueLabel": "$5M – $25M"
+      },
+      {
+        "ticker": "NVDA",
+        "asset": "NVIDIA Corporation",
+        "type": "Stock",
+        "valueLabel": "$5M – $25M"
+      },
+      {
+        "ticker": "CRM",
+        "asset": "Salesforce.com Inc",
+        "type": "Stock",
+        "valueLabel": "$5M – $25M"
+      },
+      {
+        "ticker": "V",
+        "asset": "Visa Inc.",
+        "type": "Stock",
+        "valueLabel": "$5M – $25M"
+      },
+      {
+        "ticker": "GOOGL",
+        "asset": "Alphabet Inc.",
+        "type": "Option",
+        "valueLabel": "$1M – $5M"
+      },
+      {
+        "ticker": "AXP",
+        "asset": "American Express Company",
+        "type": "Stock",
+        "valueLabel": "$1M – $5M"
+      },
+      {
+        "ticker": "CRWD",
+        "asset": "CrowdStrike Holdings, Inc. - Class A",
+        "type": "Stock",
+        "valueLabel": "$1M – $5M"
+      },
+      {
+        "ticker": "NFLX",
+        "asset": "Netflix, Inc.",
+        "type": "Stock",
+        "valueLabel": "$1M – $5M"
+      },
+      {
+        "ticker": "PANW",
+        "asset": "Palo Alto Networks, Inc.",
+        "type": "Stock",
+        "valueLabel": "$1M – $5M"
+      },
+      {
+        "ticker": "AMZN",
+        "asset": "Amazon.com, Inc.",
+        "type": "Option",
+        "valueLabel": "$500K – $1M"
+      },
+      {
+        "ticker": "CMCSA",
+        "asset": "Comcast Corporation - Class A",
+        "type": "Stock",
+        "valueLabel": "$500K – $1M"
+      },
+      {
+        "ticker": "IBKR",
+        "asset": "Interactive Brokers Group, Inc.",
+        "type": "Stock",
+        "valueLabel": "$500K – $1M"
+      }
+    ]
+  }
+}

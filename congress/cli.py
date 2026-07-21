@@ -368,12 +368,24 @@ def _cmd_landing(args: argparse.Namespace) -> int:
     from . import landing_data
 
     trades = json.loads(Path(args.trades).read_text(encoding="utf-8"))["trades"]
+    # Holdings feed the /members pages' estimated-portfolio section; absent or
+    # unreadable holdings just skip that section (member pages still render).
+    holdings: dict = {}
+    holdings_path = Path(args.holdings)
+    if holdings_path.exists():
+        try:
+            holdings = json.loads(holdings_path.read_text(encoding="utf-8")).get(
+                "holdings", {}
+            )
+        except (ValueError, OSError):
+            holdings = {}
     today = datetime.now(timezone.utc).date()
     rows, stats = landing_data.write_files(trades, Path(args.output), today)
+    members = landing_data.write_member_files(trades, holdings, Path(args.output))
     print(
         f"landing data: {rows} feed rows; {stats['tradesThisYear']} trades "
         f"in {stats['year']}, est ${stats['estVolumeThisYearUsd']:,} vol, "
-        f"{stats['pctFiledLate']}% late → {args.output}"
+        f"{stats['pctFiledLate']}% late; {len(members)} member pages → {args.output}"
     )
     return 0
 
@@ -648,6 +660,7 @@ def build_parser() -> argparse.ArgumentParser:
         help="Regenerate the landing page's feed + stats data files.",
     )
     landing_p.add_argument("--trades", default=str(pipeline.DEFAULT_OUTPUT))
+    landing_p.add_argument("--holdings", default=str(DEFAULT_HOLDINGS))
     landing_p.add_argument("--output", default=str(DEFAULT_LANDING_DATA))
     landing_p.set_defaults(func=_cmd_landing)
 

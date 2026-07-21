@@ -1,16 +1,23 @@
 ---
 // Shared site footer: brand blurb (the SEO copy names only politicians
 // truly in the tracked data — Pelosi, Trump (executive 278-T filings),
-// Tuberville, Greene — keep it that way), a sitemap, and the legal line.
+// Tuberville, Greene — each now linking to its /members page), a sitemap,
+// and the legal line.
 const links = [
   { href: "/", label: "Home" },
   { href: "/#feed", label: "Live feed" },
+  { href: "/members", label: "Members" },
   { href: "/late", label: "Late filers" },
   { href: "/how-it-works", label: "How it works" },
   { href: "/#join", label: "Get alerts" },
   { href: "/#contact", label: "Contact" },
   { href: "/privacy", label: "Privacy & terms" },
 ];
+
+// Names in the blurb link to their member pages (internal linking / SEO).
+const nameLink =
+  "text-ink-soft underline decoration-rule underline-offset-2 " +
+  "hover:text-ink hover:decoration-stamp focus-visible:text-ink";
 ---
 
 <footer class="border-t border-rule px-[5vw] pt-10 pb-6">
@@ -26,10 +33,17 @@ const links = [
       </a>
       <p class="mt-3 max-w-[52ch] text-[.85rem] leading-[1.65] text-pretty text-ink-soft">
         Capitol Ledger tracks politician stock trading, from Congress to the
-        White House, straight from official STOCK Act filings — Nancy
-        Pelosi's disclosures, Donald Trump's filings, Tommy Tuberville's
-        trades, Marjorie Taylor Greene's portfolio moves, and the members
-        who file weeks past the 45-day deadline — in one daily email.
+        White House, straight from official STOCK Act filings — <a
+          href="/members/nancy-pelosi"
+          class={nameLink}>Nancy Pelosi</a
+        >'s disclosures, <a href="/members/donald-j-trump" class={nameLink}
+          >Donald Trump</a
+        >'s filings, <a href="/members/tommy-tuberville" class={nameLink}
+          >Tommy Tuberville</a
+        >'s trades, <a href="/members/marjorie-taylor-greene" class={nameLink}
+          >Marjorie Taylor Greene</a
+        >'s portfolio moves, and the members who file weeks past the 45-day
+        deadline — in one daily email.
       </p>
     </div>
     <nav aria-label="Site map">

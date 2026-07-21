@@ -14,7 +14,7 @@ added *around* that record, never instead of it.
 | Stage | Trigger | Move | Status |
 |---|---|---|---|
 | 0 — JSON in git | — (current) | Pipeline writes JSON, the daily Action commits it, static pages read it. Free audit log, zero infra. | ✅ live |
-| 1 — SQLite in the pipeline | Member/ticker pages or query-heavy generators | The Action loads trades into a local SQLite (stdlib `sqlite3`, keeps the offline-test dependency policy); generators become SQL; output stays the same small JSONs. No servers. DuckDB is the alternative if the queries turn analytical. | planned |
+| 1 — SQLite in the pipeline | Member/ticker pages or query-heavy generators | The Action loads trades into a local SQLite (stdlib `sqlite3`, keeps the offline-test dependency policy); generators become SQL; output stays the same small JSONs. No servers. DuckDB is the alternative if the queries turn analytical. | planned — **consciously deferred**: member pages shipped (2026-07-21) for the curated featured set only (5 members), which `landing_data.member_payload` slices from the trades JSON in-memory with no perf issue. The trigger fires when this scales to *every* member or to ticker pages (the full cross-product), where per-request JSON scans stop being cheap. |
 | 2 — Serverless Postgres | User accounts / follows / per-user alerts | Neon, Supabase or Vercel Postgres for **user data only** (multi-writer, private — wrong fit for git). Supabase preferred: bundles auth + row-level security. The public trade record keeps publishing to git/JSON. | planned |
 
 Scale reality check: congressional trading is tens of thousands of rows per
@@ -43,11 +43,17 @@ In rough priority order; each item states its blocking dependency.
   `landing/README.md` (signup provider, Web3Forms key, register
   `capitolledger.io`, real domain in `astro.config.mjs`, trademark clearance,
   real contact address in `/privacy`, replace the placeholder testimonials).
-- **Member pages (`/members/<name>`)** — the SEO play: "Nancy Pelosi stock
-  trades" is where the search volume lives; the footer blurb holds those
-  keywords today. Statically generated from the tracked data (this is the
-  trigger for storage stage 1). Start with the featured members (Pelosi,
-  Trump, Tuberville, Greene, Gottheimer).
+- **Member pages (`/members/<slug>`)** — ✅ shipped 2026-07-21. The SEO play:
+  "Nancy Pelosi stock trades" is where the search volume lives. Statically
+  generated from the tracked data (`landing_data.member_payload` +
+  `write_member_files` → `landing/src/data/members/*.json`; rendered by
+  `landing/src/pages/members/[slug].astro` + a `/members` index). Live for the
+  curated set — Pelosi, Trump, Greene, Tuberville, Gottheimer
+  (`MEMBER_PAGE_NAMES`) — each showing their disclosed trades, most-traded
+  tickers, filing timeliness and estimated holdings. Linked from the header
+  nav, the footer sitemap, and the footer's named-member copy. Scaling this to
+  *every* member is what fires storage stage 1 (see the storage table); the
+  static-JSON approach is a conscious deferral, fine at 5 members.
 - **Member and ticker follows** — already promised on the site ("Member and
   ticker follows are next"): per-user watchlists and filtered alerts. Requires
   accounts → triggers storage stage 2 (Supabase) and contact stage 3.

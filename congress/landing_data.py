@@ -18,6 +18,12 @@ disclosures (see landing/docs/adr/0001):
   maximum), one row per member (their worst filing) so a single batch
   filer cannot flood the board, plus each member's total late filings
   this year.
+- ``members/<slug>.json`` + ``members/_index.json`` — one page per
+  featured filer (``MEMBER_PAGE_NAMES``): their disclosed trades (most
+  recent ``MEMBER_TRADE_CAP``), most-traded tickers, filing-timeliness
+  summary and estimated holdings (from the annual report). The /members
+  index lists the set. Scaling this to every member is the storage-stage-1
+  trigger in ROADMAP.md.
 
 "Late" means past the STOCK Act's 45-day statutory maximum
 (``daysLate = max(0, (filing_date - tx_date) - 45)``) — see
@@ -28,6 +34,8 @@ selection are fixture-tested offline.
 from __future__ import annotations
 
 import json
+import re
+from collections import Counter
 from datetime import date
 from pathlib import Path
 
@@ -233,9 +241,155 @@ def late_payload(trades: list[dict], today: date, count: int = LATE_BOARD_SIZE) 
     }
 
 
+# Featured filers that get their own /members/<slug> page. A curated SEO set
+# (highest-intent search names with enough disclosed trades to fill a page),
+# NOT the full tracker watchlist in featured.json. Scaling to every member is
+# the storage-stage-1 trigger in ROADMAP.md; keep this small until then.
+MEMBER_PAGE_NAMES = [
+    "Nancy Pelosi",
+    "Donald J. Trump",
+    "Marjorie Taylor Greene",
+    "Tommy Tuberville",
+    "Josh Gottheimer",
+]
+MEMBER_TRADE_CAP = 20
+MEMBER_HOLDINGS_CAP = 16
+
+
+def slugify(name: str) -> str:
+    """"Nancy Pelosi" → "nancy-pelosi" (URL slug for /members/<slug>)."""
+    return re.sub(r"[^a-z0-9]+", "-", name.lower()).strip("-")
+
+
+def _side_label(t: dict) -> str:
+    return {"buy": "BUY", "sell": "SELL"}.get(t.get("type"), (t.get("type") or "").upper())
+
+
+def member_payload(name: str, trades: list[dict], holdings: dict) -> dict:
+    """Per-member page data: summary, most-traded tickers, the most recent
+    ``MEMBER_TRADE_CAP`` disclosed trades, and estimated holdings from the
+    member's annual report (``holdings`` is the ``holdings.json`` ``holdings``
+    map, keyed by full member name)."""
+    ts = [t for t in trades if t.get("member") == name]
+    ts.sort(key=lambda t: (t.get("tx_date") or "", t.get("filing_date") or ""),
+            reverse=True)
+    ref = ts[0] if ts else {}
+
+    tickers = Counter(t["ticker"] for t in ts if t.get("ticker"))
+    asset_of: dict[str, str] = {}
+    for t in ts:
+        tk = t.get("ticker")
+        if tk and tk not in asset_of:
+            asset_of[tk] = t.get("asset") or tk
+
+    dated = [t for t in ts if t.get("tx_date")]
+    late_vals = [days_late(t) for t in ts if days_late(t) is not None]
+    late_pos = [d for d in late_vals if d > 0]
+
+    rows = [{
+        "ticker": t.get("ticker") or "—",
+        "asset": t.get("asset") or "",
+        "side": _side_label(t),
+        "amountBucket": compact_bucket(t.get("amount_lo"), t.get("amount_hi")),
+        "txDate": t.get("tx_date"),
+        "filedDate": t.get("filing_date"),
+        "daysLate": days_late(t),
+        "sourceUrl": t.get("source_url"),
+    } for t in ts[:MEMBER_TRADE_CAP]]
+
+    h = holdings.get(name, {}) if holdings else {}
+    stocks = h.get("stocks", []) if h.get("available") else []
+    hlo = sum(s.get("value_lo") or 0 for s in stocks)
+    hhi = sum(s.get("value_hi") or 0 for s in stocks)
+    holdings_block = {
+        "available": bool(h.get("available")),
+        "filingDate": h.get("filing_date"),
+        "reportYear": h.get("report_year"),
+        "sourceUrl": h.get("source_url"),
+        "totalLabel": compact_bucket(hlo, hhi) if stocks else None,
+        "stocks": [{
+            "ticker": s.get("ticker") or "—",
+            "asset": s.get("asset") or "",
+            "type": s.get("asset_type") or "",
+            "valueLabel": compact_bucket(s.get("value_lo"), s.get("value_hi")),
+        } for s in sorted(
+            stocks,
+            key=lambda s: -(s.get("value_hi") or s.get("value_lo") or 0),
+        )[:MEMBER_HOLDINGS_CAP]],
+    }
+
+    return {
+        "slug": slugify(name),
+        "name": name,
+        "party": ref.get("party"),
+        "state": ref.get("state"),
+        "chamber": ("Senate" if ref.get("chamber") == "senate" else "House"),
+        "district": ref.get("district"),
+        "summary": {
+            "trades": len(ts),
+            "distinctTickers": len(tickers),
+            "firstTx": min((t["tx_date"] for t in dated), default=None),
+            "lastTx": max((t["tx_date"] for t in dated), default=None),
+            "pctLate": round(100 * len(late_pos) / len(late_vals)) if late_vals else 0,
+            "worstLate": max(late_vals) if late_vals else 0,
+        },
+        "topTickers": [
+            {"ticker": tk, "count": n, "asset": asset_of.get(tk, tk)}
+            for tk, n in tickers.most_common(6)
+        ],
+        "trades": rows,
+        "tradesShown": len(rows),
+        "holdings": holdings_block,
+    }
+
+
+def write_member_files(
+    trades: list[dict], holdings: dict, out_dir: Path,
+    names: list[str] = MEMBER_PAGE_NAMES,
+) -> list[str]:
+    """Write members/<slug>.json for each featured filer with trades, plus
+    members/_index.json. Members with no disclosed trades are skipped (an
+    empty page is worse than none). Returns the slugs written."""
+    comment = (
+        "Generated from real official disclosures by congress/landing_data.py "
+        "(daily Action). Do not edit by hand."
+    )
+    members_dir = out_dir / "members"
+    members_dir.mkdir(parents=True, exist_ok=True)
+    index = []
+    written = []
+    for name in names:
+        payload = member_payload(name, trades, holdings)
+        if payload["summary"]["trades"] == 0:
+            continue
+        (members_dir / f"{payload['slug']}.json").write_text(
+            json.dumps({"_comment": comment, **payload},
+                       indent=2, ensure_ascii=False) + "\n",
+            encoding="utf-8",
+        )
+        written.append(payload["slug"])
+        index.append({
+            "slug": payload["slug"],
+            "name": payload["name"],
+            "party": payload["party"],
+            "state": payload["state"],
+            "chamber": payload["chamber"],
+            "district": payload["district"],
+            "trades": payload["summary"]["trades"],
+            "pctLate": payload["summary"]["pctLate"],
+            "worstLate": payload["summary"]["worstLate"],
+        })
+    (members_dir / "_index.json").write_text(
+        json.dumps({"_comment": comment, "members": index},
+                   indent=2, ensure_ascii=False) + "\n",
+        encoding="utf-8",
+    )
+    return written
+
+
 def write_files(trades: list[dict], out_dir: Path, today: date) -> tuple[int, dict]:
     """Write disclosures.json + stats.json + late.json; returns (rows, stats)
-    for logging."""
+    for logging. Member pages are written separately (write_member_files)."""
     comment = (
         "Generated from real official disclosures by congress/landing_data.py "
         "(daily Action). Do not edit by hand. 'filedDaysLate' counts days past "

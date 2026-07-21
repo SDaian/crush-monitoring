@@ -1,0 +1,132 @@
+---
+// "/members" — index of the featured filers, each linking to their own page.
+// Internal-linking hub for the /members/<slug> set and its own landing target.
+import "../../styles/global.css";
+import Header from "../../components/Header.astro";
+import Footer from "../../components/Footer.astro";
+import Seo from "../../components/Seo.astro";
+import index from "../../data/members/_index.json";
+
+const members = index.members;
+const partyName: Record<string, string> = {
+  D: "Democrat",
+  R: "Republican",
+  I: "Independent",
+};
+
+const title = "Featured filers — politician stock-trade pages · Capitol Ledger";
+const description =
+  "Per-member pages tracking the stock trades of the most-watched filers in " +
+  "Congress and the White House — every disclosed trade, holdings estimate " +
+  "and filing delay, from official records.";
+
+const schema = [
+  {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    name: "Featured filers",
+    description,
+    hasPart: members.map((m: any) => ({
+      "@type": "ProfilePage",
+      name: `${m.name} stock trades`,
+      url: `https://capitolledger.io/members/${m.slug}`,
+    })),
+  },
+];
+---
+
+<html lang="en">
+  <head>
+    <Seo title={title} description={description} path="/members" schema={schema} />
+  </head>
+  <body>
+    <Header active="members" />
+
+    <section class="mx-auto max-w-[75rem] px-[5vw] pt-[9vh] pb-[6vh]">
+      <p class="eyebrow mb-5">
+        Featured filers · <b class="font-semibold text-stamp">Most-watched</b>
+      </p>
+      <h1 class="headline max-w-[18ch] text-[clamp(2.4rem,6.5vw,4.6rem)]">
+        The traders <span class="underline-stamp">worth watching</span>.
+      </h1>
+      <p class="mt-6 max-w-[56ch] text-[1.05rem] leading-[1.65] text-pretty text-ink-soft">
+        A page for each of the filers people ask about most — every trade
+        they've disclosed, an estimate of what they hold, and how late each
+        filing arrived. Straight from official records.
+      </p>
+    </section>
+
+    <section class="mx-auto max-w-[75rem] px-[5vw] pb-[10vh]">
+      <div class="grid grid-cols-2 gap-x-10 gap-y-1 max-[720px]:grid-cols-1">
+        {
+          members.map((m: any) => (
+            <a href={`/members/${m.slug}`} class="mcard">
+              <div class="mcard-name">{m.name}</div>
+              <div class="mcard-meta">
+                {partyName[m.party] ?? m.party} · {m.state} ·{" "}
+                {m.chamber}
+              </div>
+              <div class="mcard-stat">
+                <b>{m.trades.toLocaleString("en-US")}</b> trades ·{" "}
+                <b>
+                  {m.pctLate === 0 && m.worstLate > 0 ? "<1%" : `${m.pctLate}%`}
+                </b>{" "}
+                filed late
+                <span class="mcard-go">View trades →</span>
+              </div>
+            </a>
+          ))
+        }
+      </div>
+    </section>
+
+    <Footer />
+  </body>
+</html>
+
+<style>
+  .mcard {
+    display: block;
+    padding: 1.75rem 0;
+    border-bottom: 1px solid var(--color-rule);
+    text-decoration: none;
+    color: var(--color-ink);
+  }
+  .mcard:hover .mcard-name,
+  .mcard:focus-visible .mcard-name {
+    color: var(--color-stamp);
+  }
+  .mcard-name {
+    font-weight: 900;
+    font-size: clamp(1.4rem, 3vw, 1.9rem);
+    letter-spacing: -0.02em;
+    transition: color 0.15s;
+  }
+  .mcard-meta {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    color: var(--color-ink-soft);
+    margin-top: 0.5rem;
+  }
+  .mcard-stat {
+    font-family: var(--font-mono);
+    font-size: 0.83rem;
+    color: var(--color-ink-soft);
+    margin-top: 0.75rem;
+    display: flex;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 0.5rem 0.75rem;
+  }
+  .mcard-stat b {
+    color: var(--color-ink);
+    font-weight: 600;
+  }
+  .mcard-go {
+    margin-left: auto;
+    color: var(--color-stamp);
+    font-weight: 600;
+  }
+</style>
