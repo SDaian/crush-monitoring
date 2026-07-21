@@ -99,6 +99,18 @@ Two families, two jobs. Both are self-hosted.
 
 **Rules.**
 
+- **Minimum text size: 12px (`0.75rem`).** Never set a `font-size` below it —
+  not for eyebrows, labels, captions, or fine print. Small type earns emphasis
+  from **mono + uppercase + tracking + color**, never from shrinking below the
+  floor. (Values like `0.68rem`/`0.72rem` are out of spec.)
+- **Size in `rem`, never forced `px`.** Font sizes, widths, and spacing
+  (margin / padding / gap) all use `rem` — through Tailwind's rem-based scale
+  (`mt-6`, `p-4`, including fractional steps like `p-4.5` = `1.125rem`), **never
+  arbitrary `[…px]` values** — so everything scales with the user's text-size
+  setting. `ch` / `%` / `clamp()` are fine; `vw` / `vh` are allowed only for
+  fluid section gutters and vertical rhythm. The **only** `px` that remains is
+  hairline borders/rules (`1` / `2` / `3px`) and shadow offsets, where a
+  physical pixel is the intent.
 - **Tracking is size-specific.** Display/headline: tight, negative
   (≈ `-0.03` to `-0.04em`). Mono labels/eyebrows: **positive, uppercase**
   (`0.06`–`0.16em`). Body: near zero.
@@ -195,6 +207,11 @@ agnostic building blocks** — the manual defines the primitive; a page's layout
 decides where they go. Canonical CSS lives in `src/styles/global.css` and the
 shared Astro components in `src/components/`.
 
+- **Shared type classes** (change once, not per use) — `.eyebrow` (the mono
+  uppercase small label: section tags, stat labels, captions), `.section-title`
+  + `.section-head` (the section heading and its row over the 2px ink rule),
+  `.fineprint` (mono small print). Prefer these over repeating utility strings;
+  Tailwind utilities still override per instance (`eyebrow text-stamp`).
 - **Header** — shared, single row: wordmark left; mono nav + one filled **ink
   pill** CTA right; **3px double ink rule** beneath (the masthead cue). Current
   page marked with the stamp underline / active state.
