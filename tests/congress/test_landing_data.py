@@ -291,6 +291,18 @@ class TestMemberPayload(unittest.TestCase):
         # Sorted by value desc: NVDA before AAPL.
         self.assertEqual(h["stocks"][0]["ticker"], "NVDA")
         self.assertIsNotNone(h["totalLabel"])
+        # Portfolio shares by midpoint sum to ~100 and are ordered like values.
+        pcts = [s["pctPortfolio"] for s in h["stocks"]]
+        self.assertTrue(all(p is not None for p in pcts))
+        self.assertAlmostEqual(sum(pcts), 100.0, delta=0.2)
+        self.assertGreater(pcts[0], pcts[1])
+
+    def test_executive_chamber_not_mislabelled_house(self):
+        # OGE 278-T filers (e.g. the President) are executive branch, not House.
+        t = MT(member="Donald J. Trump", state="US", district=None)
+        t["chamber"] = "executive"
+        p = ld.member_payload("Donald J. Trump", [t], {})
+        self.assertEqual(p["chamber"], "Executive")
 
     def test_holdings_absent_when_no_annual(self):
         p = ld.member_payload("Nancy Pelosi", [MT()], {})
