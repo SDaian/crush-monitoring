@@ -7,10 +7,9 @@
 import "../styles/global.css";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
-import FontPreloads from "../components/FontPreloads.astro";
+import Seo from "../components/Seo.astro";
 import Timeline from "../components/Timeline.astro";
 import feed from "../data/disclosures.json";
-import Analytics from "@vercel/analytics/astro";
 
 // The four-step pipeline, rendered as a scroll timeline (Timeline.astro).
 const PIPELINE = [
@@ -60,30 +59,82 @@ const lateCount = all.filter((d) => d.filedDaysLate > 0).length;
 const lateText = (n: number) =>
   n > 0 ? `${n} day${n === 1 ? "" : "s"} late` : "on time";
 
+// The "Fair questions" Q&A — single source for both the visible section and
+// the FAQPage structured data below, so Google's schema-matches-page rule can
+// never drift. Answers are plain strings (no inline markup).
+const FAQ = [
+  {
+    q: "Is this data really public?",
+    a:
+      "Yes. Every row comes from disclosures members of Congress are " +
+      "required to file under the STOCK Act. We read the official " +
+      "portals — the same documents any citizen may request — and nothing " +
+      "else.",
+  },
+  {
+    q: "Why do trades show up weeks after they happen?",
+    a:
+      "Because the law allows it. Members have up to 45 days to disclose, " +
+      "so the delay is built into the system — that's exactly why we " +
+      "count and publish the lag on every trade.",
+  },
+  {
+    q: "Is this investment advice?",
+    a:
+      "No. We publish public records in readable form, for information " +
+      "only. We add no signals, no recommendations, and no predictions — " +
+      "what you do with public information is up to you.",
+  },
+  {
+    q: "Why ranges instead of exact amounts?",
+    a:
+      'Disclosures only require a bracket, like "$100,001 – $250,000". ' +
+      "Exact amounts don't exist in the public record, so you'll never " +
+      "see one here — anyone showing exact figures is guessing.",
+  },
+  {
+    q: "How much does it cost?",
+    a:
+      "Free while in beta. One email per day, always — and if that ever " +
+      "changes, subscribers hear it from us first.",
+  },
+  {
+    q: "Do you cover every member?",
+    a:
+      "We track every Periodic Transaction Report published on the House " +
+      "and Senate portals. If a member files electronically, they're in. " +
+      "Paper-only filings are flagged, not silently skipped.",
+  },
+];
+
 const title = "How it works — Capitol Ledger";
 const description =
   "From a member of Congress's trade to your inbox: where the disclosures " +
   "come from, how we parse them, what the numbers mean, and what the daily " +
   "email looks like.";
+
+// FAQPage structured data, built from the same FAQ array shown on the page.
+const schema = [
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: FAQ.map((item) => ({
+      "@type": "Question",
+      name: item.q,
+      acceptedAnswer: { "@type": "Answer", text: item.a },
+    })),
+  },
+];
 ---
 
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>{title}</title>
-    <meta name="description" content={description} />
-    <FontPreloads />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="sitemap" href="/sitemap-index.xml" />
-    <meta property="og:type" content="website" />
-    <meta property="og:title" content={title} />
-    <meta property="og:description" content={description} />
-    <meta property="og:site_name" content="Capitol Ledger" />
-    <meta name="twitter:card" content="summary" />
-    <meta name="twitter:title" content={title} />
-    <meta name="twitter:description" content={description} />
-    <Analytics />
+    <Seo
+      title={title}
+      description={description}
+      path="/how-it-works"
+      schema={schema}
+    />
   </head>
   <body>
     <Header active="how" />
@@ -288,54 +339,14 @@ const description =
         </span>
       </div>
       <div class="mt-10 grid grid-cols-2 gap-x-14 gap-y-10 max-[760px]:grid-cols-1">
-        <div class="qa">
-          <h3>Is this data really public?</h3>
-          <p>
-            Yes. Every row comes from disclosures members of Congress are
-            required to file under the STOCK Act. We read the official
-            portals — the same documents any citizen may request — and nothing
-            else.
-          </p>
-        </div>
-        <div class="qa">
-          <h3>Why do trades show up weeks after they happen?</h3>
-          <p>
-            Because the law allows it. Members have up to 45 days to disclose,
-            so the delay is built into the system — that's exactly why we
-            count and publish the lag on every trade.
-          </p>
-        </div>
-        <div class="qa">
-          <h3>Is this investment advice?</h3>
-          <p>
-            No. We publish public records in readable form, for information
-            only. We add no signals, no recommendations, and no predictions —
-            what you do with public information is up to you.
-          </p>
-        </div>
-        <div class="qa">
-          <h3>Why ranges instead of exact amounts?</h3>
-          <p>
-            Disclosures only require a bracket, like "$100,001 – $250,000".
-            Exact amounts don't exist in the public record, so you'll never
-            see one here — anyone showing exact figures is guessing.
-          </p>
-        </div>
-        <div class="qa">
-          <h3>How much does it cost?</h3>
-          <p>
-            Free while in beta. One email per day, always — and if that ever
-            changes, subscribers hear it from us first.
-          </p>
-        </div>
-        <div class="qa">
-          <h3>Do you cover every member?</h3>
-          <p>
-            We track every Periodic Transaction Report published on the House
-            and Senate portals. If a member files electronically, they're in.
-            Paper-only filings are flagged, not silently skipped.
-          </p>
-        </div>
+        {
+          FAQ.map((item) => (
+            <div class="qa">
+              <h3>{item.q}</h3>
+              <p>{item.a}</p>
+            </div>
+          ))
+        }
       </div>
     </section>
 
