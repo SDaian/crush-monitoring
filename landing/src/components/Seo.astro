@@ -1,0 +1,89 @@
+---
+// One place for every page's <head> boilerplate: title/description, the
+// canonical URL, Open Graph + Twitter cards (with the branded 1200x630
+// og.png), the font preloads, analytics, and JSON-LD structured data.
+// Sitewide schema (Organization + WebSite) ships on every page; pass extra
+// `schema` objects (FAQPage, Dataset, ...) per page. Change head conventions
+// here once instead of in four page files.
+import FontPreloads from "./FontPreloads.astro";
+import Analytics from "@vercel/analytics/astro";
+
+interface Props {
+  title: string;
+  description: string;
+  /** Path for the canonical + og:url, e.g. "/" or "/how-it-works". */
+  path: string;
+  /** Extra JSON-LD objects for this page (merged after the sitewide graph). */
+  schema?: Record<string, unknown>[];
+}
+
+const { title, description, path, schema = [] } = Astro.props;
+
+// Absolute URLs derive from `site` in astro.config.mjs.
+const site = Astro.site ?? new URL("https://capitolledger.io");
+const canonical = new URL(path, site).href;
+const ogImage = new URL("/og.png", site).href;
+const ORG_NAME = "Capitol Ledger";
+
+// Sitewide structured data — the publisher and the site itself. Kept minimal
+// and true (no sameAs/social until those accounts exist).
+const sitewide: Record<string, unknown>[] = [
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    name: ORG_NAME,
+    url: site.href,
+    logo: new URL("/favicon.svg", site).href,
+    description:
+      "Capitol Ledger tracks the stock trades US politicians disclose " +
+      "under the STOCK Act, straight from official filings.",
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: ORG_NAME,
+    url: site.href,
+    description,
+  },
+];
+
+const graph = [...sitewide, ...schema];
+---
+
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>{title}</title>
+<meta name="description" content={description} />
+<link rel="canonical" href={canonical} />
+<FontPreloads />
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<link rel="sitemap" href="/sitemap-index.xml" />
+
+<meta property="og:type" content="website" />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:site_name" content={ORG_NAME} />
+<meta property="og:url" content={canonical} />
+<meta property="og:image" content={ogImage} />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta
+  property="og:image:alt"
+  content="Capitol Ledger — They trade. They file. You see it first."
+/>
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={ogImage} />
+
+{
+  graph.map((obj) => (
+    <script
+      type="application/ld+json"
+      set:html={JSON.stringify(obj)}
+    />
+  ))
+}
+
+<Analytics />
