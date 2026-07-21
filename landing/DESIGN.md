@@ -219,7 +219,8 @@ shared Astro components in `src/components/`.
   works" timeline (below). Frames the "why" between hero and proof.
 - **Scroll timeline** — a vertical pipeline whose stamp-red rail fills and whose
   steps light up as each reaches the reading line (numbered square nodes: neutral
-  → stamp outline when passed → stamp fill when active). Each step's title and
+  outline for upcoming, filled stamp red once reached — passed and current stay
+  filled, so progress accumulates). Each step's title and
   body are split into words that **scrub from dim to full opacity, word by word,
   as they rise through the reading band** (the Kevin-Powell scroll reveal, driven
   in JS so it works in Safari/iOS too). Motion is *meaningful* (literal progress
