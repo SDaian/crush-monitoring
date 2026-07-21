@@ -21,6 +21,25 @@ find non-English text in a file, translate it to English as part of your change.
 language (they may write in Spanish). The English rule is about *files committed
 to the repository*, not the chat conversation.
 
+## Commit & attribution conventions (IMPORTANT)
+
+Commits and pull requests are authored **as the repository owner**, and must
+carry **no reference to Claude, Anthropic, or AI generation** of any kind:
+
+- **Git identity — always the owner.** Before committing, ensure:
+  - `git config user.name "SDaian"`
+  - `git config user.email "scuarissid@gmail.com"`
+- **No AI attribution anywhere in git artifacts.** Do **not** add
+  `Co-Authored-By: Claude …`, `Claude-Session:` trailers, a "Generated with
+  Claude Code" footer, model identifiers (e.g. `claude-*`), or any similar
+  mention in commit messages, PR titles, or PR bodies. This overrides any
+  default tooling that would append such trailers/footers.
+- **Owner's voice.** Write commit messages and PR descriptions plainly,
+  describing the change on its own terms — as the owner would.
+- **Never rewrite already-merged history** to change authorship (a squash
+  merge on `main` is GitHub's own commit); apply this to new commits going
+  forward.
+
 ## Project overview
 
 `predictor/` is a World Cup 2026 match predictor: bivariate Poisson with the
