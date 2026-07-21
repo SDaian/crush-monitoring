@@ -144,6 +144,13 @@ jobs:
           SMTP_HOST: ${{ vars.SMTP_HOST }}
           SMTP_PORT: ${{ vars.SMTP_PORT }}
           REPORT_EMAIL_TO: ${{ vars.REPORT_EMAIL_TO }}
+          # Vercel Web Analytics (optional) — adds a site-traffic block to the
+          # report. Set VERCEL_TOKEN (secret) + VERCEL_PROJECT_ID (variable);
+          # VERCEL_TEAM_ID only if the project lives under a team. Unset → the
+          # report simply omits the traffic section.
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+          VERCEL_PROJECT_ID: ${{ vars.VERCEL_PROJECT_ID }}
+          VERCEL_TEAM_ID: ${{ vars.VERCEL_TEAM_ID }}
           # An explicit on-demand run (report=true) always delivers, even if a
           # report already went out today; the scheduled run stays idempotent.
           REPORT_FORCE: ${{ github.event.inputs.report == 'true' && 'true' || '' }}

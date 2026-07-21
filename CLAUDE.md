@@ -192,10 +192,22 @@ sites. Full details in `congress/README.md`. Conventions:
   `_sample` data (synthetic series, banner-flagged) until the first live refresh.
   The page's `aiScore` and Python `indicators.ai_score` **must stay in sync**
   (same checks + thresholds) — the report reuses the Python one.
+- **Site traffic in the report (Vercel Web Analytics):** `congress/analytics.py`
+  pulls the site's aggregated, cookieless page views via Vercel's public Web
+  Analytics API (`/v1/query/web-analytics/visits/{count,aggregate}`, Bearer
+  token) and the morning report embeds a "📈 Traffic — last 7 days" block
+  (total + top pages). **Gated + non-fatal:** needs `VERCEL_TOKEN` (secret) +
+  `VERCEL_PROJECT_ID` (var), optional `VERCEL_TEAM_ID`; unset or on any API
+  error it returns `None` and the report just omits the section. Network is
+  confined to `analytics._fetch_json` (stdlib `urllib`, no new deps); the
+  response is parsed defensively (field names matched against candidates) and
+  everything else is pure + offline-tested. Reads only existing aggregate data
+  — no new visitor collection, so `/privacy` is unchanged. Test it with
+  `python3 -m congress analytics`.
 - **Morning report (email digest):** `congress/daily_report.py`
   (`python3 -m congress.daily_report`) composes the AI buy/sell/hold scorecard,
-  overnight signals + rating flips, and newly-filed disclosures, then delivers
-  it two ways: **(1) direct email via SMTP** (primary, reliable regardless of
+  overnight signals + rating flips, newly-filed disclosures, and (when
+  configured) the Vercel traffic block, then delivers it two ways: **(1) direct email via SMTP** (primary, reliable regardless of
   GitHub notification settings — enabled by the `SMTP_USER`/`SMTP_PASS` secrets,
   e.g. a Gmail address + App Password; `SMTP_HOST`/`SMTP_PORT`/`REPORT_EMAIL_TO`
   are optional `vars` defaulting to Gmail:587 and the sender), and **(2) a dated

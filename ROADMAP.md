@@ -74,8 +74,10 @@ Not commitments — things to test when their stage approaches.
 - **Auth**: Supabase Auth first; Clerk if auth UX needs outgrow it.
 - **Search**: Pagefind (static, no server — fits the site) for member/ticker
   search before any database-backed search.
-- **Analytics**: Vercel Web Analytics is live (cookieless); evaluate Plausible
-  if deeper funnels are needed while keeping the privacy page honest.
+- **Analytics**: Vercel Web Analytics is live (cookieless). ✅ Its public Web
+  Analytics API now feeds a traffic block into the morning report
+  (`congress/analytics.py`, gated on `VERCEL_TOKEN`). Evaluate Plausible if
+  deeper funnels are needed while keeping the privacy page honest.
 - **Monitoring**: GitHub Actions already alerts on pipeline failure via the
   daily report; add uptime checks (e.g. UptimeRobot free) at launch.
 

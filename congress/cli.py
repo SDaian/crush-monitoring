@@ -390,6 +390,28 @@ def _cmd_landing(args: argparse.Namespace) -> int:
     return 0
 
 
+def _cmd_analytics(args: argparse.Namespace) -> int:
+    """Print the site's Vercel Web Analytics traffic summary (the same block
+    the morning report embeds). No-op message if VERCEL_TOKEN isn't set."""
+    from . import analytics
+
+    token, project_id, _ = analytics.config()
+    if not token or not project_id:
+        print(
+            f"::warning::{analytics.ENV_TOKEN}/{analytics.ENV_PROJECT} not set "
+            "— skipping analytics (report omits the traffic block)"
+        )
+        return 0
+    today = datetime.now(timezone.utc).date().isoformat()
+    summary = analytics.daily_summary(today, window_days=args.days)
+    if not summary:
+        print("analytics: no data returned (check token/project or API access)")
+        return 0
+    md, _ = analytics.format_block(summary)
+    print(md)
+    return 0
+
+
 FEATURED_TICKERS = ["MU", "INTC", "NVDA", "TSM", "AMD", "AVGO", "TSLA", "MSFT"]
 
 
@@ -663,6 +685,14 @@ def build_parser() -> argparse.ArgumentParser:
     landing_p.add_argument("--holdings", default=str(DEFAULT_HOLDINGS))
     landing_p.add_argument("--output", default=str(DEFAULT_LANDING_DATA))
     landing_p.set_defaults(func=_cmd_landing)
+
+    analytics_p = sub.add_parser(
+        "analytics",
+        help="Print the site's Vercel Web Analytics traffic summary.",
+    )
+    analytics_p.add_argument("--days", type=int, default=7,
+                             help="Trailing window in days (default 7).")
+    analytics_p.set_defaults(func=_cmd_analytics)
 
     return p
 
