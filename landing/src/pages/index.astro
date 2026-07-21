@@ -1,9 +1,9 @@
 ---
-// Capitol Ledger landing page. Visual source of truth: landing/prototype/
-// capitol-trades-landing.html, with the four deviations agreed in the
-// grilling session (see landing/docs/adr/ and landing/CONTEXT.md):
-// "Recent disclosures" header, truthful Structure/Signal copy, the
-// filed-late column visible on mobile, and every number real (generated
+// Capitol Ledger landing — "editorial × show-the-product" design (owner-
+// approved blend; see landing/DESIGN.md for the identity it follows). The
+// hero pairs the promise + signup with a live "today's email" preview built
+// from the real disclosures feed; a problem band frames the why; stats,
+// reviews, a final CTA and contact follow. Every number is real (generated
 // daily by `python3 -m congress landing`).
 import "../styles/global.css";
 import Header from "../components/Header.astro";
@@ -14,6 +14,9 @@ import stats from "../data/stats.json";
 import Analytics from "@vercel/analytics/astro";
 
 const disclosures = feed.disclosures;
+const lateCount = disclosures.filter((d) => d.filedDaysLate > 0).length;
+const timeliness = (n: number) =>
+  n > 0 ? `${n} day${n === 1 ? "" : "s"} late` : "on time";
 
 const fmtTrades = stats.tradesThisYear.toLocaleString("en-US");
 const vol = stats.estVolumeThisYearUsd;
@@ -24,16 +27,14 @@ const fmtLag = `${stats.medianLagDays} days`;
 const SIGNUP_ENDPOINT = import.meta.env.PUBLIC_SIGNUP_ENDPOINT ?? "";
 
 // Contact form contract (provider-agnostic, like the signup form): POST
-// form-encoded email+message to PUBLIC_CONTACT_ENDPOINT; if
-// PUBLIC_CONTACT_KEY is set it is sent as `access_key` (Web3Forms' shape).
-// Unset endpoint → pre-launch "opens soon" state.
+// form-encoded email+message to PUBLIC_CONTACT_ENDPOINT; if PUBLIC_CONTACT_KEY
+// is set it is sent as `access_key` (Web3Forms' shape). Unset → "opens soon".
 const CONTACT_ENDPOINT = import.meta.env.PUBLIC_CONTACT_ENDPOINT ?? "";
 const CONTACT_KEY = import.meta.env.PUBLIC_CONTACT_KEY ?? "";
 
 // PLACEHOLDER testimonials — fictional people and quotes, standing in until
 // real user feedback exists. Replace before launch (see the pre-launch
-// checklist in landing/README.md); never present fabricated reviews as real
-// on a live page.
+// checklist in landing/README.md); never present fabricated reviews as real.
 const REVIEWS = [
   {
     rating: 5,
@@ -98,127 +99,178 @@ const description =
   <body>
     <Header />
 
-    <section class="mx-auto max-w-[1200px] px-[5vw] pt-[9vh] pb-[6vh]">
-      <p class="mono mb-[22px] text-[.75rem] uppercase tracking-[.12em] text-ink-soft">
-        Politician trading disclosures ·
-        <b class="font-semibold text-stamp">Updated daily from official filings</b>
-      </p>
-      <h1 class="headline">
-        They trade.<br />They file.<br /><span class="underline-stamp"
-          >You see it first.</span
-        >
-      </h1>
-      <p class="mt-[26px] max-w-[52ch] text-[1.05rem] leading-[1.65] text-pretty text-ink-soft">
-        Every stock trade a politician reports — from Congress to the White
-        House — pulled straight from official disclosure filings and delivered
-        to you the moment it lands: who traded, what, how much, and how late
-        they filed it.
-      </p>
-      <form
-        id="join"
-        class="mt-9 flex flex-wrap gap-3"
-        data-endpoint={SIGNUP_ENDPOINT}
-        novalidate
-      >
-        <label class="sr-only" for="email">Email address</label>
-        <input
-          class="email-input"
-          type="email"
-          id="email"
-          name="email"
-          placeholder="you@email.com"
-          autocomplete="email"
-          required
-        />
-        <button class="btn" type="submit">Get trade alerts</button>
-        <p
-          class="mono w-full text-[.78rem]"
-          id="form-status"
-          role="status"
-          aria-live="polite"
-        >
-        </p>
-      </form>
-      <p class="mono mt-3 text-[.72rem] text-ink-soft">
-        <span class="max-[760px]:block"
-          >Free while in beta. One email per day — always.</span
-        >
-        <b class="font-semibold text-stamp">No spam, ever.</b>
-        <a
-          href="/privacy"
-          class="text-ink-soft underline underline-offset-2 hover:text-ink focus-visible:text-ink"
-          >Privacy matters</a
-        >
-      </p>
-    </section>
-
-    <section class="mx-auto max-w-[1200px] px-[5vw] pb-[10vh]" id="feed">
-      <div
-        class="flex items-baseline justify-between border-b-2 border-ink pb-2.5"
-      >
-        <h2 class="text-[.85rem] font-extrabold uppercase tracking-[.1em]">
-          Recent disclosures
-        </h2>
-        <span
-          class="mono flex items-center gap-[7px] text-[.72rem] uppercase tracking-[.1em] text-stamp"
-        >
-          <span class="live-dot" aria-hidden="true"></span>Filed this week
-        </span>
-      </div>
-
-      <div role="table" aria-label="Recent congressional stock disclosures">
-        <div role="row" class="sr-only">
-          <span role="columnheader">Member</span>
-          <span role="columnheader">Ticker</span>
-          <span role="columnheader">Side</span>
-          <span role="columnheader">Amount</span>
-          <span role="columnheader">Filing timeliness</span>
+    <!-- ===== Hero: promise + signup (left), live "today's email" (right) ===== -->
+    <section
+      class="mx-auto max-w-[1200px] border-b-[3px] border-double border-ink px-[5vw] pt-[7vh] pb-[6vh]"
+      id="feed"
+    >
+      <div class="hero-grid">
+        <div>
+          <p class="kicker">
+            <span class="live-dot" aria-hidden="true"></span>
+            Politician trading disclosures — updated daily
+          </p>
+          <h1
+            class="headline max-w-none whitespace-nowrap leading-[0.95] text-[clamp(2.35rem,5vw,4rem)] max-[840px]:whitespace-normal max-[840px]:text-[clamp(2.35rem,9vw,3.4rem)]"
+          >
+            They trade.<br />They file.<br /><span class="underline-stamp"
+              >You see it first.</span
+            >
+          </h1>
+          <p class="mt-6 max-w-[42ch] text-[1.05rem] leading-[1.6] text-pretty text-ink-soft">
+            Every stock trade a politician discloses — from Congress to the
+            White House — who, what, how much, and how late. Pulled from
+            official filings into one clean daily email.
+          </p>
+          <form
+            id="join"
+            class="mt-7 flex flex-wrap max-w-[440px] max-[840px]:flex-col"
+            data-endpoint={SIGNUP_ENDPOINT}
+            novalidate
+          >
+            <label class="sr-only" for="email">Email address</label>
+            <input
+              class="email-input !min-w-0 flex-1 border-r-0 max-[840px]:border-r"
+              type="email"
+              id="email"
+              name="email"
+              placeholder="you@email.com"
+              autocomplete="email"
+              required
+            />
+            <button class="btn btn-stamp whitespace-nowrap max-[840px]:w-full" type="submit"
+              >Get trade alerts</button
+            >
+            <p
+              class="mono mt-3 w-full basis-full text-[.78rem]"
+              id="form-status"
+              role="status"
+              aria-live="polite"
+            >
+            </p>
+          </form>
+          <p class="mono mt-3 text-[.72rem] text-ink-soft">
+            <span class="max-[760px]:block"
+              >Free while in beta · one email per day — always.</span
+            >
+            <b class="font-semibold text-stamp">No spam, ever.</b>
+            <a
+              href="/privacy"
+              class="underline underline-offset-2 hover:text-ink focus-visible:text-ink"
+              >Privacy matters</a
+            >
+          </p>
+          <div class="mt-7 border-t border-rule pt-[18px]">
+            <div class="mono mb-[9px] text-[.58rem] uppercase tracking-[.15em] text-ink-soft">
+              Sourced only from
+            </div>
+            <div class="mono flex flex-wrap gap-x-5 gap-y-1 text-[.74rem] font-semibold text-ink/70">
+              <span>House Clerk</span><span>Senate eFD</span><span>OGE 278-T</span>
+            </div>
+          </div>
         </div>
-        {
-          disclosures.map((d) => (
-            <div role="row" class="feed-row">
-              <div role="cell" class="who">
-                {d.member}
-                <small>
-                  {d.chamber} · {d.district}
-                </small>
-              </div>
-              <div role="cell">{d.ticker}</div>
-              <div
-                role="cell"
-                class={`font-semibold ${d.side === "BUY" ? "text-buy" : "text-sell"}`}
-              >
-                {d.side}
-              </div>
-              <div role="cell" class="amt">
-                {d.amountBucket}
-              </div>
-              <div
-                role="cell"
-                class={
-                  d.filedDaysLate > 0
-                    ? "font-medium text-stamp"
-                    : "text-ink-soft"
-                }
-                title="Late = filed beyond the STOCK Act's 45-day statutory maximum"
-              >
-                {d.filedDaysLate > 0
-                  ? `Filed ${d.filedDaysLate} day${d.filedDaysLate === 1 ? "" : "s"} late`
-                  : "Filed on time"}
+
+        <!-- Live "today's email" preview — the real curated feed, framed as
+             the daily digest (the product shot). -->
+        <div class="stage">
+          <span class="tagm">Today's email</span>
+          <div class="mail" role="table" aria-label="Sample daily digest of recent disclosures">
+            <div class="mail-hd">
+              <div class="mail-from">Capitol Ledger Daily</div>
+              <div class="mail-subj mono">
+                {disclosures.length} new disclosures · {lateCount} filed late · 07:00
               </div>
             </div>
-          ))
-        }
+            {
+              disclosures.map((d) => (
+                <div role="row" class="mrow">
+                  <span class="who" role="cell">
+                    {d.member}
+                  </span>
+                  <span role="cell">{d.ticker}</span>
+                  <span
+                    role="cell"
+                    class={`font-semibold ${d.side === "BUY" ? "text-buy" : "text-sell"}`}
+                  >
+                    {d.side}
+                  </span>
+                  <span
+                    role="cell"
+                    class={d.filedDaysLate > 0 ? "text-stamp" : "text-ink-soft"}
+                  >
+                    {timeliness(d.filedDaysLate)}
+                  </span>
+                </div>
+              ))
+            }
+            <div class="mail-ft mono">
+              one email per day · unsubscribe anytime
+            </div>
+          </div>
+          <a
+            href="/late"
+            class="mono mt-4 inline-block text-[.72rem] uppercase tracking-[.06em] text-stamp no-underline hover:text-ink focus-visible:text-ink"
+            >See the year's worst delays →</a
+          >
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Problem band + how it works ===== -->
+    <section class="mx-auto max-w-[1200px] px-[5vw] pt-[10vh]">
+      <div class="text-center">
+        <h2 class="mx-auto max-w-[22ch] text-[clamp(1.9rem,4vw,3.1rem)] font-black leading-[1.08] tracking-[-0.03em] text-balance">
+          They don't hide the trades. They just bury them.
+        </h2>
+        <p class="mx-auto mt-[18px] max-w-[54ch] text-pretty text-[1.02rem] leading-[1.6] text-ink-soft">
+          The disclosures are technically public — scattered across three
+          government portals, locked in PDFs, filed weeks or months late. We
+          read all of it, every morning, so you don't have to.
+        </p>
+      </div>
+      <div class="mt-12 grid grid-cols-3 border-t border-rule max-[760px]:grid-cols-1">
+        <div class="border-r border-rule px-7 py-8 max-[760px]:border-r-0 max-[760px]:border-b">
+          <span class="mono block text-[.68rem] uppercase tracking-[.1em] text-stamp"
+            >01 · Source</span
+          >
+          <h3 class="mt-3 mb-2 text-base font-extrabold">Official filings only</h3>
+          <p class="text-[.9rem] leading-[1.55] text-pretty text-ink-soft">
+            Straight from the House, Senate and OGE portals. No rumors, no
+            scraped tweets — the paper trail itself.
+          </p>
+        </div>
+        <div class="border-r border-rule px-7 py-8 max-[760px]:border-r-0 max-[760px]:border-b">
+          <span class="mono block text-[.68rem] uppercase tracking-[.1em] text-stamp"
+            >02 · Structure</span
+          >
+          <h3 class="mt-3 mb-2 text-base font-extrabold">Cleaned by AI-built parsers</h3>
+          <p class="text-[.9rem] leading-[1.55] text-pretty text-ink-soft">
+            Our AI-maintained pipeline normalizes tickers, buckets amounts, and
+            computes the filing lag — so every trade is comparable across
+            members and time.
+          </p>
+        </div>
+        <div class="px-7 py-8">
+          <span class="mono block text-[.68rem] uppercase tracking-[.1em] text-stamp"
+            >03 · Signal</span
+          >
+          <h3 class="mt-3 mb-2 text-base font-extrabold">One daily dispatch</h3>
+          <p class="text-[.9rem] leading-[1.55] text-pretty text-ink-soft">
+            Who traded, what, how much, and how late they filed. One email a
+            day. Member and ticker follows are next.
+          </p>
+        </div>
       </div>
       <a
-        href="/late"
-        class="mono mt-6 inline-block text-[.78rem] uppercase tracking-[.06em] text-stamp no-underline hover:text-ink focus-visible:text-ink"
-        >See the year's worst delays →</a
+        href="/how-it-works"
+        class="mono mt-8 inline-block text-[.78rem] uppercase tracking-[.06em] text-stamp no-underline hover:text-ink focus-visible:text-ink"
+        >Read the full pipeline →</a
       >
     </section>
 
+    <!-- ===== Stats ===== -->
     <section
-      class="grid grid-cols-3 border-t-2 border-t-ink border-b border-b-rule max-[760px]:grid-cols-1"
+      class="mt-[10vh] grid grid-cols-3 border-t-2 border-t-ink border-b border-b-rule max-[760px]:grid-cols-1"
       aria-label="Tracker statistics"
     >
       <div class="border-r border-rule px-[5vw] py-9 max-[760px]:border-r-0 max-[760px]:border-b max-[760px]:border-b-rule">
@@ -241,53 +293,9 @@ const description =
       </div>
     </section>
 
-    <section class="mx-auto max-w-[1200px] px-[5vw] py-[10vh]" id="how">
-      <h2 class="max-w-[20ch] text-[clamp(1.6rem,3.5vw,2.4rem)] font-black leading-[1.15] tracking-[-0.02em] text-balance">
-        From filing cabinet to your inbox in minutes.
-      </h2>
-      <div class="mt-12 grid grid-cols-3 gap-10 max-[760px]:grid-cols-1">
-        <div>
-          <span class="mono mb-3 block text-[.7rem] uppercase tracking-[.1em] text-stamp"
-            >01 · Source</span
-          >
-          <h3 class="mb-2.5 text-base font-extrabold">Official filings only</h3>
-          <p class="text-[.92rem] leading-[1.6] text-pretty text-ink-soft">
-            We parse Periodic Transaction Reports directly from House and
-            Senate disclosure portals. No rumors, no scraped tweets — the paper
-            trail itself.
-          </p>
-        </div>
-        <div>
-          <span class="mono mb-3 block text-[.7rem] uppercase tracking-[.1em] text-stamp"
-            >02 · Structure</span
-          >
-          <h3 class="mb-2.5 text-base font-extrabold">Cleaned by AI-built parsers</h3>
-          <p class="text-[.92rem] leading-[1.6] text-pretty text-ink-soft">
-            Our AI-maintained pipeline normalizes tickers, buckets amounts,
-            and computes the filing lag — so every trade is comparable across
-            members and time.
-          </p>
-        </div>
-        <div>
-          <span class="mono mb-3 block text-[.7rem] uppercase tracking-[.1em] text-stamp"
-            >03 · Signal</span
-          >
-          <h3 class="mb-2.5 text-base font-extrabold">Alerts that matter</h3>
-          <p class="text-[.92rem] leading-[1.6] text-pretty text-ink-soft">
-            One daily digest of every new disclosure — who, what, how much,
-            and how late they filed. Member and ticker follows are next.
-          </p>
-        </div>
-      </div>
-      <a
-        href="/how-it-works"
-        class="mono mt-12 inline-block text-[.78rem] uppercase tracking-[.06em] text-stamp no-underline hover:text-ink focus-visible:text-ink"
-        >Read the full pipeline →</a
-      >
-    </section>
-
+    <!-- ===== Reviews ===== -->
     <section
-      class="mx-auto max-w-[1200px] border-t border-rule px-[5vw] py-[10vh]"
+      class="mx-auto max-w-[1200px] px-[5vw] py-[10vh]"
       id="reviews"
     >
       <div class="border-b-2 border-ink pb-2.5">
@@ -319,6 +327,7 @@ const description =
       </div>
     </section>
 
+    <!-- ===== Final CTA ===== -->
     <section class="border-t-2 border-ink px-[5vw] py-[10vh] text-center">
       <h2 class="text-[clamp(1.8rem,4.5vw,3.2rem)] font-black leading-[1.15] tracking-[-0.03em] text-balance">
         Public records, actually public.
@@ -326,9 +335,10 @@ const description =
       <p class="mx-auto mt-4 mb-8 max-w-[44ch] text-pretty text-ink-soft">
         The disclosures already exist. We just make them impossible to miss.
       </p>
-      <a href="#join" class="btn inline-block no-underline">Start tracking free</a>
+      <a href="#join" class="btn btn-stamp inline-block no-underline">Start tracking free</a>
     </section>
 
+    <!-- ===== Contact ===== -->
     <section class="border-t border-rule" id="contact">
       <div class="mx-auto max-w-[1200px] px-[5vw] py-[10vh]">
         <div class="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1 border-b-2 border-ink pb-2.5">
@@ -585,5 +595,103 @@ const description =
         }
       });
     </script>
+
+    <style>
+      /* Hero split (DESIGN.md §10 composing a page); collapses to one column
+         on narrow screens. */
+      .hero-grid {
+        display: grid;
+        grid-template-columns: 1.22fr 1fr;
+        gap: 44px;
+        align-items: center;
+      }
+      .kicker {
+        display: flex;
+        align-items: baseline;
+        gap: 9px;
+        margin-bottom: 20px;
+        font-family: var(--font-mono);
+        font-size: 0.68rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.15em;
+        color: var(--color-stamp);
+      }
+      .kicker .live-dot {
+        position: relative;
+        top: 1px;
+        flex: none;
+      }
+
+      /* "Today's email" preview card — the product shot, framed as a
+         broadsheet clipping (sharp border, ink rules, a stamp tab). */
+      .stage {
+        min-width: 0;
+        background: var(--color-wash);
+        border: 1px solid var(--color-rule);
+        padding: 26px;
+      }
+      .tagm {
+        display: inline-block;
+        margin-bottom: -1px;
+        padding: 4px 10px;
+        background: var(--color-stamp);
+        color: var(--color-paper);
+        font-family: var(--font-mono);
+        font-size: 0.58rem;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+      }
+      .mail {
+        background: var(--color-paper);
+        border: 1px solid var(--color-ink);
+        box-shadow: 0 22px 44px -26px rgba(20, 22, 26, 0.3);
+      }
+      .mail-hd {
+        padding: 15px 18px;
+        border-bottom: 2px solid var(--color-ink);
+      }
+      .mail-from {
+        font-weight: 900;
+        font-size: 0.92rem;
+        letter-spacing: -0.01em;
+      }
+      .mail-subj {
+        margin-top: 3px;
+        font-size: 0.7rem;
+        color: var(--color-ink-soft);
+      }
+      .mrow {
+        display: grid;
+        grid-template-columns: 1.2fr 0.55fr 0.5fr 0.95fr;
+        gap: 8px;
+        align-items: baseline;
+        padding: 11px 18px;
+        border-bottom: 1px solid var(--color-rule);
+        font-family: var(--font-mono);
+        font-size: 0.7rem;
+      }
+      .mrow > * {
+        min-width: 0;
+        overflow-wrap: break-word;
+      }
+      .mrow .who {
+        font-family: var(--font-sans);
+        font-weight: 700;
+        font-size: 0.8rem;
+      }
+      .mail-ft {
+        padding: 11px 18px;
+        font-size: 0.62rem;
+        color: var(--color-ink-soft);
+      }
+
+      @media (max-width: 840px) {
+        .hero-grid {
+          grid-template-columns: 1fr;
+          gap: 32px;
+        }
+      }
+    </style>
   </body>
 </html>

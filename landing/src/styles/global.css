@@ -24,6 +24,9 @@
   --color-stamp: oklch(0.53 0.207 22.317); /* #C8102E */
   --color-buy: oklch(0.517 0.121 156.294); /* #0E7C4A */
   --color-sell: oklch(0.501 0.178 28.705); /* #B3261E */
+  /* Faint newsprint tint for framed insets (e.g. the email-preview stage);
+     one step off paper, still within the token set (DESIGN.md §3). */
+  --color-wash: oklch(0.963 0.004 100); /* #F4F3EE */
 
   /* The "* fallback" families are generated at build time by fontaine
      (astro.config.mjs): local Arial / Courier New with size-adjust and
@@ -153,6 +156,16 @@
   .btn:hover {
     background: var(--color-stamp);
     border-color: var(--color-stamp);
+  }
+  /* Stamp-red primary variant — the page's single rationed CTA (DESIGN.md
+     §3, §8). Inverts to ink on hover so the two btn styles cross over. */
+  .btn-stamp {
+    background: var(--color-stamp);
+    border-color: var(--color-stamp);
+  }
+  .btn-stamp:hover {
+    background: var(--color-ink);
+    border-color: var(--color-ink);
   }
   .btn:active {
     transform: scale(0.96); /* feedback on pointer-down (plans/002) */
