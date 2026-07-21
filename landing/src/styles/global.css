@@ -272,6 +272,134 @@
     margin-top: 2px;
   }
 
+  /* ---------- scroll timeline (Timeline.astro) ----------
+     Default (no-JS) state: every step lit and readable, a static hairline
+     rail — a plain numbered timeline. `.is-scroll` (added by JS when motion
+     is allowed) dims upcoming steps and reveals them on scroll; `.is-static`
+     (reduced motion) draws it complete without coupling to scroll. */
+  .timeline {
+    position: relative;
+    max-width: 760px;
+    margin: 0 auto;
+    padding-left: 78px;
+  }
+  .tl-rail,
+  .tl-fill {
+    position: absolute;
+    left: 27px;
+    top: 18px;
+    bottom: 18px;
+    width: 2px;
+  }
+  .tl-rail {
+    background: var(--color-rule);
+  }
+  .tl-fill {
+    background: var(--color-stamp);
+    transform: scaleY(0);
+    transform-origin: top;
+    will-change: transform;
+  }
+  .tl-steps {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .tl-step {
+    position: relative;
+    padding: 24px 0 46px;
+    transition: opacity 0.35s var(--ease-out);
+  }
+  .tl-step:last-child {
+    padding-bottom: 0;
+  }
+  .tl-node {
+    position: absolute;
+    left: -78px;
+    top: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 54px;
+    height: 54px;
+    background: var(--color-paper);
+    border: 2px solid var(--color-rule);
+    color: var(--color-ink-soft);
+    font-family: var(--font-mono);
+    font-weight: 600;
+    font-size: 1rem;
+    transition: color 0.35s, background 0.35s, border-color 0.35s;
+  }
+  .tl-label {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--color-stamp);
+    margin-bottom: 10px;
+  }
+  .tl-title {
+    font-weight: 800;
+    font-size: clamp(1.2rem, 2.2vw, 1.5rem);
+    letter-spacing: -0.01em;
+    margin-bottom: 9px;
+  }
+  .tl-text {
+    font-size: 0.98rem;
+    line-height: 1.6;
+    color: var(--color-ink-soft);
+    max-width: 54ch;
+  }
+  .tl-text b {
+    color: var(--color-ink);
+    font-weight: 600;
+  }
+  /* done = passed (stamp outline); active = current (stamp fill). */
+  .tl-step.is-done .tl-node,
+  .timeline.is-static .tl-node {
+    border-color: var(--color-stamp);
+    color: var(--color-stamp);
+  }
+  .tl-step.is-active .tl-node {
+    border-color: var(--color-stamp);
+    background: var(--color-stamp);
+    color: var(--color-paper);
+  }
+  /* Focus effect only when scroll-driven; static/no-JS stays fully lit. */
+  .timeline.is-scroll .tl-step {
+    opacity: 0.42;
+  }
+  .timeline.is-scroll .tl-step.is-active,
+  .timeline.is-scroll .tl-step.is-done {
+    opacity: 1;
+  }
+  .timeline.is-static .tl-fill {
+    transform: scaleY(1);
+  }
+  @media (prefers-contrast: more) {
+    /* Never suppress contrast for the focus effect. */
+    .timeline.is-scroll .tl-step {
+      opacity: 1;
+    }
+  }
+  @media (max-width: 600px) {
+    .timeline {
+      padding-left: 58px;
+    }
+    .tl-rail,
+    .tl-fill {
+      left: 20px;
+    }
+    .tl-node {
+      left: -58px;
+      top: 18px;
+      width: 42px;
+      height: 42px;
+      font-size: 0.82rem;
+    }
+  }
+
   /* ---------- stats strip ---------- */
   .stat-n {
     font-weight: 900;
