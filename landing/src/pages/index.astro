@@ -187,8 +187,8 @@ const description =
               >Privacy matters</a
             >
           </p>
-          <div class="mt-7 border-t border-rule pt-4.5">
-            <div class="mono mb-2.25 text-[.75rem] uppercase tracking-[.15em] text-ink-soft">
+          <div class="mt-7 border-t border-rule pt-4">
+            <div class="mono mb-2 text-[.75rem] uppercase tracking-[.15em] text-ink-soft">
               Sourced only from
             </div>
             <div class="mono flex flex-wrap gap-x-5 gap-y-1 text-[.75rem] font-semibold text-ink/70">
@@ -249,7 +249,7 @@ const description =
         <h2 class="mx-auto max-w-[22ch] text-[clamp(1.9rem,4vw,3.1rem)] font-black leading-[1.08] tracking-[-0.03em] text-balance">
           They don't hide the trades. They just bury them.
         </h2>
-        <p class="mx-auto mt-4.5 max-w-[54ch] text-pretty text-[1.02rem] leading-[1.6] text-ink-soft">
+        <p class="mx-auto mt-4 max-w-[54ch] text-pretty text-[1.02rem] leading-[1.6] text-ink-soft">
           The disclosures are technically public — scattered across three
           government portals, locked in PDFs, filed weeks or months late. We
           read all of it, every morning, so you don't have to.
@@ -366,14 +366,14 @@ const description =
           </div>
           <form
             id="contact-form"
-            class="flex flex-col gap-4.5"
+            class="flex flex-col gap-4"
             data-endpoint={CONTACT_ENDPOINT}
             data-key={CONTACT_KEY}
             novalidate
           >
             <div>
               <label
-                class="eyebrow mb-1.75 block"
+                class="eyebrow mb-1.5 block"
                 for="contact-email">Your email</label
               >
               <input
@@ -388,7 +388,7 @@ const description =
             </div>
             <div>
               <label
-                class="eyebrow mb-1.75 block"
+                class="eyebrow mb-1.5 block"
                 for="contact-message">Message</label
               >
               <textarea
@@ -606,8 +606,8 @@ const description =
       }
       .kicker {
         display: flex;
-        align-items: baseline;
-        gap: 0.5625rem;
+        align-items: center;
+        gap: 0.5rem;
         margin-bottom: 1.25rem;
         font-family: var(--font-mono);
         font-size: 0.75rem;
@@ -618,7 +618,6 @@ const description =
       }
       .kicker .live-dot {
         position: relative;
-        top: 0.0625rem;
         flex: none;
       }
 

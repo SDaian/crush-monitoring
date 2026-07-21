@@ -89,14 +89,14 @@ const description =
     <Header active="how" />
 
     <section class="mx-auto max-w-[75rem] px-[5vw] pt-[9vh] pb-[7vh]">
-      <p class="mono mb-5.5 text-[.75rem] uppercase tracking-[.12em] text-ink-soft">
+      <p class="mono mb-5 text-[.75rem] uppercase tracking-[.12em] text-ink-soft">
         The pipeline · <b class="font-semibold text-stamp">Official sources only</b>
       </p>
       <h1 class="headline max-w-[18ch] text-[clamp(2.4rem,6.5vw,4.6rem)]">
         Four steps from <span class="underline-stamp">their filing</span> to
         your inbox.
       </h1>
-      <p class="mt-6.5 max-w-[56ch] text-[1.05rem] leading-[1.65] text-pretty text-ink-soft">
+      <p class="mt-6 max-w-[56ch] text-[1.05rem] leading-[1.65] text-pretty text-ink-soft">
         Members of Congress must disclose their stock trades by law. This page
         is the whole machine, end to end: where the paper comes from, what we
         compute from it, and exactly what lands in your email.
@@ -245,10 +245,10 @@ const description =
         </div>
         <div class="email relative border border-ink bg-white">
           <span class="email-stamp" aria-hidden="true">Sample</span>
-          <div class="eyebrow flex justify-between border-b border-rule px-4.5 py-3.5">
+          <div class="eyebrow flex justify-between border-b border-rule px-4 py-3.5">
             <span>Capitol Ledger Daily</span><span>07:00</span>
           </div>
-          <div class="px-4.5 pt-4 pb-1.5 text-[.98rem] font-extrabold">
+          <div class="px-4 pt-4 pb-1.5 text-[.98rem] font-extrabold">
             {all.length} recent disclosures · {lateCount} filed late
           </div>
           {
@@ -270,7 +270,7 @@ const description =
               </div>
             ))
           }
-          <div class="mono border-t border-rule px-4.5 py-3 text-[.75rem] text-ink-soft">
+          <div class="mono border-t border-rule px-4 py-3 text-[.75rem] text-ink-soft">
             {more > 0 ? `+ ${more} more · ` : ""}You get this because you
             subscribed. Unsubscribe anytime.
           </div>
@@ -431,7 +431,7 @@ const description =
   @media (max-width:47.5rem) {
     .erow {
       font-size: 0.75rem;
-      gap: 0.4375rem;
+      gap: 0.5rem;
       padding-left: 0.75rem;
       padding-right: 0.75rem;
     }
