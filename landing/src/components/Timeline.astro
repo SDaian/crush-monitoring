@@ -1,0 +1,92 @@
+---
+// Scroll-progress timeline (DESIGN.md §8): a vertical pipeline whose stamp-red
+// rail fills and whose steps light up as they reach the reading line. Used on
+// the home "how it works" band and the /how-it-works pipeline.
+//
+// Progressive enhancement: with no JS every step renders lit and readable and
+// the rail is a static hairline; the script adds the scroll fill + focus. The
+// motion is meaningful (literal progress through the pipeline) and has a
+// reduced-motion path (all steps lit, rail fully drawn, no scroll listeners).
+//
+// `body` is trusted, authored HTML (may contain <b>) — never user input.
+interface Step {
+  label: string;
+  title: string;
+  body: string;
+}
+interface Props {
+  steps: Step[];
+}
+const { steps } = Astro.props;
+const n = (i: number) => String(i + 1).padStart(2, "0");
+---
+
+<div class="timeline" data-timeline>
+  <div class="tl-rail" aria-hidden="true"></div>
+  <div class="tl-fill" aria-hidden="true"></div>
+  <ol class="tl-steps">
+    {
+      steps.map((s, i) => (
+        <li class="tl-step">
+          <div class="tl-node" aria-hidden="true">{n(i)}</div>
+          <div class="tl-body">
+            <div class="tl-label">{s.label}</div>
+            <h3 class="tl-title">{s.title}</h3>
+            <p class="tl-text" set:html={s.body} />
+          </div>
+        </li>
+      ))
+    }
+  </ol>
+</div>
+
+<script>
+  // Wire every timeline on the page independently.
+  const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  document.querySelectorAll<HTMLElement>("[data-timeline]").forEach((tl) => {
+    const fill = tl.querySelector<HTMLElement>(".tl-fill");
+    const rail = tl.querySelector<HTMLElement>(".tl-rail");
+    const steps = Array.from(tl.querySelectorAll<HTMLElement>(".tl-step"));
+    if (!fill || !rail || !steps.length) return;
+
+    // Reduced motion: draw it complete and static, no scroll coupling.
+    if (reduce) {
+      tl.classList.add("is-static");
+      return;
+    }
+
+    tl.classList.add("is-scroll");
+    let ticking = false;
+
+    const update = () => {
+      ticking = false;
+      const ref = window.innerHeight * 0.55; // the "reading line"
+      const rb = rail.getBoundingClientRect();
+      const frac = Math.max(0, Math.min(1, (ref - rb.top) / (rb.height || 1)));
+      fill.style.transform = `scaleY(${frac})`;
+
+      let active = -1;
+      steps.forEach((st, i) => {
+        const node = st.querySelector<HTMLElement>(".tl-node");
+        if (!node) return;
+        const b = node.getBoundingClientRect();
+        if (b.top + b.height / 2 <= ref) active = i;
+      });
+      steps.forEach((st, i) => {
+        st.classList.toggle("is-active", i === active);
+        st.classList.toggle("is-done", i < active);
+      });
+    };
+
+    const onScroll = () => {
+      if (!ticking) {
+        ticking = true;
+        requestAnimationFrame(update);
+      }
+    };
+
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll, { passive: true });
+    update();
+  });
+</script>

@@ -9,6 +9,7 @@ import "../styles/global.css";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import FontPreloads from "../components/FontPreloads.astro";
+import Timeline from "../components/Timeline.astro";
 import feed from "../data/disclosures.json";
 import stats from "../data/stats.json";
 import Analytics from "@vercel/analytics/astro";
@@ -70,6 +71,32 @@ const REVIEWS = [
   },
 ];
 const stars = (n: number) => "★".repeat(n) + "☆".repeat(5 - n);
+
+// The "how it works" pipeline, rendered as a scroll timeline (Timeline.astro).
+const HOW_STEPS = [
+  {
+    label: "Source",
+    title: "Official filings only",
+    body:
+      "Straight from the House, Senate and OGE portals. No rumors, no " +
+      "scraped tweets — the paper trail itself.",
+  },
+  {
+    label: "Structure",
+    title: "Cleaned by AI-built parsers",
+    body:
+      "Our AI-maintained pipeline normalizes tickers, buckets amounts, and " +
+      "computes the filing lag — so every trade is comparable across members " +
+      "and time.",
+  },
+  {
+    label: "Signal",
+    title: "One daily dispatch",
+    body:
+      "Who traded, what, how much, and how late they filed. One email a day. " +
+      "Member and ticker follows are next.",
+  },
+];
 
 const title = "Capitol Ledger — Politician Stock Trades, Tracked";
 const description =
@@ -228,44 +255,16 @@ const description =
           read all of it, every morning, so you don't have to.
         </p>
       </div>
-      <div class="mt-12 grid grid-cols-3 border-t border-rule max-[760px]:grid-cols-1">
-        <div class="border-r border-rule px-7 py-8 max-[760px]:border-r-0 max-[760px]:border-b">
-          <span class="mono block text-[.68rem] uppercase tracking-[.1em] text-stamp"
-            >01 · Source</span
-          >
-          <h3 class="mt-3 mb-2 text-base font-extrabold">Official filings only</h3>
-          <p class="text-[.9rem] leading-[1.55] text-pretty text-ink-soft">
-            Straight from the House, Senate and OGE portals. No rumors, no
-            scraped tweets — the paper trail itself.
-          </p>
-        </div>
-        <div class="border-r border-rule px-7 py-8 max-[760px]:border-r-0 max-[760px]:border-b">
-          <span class="mono block text-[.68rem] uppercase tracking-[.1em] text-stamp"
-            >02 · Structure</span
-          >
-          <h3 class="mt-3 mb-2 text-base font-extrabold">Cleaned by AI-built parsers</h3>
-          <p class="text-[.9rem] leading-[1.55] text-pretty text-ink-soft">
-            Our AI-maintained pipeline normalizes tickers, buckets amounts, and
-            computes the filing lag — so every trade is comparable across
-            members and time.
-          </p>
-        </div>
-        <div class="px-7 py-8">
-          <span class="mono block text-[.68rem] uppercase tracking-[.1em] text-stamp"
-            >03 · Signal</span
-          >
-          <h3 class="mt-3 mb-2 text-base font-extrabold">One daily dispatch</h3>
-          <p class="text-[.9rem] leading-[1.55] text-pretty text-ink-soft">
-            Who traded, what, how much, and how late they filed. One email a
-            day. Member and ticker follows are next.
-          </p>
-        </div>
+      <div class="mt-14">
+        <Timeline steps={HOW_STEPS} />
       </div>
-      <a
-        href="/how-it-works"
-        class="mono mt-8 inline-block text-[.78rem] uppercase tracking-[.06em] text-stamp no-underline hover:text-ink focus-visible:text-ink"
-        >Read the full pipeline →</a
-      >
+      <div class="mx-auto max-w-[760px] pl-[78px] max-[600px]:pl-[58px]">
+        <a
+          href="/how-it-works"
+          class="mono mt-4 inline-block text-[.78rem] uppercase tracking-[.06em] text-stamp no-underline hover:text-ink focus-visible:text-ink"
+          >Read the full pipeline →</a
+        >
+      </div>
     </section>
 
     <!-- ===== Stats ===== -->

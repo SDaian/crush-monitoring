@@ -8,8 +8,47 @@ import "../styles/global.css";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import FontPreloads from "../components/FontPreloads.astro";
+import Timeline from "../components/Timeline.astro";
 import feed from "../data/disclosures.json";
 import Analytics from "@vercel/analytics/astro";
+
+// The four-step pipeline, rendered as a scroll timeline (Timeline.astro).
+const PIPELINE = [
+  {
+    label: "Day zero",
+    title: "A member of Congress trades",
+    body:
+      "A senator or representative (or their spouse) buys or sells a stock. " +
+      "Under the <b>STOCK Act of 2012</b>, they must report it: within 30 " +
+      "days of becoming aware, never more than <b>45 days after the trade</b>.",
+  },
+  {
+    label: "Within 45 days · by law",
+    title: "They file a disclosure",
+    body:
+      "The trade appears in a <b>Periodic Transaction Report</b> on the House " +
+      "Clerk or Senate eFD portal: buried in a PDF, amounts given only in " +
+      "ranges, and sometimes filed months past the deadline. Public in name, " +
+      "painful in practice.",
+  },
+  {
+    label: "Every morning",
+    title: "We parse, clean, and compute",
+    body:
+      "Our pipeline pulls the new filings daily, straight from the official " +
+      "portals — nothing scraped from social media, no rumors. Tickers are " +
+      "normalized, amounts bucketed, and the <b>filing lag</b> computed for " +
+      "every trade: how many days you were kept waiting.",
+  },
+  {
+    label: "One email · every day",
+    title: "You see it first",
+    body:
+      "Every new disclosure lands in a single daily digest — who traded, " +
+      "what, how much, and how late they filed. <b>One email per day, " +
+      "always.</b> No trading tips, no noise, no spam.",
+  },
+];
 
 // The sample email is built from the same real disclosures the feed shows —
 // even the sample is a true statement (labelled SAMPLE because this exact
@@ -74,61 +113,8 @@ const description =
         </span>
       </div>
 
-      <div class="step">
-        <div class="step-n">01</div>
-        <div class="step-when">Day zero</div>
-        <div>
-          <h3>A member of Congress trades</h3>
-          <p>
-            A senator or representative (or their spouse) buys or sells a
-            stock. Under the <b>STOCK Act of 2012</b>, they must report it:
-            within 30 days of becoming aware, never more than
-            <b>45 days after the trade</b>.
-          </p>
-        </div>
-      </div>
-
-      <div class="step">
-        <div class="step-n">02</div>
-        <div class="step-when">Within 45 days · by law</div>
-        <div>
-          <h3>They file a disclosure</h3>
-          <p>
-            The trade appears in a <b>Periodic Transaction Report</b> on the
-            House Clerk or Senate eFD portal: buried in a PDF, amounts given
-            only in ranges, and sometimes filed months past the deadline.
-            Public in name, painful in practice.
-          </p>
-        </div>
-      </div>
-
-      <div class="step">
-        <div class="step-n">03</div>
-        <div class="step-when">Every morning</div>
-        <div>
-          <h3>We parse, clean, and compute</h3>
-          <p>
-            Our pipeline pulls the new filings daily, straight from the
-            official portals — nothing scraped from social media, no rumors.
-            Tickers are normalized, amounts bucketed, and the
-            <b>filing lag</b> computed for every trade: how many days you were
-            kept waiting.
-          </p>
-        </div>
-      </div>
-
-      <div class="step border-b-2! border-b-ink!">
-        <div class="step-n">04</div>
-        <div class="step-when">One email · Every day</div>
-        <div>
-          <h3>You see it first</h3>
-          <p>
-            Every new disclosure lands in a single daily digest — who traded,
-            what, how much, and how late they filed.
-            <b>One email per day, always.</b> No trading tips, no noise, no
-            spam.
-          </p>
-        </div>
+      <div class="mt-12">
+        <Timeline steps={PIPELINE} />
       </div>
     </section>
 
@@ -368,48 +354,8 @@ const description =
 </html>
 
 <style>
-  /* Page-specific components; everything shared lives in global.css. */
-  .step {
-    display: grid;
-    grid-template-columns: 130px 170px 1fr;
-    gap: 32px;
-    align-items: start;
-    padding: 44px 4px;
-    border-bottom: 1px solid var(--color-rule);
-  }
-  .step-n {
-    font-family: var(--font-mono);
-    font-weight: 600;
-    font-size: 2.6rem;
-    letter-spacing: -0.02em;
-    line-height: 1;
-    color: var(--color-stamp);
-  }
-  .step-when {
-    font-family: var(--font-mono);
-    font-size: 0.72rem;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    color: var(--color-ink-soft);
-    padding-top: 10px;
-  }
-  .step h3 {
-    font-size: 1.35rem;
-    font-weight: 800;
-    letter-spacing: -0.01em;
-    margin-bottom: 10px;
-  }
-  .step p {
-    font-size: 0.95rem;
-    line-height: 1.65;
-    color: var(--color-ink-soft);
-    max-width: 58ch;
-  }
-  .step p b {
-    color: var(--color-ink);
-    font-weight: 600;
-  }
-
+  /* Page-specific components; everything shared lives in global.css
+     (the pipeline uses the shared Timeline component). */
   .def {
     border: 1px solid var(--color-rule);
     padding: 28px;
@@ -483,19 +429,6 @@ const description =
   }
 
   @media (max-width: 760px) {
-    .step {
-      grid-template-columns: 64px 1fr;
-      grid-template-rows: auto auto;
-      gap: 8px 20px;
-      padding: 32px 0;
-    }
-    .step-n {
-      font-size: 1.9rem;
-      grid-row: span 2;
-    }
-    .step-when {
-      padding-top: 0;
-    }
     .erow {
       font-size: 0.66rem;
       gap: 7px;
