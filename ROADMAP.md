@@ -31,9 +31,48 @@ without touching a page.
 | Stage | Trigger | Move | Status |
 |---|---|---|---|
 | 0 — Endpoint unset | — | Forms show the "opens soon" pre-launch state. | ✅ live |
-| 1 — Web3Forms (contact) + Buttondown (signup/digest) | Launch | Free tiers, zero backend; contact key + signup endpoint set in Vercel env. | 🟡 contact live (Web3Forms, 2026-07-13); signup provider still pending |
+| 1 — Web3Forms (contact) + Buttondown (signup/digest) | Launch | Free tiers, zero backend; contact key + signup endpoint set in Vercel env. | 🟡 contact live (Web3Forms, 2026-07-13); signup provider still pending — design below |
 | 2 — Own function + Resend | Volume or customization outgrows the form vendor | A small Vercel serverless function emailing via Resend; same endpoint contract. | if needed |
 | 3 — Supabase | User accounts exist (storage stage 2) | Contact messages and subscriptions become rows with auth context (support threads, per-user preferences). | with follows |
+
+### Stage 1 design — trade-alert subscribe → daily digest (Buttondown)
+
+Three pieces — capture, store, send. The report **content already exists**
+(`daily_report.build_report` → HTML), so this is wiring, not new logic.
+
+- **The constraint that drives the choice:** the site is **static** and cannot
+  hold a secret API key in the browser. Buttondown exposes a **public
+  form-submit endpoint** (no backend), so the existing FR-1 signup form POSTs
+  straight to it. Resend would require a serverless function to protect the key
+  — that's stage 2, adopted deliberately later.
+- **Capture:** the signup form (FR-1: POST `email=` to
+  `PUBLIC_SIGNUP_ENDPOINT`) points at Buttondown's subscribe endpoint.
+- **Store:** the email lives in **Buttondown's managed subscriber list** —
+  **never in git** (git is the public audit record; subscriber PII stays out of
+  it — see the standing rule below). Buttondown handles **double opt-in**
+  (GDPR), unsubscribe, and a hosted archive. A database only enters at stage 3
+  (Supabase), when accounts/follows exist.
+- **Send:** the daily Action reuses the digest HTML from `build_report` and
+  makes **one API call** (`POST /v1/emails`, `BUTTONDOWN_API_KEY` secret) to
+  broadcast it to all confirmed subscribers — one content source, no
+  re-authoring in a GUI. **Gated + non-fatal** (key unset → skip, keeping
+  today's owner-only email; same pattern as the analytics `VERCEL_TOKEN`) and
+  **idempotent per day** via the existing `report_state.date`, so no
+  double-sends. Unsubscribe/bounce/deliverability handled by Buttondown.
+- **Cost:** free ≤100 subscribers, then ~$9/mo to 1,000. (Buttondown's
+  transactional/API send is on the paid tier as of 2026-04.)
+- **Pre-first-send checklist (compliance/deliverability):**
+  1. Verify a **sending domain** (SPF/DKIM/DMARC) → `daily@capitolledger.io`.
+  2. **Double opt-in** on (Buttondown default).
+  3. **Physical mailing address** + unsubscribe link in the email footer
+     (CAN-SPAM; Buttondown auto-adds unsubscribe).
+  4. **Update `/privacy`** to name Buttondown as the processor **before**
+     collecting real emails (standing rule below).
+- **Scale trigger → stage 2 (Resend + one Vercel function):** past ~1k
+  subscribers (cost), or when we want to fully own the HTML/personalization, or
+  add per-member follows. Resend is priced **by contacts, not emails sent**, so
+  a daily blast adds no per-send cost; free ≤1,000 contacts, then $40/mo to 5k.
+  Same `PUBLIC_*_ENDPOINT` contract, so the page doesn't change.
 
 ## 3. Product
 
