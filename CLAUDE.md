@@ -216,7 +216,7 @@ sites. Full details in `congress/README.md`. Conventions:
   Analytics API (`/v1/query/web-analytics/visits/{count,aggregate}`, Bearer
   token) and the morning report embeds a "📈 Traffic — last 7 days" block
   (total + top pages). **Gated + non-fatal:** needs `VERCEL_TOKEN` (secret) +
-  `VERCEL_PROJECT_ID` (var), optional `VERCEL_TEAM_ID`; unset or on any API
+  `VERCEL_PROJECT_ID` (secret or var), optional `VERCEL_TEAM_ID`; unset or on any API
   error it returns `None` and the report just omits the section. Network is
   confined to `analytics._fetch_json` (stdlib `urllib`, no new deps); the
   response is parsed defensively (field names matched against candidates) and
