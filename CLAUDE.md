@@ -215,7 +215,9 @@ sites. Full details in `congress/README.md`. Conventions:
   pulls the site's aggregated, cookieless page views via Vercel's public Web
   Analytics API (`/v1/query/web-analytics/visits/{count,aggregate}`, Bearer
   token) and the morning report embeds a "📈 Traffic — last 7 days" block
-  (total + top pages). **Gated + non-fatal:** needs `VERCEL_TOKEN` (secret) +
+  (total + top pages + a **per-member-page breakdown** — the `by=route`
+  aggregate rows under `/members/<slug>`, resolved to real names via the
+  generated `members/_index.json`). **Gated + non-fatal:** needs `VERCEL_TOKEN` (secret) +
   `VERCEL_PROJECT_ID` (secret or var), optional `VERCEL_TEAM_ID`; unset or on any API
   error it returns `None` and the report just omits the section. Network is
   confined to `analytics._fetch_json` (stdlib `urllib`, no new deps); the
