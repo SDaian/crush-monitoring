@@ -126,22 +126,59 @@ def _row_metric(row: dict) -> int:
     return _first_int(row, _METRIC_KEYS) or 0
 
 
-def top_pages(payload: dict, limit: int = TOP_PAGES) -> list[tuple[str, int]]:
-    """[(path, views), …] sorted by views desc, from an /aggregate?by=path body."""
+def _all_page_views(payload: dict) -> list[tuple[str, int]]:
+    """[(route, views), …] for every row, sorted by views desc."""
     pairs = [(_row_key(r), _row_metric(r)) for r in parse_rows(payload)]
     pairs.sort(key=lambda p: p[1], reverse=True)
-    return pairs[:limit]
+    return pairs
+
+
+def top_pages(payload: dict, limit: int = TOP_PAGES) -> list[tuple[str, int]]:
+    """[(route, views), …] sorted by views desc, limited to the top ``limit``."""
+    return _all_page_views(payload)[:limit]
+
+
+def member_slug(route: str) -> str | None:
+    """"/members/nancy-pelosi" → "nancy-pelosi"; None for the index or non-member
+    routes. Trailing slashes and query strings are tolerated."""
+    if not isinstance(route, str):
+        return None
+    path = route.split("?", 1)[0].rstrip("/")
+    prefix = "/members/"
+    if not path.startswith(prefix):
+        return None
+    slug = path[len(prefix):]
+    return slug or None  # "/members" (index) → "" → None
+
+
+def prettify_slug(slug: str) -> str:
+    """"nancy-pelosi" → "Nancy Pelosi" (fallback when no real name is known)."""
+    return " ".join(w.capitalize() for w in slug.split("-"))
+
+
+def member_page_views(payload: dict) -> list[tuple[str, int]]:
+    """[(slug, views), …] for the /members/<slug> routes, sorted by views desc."""
+    out = []
+    for route, views in _all_page_views(payload):
+        slug = member_slug(route)
+        if slug:
+            out.append((slug, views))
+    return out
 
 
 def _esc(s) -> str:
     return (str(s).replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;"))
 
 
-def format_block(summary: dict) -> tuple[str, str]:
-    """(markdown, html) for the report's traffic section from a daily_summary."""
+def format_block(summary: dict, member_names: dict | None = None) -> tuple[str, str]:
+    """(markdown, html) for the report's traffic section from a daily_summary.
+    ``member_names`` maps slug→display name for the member-page breakdown; any
+    missing slug falls back to a prettified slug."""
     total = summary.get("total")
     pages = summary.get("pages") or []
+    member_pages = summary.get("memberPages") or []
     days = summary.get("windowDays", WINDOW_DAYS)
+    names = member_names or {}
     head = f"## 📈 Traffic — last {days} days"
     total_txt = f"{total:,} page views" if total is not None else "views unavailable"
 
@@ -153,6 +190,14 @@ def format_block(summary: dict) -> tuple[str, str]:
             f"- `{p}` — {v:,}" for p, v in pages)
         html += "<ul>" + "".join(
             f"<li><code>{_esc(p)}</code> — {v:,}</li>" for p, v in pages) + "</ul>"
+    if member_pages:
+        def label(slug):
+            return names.get(slug) or prettify_slug(slug)
+        md += "\n\nMember pages:\n" + "\n".join(
+            f"- {label(s)} — {v:,}" for s, v in member_pages)
+        html += ("<p style='margin:8px 0 2px'><b>Member pages</b></p><ul>"
+                 + "".join(f"<li>{_esc(label(s))} — {v:,}</li>"
+                           for s, v in member_pages) + "</ul>")
     return md, html
 
 
@@ -175,14 +220,16 @@ def daily_summary(today_iso: str, window_days: int = WINDOW_DAYS) -> dict | None
     except Exception:
         pass
     pages: list[tuple[str, int]] = []
+    member_pages: list[tuple[str, int]] = []
     try:
-        pages = top_pages(
-            _fetch_json("visits/aggregate", {**base, "by": AGG_BY}, token))
+        agg = _fetch_json("visits/aggregate", {**base, "by": AGG_BY}, token)
+        pages = top_pages(agg)
+        member_pages = member_page_views(agg)
     except Exception:
         pass
     if total is None and not pages:
         return None
     return {
         "since": since, "until": until, "windowDays": window_days,
-        "total": total, "pages": pages,
+        "total": total, "pages": pages, "memberPages": member_pages,
     }

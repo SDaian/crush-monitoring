@@ -69,7 +69,49 @@ class TestRowsAndTopPages(unittest.TestCase):
         self.assertEqual(a.top_pages({"data": [{"key": "/x"}]}), [("/x", 0)])
 
 
+class TestMemberPages(unittest.TestCase):
+    def test_member_slug(self):
+        self.assertEqual(a.member_slug("/members/nancy-pelosi"), "nancy-pelosi")
+        self.assertEqual(a.member_slug("/members/donald-j-trump/"), "donald-j-trump")
+        self.assertEqual(a.member_slug("/members/greene?ref=x"), "greene")
+        self.assertIsNone(a.member_slug("/members"))
+        self.assertIsNone(a.member_slug("/members/"))
+        self.assertIsNone(a.member_slug("/late"))
+        self.assertIsNone(a.member_slug("/"))
+
+    def test_prettify_slug(self):
+        self.assertEqual(a.prettify_slug("nancy-pelosi"), "Nancy Pelosi")
+
+    def test_member_page_views_filters_and_sorts(self):
+        payload = {"data": [
+            {"route": "/", "pageviews": 120},
+            {"route": "/members/nancy-pelosi", "pageviews": 46},
+            {"route": "/members", "pageviews": 9},        # index → excluded
+            {"route": "/members/josh-gottheimer", "pageviews": 60},
+            {"route": "/late", "pageviews": 30},
+        ]}
+        self.assertEqual(a.member_page_views(payload),
+                         [("josh-gottheimer", 60), ("nancy-pelosi", 46)])
+
+
 class TestFormatBlock(unittest.TestCase):
+    def test_member_breakdown_uses_real_names(self):
+        md, html = a.format_block(
+            {"total": 100, "pages": [("/", 50)], "windowDays": 7,
+             "memberPages": [("nancy-pelosi", 46), ("donald-j-trump", 12)]},
+            member_names={"nancy-pelosi": "Nancy Pelosi",
+                          "donald-j-trump": "Donald J. Trump"})
+        self.assertIn("Member pages:", md)
+        self.assertIn("Nancy Pelosi — 46", md)
+        self.assertIn("Donald J. Trump — 12", md)
+        self.assertIn("Member pages", html)
+
+    def test_member_breakdown_prettifies_unknown_slug(self):
+        md, _ = a.format_block(
+            {"total": 1, "pages": [], "windowDays": 7,
+             "memberPages": [("marjorie-taylor-greene", 5)]})
+        self.assertIn("Marjorie Taylor Greene — 5", md)
+
     def test_markdown_and_html(self):
         md, html = a.format_block(
             {"total": 165, "pages": [("/", 120), ("/late", 15)], "windowDays": 7})
