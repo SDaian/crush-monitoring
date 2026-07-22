@@ -136,10 +136,10 @@ const schema = [
     </section>
 
     <section class="mx-auto max-w-[75rem] px-[5vw] pb-[7vh]">
-      <div class="grid grid-cols-4 border-t border-ink max-[640px]:grid-cols-2">
+      <div class="statstrip">
         {
           STAT_CARDS.map((c) => (
-            <div class="statcard">
+            <div class="stat">
               <div class="statnum">{c.n}</div>
               <div class="statlabel">{c.l}</div>
             </div>
@@ -173,32 +173,62 @@ const schema = [
           <div class="section-head">
             <h2 class="section-title whitespace-nowrap">Estimated holdings</h2>
             <span class="eyebrow">
-              From the {m.holdings.reportYear} annual report
+              ~<b class="font-semibold text-stamp">{m.holdings.totalLabel}</b> ·
+              {" "}{m.holdings.positions} positions
             </span>
           </div>
-          <p class="fineprint mt-4 max-w-[80ch]">
-            A directional estimate from {m.name}'s latest annual financial
-            disclosure — bracket midpoints, not share counts, and never
-            real-time. Totals sum the disclosed ranges: about{" "}
-            <b class="text-ink">{m.holdings.totalLabel}</b> across{" "}
-            {m.holdings.stocks.length} positions. The percentage is each
-            position's share of that midpoint total.
+          <p class="fineprint mt-4 max-w-[85ch]">
+            {m.name}'s {m.holdings.reportYear} annual disclosure, <b class="text-ink"
+              >rolled forward</b
+            > with {m.holdings.filingsSince}
+            {" "}filing{m.holdings.filingsSince === 1 ? "" : "s"} since — so
+            recent buys and sells nudge the year-end snapshot toward today.
+            Bracket midpoints, <b>not</b> share counts; the percentage is each
+            stock's share of the estimated total. A directional estimate, never
+            exact or real-time.
           </p>
           <div class="mt-7 grid grid-cols-2 gap-x-12 gap-y-1 max-[720px]:grid-cols-1">
-            {m.holdings.stocks.slice(0, 16).map((h: any) => (
+            {m.holdings.stocks.map((h: any) => (
               <div class="hrow">
                 <span class="htick">{h.ticker}</span>
-                <span class="hname">{h.asset}</span>
-                <span class="hval">{h.valueLabel}</span>
+                <span class="hname">
+                  {h.asset}
+                  {h.isNew && <b class="hnew">new</b>}
+                </span>
+                <span class="hval">~{h.estLabel}</span>
                 {h.pctPortfolio != null && (
                   <span class="hpct">{h.pctPortfolio}%</span>
                 )}
               </div>
             ))}
           </div>
+
+          {
+            m.holdings.options.length > 0 && (
+              <>
+                <div class="mono mt-8 mb-3 text-[.75rem] uppercase tracking-[.07em] text-ink-soft">
+                  Live options
+                </div>
+                <div class="flex flex-wrap gap-x-8 gap-y-2">
+                  {m.holdings.options.map((o: any) => (
+                    <div class="orow">
+                      <b>{o.ticker}</b>
+                      <span>
+                        {o.type ?? "option"}
+                        {o.strike != null ? ` $${o.strike}` : ""}
+                        {o.expiration ? ` · exp ${fmtMonth(o.expiration)}` : ""}
+                      </span>
+                      <span class="oval">~{o.estLabel}</span>
+                    </div>
+                  ))}
+                </div>
+              </>
+            )
+          }
+
           {m.holdings.sourceUrl && (
-            <p class="fineprint mt-5">
-              Source:{" "}
+            <p class="fineprint mt-6">
+              Baseline source:{" "}
               <a
                 href={m.holdings.sourceUrl}
                 class="underline underline-offset-2 hover:text-ink"
@@ -206,7 +236,7 @@ const schema = [
               >
                 annual disclosure, filed {fmtMonth(m.holdings.filingDate)}
               </a>
-              .
+              , then rolled forward with disclosed trades.
             </p>
           )}
         </section>
@@ -290,10 +320,20 @@ const schema = [
 </html>
 
 <style>
-  .statcard {
-    border-bottom: 1px solid var(--color-ink);
-    border-right: 1px solid var(--color-rule);
-    padding: 1.5rem 1.25rem 1.5rem 0;
+  /* A clean 4-across strip framed by hairlines, thin dividers between stats —
+     not the boxy 2x2 grid. Collapses to 2x2 on narrow screens. */
+  .statstrip {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    border-block: 1px solid var(--color-rule);
+  }
+  .stat {
+    padding: 1.75rem 1.5rem;
+    border-left: 1px solid var(--color-rule);
+  }
+  .stat:first-child {
+    border-left: 0;
+    padding-left: 0;
   }
   .statnum {
     font-family: var(--font-sans);
@@ -310,7 +350,22 @@ const schema = [
     text-transform: uppercase;
     letter-spacing: 0.07em;
     color: var(--color-ink-soft);
-    margin-top: 0.625rem;
+    margin-top: 0.75rem;
+  }
+  @media (max-width: 40rem) {
+    .statstrip {
+      grid-template-columns: 1fr 1fr;
+    }
+    .stat {
+      padding: 1.25rem 1rem;
+    }
+    .stat:nth-child(odd) {
+      border-left: 0;
+      padding-left: 0;
+    }
+    .stat:nth-child(n + 3) {
+      border-top: 1px solid var(--color-rule);
+    }
   }
 
   .chip {
@@ -360,6 +415,37 @@ const schema = [
     text-align: right;
     white-space: nowrap;
     color: var(--color-stamp);
+    font-variant-numeric: tabular-nums;
+  }
+  /* "new" = a position first traded after the annual snapshot. */
+  .hnew {
+    margin-left: 0.5rem;
+    padding: 0.1rem 0.4rem;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    line-height: 1;
+    color: var(--color-paper);
+    background: var(--color-stamp);
+    vertical-align: middle;
+  }
+  /* Live-option chips (rolled-forward). */
+  .orow {
+    display: flex;
+    align-items: baseline;
+    gap: 0.5rem;
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    color: var(--color-ink-soft);
+  }
+  .orow b {
+    font-weight: 700;
+    color: var(--color-ink);
+  }
+  .oval {
+    font-weight: 600;
+    color: var(--color-ink);
     font-variant-numeric: tabular-nums;
   }
 

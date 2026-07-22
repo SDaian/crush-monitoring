@@ -253,16 +253,125 @@
     "available": true,
     "filingDate": "2025-08-11",
     "reportYear": 2024,
+    "snapDate": "2024-12-31",
+    "filingsSince": 18,
     "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/financial-pdfs/2024/10066210.pdf",
-    "totalLabel": "$15K – $50K",
+    "totalLabel": "$457K",
+    "positions": 39,
     "stocks": [
       {
         "ticker": "WPP",
         "asset": "WPP plc American Depositary Shares",
-        "type": "Stock",
-        "valueLabel": "$15K – $50K",
-        "pctPortfolio": 100.0
+        "estLabel": "$33K",
+        "pctPortfolio": 7.1,
+        "isNew": false
+      },
+      {
+        "ticker": "TSLA",
+        "asset": "Tesla, Inc. - Common Stock",
+        "estLabel": "$32K",
+        "pctPortfolio": 7.0,
+        "isNew": true
+      },
+      {
+        "ticker": "BABA",
+        "asset": "Alibaba Group Holding Limited American Depositary Shares each representing eight Ordinary share",
+        "estLabel": "$24K",
+        "pctPortfolio": 5.3,
+        "isNew": true
+      },
+      {
+        "ticker": "AMD",
+        "asset": "Advanced Micro Devices, Inc.",
+        "estLabel": "$24K",
+        "pctPortfolio": 5.3,
+        "isNew": true
+      },
+      {
+        "ticker": "WMT",
+        "asset": "Walmart Inc. Common Stock",
+        "estLabel": "$24K",
+        "pctPortfolio": 5.3,
+        "isNew": true
+      },
+      {
+        "ticker": "FI",
+        "asset": "Fiserv, Inc. Common Stock",
+        "estLabel": "$24K",
+        "pctPortfolio": 5.3,
+        "isNew": true
+      },
+      {
+        "ticker": "TWLO",
+        "asset": "Twilio Inc. Class A Common Stock",
+        "estLabel": "$16K",
+        "pctPortfolio": 3.5,
+        "isNew": true
+      },
+      {
+        "ticker": "FN",
+        "asset": "Fabrinet Ordinary Shares",
+        "estLabel": "$16K",
+        "pctPortfolio": 3.5,
+        "isNew": true
+      },
+      {
+        "ticker": "V",
+        "asset": "Visa Inc.",
+        "estLabel": "$16K",
+        "pctPortfolio": 3.5,
+        "isNew": true
+      },
+      {
+        "ticker": "XOM",
+        "asset": "Exxon Mobil Corporation Common Stock",
+        "estLabel": "$16K",
+        "pctPortfolio": 3.5,
+        "isNew": true
+      },
+      {
+        "ticker": "BKNG",
+        "asset": "Booking Holdings Inc. - Common Stock",
+        "estLabel": "$8K",
+        "pctPortfolio": 1.8,
+        "isNew": true
+      },
+      {
+        "ticker": "LITE",
+        "asset": "Lumentum Holdings Inc. - Common Stock",
+        "estLabel": "$8K",
+        "pctPortfolio": 1.8,
+        "isNew": true
+      },
+      {
+        "ticker": "MU",
+        "asset": "Micron Technology, Inc. - Common Stock",
+        "estLabel": "$8K",
+        "pctPortfolio": 1.8,
+        "isNew": true
+      },
+      {
+        "ticker": "ADI",
+        "asset": "Analog Devices, Inc. - Common Stock",
+        "estLabel": "$8K",
+        "pctPortfolio": 1.8,
+        "isNew": true
+      },
+      {
+        "ticker": "SNDK",
+        "asset": "Sandisk Corporation - Common Stock When-Issued",
+        "estLabel": "$8K",
+        "pctPortfolio": 1.8,
+        "isNew": true
+      },
+      {
+        "ticker": "ABBV",
+        "asset": "AbbVie Inc. Common Stock",
+        "estLabel": "$8K",
+        "pctPortfolio": 1.8,
+        "isNew": true
       }
-    ]
+    ],
+    "options": []
   }
 }

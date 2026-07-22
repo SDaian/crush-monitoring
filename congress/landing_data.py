@@ -91,6 +91,28 @@ def compact_bucket(lo, hi) -> str:
     return f"{one(lo)} – {one(hi)}"
 
 
+def money(x: float) -> str:
+    """A single point-estimate dollar amount, compact: "$5.0M" / "$250K"."""
+    x = max(0.0, x)
+    if x >= 1_000_000:
+        return f"${x / 1_000_000:.1f}M"
+    if x >= 1_000:
+        return f"${round(x / 1_000)}K"
+    return f"${x:,.0f}"
+
+
+def _holding_mid(h: dict) -> float:
+    """Bracket-midpoint value of one annual-report holding (floor if open-ended)."""
+    lo, hi = h.get("value_lo"), h.get("value_hi")
+    if lo is None:
+        return 0.0
+    return (lo + (hi if hi is not None else lo)) / 2
+
+
+def _is_option_trade(t: dict) -> bool:
+    return t.get("asset_type") == "Option" or bool(t.get("option"))
+
+
 def _eligible(trades: list[dict]) -> list[dict]:
     return [
         t for t in trades
@@ -265,7 +287,93 @@ def _side_label(t: dict) -> str:
     return {"buy": "BUY", "sell": "SELL"}.get(t.get("type"), (t.get("type") or "").upper())
 
 
-def member_payload(name: str, trades: list[dict], holdings: dict) -> dict:
+def rolled_holdings(member_trades: list[dict], h: dict, today_iso: str) -> dict:
+    """Estimated CURRENT holdings — the member's latest annual snapshot rolled
+    forward with every disclosed trade dated after it (a Python port of the
+    tracker's ``rollForward`` in docs/trades.html, kept in sync with it):
+
+    - stock buys add / sells subtract by bracket midpoint;
+    - tickers first traded *after* the snapshot appear (flagged ``isNew``);
+    - live options = snapshot options + option buys since, minus any already
+      expired (expiration < today), deduped by (ticker, type, strike, expiry).
+
+    Bracket midpoints, NOT share counts — a directional estimate. Returns
+    ``{snap, filings, stocks, options}`` with dollar-midpoint ``est`` values."""
+    # No machine-readable annual baseline → no holdings estimate (don't
+    # fabricate positions from trades alone; the page just omits the section).
+    if not h.get("available"):
+        return {"snap": None, "filings": 0, "stocks": [], "options": []}
+    stocks_in = h.get("stocks", [])
+    # Annual reports value assets at year end; roll forward from there (fall
+    # back to the filing date when the report year is unknown).
+    snap = (f"{h['report_year']}-12-31" if h.get("report_year")
+            else (h.get("filing_date") or "0000-00-00"))
+
+    pos: dict = {}
+    for s in stocks_in:
+        if s.get("asset_type") != "Stock":
+            continue
+        k = s.get("ticker") or s.get("asset")
+        pos[k] = {"ticker": s.get("ticker"), "asset": s.get("asset"),
+                  "base": _holding_mid(s), "delta": 0.0, "inSnap": True}
+
+    since = [t for t in member_trades if (t.get("tx_date") or "") > snap]
+    filings, opt_trades = set(), []
+    for t in since:
+        if t.get("filing_id"):
+            filings.add(t["filing_id"])
+        if _is_option_trade(t):
+            opt_trades.append(t)
+            continue
+        tk = t.get("ticker")
+        if not tk:
+            continue
+        e = pos.get(tk)
+        if e is None:
+            e = {"ticker": tk, "asset": t.get("asset"), "base": 0.0,
+                 "delta": 0.0, "inSnap": False}
+            pos[tk] = e
+        if t.get("type") == "buy":
+            e["delta"] += _mid(t)
+        elif t.get("type") == "sell":
+            e["delta"] -= _mid(t)
+
+    stocks = []
+    for e in pos.values():
+        est = max(0.0, e["base"] + e["delta"])
+        if est <= 0:
+            continue
+        stocks.append({"ticker": e["ticker"] or "—", "asset": e["asset"] or "",
+                       "est": est, "isNew": not e["inSnap"]})
+    stocks.sort(key=lambda x: -x["est"])
+
+    opt_map: dict = {}
+    def _add_opt(ticker, opt, est):
+        exp = (opt or {}).get("expiration")
+        if not ticker or not exp or exp < today_iso:
+            return
+        key = (ticker, (opt.get("type") or ""), (opt.get("strike") or ""), exp)
+        prev = opt_map.get(key)
+        if prev is None:
+            opt_map[key] = {"ticker": ticker, "type": opt.get("type"),
+                            "strike": opt.get("strike"), "expiration": exp,
+                            "est": est or 0.0}
+        else:
+            prev["est"] = max(prev["est"], est or 0.0)
+    for s in stocks_in:
+        if s.get("asset_type") == "Option":
+            _add_opt(s.get("ticker"), s.get("option") or {}, _holding_mid(s))
+    for t in opt_trades:
+        if t.get("type") == "buy":
+            _add_opt(t.get("ticker"), t.get("option") or {}, _mid(t))
+    options = sorted(opt_map.values(), key=lambda x: -x["est"])
+
+    return {"snap": snap, "filings": len(filings), "stocks": stocks,
+            "options": options}
+
+
+def member_payload(name: str, trades: list[dict], holdings: dict,
+                   today_iso: str = "9999-12-31") -> dict:
     """Per-member page data: summary, most-traded tickers, the most recent
     ``MEMBER_TRADE_CAP`` disclosed trades, and estimated holdings from the
     member's annual report (``holdings`` is the ``holdings.json`` ``holdings``
@@ -297,38 +405,38 @@ def member_payload(name: str, trades: list[dict], holdings: dict) -> dict:
         "sourceUrl": t.get("source_url"),
     } for t in ts[:MEMBER_TRADE_CAP]]
 
+    # Estimated CURRENT holdings: the annual snapshot rolled forward with every
+    # trade filed since (so a recent buy/option that post-dates the annual
+    # report shows up), mirroring the tracker. Bracket midpoints, not shares.
     h = holdings.get(name, {}) if holdings else {}
-    stocks = h.get("stocks", []) if h.get("available") else []
-    hlo = sum(s.get("value_lo") or 0 for s in stocks)
-    hhi = sum(s.get("value_hi") or 0 for s in stocks)
-
-    # Each position's share of the portfolio, by bracket midpoint over the WHOLE
-    # portfolio (not just the displayed top slice), so the shares are honest.
-    def _stock_mid(s: dict) -> float:
-        lo, hi = s.get("value_lo"), s.get("value_hi")
-        if lo is None:
-            return 0.0
-        return (lo + (hi if hi is not None else lo)) / 2
-    total_mid = sum(_stock_mid(s) for s in stocks)
-
+    rf = rolled_holdings(ts, h, today_iso)
+    held = rf["stocks"]
+    total_est = sum(x["est"] for x in held)
     holdings_block = {
         "available": bool(h.get("available")),
         "filingDate": h.get("filing_date"),
         "reportYear": h.get("report_year"),
+        "snapDate": rf["snap"],
+        "filingsSince": rf["filings"],
         "sourceUrl": h.get("source_url"),
-        "totalLabel": compact_bucket(hlo, hhi) if stocks else None,
+        "totalLabel": money(total_est) if held else None,
+        "positions": len(held),
         "stocks": [{
-            "ticker": s.get("ticker") or "—",
-            "asset": s.get("asset") or "",
-            "type": s.get("asset_type") or "",
-            "valueLabel": compact_bucket(s.get("value_lo"), s.get("value_hi")),
+            "ticker": x["ticker"],
+            "asset": x["asset"],
+            "estLabel": money(x["est"]),
             "pctPortfolio": (
-                round(100 * _stock_mid(s) / total_mid, 1) if total_mid else None
+                round(100 * x["est"] / total_est, 1) if total_est else None
             ),
-        } for s in sorted(
-            stocks,
-            key=lambda s: -(s.get("value_hi") or s.get("value_lo") or 0),
-        )[:MEMBER_HOLDINGS_CAP]],
+            "isNew": x["isNew"],
+        } for x in held[:MEMBER_HOLDINGS_CAP]],
+        "options": [{
+            "ticker": o["ticker"],
+            "type": o["type"],
+            "strike": o["strike"],
+            "expiration": o["expiration"],
+            "estLabel": money(o["est"]),
+        } for o in rf["options"][:MEMBER_HOLDINGS_CAP]],
     }
 
     return {
@@ -363,10 +471,12 @@ def member_payload(name: str, trades: list[dict], holdings: dict) -> dict:
 def write_member_files(
     trades: list[dict], holdings: dict, out_dir: Path,
     names: list[str] = MEMBER_PAGE_NAMES,
+    today_iso: str = "9999-12-31",
 ) -> list[str]:
     """Write members/<slug>.json for each featured filer with trades, plus
     members/_index.json. Members with no disclosed trades are skipped (an
-    empty page is worse than none). Returns the slugs written."""
+    empty page is worse than none). ``today_iso`` drives options-expiry in the
+    rolled-forward holdings. Returns the slugs written."""
     comment = (
         "Generated from real official disclosures by congress/landing_data.py "
         "(daily Action). Do not edit by hand."
@@ -376,7 +486,7 @@ def write_member_files(
     index = []
     written = []
     for name in names:
-        payload = member_payload(name, trades, holdings)
+        payload = member_payload(name, trades, holdings, today_iso)
         if payload["summary"]["trades"] == 0:
             continue
         (members_dir / f"{payload['slug']}.json").write_text(

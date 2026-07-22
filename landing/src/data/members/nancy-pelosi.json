@@ -253,120 +253,146 @@
     "available": true,
     "filingDate": "2026-05-15",
     "reportYear": 2025,
+    "snapDate": "2025-12-31",
+    "filingsSince": 2,
     "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/financial-pdfs/2025/10075701.pdf",
-    "totalLabel": "$49M – $233M",
+    "totalLabel": "$138.1M",
+    "positions": 24,
     "stocks": [
       {
         "ticker": "GOOGL",
         "asset": "Alphabet Inc. - Class A",
-        "type": "Stock",
-        "valueLabel": "$5M – $25M",
-        "pctPortfolio": 10.6
+        "estLabel": "$15.0M",
+        "pctPortfolio": 10.9,
+        "isNew": false
       },
       {
         "ticker": "AMZN",
         "asset": "Amazon.com, Inc.",
-        "type": "Stock",
-        "valueLabel": "$5M – $25M",
-        "pctPortfolio": 10.6
+        "estLabel": "$15.0M",
+        "pctPortfolio": 10.9,
+        "isNew": false
       },
       {
         "ticker": "AAPL",
         "asset": "Apple Inc.",
-        "type": "Stock",
-        "valueLabel": "$5M – $25M",
-        "pctPortfolio": 10.6
+        "estLabel": "$15.0M",
+        "pctPortfolio": 10.9,
+        "isNew": false
       },
       {
         "ticker": "AVGO",
         "asset": "Broadcom Inc.",
-        "type": "Stock",
-        "valueLabel": "$5M – $25M",
-        "pctPortfolio": 10.6
+        "estLabel": "$15.0M",
+        "pctPortfolio": 10.9,
+        "isNew": false
       },
       {
         "ticker": "MSFT",
         "asset": "Microsoft Corporation",
-        "type": "Stock",
-        "valueLabel": "$5M – $25M",
-        "pctPortfolio": 10.6
+        "estLabel": "$15.0M",
+        "pctPortfolio": 10.9,
+        "isNew": false
       },
       {
         "ticker": "NVDA",
         "asset": "NVIDIA Corporation",
-        "type": "Stock",
-        "valueLabel": "$5M – $25M",
-        "pctPortfolio": 10.6
+        "estLabel": "$15.0M",
+        "pctPortfolio": 10.9,
+        "isNew": false
       },
       {
         "ticker": "CRM",
         "asset": "Salesforce.com Inc",
-        "type": "Stock",
-        "valueLabel": "$5M – $25M",
-        "pctPortfolio": 10.6
+        "estLabel": "$15.0M",
+        "pctPortfolio": 10.9,
+        "isNew": false
       },
       {
         "ticker": "V",
         "asset": "Visa Inc.",
-        "type": "Stock",
-        "valueLabel": "$5M – $25M",
-        "pctPortfolio": 10.6
-      },
-      {
-        "ticker": "GOOGL",
-        "asset": "Alphabet Inc.",
-        "type": "Option",
-        "valueLabel": "$1M – $5M",
-        "pctPortfolio": 2.1
+        "estLabel": "$15.0M",
+        "pctPortfolio": 10.9,
+        "isNew": false
       },
       {
         "ticker": "AXP",
         "asset": "American Express Company",
-        "type": "Stock",
-        "valueLabel": "$1M – $5M",
-        "pctPortfolio": 2.1
+        "estLabel": "$3.0M",
+        "pctPortfolio": 2.2,
+        "isNew": false
       },
       {
         "ticker": "CRWD",
         "asset": "CrowdStrike Holdings, Inc. - Class A",
-        "type": "Stock",
-        "valueLabel": "$1M – $5M",
-        "pctPortfolio": 2.1
+        "estLabel": "$3.0M",
+        "pctPortfolio": 2.2,
+        "isNew": false
       },
       {
         "ticker": "NFLX",
         "asset": "Netflix, Inc.",
-        "type": "Stock",
-        "valueLabel": "$1M – $5M",
-        "pctPortfolio": 2.1
+        "estLabel": "$3.0M",
+        "pctPortfolio": 2.2,
+        "isNew": false
       },
       {
         "ticker": "PANW",
         "asset": "Palo Alto Networks, Inc.",
-        "type": "Stock",
-        "valueLabel": "$1M – $5M",
-        "pctPortfolio": 2.1
+        "estLabel": "$3.0M",
+        "pctPortfolio": 2.2,
+        "isNew": false
       },
       {
-        "ticker": "AMZN",
-        "asset": "Amazon.com, Inc.",
-        "type": "Option",
-        "valueLabel": "$500K – $1M",
-        "pctPortfolio": 0.5
+        "ticker": "AB",
+        "asset": "AllianceBernstein Holding L.P. Units",
+        "estLabel": "$3.0M",
+        "pctPortfolio": 2.2,
+        "isNew": true
       },
       {
         "ticker": "CMCSA",
         "asset": "Comcast Corporation - Class A",
-        "type": "Stock",
-        "valueLabel": "$500K – $1M",
-        "pctPortfolio": 0.5
+        "estLabel": "$750K",
+        "pctPortfolio": 0.5,
+        "isNew": false
       },
       {
         "ticker": "IBKR",
         "asset": "Interactive Brokers Group, Inc.",
-        "type": "Stock",
-        "valueLabel": "$500K – $1M",
-        "pctPortfolio": 0.5
+        "estLabel": "$750K",
+        "pctPortfolio": 0.5,
+        "isNew": false
+      },
+      {
+        "ticker": "SQ",
+        "asset": "Block, Inc.",
+        "estLabel": "$375K",
+        "pctPortfolio": 0.3,
+        "isNew": false
+      }
+    ],
+    "options": [
+      {
+        "ticker": "INTC",
+        "type": "call",
+        "strike": 50.0,
+        "expiration": "2027-03-19",
+        "estLabel": "$3.0M"
+      },
+      {
+        "ticker": "UBER",
+        "type": "call",
+        "strike": 50.0,
+        "expiration": "2027-03-19",
+        "estLabel": "$750K"
+      },
+      {
+        "ticker": "AAPL",
+        "type": "call",
+        "strike": 100.0,
+        "expiration": "2027-01-15",
+        "estLabel": "$375K"
       }
     ]
   }

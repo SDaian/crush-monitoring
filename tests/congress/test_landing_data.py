@@ -282,20 +282,57 @@ class TestMemberPayload(unittest.TestCase):
         self.assertEqual(p["summary"]["pctLate"], 1)  # 1/100
         self.assertGreater(p["summary"]["worstLate"], 0)
 
-    def test_holdings_estimate(self):
-        p = ld.member_payload("Nancy Pelosi", [MT()], HOLDINGS)
+    def test_holdings_snapshot_base(self):
+        # A trade BEFORE the annual snapshot rolls nothing forward → the
+        # holdings are the raw annual positions.
+        p = ld.member_payload("Nancy Pelosi", [MT(tx="2025-01-01")], HOLDINGS,
+                              today_iso="2026-07-01")
         h = p["holdings"]
         self.assertTrue(h["available"])
         self.assertEqual(h["reportYear"], 2025)
-        self.assertEqual(len(h["stocks"]), 2)
-        # Sorted by value desc: NVDA before AAPL.
-        self.assertEqual(h["stocks"][0]["ticker"], "NVDA")
+        self.assertEqual([s["ticker"] for s in h["stocks"]], ["NVDA", "AAPL"])
         self.assertIsNotNone(h["totalLabel"])
-        # Portfolio shares by midpoint sum to ~100 and are ordered like values.
+        self.assertTrue(all(s["estLabel"].startswith("$") for s in h["stocks"]))
+        self.assertFalse(any(s["isNew"] for s in h["stocks"]))
         pcts = [s["pctPortfolio"] for s in h["stocks"]]
-        self.assertTrue(all(p is not None for p in pcts))
         self.assertAlmostEqual(sum(pcts), 100.0, delta=0.2)
         self.assertGreater(pcts[0], pcts[1])
+
+    def test_rollforward_new_ticker_after_snapshot(self):
+        trades = [MT(ticker="TSLA", type="buy", tx="2026-06-01",
+                     lo=1_000_001, hi=5_000_000)]
+        p = ld.member_payload("Nancy Pelosi", trades, HOLDINGS,
+                              today_iso="2026-07-01")
+        pos = {s["ticker"]: s for s in p["holdings"]["stocks"]}
+        self.assertIn("TSLA", pos)
+        self.assertTrue(pos["TSLA"]["isNew"])
+
+    def test_rollforward_sell_drops_position(self):
+        # Selling ~$3M of a ~$3M NVDA position rolls it to ~0 → dropped.
+        trades = [MT(ticker="NVDA", type="sell", tx="2026-06-01",
+                     lo=1_000_001, hi=5_000_000)]
+        p = ld.member_payload("Nancy Pelosi", trades, HOLDINGS,
+                              today_iso="2026-07-01")
+        tickers = {s["ticker"] for s in p["holdings"]["stocks"]}
+        self.assertNotIn("NVDA", tickers)
+        self.assertIn("AAPL", tickers)
+
+    def test_rollforward_live_option_shown_expired_dropped(self):
+        live = MT(ticker="INTC", type="buy", tx="2026-06-01",
+                  lo=1_000_001, hi=5_000_000)
+        live["asset_type"] = "Option"
+        live["option"] = {"type": "call", "strike": 50.0,
+                          "expiration": "2027-03-19"}
+        expired = MT(ticker="MU", type="buy", tx="2026-06-02",
+                     lo=1_000_001, hi=5_000_000)
+        expired["asset_type"] = "Option"
+        expired["option"] = {"type": "call", "strike": 90.0,
+                            "expiration": "2026-01-01"}
+        p = ld.member_payload("Nancy Pelosi", [live, expired], HOLDINGS,
+                              today_iso="2026-07-01")
+        opts = {o["ticker"] for o in p["holdings"]["options"]}
+        self.assertIn("INTC", opts)      # expires after today → live
+        self.assertNotIn("MU", opts)     # expired before today → dropped
 
     def test_executive_chamber_not_mislabelled_house(self):
         # OGE 278-T filers (e.g. the President) are executive branch, not House.
