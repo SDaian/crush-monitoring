@@ -1,0 +1,47 @@
+name: Analytics probe (temporary)
+
+# One-off, manual-only probe to confirm the Vercel Web Analytics API works with
+# the configured VERCEL_TOKEN / VERCEL_PROJECT_ID and that congress/analytics.py
+# parses the real response shape. Dumps the raw count/aggregate JSON (the token
+# is never printed) and the formatted report block. No email, no commit, no
+# issue — pure read. Delete this file once the integration is confirmed.
+on:
+  workflow_dispatch:
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Probe Vercel Web Analytics
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+          VERCEL_PROJECT_ID: ${{ vars.VERCEL_PROJECT_ID }}
+          VERCEL_TEAM_ID: ${{ vars.VERCEL_TEAM_ID }}
+        run: |
+          python3 - <<'PY'
+          from datetime import date, timedelta
+          from congress import analytics as a
+
+          tok, proj, team = a.config()
+          print("configured -> token:", bool(tok), "| project:", bool(proj),
+                "| team:", bool(team))
+          today = date.today()
+          since = (today - timedelta(days=7)).isoformat()
+          base = a._base_params(proj, team, since, today.isoformat())
+
+          for path, extra in [("visits/count", {}),
+                              ("visits/aggregate", {"by": "path"})]:
+              try:
+                  raw = a._fetch_json(path, {**base, **extra}, tok)
+                  print(f"\n=== {path} RAW ===")
+                  print(raw)
+              except Exception as e:
+                  print(f"\n=== {path} ERROR === {e!r}")
+
+          print("\n=== daily_summary() ===")
+          print(a.daily_summary(today.isoformat()))
+          PY
