@@ -2,15 +2,21 @@
 // Preload the above-the-fold font subsets so they download from the first
 // byte of HTML instead of after the CSS is parsed — on most connections the
 // fonts are ready before first paint and there is no visible swap at all.
-// Only the weights the fold actually uses (headline 900, body 400, mono
-// 400/600); everything else swaps late behind the fontaine metric fallbacks
-// (see astro.config.mjs), which make that swap reflow-free.
+// Preload EVERY weight the fold actually renders, or that weight swaps in
+// late and reflows the layout (the "today's email" hero card was jumping
+// because its member names — Franklin 700, which resolves to the 800 face
+// since there's no 700 @font-face — and its BUY/SELL emphasis (600) were not
+// preloaded). Fold weights: Franklin 900 (headline / mail-from), 800 (names),
+// 600 (emphasis), 400 (body); mono 400/600. Everything else swaps late behind
+// the fontaine metric fallbacks (see astro.config.mjs), reflow-free.
 import franklin400 from "@fontsource/libre-franklin/files/libre-franklin-latin-400-normal.woff2?url";
+import franklin600 from "@fontsource/libre-franklin/files/libre-franklin-latin-600-normal.woff2?url";
+import franklin800 from "@fontsource/libre-franklin/files/libre-franklin-latin-800-normal.woff2?url";
 import franklin900 from "@fontsource/libre-franklin/files/libre-franklin-latin-900-normal.woff2?url";
 import mono400 from "@fontsource/ibm-plex-mono/files/ibm-plex-mono-latin-400-normal.woff2?url";
 import mono600 from "@fontsource/ibm-plex-mono/files/ibm-plex-mono-latin-600-normal.woff2?url";
 
-const fonts = [franklin900, franklin400, mono400, mono600];
+const fonts = [franklin900, franklin800, franklin600, franklin400, mono400, mono600];
 ---
 
 {
