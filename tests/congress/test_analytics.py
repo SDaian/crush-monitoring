@@ -28,6 +28,13 @@ class TestParseTotal(unittest.TestCase):
         self.assertIsNone(a.parse_total({"data": []}))
         self.assertIsNone(a.parse_total("nonsense"))
 
+    def test_live_count_shape(self):
+        # The exact shape the Vercel API returned in the probe: pageviews wins
+        # over visitors as the headline "views" total.
+        self.assertEqual(a.parse_total(
+            {"version": 1, "query": {},
+             "data": {"visitors": 6, "pageviews": 88}}), 88)
+
 
 class TestRowsAndTopPages(unittest.TestCase):
     ROWS = {"data": [
@@ -40,6 +47,14 @@ class TestRowsAndTopPages(unittest.TestCase):
         self.assertEqual(len(a.parse_rows(self.ROWS)), 3)
         self.assertEqual(a.parse_rows({}), [])
         self.assertEqual(a.parse_rows({"data": {"rows": [{"k": 1}]}}), [{"k": 1}])
+
+    def test_live_aggregate_shape(self):
+        # The exact shape from the probe: by=route → [{route, visitors, pageviews}].
+        payload = {"data": [
+            {"route": "/", "visitors": 5, "pageviews": 46},
+            {"route": "/members", "visitors": 2, "pageviews": 10},
+        ]}
+        self.assertEqual(a.top_pages(payload), [("/", 46), ("/members", 10)])
 
     def test_top_pages_sorted_desc(self):
         pages = a.top_pages(self.ROWS)
