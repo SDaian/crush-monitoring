@@ -253,121 +253,125 @@
     "available": true,
     "filingDate": "2025-08-15",
     "reportYear": 2024,
+    "snapDate": "2024-12-31",
+    "filingsSince": 25,
     "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/financial-pdfs/2024/10066497.pdf",
-    "totalLabel": "$124K – $810K",
+    "totalLabel": "$2.8M",
+    "positions": 83,
     "stocks": [
-      {
-        "ticker": "GOOG",
-        "asset": "Alphabet Inc. - Class C Capital Stock",
-        "type": "Stock",
-        "valueLabel": "$15K – $50K",
-        "pctPortfolio": 7.0
-      },
       {
         "ticker": "AMZN",
         "asset": "Amazon.com, Inc.",
-        "type": "Stock",
-        "valueLabel": "$15K – $50K",
-        "pctPortfolio": 7.0
-      },
-      {
-        "ticker": "DUK",
-        "asset": "Duke Energy Corporation",
-        "type": "Stock",
-        "valueLabel": "$15K – $50K",
-        "pctPortfolio": 7.0
-      },
-      {
-        "ticker": "MSFT",
-        "asset": "Microsoft Corporation",
-        "type": "Stock",
-        "valueLabel": "$15K – $50K",
-        "pctPortfolio": 7.0
+        "estLabel": "$121K",
+        "pctPortfolio": 4.2,
+        "isNew": false
       },
       {
         "ticker": "TSLA",
         "asset": "Tesla, Inc.",
-        "type": "Stock",
-        "valueLabel": "$15K – $50K",
-        "pctPortfolio": 7.0
+        "estLabel": "$105K",
+        "pctPortfolio": 3.7,
+        "isNew": false
       },
       {
-        "ticker": "HSY",
-        "asset": "The Hershey Company",
-        "type": "Stock",
-        "valueLabel": "$15K – $50K",
-        "pctPortfolio": 7.0
+        "ticker": "GOOG",
+        "asset": "Alphabet Inc. - Class C Capital Stock",
+        "estLabel": "$97K",
+        "pctPortfolio": 3.4,
+        "isNew": false
       },
       {
-        "ticker": "ABBV",
-        "asset": "AbbVie Inc.",
-        "type": "Stock",
-        "valueLabel": "$1K – $15K",
-        "pctPortfolio": 1.7
-      },
-      {
-        "ticker": "ADBE",
-        "asset": "Adobe Inc.",
-        "type": "Stock",
-        "valueLabel": "$1K – $15K",
-        "pctPortfolio": 1.7
+        "ticker": "IBIT",
+        "asset": "iShares Bitcoin Trust ETF",
+        "estLabel": "$81K",
+        "pctPortfolio": 2.8,
+        "isNew": true
       },
       {
         "ticker": "AMD",
         "asset": "Advanced Micro Devices, Inc.",
-        "type": "Stock",
-        "valueLabel": "$1K – $15K",
-        "pctPortfolio": 1.7
+        "estLabel": "$80K",
+        "pctPortfolio": 2.8,
+        "isNew": false
       },
       {
-        "ticker": "AAPL",
-        "asset": "Apple Inc.",
-        "type": "Stock",
-        "valueLabel": "$1K – $15K",
-        "pctPortfolio": 1.7
+        "ticker": "UPS",
+        "asset": "United Parcel Service, Inc.",
+        "estLabel": "$80K",
+        "pctPortfolio": 2.8,
+        "isNew": false
       },
       {
-        "ticker": "AMAT",
-        "asset": "Applied Materials, Inc.",
-        "type": "Stock",
-        "valueLabel": "$1K – $15K",
-        "pctPortfolio": 1.7
+        "ticker": "FDX",
+        "asset": "FedEx Corporation",
+        "estLabel": "$73K",
+        "pctPortfolio": 2.5,
+        "isNew": false
       },
       {
-        "ticker": "BX",
-        "asset": "Blackstone Inc.",
-        "type": "Stock",
-        "valueLabel": "$1K – $15K",
-        "pctPortfolio": 1.7
+        "ticker": "JPM",
+        "asset": "JP Morgan Chase & Co.",
+        "estLabel": "$64K",
+        "pctPortfolio": 2.2,
+        "isNew": false
       },
       {
-        "ticker": "CAH",
-        "asset": "Cardinal Health, Inc.",
-        "type": "Stock",
-        "valueLabel": "$1K – $15K",
-        "pctPortfolio": 1.7
+        "ticker": "MSFT",
+        "asset": "Microsoft Corporation",
+        "estLabel": "$57K",
+        "pctPortfolio": 2.0,
+        "isNew": false
       },
       {
-        "ticker": "CAH",
-        "asset": "Cardinal Health, Inc.",
-        "type": "Stock",
-        "valueLabel": "$1K – $15K",
-        "pctPortfolio": 1.7
+        "ticker": "HSY",
+        "asset": "The Hershey Company",
+        "estLabel": "$57K",
+        "pctPortfolio": 2.0,
+        "isNew": false
+      },
+      {
+        "ticker": "MELI",
+        "asset": "MercadoLibre, Inc. - Common Stock",
+        "estLabel": "$57K",
+        "pctPortfolio": 2.0,
+        "isNew": true
+      },
+      {
+        "ticker": "UNH",
+        "asset": "UnitedHealth Group Incorporated Common Stock",
+        "estLabel": "$57K",
+        "pctPortfolio": 2.0,
+        "isNew": true
+      },
+      {
+        "ticker": "ADBE",
+        "asset": "Adobe Inc.",
+        "estLabel": "$56K",
+        "pctPortfolio": 2.0,
+        "isNew": false
       },
       {
         "ticker": "CAT",
         "asset": "Caterpillar, Inc.",
-        "type": "Stock",
-        "valueLabel": "$1K – $15K",
-        "pctPortfolio": 1.7
+        "estLabel": "$56K",
+        "pctPortfolio": 2.0,
+        "isNew": false
       },
       {
-        "ticker": "SCHW",
-        "asset": "Charles Schwab Corporation",
-        "type": "Stock",
-        "valueLabel": "$1K – $15K",
-        "pctPortfolio": 1.7
+        "ticker": "NVDA",
+        "asset": "NVIDIA Corporation",
+        "estLabel": "$56K",
+        "pctPortfolio": 2.0,
+        "isNew": false
+      },
+      {
+        "ticker": "DUK",
+        "asset": "Duke Energy Corporation",
+        "estLabel": "$49K",
+        "pctPortfolio": 1.7,
+        "isNew": false
       }
-    ]
+    ],
+    "options": []
   }
 }

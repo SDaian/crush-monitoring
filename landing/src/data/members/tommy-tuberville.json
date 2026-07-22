@@ -253,121 +253,125 @@
     "available": true,
     "filingDate": "2025-08-08",
     "reportYear": 2024,
+    "snapDate": "2024-12-31",
+    "filingsSince": 5,
     "sourceUrl": "https://efdsearch.senate.gov/search/view/annual/ec0d2d29-4336-42b7-88af-2f07710b3196/",
-    "totalLabel": "$2M – $4M",
+    "totalLabel": "$1.1M",
+    "positions": 135,
     "stocks": [
-      {
-        "ticker": "AAPL",
-        "asset": "Apple Inc.",
-        "type": "Stock",
-        "valueLabel": "$250K – $500K",
-        "pctPortfolio": 13.3
-      },
-      {
-        "ticker": "GOOGL",
-        "asset": "Alphabet Inc.",
-        "type": "Stock",
-        "valueLabel": "$100K – $250K",
-        "pctPortfolio": 6.2
-      },
       {
         "ticker": "ABNFX",
         "asset": "The Bond Fund of America Class F2",
-        "type": "Stock",
-        "valueLabel": "$100K – $250K",
-        "pctPortfolio": 6.2
-      },
-      {
-        "ticker": "AAPL",
-        "asset": "Apple Inc.",
-        "type": "Stock",
-        "valueLabel": "$100K – $250K",
-        "pctPortfolio": 6.2
-      },
-      {
-        "ticker": "MSFT",
-        "asset": "Microsoft Corporation",
-        "type": "Stock",
-        "valueLabel": "$100K – $250K",
-        "pctPortfolio": 6.2
+        "estLabel": "$175K",
+        "pctPortfolio": 15.4,
+        "isNew": false
       },
       {
         "ticker": "PYPL",
         "asset": "PayPal Holdings, Inc. - Common Stock",
-        "type": "Stock",
-        "valueLabel": "$100K – $250K",
-        "pctPortfolio": 6.2
+        "estLabel": "$142K",
+        "pctPortfolio": 12.5,
+        "isNew": false
+      },
+      {
+        "ticker": "MSFT",
+        "asset": "Microsoft Corporation",
+        "estLabel": "$77K",
+        "pctPortfolio": 6.8,
+        "isNew": false
       },
       {
         "ticker": "NUE",
         "asset": "Nucor Corporation",
-        "type": "Stock",
-        "valueLabel": "$50K – $100K",
-        "pctPortfolio": 2.7
-      },
-      {
-        "ticker": "WMT",
-        "asset": "Walmart Inc.",
-        "type": "Stock",
-        "valueLabel": "$50K – $100K",
-        "pctPortfolio": 2.7
+        "estLabel": "$75K",
+        "pctPortfolio": 6.6,
+        "isNew": false
       },
       {
         "ticker": "RSP",
         "asset": "Invesco S&P 500 Equal Weight ETF",
-        "type": "Stock",
-        "valueLabel": "$50K – $100K",
-        "pctPortfolio": 2.7
+        "estLabel": "$75K",
+        "pctPortfolio": 6.6,
+        "isNew": false
       },
       {
         "ticker": "DHS",
         "asset": "Wisdomtree U.S. High Dividend Fund",
-        "type": "Stock",
-        "valueLabel": "$50K – $100K",
-        "pctPortfolio": 2.7
+        "estLabel": "$75K",
+        "pctPortfolio": 6.6,
+        "isNew": false
       },
       {
-        "ticker": "GOOGL",
-        "asset": "Alphabet Inc.",
-        "type": "Stock",
-        "valueLabel": "$50K – $100K",
-        "pctPortfolio": 2.7
+        "ticker": "USIG",
+        "asset": "iShares Broad USD Investment Grade Corporate Bond",
+        "estLabel": "$75K",
+        "pctPortfolio": 6.6,
+        "isNew": true
       },
       {
         "ticker": "GS",
         "asset": "The Goldman Sachs Group, Inc.",
-        "type": "Stock",
-        "valueLabel": "$50K – $100K",
-        "pctPortfolio": 2.7
+        "estLabel": "$42K",
+        "pctPortfolio": 3.7,
+        "isNew": false
       },
       {
         "ticker": "TSCO",
         "asset": "Tractor Supply Company",
-        "type": "Stock",
-        "valueLabel": "$50K – $100K",
-        "pctPortfolio": 2.7
+        "estLabel": "$34K",
+        "pctPortfolio": 3.0,
+        "isNew": false
       },
       {
         "ticker": "C",
         "asset": "Citigroup Inc.",
-        "type": "Stock",
-        "valueLabel": "$15K – $50K",
-        "pctPortfolio": 1.2
-      },
-      {
-        "ticker": "PFE",
-        "asset": "Pfizer Inc.",
-        "type": "Stock",
-        "valueLabel": "$15K – $50K",
-        "pctPortfolio": 1.2
+        "estLabel": "$33K",
+        "pctPortfolio": 2.9,
+        "isNew": false
       },
       {
         "ticker": "PM",
         "asset": "Philip Morris International Inc.",
-        "type": "Stock",
-        "valueLabel": "$15K – $50K",
-        "pctPortfolio": 1.2
+        "estLabel": "$33K",
+        "pctPortfolio": 2.9,
+        "isNew": false
+      },
+      {
+        "ticker": "VZ",
+        "asset": "Verizon Communications Inc.",
+        "estLabel": "$33K",
+        "pctPortfolio": 2.9,
+        "isNew": false
+      },
+      {
+        "ticker": "WMT",
+        "asset": "Walmart Inc.",
+        "estLabel": "$33K",
+        "pctPortfolio": 2.9,
+        "isNew": false
+      },
+      {
+        "ticker": "—",
+        "asset": "PayPal Holdings, Inc.",
+        "estLabel": "$33K",
+        "pctPortfolio": 2.9,
+        "isNew": false
+      },
+      {
+        "ticker": "QCOM",
+        "asset": "QUALCOMM Incorporated",
+        "estLabel": "$33K",
+        "pctPortfolio": 2.9,
+        "isNew": false
+      },
+      {
+        "ticker": "XLU",
+        "asset": "SPDR Select Sector Fund - Utilities",
+        "estLabel": "$33K",
+        "pctPortfolio": 2.9,
+        "isNew": true
       }
-    ]
+    ],
+    "options": []
   }
 }

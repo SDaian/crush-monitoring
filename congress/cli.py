@@ -381,7 +381,8 @@ def _cmd_landing(args: argparse.Namespace) -> int:
             holdings = {}
     today = datetime.now(timezone.utc).date()
     rows, stats = landing_data.write_files(trades, Path(args.output), today)
-    members = landing_data.write_member_files(trades, holdings, Path(args.output))
+    members = landing_data.write_member_files(
+        trades, holdings, Path(args.output), today_iso=today.isoformat())
     print(
         f"landing data: {rows} feed rows; {stats['tradesThisYear']} trades "
         f"in {stats['year']}, est ${stats['estVolumeThisYearUsd']:,} vol, "
