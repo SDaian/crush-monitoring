@@ -660,7 +660,10 @@ const description =
       }
       .mrow .who {
         font-family: var(--font-sans);
-        font-weight: 700;
+        /* 800, not 700: there is no 700 @font-face (see global.css), so 700
+           resolves to the 800 face anyway — being explicit keeps it identical
+           to the preloaded weight and consistent across browsers. */
+        font-weight: 800;
         font-size: 0.8rem;
       }
       .mail-ft {
