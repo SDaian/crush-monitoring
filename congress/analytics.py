@@ -37,11 +37,16 @@ WINDOW_DAYS = 7          # traffic reported over a trailing week (steadier than 
 TOP_PAGES = 5
 TIMEOUT = 20            # seconds
 
-# Response field-name candidates (Vercel's exact keys aren't in the public docs
-# snapshot we could reach; match defensively and degrade to "no data").
-_TOTAL_KEYS = ("total", "count", "value", "pageviews", "views", "visits")
+# The aggregate dimension for per-page rows. Confirmed against the live API:
+# `route` (and `requestPath`) return 200; `path`/`page`/`pathname` return 400.
+AGG_BY = "route"
+
+# Response field names, confirmed live: count → data:{visitors, pageviews};
+# aggregate → data:[{route, visitors, pageviews}]. Still matched against a few
+# candidates so a minor shape change degrades to "no data" rather than crashing.
+_TOTAL_KEYS = ("pageviews", "views", "total", "count", "value", "visits")
 _METRIC_KEYS = ("pageviews", "views", "total", "count", "visits", "value")
-_KEY_KEYS = ("key", "requestPath", "path", "route", "value", "name")
+_KEY_KEYS = ("route", "requestPath", "path", "key", "value", "name")
 
 
 def config() -> tuple[str, str, str]:
@@ -162,12 +167,19 @@ def daily_summary(today_iso: str, window_days: int = WINDOW_DAYS) -> dict | None
     until = today_iso
     since = (date.fromisoformat(today_iso) - timedelta(days=window_days)).isoformat()
     base = _base_params(project_id, team_id, since, until)
+    # Fetch the total and the per-page rows independently — a failure in one
+    # (e.g. a plan limit on aggregate) must not discard the other.
+    total = None
     try:
         total = parse_total(_fetch_json("visits/count", base, token))
-        pages = top_pages(
-            _fetch_json("visits/aggregate", {**base, "by": "path"}, token))
     except Exception:
-        return None
+        pass
+    pages: list[tuple[str, int]] = []
+    try:
+        pages = top_pages(
+            _fetch_json("visits/aggregate", {**base, "by": AGG_BY}, token))
+    except Exception:
+        pass
     if total is None and not pages:
         return None
     return {

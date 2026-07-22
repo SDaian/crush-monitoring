@@ -33,19 +33,7 @@ jobs:
           since = (today - timedelta(days=7)).isoformat()
           base = a._base_params(proj, team, since, today.isoformat())
 
-          try:
-              print("count RAW:", a._fetch_json("visits/count", base, tok))
-          except Exception as e:
-              print("count ERROR:", repr(e))
-
-          # Find the valid `by` dimension for per-page rows (path=400 earlier).
-          for by in ["route", "requestPath", "page", "path", "pathname",
-                     "country", "day"]:
-              try:
-                  raw = a._fetch_json("visits/aggregate", {**base, "by": by}, tok)
-                  rows = raw.get("data") if isinstance(raw, dict) else raw
-                  first = rows[0] if isinstance(rows, list) and rows else rows
-                  print(f"by={by:12} OK  first-row={first}")
-              except Exception as e:
-                  print(f"by={by:12} ERR {e!r}")
+          # End-to-end confirmation: daily_summary() should now return a dict
+          # with a page-view total and top pages.
+          print("daily_summary() ->", a.daily_summary(today.isoformat()))
           PY
