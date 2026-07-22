@@ -463,9 +463,6 @@
     .feed-row .amt {
       display: none;
     }
-    nav a:not(:last-child) {
-      display: none;
-    }
   }
 
   /* Reduced motion = remove movement, keep comprehension (plans/003):

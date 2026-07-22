@@ -1,55 +1,217 @@
 ---
-// Shared site header (DESIGN.md §8 header primitive): wordmark left; mono nav
-// + one filled CTA pill right; editorial 3px double rule beneath. `active`
-// marks the current page; the brand links home. Whether this IS the home page
-// comes from the URL, so pages outside the nav (like /privacy) still link back.
+// Shared site header (DESIGN.md §8 header primitive): wordmark + mono nav +
+// one filled CTA pill, under an editorial 3px double rule. On desktop the nav
+// is inline on the right. On mobile it collapses behind a hamburger placed to
+// the LEFT of the wordmark, which expands a stacked menu panel below the rule.
+// `active` marks the current page; the brand links home (URL decides whether
+// this IS home, so off-nav pages like /privacy still link back).
 interface Props {
   active?: "how" | "late" | "members";
 }
 const { active } = Astro.props;
 const home = Astro.url.pathname === "/";
 
-// Every nav link carries the 2px bottom border at all times (transparent
-// until active) so the active item's red underline can't shift its baseline
-// relative to the others.
+// One source for both the inline (desktop) nav and the mobile menu.
+const NAV = [
+  { href: "/#feed", label: "Live feed", key: null },
+  { href: "/members", label: "Members", key: "members" },
+  { href: "/late", label: "Late filers", key: "late" },
+  { href: "/how-it-works", label: "How it works", key: "how" },
+];
+
 const link =
-  "mono ml-6 border-b-2 pb-0.5 text-[.75rem] uppercase tracking-[.07em] " +
+  "mono border-b-2 pb-0.5 text-[.75rem] uppercase tracking-[.07em] " +
   "no-underline hover:text-ink focus-visible:text-ink";
 const active_cls = "border-stamp text-ink";
 const idle_cls = "border-transparent text-ink-soft";
+const cta =
+  "mono whitespace-nowrap bg-ink px-3.5 py-2 text-[.75rem] uppercase " +
+  "tracking-[.06em] text-paper no-underline hover:bg-stamp focus-visible:bg-stamp";
 ---
 
-<header
-  class="flex items-center justify-between border-b-[3px] border-double border-ink px-[5vw] py-4"
->
-  <a
-    href={home ? "#top" : "/"}
-    class="text-[1.05rem] font-black uppercase tracking-[-0.02em] text-ink no-underline"
-    aria-label="Capitol Ledger — home"
+<div class="site-head">
+  <header
+    class="flex items-center justify-between border-b-[3px] border-double border-ink px-[5vw] py-4"
   >
-    Capitol <span class="text-stamp">Ledger</span>
-  </a>
-  <nav class="flex items-center">
-    <a href="/#feed" class={`${link} ${idle_cls}`}>Live feed</a>
-    <a
-      href="/members"
-      class={`${link} ${active === "members" ? active_cls : idle_cls}`}
-      aria-current={active === "members" ? "page" : undefined}>Members</a
-    >
-    <a
-      href="/late"
-      class={`${link} ${active === "late" ? active_cls : idle_cls}`}
-      aria-current={active === "late" ? "page" : undefined}>Late filers</a
-    >
-    <a
-      href="/how-it-works"
-      class={`${link} ${active === "how" ? active_cls : idle_cls}`}
-      aria-current={active === "how" ? "page" : undefined}>How it works</a
-    >
-    <a
-      href="/#join"
-      class="mono ml-6 whitespace-nowrap bg-ink px-3.5 py-2 text-[.75rem] uppercase tracking-[.06em] text-paper no-underline hover:bg-stamp focus-visible:bg-stamp"
-      >Get alerts</a
-    >
+    <div class="flex items-center gap-3">
+      <button
+        id="menuBtn"
+        type="button"
+        class="menu-btn"
+        aria-label="Open menu"
+        aria-expanded="false"
+        aria-controls="mobileMenu"
+      >
+        <span class="menu-ico" aria-hidden="true"></span>
+      </button>
+      <a
+        href={home ? "#top" : "/"}
+        class="text-[1.05rem] font-black uppercase tracking-[-0.02em] text-ink no-underline"
+        aria-label="Capitol Ledger — home"
+      >
+        Capitol <span class="text-stamp">Ledger</span>
+      </a>
+    </div>
+
+    <nav class="hidden items-center gap-6 md:flex">
+      {
+        NAV.map((n) => (
+          <a
+            href={n.href}
+            class={`${link} ${active === n.key ? active_cls : idle_cls}`}
+            aria-current={active === n.key ? "page" : undefined}
+          >
+            {n.label}
+          </a>
+        ))
+      }
+      <a href="/#join" class={cta}>Get alerts</a>
+    </nav>
+
+    <a href="/#join" class={`${cta} md:hidden`}>Get alerts</a>
+  </header>
+
+  <nav id="mobileMenu" class="mobile-menu" aria-label="Menu" inert>
+    {
+      NAV.map((n) => (
+        <a
+          href={n.href}
+          class={`mm-link ${active === n.key ? "is-active" : ""}`}
+          aria-current={active === n.key ? "page" : undefined}
+        >
+          {n.label}
+        </a>
+      ))
+    }
   </nav>
-</header>
+</div>
+
+<style>
+  /* Hamburger button: a 3-bar icon that morphs to an ✕ when open. */
+  .menu-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    margin-left: -0.5rem; /* pull the icon out to the content edge */
+    background: none;
+    border: 0;
+    cursor: pointer;
+    color: var(--color-ink);
+  }
+  .menu-ico,
+  .menu-ico::before,
+  .menu-ico::after {
+    content: "";
+    display: block;
+    width: 1.25rem;
+    height: 2px;
+    background: currentColor;
+    transition:
+      transform 0.2s ease,
+      opacity 0.2s ease;
+  }
+  .menu-ico {
+    position: relative;
+  }
+  .menu-ico::before {
+    position: absolute;
+    left: 0;
+    top: -0.375rem;
+  }
+  .menu-ico::after {
+    position: absolute;
+    left: 0;
+    top: 0.375rem;
+  }
+  .menu-btn[aria-expanded="true"] .menu-ico {
+    background: transparent;
+  }
+  .menu-btn[aria-expanded="true"] .menu-ico::before {
+    transform: translateY(0.375rem) rotate(45deg);
+  }
+  .menu-btn[aria-expanded="true"] .menu-ico::after {
+    transform: translateY(-0.375rem) rotate(-45deg);
+  }
+
+  /* The panel expands downward from under the header rule. */
+  .mobile-menu {
+    display: grid;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.28s ease;
+  }
+  .mobile-menu.open {
+    max-height: 20rem;
+    border-bottom: 1px solid var(--color-rule);
+  }
+  .mm-link {
+    padding: 1rem 5vw;
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    color: var(--color-ink-soft);
+    text-decoration: none;
+    border-top: 1px solid var(--color-rule);
+  }
+  .mm-link:first-child {
+    border-top: 0;
+  }
+  .mm-link:hover,
+  .mm-link:focus-visible {
+    color: var(--color-ink);
+  }
+  .mm-link.is-active {
+    color: var(--color-ink);
+    box-shadow: inset 3px 0 0 var(--color-stamp);
+  }
+
+  /* Desktop (>= Tailwind md): the inline nav takes over, so the hamburger and
+     its panel are hidden here (in scoped CSS, since a scoped display rule would
+     otherwise out-specify a `md:hidden` utility). */
+  @media (min-width: 48rem) {
+    .menu-btn,
+    .mobile-menu {
+      display: none;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .mobile-menu,
+    .menu-ico,
+    .menu-ico::before,
+    .menu-ico::after {
+      transition: none;
+    }
+  }
+</style>
+
+<script>
+  const btn = document.getElementById("menuBtn");
+  const menu = document.getElementById("mobileMenu");
+  if (btn && menu) {
+    const setOpen = (open: boolean) => {
+      btn.setAttribute("aria-expanded", String(open));
+      btn.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+      menu.classList.toggle("open", open);
+      if (open) menu.removeAttribute("inert");
+      else menu.setAttribute("inert", "");
+    };
+    btn.addEventListener("click", () =>
+      setOpen(btn.getAttribute("aria-expanded") !== "true"),
+    );
+    // A link tap navigates; close so it isn't left open behind the new page.
+    menu.addEventListener("click", (e) => {
+      if ((e.target as HTMLElement).closest("a")) setOpen(false);
+    });
+    // Esc closes and returns focus to the trigger.
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && btn.getAttribute("aria-expanded") === "true") {
+        setOpen(false);
+        btn.focus();
+      }
+    });
+  }
+</script>

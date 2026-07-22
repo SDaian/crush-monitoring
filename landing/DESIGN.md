@@ -215,7 +215,13 @@ shared Astro components in `src/components/`.
   Tailwind utilities still override per instance (`eyebrow text-stamp`).
 - **Header** — shared, single row: wordmark left; mono nav + one filled **ink
   pill** CTA right; **3px double ink rule** beneath (the masthead cue). Current
-  page marked with the stamp underline / active state.
+  page marked with the stamp underline / active state. **On mobile** (< 48rem)
+  the inline nav collapses behind a **hamburger placed to the left of the
+  wordmark**; tapping it (icon morphs ☰ → ✕) expands a stacked menu panel
+  downward from under the rule (mono links, stamp left-bar on the active one).
+  The CTA pill stays visible. Accessible: real button with `aria-expanded` /
+  `aria-controls`, panel `inert` when closed, Esc closes and restores focus,
+  motion gated by `prefers-reduced-motion`.
 - **Footer** — shared: wordmark + identity blurb, a sitemap, the legal line.
 - **Section header** — a title (heavy sans, uppercase, tracked) + optional mono
   tag on the right, over a 2px ink rule. The canonical way to open a section.
