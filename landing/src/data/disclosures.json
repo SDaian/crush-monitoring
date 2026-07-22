@@ -2,6 +2,15 @@
   "_comment": "Generated from real official disclosures by congress/landing_data.py (daily Action). Do not edit by hand. 'filedDaysLate' counts days past the STOCK Act's 45-day statutory maximum; 0 = on time.",
   "disclosures": [
     {
+      "member": "A. Armstrong",
+      "chamber": "Senate",
+      "district": "OK",
+      "ticker": "AAPL",
+      "side": "BUY",
+      "amountBucket": "$250K – $500K",
+      "filedDaysLate": 71
+    },
+    {
       "member": "W. Timmons",
       "chamber": "House",
       "district": "SC-4",
@@ -9,15 +18,6 @@
       "side": "BUY",
       "amountBucket": "$50K – $100K",
       "filedDaysLate": 0
-    },
-    {
-      "member": "L. Lee",
-      "chamber": "House",
-      "district": "FL-15",
-      "ticker": "NOK",
-      "side": "SELL",
-      "amountBucket": "$15K – $50K",
-      "filedDaysLate": 24
     },
     {
       "member": "G. Cisneros",
