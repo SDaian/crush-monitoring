@@ -34,7 +34,7 @@ class TestBuildReport(unittest.TestCase):
 
     def test_sections_present(self):
         md = self.r["markdown"]
-        self.assertIn("🤖 AI stocks", md)
+        self.assertIn("⭐ Featured stocks", md)
         self.assertIn("🔔 Signals overnight", md)
         self.assertIn("🏛 New congressional disclosures", md)
         self.assertIn("Not investment advice", md)

@@ -1,8 +1,8 @@
-"""Mechanical technical indicators for the "AI stocks" tab.
+"""Mechanical technical indicators for the "Featured stocks" tab.
 
 This module computes a small, **descriptive** set of daily technical readings
-for a fixed universe of AI-adjacent tickers (chips, hyperscalers, data-center
-build-out): the latest close, short/medium/long moving averages, Wilder's RSI,
+for a fixed featured universe (chips, hyperscalers, data-center build-out, plus
+a few off-theme names): the latest close, short/medium/long moving averages, Wilder's RSI,
 period returns, volume vs. its 20-day average, and the 52-week range.
 
 It is deliberately *indicators only* — the module never emits a buy / sell /
@@ -22,7 +22,7 @@ from __future__ import annotations
 import json
 import re
 
-# The featured AI universe (ticker → display name). Order drives the card
+# The featured stock universe (ticker → display name). Order drives the card
 # strip on the page: chip / foundry names first, then hyperscalers & big-tech,
 # then the data-center / power / server build-out. Any of these can be traded
 # by members of Congress, which is why they live in this repo rather than a

@@ -1,4 +1,4 @@
-"""Open a GitHub issue for each brand-new AI technical signal.
+"""Open a GitHub issue for each brand-new featured-stock technical signal.
 
 Run by the daily Action *after* ``congress ai`` writes ai-indicators.json.
 Reads ``meta.new_signals`` (signals fired this run that were not previously
@@ -104,7 +104,7 @@ def main() -> int:
         body = (
             f"{len(new)} new technical signals fired on the latest session.\n\n"
             + "\n".join(lines)
-            + f"\n\nSee the [AI stocks tab]({page}).\n\n---\n{DISCLAIMER}"
+            + f"\n\nSee the [Featured stocks tab]({page}).\n\n---\n{DISCLAIMER}"
         )
         ok = _post_issue(repo, token, f"🔔 {len(new)} new AI signals", body)
         print(f"summary issue: {'ok' if ok else 'failed'}")
@@ -118,7 +118,7 @@ def main() -> int:
         body = (
             f"**{tk}** ({s.get('name', '')}) — {s['label']} on {s['asof']}.\n\n"
             f"Readings: {_readings(tk, t)}.\n\n"
-            f"See the [AI stocks tab]({page}).\n\n---\n{DISCLAIMER}"
+            f"See the [Featured stocks tab]({page}).\n\n---\n{DISCLAIMER}"
         )
         if _post_issue(repo, token, title, body):
             opened += 1

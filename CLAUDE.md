@@ -191,10 +191,12 @@ sites. Full details in `congress/README.md`. Conventions:
   realized profit (holding/sells/dividends/position size unknown; entry uses
   the trade date's close, not the fill price). Keep that caveat visible on the
   page and only show it for equity-like assets (never options/crypto).
-- **AI-stocks tab is indicators + a mechanical summary, never advice:**
+- **Featured-stocks tab is indicators + a mechanical summary, never advice:**
   `congress/indicators.py` + `congress ai` compute *mechanical* daily technical
   readings (RSI, moving averages, volume, 52-week range) for the fixed
-  `AI_TICKERS` universe → `docs/data/ai-indicators.json`, shown on the "🤖 AI
+  `AI_TICKERS` universe (kept as the identifier for continuity, but the tab is
+  now labelled **"⭐ Featured stocks"** since it includes off-theme names like
+  YPF/MELI/NU) → `docs/data/ai-indicators.json`, shown on the "⭐ Featured
   stocks" tab. The page shows a **transparent buy/sell/hold summary** (`aiScore`
   in `docs/trades.html`) — a rule-based *tally* of the displayed indicators
   (each votes buy/hold/sell), with the full breakdown visible and labelled
