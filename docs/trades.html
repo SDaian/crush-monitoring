@@ -123,7 +123,7 @@
   details.skips li{font-size:12px;color:var(--chalk-dim);margin:3px 0}
   #err{display:none}
   footer{margin:22px 0 0;font-size:11.5px;color:var(--chalk-dim)}
-  /* AI stocks tab */
+  /* Featured stocks tab */
   .fcard .px{font-size:15px;font-weight:700;margin-top:4px}
   .fcard .metarow{display:flex;justify-content:space-between;align-items:center;margin-top:4px;font-size:11.5px}
   .up{color:var(--good)} .down{color:var(--bad)} .flat{color:var(--chalk-dim)}
@@ -205,7 +205,7 @@
     <div class="tab active" data-p="all">📊 All trades</div>
     <div class="tab" data-p="ticker">🔎 Ticker focus</div>
     <div class="tab" data-p="holdings">🧩 Holdings</div>
-    <div class="tab" data-p="ai">🤖 AI stocks</div>
+    <div class="tab" data-p="ai">⭐ Featured stocks</div>
   </div>
 
   <div class="panel active" id="p-all">
@@ -274,12 +274,12 @@
 
   <div class="panel" id="p-ai">
     <div class="banner-sample" id="aiSampleBanner" style="display:none">
-      ⚠️ These AI indicators are <b>sample data from a synthetic price series — not real market data.</b>
+      ⚠️ These indicators are <b>sample data from a synthetic price series — not real market data.</b>
       The daily refresh replaces them with real closes once the price feed runs.
     </div>
     <div class="legend">
-      <b>Mechanical technical indicators</b> for an AI-adjacent universe (chips, hyperscalers, data-center
-      build-out) — RSI(14), moving averages, volume and the 52-week range, recomputed <b>daily</b> from
+      <b>Mechanical technical indicators</b> for a featured stock universe (chips, hyperscalers, data-center
+      build-out, plus a few off-theme names) — RSI(14), moving averages, volume and the 52-week range, recomputed <b>daily</b> from
       Twelve Data closes, plus a <b>transparent buy/sell/hold summary</b> that is just a <b>rule-based tally of those
       indicators</b> (each casts a vote, full breakdown shown) — <b>not investment advice</b>, and blind to fundamentals,
       news and your own goals. A <b>daily snapshot, not real-time</b>. A new signal opens a GitHub issue (email alert).
@@ -289,7 +289,7 @@
     <div id="aiSignals" class="aisignals"></div>
     <div class="cards" id="aiCards"></div>
     <div class="filters">
-      <input type="search" id="aiq" placeholder="Analyze an AI ticker (e.g. NVDA)…"/>
+      <input type="search" id="aiq" placeholder="Analyze a ticker (e.g. NVDA)…"/>
       <button class="act" id="aiClearBtn">✕ Clear</button>
     </div>
     <div class="panel2" id="aiDetail"></div>
@@ -925,7 +925,7 @@ function renderHoldings(){
   renderHoldDetail();
 }
 
-// ---- AI stocks tab: mechanical indicators + signals + copy-paste prompts ---
+// ---- Featured stocks tab: mechanical indicators + signals + copy-paste prompts ---
 // Indicators only — the page never renders a buy/sell/hold verdict. Any such
 // judgement lives in the pre-filled prompt the user copies to their own LLM.
 const AI_ORDER = ["NVDA","AMD","INTC","AVGO","MU","TSM","ASML","SNDK","MSFT",
@@ -1227,7 +1227,7 @@ function wire(){
     renderHoldings();
   });
 
-  // AI stocks: pick a card, search a ticker, clear, copy a prompt, cross-link.
+  // Featured stocks: pick a card, search a ticker, clear, copy a prompt, cross-link.
   $("aiCards").addEventListener("click", e => {
     const card = e.target.closest(".fcard");
     if (!card) return;

@@ -91,9 +91,9 @@ reports can't be parsed (that member is marked `available: false`). Only the
 listing/fetch helpers touch the network; the two parsers are pure and
 fixture-tested offline (`tests/congress/test_holdings.py`).
 
-## AI technical indicators (`indicators.py` → `docs/data/ai-indicators.json`)
+## Featured-stock technical indicators (`indicators.py` → `docs/data/ai-indicators.json`)
 
-The page's **"🤖 AI stocks"** tab shows *mechanical* daily technical readings
+The page's **"⭐ Featured stocks"** tab shows *mechanical* daily technical readings
 for a fixed AI-adjacent universe (chips, hyperscalers, data-center build-out —
 see `AI_TICKERS`): latest close, RSI(14, Wilder), 20/50/200-day moving
 averages, period returns, volume vs. its 20-day average, and the 52-week range.

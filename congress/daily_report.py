@@ -4,7 +4,7 @@ Run by the daily Action after the data refresh (before the slow price step, so
 it is timely and needs only the trades + AI files). It builds a short markdown
 report with three sections:
 
-  1. **AI stocks technical read** — the mechanical buy/hold/sell tally for each
+  1. **Featured stocks technical read** — the mechanical buy/hold/sell tally for each
      tracked ticker (from `indicators.ai_score`), with price / 1d / RSI / trend.
   2. **Signals overnight** — mechanical signals that fired on the latest bar
      (from `ai-indicators.json` meta.new_signals) plus any ticker whose
@@ -99,7 +99,7 @@ def build_report(trades: list[dict], ai_tickers: dict, new_signals: list[dict],
     order = [s["ticker"] for s in indicators.AI_TICKERS if s["ticker"] in ai_tickers]
     order += sorted(tk for tk in ai_tickers if tk not in order)
 
-    # --- Section 1: AI scorecard ---
+    # --- Section 1: Featured-stock scorecard ---
     ratings: dict[str, str] = {}
     rows, html_rows = [], []
     for tk in order:
@@ -122,12 +122,12 @@ def build_report(trades: list[dict], ai_tickers: dict, new_signals: list[dict],
             f"<td style='padding:4px 8px'>{_esc(trend)}</td>"
             f"<td style='padding:4px 8px;font-weight:700;color:{color}'>{_esc(sc['label'])}</td></tr>")
     scorecard = (
-        "## 🤖 AI stocks — technical read\n\n"
+        "## ⭐ Featured stocks — technical read\n\n"
         "| Ticker | Price | 1d | RSI | Trend | Read |\n"
         "|---|---|---|---|---|---|\n" + "\n".join(rows) +
         "\n\n_Read = a rule-based tally of the indicators (each votes "
         "buy/hold/sell), not a recommendation._"
-    ) if rows else "## 🤖 AI stocks — technical read\n\n_No indicator data._"
+    ) if rows else "## ⭐ Featured stocks — technical read\n\n_No indicator data._"
 
     # --- Section 2: signals + rating flips ---
     sig_lines = [
@@ -193,7 +193,7 @@ def build_report(trades: list[dict], ai_tickers: dict, new_signals: list[dict],
     markdown = (
         f"_{DISCLAIMER}_\n\n"
         f"{scorecard}\n\n{signals_md}\n{disclosures_md}\n{traffic_md}"
-        f"---\n_Full tracker: [AI stocks & trades]({TRACKER_URL})._"
+        f"---\n_Full tracker: [Featured stocks & trades]({TRACKER_URL})._"
     )
 
     # --- HTML email body ---
@@ -214,14 +214,14 @@ def build_report(trades: list[dict], ai_tickers: dict, new_signals: list[dict],
     html = (
         "<div style='font:14px/1.5 system-ui,-apple-system,sans-serif;color:#222;max-width:720px'>"
         f"<p style='color:#666;font-size:12px'><i>{_esc(DISCLAIMER.replace('**', ''))}</i></p>"
-        "<h2>🤖 AI stocks — technical read</h2>" + table +
+        "<h2>⭐ Featured stocks — technical read</h2>" + table +
         "<p style='color:#666;font-size:12px'>Read = a rule-based tally of the indicators "
         "(each votes buy/hold/sell), not a recommendation.</p>"
         "<h2>🔔 Signals overnight</h2>" + sig_block +
         f"<h2>🏛 New congressional disclosures <span style='font-weight:400;font-size:13px'>"
         f"(filed since {cutoff})</span></h2>" + _ul(disc_html, "No new disclosures in this window.") +
         traffic_html +
-        f"<hr><p style='font-size:12px'>Full tracker: <a href='{TRACKER_URL}'>AI stocks &amp; trades</a></p></div>"
+        f"<hr><p style='font-size:12px'>Full tracker: <a href='{TRACKER_URL}'>Featured stocks &amp; trades</a></p></div>"
     )
 
     counts = {"tickers": len(rows), "new_signals": len(sig_lines),
