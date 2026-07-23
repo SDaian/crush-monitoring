@@ -44,8 +44,11 @@ AI_TICKERS: list[dict[str, str]] = [
     {"ticker": "VRT", "name": "Vertiv Holdings"},
     {"ticker": "SMCI", "name": "Super Micro Computer"},
     {"ticker": "DELL", "name": "Dell Technologies"},
-    # Off-theme (not AI) but featured by request — YPF S.A. NYSE ADR (energy).
+    # Off-theme (not AI) but featured by request — tracked for their own sake.
     {"ticker": "YPF", "name": "YPF S.A. (ADR)"},
+    {"ticker": "MELI", "name": "MercadoLibre"},
+    {"ticker": "NU", "name": "Nu Holdings"},
+    {"ticker": "SPCX", "name": "SPCX"},
 ]
 
 # Trading-day windows (approximate calendar spans in sessions).
