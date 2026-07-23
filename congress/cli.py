@@ -413,7 +413,8 @@ def _cmd_analytics(args: argparse.Namespace) -> int:
     return 0
 
 
-FEATURED_TICKERS = ["MU", "INTC", "NVDA", "TSM", "AMD", "AVGO", "TSLA", "MSFT"]
+FEATURED_TICKERS = ["MU", "INTC", "NVDA", "TSM", "AMD", "AVGO", "TSLA", "MSFT",
+                    "SPCX", "NU", "MELI"]
 
 
 def _cmd_prices(args: argparse.Namespace) -> int:
