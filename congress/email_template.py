@@ -209,29 +209,27 @@ def traffic_block(traffic: dict, member_names: dict | None = None) -> str:
     return html
 
 
-def render_html(*, date_label: str, disclaimer: str, scorecard: list[dict],
-                signals: list[dict], flips: list[dict],
-                disclosures: list[dict], extra_disclosures: int, cutoff: str,
-                traffic: dict | None, member_names: dict | None,
-                tracker_url: str, preheader: str) -> str:
-    """Assemble the full email document from structured data (pure)."""
-    sections = [
-        _section("Featured stocks", "Technical read",
-                 scorecard_table(scorecard)),
-        _section("Overnight", "Signals &amp; rating changes",
-                 signals_block(signals, flips)),
-        _section("Congress", f"New disclosures "
-                 f"<span style='font-weight:400;font-size:13px;color:{INK_SOFT}'>"
-                 f"(filed since {_esc(cutoff)})</span>",
-                 disclosures_block(disclosures, extra_disclosures)),
-    ]
-    traffic_inner = traffic_block(traffic, member_names)
-    if traffic_inner:
-        sections.append(_section("Audience", "Site traffic", traffic_inner))
+def _footer(tracker_url: str, subscribe_note: str) -> str:
+    """Shared footer: tracker link, provenance/disclaimer, unsubscribe line."""
+    return (
+        f"<tr><td class='cl-pad' style='padding:28px 32px 30px 32px;'>"
+        f"<div style='border-top:1px solid {RULE};font-size:1px;line-height:1px;'>"
+        "&nbsp;</div>"
+        f"<p style='margin:16px 0 0;font:13px/1.5 {SANS};color:{INK};'>"
+        f"<a href='{tracker_url}' style='color:{STAMP};font-weight:700;"
+        "text-decoration:none;'>Open the full tracker →</a></p>"
+        f"<p style='margin:10px 0 0;font:11px/1.6 {SANS};color:{INK_SOFT};'>"
+        "Mechanical technical readings from past daily closes and official STOCK "
+        "Act disclosures (30–45-day legal lag; bracketed amounts). Not investment "
+        "advice.<br>Capitol Ledger · a public-data project.<br>"
+        f"<a href='#' style='color:{INK_SOFT};text-decoration:underline;'>"
+        f"Unsubscribe</a>&nbsp;·&nbsp; {_esc(subscribe_note)}</p></td></tr>")
 
-    body_rows = "".join(sections)
-    disc_txt = _esc(disclaimer.replace("**", ""))
 
+def _document(*, right_label: str, date_label: str, intro_html: str,
+              body_rows: str, tracker_url: str, subscribe_note: str,
+              title: str, preheader: str) -> str:
+    """Wrap section rows in the shared masthead + footer chrome (pure)."""
     return f"""\
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
@@ -240,7 +238,7 @@ def render_html(*, date_label: str, disclaimer: str, scorecard: list[dict],
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="color-scheme" content="light">
 <meta name="supported-color-schemes" content="light">
-<title>Capitol Ledger — Morning report</title>
+<title>{_esc(title)}</title>
 <style>
   /* Light-only by design: the card is a "paper" sheet. Partial dark-mode
      styling renders worse than none across email clients, so we opt out of
@@ -264,32 +262,64 @@ def render_html(*, date_label: str, disclaimer: str, scorecard: list[dict],
       <td style="padding:14px 0 0;font:700 22px/1 {SANS};letter-spacing:3px;text-transform:uppercase;color:{INK};">
         Capitol&nbsp;Ledger</td>
       <td align="right" style="padding:14px 0 0;font:700 11px/1.4 {MONO};letter-spacing:1px;text-transform:uppercase;color:{STAMP};">
-        Morning<br>report</td>
+        {right_label}</td>
     </tr></table>
     <div style="margin-top:6px;font:12px/1.4 {MONO};letter-spacing:.5px;color:{INK_SOFT};">
       {_esc(date_label)}</div>
     <div style="border-top:3px double {INK};font-size:1px;line-height:1px;margin-top:12px;">&nbsp;</div>
-    <p style="margin:12px 0 0;font:12px/1.5 {SANS};color:{INK_SOFT};"><i>{disc_txt}</i></p>
+    {intro_html}
   </td></tr>
 
   {body_rows}
 
-  <!-- Footer -->
-  <tr><td class="cl-pad" style="padding:28px 32px 30px 32px;">
-    <div style="border-top:1px solid {RULE};font-size:1px;line-height:1px;">&nbsp;</div>
-    <p style="margin:16px 0 0;font:13px/1.5 {SANS};color:{INK};">
-      <a href="{tracker_url}" style="color:{STAMP};font-weight:700;text-decoration:none;">
-        Open the full tracker →</a></p>
-    <p style="margin:10px 0 0;font:11px/1.6 {SANS};color:{INK_SOFT};">
-      Mechanical technical readings from past daily closes and official STOCK Act
-      disclosures (30–45-day legal lag; bracketed amounts). Not investment advice.<br>
-      Capitol Ledger · a public-data project.<br>
-      <a href="#" style="color:{INK_SOFT};text-decoration:underline;">Unsubscribe</a>
-      &nbsp;·&nbsp; You are receiving this because you subscribed to trade alerts.</p>
-  </td></tr>
+  {_footer(tracker_url, subscribe_note)}
 
 </table>
 </td></tr>
 </table>
 </body>
 </html>"""
+
+
+def render_html(*, date_label: str, disclaimer: str, scorecard: list[dict],
+                signals: list[dict], flips: list[dict],
+                disclosures: list[dict], extra_disclosures: int, cutoff: str,
+                tracker_url: str, preheader: str) -> str:
+    """The daily trade/scorecard digest email (traffic is a separate email)."""
+    body_rows = "".join([
+        _section("Featured stocks", "Technical read",
+                 scorecard_table(scorecard)),
+        _section("Overnight", "Signals &amp; rating changes",
+                 signals_block(signals, flips)),
+        _section("Congress", f"New disclosures "
+                 f"<span style='font-weight:400;font-size:13px;color:{INK_SOFT}'>"
+                 f"(filed since {_esc(cutoff)})</span>",
+                 disclosures_block(disclosures, extra_disclosures)),
+    ])
+    disc_txt = _esc(disclaimer.replace("**", ""))
+    intro = (f"<p style='margin:12px 0 0;font:12px/1.5 {SANS};color:{INK_SOFT};'>"
+             f"<i>{disc_txt}</i></p>")
+    return _document(
+        right_label="Morning<br>report", date_label=date_label,
+        intro_html=intro, body_rows=body_rows, tracker_url=tracker_url,
+        subscribe_note="You are receiving this because you subscribed to trade alerts.",
+        title="Capitol Ledger — Morning report", preheader=preheader)
+
+
+def render_traffic_html(*, date_label: str, traffic: dict,
+                        member_names: dict | None, tracker_url: str,
+                        preheader: str) -> str:
+    """The standalone site-traffic email (Vercel Web Analytics), same chrome."""
+    days = traffic.get("windowDays", 7)
+    intro = (f"<p style='margin:12px 0 0;font:12px/1.5 {SANS};color:{INK_SOFT};'>"
+             f"<i>Aggregated, cookieless page views over the last {days} days "
+             "(Vercel Web Analytics).</i></p>")
+    body_rows = _section("Audience", f"Site traffic "
+                         f"<span style='font-weight:400;font-size:13px;color:{INK_SOFT}'>"
+                         f"(last {days} days)</span>",
+                         traffic_block(traffic, member_names))
+    return _document(
+        right_label="Traffic<br>report", date_label=date_label,
+        intro_html=intro, body_rows=body_rows, tracker_url=tracker_url,
+        subscribe_note="Internal audience metrics for the Capitol Ledger project.",
+        title="Capitol Ledger — Traffic report", preheader=preheader)

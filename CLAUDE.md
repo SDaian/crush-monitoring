@@ -213,15 +213,18 @@ sites. Full details in `congress/README.md`. Conventions:
   `_sample` data (synthetic series, banner-flagged) until the first live refresh.
   The page's `aiScore` and Python `indicators.ai_score` **must stay in sync**
   (same checks + thresholds) — the report reuses the Python one.
-- **Site traffic in the report (Vercel Web Analytics):** `congress/analytics.py`
+- **Site traffic — its OWN email (Vercel Web Analytics):** `congress/analytics.py`
   pulls the site's aggregated, cookieless page views via Vercel's public Web
   Analytics API (`/v1/query/web-analytics/visits/{count,aggregate}`, Bearer
-  token) and the morning report embeds a "📈 Traffic — last 7 days" block
-  (total + top pages + a **per-member-page breakdown** — the `by=route`
-  aggregate rows under `/members/<slug>`, resolved to real names via the
-  generated `members/_index.json`). **Gated + non-fatal:** needs `VERCEL_TOKEN` (secret) +
-  `VERCEL_PROJECT_ID` (secret or var), optional `VERCEL_TEAM_ID`; unset or on any API
-  error it returns `None` and the report just omits the section. Network is
+  token). It ships as a **separate "📈 Traffic report" email** (not embedded in
+  the trade digest — `daily_report.build_traffic_email` +
+  `email_template.render_traffic_html`), so the digest stays focused on trades.
+  The traffic email shows total + top pages + a **per-member-page breakdown**
+  (the `by=route` aggregate rows under `/members/<slug>`, resolved to real names
+  via the generated `members/_index.json`). **Gated + non-fatal:** needs
+  `VERCEL_TOKEN` (secret) + `VERCEL_PROJECT_ID` (secret or var), optional
+  `VERCEL_TEAM_ID`; unset or on any API error it returns `None` and the traffic
+  email is simply not sent (the digest still goes out). Network is
   confined to `analytics._fetch_json` (stdlib `urllib`, no new deps); the
   response is parsed defensively (field names matched against candidates) and
   everything else is pure + offline-tested. Reads only existing aggregate data
@@ -229,8 +232,8 @@ sites. Full details in `congress/README.md`. Conventions:
   `python3 -m congress analytics`.
 - **Morning report (email digest):** `congress/daily_report.py`
   (`python3 -m congress.daily_report`) composes the AI buy/sell/hold scorecard,
-  overnight signals + rating flips, newly-filed disclosures, and (when
-  configured) the Vercel traffic block, then delivers it two ways: **(1) direct email via SMTP** (primary, reliable regardless of
+  overnight signals + rating flips, and newly-filed disclosures (site traffic is
+  a **separate email**, see above), then delivers it two ways: **(1) direct email via SMTP** (primary, reliable regardless of
   GitHub notification settings — enabled by the `SMTP_USER`/`SMTP_PASS` secrets,
   e.g. a Gmail address + App Password; `SMTP_HOST`/`SMTP_PORT`/`REPORT_EMAIL_TO`
   are optional `vars` defaulting to Gmail:587 and the sender), and **(2) a dated
@@ -255,11 +258,14 @@ sites. Full details in `congress/README.md`. Conventions:
     preheader, and the **Capitol Ledger text wordmark** masthead (no hosted
     image to break). Deliberately **light-only** (`color-scheme: light`): partial
     dark-mode styling renders worse than none across clients. `daily_report`
-    passes it *structured data* (scorecard rows, signals, flips, disclosures,
-    the Vercel traffic dict) — the module owns all HTML/colours; markdown (the
-    GitHub-issue body) is still built in `daily_report`. Preview it by rendering
-    `build_report(...)["html"]` to a file. Keep the two brands' looks in step,
-    but the email is its own surface (not governed by `landing/DESIGN.md`).
+    passes it *structured data* (scorecard rows, signals, flips, disclosures)
+    for the digest via `render_html`; the standalone traffic email uses
+    `render_traffic_html` (both share the masthead/footer chrome via
+    `_document`). The module owns all HTML/colours; markdown (the GitHub-issue
+    body) is still built in `daily_report`. Preview by rendering
+    `build_report(...)["html"]` / `build_traffic_email(...)["html"]` to a file.
+    Keep the two brands' looks in step, but the email is its own surface (not
+    governed by `landing/DESIGN.md`).
 - **Dependency policy:** `predictor/` stays pure-stdlib. `congress/` may use
   `requests` + `pdfplumber` (`congress/requirements.txt`, installed only by
   the Action) but **parsers must stay stdlib-importable** so
