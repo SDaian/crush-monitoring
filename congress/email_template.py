@@ -46,14 +46,23 @@ def _chg_color(direction: int) -> str:
     return BUY if direction > 0 else (SELL if direction < 0 else INK_SOFT)
 
 
+def _f(size: str, lh: str, fam: str, weight: int | None = None) -> str:
+    """Long-form font CSS. The ``font`` *shorthand* is unreliable in email —
+    Gmail's sanitizer can drop the whole declaration (and any sibling ``color``
+    with it), which is why colours vanish — so always emit the properties
+    separately."""
+    w = f"font-weight:{weight};" if weight else ""
+    return f"font-family:{fam};font-size:{size};line-height:{lh};{w}"
+
+
 def _section(kicker: str, title: str, inner: str) -> str:
     """An editorial section: a mono uppercase kicker + bold title over a 2px
     rule, then the section body. Table-wrapped so Outlook keeps the spacing."""
     return (
         "<tr><td style='padding:26px 32px 0 32px'>"
-        f"<div style='font:700 11px/1.4 {MONO};letter-spacing:1.5px;"
+        f"<div style='{_f('11px', '1.4', MONO, 700)}letter-spacing:1.5px;"
         f"text-transform:uppercase;color:{STAMP}'>{kicker}</div>"
-        f"<div style='font:700 19px/1.3 {SANS};color:{INK};padding:2px 0 8px'>"
+        f"<div style='{_f('19px', '1.3', SANS, 700)}color:{INK};padding:2px 0 8px'>"
         f"{title}</div>"
         f"<div style='border-top:2px solid {INK};font-size:1px;line-height:1px'>"
         "&nbsp;</div>"
@@ -68,12 +77,12 @@ def scorecard_table(scorecard: list[dict]) -> str:
     Each row: ``{ticker, price, chg, chg_dir, rsi, trend, label}`` (already
     formatted strings, plus ``chg_dir`` in {-1,0,1})."""
     if not scorecard:
-        return (f"<p style='margin:0;font:14px/1.5 {SANS};color:{INK_SOFT}'>"
+        return (f"<p style='margin:0;{_f('14px', '1.5', SANS)}color:{INK_SOFT}'>"
                 "<i>No indicator data.</i></p>")
     heads = ("Ticker", "Price", "1d", "RSI", "Trend", "Read")
     aligns = ("left", "right", "right", "right", "left", "right")
     head_html = "".join(
-        f"<th style='padding:6px 8px;text-align:{a};font:700 11px/1.3 {MONO};"
+        f"<th style='padding:6px 8px;text-align:{a};{_f('11px', '1.3', MONO, 700)}"
         f"letter-spacing:.5px;text-transform:uppercase;color:{INK_SOFT};"
         f"border-bottom:2px solid {RULE}'>{h}</th>"
         for h, a in zip(heads, aligns))
@@ -81,25 +90,29 @@ def scorecard_table(scorecard: list[dict]) -> str:
     for i, r in enumerate(scorecard):
         bg = PAPER if i % 2 == 0 else WASH
         color = LABEL_COLOR.get(r["label"], HOLD)
+        # Colour rides on an inline <span>/<font> around the text — not the <td> —
+        # so it survives even a client that strips a cell's style attribute.
+        chg = (f"<font color='{_chg_color(r['chg_dir'])}'>{_esc(r['chg'])}</font>")
+        read = (f"<font color='{color}'><b>{_esc(r['label'])}</b></font>")
         cells = (
-            f"<td style='padding:7px 8px;font:700 13px/1.3 {MONO};color:{INK}'>"
+            f"<td style='padding:7px 8px;{_f('13px', '1.3', MONO, 700)}color:{INK}'>"
             f"<b>{_esc(r['ticker'])}</b></td>"
-            f"<td style='padding:7px 8px;text-align:right;font:13px/1.3 {MONO};"
+            f"<td style='padding:7px 8px;text-align:right;{_f('13px', '1.3', MONO)}"
             f"color:{INK}'>${_esc(r['price'])}</td>"
-            f"<td style='padding:7px 8px;text-align:right;font:13px/1.3 {MONO};"
-            f"color:{_chg_color(r['chg_dir'])}'>{_esc(r['chg'])}</td>"
-            f"<td style='padding:7px 8px;text-align:right;font:13px/1.3 {MONO};"
+            f"<td style='padding:7px 8px;text-align:right;{_f('13px', '1.3', MONO)}'>"
+            f"{chg}</td>"
+            f"<td style='padding:7px 8px;text-align:right;{_f('13px', '1.3', MONO)}"
             f"color:{INK}'>{_esc(r['rsi'])}</td>"
-            f"<td style='padding:7px 8px;font:13px/1.3 {MONO};color:{INK_SOFT}'>"
+            f"<td style='padding:7px 8px;{_f('13px', '1.3', MONO)}color:{INK_SOFT}'>"
             f"{_esc(r['trend'])}</td>"
-            f"<td style='padding:7px 8px;text-align:right;font:700 12px/1.3 {SANS};"
-            f"color:{color}'>{_esc(r['label'])}</td>")
+            f"<td style='padding:7px 8px;text-align:right;{_f('12px', '1.3', SANS, 700)}'>"
+            f"{read}</td>")
         body.append(f"<tr style='background:{bg}'>{cells}</tr>")
     return (
         "<table role='presentation' width='100%' cellpadding='0' cellspacing='0' "
         f"style='border-collapse:collapse;width:100%'><tr>{head_html}</tr>"
         + "".join(body) + "</table>"
-        f"<p style='margin:8px 0 0;font:12px/1.5 {SANS};color:{INK_SOFT}'>"
+        f"<p style='margin:8px 0 0;{_f('12px', '1.5', SANS)}color:{INK_SOFT}'>"
         "Read = a rule-based tally of the indicators (each votes buy/hold/sell), "
         "not a recommendation.</p>")
 
@@ -107,14 +120,14 @@ def scorecard_table(scorecard: list[dict]) -> str:
 def _list_block(items: list[str]) -> str:
     """A tight, bullet-less list styled as report lines."""
     rows = "".join(
-        f"<tr><td style='padding:4px 0;font:14px/1.45 {SANS};color:{INK};"
+        f"<tr><td style='padding:4px 0;{_f('14px', '1.45', SANS)}color:{INK};"
         f"border-bottom:1px solid {RULE}'>{it}</td></tr>" for it in items)
     return ("<table role='presentation' width='100%' cellpadding='0' "
             f"cellspacing='0' style='border-collapse:collapse'>{rows}</table>")
 
 
 def _empty(msg: str) -> str:
-    return (f"<p style='margin:0;font:14px/1.5 {SANS};color:{INK_SOFT}'>"
+    return (f"<p style='margin:0;{_f('14px', '1.5', SANS)}color:{INK_SOFT}'>"
             f"<i>{_esc(msg)}</i></p>")
 
 
@@ -126,7 +139,7 @@ def signals_block(signals: list[dict], flips: list[dict]) -> str:
                  f"{_esc(s.get('label', s.get('type', 'signal')))} "
                  f"<span style='color:{INK_SOFT}'>({_esc(s.get('asof', ''))})</span>"
                  for s in signals]
-        parts.append(f"<p style='margin:0 0 4px;font:700 12px/1.4 {MONO};"
+        parts.append(f"<p style='margin:0 0 4px;{_f('12px', '1.4', MONO, 700)}"
                      f"letter-spacing:.5px;text-transform:uppercase;color:{INK_SOFT}'>"
                      "New signals</p>" + _list_block(items))
     if flips:
@@ -135,9 +148,9 @@ def signals_block(signals: list[dict], flips: list[dict]) -> str:
             color = LABEL_COLOR.get(f["label"], HOLD)
             items.append(
                 f"<b style='font-family:{MONO}'>{_esc(f['ticker'])}</b>: "
-                f"{_esc(f['prev'])} → <span style='color:{color};font-weight:700'>"
-                f"{_esc(f['label'])}</span>")
-        parts.append(f"<p style='margin:14px 0 4px;font:700 12px/1.4 {MONO};"
+                f"{_esc(f['prev'])} → <font color='{color}'><b>"
+                f"{_esc(f['label'])}</b></font>")
+        parts.append(f"<p style='margin:14px 0 4px;{_f('12px', '1.4', MONO, 700)}"
                      f"letter-spacing:.5px;text-transform:uppercase;color:{INK_SOFT}'>"
                      "Rating changes</p>" + _list_block(items))
     if not parts:
@@ -159,7 +172,7 @@ def disclosures_block(disclosures: list[dict], extra: int) -> str:
             f"{_esc(d['amount'])}</span>")
     html = _list_block(items)
     if extra > 0:
-        html += (f"<p style='margin:8px 0 0;font:12px/1.5 {SANS};color:{INK_SOFT}'>"
+        html += (f"<p style='margin:8px 0 0;{_f('12px', '1.5', SANS)}color:{INK_SOFT}'>"
                  f"<i>…and {extra} more.</i></p>")
     return html
 
@@ -178,16 +191,16 @@ def traffic_block(traffic: dict, member_names: dict | None = None) -> str:
     member_pages = traffic.get("memberPages") or []
     names = member_names or {}
     total_txt = f"{total:,} page views" if total is not None else "views unavailable"
-    html = (f"<p style='margin:0;font:700 20px/1.2 {MONO};color:{INK}'>"
+    html = (f"<p style='margin:0;{_f('20px', '1.2', MONO, 700)}color:{INK}'>"
             f"{_esc(total_txt)}</p>")
     if pages:
         rows = "".join(
-            f"<tr><td style='padding:4px 0;font:13px/1.4 {MONO};color:{INK_SOFT};"
+            f"<tr><td style='padding:4px 0;{_f('13px', '1.4', MONO)}color:{INK_SOFT};"
             f"border-bottom:1px solid {RULE}'>{_esc(p)}</td>"
-            f"<td style='padding:4px 0;text-align:right;font:700 13px/1.4 {MONO};"
+            f"<td style='padding:4px 0;text-align:right;{_f('13px', '1.4', MONO, 700)}"
             f"color:{INK};border-bottom:1px solid {RULE}'>{v:,}</td></tr>"
             for p, v in pages)
-        html += (f"<p style='margin:14px 0 4px;font:700 12px/1.4 {MONO};"
+        html += (f"<p style='margin:14px 0 4px;{_f('12px', '1.4', MONO, 700)}"
                  f"letter-spacing:.5px;text-transform:uppercase;color:{INK_SOFT}'>"
                  "Top pages</p>"
                  "<table role='presentation' width='100%' cellpadding='0' "
@@ -196,12 +209,12 @@ def traffic_block(traffic: dict, member_names: dict | None = None) -> str:
         def label(slug):
             return names.get(slug) or _prettify_slug(slug)
         rows = "".join(
-            f"<tr><td style='padding:4px 0;font:13px/1.4 {SANS};color:{INK};"
+            f"<tr><td style='padding:4px 0;{_f('13px', '1.4', SANS)}color:{INK};"
             f"border-bottom:1px solid {RULE}'>{_esc(label(s))}</td>"
-            f"<td style='padding:4px 0;text-align:right;font:700 13px/1.4 {MONO};"
+            f"<td style='padding:4px 0;text-align:right;{_f('13px', '1.4', MONO, 700)}"
             f"color:{INK};border-bottom:1px solid {RULE}'>{v:,}</td></tr>"
             for s, v in member_pages)
-        html += (f"<p style='margin:14px 0 4px;font:700 12px/1.4 {MONO};"
+        html += (f"<p style='margin:14px 0 4px;{_f('12px', '1.4', MONO, 700)}"
                  f"letter-spacing:.5px;text-transform:uppercase;color:{INK_SOFT}'>"
                  "Member pages</p>"
                  "<table role='presentation' width='100%' cellpadding='0' "
@@ -215,10 +228,10 @@ def _footer(tracker_url: str, subscribe_note: str) -> str:
         f"<tr><td class='cl-pad' style='padding:28px 32px 30px 32px;'>"
         f"<div style='border-top:1px solid {RULE};font-size:1px;line-height:1px;'>"
         "&nbsp;</div>"
-        f"<p style='margin:16px 0 0;font:13px/1.5 {SANS};color:{INK};'>"
+        f"<p style='margin:16px 0 0;{_f('13px', '1.5', SANS)}color:{INK};'>"
         f"<a href='{tracker_url}' style='color:{STAMP};font-weight:700;"
         "text-decoration:none;'>Open the full tracker →</a></p>"
-        f"<p style='margin:10px 0 0;font:11px/1.6 {SANS};color:{INK_SOFT};'>"
+        f"<p style='margin:10px 0 0;{_f('11px', '1.6', SANS)}color:{INK_SOFT};'>"
         "Mechanical technical readings from past daily closes and official STOCK "
         "Act disclosures (30–45-day legal lag; bracketed amounts). Not investment "
         "advice.<br>Capitol Ledger · a public-data project.<br>"
@@ -259,12 +272,12 @@ def _document(*, right_label: str, date_label: str, intro_html: str,
   <tr><td class="cl-pad" style="padding:30px 32px 22px 32px;">
     <div style="border-top:3px double {INK};font-size:1px;line-height:1px;">&nbsp;</div>
     <table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr>
-      <td style="padding:14px 0 0;font:700 22px/1 {SANS};letter-spacing:3px;text-transform:uppercase;color:{INK};">
+      <td style="padding:14px 0 0;{_f('22px', '1', SANS, 700)}letter-spacing:3px;text-transform:uppercase;color:{INK};">
         Capitol&nbsp;Ledger</td>
-      <td align="right" style="padding:14px 0 0;font:700 11px/1.4 {MONO};letter-spacing:1px;text-transform:uppercase;color:{STAMP};">
+      <td align="right" style="padding:14px 0 0;{_f('11px', '1.4', MONO, 700)}letter-spacing:1px;text-transform:uppercase;color:{STAMP};white-space:nowrap;">
         {right_label}</td>
     </tr></table>
-    <div style="margin-top:6px;font:12px/1.4 {MONO};letter-spacing:.5px;color:{INK_SOFT};">
+    <div style="margin-top:6px;{_f('12px', '1.4', MONO)}letter-spacing:.5px;color:{INK_SOFT};">
       {_esc(date_label)}</div>
     <div style="border-top:3px double {INK};font-size:1px;line-height:1px;margin-top:12px;">&nbsp;</div>
     {intro_html}
@@ -297,10 +310,10 @@ def render_html(*, date_label: str, disclaimer: str, scorecard: list[dict],
                  disclosures_block(disclosures, extra_disclosures)),
     ])
     disc_txt = _esc(disclaimer.replace("**", ""))
-    intro = (f"<p style='margin:12px 0 0;font:12px/1.5 {SANS};color:{INK_SOFT};'>"
+    intro = (f"<p style='margin:12px 0 0;{_f('12px', '1.5', SANS)}color:{INK_SOFT};'>"
              f"<i>{disc_txt}</i></p>")
     return _document(
-        right_label="Morning<br>report", date_label=date_label,
+        right_label="Morning report", date_label=date_label,
         intro_html=intro, body_rows=body_rows, tracker_url=tracker_url,
         subscribe_note="You are receiving this because you subscribed to trade alerts.",
         title="Capitol Ledger — Morning report", preheader=preheader)
@@ -311,7 +324,7 @@ def render_traffic_html(*, date_label: str, traffic: dict,
                         preheader: str) -> str:
     """The standalone site-traffic email (Vercel Web Analytics), same chrome."""
     days = traffic.get("windowDays", 7)
-    intro = (f"<p style='margin:12px 0 0;font:12px/1.5 {SANS};color:{INK_SOFT};'>"
+    intro = (f"<p style='margin:12px 0 0;{_f('12px', '1.5', SANS)}color:{INK_SOFT};'>"
              f"<i>Aggregated, cookieless page views over the last {days} days "
              "(Vercel Web Analytics).</i></p>")
     body_rows = _section("Audience", f"Site traffic "
@@ -319,7 +332,7 @@ def render_traffic_html(*, date_label: str, traffic: dict,
                          f"(last {days} days)</span>",
                          traffic_block(traffic, member_names))
     return _document(
-        right_label="Traffic<br>report", date_label=date_label,
+        right_label="Traffic report", date_label=date_label,
         intro_html=intro, body_rows=body_rows, tracker_url=tracker_url,
         subscribe_note="Internal audience metrics for the Capitol Ledger project.",
         title="Capitol Ledger — Traffic report", preheader=preheader)
