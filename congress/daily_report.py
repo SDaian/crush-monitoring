@@ -38,7 +38,7 @@ from datetime import date, datetime, timedelta, timezone
 from email.message import EmailMessage
 from pathlib import Path
 
-from . import analytics, indicators, pipeline
+from . import analytics, email_template, indicators, pipeline
 
 API = "https://api.github.com"
 TRADES_JSON = pipeline.REPO_ROOT / "docs" / "data" / "congress-trades.json"
@@ -77,16 +77,6 @@ def _pct(x) -> str:
 
 
 TRACKER_URL = "https://SDaian.github.io/crush-monitoring/trades.html"
-# Read-label → email colour (green bull / red bear / grey hold).
-_LABEL_COLOR = {
-    "Strong Buy": "#0a7d33", "Buy": "#0a7d33",
-    "Strong Sell": "#c0392b", "Sell": "#c0392b", "Hold": "#666",
-}
-
-
-def _esc(s) -> str:
-    return (str(s).replace("&", "&amp;").replace("<", "&lt;")
-            .replace(">", "&gt;"))
 
 
 def build_report(trades: list[dict], ai_tickers: dict, new_signals: list[dict],
@@ -101,7 +91,7 @@ def build_report(trades: list[dict], ai_tickers: dict, new_signals: list[dict],
 
     # --- Section 1: Featured-stock scorecard ---
     ratings: dict[str, str] = {}
-    rows, html_rows = [], []
+    rows, sc_rows = [], []
     for tk in order:
         t = ai_tickers[tk]
         sc = indicators.ai_score(t)
@@ -111,16 +101,12 @@ def build_report(trades: list[dict], ai_tickers: dict, new_signals: list[dict],
         trend = _trend(t)
         rows.append(
             f"| {tk} | ${price} | {chg} | {rsi} | {trend} | **{sc['label']}** |")
-        color = _LABEL_COLOR.get(sc["label"], "#666")
-        chg_color = "#0a7d33" if (t.get("chg_1d") or 0) > 0 else (
-            "#c0392b" if (t.get("chg_1d") or 0) < 0 else "#666")
-        html_rows.append(
-            f"<tr><td style='padding:4px 8px'><b>{_esc(tk)}</b></td>"
-            f"<td style='padding:4px 8px;text-align:right'>${_esc(price)}</td>"
-            f"<td style='padding:4px 8px;text-align:right;color:{chg_color}'>{_esc(chg)}</td>"
-            f"<td style='padding:4px 8px;text-align:right'>{_esc(rsi)}</td>"
-            f"<td style='padding:4px 8px'>{_esc(trend)}</td>"
-            f"<td style='padding:4px 8px;font-weight:700;color:{color}'>{_esc(sc['label'])}</td></tr>")
+        chg_val = t.get("chg_1d") or 0
+        sc_rows.append({
+            "ticker": tk, "price": price, "chg": chg,
+            "chg_dir": 1 if chg_val > 0 else (-1 if chg_val < 0 else 0),
+            "rsi": rsi, "trend": trend, "label": sc["label"],
+        })
     scorecard = (
         "## ⭐ Featured stocks — technical read\n\n"
         "| Ticker | Price | 1d | RSI | Trend | Read |\n"
@@ -135,19 +121,18 @@ def build_report(trades: list[dict], ai_tickers: dict, new_signals: list[dict],
         f"({s.get('asof', '')})"
         for s in (new_signals or [])
     ]
-    sig_html = [
-        f"<li><b>{_esc(s['ticker'])}</b> — {_esc(s.get('label', s.get('type', 'signal')))} "
-        f"({_esc(s.get('asof', ''))})</li>"
+    sig_data = [
+        {"ticker": s["ticker"],
+         "label": s.get("label", s.get("type", "signal")),
+         "type": s.get("type"), "asof": s.get("asof", "")}
         for s in (new_signals or [])
     ]
-    flips, flips_html = [], []
+    flips, flip_data = [], []
     for tk, label in ratings.items():
         prev = prev_ratings.get(tk)
         if prev and prev != label:
             flips.append(f"- **{tk}** rating: {prev} → {label}")
-            flips_html.append(
-                f"<li><b>{_esc(tk)}</b>: {_esc(prev)} → "
-                f"<span style='color:{_LABEL_COLOR.get(label, '#666')}'>{_esc(label)}</span></li>")
+            flip_data.append({"ticker": tk, "prev": prev, "label": label})
     signals_md = "## 🔔 Signals overnight\n\n"
     if sig_lines or flips:
         if sig_lines:
@@ -163,7 +148,7 @@ def build_report(trades: list[dict], ai_tickers: dict, new_signals: list[dict],
     recent = [t for t in trades if (t.get("filing_date") or "") >= cutoff]
     recent.sort(key=lambda t: (t.get("filing_date", ""), t.get("tx_date", "")),
                 reverse=True)
-    disc_lines, disc_html = [], []
+    disc_lines, disc_data = [], []
     for t in recent[:MAX_DISCLOSURES]:
         party = PARTY.get(t.get("party"))
         who = t.get("member", "?") + (f" ({party})" if party else "")
@@ -171,10 +156,10 @@ def build_report(trades: list[dict], ai_tickers: dict, new_signals: list[dict],
         disc_lines.append(
             f"- {t.get('filing_date', '?')} · {who} · "
             f"**{name}** {t.get('type', '?')} · {t.get('amount_label', '—')}")
-        disc_html.append(
-            f"<li>{_esc(t.get('filing_date', '?'))} · {_esc(who)} · "
-            f"<b>{_esc(name)}</b> {_esc(t.get('type', '?'))} · "
-            f"{_esc(t.get('amount_label', '—'))}</li>")
+        disc_data.append({
+            "filing_date": t.get("filing_date", "?"), "who": who, "name": name,
+            "type": t.get("type", "?"), "amount": t.get("amount_label", "—"),
+        })
     disclosures_md = "## 🏛 New congressional disclosures " \
         f"(filed since {cutoff})\n\n"
     if disc_lines:
@@ -185,9 +170,9 @@ def build_report(trades: list[dict], ai_tickers: dict, new_signals: list[dict],
         disclosures_md += "_No new disclosures in this window._\n"
 
     # --- Section 4 (optional): site traffic from Vercel Web Analytics ---
-    traffic_md, traffic_html = "", ""
+    traffic_md = ""
     if traffic:
-        traffic_md, traffic_html = analytics.format_block(traffic, member_names)
+        traffic_md, _ = analytics.format_block(traffic, member_names)
         traffic_md = "\n" + traffic_md + "\n"
 
     markdown = (
@@ -196,33 +181,17 @@ def build_report(trades: list[dict], ai_tickers: dict, new_signals: list[dict],
         f"---\n_Full tracker: [Featured stocks & trades]({TRACKER_URL})._"
     )
 
-    # --- HTML email body ---
-    def _ul(items, empty):
-        return ("<ul>" + "".join(items) + "</ul>") if items else f"<p><i>{empty}</i></p>"
-    table = ("<table style='border-collapse:collapse;font:13px system-ui,sans-serif'>"
-             "<tr style='border-bottom:2px solid #ccc'>"
-             + "".join(f"<th style='padding:4px 8px;text-align:left'>{h}</th>"
-                       for h in ("Ticker", "Price", "1d", "RSI", "Trend", "Read"))
-             + "</tr>" + "".join(html_rows) + "</table>") if html_rows else "<p><i>No indicator data.</i></p>"
-    sig_block = ""
-    if sig_html:
-        sig_block += "<b>New signals</b>" + _ul(sig_html, "")
-    if flips_html:
-        sig_block += "<b>Rating changes</b>" + _ul(flips_html, "")
-    if not sig_block:
-        sig_block = "<p><i>No new signals or rating changes since yesterday.</i></p>"
-    html = (
-        "<div style='font:14px/1.5 system-ui,-apple-system,sans-serif;color:#222;max-width:720px'>"
-        f"<p style='color:#666;font-size:12px'><i>{_esc(DISCLAIMER.replace('**', ''))}</i></p>"
-        "<h2>⭐ Featured stocks — technical read</h2>" + table +
-        "<p style='color:#666;font-size:12px'>Read = a rule-based tally of the indicators "
-        "(each votes buy/hold/sell), not a recommendation.</p>"
-        "<h2>🔔 Signals overnight</h2>" + sig_block +
-        f"<h2>🏛 New congressional disclosures <span style='font-weight:400;font-size:13px'>"
-        f"(filed since {cutoff})</span></h2>" + _ul(disc_html, "No new disclosures in this window.") +
-        traffic_html +
-        f"<hr><p style='font-size:12px'>Full tracker: <a href='{TRACKER_URL}'>Featured stocks &amp; trades</a></p></div>"
-    )
+    # --- HTML email body (hand-authored, bulletproof template) ---
+    date_label = date.fromisoformat(today_iso).strftime("%A, %B %-d, %Y")
+    preheader = (
+        f"{len(rows)} featured reads · {len(sig_lines) + len(flips)} overnight "
+        f"changes · {len(recent)} new disclosures")
+    html = email_template.render_html(
+        date_label=date_label, disclaimer=DISCLAIMER, scorecard=sc_rows,
+        signals=sig_data, flips=flip_data, disclosures=disc_data,
+        extra_disclosures=max(0, len(recent) - MAX_DISCLOSURES), cutoff=cutoff,
+        traffic=traffic, member_names=member_names, tracker_url=TRACKER_URL,
+        preheader=preheader)
 
     counts = {"tickers": len(rows), "new_signals": len(sig_lines),
               "flips": len(flips), "disclosures": len(recent)}
