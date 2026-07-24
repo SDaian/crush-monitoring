@@ -249,6 +249,17 @@ sites. Full details in `congress/README.md`. Conventions:
   `congress/report_state.json` (generated; do not hand-edit). UTC cron ignores
   DST so the Madrid clock time drifts ±1h; precise timing needs an external
   scheduler hitting the `workflow_dispatch` API.
+  - **HTML email = `congress/email_template.py`** (pure, offline-tested). It is a
+    hand-authored, **bulletproof** layout — table-based, inline styles, a fixed
+    ~600px centered "paper" card, web-safe fonts (mono for data), hidden
+    preheader, and the **Capitol Ledger text wordmark** masthead (no hosted
+    image to break). Deliberately **light-only** (`color-scheme: light`): partial
+    dark-mode styling renders worse than none across clients. `daily_report`
+    passes it *structured data* (scorecard rows, signals, flips, disclosures,
+    the Vercel traffic dict) — the module owns all HTML/colours; markdown (the
+    GitHub-issue body) is still built in `daily_report`. Preview it by rendering
+    `build_report(...)["html"]` to a file. Keep the two brands' looks in step,
+    but the email is its own surface (not governed by `landing/DESIGN.md`).
 - **Dependency policy:** `predictor/` stays pure-stdlib. `congress/` may use
   `requests` + `pdfplumber` (`congress/requirements.txt`, installed only by
   the Action) but **parsers must stay stdlib-importable** so
