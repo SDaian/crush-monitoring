@@ -23,7 +23,6 @@ def _render(**over):
     kw = dict(date_label="Friday, July 24, 2026", disclaimer="Not **advice.**",
               scorecard=SCORECARD, signals=SIGNALS, flips=FLIPS,
               disclosures=DISCLOSURES, extra_disclosures=0, cutoff="2026-07-21",
-              traffic=TRAFFIC, member_names={"nancy-pelosi": "Nancy Pelosi"},
               tracker_url="https://example.test/trades.html",
               preheader="preview line")
     kw.update(over)
@@ -47,17 +46,17 @@ class TestRenderHtml(unittest.TestCase):
         self.assertIn(et.BUY, html)                  # green somewhere
         self.assertIn(et.SELL, html)                 # red somewhere
 
-    def test_sections_and_traffic(self):
+    def test_sections(self):
         html = _render()
-        self.assertIn("Nancy Pelosi", html)          # disclosure + member page
+        self.assertIn("Nancy Pelosi", html)          # disclosure in window
         self.assertIn("New 52-week high", html)      # signal
         self.assertIn("Sell → ", html)               # flip arrow
-        self.assertIn("1,284 page views", html)      # traffic total
-        self.assertIn("Site traffic", html)
 
-    def test_no_traffic_omits_section(self):
-        html = _render(traffic=None)
+    def test_digest_has_no_traffic(self):
+        # Traffic moved to its own email — the digest must not carry it.
+        html = _render()
         self.assertNotIn("Site traffic", html)
+        self.assertNotIn("page views", html)
 
     def test_empty_states(self):
         html = _render(scorecard=[], signals=[], flips=[], disclosures=[])
@@ -74,6 +73,23 @@ class TestRenderHtml(unittest.TestCase):
         html = _render(scorecard=bad)
         self.assertNotIn("<script>", html)
         self.assertIn("&lt;script&gt;", html)
+
+
+class TestTrafficEmail(unittest.TestCase):
+    def test_traffic_email_renders(self):
+        html = et.render_traffic_html(
+            date_label="Friday, July 24, 2026", traffic=TRAFFIC,
+            member_names={"nancy-pelosi": "Nancy Pelosi"},
+            tracker_url="https://example.test/trades.html",
+            preheader="1,284 page views")
+        self.assertIn("<!DOCTYPE html>", html)
+        self.assertIn("Capitol&nbsp;Ledger", html)
+        self.assertIn("Traffic", html)               # masthead label
+        self.assertIn("Site traffic", html)
+        self.assertIn("1,284 page views", html)
+        self.assertIn("Nancy Pelosi", html)          # member breakdown
+        # It is a trade-focused digest's sibling, not the digest itself.
+        self.assertNotIn("Strong Buy", html)
 
 
 if __name__ == "__main__":

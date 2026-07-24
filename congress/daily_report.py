@@ -80,12 +80,12 @@ TRACKER_URL = "https://SDaian.github.io/crush-monitoring/trades.html"
 
 
 def build_report(trades: list[dict], ai_tickers: dict, new_signals: list[dict],
-                 prev_ratings: dict, today_iso: str,
-                 traffic: dict | None = None,
-                 member_names: dict | None = None) -> dict:
-    """Compose the digest in both markdown (GitHub issue) and HTML (email).
-    Pure — no I/O. Returns ``{markdown, html, ratings, counts}`` where
-    ``ratings`` is ticker→label for the next run's flip diff."""
+                 prev_ratings: dict, today_iso: str) -> dict:
+    """Compose the trade/scorecard digest in markdown (GitHub issue) and HTML
+    (email). Site traffic is delivered in its own email — see
+    ``build_traffic_email``. Pure — no I/O. Returns
+    ``{markdown, html, ratings, counts}`` where ``ratings`` is ticker→label for
+    the next run's flip diff."""
     order = [s["ticker"] for s in indicators.AI_TICKERS if s["ticker"] in ai_tickers]
     order += sorted(tk for tk in ai_tickers if tk not in order)
 
@@ -169,15 +169,9 @@ def build_report(trades: list[dict], ai_tickers: dict, new_signals: list[dict],
     else:
         disclosures_md += "_No new disclosures in this window._\n"
 
-    # --- Section 4 (optional): site traffic from Vercel Web Analytics ---
-    traffic_md = ""
-    if traffic:
-        traffic_md, _ = analytics.format_block(traffic, member_names)
-        traffic_md = "\n" + traffic_md + "\n"
-
     markdown = (
         f"_{DISCLAIMER}_\n\n"
-        f"{scorecard}\n\n{signals_md}\n{disclosures_md}\n{traffic_md}"
+        f"{scorecard}\n\n{signals_md}\n{disclosures_md}"
         f"---\n_Full tracker: [Featured stocks & trades]({TRACKER_URL})._"
     )
 
@@ -190,12 +184,30 @@ def build_report(trades: list[dict], ai_tickers: dict, new_signals: list[dict],
         date_label=date_label, disclaimer=DISCLAIMER, scorecard=sc_rows,
         signals=sig_data, flips=flip_data, disclosures=disc_data,
         extra_disclosures=max(0, len(recent) - MAX_DISCLOSURES), cutoff=cutoff,
-        traffic=traffic, member_names=member_names, tracker_url=TRACKER_URL,
-        preheader=preheader)
+        tracker_url=TRACKER_URL, preheader=preheader)
 
     counts = {"tickers": len(rows), "new_signals": len(sig_lines),
               "flips": len(flips), "disclosures": len(recent)}
     return {"markdown": markdown, "html": html, "ratings": ratings, "counts": counts}
+
+
+def build_traffic_email(traffic: dict, today_iso: str,
+                        member_names: dict | None = None) -> dict:
+    """Compose the standalone site-traffic email (subject, markdown, html) from
+    a ``analytics.daily_summary`` dict. Pure — no I/O."""
+    md, _ = analytics.format_block(traffic, member_names)
+    markdown = (f"{md}\n\n---\n_Aggregated, cookieless Vercel Web Analytics · "
+                f"[Capitol Ledger tracker]({TRACKER_URL})._")
+    date_label = date.fromisoformat(today_iso).strftime("%A, %B %-d, %Y")
+    total = traffic.get("total")
+    days = traffic.get("windowDays", 7)
+    preheader = (f"{total:,} page views" if total is not None
+                 else "site traffic") + f" · last {days} days"
+    html = email_template.render_traffic_html(
+        date_label=date_label, traffic=traffic, member_names=member_names,
+        tracker_url=TRACKER_URL, preheader=preheader)
+    return {"subject": f"📈 Traffic report — {today_iso}",
+            "markdown": markdown, "html": html}
 
 
 # --- GitHub API (network) ------------------------------------------------
@@ -282,19 +294,24 @@ def main() -> int:
     new_signals = ai.get("meta", {}).get("new_signals", [])
     prev_ratings = state.get("ratings", {})
 
-    # Site traffic (Vercel Web Analytics) — non-fatal; None unless VERCEL_TOKEN
-    # + VERCEL_PROJECT_ID are set, so the report never fails on analytics.
-    traffic = analytics.daily_summary(today_iso)
-    # Real names for the member-page traffic breakdown (slug → display name).
-    member_names = {m["slug"]: m["name"]
-                    for m in _load(MEMBER_INDEX_JSON, {}).get("members", [])}
     report = build_report(trades, ai_tickers, new_signals, prev_ratings,
-                          today_iso, traffic=traffic, member_names=member_names)
+                          today_iso)
     title = f"📋 Morning report — {today_iso}"
 
     # Primary delivery: direct email via SMTP (reliable regardless of GitHub
     # notification settings). Best-effort — no-op if creds aren't configured.
     email_ok = send_email(title, report["markdown"], report["html"])
+
+    # Site traffic (Vercel Web Analytics) ships as its OWN email so the digest
+    # stays focused on trades. Non-fatal; None unless VERCEL_TOKEN +
+    # VERCEL_PROJECT_ID are set, so the run never fails on analytics.
+    traffic = analytics.daily_summary(today_iso)
+    if traffic:
+        # Real names for the member-page breakdown (slug → display name).
+        member_names = {m["slug"]: m["name"]
+                        for m in _load(MEMBER_INDEX_JSON, {}).get("members", [])}
+        tr = build_traffic_email(traffic, today_iso, member_names)
+        send_email(tr["subject"], tr["markdown"], tr["html"])
 
     # Secondary: a dated GitHub issue as an archive + the flip-diff state. Also
     # assign it to the repo owner (override REPORT_ASSIGNEE) so watchers/owners

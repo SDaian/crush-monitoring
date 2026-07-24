@@ -71,6 +71,26 @@ class TestBuildReport(unittest.TestCase):
         self.assertIn("No new signals or rating changes", r["markdown"])
         self.assertIn("No new disclosures", r["markdown"])
 
+    def test_digest_has_no_traffic(self):
+        # Traffic is delivered in its own email now, not the digest.
+        self.assertNotIn("Traffic", self.r["markdown"])
+        self.assertNotIn("page views", self.r["html"])
+
+
+class TestTrafficEmail(unittest.TestCase):
+    TRAFFIC = {"total": 1284, "windowDays": 7,
+               "pages": [("/", 640)], "memberPages": [("nancy-pelosi", 180)]}
+
+    def test_build_traffic_email(self):
+        tr = daily_report.build_traffic_email(
+            self.TRAFFIC, "2026-07-24",
+            member_names={"nancy-pelosi": "Nancy Pelosi"})
+        self.assertEqual(tr["subject"], "📈 Traffic report — 2026-07-24")
+        self.assertIn("1,284 page views", tr["markdown"])
+        self.assertIn("Nancy Pelosi", tr["markdown"])
+        self.assertIn("1,284 page views", tr["html"])
+        self.assertNotIn("<script", tr["html"])
+
 
 class TestMainDelivery(unittest.TestCase):
     """Exercise main() with the GitHub API + files stubbed."""
