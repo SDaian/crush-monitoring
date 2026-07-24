@@ -33,8 +33,13 @@ LABEL_COLOR = {
 }
 
 # Web-safe font stacks (no web fonts — only Apple Mail would load them).
-SANS = "-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif"
-MONO = "'Courier New',Courier,monospace"
+# The multi-word family names MUST be quoted in CSS, but a literal ' would
+# close our single-quoted style='…' attributes and silently drop every
+# property after font-family (that is what made titles render plain). Use the
+# &#39; entity: the HTML parser decodes it back to ' before the CSS parser sees
+# it, so the attribute stays intact in both single- and double-quoted contexts.
+SANS = "-apple-system,&#39;Segoe UI&#39;,Roboto,Helvetica,Arial,sans-serif"
+MONO = "&#39;Courier New&#39;,Courier,monospace"
 
 
 def _esc(s) -> str:
