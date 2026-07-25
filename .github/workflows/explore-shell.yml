@@ -1,0 +1,41 @@
+name: Explore shell (manual)
+
+# One-off, manual-only exploration of the authenticated app shell (company
+# selector + sidenav). Not part of scheduled monitoring; safe to delete once the
+# real flows are pinned. Runs against dev only and logs in with the dev secrets.
+on:
+  workflow_dispatch:
+
+jobs:
+  explore:
+    name: Explore app shell (dev)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install Playwright browser
+        run: npx playwright install --with-deps chromium
+
+      - name: Explore
+        env:
+          TARGET_ENV: dev
+          TEST_USER_USERNAME: ${{ secrets.TEST_USER_USERNAME_DEV }}
+          TEST_USER_PASSWORD: ${{ secrets.TEST_USER_PASSWORD_DEV }}
+        run: node scripts/explore-shell.mjs
+
+      - name: Upload exploration output
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: exploration
+          path: exploration/**
+          if-no-files-found: warn
+          retention-days: 7
