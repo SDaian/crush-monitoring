@@ -240,8 +240,14 @@ def traffic_block(traffic: dict, member_names: dict | None = None) -> str:
     return html
 
 
-def _footer(tracker_url: str, subscribe_note: str) -> str:
-    """Shared footer: tracker link, provenance/disclaimer, unsubscribe line."""
+def _footer(tracker_url: str, subscribe_note: str,
+            unsubscribe: bool = True) -> str:
+    """Shared footer: tracker link, provenance/disclaimer, unsubscribe line.
+
+    ``unsubscribe=False`` drops our line for broadcasts through a provider that
+    injects a real one (Buttondown). Ours is a placeholder ``href='#'`` — fine
+    in the owner's own copy, but a dead unsubscribe link in a mailing-list
+    send is both a CAN-SPAM violation and a duplicate of the provider's."""
     return (
         f"<tr><td class='cl-pad' style='padding:28px 32px 30px 32px;'>"
         f"<div style='border-top:1px solid {RULE};font-size:1px;line-height:1px;'>"
@@ -253,15 +259,22 @@ def _footer(tracker_url: str, subscribe_note: str) -> str:
         "Mechanical technical readings from past daily closes and official STOCK "
         "Act disclosures (30–45-day legal lag; bracketed amounts). Not investment "
         "advice.<br>Capitol Ledger · a public-data project.<br>"
-        f"<a href='#' style='color:{INK_SOFT};text-decoration:underline;'>"
-        f"Unsubscribe</a>&nbsp;·&nbsp; {_esc(subscribe_note)}</p></td></tr>")
+        + (f"<a href='#' style='color:{INK_SOFT};text-decoration:underline;'>"
+           "Unsubscribe</a>&nbsp;·&nbsp; " if unsubscribe else "")
+        + f"{_esc(subscribe_note)}</p></td></tr>")
 
 
 def _document(*, right_label: str, date_label: str, intro_html: str,
               body_rows: str, tracker_url: str, subscribe_note: str,
-              title: str, preheader: str) -> str:
-    """Wrap section rows in the shared masthead + footer chrome (pure)."""
-    return f"""\
+              title: str, preheader: str, standalone: bool = True) -> str:
+    """Wrap section rows in the shared masthead + footer chrome (pure).
+
+    ``standalone=False`` returns just the centred card — no doctype, <html> or
+    <head>. Newsletter providers wrap what you give them in their own template,
+    so returning a whole document there nests one HTML document inside another
+    and clients render the result unpredictably (that is what breaks the
+    styling). The provider supplies the shell; we supply the card."""
+    doc = f"""\
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -303,19 +316,26 @@ def _document(*, right_label: str, date_label: str, intro_html: str,
 
   {body_rows}
 
-  {_footer(tracker_url, subscribe_note)}
+  {_footer(tracker_url, subscribe_note, standalone)}
 
 </table>
 </td></tr>
 </table>
 </body>
 </html>"""
+    if standalone:
+        return doc
+    # Everything between the outer background table's cell — i.e. the 600px
+    # card plus the hidden preheader — with the document shell removed.
+    body = doc.split("<body", 1)[1].split(">", 1)[1].rsplit("</body>", 1)[0]
+    return body.strip()
 
 
 def render_html(*, date_label: str, disclaimer: str, scorecard: list[dict],
                 signals: list[dict], flips: list[dict],
                 disclosures: list[dict], extra_disclosures: int, cutoff: str,
-                tracker_url: str, preheader: str, report_url: str = "") -> str:
+                tracker_url: str, preheader: str, report_url: str = "",
+                standalone: bool = True) -> str:
     """The daily trade/scorecard digest email (traffic is a separate email)."""
     body_rows = "".join([
         _section("Featured stocks", "Technical read",
@@ -339,7 +359,8 @@ def render_html(*, date_label: str, disclaimer: str, scorecard: list[dict],
         right_label="Morning report", date_label=date_label,
         intro_html=intro, body_rows=body_rows, tracker_url=tracker_url,
         subscribe_note="You are receiving this because you subscribed to trade alerts.",
-        title="Capitol Ledger — Morning report", preheader=preheader)
+        title="Capitol Ledger — Morning report", preheader=preheader,
+        standalone=standalone)
 
 
 def render_traffic_html(*, date_label: str, traffic: dict,
