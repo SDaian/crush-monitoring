@@ -240,3 +240,51 @@ class TestEmail(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class TestButtondown(unittest.TestCase):
+    """The subscriber broadcast: gated, pure payload, never fatal."""
+
+    def setUp(self):
+        from congress import buttondown
+        self.bd = buttondown
+        os.environ.pop(buttondown.ENV_KEY, None)
+
+    def tearDown(self):
+        os.environ.pop(self.bd.ENV_KEY, None)
+
+    def test_skips_without_key(self):
+        self.assertFalse(self.bd.configured())
+        self.assertFalse(self.bd.send("Subj", "<p>hi</p>"))
+
+    def test_payload_shape(self):
+        p = self.bd.build_payload("Morning report", "<p>hi</p>")
+        self.assertEqual(p["subject"], "Morning report")
+        self.assertEqual(p["body"], "<p>hi</p>")
+        self.assertEqual(p["email_type"], "public")
+
+    def test_api_failure_is_not_fatal(self):
+        os.environ[self.bd.ENV_KEY] = "k"
+        orig = self.bd._post
+        try:
+            def boom(payload, key):
+                raise OSError("network down")
+            self.bd._post = boom
+            self.assertFalse(self.bd.send("Subj", "<p>hi</p>"))  # no raise
+        finally:
+            self.bd._post = orig
+
+    def test_success(self):
+        os.environ[self.bd.ENV_KEY] = "k"
+        orig = self.bd._post
+        seen = {}
+        try:
+            def ok(payload, key):
+                seen.update(payload=payload, key=key)
+                return 201, "{}"
+            self.bd._post = ok
+            self.assertTrue(self.bd.send("Subj", "<p>hi</p>"))
+            self.assertEqual(seen["key"], "k")
+            self.assertEqual(seen["payload"]["subject"], "Subj")
+        finally:
+            self.bd._post = orig

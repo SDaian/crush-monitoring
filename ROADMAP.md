@@ -31,7 +31,7 @@ without touching a page.
 | Stage | Trigger | Move | Status |
 |---|---|---|---|
 | 0 — Endpoint unset | — | Forms show the "opens soon" pre-launch state. | ✅ live |
-| 1 — Web3Forms (contact) + Buttondown (signup/digest) | Launch | Free tiers, zero backend; contact key + signup endpoint set in Vercel env. | 🟡 contact live (Web3Forms, 2026-07-13); signup provider still pending — design below |
+| 1 — Web3Forms (contact) + Buttondown (signup/digest) | Launch | Free tiers, zero backend; contact key + signup endpoint set in Vercel env. | 🟡 contact live (Web3Forms, 2026-07-13); **send side shipped 2026-07-28** (`congress/buttondown.py`, gated on `BUTTONDOWN_API_KEY`) and `/privacy` now names Buttondown. Remaining: set `PUBLIC_SIGNUP_ENDPOINT` in Vercel to turn capture on. |
 | 2 — Own function + Resend | Volume or customization outgrows the form vendor | A small Vercel serverless function emailing via Resend; same endpoint contract. | if needed |
 | 3 — Supabase | User accounts exist (storage stage 2) | Contact messages and subscriptions become rows with auth context (support threads, per-user preferences). | with follows |
 

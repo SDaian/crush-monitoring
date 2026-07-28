@@ -252,6 +252,15 @@ sites. Full details in `congress/README.md`. Conventions:
   `congress/report_state.json` (generated; do not hand-edit). UTC cron ignores
   DST so the Madrid clock time drifts ±1h; precise timing needs an external
   scheduler hitting the `workflow_dispatch` API.
+  - **Subscribers = `congress/buttondown.py`** (gated + non-fatal). The same
+    `build_report` HTML is broadcast to confirmed subscribers with one API call
+    (`POST /v1/emails`, `BUTTONDOWN_API_KEY` secret); Buttondown owns the list,
+    double opt-in, unsubscribe and deliverability. **Subscriber PII never
+    enters this repo** — we only POST content, never read or store the list.
+    Unset key or any API error → skipped, and the owner's SMTP copy plus the
+    GitHub issue still go out. It sits inside the per-day idempotency gate, so
+    subscribers can't be double-sent. Capture is the FR-1 form contract
+    (`PUBLIC_SIGNUP_ENDPOINT`, set in Vercel, not in code).
   - **Web edition = `/report`** (`landing/src/pages/report.astro`), rendered
     from `landing/src/data/report.json`, which `daily_report.main()` writes from
     the **same payload** `build_report` builds the email from — so the page and
