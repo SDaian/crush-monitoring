@@ -18,32 +18,44 @@
     {
       "ticker": "AAPL",
       "count": 4,
-      "asset": "Apple Inc"
+      "asset": "Apple Inc",
+      "slug": "aapl",
+      "hasPage": true
     },
     {
       "ticker": "GOOGL",
       "count": 3,
-      "asset": "Alphabet Cl A"
+      "asset": "Alphabet Cl A",
+      "slug": "googl",
+      "hasPage": true
     },
     {
       "ticker": "MSFT",
       "count": 3,
-      "asset": "Microsoft Corp"
+      "asset": "Microsoft Corp",
+      "slug": "msft",
+      "hasPage": true
     },
     {
       "ticker": "TSCO",
       "count": 2,
-      "asset": "Tractor Supply Company - Common Stock"
+      "asset": "Tractor Supply Company - Common Stock",
+      "slug": "tsco",
+      "hasPage": false
     },
     {
       "ticker": "CSX",
       "count": 2,
-      "asset": "CSX Corporation - Common Stock"
+      "asset": "CSX Corporation - Common Stock",
+      "slug": "csx",
+      "hasPage": false
     },
     {
       "ticker": "DUK",
       "count": 2,
-      "asset": "Duke Energy Corporation (Holding Company) Common Stock"
+      "asset": "Duke Energy Corporation (Holding Company) Common Stock",
+      "slug": "duk",
+      "hasPage": false
     }
   ],
   "trades": [

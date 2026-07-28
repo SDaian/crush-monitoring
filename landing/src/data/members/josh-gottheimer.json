@@ -18,32 +18,44 @@
     {
       "ticker": "MSFT",
       "count": 31,
-      "asset": "Microsoft Corporation - Common Stock"
+      "asset": "Microsoft Corporation - Common Stock",
+      "slug": "msft",
+      "hasPage": true
     },
     {
       "ticker": "V",
       "count": 18,
-      "asset": "Visa Inc."
+      "asset": "Visa Inc.",
+      "slug": "v",
+      "hasPage": true
     },
     {
       "ticker": "TSLA",
       "count": 13,
-      "asset": "Tesla, Inc. - Common Stock"
+      "asset": "Tesla, Inc. - Common Stock",
+      "slug": "tsla",
+      "hasPage": true
     },
     {
       "ticker": "LLY",
       "count": 13,
-      "asset": "Eli Lilly and Company Common Stock"
+      "asset": "Eli Lilly and Company Common Stock",
+      "slug": "lly",
+      "hasPage": true
     },
     {
       "ticker": "WMT",
       "count": 8,
-      "asset": "Walmart Inc. Common Stock"
+      "asset": "Walmart Inc. Common Stock",
+      "slug": "wmt",
+      "hasPage": false
     },
     {
       "ticker": "NSRGY",
       "count": 7,
-      "asset": "NESTLE S.A S/ADR"
+      "asset": "NESTLE S.A S/ADR",
+      "slug": "nsrgy",
+      "hasPage": false
     }
   ],
   "trades": [

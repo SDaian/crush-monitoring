@@ -383,10 +383,14 @@ def _cmd_landing(args: argparse.Namespace) -> int:
     rows, stats = landing_data.write_files(trades, Path(args.output), today)
     members = landing_data.write_member_files(
         trades, holdings, Path(args.output), today_iso=today.isoformat())
+    # Ticker pages: the most-traded symbols, picked from the data each run
+    # (see landing_data.select_ticker_pages) so no thin page is ever emitted.
+    tickers = landing_data.write_ticker_files(trades, Path(args.output))
     print(
         f"landing data: {rows} feed rows; {stats['tradesThisYear']} trades "
         f"in {stats['year']}, est ${stats['estVolumeThisYearUsd']:,} vol, "
-        f"{stats['pctFiledLate']}% late; {len(members)} member pages → {args.output}"
+        f"{stats['pctFiledLate']}% late; {len(members)} member pages, "
+        f"{len(tickers)} ticker pages → {args.output}"
     )
     return 0
 
