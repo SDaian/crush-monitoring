@@ -7,16 +7,19 @@ import Header from "../../components/Header.astro";
 import Footer from "../../components/Footer.astro";
 import Seo from "../../components/Seo.astro";
 import index from "../../data/tickers/_index.json";
+import { plural, seoDescription } from "../../lib/seo";
 
 const tickers = index.tickers;
 const totalTrades = tickers.reduce((n: number, t: any) => n + t.trades, 0);
 
 const title =
   "What stocks does Congress trade? — the most-traded tickers · Capitol Ledger";
-const description =
-  "The stocks members of Congress trade most, ranked by disclosed trades. " +
-  "Per-ticker pages show who bought, who sold, the amount brackets and how " +
-  "late each filing arrived — from official STOCK Act records.";
+const description = seoDescription(
+  `The ${plural(tickers.length, "stock")} members of Congress trade most, ` +
+    `ranked across ${plural(totalTrades, "disclosed trade")} — who bought, ` +
+    "who sold, how much.",
+  "One page per ticker.",
+);
 
 const schema = [
   {

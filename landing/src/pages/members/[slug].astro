@@ -9,6 +9,7 @@ import Header from "../../components/Header.astro";
 import Footer from "../../components/Footer.astro";
 import Seo from "../../components/Seo.astro";
 import CountUp from "../../components/CountUp.astro";
+import { plural, seoDescription } from "../../lib/seo";
 
 export async function getStaticPaths() {
   const all = import.meta.glob("../../data/members/*.json", { eager: true });
@@ -78,10 +79,18 @@ const STAT_CARDS = [
 ];
 
 const title = `${m.name} stock trades — every disclosed trade · Capitol Ledger`;
-const description =
-  `Every stock trade ${m.name} (${partyName}, ${m.state}) has disclosed ` +
-  `under the STOCK Act: ticker, amount bracket, and how late each filing ` +
-  `arrived. Straight from official records, updated daily.`;
+// Lead with the name and the counts; the party/state gloss is the droppable
+// tail, since a long name would otherwise push the numbers out of view.
+// Executive-branch filers disclose managed-account bonds that carry no ticker,
+// so the spread clause has to disappear rather than read "across 0 tickers".
+const hasTickers = s.distinctTickers > 0;
+const description = seoDescription(
+  `${m.name} has disclosed ` +
+    plural(s.trades, hasTickers ? "stock trade" : "trade") +
+    (hasTickers ? ` across ${plural(s.distinctTickers, "ticker")}` : "") +
+    " — the amounts, the dates and how late each filing arrived.",
+  `${partyName}, ${m.state}.`,
+);
 
 const schema = [
   {

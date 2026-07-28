@@ -6,6 +6,7 @@ import Header from "../../components/Header.astro";
 import Footer from "../../components/Footer.astro";
 import Seo from "../../components/Seo.astro";
 import index from "../../data/members/_index.json";
+import { plural, seoDescription } from "../../lib/seo";
 
 const members = index.members;
 const partyName: Record<string, string> = {
@@ -15,10 +16,11 @@ const partyName: Record<string, string> = {
 };
 
 const title = "Featured filers — politician stock-trade pages · Capitol Ledger";
-const description =
-  "Per-member pages tracking the stock trades of the most-watched filers in " +
-  "Congress and the White House — every disclosed trade, holdings estimate " +
-  "and filing delay, from official records.";
+const description = seoDescription(
+  `${plural(members.length, "featured filer")}, one page each: every stock ` +
+    "trade they disclosed, their estimated holdings and their filing delays.",
+  "From official records.",
+);
 
 const schema = [
   {

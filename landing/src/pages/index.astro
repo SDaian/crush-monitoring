@@ -13,6 +13,7 @@ import CountUp from "../components/CountUp.astro";
 import Timeline from "../components/Timeline.astro";
 import feed from "../data/disclosures.json";
 import stats from "../data/stats.json";
+import { seoDescription } from "../lib/seo";
 
 const disclosures = feed.disclosures;
 const lateCount = disclosures.filter((d) => d.filedDaysLate > 0).length;
@@ -99,10 +100,11 @@ const HOW_STEPS = [
 ];
 
 const title = "Capitol Ledger — Politician Stock Trades, Tracked";
-const description =
-  "Every stock trade a politician disclosed, from Congress to the White " +
-  "House — who traded, what, how much, and how late they filed it. " +
-  "Straight from official filings, in one daily email.";
+const description = seoDescription(
+  `${fmtTrades} stock trades disclosed by politicians in ${stats.year} — who ` +
+    "traded, what, how much, and how late they filed.",
+  "Free daily email.",
+);
 ---
 
 <html lang="en">

@@ -45,7 +45,13 @@ rules, datelines, monospace for data. Every visual choice should be defensible a
 - **Wordmark:** `Capitol Ledger`, set in the display sans at heavy weight (900),
   **uppercase**, tight negative tracking. **"Ledger" is stamp red; "Capitol" is
   ink.** This is the primary identity mark; there is no separate logotype.
-- **Favicon / monogram:** `CL` in paper on a stamp-red field.
+- **Favicon / monogram:** `CL` in paper on a stamp-red field, drawn as **blocky
+  geometric bars** — never as `<text>`. A rendered typeface depends on the font
+  being installed and turns to mush at 16px; the bars stay legible at favicon
+  size, which is the only size that matters here. The whole icon set (SVG,
+  multi-size `.ico`, 96px PNG, 180px apple-touch) is **generated** from one
+  definition by `landing/scripts/make-icons.py` — edit the bars there and re-run
+  it, never hand-edit `landing/public/favicon.*`.
 - **Clear space:** keep at least the cap-height of the mark clear on all sides.
 - **Don'ts:** don't recolor "Capitol" red or "Ledger" ink; don't set it in the
   mono face; don't add a tagline lockup; don't apply effects (shadow, gradient,
