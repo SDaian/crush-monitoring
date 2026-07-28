@@ -156,7 +156,7 @@ played, update **every** relevant place:
 - After editing the inline script, syntax-check it (extract `<script>` →
   `node --check`) before committing.
 
-## Congress trades tracker (`congress/`, `docs/trades.html`)
+## Congress trades tracker (`congress/`, `/tracker` on the landing site)
 
 A separate Pages section tracking STOCK Act trade disclosures, sourced only
 from the official Senate eFD, House Clerk, and OGE (executive-branch 278-T)
@@ -278,8 +278,22 @@ sites. Full details in `congress/README.md`. Conventions:
 - **Run both test suites before committing:**
   `python3 -m unittest discover -s tests/predictor -p 'test_*.py'` and
   `python3 -m unittest discover -s tests/congress -p 'test_*.py'`.
-- The `node --check` rule for inline scripts applies to `docs/trades.html`
-  exactly as it does to `docs/index.html`.
+- **The tracker is now a native page** at `landing/src/pages/tracker.astro`
+  (`/tracker`), rebuilt in the Capitol Ledger design system rather than the
+  standalone `docs/trades.html`. It is deliberately **trimmed to two tabs** —
+  *All trades* (filter 12k+ rows) and *Featured stocks* (indicator scorecard) —
+  because `/tickers/<symbol>` and `/members/<slug>` now cover ticker focus and
+  holdings better, as static indexable pages; the tab bar links out to them.
+  Its data is fetched from `/data/*.json`, copied out of `docs/data` at build
+  time by `landing/scripts/copy-tracker-data.mjs` (npm `prebuild`), so the
+  6 MB trades JSON stays committed **once**, in `docs/data`; the copies are
+  gitignored. Because the page injects markup at runtime, its CSS must stay
+  `<style is:global>` scoped under `.tracker` — Astro's scoped styles only tag
+  build-time elements, so scoping it would silently unstyle every row and card.
+  `docs/trades.html` still serves the old standalone build on GitHub Pages and
+  is retired only once the apex domain resolves.
+- The `node --check` rule for inline scripts applies to the tracker's inline
+  script (extract it from `tracker.astro`) and to `docs/index.html`.
 - **Honest labelling:** the page must keep the 30–45-day legal lag, the
   bracket-only amounts, and the skipped paper filings visible. Never present
   the tracker as real-time or as investment advice.

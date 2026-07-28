@@ -93,6 +93,16 @@ In rough priority order; each item states its blocking dependency.
   nav, the footer sitemap, and the footer's named-member copy. Scaling this to
   *every* member is what fires storage stage 1 (see the storage table); the
   static-JSON approach is a conscious deferral, fine at 5 members.
+- **Tracker on the apex domain** — ✅ shipped 2026-07-24. The standalone
+  GitHub Pages tracker was rebuilt as a native `/tracker` page in the landing
+  app so inbound links, brand and analytics all land on one domain instead of
+  splitting between `github.io` and the site. Trimmed to the two tabs a
+  client-side app is actually needed for (filtering the full record; the daily
+  indicator scorecard) — ticker focus and holdings are now static pages.
+  **Remaining step, gated on DNS:** once `capitolledger.io` resolves, replace
+  `docs/trades.html` with a canonical + meta-refresh stub pointing at
+  `/tracker` (GitHub Pages cannot serve real 301s), and set `SITE_URL` so the
+  morning email links to the native tracker.
 - **Ticker pages** — ✅ shipped 2026-07-24 (`landing_data.ticker_payload` /
   `write_ticker_files` → `landing/src/data/tickers/*.json`; rendered by
   `landing/src/pages/tickers/[slug].astro` + a `/tickers` index). The organic
