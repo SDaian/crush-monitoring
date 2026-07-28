@@ -2,6 +2,24 @@
   "_comment": "Generated from real official disclosures by congress/landing_data.py (daily Action). Do not edit by hand. 'filedDaysLate' counts days past the STOCK Act's 45-day statutory maximum; 0 = on time.",
   "disclosures": [
     {
+      "member": "S. Liccardo",
+      "chamber": "House",
+      "district": "CA-16",
+      "ticker": "NVDA",
+      "side": "SELL",
+      "amountBucket": "$15K – $50K",
+      "filedDaysLate": 0
+    },
+    {
+      "member": "J. Moran",
+      "chamber": "Senate",
+      "district": "KS",
+      "ticker": "BRK.B",
+      "side": "BUY",
+      "amountBucket": "$15K – $50K",
+      "filedDaysLate": 0
+    },
+    {
       "member": "A. Armstrong",
       "chamber": "Senate",
       "district": "OK",
@@ -26,24 +44,6 @@
       "ticker": "LLY",
       "side": "BUY",
       "amountBucket": "$50K – $100K",
-      "filedDaysLate": 0
-    },
-    {
-      "member": "G. Stanton",
-      "chamber": "House",
-      "district": "AZ-4",
-      "ticker": "TCNNF",
-      "side": "SELL",
-      "amountBucket": "$100K – $250K",
-      "filedDaysLate": 0
-    },
-    {
-      "member": "N. Pelosi",
-      "chamber": "House",
-      "district": "CA-11",
-      "ticker": "INTC",
-      "side": "BUY",
-      "amountBucket": "$1M – $5M",
       "filedDaysLate": 0
     }
   ]
