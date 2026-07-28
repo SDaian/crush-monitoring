@@ -445,14 +445,30 @@ const description =
         button.disabled = true;
         const label = button.textContent;
         button.textContent = "Sending…";
-        try {
-          const res = await fetch(endpoint, {
+        const post = (mode?: RequestMode) =>
+          fetch(endpoint, {
             method: "POST",
+            ...(mode ? { mode } : {}),
             headers: { "Content-Type": "application/x-www-form-urlencoded" },
             body: new URLSearchParams({ email: value }),
           });
-          if (!res.ok) throw new Error(String(res.status));
-          say("You're on the list — one email per day, always.", false);
+        try {
+          try {
+            const res = await post();
+            if (!res.ok) throw new Error(String(res.status));
+          } catch (err) {
+            // Some subscribe endpoints (Buttondown's embed-subscribe among
+            // them) are built for a native form POST and send no CORS headers,
+            // so the browser delivers the request but blocks us reading the
+            // reply and fetch rejects with a TypeError. Re-send opaquely and
+            // trust the provider's confirmation email as the real receipt.
+            // Subscribe endpoints are idempotent, so the repeat is harmless.
+            if (!(err instanceof TypeError)) throw err;
+            await post("no-cors");
+          }
+          // Double opt-in: they are NOT subscribed until they click the link
+          // in the confirmation email, so don't claim they are.
+          say("Almost there — check your inbox to confirm.", false);
           form.reset();
         } catch {
           say("Something went wrong — try again.", true);
