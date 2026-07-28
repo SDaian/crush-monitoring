@@ -105,6 +105,11 @@ In rough priority order; each item states its blocking dependency.
   signals), the World Cup page's cross-link points at the new URL, and the
   morning email links to `capitolledger.io/tracker`. `docs/data/*.json` stays
   in git as the single source the Vercel build copies from.
+- **Morning report web edition (`/report`)** — ✅ shipped 2026-07-28. Closes
+  the email→app loop: the email's "view in browser" and its truncation note
+  both land here, and the page carries every disclosure the email had to cut.
+  Renders `landing/src/data/report.json`, written by `daily_report` from the
+  same payload as the email.
 - **Ticker pages** — ✅ shipped 2026-07-24 (`landing_data.ticker_payload` /
   `write_ticker_files` → `landing/src/data/tickers/*.json`; rendered by
   `landing/src/pages/tickers/[slug].astro` + a `/tickers` index). The organic

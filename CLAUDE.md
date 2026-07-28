@@ -252,6 +252,17 @@ sites. Full details in `congress/README.md`. Conventions:
   `congress/report_state.json` (generated; do not hand-edit). UTC cron ignores
   DST so the Madrid clock time drifts ±1h; precise timing needs an external
   scheduler hitting the `workflow_dispatch` API.
+  - **Web edition = `/report`** (`landing/src/pages/report.astro`), rendered
+    from `landing/src/data/report.json`, which `daily_report.main()` writes from
+    the **same payload** `build_report` builds the email from — so the page and
+    the email can never drift. One always-current URL, not a dated archive
+    (nobody searches "morning report July 24", and 365 near-duplicate pages a
+    year is an SEO liability). The one deliberate difference: the email caps
+    disclosures at `MAX_DISCLOSURES` because clients clip long messages, while
+    the page lists **every** one — that is what the email's "…and N more" and
+    its "view in browser" link point at. If you add a path that `main()` writes,
+    **stub it in `TestMainDelivery`** — the suite calls `main()` for real and
+    will otherwise overwrite the committed file.
   - **HTML email = `congress/email_template.py`** (pure, offline-tested). It is a
     hand-authored, **bulletproof** layout — table-based, inline styles, a fixed
     ~600px centered "paper" card, web-safe fonts (mono for data), hidden
