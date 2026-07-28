@@ -6,14 +6,14 @@
 // `active` marks the current page; the brand links home (URL decides whether
 // this IS home, so off-nav pages like /privacy still link back).
 interface Props {
-  active?: "how" | "late" | "members" | "tickers";
+  active?: "how" | "late" | "members" | "tickers" | "tracker";
 }
 const { active } = Astro.props;
 const home = Astro.url.pathname === "/";
 
 // One source for both the inline (desktop) nav and the mobile menu.
 const NAV = [
-  { href: "/#feed", label: "Live feed", key: null },
+  { href: "/tracker", label: "Live feed", key: "tracker" },
   { href: "/members", label: "Members", key: "members" },
   { href: "/tickers", label: "Stocks", key: "tickers" },
   { href: "/late", label: "Late filers", key: "late" },
