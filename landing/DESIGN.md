@@ -256,7 +256,9 @@ shared Astro components in `src/components/`.
   **never an on-arrival popup**: it waits for a read signal (≥60% scrolled) or
   desktop exit intent, behind a several-second floor. Shown once, dismissal
   remembered ~30 days in `localStorage`, retired for good on subscribe, and
-  suppressed entirely wherever a form is already in view. Google's
+  **held while any signup form is on screen** — it appears when they scroll
+  off it, never over it. The read signal latches once earned, so scrolling
+  back up doesn't cancel it. Google's
   intrusive-interstitial policy targets the on-load version on mobile, and it is
   also the version people bounce from. Centering a top-layer dialog means
   **keeping the UA's `position: fixed`** (overriding it with `relative` drops the

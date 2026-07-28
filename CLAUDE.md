@@ -403,7 +403,12 @@ Conventions:
   popup** (Google's intrusive-interstitial policy, and it's what makes people
   bounce): 60% scroll or desktop exit intent, behind a time floor, dismissal
   remembered in `localStorage`, retired for good on subscribe, and not rendered
-  at all when `PUBLIC_SIGNUP_ENDPOINT` is unset. **Copy constraint: these
+  at all when `PUBLIC_SIGNUP_ENDPOINT` is unset. It runs on the home page too,
+  held back by a **synchronous** geometry check — never open a dialog asking
+  for an email over a form already on screen. That check must not be an
+  `IntersectionObserver`: its callbacks land at end-of-frame, so a fast scroll
+  or an `#anchor` jump onto the form fires the scroll handler first and opens
+  the modal on top of it. **Copy constraint: these
   surfaces may not promise a per-ticker or per-member alert** — follows don't
   exist yet (`ROADMAP.md`). Promise the daily email, and lead with the page's own
   real number ("171 disclosed so far").

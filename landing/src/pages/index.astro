@@ -12,6 +12,7 @@ import Seo from "../components/Seo.astro";
 import CountUp from "../components/CountUp.astro";
 import Timeline from "../components/Timeline.astro";
 import SignupForm from "../components/SignupForm.astro";
+import SignupModal from "../components/SignupModal.astro";
 import feed from "../data/disclosures.json";
 import stats from "../data/stats.json";
 import { seoDescription } from "../lib/seo";
@@ -382,6 +383,8 @@ const description = seoDescription(
     </section>
 
     <Footer />
+
+    <SignupModal title="Don't go digging through PDFs." />
 
     <CountUp />
 
