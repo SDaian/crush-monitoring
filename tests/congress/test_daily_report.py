@@ -205,12 +205,14 @@ class TestEmail(unittest.TestCase):
             def send_message(s, msg):
                 self.sent.append(msg)
         daily_report.smtplib.SMTP = FakeSMTP
-        for k in ("SMTP_USER", "SMTP_PASS", "SMTP_HOST", "SMTP_PORT", "REPORT_EMAIL_TO"):
+        for k in ("SMTP_USER", "SMTP_PASS", "SMTP_HOST", "SMTP_PORT",
+                  "REPORT_EMAIL_TO", "REPORT_EMAIL_FROM"):
             os.environ.pop(k, None)
 
     def tearDown(self):
         daily_report.smtplib.SMTP = self._smtp
-        for k in ("SMTP_USER", "SMTP_PASS", "SMTP_HOST", "SMTP_PORT", "REPORT_EMAIL_TO"):
+        for k in ("SMTP_USER", "SMTP_PASS", "SMTP_HOST", "SMTP_PORT",
+                  "REPORT_EMAIL_TO", "REPORT_EMAIL_FROM"):
             os.environ.pop(k, None)
 
     def test_no_creds_skips(self):
@@ -230,6 +232,18 @@ class TestEmail(unittest.TestCase):
         # multipart: has an HTML alternative
         self.assertTrue(any(p.get_content_type() == "text/html"
                             for p in msg.walk()))
+
+    def test_from_defaults_to_login_but_can_be_overridden(self):
+        os.environ["SMTP_USER"] = "me@gmail.com"
+        os.environ["SMTP_PASS"] = "pw"
+        daily_report.send_email("s", "t", "<p>h</p>")
+        self.assertEqual(self.sent[0]["From"], "me@gmail.com")
+        os.environ["REPORT_EMAIL_FROM"] = "daily@capitolledger.io"
+        try:
+            daily_report.send_email("s", "t", "<p>h</p>")
+            self.assertEqual(self.sent[1]["From"], "daily@capitolledger.io")
+        finally:
+            os.environ.pop("REPORT_EMAIL_FROM", None)
 
     def test_defaults_recipient_to_user(self):
         os.environ["SMTP_USER"] = "solo@gmail.com"

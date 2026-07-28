@@ -144,6 +144,10 @@ jobs:
           SMTP_HOST: ${{ vars.SMTP_HOST }}
           SMTP_PORT: ${{ vars.SMTP_PORT }}
           REPORT_EMAIL_TO: ${{ vars.REPORT_EMAIL_TO }}
+          # Send as the brand (e.g. daily@capitolledger.io) while
+          # authenticating as SMTP_USER. Must be an address the SMTP
+          # host may send for, or SPF/DKIM alignment fails.
+          REPORT_EMAIL_FROM: ${{ vars.REPORT_EMAIL_FROM }}
           # Vercel Web Analytics (optional) — adds a site-traffic block to the
           # report. Set VERCEL_TOKEN (secret) + VERCEL_PROJECT_ID (variable);
           # VERCEL_TEAM_ID only if the project lives under a team. Unset → the
