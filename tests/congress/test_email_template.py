@@ -75,6 +75,37 @@ class TestRenderHtml(unittest.TestCase):
         self.assertIn("&lt;script&gt;", html)
 
 
+class TestEmbedVariant(unittest.TestCase):
+    """What a newsletter provider receives differs deliberately."""
+
+    def test_keeps_our_masthead(self):
+        # Our wordmark is the identity — it stays in the broadcast. The
+        # provider's own header is what gets turned off, in its template.
+        embed = _render(standalone=False)
+        self.assertIn("Capitol&nbsp;Ledger", embed)
+        self.assertIn("Friday, July 24, 2026", embed)
+
+    def test_drops_the_redundant_right_label(self):
+        # The provider's subject already says "Morning report", and that cell
+        # is what wrapped the wordmark onto two lines on a phone — an embed has
+        # no <head> for the mobile media query to live in.
+        self.assertIn("Morning report", _render())
+        self.assertNotIn("Morning report", _render(standalone=False))
+
+    def test_keeps_the_intro_and_content(self):
+        # The disclaimer, the view-in-browser link and every section stay.
+        embed = _render(standalone=False, report_url="https://x/report")
+        self.assertIn("in your browser", embed)
+        self.assertIn("Not advice.", embed)       # intro disclaimer
+        self.assertIn("Strong Buy", embed)        # scorecard survives
+        self.assertIn("Nancy Pelosi", embed)
+
+    def test_no_page_chrome(self):
+        embed = _render(standalone=False)
+        for chrome in ("<!DOCTYPE", "</html>", 'width="600"', "display:none;max-height"):
+            self.assertNotIn(chrome, embed)
+
+
 class TestTrafficEmail(unittest.TestCase):
     def test_traffic_email_renders(self):
         html = et.render_traffic_html(

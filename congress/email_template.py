@@ -60,11 +60,18 @@ def _f(size: str, lh: str, fam: str, weight: int | None = None) -> str:
     return f"font-family:{fam};font-size:{size};line-height:{lh};{w}"
 
 
-def _section(kicker: str, title: str, inner: str) -> str:
+# Horizontal padding inside the card. The standalone document can shrink this
+# with a media query; an embed cannot (no <head>), so it ships tighter to begin
+# with — 6 scorecard columns simply do not fit 390px at 32px padding.
+PAD = 32
+PAD_EMBED = 16
+
+
+def _section(kicker: str, title: str, inner: str, pad: int = PAD) -> str:
     """An editorial section: a mono uppercase kicker + bold title over a 2px
     rule, then the section body. Table-wrapped so Outlook keeps the spacing."""
     return (
-        "<tr><td style='padding:26px 32px 0 32px'>"
+        f"<tr><td style='padding:26px {pad}px 0 {pad}px'>"
         f"<div style='{_f('11px', '1.4', MONO, 700)}letter-spacing:1.5px;"
         f"text-transform:uppercase;color:{STAMP}'>{kicker}</div>"
         f"<div style='{_f('19px', '1.3', SANS, 700)}color:{INK};padding:2px 0 8px'>"
@@ -72,7 +79,7 @@ def _section(kicker: str, title: str, inner: str) -> str:
         f"<div style='border-top:2px solid {INK};font-size:1px;line-height:1px'>"
         "&nbsp;</div>"
         "</td></tr>"
-        f"<tr><td style='padding:12px 32px 0 32px'>{inner}</td></tr>"
+        f"<tr><td style='padding:12px {pad}px 0 {pad}px'>{inner}</td></tr>"
     )
 
 
@@ -87,7 +94,7 @@ def scorecard_table(scorecard: list[dict]) -> str:
     heads = ("Ticker", "Price", "1d", "RSI", "Trend", "Read")
     aligns = ("left", "right", "right", "right", "left", "right")
     head_html = "".join(
-        f"<th style='padding:6px 8px;text-align:{a};{_f('11px', '1.3', MONO, 700)}"
+        f"<th style='padding:6px 4px;text-align:{a};{_f('11px', '1.3', MONO, 700)}"
         f"letter-spacing:.5px;text-transform:uppercase;color:{INK_SOFT};"
         f"border-bottom:2px solid {RULE}'>{h}</th>"
         for h, a in zip(heads, aligns))
@@ -107,17 +114,17 @@ def scorecard_table(scorecard: list[dict]) -> str:
                    f"text-decoration:none;border-bottom:1px solid {RULE}'>"
                    f"{sym}</a>")
         cells = (
-            f"<td style='padding:7px 8px;{_f('13px', '1.3', MONO, 700)}color:{INK}'>"
+            f"<td style='padding:7px 4px;{_f('13px', '1.3', MONO, 700)}color:{INK}'>"
             f"{sym}</td>"
-            f"<td style='padding:7px 8px;text-align:right;{_f('13px', '1.3', MONO)}"
+            f"<td style='padding:7px 4px;text-align:right;{_f('13px', '1.3', MONO)}"
             f"color:{INK}'>${_esc(r['price'])}</td>"
-            f"<td style='padding:7px 8px;text-align:right;{_f('13px', '1.3', MONO)}'>"
+            f"<td style='padding:7px 4px;text-align:right;{_f('13px', '1.3', MONO)}'>"
             f"{chg}</td>"
-            f"<td style='padding:7px 8px;text-align:right;{_f('13px', '1.3', MONO)}"
+            f"<td style='padding:7px 4px;text-align:right;{_f('13px', '1.3', MONO)}"
             f"color:{INK}'>{_esc(r['rsi'])}</td>"
-            f"<td style='padding:7px 8px;{_f('13px', '1.3', MONO)}color:{INK_SOFT}'>"
+            f"<td style='padding:7px 4px;{_f('13px', '1.3', MONO)}color:{INK_SOFT}'>"
             f"{_esc(r['trend'])}</td>"
-            f"<td style='padding:7px 8px;text-align:right;{_f('12px', '1.3', SANS, 700)}'>"
+            f"<td style='padding:7px 4px;text-align:right;{_f('12px', '1.3', SANS, 700)}'>"
             f"{read}</td>")
         body.append(f"<tr style='background:{bg}'>{cells}</tr>")
     return (
@@ -241,7 +248,7 @@ def traffic_block(traffic: dict, member_names: dict | None = None) -> str:
 
 
 def _footer(tracker_url: str, subscribe_note: str,
-            unsubscribe: bool = True) -> str:
+            unsubscribe: bool = True, pad: int = PAD) -> str:
     """Shared footer: tracker link, provenance/disclaimer, unsubscribe line.
 
     ``unsubscribe=False`` drops our line for broadcasts through a provider that
@@ -249,7 +256,7 @@ def _footer(tracker_url: str, subscribe_note: str,
     in the owner's own copy, but a dead unsubscribe link in a mailing-list
     send is both a CAN-SPAM violation and a duplicate of the provider's."""
     return (
-        f"<tr><td class='cl-pad' style='padding:28px 32px 30px 32px;'>"
+        f"<tr><td class='cl-pad' style='padding:28px {pad}px 30px {pad}px;'>"
         f"<div style='border-top:1px solid {RULE};font-size:1px;line-height:1px;'>"
         "&nbsp;</div>"
         f"<p style='margin:16px 0 0;{_f('13px', '1.5', SANS)}color:{INK};'>"
@@ -266,17 +273,26 @@ def _footer(tracker_url: str, subscribe_note: str,
 
 def _card_rows(*, right_label: str, date_label: str, intro_html: str,
                body_rows: str, tracker_url: str, subscribe_note: str,
-               unsubscribe: bool) -> str:
-    """The card's table rows: masthead, sections, footer. No outer chrome."""
+               unsubscribe: bool, pad: int = PAD) -> str:
+    """The card's table rows: masthead, sections, footer. No outer chrome.
+
+    An empty ``right_label`` renders the wordmark across the full row instead
+    of beside a label. Newsletter providers print their own subject above the
+    content, so repeating "MORNING REPORT" there is redundant — and that cell
+    is what squeezed "CAPITOL LEDGER" onto two lines on a phone, since an
+    embed has no <head> for the mobile media query to live in."""
+    label_cell = (
+        f'<td align="right" style="padding:14px 0 0;{_f("11px", "1.4", MONO, 700)}'
+        f'letter-spacing:1px;text-transform:uppercase;color:{STAMP};'
+        f'white-space:nowrap;">{right_label}</td>' if right_label else "")
     return f"""\
   <!-- Masthead -->
-  <tr><td class="cl-pad" style="padding:30px 32px 22px 32px;">
+  <tr><td class="cl-pad" style="padding:30px {pad}px 22px {pad}px;">
     <div style="border-top:3px double {INK};font-size:1px;line-height:1px;">&nbsp;</div>
     <table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr>
-      <td style="padding:14px 0 0;{_f('22px', '1', SANS, 700)}letter-spacing:3px;text-transform:uppercase;color:{INK};">
+      <td class="cl-mark" style="padding:14px 0 0;{_f('21px', '1.15', SANS, 700)}letter-spacing:2px;text-transform:uppercase;color:{INK};">
         Capitol&nbsp;Ledger</td>
-      <td align="right" style="padding:14px 0 0;{_f('11px', '1.4', MONO, 700)}letter-spacing:1px;text-transform:uppercase;color:{STAMP};white-space:nowrap;">
-        {right_label}</td>
+      {label_cell}
     </tr></table>
     <div style="margin-top:6px;{_f('12px', '1.4', MONO)}letter-spacing:.5px;color:{INK_SOFT};">
       {_esc(date_label)}</div>
@@ -286,7 +302,7 @@ def _card_rows(*, right_label: str, date_label: str, intro_html: str,
 
   {body_rows}
 
-  {_footer(tracker_url, subscribe_note, unsubscribe)}
+  {_footer(tracker_url, subscribe_note, unsubscribe, pad)}
 """
 
 
@@ -305,10 +321,12 @@ def _document(*, right_label: str, date_label: str, intro_html: str,
     preview text — so repeating ours nests a bordered box inside their box,
     doubles the padding and squeezes the content. Fill their container instead
     of building a second one inside it."""
-    rows = _card_rows(right_label=right_label, date_label=date_label,
+    rows = _card_rows(right_label=right_label if standalone else "",
+                      date_label=date_label,
                       intro_html=intro_html, body_rows=body_rows,
                       tracker_url=tracker_url, subscribe_note=subscribe_note,
-                      unsubscribe=standalone)
+                      unsubscribe=standalone,
+                      pad=PAD if standalone else PAD_EMBED)
     if not standalone:
         return (
             "<table role=\"presentation\" width=\"100%\" cellpadding=\"0\" "
@@ -329,6 +347,8 @@ def _document(*, right_label: str, date_label: str, intro_html: str,
      auto-inversion (color-scheme:light) and keep one predictable theme. */
   @media (max-width:620px){{
     .cl-pad{{padding-left:18px!important;padding-right:18px!important}}
+    /* 22px + 3px tracking wraps "CAPITOL LEDGER" on a phone. */
+    .cl-mark{{font-size:17px!important;letter-spacing:1.5px!important}}
   }}
 </style>
 </head>
@@ -352,16 +372,17 @@ def render_html(*, date_label: str, disclaimer: str, scorecard: list[dict],
                 tracker_url: str, preheader: str, report_url: str = "",
                 standalone: bool = True) -> str:
     """The daily trade/scorecard digest email (traffic is a separate email)."""
+    pad = PAD if standalone else PAD_EMBED
     body_rows = "".join([
         _section("Featured stocks", "Technical read",
-                 scorecard_table(scorecard)),
+                 scorecard_table(scorecard), pad),
         _section("Overnight", "Signals &amp; rating changes",
-                 signals_block(signals, flips)),
+                 signals_block(signals, flips), pad),
         _section("Congress", f"New disclosures "
                  f"<span style='font-weight:400;font-size:13px;color:{INK_SOFT}'>"
                  f"(filed since {_esc(cutoff)})</span>",
                  disclosures_block(disclosures, extra_disclosures,
-                                   report_url)),
+                                   report_url), pad),
     ])
     disc_txt = _esc(disclaimer.replace("**", ""))
     browser = (f"<p style='margin:10px 0 0;{_f('11px', '1.5', MONO)}'>"
