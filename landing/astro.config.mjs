@@ -39,7 +39,19 @@ const fontDisplayOptional = {
 export default defineConfig({
   output: "static",
   site: "https://capitolledger.io",
-  integrations: [sitemap()],
+  integrations: [
+    // Strip the trailing slash so sitemap entries match the canonical URLs
+    // Seo.astro emits (and the URLs used in the JSON-LD). A sitemap that
+    // advertises /tickers/nvda/ while the page canonicalises to
+    // /tickers/nvda still resolves, but it fills Search Console's Coverage
+    // report with "alternate page with proper canonical tag" noise.
+    sitemap({
+      serialize: (item) => ({
+        ...item,
+        url: item.url.replace(/(?<!\/\/)\/$/, ""),
+      }),
+    }),
+  ],
   vite: {
     plugins: [
       tailwindcss(),
