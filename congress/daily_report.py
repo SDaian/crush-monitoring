@@ -79,17 +79,23 @@ def _pct(x) -> str:
 TRACKER_URL = "https://SDaian.github.io/crush-monitoring/trades.html"
 # Public site — the email links back into it so readers land on the ticker
 # pages (and so Vercel analytics can attribute the email as a traffic source).
-SITE_URL = "https://capitolledger.io"
+# Overridable via the SITE_URL var: the apex domain is the intended home, but
+# until it is registered and pointed at Vercel the deployment lives on a
+# *.vercel.app URL, and linking the email at a domain that does not resolve
+# would ship dead links every morning. Set SITE_URL to the live deployment.
+SITE_URL = (os.environ.get("SITE_URL", "").strip().rstrip("/")
+            or "https://capitolledger.io")
 EMAIL_UTM = "utm_source=email&utm_medium=report&utm_campaign=morning"
 # Symbols that have a /tickers/<slug> page, written by landing_data.
 TICKER_INDEX_JSON = (pipeline.REPO_ROOT / "landing" / "src" / "data"
                      / "tickers" / "_index.json")
 
 
-def ticker_links(ticker_pages: dict | None) -> dict:
+def ticker_links(ticker_pages: dict | None, site: str | None = None) -> dict:
     """{SYMBOL: absolute UTM-tagged page URL} for the tickers that have a page."""
+    base = (site or SITE_URL).rstrip("/")
     return {
-        t["ticker"]: f"{SITE_URL}/tickers/{t['slug']}?{EMAIL_UTM}"
+        t["ticker"]: f"{base}/tickers/{t['slug']}?{EMAIL_UTM}"
         for t in (ticker_pages or {}).get("tickers", [])
         if t.get("ticker") and t.get("slug")
     }
