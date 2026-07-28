@@ -1,0 +1,180 @@
+---
+// The one email-capture form, in three dresses. It used to live only in the
+// hero on the home page — which meant an organic visitor landing on
+// /tickers/nvda from search had no way to subscribe without navigating away
+// from what they came for. Every page now ends in a real one.
+//
+// FR-1 contract (see landing/README.md and DESIGN.md §8): POST form-encoded
+// `email=` to PUBLIC_SIGNUP_ENDPOINT, inline role="status" feedback, no
+// reload. Unset endpoint → an honest "opens soon" instead of a silent failure.
+// Nothing else goes in the body: the no-cors retry below makes the response
+// opaque, so a field the provider rejected would fail invisibly.
+import { SIGNUP_ENDPOINT } from "../lib/signup";
+
+interface Props {
+  /**
+   * hero  — the home-page headline form (wide, on paper)
+   * band  — the full-width CTA band that closes every content page (centered)
+   * modal — inside the read-triggered dialog (stacked, full width)
+   */
+  variant?: "hero" | "band" | "modal";
+  /** Submit button label. */
+  cta?: string;
+  /** Trust line under the form. Pass "" to omit it. */
+  note?: string;
+  /** DOM id. The home page passes "join" so /#join keeps resolving. */
+  id?: string;
+}
+
+const {
+  variant = "band",
+  cta = "Get trade alerts",
+  note = "Free while in beta · one email per day. No spam, ever.",
+  id,
+} = Astro.props;
+
+// Unique per instance so <label for> stays correct when a page renders more
+// than one form. Astro frontmatter runs at build time, so a module counter is
+// deterministic per page render.
+const uid = `signup-${(globalThis as any).__signupSeq =
+  (((globalThis as any).__signupSeq as number) ?? 0) + 1}`;
+const formId = id ?? uid;
+const inputId = `${uid}-email`;
+
+const shell =
+  variant === "hero"
+    ? "mt-7 max-w-[27.5rem]"
+    : variant === "band"
+      ? "mx-auto mt-7 max-w-[30rem] text-left"
+      : "mt-5 w-full";
+---
+
+<form
+  id={formId}
+  class={`flex flex-wrap max-[840px]:flex-col ${shell}`}
+  data-signup={variant}
+  data-endpoint={SIGNUP_ENDPOINT}
+  novalidate
+>
+  <label class="sr-only" for={inputId}>Email address</label>
+  <input
+    class="email-input !min-w-0 flex-1 border-r-0 max-[840px]:border-r"
+    type="email"
+    id={inputId}
+    name="email"
+    placeholder="you@email.com"
+    autocomplete="email"
+    required
+  />
+  <button class="btn btn-stamp whitespace-nowrap max-[840px]:w-full" type="submit"
+    >{cta}</button
+  >
+  <p
+    class="form-status mono mt-3 w-full basis-full text-[.78rem]"
+    data-status
+    role="status"
+    aria-live="polite"
+  >
+  </p>
+</form>
+{
+  note && (
+    <p
+      class:list={[
+        "mono mt-3 text-[.75rem] text-ink-soft",
+        variant === "band" && "text-center",
+      ]}
+    >
+      {note}{" "}
+      <a
+        href="/privacy"
+        class="underline underline-offset-2 hover:text-ink focus-visible:text-ink"
+      >
+        Privacy matters
+      </a>
+    </p>
+  )
+}
+
+<script>
+  // One bundled module wires every form on the page. Astro dedupes an
+  // identical processed <script> across component instances, so this runs once
+  // no matter how many forms are rendered — hence querySelectorAll, and hence
+  // the per-form closure below rather than module-level element consts.
+  import { track } from "@vercel/analytics";
+
+  const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  document.querySelectorAll<HTMLFormElement>("[data-signup]").forEach((form) => {
+    const email = form.querySelector<HTMLInputElement>('input[type="email"]');
+    const status = form.querySelector<HTMLElement>("[data-status]");
+    const button = form.querySelector<HTMLButtonElement>("button");
+    if (!email || !status || !button) return;
+    const endpoint = form.dataset.endpoint ?? "";
+    const variant = form.dataset.signup ?? "band";
+
+    const say = (msg: string, isError: boolean) => {
+      // Retrigger the rise-in entrance for each new message (plans/004).
+      status.classList.remove("is-in");
+      void status.offsetWidth; // restart the animation
+      status.textContent = msg;
+      status.classList.toggle("text-stamp", isError);
+      status.classList.toggle("text-buy", !isError && msg !== "");
+      if (msg) status.classList.add("is-in");
+    };
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const value = email.value.trim();
+      if (!EMAIL.test(value)) {
+        say("Enter a valid email address.", true);
+        email.focus();
+        return;
+      }
+      if (!endpoint) {
+        say("Signups open soon — check back shortly.", false);
+        return;
+      }
+      button.disabled = true;
+      const label = button.textContent;
+      button.textContent = "Sending…";
+      const post = (mode?: RequestMode) =>
+        fetch(endpoint, {
+          method: "POST",
+          ...(mode ? { mode } : {}),
+          headers: { "Content-Type": "application/x-www-form-urlencoded" },
+          body: new URLSearchParams({ email: value }),
+        });
+      try {
+        try {
+          const res = await post();
+          if (!res.ok) throw new Error(String(res.status));
+        } catch (err) {
+          // Some subscribe endpoints (Buttondown's embed-subscribe among
+          // them) are built for a native form POST and send no CORS headers,
+          // so the browser delivers the request but blocks us reading the
+          // reply and fetch rejects with a TypeError. Re-send opaquely and
+          // trust the provider's confirmation email as the real receipt.
+          // Subscribe endpoints are idempotent, so the repeat is harmless.
+          if (!(err instanceof TypeError)) throw err;
+          await post("no-cors");
+        }
+        // Double opt-in: they are NOT subscribed until they click the link
+        // in the confirmation email, so don't claim they are.
+        say("Almost there — check your inbox to confirm.", false);
+        form.reset();
+        // Which page and which surface earned the signup. Vercel custom
+        // events need a Pro plan; on Hobby track() is a harmless no-op.
+        track("signup_submit", { variant, path: location.pathname });
+        // Tells the modal to stop asking, on any page, forever.
+        document.dispatchEvent(new CustomEvent("signup:done"));
+      } catch {
+        say("Something went wrong — try again.", true);
+        track("signup_error", { variant, path: location.pathname });
+      } finally {
+        button.disabled = false;
+        button.textContent = label;
+      }
+    });
+  });
+</script>

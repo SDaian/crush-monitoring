@@ -1,0 +1,259 @@
+---
+// The read-triggered signup dialog. Catches the organic visitor who reads a
+// ticker or member page and leaves before reaching the form in the closing
+// band — which, on a long trades table, is most of them.
+//
+// It is deliberately NOT an on-arrival popup. Google's intrusive-interstitial
+// policy targets exactly that pattern on mobile (content covered immediately
+// on load), and it is also the version people bounce from. This one waits
+// until they have actually read: 60% scrolled, or the cursor leaving toward
+// the tab bar on desktop, whichever comes first, with a hard floor of a few
+// seconds. Once dismissed it stays away; once subscribed it never returns.
+//
+// Native <dialog> gives the focus trap, Esc-to-close, inert background and
+// ::backdrop for free — no library, no focus-management code to get wrong.
+import SignupForm from "./SignupForm.astro";
+import { SIGNUP_LIVE } from "../lib/signup";
+
+interface Props {
+  /** Headline. Pass the page's own subject for a contextual ask. */
+  title?: string;
+  /** One supporting line. */
+  body?: string;
+}
+const {
+  title = "One email. Every disclosed trade.",
+  body =
+    "Congress files these late and quietly. Get every new disclosure — who " +
+    "traded, how much, and how late — in one short email each morning.",
+} = Astro.props;
+---
+
+{
+  /* No dialog at all when signups aren't wired up: never interrupt someone
+     to tell them they can't subscribe. */
+  SIGNUP_LIVE && (
+    <dialog id="signupModal" class="cl-modal" aria-labelledby="signupModalTitle">
+      <button
+        type="button"
+        class="cl-modal-x"
+        data-close
+        aria-label="Close">✕</button
+      >
+      <p class="eyebrow">Capitol Ledger</p>
+      <h2 id="signupModalTitle" class="cl-modal-h">{title}</h2>
+      <p class="cl-modal-p">{body}</p>
+      <SignupForm
+        variant="modal"
+        cta="Get trade alerts"
+        note="Free while in beta · one email per day. No spam, ever."
+      />
+      <button type="button" class="cl-modal-no" data-close>
+        No thanks — keep reading
+      </button>
+    </dialog>
+  )
+}
+
+<style>
+  /* Zero radius, paper card, ink rule — the same editorial furniture as the
+     rest of the site (DESIGN.md §3/§8). */
+  .cl-modal {
+    /* The centering recipe for a top-layer dialog: keep the UA's `fixed`
+       (overriding it with `relative` drops the card at the static position,
+       half off-screen), stretch the box with inset:0, then let auto margins
+       center a max-content-height card inside it. `position` also makes this
+       the containing block for the absolutely-positioned close button. */
+    position: fixed;
+    inset: 0;
+    margin: auto;
+    width: min(30rem, calc(100vw - 2rem));
+    height: max-content;
+    max-height: calc(100dvh - 2rem);
+    overflow-y: auto;
+    padding: 2.25rem 2rem 2rem;
+    border: 2px solid var(--color-ink);
+    background: var(--color-paper);
+    color: var(--color-ink);
+  }
+  .cl-modal::backdrop {
+    background: color-mix(in oklch, var(--color-ink) 55%, transparent);
+  }
+  .cl-modal[open] {
+    animation: modal-in 200ms var(--ease-out) both;
+  }
+  .cl-modal[open]::backdrop {
+    animation: fade-in 200ms ease both;
+  }
+  @keyframes modal-in {
+    from {
+      opacity: 0;
+      transform: translateY(0.75rem);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+  .cl-modal-h {
+    margin-top: 0.75rem;
+    font-weight: 900;
+    font-size: clamp(1.5rem, 5vw, 1.9rem);
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+    text-wrap: balance;
+  }
+  .cl-modal-p {
+    margin-top: 0.875rem;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: var(--color-ink-soft);
+    text-wrap: pretty;
+  }
+  /* The dismissals are deliberately easy to find: a corner ✕ AND a worded
+     opt-out. A modal you have to fight is worse than no modal. */
+  .cl-modal-x {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    padding: 0.5rem 0.625rem;
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+    line-height: 1;
+    color: var(--color-ink-soft);
+    background: none;
+    border: 0;
+    cursor: pointer;
+  }
+  .cl-modal-x:hover,
+  .cl-modal-x:focus-visible {
+    color: var(--color-stamp);
+  }
+  .cl-modal-no {
+    display: block;
+    margin: 1.25rem auto 0;
+    padding: 0.25rem;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--color-ink-soft);
+    background: none;
+    border: 0;
+    border-bottom: 1px solid var(--color-rule);
+    cursor: pointer;
+  }
+  .cl-modal-no:hover,
+  .cl-modal-no:focus-visible {
+    color: var(--color-ink);
+    border-bottom-color: var(--color-ink);
+  }
+
+  /* Reduced motion is a first-class path (DESIGN.md §6): the dialog still
+     opens and lands in the same place, it just fades. */
+  @media (prefers-reduced-motion: reduce) {
+    .cl-modal[open] {
+      animation: fade-in 0.2s ease both;
+    }
+  }
+</style>
+
+<script>
+  import { track } from "@vercel/analytics";
+
+  const KEY = "cl.signup";
+  const DISMISS_DAYS = 30;
+  const READ_FRACTION = 0.6; // of the scrollable height
+  const FLOOR_MS = 5000; // never sooner than this after load
+
+  const dialog = document.getElementById("signupModal") as HTMLDialogElement | null;
+  if (dialog) {
+    // localStorage can throw in private modes / with storage blocked. A
+    // failure to remember must degrade to "don't nag", not to a crash.
+    const read = (): { state?: string; at?: number } => {
+      try {
+        return JSON.parse(localStorage.getItem(KEY) ?? "{}");
+      } catch {
+        return { state: "blocked" };
+      }
+    };
+    const write = (state: string) => {
+      try {
+        localStorage.setItem(KEY, JSON.stringify({ state, at: Date.now() }));
+      } catch {
+        /* nothing to do — worst case they see it again next visit */
+      }
+    };
+
+    const suppressed = () => {
+      const { state, at } = read();
+      if (state === "subscribed" || state === "blocked") return true;
+      if (state !== "dismissed") return false;
+      return Date.now() - (at ?? 0) < DISMISS_DAYS * 864e5;
+    };
+
+    let done = suppressed();
+
+    const open = () => {
+      if (done || dialog.open) return;
+      done = true;
+      dialog.showModal();
+      track("signup_modal_open", { path: location.pathname });
+    };
+
+    const close = (why: string) => {
+      if (dialog.open) dialog.close();
+      write(why);
+    };
+
+    dialog
+      .querySelectorAll<HTMLElement>("[data-close]")
+      .forEach((b) => b.addEventListener("click", () => close("dismissed")));
+    // Esc, and clicking the backdrop (the dialog element itself receives the
+    // click when the press lands outside the card).
+    dialog.addEventListener("cancel", () => write("dismissed"));
+    dialog.addEventListener("click", (e) => {
+      if (e.target === dialog) close("dismissed");
+    });
+    // Subscribing anywhere on the site retires the modal for good.
+    document.addEventListener("signup:done", () => close("subscribed"));
+
+    if (!done) {
+      let armed = false;
+
+      const readEnough = () => {
+        const doc = document.documentElement;
+        // A page too short to scroll can't signal "read" this way; leave it
+        // to exit intent rather than firing at scrollY 0.
+        if (doc.scrollHeight - window.innerHeight < 400) return false;
+        return (
+          (window.scrollY + window.innerHeight) / doc.scrollHeight >=
+          READ_FRACTION
+        );
+      };
+      const check = () => {
+        if (!armed || !readEnough()) return;
+        window.removeEventListener("scroll", check);
+        open();
+      };
+      // Check once when the floor elapses, not only on the NEXT scroll — a
+      // visitor can already be deep in the page by then (browsers restore the
+      // scroll position on reload, and #anchor links land mid-document), and
+      // waiting for a scroll that never comes means never showing at all.
+      setTimeout(() => {
+        armed = true;
+        check();
+      }, FLOOR_MS);
+      window.addEventListener("scroll", check, { passive: true });
+
+      // Exit intent: the pointer leaves through the top of the viewport,
+      // heading for the tab bar or the back button. Desktop only — there is
+      // no equivalent signal on touch, and guessing produces false fires.
+      if (matchMedia("(hover: hover) and (pointer: fine)").matches) {
+        document.addEventListener("mouseout", (e) => {
+          if (armed && !e.relatedTarget && e.clientY <= 0) open();
+        });
+      }
+    }
+  }
+</script>

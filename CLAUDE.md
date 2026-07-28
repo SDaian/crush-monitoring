@@ -393,6 +393,24 @@ Conventions:
   the morning email via `daily_report.ticker_links` with UTM tags so Vercel
   analytics attributes the email as a traffic source. Scaling to all ~1,400
   tickers fires storage stage 1.
+- **Every content page ends in a real signup form.** Search traffic lands on
+  `/tickers/<symbol>` and `/members/<slug>`, not the home page, so a CTA that
+  merely *links* to the signup elsewhere converts at ~zero — it asks an arriving
+  reader to navigate away and re-decide. Use `SignupForm.astro`
+  (`hero`/`band`/`modal` variants); `/privacy` is the one deliberate exception,
+  and the header CTA anchors to the on-page `#join` rather than bouncing home.
+  `SignupModal.astro` is the read-triggered dialog — **never an on-arrival
+  popup** (Google's intrusive-interstitial policy, and it's what makes people
+  bounce): 60% scroll or desktop exit intent, behind a time floor, dismissal
+  remembered in `localStorage`, retired for good on subscribe, and not rendered
+  at all when `PUBLIC_SIGNUP_ENDPOINT` is unset. **Copy constraint: these
+  surfaces may not promise a per-ticker or per-member alert** — follows don't
+  exist yet (`ROADMAP.md`). Promise the daily email, and lead with the page's own
+  real number ("171 disclosed so far").
+- **A missing `PUBLIC_SIGNUP_ENDPOINT` is silent and fatal.** Unset, every form
+  answers "Signups open soon" and nobody can subscribe — which from the outside
+  looks identical to nobody *wanting* to. `src/lib/signup.ts` warns loudly at
+  build time; it warns and never throws, so a deploy is never taken down over it.
 - **Meta descriptions are capped at 150 chars, structurally.** Google truncates
   what it shows at ~155 desktop / ~120 mobile, and most of our descriptions
   interpolate pipeline data (a company name, a member's name, a trade count) —

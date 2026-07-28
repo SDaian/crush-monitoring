@@ -122,9 +122,20 @@ In rough priority order; each item states its blocking dependency.
   member pages both ways, and deep-linked from the daily email with UTM tags so
   Vercel analytics attributes the traffic. Scaling to all ~1,400 tickers fires
   storage stage 1.
+- **Conversion surfaces** — ✅ shipped 2026-07-28. Organic traffic arrived on
+  the ticker and member pages and converted at zero, because the only email
+  input on the site was on the home page; every other page merely *linked* to
+  it. `SignupForm.astro` now closes all 36 content pages (`/privacy` excepted),
+  and `SignupModal.astro` catches readers who leave before the footer — gated on
+  a read signal, never on arrival. **Standing constraint:** the copy on these
+  surfaces may not promise a per-ticker or per-member alert until follows
+  actually exist (below). Today's honest promise is the whole daily email.
 - **Member and ticker follows** — already promised on the site ("Member and
   ticker follows are next"): per-user watchlists and filtered alerts. Requires
-  accounts → triggers storage stage 2 (Supabase) and contact stage 3.
+  accounts → triggers storage stage 2 (Supabase) and contact stage 3. The
+  signup surfaces above make this the most-requested next thing by construction:
+  someone subscribing from `/tickers/nvda` wants NVDA, and we send them
+  everything.
 - **Ticker pages** — same machinery as member pages, second wave.
 - **Feed curation preference** — surface featured members in the landing feed
   when present (owner request, parked during the design review).

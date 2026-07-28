@@ -172,6 +172,10 @@ Restraint. Motion is meaningful or absent — never decorative.
   isn't alive.
 - Animate only `transform`/`opacity`. Feedback is immediate on press, not on
   release. No looping ambient motion, no parallax, no attention-grabbing loops.
+- **Nothing interrupts on arrival.** Anything that covers the content the reader
+  came for — a dialog above all — must be earned by a signal that they have read
+  (scroll depth, exit intent) and gated behind a time floor. Interrupting a first
+  paint is both a ranking risk on mobile and the reason people leave.
 - **Reduced motion is a first-class path**, not an afterthought: honor
   `prefers-reduced-motion` — replace movement with a short opacity fade, drop the
   pulse to static, keep every element's visible end state. Comprehension never
@@ -241,6 +245,22 @@ shared Astro components in `src/components/`.
   `PUBLIC_*_ENDPOINT` env var (provider-agnostic); unset → an honest "opens soon"
   state; inline `role="status"` feedback with a rise-in. 16px font on touch
   (iOS-zoom guard).
+- **Signup form** (`SignupForm.astro`) — the one email capture, in three
+  dresses: `hero` (wide, in the headline block), `band` (centered, closing every
+  content page) and `modal`. **Every content page ends in a real one** — a CTA
+  that only *links* to the signup on another page makes an arriving reader
+  navigate away and re-decide, and search traffic lands on ticker and member
+  pages, not the home page. `/privacy` is the deliberate exception.
+- **Signup dialog** (`SignupModal.astro`) — native `<dialog>`, paper card, one
+  stamp CTA, two visible ways out (a corner ✕ and a worded "no thanks"). It is
+  **never an on-arrival popup**: it waits for a read signal (≥60% scrolled) or
+  desktop exit intent, behind a several-second floor. Shown once, dismissal
+  remembered ~30 days in `localStorage`, retired for good on subscribe, and
+  suppressed entirely wherever a form is already in view. Google's
+  intrusive-interstitial policy targets the on-load version on mobile, and it is
+  also the version people bounce from. Centering a top-layer dialog means
+  **keeping the UA's `position: fixed`** (overriding it with `relative` drops the
+  card at its static position, half off-screen) plus `inset: 0` and auto margins.
 - **Email-preview card** — the daily digest drawn as a broadsheet clipping: a
   stamp "Today's email" tab, an ink-ruled masthead (from + subject with live
   counts), disclosure rows, a mono footer. The hero **product shot**, framed on a
