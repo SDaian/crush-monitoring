@@ -99,10 +99,12 @@ In rough priority order; each item states its blocking dependency.
   splitting between `github.io` and the site. Trimmed to the two tabs a
   client-side app is actually needed for (filtering the full record; the daily
   indicator scorecard) — ticker focus and holdings are now static pages.
-  **Remaining step, gated on DNS:** once `capitolledger.io` resolves, replace
-  `docs/trades.html` with a canonical + meta-refresh stub pointing at
-  `/tracker` (GitHub Pages cannot serve real 301s), and set `SITE_URL` so the
-  morning email links to the native tracker.
+  **Completed 2026-07-28** when the apex domain went live: `docs/trades.html`
+  is now a canonical + meta-refresh stub pointing at `/tracker` (GitHub Pages
+  cannot serve real 301s, so the canonical tag is what transfers the ranking
+  signals), the World Cup page's cross-link points at the new URL, and the
+  morning email links to `capitolledger.io/tracker`. `docs/data/*.json` stays
+  in git as the single source the Vercel build copies from.
 - **Ticker pages** — ✅ shipped 2026-07-24 (`landing_data.ticker_payload` /
   `write_ticker_files` → `landing/src/data/tickers/*.json`; rendered by
   `landing/src/pages/tickers/[slug].astro` + a `/tickers` index). The organic

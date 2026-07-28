@@ -76,23 +76,14 @@ def _pct(x) -> str:
     return f"{'+' if x > 0 else ''}{x}%"
 
 
-# GitHub Pages still serves the standalone tracker; it is retired in favour of
-# the native /tracker page only once the apex domain resolves (see SITE_URL).
-PAGES_TRACKER_URL = "https://SDaian.github.io/crush-monitoring/trades.html"
 # Public site — the email links back into it so readers land on the ticker
 # pages (and so Vercel analytics can attribute the email as a traffic source).
-# Overridable via the SITE_URL var: the apex domain is the intended home, but
-# until it is registered and pointed at Vercel the deployment lives on a
-# *.vercel.app URL, and linking the email at a domain that does not resolve
-# would ship dead links every morning. Set SITE_URL to the live deployment.
+# Overridable via the SITE_URL var (handy for pointing a run at a preview
+# deployment); the apex domain is the default and the normal case.
 SITE_URL = (os.environ.get("SITE_URL", "").strip().rstrip("/")
             or "https://capitolledger.io")
-# Point the email at the native tracker only when we know where the site is
-# actually served (SITE_URL set). Unset means the apex domain may not resolve
-# yet, so fall back to the Pages build that definitely works — the email must
-# never link somewhere dead.
-TRACKER_URL = (f"{SITE_URL}/tracker" if os.environ.get("SITE_URL", "").strip()
-               else PAGES_TRACKER_URL)
+# The tracker now lives on the site itself (apex domain live 2026-07-28).
+TRACKER_URL = f"{SITE_URL}/tracker"
 EMAIL_UTM = "utm_source=email&utm_medium=report&utm_campaign=morning"
 # Symbols that have a /tickers/<slug> page, written by landing_data.
 TICKER_INDEX_JSON = (pipeline.REPO_ROOT / "landing" / "src" / "data"
