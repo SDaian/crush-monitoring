@@ -264,17 +264,57 @@ def _footer(tracker_url: str, subscribe_note: str,
         + f"{_esc(subscribe_note)}</p></td></tr>")
 
 
+def _card_rows(*, right_label: str, date_label: str, intro_html: str,
+               body_rows: str, tracker_url: str, subscribe_note: str,
+               unsubscribe: bool) -> str:
+    """The card's table rows: masthead, sections, footer. No outer chrome."""
+    return f"""\
+  <!-- Masthead -->
+  <tr><td class="cl-pad" style="padding:30px 32px 22px 32px;">
+    <div style="border-top:3px double {INK};font-size:1px;line-height:1px;">&nbsp;</div>
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr>
+      <td style="padding:14px 0 0;{_f('22px', '1', SANS, 700)}letter-spacing:3px;text-transform:uppercase;color:{INK};">
+        Capitol&nbsp;Ledger</td>
+      <td align="right" style="padding:14px 0 0;{_f('11px', '1.4', MONO, 700)}letter-spacing:1px;text-transform:uppercase;color:{STAMP};white-space:nowrap;">
+        {right_label}</td>
+    </tr></table>
+    <div style="margin-top:6px;{_f('12px', '1.4', MONO)}letter-spacing:.5px;color:{INK_SOFT};">
+      {_esc(date_label)}</div>
+    <div style="border-top:3px double {INK};font-size:1px;line-height:1px;margin-top:12px;">&nbsp;</div>
+    {intro_html}
+  </td></tr>
+
+  {body_rows}
+
+  {_footer(tracker_url, subscribe_note, unsubscribe)}
+"""
+
+
 def _document(*, right_label: str, date_label: str, intro_html: str,
               body_rows: str, tracker_url: str, subscribe_note: str,
               title: str, preheader: str, standalone: bool = True) -> str:
-    """Wrap section rows in the shared masthead + footer chrome (pure).
+    """The email, either as a complete document or as a bare embeddable card.
 
-    ``standalone=False`` returns just the centred card — no doctype, <html> or
-    <head>. Newsletter providers wrap what you give them in their own template,
-    so returning a whole document there nests one HTML document inside another
-    and clients render the result unpredictably (that is what breaks the
-    styling). The provider supplies the shell; we supply the card."""
-    doc = f"""\
+    ``standalone=True`` (SMTP, where we are the sender) returns a full
+    document: page background, a centred fixed-width "paper" card with a
+    border, the preheader, and the light-only ``<style>``.
+
+    ``standalone=False`` returns ONLY the card's table, at width 100% with no
+    page background, no border and no preheader. A newsletter provider already
+    supplies the document, its own centred ~600px container and its own
+    preview text — so repeating ours nests a bordered box inside their box,
+    doubles the padding and squeezes the content. Fill their container instead
+    of building a second one inside it."""
+    rows = _card_rows(right_label=right_label, date_label=date_label,
+                      intro_html=intro_html, body_rows=body_rows,
+                      tracker_url=tracker_url, subscribe_note=subscribe_note,
+                      unsubscribe=standalone)
+    if not standalone:
+        return (
+            "<table role=\"presentation\" width=\"100%\" cellpadding=\"0\" "
+            "cellspacing=\"0\" style=\"width:100%;border-collapse:collapse;"
+            f"background:{PAPER};\">\n{rows}</table>")
+    return f"""\
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -298,37 +338,12 @@ def _document(*, right_label: str, date_label: str, intro_html: str,
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:{WASH};border-collapse:collapse;">
 <tr><td align="center" style="padding:28px 12px;">
 <table role="presentation" width="600" cellpadding="0" cellspacing="0" style="width:600px;max-width:600px;background:{PAPER};border:1px solid {RULE};border-collapse:collapse;">
-
-  <!-- Masthead -->
-  <tr><td class="cl-pad" style="padding:30px 32px 22px 32px;">
-    <div style="border-top:3px double {INK};font-size:1px;line-height:1px;">&nbsp;</div>
-    <table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr>
-      <td style="padding:14px 0 0;{_f('22px', '1', SANS, 700)}letter-spacing:3px;text-transform:uppercase;color:{INK};">
-        Capitol&nbsp;Ledger</td>
-      <td align="right" style="padding:14px 0 0;{_f('11px', '1.4', MONO, 700)}letter-spacing:1px;text-transform:uppercase;color:{STAMP};white-space:nowrap;">
-        {right_label}</td>
-    </tr></table>
-    <div style="margin-top:6px;{_f('12px', '1.4', MONO)}letter-spacing:.5px;color:{INK_SOFT};">
-      {_esc(date_label)}</div>
-    <div style="border-top:3px double {INK};font-size:1px;line-height:1px;margin-top:12px;">&nbsp;</div>
-    {intro_html}
-  </td></tr>
-
-  {body_rows}
-
-  {_footer(tracker_url, subscribe_note, standalone)}
-
+{rows}
 </table>
 </td></tr>
 </table>
 </body>
 </html>"""
-    if standalone:
-        return doc
-    # Everything between the outer background table's cell — i.e. the 600px
-    # card plus the hidden preheader — with the document shell removed.
-    body = doc.split("<body", 1)[1].split(">", 1)[1].rsplit("</body>", 1)[0]
-    return body.strip()
 
 
 def render_html(*, date_label: str, disclaimer: str, scorecard: list[dict],
