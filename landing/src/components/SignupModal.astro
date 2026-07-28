@@ -194,8 +194,23 @@ const {
 
     let done = suppressed();
 
+    // Never pop a dialog asking for an email at someone already looking at a
+    // form asking for their email — that reads as broken, not persuasive. The
+    // check is deliberately SYNCHRONOUS geometry rather than an
+    // IntersectionObserver: observer callbacks land at the end of the frame, so
+    // a fast scroll or an #anchor jump that lands on the form would fire the
+    // scroll handler first and open the modal on top of it. (The modal's own
+    // form sits inside the closed dialog and is never laid out, so it can't
+    // block itself.)
+    const formOnScreen = () =>
+      [...document.querySelectorAll("[data-signup]")].some((f) => {
+        if (dialog.contains(f)) return false;
+        const r = f.getBoundingClientRect();
+        return r.bottom > 0 && r.top < window.innerHeight;
+      });
+
     const open = () => {
-      if (done || dialog.open) return;
+      if (done || dialog.open || formOnScreen()) return;
       done = true;
       dialog.showModal();
       track("signup_modal_open", { path: location.pathname });
@@ -231,10 +246,18 @@ const {
           READ_FRACTION
         );
       };
+      // The read signal latches: once earned it is never un-earned by scrolling
+      // back up. After that every scroll is just a chance to open, which is how
+      // a hold on the form resolves — they scroll off it and it appears.
+      let earned = false;
       const check = () => {
-        if (!armed || !readEnough()) return;
-        window.removeEventListener("scroll", check);
+        if (!armed) return;
+        earned ||= readEnough();
+        if (!earned) return;
         open();
+        // Only stop listening once it actually opened; while it is being held
+        // behind a visible form we still need the next scroll.
+        if (dialog.open) window.removeEventListener("scroll", check);
       };
       // Check once when the floor elapses, not only on the NEXT scroll — a
       // visitor can already be deep in the page by then (browsers restore the

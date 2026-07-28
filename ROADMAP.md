@@ -127,7 +127,9 @@ In rough priority order; each item states its blocking dependency.
   input on the site was on the home page; every other page merely *linked* to
   it. `SignupForm.astro` now closes all 36 content pages (`/privacy` excepted),
   and `SignupModal.astro` catches readers who leave before the footer — gated on
-  a read signal, never on arrival. **Standing constraint:** the copy on these
+  a read signal, never on arrival, and held back whenever a form is already on
+  screen (including on the home page, whose closing CTA still only links back
+  up to the hero form — worth making a real form too). **Standing constraint:** the copy on these
   surfaces may not promise a per-ticker or per-member alert until follows
   actually exist (below). Today's honest promise is the whole daily email.
 - **Member and ticker follows** — already promised on the site ("Member and
