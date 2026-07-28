@@ -38,13 +38,21 @@ def configured() -> bool:
     return bool(os.environ.get(ENV_KEY, "").strip())
 
 
+# Buttondown can create an email as a DRAFT. Left implicit, a broadcast can
+# return 201 and simply never send — success in the log, nothing in the inbox.
+# Say "send it now" explicitly: if this value is ever wrong the API answers
+# with a loud 4xx, which is far easier to debug than a silent draft.
+SEND_STATUS = "about_to_send"
+
+
 def build_payload(subject: str, html: str) -> dict:
     """The request body for one broadcast (pure).
 
     ``email_type: public`` publishes it to the archive as well as sending it,
     which gives each issue a shareable URL at no extra cost.
     """
-    return {"subject": subject, "body": html, "email_type": "public"}
+    return {"subject": subject, "body": html, "email_type": "public",
+            "status": SEND_STATUS}
 
 
 def _post(payload: dict, key: str) -> tuple[int, str]:
@@ -85,7 +93,16 @@ def send(subject: str, html: str) -> bool:
         print(f"::warning::Buttondown broadcast failed: {type(exc).__name__}")
         return False
     if 200 <= status < 300:
-        print(f"broadcast sent to Buttondown subscribers (HTTP {status})")
+        # Echo the returned status/id: it is the only way to tell a real send
+        # from a draft that was merely created. No subscriber data is in this
+        # response — it describes the email, not the list.
+        state = ""
+        try:
+            data = json.loads(body)
+            state = f" status={data.get('status')!r} id={data.get('id', '')[:8]}"
+        except (ValueError, AttributeError, TypeError):
+            pass
+        print(f"broadcast accepted by Buttondown (HTTP {status}){state}")
         return True
     print(f"::warning::Buttondown returned HTTP {status}: {body[:200]}")
     return False
