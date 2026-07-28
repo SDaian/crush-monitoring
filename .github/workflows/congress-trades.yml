@@ -24,6 +24,10 @@ on:
         description: "Also send the morning report issue (true to test on demand)"
         required: false
         default: "false"
+      report_only:
+        description: "Skip every data step and ONLY build/send the report (fast test)"
+        required: false
+        default: "false"
 permissions:
   contents: write
   issues: write # open an issue (→ email) when a new AI technical signal fires
@@ -51,11 +55,13 @@ jobs:
         run: python3 -m unittest discover -s tests/congress -p 'test_*.py'
 
       - name: Refresh member roster (non-fatal)
+        if: github.event.inputs.report_only != 'true'
         run: |
           python3 -m congress roster \
             || echo "::warning::roster refresh failed; using committed members.json"
 
       - name: Fetch new filings
+        if: github.event.inputs.report_only != 'true'
         run: |
           set -o pipefail # tee must not mask the fetcher's exit code
           if [ -n "${{ github.event.inputs.limit }}" ]; then
@@ -66,6 +72,7 @@ jobs:
           python3 -m congress fetch $EXTRA 2>&1 | tee fetch.log
 
       - name: Refresh featured-member holdings (non-fatal)
+        if: github.event.inputs.report_only != 'true'
         run: |
           # Real stock composition from each featured member's latest annual
           # financial-disclosure report. Rarely changes (annual), but cheap to
@@ -89,6 +96,7 @@ jobs:
           fi
 
       - name: Regenerate landing-page data (non-fatal)
+        if: github.event.inputs.report_only != 'true'
         run: |
           # Feed + stats + /late + per-member pages for the Capitol Ledger
           # landing site, derived from the trades JSON the fetch step refreshed
@@ -100,6 +108,7 @@ jobs:
             || echo "::warning::landing data refresh failed; keeping prior files"
 
       - name: Refresh AI technical indicators + notify on new signals (non-fatal)
+        if: github.event.inputs.report_only != 'true'
         env:
           CONGRESS_PRICES_KEY: ${{ secrets.CONGRESS_PRICES_KEY || vars.CONGRESS_PRICES_KEY }}
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -108,7 +117,7 @@ jobs:
           # Daily mechanical indicators (RSI / moving averages / volume / 52w)
           # for the AI universe + named signals. Reuses the Twelve Data key.
           # A source outage must not fail the whole refresh.
-          python3 -m congress ai 2>&1 | tee -a fetch.log \
+          python3 -m congress ai --skip-if-fresh 2>&1 | tee -a fetch.log \
             || echo "::warning::AI indicators refresh failed; keeping prior ai-indicators.json"
           # Open a GitHub issue (emails repo watchers) for each brand-new signal.
           # Runs before the commit so a fresh file's new_signals are read; the
@@ -130,7 +139,12 @@ jobs:
           fi
 
       - name: Morning report → GitHub issue email (scheduled/on-demand, non-fatal)
-        if: github.event_name == 'schedule' || github.event.inputs.report == 'true'
+        # report_only implies report — otherwise setting it alone would skip
+        # every data step AND the report, running nothing at all.
+        if: >-
+          github.event_name == 'schedule'
+          || github.event.inputs.report == 'true'
+          || github.event.inputs.report_only == 'true'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           REPO: ${{ github.repository }}
@@ -166,7 +180,7 @@ jobs:
           VERCEL_TEAM_ID: ${{ secrets.VERCEL_TEAM_ID || vars.VERCEL_TEAM_ID }}
           # An explicit on-demand run (report=true) always delivers, even if a
           # report already went out today; the scheduled run stays idempotent.
-          REPORT_FORCE: ${{ github.event.inputs.report == 'true' && 'true' || '' }}
+          REPORT_FORCE: ${{ (github.event.inputs.report == 'true' || github.event.inputs.report_only == 'true') && 'true' || '' }}
         run: |
           # Compose the morning digest (AI scorecard + overnight signals +
           # rating flips + new disclosures), email it via SMTP, and open a dated
@@ -187,6 +201,7 @@ jobs:
           fi
 
       - name: Estimate return-since-buy (non-fatal)
+        if: github.event.inputs.report_only != 'true'
         env:
           # Accept the key whether it was added as an Actions *secret* (preferred)
           # or an Actions *variable* — both live under the same settings page.
@@ -194,10 +209,11 @@ jobs:
         run: |
           # Prices move daily even when no new filing arrives, so this runs
           # every day. A price-source outage must not fail the whole refresh.
-          python3 -m congress prices 2>&1 | tee -a fetch.log \
+          python3 -m congress prices --skip-if-fresh 2>&1 | tee -a fetch.log \
             || echo "::warning::price refresh failed; keeping prior returns.json"
 
       - name: Commit refreshed data
+        if: github.event.inputs.report_only != 'true'
         run: |
           FILES="docs/data/congress-trades.json congress/state.json congress/members.json docs/data/returns.json landing/src/data/disclosures.json landing/src/data/stats.json landing/src/data/late.json landing/src/data/members"
           if git diff --quiet -- $FILES; then

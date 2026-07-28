@@ -461,3 +461,27 @@ class TestTickerPages(unittest.TestCase):
         # Without the set, chips stay plain (no link to a page that isn't built).
         plain = ld.member_payload("Nancy Pelosi", trades, {})
         self.assertFalse(plain["topTickers"][0]["hasPage"])
+
+
+class TestGeneratedToday(unittest.TestCase):
+    """The same-day guard on the rate-limited Twelve Data refreshes."""
+
+    def test_fresh_and_stale(self):
+        from congress import cli
+        with TemporaryDirectory() as d:
+            p = Path(d) / "x.json"
+            p.write_text(json.dumps(
+                {"meta": {"generated_at": "2026-07-28T03:34:39Z"}}))
+            self.assertTrue(cli.generated_today(p, "2026-07-28"))
+            self.assertFalse(cli.generated_today(p, "2026-07-29"))
+
+    def test_missing_or_unreadable_means_do_the_work(self):
+        from congress import cli
+        with TemporaryDirectory() as d:
+            self.assertFalse(cli.generated_today(Path(d) / "nope.json", "2026-07-28"))
+            bad = Path(d) / "bad.json"
+            bad.write_text("not json")
+            self.assertFalse(cli.generated_today(bad, "2026-07-28"))
+            nometa = Path(d) / "n.json"
+            nometa.write_text("{}")
+            self.assertFalse(cli.generated_today(nometa, "2026-07-28"))
