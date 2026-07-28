@@ -421,9 +421,31 @@ FEATURED_TICKERS = ["MU", "INTC", "NVDA", "TSM", "AMD", "AVGO", "TSLA", "MSFT",
                     "SPCX", "NU", "MELI"]
 
 
+def generated_today(path: str | Path, today_iso: str | None = None) -> bool:
+    """True when ``path`` already carries a ``meta.generated_at`` from today.
+
+    Both Twelve Data outputs (indicators, returns) are DAILY-CLOSE granularity,
+    so regenerating them a second or third time on the same day cannot produce
+    different numbers — it only burns free-tier API calls. The morning fires
+    three crons for delivery robustness, which would otherwise mean three price
+    refreshes a day. Missing or unreadable file → False (do the work).
+    """
+    if today_iso is None:
+        today_iso = datetime.now(timezone.utc).date().isoformat()
+    try:
+        meta = json.loads(Path(path).read_text(encoding="utf-8")).get("meta", {})
+    except (OSError, ValueError, AttributeError):
+        return False
+    return str(meta.get("generated_at", ""))[:10] == today_iso
+
+
 def _cmd_prices(args: argparse.Namespace) -> int:
     """Estimate 'return since buy' for the priceable disclosed buys."""
     from . import prices
+
+    if getattr(args, "skip_if_fresh", False) and generated_today(args.output):
+        print(f"returns already generated today — skipping ({args.output})")
+        return 0
 
     key = prices.api_key()
     if not key:
@@ -523,6 +545,10 @@ def _cmd_ai(args: argparse.Namespace) -> int:
     buy/sell/hold verdict. New signals (not previously emitted) are surfaced in
     meta.new_signals for the workflow's notification step."""
     from . import indicators, prices
+
+    if getattr(args, "skip_if_fresh", False) and generated_today(args.output):
+        print(f"indicators already generated today — skipping ({args.output})")
+        return 0
 
     key = prices.api_key()
     if not key:
@@ -667,6 +693,9 @@ def build_parser() -> argparse.ArgumentParser:
                           help="Price featured + this many most-traded tickers.")
     prices_p.add_argument("--limit", type=int, default=None,
                           help="Hard cap on tickers priced this run (testing).")
+    prices_p.add_argument("--skip-if-fresh", action="store_true",
+                          help="No-op if the output was already generated today "
+                               "(daily closes cannot change within a day).")
     prices_p.set_defaults(func=_cmd_prices)
 
     holdings_p = sub.add_parser(
@@ -681,6 +710,9 @@ def build_parser() -> argparse.ArgumentParser:
         help="Compute AI-universe technical indicators + signals (Twelve Data).",
     )
     ai_p.add_argument("--output", default=str(DEFAULT_AI))
+    ai_p.add_argument("--skip-if-fresh", action="store_true",
+                      help="No-op if the output was already generated today "
+                           "(daily closes cannot change within a day).")
     ai_p.set_defaults(func=_cmd_ai)
 
     landing_p = sub.add_parser(
