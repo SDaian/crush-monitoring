@@ -150,6 +150,10 @@ jobs:
           # report simply omits the traffic section.
           # PROJECT_ID / TEAM_ID aren't sensitive, but accept them as a secret
           # OR a variable so they work wherever they were added.
+          # Where the email's ticker deep-links point. Set this to the live
+          # deployment (e.g. https://<project>.vercel.app) until the apex
+          # domain is registered — otherwise the links 404.
+          SITE_URL: ${{ vars.SITE_URL }}
           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
           VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID || vars.VERCEL_PROJECT_ID }}
           VERCEL_TEAM_ID: ${{ secrets.VERCEL_TEAM_ID || vars.VERCEL_TEAM_ID }}
