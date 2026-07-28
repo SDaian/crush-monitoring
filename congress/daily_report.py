@@ -285,8 +285,11 @@ def send_email(subject: str, text_body: str, html_body: str) -> bool:
     """Send the report by SMTP if creds are configured, else no-op.
 
     Reads SMTP_USER / SMTP_PASS (required), SMTP_HOST (default smtp.gmail.com),
-    SMTP_PORT (default 587 STARTTLS; 465 → implicit SSL) and REPORT_EMAIL_TO
-    (default = SMTP_USER). Best-effort: returns False and warns on any failure
+    SMTP_PORT (default 587 STARTTLS; 465 → implicit SSL), REPORT_EMAIL_TO
+    (default = SMTP_USER) and REPORT_EMAIL_FROM (default = SMTP_USER — set it
+    to send as a verified brand address while logging in as another account;
+    it must be an address the SMTP host is authorised to send for, or SPF/DKIM
+    alignment fails and the mail lands in spam). Best-effort: returns False and warns on any failure
     so a mail outage never fails the refresh. Credentials come only from env
     (GitHub secrets) and are never logged.
     """
@@ -299,10 +302,15 @@ def send_email(subject: str, text_body: str, html_body: str) -> bool:
     host = os.environ.get("SMTP_HOST", "").strip() or "smtp.gmail.com"
     port = int(os.environ.get("SMTP_PORT", "").strip() or "587")
     to_addr = os.environ.get("REPORT_EMAIL_TO", "").strip() or user
+    # The From address can differ from the SMTP login: with a verified sending
+    # domain you often authenticate as one account (a Gmail App Password, say)
+    # but want the mail to come from the brand. Defaults to the login, which is
+    # always a safe, aligned choice.
+    from_addr = os.environ.get("REPORT_EMAIL_FROM", "").strip() or user
 
     msg = EmailMessage()
     msg["Subject"] = subject
-    msg["From"] = user
+    msg["From"] = from_addr
     msg["To"] = to_addr
     msg.set_content(text_body)
     msg.add_alternative(html_body, subtype="html")

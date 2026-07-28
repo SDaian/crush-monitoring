@@ -84,7 +84,10 @@ pages, follows — is recorded in the repo-root [`ROADMAP.md`](../ROADMAP.md).
 
 ## Pre-launch checklist (open items from the design review)
 
-- [ ] Choose the signup provider and set `PUBLIC_SIGNUP_ENDPOINT`
+- [x] ~~Choose the signup provider~~ — **Buttondown** (2026-07-28).
+      Set `PUBLIC_SIGNUP_ENDPOINT` in Vercel to
+      `https://buttondown.com/api/emails/embed-subscribe/capitolledger`
+      to turn capture on; the send side ships in `congress/buttondown.py`
       (Buttondown suggested — it also sends the daily digest).
 - [x] ~~Create a Web3Forms access key (free) and set
       `PUBLIC_CONTACT_ENDPOINT` + `PUBLIC_CONTACT_KEY` in Vercel~~ — done;
@@ -92,9 +95,11 @@ pages, follows — is recorded in the repo-root [`ROADMAP.md`](../ROADMAP.md).
 - [ ] Analytics decision (the ≥3% conversion goal is unmeasurable without).
 - [ ] "Capitol Ledger" trademark/domain clearance vs. the "Capitol Trades"
       competitor.
-- [ ] Set the real domain in `astro.config.mjs`.
-- [ ] **Finish `/privacy` for launch:** name the chosen email provider in
-      section 03 and add a real contact address (today the page says "reply
+- [x] ~~Set the real domain in `astro.config.mjs`~~ — `capitolledger.io`
+      registered and live (2026-07-28).
+- [x] ~~Name the email provider in `/privacy` section 03~~ — Buttondown,
+      with the double opt-in stated (2026-07-28). Still to do: add a real
+      contact address (today the page says "reply
       to any email", which only works once emails exist).
 - [ ] **Replace the placeholder testimonials.** The "What readers say"
       section ships with fictional reviews (marked in `src/pages/index.astro`)
