@@ -12,6 +12,7 @@ import Header from "../../components/Header.astro";
 import Footer from "../../components/Footer.astro";
 import Seo from "../../components/Seo.astro";
 import CountUp from "../../components/CountUp.astro";
+import { plural, seoDescription } from "../../lib/seo";
 
 export async function getStaticPaths() {
   const all = import.meta.glob("../../data/tickers/*.json", { eager: true });
@@ -54,10 +55,15 @@ const STAT_CARDS = [
 // Search intent here is "<ticker> congress trades" / "who in congress owns
 // <company>" — lead the title with the symbol, keep the company name in it.
 const title = `${t.ticker} congressional stock trades — who in Congress bought and sold · Capitol Ledger`;
-const description =
-  `Every disclosed trade in ${t.company} (${t.ticker}) by members of ` +
-  `Congress: who traded it, the amount brackets, and how late each filing ` +
-  `arrived. Official STOCK Act records, updated daily.`;
+// Front-loaded with this ticker's own numbers — the company name goes in an
+// optional tail clause because it is the one part whose length we do not
+// control ("Taiwan Semiconductor Manufacturing Company Ltd." alone is 47).
+const description = seoDescription(
+  `${plural(s.members, "member")} of Congress disclosed ` +
+    `${plural(s.trades, `${t.ticker} trade`)} — ${plural(s.buys, "buy")}, ` +
+    `${plural(s.sells, "sell")}, the amounts and how late each filing arrived.`,
+  `${t.company}.`,
+);
 
 const schema = [
   {

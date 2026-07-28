@@ -10,6 +10,7 @@ import Footer from "../components/Footer.astro";
 import Seo from "../components/Seo.astro";
 import Timeline from "../components/Timeline.astro";
 import feed from "../data/disclosures.json";
+import { seoDescription } from "../lib/seo";
 
 // The four-step pipeline, rendered as a scroll timeline (Timeline.astro).
 const PIPELINE = [
@@ -108,10 +109,11 @@ const FAQ = [
 ];
 
 const title = "How it works — Capitol Ledger";
-const description =
+const description = seoDescription(
   "From a member of Congress's trade to your inbox: where the disclosures " +
-  "come from, how we parse them, what the numbers mean, and what the daily " +
-  "email looks like.";
+    "come from, how we parse them, and what the numbers mean.",
+  "Official sources only.",
+);
 
 // FAQPage structured data, built from the same FAQ array shown on the page.
 const schema = [

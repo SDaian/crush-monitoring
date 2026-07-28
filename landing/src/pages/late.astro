@@ -9,6 +9,7 @@ import Footer from "../components/Footer.astro";
 import Seo from "../components/Seo.astro";
 import late from "../data/late.json";
 import stats from "../data/stats.json";
+import { plural, seoDescription } from "../lib/seo";
 
 const rows = late.worst;
 const fmtMonth = (iso: string) =>
@@ -19,10 +20,11 @@ const fmtMonth = (iso: string) =>
   });
 
 const title = `Late filers — the ${late.year} filing-delay leaderboard · Capitol Ledger`;
-const description =
-  "The year's worst STOCK Act filing delays: members of Congress who " +
-  "disclosed their stock trades weeks or months past the 45-day legal " +
-  "maximum, ranked from official filings.";
+const description = seoDescription(
+  `${plural(late.totalLateFilings, "late STOCK Act filing")} in ${late.year}: ` +
+    "who disclosed stock trades past the 45-day legal deadline, and by how much.",
+  "Ranked worst first.",
+);
 
 // The leaderboard is a real, free, dated dataset — mark it as one.
 const schema = [

@@ -14,12 +14,14 @@ import "../styles/global.css";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import Seo from "../components/Seo.astro";
+import { seoDescription } from "../lib/seo";
 
 const title = "Congressional stock-trade tracker — search every disclosure · Capitol Ledger";
-const description =
-  "Search and filter every stock trade disclosed by members of Congress and " +
-  "the executive branch under the STOCK Act — by member, ticker, chamber, " +
-  "party and date, each row linked to its official filing.";
+const description = seoDescription(
+  "Search every stock trade disclosed by Congress and the executive branch " +
+    "— filter by member, ticker, chamber, party or date.",
+  "Every row links to its filing.",
+);
 const schema = [
   {
     "@context": "https://schema.org",

@@ -393,6 +393,24 @@ Conventions:
   the morning email via `daily_report.ticker_links` with UTM tags so Vercel
   analytics attributes the email as a traffic source. Scaling to all ~1,400
   tickers fires storage stage 1.
+- **Meta descriptions are capped at 150 chars, structurally.** Google truncates
+  what it shows at ~155 desktop / ~120 mobile, and most of our descriptions
+  interpolate pipeline data (a company name, a member's name, a trade count) —
+  so a page that fits today can overflow after tomorrow's refresh. Compose every
+  description with `seoDescription()` from `src/lib/seo.ts`: the first argument
+  is the sentence that must survive (front-load the page's own numbers there),
+  the rest are tail clauses appended only while they still fit, so a long value
+  drops a whole clause instead of being cut mid-word. Guard the data's edges —
+  the President discloses ticker-less bonds, so "across N tickers" has to
+  disappear rather than render "across 0 tickers". `scripts/check-seo.mjs` runs
+  as npm `postbuild` and **warns** about overruns and missing titles; it
+  deliberately does not fail the build (a cosmetic overflow must never take the
+  deploy down).
+- **The icon set is generated, not hand-made.** `landing/scripts/make-icons.py`
+  (stdlib only, run it manually) writes `favicon.svg`, a real multi-size
+  `favicon.ico` (16/32/48, the file Google's separate favicon crawler wants at
+  the site root), `favicon-96.png` and `apple-touch-icon.png` from one set of
+  rectangles. Change the mark there and re-run; don't hand-edit the outputs.
 - **Visual identity manual:** `landing/DESIGN.md` is the design-agnostic
   identity + design system every page and redesign must follow (brand
   essence, color/type/motion/voice rules, the component vocabulary,
