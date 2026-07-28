@@ -38,7 +38,7 @@ from datetime import date, datetime, timedelta, timezone
 from email.message import EmailMessage
 from pathlib import Path
 
-from . import analytics, email_template, indicators, pipeline
+from . import analytics, buttondown, email_template, indicators, pipeline
 
 API = "https://api.github.com"
 TRADES_JSON = pipeline.REPO_ROOT / "docs" / "data" / "congress-trades.json"
@@ -356,6 +356,12 @@ def main() -> int:
     # Primary delivery: direct email via SMTP (reliable regardless of GitHub
     # notification settings). Best-effort — no-op if creds aren't configured.
     email_ok = send_email(title, report["markdown"], report["html"])
+
+    # Subscribers: the same HTML, broadcast via Buttondown (which owns the
+    # list, double opt-in and unsubscribe). Gated on BUTTONDOWN_API_KEY and
+    # non-fatal — the owner's copy above must land either way. Runs inside the
+    # per-day idempotency gate, so subscribers can't be double-sent.
+    buttondown.send(title, report["html"])
 
     # Site traffic (Vercel Web Analytics) ships as its OWN email so the digest
     # stays focused on trades. Non-fatal; None unless VERCEL_TOKEN +
