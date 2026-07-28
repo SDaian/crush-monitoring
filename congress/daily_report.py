@@ -207,12 +207,18 @@ def build_report(trades: list[dict], ai_tickers: dict, new_signals: list[dict],
     preheader = (
         f"{len(rows)} featured reads · {len(sig_lines) + len(flips)} overnight "
         f"changes · {len(recent)} new disclosures")
-    html = email_template.render_html(
+    _email_kw = dict(
         date_label=date_label, disclaimer=DISCLAIMER, scorecard=sc_rows,
         signals=sig_data, flips=flip_data, disclosures=disc_data,
         extra_disclosures=max(0, len(recent) - MAX_DISCLOSURES), cutoff=cutoff,
-        tracker_url=TRACKER_URL, preheader=preheader,
-        report_url=REPORT_URL)
+        tracker_url=TRACKER_URL, preheader=preheader, report_url=REPORT_URL)
+    # Two renderings of the same email. `html` is a complete document, for the
+    # SMTP copy where we are the sender. `html_embed` is just the card, for a
+    # newsletter provider that wraps content in its own template — handing one
+    # a full document nests two HTML documents and mangles the styling, and its
+    # footer already carries a real unsubscribe link so ours is dropped.
+    html = email_template.render_html(**_email_kw)
+    html_embed = email_template.render_html(**_email_kw, standalone=False)
 
     counts = {"tickers": len(rows), "new_signals": len(sig_lines),
               "flips": len(flips), "disclosures": len(recent)}
@@ -240,8 +246,8 @@ def build_report(trades: list[dict], ai_tickers: dict, new_signals: list[dict],
         } for t in recent],
         "emailShown": len(disc_data),
     }
-    return {"markdown": markdown, "html": html, "ratings": ratings,
-            "counts": counts, "payload": payload}
+    return {"markdown": markdown, "html": html, "html_embed": html_embed,
+            "ratings": ratings, "counts": counts, "payload": payload}
 
 
 def build_traffic_email(traffic: dict, today_iso: str,
@@ -369,7 +375,7 @@ def main() -> int:
     # list, double opt-in and unsubscribe). Gated on BUTTONDOWN_API_KEY and
     # non-fatal — the owner's copy above must land either way. Runs inside the
     # per-day idempotency gate, so subscribers can't be double-sent.
-    buttondown.send(title, report["html"])
+    buttondown.send(title, report["html_embed"])
 
     # Site traffic (Vercel Web Analytics) ships as its OWN email so the digest
     # stays focused on trades. Non-fatal; None unless VERCEL_TOKEN +

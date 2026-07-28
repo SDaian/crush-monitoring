@@ -86,6 +86,20 @@ class TestBuildReport(unittest.TestCase):
         # A ticker with no page stays plain text (no link to a 404).
         self.assertNotIn("/tickers/msft", r["html"])
 
+    def test_embed_variant_for_newsletter_providers(self):
+        # Providers wrap content in their own template: a full document would
+        # nest two HTML documents and break the styling, and their footer has
+        # the real unsubscribe link so ours must not duplicate it.
+        full, embed = self.r["html"], self.r["html_embed"]
+        self.assertTrue(full.lstrip().startswith("<!DOCTYPE"))
+        self.assertNotIn("<!DOCTYPE", embed)
+        self.assertNotIn("</html>", embed)
+        self.assertIn("Unsubscribe</a>", full)
+        self.assertNotIn("Unsubscribe</a>", embed)
+        # Same content either way.
+        self.assertIn("Nancy Pelosi", embed)
+        self.assertIn("Strong Buy", embed)
+
     def test_digest_has_no_traffic(self):
         # Traffic is delivered in its own email now, not the digest.
         self.assertNotIn("Traffic", self.r["markdown"])
