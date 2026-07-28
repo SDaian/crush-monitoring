@@ -18,32 +18,44 @@
     {
       "ticker": "NVDA",
       "count": 6,
-      "asset": "NVIDIA Corporation - Common Stock"
+      "asset": "NVIDIA Corporation - Common Stock",
+      "slug": "nvda",
+      "hasPage": true
     },
     {
       "ticker": "AAPL",
       "count": 5,
-      "asset": "Apple Inc. - Common Stock"
+      "asset": "Apple Inc. - Common Stock",
+      "slug": "aapl",
+      "hasPage": true
     },
     {
       "ticker": "GOOGL",
       "count": 4,
-      "asset": "Alphabet Inc. - Class A Common Stock"
+      "asset": "Alphabet Inc. - Class A Common Stock",
+      "slug": "googl",
+      "hasPage": true
     },
     {
       "ticker": "AMZN",
       "count": 4,
-      "asset": "Amazon.com, Inc. - Common Stock"
+      "asset": "Amazon.com, Inc. - Common Stock",
+      "slug": "amzn",
+      "hasPage": true
     },
     {
       "ticker": "TEM",
       "count": 2,
-      "asset": "Tempus AI, Inc. - Class A Common Stock $100,000"
+      "asset": "Tempus AI, Inc. - Class A Common Stock $100,000",
+      "slug": "tem",
+      "hasPage": false
     },
     {
       "ticker": "VST",
       "count": 2,
-      "asset": "Vistra Corp. Common Stock"
+      "asset": "Vistra Corp. Common Stock",
+      "slug": "vst",
+      "hasPage": false
     }
   ],
   "trades": [

@@ -373,11 +373,14 @@ def rolled_holdings(member_trades: list[dict], h: dict, today_iso: str) -> dict:
 
 
 def member_payload(name: str, trades: list[dict], holdings: dict,
-                   today_iso: str = "9999-12-31") -> dict:
+                   today_iso: str = "9999-12-31",
+                   ticker_pages: set[str] | None = None) -> dict:
     """Per-member page data: summary, most-traded tickers, the most recent
     ``MEMBER_TRADE_CAP`` disclosed trades, and estimated holdings from the
     member's annual report (``holdings`` is the ``holdings.json`` ``holdings``
-    map, keyed by full member name)."""
+    map, keyed by full member name). ``ticker_pages`` is the set of symbols
+    that have a /tickers/<slug> page, so the chips can link there."""
+    has_ticker_page = ticker_pages or set()
     ts = [t for t in trades if t.get("member") == name]
     ts.sort(key=lambda t: (t.get("tx_date") or "", t.get("filing_date") or ""),
             reverse=True)
@@ -459,7 +462,8 @@ def member_payload(name: str, trades: list[dict], holdings: dict,
             "worstLate": max(late_vals) if late_vals else 0,
         },
         "topTickers": [
-            {"ticker": tk, "count": n, "asset": asset_of.get(tk, tk)}
+            {"ticker": tk, "count": n, "asset": asset_of.get(tk, tk),
+             "slug": ticker_slug(tk), "hasPage": tk in has_ticker_page}
             for tk, n in tickers.most_common(6)
         ],
         "trades": rows,
@@ -483,10 +487,13 @@ def write_member_files(
     )
     members_dir = out_dir / "members"
     members_dir.mkdir(parents=True, exist_ok=True)
+    # Which symbols have their own page — lets member chips link to them
+    # (internal linking between the two page sets).
+    ticker_pages = set(select_ticker_pages(trades))
     index = []
     written = []
     for name in names:
-        payload = member_payload(name, trades, holdings, today_iso)
+        payload = member_payload(name, trades, holdings, today_iso, ticker_pages)
         if payload["summary"]["trades"] == 0:
             continue
         (members_dir / f"{payload['slug']}.json").write_text(
@@ -508,6 +515,178 @@ def write_member_files(
         })
     (members_dir / "_index.json").write_text(
         json.dumps({"_comment": comment, "members": index},
+                   indent=2, ensure_ascii=False) + "\n",
+        encoding="utf-8",
+    )
+    return written
+
+
+# --- Ticker pages (/tickers/<symbol>) -----------------------------------
+#
+# Chosen by SUBSTANCE, not by the featured watchlist: the most-traded tickers
+# in the real disclosure data, and only those clearing TICKER_PAGE_MIN_TRADES.
+# A featured name with 4 disclosed trades (NU) would make a thin page, and a
+# pile of thin auto-generated pages is an SEO liability on a young domain — so
+# the universe is derived from the data every run. Scaling this to *every*
+# ticker (1,399 of them) is the storage-stage-1 trigger in ROADMAP.md; keep the
+# cap until then (this slices the trades JSON in memory, like member pages).
+TICKER_PAGE_COUNT = 24
+TICKER_PAGE_MIN_TRADES = 25
+TICKER_TRADE_CAP = 25
+TICKER_MEMBER_CAP = 10
+
+# Boilerplate the filings append to company names ("NVIDIA Corporation - Common
+# Stock"); stripped so headings read like the company, not the filing.
+_ASSET_NOISE = re.compile(
+    r"\s*[-–]?\s*(class\s+[a-z]\s+)?(common\s+stock|capital\s+stock|"
+    r"ordinary\s+shares?|common\s+shares?|stock|sponsored\s+adr|"
+    r"unsponsored\s+adr|adr)\s*$",
+    re.IGNORECASE,
+)
+
+
+def ticker_slug(ticker: str) -> str:
+    """"BRK.B" → "brk-b" (URL slug for /tickers/<slug>)."""
+    return re.sub(r"[^a-z0-9]+", "-", ticker.lower()).strip("-")
+
+
+def clean_company(asset: str, ticker: str) -> str:
+    """"NVIDIA Corporation - Common Stock" → "NVIDIA Corporation"."""
+    name = (asset or "").strip()
+    # Filings often trail the symbol in parens: "Apple Inc. (AAPL)".
+    name = re.sub(r"\s*\(" + re.escape(ticker) + r"\)\s*$", "", name,
+                  flags=re.IGNORECASE)
+    prev = None
+    while prev != name:               # peel repeated suffixes ("ADR Common Stock")
+        prev = name
+        name = _ASSET_NOISE.sub("", name).strip(" -–,")
+    name = re.sub(r"\s*\(The\)\s*", " ", name).strip()
+    return name or ticker
+
+
+def select_ticker_pages(trades: list[dict], count: int = TICKER_PAGE_COUNT,
+                        minimum: int = TICKER_PAGE_MIN_TRADES) -> list[str]:
+    """The ticker universe that earns a page: most-traded first, thin ones out."""
+    counts = Counter(t["ticker"] for t in trades if t.get("ticker"))
+    return [tk for tk, n in counts.most_common(count) if n >= minimum]
+
+
+def ticker_payload(ticker: str, trades: list[dict],
+                   page_names: list[str] = MEMBER_PAGE_NAMES) -> dict:
+    """Per-ticker page data: who traded it, how much, and the recent trades with
+    a link to each official filing. Dollar figures are bracket **midpoints** —
+    an estimate, never a real position size."""
+    ts = [t for t in trades if t.get("ticker") == ticker]
+    ts.sort(key=lambda t: (t.get("tx_date") or "", t.get("filing_date") or ""),
+            reverse=True)
+
+    assets = Counter(t["asset"] for t in ts if t.get("asset"))
+    company = clean_company(assets.most_common(1)[0][0] if assets else "", ticker)
+    have_page = {n for n in page_names}
+
+    sides = Counter(t.get("type") for t in ts)
+    dated = [t for t in ts if t.get("tx_date")]
+    late_vals = [days_late(t) for t in ts if days_late(t) is not None]
+    late_pos = [d for d in late_vals if d > 0]
+    buy_est = sum(_mid(t) for t in ts if t.get("type") == "buy")
+    sell_est = sum(_mid(t) for t in ts if t.get("type") == "sell")
+
+    by_member: dict[str, dict] = {}
+    for t in ts:
+        name = t.get("member")
+        if not name:
+            continue
+        m = by_member.setdefault(name, {
+            "name": name, "slug": slugify(name), "party": t.get("party"),
+            "chamber": {"senate": "Senate", "executive": "Executive"}.get(
+                t.get("chamber"), "House"),
+            "trades": 0, "buys": 0, "sells": 0, "est": 0.0,
+            "hasPage": name in have_page,
+        })
+        m["trades"] += 1
+        m["est"] += _mid(t)
+        if t.get("type") == "buy":
+            m["buys"] += 1
+        elif t.get("type") == "sell":
+            m["sells"] += 1
+    top_members = sorted(by_member.values(),
+                         key=lambda m: (-m["trades"], -m["est"], m["name"]))
+
+    rows = [{
+        "member": t.get("member") or "—",
+        "memberSlug": slugify(t.get("member") or ""),
+        "hasPage": (t.get("member") or "") in have_page,
+        "party": t.get("party"),
+        "side": _side_label(t),
+        "amountBucket": compact_bucket(t.get("amount_lo"), t.get("amount_hi")),
+        "txDate": t.get("tx_date"),
+        "filedDate": t.get("filing_date"),
+        "daysLate": days_late(t),
+        "sourceUrl": t.get("source_url"),
+    } for t in ts[:TICKER_TRADE_CAP]]
+
+    return {
+        "slug": ticker_slug(ticker),
+        "ticker": ticker,
+        "company": company,
+        "summary": {
+            "trades": len(ts),
+            "members": len(by_member),
+            "buys": sides.get("buy", 0),
+            "sells": sides.get("sell", 0),
+            "other": len(ts) - sides.get("buy", 0) - sides.get("sell", 0),
+            "firstTx": min((t["tx_date"] for t in dated), default=None),
+            "lastTx": max((t["tx_date"] for t in dated), default=None),
+            "estBuyLabel": money(buy_est),
+            "estSellLabel": money(sell_est),
+            "pctLate": round(100 * len(late_pos) / len(late_vals)) if late_vals else 0,
+        },
+        "topMembers": [{
+            "name": m["name"], "slug": m["slug"], "party": m["party"],
+            "chamber": m["chamber"], "trades": m["trades"], "buys": m["buys"],
+            "sells": m["sells"], "estLabel": money(m["est"]),
+            "hasPage": m["hasPage"],
+        } for m in top_members[:TICKER_MEMBER_CAP]],
+        "trades": rows,
+        "tradesShown": len(rows),
+    }
+
+
+def write_ticker_files(trades: list[dict], out_dir: Path,
+                       tickers: list[str] | None = None) -> list[str]:
+    """Write tickers/<slug>.json for each qualifying ticker + tickers/_index.json.
+    Returns the slugs written."""
+    comment = (
+        "Generated from real official disclosures by congress/landing_data.py "
+        "(daily Action). Do not edit by hand. Dollar figures are bracket "
+        "midpoints — estimates, not real position sizes."
+    )
+    names = select_ticker_pages(trades) if tickers is None else tickers
+    tickers_dir = out_dir / "tickers"
+    tickers_dir.mkdir(parents=True, exist_ok=True)
+    index, written = [], []
+    for tk in names:
+        payload = ticker_payload(tk, trades)
+        if payload["summary"]["trades"] == 0:
+            continue
+        (tickers_dir / f"{payload['slug']}.json").write_text(
+            json.dumps({"_comment": comment, **payload},
+                       indent=2, ensure_ascii=False) + "\n",
+            encoding="utf-8",
+        )
+        written.append(payload["slug"])
+        index.append({
+            "slug": payload["slug"], "ticker": payload["ticker"],
+            "company": payload["company"],
+            "trades": payload["summary"]["trades"],
+            "members": payload["summary"]["members"],
+            "buys": payload["summary"]["buys"],
+            "sells": payload["summary"]["sells"],
+            "lastTx": payload["summary"]["lastTx"],
+        })
+    index.sort(key=lambda r: -r["trades"])
+    (tickers_dir / "_index.json").write_text(
+        json.dumps({"_comment": comment, "tickers": index},
                    indent=2, ensure_ascii=False) + "\n",
         encoding="utf-8",
     )

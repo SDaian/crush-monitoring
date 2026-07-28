@@ -77,10 +77,27 @@ def _pct(x) -> str:
 
 
 TRACKER_URL = "https://SDaian.github.io/crush-monitoring/trades.html"
+# Public site — the email links back into it so readers land on the ticker
+# pages (and so Vercel analytics can attribute the email as a traffic source).
+SITE_URL = "https://capitolledger.io"
+EMAIL_UTM = "utm_source=email&utm_medium=report&utm_campaign=morning"
+# Symbols that have a /tickers/<slug> page, written by landing_data.
+TICKER_INDEX_JSON = (pipeline.REPO_ROOT / "landing" / "src" / "data"
+                     / "tickers" / "_index.json")
+
+
+def ticker_links(ticker_pages: dict | None) -> dict:
+    """{SYMBOL: absolute UTM-tagged page URL} for the tickers that have a page."""
+    return {
+        t["ticker"]: f"{SITE_URL}/tickers/{t['slug']}?{EMAIL_UTM}"
+        for t in (ticker_pages or {}).get("tickers", [])
+        if t.get("ticker") and t.get("slug")
+    }
 
 
 def build_report(trades: list[dict], ai_tickers: dict, new_signals: list[dict],
-                 prev_ratings: dict, today_iso: str) -> dict:
+                 prev_ratings: dict, today_iso: str,
+                 ticker_urls: dict | None = None) -> dict:
     """Compose the trade/scorecard digest in markdown (GitHub issue) and HTML
     (email). Site traffic is delivered in its own email — see
     ``build_traffic_email``. Pure — no I/O. Returns
@@ -106,6 +123,7 @@ def build_report(trades: list[dict], ai_tickers: dict, new_signals: list[dict],
             "ticker": tk, "price": price, "chg": chg,
             "chg_dir": 1 if chg_val > 0 else (-1 if chg_val < 0 else 0),
             "rsi": rsi, "trend": trend, "label": sc["label"],
+            "url": (ticker_urls or {}).get(tk),
         })
     scorecard = (
         "## ⭐ Featured stocks — technical read\n\n"
@@ -294,8 +312,10 @@ def main() -> int:
     new_signals = ai.get("meta", {}).get("new_signals", [])
     prev_ratings = state.get("ratings", {})
 
+    # Deep-link the email's tickers into their public pages (UTM-tagged).
+    ticker_urls = ticker_links(_load(TICKER_INDEX_JSON, {}))
     report = build_report(trades, ai_tickers, new_signals, prev_ratings,
-                          today_iso)
+                          today_iso, ticker_urls=ticker_urls)
     title = f"📋 Morning report — {today_iso}"
 
     # Primary delivery: direct email via SMTP (reliable regardless of GitHub

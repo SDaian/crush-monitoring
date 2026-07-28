@@ -1,0 +1,436 @@
+---
+// "/tickers/<slug>" — one page per heavily-traded ticker: which members of
+// Congress traded it, the buy/sell split, and the most recent disclosed trades
+// with a link to each official filing (landing/src/data/tickers/*.json).
+//
+// The universe is picked by SUBSTANCE in landing_data.select_ticker_pages (the
+// most-traded tickers clearing a minimum), not by the featured watchlist — a
+// pile of thin auto-generated pages is an SEO liability, not an asset. Scaling
+// to every ticker is the storage-stage-1 trigger in ROADMAP.md.
+import "../../styles/global.css";
+import Header from "../../components/Header.astro";
+import Footer from "../../components/Footer.astro";
+import Seo from "../../components/Seo.astro";
+import CountUp from "../../components/CountUp.astro";
+
+export async function getStaticPaths() {
+  const all = import.meta.glob("../../data/tickers/*.json", { eager: true });
+  return Object.entries(all)
+    .filter(([path]) => !path.endsWith("/_index.json"))
+    .map(([, mod]) => {
+      const t = (mod as { default: any }).default;
+      return { params: { slug: t.slug }, props: { t } };
+    });
+}
+
+const { t } = Astro.props as { t: any };
+const s = t.summary;
+
+const fmtDate = (iso: string | null) =>
+  iso
+    ? new Date(`${iso}T00:00:00Z`).toLocaleDateString("en-US", {
+        month: "short",
+        day: "numeric",
+        year: "numeric",
+        timeZone: "UTC",
+      })
+    : "—";
+const fmtMonth = (iso: string | null) =>
+  iso
+    ? new Date(`${iso}T00:00:00Z`).toLocaleDateString("en-US", {
+        month: "short",
+        year: "numeric",
+        timeZone: "UTC",
+      })
+    : "—";
+
+const STAT_CARDS = [
+  { n: s.trades.toLocaleString("en-US"), l: "trades disclosed" },
+  { n: s.members.toLocaleString("en-US"), l: "members trading" },
+  { n: s.buys.toLocaleString("en-US"), l: "buys" },
+  { n: s.sells.toLocaleString("en-US"), l: "sells" },
+];
+
+// Search intent here is "<ticker> congress trades" / "who in congress owns
+// <company>" — lead the title with the symbol, keep the company name in it.
+const title = `${t.ticker} congressional stock trades — who in Congress bought and sold · Capitol Ledger`;
+const description =
+  `Every disclosed trade in ${t.company} (${t.ticker}) by members of ` +
+  `Congress: who traded it, the amount brackets, and how late each filing ` +
+  `arrived. Official STOCK Act records, updated daily.`;
+
+const schema = [
+  {
+    "@context": "https://schema.org",
+    "@type": "Dataset",
+    name: `${t.ticker} — stock trades disclosed by members of Congress`,
+    description,
+    creator: { "@type": "Organization", name: "Capitol Ledger" },
+    isAccessibleForFree: true,
+    license: "https://www.usa.gov/government-works",
+    temporalCoverage:
+      s.firstTx && s.lastTx ? `${s.firstTx}/${s.lastTx}` : undefined,
+    variableMeasured: ["member", "transaction type", "amount bracket", "filing delay"],
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Stocks", item: "/tickers" },
+      { "@type": "ListItem", position: 2, name: t.ticker },
+    ],
+  },
+];
+---
+
+<html lang="en">
+  <head>
+    <Seo
+      title={title}
+      description={description}
+      path={`/tickers/${t.slug}`}
+      schema={schema}
+    />
+  </head>
+  <body>
+    <Header active="tickers" />
+
+    <section class="mx-auto max-w-[75rem] px-[5vw] pt-[9vh] pb-[6vh]">
+      <p class="eyebrow mb-5">
+        <a href="/tickers" class="no-underline hover:text-ink">Stocks</a> ·
+        <b class="font-semibold text-stamp">{t.company}</b>
+      </p>
+      <h1 class="headline max-w-[16ch] text-[clamp(2.4rem,6.5vw,4.6rem)]">
+        Congress trades <span class="underline-stamp">{t.ticker}</span>.
+      </h1>
+      <p class="mt-6 max-w-[58ch] text-[1.05rem] leading-[1.65] text-pretty text-ink-soft">
+        {s.members} member{s.members === 1 ? "" : "s"} of Congress have disclosed
+        {" "}{s.trades.toLocaleString("en-US")} trades in {t.company} between
+        {" "}{fmtMonth(s.firstTx)} and {fmtMonth(s.lastTx)} — {s.buys} buys and
+        {" "}{s.sells} sells. Amounts are the brackets as filed; timing is counted
+        against the 45-day legal maximum.
+      </p>
+    </section>
+
+    <section class="mx-auto max-w-[75rem] px-[5vw] pb-[7vh]">
+      <div class="statstrip">
+        {
+          STAT_CARDS.map((c) => (
+            <div class="stat">
+              <div class="statnum stat-n">{c.n}</div>
+              <div class="statlabel">{c.l}</div>
+            </div>
+          ))
+        }
+      </div>
+      <p class="fineprint mt-5 max-w-[85ch]">
+        Disclosed dollar flow, by bracket midpoint: <b class="text-ink"
+          >~{s.estBuyLabel}</b
+        > bought against <b class="text-ink">~{s.estSellLabel}</b> sold. Filings
+        report ranges, not exact amounts — these are directional estimates, never
+        real position sizes, and {s.pctLate}% of these filings arrived past the
+        legal deadline.
+      </p>
+    </section>
+
+    {
+      t.topMembers.length > 0 && (
+        <section class="mx-auto max-w-[75rem] px-[5vw] pb-[7vh]">
+          <div class="section-head">
+            <h2 class="section-title whitespace-nowrap">
+              Who trades {t.ticker}
+            </h2>
+            <span class="eyebrow">Most active filers first</span>
+          </div>
+          <div class="mt-8">
+            {t.topMembers.map((m: any) => (
+              <div class="mrow">
+                <div class="mname">
+                  {m.hasPage ? (
+                    <a href={`/members/${m.slug}`}>{m.name}</a>
+                  ) : (
+                    m.name
+                  )}
+                  <small>
+                    {m.party} · {m.chamber}
+                  </small>
+                </div>
+                <div class="msplit">
+                  <span class="text-buy">{m.buys} buy</span>
+                  <span class="text-ink-soft">/</span>
+                  <span class="text-sell">{m.sells} sell</span>
+                </div>
+                <div class="mcount">
+                  {m.trades}×<small>~{m.estLabel}</small>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+      )
+    }
+
+    <section class="mx-auto max-w-[75rem] px-[5vw] pb-[6vh]">
+      <div class="section-head">
+        <h2 class="section-title whitespace-nowrap">Recent {t.ticker} trades</h2>
+        <span class="eyebrow">
+          Most recent {t.tradesShown} of {s.trades}
+        </span>
+      </div>
+
+      <div role="table" aria-label={`${t.ticker} trades disclosed by Congress`}>
+        {
+          t.trades.map((r: any) => (
+            <div role="row" class="trow">
+              <div role="cell" class="ttick">
+                {r.hasPage ? (
+                  <a href={`/members/${r.memberSlug}`} class="mlink">
+                    {r.member}
+                  </a>
+                ) : (
+                  r.member
+                )}
+                <small>{r.party}</small>
+              </div>
+              <div
+                role="cell"
+                class={`tside font-semibold ${r.side === "BUY" ? "text-buy" : "text-sell"}`}
+              >
+                {r.side}
+              </div>
+              <div role="cell" class="tamt">{r.amountBucket}</div>
+              <div role="cell" class="tdate">
+                {fmtDate(r.txDate)}
+                <small>filed {fmtDate(r.filedDate)}</small>
+              </div>
+              <div role="cell" class="tlate">
+                {r.daysLate && r.daysLate > 0 ? (
+                  <span class="latebad">{r.daysLate}d late</span>
+                ) : (
+                  <span class="lateok">on time</span>
+                )}
+                {r.sourceUrl && (
+                  <a
+                    href={r.sourceUrl}
+                    class="tsrc"
+                    rel="nofollow"
+                    aria-label="Official filing"
+                  >
+                    filing ↗
+                  </a>
+                )}
+              </div>
+            </div>
+          ))
+        }
+      </div>
+
+      <p class="fineprint mt-6 max-w-[80ch]">
+        Every row links to the official filing it came from. Amounts are the
+        brackets as filed; "days late" counts days past the STOCK Act's 45-day
+        maximum (<a
+          href="/how-it-works"
+          class="underline underline-offset-2 hover:text-ink">how we count</a
+        >). Disclosures arrive 30–45 days after the trade, so this is a public
+        record — never real-time, and never investment advice.
+      </p>
+    </section>
+
+    <section class="border-t-2 border-ink px-[5vw] py-[10vh] text-center">
+      <h2 class="text-[clamp(1.8rem,4.5vw,3.2rem)] font-black leading-[1.15] tracking-[-0.03em] text-balance">
+        Know the next {t.ticker} trade first.
+      </h2>
+      <p class="mx-auto mt-4 mb-8 max-w-[44ch] text-pretty text-ink-soft">
+        Every new disclosure — {t.ticker} and everything else — in one daily
+        email.
+      </p>
+      <a href="/#join" class="btn inline-block no-underline">Get trade alerts</a>
+    </section>
+
+    <Footer />
+
+    <CountUp />
+  </body>
+</html>
+
+<style>
+  /* Shares the member page's stat strip + trade row system (DESIGN.md §8). */
+  .statstrip {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    border-block: 1px solid var(--color-rule);
+  }
+  .stat {
+    padding: 1.75rem 1.5rem;
+    border-left: 1px solid var(--color-rule);
+  }
+  .stat:first-child {
+    border-left: 0;
+    padding-left: 0;
+  }
+  .statnum {
+    font-family: var(--font-sans);
+    font-weight: 900;
+    font-size: clamp(1.9rem, 4vw, 2.9rem);
+    letter-spacing: -0.03em;
+    line-height: 1;
+    font-variant-numeric: tabular-nums;
+    color: var(--color-stamp);
+  }
+  .statlabel {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    color: var(--color-ink-soft);
+    margin-top: 0.75rem;
+  }
+  @media (max-width: 40rem) {
+    .statstrip {
+      grid-template-columns: 1fr 1fr;
+    }
+    .stat {
+      padding: 1.25rem 1rem;
+    }
+    .stat:nth-child(odd) {
+      border-left: 0;
+      padding-left: 0;
+    }
+    .stat:nth-child(n + 3) {
+      border-top: 1px solid var(--color-rule);
+    }
+  }
+
+  /* Who-trades-it leaderboard. */
+  .mrow {
+    display: grid;
+    grid-template-columns: 1.6fr 1fr auto;
+    gap: 0.75rem;
+    align-items: baseline;
+    padding: 0.9rem 0.25rem;
+    border-bottom: 1px solid var(--color-rule);
+    font-family: var(--font-mono);
+    font-size: 0.83rem;
+  }
+  .mrow > * {
+    min-width: 0;
+  }
+  .mname {
+    font-family: var(--font-sans);
+    font-weight: 700;
+    font-size: 0.95rem;
+  }
+  .mname a {
+    color: inherit;
+    text-decoration: none;
+    border-bottom: 1px solid var(--color-rule);
+  }
+  .mname a:hover {
+    border-color: var(--color-stamp);
+    color: var(--color-stamp);
+  }
+  .mname small,
+  .mcount small {
+    display: block;
+    font-family: var(--font-mono);
+    font-weight: 400;
+    font-size: 0.72rem;
+    color: var(--color-ink-soft);
+    margin-top: 0.125rem;
+  }
+  .msplit {
+    display: flex;
+    gap: 0.4rem;
+    font-size: 0.78rem;
+  }
+  .mcount {
+    text-align: right;
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+  }
+
+  .trow {
+    display: grid;
+    grid-template-columns: 2fr 0.6fr 0.9fr 1.1fr 1fr;
+    gap: 0.75rem;
+    align-items: center;
+    padding: 1.1rem 0.25rem;
+    border-bottom: 1px solid var(--color-rule);
+    font-family: var(--font-mono);
+    font-size: 0.83rem;
+  }
+  .trow > * {
+    min-width: 0;
+  }
+  .ttick {
+    font-family: var(--font-sans);
+    font-weight: 700;
+    font-size: 0.95rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .ttick .mlink {
+    color: inherit;
+    text-decoration: none;
+    border-bottom: 1px solid var(--color-rule);
+  }
+  .ttick .mlink:hover {
+    border-color: var(--color-stamp);
+    color: var(--color-stamp);
+  }
+  .ttick small,
+  .tdate small {
+    display: block;
+    font-family: var(--font-mono);
+    font-weight: 400;
+    font-size: 0.72rem;
+    color: var(--color-ink-soft);
+    margin-top: 0.125rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .tamt {
+    font-variant-numeric: tabular-nums;
+  }
+  .tlate {
+    text-align: right;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.25rem;
+  }
+  .latebad {
+    color: var(--color-stamp);
+    font-weight: 600;
+  }
+  .lateok {
+    color: var(--color-ink-soft);
+  }
+  .tsrc {
+    font-size: 0.72rem;
+    color: var(--color-ink-soft);
+    text-decoration: none;
+  }
+  .tsrc:hover {
+    color: var(--color-ink);
+  }
+
+  @media (max-width: 47.5rem) {
+    .trow {
+      grid-template-columns: 1.6fr 0.7fr 1fr;
+      font-size: 0.75rem;
+    }
+    .trow .tamt,
+    .trow .tdate {
+      display: none;
+    }
+    .mrow {
+      grid-template-columns: 1.4fr auto;
+    }
+    .mrow .msplit {
+      display: none;
+    }
+  }
+</style>

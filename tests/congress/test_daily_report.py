@@ -71,6 +71,21 @@ class TestBuildReport(unittest.TestCase):
         self.assertIn("No new signals or rating changes", r["markdown"])
         self.assertIn("No new disclosures", r["markdown"])
 
+    def test_ticker_deep_links(self):
+        # Tickers with a public page link back into the site, UTM-tagged so
+        # Vercel analytics can attribute the email as a traffic source.
+        urls = daily_report.ticker_links(
+            {"tickers": [{"ticker": "NVDA", "slug": "nvda"}]})
+        self.assertEqual(
+            urls["NVDA"],
+            "https://capitolledger.io/tickers/nvda?utm_source=email"
+            "&utm_medium=report&utm_campaign=morning")
+        r = build_report(TRADES, AI, NEW_SIGNALS, prev_ratings={},
+                         today_iso="2026-07-07", ticker_urls=urls)
+        self.assertIn("/tickers/nvda?utm_source=email", r["html"])
+        # A ticker with no page stays plain text (no link to a 404).
+        self.assertNotIn("/tickers/msft", r["html"])
+
     def test_digest_has_no_traffic(self):
         # Traffic is delivered in its own email now, not the digest.
         self.assertNotIn("Traffic", self.r["markdown"])

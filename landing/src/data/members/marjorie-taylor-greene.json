@@ -18,32 +18,44 @@
     {
       "ticker": "AMZN",
       "count": 11,
-      "asset": "Amazon.com, Inc. - Common Stock"
+      "asset": "Amazon.com, Inc. - Common Stock",
+      "slug": "amzn",
+      "hasPage": true
     },
     {
       "ticker": "TSLA",
       "count": 9,
-      "asset": "Tesla, Inc. - Common Stock $200?"
+      "asset": "Tesla, Inc. - Common Stock $200?",
+      "slug": "tsla",
+      "hasPage": true
     },
     {
       "ticker": "UPS",
       "count": 9,
-      "asset": "United Parcel Service, Inc. Common Stock"
+      "asset": "United Parcel Service, Inc. Common Stock",
+      "slug": "ups",
+      "hasPage": true
     },
     {
       "ticker": "AMD",
       "count": 9,
-      "asset": "Advanced Micro Devices, Inc."
+      "asset": "Advanced Micro Devices, Inc.",
+      "slug": "amd",
+      "hasPage": true
     },
     {
       "ticker": "GOOG",
       "count": 8,
-      "asset": "Alphabet Inc. - Class C Capital Stock"
+      "asset": "Alphabet Inc. - Class C Capital Stock",
+      "slug": "goog",
+      "hasPage": true
     },
     {
       "ticker": "IBIT",
       "count": 7,
-      "asset": "iShares Bitcoin Trust ETF"
+      "asset": "iShares Bitcoin Trust ETF",
+      "slug": "ibit",
+      "hasPage": false
     }
   ],
   "trades": [

@@ -366,3 +366,98 @@ class TestMemberPayload(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class TestTickerPages(unittest.TestCase):
+    """Ticker pages: universe picked by substance, payload, and file writing."""
+
+    def test_ticker_slug(self):
+        self.assertEqual(ld.ticker_slug("NVDA"), "nvda")
+        self.assertEqual(ld.ticker_slug("BRK.B"), "brk-b")
+
+    def test_clean_company(self):
+        self.assertEqual(
+            ld.clean_company("NVIDIA Corporation - Common Stock", "NVDA"),
+            "NVIDIA Corporation")
+        self.assertEqual(
+            ld.clean_company("Alphabet Inc. - Class C Capital Stock", "GOOG"),
+            "Alphabet Inc.")
+        self.assertEqual(
+            ld.clean_company("Williams Companies, Inc. (The) Common Stock", "WMB"),
+            "Williams Companies, Inc.")
+        self.assertEqual(ld.clean_company("Apple Inc. (AAPL)", "AAPL"), "Apple Inc.")
+        # No usable asset string → fall back to the symbol, never empty.
+        self.assertEqual(ld.clean_company("", "XYZ"), "XYZ")
+
+    def test_universe_excludes_thin_tickers(self):
+        # 30 NVDA trades clear the bar; a 2-trade ticker must NOT get a page
+        # (thin auto-generated pages are an SEO liability).
+        trades = [MT(ticker="NVDA", tx="2026-06-01") for _ in range(30)]
+        trades += [MT(ticker="THIN") for _ in range(2)]
+        uni = ld.select_ticker_pages(trades, minimum=25)
+        self.assertEqual(uni, ["NVDA"])
+        self.assertNotIn("THIN", uni)
+
+    def test_universe_ranked_and_capped(self):
+        trades = ([MT(ticker="AAA") for _ in range(30)]
+                  + [MT(ticker="BBB") for _ in range(40)])
+        self.assertEqual(ld.select_ticker_pages(trades, minimum=5), ["BBB", "AAA"])
+        self.assertEqual(ld.select_ticker_pages(trades, count=1, minimum=5), ["BBB"])
+
+    def test_payload_summary_and_members(self):
+        trades = [
+            MT(member="Nancy Pelosi", ticker="NVDA", type="buy", tx="2026-06-01"),
+            MT(member="Nancy Pelosi", ticker="NVDA", type="buy", tx="2026-05-01"),
+            MT(member="Tommy Tuberville", ticker="NVDA", type="sell",
+               tx="2026-04-01"),
+            MT(member="Nancy Pelosi", ticker="AAPL"),          # other ticker
+        ]
+        p = ld.ticker_payload("NVDA", trades)
+        self.assertEqual(p["slug"], "nvda")
+        self.assertEqual(p["ticker"], "NVDA")
+        self.assertEqual(p["summary"]["trades"], 3)
+        self.assertEqual(p["summary"]["members"], 2)
+        self.assertEqual(p["summary"]["buys"], 2)
+        self.assertEqual(p["summary"]["sells"], 1)
+        self.assertEqual(p["summary"]["firstTx"], "2026-04-01")
+        self.assertEqual(p["summary"]["lastTx"], "2026-06-01")
+        # Most active filer first; featured members are flagged for linking.
+        self.assertEqual(p["topMembers"][0]["name"], "Nancy Pelosi")
+        self.assertEqual(p["topMembers"][0]["trades"], 2)
+        self.assertTrue(p["topMembers"][0]["hasPage"])
+
+    def test_payload_rows_have_source_and_are_capped(self):
+        trades = [MT(ticker="NVDA", tx=f"2026-06-{i:02d}") for i in range(1, 30)]
+        p = ld.ticker_payload("NVDA", trades)
+        self.assertEqual(p["tradesShown"], ld.TICKER_TRADE_CAP)
+        self.assertEqual(p["trades"][0]["txDate"], "2026-06-29")  # newest first
+        self.assertTrue(p["trades"][0]["sourceUrl"])              # provenance
+
+    def test_unfeatured_member_not_linked(self):
+        p = ld.ticker_payload("NVDA", [MT(member="Random Filer", ticker="NVDA")])
+        self.assertFalse(p["topMembers"][0]["hasPage"])
+        self.assertFalse(p["trades"][0]["hasPage"])
+
+    def test_write_ticker_files(self):
+        trades = [MT(ticker="NVDA", tx="2026-06-01") for _ in range(30)]
+        trades += [MT(ticker="THIN") for _ in range(2)]
+        with TemporaryDirectory() as d:
+            out = Path(d)
+            written = ld.write_ticker_files(trades, out)
+            self.assertEqual(written, ["nvda"])
+            self.assertTrue((out / "tickers" / "nvda.json").exists())
+            self.assertFalse((out / "tickers" / "thin.json").exists())
+            idx = json.loads((out / "tickers" / "_index.json").read_text())
+            self.assertEqual([r["ticker"] for r in idx["tickers"]], ["NVDA"])
+            self.assertEqual(idx["tickers"][0]["trades"], 30)
+
+    def test_member_chips_link_to_ticker_pages(self):
+        trades = [MT(ticker="NVDA", tx="2026-06-01") for _ in range(30)]
+        p = ld.member_payload("Nancy Pelosi", trades, {},
+                              ticker_pages={"NVDA"})
+        chip = p["topTickers"][0]
+        self.assertEqual(chip["slug"], "nvda")
+        self.assertTrue(chip["hasPage"])
+        # Without the set, chips stay plain (no link to a page that isn't built).
+        plain = ld.member_payload("Nancy Pelosi", trades, {})
+        self.assertFalse(plain["topTickers"][0]["hasPage"])

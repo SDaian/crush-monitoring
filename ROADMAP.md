@@ -14,7 +14,7 @@ added *around* that record, never instead of it.
 | Stage | Trigger | Move | Status |
 |---|---|---|---|
 | 0 — JSON in git | — (current) | Pipeline writes JSON, the daily Action commits it, static pages read it. Free audit log, zero infra. | ✅ live |
-| 1 — SQLite in the pipeline | Member/ticker pages or query-heavy generators | The Action loads trades into a local SQLite (stdlib `sqlite3`, keeps the offline-test dependency policy); generators become SQL; output stays the same small JSONs. No servers. DuckDB is the alternative if the queries turn analytical. | planned — **consciously deferred**: member pages shipped (2026-07-21) for the curated featured set only (5 members), which `landing_data.member_payload` slices from the trades JSON in-memory with no perf issue. The trigger fires when this scales to *every* member or to ticker pages (the full cross-product), where per-request JSON scans stop being cheap. |
+| 1 — SQLite in the pipeline | Member/ticker pages or query-heavy generators | The Action loads trades into a local SQLite (stdlib `sqlite3`, keeps the offline-test dependency policy); generators become SQL; output stays the same small JSONs. No servers. DuckDB is the alternative if the queries turn analytical. | planned — **consciously deferred twice**: member pages shipped (2026-07-21) for 5 curated filers, and **ticker pages shipped (2026-07-24) for the top 24 symbols by disclosed trades** (`landing_data.select_ticker_pages`). Both slice the trades JSON in memory per build with no perf issue (~12.6k rows, 35 pages, <5s). The trigger fires when either scales to the full cross-product — *every* member (~535) or *every* ticker (~1,400) — where per-build JSON scans stop being cheap. |
 | 2 — Serverless Postgres | User accounts / follows / per-user alerts | Neon, Supabase or Vercel Postgres for **user data only** (multi-writer, private — wrong fit for git). Supabase preferred: bundles auth + row-level security. The public trade record keeps publishing to git/JSON. | planned |
 
 Scale reality check: congressional trading is tens of thousands of rows per
@@ -93,6 +93,18 @@ In rough priority order; each item states its blocking dependency.
   nav, the footer sitemap, and the footer's named-member copy. Scaling this to
   *every* member is what fires storage stage 1 (see the storage table); the
   static-JSON approach is a conscious deferral, fine at 5 members.
+- **Ticker pages** — ✅ shipped 2026-07-24 (`landing_data.ticker_payload` /
+  `write_ticker_files` → `landing/src/data/tickers/*.json`; rendered by
+  `landing/src/pages/tickers/[slug].astro` + a `/tickers` index). The organic
+  search demand is on **entities, not dates** ("nvda congress trades"), so this
+  — not a dated report archive — is the traffic play. The universe is picked by
+  **substance each run**: the top `TICKER_PAGE_COUNT` symbols clearing
+  `TICKER_PAGE_MIN_TRADES`, never the featured watchlist, because a pile of
+  thin auto-generated pages is an SEO liability on a young domain (a featured
+  name like NU with 4 disclosed trades would be a stub). Cross-linked with
+  member pages both ways, and deep-linked from the daily email with UTM tags so
+  Vercel analytics attributes the traffic. Scaling to all ~1,400 tickers fires
+  storage stage 1.
 - **Member and ticker follows** — already promised on the site ("Member and
   ticker follows are next"): per-user watchlists and filtered alerts. Requires
   accounts → triggers storage stage 2 (Supabase) and contact stage 3.

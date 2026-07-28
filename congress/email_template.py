@@ -99,9 +99,16 @@ def scorecard_table(scorecard: list[dict]) -> str:
         # so it survives even a client that strips a cell's style attribute.
         chg = (f"<font color='{_chg_color(r['chg_dir'])}'>{_esc(r['chg'])}</font>")
         read = (f"<font color='{color}'><b>{_esc(r['label'])}</b></font>")
+        # Tickers with a public page become links back into the site (UTM-tagged
+        # so Vercel analytics can attribute the email as a traffic source).
+        sym = f"<b>{_esc(r['ticker'])}</b>"
+        if r.get("url"):
+            sym = (f"<a href='{r['url']}' style='color:{INK};"
+                   f"text-decoration:none;border-bottom:1px solid {RULE}'>"
+                   f"{sym}</a>")
         cells = (
             f"<td style='padding:7px 8px;{_f('13px', '1.3', MONO, 700)}color:{INK}'>"
-            f"<b>{_esc(r['ticker'])}</b></td>"
+            f"{sym}</td>"
             f"<td style='padding:7px 8px;text-align:right;{_f('13px', '1.3', MONO)}"
             f"color:{INK}'>${_esc(r['price'])}</td>"
             f"<td style='padding:7px 8px;text-align:right;{_f('13px', '1.3', MONO)}'>"

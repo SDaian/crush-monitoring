@@ -157,12 +157,19 @@ const schema = [
             <span class="eyebrow">By number of disclosed trades</span>
           </div>
           <div class="mt-8 flex flex-wrap gap-3">
-            {m.topTickers.map((t: any) => (
-              <div class="chip">
-                <b>{t.ticker}</b>
-                <span>{t.count}×</span>
-              </div>
-            ))}
+            {m.topTickers.map((t: any) =>
+              t.hasPage ? (
+                <a href={`/tickers/${t.slug}`} class="chip chip-link">
+                  <b>{t.ticker}</b>
+                  <span>{t.count}×</span>
+                </a>
+              ) : (
+                <div class="chip">
+                  <b>{t.ticker}</b>
+                  <span>{t.count}×</span>
+                </div>
+              ),
+            )}
           </div>
         </section>
       )
@@ -386,6 +393,23 @@ const schema = [
   }
   .chip span {
     color: var(--color-ink-soft);
+  }
+  /* Chips for tickers that have their own page become links. */
+  .chip-link {
+    color: var(--color-ink);
+    text-decoration: none;
+    transition:
+      background 0.15s,
+      color 0.15s;
+  }
+  .chip-link:hover,
+  .chip-link:focus-visible {
+    background: var(--color-ink);
+    color: var(--color-paper);
+  }
+  .chip-link:hover span,
+  .chip-link:focus-visible span {
+    color: var(--color-paper);
   }
 
   .hrow {
