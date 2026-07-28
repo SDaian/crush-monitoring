@@ -5,8 +5,8 @@
   "cutoff": "2026-07-25",
   "counts": {
     "tickers": 20,
-    "new_signals": 3,
-    "flips": 10,
+    "new_signals": 0,
+    "flips": 0,
     "disclosures": 18
   },
   "scorecard": [
@@ -211,78 +211,8 @@
       "url": null
     }
   ],
-  "signals": [
-    {
-      "ticker": "AMD",
-      "label": "Lost the 50-day average",
-      "type": "lose_sma50",
-      "asof": "2026-07-27"
-    },
-    {
-      "ticker": "ASML",
-      "label": "Lost the 50-day average",
-      "type": "lose_sma50",
-      "asof": "2026-07-27"
-    },
-    {
-      "ticker": "SPCX",
-      "label": "New 52-week low",
-      "type": "new_52w_low",
-      "asof": "2026-07-27"
-    }
-  ],
-  "flips": [
-    {
-      "ticker": "NVDA",
-      "prev": "Strong Buy",
-      "label": "Hold"
-    },
-    {
-      "ticker": "AMD",
-      "prev": "Strong Buy",
-      "label": "Sell"
-    },
-    {
-      "ticker": "AVGO",
-      "prev": "Buy",
-      "label": "Strong Buy"
-    },
-    {
-      "ticker": "TSM",
-      "prev": "Hold",
-      "label": "Sell"
-    },
-    {
-      "ticker": "ASML",
-      "prev": "Buy",
-      "label": "Sell"
-    },
-    {
-      "ticker": "SNDK",
-      "prev": "Hold",
-      "label": "Sell"
-    },
-    {
-      "ticker": "MSFT",
-      "prev": "Strong Sell",
-      "label": "Sell"
-    },
-    {
-      "ticker": "GOOGL",
-      "prev": "Strong Sell",
-      "label": "Sell"
-    },
-    {
-      "ticker": "AMZN",
-      "prev": "Strong Sell",
-      "label": "Sell"
-    },
-    {
-      "ticker": "VRT",
-      "prev": "Hold",
-      "label": "Sell"
-    }
-  ],
+  "signals": [],
+  "flips": [],
   "disclosures": [
     {
       "filingDate": "2026-07-27",
