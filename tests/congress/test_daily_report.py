@@ -276,6 +276,8 @@ class TestButtondown(unittest.TestCase):
         self.assertEqual(p["subject"], "Morning report")
         self.assertEqual(p["body"], "<p>hi</p>")
         self.assertEqual(p["email_type"], "public")
+        # Must ask to SEND — an implicit draft returns 201 and mails nobody.
+        self.assertEqual(p["status"], "about_to_send")
 
     def test_api_failure_is_not_fatal(self):
         os.environ[self.bd.ENV_KEY] = "k"
@@ -295,7 +297,7 @@ class TestButtondown(unittest.TestCase):
         try:
             def ok(payload, key):
                 seen.update(payload=payload, key=key)
-                return 201, "{}"
+                return 201, '{"status": "about_to_send", "id": "abc12345"}'
             self.bd._post = ok
             self.assertTrue(self.bd.send("Subj", "<p>hi</p>"))
             self.assertEqual(seen["key"], "k")
