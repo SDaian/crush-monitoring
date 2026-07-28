@@ -66,7 +66,7 @@ npm run preview    # serve the build
 
 | Variable | Purpose |
 |---|---|
-| `PUBLIC_SIGNUP_ENDPOINT` | Signup provider endpoint the form POSTs `email=` to (form-encoded). **Unset** → submitting shows "Signups open soon" (pre-launch state). |
+| `PUBLIC_SIGNUP_ENDPOINT` | Signup provider endpoint the forms POST `email=` to (form-encoded). **Unset** → every form shows "Signups open soon" and the signup dialog is not rendered at all; the build prints a warning, because a silently dead form looks exactly like nobody wanting to subscribe. |
 | `PUBLIC_CONTACT_ENDPOINT` | Contact-form endpoint (POSTs form-encoded `email`, `message`, `subject`). Web3Forms chosen at launch: `https://api.web3forms.com/submit`. **Unset** → "Contact opens soon". |
 | `PUBLIC_CONTACT_KEY` | Sent as `access_key` with the contact POST when set (Web3Forms' auth shape). Public by design — it only routes submissions. |
 

@@ -10,6 +10,11 @@ interface Props {
 }
 const { active } = Astro.props;
 const home = Astro.url.pathname === "/";
+// Every content page now ends in a real signup form with id="join", so the
+// CTA scrolls to it instead of bouncing the visitor to the home page and
+// making them re-decide. /privacy is the one page without a form.
+const hasForm = Astro.url.pathname !== "/privacy";
+const ctaHref = hasForm ? "#join" : "/#join";
 
 // One source for both the inline (desktop) nav and the mobile menu.
 const NAV = [
@@ -66,10 +71,10 @@ const cta =
           </a>
         ))
       }
-      <a href="/#join" class={cta}>Get alerts</a>
+      <a href={ctaHref} class={cta}>Get alerts</a>
     </nav>
 
-    <a href="/#join" class={`${cta} md:hidden`}>Get alerts</a>
+    <a href={ctaHref} class={`${cta} md:hidden`}>Get alerts</a>
   </header>
 
   <nav id="mobileMenu" class="mobile-menu" aria-label="Menu" inert>

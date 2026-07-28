@@ -11,6 +11,7 @@ import Footer from "../components/Footer.astro";
 import Seo from "../components/Seo.astro";
 import CountUp from "../components/CountUp.astro";
 import Timeline from "../components/Timeline.astro";
+import SignupForm from "../components/SignupForm.astro";
 import feed from "../data/disclosures.json";
 import stats from "../data/stats.json";
 import { seoDescription } from "../lib/seo";
@@ -25,8 +26,6 @@ const vol = stats.estVolumeThisYearUsd;
 const fmtVol =
   vol >= 1e9 ? `$${(vol / 1e9).toFixed(1)}B` : `$${Math.round(vol / 1e6)}M`;
 const fmtLag = `${stats.medianLagDays} days`;
-
-const SIGNUP_ENDPOINT = import.meta.env.PUBLIC_SIGNUP_ENDPOINT ?? "";
 
 // Contact form contract (provider-agnostic, like the signup form): POST
 // form-encoded email+message to PUBLIC_CONTACT_ENDPOINT; if PUBLIC_CONTACT_KEY
@@ -137,33 +136,7 @@ const description = seoDescription(
             White House — who, what, how much, and how late. Pulled from
             official filings into one clean daily email.
           </p>
-          <form
-            id="join"
-            class="mt-7 flex flex-wrap max-w-[27.5rem] max-[840px]:flex-col"
-            data-endpoint={SIGNUP_ENDPOINT}
-            novalidate
-          >
-            <label class="sr-only" for="email">Email address</label>
-            <input
-              class="email-input !min-w-0 flex-1 border-r-0 max-[840px]:border-r"
-              type="email"
-              id="email"
-              name="email"
-              placeholder="you@email.com"
-              autocomplete="email"
-              required
-            />
-            <button class="btn btn-stamp whitespace-nowrap max-[840px]:w-full" type="submit"
-              >Get trade alerts</button
-            >
-            <p
-              class="mono mt-3 w-full basis-full text-[.78rem]"
-              id="form-status"
-              role="status"
-              aria-live="polite"
-            >
-            </p>
-          </form>
+          <SignupForm variant="hero" id="join" note="" />
           <p class="mono mt-3 text-[.75rem] text-ink-soft">
             <span class="max-[760px]:block"
               >Free while in beta · one email per day — always.</span
@@ -411,75 +384,6 @@ const description = seoDescription(
     <Footer />
 
     <CountUp />
-
-    <script>
-      // FR-1: client-side validation, POST to the configured endpoint,
-      // inline success/error, no reload. With no endpoint configured
-      // (pre-launch), submitting reports that signups open soon.
-      const form = document.getElementById("join") as HTMLFormElement;
-      const email = document.getElementById("email") as HTMLInputElement;
-      const status = document.getElementById("form-status") as HTMLElement;
-      const button = form.querySelector("button") as HTMLButtonElement;
-      const endpoint = form.dataset.endpoint ?? "";
-
-      const say = (msg: string, isError: boolean) => {
-        // Retrigger the rise-in entrance for each new message (plans/004).
-        status.classList.remove("is-in");
-        void status.offsetWidth; // restart the animation
-        status.textContent = msg;
-        status.classList.toggle("text-stamp", isError);
-        status.classList.toggle("text-buy", !isError && msg !== "");
-        if (msg) status.classList.add("is-in");
-      };
-
-      form.addEventListener("submit", async (e) => {
-        e.preventDefault();
-        const value = email.value.trim();
-        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
-          say("Enter a valid email address.", true);
-          email.focus();
-          return;
-        }
-        if (!endpoint) {
-          say("Signups open soon — check back shortly.", false);
-          return;
-        }
-        button.disabled = true;
-        const label = button.textContent;
-        button.textContent = "Sending…";
-        const post = (mode?: RequestMode) =>
-          fetch(endpoint, {
-            method: "POST",
-            ...(mode ? { mode } : {}),
-            headers: { "Content-Type": "application/x-www-form-urlencoded" },
-            body: new URLSearchParams({ email: value }),
-          });
-        try {
-          try {
-            const res = await post();
-            if (!res.ok) throw new Error(String(res.status));
-          } catch (err) {
-            // Some subscribe endpoints (Buttondown's embed-subscribe among
-            // them) are built for a native form POST and send no CORS headers,
-            // so the browser delivers the request but blocks us reading the
-            // reply and fetch rejects with a TypeError. Re-send opaquely and
-            // trust the provider's confirmation email as the real receipt.
-            // Subscribe endpoints are idempotent, so the repeat is harmless.
-            if (!(err instanceof TypeError)) throw err;
-            await post("no-cors");
-          }
-          // Double opt-in: they are NOT subscribed until they click the link
-          // in the confirmation email, so don't claim they are.
-          say("Almost there — check your inbox to confirm.", false);
-          form.reset();
-        } catch {
-          say("Something went wrong — try again.", true);
-        } finally {
-          button.disabled = false;
-          button.textContent = label;
-        }
-      });
-    </script>
 
     <script>
       // Contact form: same contract style as FR-1 — validate, POST

@@ -220,8 +220,10 @@
     opacity: 0.55;
     cursor: wait;
   }
-  /* Completion feedback rises in at the causal moment (plans/004). */
-  #form-status.is-in {
+  /* Completion feedback rises in at the causal moment (plans/004). A CLASS,
+     not an id — every page now renders a signup form, and several render two
+     (the band and the modal), so an id hook would animate only the first. */
+  .form-status.is-in {
     animation: rise-in 200ms var(--ease-out) both;
   }
   @keyframes rise-in {
@@ -493,7 +495,7 @@
       animation: none;
       transform:scaleX(1); /* fully drawn, statically */
     }
-    #form-status.is-in {
+    .form-status.is-in {
       animation:fade-in 0.2s ease both; /* fade only, no rise */
     }
   }
