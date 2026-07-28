@@ -279,6 +279,33 @@ class TestButtondown(unittest.TestCase):
         # Must ask to SEND — an implicit draft returns 201 and mails nobody.
         self.assertEqual(p["status"], "about_to_send")
 
+    def test_sends_the_confirmation_header(self):
+        # Without X-Buttondown-Live-Dangerously the API refuses to send:
+        # 400 sending_requires_confirmation. Lock the header in.
+        import urllib.request
+        captured = {}
+
+        def fake_urlopen(req, timeout=None):
+            captured["headers"] = {k.lower(): v for k, v in req.header_items()}
+
+            class R:
+                status = 201
+                def read(self): return b'{"status": "about_to_send"}'
+                def __enter__(self): return self
+                def __exit__(self, *a): return False
+            return R()
+
+        orig = urllib.request.urlopen
+        urllib.request.urlopen = fake_urlopen
+        try:
+            self.bd._post({"subject": "s"}, "key123")
+        finally:
+            urllib.request.urlopen = orig
+        self.assertEqual(captured["headers"].get("X-buttondown-live-dangerously".lower()),
+                         "true")
+        # And the key is sent as a Token, never in the URL.
+        self.assertEqual(captured["headers"].get("authorization"), "Token key123")
+
     def test_api_failure_is_not_fatal(self):
         os.environ[self.bd.ENV_KEY] = "k"
         orig = self.bd._post

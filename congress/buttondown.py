@@ -18,7 +18,9 @@ Design (matches ROADMAP contact stage 1):
 
 API: POST https://api.buttondown.com/v1/emails
      Authorization: Token <key>
-     {"subject": ..., "body": ..., "email_type": "public"}
+     X-Buttondown-Live-Dangerously: true   (required to actually send)
+     {"subject": ..., "body": ..., "email_type": "public",
+      "status": "about_to_send"}
 """
 
 from __future__ import annotations
@@ -67,6 +69,13 @@ def _post(payload: dict, key: str) -> tuple[int, str]:
             "Content-Type": "application/json",
             "Accept": "application/json",
             "User-Agent": "capitol-ledger-morning-report",
+            # Buttondown's safety interlock: creating an email that actually
+            # SENDS (status=about_to_send) is refused with
+            # 400 sending_requires_confirmation unless this header says you
+            # mean it. It exists so nobody blasts a live list while testing
+            # the API. Their docs note it is only enforced once per key, but
+            # sending it every time is harmless and keeps a fresh key working.
+            "X-Buttondown-Live-Dangerously": "true",
         },
     )
     with urllib.request.urlopen(req, timeout=TIMEOUT) as resp:
