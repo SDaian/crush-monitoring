@@ -118,10 +118,15 @@ class TestMainDelivery(unittest.TestCase):
             {"tickers": {}, "meta": {"new_signals": []}}))
         self.state = base / "state.json"
         self._orig = (daily_report.TRADES_JSON, daily_report.AI_JSON,
-                      daily_report.STATE_JSON, daily_report._gh)
+                      daily_report.STATE_JSON, daily_report.REPORT_JSON,
+                      daily_report._gh)
         daily_report.TRADES_JSON = base / "trades.json"
         daily_report.AI_JSON = base / "ai.json"
         daily_report.STATE_JSON = self.state
+        # main() publishes the web edition too — point it at the temp dir so a
+        # test run never overwrites the repo's real landing/src/data/report.json.
+        self.report_json = base / "report.json"
+        daily_report.REPORT_JSON = self.report_json
         self.calls = []
 
         def fake_gh(method, url, token, payload=None):
@@ -133,7 +138,8 @@ class TestMainDelivery(unittest.TestCase):
 
     def tearDown(self):
         (daily_report.TRADES_JSON, daily_report.AI_JSON,
-         daily_report.STATE_JSON, daily_report._gh) = self._orig
+         daily_report.STATE_JSON, daily_report.REPORT_JSON,
+         daily_report._gh) = self._orig
         os.environ.pop("REPO", None)
         os.environ.pop("GH_TOKEN", None)
         os.environ.pop("REPORT_ASSIGNEE", None)
@@ -145,6 +151,12 @@ class TestMainDelivery(unittest.TestCase):
         self.assertEqual(post[2]["assignees"], ["SDaian"])  # defaults to owner
         saved = json.loads(self.state.read_text())
         self.assertEqual(saved["issue_number"], 99)
+
+    def test_writes_report_json_for_the_web_page(self):
+        daily_report.main()
+        payload = json.loads(self.report_json.read_text())
+        for key in ("date", "scorecard", "signals", "flips", "disclosures"):
+            self.assertIn(key, payload)
 
     def test_assignee_override(self):
         os.environ["REPORT_ASSIGNEE"] = "someone-else"

@@ -170,7 +170,8 @@ def signals_block(signals: list[dict], flips: list[dict]) -> str:
     return "".join(parts)
 
 
-def disclosures_block(disclosures: list[dict], extra: int) -> str:
+def disclosures_block(disclosures: list[dict], extra: int,
+                      report_url: str = "") -> str:
     """Recent congressional disclosures as report lines (date · who · TICKER …)."""
     if not disclosures:
         return _empty("No new disclosures in this window.")
@@ -184,8 +185,13 @@ def disclosures_block(disclosures: list[dict], extra: int) -> str:
             f"{_esc(d['amount'])}</span>")
     html = _list_block(items)
     if extra > 0:
+        # The email caps the list (clients clip long messages); the web edition
+        # carries every one, so send the reader there rather than dead-ending.
+        more = (f"<a href='{report_url}' style='color:{STAMP};font-weight:700;"
+                f"text-decoration:none'>see all {extra + len(disclosures)} "
+                "on the site →</a>") if report_url else f"…and {extra} more."
         html += (f"<p style='margin:8px 0 0;{_f('12px', '1.5', SANS)}color:{INK_SOFT}'>"
-                 f"<i>…and {extra} more.</i></p>")
+                 f"<i>…and {extra} more · </i>{more}</p>")
     return html
 
 
@@ -309,7 +315,7 @@ def _document(*, right_label: str, date_label: str, intro_html: str,
 def render_html(*, date_label: str, disclaimer: str, scorecard: list[dict],
                 signals: list[dict], flips: list[dict],
                 disclosures: list[dict], extra_disclosures: int, cutoff: str,
-                tracker_url: str, preheader: str) -> str:
+                tracker_url: str, preheader: str, report_url: str = "") -> str:
     """The daily trade/scorecard digest email (traffic is a separate email)."""
     body_rows = "".join([
         _section("Featured stocks", "Technical read",
@@ -319,11 +325,16 @@ def render_html(*, date_label: str, disclaimer: str, scorecard: list[dict],
         _section("Congress", f"New disclosures "
                  f"<span style='font-weight:400;font-size:13px;color:{INK_SOFT}'>"
                  f"(filed since {_esc(cutoff)})</span>",
-                 disclosures_block(disclosures, extra_disclosures)),
+                 disclosures_block(disclosures, extra_disclosures,
+                                   report_url)),
     ])
     disc_txt = _esc(disclaimer.replace("**", ""))
+    browser = (f"<p style='margin:10px 0 0;{_f('11px', '1.5', MONO)}'>"
+               f"<a href='{report_url}' style='color:{INK_SOFT};"
+               "text-decoration:underline'>View this report in your browser"
+               "</a></p>") if report_url else ""
     intro = (f"<p style='margin:12px 0 0;{_f('12px', '1.5', SANS)}color:{INK_SOFT};'>"
-             f"<i>{disc_txt}</i></p>")
+             f"<i>{disc_txt}</i></p>" + browser)
     return _document(
         right_label="Morning report", date_label=date_label,
         intro_html=intro, body_rows=body_rows, tracker_url=tracker_url,

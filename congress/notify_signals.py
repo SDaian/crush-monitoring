@@ -36,8 +36,11 @@ DISCLAIMER = (
 
 
 def _page_url(repo: str) -> str:
-    owner, _, name = repo.partition("/")
-    return f"https://{owner}.github.io/{name}/trades.html"
+    """Where a signal notification sends the reader. The GitHub Pages build is
+    retired (and no longer served), so this points at the live site; ``repo``
+    is kept for the signature but no longer used to derive a Pages URL."""
+    from .daily_report import SITE_URL
+    return f"{SITE_URL}/tracker"
 
 
 def _post_issue(repo: str, token: str, title: str, body: str) -> bool:
