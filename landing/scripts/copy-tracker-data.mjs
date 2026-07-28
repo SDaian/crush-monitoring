@@ -25,16 +25,13 @@ const FILES = [
 
 await mkdir(dest, { recursive: true });
 let total = 0;
+const missing = [];
 for (const name of FILES) {
   const from = join(src, name);
   const info = await stat(from).catch(() => null);
   if (!info) {
-    console.error(
-      `\n[copy-tracker-data] MISSING ${from}\n` +
-        `The tracker cannot be built without it. Run \`python3 -m congress fetch\`\n` +
-        `or restore docs/data from git.\n`,
-    );
-    process.exit(1);
+    missing.push(name);
+    continue;
   }
   await copyFile(from, join(dest, name));
   total += info.size;
@@ -42,6 +39,24 @@ for (const name of FILES) {
     `[copy-tracker-data] ${name} (${(info.size / 1048576).toFixed(2)} MB)`,
   );
 }
-console.log(
-  `[copy-tracker-data] ${FILES.length} files, ${(total / 1048576).toFixed(2)} MB → public/data`,
-);
+
+if (missing.length) {
+  // Warn loudly, but DO NOT fail the build. This script reaches outside the
+  // Astro root (../../docs/data); on Vercel that only works when "Include
+  // source files outside of the Root Directory" is enabled. Exiting non-zero
+  // here would take down all 35 other pages — the whole marketing and SEO
+  // surface — because one page's data was unreachable. The tracker degrades
+  // on its own (it renders a "could not load" message), so ship the site and
+  // make the problem obvious in the log instead.
+  console.warn(
+    `\n[copy-tracker-data] ⚠️  MISSING from ${src}: ${missing.join(", ")}\n` +
+      `  → /tracker will render without data. Everything else builds normally.\n` +
+      `  → On Vercel: Settings → Build → Root Directory → enable\n` +
+      `    "Include source files outside of the Root Directory in the Build Step".\n` +
+      `  → Locally: restore docs/data from git or run \`python3 -m congress fetch\`.\n`,
+  );
+} else {
+  console.log(
+    `[copy-tracker-data] ${FILES.length} files, ${(total / 1048576).toFixed(2)} MB → public/data`,
+  );
+}
