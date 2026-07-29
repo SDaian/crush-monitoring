@@ -146,8 +146,9 @@ publication.
   marks a major structural break (masthead, band edges). Use them consistently —
   the weight communicates the size of the division.
 - **Zero border-radius everywhere.** Sharp corners are the identity
-  (`--radius-*: initial`). **The only exception is the live-dot, which is a
-  circle because it is literally a dot.** No rounded cards, buttons, or inputs.
+  (`--radius-*: initial`). **Two exceptions, both because the shape IS the
+  meaning:** the live-dot (literally a dot) and the holdings ring (a
+  part-to-whole is a circle). Neither licenses a rounded card, button or input.
 - **Grid:** centered, `max-width` ~1200px, `5vw` side gutters. Generous vertical
   rhythm between sections (~`10vh`). Whitespace is a feature — the page breathes
   like newsprint, it is not dense.
@@ -263,6 +264,22 @@ shared Astro components in `src/components/`.
   also the version people bounce from. Centering a top-layer dialog means
   **keeping the UA's `position: fixed`** (overriding it with `relative` drops the
   card at its static position, half off-screen) plus `inset: 0` and auto margins.
+- **Holdings ring** (`HoldingsChart.astro`) — portfolio composition as a donut:
+  top slices plus one neutral "everything else", the estimated total as a hero
+  figure in the middle, tickers direct-labelled around the ring, a legend, and a
+  ranked-bar table below. Inline SVG built at **build time**; no chart library and
+  no client JS. Three rules it must keep:
+  - **The ramp is sequential, not categorical.** One hue (stamp), monotonic in
+    lightness, darker = larger. Mix it in **oklab, never oklch** — oklch
+    interpolates the hue arc and paper's hue is 106°, so an oklch ramp drifts red
+    → orange → tan. A single-hue ramp cannot carry identity (its adjacent steps
+    fail every colour-distinguishability check), so **identity is carried by the
+    labels**, never by the colour.
+  - **The folded remainder is always drawn.** We list the top 16 of up to 135
+    positions; a ring of just those would read as the whole portfolio when it can
+    be 40% of it.
+  - **It does not animate.** A filed disclosure is settled evidence, same rule as
+    the late-filers leaderboard.
 - **Email-preview card** — the daily digest drawn as a broadsheet clipping: a
   stamp "Today's email" tab, an ink-ruled masthead (from + subject with live
   counts), disclosure rows, a mono footer. The hero **product shot**, framed on a
