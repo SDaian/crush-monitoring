@@ -416,6 +416,15 @@ Conventions:
   answers "Signups open soon" and nobody can subscribe — which from the outside
   looks identical to nobody *wanting* to. `src/lib/signup.ts` warns loudly at
   build time; it warns and never throws, so a deploy is never taken down over it.
+- **Charts must not out-claim the data.** The holdings ring/bars on member pages
+  (`HoldingsChart.astro` + `src/lib/holdings.ts`) render bracket midpoints of a
+  **truncated** list, so two things are mandatory: always draw the folded
+  remainder (the 16 listed can be 40% of a real portfolio — Greene), and always
+  caption ties (Pelosi's top eight are all exactly $15.0M because all eight are
+  in the same $5M–$25M band; equal slices mean equal *brackets*). Bar widths are
+  clamped — the untracked tail can exceed the largest listed holding and will
+  otherwise render past 100% and off the page. Charts are inline SVG built at
+  build time; no chart library, no client JS.
 - **Meta descriptions are capped at 150 chars, structurally.** Google truncates
   what it shows at ~155 desktop / ~120 mobile, and most of our descriptions
   interpolate pipeline data (a company name, a member's name, a trade count) —

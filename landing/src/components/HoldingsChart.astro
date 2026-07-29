@@ -1,0 +1,259 @@
+---
+// Portfolio composition as a ring: the top holdings by estimated share, with
+// everything else folded into one neutral "Other" slice.
+//
+// Rendered as inline SVG at BUILD time — no chart library, no client JS. The
+// data is static per build, and DESIGN.md §11 keeps client scripts to the forms
+// and the count-up.
+//
+// The ring is drawn as stacked <circle>s with stroke-dasharray rather than arc
+// paths: no trigonometry for the geometry, perfectly crisp joins, and the 2px
+// gap between segments falls out of the dash gap for free.
+//
+// It does NOT animate. DESIGN.md §6: motion means "alive", and a filed annual
+// disclosure is settled evidence — the same reason the late-filers leaderboard
+// doesn't animate in either.
+import {
+  segments as buildSegments,
+  concentration,
+  hasTies,
+  pctLabel,
+  type Holding,
+} from "../lib/holdings";
+
+interface Props {
+  holdings: Holding[];
+  /** Total position count from the annual filing — includes unlisted ones. */
+  positions: number;
+  /** Pre-formatted estimated total, e.g. "$138.1M". */
+  totalLabel: string;
+  name: string;
+}
+const { holdings, positions, totalLabel, name } = Astro.props;
+
+const segs = buildSegments(holdings, positions);
+const top5 = concentration(holdings, 5);
+const ties = hasTies(segs);
+
+// Ring geometry. r and the stroke width are in viewBox units; the SVG scales.
+const CX = 100;
+const CY = 100;
+const R = 66;
+const STROKE = 27;
+const C = 2 * Math.PI * R;
+const GAP = 2.5; // user units of blank between segments (DESIGN: 2px spacer)
+
+// Running offset so each arc starts where the previous ended. Rotating the
+// whole group -90° puts the first segment at 12 o'clock.
+let acc = 0;
+const arcs = segs.map((s) => {
+  const len = (s.pct / 100) * C;
+  const arc = {
+    ...s,
+    // Never let the gap eat a tiny slice entirely — clamp to a hairline.
+    dash: `${Math.max(len - GAP, 0.6)} ${C - Math.max(len - GAP, 0.6)}`,
+    offset: -acc,
+    // Mid-angle, for the direct label.
+    mid: ((acc + len / 2) / C) * 360 - 90,
+  };
+  acc += len;
+  return arc;
+});
+
+// Direct-label only the slices with room for one; the legend carries the rest
+// (the skill's rule: label selectively, never every segment). Below ~7% the
+// label would collide with its neighbour's.
+const LABEL_R = R + STROKE / 2 + 12;
+const labels = arcs
+  .filter((a) => a.pct >= 7 && !a.isOther)
+  .map((a) => {
+    const rad = (a.mid * Math.PI) / 180;
+    const x = CX + LABEL_R * Math.cos(rad);
+    const y = CY + LABEL_R * Math.sin(rad);
+    return { text: a.label, x, y, anchor: x >= CX ? "start" : "end" };
+  });
+
+const alt =
+  `Estimated portfolio composition for ${name}: ` +
+  segs.map((s) => `${s.label} ${pctLabel(s.pct)}`).join(", ") + ".";
+---
+
+<figure class="hchart">
+  <!-- Padded only when there are labels to fit. They sit outside the 200-unit
+       ring and a 5-character ticker was being sliced ("AAPL" → "AA") by a tight
+       box — but on a flat portfolio nothing clears the labelling threshold, and
+       padding an empty margin just shrinks the ring for no reason. -->
+  <svg
+    viewBox={labels.length ? "-44 -6 288 212" : "0 0 200 200"}
+    class="hring"
+    role="img"
+    aria-label={alt}
+    preserveAspectRatio="xMidYMid meet"
+  >
+    <title>{alt}</title>
+    <g transform={`rotate(-90 ${CX} ${CY})`}>
+      {
+        arcs.map((a) => (
+          <circle
+            cx={CX}
+            cy={CY}
+            r={R}
+            fill="none"
+            stroke={a.fill}
+            stroke-width={STROKE}
+            stroke-dasharray={a.dash}
+            stroke-dashoffset={a.offset}
+          />
+        ))
+      }
+    </g>
+    {
+      labels.map((l) => (
+        <text
+          x={l.x}
+          y={l.y}
+          class="hring-lbl"
+          text-anchor={l.anchor}
+          dominant-baseline="middle"
+        >
+          {l.text}
+        </text>
+      ))
+    }
+    <text x={CX} y={CY - 4} class="hring-total" text-anchor="middle">
+      ~{totalLabel}
+    </text>
+    <text x={CX} y={CY + 12} class="hring-sub" text-anchor="middle">
+      estimated
+    </text>
+  </svg>
+
+  <figcaption class="hkey">
+    <div class="hkey-lead">
+      Top 5 ≈ <b>{pctLabel(top5)}</b> of the estimated total
+    </div>
+    <ul class="hkey-list">
+      {
+        segs.map((s) => (
+          <li>
+            <span class="hkey-sw" style={`background:${s.fill}`} aria-hidden="true" />
+            <span class:list={["hkey-name", s.isOther && "is-other"]}>{s.label}</span>
+            <span class="hkey-pct">{pctLabel(s.pct)}</span>
+          </li>
+        ))
+      }
+    </ul>
+    {
+      ties && (
+        <p class="hkey-note">
+          Equal slices mean equal <b>brackets</b>, not equal value — disclosures
+          report ranges, so every position in the same band shares a midpoint.
+        </p>
+      )
+    }
+  </figcaption>
+</figure>
+
+<style>
+  .hchart {
+    display: grid;
+    grid-template-columns: minmax(0, 17rem) minmax(0, 1fr);
+    gap: 2rem 2.5rem;
+    align-items: center;
+    margin: 1.75rem 0 0;
+  }
+  .hring {
+    width: 100%;
+    height: auto;
+    /* A circle in a zero-radius system: deliberate, and noted in DESIGN.md. */
+  }
+  .hring-lbl {
+    font-family: var(--font-mono);
+    font-size: 9px;
+    font-weight: 600;
+    fill: var(--color-ink);
+  }
+  .hring-total {
+    font-family: var(--font-sans);
+    font-size: 19px;
+    font-weight: 900;
+    letter-spacing: -0.03em;
+    fill: var(--color-ink);
+  }
+  .hring-sub {
+    font-family: var(--font-mono);
+    font-size: 8px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    fill: var(--color-ink-soft);
+  }
+  .hkey-lead {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--color-ink-soft);
+    padding-bottom: 0.625rem;
+    border-bottom: 2px solid var(--color-ink);
+  }
+  .hkey-lead b {
+    color: var(--color-ink);
+    font-weight: 600;
+  }
+  .hkey-list {
+    list-style: none;
+    margin: 0.25rem 0 0;
+    padding: 0;
+  }
+  .hkey-list li {
+    display: grid;
+    grid-template-columns: 0.75rem 1fr auto;
+    gap: 0.625rem;
+    align-items: center;
+    padding: 0.4375rem 0;
+    border-bottom: 1px solid var(--color-rule);
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+  }
+  .hkey-sw {
+    width: 0.75rem;
+    height: 0.75rem;
+  }
+  .hkey-name {
+    font-weight: 600;
+    color: var(--color-ink);
+    min-width: 0;
+    overflow-wrap: break-word;
+  }
+  .hkey-name.is-other {
+    font-weight: 400;
+    color: var(--color-ink-soft);
+  }
+  .hkey-pct {
+    color: var(--color-ink-soft);
+    font-variant-numeric: tabular-nums;
+  }
+  .hkey-note {
+    margin-top: 0.875rem;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    line-height: 1.6;
+    color: var(--color-ink-soft);
+  }
+  .hkey-note b {
+    color: var(--color-ink);
+    font-weight: 600;
+  }
+
+  @media (max-width: 47.5rem) {
+    .hchart {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+      justify-items: center;
+    }
+    .hring {
+      max-width: 17rem;
+    }
+    .hkey {
+      width: 100%;
+    }
+  }
+</style>
