@@ -397,7 +397,11 @@ const schema = [
   .email-stamp {
     position: absolute;
     top: 0.75rem;
-    right: -0.75rem;
+    /* Hangs off the card's edge for the postmark effect — but on a phone the
+       card already sits in the page gutter, so the overhang plus the rotation
+       pushed the document past the viewport. Tuck it inside below the
+       breakpoint; the tilt reads the same. */
+    right: 0.5rem;
     transform: rotate(6deg);
     background: var(--color-stamp);
     color: var(--color-paper);
@@ -406,6 +410,11 @@ const schema = [
     letter-spacing: 0.18em;
     text-transform: uppercase;
     padding: 0.25rem 0.625rem;
+  }
+  @media (min-width: 47.5rem) {
+    .email-stamp {
+      right: -0.75rem;
+    }
   }
   .erow {
     display: grid;
