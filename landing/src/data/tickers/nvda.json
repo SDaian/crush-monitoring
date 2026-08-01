@@ -4,15 +4,15 @@
   "ticker": "NVDA",
   "company": "NVIDIA Corporation",
   "summary": {
-    "trades": 171,
-    "members": 30,
+    "trades": 172,
+    "members": 31,
     "buys": 113,
-    "sells": 58,
+    "sells": 59,
     "other": 0,
     "firstTx": "2024-01-02",
-    "lastTx": "2026-07-10",
+    "lastTx": "2026-07-21",
     "estBuyLabel": "$11.2M",
-    "estSellLabel": "$10.5M",
+    "estSellLabel": "$10.6M",
     "pctLate": 16
   },
   "topMembers": [
@@ -25,7 +25,7 @@
       "buys": 46,
       "sells": 1,
       "estLabel": "$9.0M",
-      "hasPage": false
+      "hasPage": true
     },
     {
       "name": "Robert P. Bresnahan, Jr.",
@@ -129,6 +129,18 @@
   ],
   "trades": [
     {
+      "member": "Sam T. Liccardo",
+      "memberSlug": "sam-t-liccardo",
+      "hasPage": false,
+      "party": "D",
+      "side": "SELL",
+      "amountBucket": "$15K – $50K",
+      "txDate": "2026-07-21",
+      "filedDate": "2026-07-27",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20034736.pdf"
+    },
+    {
       "member": "Dan Newhouse",
       "memberSlug": "dan-newhouse",
       "hasPage": false,
@@ -155,7 +167,7 @@
     {
       "member": "Cleo Fields",
       "memberSlug": "cleo-fields",
-      "hasPage": false,
+      "hasPage": true,
       "party": "D",
       "side": "BUY",
       "amountBucket": "$1K – $15K",
@@ -167,7 +179,7 @@
     {
       "member": "Cleo Fields",
       "memberSlug": "cleo-fields",
-      "hasPage": false,
+      "hasPage": true,
       "party": "D",
       "side": "BUY",
       "amountBucket": "$1K – $15K",
@@ -179,7 +191,7 @@
     {
       "member": "Cleo Fields",
       "memberSlug": "cleo-fields",
-      "hasPage": false,
+      "hasPage": true,
       "party": "D",
       "side": "BUY",
       "amountBucket": "$1K – $15K",
@@ -415,18 +427,6 @@
       "filedDate": "2026-02-10",
       "daysLate": 0,
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20033956.pdf"
-    },
-    {
-      "member": "Nancy Pelosi",
-      "memberSlug": "nancy-pelosi",
-      "hasPage": true,
-      "party": "D",
-      "side": "BUY",
-      "amountBucket": "$250K – $500K",
-      "txDate": "2026-01-16",
-      "filedDate": "2026-01-23",
-      "daysLate": 0,
-      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20033725.pdf"
     }
   ],
   "tradesShown": 25

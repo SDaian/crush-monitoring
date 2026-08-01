@@ -4,13 +4,13 @@
   "ticker": "META",
   "company": "Meta Platforms, Inc.",
   "summary": {
-    "trades": 88,
-    "members": 23,
-    "buys": 59,
+    "trades": 90,
+    "members": 24,
+    "buys": 61,
     "sells": 29,
     "other": 0,
     "firstTx": "2024-01-02",
-    "lastTx": "2026-06-16",
+    "lastTx": "2026-06-17",
     "estBuyLabel": "$1.9M",
     "estSellLabel": "$640K",
     "pctLate": 18
@@ -25,7 +25,7 @@
       "buys": 13,
       "sells": 0,
       "estLabel": "$1.3M",
-      "hasPage": false
+      "hasPage": true
     },
     {
       "name": "Robert P. Bresnahan, Jr.",
@@ -129,6 +129,30 @@
   ],
   "trades": [
     {
+      "member": "Jared Moskowitz",
+      "memberSlug": "jared-moskowitz",
+      "hasPage": false,
+      "party": "D",
+      "side": "BUY",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-06-17",
+      "filedDate": "2026-07-26",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20034963.pdf"
+    },
+    {
+      "member": "Jared Moskowitz",
+      "memberSlug": "jared-moskowitz",
+      "hasPage": false,
+      "party": "D",
+      "side": "BUY",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-06-17",
+      "filedDate": "2026-07-26",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20034963.pdf"
+    },
+    {
       "member": "Matthew Robert Van Epps",
       "memberSlug": "matthew-robert-van-epps",
       "hasPage": false,
@@ -227,7 +251,7 @@
     {
       "member": "Cleo Fields",
       "memberSlug": "cleo-fields",
-      "hasPage": false,
+      "hasPage": true,
       "party": "D",
       "side": "BUY",
       "amountBucket": "$100K – $250K",
@@ -251,7 +275,7 @@
     {
       "member": "Cleo Fields",
       "memberSlug": "cleo-fields",
-      "hasPage": false,
+      "hasPage": true,
       "party": "D",
       "side": "BUY",
       "amountBucket": "$50K – $100K",
@@ -403,30 +427,6 @@
       "filedDate": "2025-10-10",
       "daysLate": 0,
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20032211.pdf"
-    },
-    {
-      "member": "Cleo Fields",
-      "memberSlug": "cleo-fields",
-      "hasPage": false,
-      "party": "D",
-      "side": "BUY",
-      "amountBucket": "$15K – $50K",
-      "txDate": "2025-09-17",
-      "filedDate": "2025-09-30",
-      "daysLate": 0,
-      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20032106.pdf"
-    },
-    {
-      "member": "Cleo Fields",
-      "memberSlug": "cleo-fields",
-      "hasPage": false,
-      "party": "D",
-      "side": "BUY",
-      "amountBucket": "$50K – $100K",
-      "txDate": "2025-09-10",
-      "filedDate": "2025-09-30",
-      "daysLate": 0,
-      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20032106.pdf"
     }
   ],
   "tradesShown": 25

@@ -1,0 +1,276 @@
+{
+  "_comment": "Generated from real official disclosures by congress/landing_data.py (daily Action). Do not edit by hand.",
+  "slug": "cleo-fields",
+  "name": "Cleo Fields",
+  "party": "D",
+  "state": "LA",
+  "chamber": "House",
+  "district": "LA-6",
+  "summary": {
+    "trades": 231,
+    "distinctTickers": 33,
+    "firstTx": "2025-02-05",
+    "lastTx": "2026-06-26",
+    "pctLate": 0,
+    "worstLate": 0
+  },
+  "topTickers": [
+    {
+      "ticker": "NVDA",
+      "count": 47,
+      "asset": "NVIDIA Corporation - Common Stock",
+      "slug": "nvda",
+      "hasPage": true
+    },
+    {
+      "ticker": "AAPL",
+      "count": 21,
+      "asset": "Apple Inc. - Common Stock",
+      "slug": "aapl",
+      "hasPage": true
+    },
+    {
+      "ticker": "GOOG",
+      "count": 19,
+      "asset": "Alphabet Inc. - Class C Capital Stock",
+      "slug": "goog",
+      "hasPage": true
+    },
+    {
+      "ticker": "MSFT",
+      "count": 18,
+      "asset": "Microsoft Corporation - Common Stock",
+      "slug": "msft",
+      "hasPage": true
+    },
+    {
+      "ticker": "AMZN",
+      "count": 16,
+      "asset": "Amazon.com, Inc. - Common Stock",
+      "slug": "amzn",
+      "hasPage": true
+    },
+    {
+      "ticker": "META",
+      "count": 13,
+      "asset": "Meta Platforms, Inc. - Class A Common Stock",
+      "slug": "meta",
+      "hasPage": true
+    }
+  ],
+  "trades": [
+    {
+      "ticker": "NVDA",
+      "asset": "NVIDIA Corporation - Common Stock",
+      "side": "BUY",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-06-26",
+      "filedDate": "2026-07-16",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20034894.pdf"
+    },
+    {
+      "ticker": "NVDA",
+      "asset": "NVIDIA Corporation - Common Stock",
+      "side": "BUY",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-06-26",
+      "filedDate": "2026-07-16",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20034894.pdf"
+    },
+    {
+      "ticker": "NVDA",
+      "asset": "NVIDIA Corporation - Common Stock",
+      "side": "BUY",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-06-26",
+      "filedDate": "2026-07-16",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20034894.pdf"
+    },
+    {
+      "ticker": "GOOG",
+      "asset": "Alphabet Inc. - Class C Capital Stock",
+      "side": "BUY",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-06-15",
+      "filedDate": "2026-06-26",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20034800.pdf"
+    },
+    {
+      "ticker": "MSFT",
+      "asset": "Microsoft Corporation - Common Stock",
+      "side": "BUY",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-06-11",
+      "filedDate": "2026-06-26",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20034800.pdf"
+    },
+    {
+      "ticker": "MSFT",
+      "asset": "Microsoft Corporation - Common Stock",
+      "side": "BUY",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-06-11",
+      "filedDate": "2026-06-26",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20034800.pdf"
+    },
+    {
+      "ticker": "QNT",
+      "asset": "Quantinuum Inc. - Class A Common Stock",
+      "side": "BUY",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-06-04",
+      "filedDate": "2026-06-26",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20034800.pdf"
+    },
+    {
+      "ticker": "AAPL",
+      "asset": "Apple Inc. - Common Stock",
+      "side": "BUY",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-05-14",
+      "filedDate": "2026-06-03",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20034591.pdf"
+    },
+    {
+      "ticker": "TSM",
+      "asset": "Taiwan Semiconductor Manufacturing Company Ltd.",
+      "side": "BUY",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-04-09",
+      "filedDate": "2026-04-20",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20034357.pdf"
+    },
+    {
+      "ticker": "GOOG",
+      "asset": "Alphabet Inc. - Class C Capital Stock",
+      "side": "BUY",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-03-16",
+      "filedDate": "2026-04-07",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20034295.pdf"
+    },
+    {
+      "ticker": "MSFT",
+      "asset": "Microsoft Corporation - Common Stock",
+      "side": "BUY",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-03-12",
+      "filedDate": "2026-03-17",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20034179.pdf"
+    },
+    {
+      "ticker": "MSFT",
+      "asset": "Microsoft Corporation - Common Stock",
+      "side": "BUY",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-03-12",
+      "filedDate": "2026-03-17",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20034179.pdf"
+    },
+    {
+      "ticker": "AAPL",
+      "asset": "Apple Inc. - Common Stock",
+      "side": "BUY",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-02-12",
+      "filedDate": "2026-02-24",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20034018.pdf"
+    },
+    {
+      "ticker": "AMD",
+      "asset": "Advanced Micro Devices, Inc.",
+      "side": "BUY",
+      "amountBucket": "$50K – $100K",
+      "txDate": "2026-02-03",
+      "filedDate": "2026-02-24",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20034018.pdf"
+    },
+    {
+      "ticker": "GOOGL",
+      "asset": "Alphabet Inc. - Class A Common Stock",
+      "side": "BUY",
+      "amountBucket": "$100K – $250K",
+      "txDate": "2026-02-03",
+      "filedDate": "2026-02-24",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20034018.pdf"
+    },
+    {
+      "ticker": "LRCX",
+      "asset": "Lam Research Corporation - Common Stock",
+      "side": "BUY",
+      "amountBucket": "$15K – $50K",
+      "txDate": "2026-02-03",
+      "filedDate": "2026-02-24",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20034018.pdf"
+    },
+    {
+      "ticker": "META",
+      "asset": "Meta Platforms, Inc. - Class A Common Stock",
+      "side": "BUY",
+      "amountBucket": "$100K – $250K",
+      "txDate": "2026-02-03",
+      "filedDate": "2026-02-24",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20034018.pdf"
+    },
+    {
+      "ticker": "MU",
+      "asset": "Micron Technology, Inc. - Common Stock",
+      "side": "BUY",
+      "amountBucket": "$100K – $250K",
+      "txDate": "2026-02-03",
+      "filedDate": "2026-02-24",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20034018.pdf"
+    },
+    {
+      "ticker": "GOOG",
+      "asset": "Alphabet Inc. - Class C Capital Stock",
+      "side": "BUY",
+      "amountBucket": "$100K – $250K",
+      "txDate": "2026-01-20",
+      "filedDate": "2026-02-03",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20033858.pdf"
+    },
+    {
+      "ticker": "IREN",
+      "asset": "IREN Limited - Ordinary Shares",
+      "side": "BUY",
+      "amountBucket": "$50K – $100K",
+      "txDate": "2026-01-20",
+      "filedDate": "2026-02-03",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20033858.pdf"
+    }
+  ],
+  "tradesShown": 20,
+  "holdings": {
+    "available": false,
+    "filingDate": "2026-05-14",
+    "reportYear": 2025,
+    "snapDate": null,
+    "filingsSince": 0,
+    "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/financial-pdfs/2025/10074378.pdf",
+    "totalLabel": null,
+    "positions": 0,
+    "stocks": [],
+    "options": []
+  }
+}

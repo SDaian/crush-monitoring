@@ -4,14 +4,14 @@
   "ticker": "HD",
   "company": "Home Depot, Inc.",
   "summary": {
-    "trades": 70,
+    "trades": 71,
     "members": 23,
-    "buys": 41,
+    "buys": 42,
     "sells": 29,
     "other": 0,
     "firstTx": "2023-03-15",
     "lastTx": "2026-07-20",
-    "estBuyLabel": "$426K",
+    "estBuyLabel": "$434K",
     "estSellLabel": "$680K",
     "pctLate": 13
   },
@@ -151,6 +151,18 @@
       "filedDate": "2026-07-06",
       "daysLate": 0,
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20034923.pdf"
+    },
+    {
+      "member": "Jared Moskowitz",
+      "memberSlug": "jared-moskowitz",
+      "hasPage": false,
+      "party": "D",
+      "side": "BUY",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-06-17",
+      "filedDate": "2026-07-26",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20034963.pdf"
     },
     {
       "member": "David J. Taylor",
@@ -415,18 +427,6 @@
       "filedDate": "2025-12-29",
       "daysLate": 0,
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20033576.pdf"
-    },
-    {
-      "member": "Gilbert Ray Cisneros, Jr.",
-      "memberSlug": "gilbert-ray-cisneros-jr",
-      "hasPage": false,
-      "party": "D",
-      "side": "BUY",
-      "amountBucket": "$1K – $15K",
-      "txDate": "2025-11-18",
-      "filedDate": "2025-12-15",
-      "daysLate": 0,
-      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20033619.pdf"
     }
   ],
   "tradesShown": 25
