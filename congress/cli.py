@@ -315,11 +315,21 @@ def _cmd_holdings(args: argparse.Namespace) -> int:
                 rec["source_url"] = ref.url
                 rec["filing_date"] = ref.filing_date
                 rec["report_year"] = ref.report_year
-                stocks = holdings.fetch_holdings(session, ref, member=display)
+                stocks, reason = holdings.fetch_holdings(
+                    session, ref, member=display
+                )
                 rec["stocks"] = [h.to_dict() for h in stocks]
                 rec["available"] = bool(stocks)
+                rec["reason"] = reason
+            else:
+                rec["reason"] = (
+                    holdings.REASON_UNSUPPORTED
+                    if chamber not in ("house", "senate")
+                    else holdings.REASON_NO_FILING
+                )
         except Exception as exc:  # one member must not abort the whole run
             rec["error"] = str(exc)
+            rec["reason"] = holdings.REASON_ERROR
         out[display] = rec
         print(
             f"{display}: {chamber or '?'} "
@@ -356,6 +366,34 @@ def _cmd_holdings(args: argparse.Namespace) -> int:
     )
     n_avail = sum(1 for r in out.values() if r["available"])
     print(f"wrote holdings for {n_avail}/{len(out)} featured members → {path}")
+
+    # Coverage audit. An empty holdings list has four very different causes and
+    # only some are our problem — print them with the document URL so a gap can
+    # be opened and read by hand instead of being silently absorbed.
+    gaps = [
+        (name, rec) for name, rec in out.items()
+        if rec.get("reason") in holdings.NEEDS_REVIEW
+    ]
+    funds_only = [
+        name for name, rec in out.items()
+        if rec.get("reason") == holdings.REASON_NO_EQUITIES
+    ]
+    if funds_only:
+        print(
+            f"no individual equities (correct, not a gap): {', '.join(funds_only)}"
+        )
+    if gaps:
+        print(f"\nholdings needing review — {len(gaps)}:")
+        for name, rec in gaps:
+            why = holdings.REASON_TEXT.get(rec["reason"], rec["reason"])
+            print(f"  {name}: {why}")
+            if rec.get("error"):
+                print(f"      error: {rec['error']}")
+            if rec.get("source_url"):
+                print(f"      {rec['source_url']}")
+            # Surfaces in the Action log's annotations, so a new gap is visible
+            # without reading the whole run output.
+            print(f"::warning::holdings unavailable for {name} — {why}")
     return 0
 
 
