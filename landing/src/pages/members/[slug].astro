@@ -675,14 +675,14 @@ const schema = [
     -webkit-overflow-scrolling: touch;
   }
   @media (max-width: 47.5rem) {
-    /* Two lines per trade, not five columns. Five columns do not fit a phone:
+    /* A stacked row, not five columns. Five columns do not fit a phone:
        scrolling the table sideways hides the dates — the columns people came
        for — behind a swipe, and narrowing them just clips the year off
        "filed Jun 23, 2026". So the money line carries what identifies the
-       trade (ticker, side, amount) and one grey line under it carries the
-       evidence (traded → filed, timeliness, the filing itself). The columns
-       still line up down the page because the first two tracks are sized to
-       their content. */
+       trade (ticker/member and the amount), the evidence line carries the
+       side and both dates, and timeliness plus the filing link sit right-
+       aligned below. The columns still line up down the page because track 1
+       is a fixed width. */
     .tscroll > [role="table"] {
       width: auto;
     }
