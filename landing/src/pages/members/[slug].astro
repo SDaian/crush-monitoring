@@ -639,13 +639,23 @@ const schema = [
   }
 
   @media (max-width: 47.5rem) {
+    /* Reflow onto two lines rather than dropping columns. The trade date is
+       the point of a disclosure — it is what the 45-day clock is measured
+       from — so hiding it on the screen most people read this on left the
+       table saying almost nothing. */
     .trow {
-      grid-template-columns: 1.6fr 0.7fr 1fr;
+      grid-template-columns: auto auto 1fr auto;
+      grid-template-areas:
+        "tick tick tick tick"
+        "side amt  date late";
+      gap: 0.375rem 0.625rem;
       font-size: 0.75rem;
+      align-items: baseline;
     }
-    .trow .tamt,
-    .trow .tdate {
-      display: none;
-    }
+    .trow .ttick { grid-area: tick; }
+    .trow .tside { grid-area: side; }
+    .trow .tamt  { grid-area: amt; }
+    .trow .tdate { grid-area: date; text-align: right; }
+    .trow .tlate { grid-area: late; }
   }
 </style>
