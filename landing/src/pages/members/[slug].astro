@@ -315,7 +315,6 @@ const schema = [
         </span>
       </div>
 
-      <p class="tswipe" aria-hidden="true">swipe →</p>
       <div class="tscroll">
         <div role="table" aria-label={`${m.name} disclosed trades`}>
           <div role="row" class="trow thead">
@@ -675,56 +674,95 @@ const schema = [
     overscroll-behavior-x: contain;
     -webkit-overflow-scrolling: touch;
   }
-  .tswipe {
-    display: none;
-  }
   @media (max-width: 47.5rem) {
-    .tscroll {
-      background:
-        linear-gradient(to right, var(--color-paper) 40%, transparent) left /
-          2rem 100% no-repeat,
-        linear-gradient(to left, var(--color-paper) 40%, transparent) right /
-          2rem 100% no-repeat,
-        radial-gradient(farthest-side at 0 50%, rgb(0 0 0 / 0.2), transparent)
-          left / 1rem 100% no-repeat,
-        radial-gradient(farthest-side at 100% 50%, rgb(0 0 0 / 0.2), transparent)
-          right / 1rem 100% no-repeat;
-      background-attachment: local, local, scroll, scroll;
-    }
-    /* max-content, not a min-width guess: the row's columns are fixed rem
-       widths, so a container narrower than their sum would clip the last
-       column even when scrolled fully right. */
+    /* Two lines per trade, not five columns. Five columns do not fit a phone:
+       scrolling the table sideways hides the dates — the columns people came
+       for — behind a swipe, and narrowing them just clips the year off
+       "filed Jun 23, 2026". So the money line carries what identifies the
+       trade (ticker, side, amount) and one grey line under it carries the
+       evidence (traded → filed, timeliness, the filing itself). The columns
+       still line up down the page because the first two tracks are sized to
+       their content. */
     .tscroll > [role="table"] {
-      width: max-content;
-      min-width: 100%;
-      padding-right: 0.5rem;
-    }
-    .tswipe {
-      display: block;
-      margin: 0.7rem 0 0.35rem;
-      text-align: right;
-      font-family: var(--font-mono);
-      font-size: 0.68rem;
-      letter-spacing: 0.08em;
-      color: var(--color-ink-soft);
+      width: auto;
     }
     .trow {
-      grid-template-columns: 9rem 3.4rem 7.6rem 7.6rem 7rem;
-      font-size: 0.76rem;
-      padding: 0.9rem 0.1rem;
+      /* Track 1 is the side chip's width, so BUY/SELL, the dates and the
+         timeliness all line up down the page even though each row is its own
+         grid. The identifier spans tracks 1-2 and the amount holds the right
+         margin. */
+      grid-template-columns: 3rem 1fr auto;
+      grid-template-areas:
+        "tick tick amt"
+        "side date date"
+        "late late late";
+      gap: 0.2rem 0.45rem;
+      padding: 0.85rem 0.1rem;
+      align-items: baseline;
+      font-size: 0.72rem;
     }
-    .trow.thead {
-      font-size: 0.66rem;
+    .trow.thead { display: none; }
+    .trow .ttick {
+      grid-area: tick;
+      font-size: 0.95rem;
+      min-width: 0;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
-    .ttick {
+    /* The asset name is the one thing worth dropping here: at this width it
+       ellipsed to "Intel Corporation -…", which is noise, and the ticker plus
+       the linked filing already say what was traded. */
+    .trow .ttick small { display: none; }
+    .trow .tside {
+      grid-area: side;
+      font-size: 0.68rem;
+      letter-spacing: 0.06em;
+    }
+    .trow .tamt {
+      grid-area: amt;
+      text-align: right;
+      font-weight: 700;
       font-size: 0.88rem;
+      /* "$15K – $50K" broken across three lines is how the ticker pages fell
+         apart at 320px — a bracket is one value. */
+      white-space: nowrap;
     }
-    /* The asset name may ellipse — it is context. The dates may not: losing
-       the year off "filed Jun 23, 2026" guts the one column the filing clock
-       is measured against, so its column is sized to hold it whole. */
-    .tdate small {
+    .trow .tdate {
+      grid-area: date;
+      display: flex;
+      gap: 0.4rem;
+      align-items: baseline;
+      text-align: left;
+      color: var(--color-ink);
+      /* A date is one token. Left to wrap it broke as "May 29," / "2026". */
+      white-space: nowrap;
+    }
+    .trow .tdate small {
+      display: inline;
+      margin: 0;
+      font-size: 0.7rem;
       overflow: visible;
       text-overflow: clip;
+    }
+    .trow .tdate small::before {
+      content: "· ";
+    }
+    .trow .tlate {
+      grid-area: late;
+      flex-direction: row;
+      justify-content: flex-end;
+      gap: 0.4rem;
+      font-size: 0.7rem;
+    }
+    /* The word "filing" is the first thing to go when space runs out — the
+       arrow plus the cell's aria-label still say what the link is. */
+    .trow .tsrc {
+      font-size: 0;
+    }
+    .trow .tsrc::after {
+      content: "↗";
+      font-size: 0.75rem;
     }
   }
 </style>
