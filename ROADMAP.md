@@ -87,12 +87,12 @@ In rough priority order; each item states its blocking dependency.
   generated from the tracked data (`landing_data.member_payload` +
   `write_member_files` → `landing/src/data/members/*.json`; rendered by
   `landing/src/pages/members/[slug].astro` + a `/members` index). Live for the
-  curated set — Pelosi, Trump, Greene, Tuberville, Gottheimer
+  curated set — Pelosi, Trump, Greene, Tuberville, Gottheimer, Fields
   (`MEMBER_PAGE_NAMES`) — each showing their disclosed trades, most-traded
   tickers, filing timeliness and estimated holdings. Linked from the header
   nav, the footer sitemap, and the footer's named-member copy. Scaling this to
   *every* member is what fires storage stage 1 (see the storage table); the
-  static-JSON approach is a conscious deferral, fine at 5 members.
+  static-JSON approach is a conscious deferral, fine at 6 members.
 - **Tracker on the apex domain** — ✅ shipped 2026-07-24. The standalone
   GitHub Pages tracker was rebuilt as a native `/tracker` page in the landing
   app so inbound links, brand and analytics all land on one domain instead of

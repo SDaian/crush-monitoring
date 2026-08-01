@@ -4,13 +4,13 @@
   "ticker": "MSFT",
   "company": "Microsoft Corporation",
   "summary": {
-    "trades": 181,
-    "members": 41,
-    "buys": 96,
+    "trades": 183,
+    "members": 42,
+    "buys": 98,
     "sells": 85,
     "other": 0,
     "firstTx": "2023-03-15",
-    "lastTx": "2026-06-16",
+    "lastTx": "2026-06-17",
     "estBuyLabel": "$27.5M",
     "estSellLabel": "$23.5M",
     "pctLate": 10
@@ -36,7 +36,7 @@
       "buys": 18,
       "sells": 0,
       "estLabel": "$1.5M",
-      "hasPage": false
+      "hasPage": true
     },
     {
       "name": "Gilbert Ray Cisneros, Jr.",
@@ -129,6 +129,30 @@
   ],
   "trades": [
     {
+      "member": "Jared Moskowitz",
+      "memberSlug": "jared-moskowitz",
+      "hasPage": false,
+      "party": "D",
+      "side": "BUY",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-06-17",
+      "filedDate": "2026-07-26",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20034963.pdf"
+    },
+    {
+      "member": "Jared Moskowitz",
+      "memberSlug": "jared-moskowitz",
+      "hasPage": false,
+      "party": "D",
+      "side": "BUY",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-06-17",
+      "filedDate": "2026-07-26",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20034963.pdf"
+    },
+    {
       "member": "Gilbert Ray Cisneros, Jr.",
       "memberSlug": "gilbert-ray-cisneros-jr",
       "hasPage": false,
@@ -155,7 +179,7 @@
     {
       "member": "Cleo Fields",
       "memberSlug": "cleo-fields",
-      "hasPage": false,
+      "hasPage": true,
       "party": "D",
       "side": "BUY",
       "amountBucket": "$1K – $15K",
@@ -167,7 +191,7 @@
     {
       "member": "Cleo Fields",
       "memberSlug": "cleo-fields",
-      "hasPage": false,
+      "hasPage": true,
       "party": "D",
       "side": "BUY",
       "amountBucket": "$1K – $15K",
@@ -403,30 +427,6 @@
       "filedDate": "2026-04-07",
       "daysLate": 0,
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20033648.pdf"
-    },
-    {
-      "member": "Gilbert Ray Cisneros, Jr.",
-      "memberSlug": "gilbert-ray-cisneros-jr",
-      "hasPage": false,
-      "party": "D",
-      "side": "BUY",
-      "amountBucket": "$15K – $50K",
-      "txDate": "2026-03-13",
-      "filedDate": "2026-04-07",
-      "daysLate": 0,
-      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20034285.pdf"
-    },
-    {
-      "member": "Cleo Fields",
-      "memberSlug": "cleo-fields",
-      "hasPage": false,
-      "party": "D",
-      "side": "BUY",
-      "amountBucket": "$1K – $15K",
-      "txDate": "2026-03-12",
-      "filedDate": "2026-03-17",
-      "daysLate": 0,
-      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20034179.pdf"
     }
   ],
   "tradesShown": 25
