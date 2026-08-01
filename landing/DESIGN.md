@@ -167,8 +167,22 @@ publication.
   are on-identity and encouraged where they add credibility, not clutter.
 - **Mobile-first.** Most visitors arrive on phones. Every layout must hold at
   ≥320px with **zero horizontal overflow** — verify by measuring, never mask with
-  `overflow: hidden`. Multi-column structures collapse to one column; data tables
-  drop their least-important columns rather than shrink to illegibility.
+  `overflow: hidden`. The rule is about the **page**: the document body never
+  scrolls sideways. It does not forbid a component from scrolling inside its own
+  box. Multi-column structures collapse to one column.
+- **Wide data tables** have three sanctioned strategies; pick by what the reader
+  loses, and never let the choice reach the page body:
+  1. **Drop the least-important columns** rather than shrink to illegibility.
+     The default — but only for columns nothing else depends on.
+  2. **Reflow the row onto two lines** when a surviving column needs a dropped
+     one to mean anything (a filing's timeliness is unreadable without its trade
+     date). Drop the header row with it — a header that lines up with nothing is
+     noise — and keep the labels for screen readers.
+  3. **Scroll the table inside its own `overflow-x: auto` container** when the
+     columns are genuinely irreducible and reflow would scramble the reading
+     order. Keep the first column identifying (sticky if the width warrants it),
+     and make the scroll affordance visible — a silently clipped table reads as
+     a truncated one.
 
 ---
 
