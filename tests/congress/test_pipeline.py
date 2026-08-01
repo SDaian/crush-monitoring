@@ -6,6 +6,8 @@ import unittest
 from datetime import date
 from pathlib import Path
 
+from congress import pipeline
+
 from congress.normalize import Trade
 from congress.pipeline import (
     ChamberSource,
@@ -216,3 +218,38 @@ class PipelineTest(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class TestInvalidTradeRepair(unittest.TestCase):
+    """Detecting and forgetting rows a parser fix needs to redo."""
+
+    ROWS = [
+        {"id": "a", "filing_id": "F1", "amount_lo": 1001, "amount_hi": 15000},
+        {"id": "b", "filing_id": "F2", "amount_lo": 50001, "amount_hi": 200},
+        {"id": "c", "filing_id": "F2", "amount_lo": 1001, "amount_hi": 15000},
+        {"id": "d", "filing_id": "F3", "amount_lo": None, "amount_hi": None},
+    ]
+
+    def test_finds_only_inverted_brackets(self):
+        bad = pipeline.invalid_trades(self.ROWS)
+        self.assertEqual([t["id"] for t in bad], ["b"])
+
+    def test_missing_amounts_are_not_invalid(self):
+        # A row with no bracket at all (executive bond filings) is not broken.
+        self.assertEqual(pipeline.invalid_trades([self.ROWS[3]]), [])
+
+    def test_forgetting_drops_the_whole_filing(self):
+        # Re-parsing is per document, so the good sibling row in F2 must go
+        # too — otherwise the re-fetch would duplicate it.
+        state = {"processed": {"house": {"F1": "2026-01-01", "F2": "2026-01-02"}}}
+        output = {"trades": [dict(r) for r in self.ROWS]}
+        dropped = pipeline.forget_filings(state, output, {"F2"})
+        self.assertEqual(dropped, 2)
+        self.assertEqual([t["id"] for t in output["trades"]], ["a", "d"])
+        self.assertEqual(list(state["processed"]["house"]), ["F1"])
+
+    def test_forgetting_is_a_noop_for_unknown_ids(self):
+        state = {"processed": {"house": {"F1": "2026-01-01"}}}
+        output = {"trades": [dict(r) for r in self.ROWS]}
+        self.assertEqual(pipeline.forget_filings(state, output, {"NOPE"}), 0)
+        self.assertEqual(list(state["processed"]["house"]), ["F1"])

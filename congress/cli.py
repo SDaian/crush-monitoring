@@ -164,6 +164,7 @@ def _cmd_fetch(args: argparse.Namespace) -> int:
         state_path=Path(args.state),
         limit=args.limit,
         dry_run=args.dry_run,
+        reparse_invalid=getattr(args, "reparse_invalid", False),
     )
     print(
         f"fetched={result.fetched} new_trades={result.new_trades} "
@@ -689,6 +690,12 @@ def build_parser() -> argparse.ArgumentParser:
                        default="both")
     fetch.add_argument("--limit", type=int, default=None,
                        help="Max new filings per chamber this run.")
+    fetch.add_argument(
+        "--reparse-invalid", action="store_true",
+        help="re-fetch filings whose stored trades break an invariant "
+             "(e.g. an inverted amount bracket), so a parser fix reaches "
+             "data that was already published",
+    )
     fetch.add_argument("--dry-run", action="store_true",
                        help="List what would be fetched; write nothing.")
     fetch.add_argument("--debug-dump", default=None, metavar="DIR",

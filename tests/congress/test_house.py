@@ -179,3 +179,43 @@ class TestPdfExtraction(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class TestWrappedAmountWithFeeBoilerplate(unittest.TestCase):
+    """The bug that produced "$50,001 - $200" on live pages.
+
+    House PTRs carry a "$200 late filing fee" line, and when a bracket wraps,
+    that stray token could win the completion — inverting the range and
+    stranding the real upper bound inside the asset name.
+    """
+
+    TEXT = (
+        "Name: Test Filer\n"
+        "SP Tempus AI, Inc. - Class A Common P 01/16/2026 01/23/2026 $50,001 -\n"
+        "Stock $100,000 $200\n"
+        "F S: New\n"
+    )
+
+    def setUp(self):
+        ref = HouseFilingRef(
+            doc_id="99999999", name="Test Filer", state="CA", district="CA-11",
+            filing_date="2026-01-23", year=2026,
+            url="https://example.test/x.pdf",
+        )
+        self.trades = parse_ptr_text(self.TEXT, ref)
+
+    def test_upper_bound_is_the_bracket_not_the_fee(self):
+        t = self.trades[0]
+        self.assertEqual((t.amount_lo, t.amount_hi), (50001, 100000))
+        self.assertEqual(t.amount_label, "$50,001 - $100,000")
+
+    def test_bracket_is_never_inverted(self):
+        for t in self.trades:
+            if t.amount_lo is not None and t.amount_hi is not None:
+                self.assertLessEqual(t.amount_lo, t.amount_hi)
+
+    def test_amount_text_does_not_leak_into_the_asset(self):
+        self.assertNotIn("$", self.trades[0].asset)
+        self.assertEqual(
+            self.trades[0].asset, "Tempus AI, Inc. - Class A Common Stock"
+        )
