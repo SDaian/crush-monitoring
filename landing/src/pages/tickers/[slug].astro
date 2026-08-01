@@ -456,10 +456,11 @@ const schema = [
        from — so hiding it on the screen most people read this on left the
        table saying almost nothing. */
     .trow {
-      grid-template-columns: auto auto 1fr auto;
+      grid-template-columns: auto 1fr auto;
       grid-template-areas:
-        "tick tick tick tick"
-        "side amt  date late";
+        "tick tick tick"
+        "side amt  late"
+        "date date date";
       gap: 0.375rem 0.625rem;
       font-size: 0.75rem;
       align-items: baseline;
@@ -468,8 +469,24 @@ const schema = [
     .trow .ttick { grid-area: tick; }
     .trow .tside { grid-area: side; }
     .trow .tamt  { grid-area: amt; }
-    .trow .tdate { grid-area: date; text-align: right; }
-    .trow .tlate { grid-area: late; }
+    .trow .tlate { grid-area: late; flex-direction: row; gap: 0.5rem; }
+    /* The two dates get their own full-width line, side by side. Squeezed
+       into a column they had to either truncate ("filed Jun 23, …", which
+       drops the year off the one field the 45-day clock is measured against)
+       or wrap the year onto its own line. */
+    .trow .tdate {
+      grid-area: date;
+      display: flex;
+      justify-content: flex-end;
+      align-items: baseline;
+      gap: 0.5rem;
+      text-align: right;
+    }
+    .trow .tdate small {
+      margin-top: 0;
+      overflow: visible;
+      text-overflow: clip;
+    }
     .mrow {
       grid-template-columns: 1.4fr auto;
     }
