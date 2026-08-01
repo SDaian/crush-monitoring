@@ -316,6 +316,13 @@ const schema = [
       </div>
 
       <div role="table" aria-label={`${m.name} disclosed trades`}>
+        <div role="row" class="trow thead">
+          <span role="columnheader">Ticker</span>
+          <span role="columnheader">Side</span>
+          <span role="columnheader">Amount</span>
+          <span role="columnheader">Traded</span>
+          <span role="columnheader">Filing</span>
+        </div>
         {
           m.trades.map((t: any) => (
             <div role="row" class="trow">
@@ -582,6 +589,22 @@ const schema = [
     font-variant-numeric: tabular-nums;
   }
 
+  /* Column headers. The live feed has them and these tables did not, which
+     is the whole readability gap — a bare grid makes the reader infer what
+     each column is. Hidden on mobile, where the row reflows onto two lines
+     and a header can no longer line up with anything; screen readers still
+     get them via the sr-only fallback. */
+  .trow.thead {
+    padding: 0 0 0.5rem;
+    border-bottom: 2px solid var(--color-ink);
+    font-size: 0.72rem;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: var(--color-ink-soft);
+  }
+  .trow.thead > * {
+    font-weight: 600;
+  }
   .trow {
     display: grid;
     grid-template-columns: 2fr 0.6fr 0.9fr 1.1fr 1fr;
@@ -652,6 +675,7 @@ const schema = [
       font-size: 0.75rem;
       align-items: baseline;
     }
+    .trow.thead { display: none; }
     .trow .ttick { grid-area: tick; }
     .trow .tside { grid-area: side; }
     .trow .tamt  { grid-area: amt; }
