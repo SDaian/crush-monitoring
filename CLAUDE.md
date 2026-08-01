@@ -168,6 +168,17 @@ sites. Full details in `congress/README.md`. Conventions:
   `congress/pipeline.py` / `congress/prices.py` / `congress/holdings.py` /
   `congress/indicators.py` (daily via `.github/workflows/congress-trades.yml`).
   To change the data, fix the generator and re-run it.
+- **A generator's output is only real if the workflow commits it.** The daily
+  Action stages an explicit `FILES` list, so a path the generators write but
+  `FILES` omits is regenerated every run and thrown away at the next checkout —
+  with every step reporting success. That is how `landing/src/data/tickers`
+  served two-month-old pages while the tracker was current. Two guards now hold
+  the line, and **both must stay**: `tests/congress/test_workflow_paths.py`
+  *runs* the landing generators into a temp dir and asserts the workflow stages
+  every file they produce (so a new output fails the suite until it is listed),
+  and a post-push workflow step fails the run if anything under `docs/data`,
+  `landing/src/data` or `congress/` is left uncommitted. When you add a
+  generator output, add its path to `FILES`.
 - **Real holdings vs. trades:** PTRs disclose *trades*; a member's actual
   positions come from their **annual** report. `congress/holdings.py` parses the
   individual **stocks and options** from each featured member's latest annual FD

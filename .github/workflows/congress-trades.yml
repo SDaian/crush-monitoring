@@ -237,6 +237,30 @@ jobs:
           git pull --rebase --autostash -X theirs origin "${GITHUB_REF_NAME}"
           git push
 
+      # Catch-all for the failure mode a drifting FILES list causes: a
+      # generator wrote something no step stages, so it is discarded at the
+      # next run's checkout while every step reports success — that is how
+      # landing/src/data/tickers went two months stale.
+      # tests/congress/test_workflow_paths.py catches this at PR time for the
+      # landing generators; this catches it at run time for anything else.
+      #
+      # Its own step, so it also runs on the "no new trades" early exit above,
+      # and it runs AFTER the push: the refreshed data is already safe, so a
+      # false positive turns the run red instead of skipping a day of data.
+      - name: Verify every generated file was committed
+        if: github.event.inputs.report_only != 'true'
+        run: |
+          # Unstaged/untracked show as " M" / "??" — a leading space or ?.
+          LEFTOVER=$(git status --porcelain -- docs/data landing/src/data congress \
+                     | grep -E '^( |\?)' || true)
+          if [ -n "$LEFTOVER" ]; then
+            echo "::error::a generator wrote files no step commits — they will"
+            echo "::error::be discarded at the next checkout. Add them to FILES:"
+            echo "$LEFTOVER"
+            exit 1
+          fi
+          echo "All generated data is committed."
+
       - name: Upload fetch log and raw payloads
         if: always()
         uses: actions/upload-artifact@v4
