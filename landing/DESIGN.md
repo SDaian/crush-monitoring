@@ -307,14 +307,26 @@ shared Astro components in `src/components/`.
     the late-filers leaderboard.
 - **Trades table** — the five-column disclosure record (identifier, side, amount,
   traded/filed dates, timeliness + a link to the official filing) used on member
-  and ticker pages. Below 48rem it keeps every column and scrolls inside its own
-  box (§5, strategy 3) rather than reflowing: a filing's dates are the evidence,
-  and split across two lines the row read as a list of fragments. The scroll
-  affordance is a **paper-fade + hairline shadow at each live edge** (Lea Verou's
-  `background-attachment: local/scroll` pair — the paper cover hides its own
-  shadow at the extremes) plus a mono `swipe →` hint. The table is
-  `width: max-content`: fixed rem columns inside a narrower box clip the last
-  column even when scrolled fully right.
+  and ticker pages. Below 48rem it **stacks into three lines** (§5, strategy 2):
+  identifier and amount on the money line, side and both dates on the evidence
+  line, timeliness and the filing link right-aligned below. Rules learnt the hard
+  way, in the order they bit:
+  - **Sideways scroll (strategy 3) was tried and rejected here.** Five columns
+    cannot fit a phone, so the swipe hid the dates — the columns the page exists
+    to show — and narrowing them to fit only clipped the year off
+    `filed Jun 23, 2026`. Strategy 3 is for tables whose columns are irreducible;
+    these reduce.
+  - **Each row is its own grid**, so `auto` tracks size per row and the side chip
+    jitters left/right down the page. Track 1 is a **fixed** side width; that is
+    what makes the column read as a column.
+  - **The amount and each date are single tokens** (`white-space: nowrap`).
+    Allowed to wrap they became `$15K` / `–` / `$50K` and `May 29,` / `2026`.
+  - **Three lines, not two, at every mobile width.** The evidence line plus
+    timeliness fits at 430px and clips at 390px — a layout that depends on which
+    phone you hold is a layout that breaks. The asset name is what gets dropped
+    (it ellipsed to noise); the dates never are.
+  - The `overflow-x: auto` wrapper stays as a **backstop** so an unexpectedly wide
+    row can never reach the page body.
 - **Email-preview card** — the daily digest drawn as a broadsheet clipping: a
   stamp "Today's email" tab, an ink-ruled masthead (from + subject with live
   counts), disclosure rows, a mono footer. The hero **product shot**, framed on a
