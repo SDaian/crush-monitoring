@@ -121,6 +121,42 @@ def save_state(state: dict, path: Path) -> None:
 # Run
 # ---------------------------------------------------------------------------
 
+def invalid_trades(trades: list[dict]) -> list[dict]:
+    """Rows that violate an invariant a disclosure bracket cannot break.
+
+    Today that is an inverted amount range (`amount_hi < amount_lo`), which a
+    House PTR produced when the form's "$200 late filing fee" boilerplate was
+    mistaken for the bracket's upper bound. Pure and list-based so it is tested
+    offline and can be reused as filings are re-parsed.
+    """
+    bad = []
+    for t in trades:
+        lo, hi = t.get("amount_lo"), t.get("amount_hi")
+        if lo is not None and hi is not None and hi < lo:
+            bad.append(t)
+    return bad
+
+
+def forget_filings(state: dict, output: dict, filing_ids: set[str]) -> int:
+    """Drop `filing_ids` from the processed state and their trades from the
+    output, so the next fetch re-downloads and re-parses them.
+
+    Fixing a parser only helps future filings — `state["processed"]` means an
+    already-seen document is never read again, so a bad row would otherwise
+    stay published forever.
+    """
+    for chamber in state.get("processed", {}):
+        state["processed"][chamber] = {
+            i: d for i, d in state["processed"][chamber].items()
+            if i not in filing_ids
+        }
+    before = len(output["trades"])
+    output["trades"] = [
+        t for t in output["trades"] if t.get("filing_id") not in filing_ids
+    ]
+    return before - len(output["trades"])
+
+
 def run(
     sources: list[ChamberSource],
     *,
@@ -131,6 +167,7 @@ def run(
     log: Callable[[str], None] = print,
     dry_run: bool = False,
     generated_at: str | None = None,
+    reparse_invalid: bool = False,
 ) -> RunResult:
     today = today or datetime.now(timezone.utc).date()
     cutoff = prune_cutoff(today)
@@ -138,6 +175,18 @@ def run(
     state = load_state(state_path)
     roster = Roster.load()
     result = RunResult(changed=False)
+
+    if reparse_invalid:
+        bad = invalid_trades(output["trades"])
+        ids = {t["filing_id"] for t in bad if t.get("filing_id")}
+        if ids:
+            dropped = forget_filings(state, output, ids)
+            log(
+                f"reparse: {len(bad)} invalid rows across {len(ids)} filings — "
+                f"dropped {dropped} trades, re-fetching those documents"
+            )
+        else:
+            log("reparse: no invalid rows found")
 
     trades = {t["id"]: t for t in output["trades"]}
     skipped = {s["filing_id"]: s for s in output["skipped_filings"]}

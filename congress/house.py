@@ -185,6 +185,15 @@ _CODE = re.compile(r"\[([A-Z]{2})\]")
 _MONEY_TOKEN = re.compile(r"\$[\d,]+")
 
 
+def _money_value(text: str) -> int:
+    """First ``$n,nnn`` in `text` as an int, or 0. Used to tell a real bracket
+    bound from the form's "$200 late filing fee" boilerplate."""
+    m = _MONEY_TOKEN.search(text or "")
+    if not m:
+        return 0
+    return int(m.group().lstrip("$").replace(",", "") or 0)
+
+
 def parse_ptr_text(text: str, ref: HouseFilingRef) -> list[Trade]:
     """Parse extracted House PTR text into normalized trades.
 
@@ -229,12 +238,23 @@ def parse_ptr_text(text: str, ref: HouseFilingRef) -> list[Trade]:
         if pending["amount"].rstrip().endswith(("-", "–")):
             # A wrapped amount lands at the end of the continuation line
             # ("Market ETF (ITOT) [EF] $15,000") — the rest is asset name.
+            #
+            # Pick the first token that can actually BE an upper bound, i.e.
+            # one larger than the lower bound we already have. Taking the last
+            # token on the line looks right for the common shape but breaks
+            # whenever the form's "$200 late filing fee" boilerplate trails the
+            # amount: the completion became "$50,001 - $200" and the real bound
+            # was left behind inside the asset name.
             money = _MONEY_TOKEN.findall(line)
-            if money:
+            lo_val = _money_value(pending["amount"])
+            upper = next(
+                (m for m in money if _money_value(m) > lo_val), None
+            )
+            if upper:
                 pending["amount"] = (
-                    pending["amount"].rstrip(" -–") + " - " + money[-1]
+                    pending["amount"].rstrip(" -–") + " - " + upper
                 )
-                remainder = line[: line.rfind(money[-1])].strip()
+                remainder = line[: line.find(upper)].strip()
                 if remainder and not pending.get("closed"):
                     pending["extra"].append(remainder)
                 continue

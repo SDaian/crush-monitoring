@@ -294,6 +294,14 @@ sites. Full details in `congress/README.md`. Conventions:
     `build_report(...)["html"]` / `build_traffic_email(...)["html"]` to a file.
     Keep the two brands' looks in step, but the email is its own surface (not
     governed by `landing/DESIGN.md`).
+- **A parser fix does not reach data already published.** `congress/state.json`
+  records every processed `filing_id`, so a document is never read twice —
+  which means a bad row stays live forever unless the filing is forgotten.
+  `python3 -m congress fetch --reparse-invalid` finds rows breaking an
+  invariant (`pipeline.invalid_trades`), drops those *whole filings* from the
+  state and the output, and lets the normal fetch re-download them. Drop the
+  whole filing, never the single row: re-parsing is per document, so leaving a
+  sibling row behind duplicates it.
 - **Dependency policy:** `predictor/` stays pure-stdlib. `congress/` may use
   `requests` + `pdfplumber` (`congress/requirements.txt`, installed only by
   the Action) but **parsers must stay stdlib-importable** so
