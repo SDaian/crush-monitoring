@@ -390,8 +390,59 @@ def senate_latest_annual(session, last_name) -> AnnualRef | None:
     return best
 
 
-def fetch_holdings(session, ref: AnnualRef, *, member: str) -> list[Holding]:
-    """Fetch + parse a member's latest annual report into stock holdings."""
+#: Why a member ended up with no holdings. Only ``ok`` and
+#: ``no_individual_equities`` are *successes* — the rest mean we failed to read
+#: a document that exists, which is worth a human looking at.
+REASON_OK = "ok"
+REASON_SCANNED = "scanned_no_text"
+REASON_NO_ASSETS = "no_assets_parsed"
+REASON_NO_EQUITIES = "no_individual_equities"
+REASON_NO_FILING = "no_annual_filing"
+REASON_UNSUPPORTED = "unsupported_chamber"
+REASON_ERROR = "error"
+
+#: Reasons that represent a genuine gap in coverage rather than a true zero.
+NEEDS_REVIEW = frozenset(
+    {REASON_SCANNED, REASON_NO_ASSETS, REASON_NO_FILING, REASON_ERROR}
+)
+
+REASON_TEXT = {
+    REASON_OK: "parsed",
+    REASON_SCANNED: "scanned report — no text layer to read",
+    REASON_NO_ASSETS: "text extracted but no assets parsed — parser may need work",
+    REASON_NO_EQUITIES: "parsed fine; holds no individual stocks (funds only)",
+    REASON_NO_FILING: "no annual report found for the years searched",
+    REASON_UNSUPPORTED: "chamber not supported (executive files a scanned OGE 278)",
+    REASON_ERROR: "fetch or parse raised",
+}
+
+
+def classify(*, has_text: bool, parsed: int, kept: int) -> str:
+    """Why did this member end up with `kept` stocks? Pure, so it is tested.
+
+    The distinction that matters: a member holding **only funds** parses
+    perfectly and legitimately has zero individual equities. Collapsing that
+    into the same "unavailable" flag as an unreadable scan hides real coverage
+    gaps behind data that is actually correct.
+    """
+    if not has_text:
+        return REASON_SCANNED
+    if parsed == 0:
+        return REASON_NO_ASSETS
+    if kept == 0:
+        return REASON_NO_EQUITIES
+    return REASON_OK
+
+
+def fetch_holdings(
+    session, ref: AnnualRef, *, member: str
+) -> tuple[list[Holding], str]:
+    """Fetch + parse a member's latest annual report into stock holdings.
+
+    Returns ``(stocks, reason)`` — see ``classify``. The reason is carried all
+    the way into holdings.json so an empty result can be triaged without
+    re-running the fetch.
+    """
     from . import house, senate
     from .http import polite_get
 
@@ -399,16 +450,21 @@ def fetch_holdings(session, ref: AnnualRef, *, member: str) -> list[Holding]:
         html = polite_get(
             session, ref.url, headers={"Referer": senate.SEARCH_REFERER}
         ).text
+        has_text = bool(html.strip())
         holds = parse_senate_annual_assets(
             html, member=member, source_url=ref.url,
             filing_date=ref.filing_date, report_year=ref.report_year,
         )
     else:
         text = house.extract_pdf_text(polite_get(session, ref.url).content)
-        if not text.strip():
-            return []  # scanned annual report — no text layer
-        holds = parse_house_annual_assets(
-            text, member=member, source_url=ref.url,
-            filing_date=ref.filing_date, report_year=ref.report_year,
+        has_text = bool(text.strip())
+        holds = (
+            parse_house_annual_assets(
+                text, member=member, source_url=ref.url,
+                filing_date=ref.filing_date, report_year=ref.report_year,
+            )
+            if has_text
+            else []
         )
-    return [h for h in holds if is_stock_or_option(h)]
+    kept = [h for h in holds if is_stock_or_option(h)]
+    return kept, classify(has_text=has_text, parsed=len(holds), kept=len(kept))

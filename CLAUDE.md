@@ -178,6 +178,14 @@ sites. Full details in `congress/README.md`. Conventions:
   Scanned annual reports (and Trump's image-only OGE 278) are marked unavailable
   and fall back to an inferred net-trading estimate. Label it honestly — bracket
   **midpoints, not share counts**; a directional estimate, never exact/real-time.
+  **An empty holdings list is not one thing.** `holdings.classify` records a
+  `reason` per member, because the causes need different responses: a scanned
+  PDF is a source limit, "no assets parsed" is a parser bug worth fixing, and
+  **"funds only" is correct data, not a gap** — a member holding no individual
+  equities genuinely has zero, and flagging it would be wrong. The `holdings`
+  command prints the ones in `NEEDS_REVIEW` with their document URL and emits a
+  `::warning::` per gap, so new coverage holes surface in the Action log instead
+  of being absorbed silently.
 - **Executive 278-T (President) is a curated seed, not a scrape:**
   `congress/oge_filings.json` lists the President's OGE Form 278-T Periodic
   Transaction Reports by stable document UNID (he is not in any browsable OGE

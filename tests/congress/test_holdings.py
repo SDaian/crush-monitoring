@@ -3,6 +3,7 @@
 import unittest
 from pathlib import Path
 
+from congress import holdings
 from congress.holdings import (
     Holding,
     is_stock,
@@ -135,3 +136,35 @@ class TestAssetTypeNormalization(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class TestHoldingsCoverageReason(unittest.TestCase):
+    """Why a member has no holdings — the distinction that drives triage."""
+
+    def test_scanned_report_has_no_text(self):
+        self.assertEqual(
+            holdings.classify(has_text=False, parsed=0, kept=0),
+            holdings.REASON_SCANNED,
+        )
+
+    def test_text_but_nothing_parsed_is_a_parser_gap(self):
+        self.assertEqual(
+            holdings.classify(has_text=True, parsed=0, kept=0),
+            holdings.REASON_NO_ASSETS,
+        )
+
+    def test_funds_only_is_correct_data_not_a_gap(self):
+        # Parsed 12 assets, none of them individual equities. This member
+        # genuinely holds no stocks; flagging it for review would be wrong.
+        reason = holdings.classify(has_text=True, parsed=12, kept=0)
+        self.assertEqual(reason, holdings.REASON_NO_EQUITIES)
+        self.assertNotIn(reason, holdings.NEEDS_REVIEW)
+
+    def test_parsed_holdings_are_ok(self):
+        reason = holdings.classify(has_text=True, parsed=12, kept=5)
+        self.assertEqual(reason, holdings.REASON_OK)
+        self.assertNotIn(reason, holdings.NEEDS_REVIEW)
+
+    def test_every_reason_has_human_text(self):
+        for r in holdings.NEEDS_REVIEW:
+            self.assertIn(r, holdings.REASON_TEXT)
