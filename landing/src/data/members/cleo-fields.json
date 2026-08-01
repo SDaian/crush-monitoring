@@ -7,10 +7,10 @@
   "chamber": "House",
   "district": "LA-6",
   "summary": {
-    "trades": 231,
+    "trades": 232,
     "distinctTickers": 33,
     "firstTx": "2025-02-05",
-    "lastTx": "2026-06-26",
+    "lastTx": "2026-07-10",
     "pctLate": 0,
     "worstLate": 0
   },
@@ -51,14 +51,24 @@
       "hasPage": true
     },
     {
-      "ticker": "META",
+      "ticker": "TSM",
       "count": 13,
-      "asset": "Meta Platforms, Inc. - Class A Common Stock",
-      "slug": "meta",
+      "asset": "Taiwan Semiconductor Manufacturing Company Ltd.",
+      "slug": "tsm",
       "hasPage": true
     }
   ],
   "trades": [
+    {
+      "ticker": "TSM",
+      "asset": "Taiwan Semiconductor Manufacturing Company Ltd.",
+      "side": "BUY",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-07-10",
+      "filedDate": "2026-07-30",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035023.pdf"
+    },
     {
       "ticker": "NVDA",
       "asset": "NVIDIA Corporation - Common Stock",
@@ -244,16 +254,6 @@
       "asset": "Alphabet Inc. - Class C Capital Stock",
       "side": "BUY",
       "amountBucket": "$100K – $250K",
-      "txDate": "2026-01-20",
-      "filedDate": "2026-02-03",
-      "daysLate": 0,
-      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20033858.pdf"
-    },
-    {
-      "ticker": "IREN",
-      "asset": "IREN Limited - Ordinary Shares",
-      "side": "BUY",
-      "amountBucket": "$50K – $100K",
       "txDate": "2026-01-20",
       "filedDate": "2026-02-03",
       "daysLate": 0,
