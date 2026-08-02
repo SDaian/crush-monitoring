@@ -211,6 +211,12 @@ jobs:
           # every day. A price-source outage must not fail the whole refresh.
           python3 -m congress prices --skip-if-fresh 2>&1 | tee -a fetch.log \
             || echo "::warning::price refresh failed; keeping prior returns.json"
+          # The landing step above ran before prices, so the member pages'
+          # performance section was built from YESTERDAY's returns. Re-run the
+          # (cheap, pure-local) landing generation now that today's returns
+          # and performance series exist, so the pages ship today's numbers.
+          python3 -m congress landing 2>&1 | tee -a fetch.log \
+            || echo "::warning::landing re-run after prices failed; pages keep the earlier data"
 
       - name: Commit refreshed data
         if: github.event.inputs.report_only != 'true'
@@ -220,7 +226,7 @@ jobs:
           # landing/src/data/tickers was missing, so the ticker pages served
           # whatever a manual run last happened to commit (TSM was 2 months
           # and 1 trade behind the tracker).
-          FILES="docs/data/congress-trades.json congress/state.json congress/members.json docs/data/returns.json landing/src/data/disclosures.json landing/src/data/stats.json landing/src/data/late.json landing/src/data/members landing/src/data/tickers"
+          FILES="docs/data/congress-trades.json congress/state.json congress/members.json docs/data/returns.json docs/data/performance.json landing/src/data/disclosures.json landing/src/data/stats.json landing/src/data/late.json landing/src/data/members landing/src/data/tickers"
           if git diff --quiet -- $FILES; then
             echo "No new trades or price changes."
             exit 0

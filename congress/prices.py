@@ -186,7 +186,8 @@ def buy_return(series: PriceSeries, tx_date: str) -> dict | None:
 NON_EQUITY = {"Option", "Cryptocurrency"}
 
 
-def compute_returns(trades: list[dict], series_by_ticker: dict[str, PriceSeries]):
+def compute_returns(trades: list[dict], series_by_ticker: dict[str, PriceSeries],
+                    bench: PriceSeries | None = None):
     """Build the returns map for every priceable buy.
 
     Returns ``(returns_by_id, prices_by_ticker, stats)`` where
@@ -194,7 +195,12 @@ def compute_returns(trades: list[dict], series_by_ticker: dict[str, PriceSeries]
     ``prices_by_ticker`` maps ticker → {asof_date, asof_close} for tooltips.
     Large moves are kept as-is — in a chip-driven run a real buy can be up
     many-fold, so we do not second-guess the source's price.
+
+    With ``bench`` (the S&P proxy's series), each row also carries
+    ``bench_pct`` — the index's move over the same window — so a return is
+    never shown without what the market did over the identical period.
     """
+    from .performance import bench_pct as _bench_pct
     returns: dict[str, dict] = {}
     prices: dict[str, dict] = {}
     total_buys = 0
@@ -215,6 +221,9 @@ def compute_returns(trades: list[dict], series_by_ticker: dict[str, PriceSeries]
             "entry_close": rec["entry_close"],
             "pct": rec["pct"],
         }
+        bp = _bench_pct(bench, t["tx_date"]) if bench else None
+        if bp is not None:
+            returns[t["id"]]["bench_pct"] = bp
         prices[t["ticker"]] = {
             "asof_date": rec["latest_date"],
             "asof_close": rec["latest_close"],

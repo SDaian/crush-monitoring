@@ -267,6 +267,7 @@ def _cmd_roster(args: argparse.Namespace) -> int:
 
 
 DEFAULT_RETURNS = pipeline.REPO_ROOT / "docs" / "data" / "returns.json"
+DEFAULT_PERFORMANCE = pipeline.REPO_ROOT / "docs" / "data" / "performance.json"
 DEFAULT_HOLDINGS = pipeline.REPO_ROOT / "docs" / "data" / "holdings.json"
 DEFAULT_AI = pipeline.REPO_ROOT / "docs" / "data" / "ai-indicators.json"
 
@@ -418,10 +419,25 @@ def _cmd_landing(args: argparse.Namespace) -> int:
             )
         except (ValueError, OSError):
             holdings = {}
+    # Returns + performance feed the member pages' trading-performance
+    # section. Absent, unreadable, or predating the bench_pct field → the
+    # block reports unavailable and the section is not rendered.
+    def _optional_json(path_str: str) -> dict:
+        p = Path(path_str)
+        if not p.exists():
+            return {}
+        try:
+            return json.loads(p.read_text(encoding="utf-8"))
+        except (ValueError, OSError):
+            return {}
+
+    returns = _optional_json(args.returns).get("returns") or {}
+    perf = _optional_json(args.performance)
     today = datetime.now(timezone.utc).date()
     rows, stats = landing_data.write_files(trades, Path(args.output), today)
     members = landing_data.write_member_files(
-        trades, holdings, Path(args.output), today_iso=today.isoformat())
+        trades, holdings, Path(args.output), today_iso=today.isoformat(),
+        returns=returns, perf=perf)
     # Ticker pages: the most-traded symbols, picked from the data each run
     # (see landing_data.select_ticker_pages) so no thin page is ever emitted.
     tickers = landing_data.write_ticker_files(trades, Path(args.output))
@@ -480,9 +496,12 @@ def generated_today(path: str | Path, today_iso: str | None = None) -> bool:
 
 def _cmd_prices(args: argparse.Namespace) -> int:
     """Estimate 'return since buy' for the priceable disclosed buys."""
-    from . import prices
+    from . import performance, prices
 
-    if getattr(args, "skip_if_fresh", False) and generated_today(args.output):
+    # performance.json can only be built while the full price histories are in
+    # memory, so a "fresh" returns.json without it still means work to do.
+    if (getattr(args, "skip_if_fresh", False) and generated_today(args.output)
+            and generated_today(args.perf_output)):
         print(f"returns already generated today — skipping ({args.output})")
         return 0
 
@@ -499,10 +518,14 @@ def _cmd_prices(args: argparse.Namespace) -> int:
 
     trades = json.loads(Path(args.trades).read_text(encoding="utf-8"))["trades"]
     # Free tier is 800 calls/day, 8/min — price the featured + most-traded
-    # names (where the volume is), not the whole long tail.
+    # names (where the volume is), not the whole long tail. The benchmark
+    # rides along as one extra call; --limit never cuts it, or every run
+    # under a test cap would silently lose the whole comparison feature.
     tickers = prices.select_tickers(trades, FEATURED_TICKERS, args.top)
     if args.limit:
         tickers = tickers[: args.limit]
+    if performance.BENCH_TICKER not in tickers:
+        tickers = [performance.BENCH_TICKER, *tickers]
     print(f"pricing {len(tickers)} tickers via Twelve Data (8/min)…")
     session = prices.make_session()
     series_by_ticker = {}
@@ -524,7 +547,15 @@ def _cmd_prices(args: argparse.Namespace) -> int:
         if i % 20 == 0:
             print(f"  priced {i}/{len(tickers)} tickers…")
 
-    returns, price_map, stats = prices.compute_returns(trades, series_by_ticker)
+    # The benchmark is a comparison yardstick, not a congressional buy — pull
+    # it out so it never lands in the priced-tickers map or the stats.
+    bench = series_by_ticker.pop(performance.BENCH_TICKER, None)
+    if not bench:
+        print("::warning::benchmark fetch failed — returns will carry no "
+              "bench_pct and performance.json is left as-is this run")
+
+    returns, price_map, stats = prices.compute_returns(
+        trades, series_by_ticker, bench)
     stats["unlisted_tickers"] = unlisted
     stats["priced_tickers_of"] = len(tickers)
     if not returns:
@@ -565,6 +596,42 @@ def _cmd_prices(args: argparse.Namespace) -> int:
         f"priced {stats['priced_buys']}/{stats['total_buys']} buys across "
         f"{stats['tickers']} tickers ({unlisted} unlisted) → {out}"
     )
+
+    # The $1-race series for the featured member pages, built now because the
+    # full histories exist only in this process (returns.json keeps just the
+    # entry/latest closes). No benchmark → keep the previous file.
+    if bench:
+        from . import landing_data
+
+        perf = performance.build_performance(
+            trades, series_by_ticker, bench,
+            landing_data.MEMBER_PAGE_NAMES, prices.NON_EQUITY)
+        perf_payload = {
+            "meta": {
+                "_comment": (
+                    "Equal-weighted $1-in-every-priced-buy index vs the same "
+                    "dollars, same dates, in the S&P 500 (SPY). NOT realized "
+                    "profit. Generated by congress/performance.py via the "
+                    "prices run; do not edit by hand."
+                ),
+                "generated_at": datetime.now(timezone.utc).strftime(
+                    "%Y-%m-%dT%H:%M:%SZ"
+                ),
+                "source": "twelvedata.com",
+            },
+            **perf,
+        }
+        perf_out = Path(args.perf_output)
+        perf_out.parent.mkdir(parents=True, exist_ok=True)
+        perf_out.write_text(
+            json.dumps(perf_payload, separators=(",", ":"),
+                       ensure_ascii=False) + "\n",
+            encoding="utf-8",
+        )
+        print(
+            f"performance series for {len(perf['members'])} member(s) "
+            f"→ {perf_out}"
+        )
     return 0
 
 
@@ -734,6 +801,8 @@ def build_parser() -> argparse.ArgumentParser:
     )
     prices_p.add_argument("--trades", default=str(pipeline.DEFAULT_OUTPUT))
     prices_p.add_argument("--output", default=str(DEFAULT_RETURNS))
+    prices_p.add_argument("--perf-output", default=str(DEFAULT_PERFORMANCE),
+                          help="Member-vs-S&P performance series output.")
     prices_p.add_argument("--top", type=int, default=100,
                           help="Price featured + this many most-traded tickers.")
     prices_p.add_argument("--limit", type=int, default=None,
@@ -766,6 +835,8 @@ def build_parser() -> argparse.ArgumentParser:
     )
     landing_p.add_argument("--trades", default=str(pipeline.DEFAULT_OUTPUT))
     landing_p.add_argument("--holdings", default=str(DEFAULT_HOLDINGS))
+    landing_p.add_argument("--returns", default=str(DEFAULT_RETURNS))
+    landing_p.add_argument("--performance", default=str(DEFAULT_PERFORMANCE))
     landing_p.add_argument("--output", default=str(DEFAULT_LANDING_DATA))
     landing_p.set_defaults(func=_cmd_landing)
 

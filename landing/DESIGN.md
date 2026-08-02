@@ -315,6 +315,26 @@ shared Astro components in `src/components/`.
   shadow at the extremes) plus a mono `swipe →` hint. The table is
   `width: max-content`: fixed rem columns inside a narrower box clip the last
   column even when scrolled fully right.
+- **Performance section** (`PerformanceChart.astro`) — a member's priced buys
+  vs the S&P 500: KPI strip, the "$1 race" line chart, per-buy dumbbells.
+  Rules it must keep:
+  - **Emphasis form, not categorical:** the member's line in stamp, the index
+    as a gray dashed context line; identity carried by direct labels and the
+    legend, never color alone.
+  - **Two SVG geometries, same data.** SVG text scales with the viewBox, so
+    the 1000px desktop drawing renders 5px type on a phone. The mobile
+    variant (`.pmob`) drops the right label-gutter and leans on the legend
+    row. Note the specificity trap: `.pchart svg` outranks a lone class, so
+    the visibility toggles must be `.pchart .pdesk` / `.pchart .pmob`.
+  - **The honesty caption is part of the component** — "not realized profit,
+    equal-weighted brackets, buys only, daily snapshot" cannot be separated
+    from the chart. The section is gated (≥3 priced buys + benchmark data);
+    it renders nothing rather than a two-buy "track record".
+  - **Dumbbells share one axis** across rows so lengths compare; the stock
+    dot draws last with a paper ring so stock ≈ index still reads as two
+    marks. A dot is a dot (the §5 radius exception applies).
+  - **It does not animate** — settled evidence, same rule as the holdings
+    ring and the leaderboard.
 - **Email-preview card** — the daily digest drawn as a broadsheet clipping: a
   stamp "Today's email" tab, an ink-ruled masthead (from + subject with live
   counts), disclosure rows, a mono footer. The hero **product shot**, framed on a

@@ -163,7 +163,8 @@ from the official Senate eFD, House Clerk, and OGE (executive-branch 278-T)
 sites. Full details in `congress/README.md`. Conventions:
 
 - **Generated files are never hand-edited:** `docs/data/congress-trades.json`,
-  `docs/data/returns.json`, `docs/data/holdings.json`,
+  `docs/data/returns.json`, `docs/data/performance.json`,
+  `docs/data/holdings.json`,
   `docs/data/ai-indicators.json` and `congress/state.json` are written by
   `congress/pipeline.py` / `congress/prices.py` / `congress/holdings.py` /
   `congress/indicators.py` (daily via `.github/workflows/congress-trades.yml`).
@@ -204,6 +205,25 @@ sites. Full details in `congress/README.md`. Conventions:
   managed-account **bond** purchases (chamber `executive`, no ticker, no return
   estimate). To track a newly posted 278-T, append its `unid` + `filename`.
   This file *is* hand-maintained (unlike the generated data files above).
+- **Trading performance vs the S&P 500 (member pages):** the prices run also
+  fetches one benchmark series (SPY) and (a) stamps each priced buy in
+  `returns.json` with `bench_pct` — the index's move over the *same* window —
+  and (b) writes `docs/data/performance.json` (`congress/performance.py`, pure
+  math): a per-featured-member weekly "$1 in every priced buy vs the same $1,
+  same dates, in the S&P" index series. This can only be built during the
+  prices run (full histories exist only in memory), which is why the workflow
+  re-runs `congress landing` after prices. The member-page section
+  (`PerformanceChart.astro`) is **gated**: it renders only with ≥3 priced buys
+  AND benchmark data, and its not-realized-profit caption is part of the
+  component so the chart cannot ship without it. Equal-weighted everywhere —
+  filings disclose brackets, so weighting by position size would be invented.
+- **Bonds are kept but de-emphasized:** ticker-less debt rows (Trump's
+  executive 278-T bonds, munis, treasuries) stay in the record, the tracker
+  and the member pages — removing them would erase Trump's page entirely
+  (57/57 rows are bonds) and the executive coverage is a differentiator. But
+  they are excluded from the HEADLINE surfaces (`landing_data.is_bond`): the
+  home-page stats say "stock trades" and count exactly that, and the live
+  feed already requires a ticker. Don't widen `is_bond` to tickered rows.
 - **Return-since-buy is an estimate — label it as such:** `congress/prices.py`
   fetches Twelve Data daily closes (free tier, key via the CONGRESS_PRICES_KEY secret) and records, per disclosed
   **buy**, the stock's % change since the trade date. It is NOT the member's
