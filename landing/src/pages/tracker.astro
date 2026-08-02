@@ -107,6 +107,11 @@ const schema = [
             <option value="sell">Sell</option>
             <option value="exchange">Exchange</option>
           </select>
+          <select id="fAsset">
+            <option value="equity" selected>Stocks &amp; options</option>
+            <option value="bond">Bonds &amp; debt</option>
+            <option value="">Assets: all</option>
+          </select>
           <select id="fRange">
             <option value="90">Last 90 days</option>
             <option value="365">Last year</option>
@@ -195,7 +200,7 @@ const schema = [
       let AI_META = {};
       let retSample = false;
       let aiSample = false;
-      let state = {q:"", chamber:"", party:"", type:"", range:"", member:"",
+      let state = {q:"", chamber:"", party:"", type:"", range:"", member:"", asset:"equity",
                    sortKey:"filing_date", sortDir:-1, shown:PAGE, aiTicker:"NVDA"};
 
       const $ = id => document.getElementById(id);
@@ -206,6 +211,15 @@ const schema = [
         return d.toISOString().slice(0,10);
       }
 
+      // Ticker-less debt rows (Trump's managed-account bonds, munis,
+      // treasuries; House code CS is corporate bonds/notes). Mirrors the
+      // Python landing_data.is_bond — a tickered row is never a bond here.
+      const BOND_TYPES = new Set([
+        "bond", "Corporate Bond", "Municipal Security",
+        "Government Security", "Corporate Security",
+      ]);
+      const isBond = t => !t.ticker && BOND_TYPES.has(t.asset_type);
+
       function filtered(){
         const q = state.q.trim().toLowerCase();
         const since = state.range ? daysAgo(+state.range) : "";
@@ -215,6 +229,7 @@ const schema = [
           (!state.chamber || t.chamber === state.chamber) &&
           (!state.party || t.party === state.party) &&
           (!state.type || t.type === state.type) &&
+          (!state.asset || (state.asset === "bond") === isBond(t)) &&
           (!since || t.tx_date >= since)
         );
       }
@@ -616,10 +631,12 @@ const schema = [
         $("fParty").addEventListener("change", e => { state.party = e.target.value; rerender(); });
         $("fType").addEventListener("change", e => { state.type = e.target.value; rerender(); });
         $("fRange").addEventListener("change", e => { state.range = e.target.value; rerender(); });
+        $("fAsset").addEventListener("change", e => { state.asset = e.target.value; rerender(); });
         $("clearBtn").addEventListener("click", () => {
-          state = {...state, q:"", chamber:"", party:"", type:"", range:"", member:"", shown:PAGE};
+          // Back to the DEFAULT view — which is stocks/options, not "all".
+          state = {...state, q:"", chamber:"", party:"", type:"", range:"", member:"", asset:"equity", shown:PAGE};
           $("q").value = ""; $("fChamber").value = ""; $("fParty").value = "";
-          $("fType").value = ""; $("fRange").value = "";
+          $("fType").value = ""; $("fRange").value = ""; $("fAsset").value = "equity";
           renderRows();
         });
         $("moreBtn").addEventListener("click", () => { state.shown += PAGE; renderRows(); });
