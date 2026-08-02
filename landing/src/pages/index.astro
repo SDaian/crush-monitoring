@@ -174,9 +174,23 @@ const description = seoDescription(
               disclosures.map((d) => (
                 <div role="row" class="mrow">
                   <span class="who" role="cell">
-                    {d.member}
+                    {d.memberSlug ? (
+                      <a href={`/members/${d.memberSlug}`} class="mlink">
+                        {d.member}
+                      </a>
+                    ) : (
+                      d.member
+                    )}
                   </span>
-                  <span role="cell">{d.ticker}</span>
+                  <span role="cell">
+                    {d.tickerSlug ? (
+                      <a href={`/tickers/${d.tickerSlug}`} class="mlink">
+                        {d.ticker}
+                      </a>
+                    ) : (
+                      d.ticker
+                    )}
+                  </span>
                   <span
                     role="cell"
                     class={`font-semibold ${d.side === "BUY" ? "text-buy" : "text-sell"}`}
@@ -547,6 +561,21 @@ const description = seoDescription(
            to the preloaded weight and consistent across browsers. */
         font-weight: 800;
         font-size: 0.8rem;
+      }
+      /* Feed rows deep-link to member/ticker pages when they exist. Ink, not
+         link-blue — the card is a product shot of the email first; the
+         hairline underline is the whole affordance. */
+      .mrow .mlink {
+        color: inherit;
+        text-decoration: underline;
+        text-decoration-color: var(--color-rule);
+        text-decoration-thickness: 1px;
+        text-underline-offset: 3px;
+      }
+      .mrow .mlink:hover,
+      .mrow .mlink:focus-visible {
+        text-decoration-color: var(--color-stamp);
+        color: var(--color-stamp);
       }
       .mail-ft {
         padding: 0.6875rem 1.125rem;
