@@ -115,9 +115,14 @@ const schema = [
     <Header active="tickers" />
 
     <section class="mx-auto max-w-[75rem] px-[5vw] pt-[9vh] pb-[6vh]">
-      <p class="eyebrow mb-5">
-        <a href="/tickers" class="no-underline hover:text-ink">Stocks</a> ·
-        <b class="font-semibold text-stamp">{t.company}</b>
+      <p class="eyebrow mb-5 flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
+        <span>
+          <a href="/tickers" class="no-underline hover:text-ink">Stocks</a> ·
+          <b class="font-semibold text-stamp">{t.company}</b>
+        </span>
+        {s.lastFiling && (
+          <span>Newest filing <b class="font-semibold text-ink">{fmtDate(s.lastFiling)}</b></span>
+        )}
       </p>
       <h1 class="headline max-w-[16ch] text-[clamp(2.4rem,6.5vw,4.6rem)]">
         Congress trades <span class="underline-stamp">{t.ticker}</span>.
@@ -129,12 +134,10 @@ const schema = [
         {" "}{s.sells} sells. Amounts are the brackets as filed; timing is counted
         against the 45-day legal maximum.
       </p>
-      <!-- Same dateline as member pages: our freshness vs the data's. -->
+      <!-- Same split as member pages: newest filing in the header's right
+           meta, "checked" (our rebuild date) down here. -->
       <p class="mono mt-5 text-[.75rem] uppercase tracking-[.08em] text-ink-soft">
         Checked {checkedOn}
-        {s.lastFiling && (
-          <Fragment> · newest filing <b class="font-semibold text-ink">{fmtDate(s.lastFiling)}</b></Fragment>
-        )}
       </p>
     </section>
 
