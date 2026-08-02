@@ -162,12 +162,14 @@ const schema = [
     <Header active="members" />
 
     <section class="mx-auto max-w-[75rem] px-[5vw] pt-[9vh] pb-[6vh]">
-      <!-- Party + seat sit right-aligned on the eyebrow line, section-head
-           style (label left, meta right) — the affiliation reads as the
-           page's dateline-like tag rather than part of the label. -->
+      <!-- Section-head style split: who they are (label · party · seat) on
+           the left, the newest-filing date on the right — the data's own
+           freshness is the header's right-hand meta. -->
       <p class="eyebrow mb-5 flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
-        <span>Featured filer</span>
-        <b class="font-semibold text-stamp">{seat}</b>
+        <span>Featured filer · <b class="font-semibold text-stamp">{seat}</b></span>
+        {s.lastFiling && (
+          <span>Newest filing <b class="font-semibold text-ink">{fmtDate(s.lastFiling)}</b></span>
+        )}
       </p>
       <h1 class="headline max-w-[16ch] text-[clamp(2.4rem,6.5vw,4.6rem)]">
         {m.name}'s <span class="underline-stamp">stock trades</span>.
@@ -178,15 +180,12 @@ const schema = [
         {" "}{fmtMonth(s.lastTx)}. Amounts are the brackets as filed; timing is
         counted against the 45-day legal maximum.
       </p>
-      <!-- The dateline separates OUR freshness from THEIRS: "checked" is when
-           this page was rebuilt; "newest filing" is how recent the newest
-           information about this member is. Conflating the two would dress
-           30-45-day-old trades up as current. -->
+      <!-- "Checked" (when WE rebuilt the page) stays down here; "newest
+           filing" (how recent THEIR data is) lives in the header's right
+           meta. Keeping the two apart stops 30-45-day-old trades from
+           dressing up as current. -->
       <p class="mono mt-5 text-[.75rem] uppercase tracking-[.08em] text-ink-soft">
         Checked {checkedOn}
-        {s.lastFiling && (
-          <Fragment> · newest filing <b class="font-semibold text-ink">{fmtDate(s.lastFiling)}</b></Fragment>
-        )}
       </p>
     </section>
 
