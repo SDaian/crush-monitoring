@@ -15,6 +15,17 @@ import HoldingsChart from "../../components/HoldingsChart.astro";
 import PerformanceChart from "../../components/PerformanceChart.astro";
 import { plural, seoDescription } from "../../lib/seo";
 
+// Build-time "checked" date: when this page was last regenerated. Deliberately
+// computed here, not stamped into the data files — a timestamp in the payload
+// would make every generated JSON diff daily even when nothing changed.
+const checkedOn = new Date().toLocaleDateString("en-US", {
+  month: "short",
+  day: "numeric",
+  year: "numeric",
+  timeZone: "UTC",
+});
+
+
 export async function getStaticPaths() {
   const all = import.meta.glob("../../data/members/*.json", { eager: true });
   return Object.entries(all)
@@ -116,7 +127,7 @@ const schema = [
   {
     "@context": "https://schema.org",
     "@type": "ProfilePage",
-    dateModified: s.lastTx ?? undefined,
+    dateModified: s.lastFiling ?? s.lastTx ?? undefined,
     mainEntity: {
       "@type": "Person",
       name: m.name,
@@ -162,6 +173,16 @@ const schema = [
         {" "}across {s.distinctTickers} tickers, from {fmtMonth(s.firstTx)} to
         {" "}{fmtMonth(s.lastTx)}. Amounts are the brackets as filed; timing is
         counted against the 45-day legal maximum.
+      </p>
+      <!-- The dateline separates OUR freshness from THEIRS: "checked" is when
+           this page was rebuilt; "newest filing" is how recent the newest
+           information about this member is. Conflating the two would dress
+           30-45-day-old trades up as current. -->
+      <p class="mono mt-5 text-[.75rem] uppercase tracking-[.08em] text-ink-soft">
+        Checked {checkedOn}
+        {s.lastFiling && (
+          <Fragment> · newest filing <b class="font-semibold text-ink">{fmtDate(s.lastFiling)}</b></Fragment>
+        )}
       </p>
     </section>
 

@@ -496,6 +496,11 @@ def member_payload(name: str, trades: list[dict], holdings: dict,
             "distinctTickers": len(tickers),
             "firstTx": min((t["tx_date"] for t in dated), default=None),
             "lastTx": max((t["tx_date"] for t in dated), default=None),
+            # The page dateline's "newest filing" — how recent the newest
+            # information here is, as opposed to when we last rebuilt the page.
+            "lastFiling": max(
+                (t["filing_date"] for t in ts if t.get("filing_date")),
+                default=None),
             "pctLate": round(100 * len(late_pos) / len(late_vals)) if late_vals else 0,
             "worstLate": max(late_vals) if late_vals else 0,
         },
@@ -746,6 +751,11 @@ def ticker_payload(ticker: str, trades: list[dict],
             "other": len(ts) - sides.get("buy", 0) - sides.get("sell", 0),
             "firstTx": min((t["tx_date"] for t in dated), default=None),
             "lastTx": max((t["tx_date"] for t in dated), default=None),
+            # The page dateline's "newest filing" — how recent the newest
+            # information here is, as opposed to when we last rebuilt the page.
+            "lastFiling": max(
+                (t["filing_date"] for t in ts if t.get("filing_date")),
+                default=None),
             "estBuyLabel": money(buy_est),
             "estSellLabel": money(sell_est),
             "pctLate": round(100 * len(late_pos) / len(late_vals)) if late_vals else 0,

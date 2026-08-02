@@ -602,3 +602,17 @@ class TestFeedLinks(unittest.TestCase):
     def test_no_ticker_pages_argument_means_no_ticker_links(self):
         rows = ld.feed_payload(self._pool())
         self.assertTrue(all(r["tickerSlug"] is None for r in rows))
+
+
+class TestLastFiling(unittest.TestCase):
+    def test_member_summary_carries_newest_filing_date(self):
+        ts = [T(member="Nancy Pelosi", tx="2026-06-01", filed="2026-06-20", id="a"),
+              T(member="Nancy Pelosi", tx="2026-06-10", filed="2026-07-30", id="b")]
+        p = ld.member_payload("Nancy Pelosi", ts, {})
+        self.assertEqual(p["summary"]["lastFiling"], "2026-07-30")
+
+    def test_ticker_summary_carries_newest_filing_date(self):
+        ts = [MT(tx="2026-06-01", filed="2026-07-05"),
+              MT(tx="2026-06-02", filed="2026-06-20")]
+        p = ld.ticker_payload("NVDA", ts)
+        self.assertEqual(p["summary"]["lastFiling"], "2026-07-05")

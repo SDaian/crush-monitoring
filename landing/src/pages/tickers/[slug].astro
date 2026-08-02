@@ -16,6 +16,17 @@ import SignupModal from "../../components/SignupModal.astro";
 import CountUp from "../../components/CountUp.astro";
 import { plural, seoDescription } from "../../lib/seo";
 
+// Build-time "checked" date: when this page was last regenerated. Deliberately
+// computed here, not stamped into the data files — a timestamp in the payload
+// would make every generated JSON diff daily even when nothing changed.
+const checkedOn = new Date().toLocaleDateString("en-US", {
+  month: "short",
+  day: "numeric",
+  year: "numeric",
+  timeZone: "UTC",
+});
+
+
 export async function getStaticPaths() {
   const all = import.meta.glob("../../data/tickers/*.json", { eager: true });
   return Object.entries(all)
@@ -117,6 +128,13 @@ const schema = [
         {" "}{fmtMonth(s.firstTx)} and {fmtMonth(s.lastTx)} — {s.buys} buys and
         {" "}{s.sells} sells. Amounts are the brackets as filed; timing is counted
         against the 45-day legal maximum.
+      </p>
+      <!-- Same dateline as member pages: our freshness vs the data's. -->
+      <p class="mono mt-5 text-[.75rem] uppercase tracking-[.08em] text-ink-soft">
+        Checked {checkedOn}
+        {s.lastFiling && (
+          <Fragment> · newest filing <b class="font-semibold text-ink">{fmtDate(s.lastFiling)}</b></Fragment>
+        )}
       </p>
     </section>
 
