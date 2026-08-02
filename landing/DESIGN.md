@@ -338,7 +338,11 @@ shared Astro components in `src/components/`.
 - **Email-preview card** — the daily digest drawn as a broadsheet clipping: a
   stamp "Today's email" tab, an ink-ruled masthead (from + subject with live
   counts), disclosure rows, a mono footer. The hero **product shot**, framed on a
-  `wash` inset; built from the **real feed**, never mocked rows.
+  `wash` inset; built from the **real feed**, never mocked rows. Member and
+  ticker cells **deep-link to their pages when those exist** (the feed data
+  carries `memberSlug`/`tickerSlug`, null otherwise — never mint a dead link);
+  the affordance is a hairline rule-colored underline that turns stamp on
+  hover, in ink — the card reads as the email first, links second.
 - **Problem band** — a centered accusation headline + lede, over the "how it
   works" timeline (below). Frames the "why" between hero and proof.
 - **Scroll timeline** — a vertical pipeline whose stamp-red rail fills and whose

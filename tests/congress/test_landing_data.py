@@ -110,7 +110,8 @@ class TestPayloads(unittest.TestCase):
         rows = ld.feed_payload([T(member="Nancy Pelosi", chamber="house",
                                   district="CA-11", lo=1_000_001, hi=5_000_000)])
         r = rows[0]
-        self.assertEqual(set(r), {"member", "chamber", "district", "ticker",
+        self.assertEqual(set(r), {"member", "memberSlug", "chamber",
+                                  "district", "ticker", "tickerSlug",
                                   "side", "amountBucket", "filedDaysLate"})
         self.assertEqual(r["member"], "N. Pelosi")
         self.assertEqual(r["chamber"], "House")
@@ -574,3 +575,30 @@ class TestBondDeEmphasis(unittest.TestCase):
         bond["member"] = "Donald J. Trump"
         p = ld.member_payload("Donald J. Trump", [bond], {})
         self.assertEqual(p["summary"]["trades"], 1)
+
+
+class TestFeedLinks(unittest.TestCase):
+    def _pool(self):
+        # Distinct members so select_feed keeps all rows.
+        return [
+            T(member="Nancy Pelosi", ticker="NVDA", id="a",
+              tx="2026-06-01", filed="2026-06-20"),
+            T(member="Somebody Unfeatured", ticker="ZZZQ", id="b",
+              tx="2026-06-01", filed="2026-06-20"),
+        ]
+
+    def test_featured_member_and_paged_ticker_get_slugs(self):
+        rows = ld.feed_payload(self._pool(), ticker_pages={"NVDA"})
+        by_ticker = {r["ticker"]: r for r in rows}
+        self.assertEqual(by_ticker["NVDA"]["memberSlug"], "nancy-pelosi")
+        self.assertEqual(by_ticker["NVDA"]["tickerSlug"], "nvda")
+
+    def test_unfeatured_member_and_unpaged_ticker_get_none(self):
+        rows = ld.feed_payload(self._pool(), ticker_pages={"NVDA"})
+        by_ticker = {r["ticker"]: r for r in rows}
+        self.assertIsNone(by_ticker["ZZZQ"]["memberSlug"])
+        self.assertIsNone(by_ticker["ZZZQ"]["tickerSlug"])
+
+    def test_no_ticker_pages_argument_means_no_ticker_links(self):
+        rows = ld.feed_payload(self._pool())
+        self.assertTrue(all(r["tickerSlug"] is None for r in rows))

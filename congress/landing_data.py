@@ -174,17 +174,33 @@ def select_feed(trades: list[dict], count: int = FEED_SIZE) -> list[dict]:
     return picked
 
 
-def feed_payload(trades: list[dict]) -> list[dict]:
-    """FR-2-shaped rows for landing/src/data/disclosures.json."""
+def feed_payload(trades: list[dict],
+                 ticker_pages: set[str] | None = None) -> list[dict]:
+    """FR-2-shaped rows for landing/src/data/disclosures.json.
+
+    ``memberSlug``/``tickerSlug`` are set only when the corresponding page
+    exists (featured member set / the ticker-page universe), so the feed can
+    deep-link without ever minting a dead link. The display name is
+    abbreviated ("N. Pelosi"), which is why the slug is derived from the full
+    filer name here, where it is still known."""
+    ticker_pages = ticker_pages or set()
+    featured = set(MEMBER_PAGE_NAMES)
     rows = []
     for t in select_feed(trades):
         chamber = "Senate" if t.get("chamber") == "senate" else "House"
         district = t.get("district") or t.get("state") or ""
         rows.append({
             "member": display_name(t["member"]),
+            "memberSlug": (
+                slugify(t["member"]) if t["member"] in featured else None
+            ),
             "chamber": chamber,
             "district": district,
             "ticker": t["ticker"],
+            "tickerSlug": (
+                ticker_slug(t["ticker"]) if t["ticker"] in ticker_pages
+                else None
+            ),
             "side": t["type"].upper(),
             "amountBucket": compact_bucket(t.get("amount_lo"), t.get("amount_hi")),
             "filedDaysLate": days_late(t),
@@ -794,7 +810,7 @@ def write_files(trades: list[dict], out_dir: Path, today: date) -> tuple[int, di
         "(daily Action). Do not edit by hand. 'filedDaysLate' counts days past "
         "the STOCK Act's 45-day statutory maximum; 0 = on time."
     )
-    rows = feed_payload(trades)
+    rows = feed_payload(trades, set(select_ticker_pages(trades)))
     stats = stats_payload(trades, today)
     out_dir.mkdir(parents=True, exist_ok=True)
     (out_dir / "disclosures.json").write_text(
