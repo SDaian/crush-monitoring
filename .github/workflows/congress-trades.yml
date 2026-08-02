@@ -69,7 +69,13 @@ jobs:
           else
             EXTRA="" # full scheduled run: no dump (it would be huge)
           fi
-          python3 -m congress fetch $EXTRA 2>&1 | tee fetch.log
+          # --reparse-invalid on every run: rows that break an invariant
+          # (amount_hi < amount_lo — the "$200 late-filing fee" bug) have
+          # their WHOLE filing forgotten and re-fetched, so a parser fix
+          # actually reaches data that was published before it. state.json
+          # gates by filing_id, so without this a bad row stays live forever.
+          # Normally zero rows match and the flag is a no-op.
+          python3 -m congress fetch --reparse-invalid $EXTRA 2>&1 | tee fetch.log
 
       - name: Refresh featured-member holdings (non-fatal)
         if: github.event.inputs.report_only != 'true'
