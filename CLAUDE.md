@@ -325,6 +325,13 @@ sites. Full details in `congress/README.md`. Conventions:
     `build_report(...)["html"]` / `build_traffic_email(...)["html"]` to a file.
     Keep the two brands' looks in step, but the email is its own surface (not
     governed by `landing/DESIGN.md`).
+- **Search indexing is push + pull:** the sitemap (`robots.txt` →
+  `sitemap-index.xml`) covers Google; `congress/indexnow.py`
+  (`python3 -m congress indexnow`, non-fatal daily workflow step) pushes the
+  refreshed URLs to IndexNow (Bing/Yandex family — also feeds DuckDuckGo and
+  Yahoo). Ownership proof is `landing/public/<KEY>.txt`; the key is public by
+  design, NOT a secret. Bing Webmaster Tools itself is a one-time manual
+  setup (import from Google Search Console).
 - **A parser fix does not reach data already published.** `congress/state.json`
   records every processed `filing_id`, so a document is never read twice —
   which means a bad row stays live forever unless the filing is forgotten.
