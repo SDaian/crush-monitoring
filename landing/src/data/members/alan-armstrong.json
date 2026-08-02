@@ -1,0 +1,378 @@
+{
+  "_comment": "Generated from real official disclosures by congress/landing_data.py (daily Action). Do not edit by hand.",
+  "slug": "alan-armstrong",
+  "name": "Alan Armstrong",
+  "party": "R",
+  "state": "OK",
+  "chamber": "Senate",
+  "district": null,
+  "summary": {
+    "trades": 703,
+    "distinctTickers": 345,
+    "firstTx": "2026-03-24",
+    "lastTx": "2026-06-24",
+    "lastFiling": "2026-07-21",
+    "pctLate": 100,
+    "worstLate": 74
+  },
+  "topTickers": [
+    {
+      "ticker": "WMB",
+      "count": 2,
+      "asset": "Williams Companies, Inc. (The) Common Stock",
+      "slug": "wmb",
+      "hasPage": false
+    },
+    {
+      "ticker": "NVS",
+      "count": 2,
+      "asset": "Novartis AG Common Stock",
+      "slug": "nvs",
+      "hasPage": false
+    },
+    {
+      "ticker": "SAN",
+      "count": 2,
+      "asset": "Banco Santander, S.A. Sponsored ADR (Spain)",
+      "slug": "san",
+      "hasPage": false
+    },
+    {
+      "ticker": "AZN",
+      "count": 2,
+      "asset": "AstraZeneca PLC Ordinary Shares",
+      "slug": "azn",
+      "hasPage": false
+    },
+    {
+      "ticker": "ASML",
+      "count": 2,
+      "asset": "ASML Holding N.V. - New York Registry Shares",
+      "slug": "asml",
+      "hasPage": false
+    },
+    {
+      "ticker": "SCHW",
+      "count": 2,
+      "asset": "Charles Schwab Corporation (The) Common Stock",
+      "slug": "schw",
+      "hasPage": false
+    }
+  ],
+  "trades": [
+    {
+      "ticker": "WMB",
+      "asset": "Williams Companies, Inc. (The) Common Stock",
+      "side": "SELL",
+      "amountBucket": "$5M – $25M",
+      "txDate": "2026-06-24",
+      "filedDate": "2026-07-21",
+      "daysLate": 0,
+      "sourceUrl": "https://efdsearch.senate.gov/search/view/ptr/fda235b3-bad7-4637-8fa1-053f354d929c/"
+    },
+    {
+      "ticker": "WMB",
+      "asset": "Williams Companies, Inc. (The) Common Stock Option Type: Call Strike price: $75.00 Expires: 2026-08-21",
+      "side": "SELL",
+      "amountBucket": "$250K – $500K",
+      "txDate": "2026-06-22",
+      "filedDate": "2026-07-21",
+      "daysLate": 0,
+      "sourceUrl": "https://efdsearch.senate.gov/search/view/ptr/fda235b3-bad7-4637-8fa1-053f354d929c/"
+    },
+    {
+      "ticker": "—",
+      "asset": "Hensoldt AG ADR (HAGHY)",
+      "side": "BUY",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-03-31",
+      "filedDate": "2026-07-21",
+      "daysLate": 67,
+      "sourceUrl": "https://efdsearch.senate.gov/search/view/ptr/fda235b3-bad7-4637-8fa1-053f354d929c/"
+    },
+    {
+      "ticker": "—",
+      "asset": "Zurich Insurance Group Ltd Sponsored ADR (ZURVY)",
+      "side": "BUY",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-03-31",
+      "filedDate": "2026-07-21",
+      "daysLate": 67,
+      "sourceUrl": "https://efdsearch.senate.gov/search/view/ptr/fda235b3-bad7-4637-8fa1-053f354d929c/"
+    },
+    {
+      "ticker": "—",
+      "asset": "Wise plc Sponsored ADR (WIZEY)",
+      "side": "BUY",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-03-31",
+      "filedDate": "2026-07-21",
+      "daysLate": 67,
+      "sourceUrl": "https://efdsearch.senate.gov/search/view/ptr/fda235b3-bad7-4637-8fa1-053f354d929c/"
+    },
+    {
+      "ticker": "—",
+      "asset": "Unicredit SPA Unsponsored ADR (UNCRY)",
+      "side": "BUY",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-03-31",
+      "filedDate": "2026-07-21",
+      "daysLate": 67,
+      "sourceUrl": "https://efdsearch.senate.gov/search/view/ptr/fda235b3-bad7-4637-8fa1-053f354d929c/"
+    },
+    {
+      "ticker": "—",
+      "asset": "Swisscom AG Sponsored ADR (SCMWY)",
+      "side": "BUY",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-03-31",
+      "filedDate": "2026-07-21",
+      "daysLate": 67,
+      "sourceUrl": "https://efdsearch.senate.gov/search/view/ptr/fda235b3-bad7-4637-8fa1-053f354d929c/"
+    },
+    {
+      "ticker": "—",
+      "asset": "Schneider Electric SE Unsponsored ADR (SBGSY)",
+      "side": "BUY",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-03-31",
+      "filedDate": "2026-07-21",
+      "daysLate": 67,
+      "sourceUrl": "https://efdsearch.senate.gov/search/view/ptr/fda235b3-bad7-4637-8fa1-053f354d929c/"
+    },
+    {
+      "ticker": "—",
+      "asset": "SAP SE Sponsored ADR (SAP)",
+      "side": "BUY",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-03-31",
+      "filedDate": "2026-07-21",
+      "daysLate": 67,
+      "sourceUrl": "https://efdsearch.senate.gov/search/view/ptr/fda235b3-bad7-4637-8fa1-053f354d929c/"
+    },
+    {
+      "ticker": "—",
+      "asset": "Royal KPN N.V. Sponsored ADR (KKPNY)",
+      "side": "BUY",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-03-31",
+      "filedDate": "2026-07-21",
+      "daysLate": 67,
+      "sourceUrl": "https://efdsearch.senate.gov/search/view/ptr/fda235b3-bad7-4637-8fa1-053f354d929c/"
+    },
+    {
+      "ticker": "—",
+      "asset": "Rolls Royce Holdings plc Sponsored ADR (RYCEY)",
+      "side": "BUY",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-03-31",
+      "filedDate": "2026-07-21",
+      "daysLate": 67,
+      "sourceUrl": "https://efdsearch.senate.gov/search/view/ptr/fda235b3-bad7-4637-8fa1-053f354d929c/"
+    },
+    {
+      "ticker": "NVS",
+      "asset": "Novartis AG Common Stock",
+      "side": "BUY",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-03-31",
+      "filedDate": "2026-07-21",
+      "daysLate": 67,
+      "sourceUrl": "https://efdsearch.senate.gov/search/view/ptr/fda235b3-bad7-4637-8fa1-053f354d929c/"
+    },
+    {
+      "ticker": "—",
+      "asset": "Henkel AG & Co KGAA Sponsored ADR (HENKY)",
+      "side": "BUY",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-03-31",
+      "filedDate": "2026-07-21",
+      "daysLate": 67,
+      "sourceUrl": "https://efdsearch.senate.gov/search/view/ptr/fda235b3-bad7-4637-8fa1-053f354d929c/"
+    },
+    {
+      "ticker": "—",
+      "asset": "Heineken NV Sponsored ADR (HEINY)",
+      "side": "BUY",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-03-31",
+      "filedDate": "2026-07-21",
+      "daysLate": 67,
+      "sourceUrl": "https://efdsearch.senate.gov/search/view/ptr/fda235b3-bad7-4637-8fa1-053f354d929c/"
+    },
+    {
+      "ticker": "—",
+      "asset": "Glencore plc Unsponsored ADR (GLNCY)",
+      "side": "BUY",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-03-31",
+      "filedDate": "2026-07-21",
+      "daysLate": 67,
+      "sourceUrl": "https://efdsearch.senate.gov/search/view/ptr/fda235b3-bad7-4637-8fa1-053f354d929c/"
+    },
+    {
+      "ticker": "—",
+      "asset": "DSV A/S ADR (DSDVY)",
+      "side": "BUY",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-03-31",
+      "filedDate": "2026-07-21",
+      "daysLate": 67,
+      "sourceUrl": "https://efdsearch.senate.gov/search/view/ptr/fda235b3-bad7-4637-8fa1-053f354d929c/"
+    },
+    {
+      "ticker": "—",
+      "asset": "Compagnie Financiere Richemont AG ADR (CFRUY)",
+      "side": "BUY",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-03-31",
+      "filedDate": "2026-07-21",
+      "daysLate": 67,
+      "sourceUrl": "https://efdsearch.senate.gov/search/view/ptr/fda235b3-bad7-4637-8fa1-053f354d929c/"
+    },
+    {
+      "ticker": "—",
+      "asset": "Carrefour SA Sponsored ADR (CRRFY)",
+      "side": "BUY",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-03-31",
+      "filedDate": "2026-07-21",
+      "daysLate": 67,
+      "sourceUrl": "https://efdsearch.senate.gov/search/view/ptr/fda235b3-bad7-4637-8fa1-053f354d929c/"
+    },
+    {
+      "ticker": "—",
+      "asset": "BHP Group Limited (BHP)",
+      "side": "BUY",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-03-31",
+      "filedDate": "2026-07-21",
+      "daysLate": 67,
+      "sourceUrl": "https://efdsearch.senate.gov/search/view/ptr/fda235b3-bad7-4637-8fa1-053f354d929c/"
+    },
+    {
+      "ticker": "SAN",
+      "asset": "Banco Santander, S.A. Sponsored ADR (Spain)",
+      "side": "BUY",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-03-31",
+      "filedDate": "2026-07-21",
+      "daysLate": 67,
+      "sourceUrl": "https://efdsearch.senate.gov/search/view/ptr/fda235b3-bad7-4637-8fa1-053f354d929c/"
+    }
+  ],
+  "tradesShown": 20,
+  "holdings": {
+    "available": false,
+    "filingDate": null,
+    "reportYear": null,
+    "snapDate": null,
+    "filingsSince": 0,
+    "sourceUrl": null,
+    "totalLabel": null,
+    "positions": 0,
+    "stocks": [],
+    "options": []
+  },
+  "performance": {
+    "available": true,
+    "benchLabel": "S&P 500",
+    "asofDate": "2026-07-31",
+    "kpis": {
+      "medianPct": 16.1,
+      "medianBenchPct": 17.8,
+      "beat": 36,
+      "beatOf": 76,
+      "priced": 76,
+      "pricedOf": 320
+    },
+    "series": null,
+    "rows": [
+      {
+        "ticker": "ASML",
+        "txDate": "2026-03-31",
+        "pct": 23.3,
+        "benchPct": 14.9,
+        "excess": 8.4
+      },
+      {
+        "ticker": "AZN",
+        "txDate": "2026-03-31",
+        "pct": -14.0,
+        "benchPct": 14.9,
+        "excess": -28.9
+      },
+      {
+        "ticker": "TSLA",
+        "txDate": "2026-03-30",
+        "pct": -12.4,
+        "benchPct": 18.2,
+        "excess": -30.6
+      },
+      {
+        "ticker": "UBER",
+        "txDate": "2026-03-30",
+        "pct": 0.6,
+        "benchPct": 18.2,
+        "excess": -17.6
+      },
+      {
+        "ticker": "GOOG",
+        "txDate": "2026-03-30",
+        "pct": 30.6,
+        "benchPct": 18.2,
+        "excess": 12.4
+      },
+      {
+        "ticker": "AAPL",
+        "txDate": "2026-03-30",
+        "pct": 25.3,
+        "benchPct": 18.2,
+        "excess": 7.1
+      },
+      {
+        "ticker": "ASML",
+        "txDate": "2026-03-30",
+        "pct": 29.9,
+        "benchPct": 18.2,
+        "excess": 11.7
+      },
+      {
+        "ticker": "AZN",
+        "txDate": "2026-03-30",
+        "pct": -12.5,
+        "benchPct": 18.2,
+        "excess": -30.7
+      },
+      {
+        "ticker": "GS",
+        "txDate": "2026-03-30",
+        "pct": 26.1,
+        "benchPct": 18.2,
+        "excess": 7.9
+      },
+      {
+        "ticker": "JNJ",
+        "txDate": "2026-03-30",
+        "pct": 5.7,
+        "benchPct": 18.2,
+        "excess": -12.5
+      },
+      {
+        "ticker": "MSFT",
+        "txDate": "2026-03-30",
+        "pct": 29.5,
+        "benchPct": 18.2,
+        "excess": 11.3
+      },
+      {
+        "ticker": "NVO",
+        "txDate": "2026-03-30",
+        "pct": 33.4,
+        "benchPct": 18.2,
+        "excess": 15.2
+      }
+    ],
+    "rowsOf": 76
+  }
+}
