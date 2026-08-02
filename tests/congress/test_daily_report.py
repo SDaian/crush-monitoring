@@ -133,7 +133,8 @@ class TestMainDelivery(unittest.TestCase):
         self.state = base / "state.json"
         self._orig = (daily_report.TRADES_JSON, daily_report.AI_JSON,
                       daily_report.STATE_JSON, daily_report.REPORT_JSON,
-                      daily_report.REPORTS_DIR, daily_report._gh)
+                      daily_report.REPORTS_DIR, daily_report.HOLDINGS_JSON,
+                      daily_report._gh)
         daily_report.TRADES_JSON = base / "trades.json"
         daily_report.AI_JSON = base / "ai.json"
         daily_report.STATE_JSON = self.state
@@ -144,6 +145,8 @@ class TestMainDelivery(unittest.TestCase):
         # ... and the dated archive dir, for the same reason.
         self.reports_dir = base / "reports"
         daily_report.REPORTS_DIR = self.reports_dir
+        # Missing file → no coverage section; gap tests write their own.
+        daily_report.HOLDINGS_JSON = base / "holdings.json"
         self.calls = []
 
         def fake_gh(method, url, token, payload=None):
@@ -156,7 +159,8 @@ class TestMainDelivery(unittest.TestCase):
     def tearDown(self):
         (daily_report.TRADES_JSON, daily_report.AI_JSON,
          daily_report.STATE_JSON, daily_report.REPORT_JSON,
-         daily_report.REPORTS_DIR, daily_report._gh) = self._orig
+         daily_report.REPORTS_DIR, daily_report.HOLDINGS_JSON,
+         daily_report._gh) = self._orig
         os.environ.pop("REPO", None)
         os.environ.pop("GH_TOKEN", None)
         os.environ.pop("REPORT_ASSIGNEE", None)
@@ -385,3 +389,36 @@ class TestReportArchive(TestMainDelivery):
         from datetime import datetime, timezone
         today = datetime.now(timezone.utc).date().isoformat()
         self.assertIn(f"/report/{today}", daily_report.report_url(today))
+
+
+class TestHoldingsGaps(unittest.TestCase):
+    def _holdings(self, reason, name="Alan Armstrong"):
+        return {"holdings": {name: {"available": reason == "ok",
+                                    "reason": reason}}}
+
+    def test_needs_review_reasons_are_gaps(self):
+        gaps = daily_report.holdings_gaps(self._holdings("scanned_no_text"))
+        self.assertTrue(any(g.startswith("Alan Armstrong — ") for g in gaps))
+
+    def test_ok_and_correct_data_reasons_are_not_gaps(self):
+        for reason in ("ok", "no_individual_equities", "unsupported_chamber"):
+            gaps = daily_report.holdings_gaps(self._holdings(reason))
+            self.assertFalse(any("Alan Armstrong" in g for g in gaps), reason)
+
+    def test_unfetched_featured_member_is_a_gap(self):
+        gaps = daily_report.holdings_gaps({"holdings": {}})
+        self.assertIn("Alan Armstrong — not fetched yet", gaps)
+
+    def test_gaps_reach_email_and_markdown(self):
+        r = daily_report.build_report(
+            [], {}, [], {}, "2026-08-02",
+            coverage_gaps=["Alan Armstrong — scanned report"])
+        self.assertIn("Holdings coverage", r["markdown"])
+        self.assertIn("Alan Armstrong", r["markdown"])
+        self.assertIn("Holdings we could not parse", r["html"])
+
+    def test_clean_day_renders_no_coverage_section(self):
+        r = daily_report.build_report([], {}, [], {}, "2026-08-02",
+                                      coverage_gaps=[])
+        self.assertNotIn("Holdings coverage", r["markdown"])
+        self.assertNotIn("Holdings we could not parse", r["html"])

@@ -370,6 +370,7 @@ def render_html(*, date_label: str, disclaimer: str, scorecard: list[dict],
                 signals: list[dict], flips: list[dict],
                 disclosures: list[dict], extra_disclosures: int, cutoff: str,
                 tracker_url: str, preheader: str, report_url: str = "",
+                coverage: list[str] | None = None,
                 standalone: bool = True) -> str:
     """The daily trade/scorecard digest email (traffic is a separate email)."""
     pad = PAD if standalone else PAD_EMBED
@@ -383,6 +384,13 @@ def render_html(*, date_label: str, disclaimer: str, scorecard: list[dict],
                  f"(filed since {_esc(cutoff)})</span>",
                  disclosures_block(disclosures, extra_disclosures,
                                    report_url), pad),
+        # Owner's ops note: featured annual reports we could not parse.
+        # Rendered only when gapped, so a clean day stays clean.
+        (_section("Coverage", "Holdings we could not parse",
+                  "".join(
+                      f"<p style='margin:0 0 6px;{_f('13px', '1.5', MONO)}"
+                      f"color:{INK}'>{_esc(g)}</p>" for g in coverage), pad)
+         if coverage else ""),
     ])
     disc_txt = _esc(disclaimer.replace("**", ""))
     browser = (f"<p style='margin:10px 0 0;{_f('11px', '1.5', MONO)}'>"
