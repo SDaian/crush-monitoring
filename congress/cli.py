@@ -450,6 +450,13 @@ def _cmd_landing(args: argparse.Namespace) -> int:
     return 0
 
 
+def _cmd_indexnow(args: argparse.Namespace) -> int:
+    """Ping IndexNow (Bing/Yandex family) with today's refreshed URLs."""
+    from . import indexnow
+
+    return indexnow.main()
+
+
 def _cmd_analytics(args: argparse.Namespace) -> int:
     """Print the site's Vercel Web Analytics traffic summary (the same block
     the morning report embeds). No-op message if VERCEL_TOKEN isn't set."""
@@ -847,6 +854,12 @@ def build_parser() -> argparse.ArgumentParser:
     analytics_p.add_argument("--days", type=int, default=7,
                              help="Trailing window in days (default 7).")
     analytics_p.set_defaults(func=_cmd_analytics)
+
+    indexnow_p = sub.add_parser(
+        "indexnow",
+        help="Ping IndexNow with the pages the daily refresh changed.",
+    )
+    indexnow_p.set_defaults(func=_cmd_indexnow)
 
     return p
 

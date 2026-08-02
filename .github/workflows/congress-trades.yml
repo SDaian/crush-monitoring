@@ -249,6 +249,16 @@ jobs:
           git pull --rebase --autostash -X theirs origin "${GITHUB_REF_NAME}"
           git push
 
+      # Push half of search indexing: tell the Bing/Yandex family which pages
+      # today's refresh changed (Google ignores IndexNow; the sitemap covers
+      # it). After the data push so the deploy is underway; non-fatal — a
+      # search ping must never fail the refresh.
+      - name: Ping IndexNow with refreshed pages (non-fatal)
+        if: github.event.inputs.report_only != 'true'
+        run: |
+          python3 -m congress indexnow 2>&1 | tee -a fetch.log \
+            || echo "::warning::IndexNow ping failed (non-fatal)"
+
       # Catch-all for the failure mode a drifting FILES list causes: a
       # generator wrote something no step stages, so it is discarded at the
       # next run's checkout while every step reports success — that is how
