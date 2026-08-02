@@ -1,0 +1,91 @@
+---
+// "/report/<date>" — the archived morning report exactly as it went out.
+// These are permalinks for readers (the email's "view in browser" points
+// here), NOT a search surface: every page is noindex and canonicalizes to
+// /report, which keeps the deliberate one-indexable-report-URL decision
+// intact while old emails stop pointing at the wrong day's report.
+import "../../styles/global.css";
+import Header from "../../components/Header.astro";
+import Footer from "../../components/Footer.astro";
+import Seo from "../../components/Seo.astro";
+import SignupForm from "../../components/SignupForm.astro";
+import ReportBody from "../../components/ReportBody.astro";
+import { seoDescription } from "../../lib/seo";
+
+export async function getStaticPaths() {
+  const all = import.meta.glob("../../data/reports/*.json", { eager: true });
+  return Object.entries(all)
+    .filter(([path]) => !path.endsWith("/_index.json"))
+    .map(([, mod]) => {
+      const r = (mod as { default: any }).default;
+      return { params: { date: r.date }, props: { r } };
+    });
+}
+
+const { r } = Astro.props as { r: any };
+const c = r.counts ?? {};
+
+const title = `Morning report, ${r.dateLabel} · Capitol Ledger`;
+const description = seoDescription(
+  `The Capitol Ledger morning report for ${r.dateLabel}: ` +
+    `${c.disclosures ?? 0} newly filed congressional trades and the day's ` +
+    "featured-stock readings.",
+  "From the archive.",
+);
+---
+
+<html lang="en">
+  <head>
+    <Seo
+      title={title}
+      description={description}
+      path={`/report/${r.date}`}
+      canonicalPath="/report"
+      noindex
+    />
+  </head>
+  <body>
+    <Header />
+
+    <section class="mx-auto max-w-[75rem] px-[5vw] pt-[9vh] pb-[5vh]">
+      <p class="eyebrow mb-5">
+        From the archive · <b class="font-semibold text-stamp">{r.dateLabel}</b>
+      </p>
+      <h1 class="headline max-w-[18ch] text-[clamp(2.2rem,5.5vw,4rem)]">
+        The report, <span class="underline-stamp">as it went out</span>.
+      </h1>
+      <p class="mt-6 max-w-[60ch] text-[1.05rem] leading-[1.65] text-pretty text-ink-soft">
+        This is the morning report exactly as published on {r.dateLabel} —
+        {c.disclosures ?? 0} newly filed disclosure{c.disclosures === 1 ? "" : "s"},
+        {" "}{c.new_signals ?? 0} overnight signal{c.new_signals === 1 ? "" : "s"} and
+        {" "}{c.flips ?? 0} rating change{c.flips === 1 ? "" : "s"}. Readings were
+        mechanical and dated; prices have moved since.
+        <b class="text-ink"> Not investment advice.</b>
+      </p>
+      <p class="mono mt-5 text-[.75rem] uppercase tracking-[.06em]">
+        <a href="/report" class="text-stamp no-underline hover:text-ink"
+          >Read today's report →</a
+        >
+        <span class="mx-2 text-ink-soft">·</span>
+        <a href="/report/archive" class="text-ink-soft no-underline hover:text-ink"
+          >All past reports</a
+        >
+      </p>
+    </section>
+
+    <ReportBody r={r} />
+
+    <section class="border-t-2 border-ink px-[5vw] py-[10vh] text-center">
+      <h2 class="text-[clamp(1.8rem,4.5vw,3.2rem)] font-black leading-[1.15] tracking-[-0.03em] text-balance">
+        Get tomorrow's before it's history.
+      </h2>
+      <p class="mx-auto mt-4 mb-6 max-w-[46ch] text-pretty text-ink-soft">
+        The same report, in your inbox each morning — every new disclosure and
+        every overnight signal, once a day.
+      </p>
+      <SignupForm variant="band" id="join" />
+    </section>
+
+    <Footer />
+  </body>
+</html>

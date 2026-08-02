@@ -196,9 +196,10 @@ jobs:
           python3 -m congress.daily_report 2>&1 | tee -a fetch.log \
             || echo "::warning::morning report failed (non-fatal)"
           # report_state.json = tomorrow's flip diff; report.json = the web
-          # edition rendered by /report (commit both so the site rebuilds).
-          git add congress/report_state.json landing/src/data/report.json
-          if ! git diff --cached --quiet -- congress/report_state.json landing/src/data/report.json; then
+          # edition rendered by /report; reports/ = the dated archive
+          # (/report/<date> + /report/archive). Commit all so the site rebuilds.
+          git add congress/report_state.json landing/src/data/report.json landing/src/data/reports
+          if ! git diff --cached --quiet -- congress/report_state.json landing/src/data/report.json landing/src/data/reports; then
             git config user.name "github-actions[bot]"
             git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
             git commit -m "congress: morning report state ($(date -u +%F))"

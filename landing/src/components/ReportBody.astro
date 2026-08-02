@@ -1,0 +1,276 @@
+---
+// The morning report's content sections (Featured stocks / Overnight / New
+// disclosures), shared by /report (today, indexable) and /report/<date> (the
+// noindex'd archive permalinks) so the two renderings can never drift.
+// Markup is all build-time, so Astro's scoped styles work here.
+const { r } = Astro.props as { r: any };
+const c = r.counts ?? {};
+const truncated = Math.max(0, (r.disclosures?.length ?? 0) - (r.emailShown ?? 0));
+
+const READ_CLASS: Record<string, string> = {
+  "Strong Buy": "text-buy",
+  Buy: "text-buy",
+  "Strong Sell": "text-sell",
+  Sell: "text-sell",
+  Hold: "text-ink-soft",
+};
+
+const fmtDate = (iso: string | null) =>
+  iso
+    ? new Date(`${iso}T00:00:00Z`).toLocaleDateString("en-US", {
+        month: "short",
+        day: "numeric",
+        timeZone: "UTC",
+      })
+    : "—";
+---
+
+<!-- Featured stocks -->
+    <section class="mx-auto max-w-[75rem] px-[5vw] pb-[7vh]">
+      <div class="section-head">
+        <h2 class="section-title whitespace-nowrap">Featured stocks</h2>
+        <span class="eyebrow">Mechanical technical read</span>
+      </div>
+      {
+        r.scorecard?.length ? (
+          <div class="tblwrap mt-7">
+            <table class="rtbl">
+              <thead>
+                <tr>
+                  <th>Ticker</th>
+                  <th class="num">Price</th>
+                  <th class="num">1d</th>
+                  <th class="num">RSI</th>
+                  <th>Trend</th>
+                  <th class="num">Read</th>
+                </tr>
+              </thead>
+              <tbody>
+                {r.scorecard.map((s: any) => (
+                  <tr>
+                    <td class="tk">
+                      <a href={`/tickers/${s.ticker.toLowerCase()}`}>{s.ticker}</a>
+                    </td>
+                    <td class="num">${s.price}</td>
+                    <td
+                      class={`num ${s.chg_dir > 0 ? "text-buy" : s.chg_dir < 0 ? "text-sell" : "text-ink-soft"}`}
+                    >
+                      {s.chg}
+                    </td>
+                    <td class="num">{s.rsi}</td>
+                    <td class="text-ink-soft">{s.trend}</td>
+                    <td class={`num font-semibold ${READ_CLASS[s.label] ?? ""}`}>
+                      {s.label}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        ) : (
+          <p class="fineprint mt-6">No indicator data in this run.</p>
+        )
+      }
+      <p class="fineprint mt-5 max-w-[80ch]">
+        "Read" is a rule-based tally of the indicators shown — each casts a
+        buy/hold/sell vote. It is a reproducible mechanical summary, <b
+          class="text-ink">not a recommendation</b
+        >, and it is blind to fundamentals, news and your own goals. See the
+        full breakdown on the <a
+          href="/tracker"
+          class="underline underline-offset-2 hover:text-ink">tracker</a
+        >.
+      </p>
+    </section>
+
+    <!-- Overnight -->
+    <section class="mx-auto max-w-[75rem] px-[5vw] pb-[7vh]">
+      <div class="section-head">
+        <h2 class="section-title whitespace-nowrap">Overnight</h2>
+        <span class="eyebrow">Signals &amp; rating changes</span>
+      </div>
+      {
+        r.signals?.length || r.flips?.length ? (
+          <div class="mt-7">
+            {r.signals?.map((s: any) => (
+              <div class="lrow">
+                <b class="mono">{s.ticker}</b>
+                <span>{s.label}</span>
+                <span class="text-ink-soft">{s.asof}</span>
+              </div>
+            ))}
+            {r.flips?.map((f: any) => (
+              <div class="lrow">
+                <b class="mono">{f.ticker}</b>
+                <span>
+                  rating: {f.prev} →{" "}
+                  <b class={READ_CLASS[f.label] ?? ""}>{f.label}</b>
+                </span>
+                <span class="text-ink-soft">changed</span>
+              </div>
+            ))}
+          </div>
+        ) : (
+          <p class="fineprint mt-6">
+            No new signals or rating changes since yesterday.
+          </p>
+        )
+      }
+    </section>
+
+    <!-- Disclosures -->
+    <section class="mx-auto max-w-[75rem] px-[5vw] pb-[7vh]">
+      <div class="section-head">
+        <h2 class="section-title whitespace-nowrap">New disclosures</h2>
+        <span class="eyebrow">Filed since {r.cutoff}</span>
+      </div>
+      {
+        truncated > 0 && (
+          <p class="fineprint mt-4 max-w-[80ch]">
+            The email lists the {r.emailShown} most recent of these; all{" "}
+            <b class="text-ink">{r.disclosures.length}</b> are below.
+          </p>
+        )
+      }
+      {
+        r.disclosures?.length ? (
+          <div class="mt-7">
+            {r.disclosures.map((d: any) => (
+              <div class="drow">
+                <div class="dwho">
+                  {d.member}
+                  <small>
+                    {d.party ? `${d.party} · ` : ""}filed {fmtDate(d.filingDate)}
+                    {d.txDate ? ` · traded ${fmtDate(d.txDate)}` : ""}
+                  </small>
+                </div>
+                <div class="dtick">
+                  {d.ticker ? <b>{d.ticker}</b> : <span class="text-ink-soft">—</span>}
+                  <small>{d.asset}</small>
+                </div>
+                <div
+                  class={`dside ${d.type === "buy" ? "text-buy" : d.type === "sell" ? "text-sell" : "text-ink-soft"}`}
+                >
+                  {d.type}
+                </div>
+                <div class="damt">
+                  {d.amount}
+                  {d.sourceUrl && (
+                    <a href={d.sourceUrl} rel="nofollow" class="dsrc">
+                      filing ↗
+                    </a>
+                  )}
+                </div>
+              </div>
+            ))}
+          </div>
+        ) : (
+          <p class="fineprint mt-6">No new disclosures in this window.</p>
+        )
+      }
+      <p class="fineprint mt-6 max-w-[80ch]">
+        Disclosures arrive 30–45 days after the trade and amounts are the
+        brackets as filed, never exact. Browse the whole record on the <a
+          href="/tracker"
+          class="underline underline-offset-2 hover:text-ink">tracker</a
+        >, or by <a
+          href="/tickers"
+          class="underline underline-offset-2 hover:text-ink">stock</a
+        > and <a
+          href="/members"
+          class="underline underline-offset-2 hover:text-ink">member</a
+        >.
+      </p>
+    </section>
+
+
+<style>
+  .tblwrap { overflow-x: auto; }
+  .rtbl {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: var(--font-mono);
+    font-size: 0.83rem;
+  }
+  .rtbl th {
+    text-align: left;
+    white-space: nowrap;
+    padding: 0.6rem 0.7rem;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--color-ink-soft);
+    border-bottom: 2px solid var(--color-ink);
+  }
+  .rtbl td {
+    padding: 0.7rem;
+    border-bottom: 1px solid var(--color-rule);
+    white-space: nowrap;
+  }
+  .rtbl tbody tr:nth-child(even) { background: var(--color-wash); }
+  .rtbl .num { text-align: right; font-variant-numeric: tabular-nums; }
+  .rtbl .tk { font-weight: 700; }
+  .rtbl .tk a { color: inherit; text-decoration: none; border-bottom: 1px solid var(--color-rule); }
+  .rtbl .tk a:hover { color: var(--color-stamp); border-color: var(--color-stamp); }
+
+  /* Signals + rating flips. */
+  .lrow {
+    display: grid;
+    grid-template-columns: 5rem 1fr auto;
+    gap: 0.75rem;
+    align-items: baseline;
+    padding: 0.75rem 0.25rem;
+    border-bottom: 1px solid var(--color-rule);
+    font-family: var(--font-mono);
+    font-size: 0.83rem;
+  }
+
+  /* Disclosure rows. */
+  .drow {
+    display: grid;
+    grid-template-columns: 1.5fr 1.3fr 0.5fr 1fr;
+    gap: 0.75rem;
+    align-items: baseline;
+    padding: 0.85rem 0.25rem;
+    border-bottom: 1px solid var(--color-rule);
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+  }
+  .drow > * { min-width: 0; }
+  .dwho {
+    font-family: var(--font-sans);
+    font-weight: 700;
+    font-size: 0.95rem;
+  }
+  .dwho small,
+  .dtick small {
+    display: block;
+    font-family: var(--font-mono);
+    font-weight: 400;
+    font-size: 0.7rem;
+    color: var(--color-ink-soft);
+    margin-top: 0.15rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .dside { text-transform: uppercase; font-weight: 600; }
+  .damt {
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.2rem;
+  }
+  .dsrc { font-size: 0.7rem; color: var(--color-ink-soft); text-decoration: none; white-space: nowrap; }
+  .dsrc:hover { color: var(--color-stamp); }
+
+  @media (max-width: 47.5rem) {
+    .drow { grid-template-columns: 1.4fr 0.5fr 1fr; }
+    .drow .dtick { display: none; }
+    .lrow { grid-template-columns: 4.5rem 1fr; }
+    .lrow > :last-child { display: none; }
+  }
+</style>

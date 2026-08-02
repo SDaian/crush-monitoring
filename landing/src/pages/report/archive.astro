@@ -1,0 +1,135 @@
+---
+// "/report/archive" — the index of past morning reports. One indexable list
+// page; the dated permalinks it points at are noindex (see [date].astro).
+// Empty until the first archived report lands (the archive starts the day
+// this shipped — history before that lives in git and the GitHub issues).
+import "../../styles/global.css";
+import Header from "../../components/Header.astro";
+import Footer from "../../components/Footer.astro";
+import Seo from "../../components/Seo.astro";
+import SignupForm from "../../components/SignupForm.astro";
+import { seoDescription } from "../../lib/seo";
+
+const idx = import.meta.glob("../../data/reports/_index.json", { eager: true });
+const reports: any[] =
+  (Object.values(idx)[0] as { default: any } | undefined)?.default?.reports ?? [];
+
+const title = "Morning report archive · Capitol Ledger";
+const description = seoDescription(
+  "Every Capitol Ledger morning report, kept as published — newly filed " +
+    "congressional trades and the day's featured-stock readings.",
+  "The record of the record.",
+);
+---
+
+<html lang="en">
+  <head>
+    <Seo title={title} description={description} path="/report/archive" />
+  </head>
+  <body>
+    <Header />
+
+    <section class="mx-auto max-w-[75rem] px-[5vw] pt-[9vh] pb-[5vh]">
+      <p class="eyebrow mb-5">
+        Morning report · <b class="font-semibold text-stamp">Archive</b>
+      </p>
+      <h1 class="headline max-w-[16ch] text-[clamp(2.2rem,5.5vw,4rem)]">
+        Every report, <span class="underline-stamp">kept</span>.
+      </h1>
+      <p class="mt-6 max-w-[58ch] text-[1.05rem] leading-[1.65] text-pretty text-ink-soft">
+        Each morning report, preserved exactly as it went out. A record has to
+        keep its own record.
+      </p>
+      <p class="mono mt-5 text-[.75rem] uppercase tracking-[.06em]">
+        <a href="/report" class="text-stamp no-underline hover:text-ink"
+          >Read today's report →</a
+        >
+      </p>
+    </section>
+
+    <section class="mx-auto max-w-[75rem] px-[5vw] pb-[8vh]">
+      <div class="section-head">
+        <h2 class="section-title whitespace-nowrap">Past reports</h2>
+        <span class="eyebrow">{reports.length} archived</span>
+      </div>
+      {
+        reports.length ? (
+          <div class="mt-7">
+            {reports.map((e) => (
+              <a href={`/report/${e.date}`} class="arow">
+                <b>{e.dateLabel}</b>
+                <span class="acount">
+                  {e.counts?.disclosures ?? 0} disclosures ·{" "}
+                  {e.counts?.new_signals ?? 0} signals ·{" "}
+                  {e.counts?.flips ?? 0} flips
+                </span>
+                <span class="ago" aria-hidden="true">→</span>
+              </a>
+            ))}
+          </div>
+        ) : (
+          <p class="fineprint mt-6 max-w-[70ch]">
+            The archive starts with the next morning report — check back
+            tomorrow. Earlier reports live on as dated GitHub issues in the
+            project's repository.
+          </p>
+        )
+      }
+    </section>
+
+    <section class="border-t-2 border-ink px-[5vw] py-[10vh] text-center">
+      <h2 class="text-[clamp(1.8rem,4.5vw,3.2rem)] font-black leading-[1.15] tracking-[-0.03em] text-balance">
+        Read tomorrow's first.
+      </h2>
+      <p class="mx-auto mt-4 mb-6 max-w-[46ch] text-pretty text-ink-soft">
+        Every new disclosure and every overnight signal, in your inbox each
+        morning.
+      </p>
+      <SignupForm variant="band" id="join" />
+    </section>
+
+    <Footer />
+  </body>
+</html>
+
+<style>
+  .arow {
+    display: grid;
+    grid-template-columns: 1fr auto auto;
+    gap: 1rem;
+    align-items: baseline;
+    padding: 0.9rem 0.25rem;
+    border-bottom: 1px solid var(--color-rule);
+    font-family: var(--font-mono);
+    font-size: 0.83rem;
+    color: inherit;
+    text-decoration: none;
+  }
+  .arow b {
+    font-family: var(--font-sans);
+    font-weight: 700;
+    font-size: 0.95rem;
+  }
+  .arow:hover b,
+  .arow:focus-visible b {
+    color: var(--color-stamp);
+  }
+  .acount {
+    color: var(--color-ink-soft);
+    font-variant-numeric: tabular-nums;
+  }
+  .ago {
+    color: var(--color-ink-soft);
+  }
+  .arow:hover .ago {
+    color: var(--color-stamp);
+  }
+  @media (max-width: 47.5rem) {
+    .arow {
+      grid-template-columns: 1fr auto;
+    }
+    .acount {
+      font-size: 0.72rem;
+    }
+  }
+</style>
