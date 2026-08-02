@@ -192,14 +192,31 @@ def feed_payload(trades: list[dict]) -> list[dict]:
     return rows
 
 
+# Debt instruments filed without a ticker — kept in the record and on member
+# pages (they are real disclosures; Trump's filings are ALL bonds), but out of
+# the HEADLINE stats: the product's story is stock trading, and other trackers
+# don't count bonds, so a bond-inflated hero number reads as overcounting.
+_BOND_ASSET_TYPES = frozenset({
+    "bond", "Corporate Bond", "Municipal Security", "Government Security",
+    "Corporate Security",  # House code CS: corporate bonds and notes
+})
+
+
+def is_bond(t: dict) -> bool:
+    return not t.get("ticker") and t.get("asset_type") in _BOND_ASSET_TYPES
+
+
 def stats_payload(trades: list[dict], today: date) -> dict:
     """Year-scoped stats, each stat scoped by its own noun: trades/volume by
     TRADE date this year; the late share by FILING date this year. Scoping the
     late share by trade year would undercount structurally — this year's
     trades haven't had time to become late yet (a June trade can only show as
-    late from August onward)."""
+    late from August onward). Ticker-less bond rows stay out of every number
+    here (see ``is_bond``) — the copy above these stats says "stock trades",
+    so the numbers must count exactly that."""
     year = str(today.year)
-    dated = [t for t in trades if days_late(t) is not None]
+    dated = [t for t in trades
+             if days_late(t) is not None and not is_bond(t)]
     traded_this_year = [t for t in dated if (t.get("tx_date") or "").startswith(year)]
     filed_this_year = [t for t in dated if (t.get("filing_date") or "").startswith(year)]
     late = sum(1 for t in filed_this_year if days_late(t) > 0)
@@ -375,12 +392,16 @@ def rolled_holdings(member_trades: list[dict], h: dict, today_iso: str) -> dict:
 
 def member_payload(name: str, trades: list[dict], holdings: dict,
                    today_iso: str = "9999-12-31",
-                   ticker_pages: set[str] | None = None) -> dict:
+                   ticker_pages: set[str] | None = None,
+                   returns: dict | None = None,
+                   perf: dict | None = None) -> dict:
     """Per-member page data: summary, most-traded tickers, the most recent
     ``MEMBER_TRADE_CAP`` disclosed trades, and estimated holdings from the
     member's annual report (``holdings`` is the ``holdings.json`` ``holdings``
     map, keyed by full member name). ``ticker_pages`` is the set of symbols
-    that have a /tickers/<slug> page, so the chips can link there."""
+    that have a /tickers/<slug> page, so the chips can link there.
+    ``returns`` is returns.json's id→record map and ``perf`` is
+    performance.json — together they feed the trading-performance section."""
     has_ticker_page = ticker_pages or set()
     ts = [t for t in trades if t.get("member") == name]
     ts.sort(key=lambda t: (t.get("tx_date") or "", t.get("filing_date") or ""),
@@ -470,6 +491,74 @@ def member_payload(name: str, trades: list[dict], holdings: dict,
         "trades": rows,
         "tradesShown": len(rows),
         "holdings": holdings_block,
+        "performance": performance_block(name, ts, returns, perf),
+    }
+
+
+# Options and crypto have their own price dynamics; a "return since buy" of
+# the underlying is not the position's return. Mirrors prices.NON_EQUITY.
+PERF_NON_EQUITY = frozenset({"Option", "Cryptocurrency"})
+# Below this many priced buys the numbers are one lucky pick wearing a
+# median's clothes. Mirrors performance.MIN_PRICED_BUYS.
+PERF_MIN_BUYS = 3
+PERF_ROW_CAP = 12
+
+
+def performance_block(name: str, member_trades: list[dict],
+                      returns: dict | None, perf: dict | None) -> dict:
+    """The trading-performance section's data: KPIs, per-buy rows with the
+    S&P over the same window, and the $1-race series. ``available`` is False
+    (with a reason) until there are enough priced buys AND the benchmark data
+    exists — the page renders nothing rather than a two-buy 'track record'."""
+    buys = [t for t in member_trades
+            if t.get("type") == "buy" and t.get("ticker")
+            and t.get("asset_type") not in PERF_NON_EQUITY]
+    priced = []
+    for t in buys:
+        rec = (returns or {}).get(t.get("id"))
+        if rec and rec.get("bench_pct") is not None:
+            priced.append((t, rec))
+    if len(priced) < PERF_MIN_BUYS:
+        reason = ("no_benchmark" if buys and returns and not priced
+                  else "not_enough_priced_buys")
+        return {"available": False, "reason": reason,
+                "pricedBuys": len(priced), "stockBuys": len(buys)}
+
+    priced.sort(key=lambda pair: (pair[0].get("tx_date") or "",
+                                  pair[0].get("id") or ""), reverse=True)
+    pcts = sorted(rec["pct"] for _, rec in priced)
+    bench_pcts = sorted(rec["bench_pct"] for _, rec in priced)
+    beat = sum(1 for _, rec in priced if rec["pct"] > rec["bench_pct"])
+
+    def _median(vals: list[float]) -> float:
+        mid = len(vals) // 2
+        if len(vals) % 2:
+            return vals[mid]
+        return round((vals[mid - 1] + vals[mid]) / 2, 1)
+
+    series = (perf or {}).get("members", {}).get(name)
+    bench_meta = (perf or {}).get("benchmark", {})
+    return {
+        "available": True,
+        "benchLabel": bench_meta.get("label") or "S&P 500",
+        "asofDate": bench_meta.get("asof_date"),
+        "kpis": {
+            "medianPct": _median(pcts),
+            "medianBenchPct": _median(bench_pcts),
+            "beat": beat,
+            "beatOf": len(priced),
+            "priced": len(priced),
+            "pricedOf": len(buys),
+        },
+        "series": series,  # None → the page skips the chart, keeps the rest
+        "rows": [{
+            "ticker": t["ticker"],
+            "txDate": t.get("tx_date"),
+            "pct": rec["pct"],
+            "benchPct": rec["bench_pct"],
+            "excess": round(rec["pct"] - rec["bench_pct"], 1),
+        } for t, rec in priced[:PERF_ROW_CAP]],
+        "rowsOf": len(priced),
     }
 
 
@@ -477,6 +566,8 @@ def write_member_files(
     trades: list[dict], holdings: dict, out_dir: Path,
     names: list[str] = MEMBER_PAGE_NAMES,
     today_iso: str = "9999-12-31",
+    returns: dict | None = None,
+    perf: dict | None = None,
 ) -> list[str]:
     """Write members/<slug>.json for each featured filer with trades, plus
     members/_index.json. Members with no disclosed trades are skipped (an
@@ -494,7 +585,8 @@ def write_member_files(
     index = []
     written = []
     for name in names:
-        payload = member_payload(name, trades, holdings, today_iso, ticker_pages)
+        payload = member_payload(name, trades, holdings, today_iso,
+                                 ticker_pages, returns, perf)
         if payload["summary"]["trades"] == 0:
             continue
         (members_dir / f"{payload['slug']}.json").write_text(

@@ -1,0 +1,473 @@
+---
+// The "Trading performance" section on /members/<slug>: KPI strip, the
+// $1-race line chart (member's priced buys vs the same dollars in the S&P
+// 500), and a per-buy dumbbell list. Everything is built at build time from
+// the member payload's `performance` block — inline SVG, no chart library,
+// no client JS (same rule as the holdings ring).
+//
+// Honesty is structural here, not decorative: the block only exists when
+// enough buys are priced AND the benchmark data exists; the caption naming
+// what this is NOT (realized profit) is part of the component, so no page
+// can render the chart without it.
+const { perf, name } = Astro.props as { perf: any; name: string };
+
+const fmtDate = (iso: string | null) =>
+  iso
+    ? new Date(`${iso}T00:00:00Z`).toLocaleDateString("en-US", {
+        month: "short",
+        day: "numeric",
+        year: "numeric",
+        timeZone: "UTC",
+      })
+    : "—";
+const fmtMonthShort = (iso: string) =>
+  new Date(`${iso}T00:00:00Z`).toLocaleDateString("en-US", {
+    month: "short",
+    year: "2-digit",
+    timeZone: "UTC",
+  });
+const signed = (v: number) => `${v > 0 ? "+" : v < 0 ? "−" : ""}${Math.abs(v)}%`;
+
+const k = perf.kpis;
+
+// ---- Line chart geometry (only when the series exists) ----
+const s = perf.series;
+type LineGeom = {
+  w: number; h: number; member: string; bench: string;
+  grid: { y: number; label: number }[]; ticks: { x: number; label: string }[];
+  endM: { x: number; y: number }; endB: { x: number; y: number };
+  memberPct: number; benchPct: number;
+};
+
+// Two geometries from the same series: an SVG's text scales with its
+// viewBox, so one 1000px-wide drawing shrunk to a phone renders 5px type.
+// The desktop variant labels the line ends in a right gutter; the mobile one
+// drops the gutter and relies on the legend row above the figure.
+function lineGeom(W: number, H: number, rGutter: number,
+                  tickCount: number): LineGeom | null {
+  if (!s || s.dates.length < 2) return null;
+  const P = { l: 46, r: rGutter, t: 16, b: 30 };
+  const all = [...s.member, ...s.bench];
+  // Padded to round steps of 10 so gridlines land on honest numbers.
+  const lo = Math.floor(Math.min(...all, 100) / 10) * 10;
+  const hi = Math.ceil(Math.max(...all, 100) / 10) * 10 || 10;
+  const X = (i: number) => P.l + (i / (s.dates.length - 1)) * (W - P.l - P.r);
+  const Y = (v: number) => P.t + (1 - (v - lo) / (hi - lo)) * (H - P.t - P.b);
+  const path = (vals: number[]) =>
+    vals.map((v: number, i: number) =>
+      `${i ? "L" : "M"}${X(i).toFixed(1)},${Y(v).toFixed(1)}`).join(" ");
+  const gridStep = hi - lo > 60 ? 20 : 10;
+  const grid = [];
+  for (let v = lo; v <= hi; v += gridStep) grid.push({ y: Y(v), label: v });
+  const every = Math.max(1, Math.round((s.dates.length - 1) / (tickCount - 1)));
+  const ticks = s.dates
+    .map((d: string, i: number) => ({ i, d }))
+    .filter(({ i }: { i: number }) => i % every === 0)
+    .map(({ i, d }: { i: number; d: string }) => ({
+      x: X(i),
+      label: fmtMonthShort(d),
+    }));
+  const last = s.dates.length - 1;
+  return {
+    w: W, h: H,
+    member: path(s.member), bench: path(s.bench),
+    grid, ticks,
+    endM: { x: X(last), y: Y(s.member[last]) },
+    endB: { x: X(last), y: Y(s.bench[last]) },
+    memberPct: Math.round(s.member[last] - 100),
+    benchPct: Math.round(s.bench[last] - 100),
+  };
+}
+
+const line = lineGeom(1000, 320, 150, 5);
+const lineM = lineGeom(420, 300, 24, 3);
+
+// ---- Dumbbell scale: one shared axis across rows so lengths compare ----
+const rows = perf.rows as {
+  ticker: string; txDate: string; pct: number; benchPct: number; excess: number;
+}[];
+const dMin = Math.min(0, ...rows.map((r) => Math.min(r.pct, r.benchPct)));
+const dMax = Math.max(0, ...rows.map((r) => Math.max(r.pct, r.benchPct)));
+const span = dMax - dMin || 1;
+// Percent position within the track, with breathing room for dots/labels.
+const pos = (v: number) => 4 + ((v - dMin) / span) * 78;
+---
+
+<section class="mx-auto max-w-[75rem] px-[5vw] pb-[7vh]">
+  <div class="section-head">
+    <h2 class="section-title whitespace-nowrap">Trading performance</h2>
+    <span class="eyebrow">Disclosed buys vs the {perf.benchLabel} · not realized profit</span>
+  </div>
+
+  <div class="pkpis" role="list">
+    <div class="pkpi" role="listitem">
+      <div class="pkn stamp">{signed(k.medianPct)}</div>
+      <div class="pkl">median return since buy</div>
+    </div>
+    <div class="pkpi" role="listitem">
+      <div class="pkn">{signed(k.medianBenchPct)}</div>
+      <div class="pkl">{perf.benchLabel}, same windows</div>
+    </div>
+    <div class="pkpi" role="listitem">
+      <div class="pkn stamp">{k.beat} of {k.beatOf}</div>
+      <div class="pkl">buys beating the index</div>
+    </div>
+    <div class="pkpi" role="listitem">
+      <div class="pkn">{k.priced} of {k.pricedOf}</div>
+      <div class="pkl">stock buys priced</div>
+    </div>
+  </div>
+
+  {
+    line && lineM && (
+      <figure class="pchart">
+        <p class="plegend" aria-hidden="true">
+          <span class="plegend-m">— Their buys {line.memberPct >= 0 ? "+" : "−"}{Math.abs(line.memberPct)}%</span>
+          <span class="plegend-b">┄ {perf.benchLabel} {line.benchPct >= 0 ? "+" : "−"}{Math.abs(line.benchPct)}%</span>
+        </p>
+        <svg
+          class="pdesk"
+          viewBox={`0 0 ${line.w} ${line.h}`}
+          role="img"
+          aria-label={`Value of $1 in ${name}'s disclosed buys (${line.memberPct >= 0 ? "+" : ""}${line.memberPct}%) vs the same dollars in the ${perf.benchLabel} (${line.benchPct >= 0 ? "+" : ""}${line.benchPct}%), indexed to 100`}
+        >
+          {line.grid.map((g) => (
+            <>
+              <line x1="46" y1={g.y} x2={line.w - 150} y2={g.y}
+                stroke="var(--color-rule)" stroke-width="1" />
+              <text x="38" y={g.y + 4} text-anchor="end" class="ptick">
+                {g.label}
+              </text>
+            </>
+          ))}
+          {line.ticks.map((t) => (
+            <text x={t.x} y={line.h - 8} text-anchor="middle" class="ptick">
+              {t.label}
+            </text>
+          ))}
+          <path d={line.bench} fill="none" stroke="var(--color-ink-soft)"
+            stroke-width="2" stroke-dasharray="5 4" />
+          <path d={line.member} fill="none" stroke="var(--color-stamp)"
+            stroke-width="2.5" />
+          <circle cx={line.endM.x} cy={line.endM.y} r="4"
+            fill="var(--color-stamp)" />
+          <text x={line.endM.x + 10} y={line.endM.y + 4} class="pend pend-m">
+            Their buys {line.memberPct >= 0 ? "+" : "−"}{Math.abs(line.memberPct)}%
+          </text>
+          <text x={line.endB.x + 10} y={line.endB.y + 4} class="pend pend-b">
+            {perf.benchLabel} {line.benchPct >= 0 ? "+" : "−"}{Math.abs(line.benchPct)}%
+          </text>
+        </svg>
+        <svg
+          class="pmob"
+          viewBox={`0 0 ${lineM.w} ${lineM.h}`}
+          aria-hidden="true"
+        >
+          {lineM.grid.map((g) => (
+            <>
+              <line x1="46" y1={g.y} x2={lineM.w - 24} y2={g.y}
+                stroke="var(--color-rule)" stroke-width="1" />
+              <text x="38" y={g.y + 4} text-anchor="end" class="ptick pt-m">
+                {g.label}
+              </text>
+            </>
+          ))}
+          {lineM.ticks.map((t) => (
+            <text x={Math.min(t.x, lineM.w - 40)} y={lineM.h - 8}
+              text-anchor="middle" class="ptick pt-m">
+              {t.label}
+            </text>
+          ))}
+          <path d={lineM.bench} fill="none" stroke="var(--color-ink-soft)"
+            stroke-width="1.6" stroke-dasharray="4 3" />
+          <path d={lineM.member} fill="none" stroke="var(--color-stamp)"
+            stroke-width="2" />
+          <circle cx={lineM.endM.x} cy={lineM.endM.y} r="3.5"
+            fill="var(--color-stamp)" />
+        </svg>
+        <figcaption class="fineprint mt-2">
+          $1 spread equally across every priced buy, held — against the same
+          $1, same dates, in the {perf.benchLabel}. Weekly closes, indexed to
+          100.
+        </figcaption>
+      </figure>
+    )
+  }
+
+  <div class="pdumb" role="table"
+    aria-label={`${name}'s priced buys vs the ${perf.benchLabel} over the same windows`}>
+    <div class="pdrow pdhead" role="row">
+      <span role="columnheader">Buy</span>
+      <span role="columnheader" class="pdlegend">
+        Return since trade date · <span class="pdot-spy-inline"></span>
+        {perf.benchLabel} same window
+        <span class="pdot-stk-inline"></span> this stock
+      </span>
+      <span role="columnheader" class="pdx-h">vs index</span>
+    </div>
+    {
+      rows.map((r) => (
+        <div class="pdrow" role="row">
+          <div class="pdtick" role="cell">
+            {r.ticker}
+            <small>{fmtDate(r.txDate)}</small>
+          </div>
+          <div class="pdtrack" role="cell"
+            aria-label={`${r.ticker} ${signed(r.pct)}; ${perf.benchLabel} ${signed(r.benchPct)} over the same window`}>
+            {dMin < 0 && <span class="pdzero" style={`left:${pos(0)}%`} />}
+            <span class="pdbar"
+              style={`left:${Math.min(pos(r.pct), pos(r.benchPct))}%;width:${Math.abs(pos(r.pct) - pos(r.benchPct))}%`} />
+            <span class="pdot spy" style={`left:${pos(r.benchPct)}%`} />
+            <span class="pdot stk" style={`left:${pos(r.pct)}%`} />
+            <span class="pdval"
+              style={`left:calc(${Math.max(pos(r.pct), pos(r.benchPct))}% + 10px)`}>
+              {signed(r.pct)}
+            </span>
+          </div>
+          <div class="pdx" role="cell"
+            class:list={[r.excess >= 0 ? "" : "pdx-lag"]}>
+            {signed(r.excess)}
+          </div>
+        </div>
+      ))
+    }
+    {
+      perf.rowsOf > rows.length && (
+        <p class="fineprint mt-3">
+          Most recent {rows.length} of {perf.rowsOf} priced buys.
+        </p>
+      )
+    }
+  </div>
+
+  <p class="fineprint mt-6 max-w-[80ch]">
+    Stock price change since the disclosed trade date (that day's close as
+    entry) — <b class="text-ink">not {name}'s realized profit</b>: holding
+    period, later sells, dividends and fill prices are unknown, and filings
+    disclose bracket amounts, so every buy is weighted equally. Buys of
+    listed stocks only; options, crypto and bonds are never priced. Prices
+    are a daily snapshot{perf.asofDate ? ` (as of ${fmtDate(perf.asofDate)})` : ""},
+    via Twelve Data.
+  </p>
+</section>
+
+<style>
+  .pkpis {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    border-bottom: 1px solid var(--color-rule);
+  }
+  .pkpi {
+    padding: 1.5rem 1rem 1.25rem;
+    border-right: 1px solid var(--color-rule);
+  }
+  .pkpi:last-child {
+    border-right: 0;
+  }
+  .pkn {
+    font-weight: 900;
+    font-size: 2rem;
+    letter-spacing: -0.02em;
+    font-variant-numeric: tabular-nums;
+  }
+  .pkn.stamp {
+    color: var(--color-stamp);
+  }
+  .pkl {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-ink-soft);
+    margin-top: 0.4rem;
+  }
+  .pchart {
+    margin-top: 2.25rem;
+  }
+  .pchart svg {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  /* The legend row doubles as the mobile chart's only labelling, and on
+     desktop it previews the end-of-line numbers for anyone who reads
+     top-to-bottom. */
+  .plegend {
+    display: flex;
+    gap: 1.25rem;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    font-weight: 700;
+    margin-bottom: 0.6rem;
+  }
+  .plegend-m {
+    color: var(--color-stamp);
+  }
+  .plegend-b {
+    color: var(--color-ink-soft);
+    font-weight: 400;
+  }
+  /* .pchart svg (class+element) outranks a lone class — match it. */
+  .pchart .pmob {
+    display: none;
+  }
+  .pt-m {
+    font-size: 13px;
+  }
+  .ptick {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    fill: var(--color-ink-soft);
+  }
+  .pend {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    font-weight: 700;
+    fill: var(--color-ink);
+  }
+  .pend-b {
+    font-weight: 400;
+    fill: var(--color-ink-soft);
+  }
+
+  .pdumb {
+    margin-top: 2.5rem;
+  }
+  .pdrow {
+    display: grid;
+    grid-template-columns: 7.5rem 1fr 4.5rem;
+    gap: 0.9rem;
+    align-items: center;
+    padding: 0.7rem 0;
+    border-bottom: 1px solid var(--color-rule);
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+  }
+  .pdrow.pdhead {
+    border-bottom: 2px solid var(--color-ink);
+    font-size: 0.66rem;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: var(--color-ink-soft);
+    font-weight: 600;
+    padding-bottom: 0.45rem;
+  }
+  .pdx-h {
+    text-align: right;
+  }
+  .pdot-spy-inline,
+  .pdot-stk-inline {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    vertical-align: baseline;
+  }
+  .pdot-spy-inline {
+    background: var(--color-paper);
+    border: 2px solid var(--color-ink-soft);
+  }
+  .pdot-stk-inline {
+    background: var(--color-stamp);
+  }
+  .pdtick {
+    font-family: var(--font-sans);
+    font-weight: 800;
+    font-size: 0.95rem;
+  }
+  .pdtick small {
+    display: block;
+    font-family: var(--font-mono);
+    font-weight: 400;
+    font-size: 0.66rem;
+    color: var(--color-ink-soft);
+    margin-top: 0.1rem;
+  }
+  .pdtrack {
+    position: relative;
+    height: 24px;
+  }
+  .pdzero {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background: var(--color-rule);
+  }
+  .pdbar {
+    position: absolute;
+    top: 50%;
+    height: 2px;
+    margin-top: -1px;
+    background: var(--color-ink);
+    opacity: 0.3;
+  }
+  /* The ring exception in DESIGN.md §5 covers these: a dot is a dot. */
+  .pdot {
+    position: absolute;
+    top: 50%;
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+  }
+  .pdot.spy {
+    background: var(--color-paper);
+    border: 2px solid var(--color-ink-soft);
+  }
+  /* Drawn after the benchmark dot, with a paper ring, so when the two land on
+     the same pixel (stock ≈ index) the pair still reads as two marks. */
+  .pdot.stk {
+    background: var(--color-stamp);
+    box-shadow: 0 0 0 2px var(--color-paper);
+  }
+  .pdval {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: var(--color-ink);
+    white-space: nowrap;
+  }
+  .pdx {
+    font-weight: 700;
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+  }
+  .pdx-lag {
+    color: var(--color-ink-soft);
+  }
+
+  @media (max-width: 47.5rem) {
+    .pchart .pdesk {
+      display: none;
+    }
+    .pchart .pmob {
+      display: block;
+    }
+    .pkpis {
+      grid-template-columns: 1fr 1fr;
+    }
+    .pkpi:nth-child(2n) {
+      border-right: 0;
+    }
+    .pkpi:nth-child(-n + 2) {
+      border-bottom: 1px solid var(--color-rule);
+    }
+    .pkn {
+      font-size: 1.6rem;
+    }
+    .pdrow {
+      grid-template-columns: 5.6rem 1fr 3.4rem;
+      gap: 0.5rem;
+      font-size: 0.7rem;
+    }
+    .pdlegend {
+      display: none;
+    }
+    .pdval {
+      font-size: 0.66rem;
+    }
+  }
+</style>

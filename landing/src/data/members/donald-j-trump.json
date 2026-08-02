@@ -229,5 +229,11 @@
     "positions": 0,
     "stocks": [],
     "options": []
+  },
+  "performance": {
+    "available": false,
+    "reason": "not_enough_priced_buys",
+    "pricedBuys": 0,
+    "stockBuys": 0
   }
 }

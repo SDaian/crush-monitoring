@@ -12,6 +12,7 @@ import SignupForm from "../../components/SignupForm.astro";
 import SignupModal from "../../components/SignupModal.astro";
 import CountUp from "../../components/CountUp.astro";
 import HoldingsChart from "../../components/HoldingsChart.astro";
+import PerformanceChart from "../../components/PerformanceChart.astro";
 import { plural, seoDescription } from "../../lib/seo";
 
 export async function getStaticPaths() {
@@ -304,6 +305,12 @@ const schema = [
             </p>
           )}
         </section>
+      )
+    }
+
+    {
+      m.performance?.available && (
+        <PerformanceChart perf={m.performance} name={m.name} />
       )
     }
 

@@ -485,3 +485,92 @@ class TestGeneratedToday(unittest.TestCase):
             nometa = Path(d) / "n.json"
             nometa.write_text("{}")
             self.assertFalse(cli.generated_today(nometa, "2026-07-28"))
+
+
+class TestPerformanceBlock(unittest.TestCase):
+    def _trades(self, n=3):
+        return [T(member="Nancy Pelosi", ticker="AAPL", type="buy",
+                  tx=f"2026-06-{d:02d}", id=f"b{d}") for d in range(1, n + 1)]
+
+    def _returns(self, ids, pct=20.0, bench=10.0):
+        return {i: {"pct": pct, "bench_pct": bench} for i in ids}
+
+    def test_available_with_kpis(self):
+        ts = self._trades(4)
+        returns = self._returns(["b1", "b2", "b3"])
+        returns["b1"]["pct"] = 5.0  # below bench: not a beat
+        perf = {"benchmark": {"label": "S&P 500", "asof_date": "2026-07-31"},
+                "members": {"Nancy Pelosi": {"dates": ["2026-06-01"],
+                                             "member": [100.0],
+                                             "bench": [100.0], "buys": 3}}}
+        p = ld.performance_block("Nancy Pelosi", ts, returns, perf)
+        self.assertTrue(p["available"])
+        self.assertEqual(p["kpis"]["priced"], 3)
+        self.assertEqual(p["kpis"]["pricedOf"], 4)
+        self.assertEqual(p["kpis"]["beat"], 2)
+        self.assertEqual(p["kpis"]["medianPct"], 20.0)
+        self.assertEqual(p["kpis"]["medianBenchPct"], 10.0)
+        self.assertEqual(p["asofDate"], "2026-07-31")
+        self.assertIsNotNone(p["series"])
+        # newest trade first, excess computed
+        self.assertEqual(p["rows"][0]["txDate"], "2026-06-03")
+        self.assertEqual(p["rows"][0]["excess"], 10.0)
+
+    def test_too_few_priced_buys_is_unavailable(self):
+        ts = self._trades(3)
+        p = ld.performance_block("Nancy Pelosi", ts,
+                                 self._returns(["b1", "b2"]), {})
+        self.assertFalse(p["available"])
+        self.assertEqual(p["reason"], "not_enough_priced_buys")
+
+    def test_returns_without_bench_pct_is_no_benchmark(self):
+        # Committed returns.json predating the benchmark field: rows priced,
+        # but none carries bench_pct.
+        ts = self._trades(3)
+        returns = {f"b{i}": {"pct": 20.0} for i in (1, 2, 3)}
+        p = ld.performance_block("Nancy Pelosi", ts, returns, {})
+        self.assertFalse(p["available"])
+        self.assertEqual(p["reason"], "no_benchmark")
+
+    def test_options_never_counted(self):
+        ts = self._trades(3)
+        for t in ts:
+            t["asset_type"] = "Option"
+        p = ld.performance_block("Nancy Pelosi", ts,
+                                 self._returns(["b1", "b2", "b3"]), {})
+        self.assertFalse(p["available"])
+
+    def test_missing_series_keeps_block_available(self):
+        ts = self._trades(3)
+        p = ld.performance_block("Nancy Pelosi", ts,
+                                 self._returns(["b1", "b2", "b3"]), {})
+        self.assertTrue(p["available"])
+        self.assertIsNone(p["series"])
+
+
+class TestBondDeEmphasis(unittest.TestCase):
+    def _bond(self, **kw):
+        t = T(ticker=None, id=kw.pop("id", "bond1"), **kw)
+        t["ticker"] = None
+        t["asset_type"] = "bond"
+        return t
+
+    def test_bonds_out_of_headline_stats(self):
+        from datetime import date as _date
+        stock = T(tx="2026-06-01", filed="2026-06-20", id="s1")
+        stock["asset_type"] = "Stock"
+        bond = self._bond(tx="2026-06-01", filed="2026-06-20")
+        s = ld.stats_payload([stock, bond], _date(2026, 7, 12))
+        self.assertEqual(s["tradesThisYear"], 1)
+
+    def test_tickered_rows_never_bond_filtered(self):
+        t = T()
+        t["asset_type"] = "Corporate Security"  # tickered CS row stays
+        self.assertFalse(ld.is_bond(t))
+        self.assertTrue(ld.is_bond(self._bond()))
+
+    def test_bonds_stay_on_member_pages(self):
+        bond = self._bond(tx="2026-06-01", filed="2026-06-20")
+        bond["member"] = "Donald J. Trump"
+        p = ld.member_payload("Donald J. Trump", [bond], {})
+        self.assertEqual(p["summary"]["trades"], 1)
