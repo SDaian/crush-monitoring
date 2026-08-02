@@ -17,6 +17,19 @@ import Seo from "../components/Seo.astro";
 import SignupForm from "../components/SignupForm.astro";
 import SignupModal from "../components/SignupModal.astro";
 import { seoDescription } from "../lib/seo";
+import memberIndex from "../data/members/_index.json";
+import tickerIndex from "../data/tickers/_index.json";
+
+// Which member/ticker pages exist, resolved at BUILD time from the same
+// generated indexes that build those pages — so a feed row can deep-link
+// without ever minting a dead link. Full filer name → slug (the trades JSON
+// carries full names); ticker → slug.
+const MEMBER_PAGES = Object.fromEntries(
+  (memberIndex as any).members.map((m: any) => [m.name, m.slug]),
+);
+const TICKER_PAGES = Object.fromEntries(
+  (tickerIndex as any).tickers.map((t: any) => [t.ticker, t.slug]),
+);
 
 const title = "Congressional stock-trade tracker — search every disclosure · Capitol Ledger";
 const description = seoDescription(
@@ -157,8 +170,11 @@ const schema = [
 
     <SignupModal title="Stop refreshing. Start reading." />
 
+    <script is:inline id="pagemaps" type="application/json" set:html={JSON.stringify({ members: MEMBER_PAGES, tickers: TICKER_PAGES })} />
     <script is:inline>
       // ── State + constants ──────────────────────────────────────────────
+      // Pages that exist for deep-linking (built at build time; see frontmatter).
+      const PAGEMAPS = JSON.parse(document.getElementById("pagemaps").textContent);
       const COLS = [
         {key:"member",     label:"Member"},
         {key:"ticker",     label:"Ticker"},
@@ -262,7 +278,19 @@ const schema = [
 
       function memberCell(t){
         const who = [t.party, t.district || t.state].filter(Boolean).join(" · ");
-        return `${esc(t.member)}${who ? `<span class="chip">${esc(who)}</span>` : ""}`;
+        const slug = PAGEMAPS.members[t.member];
+        const name = slug
+          ? `<a class="pagelink" href="/members/${slug}">${esc(t.member)}</a>`
+          : esc(t.member);
+        return `${name}${who ? `<span class="chip">${esc(who)}</span>` : ""}`;
+      }
+
+      function tickerCell(t){
+        if (!t.ticker) return '<span class="muted">—</span>';
+        const slug = PAGEMAPS.tickers[t.ticker];
+        return slug
+          ? `<a class="pagelink" href="/tickers/${slug}"><b>${esc(t.ticker)}</b></a>`
+          : `<b>${esc(t.ticker)}</b>`;
       }
 
       function renderHead(){
@@ -277,7 +305,7 @@ const schema = [
         const slice = rows.slice(0, state.shown);
         $("rows").innerHTML = slice.map(t => `<tr>
           <td>${memberCell(t)}</td>
-          <td>${t.ticker ? `<b>${esc(t.ticker)}</b>` : '<span class="muted">—</span>'}</td>
+          <td>${tickerCell(t)}</td>
           <td>${esc(t.asset)}${t.asset_type ? `<span class="chip">${esc(t.asset_type)}</span>` : ""}</td>
           <td>${typeCell(t)}</td>
           <td class="num">${esc(t.amount_label)}</td>
@@ -811,6 +839,21 @@ const schema = [
   }
   .tracker tbody tr:nth-child(even) { background: var(--color-wash); }
   .tracker td.num, .tracker th.num { white-space: nowrap; font-variant-numeric: tabular-nums; }
+  /* Deep links to member/ticker pages (only rendered when the page exists —
+     see PAGEMAPS). Ink with a hairline underline so the table stays a record
+     first; stamp on hover, same affordance as the home feed card. */
+  .tracker a.pagelink {
+    color: inherit;
+    text-decoration: underline;
+    text-decoration-color: var(--color-rule);
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
+  }
+  .tracker a.pagelink:hover,
+  .tracker a.pagelink:focus-visible {
+    color: var(--color-stamp);
+    text-decoration-color: var(--color-stamp);
+  }
   .tracker tbody td:first-child { min-width: 9rem; }
   .tracker tbody a { color: var(--color-ink-soft); text-decoration: none; white-space: nowrap; }
   .tracker tbody a:hover { color: var(--color-stamp); }
