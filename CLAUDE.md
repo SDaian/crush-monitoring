@@ -303,14 +303,24 @@ sites. Full details in `congress/README.md`. Conventions:
   - **Web edition = `/report`** (`landing/src/pages/report.astro`), rendered
     from `landing/src/data/report.json`, which `daily_report.main()` writes from
     the **same payload** `build_report` builds the email from — so the page and
-    the email can never drift. One always-current URL, not a dated archive
-    (nobody searches "morning report July 24", and 365 near-duplicate pages a
-    year is an SEO liability). The one deliberate difference: the email caps
+    the email can never drift. The one deliberate difference: the email caps
     disclosures at `MAX_DISCLOSURES` because clients clip long messages, while
-    the page lists **every** one — that is what the email's "…and N more" and
-    its "view in browser" link point at. If you add a path that `main()` writes,
-    **stub it in `TestMainDelivery`** — the suite calls `main()` for real and
-    will otherwise overwrite the committed file.
+    the page lists **every** one — that is what the email's "…and N more"
+    links. If you add a path that `main()` writes, **stub it in
+    `TestMainDelivery`** — the suite calls `main()` for real and will
+    otherwise overwrite the committed file.
+  - **Report archive = `/report/<date>` + `/report/archive`.** `main()` also
+    writes `landing/src/data/reports/<date>.json` (+ `_index.json`) — the SAME
+    payload as `report.json`, so a permalink can never disagree with what went
+    out — and the email's "view in browser" now links the dated permalink. The
+    original one-indexable-URL decision (nobody searches "morning report July
+    24"; 365 near-duplicate pages a year is an SEO liability) still stands,
+    amended not reversed: **every dated page is `noindex` and canonicalizes to
+    `/report`** (`check-seo.mjs` warns if one loses it); only `/report` and
+    `/report/archive` are indexable. No backfill — the archive starts the day
+    it shipped; earlier reports live in git history and the dated GitHub
+    issues. Shared markup lives in `ReportBody.astro` so the two renderings
+    cannot drift. The flat-file archive migrates when storage stage 1 fires.
   - **HTML email = `congress/email_template.py`** (pure, offline-tested). It is a
     hand-authored, **bulletproof** layout — table-based, inline styles, a fixed
     ~600px centered "paper" card, web-safe fonts (mono for data), hidden

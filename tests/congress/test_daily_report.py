@@ -133,7 +133,7 @@ class TestMainDelivery(unittest.TestCase):
         self.state = base / "state.json"
         self._orig = (daily_report.TRADES_JSON, daily_report.AI_JSON,
                       daily_report.STATE_JSON, daily_report.REPORT_JSON,
-                      daily_report._gh)
+                      daily_report.REPORTS_DIR, daily_report._gh)
         daily_report.TRADES_JSON = base / "trades.json"
         daily_report.AI_JSON = base / "ai.json"
         daily_report.STATE_JSON = self.state
@@ -141,6 +141,9 @@ class TestMainDelivery(unittest.TestCase):
         # test run never overwrites the repo's real landing/src/data/report.json.
         self.report_json = base / "report.json"
         daily_report.REPORT_JSON = self.report_json
+        # ... and the dated archive dir, for the same reason.
+        self.reports_dir = base / "reports"
+        daily_report.REPORTS_DIR = self.reports_dir
         self.calls = []
 
         def fake_gh(method, url, token, payload=None):
@@ -153,7 +156,7 @@ class TestMainDelivery(unittest.TestCase):
     def tearDown(self):
         (daily_report.TRADES_JSON, daily_report.AI_JSON,
          daily_report.STATE_JSON, daily_report.REPORT_JSON,
-         daily_report._gh) = self._orig
+         daily_report.REPORTS_DIR, daily_report._gh) = self._orig
         os.environ.pop("REPO", None)
         os.environ.pop("GH_TOKEN", None)
         os.environ.pop("REPORT_ASSIGNEE", None)
@@ -345,3 +348,40 @@ class TestButtondown(unittest.TestCase):
             self.assertEqual(seen["payload"]["subject"], "Subj")
         finally:
             self.bd._post = orig
+
+
+class TestReportArchive(TestMainDelivery):
+    """The dated archive written alongside report.json."""
+
+    def test_dated_copy_and_index_written(self):
+        self.assertEqual(daily_report.main(), 0)
+        import json as _json
+        from datetime import datetime, timezone
+        today = datetime.now(timezone.utc).date().isoformat()
+        dated = self.reports_dir / f"{today}.json"
+        self.assertTrue(dated.exists())
+        payload = _json.loads(dated.read_text())
+        current = _json.loads(self.report_json.read_text())
+        # Same payload as report.json — the permalink can't disagree with
+        # what went out.
+        self.assertEqual(payload["date"], current["date"])
+        self.assertEqual(payload["disclosures"], current["disclosures"])
+        index = _json.loads((self.reports_dir / "_index.json").read_text())
+        self.assertEqual(index["reports"][0]["date"], today)
+
+    def test_rerun_same_day_does_not_duplicate_index(self):
+        import os as _os
+        self.assertEqual(daily_report.main(), 0)
+        _os.environ["REPORT_FORCE"] = "true"
+        try:
+            self.assertEqual(daily_report.main(), 0)
+        finally:
+            _os.environ.pop("REPORT_FORCE", None)
+        import json as _json
+        index = _json.loads((self.reports_dir / "_index.json").read_text())
+        self.assertEqual(len(index["reports"]), 1)
+
+    def test_email_links_the_dated_permalink(self):
+        from datetime import datetime, timezone
+        today = datetime.now(timezone.utc).date().isoformat()
+        self.assertIn(f"/report/{today}", daily_report.report_url(today))

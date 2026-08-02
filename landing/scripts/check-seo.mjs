@@ -58,6 +58,12 @@ for (const file of files.sort()) {
 
   if (!title) problems.push(`${url} — missing <title>`);
   if (!description) problems.push(`${url} — missing meta description`);
+  // Dated report permalinks must stay OUT of search indexes — /report is the
+  // one indexable report URL (a year of near-duplicate dated pages is an SEO
+  // liability). A dated page that loses its noindex is a real regression.
+  if (/^\/report\/\d{4}-\d{2}-\d{2}\/$/.test(url) &&
+      !/<meta name="robots" content="noindex/.test(html))
+    problems.push(`${url} — dated report page is MISSING noindex`);
   else if (description.length > MAX)
     problems.push(
       `${url} — description is ${description.length} chars (max ${MAX}): ` +
