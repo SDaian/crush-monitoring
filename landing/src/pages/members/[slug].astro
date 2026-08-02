@@ -162,8 +162,12 @@ const schema = [
     <Header active="members" />
 
     <section class="mx-auto max-w-[75rem] px-[5vw] pt-[9vh] pb-[6vh]">
-      <p class="eyebrow mb-5">
-        Featured filer · <b class="font-semibold text-stamp">{seat}</b>
+      <!-- Party + seat sit right-aligned on the eyebrow line, section-head
+           style (label left, meta right) — the affiliation reads as the
+           page's dateline-like tag rather than part of the label. -->
+      <p class="eyebrow mb-5 flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
+        <span>Featured filer</span>
+        <b class="font-semibold text-stamp">{seat}</b>
       </p>
       <h1 class="headline max-w-[16ch] text-[clamp(2.4rem,6.5vw,4.6rem)]">
         {m.name}'s <span class="underline-stamp">stock trades</span>.
