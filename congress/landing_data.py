@@ -307,6 +307,10 @@ MEMBER_PAGE_NAMES = [
     "Tommy Tuberville",
     "Josh Gottheimer",
     "Cleo Fields",
+    "Gilbert Ray Cisneros, Jr.",
+    "Alan Armstrong",
+    "David McCormick",
+    "April McClain Delaney",
 ]
 MEMBER_TRADE_CAP = 20
 MEMBER_HOLDINGS_CAP = 16

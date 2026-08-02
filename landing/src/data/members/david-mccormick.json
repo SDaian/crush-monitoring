@@ -1,0 +1,414 @@
+{
+  "_comment": "Generated from real official disclosures by congress/landing_data.py (daily Action). Do not edit by hand.",
+  "slug": "david-mccormick",
+  "name": "David McCormick",
+  "party": "R",
+  "state": "PA",
+  "chamber": "Senate",
+  "district": null,
+  "summary": {
+    "trades": 361,
+    "distinctTickers": 4,
+    "firstTx": "2024-02-18",
+    "lastTx": "2026-07-22",
+    "lastFiling": "2026-07-29",
+    "pctLate": 0,
+    "worstLate": 336
+  },
+  "topTickers": [
+    {
+      "ticker": "BITB",
+      "count": 24,
+      "asset": "Bitwise Bitcoin ETF",
+      "slug": "bitb",
+      "hasPage": false
+    },
+    {
+      "ticker": "GS",
+      "count": 2,
+      "asset": "Goldman Sachs Group",
+      "slug": "gs",
+      "hasPage": true
+    },
+    {
+      "ticker": "IJR",
+      "count": 1,
+      "asset": "S&P Smallcap Ishares Core ETF",
+      "slug": "ijr",
+      "hasPage": false
+    },
+    {
+      "ticker": "RUM",
+      "count": 1,
+      "asset": "Rumble Inc",
+      "slug": "rum",
+      "hasPage": false
+    }
+  ],
+  "trades": [
+    {
+      "ticker": "—",
+      "asset": "PITTSBURGH PA WTR & SWR AUTH WTR & SWR Rate/Coupon: 5% Matures: 2056-09-01",
+      "side": "BUY",
+      "amountBucket": "$500K – $1M",
+      "txDate": "2026-07-22",
+      "filedDate": "2026-07-29",
+      "daysLate": 0,
+      "sourceUrl": "https://efdsearch.senate.gov/search/view/ptr/19fb5a84-b9f8-4847-841e-84c67a0edfe0/"
+    },
+    {
+      "ticker": "—",
+      "asset": "GS Managed Structured Note Strategy MSCI EAFE Linked Note",
+      "side": "BUY",
+      "amountBucket": "$100K – $250K",
+      "txDate": "2026-07-21",
+      "filedDate": "2026-07-29",
+      "daysLate": 0,
+      "sourceUrl": "https://efdsearch.senate.gov/search/view/ptr/19fb5a84-b9f8-4847-841e-84c67a0edfe0/"
+    },
+    {
+      "ticker": "—",
+      "asset": "ALLEGHENY CNTY PA GO BDS SER. C Rate/Coupon: 5% Matures: 2054-12-01",
+      "side": "BUY",
+      "amountBucket": "$500K – $1M",
+      "txDate": "2026-07-14",
+      "filedDate": "2026-07-29",
+      "daysLate": 0,
+      "sourceUrl": "https://efdsearch.senate.gov/search/view/ptr/19fb5a84-b9f8-4847-841e-84c67a0edfe0/"
+    },
+    {
+      "ticker": "—",
+      "asset": "GS Managed Structured Note Strategy MSCI EAFE Linked Note",
+      "side": "BUY",
+      "amountBucket": "$100K – $250K",
+      "txDate": "2026-07-14",
+      "filedDate": "2026-07-29",
+      "daysLate": 0,
+      "sourceUrl": "https://efdsearch.senate.gov/search/view/ptr/19fb5a84-b9f8-4847-841e-84c67a0edfe0/"
+    },
+    {
+      "ticker": "—",
+      "asset": "POCONO MTN PA SCH DIST GEN OBLIG BDS Rate/Coupon: 5% Matures: 2051-06-15",
+      "side": "BUY",
+      "amountBucket": "$250K – $500K",
+      "txDate": "2026-07-08",
+      "filedDate": "2026-07-29",
+      "daysLate": 0,
+      "sourceUrl": "https://efdsearch.senate.gov/search/view/ptr/19fb5a84-b9f8-4847-841e-84c67a0edfe0/"
+    },
+    {
+      "ticker": "—",
+      "asset": "GS Managed Structured Note Strategy MSCI EAFE Linked Note",
+      "side": "BUY",
+      "amountBucket": "$250K – $500K",
+      "txDate": "2026-07-08",
+      "filedDate": "2026-07-29",
+      "daysLate": 0,
+      "sourceUrl": "https://efdsearch.senate.gov/search/view/ptr/19fb5a84-b9f8-4847-841e-84c67a0edfe0/"
+    },
+    {
+      "ticker": "—",
+      "asset": "PHILADELPHIA PA AUTH FOR INDL REV Rate/Coupon: 5% Matures: 2028-12-01",
+      "side": "BUY",
+      "amountBucket": "$100K – $250K",
+      "txDate": "2026-06-30",
+      "filedDate": "2026-07-29",
+      "daysLate": 0,
+      "sourceUrl": "https://efdsearch.senate.gov/search/view/ptr/19fb5a84-b9f8-4847-841e-84c67a0edfe0/"
+    },
+    {
+      "ticker": "—",
+      "asset": "PHILADELPHIA PA AUTH FOR INDL REV Rate/Coupon: 5% Matures: 2031-12-01",
+      "side": "SELL",
+      "amountBucket": "$100K – $250K",
+      "txDate": "2026-06-29",
+      "filedDate": "2026-07-29",
+      "daysLate": 0,
+      "sourceUrl": "https://efdsearch.senate.gov/search/view/ptr/19fb5a84-b9f8-4847-841e-84c67a0edfe0/"
+    },
+    {
+      "ticker": "—",
+      "asset": "WASHINGTON ST GO Rate/Coupon: 5% Matures: 2033-02-01",
+      "side": "SELL",
+      "amountBucket": "$15K – $50K",
+      "txDate": "2026-06-29",
+      "filedDate": "2026-07-29",
+      "daysLate": 0,
+      "sourceUrl": "https://efdsearch.senate.gov/search/view/ptr/19fb5a84-b9f8-4847-841e-84c67a0edfe0/"
+    },
+    {
+      "ticker": "—",
+      "asset": "PENNSYLVANIA ST TPK COMMN OIL REV Rate/Coupon: 5% Matures: 2026-12-01",
+      "side": "SELL",
+      "amountBucket": "$15K – $50K",
+      "txDate": "2026-06-29",
+      "filedDate": "2026-07-29",
+      "daysLate": 0,
+      "sourceUrl": "https://efdsearch.senate.gov/search/view/ptr/19fb5a84-b9f8-4847-841e-84c67a0edfe0/"
+    },
+    {
+      "ticker": "—",
+      "asset": "NORTHAMPTON CNTY PA GEN PURP A REV Rate/Coupon: 5% Matures: 2034-11-15",
+      "side": "SELL",
+      "amountBucket": "$15K – $50K",
+      "txDate": "2026-06-29",
+      "filedDate": "2026-07-29",
+      "daysLate": 0,
+      "sourceUrl": "https://efdsearch.senate.gov/search/view/ptr/19fb5a84-b9f8-4847-841e-84c67a0edfe0/"
+    },
+    {
+      "ticker": "—",
+      "asset": "PENNSYLVANIA ST TPK COMMN TPK REV Rate/Coupon: 5% Matures: 2030-12-01",
+      "side": "SELL",
+      "amountBucket": "$100K – $250K",
+      "txDate": "2026-06-29",
+      "filedDate": "2026-07-29",
+      "daysLate": 0,
+      "sourceUrl": "https://efdsearch.senate.gov/search/view/ptr/19fb5a84-b9f8-4847-841e-84c67a0edfe0/"
+    },
+    {
+      "ticker": "—",
+      "asset": "CORPUS CHRISTI TEX UTIL SYS REV Rate/Coupon: 5% Matures: 2029-07-15",
+      "side": "SELL",
+      "amountBucket": "$100K – $250K",
+      "txDate": "2026-06-29",
+      "filedDate": "2026-07-29",
+      "daysLate": 0,
+      "sourceUrl": "https://efdsearch.senate.gov/search/view/ptr/19fb5a84-b9f8-4847-841e-84c67a0edfe0/"
+    },
+    {
+      "ticker": "—",
+      "asset": "PENNSYLVANIA ST HIGHER EDL REV Rate/Coupon: 4% Matures: 2031-06-15",
+      "side": "SELL",
+      "amountBucket": "$100K – $250K",
+      "txDate": "2026-06-29",
+      "filedDate": "2026-07-29",
+      "daysLate": 0,
+      "sourceUrl": "https://efdsearch.senate.gov/search/view/ptr/19fb5a84-b9f8-4847-841e-84c67a0edfe0/"
+    },
+    {
+      "ticker": "—",
+      "asset": "ALLEGHENY CNTY PA SAN AUTH SWR REV BDS Rate/Coupon: 5% Matures: 2055-12-01",
+      "side": "BUY",
+      "amountBucket": "$250K – $500K",
+      "txDate": "2026-06-18",
+      "filedDate": "2026-06-26",
+      "daysLate": 0,
+      "sourceUrl": "https://efdsearch.senate.gov/search/view/ptr/ff0b0573-2809-40ae-8197-4b26648e9027/"
+    },
+    {
+      "ticker": "—",
+      "asset": "GS Managed Structured Note Strategy MSCI EAFE Linked Note",
+      "side": "BUY",
+      "amountBucket": "$100K – $250K",
+      "txDate": "2026-06-02",
+      "filedDate": "2026-06-26",
+      "daysLate": 0,
+      "sourceUrl": "https://efdsearch.senate.gov/search/view/ptr/ff0b0573-2809-40ae-8197-4b26648e9027/"
+    },
+    {
+      "ticker": "—",
+      "asset": "GS Managed Structured Note Strategy MSCI EAFE Linked Note",
+      "side": "BUY",
+      "amountBucket": "$100K – $250K",
+      "txDate": "2026-05-27",
+      "filedDate": "2026-06-26",
+      "daysLate": 0,
+      "sourceUrl": "https://efdsearch.senate.gov/search/view/ptr/ff0b0573-2809-40ae-8197-4b26648e9027/"
+    },
+    {
+      "ticker": "—",
+      "asset": "PHILADELPHIA PA AUTH FOR INDL REV Rate/Coupon: 5% Matures: 2031-12-01",
+      "side": "SELL",
+      "amountBucket": "$100K – $250K",
+      "txDate": "2026-05-26",
+      "filedDate": "2026-06-26",
+      "daysLate": 0,
+      "sourceUrl": "https://efdsearch.senate.gov/search/view/ptr/ff0b0573-2809-40ae-8197-4b26648e9027/"
+    },
+    {
+      "ticker": "—",
+      "asset": "PENNSYLVANIA ST GO Rate/Coupon: 5% Matures: 2027-08-15",
+      "side": "SELL",
+      "amountBucket": "$500K – $1M",
+      "txDate": "2026-05-26",
+      "filedDate": "2026-06-26",
+      "daysLate": 0,
+      "sourceUrl": "https://efdsearch.senate.gov/search/view/ptr/ff0b0573-2809-40ae-8197-4b26648e9027/"
+    },
+    {
+      "ticker": "—",
+      "asset": "PENNSYLVANIA ST TPK COMMN REV Rate/Coupon: 5.25% Matures: 2030-07-15",
+      "side": "SELL",
+      "amountBucket": "$100K – $250K",
+      "txDate": "2026-05-26",
+      "filedDate": "2026-06-26",
+      "daysLate": 0,
+      "sourceUrl": "https://efdsearch.senate.gov/search/view/ptr/ff0b0573-2809-40ae-8197-4b26648e9027/"
+    }
+  ],
+  "tradesShown": 20,
+  "holdings": {
+    "available": true,
+    "filingDate": "2025-08-13",
+    "reportYear": 2024,
+    "snapDate": "2024-12-31",
+    "filingsSince": 23,
+    "sourceUrl": "https://efdsearch.senate.gov/search/view/annual/f0dda451-74f3-4b34-b6a9-71a8c593fbae/",
+    "totalLabel": "$56.4M",
+    "positions": 7,
+    "stocks": [
+      {
+        "ticker": "—",
+        "asset": "Bridgewater Equity InstrumentFiler comment: Proceeds from an exit agreement",
+        "estLabel": "$50.0M",
+        "pctPortfolio": 88.6,
+        "isNew": false
+      },
+      {
+        "ticker": "BITB",
+        "asset": "Bitwise Bitcoin ETF",
+        "estLabel": "$4.2M",
+        "pctPortfolio": 7.5,
+        "isNew": false
+      },
+      {
+        "ticker": "—",
+        "asset": "GS Restricted Stock Units",
+        "estLabel": "$1.0M",
+        "pctPortfolio": 1.8,
+        "isNew": false
+      },
+      {
+        "ticker": "ETHW",
+        "asset": "Bitwise Ethereum ETF",
+        "estLabel": "$750K",
+        "pctPortfolio": 1.3,
+        "isNew": false
+      },
+      {
+        "ticker": "—",
+        "asset": "CCFN Muncy Columbia Financial CorpFiler comment: Bloomsburg, PA",
+        "estLabel": "$375K",
+        "pctPortfolio": 0.7,
+        "isNew": false
+      },
+      {
+        "ticker": "DGRW",
+        "asset": "WisdomTree U.S. Quality Dividend Growth Fund",
+        "estLabel": "$33K",
+        "pctPortfolio": 0.1,
+        "isNew": false
+      },
+      {
+        "ticker": "—",
+        "asset": "SmithEllis Inc.Company: SmithEllisItems, Inc. (Delaware, DE) Description: Private Company Filer comment: Publishing Firm",
+        "estLabel": "$33K",
+        "pctPortfolio": 0.1,
+        "isNew": false
+      }
+    ],
+    "options": []
+  },
+  "performance": {
+    "available": true,
+    "benchLabel": "S&P 500",
+    "asofDate": "2026-07-31",
+    "kpis": {
+      "medianPct": -26.4,
+      "medianBenchPct": 29.0,
+      "beat": 0,
+      "beatOf": 24,
+      "priced": 24,
+      "pricedOf": 24
+    },
+    "series": null,
+    "rows": [
+      {
+        "ticker": "BITB",
+        "txDate": "2025-11-28",
+        "pct": -30.8,
+        "benchPct": 9.3,
+        "excess": -40.1
+      },
+      {
+        "ticker": "BITB",
+        "txDate": "2025-11-26",
+        "pct": -30.1,
+        "benchPct": 9.9,
+        "excess": -40.0
+      },
+      {
+        "ticker": "BITB",
+        "txDate": "2025-11-25",
+        "pct": -28.1,
+        "benchPct": 10.7,
+        "excess": -38.8
+      },
+      {
+        "ticker": "BITB",
+        "txDate": "2025-11-24",
+        "pct": -29.6,
+        "benchPct": 11.7,
+        "excess": -41.3
+      },
+      {
+        "ticker": "BITB",
+        "txDate": "2025-04-09",
+        "pct": -23.8,
+        "benchPct": 36.2,
+        "excess": -60.0
+      },
+      {
+        "ticker": "BITB",
+        "txDate": "2025-04-07",
+        "pct": -19.6,
+        "benchPct": 48.1,
+        "excess": -67.7
+      },
+      {
+        "ticker": "BITB",
+        "txDate": "2025-04-03",
+        "pct": -23.5,
+        "benchPct": 39.2,
+        "excess": -62.7
+      },
+      {
+        "ticker": "BITB",
+        "txDate": "2025-04-02",
+        "pct": -27.9,
+        "benchPct": 32.3,
+        "excess": -60.2
+      },
+      {
+        "ticker": "BITB",
+        "txDate": "2025-03-31",
+        "pct": -24.0,
+        "benchPct": 33.5,
+        "excess": -57.5
+      },
+      {
+        "ticker": "BITB",
+        "txDate": "2025-03-27",
+        "pct": -28.0,
+        "benchPct": 31.7,
+        "excess": -59.7
+      },
+      {
+        "ticker": "BITB",
+        "txDate": "2025-03-25",
+        "pct": -28.9,
+        "benchPct": 29.8,
+        "excess": -58.7
+      },
+      {
+        "ticker": "BITB",
+        "txDate": "2025-03-24",
+        "pct": -29.0,
+        "benchPct": 30.1,
+        "excess": -59.1
+      }
+    ],
+    "rowsOf": 24
+  }
+}

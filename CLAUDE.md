@@ -426,7 +426,8 @@ Conventions:
   45-day statutory maximum (ADR 0002).
 - **Member pages** (`/members/<slug>` + a `/members` index) are static SEO
   pages for a **curated featured set** (`landing_data.MEMBER_PAGE_NAMES` —
-  Pelosi, Trump, Greene, Tuberville, Gottheimer, Fields), each showing that member's
+  Pelosi, Trump, Greene, Tuberville, Gottheimer, Fields, Cisneros, Armstrong,
+  McCormick, McClain Delaney), each showing that member's
   disclosed trades, most-traded tickers, filing timeliness and **estimated
   holdings**. The holdings are the annual snapshot **rolled forward** with
   every trade filed since (buys add / sells subtract by bracket midpoint, new
@@ -440,7 +441,7 @@ Conventions:
   The `landing` Action step runs **after** the holdings refresh so pages use
   the freshest annual data. Scaling this to
   every member is the storage-stage-1 trigger — see
-  `ROADMAP.md` (deliberately deferred at 6 members). SEO helpers (canonical,
+  `ROADMAP.md` (deliberately deferred at 10 members). SEO helpers (canonical,
   OG image, JSON-LD) live in the shared `src/components/Seo.astro`.
 - **Ticker pages** (`/tickers/<slug>` + a `/tickers` index) are the organic-
   search surface: search demand is on **entities, not dates** ("nvda congress
