@@ -509,7 +509,10 @@ def _cmd_social(args: argparse.Namespace) -> int:
     out_dir.mkdir(parents=True, exist_ok=True)
     drafted = failed = 0
     for rows in picked:
-        payload = social.filing_payload(rows)
+        head = social._headline_trade(rows)
+        context = social.holdings_context(head.get("member", ""),
+                                          head.get("ticker") or "")
+        payload = social.filing_payload(rows, context=context)
         rid = payload["record_id"]
         try:
             copy = social.post_copy(payload,
