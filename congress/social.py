@@ -34,6 +34,7 @@ from . import pipeline
 from .landing_data import MEMBER_PAGE_NAMES, days_late
 
 STATE_PATH = pipeline.REPO_ROOT / "congress" / "social_state.json"
+MEMBERS_DATA_DIR = pipeline.REPO_ROOT / "landing" / "src" / "data" / "members"
 TEMPLATE_DIR = pipeline.REPO_ROOT / "congress" / "social"
 COPY_TEMPLATE = TEMPLATE_DIR / "copy_template.txt"
 
@@ -121,8 +122,37 @@ def compact_amount(t: dict) -> str:
     return label.replace(" - ", " – ")
 
 
-def filing_payload(rows: list[dict]) -> dict:
-    """Everything the card template and copy template need, precomputed."""
+def holdings_context(member: str, ticker: str,
+                     data_dir: Path = MEMBERS_DATA_DIR) -> dict | None:
+    """The narrative hook, honestly: what this member ALREADY holds of the
+    headline ticker, from the rolled-forward estimated holdings that power
+    their member page (annual report + every trade filed since; bracket
+    midpoints, so always "~" and "estimated"). None when the member has no
+    page, no parsed holdings, or no position in the ticker — the post simply
+    runs without the context line."""
+    if member not in MEMBER_PAGE_NAMES:
+        return None
+    from .landing_data import slugify
+    try:
+        page = json.loads((data_dir / f"{slugify(member)}.json")
+                          .read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        return None
+    holdings = page.get("holdings") or {}
+    if not holdings.get("available"):
+        return None
+    for stock in holdings.get("stocks", []):
+        if stock.get("ticker") == ticker:
+            return {"est": stock.get("estLabel"),
+                    "pct": stock.get("pctPortfolio")}
+    return None
+
+
+def filing_payload(rows: list[dict],
+                   context: dict | None = None) -> dict:
+    """Everything the card template and copy template need, precomputed.
+    ``context`` is ``holdings_context()``'s answer for the headline ticker
+    (the caller looks it up so this stays pure)."""
     head = _headline_trade(rows)
     who, seat = _who(head)
     late = max((days_late(t) or 0) for t in rows)
@@ -142,6 +172,8 @@ def filing_payload(rows: list[dict]) -> dict:
         "late_days": late,
         "extra_trades": extra_n,
         "source_url": head.get("source_url"),
+        "held_est": (context or {}).get("est"),
+        "held_pct": (context or {}).get("pct"),
     }
 
 
@@ -177,6 +209,11 @@ def card_html(p: dict) -> str:
         "EXTRA": (f"+ {p['extra_trades']} more "
                   f"trade{'s' if p['extra_trades'] != 1 else ''} in this filing"
                   if p["extra_trades"] else ""),
+        "CONTEXT": (
+            f"Already holds ~{p['held_est']} of {_esc(p['ticker'])}"
+            + (f" — {p['held_pct']}% of their estimated portfolio"
+               if p.get("held_pct") is not None else "")
+            if p.get("held_est") else ""),
         "TX_DATE": _fmt(p["tx_date"]),
         "FILED_DATE": _fmt(p["filed_date"]),
         "DEADLINE_HTML": (f"<b class='late'>missed by {late} days</b>"
@@ -211,6 +248,12 @@ def post_copy(p: dict, include_link: bool = False) -> str:
     who_short = f"{p['who']} ({p['party_state']})"
     late_line = (f"Filed {p['late_days']} days past the legal 45-day deadline."
                  if p["late_days"] else "")
+    context_line = ""
+    if p.get("held_est"):
+        context_line = f"Already holds ~{p['held_est']} of ${p['ticker']}"
+        if p.get("held_pct") is not None:
+            context_line += f" — {p['held_pct']}% of their estimated portfolio"
+        context_line += "."
     link = ""
     if include_link and p["member"] in MEMBER_PAGE_NAMES:
         from .landing_data import slugify
@@ -224,16 +267,24 @@ def post_copy(p: dict, include_link: bool = False) -> str:
         "filed_date": _fmt(p["filed_date"], year=False),
         "extra": (f" (+{p['extra_trades']} more trades in the same filing)"
                   if p["extra_trades"] else ""),
+        "context_line": context_line,
         "late_line": late_line,
         "link": link,
     }
-    text = _copy_template().format(**fields)
-    text = re.sub(r"\n{3,}", "\n\n", text).strip()
-    if _x_len(text) > X_LIMIT and late_line:
-        # Degrade: drop the late line first (the card still carries it).
-        fields["late_line"] = ""
-        text = re.sub(r"\n{3,}", "\n\n",
+
+    def render() -> str:
+        return re.sub(r"\n{3,}", "\n\n",
                       _copy_template().format(**fields)).strip()
+
+    text = render()
+    # Degradation order: the context estimate goes first (nice-to-have),
+    # then the late line (the card still stamps it); never a broken cut.
+    if _x_len(text) > X_LIMIT and context_line:
+        fields["context_line"] = ""
+        text = render()
+    if _x_len(text) > X_LIMIT and late_line:
+        fields["late_line"] = ""
+        text = render()
     if _x_len(text) > X_LIMIT:
         raise ValueError(
             f"{p['record_id']}: copy is {_x_len(text)} chars even after "

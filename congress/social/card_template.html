@@ -14,6 +14,9 @@
        {{SIDE_CLASS}}      "side-buy" / "side-sell" / "side-neutral"
        {{TICKER}}          "AAPL"
        {{EXTRA}}           "" or "+ 11 more trades in this filing"
+       {{CONTEXT}}         "" or "Already holds ~$121K of AMZN — 4.2% of
+                           their estimated portfolio" (rolled-forward
+                           holdings estimate; empty when unavailable)
        {{AMOUNT}}          "$250,001 – $500,000" (largest trade's bracket)
        {{TX_DATE}}         "Mar 27, 2026"
        {{FILED_DATE}}      "Jul 21, 2026"
@@ -54,6 +57,8 @@ body { font-family: LF, sans-serif; }
 .headline .side-sell { color: var(--sell); }
 .headline .side-neutral { color: var(--ink); }
 .extra { margin-top: 16px; font-family: PM; font-size: 30px; color: var(--soft); }
+.context { margin-top: 26px; font-family: PM; font-size: 32px; color: var(--ink);
+           white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .amount { margin-top: 12px; font-family: PM; font-weight: 700; font-size: 58px;
           white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .meta { margin-top: auto; display: flex; gap: 64px;
@@ -77,6 +82,7 @@ body { font-family: LF, sans-serif; }
   <div class="headline">{{ACTION}} <span class="{{SIDE_CLASS}}">{{TICKER}}</span></div>
   <div class="amount">{{AMOUNT}}</div>
   <div class="extra">{{EXTRA}}</div>
+  <div class="context">{{CONTEXT}}</div>
   {{STAMP_HTML}}
   <div class="meta">
     <span><span class="k">Traded</span><b>{{TX_DATE}}</b></span>

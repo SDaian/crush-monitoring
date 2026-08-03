@@ -349,7 +349,13 @@ sites. Full details in `congress/README.md`. Conventions:
   Dedup state is `congress/social_state.json` (chamber:filing_id → draft),
   committed by the Action; a failed record stays out of the state so it
   retries. `--seed` marked the 163-filing backlog as seen at ship time —
-  never drip-feed old disclosures as if they were news.
+  never drip-feed old disclosures as if they were news. The narrative hook
+  ("Already holds ~$121K of AMZN — 4.2% of their estimated portfolio") comes
+  from `social.holdings_context`: the member page's rolled-forward holdings
+  estimate, so it is always "~"/"estimated" (bracket midpoints, never
+  invented precision) and silently absent when the member has no page, no
+  parsed holdings, or no position. Under the 280 limit it degrades context
+  line first, late line second — accountability outlives the nice-to-have.
 - **Search indexing is push + pull:** the sitemap (`robots.txt` →
   `sitemap-index.xml`) covers Google; `congress/indexnow.py`
   (`python3 -m congress indexnow`, non-fatal daily workflow step) pushes the

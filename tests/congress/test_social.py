@@ -93,6 +93,79 @@ class TestPayloadAndCard(unittest.TestCase):
         self.assertIn("A &lt;b&gt;&amp;Co", html)
 
 
+class TestHoldingsContext(unittest.TestCase):
+    """The narrative hook: what the member already holds of the ticker,
+    from the member page's rolled-forward estimate. None on any gap."""
+
+    def _page_dir(self, tmp, holdings):
+        d = Path(tmp)
+        (d / "marjorie-taylor-greene.json").write_text(
+            json.dumps({"holdings": holdings}), encoding="utf-8")
+        return d
+
+    def test_found(self):
+        with TemporaryDirectory() as tmp:
+            d = self._page_dir(tmp, {
+                "available": True,
+                "stocks": [{"ticker": "AMZN", "estLabel": "$121K",
+                            "pctPortfolio": 4.2}]})
+            ctx = social.holdings_context(
+                "Marjorie Taylor Greene", "AMZN", data_dir=d)
+            self.assertEqual(ctx, {"est": "$121K", "pct": 4.2})
+
+    def test_no_position_in_ticker(self):
+        with TemporaryDirectory() as tmp:
+            d = self._page_dir(tmp, {
+                "available": True,
+                "stocks": [{"ticker": "AMZN", "estLabel": "$121K",
+                            "pctPortfolio": 4.2}]})
+            self.assertIsNone(social.holdings_context(
+                "Marjorie Taylor Greene", "NVDA", data_dir=d))
+
+    def test_holdings_unavailable(self):
+        # e.g. scanned annual report, or no annual filing yet
+        with TemporaryDirectory() as tmp:
+            d = self._page_dir(tmp, {"available": False, "stocks": []})
+            self.assertIsNone(social.holdings_context(
+                "Marjorie Taylor Greene", "AMZN", data_dir=d))
+
+    def test_unfeatured_member(self):
+        with TemporaryDirectory() as tmp:
+            self.assertIsNone(social.holdings_context(
+                "Somebody Obscure", "AMZN", data_dir=Path(tmp)))
+
+    def test_missing_page_file(self):
+        with TemporaryDirectory() as tmp:
+            self.assertIsNone(social.holdings_context(
+                "Marjorie Taylor Greene", "AMZN", data_dir=Path(tmp)))
+
+    def test_payload_carries_context(self):
+        rows = [T(member="Marjorie Taylor Greene", filing="G1", ticker="AMZN")]
+        p = social.filing_payload(rows, context={"est": "$121K", "pct": 4.2})
+        self.assertEqual(p["held_est"], "$121K")
+        self.assertEqual(p["held_pct"], 4.2)
+
+    def test_payload_without_context(self):
+        p = social.filing_payload([T(member="Nancy Pelosi", filing="P1")])
+        self.assertIsNone(p["held_est"])
+        self.assertIsNone(p["held_pct"])
+
+    def test_card_renders_context(self):
+        rows = [T(member="Marjorie Taylor Greene", filing="G1", ticker="AMZN")]
+        p = social.filing_payload(rows, context={"est": "$121K", "pct": 4.2})
+        html = social.card_html(p)
+        self.assertIn("Already holds ~$121K of AMZN — 4.2% of their "
+                      "estimated portfolio", html)
+        self.assertNotIn("{{", html)
+
+    def test_card_context_empty_without_holdings(self):
+        html = social.card_html(
+            social.filing_payload([T(member="Nancy Pelosi", filing="P1")]))
+        body = html.split("</style>")[1]
+        self.assertIn('<div class="context"></div>', body)
+        self.assertNotIn("Already holds", body)
+
+
 class TestCopy(unittest.TestCase):
     def test_under_limit_with_cashtag(self):
         p = social.filing_payload([T(member="Nancy Pelosi", filing="P1")])
@@ -106,6 +179,28 @@ class TestCopy(unittest.TestCase):
                   tx="2026-01-01", filed="2026-06-20")]
         text = social.post_copy(social.filing_payload(rows))
         self.assertIn("past the legal 45-day deadline", text)
+
+    def test_context_line_in_copy(self):
+        p = social.filing_payload(
+            [T(member="Marjorie Taylor Greene", filing="G1", ticker="AMZN")],
+            context={"est": "$121K", "pct": 4.2})
+        text = social.post_copy(p)
+        self.assertIn("Already holds ~$121K of $AMZN — 4.2% of their "
+                      "estimated portfolio.", text)
+        self.assertLessEqual(social._x_len(text), social.X_LIMIT)
+
+    def test_context_dropped_before_late_line(self):
+        # Force the squeeze with a huge amount label: the context estimate
+        # (nice-to-have) must go before the late line (accountability).
+        row = T(member="Marjorie Taylor Greene", filing="G2", ticker="AMZN",
+                tx="2026-01-01", filed="2026-06-20")
+        # ~120-char label: over 280 with the context line, under without it
+        row["amount_label"] = "$" + "9" * 80 + " - $" + "9" * 35
+        p = social.filing_payload([row], context={"est": "$121K", "pct": 4.2})
+        text = social.post_copy(p)
+        self.assertNotIn("Already holds", text)
+        self.assertIn("past the legal 45-day deadline", text)
+        self.assertLessEqual(social._x_len(text), social.X_LIMIT)
 
     def test_link_counts_as_tco(self):
         p = social.filing_payload([T(member="Nancy Pelosi", filing="P3")])
