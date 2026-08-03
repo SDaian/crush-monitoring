@@ -1,8 +1,10 @@
 # Dependencies
 node_modules/
 
-# Playwright / test output
-reports/
+# Playwright / test output — anchored to the repo root: an unanchored
+# "reports/" also swallowed landing/src/data/reports (the report archive),
+# which made the daily Action's git add fail the whole run.
+/reports/
 results.json
 test-results/
 playwright-report/
