@@ -158,19 +158,20 @@ const schema = [
     color: var(--color-ink);
     font-weight: 600;
   }
+  /* Badge flows INLINE right after the name (not pushed to the far edge) —
+     the number reads as part of the name line. */
   .mcard-namerow {
     display: flex;
     align-items: baseline;
-    justify-content: space-between;
+    justify-content: flex-start;
     flex-wrap: wrap;
-    gap: 0.25rem 0.75rem;
+    gap: 0.25rem 0.625rem;
   }
   /* The performance badge: the buys total, chart-direction emoji = gained
      or lost. Stamp only when actually ahead of the S&P over the same
      windows — the full comparison lives on the member's page, and the
      fineprint below the grid carries the estimate caveat. */
   .mcard-badge {
-    text-align: right;
     font-family: var(--font-mono);
   }
   .mcard-badge b {
