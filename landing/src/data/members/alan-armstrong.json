@@ -263,15 +263,128 @@
   ],
   "tradesShown": 20,
   "holdings": {
-    "available": false,
-    "filingDate": null,
-    "reportYear": null,
-    "snapDate": null,
+    "available": true,
+    "filingDate": "2026-07-21",
+    "reportYear": 2026,
+    "snapDate": "2026-12-31",
     "filingsSince": 0,
-    "sourceUrl": null,
-    "totalLabel": null,
-    "positions": 0,
-    "stocks": [],
+    "sourceUrl": "https://efdsearch.senate.gov/search/view/annual/37264946-5291-4f15-aea8-c23453c027c3/",
+    "totalLabel": "$23.3M",
+    "positions": 86,
+    "stocks": [
+      {
+        "ticker": "WMB",
+        "asset": "Williams Companies, Inc. (The) Common StockFiler comment: Performance Stock Units",
+        "estLabel": "$15.0M",
+        "pctPortfolio": 64.3,
+        "isNew": false
+      },
+      {
+        "ticker": "CAT",
+        "asset": "Caterpillar, Inc. Common Stock",
+        "estLabel": "$3.0M",
+        "pctPortfolio": 12.9,
+        "isNew": false
+      },
+      {
+        "ticker": "COP",
+        "asset": "ConocoPhillips Common Stock",
+        "estLabel": "$750K",
+        "pctPortfolio": 3.2,
+        "isNew": false
+      },
+      {
+        "ticker": "BOKF",
+        "asset": "BOK Financial Corporation - Common Stock",
+        "estLabel": "$375K",
+        "pctPortfolio": 1.6,
+        "isNew": false
+      },
+      {
+        "ticker": "GOOGL",
+        "asset": "Alphabet Inc. - Class A Common Stock",
+        "estLabel": "$175K",
+        "pctPortfolio": 0.8,
+        "isNew": false
+      },
+      {
+        "ticker": "AMZN",
+        "asset": "Amazon.com, Inc. - Common Stock",
+        "estLabel": "$175K",
+        "pctPortfolio": 0.8,
+        "isNew": false
+      },
+      {
+        "ticker": "AAPL",
+        "asset": "Apple Inc. - Common Stock",
+        "estLabel": "$175K",
+        "pctPortfolio": 0.8,
+        "isNew": false
+      },
+      {
+        "ticker": "AVGO",
+        "asset": "Broadcom Inc. - Common Stock",
+        "estLabel": "$175K",
+        "pctPortfolio": 0.8,
+        "isNew": false
+      },
+      {
+        "ticker": "GLW",
+        "asset": "Corning Incorporated Common Stock",
+        "estLabel": "$175K",
+        "pctPortfolio": 0.8,
+        "isNew": false
+      },
+      {
+        "ticker": "GEV",
+        "asset": "GE Vernova Inc. Common Stock",
+        "estLabel": "$175K",
+        "pctPortfolio": 0.8,
+        "isNew": false
+      },
+      {
+        "ticker": "HD",
+        "asset": "Home Depot, Inc. (The) Common Stock",
+        "estLabel": "$175K",
+        "pctPortfolio": 0.8,
+        "isNew": false
+      },
+      {
+        "ticker": "JPM",
+        "asset": "JP Morgan Chase & Co. Common Stock",
+        "estLabel": "$175K",
+        "pctPortfolio": 0.8,
+        "isNew": false
+      },
+      {
+        "ticker": "MSFT",
+        "asset": "Microsoft Corporation - Common Stock",
+        "estLabel": "$175K",
+        "pctPortfolio": 0.8,
+        "isNew": false
+      },
+      {
+        "ticker": "NVDA",
+        "asset": "NVIDIA Corporation - Common Stock",
+        "estLabel": "$175K",
+        "pctPortfolio": 0.8,
+        "isNew": false
+      },
+      {
+        "ticker": "AMGN",
+        "asset": "Amgen Inc. - Common Stock",
+        "estLabel": "$75K",
+        "pctPortfolio": 0.3,
+        "isNew": false
+      },
+      {
+        "ticker": "CDNS",
+        "asset": "Cadence Design Systems, Inc. - Common Stock",
+        "estLabel": "$75K",
+        "pctPortfolio": 0.3,
+        "isNew": false
+      }
+    ],
     "options": []
   },
   "performance": {
@@ -286,7 +399,72 @@
       "priced": 76,
       "pricedOf": 320
     },
-    "series": null,
+    "series": {
+      "dates": [
+        "2026-03-27",
+        "2026-04-03",
+        "2026-04-10",
+        "2026-04-17",
+        "2026-04-24",
+        "2026-05-01",
+        "2026-05-08",
+        "2026-05-15",
+        "2026-05-22",
+        "2026-05-29",
+        "2026-06-05",
+        "2026-06-12",
+        "2026-06-19",
+        "2026-06-26",
+        "2026-07-03",
+        "2026-07-10",
+        "2026-07-17",
+        "2026-07-24",
+        "2026-07-31"
+      ],
+      "member": [
+        100.0,
+        103.5,
+        105.8,
+        111.8,
+        112.2,
+        113.2,
+        117.5,
+        116.6,
+        119.7,
+        124.5,
+        120.0,
+        121.9,
+        123.2,
+        121.6,
+        123.6,
+        124.2,
+        120.6,
+        119.7,
+        120.2
+      ],
+      "bench": [
+        100.0,
+        103.4,
+        107.1,
+        112.0,
+        112.6,
+        113.6,
+        116.3,
+        116.6,
+        117.6,
+        119.3,
+        116.3,
+        117.0,
+        117.7,
+        114.9,
+        117.4,
+        119.0,
+        117.2,
+        116.5,
+        117.8
+      ],
+      "buys": 76
+    },
     "rows": [
       {
         "ticker": "ASML",
