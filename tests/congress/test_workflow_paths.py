@@ -120,3 +120,30 @@ class TestWorkflowStagesGeneratedData(unittest.TestCase):
             is_covered(f"{LANDING_DATA}/tickers/nvda.json", staged_paths()),
             "landing/src/data/tickers is not staged by the daily workflow",
         )
+
+
+class TestStagedPathsNotGitignored(unittest.TestCase):
+    """A gitignored path in a `git add` fails the whole Action run.
+
+    That is exactly how the report archive broke: the root .gitignore's
+    Playwright rule ("reports/", unanchored) also matched
+    landing/src/data/reports, `git add` refused it, the step exited 1, and
+    every downstream step (prices, commit, verify) was skipped — while the
+    verify guard itself was blind, because `git status` does not show
+    ignored files. So check-ignore every staged path at test time.
+    """
+
+    def test_no_git_add_path_is_ignored(self):
+        import subprocess
+        staged = sorted(staged_paths())
+        result = subprocess.run(
+            ["git", "check-ignore", "--no-index", *staged],
+            capture_output=True, text=True, cwd=REPO_ROOT,
+        )
+        # Exit 1 = nothing ignored (what we want); 0 = some path matched.
+        ignored = result.stdout.strip().splitlines()
+        self.assertEqual(
+            ignored, [],
+            "these workflow-staged paths are gitignored — git add will fail "
+            f"the daily run: {ignored}",
+        )
