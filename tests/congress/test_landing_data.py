@@ -616,3 +616,62 @@ class TestLastFiling(unittest.TestCase):
               MT(tx="2026-06-02", filed="2026-06-20")]
         p = ld.ticker_payload("NVDA", ts)
         self.assertEqual(p["summary"]["lastFiling"], "2026-07-05")
+
+
+class TestMemberIndexPerf(unittest.TestCase):
+    def _write(self, perf_members):
+        perf = {"benchmark": {"label": "S&P 500", "asof_date": "2026-07-31"},
+                "members": perf_members}
+        trades = [MT(tx=f"2026-06-{d:02d}") for d in range(1, 5)]
+        returns = {t["id"]: {"pct": 20.0, "bench_pct": 10.0} for t in trades}
+        # MT() ids default to "x" — give them distinct ids for the returns map
+        for i, t in enumerate(trades):
+            t["id"] = f"b{i}"
+        returns = {f"b{i}": {"pct": 20.0, "bench_pct": 10.0} for i in range(4)}
+        with TemporaryDirectory() as d:
+            out = Path(d)
+            ld.write_member_files(trades, {}, out, names=["Nancy Pelosi"],
+                                  returns=returns, perf=perf)
+            return json.loads((out / "members" / "_index.json").read_text())
+
+    def test_index_carries_race_totals_as_a_pair(self):
+        idx = self._write({"Nancy Pelosi": {
+            "dates": ["2026-06-01", "2026-07-31"],
+            "member": [100.0, 135.3], "bench": [100.0, 117.1], "buys": 4}})
+        row = idx["members"][0]
+        self.assertEqual(row["perfPct"], 35)
+        self.assertEqual(row["perfBenchPct"], 17)
+
+    def test_every_member_gets_their_series_not_just_the_first(self):
+        # Regression: the index writer once shadowed the shared `perf`
+        # argument inside its loop, so only the FIRST member ever got a
+        # series — a single-member test could not see it.
+        series = {"dates": ["2026-06-01", "2026-07-31"],
+                  "member": [100.0, 120.0], "bench": [100.0, 110.0],
+                  "buys": 4}
+        perf = {"benchmark": {"label": "S&P 500", "asof_date": "2026-07-31"},
+                "members": {"Nancy Pelosi": dict(series),
+                            "Marjorie Taylor Greene": dict(series)}}
+        trades = []
+        for i, member in enumerate(["Nancy Pelosi", "Marjorie Taylor Greene"]):
+            for d in range(1, 5):
+                tr = MT(member=member, tx=f"2026-06-{d:02d}")
+                tr["id"] = f"{i}-{d}"
+                trades.append(tr)
+        returns = {t["id"]: {"pct": 20.0, "bench_pct": 10.0} for t in trades}
+        with TemporaryDirectory() as d:
+            out = Path(d)
+            ld.write_member_files(
+                trades, {}, out,
+                names=["Nancy Pelosi", "Marjorie Taylor Greene"],
+                returns=returns, perf=perf)
+            idx = json.loads((out / "members" / "_index.json").read_text())
+        pcts = {r["name"]: r["perfPct"] for r in idx["members"]}
+        self.assertEqual(pcts, {"Nancy Pelosi": 20,
+                                "Marjorie Taylor Greene": 20})
+
+    def test_no_series_means_no_numbers(self):
+        idx = self._write({})
+        row = idx["members"][0]
+        self.assertIsNone(row["perfPct"])
+        self.assertIsNone(row["perfBenchPct"])
