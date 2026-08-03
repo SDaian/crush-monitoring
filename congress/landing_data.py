@@ -620,6 +620,14 @@ def write_member_files(
             encoding="utf-8",
         )
         written.append(payload["slug"])
+        # The $1-race totals, for the index card's performance line. Only
+        # when the series exists — and ALWAYS as a pair: a member's number
+        # without the index over the same windows reads as skill in what may
+        # simply be a bull market. (Named pblock, NOT perf — reusing the
+        # parameter name here once clobbered the shared performance file
+        # after the first iteration, silently blanking every later member.)
+        pblock = payload.get("performance") or {}
+        series = pblock.get("series") if pblock.get("available") else None
         index.append({
             "slug": payload["slug"],
             "name": payload["name"],
@@ -630,6 +638,10 @@ def write_member_files(
             "trades": payload["summary"]["trades"],
             "pctLate": payload["summary"]["pctLate"],
             "worstLate": payload["summary"]["worstLate"],
+            "perfPct": (round(series["member"][-1] - 100)
+                        if series and series.get("member") else None),
+            "perfBenchPct": (round(series["bench"][-1] - 100)
+                             if series and series.get("bench") else None),
         })
     (members_dir / "_index.json").write_text(
         json.dumps({"_comment": comment, "members": index},

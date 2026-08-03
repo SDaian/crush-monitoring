@@ -78,10 +78,26 @@ const schema = [
                 filed late
                 <span class="mcard-go">View trades →</span>
               </div>
+              {m.perfPct != null && m.perfBenchPct != null && (
+                <div class="mcard-perf">
+                  buys{" "}
+                  <b class:list={[m.perfPct >= m.perfBenchPct ? "perf-lead" : ""]}>
+                    {m.perfPct >= 0 ? "+" : "−"}{Math.abs(m.perfPct)}%
+                  </b>{" "}
+                  · S&P 500 same windows {m.perfBenchPct >= 0 ? "+" : "−"}{Math.abs(m.perfBenchPct)}%
+                </div>
+              )}
             </a>
           ))
         }
       </div>
+      <p class="fineprint mt-8 max-w-[85ch]">
+        "Buys" is the estimated price change of each member's disclosed stock
+        buys, equal-weighted and held, against the same dollars on the same
+        dates in the S&P 500 — <b class="text-ink">not realized profit</b>
+        (fills, sells and position sizes are unknown). Full methodology on
+        each member's page.
+      </p>
     </section>
 
     <section class="border-t-2 border-ink px-[5vw] py-[10vh] text-center">
@@ -140,6 +156,22 @@ const schema = [
   .mcard-stat b {
     color: var(--color-ink);
     font-weight: 600;
+  }
+  .mcard-perf {
+    margin-top: 0.4rem;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--color-ink-soft);
+  }
+  .mcard-perf b {
+    color: var(--color-ink);
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+  }
+  /* Stamp only when the member is ahead of the index — the one emphasis
+     that means something here. */
+  .mcard-perf b.perf-lead {
+    color: var(--color-stamp);
   }
   .mcard-go {
     margin-left: auto;
