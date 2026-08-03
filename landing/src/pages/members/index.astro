@@ -162,7 +162,9 @@ const schema = [
      the number reads as part of the name line. */
   .mcard-namerow {
     display: flex;
-    align-items: baseline;
+    /* center, not baseline: the badge is a chip beside a much larger name —
+       baseline left it hanging low; centering sits it mid-cap-height. */
+    align-items: center;
     justify-content: flex-start;
     flex-wrap: wrap;
     gap: 0.25rem 0.625rem;
