@@ -1,0 +1,88 @@
+<!doctype html>
+<!-- The X/Twitter card template ("broadsheet" variant) rendered by
+     scripts/render_card.mjs into a 1600x900 PNG. EDIT THIS FILE to change
+     the card design — the pipeline only substitutes the {{PLACEHOLDER}}
+     tokens and screenshots the result. Fonts are the repo-local woff2 files
+     in ./fonts (self-contained: no CDN, no node_modules needed at render
+     time), so CI output is deterministic.
+
+     Placeholders:
+       {{DISCLOSED_LONG}}  "Disclosed Jul 21, 2026" (masthead, right)
+       {{WHO}}             "Sen. Alan Armstrong" (title-cased, prefixed)
+       {{SEAT}}            "R · OK"
+       {{ACTION}}          "Bought" / "Sold" / "Traded"
+       {{SIDE_CLASS}}      "side-buy" / "side-sell" / "side-neutral"
+       {{TICKER}}          "AAPL"
+       {{EXTRA}}           "" or "+ 11 more trades in this filing"
+       {{AMOUNT}}          "$250,001 – $500,000" (largest trade's bracket)
+       {{TX_DATE}}         "Mar 27, 2026"
+       {{FILED_DATE}}      "Jul 21, 2026"
+       {{DEADLINE_HTML}}   "<b>on time</b>" or
+                           "<b class='late'>missed by 71 days</b>"
+       {{STAMP_HTML}}      "" or "<div class='stampbox'>71 days late</div>"
+-->
+<html><head><meta charset="utf-8"><style>
+@font-face { font-family: LF; src: url(fonts/libre-franklin-latin-400-normal.woff2); font-weight: 400; }
+@font-face { font-family: LF; src: url(fonts/libre-franklin-latin-800-normal.woff2); font-weight: 800; }
+@font-face { font-family: LF; src: url(fonts/libre-franklin-latin-900-normal.woff2); font-weight: 900; }
+@font-face { font-family: PM; src: url(fonts/ibm-plex-mono-latin-400-normal.woff2); font-weight: 400; }
+@font-face { font-family: PM; src: url(fonts/ibm-plex-mono-latin-500-normal.woff2); font-weight: 500; }
+@font-face { font-family: PM; src: url(fonts/ibm-plex-mono-latin-700-normal.woff2); font-weight: 700; }
+* { margin: 0; box-sizing: border-box; }
+:root { --paper:#FBFBF9; --ink:#14161A; --soft:#5A5E66; --rule:#E3E2DC;
+        --stamp:#C8102E; --buy:#0E7C4A; --sell:#B3261E; }
+body { font-family: LF, sans-serif; }
+.card { width: 1600px; height: 900px; overflow: hidden; position: relative;
+        background: var(--paper); color: var(--ink); padding: 64px 72px;
+        display: flex; flex-direction: column; }
+.mast { display: flex; justify-content: space-between; align-items: baseline;
+        border-bottom: 6px double var(--ink); padding-bottom: 22px; }
+.wm { font-weight: 900; font-size: 44px; letter-spacing: -0.5px; }
+.wm i { font-style: normal; color: var(--stamp); }
+.dateline { font-family: PM; font-size: 26px; color: var(--soft);
+            letter-spacing: 2px; text-transform: uppercase; }
+.who { margin-top: 48px; font-family: PM; font-size: 30px; letter-spacing: 3px;
+       text-transform: uppercase; color: var(--soft);
+       white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.who b { color: var(--stamp); font-weight: 700; }
+/* The headline clamps rather than overflowing: one line, ellipsis. Ticker
+   symbols are <=10 chars so this only bites on absurd inputs. */
+.headline { margin-top: 14px; font-weight: 900; font-size: 108px;
+            letter-spacing: -3px; line-height: 1.0;
+            white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.headline .side-buy { color: var(--buy); }
+.headline .side-sell { color: var(--sell); }
+.headline .side-neutral { color: var(--ink); }
+.extra { margin-top: 16px; font-family: PM; font-size: 30px; color: var(--soft); }
+.amount { margin-top: 12px; font-family: PM; font-weight: 700; font-size: 58px;
+          white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.meta { margin-top: auto; display: flex; gap: 64px;
+        border-top: 2px solid var(--ink); padding-top: 26px;
+        font-family: PM; font-size: 27px; }
+.meta .k { color: var(--soft); font-size: 21px; letter-spacing: 2.5px;
+           text-transform: uppercase; display: block; margin-bottom: 8px; }
+.meta b { font-weight: 700; }
+.meta .late { color: var(--stamp); }
+.stampbox { position: absolute; right: 66px; top: 300px; transform: rotate(-8deg);
+            border: 6px solid var(--stamp); color: var(--stamp);
+            font-family: PM; font-weight: 700; font-size: 44px;
+            letter-spacing: 4px; padding: 18px 30px; text-transform: uppercase; }
+</style></head><body>
+<div class="card" id="card">
+  <div class="mast">
+    <span class="wm">CAPITOL <i>LEDGER</i></span>
+    <span class="dateline">{{DISCLOSED_LONG}}</span>
+  </div>
+  <div class="who">{{WHO}} · <b>{{SEAT}}</b></div>
+  <div class="headline">{{ACTION}} <span class="{{SIDE_CLASS}}">{{TICKER}}</span></div>
+  <div class="amount">{{AMOUNT}}</div>
+  <div class="extra">{{EXTRA}}</div>
+  {{STAMP_HTML}}
+  <div class="meta">
+    <span><span class="k">Traded</span><b>{{TX_DATE}}</b></span>
+    <span><span class="k">Disclosed</span><b>{{FILED_DATE}}</b></span>
+    <span><span class="k">Filing deadline</span>{{DEADLINE_HTML}}</span>
+    <span style="margin-left:auto"><span class="k">Source</span><b>official filings</b></span>
+  </div>
+</div>
+</body></html>
