@@ -72,7 +72,6 @@ const schema = [
                     <b class:list={[m.perfPct >= m.perfBenchPct ? "perf-lead" : ""]}>
                       {m.perfPct >= 0 ? "📈" : "📉"} {m.perfPct >= 0 ? "+" : "−"}{Math.abs(m.perfPct)}%
                     </b>
-                    <small>S&P {m.perfBenchPct >= 0 ? "+" : "−"}{Math.abs(m.perfBenchPct)}%</small>
                   </span>
                 )}
               </div>
@@ -94,11 +93,11 @@ const schema = [
         }
       </div>
       <p class="fineprint mt-8 max-w-[85ch]">
-        "Buys" is the estimated price change of each member's disclosed stock
-        buys, equal-weighted and held, against the same dollars on the same
-        dates in the S&P 500 — <b class="text-ink">not realized profit</b>
-        (fills, sells and position sizes are unknown). Full methodology on
-        each member's page.
+        📈 is the estimated price change of each member's disclosed stock
+        buys, equal-weighted and held — <b class="text-ink">not realized
+        profit</b> (fills, sells and position sizes are unknown). Red means
+        ahead of the S&P 500 over the same windows; the full comparison is
+        on each member's page.
       </p>
     </section>
 
@@ -166,17 +165,15 @@ const schema = [
     flex-wrap: wrap;
     gap: 0.25rem 0.75rem;
   }
-  /* The performance badge: the buys total up front (chart-direction emoji =
-     gained or lost), the S&P over the same windows always directly beneath —
-     the member's number never travels without its yardstick. Stamp only when
-     actually ahead of the index. */
+  /* The performance badge: the buys total, chart-direction emoji = gained
+     or lost. Stamp only when actually ahead of the S&P over the same
+     windows — the full comparison lives on the member's page, and the
+     fineprint below the grid carries the estimate caveat. */
   .mcard-badge {
     text-align: right;
     font-family: var(--font-mono);
-    line-height: 1.25;
   }
   .mcard-badge b {
-    display: block;
     font-size: 0.9rem;
     font-weight: 700;
     color: var(--color-ink);
@@ -184,11 +181,6 @@ const schema = [
   }
   .mcard-badge b.perf-lead {
     color: var(--color-stamp);
-  }
-  .mcard-badge small {
-    display: block;
-    font-size: 0.75rem;
-    color: var(--color-ink-soft);
   }
   .mcard-go {
     margin-left: auto;
