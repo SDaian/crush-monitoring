@@ -23,6 +23,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import sys
 from datetime import date, datetime, timezone
 from pathlib import Path
@@ -450,6 +451,106 @@ def _cmd_landing(args: argparse.Namespace) -> int:
     return 0
 
 
+def _cmd_social(args: argparse.Namespace) -> int:
+    """Draft X posts for notable new filings (cards + copy → Typefully)."""
+    import subprocess
+
+    from . import social, typefully
+
+    def summary(line: str) -> None:
+        print(line)
+        path = os.environ.get("GITHUB_STEP_SUMMARY")
+        if path:
+            with open(path, "a", encoding="utf-8") as fh:
+                fh.write(line + "\n")
+
+    trades = json.loads(Path(args.trades).read_text(encoding="utf-8"))["trades"]
+    state = social.load_state(Path(args.state))
+    picked = social.select_new_filings(trades, state)
+    if args.seed:
+        # Mark everything currently notable as seen WITHOUT drafting: the
+        # pipeline should start from tomorrow's new filings, not drip-feed
+        # months-old disclosures as if they were news.
+        for rows in picked:
+            social.mark_drafted(state,
+                                social.filing_payload(rows)["record_id"],
+                                None)
+        social.save_state(state, Path(args.state))
+        summary(f"- seeded {len(picked)} existing notable filings as "
+                "already-seen (no drafts created)")
+        return 0
+    cap = args.cap
+    truncated = max(0, len(picked) - cap)
+    if truncated:
+        summary(f"- batch cap {cap}: drafting the {cap} newest of "
+                f"{len(picked)} new notable filings ({truncated} deferred "
+                "to later runs)")
+    picked = picked[:cap]
+    if not picked:
+        summary("- no new notable filings — nothing to draft")
+        return 0
+
+    key = os.environ.get("TYPEFULLY_API_KEY", "")
+    live = (os.environ.get("SOCIAL_LIVE", "").strip().lower() == "true"
+            and not args.dry_run)
+    if live and not key:
+        print("::error::SOCIAL_LIVE=true but TYPEFULLY_API_KEY is not set")
+        return 1
+    if live:
+        try:
+            typefully.probe(key)  # read-only; aborts before any write
+        except typefully.TypefullyError as exc:
+            print(f"::error::Typefully probe failed — drafting nothing: {exc}")
+            return 1
+    mode = "LIVE" if live else "DRY-RUN"
+    summary(f"### Social drafts ({mode})")
+
+    out_dir = Path(args.out_dir)
+    out_dir.mkdir(parents=True, exist_ok=True)
+    drafted = failed = 0
+    for rows in picked:
+        payload = social.filing_payload(rows)
+        rid = payload["record_id"]
+        try:
+            copy = social.post_copy(payload,
+                                    include_link=args.include_link)
+            safe = rid.replace(":", "-")
+            html_path = out_dir / f"{safe}.html"
+            png_path = out_dir / f"{safe}.png"
+            html_path.write_text(social.card_html(payload), encoding="utf-8")
+            subprocess.run(
+                ["node", str(pipeline.REPO_ROOT / "scripts" / "render_card.mjs"),
+                 str(html_path), str(png_path)],
+                check=True, capture_output=True, text=True,
+            )
+            if live:
+                # The card is attached by the owner in Typefully (see
+                # typefully.py's unverified-API note); the trailing marker
+                # line says which artifact to drag in, and is deleted there.
+                content = f"{copy}\n\n[attach card: {png_path.name}]"
+                draft = typefully.create_draft(key, content)
+                social.mark_drafted(state, rid, draft.get("id"))
+                summary(f"- ✅ {rid}: draft {draft.get('id')} — "
+                        f"{payload['who']} {payload['action'].lower()} "
+                        f"{payload['ticker']}")
+            else:
+                summary(f"- 📝 {rid}: rendered {png_path.name} "
+                        f"({payload['who']} {payload['action'].lower()} "
+                        f"{payload['ticker']}) — no draft written")
+            drafted += 1
+        except Exception as exc:  # noqa: BLE001 — one bad record never
+            # stops the rest, and it stays OUT of the state so the next
+            # run retries it.
+            failed += 1
+            detail = getattr(exc, "stderr", "") or str(exc)
+            summary(f"- ❌ {rid}: {type(exc).__name__}: {str(detail)[:200]}")
+    if live and drafted:
+        social.save_state(state, Path(args.state))
+    summary(f"- done: {drafted} drafted, {failed} failed, "
+            f"{truncated} deferred")
+    return 0 if failed == 0 else 1
+
+
 def _cmd_indexnow(args: argparse.Namespace) -> int:
     """Ping IndexNow (Bing/Yandex family) with today's refreshed URLs."""
     from . import indexnow
@@ -860,6 +961,30 @@ def build_parser() -> argparse.ArgumentParser:
         help="Ping IndexNow with the pages the daily refresh changed.",
     )
     indexnow_p.set_defaults(func=_cmd_indexnow)
+
+    social_p = sub.add_parser(
+        "social",
+        help="Draft X posts for notable new filings (Typefully; see social.py).",
+    )
+    social_p.add_argument("--trades", default=str(pipeline.DEFAULT_OUTPUT))
+    social_p.add_argument("--state",
+                          default=str(pipeline.REPO_ROOT / "congress"
+                                      / "social_state.json"))
+    social_p.add_argument("--out-dir", default="social-cards",
+                          help="Where rendered card PNGs land (uploaded as "
+                               "run artifacts).")
+    social_p.add_argument("--cap", type=int,
+                          default=int(os.environ.get("SOCIAL_CAP", "5")),
+                          help="Max drafts per run (backlog guard).")
+    social_p.add_argument("--dry-run", action="store_true",
+                          help="Render cards + copy but write no drafts.")
+    social_p.add_argument("--seed", action="store_true",
+                          help="Mark all currently notable filings as seen "
+                               "without drafting (run once at setup).")
+    social_p.add_argument("--include-link", action="store_true",
+                          help="Append the member-page URL (link posts cost "
+                               "reach on X; off by default).")
+    social_p.set_defaults(func=_cmd_social)
 
     return p
 

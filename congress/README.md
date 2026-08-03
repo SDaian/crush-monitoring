@@ -204,3 +204,42 @@ remove it again before merging to `main`.
 Known simplification: amendment filings are treated as separate filings
 (deduped by filing id only), so an amended trade can appear twice — once per
 filing — each linked to its own official document.
+
+## Social drafts (X via Typefully)
+
+`python3 -m congress social` turns notable NEW filings into branded card
+images + tweet copy and creates **unpublished drafts** in Typefully, where
+the owner approves each one before it can reach X. Runs daily from the
+Action; a filing is notable when the filer is a featured member, any trade's
+bracket floor is ≥ $1M, or a trade arrived > 90 days past the deadline.
+
+**Setup (one time):**
+
+1. In Typefully: Settings → API → create a key (check the plan requirement).
+2. Add it as the `TYPEFULLY_API_KEY` repository secret.
+3. Set the repository **variable** `SOCIAL_LIVE=true` when ready — until
+   then every run is a dry-run that renders the cards as workflow artifacts
+   (`social-cards`) and writes nothing. `SOCIAL_CAP` (variable, default 5)
+   caps drafts per run.
+
+**Dry-run on demand:** run the workflow manually with `social_dry_run=true`,
+then download the `social-cards` artifact to inspect the PNGs.
+
+**Editing the design/copy:** the card is
+`congress/social/card_template.html` (open it directly in a browser to
+iterate; placeholders documented in the file) and the wording is
+`congress/social/copy_template.txt`. Preview locally:
+
+    CARD_CHROMIUM=<path-to-chromium> python3 -m congress social --dry-run \
+        --cap 3 --out-dir /tmp/cards
+
+**State / re-drafting:** `congress/social_state.json` maps
+`chamber:filing_id` → draft info. Delete an entry and the next run re-drafts
+exactly that filing; `--seed` marks every currently-notable filing as seen
+(run once at setup so the backlog is never posted as if it were news).
+A failed record is *not* recorded, so it retries next run.
+
+**Image attach:** the Typefully media API is deliberately not called yet
+(unverified — see `congress/typefully.py`). Each draft ends with an
+`[attach card: …]` marker; drag the matching PNG from the `social-cards`
+artifact into the draft during approval and delete the marker line.

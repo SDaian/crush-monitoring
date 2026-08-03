@@ -335,6 +335,21 @@ sites. Full details in `congress/README.md`. Conventions:
     `build_report(...)["html"]` / `build_traffic_email(...)["html"]` to a file.
     Keep the two brands' looks in step, but the email is its own surface (not
     governed by `landing/DESIGN.md`).
+- **Social drafts (X via Typefully) are approval-gated and seeded:**
+  `python3 -m congress social` (daily Action step) turns notable NEW filings
+  (featured member, ≥$1M bracket floor, or >90d late) into card PNGs
+  (`congress/social/card_template.html` + `scripts/render_card.mjs`,
+  repo-local fonts) and tweet copy (`congress/social/copy_template.txt`,
+  280-char enforced with graceful degradation), then creates UNPUBLISHED
+  Typefully drafts. Live is double-gated (`TYPEFULLY_API_KEY` secret AND
+  `SOCIAL_LIVE=true` variable) because the Typefully endpoint shapes are
+  documented-but-unverified (`congress/typefully.py` — docs unreachable from
+  the dev sandbox); a read-only probe runs before any write, and the media
+  API is not called at all (the owner drag-drops the card during approval).
+  Dedup state is `congress/social_state.json` (chamber:filing_id → draft),
+  committed by the Action; a failed record stays out of the state so it
+  retries. `--seed` marked the 163-filing backlog as seen at ship time —
+  never drip-feed old disclosures as if they were news.
 - **Search indexing is push + pull:** the sitemap (`robots.txt` →
   `sitemap-index.xml`) covers Google; `congress/indexnow.py`
   (`python3 -m congress indexnow`, non-fatal daily workflow step) pushes the

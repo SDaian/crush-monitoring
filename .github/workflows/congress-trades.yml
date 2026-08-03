@@ -28,6 +28,10 @@ on:
         description: "Skip every data step and ONLY build/send the report (fast test)"
         required: false
         default: "false"
+      social_dry_run:
+        description: "Social step: render cards + copy but write NO Typefully drafts"
+        required: false
+        default: "false"
 permissions:
   contents: write
   issues: write # open an issue (→ email) when a new AI technical signal fires
@@ -47,6 +51,13 @@ jobs:
           python-version: "3.11"
           cache: pip
           cache-dependency-path: congress/requirements.txt
+
+      # Node is only used by the social step's card renderer (Playwright lib
+      # + the runner's preinstalled Chrome — no browser download).
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
 
       - name: Install fetcher dependencies
         run: pip install -r congress/requirements.txt
@@ -112,6 +123,37 @@ jobs:
           # final step; the push triggers Vercel's rebuild.
           python3 -m congress landing 2>&1 | tee -a fetch.log \
             || echo "::warning::landing data refresh failed; keeping prior files"
+
+      - name: Draft social posts for notable new filings (non-fatal)
+        if: github.event.inputs.report_only != 'true'
+        env:
+          TYPEFULLY_API_KEY: ${{ secrets.TYPEFULLY_API_KEY }}
+          # Live drafting is DOUBLE-gated: the secret must exist AND the repo
+          # variable SOCIAL_LIVE must be "true". Until both are set every run
+          # is a dry-run that renders cards as artifacts and writes nothing —
+          # the Typefully API surface is documented-but-unverified from the
+          # dev sandbox (see congress/typefully.py), so live stays opt-in.
+          SOCIAL_LIVE: ${{ vars.SOCIAL_LIVE }}
+          SOCIAL_CAP: ${{ vars.SOCIAL_CAP }}
+        run: |
+          # Card rendering needs the playwright lib (browser = the runner's
+          # preinstalled Chrome, no download). npm ci is cached by setup-node.
+          npm ci --ignore-scripts --no-audit --no-fund 2>&1 | tail -1
+          DRY=""
+          if [ "${{ github.event.inputs.social_dry_run }}" = "true" ]; then
+            DRY="--dry-run"
+          fi
+          python3 -m congress social $DRY --out-dir social-cards 2>&1 | tee -a fetch.log \
+            || echo "::warning::social drafting failed (non-fatal)"
+
+      - name: Upload rendered social cards (inspection artifact)
+        if: github.event.inputs.report_only != 'true'
+        uses: actions/upload-artifact@v4
+        with:
+          name: social-cards
+          path: social-cards/
+          if-no-files-found: ignore
+          retention-days: 7
 
       - name: Refresh AI technical indicators + notify on new signals (non-fatal)
         if: github.event.inputs.report_only != 'true'
@@ -233,7 +275,7 @@ jobs:
           # landing/src/data/tickers was missing, so the ticker pages served
           # whatever a manual run last happened to commit (TSM was 2 months
           # and 1 trade behind the tracker).
-          FILES="docs/data/congress-trades.json congress/state.json congress/members.json docs/data/returns.json docs/data/performance.json landing/src/data/disclosures.json landing/src/data/stats.json landing/src/data/late.json landing/src/data/members landing/src/data/tickers"
+          FILES="docs/data/congress-trades.json congress/state.json congress/social_state.json congress/members.json docs/data/returns.json docs/data/performance.json landing/src/data/disclosures.json landing/src/data/stats.json landing/src/data/late.json landing/src/data/members landing/src/data/tickers"
           if git diff --quiet -- $FILES; then
             echo "No new trades or price changes."
             exit 0

@@ -1,0 +1,21 @@
+# The tweet copy template. EDIT THIS FILE to change post wording — the
+# pipeline only fills the {placeholders} and enforces the 280-char limit
+# (it drops the {late_line} first, then truncates the asset name, and
+# refuses to draft rather than post a broken cut).
+#
+# Lines starting with "#" are comments and are stripped. Blank lines are
+# kept (they become paragraph breaks in the post). Placeholders:
+#   {who}         "Sen. Alan Armstrong (R-OK)"
+#   {action}      "bought" / "sold" / "traded"
+#   {ticker}      "AAPL" -> rendered as a cashtag $AAPL
+#   {amount}      "$250,001 – $500,000"
+#   {tx_date}     "Mar 27"
+#   {filed_date}  "Jul 21"
+#   {extra}       "" or " (+11 more trades in the same filing)"
+#   {late_line}   "" or "Filed 71 days past the legal 45-day deadline."
+#   {link}        "" or the member-page URL (config: SOCIAL_INCLUDE_LINK)
+{who} {action} ${ticker}: {amount}{extra}
+
+Traded {tx_date} — disclosed {filed_date}.
+{late_line}
+{link}
