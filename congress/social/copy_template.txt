@@ -15,7 +15,8 @@
 #   {context_line} "" or "Already holds ~$121K of $AMZN — 4.2% of their
 #                 estimated portfolio." (rolled-forward holdings estimate)
 #   {late_line}   "" or "Filed 71 days past the legal 45-day deadline."
-#   {link}        "" or the member-page URL (config: SOCIAL_INCLUDE_LINK)
+#   {link}        "" or "🔗 <member-page URL>" — included by default when
+#                 the member has a page; --no-link drops it
 🚨 NEW TRADE ALERT
 
 {who} {action} ${ticker}: {amount}{extra}
