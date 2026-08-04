@@ -516,7 +516,9 @@ def _cmd_social(args: argparse.Namespace) -> int:
         head = social._headline_trade(rows)
         context = social.holdings_context(head.get("member", ""),
                                           head.get("ticker") or "")
-        payload = social.filing_payload(rows, context=context)
+        stats = social.ticker_stats(trades, head.get("ticker") or "",
+                                    (head.get("tx_date") or "")[:4])
+        payload = social.filing_payload(rows, context=context, stats=stats)
         rid = payload["record_id"]
         try:
             copy = social.post_copy(payload,

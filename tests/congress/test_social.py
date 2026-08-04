@@ -92,6 +92,64 @@ class TestPayloadAndCard(unittest.TestCase):
         html = social.card_html(social.filing_payload(rows))
         self.assertIn("A &lt;b&gt;&amp;Co", html)
 
+    def test_bracket_amount_not_on_card(self):
+        # Owner's call: the bracket stays in the tweet copy but is too
+        # easily read as an exact figure on the big card — keep it off.
+        rows = [T(member="Nancy Pelosi", filing="P9")]
+        html = social.card_html(social.filing_payload(rows))
+        body = html.split("</style>")[1]
+        self.assertNotIn("$1,001", body)
+        text = social.post_copy(social.filing_payload(rows))
+        self.assertIn("$1,001 – $15,000", text)  # copy keeps it
+
+    def test_company_name_on_card(self):
+        rows = [T(member="Nancy Pelosi", filing="P10")]
+        rows[0]["asset"] = "Apple Inc. <Class A>"
+        html = social.card_html(social.filing_payload(rows))
+        self.assertIn("Apple Inc. &lt;Class A&gt;", html)
+
+
+class TestTickerStats(unittest.TestCase):
+    def _trades(self):
+        return [T(member="Nancy Pelosi", filing="A", ticker="TSM"),
+                T(member="Cleo Fields", filing="B", ticker="TSM",
+                  type="sell"),
+                T(member="Cleo Fields", filing="B2", ticker="TSM",
+                  tx="2025-06-01"),          # other year: excluded
+                T(member="Nancy Pelosi", filing="C", ticker="NVDA")]
+
+    def test_counts_by_year_and_ticker(self):
+        s = social.ticker_stats(self._trades(), "TSM", "2026")
+        self.assertEqual(s, {"members": 2, "trades": 2, "buys": 1,
+                             "sells": 1, "year": "2026"})
+
+    def test_none_without_ticker_or_rows(self):
+        self.assertIsNone(social.ticker_stats(self._trades(), "", "2026"))
+        self.assertIsNone(social.ticker_stats(self._trades(), "ZZZ", "2026"))
+
+    def test_stats_band_rendered(self):
+        rows = [T(member="Nancy Pelosi", filing="S1", ticker="TSM")]
+        stats = {"members": 12, "trades": 50, "buys": 34, "sells": 16,
+                 "year": "2026"}
+        html = social.card_html(social.filing_payload(rows, stats=stats))
+        self.assertIn("TSM in Congress · 2026", html)
+        self.assertIn("<b>12 members</b> have disclosed", html)
+        self.assertIn("34 buys", html)
+        self.assertIn("16 sells", html)
+
+    def test_stats_band_singular_first_trade(self):
+        rows = [T(member="Nancy Pelosi", filing="S2", ticker="TSM")]
+        stats = {"members": 1, "trades": 1, "buys": 1, "sells": 0,
+                 "year": "2026"}
+        html = social.card_html(social.filing_payload(rows, stats=stats))
+        self.assertIn("<b>1 member</b> has disclosed <b>1 trade</b>", html)
+        self.assertNotIn("0 sells", html)  # no buy/sell split on n=1
+
+    def test_stats_band_absent_without_stats(self):
+        rows = [T(member="Nancy Pelosi", filing="S3")]
+        html = social.card_html(social.filing_payload(rows))
+        self.assertNotIn("in Congress", html.split("</style>")[1])
+
 
 class TestHoldingsContext(unittest.TestCase):
     """The narrative hook: what the member already holds of the ticker,
