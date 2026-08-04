@@ -496,9 +496,13 @@ def _cmd_social(args: argparse.Namespace) -> int:
     if live and not key:
         print("::error::SOCIAL_LIVE=true but TYPEFULLY_API_KEY is not set")
         return 1
+    set_id = None
     if live:
         try:
             typefully.probe(key)  # read-only; aborts before any write
+            # v2 scopes drafts under a social set; resolve it once here so a
+            # bad/missing set also aborts before any write.
+            set_id = typefully.resolve_social_set_id(key)
         except typefully.TypefullyError as exc:
             print(f"::error::Typefully probe failed — drafting nothing: {exc}")
             return 1
@@ -531,7 +535,7 @@ def _cmd_social(args: argparse.Namespace) -> int:
                 # typefully.py's unverified-API note); the trailing marker
                 # line says which artifact to drag in, and is deleted there.
                 content = f"{copy}\n\n[attach card: {png_path.name}]"
-                draft = typefully.create_draft(key, content)
+                draft = typefully.create_draft(key, content, set_id)
                 social.mark_drafted(state, rid, draft.get("id"))
                 summary(f"- ✅ {rid}: draft {draft.get('id')} — "
                         f"{payload['who']} {payload['action'].lower()} "

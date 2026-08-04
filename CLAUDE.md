@@ -342,9 +342,11 @@ sites. Full details in `congress/README.md`. Conventions:
   repo-local fonts) and tweet copy (`congress/social/copy_template.txt`,
   280-char enforced with graceful degradation), then creates UNPUBLISHED
   Typefully drafts. Live is double-gated (`TYPEFULLY_API_KEY` secret AND
-  `SOCIAL_LIVE=true` variable) because the Typefully endpoint shapes are
-  documented-but-unverified (`congress/typefully.py` — docs unreachable from
-  the dev sandbox); a read-only probe runs before any write, and the media
+  `SOCIAL_LIVE=true` variable) because the Typefully **v2** endpoint shapes
+  are well-sourced but not doc-verified (`congress/typefully.py` — the docs
+  site 403s the dev sandbox; v1 was retired for API keys, which the
+  probe-before-write caught on the very first live run); a read-only probe
+  (GET /me) plus social-set resolution run before any write, and the media
   API is not called at all (the owner drag-drops the card during approval).
   Dedup state is `congress/social_state.json` (chamber:filing_id → draft),
   committed by the Action; a failed record stays out of the state so it
