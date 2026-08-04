@@ -372,8 +372,30 @@ token or breaks a rule here, update this manual in the same PR.
 ## 9. Imagery & iconography
 
 - **Data is the imagery.** The hero "product shot" is a rendering of the actual
-  product — the daily email / the feed — not stock photography. There are **no
-  photos** and no illustration in the identity.
+  product — the daily email / the feed — not stock photography. There is no
+  illustration and no stock photography in the identity.
+- **Photography enters in exactly one form: the duotone portrait.** An official
+  congressional portrait (a U.S. government work, public domain), worn as a
+  named treatment — never a raw color photo:
+  - **Recipe** (CSS, from the original color photo — never pre-tint the asset):
+    the image drained to grayscale (`grayscale(1) contrast(1.06)`) and
+    **screen-blended over a `--color-stamp` background**, so shadows go stamp
+    red and highlights go paper. Where the photo meets content, its edge
+    **fades into the page** via a gradient mask (~72% solid, then to
+    transparent) — a bleed, not a frame.
+  - **Credit is mandatory:** a small mono caption — `OFFICIAL PORTRAIT ·
+    PUBLIC DOMAIN` — on or beside the photo.
+  - **Canonical implementation:** `.duotone` / `.duotone-fade` in
+    `src/styles/global.css`; the social-card template
+    (`congress/social/card_template.html`) carries the same recipe inline
+    (it must stay self-contained) — keep the two in step.
+  - **Red budget:** a duotone portrait **is** the viewport's dominant red
+    moment (§3) — never pair it with a competing red block; the stamp CTA
+    may coexist only when clearly subordinate.
+  - **Scope:** members of Congress and executive filers on editorial surfaces
+    (social cards, member-page headers, holdings graphics). Never decoration,
+    never a stand-in for missing data, and a surface must degrade cleanly
+    when no portrait exists.
 - **Iconography is minimal and functional:** the live dot, the stamp underline,
   rules. Emoji are used only where they carry real information — country **flags**
   on testimonials, **★ rating stars** — never as decoration or tone.

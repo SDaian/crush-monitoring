@@ -99,8 +99,11 @@ body { font-family: LF, sans-serif; }
    duotone is pure CSS — grayscale image screen-blended over stamp red, so
    shadows go red and highlights go paper — and the right edge fades into
    the page via a mask, like a print halftone bleeding into the column.
-   Cards without a portrait file keep the full-width layout: .has-portrait
-   is what makes room. */
+   The treatment is canonical in landing/DESIGN.md §9 ("the duotone
+   portrait") and mirrored as .duotone/.duotone-fade in
+   landing/src/styles/global.css — this template must stay self-contained,
+   so change all three together. Cards without a portrait file keep the
+   full-width layout: .has-portrait is what makes room. */
 .portrait { position: absolute; left: 0; top: 0; bottom: 0; width: 620px;
             background: var(--stamp); overflow: hidden;
             -webkit-mask-image: linear-gradient(to right, #000 72%, transparent 100%);
