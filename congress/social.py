@@ -148,11 +148,33 @@ def holdings_context(member: str, ticker: str,
     return None
 
 
+def ticker_stats(trades: list[dict], ticker: str, year: str) -> dict | None:
+    """The ticker across Congress: how many members disclosed how many
+    trades of this symbol in ``year`` (by trade date), split buy/sell.
+    Powers the card's stats band — one filing becomes a pattern."""
+    if not ticker:
+        return None
+    rows = [t for t in trades
+            if t.get("ticker") == ticker
+            and (t.get("tx_date") or "").startswith(year)]
+    if not rows:
+        return None
+    return {
+        "members": len({t.get("member") for t in rows}),
+        "trades": len(rows),
+        "buys": sum(1 for t in rows if t.get("type") == "buy"),
+        "sells": sum(1 for t in rows if t.get("type") == "sell"),
+        "year": year,
+    }
+
+
 def filing_payload(rows: list[dict],
-                   context: dict | None = None) -> dict:
+                   context: dict | None = None,
+                   stats: dict | None = None) -> dict:
     """Everything the card template and copy template need, precomputed.
     ``context`` is ``holdings_context()``'s answer for the headline ticker
-    (the caller looks it up so this stays pure)."""
+    and ``stats`` is ``ticker_stats()``'s (the caller looks both up so
+    this stays pure)."""
     head = _headline_trade(rows)
     who, seat = _who(head)
     late = max((days_late(t) or 0) for t in rows)
@@ -166,6 +188,7 @@ def filing_payload(rows: list[dict],
         "party_state": f"{head.get('party') or '?'}-{head.get('state') or 'US'}",
         "action": action,
         "ticker": head.get("ticker") or "—",
+        "company": head.get("asset") or "",
         "amount": compact_amount(head),
         "tx_date": head.get("tx_date"),
         "filed_date": head.get("filing_date"),
@@ -174,6 +197,7 @@ def filing_payload(rows: list[dict],
         "source_url": head.get("source_url"),
         "held_est": (context or {}).get("est"),
         "held_pct": (context or {}).get("pct"),
+        "stats": stats,
     }
 
 
@@ -184,6 +208,26 @@ def filing_payload(rows: list[dict],
 def _esc(s: str) -> str:
     return (str(s).replace("&", "&amp;").replace("<", "&lt;")
             .replace(">", "&gt;"))
+
+
+def _stats_html(p: dict) -> str:
+    s = p.get("stats")
+    if not s:
+        return ""
+    members = f"{s['members']} member{'s' if s['members'] != 1 else ''}"
+    have = "have" if s["members"] != 1 else "has"
+    trades = f"{s['trades']} trade{'s' if s['trades'] != 1 else ''}"
+    split = (f" — <b class='up'>{s['buys']} "
+             f"buy{'s' if s['buys'] != 1 else ''}</b> / "
+             f"<b class='down'>{s['sells']} "
+             f"sell{'s' if s['sells'] != 1 else ''}</b>"
+             if s["trades"] > 1 else "")
+    return (f"<div class='stats'>"
+            f"<div class='k'>{_esc(p['ticker'])} in Congress · "
+            f"{_esc(s['year'])}</div>"
+            f"<div class='v'><b>{members}</b> {have} disclosed "
+            f"<b>{trades}</b>{split}</div>"
+            f"</div>")
 
 
 def card_html(p: dict) -> str:
@@ -205,7 +249,8 @@ def card_html(p: dict) -> str:
         "SIDE_CLASS": {"Bought": "side-buy", "Sold": "side-sell"}.get(
             p["action"], "side-neutral"),
         "TICKER": _esc(p["ticker"]),
-        "AMOUNT": _esc(p["amount"]),
+        "COMPANY": _esc(p.get("company") or ""),
+        "STATS_HTML": _stats_html(p),
         "EXTRA": (f"+ {p['extra_trades']} more "
                   f"trade{'s' if p['extra_trades'] != 1 else ''} in this filing"
                   if p["extra_trades"] else ""),

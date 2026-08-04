@@ -13,11 +13,14 @@
        {{ACTION}}          "Bought" / "Sold" / "Traded"
        {{SIDE_CLASS}}      "side-buy" / "side-sell" / "side-neutral"
        {{TICKER}}          "AAPL"
+       {{COMPANY}}         "" or "Taiwan Semiconductor Manufacturing
+                           Company Ltd." (the filing's asset name)
        {{EXTRA}}           "" or "+ 11 more trades in this filing"
        {{CONTEXT}}         "" or "Already holds ~$121K of AMZN — 4.2% of
                            their estimated portfolio" (rolled-forward
                            holdings estimate; empty when unavailable)
-       {{AMOUNT}}          "$250,001 – $500,000" (largest trade's bracket)
+       {{STATS_HTML}}      "" or the ticker-across-Congress band
+                           ("12 members have disclosed 50 trades — …")
        {{TX_DATE}}         "Mar 27, 2026"
        {{FILED_DATE}}      "Jul 21, 2026"
        {{DEADLINE_HTML}}   "<b>on time</b>" or
@@ -56,11 +59,21 @@ body { font-family: LF, sans-serif; }
 .headline .side-buy { color: var(--buy); }
 .headline .side-sell { color: var(--sell); }
 .headline .side-neutral { color: var(--ink); }
+.company { margin-top: 10px; font-family: PM; font-size: 30px; color: var(--soft);
+           white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .extra { margin-top: 16px; font-family: PM; font-size: 30px; color: var(--soft); }
 .context { margin-top: 26px; font-family: PM; font-size: 32px; color: var(--ink);
            white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.amount { margin-top: 12px; font-family: PM; font-weight: 700; font-size: 58px;
-          white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+/* Two margin-top:auto blocks (.stats and .meta) split the leftover
+   vertical space evenly, so the stats band floats centered between the
+   headline group and the bottom meta strip. */
+.stats { margin-top: auto; border-top: 2px solid var(--rule); padding-top: 26px; }
+.stats .k { font-family: PM; font-size: 21px; letter-spacing: 2.5px;
+            text-transform: uppercase; color: var(--soft); margin-bottom: 14px; }
+.stats .v { font-family: PM; font-size: 33px; line-height: 1.5; }
+.stats b { font-weight: 700; }
+.stats .up { color: var(--buy); }
+.stats .down { color: var(--sell); }
 .meta { margin-top: auto; display: flex; gap: 64px;
         border-top: 2px solid var(--ink); padding-top: 26px;
         font-family: PM; font-size: 27px; }
@@ -80,10 +93,11 @@ body { font-family: LF, sans-serif; }
   </div>
   <div class="who">{{WHO}} · <b>{{SEAT}}</b></div>
   <div class="headline">{{ACTION}} <span class="{{SIDE_CLASS}}">{{TICKER}}</span></div>
-  <div class="amount">{{AMOUNT}}</div>
+  <div class="company">{{COMPANY}}</div>
   <div class="extra">{{EXTRA}}</div>
   <div class="context">{{CONTEXT}}</div>
   {{STAMP_HTML}}
+  {{STATS_HTML}}
   <div class="meta">
     <span><span class="k">Traded</span><b>{{TX_DATE}}</b></span>
     <span><span class="k">Disclosed</span><b>{{FILED_DATE}}</b></span>
