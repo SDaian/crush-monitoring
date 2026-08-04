@@ -40,6 +40,52 @@ carry **no reference to Claude, Anthropic, or AI generation** of any kind:
   merge on `main` is GitHub's own commit); apply this to new commits going
   forward.
 
+## Engineering principles (IMPORTANT)
+
+How code gets written here. Each principle leads; the clause after it is how
+it applies in *this* repo, and where a standing rule below overrides it, that
+rule wins.
+
+- **Do not preserve backward compatibility.** Remove obsolete paths instead of
+  adding compatibility layers, fallbacks, or migrations. Three things here are
+  **not** obsolete paths and survive this rule:
+  - **Graceful degradation of the daily pipeline** — the non-fatal steps and
+    gated integrations (unset key → skip, source outage → keep the prior file,
+    media upload fails → manual-attach marker). That is resilience, not a
+    compat shim: an optional step must never take the run down.
+  - **The historical record** — `predictor/results_log.md`, prediction lambdas
+    as filed, `congress/social_state.json`, and the git audit trail
+    (`ROADMAP.md` §1). Annotate history; never rewrite it.
+  - **Documented sunsets** — e.g. `docs/trades.html` serves until the apex
+    domain resolves. Retire on the stated trigger, not on sight.
+- **Choose the simplest implementation that fully meets the current
+  requirements.** Avoid speculative abstractions, configuration, and
+  indirection.
+- **Grow the system in layers.** Start from the smallest version that works end
+  to end, and add each new capability on top of a product that already works.
+  Never trade a working product for unfinished complexity.
+- **Keep components modular and concerns clearly separated.** The existing
+  seams are the model: pure logic stays offline-testable, network is confined
+  to `congress/http.py`, markup and CSS live in templates rather than in
+  Python.
+- **Prefer established, well-maintained libraries** when they reduce overall
+  complexity or improve reliability. Do not reimplement common functionality
+  without a clear reason. **The dependency policy overrides this bullet**:
+  `predictor/` stays pure-stdlib and `congress/` parsers stay
+  stdlib-importable, so a library that would break the offline tests is not an
+  option however good it is.
+- **Lean on the dependencies already in the project** before writing your own
+  implementation or adding packages. Do not assume a library lacks a
+  capability without checking its documentation and types. When the docs are
+  unreachable from the sandbox (the egress proxy 403s some vendors), isolate
+  the uncertain surface in one module, mark it UNVERIFIED, and probe read-only
+  before any write — `congress/typefully.py` is the pattern.
+- **Make architectural decisions for the long term.** Do not accept a stopgap
+  that only works for now and is meant to be replaced later. A **trigger-gated
+  `ROADMAP.md` stage is not a stopgap**: deferring SQLite until its trigger
+  fires *is* the long-term decision — premature infrastructure is the failure
+  mode the roadmap exists to prevent.
+
 ## Project overview
 
 `predictor/` is a World Cup 2026 match predictor: bivariate Poisson with the
