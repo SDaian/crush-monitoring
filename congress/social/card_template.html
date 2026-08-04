@@ -52,14 +52,19 @@ body { font-family: LF, sans-serif; }
        white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .who b { color: var(--stamp); font-weight: 700; }
 /* The headline clamps rather than overflowing: one line, ellipsis. Ticker
-   symbols are <=10 chars so this only bites on absurd inputs. */
+   symbols are <=10 chars so this only bites on absurd inputs. The bottom
+   padding is NOT decorative: at line-height 1.0 the overflow:hidden box
+   ends at the em box, shearing the descender off the "g" in "Bought" —
+   padding sits inside the clip edge and gives the descender room. */
 .headline { margin-top: 14px; font-weight: 900; font-size: 108px;
-            letter-spacing: -3px; line-height: 1.0;
+            letter-spacing: -3px; line-height: 1.0; padding-bottom: 0.25em;
             white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .headline .side-buy { color: var(--buy); }
 .headline .side-sell { color: var(--sell); }
 .headline .side-neutral { color: var(--ink); }
-.company { margin-top: 10px; font-family: PM; font-size: 30px; color: var(--soft);
+/* No margin-top: the headline's descender padding above already provides
+   the visual gap. */
+.company { font-family: PM; font-size: 30px; color: var(--soft);
            white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .extra { margin-top: 16px; font-family: PM; font-size: 30px; color: var(--soft); }
 .context { margin-top: 26px; font-family: PM; font-size: 32px; color: var(--ink);
