@@ -3,6 +3,8 @@ stubbed; the shapes it sends/parses are the part we own)."""
 
 import os
 import unittest
+from pathlib import Path
+from tempfile import TemporaryDirectory
 from unittest import mock
 
 from congress import typefully
@@ -56,6 +58,57 @@ class TestResolveSocialSet(unittest.TestCase):
                     typefully.resolve_social_set_id("k")
 
 
+class TestUploadMedia(unittest.TestCase):
+    def _png(self, tmp):
+        p = Path(tmp) / "card.png"
+        p.write_bytes(b"\x89PNG-not-really")
+        return p
+
+    def test_three_step_happy_path(self):
+        with TemporaryDirectory() as tmp:
+            png = self._png(tmp)
+            responses = [
+                {"presigned_url": "https://s3/put-here", "media_id": "m1"},
+                {"status": "processing"},
+                {"status": "ready"},
+            ]
+            with mock.patch.object(typefully, "_request",
+                                   side_effect=responses) as req, \
+                 mock.patch.object(typefully, "_put_bytes") as put:
+                mid = typefully.upload_media("k", 5, png,
+                                             poll_interval_s=0)
+            self.assertEqual(mid, "m1")
+            slot_call = req.call_args_list[0].args
+            self.assertEqual(slot_call[1],
+                             typefully.media_upload_endpoint(5))
+            self.assertEqual(slot_call[3],
+                             {"file_name": "card.png",
+                              "content_type": "image/png"})
+            put.assert_called_once_with("https://s3/put-here",
+                                        b"\x89PNG-not-really", "image/png")
+
+    def test_error_status_raises(self):
+        with TemporaryDirectory() as tmp:
+            png = self._png(tmp)
+            responses = [{"upload_url": "https://s3/x", "id": 9},
+                         {"status": "error"}]
+            with mock.patch.object(typefully, "_request",
+                                   side_effect=responses), \
+                 mock.patch.object(typefully, "_put_bytes"):
+                with self.assertRaises(typefully.TypefullyError):
+                    typefully.upload_media("k", 5, png, poll_interval_s=0)
+
+    def test_missing_presigned_url_raises_before_upload(self):
+        with TemporaryDirectory() as tmp:
+            png = self._png(tmp)
+            with mock.patch.object(typefully, "_request",
+                                   return_value={"media_id": "m1"}), \
+                 mock.patch.object(typefully, "_put_bytes") as put:
+                with self.assertRaises(typefully.TypefullyError):
+                    typefully.upload_media("k", 5, png, poll_interval_s=0)
+                put.assert_not_called()
+
+
 class TestCreateDraft(unittest.TestCase):
     def test_unpublished_x_draft_payload(self):
         with mock.patch.object(typefully, "_request",
@@ -73,3 +126,16 @@ class TestCreateDraft(unittest.TestCase):
         flat = str(payload)
         self.assertNotIn("schedule", flat)
         self.assertNotIn("publish", flat)
+
+    def test_media_attached_at_top_level(self):
+        with mock.patch.object(typefully, "_request",
+                               return_value={"id": 1}) as req:
+            typefully.create_draft("k", "hi", set_id=5, media_ids=["m1"])
+        payload = req.call_args.args[3]
+        self.assertEqual(payload["media"], ["m1"])
+
+    def test_no_media_key_when_empty(self):
+        with mock.patch.object(typefully, "_request",
+                               return_value={"id": 1}) as req:
+            typefully.create_draft("k", "hi", set_id=5, media_ids=[])
+        self.assertNotIn("media", req.call_args.args[3])

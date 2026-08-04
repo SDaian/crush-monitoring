@@ -26,11 +26,12 @@ set by default; TYPEFULLY_SOCIAL_SET_ID pins one if the account ever has
 several), then POST the draft into it. Responses are parsed defensively —
 field names are matched against candidates, like analytics.py does.
 
-Image attachment is NOT automated yet (the v2 media upload is a three-step
-presigned-S3 flow — the least certain part of the surface). The card PNG is
-saved as a run artifact and referenced in a trailing note line the owner
-deletes after drag-dropping the image in Typefully — one manual step inside
-the approval they were doing anyway.
+Image attachment IS automated (``upload_media``): the v2 three-step flow —
+request an upload slot, PUT the bytes to the returned presigned S3 URL,
+poll until the media is processed — then the draft is created with the
+media id attached. If any step fails, the CLI falls back to the old manual
+path: the draft carries a trailing "[attach card: …]" note and the PNG is
+in the run's ``social-cards`` artifact for drag-dropping during approval.
 
 Auth: ``Authorization: Bearer <key>`` (v2 renamed the v1 X-API-KEY header).
 The key is never logged.
@@ -54,8 +55,18 @@ def drafts_endpoint(set_id) -> str:
     return f"{BASE}/social-sets/{set_id}/drafts"
 
 
+def media_upload_endpoint(set_id) -> str:
+    return f"{BASE}/social-sets/{set_id}/media/upload"
+
+
+def media_status_endpoint(set_id, media_id) -> str:
+    return f"{BASE}/social-sets/{set_id}/media/{media_id}"
+
+
 RETRIES = 3
 BACKOFF_S = 4.0
+MEDIA_POLL_TRIES = 15
+MEDIA_POLL_INTERVAL_S = 2.0
 
 
 class TypefullyError(RuntimeError):
@@ -121,7 +132,55 @@ def resolve_social_set_id(key: str):
                          "Typefully or set TYPEFULLY_SOCIAL_SET_ID")
 
 
-def create_draft(key: str, content: str, set_id=None) -> dict:
+def _put_bytes(url: str, data: bytes, content_type: str) -> None:
+    """PUT raw bytes to the presigned S3 URL. No auth header — the URL
+    itself carries the authorization (that's what presigned means)."""
+    req = urllib.request.Request(
+        url, data=data, method="PUT",
+        headers={"Content-Type": content_type},
+    )
+    try:
+        with urllib.request.urlopen(req, timeout=60):
+            pass
+    except (urllib.error.URLError, OSError) as exc:
+        raise TypefullyError(
+            f"presigned upload failed: {type(exc).__name__}") from None
+
+
+def upload_media(key: str, set_id, path,
+                 content_type: str = "image/png",
+                 poll_interval_s: float = MEDIA_POLL_INTERVAL_S):
+    """Upload a file and return its media id once Typefully has processed
+    it. Three steps: request an upload slot, PUT the bytes to the returned
+    presigned URL, poll status until "ready" ("error" or a timeout raise)."""
+    slot = _request("POST", media_upload_endpoint(set_id), key,
+                    {"file_name": path.name, "content_type": content_type})
+    if not isinstance(slot, dict):
+        raise TypefullyError("unexpected media/upload response shape")
+    url = (slot.get("presigned_url") or slot.get("upload_url")
+           or slot.get("url"))
+    media_id = slot.get("media_id") if slot.get("media_id") is not None \
+        else slot.get("id")
+    if not url or media_id is None:
+        raise TypefullyError("media/upload response missing presigned_url "
+                             "or media_id")
+    _put_bytes(url, path.read_bytes(), content_type)
+    for attempt in range(MEDIA_POLL_TRIES):
+        status_resp = _request(
+            "GET", media_status_endpoint(set_id, media_id), key)
+        status = str((status_resp or {}).get("status") or "").lower()
+        if status == "ready":
+            return media_id
+        if status == "error":
+            raise TypefullyError("media processing failed (status=error)")
+        if attempt < MEDIA_POLL_TRIES - 1:
+            time.sleep(poll_interval_s)
+    raise TypefullyError(
+        f"media not ready after {MEDIA_POLL_TRIES} status checks")
+
+
+def create_draft(key: str, content: str, set_id=None,
+                 media_ids: list | None = None) -> dict:
     """Create an UNPUBLISHED X draft. No schedule/publish fields are sent on
     purpose: an unscheduled draft sits in Drafts until a human queues or
     publishes it — the safest default the brief demands."""
@@ -132,5 +191,7 @@ def create_draft(key: str, content: str, set_id=None) -> dict:
             "x": {"enabled": True, "posts": [{"text": content}]},
         },
     }
+    if media_ids:
+        payload["media"] = list(media_ids)
     resp = _request("POST", drafts_endpoint(set_id), key, payload)
     return resp if isinstance(resp, dict) else {"raw": resp}
