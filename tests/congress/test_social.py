@@ -109,6 +109,38 @@ class TestPayloadAndCard(unittest.TestCase):
         self.assertIn("Apple Inc. &lt;Class A&gt;", html)
 
 
+class TestPortrait(unittest.TestCase):
+    def test_found_by_slug_and_extension(self):
+        with TemporaryDirectory() as tmp:
+            d = Path(tmp)
+            (d / "cleo-fields.png").write_bytes(b"png")
+            p = social.portrait_path("Cleo Fields", portraits_dir=d)
+            self.assertEqual(p, d / "cleo-fields.png")
+
+    def test_absent(self):
+        with TemporaryDirectory() as tmp:
+            self.assertIsNone(social.portrait_path(
+                "Cleo Fields", portraits_dir=Path(tmp)))
+
+    def test_card_with_portrait(self):
+        with TemporaryDirectory() as tmp:
+            img = Path(tmp) / "cleo-fields.jpg"
+            img.write_bytes(b"jpg")
+            p = social.filing_payload([T(member="Cleo Fields", filing="F1")])
+            p["portrait"] = img
+            html = social.card_html(p)
+            self.assertIn('class="card has-portrait"', html)
+            self.assertIn(img.as_uri(), html)
+            self.assertIn("Official portrait · public domain", html)
+
+    def test_card_without_portrait(self):
+        p = social.filing_payload([T(member="Somebody Obscure", filing="F2",
+                                     lo=1_000_001, hi=5_000_000)])
+        html = social.card_html(p)
+        self.assertIn('class="card "', html)
+        self.assertNotIn("class='portrait'", html.split("</style>")[1])
+
+
 class TestTickerStats(unittest.TestCase):
     def _trades(self):
         return [T(member="Nancy Pelosi", filing="A", ticker="TSM"),

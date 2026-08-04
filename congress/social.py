@@ -37,6 +37,10 @@ STATE_PATH = pipeline.REPO_ROOT / "congress" / "social_state.json"
 MEMBERS_DATA_DIR = pipeline.REPO_ROOT / "landing" / "src" / "data" / "members"
 TEMPLATE_DIR = pipeline.REPO_ROOT / "congress" / "social"
 COPY_TEMPLATE = TEMPLATE_DIR / "copy_template.txt"
+# Official portraits, committed per featured member as <slug>.jpg/.png
+# (they are U.S. government works — public domain). A member without a
+# file simply gets the no-portrait layout.
+PORTRAITS_DIR = TEMPLATE_DIR / "portraits"
 
 # Notability thresholds. BIG is the bracket FLOOR (amount_lo), so ">= $1M"
 # means the filer disclosed at least the $1,000,001+ band.
@@ -198,6 +202,7 @@ def filing_payload(rows: list[dict],
         "held_est": (context or {}).get("est"),
         "held_pct": (context or {}).get("pct"),
         "stats": stats,
+        "portrait": portrait_path(head.get("member", "")),
     }
 
 
@@ -208,6 +213,26 @@ def filing_payload(rows: list[dict],
 def _esc(s: str) -> str:
     return (str(s).replace("&", "&amp;").replace("<", "&lt;")
             .replace(">", "&gt;"))
+
+
+def portrait_path(member: str,
+                  portraits_dir: Path = PORTRAITS_DIR) -> Path | None:
+    """The member's committed official portrait, or None."""
+    from .landing_data import slugify
+    for ext in ("jpg", "jpeg", "png", "webp"):
+        p = portraits_dir / f"{slugify(member)}.{ext}"
+        if p.is_file():
+            return p
+    return None
+
+
+def _portrait_html(p: dict) -> str:
+    path = p.get("portrait")
+    if not path:
+        return ""
+    return (f"<div class='portrait'><img src='{Path(path).as_uri()}'>"
+            f"<div class='credit'>Official portrait · public domain</div>"
+            f"</div>")
 
 
 def _stats_html(p: dict) -> str:
@@ -251,6 +276,8 @@ def card_html(p: dict) -> str:
         "TICKER": _esc(p["ticker"]),
         "COMPANY": _esc(p.get("company") or ""),
         "STATS_HTML": _stats_html(p),
+        "CARD_CLASS": "has-portrait" if p.get("portrait") else "",
+        "PORTRAIT_HTML": _portrait_html(p),
         "EXTRA": (f"+ {p['extra_trades']} more "
                   f"trade{'s' if p['extra_trades'] != 1 else ''} in this filing"
                   if p["extra_trades"] else ""),
