@@ -531,15 +531,23 @@ def _cmd_social(args: argparse.Namespace) -> int:
                 check=True, capture_output=True, text=True,
             )
             if live:
-                # The card is attached by the owner in Typefully (see
-                # typefully.py's unverified-API note); the trailing marker
-                # line says which artifact to drag in, and is deleted there.
-                content = f"{copy}\n\n[attach card: {png_path.name}]"
-                draft = typefully.create_draft(key, content, set_id)
+                # Attach the card via the v2 media flow; if that fails, the
+                # draft still goes out, carrying a trailing marker line that
+                # tells the owner which artifact PNG to drag in during
+                # approval (the pre-automation manual path).
+                content, media_ids, card_note = copy, [], "card attached"
+                try:
+                    media_ids = [typefully.upload_media(key, set_id,
+                                                        png_path)]
+                except typefully.TypefullyError as exc:
+                    content = f"{copy}\n\n[attach card: {png_path.name}]"
+                    card_note = f"card upload failed ({exc}) — attach manually"
+                draft = typefully.create_draft(key, content, set_id,
+                                               media_ids=media_ids)
                 social.mark_drafted(state, rid, draft.get("id"))
                 summary(f"- ✅ {rid}: draft {draft.get('id')} — "
                         f"{payload['who']} {payload['action'].lower()} "
-                        f"{payload['ticker']}")
+                        f"{payload['ticker']} ({card_note})")
             else:
                 summary(f"- 📝 {rid}: rendered {png_path.name} "
                         f"({payload['who']} {payload['action'].lower()} "

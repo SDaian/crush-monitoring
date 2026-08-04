@@ -346,8 +346,11 @@ sites. Full details in `congress/README.md`. Conventions:
   are well-sourced but not doc-verified (`congress/typefully.py` — the docs
   site 403s the dev sandbox; v1 was retired for API keys, which the
   probe-before-write caught on the very first live run); a read-only probe
-  (GET /me) plus social-set resolution run before any write, and the media
-  API is not called at all (the owner drag-drops the card during approval).
+  (GET /me) plus social-set resolution run before any write. The card PNG
+  is attached automatically (`typefully.upload_media`: upload slot →
+  presigned-S3 PUT → status poll); if that fails the draft still goes out
+  with an "[attach card: …]" note and the owner drag-drops the PNG from the
+  run's `social-cards` artifact during approval.
   Dedup state is `congress/social_state.json` (chamber:filing_id → draft),
   committed by the Action; a failed record stays out of the state so it
   retries. `--seed` marked the 163-filing backlog as seen at ship time —
