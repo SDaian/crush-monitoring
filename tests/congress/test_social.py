@@ -219,6 +219,25 @@ class TestCopy(unittest.TestCase):
         self.assertLessEqual(social._x_len(text), len(text))
 
 
+class TestCliParser(unittest.TestCase):
+    def test_empty_social_cap_env_falls_back_to_default(self):
+        # The workflow always exports SOCIAL_CAP from a repo variable; unset
+        # it arrives as "" and int("") crashed the whole CLI (every
+        # subcommand — the parser is built before dispatch).
+        import os
+        from congress import cli
+        old = os.environ.get("SOCIAL_CAP")
+        os.environ["SOCIAL_CAP"] = ""
+        try:
+            args = cli.build_parser().parse_args(["social", "--dry-run"])
+            self.assertEqual(args.cap, social.DEFAULT_CAP)
+        finally:
+            if old is None:
+                del os.environ["SOCIAL_CAP"]
+            else:
+                os.environ["SOCIAL_CAP"] = old
+
+
 class TestState(unittest.TestCase):
     def test_round_trip_and_mark(self):
         with TemporaryDirectory() as d:
