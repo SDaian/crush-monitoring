@@ -306,7 +306,12 @@ sites. Full details in `congress/README.md`. Conventions:
     the email can never drift. The one deliberate difference: the email caps
     disclosures at `MAX_DISCLOSURES` because clients clip long messages, while
     the page lists **every** one — that is what the email's "…and N more"
-    links. If you add a path that `main()` writes, **stub it in
+    links. **Bond/muni filings are a count, not rows, on BOTH surfaces**
+    (owner's call — one senator's muni ladder was drowning the signal): the
+    report lists stock/option disclosures only, split with the same
+    `landing_data.is_bond` predicate as the home-page stats, and ticker-less
+    debt collapses to "…plus N bond & muni filings" linking the tracker
+    (which still carries the full record via its asset-class filter). If you add a path that `main()` writes, **stub it in
     `TestMainDelivery`** — the suite calls `main()` for real and will
     otherwise overwrite the committed file.
   - **Report archive = `/report/<date>` + `/report/archive`.** `main()` also

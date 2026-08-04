@@ -36,7 +36,7 @@ class TestBuildReport(unittest.TestCase):
         md = self.r["markdown"]
         self.assertIn("⭐ Featured stocks", md)
         self.assertIn("🔔 Signals overnight", md)
-        self.assertIn("🏛 New congressional disclosures", md)
+        self.assertIn("🏛 New stock & option disclosures", md)
         self.assertIn("Not investment advice", md)
 
     def test_html_body(self):
@@ -69,7 +69,44 @@ class TestBuildReport(unittest.TestCase):
         r = build_report([], AI, [], prev_ratings=dict(self.r["ratings"]),
                          today_iso="2026-07-07")
         self.assertIn("No new signals or rating changes", r["markdown"])
-        self.assertIn("No new disclosures", r["markdown"])
+        self.assertIn("No new stock/option disclosures", r["markdown"])
+        self.assertNotIn("bond & muni", r["markdown"])  # no zero-count line
+
+    def test_bond_filings_collapse_to_a_count(self):
+        # Ticker-less debt rows drowned the report (one senator's muni
+        # ladder is a dozen lines) — they collapse to a count that links
+        # the tracker, on every surface: markdown, email, and payload.
+        bonds = [{"member": "Rick Scott", "party": "R", "ticker": None,
+                  "asset": f"Muni Bond {i}", "asset_type": "Municipal Security",
+                  "type": "sell", "amount_label": "$100,001 - $250,000",
+                  "tx_date": "2026-07-03", "filing_date": "2026-07-06"}
+                 for i in range(3)]
+        r = build_report(TRADES + bonds, AI, [],
+                         prev_ratings=dict(self.r["ratings"]),
+                         today_iso="2026-07-07")
+        md = r["markdown"]
+        self.assertNotIn("Muni Bond", md)               # no bond rows
+        self.assertIn("plus 3 bond & muni filings", md)  # the count line
+        self.assertIn("Nancy Pelosi", md)                # equities intact
+        self.assertEqual(r["counts"]["disclosures"], 1)  # stocks only
+        self.assertEqual(r["counts"]["bonds"], 3)
+        self.assertEqual(r["payload"]["bondCount"], 3)
+        self.assertEqual(len(r["payload"]["disclosures"]), 1)
+        self.assertIn("plus 3 bond &amp; muni filings", r["html"])
+        self.assertNotIn("Muni Bond", r["html"])
+
+    def test_tickered_rows_never_counted_as_bonds(self):
+        # is_bond must stay narrow: a tickered row is never a "bond" even
+        # with a bond-ish asset type.
+        odd = [{"member": "Somebody", "party": "D", "ticker": "BOND",
+                "asset": "PIMCO Active Bond ETF", "asset_type": "Municipal Security",
+                "type": "buy", "amount_label": "$1,001 - $15,000",
+                "tx_date": "2026-07-03", "filing_date": "2026-07-06"}]
+        r = build_report(TRADES + odd, AI, [],
+                         prev_ratings=dict(self.r["ratings"]),
+                         today_iso="2026-07-07")
+        self.assertEqual(r["counts"]["bonds"], 0)
+        self.assertIn("**BOND** buy", r["markdown"])
 
     def test_ticker_deep_links(self):
         # Tickers with a public page link back into the site, UTM-tagged so
