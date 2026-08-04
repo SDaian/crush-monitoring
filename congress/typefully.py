@@ -1,45 +1,58 @@
-"""Typefully API client — the publishing target for social drafts.
+"""Typefully API v2 client — the publishing target for social drafts.
 
 Why Typefully (owner's decision, recorded): drafts created via API sit
 UNPUBLISHED until a human approves them in the Typefully UI, which is the
 approval gate the owner wants; posting via the X API directly was ruled out
 (paid per-post for new developers since 2026, and no approval step).
 
-UNVERIFIED-API WARNING: the sandbox this was written in cannot reach
-Typefully's documentation (their docs endpoint 403s our egress proxy), so
-the endpoint shapes below are the widely-known public surface, NOT verified
-against today's docs. Every shape is isolated in the constants right here.
-Three safety layers compensate:
+This is the **v2** surface: the first live run's probe came back
+``HTTP 403: API v1 access via API keys is disabled`` — exactly the failure
+mode the probe-before-write design exists to catch. The v2 shapes below come
+from Typefully's published migration guidance and a working open-source v2
+client (the docs site itself still 403s our egress proxy), so treat them as
+well-sourced but not doc-verified. The same three safety layers hold:
 
 1. The pipeline defaults to DRY-RUN; live drafting requires both the
    TYPEFULLY_API_KEY secret and an explicit SOCIAL_LIVE=true repo variable.
-2. Before drafting, ``probe()`` makes a read-only call; if it fails, the
-   run aborts before any write.
-3. Even a successful draft is unpublished by design — nothing goes to X
-   without the owner pressing publish/queue in Typefully.
+2. Before drafting, ``probe()`` makes a read-only call (GET /me); if it
+   fails, the run aborts before any write.
+3. Even a successful draft is unpublished by design — no schedule/publish
+   fields are ever sent, so nothing goes to X without the owner pressing
+   publish/queue in Typefully.
 
-Image attachment is NOT automated yet for the same reason (the media-upload
-endpoint is the least certain part of the surface). The card PNG is saved as
-a run artifact and referenced in a trailing note line the owner deletes
-after drag-dropping the image in Typefully — one manual step inside the
-approval they were doing anyway. Wire the media endpoint once its docs have
-been read from a machine that can reach them.
+v2 scopes drafts under a **social set** (a group of connected accounts), so
+drafting is a two-step: GET /social-sets to resolve the set id (the first
+set by default; TYPEFULLY_SOCIAL_SET_ID pins one if the account ever has
+several), then POST the draft into it. Responses are parsed defensively —
+field names are matched against candidates, like analytics.py does.
 
-Auth: ``X-API-KEY: Bearer <key>`` per Typefully's published examples. The
-key is never logged.
+Image attachment is NOT automated yet (the v2 media upload is a three-step
+presigned-S3 flow — the least certain part of the surface). The card PNG is
+saved as a run artifact and referenced in a trailing note line the owner
+deletes after drag-dropping the image in Typefully — one manual step inside
+the approval they were doing anyway.
+
+Auth: ``Authorization: Bearer <key>`` (v2 renamed the v1 X-API-KEY header).
+The key is never logged.
 """
 
 from __future__ import annotations
 
 import json
+import os
 import time
 import urllib.error
 import urllib.request
 
-BASE = "https://api.typefully.com/v1"
-DRAFTS_ENDPOINT = f"{BASE}/drafts/"
+BASE = "https://api.typefully.com/v2"
 # Read-only endpoint used to verify auth + reachability before any write.
-PROBE_ENDPOINT = f"{BASE}/drafts/recently-scheduled/"
+PROBE_ENDPOINT = f"{BASE}/me"
+SOCIAL_SETS_ENDPOINT = f"{BASE}/social-sets"
+
+
+def drafts_endpoint(set_id) -> str:
+    return f"{BASE}/social-sets/{set_id}/drafts"
+
 
 RETRIES = 3
 BACKOFF_S = 4.0
@@ -53,7 +66,7 @@ def _request(method: str, url: str, key: str, payload: dict | None = None):
     data = json.dumps(payload).encode("utf-8") if payload is not None else None
     req = urllib.request.Request(
         url, data=data, method=method,
-        headers={"X-API-KEY": f"Bearer {key}",
+        headers={"Authorization": f"Bearer {key}",
                  "Content-Type": "application/json"},
     )
     last_err: Exception | None = None
@@ -82,8 +95,42 @@ def probe(key: str) -> bool:
     return True
 
 
-def create_draft(key: str, content: str) -> dict:
-    """Create an UNPUBLISHED draft. No schedule fields are sent on purpose:
-    per Typefully's model an unscheduled draft sits in Drafts until a human
-    queues or publishes it — the safest default the brief demands."""
-    return _request("POST", DRAFTS_ENDPOINT, key, {"content": content})
+def _extract_sets(resp) -> list:
+    """The /social-sets response shape isn't doc-verified: accept either a
+    bare list or a list under a conventional wrapper key."""
+    if isinstance(resp, list):
+        return resp
+    if isinstance(resp, dict):
+        for k in ("data", "results", "items", "social_sets"):
+            if isinstance(resp.get(k), list):
+                return resp[k]
+    return []
+
+
+def resolve_social_set_id(key: str):
+    """The set drafts land in: TYPEFULLY_SOCIAL_SET_ID when set, else the
+    account's first (usually only) social set."""
+    pinned = os.environ.get("TYPEFULLY_SOCIAL_SET_ID", "").strip()
+    if pinned:
+        return pinned
+    sets = _extract_sets(_request("GET", SOCIAL_SETS_ENDPOINT, key))
+    for s in sets:
+        if isinstance(s, dict) and s.get("id") is not None:
+            return s["id"]
+    raise TypefullyError("no social set found — connect an account in "
+                         "Typefully or set TYPEFULLY_SOCIAL_SET_ID")
+
+
+def create_draft(key: str, content: str, set_id=None) -> dict:
+    """Create an UNPUBLISHED X draft. No schedule/publish fields are sent on
+    purpose: an unscheduled draft sits in Drafts until a human queues or
+    publishes it — the safest default the brief demands."""
+    if set_id is None:
+        set_id = resolve_social_set_id(key)
+    payload = {
+        "platforms": {
+            "x": {"enabled": True, "posts": [{"text": content}]},
+        },
+    }
+    resp = _request("POST", drafts_endpoint(set_id), key, payload)
+    return resp if isinstance(resp, dict) else {"raw": resp}
