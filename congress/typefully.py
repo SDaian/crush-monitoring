@@ -132,23 +132,45 @@ def resolve_social_set_id(key: str):
                          "Typefully or set TYPEFULLY_SOCIAL_SET_ID")
 
 
-def _put_bytes(url: str, data: bytes, content_type: str) -> None:
-    """PUT raw bytes to the presigned S3 URL. No auth header — the URL
-    itself carries the authorization (that's what presigned means)."""
+def _put_once(url: str, data: bytes, content_type: str) -> None:
+    # An explicit (possibly empty) Content-Type always — urllib would
+    # otherwise silently add application/x-www-form-urlencoded, which S3
+    # folds into the signature check.
     req = urllib.request.Request(
         url, data=data, method="PUT",
         headers={"Content-Type": content_type},
     )
+    with urllib.request.urlopen(req, timeout=60):
+        pass
+
+
+def _put_bytes(url: str, data: bytes, content_type: str) -> None:
+    """PUT raw bytes to the presigned S3 URL. No auth header — the URL
+    itself carries the authorization (that's what presigned means).
+
+    S3 folds the Content-Type header into the signature, and whether the
+    presigner included it isn't observable from the URL. A live run showed
+    Typefully signs WITHOUT it (sending image/png got SignatureDoesNotMatch
+    with image/png right there in S3's computed string-to-sign), so a
+    signature rejection is retried once with the header suppressed."""
+    last: urllib.error.HTTPError | None = None
     try:
-        with urllib.request.urlopen(req, timeout=60):
-            pass
-    except urllib.error.HTTPError as exc:
+        for ct in (content_type, ""):
+            try:
+                _put_once(url, data, ct)
+                return
+            except urllib.error.HTTPError as exc:
+                body = exc.read().decode("utf-8", errors="replace")
+                exc.msg = body  # keep for the final error message
+                last = exc
+                if not (exc.code == 403 and "SignatureDoesNotMatch" in body):
+                    break
         # The S3 error XML says WHY the request was rejected — essential
         # for debugging a shape the docs sandbox cannot verify. Never log
         # the URL itself (it embeds the signing credentials).
-        body = exc.read().decode("utf-8", errors="replace")[:300]
         raise TypefullyError(
-            f"presigned upload failed: HTTP {exc.code}: {body}") from None
+            f"presigned upload failed: HTTP {last.code}: "
+            f"{last.msg[:1000]}") from None
     except (urllib.error.URLError, OSError) as exc:
         raise TypefullyError(
             f"presigned upload failed: {type(exc).__name__}") from None

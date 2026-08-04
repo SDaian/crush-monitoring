@@ -109,6 +109,48 @@ class TestUploadMedia(unittest.TestCase):
                 put.assert_not_called()
 
 
+class TestPutBytes(unittest.TestCase):
+    """The signature-mismatch retry: S3 folds Content-Type into the
+    signature and Typefully signs without it, so a SignatureDoesNotMatch
+    on the typed PUT must retry once with the header suppressed."""
+
+    @staticmethod
+    def _sig_error():
+        import io
+        import urllib.error
+        return urllib.error.HTTPError(
+            "https://s3/x", 403, "Forbidden", {},
+            io.BytesIO(b"<Error><Code>SignatureDoesNotMatch</Code></Error>"))
+
+    def test_retries_without_content_type_on_signature_mismatch(self):
+        calls = []
+
+        def fake_urlopen(req, timeout=None):
+            calls.append(req.get_header("Content-type"))
+            if len(calls) == 1:
+                raise self._sig_error()
+            return mock.MagicMock(__enter__=mock.MagicMock(),
+                                  __exit__=mock.MagicMock(return_value=False))
+
+        with mock.patch.object(typefully.urllib.request, "urlopen",
+                               side_effect=fake_urlopen):
+            typefully._put_bytes("https://s3/x", b"png", "image/png")
+        self.assertEqual(calls, ["image/png", ""])
+
+    def test_non_signature_error_not_retried(self):
+        import io
+        import urllib.error
+        err = urllib.error.HTTPError(
+            "https://s3/x", 400, "Bad Request", {},
+            io.BytesIO(b"<Error><Code>EntityTooLarge</Code></Error>"))
+        with mock.patch.object(typefully.urllib.request, "urlopen",
+                               side_effect=err) as up:
+            with self.assertRaises(typefully.TypefullyError) as ctx:
+                typefully._put_bytes("https://s3/x", b"png", "image/png")
+            self.assertEqual(up.call_count, 1)
+            self.assertIn("EntityTooLarge", str(ctx.exception))
+
+
 class TestCreateDraft(unittest.TestCase):
     def test_unpublished_x_draft_payload(self):
         with mock.patch.object(typefully, "_request",
