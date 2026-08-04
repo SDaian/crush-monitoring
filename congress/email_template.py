@@ -178,15 +178,15 @@ def signals_block(signals: list[dict], flips: list[dict]) -> str:
 
 
 def disclosures_block(disclosures: list[dict], extra: int,
-                      report_url: str = "", bond_count: int = 0,
-                      tracker_url: str = "") -> str:
+                      report_url: str = "", bond_count: int = 0) -> str:
     """Recent stock/option disclosures as report lines (date · who ·
     TICKER …). Bond/muni filings are deliberately a COUNT, not rows —
-    they drowned the signal (one senator's muni ladder is a dozen lines)
-    and the tracker carries the full record."""
+    they drowned the signal (one senator's muni ladder is a dozen lines).
+    The /report page shows the whole undivided picture, so that is where
+    the count links."""
     if not disclosures:
         return (_empty("No new stock/option disclosures in this window.")
-                + _bond_note(bond_count, tracker_url))
+                + _bond_note(bond_count, report_url))
     items = []
     for d in disclosures:
         items.append(
@@ -204,19 +204,19 @@ def disclosures_block(disclosures: list[dict], extra: int,
                 "on the site →</a>") if report_url else f"…and {extra} more."
         html += (f"<p style='margin:8px 0 0;{_f('12px', '1.5', SANS)}color:{INK_SOFT}'>"
                  f"<i>…and {extra} more · </i>{more}</p>")
-    return html + _bond_note(bond_count, tracker_url)
+    return html + _bond_note(bond_count, report_url)
 
 
-def _bond_note(bond_count: int, tracker_url: str) -> str:
+def _bond_note(bond_count: int, report_url: str) -> str:
     if not bond_count:
         return ""
     s = "s" if bond_count != 1 else ""
-    link = (f"<a href='{tracker_url}' style='color:{INK_SOFT};"
-            "text-decoration:underline'>tracker</a>"
-            if tracker_url else "tracker")
+    link = (f"<a href='{report_url}' style='color:{INK_SOFT};"
+            "text-decoration:underline'>see the full report</a>"
+            if report_url else "see the full report")
     return (f"<p style='margin:8px 0 0;{_f('12px', '1.5', SANS)}"
             f"color:{INK_SOFT}'>…plus {bond_count} bond &amp; muni "
-            f"filing{s} — kept in the record, browsable on the {link}.</p>")
+            f"filing{s} — {link}.</p>")
 
 
 def _prettify_slug(slug: str) -> str:
@@ -392,16 +392,17 @@ def render_html(*, date_label: str, disclaimer: str, scorecard: list[dict],
                 standalone: bool = True) -> str:
     """The daily trade/scorecard digest email (traffic is a separate email)."""
     pad = PAD if standalone else PAD_EMBED
+    # Disclosures lead — they are the product; the scorecard supports.
     body_rows = "".join([
+        _section("Congress", f"New disclosures "
+                 f"<span style='font-weight:400;font-size:13px;color:{INK_SOFT}'>"
+                 f"(filed since {_esc(cutoff)})</span>",
+                 disclosures_block(disclosures, extra_disclosures,
+                                   report_url, bond_count), pad),
         _section("Featured stocks", "Technical read",
                  scorecard_table(scorecard), pad),
         _section("Overnight", "Signals &amp; rating changes",
                  signals_block(signals, flips), pad),
-        _section("Congress", f"New stock &amp; option disclosures "
-                 f"<span style='font-weight:400;font-size:13px;color:{INK_SOFT}'>"
-                 f"(filed since {_esc(cutoff)})</span>",
-                 disclosures_block(disclosures, extra_disclosures,
-                                   report_url, bond_count, tracker_url), pad),
         # Owner's ops note: featured annual reports we could not parse.
         # Rendered only when gapped, so a clean day stays clean.
         (_section("Coverage", "Holdings we could not parse",

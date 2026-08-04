@@ -36,7 +36,7 @@ class TestBuildReport(unittest.TestCase):
         md = self.r["markdown"]
         self.assertIn("⭐ Featured stocks", md)
         self.assertIn("🔔 Signals overnight", md)
-        self.assertIn("🏛 New stock & option disclosures", md)
+        self.assertIn("🏛 New disclosures", md)
         self.assertIn("Not investment advice", md)
 
     def test_html_body(self):
@@ -73,9 +73,10 @@ class TestBuildReport(unittest.TestCase):
         self.assertNotIn("bond & muni", r["markdown"])  # no zero-count line
 
     def test_bond_filings_collapse_to_a_count(self):
-        # Ticker-less debt rows drowned the report (one senator's muni
-        # ladder is a dozen lines) — they collapse to a count that links
-        # the tracker, on every surface: markdown, email, and payload.
+        # Ticker-less debt rows drowned the email (one senator's muni
+        # ladder is a dozen lines) — the email collapses them to a count
+        # that links the /report page, which shows the WHOLE undivided
+        # picture (payload carries every row, bonds included).
         bonds = [{"member": "Rick Scott", "party": "R", "ticker": None,
                   "asset": f"Muni Bond {i}", "asset_type": "Municipal Security",
                   "type": "sell", "amount_label": "$100,001 - $250,000",
@@ -85,15 +86,26 @@ class TestBuildReport(unittest.TestCase):
                          prev_ratings=dict(self.r["ratings"]),
                          today_iso="2026-07-07")
         md = r["markdown"]
-        self.assertNotIn("Muni Bond", md)               # no bond rows
+        self.assertNotIn("Muni Bond", md)               # no bond rows in md
         self.assertIn("plus 3 bond & muni filings", md)  # the count line
+        self.assertIn("see the full report", md)         # …linking /report
         self.assertIn("Nancy Pelosi", md)                # equities intact
-        self.assertEqual(r["counts"]["disclosures"], 1)  # stocks only
+        self.assertEqual(r["counts"]["disclosures"], 4)  # the whole window
         self.assertEqual(r["counts"]["bonds"], 3)
         self.assertEqual(r["payload"]["bondCount"], 3)
-        self.assertEqual(len(r["payload"]["disclosures"]), 1)
+        # The page payload is the full picture; the email showed 1 row.
+        self.assertEqual(len(r["payload"]["disclosures"]), 4)
+        self.assertEqual(r["payload"]["emailShown"], 1)
         self.assertIn("plus 3 bond &amp; muni filings", r["html"])
+        self.assertIn("see the full report", r["html"])
         self.assertNotIn("Muni Bond", r["html"])
+
+    def test_disclosures_lead_the_email(self):
+        html = self.r["html"]
+        self.assertLess(html.index("New disclosures"),
+                        html.index("Technical read"))
+        self.assertIn("New disclosures",
+                      self.r["markdown"].split("Featured stocks")[0])
 
     def test_tickered_rows_never_counted_as_bonds(self):
         # is_bond must stay narrow: a tickered row is never a "bond" even
