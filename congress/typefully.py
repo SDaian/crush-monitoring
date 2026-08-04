@@ -142,6 +142,13 @@ def _put_bytes(url: str, data: bytes, content_type: str) -> None:
     try:
         with urllib.request.urlopen(req, timeout=60):
             pass
+    except urllib.error.HTTPError as exc:
+        # The S3 error XML says WHY the request was rejected — essential
+        # for debugging a shape the docs sandbox cannot verify. Never log
+        # the URL itself (it embeds the signing credentials).
+        body = exc.read().decode("utf-8", errors="replace")[:300]
+        raise TypefullyError(
+            f"presigned upload failed: HTTP {exc.code}: {body}") from None
     except (urllib.error.URLError, OSError) as exc:
         raise TypefullyError(
             f"presigned upload failed: {type(exc).__name__}") from None
@@ -155,6 +162,8 @@ def upload_media(key: str, set_id, path,
     presigned URL, poll status until "ready" ("error" or a timeout raise)."""
     slot = _request("POST", media_upload_endpoint(set_id), key,
                     {"file_name": path.name, "content_type": content_type})
+    if isinstance(slot, dict) and isinstance(slot.get("data"), dict):
+        slot = slot["data"]  # tolerate a conventional wrapper
     if not isinstance(slot, dict):
         raise TypefullyError("unexpected media/upload response shape")
     url = (slot.get("presigned_url") or slot.get("upload_url")
@@ -162,8 +171,9 @@ def upload_media(key: str, set_id, path,
     media_id = slot.get("media_id") if slot.get("media_id") is not None \
         else slot.get("id")
     if not url or media_id is None:
+        # Keys only, never values — the presigned URL embeds credentials.
         raise TypefullyError("media/upload response missing presigned_url "
-                             "or media_id")
+                             f"or media_id (keys: {sorted(slot)})")
     _put_bytes(url, path.read_bytes(), content_type)
     for attempt in range(MEDIA_POLL_TRIES):
         status_resp = _request(
