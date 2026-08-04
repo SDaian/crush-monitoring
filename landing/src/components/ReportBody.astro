@@ -25,7 +25,78 @@ const fmtDate = (iso: string | null) =>
     : "—";
 ---
 
-<!-- Featured stocks -->
+<!-- Disclosures — they lead: they are the product; the
+     scorecard supports. Same order as the email. -->
+<!-- Disclosures -->
+    <section class="mx-auto max-w-[75rem] px-[5vw] pb-[7vh]">
+      <div class="section-head">
+        <h2 class="section-title whitespace-nowrap">New disclosures</h2>
+        <span class="eyebrow">Filed since {r.cutoff}</span>
+      </div>
+      {
+        truncated > 0 && (
+          <p class="fineprint mt-4 max-w-[80ch]">
+            The email highlights the {r.emailShown} most recent stock &amp;
+            option filings; the whole picture — all{" "}
+            <b class="text-ink">{r.disclosures.length}</b>, bonds included —
+            is below.
+          </p>
+        )
+      }
+      {
+        r.disclosures?.length ? (
+          <div class="mt-7">
+            {r.disclosures.map((d: any) => (
+              <div class="drow">
+                <div class="dwho">
+                  {d.member}
+                  <small>
+                    {d.party ? `${d.party} · ` : ""}filed {fmtDate(d.filingDate)}
+                    {d.txDate ? ` · traded ${fmtDate(d.txDate)}` : ""}
+                  </small>
+                </div>
+                <div class="dtick">
+                  {d.ticker ? <b>{d.ticker}</b> : <span class="text-ink-soft">—</span>}
+                  <small>{d.asset}</small>
+                </div>
+                <div
+                  class={`dside ${d.type === "buy" ? "text-buy" : d.type === "sell" ? "text-sell" : "text-ink-soft"}`}
+                >
+                  {d.type}
+                </div>
+                <div class="damt">
+                  {d.amount}
+                  {d.sourceUrl && (
+                    <a href={d.sourceUrl} rel="nofollow" class="dsrc">
+                      filing ↗
+                    </a>
+                  )}
+                </div>
+              </div>
+            ))}
+          </div>
+        ) : (
+          <p class="fineprint mt-6">
+            No new stock/option disclosures in this window.
+          </p>
+        )
+      }
+      <p class="fineprint mt-6 max-w-[80ch]">
+        Disclosures arrive 30–45 days after the trade and amounts are the
+        brackets as filed, never exact. Browse the whole record on the <a
+          href="/tracker"
+          class="underline underline-offset-2 hover:text-ink">tracker</a
+        >, or by <a
+          href="/tickers"
+          class="underline underline-offset-2 hover:text-ink">stock</a
+        > and <a
+          href="/members"
+          class="underline underline-offset-2 hover:text-ink">member</a
+        >.
+      </p>
+    </section>
+
+    <!-- Featured stocks -->
     <section class="mx-auto max-w-[75rem] px-[5vw] pb-[7vh]">
       <div class="section-head">
         <h2 class="section-title whitespace-nowrap">Featured stocks</h2>
@@ -118,86 +189,7 @@ const fmtDate = (iso: string | null) =>
       }
     </section>
 
-    <!-- Disclosures -->
-    <section class="mx-auto max-w-[75rem] px-[5vw] pb-[7vh]">
-      <div class="section-head">
-        <h2 class="section-title whitespace-nowrap">
-          New stock &amp; option disclosures
-        </h2>
-        <span class="eyebrow">Filed since {r.cutoff}</span>
-      </div>
-      {
-        truncated > 0 && (
-          <p class="fineprint mt-4 max-w-[80ch]">
-            The email lists the {r.emailShown} most recent of these; all{" "}
-            <b class="text-ink">{r.disclosures.length}</b> are below.
-          </p>
-        )
-      }
-      {
-        r.disclosures?.length ? (
-          <div class="mt-7">
-            {r.disclosures.map((d: any) => (
-              <div class="drow">
-                <div class="dwho">
-                  {d.member}
-                  <small>
-                    {d.party ? `${d.party} · ` : ""}filed {fmtDate(d.filingDate)}
-                    {d.txDate ? ` · traded ${fmtDate(d.txDate)}` : ""}
-                  </small>
-                </div>
-                <div class="dtick">
-                  {d.ticker ? <b>{d.ticker}</b> : <span class="text-ink-soft">—</span>}
-                  <small>{d.asset}</small>
-                </div>
-                <div
-                  class={`dside ${d.type === "buy" ? "text-buy" : d.type === "sell" ? "text-sell" : "text-ink-soft"}`}
-                >
-                  {d.type}
-                </div>
-                <div class="damt">
-                  {d.amount}
-                  {d.sourceUrl && (
-                    <a href={d.sourceUrl} rel="nofollow" class="dsrc">
-                      filing ↗
-                    </a>
-                  )}
-                </div>
-              </div>
-            ))}
-          </div>
-        ) : (
-          <p class="fineprint mt-6">
-            No new stock/option disclosures in this window.
-          </p>
-        )
-      }
-      {
-        (r.bondCount ?? 0) > 0 && (
-          <p class="fineprint mt-4 max-w-[80ch]">
-            …plus <b class="text-ink">{r.bondCount}</b> bond &amp; muni filing{r.bondCount !== 1 ? "s" : ""}
-            — kept in the record, browsable on the{" "}
-            <a
-              href="/tracker"
-              class="underline underline-offset-2 hover:text-ink">tracker</a
-            >.
-          </p>
-        )
-      }
-      <p class="fineprint mt-6 max-w-[80ch]">
-        Disclosures arrive 30–45 days after the trade and amounts are the
-        brackets as filed, never exact. Browse the whole record on the <a
-          href="/tracker"
-          class="underline underline-offset-2 hover:text-ink">tracker</a
-        >, or by <a
-          href="/tickers"
-          class="underline underline-offset-2 hover:text-ink">stock</a
-        > and <a
-          href="/members"
-          class="underline underline-offset-2 hover:text-ink">member</a
-        >.
-      </p>
-    </section>
+
 
 
 <style>

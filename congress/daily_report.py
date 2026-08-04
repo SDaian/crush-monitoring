@@ -210,15 +210,15 @@ def build_report(trades: list[dict], ai_tickers: dict, new_signals: list[dict],
     cutoff = (date.fromisoformat(today_iso) -
               timedelta(days=DISCLOSURE_WINDOW_DAYS)).isoformat()
     window = [t for t in trades if (t.get("filing_date") or "") >= cutoff]
-    # The report is a headline surface: stock/option rows only (owner's
+    window.sort(key=lambda t: (t.get("filing_date", ""), t.get("tx_date", "")),
+                reverse=True)
+    # The EMAIL is a headline surface: stock/option rows only (owner's
     # call — one senator's muni-bond ladder was drowning the signal).
-    # Bond/muni filings stay in the record and collapse to a count that
-    # links the tracker, same de-emphasis rule as the home-page stats.
+    # Bond/muni filings collapse to a count there, linking the /report
+    # page — which shows the whole undivided picture.
     from .landing_data import is_bond
     recent = [t for t in window if not is_bond(t)]
     bond_count = len(window) - len(recent)
-    recent.sort(key=lambda t: (t.get("filing_date", ""), t.get("tx_date", "")),
-                reverse=True)
     disc_lines, disc_data = [], []
     for t in recent[:MAX_DISCLOSURES]:
         party = PARTY.get(t.get("party"))
@@ -231,7 +231,7 @@ def build_report(trades: list[dict], ai_tickers: dict, new_signals: list[dict],
             "filing_date": t.get("filing_date", "?"), "who": who, "name": name,
             "type": t.get("type", "?"), "amount": t.get("amount_label", "—"),
         })
-    disclosures_md = "## 🏛 New stock & option disclosures " \
+    disclosures_md = "## 🏛 New disclosures " \
         f"(filed since {cutoff})\n\n"
     if disc_lines:
         disclosures_md += "\n".join(disc_lines) + "\n"
@@ -242,8 +242,8 @@ def build_report(trades: list[dict], ai_tickers: dict, new_signals: list[dict],
     if bond_count:
         disclosures_md += (
             f"\n_…plus {bond_count} bond & muni filing"
-            f"{'s' if bond_count != 1 else ''} — kept in the record, "
-            f"browsable on the [tracker]({TRACKER_URL})._\n")
+            f"{'s' if bond_count != 1 else ''} — "
+            f"[see the full report]({report_url(today_iso)})._\n")
 
     # --- Holdings coverage (owner's ops note; only rendered when gapped) ---
     coverage_md = ""
@@ -252,17 +252,18 @@ def build_report(trades: list[dict], ai_tickers: dict, new_signals: list[dict],
                        + "\n".join(f"- {g}" for g in coverage_gaps)
                        + "\n\n")
 
+    # Disclosures lead — they are the product; the scorecard supports.
     markdown = (
         f"_{DISCLAIMER}_\n\n"
-        f"{scorecard}\n\n{signals_md}\n{disclosures_md}{coverage_md}"
+        f"{disclosures_md}\n{scorecard}\n\n{signals_md}{coverage_md}"
         f"---\n_Full tracker: [Featured stocks & trades]({TRACKER_URL})._"
     )
 
     # --- HTML email body (hand-authored, bulletproof template) ---
     date_label = date.fromisoformat(today_iso).strftime("%A, %B %-d, %Y")
     preheader = (
-        f"{len(rows)} featured reads · {len(sig_lines) + len(flips)} overnight "
-        f"changes · {len(recent)} new stock disclosures")
+        f"{len(window)} new disclosures · {len(rows)} featured reads · "
+        f"{len(sig_lines) + len(flips)} overnight changes")
     _email_kw = dict(
         date_label=date_label, disclaimer=DISCLAIMER, scorecard=sc_rows,
         signals=sig_data, flips=flip_data, disclosures=disc_data,
@@ -280,13 +281,13 @@ def build_report(trades: list[dict], ai_tickers: dict, new_signals: list[dict],
     html_embed = email_template.render_html(**_email_kw, standalone=False)
 
     counts = {"tickers": len(rows), "new_signals": len(sig_lines),
-              "flips": len(flips), "disclosures": len(recent),
+              "flips": len(flips), "disclosures": len(window),
               "bonds": bond_count}
     # The /report page renders from this same structure, so the web version and
-    # the email can never drift. It carries EVERY stock/option disclosure in
-    # the window (the email caps at MAX_DISCLOSURES because clients clip long
-    # messages); bond/muni filings are a count on both surfaces, linking the
-    # tracker.
+    # the email can never drift. The page is the WHOLE undivided picture —
+    # every filing in the window, bonds included; the email shows stock/option
+    # rows (capped at MAX_DISCLOSURES because clients clip long messages) and
+    # collapses bonds to a count that links here.
     payload = {
         "date": today_iso,
         "dateLabel": date_label,
@@ -305,7 +306,7 @@ def build_report(trades: list[dict], ai_tickers: dict, new_signals: list[dict],
             "type": t.get("type", "?"),
             "amount": t.get("amount_label", "—"),
             "sourceUrl": t.get("source_url"),
-        } for t in recent],
+        } for t in window],
         "bondCount": bond_count,
         "emailShown": len(disc_data),
     }
