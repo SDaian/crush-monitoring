@@ -209,7 +209,14 @@ def build_report(trades: list[dict], ai_tickers: dict, new_signals: list[dict],
     # --- Section 3: new congressional disclosures ---
     cutoff = (date.fromisoformat(today_iso) -
               timedelta(days=DISCLOSURE_WINDOW_DAYS)).isoformat()
-    recent = [t for t in trades if (t.get("filing_date") or "") >= cutoff]
+    window = [t for t in trades if (t.get("filing_date") or "") >= cutoff]
+    # The report is a headline surface: stock/option rows only (owner's
+    # call — one senator's muni-bond ladder was drowning the signal).
+    # Bond/muni filings stay in the record and collapse to a count that
+    # links the tracker, same de-emphasis rule as the home-page stats.
+    from .landing_data import is_bond
+    recent = [t for t in window if not is_bond(t)]
+    bond_count = len(window) - len(recent)
     recent.sort(key=lambda t: (t.get("filing_date", ""), t.get("tx_date", "")),
                 reverse=True)
     disc_lines, disc_data = [], []
@@ -224,14 +231,19 @@ def build_report(trades: list[dict], ai_tickers: dict, new_signals: list[dict],
             "filing_date": t.get("filing_date", "?"), "who": who, "name": name,
             "type": t.get("type", "?"), "amount": t.get("amount_label", "—"),
         })
-    disclosures_md = "## 🏛 New congressional disclosures " \
+    disclosures_md = "## 🏛 New stock & option disclosures " \
         f"(filed since {cutoff})\n\n"
     if disc_lines:
         disclosures_md += "\n".join(disc_lines) + "\n"
         if len(recent) > MAX_DISCLOSURES:
             disclosures_md += f"\n_…and {len(recent) - MAX_DISCLOSURES} more._\n"
     else:
-        disclosures_md += "_No new disclosures in this window._\n"
+        disclosures_md += "_No new stock/option disclosures in this window._\n"
+    if bond_count:
+        disclosures_md += (
+            f"\n_…plus {bond_count} bond & muni filing"
+            f"{'s' if bond_count != 1 else ''} — kept in the record, "
+            f"browsable on the [tracker]({TRACKER_URL})._\n")
 
     # --- Holdings coverage (owner's ops note; only rendered when gapped) ---
     coverage_md = ""
@@ -250,11 +262,12 @@ def build_report(trades: list[dict], ai_tickers: dict, new_signals: list[dict],
     date_label = date.fromisoformat(today_iso).strftime("%A, %B %-d, %Y")
     preheader = (
         f"{len(rows)} featured reads · {len(sig_lines) + len(flips)} overnight "
-        f"changes · {len(recent)} new disclosures")
+        f"changes · {len(recent)} new stock disclosures")
     _email_kw = dict(
         date_label=date_label, disclaimer=DISCLAIMER, scorecard=sc_rows,
         signals=sig_data, flips=flip_data, disclosures=disc_data,
         extra_disclosures=max(0, len(recent) - MAX_DISCLOSURES), cutoff=cutoff,
+        bond_count=bond_count,
         tracker_url=TRACKER_URL, preheader=preheader,
         report_url=report_url(today_iso),
         coverage=coverage_gaps or [])
@@ -267,10 +280,13 @@ def build_report(trades: list[dict], ai_tickers: dict, new_signals: list[dict],
     html_embed = email_template.render_html(**_email_kw, standalone=False)
 
     counts = {"tickers": len(rows), "new_signals": len(sig_lines),
-              "flips": len(flips), "disclosures": len(recent)}
+              "flips": len(flips), "disclosures": len(recent),
+              "bonds": bond_count}
     # The /report page renders from this same structure, so the web version and
-    # the email can never drift. It carries EVERY disclosure in the window (the
-    # email caps at MAX_DISCLOSURES because clients clip long messages).
+    # the email can never drift. It carries EVERY stock/option disclosure in
+    # the window (the email caps at MAX_DISCLOSURES because clients clip long
+    # messages); bond/muni filings are a count on both surfaces, linking the
+    # tracker.
     payload = {
         "date": today_iso,
         "dateLabel": date_label,
@@ -290,6 +306,7 @@ def build_report(trades: list[dict], ai_tickers: dict, new_signals: list[dict],
             "amount": t.get("amount_label", "—"),
             "sourceUrl": t.get("source_url"),
         } for t in recent],
+        "bondCount": bond_count,
         "emailShown": len(disc_data),
     }
     return {"markdown": markdown, "html": html, "html_embed": html_embed,

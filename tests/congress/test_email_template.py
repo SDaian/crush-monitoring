@@ -62,7 +62,7 @@ class TestRenderHtml(unittest.TestCase):
         html = _render(scorecard=[], signals=[], flips=[], disclosures=[])
         self.assertIn("No indicator data.", html)
         self.assertIn("No new signals or rating changes", html)
-        self.assertIn("No new disclosures", html)
+        self.assertIn("No new stock/option disclosures", html)
 
     def test_extra_disclosures_note(self):
         self.assertIn("and 5 more", _render(extra_disclosures=5))
