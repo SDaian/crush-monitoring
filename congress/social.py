@@ -237,10 +237,12 @@ def _copy_template() -> str:
 
 
 def _x_len(text: str) -> int:
-    """X counts every URL as TCO_LEN chars regardless of length."""
+    """X counts every URL as TCO_LEN chars regardless of length, and
+    weights emoji (astral-plane code points, e.g. 🚨) as 2."""
     n = len(text)
     for m in re.finditer(r"https?://\S+", text):
         n -= len(m.group()) - TCO_LEN
+    n += sum(1 for c in text if ord(c) > 0xFFFF)
     return n
 
 

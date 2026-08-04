@@ -174,6 +174,14 @@ class TestCopy(unittest.TestCase):
         self.assertIn("$AAPL", text)
         self.assertNotIn("{", text)
 
+    def test_opens_with_alert_line(self):
+        p = social.filing_payload([T(member="Nancy Pelosi", filing="P1")])
+        text = social.post_copy(p)
+        self.assertTrue(text.startswith("🚨 NEW TRADE ALERT"))
+
+    def test_emoji_weighs_two(self):
+        self.assertEqual(social._x_len("🚨"), 2)
+
     def test_late_line_present_then_dropped_under_pressure(self):
         rows = [T(member="Nancy Pelosi", filing="P2",
                   tx="2026-01-01", filed="2026-06-20")]
