@@ -520,7 +520,7 @@ def _cmd_social(args: argparse.Namespace) -> int:
         rid = payload["record_id"]
         try:
             copy = social.post_copy(payload,
-                                    include_link=args.include_link)
+                                    include_link=not args.no_link)
             safe = rid.replace(":", "-")
             html_path = out_dir / f"{safe}.html"
             png_path = out_dir / f"{safe}.png"
@@ -999,9 +999,10 @@ def build_parser() -> argparse.ArgumentParser:
     social_p.add_argument("--seed", action="store_true",
                           help="Mark all currently notable filings as seen "
                                "without drafting (run once at setup).")
-    social_p.add_argument("--include-link", action="store_true",
-                          help="Append the member-page URL (link posts cost "
-                               "reach on X; off by default).")
+    social_p.add_argument("--no-link", action="store_true",
+                          help="Drop the member-page URL from the copy "
+                               "(included by default when the member has "
+                               "a page).")
     social_p.set_defaults(func=_cmd_social)
 
     return p

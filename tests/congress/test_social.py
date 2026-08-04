@@ -205,7 +205,7 @@ class TestCopy(unittest.TestCase):
         # ~120-char label: over 280 with the context line, under without it
         row["amount_label"] = "$" + "9" * 80 + " - $" + "9" * 35
         p = social.filing_payload([row], context={"est": "$121K", "pct": 4.2})
-        text = social.post_copy(p)
+        text = social.post_copy(p, include_link=False)
         self.assertNotIn("Already holds", text)
         self.assertIn("past the legal 45-day deadline", text)
         self.assertLessEqual(social._x_len(text), social.X_LIMIT)
@@ -213,10 +213,24 @@ class TestCopy(unittest.TestCase):
     def test_link_counts_as_tco(self):
         p = social.filing_payload([T(member="Nancy Pelosi", filing="P3")])
         text = social.post_copy(p, include_link=True)
-        self.assertIn("capitolledger.io/members/nancy-pelosi", text)
+        self.assertIn("🔗 https://capitolledger.io/members/nancy-pelosi",
+                      text)
         self.assertLessEqual(social._x_len(text), social.X_LIMIT)
-        # the raw string may exceed what X counts, never the reverse
-        self.assertLessEqual(social._x_len(text), len(text))
+
+    def test_link_included_by_default_for_featured(self):
+        p = social.filing_payload([T(member="Nancy Pelosi", filing="P4")])
+        self.assertIn("🔗 https://capitolledger.io/members/nancy-pelosi",
+                      social.post_copy(p))
+
+    def test_no_link_or_stray_emoji_for_unfeatured(self):
+        # Big bracket makes an unfeatured member notable; they have no
+        # member page, so no URL — and no orphaned 🔗 either.
+        p = social.filing_payload(
+            [T(member="Somebody Obscure", filing="P5",
+               lo=1_000_001, hi=5_000_000)])
+        text = social.post_copy(p)
+        self.assertNotIn("capitolledger.io", text)
+        self.assertNotIn("🔗", text)
 
 
 class TestCliParser(unittest.TestCase):

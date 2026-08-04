@@ -246,7 +246,7 @@ def _x_len(text: str) -> int:
     return n
 
 
-def post_copy(p: dict, include_link: bool = False) -> str:
+def post_copy(p: dict, include_link: bool = True) -> str:
     who_short = f"{p['who']} ({p['party_state']})"
     late_line = (f"Filed {p['late_days']} days past the legal 45-day deadline."
                  if p["late_days"] else "")
@@ -259,7 +259,8 @@ def post_copy(p: dict, include_link: bool = False) -> str:
     link = ""
     if include_link and p["member"] in MEMBER_PAGE_NAMES:
         from .landing_data import slugify
-        link = f"https://capitolledger.io/members/{slugify(p['member'])}"
+        link = ("🔗 https://capitolledger.io/members/"
+                f"{slugify(p['member'])}")
     fields = {
         "who": who_short,
         "action": p["action"].lower(),
