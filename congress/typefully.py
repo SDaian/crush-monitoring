@@ -218,12 +218,15 @@ def create_draft(key: str, content: str, set_id=None,
     publishes it — the safest default the brief demands."""
     if set_id is None:
         set_id = resolve_social_set_id(key)
+    post: dict = {"text": content}
+    if media_ids:
+        # Per post, not top-level: the drafts endpoint is strict
+        # ("extra_forbidden") and rejected a top-level media array.
+        post["media_ids"] = list(media_ids)
     payload = {
         "platforms": {
-            "x": {"enabled": True, "posts": [{"text": content}]},
+            "x": {"enabled": True, "posts": [post]},
         },
     }
-    if media_ids:
-        payload["media"] = list(media_ids)
     resp = _request("POST", drafts_endpoint(set_id), key, payload)
     return resp if isinstance(resp, dict) else {"raw": resp}

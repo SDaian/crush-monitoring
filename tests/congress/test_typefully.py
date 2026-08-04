@@ -169,15 +169,22 @@ class TestCreateDraft(unittest.TestCase):
         self.assertNotIn("schedule", flat)
         self.assertNotIn("publish", flat)
 
-    def test_media_attached_at_top_level(self):
+    def test_media_attached_inside_post(self):
+        # Per post, not top-level: the endpoint is strict and 422s
+        # unknown top-level fields ("extra_forbidden").
         with mock.patch.object(typefully, "_request",
                                return_value={"id": 1}) as req:
             typefully.create_draft("k", "hi", set_id=5, media_ids=["m1"])
         payload = req.call_args.args[3]
-        self.assertEqual(payload["media"], ["m1"])
+        self.assertNotIn("media", payload)
+        self.assertEqual(payload["platforms"]["x"]["posts"][0],
+                         {"text": "hi", "media_ids": ["m1"]})
 
     def test_no_media_key_when_empty(self):
         with mock.patch.object(typefully, "_request",
                                return_value={"id": 1}) as req:
             typefully.create_draft("k", "hi", set_id=5, media_ids=[])
-        self.assertNotIn("media", req.call_args.args[3])
+        payload = req.call_args.args[3]
+        self.assertNotIn("media", payload)
+        self.assertEqual(payload["platforms"]["x"]["posts"][0],
+                         {"text": "hi"})
