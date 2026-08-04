@@ -976,8 +976,11 @@ def build_parser() -> argparse.ArgumentParser:
     social_p.add_argument("--out-dir", default="social-cards",
                           help="Where rendered card PNGs land (uploaded as "
                                "run artifacts).")
+    # `or`, not a .get() default: the workflow always sets SOCIAL_CAP from a
+    # repo variable, so an unset variable arrives as "" — int("") crashed the
+    # whole CLI at parser build time.
     social_p.add_argument("--cap", type=int,
-                          default=int(os.environ.get("SOCIAL_CAP", "5")),
+                          default=int(os.environ.get("SOCIAL_CAP") or "5"),
                           help="Max drafts per run (backlog guard).")
     social_p.add_argument("--dry-run", action="store_true",
                           help="Render cards + copy but write no drafts.")
