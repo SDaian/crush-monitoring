@@ -109,6 +109,95 @@ class TestPayloadAndCard(unittest.TestCase):
         self.assertIn("Apple Inc. &lt;Class A&gt;", html)
 
 
+class TestFocusedPost(unittest.TestCase):
+    """--focus aims a post at named tickers: a 60-row filing has more than
+    one story, and the largest-bracket auto-pick tells only one."""
+
+    def _rows(self):
+        return [
+            T(member="April McClain Delaney", filing="F", ticker="BWXT",
+              lo=15001, hi=50000, tx="2026-07-24", filed="2026-08-03"),
+            T(member="April McClain Delaney", filing="F", ticker="ENTG",
+              lo=1001, hi=15000, tx="2026-07-08", filed="2026-08-03"),
+            T(member="April McClain Delaney", filing="F", ticker="FWONK",
+              lo=15001, hi=50000, tx="2026-07-31", filed="2026-08-03"),
+        ]
+
+    def test_focus_selects_named_tickers(self):
+        picked = social.focus_rows(self._rows(), ["bwxt", " entg "])
+        self.assertEqual(sorted(t["ticker"] for t in picked),
+                         ["BWXT", "ENTG"])
+
+    def test_no_focus_or_no_match_returns_empty(self):
+        self.assertEqual(social.focus_rows(self._rows(), None), [])
+        self.assertEqual(social.focus_rows(self._rows(), ["ZZZZ"]), [])
+
+    def test_payload_covers_the_focused_rows(self):
+        p = social.filing_payload(self._rows(), focus=["BWXT", "ENTG"])
+        self.assertEqual(p["ticker"], "BWXT + ENTG")   # biggest name leads
+        self.assertEqual(p["cashtags"], "$BWXT and $ENTG")
+        self.assertEqual(p["primary_ticker"], "BWXT")  # for stats/holdings
+        self.assertEqual(p["action"], "Bought")
+        self.assertEqual(p["subject_trades"], 2)
+        self.assertEqual(p["extra_trades"], 1)         # the unfocused FWONK
+        self.assertEqual(p["company"], "")             # two firms, no one name
+        # Brackets summed as a RANGE, never a single invented number.
+        self.assertEqual(p["amount"], "$16,002 – $65,000 across 2 buys")
+        self.assertEqual(p["tx_label"], "Jul 8–24, 2026")
+
+    def test_unmatched_focus_falls_back_to_normal_post(self):
+        p = social.filing_payload(self._rows(), focus=["ZZZZ"])
+        plain = social.filing_payload(self._rows())
+        self.assertEqual(p["ticker"], plain["ticker"])
+        self.assertEqual(p["amount"], plain["amount"])
+
+    def test_mixed_sides_read_as_traded(self):
+        rows = self._rows()
+        rows[1]["type"] = "sell"
+        p = social.filing_payload(rows, focus=["BWXT", "ENTG"])
+        self.assertEqual(p["action"], "Traded")
+        self.assertIn("across 2 trades", p["amount"])
+
+    def test_copy_names_both_cashtags(self):
+        p = social.filing_payload(self._rows(), focus=["BWXT", "ENTG"])
+        text = social.post_copy(p)
+        self.assertIn("bought $BWXT and $ENTG", text)
+        self.assertLessEqual(social._x_len(text), social.X_LIMIT)
+
+    def test_single_ticker_focus_keeps_the_company_line(self):
+        rows = self._rows() + [T(member="April McClain Delaney", filing="F",
+                                 ticker="BWXT", lo=1001, hi=15000,
+                                 tx="2026-07-27", filed="2026-08-03")]
+        for r in rows:
+            r["asset"] = "BWX Technologies Inc."
+        p = social.filing_payload(rows, focus=["BWXT"])
+        self.assertEqual(p["ticker"], "BWXT")
+        self.assertEqual(p["company"], "BWX Technologies Inc.")
+        self.assertEqual(p["subject_trades"], 2)
+
+
+class TestHeadlineFit(unittest.TestCase):
+    """A long headline must shrink, not ellipsis away — the portrait column
+    leaves roughly half the width."""
+
+    def test_short_label_keeps_full_size(self):
+        self.assertEqual(social.headline_px("Bought TSM", False), 108)
+
+    def test_long_label_shrinks_beside_a_portrait(self):
+        wide = social.headline_px("Bought BWXT + ENTG", False)
+        narrow = social.headline_px("Bought BWXT + ENTG", True)
+        self.assertLess(narrow, wide)
+        self.assertIn(narrow, social.HEADLINE_STEPS)
+
+    def test_absurd_label_stops_at_the_floor(self):
+        self.assertEqual(social.headline_px("Bought " + "X" * 80, True),
+                         social.HEADLINE_STEPS[-1])
+
+    def test_card_carries_the_size(self):
+        p = social.filing_payload([T(member="Nancy Pelosi", filing="H1")])
+        self.assertIn("font-size:108px", social.card_html(p))
+
+
 class TestPortrait(unittest.TestCase):
     def test_found_by_slug_and_extension(self):
         with TemporaryDirectory() as tmp:
