@@ -7,9 +7,10 @@
 # kept (they become paragraph breaks in the post). Placeholders:
 #   {who}         "Sen. Alan Armstrong (R-OK)"
 #   {action}      "bought" / "sold" / "traded"
-#   {ticker}      "AAPL" -> rendered as a cashtag $AAPL
-#   {amount}      "$250,001 – $500,000"
-#   {tx_date}     "Mar 27"
+#   {cashtags}    "$AAPL", or "$BWXT and $ENTG" on a --focus post
+#   {amount}      "$250,001 – $500,000", or the summed range on a focus
+#                 post ("$19,005 – $110,000 across 5 buys")
+#   {tx_date}     "Mar 27", or a span ("Jul 8–Jul 30")
 #   {filed_date}  "Jul 21"
 #   {extra}       "" or " (+11 more trades in the same filing)"
 #   {context_line} "" or "Already holds ~$121K of $AMZN — 4.2% of their
@@ -19,7 +20,7 @@
 #                 the member has a page; --no-link drops it
 🚨 NEW TRADE ALERT
 
-{who} {action} ${ticker}: {amount}{extra}
+{who} {action} {cashtags}: {amount}{extra}
 
 {context_line}
 Traded {tx_date} — disclosed {filed_date}.

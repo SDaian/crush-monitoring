@@ -466,7 +466,18 @@ def _cmd_social(args: argparse.Namespace) -> int:
 
     trades = json.loads(Path(args.trades).read_text(encoding="utf-8"))["trades"]
     state = social.load_state(Path(args.state))
-    picked = social.select_new_filings(trades, state)
+    focus = [t for t in (args.focus or "").split(",") if t.strip()]
+    if args.filing:
+        # Editorial override: draft THIS filing now, whatever the state and
+        # notability say — the auto-pick headlines the largest bracket, and
+        # a 60-row filing has more than one story worth telling.
+        picked = [[t for t in trades
+                   if str(t.get("filing_id")) == str(args.filing)]]
+        if not picked[0]:
+            print(f"::error::no trades found for filing {args.filing}")
+            return 1
+    else:
+        picked = social.select_new_filings(trades, state)
     if args.seed:
         # Mark everything currently notable as seen WITHOUT drafting: the
         # pipeline should start from tomorrow's new filings, not drip-feed
@@ -513,12 +524,13 @@ def _cmd_social(args: argparse.Namespace) -> int:
     out_dir.mkdir(parents=True, exist_ok=True)
     drafted = failed = 0
     for rows in picked:
-        head = social._headline_trade(rows)
+        head = social._headline_trade(social.focus_rows(rows, focus) or rows)
         context = social.holdings_context(head.get("member", ""),
                                           head.get("ticker") or "")
         stats = social.ticker_stats(trades, head.get("ticker") or "",
                                     (head.get("tx_date") or "")[:4])
-        payload = social.filing_payload(rows, context=context, stats=stats)
+        payload = social.filing_payload(rows, context=context, stats=stats,
+                                        focus=focus)
         rid = payload["record_id"]
         try:
             copy = social.post_copy(payload,
@@ -546,7 +558,10 @@ def _cmd_social(args: argparse.Namespace) -> int:
                     card_note = f"card upload failed ({exc}) — attach manually"
                 draft = typefully.create_draft(key, content, set_id,
                                                media_ids=media_ids)
-                social.mark_drafted(state, rid, draft.get("id"))
+                # An editorial re-draft must not clobber the automatic
+                # pipeline's record of the filing (or its draft id).
+                if rid not in state.get("records", {}):
+                    social.mark_drafted(state, rid, draft.get("id"))
                 summary(f"- ✅ {rid}: draft {draft.get('id')} — "
                         f"{payload['who']} {payload['action'].lower()} "
                         f"{payload['ticker']} ({card_note})")
@@ -1001,6 +1016,13 @@ def build_parser() -> argparse.ArgumentParser:
     social_p.add_argument("--seed", action="store_true",
                           help="Mark all currently notable filings as seen "
                                "without drafting (run once at setup).")
+    social_p.add_argument("--filing",
+                          help="Draft this filing_id now, bypassing the state "
+                               "and notability bar (editorial override).")
+    social_p.add_argument("--focus",
+                          help="Comma-separated tickers the post is about "
+                               "(e.g. BWXT,ENTG) instead of the auto-picked "
+                               "largest trade.")
     social_p.add_argument("--no-link", action="store_true",
                           help="Drop the member-page URL from the copy "
                                "(included by default when the member has "

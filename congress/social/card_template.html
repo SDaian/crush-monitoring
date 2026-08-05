@@ -12,6 +12,8 @@
        {{SEAT}}            "R · OK"
        {{ACTION}}          "Bought" / "Sold" / "Traded"
        {{SIDE_CLASS}}      "side-buy" / "side-sell" / "side-neutral"
+       {{HEADLINE_PX}}     headline font size, auto-fitted to the label
+                           and the portrait column (social.headline_px)
        {{TICKER}}          "AAPL"
        {{COMPANY}}         "" or "Taiwan Semiconductor Manufacturing
                            Company Ltd." (the filing's asset name)
@@ -61,7 +63,7 @@ body { font-family: LF, sans-serif; }
    padding is NOT decorative: at line-height 1.0 the overflow:hidden box
    ends at the em box, shearing the descender off the "g" in "Bought" —
    padding sits inside the clip edge and gives the descender room. */
-.headline { margin-top: 14px; font-weight: 900; font-size: 108px;
+.headline { margin-top: 14px; font-weight: 900;
             letter-spacing: -3px; line-height: 1.0; padding-bottom: 0.25em;
             white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .headline .side-buy { color: var(--buy); }
@@ -84,13 +86,15 @@ body { font-family: LF, sans-serif; }
 .stats b { font-weight: 700; }
 .stats .up { color: var(--buy); }
 .stats .down { color: var(--sell); }
-.meta { margin-top: auto; display: flex; gap: 64px;
+.meta { margin-top: auto; display: flex; flex-wrap: wrap; row-gap: 18px;
+        gap: 64px;
         border-top: 2px solid var(--ink); padding-top: 26px;
         font-family: PM; font-size: 27px; }
 .meta .k { color: var(--soft); font-size: 21px; letter-spacing: 2.5px;
            text-transform: uppercase; display: block; margin-bottom: 8px; }
 .meta b { font-weight: 700; }
 .meta .late { color: var(--stamp); }
+.meta .src { margin-left: auto; }
 .stampbox { position: absolute; right: 66px; top: 300px; transform: rotate(-8deg);
             border: 6px solid var(--stamp); color: var(--stamp);
             font-family: PM; font-weight: 700; font-size: 44px;
@@ -117,8 +121,9 @@ body { font-family: LF, sans-serif; }
 .has-portrait { padding-left: 660px; }
 .has-portrait .stats .v { font-size: 27px; }
 /* The narrower column would wrap the meta dates; tighten instead. */
-.has-portrait .meta { gap: 40px; font-size: 24px; }
-.has-portrait .meta .k { font-size: 19px; letter-spacing: 2px; }
+.has-portrait .meta { gap: 30px; font-size: 23px; }
+.has-portrait .meta .k { font-size: 18px; letter-spacing: 1.5px; }
+.has-portrait .meta .src { margin-left: 0; }
 .meta > span { white-space: nowrap; }
 </style></head><body>
 <div class="card {{CARD_CLASS}}" id="card">
@@ -128,7 +133,7 @@ body { font-family: LF, sans-serif; }
     <span class="dateline">{{DISCLOSED_LONG}}</span>
   </div>
   <div class="who">{{WHO}} · <b>{{SEAT}}</b></div>
-  <div class="headline">{{ACTION}} <span class="{{SIDE_CLASS}}">{{TICKER}}</span></div>
+  <div class="headline" style="font-size:{{HEADLINE_PX}}px">{{ACTION}} <span class="{{SIDE_CLASS}}">{{TICKER}}</span></div>
   <div class="company">{{COMPANY}}</div>
   <div class="extra">{{EXTRA}}</div>
   <div class="context">{{CONTEXT}}</div>
@@ -138,7 +143,7 @@ body { font-family: LF, sans-serif; }
     <span><span class="k">Traded</span><b>{{TX_DATE}}</b></span>
     <span><span class="k">Disclosed</span><b>{{FILED_DATE}}</b></span>
     <span><span class="k">Filing deadline</span>{{DEADLINE_HTML}}</span>
-    <span style="margin-left:auto"><span class="k">Source</span><b>official filings</b></span>
+    <span class="src"><span class="k">Source</span><b>official filings</b></span>
   </div>
 </div>
 </body></html>

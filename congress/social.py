@@ -113,6 +113,67 @@ def _headline_trade(rows: list[dict]) -> dict:
                                         t.get("tx_date") or ""))
 
 
+def focus_rows(rows: list[dict], focus: list[str] | None) -> list[dict]:
+    """The rows a FOCUSED post is about (``--focus BWXT,ENTG``). A 60-row
+    filing holds many stories and the largest-bracket auto-pick chooses
+    only one; this lets the owner aim a post at the names that matter.
+    Returns [] when no focus is given or nothing matches — the caller then
+    falls back to the whole filing (normal behaviour)."""
+    if not focus:
+        return []
+    want = {t.strip().upper() for t in focus if t.strip()}
+    return [t for t in rows if (t.get("ticker") or "").upper() in want]
+
+
+def _combined_action(rows: list[dict]) -> str:
+    kinds = {t.get("type") for t in rows}
+    return {frozenset({"buy"}): "Bought",
+            frozenset({"sell"}): "Sold"}.get(frozenset(kinds), "Traded")
+
+
+def _summed_amount(rows: list[dict]) -> str:
+    """Brackets cannot be added into ONE number, but they can be added into
+    a range: the true total lies between the sum of the floors and the sum
+    of the ceilings. That is a fact about the filing — unlike a midpoint,
+    which is an estimate."""
+    lo = sum(t.get("amount_lo") or 0 for t in rows)
+    hi = sum(t.get("amount_hi") or t.get("amount_lo") or 0 for t in rows)
+    return f"${lo:,} – ${hi:,}"
+
+
+def _date_span(rows: list[dict]) -> tuple[str, str]:
+    """(long, short) trade-date labels — a span when the rows straddle days.
+    Within one month the month is not repeated ("Jul 8–30, 2026"): the card's
+    meta strip is tight, and the repetition reads as noise."""
+    dates = sorted(d for d in (t.get("tx_date") for t in rows) if d)
+    if not dates:
+        return "—", "—"
+    first, last = date.fromisoformat(dates[0]), date.fromisoformat(dates[-1])
+    if first == last:
+        return _fmt(dates[0]), _fmt(dates[0], year=False)
+    if (first.year, first.month) == (last.year, last.month):
+        return (f"{first.strftime('%b %-d')}–{last.strftime('%-d, %Y')}",
+                f"{first.strftime('%b %-d')}–{last.strftime('%-d')}")
+    return (f"{_fmt(dates[0], year=False)} – {_fmt(dates[-1])}",
+            f"{_fmt(dates[0], year=False)}–{_fmt(dates[-1], year=False)}")
+
+
+# Headline auto-fit. The headline is one clamped line, so a long label
+# ("Bought BWXT + ENTG") must shrink rather than ellipsis away. Libre
+# Franklin 900 with -3px tracking averages ~0.56em per character; the
+# usable width is the card minus padding, minus the portrait column when
+# one is present.
+HEADLINE_STEPS = (108, 88, 74, 62)
+
+
+def headline_px(text: str, has_portrait: bool) -> int:
+    usable = (1600 - 660 - 72) if has_portrait else (1600 - 144)
+    for size in HEADLINE_STEPS:
+        if len(text) * size * 0.56 <= usable:
+            return size
+    return HEADLINE_STEPS[-1]
+
+
 def _who(t: dict) -> tuple[str, str]:
     """("Sen. Alan Armstrong", "R · OK") — executive filers get no prefix."""
     chamber = t.get("chamber")
@@ -174,16 +235,45 @@ def ticker_stats(trades: list[dict], ticker: str, year: str) -> dict | None:
 
 def filing_payload(rows: list[dict],
                    context: dict | None = None,
-                   stats: dict | None = None) -> dict:
+                   stats: dict | None = None,
+                   focus: list[str] | None = None) -> dict:
     """Everything the card template and copy template need, precomputed.
     ``context`` is ``holdings_context()``'s answer for the headline ticker
     and ``stats`` is ``ticker_stats()``'s (the caller looks both up so
-    this stays pure)."""
-    head = _headline_trade(rows)
+    this stays pure). ``focus`` narrows the post to named tickers — one
+    post about the two names that matter instead of the auto-picked
+    largest bracket in a 60-row filing."""
+    matched = focus_rows(rows, focus)
+    subject = matched or rows
+    head = _headline_trade(subject)
     who, seat = _who(head)
     late = max((days_late(t) or 0) for t in rows)
-    action = {"buy": "Bought", "sell": "Sold"}.get(head.get("type"), "Traded")
-    extra_n = len(rows) - 1
+    if len(matched) > 1:
+        # Ordered by bracket floor so the biggest name leads the headline.
+        ordered = sorted(subject, key=lambda t: (t.get("amount_lo") or 0),
+                         reverse=True)
+        tickers = list(dict.fromkeys(t["ticker"] for t in ordered
+                                     if t.get("ticker")))
+        ticker_label = " + ".join(tickers)
+        cashtags = " and ".join(f"${t}" for t in tickers)
+        action = _combined_action(subject)
+        noun = {"Bought": "buy", "Sold": "sale"}.get(action, "trade")
+        n = len(subject)
+        amount = (f"{_summed_amount(subject)} across {n} "
+                  f"{noun if n == 1 else noun + 's'}")
+        tx_long, tx_short = _date_span(subject)
+        # Two companies have no single name; one ticker bought repeatedly
+        # keeps its company line.
+        company = head.get("asset", "") if len(tickers) == 1 else ""
+    else:
+        ticker_label = head.get("ticker") or "—"
+        cashtags = f"${ticker_label}"
+        action = {"buy": "Bought", "sell": "Sold"}.get(head.get("type"),
+                                                       "Traded")
+        amount = compact_amount(head)
+        tx_long, tx_short = _fmt(head.get("tx_date")), _fmt(
+            head.get("tx_date"), year=False)
+        company = head.get("asset") or ""
     return {
         "record_id": record_id(head),
         "member": head.get("member", "?"),
@@ -191,13 +281,20 @@ def filing_payload(rows: list[dict],
         "seat": seat,
         "party_state": f"{head.get('party') or '?'}-{head.get('state') or 'US'}",
         "action": action,
-        "ticker": head.get("ticker") or "—",
-        "company": head.get("asset") or "",
-        "amount": compact_amount(head),
+        "ticker": ticker_label,
+        "primary_ticker": head.get("ticker") or "—",
+        "cashtags": cashtags,
+        "company": company,
+        "amount": amount,
         "tx_date": head.get("tx_date"),
+        "tx_label": tx_long,
+        "tx_short": tx_short,
         "filed_date": head.get("filing_date"),
         "late_days": late,
-        "extra_trades": extra_n,
+        # A normal post is about ONE trade (the headline) however many rows
+        # the filing has; a focused post covers all its matched rows.
+        "subject_trades": len(matched) if len(matched) > 1 else 1,
+        "extra_trades": len(rows) - (len(matched) if len(matched) > 1 else 1),
         "source_url": head.get("source_url"),
         "held_est": (context or {}).get("est"),
         "held_pct": (context or {}).get("pct"),
@@ -248,7 +345,8 @@ def _stats_html(p: dict) -> str:
              f"sell{'s' if s['sells'] != 1 else ''}</b>"
              if s["trades"] > 1 else "")
     return (f"<div class='stats'>"
-            f"<div class='k'>{_esc(p['ticker'])} in Congress · "
+            f"<div class='k'>"
+            f"{_esc(p.get('primary_ticker') or p['ticker'])} in Congress · "
             f"{_esc(s['year'])}</div>"
             f"<div class='v'><b>{members}</b> {have} disclosed "
             f"<b>{trades}</b>{split}</div>"
@@ -273,6 +371,8 @@ def card_html(p: dict) -> str:
         "ACTION": p["action"],
         "SIDE_CLASS": {"Bought": "side-buy", "Sold": "side-sell"}.get(
             p["action"], "side-neutral"),
+        "HEADLINE_PX": str(headline_px(f"{p['action']} {p['ticker']}",
+                                       bool(p.get("portrait")))),
         "TICKER": _esc(p["ticker"]),
         "COMPANY": _esc(p.get("company") or ""),
         "STATS_HTML": _stats_html(p),
@@ -282,11 +382,12 @@ def card_html(p: dict) -> str:
                   f"trade{'s' if p['extra_trades'] != 1 else ''} in this filing"
                   if p["extra_trades"] else ""),
         "CONTEXT": (
-            f"Already holds ~{p['held_est']} of {_esc(p['ticker'])}"
+            f"Already holds ~{p['held_est']} of "
+            f"{_esc(p.get('primary_ticker') or p['ticker'])}"
             + (f" — {p['held_pct']}% of their estimated portfolio"
                if p.get("held_pct") is not None else "")
             if p.get("held_est") else ""),
-        "TX_DATE": _fmt(p["tx_date"]),
+        "TX_DATE": p.get("tx_label") or _fmt(p["tx_date"]),
         "FILED_DATE": _fmt(p["filed_date"]),
         "DEADLINE_HTML": (f"<b class='late'>missed by {late} days</b>"
                           if late else "<b>on time</b>"),
@@ -324,7 +425,9 @@ def post_copy(p: dict, include_link: bool = True) -> str:
                  if p["late_days"] else "")
     context_line = ""
     if p.get("held_est"):
-        context_line = f"Already holds ~{p['held_est']} of ${p['ticker']}"
+        context_line = ("Already holds ~"
+                        f"{p['held_est']} of "
+                        f"${p.get('primary_ticker') or p['ticker']}")
         if p.get("held_pct") is not None:
             context_line += f" — {p['held_pct']}% of their estimated portfolio"
         context_line += "."
@@ -337,8 +440,9 @@ def post_copy(p: dict, include_link: bool = True) -> str:
         "who": who_short,
         "action": p["action"].lower(),
         "ticker": p["ticker"],
+        "cashtags": p.get("cashtags") or f"${p['ticker']}",
         "amount": p["amount"],
-        "tx_date": _fmt(p["tx_date"], year=False),
+        "tx_date": p.get("tx_short") or _fmt(p["tx_date"], year=False),
         "filed_date": _fmt(p["filed_date"], year=False),
         "extra": (f" (+{p['extra_trades']} more trades in the same filing)"
                   if p["extra_trades"] else ""),
