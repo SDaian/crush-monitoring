@@ -390,13 +390,13 @@
   "performance": {
     "available": true,
     "benchLabel": "S&P 500",
-    "asofDate": "2026-08-03",
+    "asofDate": "2026-08-04",
     "kpis": {
-      "medianPct": 18.5,
-      "medianBenchPct": 19.5,
-      "beat": 37,
-      "beatOf": 76,
-      "priced": 76,
+      "medianPct": 19.0,
+      "medianBenchPct": 21.6,
+      "beat": 36,
+      "beatOf": 74,
+      "priced": 74,
       "pricedOf": 320
     },
     "series": {
@@ -420,29 +420,29 @@
         "2026-07-17",
         "2026-07-24",
         "2026-07-31",
-        "2026-08-03"
+        "2026-08-04"
       ],
       "member": [
         100.0,
-        103.5,
+        103.6,
         105.8,
         111.8,
         112.2,
-        113.2,
-        117.5,
-        116.6,
-        119.7,
-        124.5,
+        113.3,
+        117.7,
+        116.9,
         120.0,
-        121.9,
-        123.2,
-        121.6,
-        123.6,
-        124.2,
-        120.6,
-        119.7,
+        124.8,
         120.2,
-        122.1
+        122.2,
+        123.4,
+        121.8,
+        123.8,
+        124.5,
+        121.0,
+        120.1,
+        120.6,
+        125.6
       ],
       "bench": [
         100.0,
@@ -464,96 +464,96 @@
         117.2,
         116.5,
         117.8,
-        119.5
+        121.6
       ],
-      "buys": 76
+      "buys": 74
     },
     "rows": [
       {
         "ticker": "ASML",
         "txDate": "2026-03-31",
-        "pct": 24.4,
-        "benchPct": 16.5,
-        "excess": 7.9
+        "pct": 29.6,
+        "benchPct": 18.6,
+        "excess": 11.0
       },
       {
         "ticker": "AZN",
         "txDate": "2026-03-31",
-        "pct": -19.9,
-        "benchPct": 16.5,
-        "excess": -36.4
+        "pct": -21.1,
+        "benchPct": 18.6,
+        "excess": -39.7
       },
       {
         "ticker": "TSLA",
         "txDate": "2026-03-30",
-        "pct": -9.3,
-        "benchPct": 19.9,
-        "excess": -29.2
+        "pct": -7.9,
+        "benchPct": 22.1,
+        "excess": -30.0
       },
       {
         "ticker": "UBER",
         "txDate": "2026-03-30",
-        "pct": 2.4,
-        "benchPct": 19.9,
-        "excess": -17.5
+        "pct": 3.0,
+        "benchPct": 22.1,
+        "excess": -19.1
       },
       {
         "ticker": "GOOG",
         "txDate": "2026-03-30",
-        "pct": 36.4,
-        "benchPct": 19.9,
-        "excess": 16.5
+        "pct": 37.4,
+        "benchPct": 22.1,
+        "excess": 15.3
       },
       {
         "ticker": "AAPL",
         "txDate": "2026-03-30",
-        "pct": 23.0,
-        "benchPct": 19.9,
-        "excess": 3.1
+        "pct": 25.4,
+        "benchPct": 22.1,
+        "excess": 3.3
       },
       {
         "ticker": "ASML",
         "txDate": "2026-03-30",
-        "pct": 31.0,
-        "benchPct": 19.9,
-        "excess": 11.1
+        "pct": 36.5,
+        "benchPct": 22.1,
+        "excess": 14.4
       },
       {
         "ticker": "AZN",
         "txDate": "2026-03-30",
-        "pct": -18.5,
-        "benchPct": 19.9,
-        "excess": -38.4
+        "pct": -19.7,
+        "benchPct": 22.1,
+        "excess": -41.8
       },
       {
         "ticker": "GS",
         "txDate": "2026-03-30",
-        "pct": 27.2,
-        "benchPct": 19.9,
-        "excess": 7.3
+        "pct": 30.4,
+        "benchPct": 22.1,
+        "excess": 8.3
       },
       {
         "ticker": "JNJ",
         "txDate": "2026-03-30",
-        "pct": 4.9,
-        "benchPct": 19.9,
-        "excess": -15.0
+        "pct": 5.1,
+        "benchPct": 22.1,
+        "excess": -17.0
       },
       {
         "ticker": "MSFT",
         "txDate": "2026-03-30",
-        "pct": 35.9,
-        "benchPct": 19.9,
-        "excess": 16.0
+        "pct": 37.3,
+        "benchPct": 22.1,
+        "excess": 15.2
       },
       {
         "ticker": "NVO",
         "txDate": "2026-03-30",
-        "pct": 33.4,
-        "benchPct": 19.9,
-        "excess": 13.5
+        "pct": 25.5,
+        "benchPct": 22.1,
+        "excess": 3.4
       }
     ],
-    "rowsOf": 76
+    "rowsOf": 74
   }
 }

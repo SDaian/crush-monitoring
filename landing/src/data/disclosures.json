@@ -2,6 +2,28 @@
   "_comment": "Generated from real official disclosures by congress/landing_data.py (daily Action). Do not edit by hand. 'filedDaysLate' counts days past the STOCK Act's 45-day statutory maximum; 0 = on time.",
   "disclosures": [
     {
+      "member": "S. Capito",
+      "memberSlug": null,
+      "chamber": "Senate",
+      "district": "WV",
+      "ticker": "MSFT",
+      "tickerSlug": "msft",
+      "side": "SELL",
+      "amountBucket": "$15K – $50K",
+      "filedDaysLate": 0
+    },
+    {
+      "member": "A. Delaney",
+      "memberSlug": "april-mcclain-delaney",
+      "chamber": "House",
+      "district": "MD-6",
+      "ticker": "WAB",
+      "tickerSlug": null,
+      "side": "SELL",
+      "amountBucket": "$15K – $50K",
+      "filedDaysLate": 0
+    },
+    {
       "member": "S. Liccardo",
       "memberSlug": null,
       "chamber": "House",
@@ -9,17 +31,6 @@
       "ticker": "NVDA",
       "tickerSlug": "nvda",
       "side": "SELL",
-      "amountBucket": "$15K – $50K",
-      "filedDaysLate": 0
-    },
-    {
-      "member": "J. Moran",
-      "memberSlug": null,
-      "chamber": "Senate",
-      "district": "KS",
-      "ticker": "BRK.B",
-      "tickerSlug": "brk-b",
-      "side": "BUY",
       "amountBucket": "$15K – $50K",
       "filedDaysLate": 0
     },
@@ -33,17 +44,6 @@
       "side": "BUY",
       "amountBucket": "$250K – $500K",
       "filedDaysLate": 71
-    },
-    {
-      "member": "J. Himes",
-      "memberSlug": null,
-      "chamber": "House",
-      "district": "CT-4",
-      "ticker": "HD",
-      "tickerSlug": "hd",
-      "side": "SELL",
-      "amountBucket": "$15K – $50K",
-      "filedDaysLate": 0
     },
     {
       "member": "W. Timmons",

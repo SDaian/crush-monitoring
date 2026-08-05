@@ -4,14 +4,14 @@
   "ticker": "AAPL",
   "company": "Apple Inc.",
   "summary": {
-    "trades": 133,
+    "trades": 134,
     "members": 41,
     "buys": 71,
-    "sells": 62,
+    "sells": 63,
     "other": 0,
     "firstTx": "2023-03-15",
-    "lastTx": "2026-06-24",
-    "lastFiling": "2026-07-21",
+    "lastTx": "2026-07-21",
+    "lastFiling": "2026-08-04",
     "estBuyLabel": "$3.6M",
     "estSellLabel": "$47.3M",
     "pctLate": 21
@@ -51,6 +51,17 @@
       "hasPage": false
     },
     {
+      "name": "Shelley Moore Capito",
+      "slug": "shelley-moore-capito",
+      "party": "R",
+      "chamber": "Senate",
+      "trades": 7,
+      "buys": 0,
+      "sells": 7,
+      "estLabel": "$81K",
+      "hasPage": false
+    },
+    {
       "name": "David J. Taylor",
       "slug": "david-j-taylor",
       "party": "R",
@@ -71,17 +82,6 @@
       "sells": 6,
       "estLabel": "$56K",
       "hasPage": true
-    },
-    {
-      "name": "Shelley Moore Capito",
-      "slug": "shelley-moore-capito",
-      "party": "R",
-      "chamber": "Senate",
-      "trades": 6,
-      "buys": 0,
-      "sells": 6,
-      "estLabel": "$73K",
-      "hasPage": false
     },
     {
       "name": "Nancy Pelosi",
@@ -129,6 +129,18 @@
     }
   ],
   "trades": [
+    {
+      "member": "Shelley Moore Capito",
+      "memberSlug": "shelley-moore-capito",
+      "hasPage": false,
+      "party": "R",
+      "side": "SELL",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-07-21",
+      "filedDate": "2026-08-04",
+      "daysLate": 0,
+      "sourceUrl": "https://efdsearch.senate.gov/search/view/ptr/60c01547-0cf9-46c6-9ce6-f0102f5941f6/"
+    },
     {
       "member": "Sheldon Whitehouse",
       "memberSlug": "sheldon-whitehouse",
@@ -412,18 +424,6 @@
       "party": "D",
       "side": "BUY",
       "amountBucket": "$250K – $500K",
-      "txDate": "2025-12-30",
-      "filedDate": "2026-01-23",
-      "daysLate": 0,
-      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20033725.pdf"
-    },
-    {
-      "member": "Nancy Pelosi",
-      "memberSlug": "nancy-pelosi",
-      "hasPage": true,
-      "party": "D",
-      "side": "SELL",
-      "amountBucket": "$5M – $25M",
       "txDate": "2025-12-30",
       "filedDate": "2026-01-23",
       "daysLate": 0,

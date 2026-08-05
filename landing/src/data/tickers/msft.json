@@ -4,14 +4,14 @@
   "ticker": "MSFT",
   "company": "Microsoft Corporation",
   "summary": {
-    "trades": 183,
+    "trades": 184,
     "members": 42,
     "buys": 98,
-    "sells": 85,
+    "sells": 86,
     "other": 0,
     "firstTx": "2023-03-15",
-    "lastTx": "2026-06-17",
-    "lastFiling": "2026-07-26",
+    "lastTx": "2026-07-21",
+    "lastFiling": "2026-08-04",
     "estBuyLabel": "$27.5M",
     "estSellLabel": "$23.5M",
     "pctLate": 10
@@ -55,10 +55,10 @@
       "slug": "shelley-moore-capito",
       "party": "R",
       "chamber": "Senate",
-      "trades": 10,
+      "trades": 11,
       "buys": 0,
-      "sells": 10,
-      "estLabel": "$129K",
+      "sells": 11,
+      "estLabel": "$162K",
       "hasPage": false
     },
     {
@@ -129,6 +129,18 @@
     }
   ],
   "trades": [
+    {
+      "member": "Shelley Moore Capito",
+      "memberSlug": "shelley-moore-capito",
+      "hasPage": false,
+      "party": "R",
+      "side": "SELL",
+      "amountBucket": "$15K – $50K",
+      "txDate": "2026-07-21",
+      "filedDate": "2026-08-04",
+      "daysLate": 0,
+      "sourceUrl": "https://efdsearch.senate.gov/search/view/ptr/60c01547-0cf9-46c6-9ce6-f0102f5941f6/"
+    },
     {
       "member": "Jared Moskowitz",
       "memberSlug": "jared-moskowitz",
@@ -404,18 +416,6 @@
       "filedDate": "2026-04-08",
       "daysLate": 0,
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20034305.pdf"
-    },
-    {
-      "member": "Richard McCormick",
-      "memberSlug": "richard-mccormick",
-      "hasPage": false,
-      "party": "R",
-      "side": "BUY",
-      "amountBucket": "$1K – $15K",
-      "txDate": "2026-03-19",
-      "filedDate": "2026-04-07",
-      "daysLate": 0,
-      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20033648.pdf"
     },
     {
       "member": "Richard McCormick",
