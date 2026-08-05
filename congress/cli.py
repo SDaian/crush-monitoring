@@ -31,8 +31,12 @@ from pathlib import Path
 from . import house, oge, pipeline, senate
 from .normalize import MEMBERS_PATH, prune_cutoff
 
+# raw.githubusercontent, not unitedstates.github.io: the gh-pages host is
+# blocked by the dev sandbox's egress proxy, and the same file is served
+# from the raw mirror, so this URL works in the Action AND locally.
 LEGISLATORS_URL = (
-    "https://unitedstates.github.io/congress-legislators/legislators-current.json"
+    "https://raw.githubusercontent.com/unitedstates/congress-legislators/"
+    "gh-pages/legislators-current.json"
 )
 
 
@@ -228,6 +232,9 @@ def _cmd_roster(args: argparse.Namespace) -> int:
             "chamber": chamber,
             "party": party_map.get(term.get("party"), term.get("party")),
             "state": state,
+            # The join key for committee seats: names collide (there is both
+            # a "Lisa C. McClain" and an "April McClain Delaney").
+            "bioguide": (leg.get("id") or {}).get("bioguide"),
         }
         if chamber == "house" and term.get("district") is not None:
             entry["district"] = f"{state}-{term['district']}"
@@ -250,8 +257,12 @@ def _cmd_roster(args: argparse.Namespace) -> int:
         seen_names.add(name)
     # Preserve hand-curated entries that the download does not include
     # (e.g. seed aliases for members missing from legislators-current).
+    # They are, by definition of that file, not sitting members — record
+    # that so committee lookups can say "former member" instead of
+    # reporting a coverage gap they could never close.
     for name, entry in by_name.items():
         if name not in seen_names:
+            entry["sitting"] = False
             members.append(entry)
     members.sort(key=lambda m: m["name"])
     MEMBERS_PATH.write_text(
@@ -581,6 +592,35 @@ def _cmd_social(args: argparse.Namespace) -> int:
     summary(f"- done: {drafted} drafted, {failed} failed, "
             f"{truncated} deferred")
     return 0 if failed == 0 else 1
+
+
+def _cmd_committees(args: argparse.Namespace) -> int:
+    """Refresh committee seats (where each member sits) from the
+    congress-legislators dataset, joined by bioguide id."""
+    from . import committees
+    from .http import make_session
+
+    membership, comms, legislators = committees.fetch_raw(make_session())
+    roster = json.loads(MEMBERS_PATH.read_text(encoding="utf-8"))["members"]
+    payload = committees.build(roster, membership, comms,
+                               committees.sitting_ids(legislators))
+    committees.save(payload, Path(args.output))
+
+    counts: dict[str, int] = {}
+    for rec in payload["members"].values():
+        counts[rec["reason"]] = counts.get(rec["reason"], 0) + 1
+    assigned = counts.get(committees.REASON_ASSIGNED, 0)
+    print(f"wrote committee seats for {assigned}/{len(payload['members'])} "
+          f"roster members → {args.output}")
+    for reason, n in sorted(counts.items()):
+        print(f"  {n:4d}  {committees.REASON_TEXT.get(reason, reason)}")
+    # Only a genuine coverage gap warrants a warning: a sitting member with
+    # no seats, a former member and an executive filer are all true zeroes.
+    gaps = counts.get(committees.REASON_UNMATCHED, 0)
+    if gaps:
+        print(f"::warning::{gaps} roster members have no bioguide id — "
+              "run `python3 -m congress roster` to refresh it")
+    return 0
 
 
 def _cmd_indexnow(args: argparse.Namespace) -> int:
@@ -993,6 +1033,15 @@ def build_parser() -> argparse.ArgumentParser:
         help="Ping IndexNow with the pages the daily refresh changed.",
     )
     indexnow_p.set_defaults(func=_cmd_indexnow)
+
+    committees_p = sub.add_parser(
+        "committees",
+        help="Refresh committee seats per member (congress-legislators).",
+    )
+    committees_p.add_argument(
+        "--output",
+        default=str(pipeline.REPO_ROOT / "docs" / "data" / "committees.json"))
+    committees_p.set_defaults(func=_cmd_committees)
 
     social_p = sub.add_parser(
         "social",
