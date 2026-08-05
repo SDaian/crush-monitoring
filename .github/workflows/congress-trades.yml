@@ -32,6 +32,14 @@ on:
         description: "Social step: render cards + copy but write NO Typefully drafts"
         required: false
         default: "false"
+      social_filing:
+        description: "Draft THIS filing_id now (editorial override; skips the state + notability bar)"
+        required: false
+        default: ""
+      social_focus:
+        description: "Tickers the drafted post is about, e.g. BWXT,ENTG (needs social_filing)"
+        required: false
+        default: ""
 permissions:
   contents: write
   issues: write # open an issue (→ email) when a new AI technical signal fires
@@ -143,7 +151,16 @@ jobs:
           if [ "${{ github.event.inputs.social_dry_run }}" = "true" ]; then
             DRY="--dry-run"
           fi
-          python3 -m congress social $DRY --out-dir social-cards 2>&1 | tee -a fetch.log \
+          # Editorial override: draft one named filing, optionally headlined
+          # by chosen tickers, instead of the usual new-filings sweep.
+          PICK=""
+          if [ -n "${{ github.event.inputs.social_filing }}" ]; then
+            PICK="--filing ${{ github.event.inputs.social_filing }}"
+            if [ -n "${{ github.event.inputs.social_focus }}" ]; then
+              PICK="$PICK --focus ${{ github.event.inputs.social_focus }}"
+            fi
+          fi
+          python3 -m congress social $DRY $PICK --out-dir social-cards 2>&1 | tee -a fetch.log \
             || echo "::warning::social drafting failed (non-fatal)"
 
       - name: Upload rendered social cards (inspection artifact)
