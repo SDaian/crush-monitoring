@@ -2,6 +2,17 @@
   "_comment": "Generated from real official disclosures by congress/landing_data.py (daily Action). Do not edit by hand. 'filedDaysLate' counts days past the STOCK Act's 45-day statutory maximum; 0 = on time.",
   "disclosures": [
     {
+      "member": "T. Tuberville",
+      "memberSlug": "tommy-tuberville",
+      "chamber": "Senate",
+      "district": "AL",
+      "ticker": "CLF",
+      "tickerSlug": null,
+      "side": "SELL",
+      "amountBucket": "$100K – $250K",
+      "filedDaysLate": 769
+    },
+    {
       "member": "S. Capito",
       "memberSlug": null,
       "chamber": "Senate",
@@ -24,26 +35,15 @@
       "filedDaysLate": 0
     },
     {
-      "member": "S. Liccardo",
-      "memberSlug": null,
-      "chamber": "House",
-      "district": "CA-16",
-      "ticker": "NVDA",
-      "tickerSlug": "nvda",
-      "side": "SELL",
-      "amountBucket": "$15K – $50K",
-      "filedDaysLate": 0
-    },
-    {
       "member": "A. Armstrong",
       "memberSlug": "alan-armstrong",
       "chamber": "Senate",
       "district": "OK",
-      "ticker": "AAPL",
-      "tickerSlug": "aapl",
-      "side": "BUY",
-      "amountBucket": "$250K – $500K",
-      "filedDaysLate": 71
+      "ticker": "WMB",
+      "tickerSlug": null,
+      "side": "SELL",
+      "amountBucket": "$5M – $25M",
+      "filedDaysLate": 0
     },
     {
       "member": "W. Timmons",

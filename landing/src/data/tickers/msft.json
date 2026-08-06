@@ -4,17 +4,17 @@
   "ticker": "MSFT",
   "company": "Microsoft Corporation",
   "summary": {
-    "trades": 184,
+    "trades": 189,
     "members": 42,
     "buys": 98,
-    "sells": 86,
+    "sells": 91,
     "other": 0,
     "firstTx": "2023-03-15",
     "lastTx": "2026-07-21",
-    "lastFiling": "2026-08-04",
+    "lastFiling": "2026-08-05",
     "estBuyLabel": "$27.5M",
-    "estSellLabel": "$23.5M",
-    "pctLate": 10
+    "estSellLabel": "$23.7M",
+    "pctLate": 13
   },
   "topMembers": [
     {
@@ -73,6 +73,17 @@
       "hasPage": false
     },
     {
+      "name": "Tommy Tuberville",
+      "slug": "tommy-tuberville",
+      "party": "R",
+      "chamber": "Senate",
+      "trades": 8,
+      "buys": 0,
+      "sells": 8,
+      "estLabel": "$260K",
+      "hasPage": true
+    },
+    {
       "name": "Lisa C. McClain",
       "slug": "lisa-c-mcclain",
       "party": "R",
@@ -114,17 +125,6 @@
       "buys": 7,
       "sells": 0,
       "estLabel": "$56K",
-      "hasPage": false
-    },
-    {
-      "name": "Val T. Hoyle",
-      "slug": "val-t-hoyle",
-      "party": "D",
-      "chamber": "House",
-      "trades": 5,
-      "buys": 4,
-      "sells": 1,
-      "estLabel": "$89K",
       "hasPage": false
     }
   ],

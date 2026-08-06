@@ -1,8 +1,20 @@
 {
   "_comment": "Generated from real official disclosures by congress/landing_data.py (daily Action). Do not edit by hand. 'filedDaysLate' counts days past the STOCK Act's 45-day statutory maximum; 0 = on time.",
   "year": 2026,
-  "totalLateFilings": 630,
+  "totalLateFilings": 795,
   "worst": [
+    {
+      "member": "T. Tuberville",
+      "chamber": "Senate",
+      "district": "AL",
+      "ticker": "AMAT",
+      "side": "SELL",
+      "amountBucket": "$1K – $15K",
+      "daysLate": 835,
+      "tradeDate": "2024-03-08",
+      "filedDate": "2026-08-05",
+      "lateCount": 165
+    },
     {
       "member": "P. Jayapal",
       "chamber": "House",
@@ -110,18 +122,6 @@
       "tradeDate": "2025-04-16",
       "filedDate": "2026-05-05",
       "lateCount": 3
-    },
-    {
-      "member": "K. Britt",
-      "chamber": "Senate",
-      "district": "AL",
-      "ticker": "XOM",
-      "side": "BUY",
-      "amountBucket": "$1K – $15K",
-      "daysLate": 242,
-      "tradeDate": "2025-04-14",
-      "filedDate": "2026-01-26",
-      "lateCount": 22
     }
   ]
 }

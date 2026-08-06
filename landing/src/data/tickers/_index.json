@@ -5,10 +5,10 @@
       "slug": "msft",
       "ticker": "MSFT",
       "company": "Microsoft Corporation",
-      "trades": 184,
+      "trades": 189,
       "members": 42,
       "buys": 98,
-      "sells": 86,
+      "sells": 91,
       "lastTx": "2026-07-21"
     },
     {
@@ -25,10 +25,10 @@
       "slug": "aapl",
       "ticker": "AAPL",
       "company": "Apple Inc.",
-      "trades": 134,
+      "trades": 142,
       "members": 41,
       "buys": 71,
-      "sells": 63,
+      "sells": 71,
       "lastTx": "2026-07-21"
     },
     {
@@ -75,10 +75,10 @@
       "slug": "googl",
       "ticker": "GOOGL",
       "company": "Alphabet Inc.",
-      "trades": 76,
+      "trades": 79,
       "members": 27,
       "buys": 38,
-      "sells": 38,
+      "sells": 41,
       "lastTx": "2026-07-10"
     },
     {
@@ -105,11 +105,21 @@
       "slug": "lly",
       "ticker": "LLY",
       "company": "Eli Lilly and Company",
-      "trades": 63,
+      "trades": 64,
       "members": 21,
       "buys": 25,
-      "sells": 38,
+      "sells": 39,
       "lastTx": "2026-07-10"
+    },
+    {
+      "slug": "jnj",
+      "ticker": "JNJ",
+      "company": "Johnson & Johnson",
+      "trades": 64,
+      "members": 24,
+      "buys": 30,
+      "sells": 34,
+      "lastTx": "2026-06-29"
     },
     {
       "slug": "brk-b",
@@ -122,43 +132,33 @@
       "lastTx": "2026-06-23"
     },
     {
-      "slug": "jnj",
-      "ticker": "JNJ",
-      "company": "Johnson & Johnson",
-      "trades": 62,
-      "members": 23,
-      "buys": 30,
-      "sells": 32,
-      "lastTx": "2026-06-29"
-    },
-    {
       "slug": "v",
       "ticker": "V",
       "company": "Visa Inc.",
-      "trades": 61,
-      "members": 22,
+      "trades": 62,
+      "members": 23,
       "buys": 38,
-      "sells": 23,
+      "sells": 24,
       "lastTx": "2026-04-27"
     },
     {
       "slug": "gs",
       "ticker": "GS",
       "company": "Goldman Sachs Group, Inc.",
-      "trades": 60,
+      "trades": 61,
       "members": 18,
       "buys": 33,
-      "sells": 27,
+      "sells": 28,
       "lastTx": "2026-04-16"
     },
     {
       "slug": "jpm",
       "ticker": "JPM",
       "company": "JP Morgan Chase & Co.",
-      "trades": 59,
+      "trades": 61,
       "members": 27,
       "buys": 30,
-      "sells": 29,
+      "sells": 31,
       "lastTx": "2026-04-13"
     },
     {
@@ -175,11 +175,21 @@
       "slug": "pg",
       "ticker": "PG",
       "company": "Procter & Gamble Company",
-      "trades": 54,
+      "trades": 55,
       "members": 26,
       "buys": 25,
-      "sells": 29,
+      "sells": 30,
       "lastTx": "2026-06-08"
+    },
+    {
+      "slug": "ups",
+      "ticker": "UPS",
+      "company": "United Parcel Service, Inc.",
+      "trades": 50,
+      "members": 18,
+      "buys": 19,
+      "sells": 31,
+      "lastTx": "2026-07-10"
     },
     {
       "slug": "tsm",
@@ -192,14 +202,14 @@
       "lastTx": "2026-07-10"
     },
     {
-      "slug": "ups",
-      "ticker": "UPS",
-      "company": "United Parcel Service, Inc.",
+      "slug": "nflx",
+      "ticker": "NFLX",
+      "company": "Netflix, Inc.",
       "trades": 49,
-      "members": 17,
-      "buys": 19,
-      "sells": 30,
-      "lastTx": "2026-07-10"
+      "members": 21,
+      "buys": 28,
+      "sells": 21,
+      "lastTx": "2026-03-27"
     },
     {
       "slug": "amd",
@@ -222,24 +232,14 @@
       "lastTx": "2026-06-02"
     },
     {
-      "slug": "nflx",
-      "ticker": "NFLX",
-      "company": "Netflix, Inc.",
-      "trades": 48,
-      "members": 20,
-      "buys": 28,
-      "sells": 20,
-      "lastTx": "2026-03-27"
-    },
-    {
-      "slug": "pltr",
-      "ticker": "PLTR",
-      "company": "Palantir Technologies Inc.",
+      "slug": "orcl",
+      "ticker": "ORCL",
+      "company": "Oracle Corporation",
       "trades": 47,
-      "members": 13,
-      "buys": 31,
-      "sells": 16,
-      "lastTx": "2026-05-15"
+      "members": 16,
+      "buys": 17,
+      "sells": 30,
+      "lastTx": "2026-05-07"
     }
   ]
 }

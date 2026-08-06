@@ -4,17 +4,17 @@
   "ticker": "JPM",
   "company": "JP Morgan Chase & Co.",
   "summary": {
-    "trades": 59,
+    "trades": 61,
     "members": 27,
     "buys": 30,
-    "sells": 29,
+    "sells": 31,
     "other": 0,
-    "firstTx": "2024-08-07",
+    "firstTx": "2024-03-12",
     "lastTx": "2026-04-13",
-    "lastFiling": "2026-07-21",
+    "lastFiling": "2026-08-05",
     "estBuyLabel": "$332K",
-    "estSellLabel": "$613K",
-    "pctLate": 25
+    "estSellLabel": "$654K",
+    "pctLate": 28
   },
   "topMembers": [
     {
@@ -60,6 +60,17 @@
       "sells": 4,
       "estLabel": "$48K",
       "hasPage": false
+    },
+    {
+      "name": "Tommy Tuberville",
+      "slug": "tommy-tuberville",
+      "party": "R",
+      "chamber": "Senate",
+      "trades": 3,
+      "buys": 0,
+      "sells": 3,
+      "estLabel": "$73K",
+      "hasPage": true
     },
     {
       "name": "John Boozman",
@@ -115,17 +126,6 @@
       "sells": 2,
       "estLabel": "$16K",
       "hasPage": false
-    },
-    {
-      "name": "Gilbert Ray Cisneros, Jr.",
-      "slug": "gilbert-ray-cisneros-jr",
-      "party": "D",
-      "chamber": "House",
-      "trades": 2,
-      "buys": 2,
-      "sells": 0,
-      "estLabel": "$16K",
-      "hasPage": true
     }
   ],
   "trades": [

@@ -4,17 +4,17 @@
   "ticker": "AAPL",
   "company": "Apple Inc.",
   "summary": {
-    "trades": 134,
+    "trades": 142,
     "members": 41,
     "buys": 71,
-    "sells": 63,
+    "sells": 71,
     "other": 0,
     "firstTx": "2023-03-15",
     "lastTx": "2026-07-21",
-    "lastFiling": "2026-08-04",
+    "lastFiling": "2026-08-05",
     "estBuyLabel": "$3.6M",
-    "estSellLabel": "$47.3M",
-    "pctLate": 21
+    "estSellLabel": "$47.6M",
+    "pctLate": 25
   },
   "topMembers": [
     {
@@ -26,6 +26,17 @@
       "buys": 21,
       "sells": 0,
       "estLabel": "$1.9M",
+      "hasPage": true
+    },
+    {
+      "name": "Tommy Tuberville",
+      "slug": "tommy-tuberville",
+      "party": "R",
+      "chamber": "Senate",
+      "trades": 12,
+      "buys": 0,
+      "sells": 12,
+      "estLabel": "$475K",
       "hasPage": true
     },
     {
@@ -115,17 +126,6 @@
       "sells": 2,
       "estLabel": "$65K",
       "hasPage": false
-    },
-    {
-      "name": "Marjorie Taylor Greene",
-      "slug": "marjorie-taylor-greene",
-      "party": "R",
-      "chamber": "House",
-      "trades": 5,
-      "buys": 5,
-      "sells": 0,
-      "estLabel": "$40K",
-      "hasPage": true
     }
   ],
   "trades": [

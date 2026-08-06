@@ -4,17 +4,17 @@
   "ticker": "GOOGL",
   "company": "Alphabet Inc.",
   "summary": {
-    "trades": 76,
+    "trades": 79,
     "members": 27,
     "buys": 38,
-    "sells": 38,
+    "sells": 41,
     "other": 0,
     "firstTx": "2024-09-26",
     "lastTx": "2026-07-10",
-    "lastFiling": "2026-07-17",
+    "lastFiling": "2026-08-05",
     "estBuyLabel": "$2.7M",
-    "estSellLabel": "$6.7M",
-    "pctLate": 18
+    "estSellLabel": "$6.8M",
+    "pctLate": 22
   },
   "topMembers": [
     {
@@ -49,6 +49,17 @@
       "sells": 3,
       "estLabel": "$89K",
       "hasPage": false
+    },
+    {
+      "name": "Tommy Tuberville",
+      "slug": "tommy-tuberville",
+      "party": "R",
+      "chamber": "Senate",
+      "trades": 6,
+      "buys": 0,
+      "sells": 6,
+      "estLabel": "$146K",
+      "hasPage": true
     },
     {
       "name": "John Boozman",
@@ -115,17 +126,6 @@
       "sells": 3,
       "estLabel": "$73K",
       "hasPage": false
-    },
-    {
-      "name": "Tommy Tuberville",
-      "slug": "tommy-tuberville",
-      "party": "R",
-      "chamber": "Senate",
-      "trades": 3,
-      "buys": 0,
-      "sells": 3,
-      "estLabel": "$73K",
-      "hasPage": true
     }
   ],
   "trades": [
@@ -353,6 +353,18 @@
       "side": "SELL",
       "amountBucket": "$1K – $15K",
       "txDate": "2025-12-17",
+      "filedDate": "2026-08-05",
+      "daysLate": 186,
+      "sourceUrl": "https://efdsearch.senate.gov/search/view/ptr/57cf1745-e3dd-4afd-8685-228153848631/"
+    },
+    {
+      "member": "Tommy Tuberville",
+      "memberSlug": "tommy-tuberville",
+      "hasPage": true,
+      "party": "R",
+      "side": "SELL",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2025-12-17",
       "filedDate": "2026-01-15",
       "daysLate": 0,
       "sourceUrl": "https://efdsearch.senate.gov/search/view/ptr/b2bdf363-af39-43c8-ae93-13ed14aa3752/"
@@ -413,18 +425,6 @@
       "side": "BUY",
       "amountBucket": "$50K – $100K",
       "txDate": "2025-12-09",
-      "filedDate": "2025-12-17",
-      "daysLate": 0,
-      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20033616.pdf"
-    },
-    {
-      "member": "Cleo Fields",
-      "memberSlug": "cleo-fields",
-      "hasPage": true,
-      "party": "D",
-      "side": "BUY",
-      "amountBucket": "$50K – $100K",
-      "txDate": "2025-12-01",
       "filedDate": "2025-12-17",
       "daysLate": 0,
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20033616.pdf"
