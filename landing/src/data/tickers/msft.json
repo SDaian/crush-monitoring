@@ -4,6 +4,32 @@
   "ticker": "MSFT",
   "company": "Microsoft Corporation",
   "indexable": true,
+  "technical": {
+    "asOf": "2026-08-06",
+    "price": 499.86,
+    "chg1d": 2.54,
+    "chg1w": 10.81,
+    "chg1m": 30.4,
+    "rsi14": 78.1,
+    "sma50": 405.27,
+    "sma200": 433.16,
+    "vsSma50": 23.3,
+    "vsSma200": 15.4,
+    "relVol": 0.83,
+    "high52w": 542.07,
+    "low52w": 352.83,
+    "rangePos": 78.0,
+    "series": [],
+    "signals": [],
+    "nextEarnings": null,
+    "score": {
+      "label": "Buy",
+      "buys": 5,
+      "sells": 2,
+      "holds": 0,
+      "ratio": 0.429
+    }
+  },
   "summary": {
     "trades": 189,
     "members": 42,

@@ -4,6 +4,32 @@
   "ticker": "SNDK",
   "company": "Sandisk Corporation",
   "indexable": false,
+  "technical": {
+    "asOf": "2026-08-06",
+    "price": 1258.58,
+    "chg1d": -6.81,
+    "chg1w": -1.67,
+    "chg1m": -27.13,
+    "rsi14": 43.1,
+    "sma50": 1695.65,
+    "sma200": 866.93,
+    "vsSma50": -25.8,
+    "vsSma200": 45.2,
+    "relVol": 1.12,
+    "high52w": 2335.0,
+    "low52w": 40.69,
+    "rangePos": 53.0,
+    "series": [],
+    "signals": [],
+    "nextEarnings": null,
+    "score": {
+      "label": "Sell",
+      "buys": 2,
+      "sells": 4,
+      "holds": 1,
+      "ratio": -0.286
+    }
+  },
   "summary": {
     "trades": 11,
     "members": 6,

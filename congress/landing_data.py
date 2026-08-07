@@ -726,6 +726,56 @@ def select_ticker_pages(trades: list[dict],
     return picked
 
 
+# Derived from this file, not from `pipeline`: this module stays import-light
+# and path-free by design so the tests run it in isolation.
+AI_INDICATORS_PATH = (Path(__file__).resolve().parent.parent
+                      / "docs" / "data" / "ai-indicators.json")
+
+
+def load_indicators(path: Path = AI_INDICATORS_PATH) -> dict:
+    """The featured-watchlist technical readings, keyed by ticker. Missing or
+    unreadable → {}, so ticker pages simply omit the technical panel."""
+    try:
+        return json.loads(path.read_text(encoding="utf-8")).get("tickers", {})
+    except (OSError, ValueError, AttributeError):
+        return {}
+
+
+def technical_block(ticker: str, readings: dict) -> dict | None:
+    """The ticker page's "Technical read" panel: the SAME mechanical reading
+    the tracker and the morning report show, scored by the SAME function
+    (`indicators.ai_score`) so the three surfaces can never disagree.
+
+    Descriptive only — a transparent tally of the indicators displayed, never
+    advice. None for any ticker outside the featured watchlist.
+    """
+    rec = readings.get(ticker)
+    if not rec:
+        return None
+    from .indicators import ai_score
+
+    return {
+        "asOf": rec.get("asof_date"),
+        "price": rec.get("price"),
+        "chg1d": rec.get("chg_1d"),
+        "chg1w": rec.get("chg_1w"),
+        "chg1m": rec.get("chg_1m"),
+        "rsi14": rec.get("rsi14"),
+        "sma50": rec.get("sma50"),
+        "sma200": rec.get("sma200"),
+        "vsSma50": rec.get("vs_sma50"),
+        "vsSma200": rec.get("vs_sma200"),
+        "relVol": rec.get("rel_vol"),
+        "high52w": rec.get("high_52w"),
+        "low52w": rec.get("low_52w"),
+        "rangePos": rec.get("range_pos"),
+        "series": rec.get("series") or [],
+        "signals": rec.get("signals") or [],
+        "nextEarnings": rec.get("nextEarnings"),
+        "score": ai_score(rec),
+    }
+
+
 def ticker_is_indexable(trade_count: int,
                         minimum: int = TICKER_PAGE_MIN_TRADES) -> bool:
     """Only pages carrying real substance are offered to search engines; a
@@ -734,7 +784,8 @@ def ticker_is_indexable(trade_count: int,
 
 
 def ticker_payload(ticker: str, trades: list[dict],
-                   page_names: list[str] = MEMBER_PAGE_NAMES) -> dict:
+                   page_names: list[str] = MEMBER_PAGE_NAMES,
+                   indicators: dict | None = None) -> dict:
     """Per-ticker page data: who traded it, how much, and the recent trades with
     a link to each official filing. Dollar figures are bracket **midpoints** —
     an estimate, never a real position size."""
@@ -794,6 +845,9 @@ def ticker_payload(ticker: str, trades: list[dict],
         # A featured-watchlist stub exists so the tracker's link resolves;
         # only pages with real substance are offered to search engines.
         "indexable": ticker_is_indexable(len(ts)),
+        # Present only for the featured watchlist (the universe we compute
+        # indicators for); every other ticker page omits the panel.
+        "technical": technical_block(ticker, indicators or {}),
         "summary": {
             "trades": len(ts),
             "members": len(by_member),
@@ -832,11 +886,12 @@ def write_ticker_files(trades: list[dict], out_dir: Path,
         "midpoints — estimates, not real position sizes."
     )
     names = select_ticker_pages(trades) if tickers is None else tickers
+    ind = load_indicators()
     tickers_dir = out_dir / "tickers"
     tickers_dir.mkdir(parents=True, exist_ok=True)
     index, written = [], []
     for tk in names:
-        payload = ticker_payload(tk, trades)
+        payload = ticker_payload(tk, trades, indicators=ind)
         if payload["summary"]["trades"] == 0:
             continue
         (tickers_dir / f"{payload['slug']}.json").write_text(

@@ -4,6 +4,32 @@
   "ticker": "MELI",
   "company": "MercadoLibre, Inc.",
   "indexable": false,
+  "technical": {
+    "asOf": "2026-08-06",
+    "price": 1830.0,
+    "chg1d": -4.81,
+    "chg1w": -2.96,
+    "chg1m": 1.14,
+    "rsi14": 51.2,
+    "sma50": 1745.24,
+    "sma200": 1888.79,
+    "vsSma50": 4.9,
+    "vsSma200": -3.1,
+    "relVol": 2.8,
+    "high52w": 2510.97,
+    "low52w": 1546.81,
+    "rangePos": 29.0,
+    "series": [],
+    "signals": [],
+    "nextEarnings": null,
+    "score": {
+      "label": "Sell",
+      "buys": 2,
+      "sells": 4,
+      "holds": 1,
+      "ratio": -0.286
+    }
+  },
   "summary": {
     "trades": 17,
     "members": 6,

@@ -4,6 +4,32 @@
   "ticker": "GOOGL",
   "company": "Alphabet Inc.",
   "indexable": true,
+  "technical": {
+    "asOf": "2026-08-06",
+    "price": 357.75,
+    "chg1d": -1.29,
+    "chg1w": 7.22,
+    "chg1m": -1.15,
+    "rsi14": 52.4,
+    "sma50": 357.2,
+    "sma200": 328.62,
+    "vsSma50": 0.2,
+    "vsSma200": 8.9,
+    "relVol": 0.77,
+    "high52w": 402.62,
+    "low52w": 196.09,
+    "rangePos": 78.0,
+    "series": [],
+    "signals": [],
+    "nextEarnings": null,
+    "score": {
+      "label": "Strong Buy",
+      "buys": 5,
+      "sells": 1,
+      "holds": 1,
+      "ratio": 0.571
+    }
+  },
   "summary": {
     "trades": 79,
     "members": 27,

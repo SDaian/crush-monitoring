@@ -4,6 +4,32 @@
   "ticker": "TSM",
   "company": "Taiwan Semiconductor Manufacturing Company Ltd.",
   "indexable": true,
+  "technical": {
+    "asOf": "2026-08-06",
+    "price": 418.2,
+    "chg1d": 1.01,
+    "chg1w": 3.69,
+    "chg1m": -4.3,
+    "rsi14": 51.5,
+    "sma50": 425.93,
+    "sma200": 359.59,
+    "vsSma50": -1.8,
+    "vsSma200": 16.3,
+    "relVol": 0.7,
+    "high52w": 477.57,
+    "low52w": 227.33,
+    "rangePos": 76.0,
+    "series": [],
+    "signals": [],
+    "nextEarnings": null,
+    "score": {
+      "label": "Buy",
+      "buys": 4,
+      "sells": 2,
+      "holds": 1,
+      "ratio": 0.286
+    }
+  },
   "summary": {
     "trades": 50,
     "members": 12,

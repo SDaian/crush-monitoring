@@ -297,7 +297,18 @@ sites. Full details in `congress/README.md`. Conventions:
   Values are a **daily snapshot, not real-time**. The committed JSON ships as
   `_sample` data (synthetic series, banner-flagged) until the first live refresh.
   The page's `aiScore` and Python `indicators.ai_score` **must stay in sync**
-  (same checks + thresholds) — the report reuses the Python one.
+  (same checks + thresholds) — the report reuses the Python one. The **ticker
+  page** (`/tickers/<symbol>`) carries the same reading in a "Technical read"
+  panel, for featured symbols only, built by `landing_data.technical_block` —
+  which calls `indicators.ai_score` directly, so that surface cannot drift
+  either. It ships with the vote breakdown and the "not a recommendation"
+  caption, and the page's congressional trades stay its `<h1>`/description so
+  it still reads as a disclosure record first. The sparkline is `series` (52
+  weekly closes downsampled from the history the indicators run already
+  fetched — **no extra API call**) drawn as build-time inline SVG; an empty
+  series omits the chart. `nextEarnings` is opt-in via the `EARNINGS_DATES`
+  variable, because it is an extra per-ticker call on an endpoint that is not
+  on every Twelve Data plan — unset or failing, the line is simply absent.
 - **Site traffic — its OWN email (Vercel Web Analytics):** `congress/analytics.py`
   pulls the site's aggregated, cookieless page views via Vercel's public Web
   Analytics API (`/v1/query/web-analytics/visits/{count,aggregate}`, Bearer

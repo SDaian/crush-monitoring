@@ -4,6 +4,32 @@
   "ticker": "META",
   "company": "Meta Platforms, Inc.",
   "indexable": true,
+  "technical": {
+    "asOf": "2026-08-06",
+    "price": 589.9,
+    "chg1d": 0.19,
+    "chg1w": 9.44,
+    "chg1m": -2.19,
+    "rsi14": 47.0,
+    "sma50": 600.62,
+    "sma200": 632.0,
+    "vsSma50": -1.8,
+    "vsSma200": -6.7,
+    "relVol": 0.62,
+    "high52w": 790.0,
+    "low52w": 525.72,
+    "rangePos": 24.0,
+    "series": [],
+    "signals": [],
+    "nextEarnings": null,
+    "score": {
+      "label": "Strong Sell",
+      "buys": 1,
+      "sells": 5,
+      "holds": 1,
+      "ratio": -0.571
+    }
+  },
   "summary": {
     "trades": 90,
     "members": 24,

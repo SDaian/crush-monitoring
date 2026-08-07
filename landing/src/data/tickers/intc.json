@@ -4,6 +4,32 @@
   "ticker": "INTC",
   "company": "Intel Corporation",
   "indexable": true,
+  "technical": {
+    "asOf": "2026-08-06",
+    "price": 99.81,
+    "chg1d": -1.24,
+    "chg1w": 9.52,
+    "chg1m": -9.46,
+    "rsi14": 48.5,
+    "sma50": 111.05,
+    "sma200": 68.27,
+    "vsSma50": -10.1,
+    "vsSma200": 46.2,
+    "relVol": 0.68,
+    "high52w": 140.94,
+    "low52w": 19.77,
+    "rangePos": 66.0,
+    "series": [],
+    "signals": [],
+    "nextEarnings": null,
+    "score": {
+      "label": "Buy",
+      "buys": 4,
+      "sells": 2,
+      "holds": 1,
+      "ratio": 0.286
+    }
+  },
   "summary": {
     "trades": 43,
     "members": 18,

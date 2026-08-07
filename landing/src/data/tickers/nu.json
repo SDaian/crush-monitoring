@@ -4,6 +4,32 @@
   "ticker": "NU",
   "company": "Nu Holdings Ltd.",
   "indexable": false,
+  "technical": {
+    "asOf": "2026-08-06",
+    "price": 14.12,
+    "chg1d": -2.49,
+    "chg1w": -2.55,
+    "chg1m": 5.61,
+    "rsi14": 52.2,
+    "sma50": 13.3,
+    "sma200": 15.11,
+    "vsSma50": 6.2,
+    "vsSma200": -6.5,
+    "relVol": 0.42,
+    "high52w": 18.76,
+    "low52w": 11.6,
+    "rangePos": 35.0,
+    "series": [],
+    "signals": [],
+    "nextEarnings": null,
+    "score": {
+      "label": "Sell",
+      "buys": 2,
+      "sells": 4,
+      "holds": 1,
+      "ratio": -0.286
+    }
+  },
   "summary": {
     "trades": 4,
     "members": 2,
