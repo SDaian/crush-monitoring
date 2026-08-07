@@ -42,7 +42,7 @@
       "count": 7,
       "asset": "Adobe Inc. - Common Stock",
       "slug": "adbe",
-      "hasPage": false
+      "hasPage": true
     },
     {
       "ticker": "GOOGL",
@@ -390,10 +390,10 @@
   "performance": {
     "available": true,
     "benchLabel": "S&P 500",
-    "asofDate": "2026-08-05",
+    "asofDate": "2026-08-06",
     "kpis": {
-      "medianPct": 99.8,
-      "medianBenchPct": 48.4,
+      "medianPct": 98.4,
+      "medianBenchPct": 48.2,
       "beat": 6,
       "beatOf": 8,
       "priced": 8,
@@ -519,7 +519,7 @@
         "2026-07-21",
         "2026-07-28",
         "2026-08-04",
-        "2026-08-05"
+        "2026-08-06"
       ],
       "member": [
         100.0,
@@ -640,7 +640,7 @@
         225.3,
         204.1,
         223.1,
-        221.1
+        219.3
       ],
       "bench": [
         100.0,
@@ -761,7 +761,7 @@
         144.2,
         142.8,
         148.6,
-        148.3
+        148.1
       ],
       "buys": 8
     },
@@ -769,58 +769,58 @@
       {
         "ticker": "GILD",
         "txDate": "2024-05-10",
-        "pct": 99.8,
-        "benchPct": 47.8,
-        "excess": 52.0
+        "pct": 98.4,
+        "benchPct": 47.6,
+        "excess": 50.8
       },
       {
         "ticker": "GILD",
         "txDate": "2024-05-10",
-        "pct": 99.8,
-        "benchPct": 47.8,
-        "excess": 52.0
+        "pct": 98.4,
+        "benchPct": 47.6,
+        "excess": 50.8
       },
       {
         "ticker": "GILD",
         "txDate": "2024-05-10",
-        "pct": 99.8,
-        "benchPct": 47.8,
-        "excess": 52.0
+        "pct": 98.4,
+        "benchPct": 47.6,
+        "excess": 50.8
       },
       {
         "ticker": "INTC",
         "txDate": "2024-05-09",
-        "pct": 235.9,
-        "benchPct": 48.0,
-        "excess": 187.9
+        "pct": 231.7,
+        "benchPct": 47.8,
+        "excess": 183.9
       },
       {
         "ticker": "INTC",
         "txDate": "2024-05-08",
-        "pct": 236.9,
-        "benchPct": 48.8,
-        "excess": 188.1
+        "pct": 232.7,
+        "benchPct": 48.6,
+        "excess": 184.1
       },
       {
         "ticker": "ADBE",
         "txDate": "2024-05-08",
-        "pct": -46.9,
-        "benchPct": 48.8,
-        "excess": -95.7
+        "pct": -46.7,
+        "benchPct": 48.6,
+        "excess": -95.3
       },
       {
         "ticker": "INTC",
         "txDate": "2024-05-07",
-        "pct": 229.4,
-        "benchPct": 48.9,
-        "excess": 180.5
+        "pct": 225.3,
+        "benchPct": 48.6,
+        "excess": 176.7
       },
       {
         "ticker": "CVX",
         "txDate": "2024-05-07",
-        "pct": 14.6,
-        "benchPct": 48.9,
-        "excess": -34.3
+        "pct": 16.3,
+        "benchPct": 48.6,
+        "excess": -32.3
       }
     ],
     "rowsOf": 8

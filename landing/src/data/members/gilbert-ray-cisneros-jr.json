@@ -277,11 +277,11 @@
   "performance": {
     "available": true,
     "benchLabel": "S&P 500",
-    "asofDate": "2026-08-05",
+    "asofDate": "2026-08-06",
     "kpis": {
-      "medianPct": 5.2,
-      "medianBenchPct": 15.9,
-      "beat": 103,
+      "medianPct": 4.9,
+      "medianBenchPct": 15.7,
+      "beat": 105,
       "beatOf": 250,
       "priced": 250,
       "pricedOf": 853
@@ -368,7 +368,7 @@
         "2026-07-17",
         "2026-07-24",
         "2026-07-31",
-        "2026-08-05"
+        "2026-08-06"
       ],
       "member": [
         100.0,
@@ -451,7 +451,7 @@
         104.1,
         102.2,
         105.0,
-        109.1
+        108.6
       ],
       "bench": [
         100.0,
@@ -534,7 +534,7 @@
         111.2,
         110.6,
         111.8,
-        115.2
+        115.0
       ],
       "buys": 250
     },
@@ -542,86 +542,86 @@
       {
         "ticker": "SPCX",
         "txDate": "2026-06-18",
-        "pct": -41.5,
-        "benchPct": 3.1,
-        "excess": -44.6
+        "pct": -37.9,
+        "benchPct": 2.9,
+        "excess": -40.8
       },
       {
         "ticker": "ZTS",
         "txDate": "2026-06-16",
-        "pct": -6.2,
-        "benchPct": 2.6,
-        "excess": -8.8
+        "pct": -2.6,
+        "benchPct": 2.4,
+        "excess": -5.0
       },
       {
         "ticker": "PGR",
         "txDate": "2026-06-16",
-        "pct": 4.0,
-        "benchPct": 2.6,
-        "excess": 1.4
+        "pct": 5.2,
+        "benchPct": 2.4,
+        "excess": 2.8
       },
       {
         "ticker": "IBM",
         "txDate": "2026-06-16",
-        "pct": -12.9,
-        "benchPct": 2.6,
-        "excess": -15.5
+        "pct": -13.8,
+        "benchPct": 2.4,
+        "excess": -16.2
       },
       {
         "ticker": "ACN",
         "txDate": "2026-06-16",
-        "pct": 3.1,
-        "benchPct": 2.6,
-        "excess": 0.5
+        "pct": 3.4,
+        "benchPct": 2.4,
+        "excess": 1.0
       },
       {
         "ticker": "ABT",
         "txDate": "2026-06-16",
-        "pct": 16.7,
-        "benchPct": 2.6,
-        "excess": 14.1
+        "pct": 19.1,
+        "benchPct": 2.4,
+        "excess": 16.7
       },
       {
         "ticker": "LPLA",
         "txDate": "2026-06-11",
-        "pct": 26.1,
-        "benchPct": 4.3,
-        "excess": 21.8
+        "pct": 25.8,
+        "benchPct": 4.2,
+        "excess": 21.6
       },
       {
         "ticker": "MELI",
         "txDate": "2026-06-10",
-        "pct": 21.0,
-        "benchPct": 6.1,
-        "excess": 14.9
+        "pct": 15.2,
+        "benchPct": 5.9,
+        "excess": 9.3
       },
       {
         "ticker": "LLY",
         "txDate": "2026-06-10",
-        "pct": 2.9,
-        "benchPct": 6.1,
-        "excess": -3.2
+        "pct": 4.9,
+        "benchPct": 5.9,
+        "excess": -1.0
       },
       {
         "ticker": "AAPL",
         "txDate": "2026-06-05",
-        "pct": 1.2,
-        "benchPct": 4.4,
-        "excess": -3.2
+        "pct": 1.6,
+        "benchPct": 4.2,
+        "excess": -2.6
       },
       {
         "ticker": "LPLA",
         "txDate": "2026-06-05",
-        "pct": 24.8,
-        "benchPct": 4.4,
-        "excess": 20.4
+        "pct": 24.5,
+        "benchPct": 4.2,
+        "excess": 20.3
       },
       {
         "ticker": "AMD",
         "txDate": "2026-06-05",
-        "pct": 3.4,
-        "benchPct": 4.4,
-        "excess": -1.0
+        "pct": 4.9,
+        "benchPct": 4.2,
+        "excess": 0.7
       }
     ],
     "rowsOf": 250

@@ -1,7 +1,7 @@
 {
   "_comment": "Generated from real official disclosures by congress/landing_data.py (daily Action). Do not edit by hand. 'filedDaysLate' counts days past the STOCK Act's 45-day statutory maximum; 0 = on time.",
   "year": 2026,
-  "totalLateFilings": 795,
+  "totalLateFilings": 871,
   "worst": [
     {
       "member": "T. Tuberville",
@@ -50,6 +50,18 @@
       "tradeDate": "2025-01-07",
       "filedDate": "2026-07-08",
       "lateCount": 1
+    },
+    {
+      "member": "J. Johnson",
+      "chamber": "House",
+      "district": "TX-32",
+      "ticker": "MMM",
+      "side": "BUY",
+      "amountBucket": "$1K – $15K",
+      "daysLate": 463,
+      "tradeDate": "2025-03-15",
+      "filedDate": "2026-08-05",
+      "lateCount": 76
     },
     {
       "member": "T. Walberg",
@@ -110,18 +122,6 @@
       "tradeDate": "2025-04-02",
       "filedDate": "2026-05-15",
       "lateCount": 1
-    },
-    {
-      "member": "J. Hickenlooper",
-      "chamber": "Senate",
-      "district": "CO",
-      "ticker": "PLTR",
-      "side": "SELL",
-      "amountBucket": "$1K – $15K",
-      "daysLate": 339,
-      "tradeDate": "2025-04-16",
-      "filedDate": "2026-05-05",
-      "lateCount": 3
     }
   ]
 }
