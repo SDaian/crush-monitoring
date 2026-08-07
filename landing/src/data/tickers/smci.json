@@ -1,0 +1,212 @@
+{
+  "_comment": "Generated from real official disclosures by congress/landing_data.py (daily Action). Do not edit by hand. Dollar figures are bracket midpoints — estimates, not real position sizes.",
+  "slug": "smci",
+  "ticker": "SMCI",
+  "company": "Super Micro Computer, Inc.",
+  "indexable": false,
+  "summary": {
+    "trades": 11,
+    "members": 5,
+    "buys": 5,
+    "sells": 6,
+    "other": 0,
+    "firstTx": "2025-01-13",
+    "lastTx": "2025-12-31",
+    "lastFiling": "2026-01-13",
+    "estBuyLabel": "$65K",
+    "estSellLabel": "$73K",
+    "pctLate": 0
+  },
+  "topMembers": [
+    {
+      "name": "Robert P. Bresnahan, Jr.",
+      "slug": "robert-p-bresnahan-jr",
+      "party": "R",
+      "chamber": "House",
+      "trades": 3,
+      "buys": 1,
+      "sells": 2,
+      "estLabel": "$24K",
+      "hasPage": false
+    },
+    {
+      "name": "Tim Moore",
+      "slug": "tim-moore",
+      "party": "R",
+      "chamber": "House",
+      "trades": 2,
+      "buys": 1,
+      "sells": 1,
+      "estLabel": "$65K",
+      "hasPage": false
+    },
+    {
+      "name": "Gilbert Ray Cisneros, Jr.",
+      "slug": "gilbert-ray-cisneros-jr",
+      "party": "D",
+      "chamber": "House",
+      "trades": 2,
+      "buys": 1,
+      "sells": 1,
+      "estLabel": "$16K",
+      "hasPage": true
+    },
+    {
+      "name": "John Boozman",
+      "slug": "john-boozman",
+      "party": "R",
+      "chamber": "Senate",
+      "trades": 2,
+      "buys": 1,
+      "sells": 1,
+      "estLabel": "$16K",
+      "hasPage": false
+    },
+    {
+      "name": "Julie Johnson",
+      "slug": "julie-johnson",
+      "party": "D",
+      "chamber": "House",
+      "trades": 2,
+      "buys": 1,
+      "sells": 1,
+      "estLabel": "$16K",
+      "hasPage": false
+    }
+  ],
+  "trades": [
+    {
+      "member": "John Boozman",
+      "memberSlug": "john-boozman",
+      "hasPage": false,
+      "party": "R",
+      "side": "SELL",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2025-12-31",
+      "filedDate": "2026-01-13",
+      "daysLate": 0,
+      "sourceUrl": "https://efdsearch.senate.gov/search/view/ptr/d3daa40b-123d-4451-9974-02bf5a96d8da/"
+    },
+    {
+      "member": "John Boozman",
+      "memberSlug": "john-boozman",
+      "hasPage": false,
+      "party": "R",
+      "side": "BUY",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2025-12-11",
+      "filedDate": "2026-01-13",
+      "daysLate": 0,
+      "sourceUrl": "https://efdsearch.senate.gov/search/view/ptr/0677bd3f-167e-4cae-8f1d-05eb4340fcdc/"
+    },
+    {
+      "member": "Gilbert Ray Cisneros, Jr.",
+      "memberSlug": "gilbert-ray-cisneros-jr",
+      "hasPage": true,
+      "party": "D",
+      "side": "SELL",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2025-11-12",
+      "filedDate": "2025-12-15",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20033619.pdf"
+    },
+    {
+      "member": "Gilbert Ray Cisneros, Jr.",
+      "memberSlug": "gilbert-ray-cisneros-jr",
+      "hasPage": true,
+      "party": "D",
+      "side": "BUY",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2025-09-05",
+      "filedDate": "2025-10-10",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20032248.pdf"
+    },
+    {
+      "member": "Tim Moore",
+      "memberSlug": "tim-moore",
+      "hasPage": false,
+      "party": "R",
+      "side": "SELL",
+      "amountBucket": "$15K – $50K",
+      "txDate": "2025-05-02",
+      "filedDate": "2025-06-13",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20030516.pdf"
+    },
+    {
+      "member": "Tim Moore",
+      "memberSlug": "tim-moore",
+      "hasPage": false,
+      "party": "R",
+      "side": "BUY",
+      "amountBucket": "$15K – $50K",
+      "txDate": "2025-04-30",
+      "filedDate": "2025-06-13",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20030522.pdf"
+    },
+    {
+      "member": "Robert P. Bresnahan, Jr.",
+      "memberSlug": "robert-p-bresnahan-jr",
+      "hasPage": false,
+      "party": "R",
+      "side": "SELL",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2025-04-08",
+      "filedDate": "2025-05-08",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20030291.pdf"
+    },
+    {
+      "member": "Julie Johnson",
+      "memberSlug": "julie-johnson",
+      "hasPage": false,
+      "party": "D",
+      "side": "SELL",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2025-04-01",
+      "filedDate": "2025-05-14",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20030296.pdf"
+    },
+    {
+      "member": "Robert P. Bresnahan, Jr.",
+      "memberSlug": "robert-p-bresnahan-jr",
+      "hasPage": false,
+      "party": "R",
+      "side": "BUY",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2025-02-25",
+      "filedDate": "2025-03-27",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20029034.pdf"
+    },
+    {
+      "member": "Julie Johnson",
+      "memberSlug": "julie-johnson",
+      "hasPage": false,
+      "party": "D",
+      "side": "BUY",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2025-01-15",
+      "filedDate": "2025-02-12",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20026762.pdf"
+    },
+    {
+      "member": "Robert P. Bresnahan, Jr.",
+      "memberSlug": "robert-p-bresnahan-jr",
+      "hasPage": false,
+      "party": "R",
+      "side": "SELL",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2025-01-13",
+      "filedDate": "2025-02-13",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20024346.pdf"
+    }
+  ],
+  "tradesShown": 11
+}

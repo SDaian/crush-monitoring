@@ -1,0 +1,175 @@
+{
+  "_comment": "Generated from real official disclosures by congress/landing_data.py (daily Action). Do not edit by hand. Dollar figures are bracket midpoints — estimates, not real position sizes.",
+  "slug": "spcx",
+  "ticker": "SPCX",
+  "company": "Space Exploration Technologies Corp.",
+  "indexable": false,
+  "summary": {
+    "trades": 7,
+    "members": 6,
+    "buys": 7,
+    "sells": 0,
+    "other": 0,
+    "firstTx": "2026-06-12",
+    "lastTx": "2026-06-18",
+    "lastFiling": "2026-07-26",
+    "estBuyLabel": "$239K",
+    "estSellLabel": "$0",
+    "pctLate": 0
+  },
+  "topMembers": [
+    {
+      "name": "William R. Timmons IV",
+      "slug": "william-r-timmons-iv",
+      "party": "R",
+      "chamber": "House",
+      "trades": 2,
+      "buys": 2,
+      "sells": 0,
+      "estLabel": "$150K",
+      "hasPage": false
+    },
+    {
+      "name": "Daniel Meuser",
+      "slug": "daniel-meuser",
+      "party": "R",
+      "chamber": "House",
+      "trades": 1,
+      "buys": 1,
+      "sells": 0,
+      "estLabel": "$33K",
+      "hasPage": false
+    },
+    {
+      "name": "John James",
+      "slug": "john-james",
+      "party": "R",
+      "chamber": "House",
+      "trades": 1,
+      "buys": 1,
+      "sells": 0,
+      "estLabel": "$33K",
+      "hasPage": false
+    },
+    {
+      "name": "Gilbert Ray Cisneros, Jr.",
+      "slug": "gilbert-ray-cisneros-jr",
+      "party": "D",
+      "chamber": "House",
+      "trades": 1,
+      "buys": 1,
+      "sells": 0,
+      "estLabel": "$8K",
+      "hasPage": true
+    },
+    {
+      "name": "Jared Moskowitz",
+      "slug": "jared-moskowitz",
+      "party": "D",
+      "chamber": "House",
+      "trades": 1,
+      "buys": 1,
+      "sells": 0,
+      "estLabel": "$8K",
+      "hasPage": false
+    },
+    {
+      "name": "John J. McGuire III",
+      "slug": "john-j-mcguire-iii",
+      "party": "R",
+      "chamber": "House",
+      "trades": 1,
+      "buys": 1,
+      "sells": 0,
+      "estLabel": "$8K",
+      "hasPage": false
+    }
+  ],
+  "trades": [
+    {
+      "member": "Gilbert Ray Cisneros, Jr.",
+      "memberSlug": "gilbert-ray-cisneros-jr",
+      "hasPage": true,
+      "party": "D",
+      "side": "BUY",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-06-18",
+      "filedDate": "2026-07-02",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20034906.pdf"
+    },
+    {
+      "member": "William R. Timmons IV",
+      "memberSlug": "william-r-timmons-iv",
+      "hasPage": false,
+      "party": "R",
+      "side": "BUY",
+      "amountBucket": "$50K – $100K",
+      "txDate": "2026-06-15",
+      "filedDate": "2026-07-19",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20022577.pdf"
+    },
+    {
+      "member": "William R. Timmons IV",
+      "memberSlug": "william-r-timmons-iv",
+      "hasPage": false,
+      "party": "R",
+      "side": "BUY",
+      "amountBucket": "$50K – $100K",
+      "txDate": "2026-06-15",
+      "filedDate": "2026-07-19",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035042.pdf"
+    },
+    {
+      "member": "John J. McGuire III",
+      "memberSlug": "john-j-mcguire-iii",
+      "hasPage": false,
+      "party": "R",
+      "side": "BUY",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-06-15",
+      "filedDate": "2026-07-08",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20034942.pdf"
+    },
+    {
+      "member": "Daniel Meuser",
+      "memberSlug": "daniel-meuser",
+      "hasPage": false,
+      "party": "R",
+      "side": "BUY",
+      "amountBucket": "$15K – $50K",
+      "txDate": "2026-06-15",
+      "filedDate": "2026-07-02",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20034774.pdf"
+    },
+    {
+      "member": "Jared Moskowitz",
+      "memberSlug": "jared-moskowitz",
+      "hasPage": false,
+      "party": "D",
+      "side": "BUY",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-06-12",
+      "filedDate": "2026-07-26",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20034963.pdf"
+    },
+    {
+      "member": "John James",
+      "memberSlug": "john-james",
+      "hasPage": false,
+      "party": "R",
+      "side": "BUY",
+      "amountBucket": "$15K – $50K",
+      "txDate": "2026-06-12",
+      "filedDate": "2026-07-12",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20034949.pdf"
+    }
+  ],
+  "tradesShown": 7
+}

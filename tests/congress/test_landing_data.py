@@ -395,15 +395,45 @@ class TestTickerPages(unittest.TestCase):
         # (thin auto-generated pages are an SEO liability).
         trades = [MT(ticker="NVDA", tx="2026-06-01") for _ in range(30)]
         trades += [MT(ticker="THIN") for _ in range(2)]
-        uni = ld.select_ticker_pages(trades, minimum=25)
+        uni = ld.select_ticker_pages(trades, minimum=25, featured=[])
         self.assertEqual(uni, ["NVDA"])
         self.assertNotIn("THIN", uni)
 
-    def test_universe_ranked_and_capped(self):
+    def test_universe_ranked_and_uncapped(self):
+        # Every symbol clearing the bar earns a page — a top-N cap once cut
+        # 66 qualifying symbols (ORCL, IBM, LMT …), which is a content gap.
         trades = ([MT(ticker="AAA") for _ in range(30)]
-                  + [MT(ticker="BBB") for _ in range(40)])
-        self.assertEqual(ld.select_ticker_pages(trades, minimum=5), ["BBB", "AAA"])
-        self.assertEqual(ld.select_ticker_pages(trades, count=1, minimum=5), ["BBB"])
+                  + [MT(ticker="BBB") for _ in range(40)]
+                  + [MT(ticker="CCC") for _ in range(20)])
+        self.assertEqual(
+            ld.select_ticker_pages(trades, minimum=20, featured=[]),
+            ["BBB", "AAA", "CCC"])
+
+    def test_featured_tickers_get_a_page_even_when_thin(self):
+        # The tracker's Featured tab links per ticker, so the page must
+        # resolve; thin ones ride along after the qualifying set.
+        trades = ([MT(ticker="NVDA") for _ in range(30)]
+                  + [MT(ticker="NU") for _ in range(4)])
+        uni = ld.select_ticker_pages(trades, minimum=25, featured=["NU"])
+        self.assertEqual(uni, ["NVDA", "NU"])
+
+    def test_featured_ticker_is_not_duplicated(self):
+        trades = [MT(ticker="NVDA") for _ in range(30)]
+        self.assertEqual(
+            ld.select_ticker_pages(trades, minimum=25, featured=["NVDA"]),
+            ["NVDA"])
+
+    def test_only_substantive_pages_are_indexable(self):
+        # The thin featured stub exists to make a link resolve — it must
+        # never be offered to search engines.
+        self.assertTrue(ld.ticker_is_indexable(25, minimum=25))
+        self.assertFalse(ld.ticker_is_indexable(4, minimum=25))
+
+    def test_payload_carries_the_index_flag(self):
+        thin = [MT(ticker="NU", tx="2026-06-01") for _ in range(4)]
+        fat = [MT(ticker="NVDA", tx="2026-06-01") for _ in range(30)]
+        self.assertFalse(ld.ticker_payload("NU", thin)["indexable"])
+        self.assertTrue(ld.ticker_payload("NVDA", fat)["indexable"])
 
     def test_payload_summary_and_members(self):
         trades = [

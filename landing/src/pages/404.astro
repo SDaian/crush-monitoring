@@ -1,0 +1,112 @@
+---
+// "/404" — the not-found page. Astro prerenders it and Vercel serves it for
+// any unmatched path, so a mistyped or retired URL lands somewhere useful
+// instead of the host's generic error. Deliberately a ROUTING page, not a
+// marketing one: the job is to get the reader to the record they wanted.
+//
+// It is noindex — a 404 that search engines index is a soft-404 problem —
+// and it carries no signup form, unlike every content page: asking for an
+// email from someone who just hit a dead end is the wrong moment.
+import "../styles/global.css";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import Seo from "../components/Seo.astro";
+import stats from "../data/stats.json";
+import tickerIndex from "../data/tickers/_index.json";
+import memberIndex from "../data/members/_index.json";
+
+// Real destinations, picked by substance — the most-traded symbols and the
+// featured members, so the suggestions are never a dead list.
+const topTickers = (tickerIndex.tickers ?? []).slice(0, 8);
+const members = (memberIndex.members ?? []).slice(0, 6);
+---
+
+<html lang="en">
+  <head>
+    <Seo
+      title="Page not found · Capitol Ledger"
+      description="That page does not exist. Browse congressional stock trades by member, by ticker, or in the full disclosure tracker."
+      path="/404"
+      noindex={true}
+    />
+  </head>
+  <body>
+    <Header />
+
+    <section class="mx-auto max-w-[75rem] px-[5vw] pt-[12vh] pb-[7vh]">
+      <p class="eyebrow mb-4">Error 404</p>
+      <h1 class="text-[clamp(2rem,6vw,3.5rem)] font-extrabold leading-[1.05]">
+        That page isn't here.
+      </h1>
+      <p class="mt-5 max-w-[60ch] text-ink-soft">
+        The link may be mistyped, or it may point at a page we no longer
+        publish. Everything we track is still one click away — all
+        {stats.tradesThisYear?.toLocaleString?.() ?? ""} disclosed trades of {stats.year}
+        are in the tracker.
+      </p>
+
+      <div class="mt-9 flex flex-wrap gap-3">
+        <a href="/tracker" class="btn btn-stamp">Open the tracker</a>
+        <a href="/" class="btn">Home</a>
+      </div>
+    </section>
+
+    <section class="mx-auto max-w-[75rem] px-[5vw] pb-[7vh]">
+      <div class="section-head">
+        <h2 class="section-title whitespace-nowrap">Most-traded stocks</h2>
+        <span class="eyebrow">By disclosed trades</span>
+      </div>
+      <div class="mt-6 flex flex-wrap gap-2">
+        {
+          topTickers.map((t: any) => (
+            <a href={`/tickers/${t.slug}`} class="chiplink">
+              <b>{t.ticker}</b>
+              <small>{t.trades}</small>
+            </a>
+          ))
+        }
+        <a href="/tickers" class="chiplink">All stocks →</a>
+      </div>
+    </section>
+
+    <section class="mx-auto max-w-[75rem] px-[5vw] pb-[10vh]">
+      <div class="section-head">
+        <h2 class="section-title whitespace-nowrap">Featured members</h2>
+        <span class="eyebrow">Individual records</span>
+      </div>
+      <div class="mt-6 flex flex-wrap gap-2">
+        {
+          members.map((m: any) => (
+            <a href={`/members/${m.slug}`} class="chiplink">
+              <b>{m.name}</b>
+            </a>
+          ))
+        }
+        <a href="/members" class="chiplink">All members →</a>
+      </div>
+    </section>
+
+    <Footer />
+
+    <style>
+      .chiplink {
+        display: inline-flex;
+        align-items: baseline;
+        gap: 0.5rem;
+        border: 1px solid var(--color-rule);
+        padding: 0.5rem 0.85rem;
+        font-family: var(--font-mono);
+        font-size: 0.85rem;
+        color: var(--color-ink);
+        text-decoration: none;
+      }
+      .chiplink:hover {
+        border-color: var(--color-ink);
+      }
+      .chiplink small {
+        color: var(--color-ink-soft);
+        font-size: 0.75rem;
+      }
+    </style>
+  </body>
+</html>

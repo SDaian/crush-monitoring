@@ -1,0 +1,95 @@
+{
+  "_comment": "Generated from real official disclosures by congress/landing_data.py (daily Action). Do not edit by hand. Dollar figures are bracket midpoints — estimates, not real position sizes.",
+  "slug": "nu",
+  "ticker": "NU",
+  "company": "Nu Holdings Ltd.",
+  "indexable": false,
+  "summary": {
+    "trades": 4,
+    "members": 2,
+    "buys": 1,
+    "sells": 3,
+    "other": 0,
+    "firstTx": "2025-03-10",
+    "lastTx": "2025-05-23",
+    "lastFiling": "2025-06-23",
+    "estBuyLabel": "$8K",
+    "estSellLabel": "$24K",
+    "pctLate": 0
+  },
+  "topMembers": [
+    {
+      "name": "Byron Donalds",
+      "slug": "byron-donalds",
+      "party": "R",
+      "chamber": "House",
+      "trades": 2,
+      "buys": 0,
+      "sells": 2,
+      "estLabel": "$16K",
+      "hasPage": false
+    },
+    {
+      "name": "Robert P. Bresnahan, Jr.",
+      "slug": "robert-p-bresnahan-jr",
+      "party": "R",
+      "chamber": "House",
+      "trades": 2,
+      "buys": 1,
+      "sells": 1,
+      "estLabel": "$16K",
+      "hasPage": false
+    }
+  ],
+  "trades": [
+    {
+      "member": "Robert P. Bresnahan, Jr.",
+      "memberSlug": "robert-p-bresnahan-jr",
+      "hasPage": false,
+      "party": "R",
+      "side": "SELL",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2025-05-23",
+      "filedDate": "2025-06-23",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20030546.pdf"
+    },
+    {
+      "member": "Byron Donalds",
+      "memberSlug": "byron-donalds",
+      "hasPage": false,
+      "party": "R",
+      "side": "SELL",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2025-04-10",
+      "filedDate": "2025-05-24",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20030342.pdf"
+    },
+    {
+      "member": "Byron Donalds",
+      "memberSlug": "byron-donalds",
+      "hasPage": false,
+      "party": "R",
+      "side": "SELL",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2025-04-10",
+      "filedDate": "2025-05-24",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20030342.pdf"
+    },
+    {
+      "member": "Robert P. Bresnahan, Jr.",
+      "memberSlug": "robert-p-bresnahan-jr",
+      "hasPage": false,
+      "party": "R",
+      "side": "BUY",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2025-03-10",
+      "filedDate": "2025-04-09",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20029055.pdf"
+    }
+  ],
+  "tradesShown": 4
+}

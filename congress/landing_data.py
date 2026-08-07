@@ -654,13 +654,18 @@ def write_member_files(
 # --- Ticker pages (/tickers/<symbol>) -----------------------------------
 #
 # Chosen by SUBSTANCE, not by the featured watchlist: the most-traded tickers
-# in the real disclosure data, and only those clearing TICKER_PAGE_MIN_TRADES.
-# A featured name with 4 disclosed trades (NU) would make a thin page, and a
-# pile of thin auto-generated pages is an SEO liability on a young domain — so
-# the universe is derived from the data every run. Scaling this to *every*
-# ticker (1,399 of them) is the storage-stage-1 trigger in ROADMAP.md; keep the
-# cap until then (this slices the trades JSON in memory, like member pages).
-TICKER_PAGE_COUNT = 24
+# in the real disclosure data: EVERY symbol clearing TICKER_PAGE_MIN_TRADES
+# earns one. There is deliberately no top-N cap — a cap cut 66 symbols that
+# met the substance bar (ORCL 47, IBM 45, LMT 25 …), which is a content gap,
+# not SEO hygiene.
+#
+# Featured-watchlist names below the bar still get a page so the tracker's
+# "See who traded it" link always resolves, but they are marked NOINDEX: the
+# link works for a reader, and a 4-trade stub (NU) never enters the index.
+# That is the standing "no thin indexable pages" rule, kept intact.
+#
+# Scaling to *every* ticker (1,399) remains the storage-stage-1 trigger in
+# ROADMAP.md; this still slices the trades JSON in memory, like member pages.
 TICKER_PAGE_MIN_TRADES = 25
 TICKER_TRADE_CAP = 25
 TICKER_MEMBER_CAP = 10
@@ -694,11 +699,38 @@ def clean_company(asset: str, ticker: str) -> str:
     return name or ticker
 
 
-def select_ticker_pages(trades: list[dict], count: int = TICKER_PAGE_COUNT,
-                        minimum: int = TICKER_PAGE_MIN_TRADES) -> list[str]:
-    """The ticker universe that earns a page: most-traded first, thin ones out."""
+def featured_tickers() -> list[str]:
+    """The watchlist shown on the tracker's "Featured stocks" tab. Those rows
+    link out per ticker, so each one needs a page that resolves."""
+    from .indicators import AI_TICKERS
+
+    return [t["ticker"] for t in AI_TICKERS if t.get("ticker")]
+
+
+def select_ticker_pages(trades: list[dict],
+                        minimum: int = TICKER_PAGE_MIN_TRADES,
+                        featured: list[str] | None = None) -> list[str]:
+    """The ticker universe that earns a page, most-traded first.
+
+    Two ways in: clearing `minimum` disclosed trades (indexable), or being on
+    the featured watchlist (linked from the tracker, so it must resolve —
+    noindex when thin; see `ticker_is_indexable`).
+    """
     counts = Counter(t["ticker"] for t in trades if t.get("ticker"))
-    return [tk for tk, n in counts.most_common(count) if n >= minimum]
+    picked = [tk for tk, n in counts.most_common() if n >= minimum]
+    seen = set(picked)
+    for tk in (featured if featured is not None else featured_tickers()):
+        if tk and tk not in seen:
+            picked.append(tk)
+            seen.add(tk)
+    return picked
+
+
+def ticker_is_indexable(trade_count: int,
+                        minimum: int = TICKER_PAGE_MIN_TRADES) -> bool:
+    """Only pages carrying real substance are offered to search engines; a
+    featured stub exists to make an internal link resolve, nothing more."""
+    return trade_count >= minimum
 
 
 def ticker_payload(ticker: str, trades: list[dict],
@@ -759,6 +791,9 @@ def ticker_payload(ticker: str, trades: list[dict],
         "slug": ticker_slug(ticker),
         "ticker": ticker,
         "company": company,
+        # A featured-watchlist stub exists so the tracker's link resolves;
+        # only pages with real substance are offered to search engines.
+        "indexable": ticker_is_indexable(len(ts)),
         "summary": {
             "trades": len(ts),
             "members": len(by_member),
@@ -818,6 +853,7 @@ def write_ticker_files(trades: list[dict], out_dir: Path,
             "buys": payload["summary"]["buys"],
             "sells": payload["summary"]["sells"],
             "lastTx": payload["summary"]["lastTx"],
+            "indexable": payload["indexable"],
         })
     index.sort(key=lambda r: -r["trades"])
     (tickers_dir / "_index.json").write_text(

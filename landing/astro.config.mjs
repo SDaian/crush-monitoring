@@ -2,6 +2,7 @@
 import { defineConfig } from "astro/config";
 import tailwindcss from "@tailwindcss/vite";
 import sitemap from "@astrojs/sitemap";
+import tickerIndex from "./src/data/tickers/_index.json" with { type: "json" };
 import { FontaineTransform } from "fontaine";
 
 // @fontsource ships every @font-face with `font-display: swap`, which shows
@@ -46,6 +47,21 @@ export default defineConfig({
     // /tickers/nvda still resolves, but it fills Search Console's Coverage
     // report with "alternate page with proper canonical tag" noise.
     sitemap({
+      // Never advertise a page we tell robots to ignore — a sitemap entry
+      // for a noindex URL is a contradictory signal in Search Console.
+      // Two kinds are excluded: dated report permalinks (they canonicalise
+      // to /report) and featured-watchlist ticker stubs below the
+      // substance bar (they exist so an internal link resolves).
+      filter: (page) => {
+        const path = new URL(page).pathname.replace(/\/$/, "");
+        if (/^\/report\/\d{4}-\d{2}-\d{2}$/.test(path)) return false;
+        const slug = path.startsWith("/tickers/") ? path.slice(9) : null;
+        if (slug) {
+          const row = tickerIndex.tickers.find((t) => t.slug === slug);
+          if (row && row.indexable === false) return false;
+        }
+        return true;
+      },
       serialize: (item) => ({
         ...item,
         url: item.url.replace(/(?<!\/\/)\/$/, ""),

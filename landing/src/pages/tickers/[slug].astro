@@ -109,6 +109,7 @@ const schema = [
       description={description}
       path={`/tickers/${t.slug}`}
       schema={schema}
+      noindex={t.indexable === false}
     />
   </head>
   <body>
