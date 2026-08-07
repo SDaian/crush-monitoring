@@ -4,6 +4,32 @@
   "ticker": "AMZN",
   "company": "Amazon.com, Inc.",
   "indexable": true,
+  "technical": {
+    "asOf": "2026-08-06",
+    "price": 272.26,
+    "chg1d": -0.14,
+    "chg1w": 15.61,
+    "chg1m": 11.76,
+    "rsi14": 63.2,
+    "sma50": 247.45,
+    "sma200": 236.25,
+    "vsSma50": 10.0,
+    "vsSma200": 15.2,
+    "relVol": 0.56,
+    "high52w": 284.02,
+    "low52w": 198.79,
+    "rangePos": 86.0,
+    "series": [],
+    "signals": [],
+    "nextEarnings": null,
+    "score": {
+      "label": "Strong Buy",
+      "buys": 6,
+      "sells": 0,
+      "holds": 1,
+      "ratio": 0.857
+    }
+  },
   "summary": {
     "trades": 117,
     "members": 31,

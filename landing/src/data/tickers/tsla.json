@@ -4,6 +4,32 @@
   "ticker": "TSLA",
   "company": "Tesla, Inc.",
   "indexable": true,
+  "technical": {
+    "asOf": "2026-08-06",
+    "price": 319.53,
+    "chg1d": -0.63,
+    "chg1w": 3.46,
+    "chg1m": -18.91,
+    "rsi14": 36.9,
+    "sma50": 382.68,
+    "sma200": 409.39,
+    "vsSma50": -16.5,
+    "vsSma200": -21.9,
+    "relVol": 0.64,
+    "high52w": 489.88,
+    "low52w": 298.32,
+    "rangePos": 11.0,
+    "series": [],
+    "signals": [],
+    "nextEarnings": null,
+    "score": {
+      "label": "Strong Sell",
+      "buys": 1,
+      "sells": 5,
+      "holds": 1,
+      "ratio": -0.571
+    }
+  },
   "summary": {
     "trades": 58,
     "members": 12,

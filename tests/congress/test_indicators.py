@@ -176,3 +176,69 @@ class TestAiScore(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class TestWeeklyCloses(unittest.TestCase):
+    """The ticker-page sparkline series — derived from the history already
+    fetched for the indicators, so it costs no extra API call."""
+
+    def _rows(self, n):
+        # n consecutive weekdays starting on a Monday (2026-01-05).
+        from datetime import date, timedelta
+        start = date(2026, 1, 5)
+        out, d = [], start
+        while len(out) < n:
+            if d.weekday() < 5:
+                out.append({"date": d.isoformat(), "close": 100.0 + len(out),
+                            "volume": 1.0})
+            d += timedelta(days=1)
+        return out
+
+    def test_one_point_per_week(self):
+        rows = self._rows(20)          # 4 trading weeks
+        pts = ind.weekly_closes(rows)
+        self.assertEqual(len(pts), 4)
+
+    def test_point_is_the_last_close_of_its_week(self):
+        rows = self._rows(10)          # 2 weeks
+        pts = ind.weekly_closes(rows)
+        self.assertEqual(pts[0]["c"], rows[4]["close"])   # Friday of week 1
+        self.assertEqual(pts[-1]["c"], rows[-1]["close"])
+
+    def test_capped_to_the_requested_window(self):
+        pts = ind.weekly_closes(self._rows(400), weeks=52)
+        self.assertLessEqual(len(pts), 52)
+
+    def test_ignores_unusable_rows(self):
+        rows = self._rows(5) + [{"date": "", "close": 1.0},
+                                {"date": "2026-02-02", "close": None}]
+        self.assertEqual(len(ind.weekly_closes(rows)), 1)
+
+    def test_empty_history(self):
+        self.assertEqual(ind.weekly_closes([]), [])
+
+
+class TestNextEarnings(unittest.TestCase):
+    """Optional, gated data: any doubt yields None so the page shows nothing
+    rather than a guessed date."""
+
+    BODY = ('{"earnings":[{"date":"2026-05-01","time":"post"},'
+            '{"date":"2026-11-19","time":"post"},{"date":"2026-08-20"}]}')
+
+    def test_picks_the_earliest_future_date(self):
+        got = ind.next_earnings(self.BODY, "2026-08-06")
+        self.assertEqual(got["date"], "2026-08-20")
+
+    def test_today_is_not_upcoming(self):
+        got = ind.next_earnings(self.BODY, "2026-08-20")
+        self.assertEqual(got["date"], "2026-11-19")
+
+    def test_all_past_yields_none(self):
+        self.assertIsNone(
+            ind.next_earnings('{"earnings":[{"date":"2020-01-01"}]}',
+                                     "2026-08-06"))
+
+    def test_unparseable_yields_none(self):
+        for body in ("", "not json", "{}", '{"earnings":"nope"}',
+                     '{"earnings":[{"date":"soon"}]}'):
+            self.assertIsNone(ind.next_earnings(body, "2026-08-06"))

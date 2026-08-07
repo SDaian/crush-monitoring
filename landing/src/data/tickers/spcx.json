@@ -4,6 +4,32 @@
   "ticker": "SPCX",
   "company": "Space Exploration Technologies Corp.",
   "indexable": false,
+  "technical": {
+    "asOf": "2026-08-06",
+    "price": 114.92,
+    "chg1d": 6.14,
+    "chg1w": 2.42,
+    "chg1m": -22.51,
+    "rsi14": 45.2,
+    "sma50": null,
+    "sma200": null,
+    "vsSma50": null,
+    "vsSma200": null,
+    "relVol": 2.92,
+    "high52w": 211.39,
+    "low52w": 108.27,
+    "rangePos": 6.0,
+    "series": [],
+    "signals": [],
+    "nextEarnings": null,
+    "score": {
+      "label": "Sell",
+      "buys": 1,
+      "sells": 2,
+      "holds": 1,
+      "ratio": -0.25
+    }
+  },
   "summary": {
     "trades": 7,
     "members": 6,

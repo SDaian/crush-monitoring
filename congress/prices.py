@@ -78,6 +78,24 @@ def _pace() -> None:
     _last_request = time.monotonic()
 
 
+def fetch_earnings_raw(session, ticker: str, key: str) -> str:
+    """Raw Twelve Data ``earnings`` JSON for one ticker (network).
+
+    The endpoint is not on every plan, so callers treat any failure as
+    "unknown" rather than an error — the ticker page simply omits the line.
+    Never print the URL: it carries the key.
+    """
+    _pace()
+    params = {
+        "symbol": td_symbol(ticker),
+        "country": "United States",
+        "apikey": key,
+    }
+    resp = session.get(f"{TD_HOST}/earnings", params=params, timeout=30)
+    resp.raise_for_status()
+    return resp.text
+
+
 def fetch_raw(session, ticker: str, key: str) -> str:
     """Download a ticker's raw Twelve Data time_series JSON (network).
 

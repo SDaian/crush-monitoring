@@ -4,6 +4,32 @@
   "ticker": "AVGO",
   "company": "Broadcom Inc.",
   "indexable": true,
+  "technical": {
+    "asOf": "2026-08-06",
+    "price": 420.56,
+    "chg1d": 0.55,
+    "chg1w": 8.44,
+    "chg1m": 8.2,
+    "rsi14": 62.5,
+    "sma50": 394.92,
+    "sma200": 367.2,
+    "vsSma50": 6.5,
+    "vsSma200": 14.5,
+    "relVol": 0.67,
+    "high52w": 481.57,
+    "low52w": 289.6,
+    "rangePos": 68.0,
+    "series": [],
+    "signals": [],
+    "nextEarnings": null,
+    "score": {
+      "label": "Strong Buy",
+      "buys": 6,
+      "sells": 0,
+      "holds": 1,
+      "ratio": 0.857
+    }
+  },
   "summary": {
     "trades": 82,
     "members": 22,

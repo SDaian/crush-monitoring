@@ -67,6 +67,60 @@ const STAT_CARDS = [
 
 // Search intent here is "<ticker> congress trades" / "who in congress owns
 // <company>" — lead the title with the symbol, keep the company name in it.
+// --- Technical read (featured watchlist only) -------------------------
+const tech: any = (t as any).technical ?? null;
+const num = (v: any, suffix = "", digits = 2) =>
+  v === null || v === undefined ? "—" : `${Number(v).toFixed(digits)}${suffix}`;
+const signed = (v: any) =>
+  v === null || v === undefined ? "—" : `${v > 0 ? "+" : ""}${Number(v).toFixed(2)}%`;
+const dirClass = (v: any) =>
+  v === null || v === undefined ? "" : v > 0 ? "text-buy" : v < 0 ? "text-sell" : "";
+
+// Inline SVG sparkline of the weekly closes — built here, no chart library
+// and no client JS (DESIGN.md: charts are build-time SVG).
+const pts: any[] = tech?.series ?? [];
+const spark = (() => {
+  if (pts.length < 2) return null;
+  const w = 1000;
+  const h = 260;
+  const closes = pts.map((p: any) => p.c);
+  const lo = Math.min(...closes);
+  const hi = Math.max(...closes);
+  const span = hi - lo || 1;
+  const x = (i: number) => (i / (pts.length - 1)) * w;
+  const y = (c: number) => h - ((c - lo) / span) * (h - 8) - 4;
+  const line = closes.map((c: number, i: number) => `${x(i).toFixed(1)},${y(c).toFixed(1)}`).join(" ");
+  return {
+    w, h, line,
+    area: `0,${h} ${line} ${w},${h}`,
+    lo: lo.toFixed(2),
+    hi: hi.toFixed(2),
+  };
+})();
+
+const cells = tech
+  ? [
+      { k: "Price", v: num(tech.price), x: `as of ${tech.asOf}` },
+      { k: "1 day", v: signed(tech.chg1d), cls: dirClass(tech.chg1d) },
+      { k: "1 week", v: signed(tech.chg1w), cls: dirClass(tech.chg1w) },
+      { k: "1 month", v: signed(tech.chg1m), cls: dirClass(tech.chg1m) },
+      { k: "RSI (14)", v: num(tech.rsi14, "", 1),
+        x: tech.rsi14 == null ? "" : tech.rsi14 < 30 ? "oversold" : tech.rsi14 > 70 ? "overbought" : "neutral" },
+      { k: "vs 50-day", v: signed(tech.vsSma50), cls: dirClass(tech.vsSma50),
+        x: `avg ${num(tech.sma50)}` },
+      { k: "vs 200-day", v: signed(tech.vsSma200), cls: dirClass(tech.vsSma200),
+        x: `avg ${num(tech.sma200)}` },
+      { k: "52-week range", v: tech.rangePos == null ? "—" : `${tech.rangePos}%`,
+        x: `${num(tech.low52w)} – ${num(tech.high52w)}` },
+      { k: "Rel. volume", v: tech.relVol == null ? "—" : `${num(tech.relVol)}x`,
+        x: "vs 20-day average" },
+    ]
+  : [];
+const scoreClass = tech
+  ? { "Strong Buy": "text-buy", Buy: "text-buy", "Strong Sell": "text-sell",
+      Sell: "text-sell", Hold: "text-ink-soft" }[tech.score.label] ?? ""
+  : "";
+
 const title = `${t.ticker} congressional stock trades — who in Congress bought and sold · Capitol Ledger`;
 // Front-loaded with this ticker's own numbers — the company name goes in an
 // optional tail clause because it is the one part whose length we do not
@@ -275,6 +329,104 @@ const schema = [
         record — never real-time, and never investment advice.
       </p>
     </section>
+
+    {
+      tech && (
+        <section id="technical" class="mx-auto max-w-[75rem] px-[5vw] pb-[7vh]">
+          <div class="section-head">
+            <h2 class="section-title whitespace-nowrap">Technical read</h2>
+            <span class="eyebrow">Daily snapshot · {tech.asOf}</span>
+          </div>
+
+          <p class="fineprint mt-4 max-w-[80ch]">
+            Mechanical readings computed from past daily closes for the stocks
+            on our watchlist — the same ones in the morning report. A daily
+            snapshot, <b class="text-ink">not real-time</b>, and{" "}
+            <b class="text-ink">not investment advice</b>.
+          </p>
+
+          {spark && (
+            <figure class="mt-7">
+              <svg
+                viewBox={`0 0 ${spark.w} ${spark.h}`}
+                width="100%"
+                height="180"
+                role="img"
+                aria-label={`${t.ticker} weekly closes over the last year`}
+                preserveAspectRatio="none"
+              >
+                <polyline
+                  points={spark.area}
+                  fill="var(--color-wash)"
+                  stroke="none"
+                />
+                <polyline
+                  points={spark.line}
+                  fill="none"
+                  stroke="var(--color-stamp)"
+                  stroke-width="2"
+                  vector-effect="non-scaling-stroke"
+                />
+              </svg>
+              <figcaption class="fineprint mt-2">
+                Weekly closes, last {tech.series.length} weeks · low{" "}
+                {spark.lo} · high {spark.hi}
+              </figcaption>
+            </figure>
+          )}
+
+          <div class="mt-7 grid gap-3 [grid-template-columns:repeat(auto-fit,minmax(11rem,1fr))]">
+            {cells.map((c: any) => (
+              <div class="indcell">
+                <div class="k">{c.k}</div>
+                <div class={`v ${c.cls ?? ""}`}>{c.v}</div>
+                {c.x && <div class="x">{c.x}</div>}
+              </div>
+            ))}
+          </div>
+
+          <div class="mt-7 border border-rule p-5">
+            <div class="eyebrow">Mechanical summary</div>
+            <p class="mt-2 text-lg font-bold">
+              <span class={scoreClass}>{tech.score.label}</span>
+              <span class="ml-2 text-sm font-normal text-ink-soft">
+                {tech.score.buys} buy · {tech.score.holds} hold ·{" "}
+                {tech.score.sells} sell votes
+              </span>
+            </p>
+            <p class="fineprint mt-3 max-w-[80ch]">
+              A rule-based tally of the indicators shown above — each casts one
+              buy/hold/sell vote (price vs. its 20/50/200-day averages, the
+              50-vs-200 cross, RSI, and the 1-week and 1-month changes). It is
+              reproducible and blind to fundamentals, news and your own goals.
+              <b class="text-ink"> Not a recommendation.</b>
+            </p>
+          </div>
+
+          {(tech.signals.length > 0 || tech.nextEarnings) && (
+            <div class="mt-7">
+              <div class="eyebrow">Worth keeping in mind</div>
+              <ul class="mt-3 space-y-2">
+                {tech.signals.map((sig: any) => (
+                  <li class="text-sm">
+                    <b class="mono">{sig.label}</b>{" "}
+                    <span class="text-ink-soft">· {sig.asof}</span>
+                  </li>
+                ))}
+                {tech.nextEarnings && (
+                  <li class="text-sm">
+                    <b class="mono">Next earnings: {tech.nextEarnings.date}</b>
+                    {tech.nextEarnings.time && (
+                      <span class="text-ink-soft"> · {tech.nextEarnings.time}</span>
+                    )}
+                  </li>
+                )}
+              </ul>
+            </div>
+          )}
+        </section>
+      )
+    }
 
     <section class="border-t-2 border-ink px-[5vw] py-[10vh] text-center">
       <h2 class="text-[clamp(1.8rem,4.5vw,3.2rem)] font-black leading-[1.15] tracking-[-0.03em] text-balance">
@@ -539,6 +691,34 @@ const schema = [
     }
     .mrow {
       grid-template-columns: 1.4fr auto;
+    }
+  }
+  .indcell {
+    border: 1px solid var(--color-rule);
+    padding: 0.75rem 0.9rem;
+  }
+  .indcell .k {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: var(--color-ink-soft);
+  }
+  .indcell .v {
+    font-family: var(--font-mono);
+    font-size: 1.15rem;
+    font-weight: 700;
+    margin-top: 0.25rem;
+  }
+  .indcell .x {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--color-ink-soft);
+    margin-top: 0.15rem;
+  }
+  @media (max-width: 40rem) {
+    .indcell .v {
+      font-size: 1rem;
     }
     .mrow .msplit {
       display: none;

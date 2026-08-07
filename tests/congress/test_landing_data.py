@@ -705,3 +705,51 @@ class TestMemberIndexPerf(unittest.TestCase):
         row = idx["members"][0]
         self.assertIsNone(row["perfPct"])
         self.assertIsNone(row["perfBenchPct"])
+
+
+class TestTechnicalBlock(unittest.TestCase):
+    """The ticker page's technical panel — featured watchlist only, and
+    scored by the SAME function the tracker and the report use."""
+
+    READINGS = {
+        "NVDA": {"name": "NVIDIA", "asof_date": "2026-08-06", "price": 218.99,
+                 "chg_1d": -0.1, "chg_1w": 12.3, "chg_1m": 7.3, "rsi14": 61.4,
+                 "sma20": 206.2, "sma50": 205.9, "sma200": 193.8,
+                 "vs_sma50": 6.4, "vs_sma200": 13.0, "rel_vol": 0.87,
+                 "high_52w": 235.7, "low_52w": 165.2, "range_pos": 76.0,
+                 "series": [{"d": "2026-08-03", "c": 218.99}],
+                 "signals": [{"type": "golden_cross", "label": "Golden cross",
+                              "asof": "2026-08-06"}]},
+    }
+
+    def test_featured_ticker_gets_a_panel(self):
+        b = ld.technical_block("NVDA", self.READINGS)
+        self.assertEqual(b["asOf"], "2026-08-06")
+        self.assertEqual(b["rsi14"], 61.4)
+        self.assertEqual(len(b["series"]), 1)
+        self.assertEqual(len(b["signals"]), 1)
+
+    def test_unfeatured_ticker_has_no_panel(self):
+        self.assertIsNone(ld.technical_block("LMT", self.READINGS))
+        self.assertIsNone(ld.technical_block("NVDA", {}))
+
+    def test_score_matches_the_shared_function(self):
+        from congress.indicators import ai_score
+        b = ld.technical_block("NVDA", self.READINGS)
+        self.assertEqual(b["score"], ai_score(self.READINGS["NVDA"]))
+
+    def test_absent_earnings_is_none_not_invented(self):
+        self.assertIsNone(ld.technical_block("NVDA", self.READINGS)["nextEarnings"])
+
+    def test_payload_carries_the_panel_only_when_featured(self):
+        trades = [MT(ticker="NVDA", tx="2026-06-01") for _ in range(30)]
+        with_panel = ld.ticker_payload("NVDA", trades, indicators=self.READINGS)
+        without = ld.ticker_payload("NVDA", trades)
+        self.assertIsNotNone(with_panel["technical"])
+        self.assertIsNone(without["technical"])
+
+    def test_missing_indicator_file_degrades_to_empty(self):
+        from pathlib import Path
+        from tempfile import TemporaryDirectory
+        with TemporaryDirectory() as tmp:
+            self.assertEqual(ld.load_indicators(Path(tmp) / "absent.json"), {})

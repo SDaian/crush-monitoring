@@ -21,6 +21,7 @@ from __future__ import annotations
 
 import json
 import re
+from datetime import date
 
 # The featured stock universe (ticker → display name). Order drives the card
 # strip on the page: chip / foundry names first, then hyperscalers & big-tech,
@@ -49,6 +50,7 @@ AI_TICKERS: list[dict[str, str]] = [
     {"ticker": "MELI", "name": "MercadoLibre"},
     {"ticker": "NU", "name": "Nu Holdings"},
     {"ticker": "SPCX", "name": "SpaceX"},
+    {"ticker": "PYPL", "name": "PayPal"},
 ]
 
 # Trading-day windows (approximate calendar spans in sessions).
@@ -255,6 +257,54 @@ def ai_score(t: dict) -> dict:
             "ratio": round(ratio, 3)}
 
 
+def next_earnings(body: str, today: str) -> dict | None:
+    """The next scheduled earnings date from a Twelve Data ``earnings`` body,
+    or None. Pure, so it is tested offline.
+
+    "Next" means the earliest dated entry strictly after ``today``: the feed
+    mixes reported history with upcoming dates, and a past date is not a
+    schedule. Anything unparseable yields None — the page then shows nothing
+    rather than a guess.
+    """
+    try:
+        data = json.loads(body)
+    except (ValueError, TypeError):
+        return None
+    rows = data.get("earnings") if isinstance(data, dict) else None
+    if not isinstance(rows, list):
+        return None
+    upcoming = []
+    for r in rows:
+        if not isinstance(r, dict):
+            continue
+        d = str(r.get("date", "")).strip()[:10]
+        if not re.fullmatch(r"\d{4}-\d{2}-\d{2}", d) or d <= today:
+            continue
+        upcoming.append({"date": d, "time": str(r.get("time") or "").strip()})
+    if not upcoming:
+        return None
+    upcoming.sort(key=lambda r: r["date"])
+    return upcoming[0]
+
+
+def weekly_closes(rows: list[dict], weeks: int = 52) -> list[dict]:
+    """One close per ISO week for the last ``weeks`` weeks — the sparkline on
+    the ticker page. Derived from the series already fetched for the
+    indicators, so it costs no extra API call. Each point is the LAST close
+    of its week, which is what a weekly chart plots."""
+    by_week: dict[tuple[int, int], dict] = {}
+    for r in rows:
+        if r.get("close") is None or not r.get("date"):
+            continue
+        try:
+            y, w, _ = date.fromisoformat(r["date"]).isocalendar()
+        except ValueError:
+            continue
+        by_week[(y, w)] = {"d": r["date"], "c": round(r["close"], 2)}
+    points = [by_week[k] for k in sorted(by_week)]
+    return points[-weeks:]
+
+
 def compute_indicators(rows: list[dict]) -> dict | None:
     """Compute the descriptive indicator bundle for one ticker, or None.
 
@@ -300,4 +350,6 @@ def compute_indicators(rows: list[dict]) -> dict | None:
             (last - low52) / (high52 - low52) * 100 if high52 > low52 else None,
             0),
         "bars": len(closes),
+        # Weekly closes for the ticker page's sparkline (no extra fetch).
+        "series": weekly_closes(rows),
     }

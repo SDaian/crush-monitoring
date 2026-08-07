@@ -4,6 +4,32 @@
   "ticker": "NVDA",
   "company": "NVIDIA Corporation",
   "indexable": true,
+  "technical": {
+    "asOf": "2026-08-06",
+    "price": 218.99,
+    "chg1d": -0.1,
+    "chg1w": 12.28,
+    "chg1m": 7.28,
+    "rsi14": 61.4,
+    "sma50": 205.85,
+    "sma200": 193.77,
+    "vsSma50": 6.4,
+    "vsSma200": 13.0,
+    "relVol": 0.87,
+    "high52w": 235.74,
+    "low52w": 165.17,
+    "rangePos": 76.0,
+    "series": [],
+    "signals": [],
+    "nextEarnings": null,
+    "score": {
+      "label": "Strong Buy",
+      "buys": 6,
+      "sells": 0,
+      "holds": 1,
+      "ratio": 0.857
+    }
+  },
   "summary": {
     "trades": 172,
     "members": 31,
