@@ -523,7 +523,9 @@ const schema = [
         const congress = s.n
           ? `<div class="note" style="margin-top:6px">🏛 <b>Congress:</b> ${s.n} disclosed trade${s.n===1?"":"s"} all-time
               (<span class="buy">${s.buy} buy</span> · <span class="sell">${s.sell} sell</span>), ${s.members} member${s.members===1?"":"s"}.
-              <a href="/tickers/${tickerSlug(tk)}">See who traded it →</a></div>`
+              ${PAGEMAPS.tickers[tk]
+                  ? `<a href="/tickers/${PAGEMAPS.tickers[tk]}">See who traded it →</a>`
+                  : ""}</div>`
           : `<div class="note" style="margin-top:6px">🏛 No congressional trades on record for $${esc(tk)}.</div>`;
 
         const cell = (k, v, x) =>
