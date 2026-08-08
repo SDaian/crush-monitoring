@@ -390,13 +390,13 @@
   "performance": {
     "available": true,
     "benchLabel": "S&P 500",
-    "asofDate": "2026-08-06",
+    "asofDate": "2026-08-07",
     "kpis": {
-      "medianPct": 20.6,
-      "medianBenchPct": 21.2,
-      "beat": 37,
-      "beatOf": 74,
-      "priced": 74,
+      "medianPct": 20.7,
+      "medianBenchPct": 21.9,
+      "beat": 36,
+      "beatOf": 73,
+      "priced": 73,
       "pricedOf": 320
     },
     "series": {
@@ -420,29 +420,29 @@
         "2026-07-17",
         "2026-07-24",
         "2026-07-31",
-        "2026-08-06"
+        "2026-08-07"
       ],
       "member": [
         100.0,
         103.6,
-        106.0,
-        111.8,
-        112.0,
-        112.8,
-        116.6,
-        116.0,
-        118.8,
-        123.6,
-        119.3,
-        121.5,
+        105.9,
+        111.9,
+        111.9,
+        112.4,
+        116.3,
+        115.7,
+        118.6,
+        123.5,
+        119.2,
+        121.4,
         122.6,
         121.5,
         123.6,
-        124.0,
-        120.8,
-        120.1,
+        124.1,
+        120.9,
+        120.2,
         120.7,
-        124.3
+        125.6
       ],
       "bench": [
         100.0,
@@ -464,96 +464,96 @@
         117.2,
         116.5,
         117.8,
-        121.2
+        121.9
       ],
-      "buys": 74
+      "buys": 73
     },
     "rows": [
       {
         "ticker": "ASML",
         "txDate": "2026-03-31",
-        "pct": 29.0,
-        "benchPct": 18.2,
-        "excess": 10.8
+        "pct": 31.8,
+        "benchPct": 18.9,
+        "excess": 12.9
       },
       {
         "ticker": "AZN",
         "txDate": "2026-03-31",
-        "pct": -18.3,
-        "benchPct": 18.2,
-        "excess": -36.5
+        "pct": -18.2,
+        "benchPct": 18.9,
+        "excess": -37.1
       },
       {
         "ticker": "TSLA",
         "txDate": "2026-03-30",
-        "pct": -10.1,
-        "benchPct": 21.6,
-        "excess": -31.7
+        "pct": -7.5,
+        "benchPct": 22.3,
+        "excess": -29.8
       },
       {
         "ticker": "UBER",
         "txDate": "2026-03-30",
-        "pct": 0.8,
-        "benchPct": 21.6,
-        "excess": -20.8
+        "pct": 7.3,
+        "benchPct": 22.3,
+        "excess": -15.0
       },
       {
         "ticker": "GOOG",
         "txDate": "2026-03-30",
-        "pct": 30.6,
-        "benchPct": 21.6,
-        "excess": 9.0
+        "pct": 29.4,
+        "benchPct": 22.3,
+        "excess": 7.1
       },
       {
         "ticker": "AAPL",
         "txDate": "2026-03-30",
-        "pct": 26.7,
-        "benchPct": 21.6,
-        "excess": 5.1
+        "pct": 27.0,
+        "benchPct": 22.3,
+        "excess": 4.7
       },
       {
         "ticker": "ASML",
         "txDate": "2026-03-30",
-        "pct": 35.9,
-        "benchPct": 21.6,
-        "excess": 14.3
+        "pct": 38.8,
+        "benchPct": 22.3,
+        "excess": 16.5
       },
       {
         "ticker": "AZN",
         "txDate": "2026-03-30",
-        "pct": -16.9,
-        "benchPct": 21.6,
-        "excess": -38.5
+        "pct": -16.8,
+        "benchPct": 22.3,
+        "excess": -39.1
       },
       {
         "ticker": "GS",
         "txDate": "2026-03-30",
-        "pct": 27.9,
-        "benchPct": 21.6,
-        "excess": 6.3
+        "pct": 28.7,
+        "benchPct": 22.3,
+        "excess": 6.4
       },
       {
         "ticker": "JNJ",
         "txDate": "2026-03-30",
-        "pct": 6.0,
-        "benchPct": 21.6,
-        "excess": -15.6
+        "pct": 6.9,
+        "benchPct": 22.3,
+        "excess": -15.4
       },
       {
         "ticker": "MSFT",
         "txDate": "2026-03-30",
         "pct": 39.3,
-        "benchPct": 21.6,
-        "excess": 17.7
+        "benchPct": 22.3,
+        "excess": 17.0
       },
       {
         "ticker": "NVO",
         "txDate": "2026-03-30",
-        "pct": 30.3,
-        "benchPct": 21.6,
-        "excess": 8.7
+        "pct": 33.9,
+        "benchPct": 22.3,
+        "excess": 11.6
       }
     ],
-    "rowsOf": 74
+    "rowsOf": 73
   }
 }

@@ -412,10 +412,10 @@
   "performance": {
     "available": true,
     "benchLabel": "S&P 500",
-    "asofDate": "2026-08-06",
+    "asofDate": "2026-08-07",
     "kpis": {
-      "medianPct": 40.1,
-      "medianBenchPct": 20.2,
+      "medianPct": 43.3,
+      "medianBenchPct": 21.0,
       "beat": 5,
       "beatOf": 6,
       "priced": 6,
@@ -508,7 +508,7 @@
         "2026-07-17",
         "2026-07-24",
         "2026-07-31",
-        "2026-08-06"
+        "2026-08-07"
       ],
       "member": [
         100.0,
@@ -596,7 +596,7 @@
         134.7,
         130.8,
         135.3,
-        143.9
+        145.7
       ],
       "bench": [
         100.0,
@@ -684,7 +684,7 @@
         116.5,
         115.8,
         117.1,
-        120.5
+        121.2
       ],
       "buys": 6
     },
@@ -692,44 +692,44 @@
       {
         "ticker": "AMZN",
         "txDate": "2026-01-16",
-        "pct": 13.9,
-        "benchPct": 11.1,
-        "excess": 2.8
+        "pct": 14.8,
+        "benchPct": 11.8,
+        "excess": 3.0
       },
       {
         "ticker": "NVDA",
         "txDate": "2026-01-16",
-        "pct": 17.6,
-        "benchPct": 11.1,
-        "excess": 6.5
+        "pct": 20.3,
+        "benchPct": 11.8,
+        "excess": 8.5
       },
       {
         "ticker": "GOOGL",
         "txDate": "2026-01-16",
-        "pct": 8.4,
-        "benchPct": 11.1,
-        "excess": -2.7
+        "pct": 7.3,
+        "benchPct": 11.8,
+        "excess": -4.5
       },
       {
         "ticker": "AVGO",
         "txDate": "2025-06-20",
-        "pct": 68.2,
-        "benchPct": 29.3,
-        "excess": 38.9
+        "pct": 71.0,
+        "benchPct": 30.1,
+        "excess": 40.9
       },
       {
         "ticker": "PANW",
         "txDate": "2024-12-20",
-        "pct": 92.5,
-        "benchPct": 30.0,
-        "excess": 62.5
+        "pct": 94.8,
+        "benchPct": 30.8,
+        "excess": 64.0
       },
       {
         "ticker": "NVDA",
         "txDate": "2024-12-20",
-        "pct": 62.6,
-        "benchPct": 30.0,
-        "excess": 32.6
+        "pct": 66.3,
+        "benchPct": 30.8,
+        "excess": 35.5
       }
     ],
     "rowsOf": 6
