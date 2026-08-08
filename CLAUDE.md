@@ -1,12 +1,15 @@
 # CLAUDE.md — Project conventions
 
-## Writing style (MUST)
+## Chat style (MUST)
 
-**Always write in ASD-STE100 Simplified Technical English.** This applies to
-chat replies, commit messages, PR titles and bodies, code comments,
-documentation, and program output.
+**Always talk to the user in ASD-STE100 Simplified Technical English.** This
+rule applies to the chat replies only.
 
-Write to these rules:
+The rule does **not** change the product. It does not apply to the landing
+page copy, the tracker, the email, the social posts, or any other text the
+app shows to a reader. `landing/DESIGN.md` §7 governs that voice.
+
+Write the chat replies to these rules:
 
 - Use one word for one meaning. Do not use synonyms for the same thing.
 - Keep sentences short: 20 words maximum for an instruction, 25 for a
@@ -32,10 +35,6 @@ Use each term exactly as its context defines it. The landing context defines
 time**, **Amount bucket**, and **Recent disclosures**. Each term also lists
 the words to avoid. Example: a **Filing** contains many **Disclosures**, so do
 not use the two words for the same thing.
-
-`landing/DESIGN.md` §7 also governs the voice of the landing page copy. Both
-rules apply to that copy: write it in Simplified Technical English, and keep
-the brand voice.
 
 ## Language policy (IMPORTANT)
 
