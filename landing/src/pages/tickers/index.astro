@@ -60,11 +60,41 @@ const schema = [
       </p>
     </section>
 
+    <section class="mx-auto max-w-[75rem] px-[5vw] pb-6">
+      <div id="tfilter" class="tctl" hidden>
+        <label class="tctl-search">
+          <span class="sr-only">Filter the stocks</span>
+          <input
+            id="tq"
+            type="search"
+            autocomplete="off"
+            placeholder="Filter by ticker or company — try LMT or Lockheed"
+          />
+        </label>
+        <label class="tctl-sort">
+          <span class="eyebrow">Sort</span>
+          <select id="tsort">
+            <option value="trades">Most traded</option>
+            <option value="name">A–Z</option>
+            <option value="members">Most members</option>
+          </select>
+        </label>
+        <p id="tcount" class="eyebrow tctl-count" aria-live="polite" />
+      </div>
+    </section>
+
     <section class="mx-auto max-w-[75rem] px-[5vw] pb-[10vh]">
-      <div class="grid grid-cols-2 gap-x-10 gap-y-1 max-[720px]:grid-cols-1">
+      <div id="tgrid" class="grid grid-cols-2 gap-x-10 gap-y-1 max-[720px]:grid-cols-1">
         {
           tickers.map((t: any) => (
-            <a href={`/tickers/${t.slug}`} class="tcard">
+            <a
+              href={`/tickers/${t.slug}`}
+              class="tcard"
+              data-t={t.ticker.toLowerCase()}
+              data-c={(t.company ?? "").toLowerCase()}
+              data-trades={t.trades}
+              data-members={t.members}
+            >
               <div class="tcard-name">
                 {t.ticker}
                 <span class="tcard-co">{t.company}</span>
@@ -80,6 +110,12 @@ const schema = [
           ))
         }
       </div>
+      <p id="tempty" class="mt-8 text-ink-soft" hidden>
+        No stock matches that filter. Every disclosed trade is still on the
+        <a href="/tracker" class="underline underline-offset-2 hover:text-ink"
+          >full tracker</a
+        >.
+      </p>
       <p class="fineprint mt-8 max-w-[80ch]">
         Ranked by number of disclosed trades across all filers. Only tickers with
         enough disclosed activity get a page — the rest are searchable on the
@@ -109,7 +145,123 @@ const schema = [
   </body>
 </html>
 
+<script is:inline>
+  // Filter and sort the stock list. The page ships all 97 rows in the HTML,
+  // so a crawler still reads every link; this only hides and reorders them.
+  // The controls start hidden and this script reveals them, so a reader
+  // without JavaScript never sees a control that cannot work.
+  (function () {
+    var box = document.getElementById("tfilter");
+    var grid = document.getElementById("tgrid");
+    var q = document.getElementById("tq");
+    var sortSel = document.getElementById("tsort");
+    var count = document.getElementById("tcount");
+    var empty = document.getElementById("tempty");
+    if (!box || !grid || !q || !sortSel || !count || !empty) return;
+
+    var rows = Array.prototype.slice.call(grid.querySelectorAll(".tcard"));
+    var total = rows.length;
+    var num = function (el, name) {
+      return parseInt(el.getAttribute(name) || "0", 10) || 0;
+    };
+
+    function apply() {
+      var term = q.value.trim().toLowerCase();
+      var shown = 0;
+      rows.forEach(function (row) {
+        var hit =
+          !term ||
+          row.getAttribute("data-t").indexOf(term) !== -1 ||
+          row.getAttribute("data-c").indexOf(term) !== -1;
+        row.hidden = !hit;
+        if (hit) shown++;
+      });
+      empty.hidden = shown !== 0;
+      count.textContent =
+        shown === total
+          ? total + " stocks"
+          : shown + " of " + total + " stocks";
+    }
+
+    function sort() {
+      var mode = sortSel.value;
+      var ordered = rows.slice().sort(function (a, b) {
+        if (mode === "name") {
+          return a.getAttribute("data-t").localeCompare(b.getAttribute("data-t"));
+        }
+        var key = mode === "members" ? "data-members" : "data-trades";
+        // Ties keep the ticker order, so the list never shuffles at random.
+        return (
+          num(b, key) - num(a, key) ||
+          a.getAttribute("data-t").localeCompare(b.getAttribute("data-t"))
+        );
+      });
+      ordered.forEach(function (row) {
+        grid.appendChild(row);
+      });
+    }
+
+    q.addEventListener("input", apply);
+    sortSel.addEventListener("change", function () {
+      sort();
+      apply();
+    });
+    box.hidden = false;
+    apply();
+  })();
+</script>
+
 <style>
+  .tctl {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.75rem 1.25rem;
+    border-top: 2px solid var(--color-ink);
+    border-bottom: 1px solid var(--color-rule);
+    padding: 0.9rem 0;
+  }
+  .tctl-search {
+    flex: 1 1 22rem;
+  }
+  .tctl-search input {
+    width: 100%;
+    border: 1px solid var(--color-rule);
+    background: var(--color-paper);
+    padding: 0.7rem 0.9rem;
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+    color: var(--color-ink);
+  }
+  .tctl-search input:focus {
+    outline: 2px solid var(--color-ink);
+    outline-offset: -1px;
+  }
+  .tctl-sort {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .tctl-sort select {
+    border: 1px solid var(--color-rule);
+    background: var(--color-paper);
+    padding: 0.55rem 0.6rem;
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: var(--color-ink);
+  }
+  .tctl-count {
+    margin-left: auto;
+    white-space: nowrap;
+  }
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+  }
   .tcard {
     display: block;
     padding: 1.75rem 0;
