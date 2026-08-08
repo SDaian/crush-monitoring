@@ -68,7 +68,7 @@ const schema = [
             id="tq"
             type="search"
             autocomplete="off"
-            placeholder="Filter by ticker or company — try LMT or Lockheed"
+            placeholder="Filter by ticker or company"
           />
         </label>
         <label class="tctl-sort">
@@ -223,6 +223,7 @@ const schema = [
   }
   .tctl-search {
     flex: 1 1 22rem;
+    min-width: 0;
   }
   .tctl-search input {
     width: 100%;
@@ -253,6 +254,18 @@ const schema = [
   .tctl-count {
     margin-left: auto;
     white-space: nowrap;
+  }
+  @media (max-width: 40rem) {
+    .tctl {
+      gap: 0.6rem 0.8rem;
+    }
+    .tctl-search {
+      flex: 1 1 100%;
+    }
+    .tctl-search input,
+    .tctl-sort select {
+      font-size: 0.82rem;
+    }
   }
   .sr-only {
     position: absolute;

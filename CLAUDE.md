@@ -656,3 +656,18 @@ Conventions:
 - Static output only (no server runtime); the only client JS is the signup
   form script (FR-1 contract: POST `email=` to `PUBLIC_SIGNUP_ENDPOINT`;
   unset endpoint → "Signups open soon").
+- **Check every UI change on a phone BEFORE you ship it — a desktop
+  screenshot proves nothing.** The filter on `/tickers` looked correct at
+  1200px and clipped its placeholder mid-sentence at 375px. Build the site,
+  serve `landing/dist` over `python3 -m http.server`, and drive the page with
+  Playwright at **320, 375 and 414 px**. Assert three things, because the eye
+  misses all of them in a screenshot:
+  1. **The document never scrolls sideways**:
+     `documentElement.scrollWidth <= clientWidth`.
+  2. **No element overflows its own box**: compare `scrollWidth` with
+     `clientWidth` per element. Deliberate exceptions exist and must stay —
+     the trades table (`.tscroll`) and the mobile menu scroll on purpose.
+  3. **Text fits its control**: measure the string against the box width
+     (a canvas/probe span), because a clipped placeholder or a truncated
+     label still reports zero overflow.
+  Prefer a shorter string over a smaller font: 375px is the real floor.
