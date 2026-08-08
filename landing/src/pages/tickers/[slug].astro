@@ -76,27 +76,63 @@ const signed = (v: any) =>
 const dirClass = (v: any) =>
   v === null || v === undefined ? "" : v > 0 ? "text-buy" : v < 0 ? "text-sell" : "";
 
-// Inline SVG sparkline of the weekly closes — built here, no chart library
-// and no client JS (DESIGN.md: charts are build-time SVG).
+// The weekly-close chart. Built here as inline SVG: no chart library and no
+// client JS (DESIGN.md). The y-scale spans the DAILY 52-week low/high, not
+// the weekly series range, so the chart and the "52-week range" cell below
+// it can never state two different numbers for the same idea.
 const pts: any[] = tech?.series ?? [];
-const spark = (() => {
-  if (pts.length < 2) return null;
-  const w = 1000;
-  const h = 260;
+
+function buildChart(w: number, h: number, fs: number) {
+  if (pts.length < 2 || !tech) return null;
   const closes = pts.map((p: any) => p.c);
-  const lo = Math.min(...closes);
-  const hi = Math.max(...closes);
-  const span = hi - lo || 1;
-  const x = (i: number) => (i / (pts.length - 1)) * w;
-  const y = (c: number) => h - ((c - lo) / span) * (h - 8) - 4;
-  const line = closes.map((c: number, i: number) => `${x(i).toFixed(1)},${y(c).toFixed(1)}`).join(" ");
+  const lo = Math.min(tech.low52w ?? Math.min(...closes), ...closes);
+  const hi = Math.max(tech.high52w ?? Math.max(...closes), ...closes);
+  // Pad the scale so the 52-week hairlines sit inside the plot. Without it
+  // the low line lands on the baseline and the area fill swallows it.
+  const pad = (hi - lo || 1) * 0.06;
+  const yLo = lo - pad;
+  const span = hi + pad - yLo || 1;
+  // Right gutter holds the two range labels; the bottom band holds the dates.
+  const padR = fs * 5.2;
+  const padT = fs * 1.1;
+  const padB = fs * 2.0;
+  const plotW = w - padR;
+  const plotH = h - padT - padB;
+  const x = (i: number) => (i / (pts.length - 1)) * plotW;
+  const y = (v: number) => padT + (1 - (v - yLo) / span) * plotH;
+  const line = closes
+    .map((c: number, i: number) => `${x(i).toFixed(1)},${y(c).toFixed(1)}`)
+    .join(" ");
+  const month = (iso: string) =>
+    new Date(`${iso}T00:00:00Z`).toLocaleDateString("en-US", {
+      month: "short",
+      year: "numeric",
+      timeZone: "UTC",
+    });
   return {
-    w, h, line,
-    area: `0,${h} ${line} ${w},${h}`,
-    lo: lo.toFixed(2),
+    w, h, fs, line,
+    area: `0,${(padT + plotH).toFixed(1)} ${line} ${plotW.toFixed(1)},${(padT + plotH).toFixed(1)}`,
+    yHigh: y(hi).toFixed(1),
+    yLow: y(lo).toFixed(1),
     hi: hi.toFixed(2),
+    lo: lo.toFixed(2),
+    dotX: x(pts.length - 1).toFixed(1),
+    dotY: y(closes[closes.length - 1]).toFixed(1),
+    last: closes[closes.length - 1].toFixed(2),
+    plotW: plotW.toFixed(1),
+    labelX: (plotW + fs * 0.5).toFixed(1),
+    baseY: (padT + plotH).toFixed(1),
+    dateY: (h - fs * 0.4).toFixed(1),
+    firstMonth: month(pts[0].d),
+    lastMonth: month(pts[pts.length - 1].d),
+    weeks: pts.length,
   };
-})();
+}
+
+// Two geometries. SVG text scales with the viewBox, so one geometry stretched
+// to both widths would render the labels at the wrong size on a phone.
+const chartDesk = buildChart(1000, 300, 14);
+const chartMob = buildChart(520, 340, 19);
 
 const cells = tech
   ? [
@@ -345,32 +381,52 @@ const schema = [
             <b class="text-ink">not investment advice</b>.
           </p>
 
-          {spark && (
-            <figure class="mt-7">
-              <svg
-                viewBox={`0 0 ${spark.w} ${spark.h}`}
-                width="100%"
-                height="180"
-                role="img"
-                aria-label={`${t.ticker} weekly closes over the last year`}
-                preserveAspectRatio="none"
-              >
-                <polyline
-                  points={spark.area}
-                  fill="var(--color-wash)"
-                  stroke="none"
-                />
-                <polyline
-                  points={spark.line}
-                  fill="none"
-                  stroke="var(--color-stamp)"
-                  stroke-width="2"
-                  vector-effect="non-scaling-stroke"
-                />
-              </svg>
+          {chartDesk && chartMob && (
+            <figure class="mt-7 cwrap">
+              {[chartDesk, chartMob].map((c: any, idx: number) => (
+                <svg
+                  class={idx === 0 ? "cdesk" : "cmob"}
+                  viewBox={`0 0 ${c.w} ${c.h}`}
+                  role="img"
+                  aria-label={`${t.ticker} weekly closes over the last year: ${c.last}, in a 52-week range of ${c.lo} to ${c.hi}`}
+                >
+                  <polyline points={c.area} fill="var(--color-wash)" stroke="none" />
+                  {/* 52-week range: solid hairlines, one shade off the paper.
+                      Never dashed — a dash reads as a projection. Drawn AFTER
+                      the area, or the fill hides the low one. */}
+                  <line x1="0" x2={c.plotW} y1={c.yHigh} y2={c.yHigh}
+                    stroke="var(--color-rule)" stroke-width="1" />
+                  <line x1="0" x2={c.plotW} y1={c.yLow} y2={c.yLow}
+                    stroke="var(--color-rule)" stroke-width="1" />
+                  <polyline points={c.line} fill="none"
+                    stroke="var(--color-stamp)" stroke-width="2"
+                    stroke-linejoin="round" vector-effect="non-scaling-stroke" />
+                  {/* The current close. The ring keeps the dot readable where
+                      it sits on the line. */}
+                  <circle cx={c.dotX} cy={c.dotY} r={c.fs * 0.42}
+                    fill="var(--color-stamp)"
+                    stroke="var(--color-paper)" stroke-width="2" />
+                  <text x={c.labelX} y={c.yHigh} dy="0.32em"
+                    font-size={c.fs} fill="var(--color-ink-soft)"
+                    font-family="var(--font-mono)">{c.hi}</text>
+                  <text x={c.labelX} y={c.yLow} dy="0.32em"
+                    font-size={c.fs} fill="var(--color-ink-soft)"
+                    font-family="var(--font-mono)">{c.lo}</text>
+                  <text x={c.labelX} y={c.dotY} dy="0.32em"
+                    font-size={c.fs} fill="var(--color-ink)" font-weight="700"
+                    font-family="var(--font-mono)">{c.last}</text>
+                  <text x="0" y={c.dateY} font-size={c.fs * 0.85}
+                    fill="var(--color-ink-soft)" font-family="var(--font-mono)"
+                  >{c.firstMonth}</text>
+                  <text x={c.plotW} y={c.dateY} text-anchor="end"
+                    font-size={c.fs * 0.85} fill="var(--color-ink-soft)"
+                    font-family="var(--font-mono)"
+                  >{c.lastMonth}</text>
+                </svg>
+              ))}
               <figcaption class="fineprint mt-2">
-                Weekly closes, last {tech.series.length} weeks · low{" "}
-                {spark.lo} · high {spark.hi}
+                Weekly closes, last {chartDesk.weeks} weeks. The two hairlines
+                mark the 52-week low and high; the dot marks the latest close.
               </figcaption>
             </figure>
           )}
@@ -691,6 +747,24 @@ const schema = [
     }
     .mrow {
       grid-template-columns: 1.4fr auto;
+    }
+  }
+  /* The toggle is scoped under .cwrap: a bare `.cdesk` loses to `svg` on
+     specificity, which would show both geometries at once. */
+  .cwrap svg {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+  .cwrap .cmob {
+    display: none;
+  }
+  @media (max-width: 40rem) {
+    .cwrap .cdesk {
+      display: none;
+    }
+    .cwrap .cmob {
+      display: block;
     }
   }
   .indcell {
