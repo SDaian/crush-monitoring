@@ -1,5 +1,42 @@
 # CLAUDE.md — Project conventions
 
+## Writing style (MUST)
+
+**Always write in ASD-STE100 Simplified Technical English.** This applies to
+chat replies, commit messages, PR titles and bodies, code comments,
+documentation, and program output.
+
+Write to these rules:
+
+- Use one word for one meaning. Do not use synonyms for the same thing.
+- Keep sentences short: 20 words maximum for an instruction, 25 for a
+  description.
+- Write one instruction in one sentence.
+- Use the active voice. Write "the parser reads the file", not "the file is
+  read by the parser".
+- Use simple tenses: present, past, or future. Do not use compound tenses.
+- Start an instruction with the verb.
+- Keep articles ("a", "the") in the sentence. Do not remove them.
+- Use a maximum of three words in a noun cluster.
+- Do not use "-ing" forms as nouns or adjectives when a simple verb works.
+- Write one topic in one paragraph. Use a maximum of six sentences.
+
+**Always read the `CONTEXT.md` files before you change related code, and use
+their ubiquitous language.** The files are:
+
+- `CONTEXT-MAP.md` (repo root) — the list of contexts and their relationships.
+- `landing/CONTEXT.md` — the Capitol Ledger landing context.
+
+Use each term exactly as its context defines it. The landing context defines
+**Disclosure**, **Filing**, **Filing lag**, **Late**, **Days late**, **On
+time**, **Amount bucket**, and **Recent disclosures**. Each term also lists
+the words to avoid. Example: a **Filing** contains many **Disclosures**, so do
+not use the two words for the same thing.
+
+`landing/DESIGN.md` §7 also governs the voice of the landing page copy. Both
+rules apply to that copy: write it in Simplified Technical English, and keep
+the brand voice.
+
 ## Language policy (IMPORTANT)
 
 **All repository files MUST be written in English.** This includes, without
