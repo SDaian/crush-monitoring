@@ -51,6 +51,7 @@ AI_TICKERS: list[dict[str, str]] = [
     {"ticker": "NU", "name": "Nu Holdings"},
     {"ticker": "SPCX", "name": "SpaceX"},
     {"ticker": "PYPL", "name": "PayPal"},
+    {"ticker": "SNOW", "name": "Snowflake"},
 ]
 
 # Trading-day windows (approximate calendar spans in sessions).

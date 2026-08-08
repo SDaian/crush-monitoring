@@ -1,0 +1,190 @@
+{
+  "_comment": "Generated from real official disclosures by congress/landing_data.py (daily Action). Do not edit by hand. Dollar figures are bracket midpoints — estimates, not real position sizes.",
+  "slug": "snow",
+  "ticker": "SNOW",
+  "company": "Snowflake Inc.",
+  "indexable": false,
+  "technical": null,
+  "summary": {
+    "trades": 10,
+    "members": 4,
+    "buys": 8,
+    "sells": 2,
+    "other": 0,
+    "firstTx": "2025-02-12",
+    "lastTx": "2025-06-17",
+    "lastFiling": "2025-06-23",
+    "estBuyLabel": "$64K",
+    "estSellLabel": "$41K",
+    "pctLate": 0
+  },
+  "topMembers": [
+    {
+      "name": "Robert P. Bresnahan, Jr.",
+      "slug": "robert-p-bresnahan-jr",
+      "party": "R",
+      "chamber": "House",
+      "trades": 5,
+      "buys": 5,
+      "sells": 0,
+      "estLabel": "$40K",
+      "hasPage": false
+    },
+    {
+      "name": "Josh Gottheimer",
+      "slug": "josh-gottheimer",
+      "party": "D",
+      "chamber": "House",
+      "trades": 2,
+      "buys": 1,
+      "sells": 1,
+      "estLabel": "$16K",
+      "hasPage": true
+    },
+    {
+      "name": "Marjorie Taylor Greene",
+      "slug": "marjorie-taylor-greene",
+      "party": "R",
+      "chamber": "House",
+      "trades": 2,
+      "buys": 2,
+      "sells": 0,
+      "estLabel": "$16K",
+      "hasPage": true
+    },
+    {
+      "name": "Jefferson Shreve",
+      "slug": "jefferson-shreve",
+      "party": "R",
+      "chamber": "House",
+      "trades": 1,
+      "buys": 0,
+      "sells": 1,
+      "estLabel": "$33K",
+      "hasPage": false
+    }
+  ],
+  "trades": [
+    {
+      "member": "Marjorie Taylor Greene",
+      "memberSlug": "marjorie-taylor-greene",
+      "hasPage": true,
+      "party": "R",
+      "side": "BUY",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2025-06-17",
+      "filedDate": "2025-06-23",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20030548.pdf"
+    },
+    {
+      "member": "Marjorie Taylor Greene",
+      "memberSlug": "marjorie-taylor-greene",
+      "hasPage": true,
+      "party": "R",
+      "side": "BUY",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2025-06-06",
+      "filedDate": "2025-06-18",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20030539.pdf"
+    },
+    {
+      "member": "Robert P. Bresnahan, Jr.",
+      "memberSlug": "robert-p-bresnahan-jr",
+      "hasPage": false,
+      "party": "R",
+      "side": "BUY",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2025-05-23",
+      "filedDate": "2025-06-23",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20030546.pdf"
+    },
+    {
+      "member": "Jefferson Shreve",
+      "memberSlug": "jefferson-shreve",
+      "hasPage": false,
+      "party": "R",
+      "side": "SELL",
+      "amountBucket": "$15K – $50K",
+      "txDate": "2025-05-12",
+      "filedDate": "2025-06-22",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20030387.pdf"
+    },
+    {
+      "member": "Josh Gottheimer",
+      "memberSlug": "josh-gottheimer",
+      "hasPage": true,
+      "party": "D",
+      "side": "SELL",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2025-03-19",
+      "filedDate": "2025-04-10",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20029083.pdf"
+    },
+    {
+      "member": "Robert P. Bresnahan, Jr.",
+      "memberSlug": "robert-p-bresnahan-jr",
+      "hasPage": false,
+      "party": "R",
+      "side": "BUY",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2025-03-03",
+      "filedDate": "2025-03-27",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20029034.pdf"
+    },
+    {
+      "member": "Robert P. Bresnahan, Jr.",
+      "memberSlug": "robert-p-bresnahan-jr",
+      "hasPage": false,
+      "party": "R",
+      "side": "BUY",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2025-02-26",
+      "filedDate": "2025-03-27",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20029034.pdf"
+    },
+    {
+      "member": "Josh Gottheimer",
+      "memberSlug": "josh-gottheimer",
+      "hasPage": true,
+      "party": "D",
+      "side": "BUY",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2025-02-21",
+      "filedDate": "2025-03-06",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20027901.pdf"
+    },
+    {
+      "member": "Robert P. Bresnahan, Jr.",
+      "memberSlug": "robert-p-bresnahan-jr",
+      "hasPage": false,
+      "party": "R",
+      "side": "BUY",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2025-02-13",
+      "filedDate": "2025-03-07",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20027923.pdf"
+    },
+    {
+      "member": "Robert P. Bresnahan, Jr.",
+      "memberSlug": "robert-p-bresnahan-jr",
+      "hasPage": false,
+      "party": "R",
+      "side": "BUY",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2025-02-12",
+      "filedDate": "2025-03-07",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20027923.pdf"
+    }
+  ],
+  "tradesShown": 10
+}
