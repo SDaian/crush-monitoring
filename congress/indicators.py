@@ -55,6 +55,43 @@ AI_TICKERS: list[dict[str, str]] = [
     {"ticker": "NOW", "name": "ServiceNow"},
 ]
 
+
+def featured_set() -> set[str]:
+    """The featured watchlist as a set — the universe the morning email scores
+    and the tracker's "Featured stocks" tab shows."""
+    return {t["ticker"] for t in AI_TICKERS}
+
+
+def reading_universe(page_tickers: list[str],
+                     names: dict[str, str] | None = None) -> list[dict]:
+    """Every symbol we compute a daily reading for.
+
+    A reading costs one API call, so the universe used to be the hand-written
+    featured list above. That made the two universes disagree: ticker pages
+    pick themselves by substance (disclosed trades), readings were picked by
+    theme — so AAPL, the third most-traded stock in Congress, had a page with
+    no reading. The rule now is one rule: **every symbol with a page gets a
+    reading.** Pass the page universe (``landing_data.select_ticker_pages``,
+    or the generated ticker index) and this orders it featured-first, because
+    that order still drives the email scorecard and the tracker tab.
+
+    Each entry is ``{ticker, name, featured}``. ``featured`` is what the
+    surfaces that must stay short filter on.
+    """
+    names = names or {}
+    featured = featured_set()
+    out = [{"ticker": t["ticker"], "name": t["name"], "featured": True}
+           for t in AI_TICKERS]
+    seen = {t["ticker"] for t in out}
+    for tk in page_tickers:
+        if not tk or tk in seen:
+            continue
+        seen.add(tk)
+        out.append({"ticker": tk, "name": names.get(tk) or tk,
+                    "featured": tk in featured})
+    return out
+
+
 # Trading-day windows (approximate calendar spans in sessions).
 RSI_PERIOD = 14
 SMA_WINDOWS = (20, 50, 200)

@@ -409,10 +409,13 @@ const schema = [
         if (r == null) return "—";
         return r < 30 ? "oversold" : r > 70 ? "overbought" : "neutral";
       }
-      function aiTickers(){ // ordered, only those we actually have data for
+      function aiTickers(){ // the FEATURED watchlist, in its order
+        // ai-indicators.json also carries a reading for every ticker page
+        // (~90 symbols) so those pages can show one. This tab is the featured
+        // watchlist, so it lists AI_ORDER and nothing else — otherwise one
+        // data change would silently turn 23 cards into ninety.
         const have = new Set(Object.keys(AI));
-        return AI_ORDER.filter(t => have.has(t)).concat(
-          [...have].filter(t => !AI_ORDER.includes(t)).sort());
+        return AI_ORDER.filter(t => have.has(t));
       }
       function sigTags(sigs){
         return (sigs || []).map(s =>
