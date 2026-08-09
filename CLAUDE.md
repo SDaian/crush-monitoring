@@ -381,7 +381,24 @@ sites. Full details in `congress/README.md`. Conventions:
   the repo, is **idempotent per day** (skips if `report_state.date == today`, so
   a manual send + a delayed scheduled run don't double-post), closes the prior
   day's report issue, and tracks the last issue number + ratings in
-  `congress/report_state.json` (generated; do not hand-edit). UTC cron ignores
+  `congress/report_state.json` (generated; do not hand-edit).
+  - **Quiet days do not send** (`daily_report.whats_new`). The market closes at
+    the weekend and on holidays, so a Sunday email repeats Saturday's word for
+    word. When the latest daily close has not advanced **and** no new filing
+    has arrived since the last delivered report, the run skips *every* delivery
+    — digest, Buttondown broadcast, traffic email, GitHub issue — and writes no
+    dated permalink, but **still publishes `report.json` so `/report` stays
+    current**, and records **nothing** in `report_state.json` (its fingerprint
+    keeps describing the last report that went out, so a later cron re-asks the
+    question). The test is a fingerprint — `market_date` (max `asof_date` across
+    the featured tickers), `trades_total`, `last_filing_date` — not the weekday:
+    a market holiday is just as quiet, and ~8% of filings carry a weekend date,
+    so a blanket weekend skip would hold a real disclosure until Monday. Signals
+    and rating flips get **no test of their own**: both derive from the
+    indicators, so a new close already covers them, and testing them separately
+    would re-send yesterday's signals off a stale file. A missing baseline and
+    `REPORT_FORCE` both always send.
+  UTC cron ignores
   DST so the Madrid clock time drifts ±1h; precise timing needs an external
   scheduler hitting the `workflow_dispatch` API.
   - **Subscribers = `congress/buttondown.py`** (gated + non-fatal). The same

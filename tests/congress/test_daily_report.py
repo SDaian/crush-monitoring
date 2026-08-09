@@ -471,3 +471,132 @@ class TestHoldingsGaps(unittest.TestCase):
                                       coverage_gaps=[])
         self.assertNotIn("Holdings coverage", r["markdown"])
         self.assertNotIn("Holdings we could not parse", r["html"])
+
+
+class TestWhatsNew(unittest.TestCase):
+    """The quiet-day rule: send only when the picture actually moved."""
+
+    BASE = {"date": "2026-08-08", "market_date": "2026-08-07",
+            "trades_total": 100, "last_filing_date": "2026-08-08"}
+    SAME = {"market_date": "2026-08-07", "trades_total": 100,
+            "last_filing_date": "2026-08-08"}
+
+    def test_a_closed_market_and_no_filing_is_quiet(self):
+        self.assertEqual(daily_report.whats_new(self.BASE, self.SAME), [])
+
+    def test_a_new_close_sends(self):
+        now = dict(self.SAME, market_date="2026-08-10")
+        self.assertIn("new market close (2026-08-10)",
+                      daily_report.whats_new(self.BASE, now))
+
+    def test_new_filings_send(self):
+        now = dict(self.SAME, trades_total=103,
+                   last_filing_date="2026-08-09")
+        self.assertIn("3 newly disclosed trades",
+                      daily_report.whats_new(self.BASE, now))
+
+    def test_a_reparse_that_keeps_the_count_still_sends(self):
+        # --reparse-invalid can replace rows one for one. The count holds but
+        # the record changed, so the report must go out.
+        now = dict(self.SAME, last_filing_date="2026-08-09")
+        self.assertEqual(daily_report.whats_new(self.BASE, now),
+                         ["the disclosure record changed"])
+
+    def test_a_missing_baseline_always_sends(self):
+        self.assertEqual(daily_report.whats_new({}, self.SAME), ["first run"])
+        self.assertEqual(
+            daily_report.whats_new({"date": "2026-08-08"}, self.SAME),
+            ["first run"])
+
+    def test_an_empty_market_date_never_reads_as_news(self):
+        # A price-source outage leaves no bar date. That is missing data, not
+        # a new close — it must not trigger a send on its own.
+        now = dict(self.SAME, market_date="")
+        self.assertEqual(daily_report.whats_new(self.BASE, now), [])
+
+    def test_market_date_is_the_latest_bar(self):
+        self.assertEqual(daily_report.market_date(
+            {"NVDA": {"asof_date": "2026-08-06"},
+             "MSFT": {"asof_date": "2026-08-07"}}), "2026-08-07")
+        self.assertEqual(daily_report.market_date({}), "")
+
+    def test_fingerprint_reads_the_data(self):
+        fp = daily_report.fingerprint(TRADES, {"NVDA": {"asof_date": "2026-08-07"}})
+        self.assertEqual(fp, {"market_date": "2026-08-07", "trades_total": 2,
+                              "last_filing_date": "2026-07-07"})
+
+
+class TestQuietDayDelivery(TestMainDelivery):
+    """main() on a weekend: no email, no issue, but /report stays current."""
+
+    def _quiet(self):
+        """Seed yesterday's state with today's exact fingerprint."""
+        from datetime import date as _date, datetime, timedelta, timezone
+        today = datetime.now(timezone.utc).date()
+        trades = [{"member": "A", "ticker": "NVDA", "type": "buy",
+                   "filing_date": today.isoformat(),
+                   "amount_label": "$1,001 - $15,000"}]
+        daily_report.TRADES_JSON.write_text(json.dumps({"trades": trades}))
+        daily_report.AI_JSON.write_text(json.dumps(
+            {"tickers": {"NVDA": dict(AI["NVDA"], asof_date="2026-08-07")},
+             "meta": {"new_signals": []}}))
+        self.state.write_text(json.dumps({
+            "date": (today - timedelta(days=1)).isoformat(),
+            "issue_number": 42, "ratings": {"NVDA": "Strong Buy"},
+            "market_date": "2026-08-07", "trades_total": 1,
+            "last_filing_date": today.isoformat()}))
+        return today
+
+    def test_quiet_day_sends_nothing(self):
+        self._quiet()
+        self.assertEqual(daily_report.main(), 0)
+        self.assertEqual(self.calls, [])  # no issue, no closing PATCH
+
+    def test_quiet_day_keeps_the_page_current(self):
+        today = self._quiet()
+        daily_report.main()
+        payload = json.loads(self.report_json.read_text())
+        self.assertEqual(payload["date"], today.isoformat())
+
+    def test_quiet_day_writes_no_permalink(self):
+        today = self._quiet()
+        daily_report.main()
+        self.assertFalse((self.reports_dir / f"{today.isoformat()}.json").exists())
+
+    def test_quiet_day_leaves_the_state_alone(self):
+        today = self._quiet()
+        before = self.state.read_text()
+        daily_report.main()
+        # The fingerprint must keep describing the last DELIVERED report, and
+        # the date must stay yesterday's so a later cron re-asks the question.
+        self.assertEqual(self.state.read_text(), before)
+        self.assertNotEqual(json.loads(before)["date"], today.isoformat())
+
+    def test_force_sends_on_a_quiet_day(self):
+        self._quiet()
+        os.environ["REPORT_FORCE"] = "true"
+        try:
+            daily_report.main()
+        finally:
+            os.environ.pop("REPORT_FORCE", None)
+        self.assertTrue([c for c in self.calls if c[0] == "POST"])
+
+    def test_a_new_filing_sends(self):
+        today = self._quiet()
+        trades = json.loads(daily_report.TRADES_JSON.read_text())["trades"]
+        trades.append({"member": "B", "ticker": "MSFT", "type": "sell",
+                       "filing_date": today.isoformat(),
+                       "amount_label": "$1,001 - $15,000"})
+        daily_report.TRADES_JSON.write_text(json.dumps({"trades": trades}))
+        daily_report.main()
+        self.assertTrue([c for c in self.calls if c[0] == "POST"])
+
+    def test_a_delivered_report_records_the_fingerprint(self):
+        self._quiet()
+        daily_report.AI_JSON.write_text(json.dumps(
+            {"tickers": {"NVDA": dict(AI["NVDA"], asof_date="2026-08-10")},
+             "meta": {"new_signals": []}}))
+        daily_report.main()
+        saved = json.loads(self.state.read_text())
+        self.assertEqual(saved["market_date"], "2026-08-10")
+        self.assertEqual(saved["trades_total"], 1)
