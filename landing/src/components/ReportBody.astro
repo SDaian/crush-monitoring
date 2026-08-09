@@ -27,9 +27,9 @@ const fmtDate = (iso: string | null) =>
     : "—";
 ---
 
-<!-- Disclosures — they lead: they are the product; the
-     scorecard supports. Same order as the email. -->
-<!-- Disclosures -->
+{/* Disclosures — they lead: they are the product; the
+     scorecard supports. Same order as the email. */}
+{/* Disclosures */}
     <section class="mx-auto max-w-[75rem] px-[5vw] pb-[7vh]">
       <div class="section-head">
         <h2 class="section-title whitespace-nowrap">New disclosures</h2>
@@ -98,13 +98,13 @@ const fmtDate = (iso: string | null) =>
       </p>
     </section>
 
-    <!-- Featured stocks -->
+    {/* Featured stocks */}
     <section class="mx-auto max-w-[75rem] px-[5vw] pb-[7vh]">
       <div class="section-head">
         <h2 class="section-title whitespace-nowrap">Featured stocks</h2>
         <span class="eyebrow">Mechanical technical read</span>
       </div>
-      <!-- Market-wide volatility leads the readings it gives context to. -->
+      {/* Market-wide volatility leads the readings it gives context to. */}
       <div class="mt-6"><MarketStrip reading={r.market} /></div>
       {
         r.scorecard?.length ? (
@@ -158,7 +158,7 @@ const fmtDate = (iso: string | null) =>
       </p>
     </section>
 
-    <!-- Overnight -->
+    {/* Overnight */}
     <section class="mx-auto max-w-[75rem] px-[5vw] pb-[7vh]">
       <div class="section-head">
         <h2 class="section-title whitespace-nowrap">Overnight</h2>

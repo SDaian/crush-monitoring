@@ -70,7 +70,7 @@ const schema = [
                 {m.perfPct != null && m.perfBenchPct != null && (
                   <span class="mcard-badge">
                     <b class:list={[m.perfPct >= m.perfBenchPct ? "perf-lead" : ""]}>
-                      {m.perfPct >= 0 ? "📈" : "📉"} {m.perfPct >= 0 ? "+" : "−"}{Math.abs(m.perfPct)}%
+                      {m.perfPct >= 0 ? "+" : "−"}{Math.abs(m.perfPct)}%
                     </b>
                   </span>
                 )}
@@ -93,11 +93,11 @@ const schema = [
         }
       </div>
       <p class="fineprint mt-8 max-w-[85ch]">
-        📈 is the estimated price change of each member's disclosed stock
-        buys, equal-weighted and held — <b class="text-ink">not realized
-        profit</b> (fills, sells and position sizes are unknown). Red means
-        ahead of the S&P 500 over the same windows; the full comparison is
-        on each member's page.
+        The percentage on each card is the estimated price change of that
+        member's disclosed stock buys, equal-weighted and held. It is
+        <b class="text-ink">not realized profit</b>: fills, sells and position
+        sizes are unknown. Red means ahead of the S&P 500 over the same
+        windows, and the full comparison is on each member's page.
       </p>
     </section>
 

@@ -162,9 +162,9 @@ const schema = [
     <Header active="members" />
 
     <section class="mx-auto max-w-[75rem] px-[5vw] pt-[9vh] pb-[6vh]">
-      <!-- Section-head style split: who they are (label · party · seat) on
+      {/* Section-head style split: who they are (label · party · seat) on
            the left, the newest-filing date on the right — the data's own
-           freshness is the header's right-hand meta. -->
+           freshness is the header's right-hand meta. */}
       <p class="eyebrow mb-5 flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
         <span>Featured filer · <b class="font-semibold text-stamp">{seat}</b></span>
         {s.lastFiling && (
@@ -180,10 +180,10 @@ const schema = [
         {" "}{fmtMonth(s.lastTx)}. Amounts are the brackets as filed; timing is
         counted against the 45-day legal maximum.
       </p>
-      <!-- "Checked" (when WE rebuilt the page) stays down here; "newest
+      {/* "Checked" (when WE rebuilt the page) stays down here; "newest
            filing" (how recent THEIR data is) lives in the header's right
            meta. Keeping the two apart stops 30-45-day-old trades from
-           dressing up as current. -->
+           dressing up as current. */}
       <p class="mono mt-5 text-[.75rem] uppercase tracking-[.08em] text-ink-soft">
         Checked {checkedOn}
       </p>
