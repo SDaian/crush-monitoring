@@ -301,7 +301,7 @@ jobs:
           # landing/src/data/tickers was missing, so the ticker pages served
           # whatever a manual run last happened to commit (TSM was 2 months
           # and 1 trade behind the tracker).
-          FILES="docs/data/congress-trades.json congress/state.json congress/social_state.json congress/members.json docs/data/committees.json docs/data/returns.json docs/data/performance.json landing/src/data/disclosures.json landing/src/data/stats.json landing/src/data/late.json landing/src/data/members landing/src/data/tickers"
+          FILES="docs/data/congress-trades.json congress/state.json congress/social_state.json congress/members.json docs/data/committees.json docs/data/returns.json docs/data/performance.json landing/src/data/disclosures.json landing/src/data/stats.json landing/src/data/late.json landing/src/data/market.json landing/src/data/members landing/src/data/tickers"
           if git diff --quiet -- $FILES; then
             echo "No new trades or price changes."
             exit 0

@@ -46,7 +46,8 @@ from datetime import date, datetime, timedelta, timezone
 from email.message import EmailMessage
 from pathlib import Path
 
-from . import analytics, buttondown, email_template, indicators, pipeline
+from . import (analytics, buttondown, email_template, indicators, market,
+               pipeline)
 
 API = "https://api.github.com"
 TRADES_JSON = pipeline.REPO_ROOT / "docs" / "data" / "congress-trades.json"
@@ -151,7 +152,8 @@ def holdings_gaps(holdings: dict) -> list[str]:
 def build_report(trades: list[dict], ai_tickers: dict, new_signals: list[dict],
                  prev_ratings: dict, today_iso: str,
                  ticker_urls: dict | None = None,
-                 coverage_gaps: list[str] | None = None) -> dict:
+                 coverage_gaps: list[str] | None = None,
+                 market_reading: dict | None = None) -> dict:
     """Compose the trade/scorecard digest in markdown (GitHub issue) and HTML
     (email). Site traffic is delivered in its own email — see
     ``build_traffic_email``. Pure — no I/O. Returns
@@ -179,8 +181,14 @@ def build_report(trades: list[dict], ai_tickers: dict, new_signals: list[dict],
             "rsi": rsi, "trend": trend, "label": sc["label"],
             "url": (ticker_urls or {}).get(tk),
         })
+    # Market-wide volatility leads the readings it gives context to. It never
+    # votes in ai_score — see congress/market.py.
+    market_md = ""
+    if market_reading:
+        market_md = (f"**{market.summary(market_reading)}** — "
+                     f"{market_reading['note']}\n\n")
     scorecard = (
-        "## ⭐ Featured stocks — technical read\n\n"
+        "## ⭐ Featured stocks — technical read\n\n" + market_md +
         "| Ticker | Price | 1d | RSI | Trend | Read |\n"
         "|---|---|---|---|---|---|\n" + "\n".join(rows) +
         "\n\n_Read = a rule-based tally of the indicators (each votes "
@@ -276,7 +284,7 @@ def build_report(trades: list[dict], ai_tickers: dict, new_signals: list[dict],
         date_label=date_label, disclaimer=DISCLAIMER, scorecard=sc_rows,
         signals=sig_data, flips=flip_data, disclosures=disc_data,
         extra_disclosures=max(0, len(recent) - MAX_DISCLOSURES), cutoff=cutoff,
-        bond_count=bond_count,
+        bond_count=bond_count, market=market_reading,
         tracker_url=TRACKER_URL, preheader=preheader,
         report_url=report_url(today_iso),
         coverage=coverage_gaps or [])
@@ -316,6 +324,7 @@ def build_report(trades: list[dict], ai_tickers: dict, new_signals: list[dict],
             "sourceUrl": t.get("source_url"),
         } for t in window],
         "bondCount": bond_count,
+        "market": market_reading,
         "emailShown": len(disc_data),
     }
     return {"markdown": markdown, "html": html, "html_embed": html_embed,
@@ -543,7 +552,8 @@ def main() -> int:
     gaps = holdings_gaps(_load(HOLDINGS_JSON, {}))
     report = build_report(trades, ai_tickers, new_signals, prev_ratings,
                           today_iso, ticker_urls=ticker_urls,
-                          coverage_gaps=gaps)
+                          coverage_gaps=gaps,
+                          market_reading=ai.get("market"))
     title = f"📋 Morning report — {today_iso}"
 
     # A quiet day: the market printed no new close and no filing arrived, so

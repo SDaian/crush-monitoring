@@ -83,6 +83,43 @@ def _section(kicker: str, title: str, inner: str, pad: int = PAD) -> str:
     )
 
 
+BAND_COLOR = {"calm": BUY, "normal": HOLD, "elevated": SELL,
+              "stressed": STAMP}
+
+
+def market_line(reading: dict | None) -> str:
+    """The market-wide volatility strip above the scorecard.
+
+    One line: the label, the level, the day's move and the band. It is
+    context for the readings below, never a signal — the note says which
+    number it is, and the band is stated as our own convention."""
+    if not reading:
+        return ""
+    color = BAND_COLOR.get(reading.get("band", ""), HOLD)
+    move = ""
+    if reading.get("chg_1d") is not None:
+        chg = reading["chg_1d"]
+        move = (f"<font color='{_chg_color(1 if chg > 0 else (-1 if chg < 0 else 0))}'>"
+                f"{'+' if chg > 0 else ''}{_esc(chg)} pts</font>")
+    return (
+        f"<table role='presentation' width='100%' cellpadding='0' "
+        f"cellspacing='0' style='border-collapse:collapse;background:{WASH};"
+        f"border:1px solid {RULE};margin:0 0 14px'>"
+        f"<tr><td style='padding:9px 10px'>"
+        f"<span style='{_f('11px', '1.3', MONO, 700)}letter-spacing:.5px;"
+        f"text-transform:uppercase;color:{INK_SOFT}'>Market</span>"
+        f"<span style='{_f('13px', '1.4', MONO, 700)}color:{INK}'>"
+        f"&nbsp;&nbsp;{_esc(reading['label'])} {_esc(reading['level'])}</span>"
+        + (f"<span style='{_f('12px', '1.4', MONO)}'>&nbsp;{move}</span>"
+           if move else "")
+        + f"<span style='{_f('12px', '1.4', MONO, 700)}color:{color}'>"
+          f"&nbsp;·&nbsp;{_esc(reading['bandLabel'])}</span>"
+        f"<div style='margin:4px 0 0;{_f('11px', '1.45', SANS)}color:{INK_SOFT}'>"
+        f"{_esc(reading['note'])} {_esc(reading['bandNote'])}</div>"
+        f"</td></tr></table>"
+    )
+
+
 def scorecard_table(scorecard: list[dict]) -> str:
     """The featured-stocks read as a full-width, zebra-striped table.
 
@@ -387,7 +424,7 @@ def render_html(*, date_label: str, disclaimer: str, scorecard: list[dict],
                 signals: list[dict], flips: list[dict],
                 disclosures: list[dict], extra_disclosures: int, cutoff: str,
                 tracker_url: str, preheader: str, report_url: str = "",
-                bond_count: int = 0,
+                bond_count: int = 0, market: dict | None = None,
                 coverage: list[str] | None = None,
                 standalone: bool = True) -> str:
     """The daily trade/scorecard digest email (traffic is a separate email)."""
@@ -399,8 +436,9 @@ def render_html(*, date_label: str, disclaimer: str, scorecard: list[dict],
                  f"(filed since {_esc(cutoff)})</span>",
                  disclosures_block(disclosures, extra_disclosures,
                                    report_url, bond_count), pad),
+        # The market strip leads the readings it gives context to.
         _section("Featured stocks", "Technical read",
-                 scorecard_table(scorecard), pad),
+                 market_line(market) + scorecard_table(scorecard), pad),
         _section("Overnight", "Signals &amp; rating changes",
                  signals_block(signals, flips), pad),
         # Owner's ops note: featured annual reports we could not parse.

@@ -1,0 +1,102 @@
+---
+// One line of market-wide volatility context, shared by /report and every
+// ticker page so the two can never disagree. The data comes from
+// congress/market.py via the indicators run: the VIX when Twelve Data serves
+// it, otherwise our own 20-day realized volatility of the S&P 500 — which is
+// labelled as ours, never as "VIX".
+//
+// It is CONTEXT, not a signal: it never votes in the mechanical read, and on
+// a ticker page it says so, because the same number appears on all of them.
+// Renders nothing at all when the reading is absent (a source outage), the
+// same way a missing earnings date simply drops its line.
+interface Props {
+  reading: any;
+  /** Ticker symbol, when the strip sits on a ticker page. */
+  subject?: string;
+}
+const { reading, subject } = Astro.props;
+
+const BAND_CLASS: Record<string, string> = {
+  calm: "text-buy",
+  normal: "text-ink-soft",
+  elevated: "text-sell",
+  stressed: "text-stamp",
+};
+
+const chg = reading?.chg_1d;
+const chgClass =
+  chg == null ? "" : chg > 0 ? "text-sell" : chg < 0 ? "text-buy" : "text-ink-soft";
+// Rising volatility is the stressful direction, so the colours are the
+// opposite way round to a price change. Green for calmer, red for choppier.
+
+// Compose every string here, not in the markup: the compiler drops the
+// whitespace between two adjacent {expressions}, which rendered "VIX18.52"
+// and "S&P 500.Bands are…" the first time this shipped.
+const level = reading ? `${reading.label} ${reading.level}` : "";
+const move = chg == null ? "" : `${chg > 0 ? "+" : ""}${chg} pts`;
+const note = reading
+  ? [reading.note, reading.bandNote, subject && `Market-wide context — not a reading on ${subject}.`]
+      .filter(Boolean)
+      .join(" ")
+  : "";
+---
+
+{
+  reading && (
+    <div class="mstrip">
+      <div class="mrow">
+        <span class="mkicker">Market</span>
+        <b class="mval">{level}</b>
+        {move && <span class={`mchg ${chgClass}`}>{move}</span>}
+        <span class={`mband ${BAND_CLASS[reading.band] ?? "text-ink-soft"}`}>
+          {reading.bandLabel}
+        </span>
+        {reading.asofDate && <span class="masof">{reading.asofDate}</span>}
+      </div>
+      <p class="mnote">{note}</p>
+    </div>
+  )
+}
+
+<style>
+  .mstrip {
+    border: 1px solid var(--color-rule);
+    background: var(--color-wash);
+    padding: 0.7rem 0.85rem;
+  }
+  .mrow {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.5rem 0.75rem;
+    font-family: var(--font-mono);
+  }
+  .mkicker {
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-ink-soft);
+  }
+  .mval {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--color-ink);
+  }
+  .mchg,
+  .mband {
+    font-size: 0.82rem;
+    font-weight: 600;
+  }
+  .masof {
+    font-size: 0.72rem;
+    color: var(--color-ink-soft);
+  }
+  .mnote {
+    margin-top: 0.4rem;
+    font-size: 0.75rem;
+    line-height: 1.5;
+    color: var(--color-ink-soft);
+    text-wrap: pretty;
+  }
+</style>

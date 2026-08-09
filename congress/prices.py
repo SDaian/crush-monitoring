@@ -78,6 +78,29 @@ def _pace() -> None:
     _last_request = time.monotonic()
 
 
+def fetch_index_raw(session, symbol: str, key: str) -> str:
+    """Raw Twelve Data ``time_series`` JSON for an INDEX symbol (network).
+
+    Same endpoint as :func:`fetch_raw` without the ``country`` filter: an
+    index is not a US-listed security, and the filter drops it. Index coverage
+    depends on the plan, so callers treat an error as "no data" — the surface
+    omits the line rather than guessing. Never print the URL: it carries the
+    key.
+    """
+    _pace()
+    params = {
+        "symbol": symbol.strip().upper(),
+        "interval": TD_INTERVAL,
+        # A month of bars is all the market reading needs (a level, the prior
+        # close, and enough history for a 20-day realized-volatility window).
+        "outputsize": 60,
+        "apikey": key,
+    }
+    resp = session.get(f"{TD_HOST}/time_series", params=params, timeout=30)
+    resp.raise_for_status()
+    return resp.text
+
+
 def fetch_earnings_raw(session, ticker: str, key: str) -> str:
     """Raw Twelve Data ``earnings`` JSON for one ticker (network).
 

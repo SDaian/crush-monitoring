@@ -753,3 +753,35 @@ class TestTechnicalBlock(unittest.TestCase):
         from tempfile import TemporaryDirectory
         with TemporaryDirectory() as tmp:
             self.assertEqual(ld.load_indicators(Path(tmp) / "absent.json"), {})
+
+
+class TestMarketFile(unittest.TestCase):
+    """One market.json, imported by every ticker page."""
+
+    READING = {"source": "vix", "label": "VIX", "level": 18.5,
+               "band": "normal", "bandLabel": "Normal"}
+
+    def _indicators(self, tmp, payload):
+        path = Path(tmp) / "ai-indicators.json"
+        path.write_text(json.dumps(payload), encoding="utf-8")
+        return path
+
+    def test_reads_the_reading_from_the_indicators_file(self):
+        with TemporaryDirectory() as tmp:
+            path = self._indicators(tmp, {"tickers": {},
+                                          "market": self.READING})
+            self.assertEqual(ld.load_market(path), self.READING)
+
+    def test_absent_or_unreadable_is_none(self):
+        with TemporaryDirectory() as tmp:
+            self.assertIsNone(ld.load_market(self._indicators(tmp, {"tickers": {}})))
+            self.assertIsNone(ld.load_market(Path(tmp) / "missing.json"))
+
+    def test_the_file_is_always_written(self):
+        # Every ticker page imports it at build time, so a missing reading
+        # must still produce a file — with a null reading, not no file.
+        with TemporaryDirectory() as tmp:
+            out = Path(tmp)
+            ld.write_files([], out, today=date(2026, 8, 1))
+            data = json.loads((out / "market.json").read_text())
+            self.assertIn("market", data)

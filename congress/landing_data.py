@@ -741,6 +741,17 @@ def load_indicators(path: Path = AI_INDICATORS_PATH) -> dict:
         return {}
 
 
+def load_market(path: Path = AI_INDICATORS_PATH) -> dict | None:
+    """The market-wide volatility reading (`congress.market`), or None.
+
+    Written by the indicators run into the same file as the ticker readings.
+    Missing or unreadable → None, and every surface omits the line."""
+    try:
+        return json.loads(path.read_text(encoding="utf-8")).get("market") or None
+    except (OSError, ValueError, AttributeError):
+        return None
+
+
 def technical_block(ticker: str, readings: dict) -> dict | None:
     """The ticker page's "Technical read" panel: the SAME mechanical reading
     the tracker and the morning report show, scored by the SAME function
@@ -942,6 +953,20 @@ def write_files(trades: list[dict], out_dir: Path, today: date) -> tuple[int, di
     )
     (out_dir / "late.json").write_text(
         json.dumps({"_comment": comment, **late_payload(trades, today)},
+                   indent=2, ensure_ascii=False) + "\n",
+        encoding="utf-8",
+    )
+    # The market reading lives in ONE file that every ticker page imports.
+    # Copying it into each ticker payload would rewrite all 98 of them every
+    # morning — the same number, 98 times — and bury the real trade changes in
+    # the diff. Always written, even when the reading is absent: the pages
+    # import it at build time, so the file has to exist.
+    (out_dir / "market.json").write_text(
+        json.dumps({"_comment": (
+            "Market-wide volatility reading, copied from the indicators run "
+            "(congress/market.py). Context only — it never votes in the "
+            "mechanical read. Do not edit by hand."),
+            "market": load_market()},
                    indent=2, ensure_ascii=False) + "\n",
         encoding="utf-8",
     )

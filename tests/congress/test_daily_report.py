@@ -600,3 +600,56 @@ class TestQuietDayDelivery(TestMainDelivery):
         saved = json.loads(self.state.read_text())
         self.assertEqual(saved["market_date"], "2026-08-10")
         self.assertEqual(saved["trades_total"], 1)
+
+
+VIX = {"source": "vix", "label": "VIX", "level": 18.5, "chg_1d": 2.5,
+       "band": "normal", "bandLabel": "Normal", "asofDate": "2026-07-07",
+       "note": "CBOE Volatility Index — the market's expected 30-day swing "
+               "in the S&P 500.",
+       "bandNote": "Bands are our own convention, not an official "
+                   "classification."}
+
+
+class TestMarketContext(unittest.TestCase):
+    """The market reading is context on every surface — and never a vote."""
+
+    def setUp(self):
+        self.r = build_report(TRADES, AI, NEW_SIGNALS, prev_ratings={},
+                              today_iso="2026-07-07", market_reading=VIX)
+
+    def test_markdown_carries_the_reading_and_its_label(self):
+        md = self.r["markdown"]
+        self.assertIn("VIX 18.5 (+2.5 pts) — normal", md)
+        self.assertIn("CBOE Volatility Index", md)
+
+    def test_email_carries_the_strip(self):
+        html = self.r["html"]
+        self.assertIn("VIX 18.5", html)
+        self.assertIn("Normal", html)
+        self.assertIn("Bands are our own convention", html)
+
+    def test_the_web_payload_carries_it_so_report_matches_the_email(self):
+        self.assertEqual(self.r["payload"]["market"], VIX)
+
+    def test_no_reading_renders_no_line(self):
+        plain = build_report(TRADES, AI, NEW_SIGNALS, prev_ratings={},
+                             today_iso="2026-07-07")
+        self.assertNotIn("VIX", plain["markdown"])
+        self.assertNotIn("Volatility Index", plain["html"])
+        self.assertIsNone(plain["payload"]["market"])
+
+    def test_it_does_not_change_a_single_rating(self):
+        # ai_score is a per-stock tally. A market-wide input would flip every
+        # ticker at once and the rating-flip diff would stop meaning anything.
+        plain = build_report(TRADES, AI, NEW_SIGNALS, prev_ratings={},
+                             today_iso="2026-07-07")
+        self.assertEqual(self.r["ratings"], plain["ratings"])
+
+
+class TestMarketFromTheIndicatorsFile(TestMainDelivery):
+    def test_main_reads_the_reading_written_by_the_indicators_run(self):
+        daily_report.AI_JSON.write_text(json.dumps(
+            {"tickers": {}, "meta": {"new_signals": []}, "market": VIX}))
+        daily_report.main()
+        self.assertEqual(
+            json.loads(self.report_json.read_text())["market"], VIX)
