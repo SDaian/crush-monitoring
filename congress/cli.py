@@ -825,6 +825,39 @@ def _load_prev_emitted(path: Path) -> set[str]:
         return set()
 
 
+def _market_reading(session, key, redact):
+    """Fetch the market-wide volatility reading for the indicators payload.
+
+    One extra call a day: the VIX. If the plan does not serve indices the
+    series comes back empty, and we fall back to our own 20-day realized
+    volatility of SPY — a second call, made only in that case. Any failure
+    returns None and every surface omits the line."""
+    from . import indicators, market, prices
+
+    try:
+        rows = indicators.parse_series(
+            prices.fetch_index_raw(session, market.VIX_SYMBOL, key))
+    except Exception as exc:  # noqa: BLE001 — context is never worth a failure
+        print(f"  {market.VIX_SYMBOL}: fetch error: {redact(exc)}")
+        rows = []
+    reading = market.from_vix(rows)
+    if reading is None:
+        print(f"  {market.VIX_SYMBOL}: no index data on this plan — "
+              f"computing our own from {market.BENCH_SYMBOL}")
+        try:
+            bench = indicators.parse_series(
+                prices.fetch_raw(session, market.BENCH_SYMBOL, key))
+        except Exception as exc:  # noqa: BLE001
+            print(f"  {market.BENCH_SYMBOL}: fetch error: {redact(exc)}")
+            bench = []
+        reading = market.from_benchmark(bench)
+    if reading:
+        print(f"  market: {market.summary(reading)}")
+    else:
+        print("  market: no volatility reading — the line is omitted")
+    return reading
+
+
 def _cmd_ai(args: argparse.Namespace) -> int:
     """Compute daily technical indicators + mechanical signals for the AI
     universe, writing docs/data/ai-indicators.json. Indicators only — never a
@@ -903,6 +936,10 @@ def _cmd_ai(args: argparse.Namespace) -> int:
         )
         return 0
 
+    # Market-wide context (one line, the same on every surface). Fetched after
+    # the universe so a volatility outage can never cost us the readings.
+    market_reading = _market_reading(session, key, redact)
+
     # Bound the dedup memory: keep the most recent keys by their bar date.
     emitted = set(sorted(emitted, key=lambda k: k.rsplit("|", 1)[-1])[-AI_EMITTED_KEEP:])
     payload = {
@@ -922,6 +959,9 @@ def _cmd_ai(args: argparse.Namespace) -> int:
             "new_signals": new_signals,
             "emitted_signal_keys": sorted(emitted),
         },
+        # Market-wide volatility. Context only — it never votes in ai_score.
+        # Absent when neither the VIX nor the fallback produced a number.
+        **({"market": market_reading} if market_reading else {}),
         "tickers": tickers,
     }
     out_path.parent.mkdir(parents=True, exist_ok=True)

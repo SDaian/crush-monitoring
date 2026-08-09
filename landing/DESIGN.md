@@ -363,6 +363,16 @@ shared Astro components in `src/components/`.
   `buy`/`sell`/`late` semantic colors, `min-width:0` cells that wrap rather than
   overflow, and real data behind every value.
 - **Live dot** — the one circle; pulses only to mean "live."
+- **Market strip** — one `wash` band, hairline-ruled, carrying the market-wide
+  volatility reading (kicker · level · day's move · band · date) with a
+  fineprint note under it. Used on `/report` and on **every** ticker page, so
+  three rules hold it honest: the note **names the number** (the VIX, or our
+  own realized-volatility fallback — never the fallback under the VIX's name),
+  the band is stated as **our convention**, and where the same value repeats
+  across pages it says it is market-wide and **not a reading on that stock**.
+  Colour follows stress, not price: calm is `buy` green, stressed is `stamp`,
+  and a **rising** number is `sell` red — the opposite of a price change.
+  Absent data renders **nothing at all**; it never shows a placeholder.
 
 Adding a component: express it in the tokens and these patterns; if it needs a new
 token or breaks a rule here, update this manual in the same PR.

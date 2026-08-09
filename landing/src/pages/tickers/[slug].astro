@@ -14,6 +14,8 @@ import Seo from "../../components/Seo.astro";
 import SignupForm from "../../components/SignupForm.astro";
 import SignupModal from "../../components/SignupModal.astro";
 import CountUp from "../../components/CountUp.astro";
+import MarketStrip from "../../components/MarketStrip.astro";
+import marketData from "../../data/market.json";
 import { plural, seoDescription } from "../../lib/seo";
 
 // Build-time "checked" date: when this page was last regenerated. Deliberately
@@ -69,6 +71,10 @@ const STAT_CARDS = [
 // <company>" — lead the title with the symbol, keep the company name in it.
 // --- Technical read (featured watchlist only) -------------------------
 const tech: any = (t as any).technical ?? null;
+// Market-wide volatility, generated once and imported by every ticker page —
+// see landing/src/data/market.json. Null on a source outage; the strip then
+// renders nothing.
+const market = (marketData as any).market ?? null;
 const num = (v: any, suffix = "", digits = 2) =>
   v === null || v === undefined ? "—" : `${Number(v).toFixed(digits)}${suffix}`;
 const signed = (v: any) =>
@@ -251,6 +257,10 @@ const schema = [
         real position sizes, and {s.pctLate}% of these filings arrived past the
         legal deadline.
       </p>
+      <!-- The weather every one of these trades happened in. One market-wide
+           number, so it is identical on every ticker page and says so. It sits
+           BELOW the stock's own record, which stays the page's subject. -->
+      <div class="mt-8"><MarketStrip reading={market} subject={t.ticker} /></div>
     </section>
 
     {

@@ -3,6 +3,8 @@
 // disclosures), shared by /report (today, indexable) and /report/<date> (the
 // noindex'd archive permalinks) so the two renderings can never drift.
 // Markup is all build-time, so Astro's scoped styles work here.
+import MarketStrip from "./MarketStrip.astro";
+
 const { r } = Astro.props as { r: any };
 const c = r.counts ?? {};
 const truncated = Math.max(0, (r.disclosures?.length ?? 0) - (r.emailShown ?? 0));
@@ -102,6 +104,8 @@ const fmtDate = (iso: string | null) =>
         <h2 class="section-title whitespace-nowrap">Featured stocks</h2>
         <span class="eyebrow">Mechanical technical read</span>
       </div>
+      <!-- Market-wide volatility leads the readings it gives context to. -->
+      <div class="mt-6"><MarketStrip reading={r.market} /></div>
       {
         r.scorecard?.length ? (
           <div class="tblwrap mt-7">
