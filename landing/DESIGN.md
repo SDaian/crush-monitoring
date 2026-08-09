@@ -363,6 +363,17 @@ shared Astro components in `src/components/`.
   `buy`/`sell`/`late` semantic colors, `min-width:0` cells that wrap rather than
   overflow, and real data behind every value.
 - **Live dot** — the one circle; pulses only to mean "live."
+- **Section tabs** — a mono, uppercase bar under a 2px ink rule, the active
+  tab marked by a stamp underline. Used on the tracker and on ticker pages to
+  put a second view one click away instead of one scroll down; it belongs
+  **directly under the headline**, or it lands below the fold and solves
+  nothing. Three rules make it safe on a static, search-first site: **every
+  panel ships in the HTML** (the switch only hides one), **the class that
+  hides a panel is set by a synchronous head script** so nothing flashes, and
+  **without JavaScript every panel shows** — the page degrades to the long
+  page it was. A tab that owns an anchor keeps the anchor's `id` inside its
+  panel, opens on that hash, and writes the hash back on switch. Real
+  `tablist`/`tab`/`tabpanel` roles, roving `tabindex`, arrow-key movement.
 - **Market strip** — one `wash` band, hairline-ruled, carrying the market-wide
   volatility reading (kicker · level · day's move · band · date) with a
   fineprint note under it. Used on `/report` and on **every** ticker page, so

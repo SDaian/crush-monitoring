@@ -159,8 +159,11 @@ def build_report(trades: list[dict], ai_tickers: dict, new_signals: list[dict],
     ``build_traffic_email``. Pure — no I/O. Returns
     ``{markdown, html, ratings, counts}`` where ``ratings`` is ticker→label for
     the next run's flip diff."""
+    # The FEATURED watchlist only, in its own order. The indicators file also
+    # carries a reading for every ticker page (~90 symbols) so those pages can
+    # show one; scoring them all here would turn a readable email into a
+    # ninety-row table.
     order = [s["ticker"] for s in indicators.AI_TICKERS if s["ticker"] in ai_tickers]
-    order += sorted(tk for tk in ai_tickers if tk not in order)
 
     # --- Section 1: Featured-stock scorecard ---
     ratings: dict[str, str] = {}

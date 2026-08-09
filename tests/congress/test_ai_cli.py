@@ -1,8 +1,9 @@
 """Offline test for the `congress ai` subcommand (network stubbed).
 
-Verifies the command writes a well-formed ai-indicators.json and that the
-signal dedup memory suppresses re-notification of an already-emitted signal on
-a second run against the same data.
+Verifies the command writes a well-formed ai-indicators.json, that the
+universe is every ticker page (not the hand-written watchlist), that only
+featured symbols reach meta.new_signals, and that the dedup memory suppresses
+re-notification of an already-emitted signal on a second run.
 """
 
 import json
@@ -30,32 +31,59 @@ class TestAiCommand(unittest.TestCase):
         self._real_fetch = prices.fetch_raw
         self._real_session = prices.make_session
         self._real_key = os.environ.get(prices.ENV_KEY)
+        self._real_index = prices.fetch_index_raw
         prices.make_session = lambda: None
         prices.fetch_raw = lambda session, tk, key: _ascending_body(hash(tk) % 30)
+        # The market reading rides along on every run; keep it offline too.
+        prices.fetch_index_raw = lambda session, sym, key: _ascending_body(17)
         os.environ[prices.ENV_KEY] = "TESTKEY"
 
     def tearDown(self):
         prices.fetch_raw = self._real_fetch
+        prices.fetch_index_raw = self._real_index
         prices.make_session = self._real_session
         if self._real_key is None:
             os.environ.pop(prices.ENV_KEY, None)
         else:
             os.environ[prices.ENV_KEY] = self._real_key
 
+    @staticmethod
+    def _index(dirpath, tickers):
+        """A generated ticker index, as the `landing` step writes it."""
+        path = Path(dirpath) / "_index.json"
+        path.write_text(json.dumps({"tickers": [
+            {"ticker": tk, "company": f"{tk} Inc.", "slug": tk.lower()}
+            for tk in tickers]}), encoding="utf-8")
+        return path
+
     def test_writes_and_dedupes(self):
         with TemporaryDirectory() as d:
             out = Path(d) / "ai-indicators.json"
-            args = types.SimpleNamespace(output=str(out))
+            # AAPL has a page but is NOT on the featured watchlist — the case
+            # that used to leave the third most-traded stock without a read.
+            index = self._index(d, ["AAPL", "NVDA", "UNH"])
+            args = types.SimpleNamespace(output=str(out), index=str(index))
 
             self.assertEqual(cli._cmd_ai(args), 0)
             data = json.loads(out.read_text())
-            self.assertEqual(len(data["tickers"]), len(indicators.AI_TICKERS))
+            self.assertEqual(len(data["tickers"]),
+                             len(indicators.AI_TICKERS) + 2)  # + AAPL, UNH
             nvda = data["tickers"]["NVDA"]
             for k in ("price", "rsi14", "sma200", "signals", "name"):
                 self.assertIn(k, nvda)
-            # Every ticker made a new 52-week high → one new signal each.
+            self.assertTrue(nvda["featured"])
+            # Every page symbol gets the same reading; only the flag differs.
+            aapl = data["tickers"]["AAPL"]
+            self.assertFalse(aapl["featured"])
+            self.assertEqual(aapl["name"], "AAPL Inc.")
+            self.assertIsNotNone(aapl["rsi14"])
+            # Every ticker made a new 52-week high, but only the featured ones
+            # may notify — an email per page symbol would be noise.
             self.assertEqual(len(data["meta"]["new_signals"]),
                              len(indicators.AI_TICKERS))
+            self.assertNotIn("AAPL", [s["ticker"]
+                                      for s in data["meta"]["new_signals"]])
+            self.assertTrue(aapl["signals"])  # still shown on its own page
             self.assertTrue(data["meta"]["emitted_signal_keys"])
 
             # Second run over identical data: nothing new to notify.
@@ -63,11 +91,22 @@ class TestAiCommand(unittest.TestCase):
             data2 = json.loads(out.read_text())
             self.assertEqual(data2["meta"]["new_signals"], [])
 
+    def test_a_missing_index_falls_back_to_the_watchlist(self):
+        # A stale or failed `landing` step costs a few readings, never the run.
+        with TemporaryDirectory() as d:
+            out = Path(d) / "ai-indicators.json"
+            args = types.SimpleNamespace(output=str(out),
+                                         index=str(Path(d) / "absent.json"))
+            self.assertEqual(cli._cmd_ai(args), 0)
+            data = json.loads(out.read_text())
+            self.assertEqual(len(data["tickers"]), len(indicators.AI_TICKERS))
+
     def test_missing_key_keeps_existing(self):
         os.environ.pop(prices.ENV_KEY, None)
         with TemporaryDirectory() as d:
             out = Path(d) / "ai-indicators.json"
-            args = types.SimpleNamespace(output=str(out))
+            args = types.SimpleNamespace(output=str(out),
+                                         index=str(Path(d) / "absent.json"))
             self.assertEqual(cli._cmd_ai(args), 0)
             self.assertFalse(out.exists())  # no key → wrote nothing
 

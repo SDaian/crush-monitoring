@@ -825,6 +825,31 @@ def _load_prev_emitted(path: Path) -> set[str]:
         return set()
 
 
+TICKER_INDEX = DEFAULT_LANDING_DATA / "tickers" / "_index.json"
+
+
+def _reading_universe(index_path: Path) -> list[dict]:
+    """The symbols to compute readings for, from the generated ticker index.
+
+    The index is the page universe itself — written by the `landing` step,
+    which the workflow runs BEFORE this one — so "every ticker page has a
+    reading" holds by construction instead of by two lists agreeing. A missing
+    or unreadable index falls back to the featured watchlist alone: a stale
+    index costs a few readings, never the run.
+    """
+    from . import indicators
+
+    try:
+        rows = json.loads(index_path.read_text(encoding="utf-8"))["tickers"]
+    except (OSError, ValueError, KeyError, TypeError):
+        print(f"::warning::no ticker index at {index_path} — "
+              "computing the featured watchlist only")
+        rows = []
+    return indicators.reading_universe(
+        [r.get("ticker") for r in rows],
+        {r.get("ticker"): r.get("company") for r in rows})
+
+
 def _market_reading(session, key, redact):
     """Fetch the market-wide volatility reading for the indicators payload.
 
@@ -886,12 +911,14 @@ def _cmd_ai(args: argparse.Namespace) -> int:
     tickers: dict[str, dict] = {}
     new_signals: list[dict] = []
     emitted = set(prev_emitted)
-    universe = indicators.AI_TICKERS
+    universe = _reading_universe(Path(args.index))
+    featured_n = sum(1 for spec in universe if spec.get("featured"))
     # EARNINGS_DATES=true opts into the extra per-ticker earnings call.
     earnings_on = os.environ.get("EARNINGS_DATES", "").strip().lower() == "true"
     earnings_warned = False
     today_iso = datetime.now(timezone.utc).date().isoformat()
-    print(f"computing indicators for {len(universe)} AI tickers via Twelve Data (8/min)…"
+    print(f"computing indicators for {len(universe)} tickers "
+          f"({featured_n} featured) via Twelve Data (8/min)…"
           + (" (+earnings dates)" if earnings_on else ""))
     for spec in universe:
         tk, name = spec["ticker"], spec["name"]
@@ -905,7 +932,8 @@ def _cmd_ai(args: argparse.Namespace) -> int:
             print(f"  {tk}: no price history (unlisted?) — skipped")
             continue
         sigs = indicators.compute_signals(rows)
-        rec = {"name": name, **ind, "signals": sigs}
+        rec = {"name": name, "featured": bool(spec.get("featured")),
+               **ind, "signals": sigs}
         # Next earnings date — an EXTRA call per ticker on an endpoint that
         # is not on every Twelve Data plan. Gated so it cannot silently
         # double the run's rate budget, and any failure just leaves the
@@ -923,7 +951,11 @@ def _cmd_ai(args: argparse.Namespace) -> int:
         tickers[tk] = rec
         for s in sigs:
             k = indicators.signal_key(tk, s)
-            if k not in prev_emitted:
+            # meta.new_signals drives the notification issue and the morning
+            # report's overnight section, so only the featured watchlist
+            # enters it. A signal on any of the ~90 other page symbols still
+            # shows on that ticker's own page — it just does not email.
+            if k not in prev_emitted and spec.get("featured"):
                 new_signals.append({"ticker": tk, "name": name, **s})
             emitted.add(k)
         tag = f" · {len(sigs)} signal(s)" if sigs else ""
@@ -970,8 +1002,9 @@ def _cmd_ai(args: argparse.Namespace) -> int:
         encoding="utf-8",
     )
     print(
-        f"wrote indicators for {len(tickers)}/{len(universe)} AI tickers, "
-        f"{len(new_signals)} new signal(s) → {out_path}"
+        f"wrote indicators for {len(tickers)}/{len(universe)} tickers "
+        f"({featured_n} featured), {len(new_signals)} new featured "
+        f"signal(s) → {out_path}"
     )
     return 0
 
@@ -1063,6 +1096,9 @@ def build_parser() -> argparse.ArgumentParser:
         help="Compute AI-universe technical indicators + signals (Twelve Data).",
     )
     ai_p.add_argument("--output", default=str(DEFAULT_AI))
+    ai_p.add_argument("--index", default=str(TICKER_INDEX),
+                      help="Generated ticker index; every page in it gets a "
+                           "reading (falls back to the featured watchlist).")
     ai_p.add_argument("--skip-if-fresh", action="store_true",
                       help="No-op if the output was already generated today "
                            "(daily closes cannot change within a day).")

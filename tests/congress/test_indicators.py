@@ -242,3 +242,37 @@ class TestNextEarnings(unittest.TestCase):
         for body in ("", "not json", "{}", '{"earnings":"nope"}',
                      '{"earnings":[{"date":"soon"}]}'):
             self.assertIsNone(ind.next_earnings(body, "2026-08-06"))
+
+
+class TestReadingUniverse(unittest.TestCase):
+    """One rule for both universes: every ticker page gets a reading."""
+
+    def test_featured_come_first_in_their_own_order(self):
+        u = ind.reading_universe(["AAPL", "NVDA"], {"AAPL": "Apple Inc."})
+        self.assertEqual([s["ticker"] for s in u[:3]],
+                         [t["ticker"] for t in ind.AI_TICKERS[:3]])
+
+    def test_page_symbols_are_appended_and_flagged(self):
+        u = ind.reading_universe(["AAPL"], {"AAPL": "Apple Inc."})
+        aapl = next(s for s in u if s["ticker"] == "AAPL")
+        self.assertFalse(aapl["featured"])
+        self.assertEqual(aapl["name"], "Apple Inc.")
+        self.assertTrue(next(s for s in u if s["ticker"] == "NVDA")["featured"])
+
+    def test_a_featured_symbol_is_never_duplicated(self):
+        u = ind.reading_universe([t["ticker"] for t in ind.AI_TICKERS])
+        self.assertEqual(len(u), len(ind.AI_TICKERS))
+        self.assertEqual(len({s["ticker"] for s in u}), len(u))
+
+    def test_a_symbol_with_no_company_name_falls_back_to_its_ticker(self):
+        u = ind.reading_universe(["ZZZZ"], {})
+        self.assertEqual(next(s for s in u if s["ticker"] == "ZZZZ")["name"],
+                         "ZZZZ")
+
+    def test_an_empty_page_list_is_the_watchlist(self):
+        self.assertEqual(len(ind.reading_universe([])), len(ind.AI_TICKERS))
+
+    def test_blank_entries_are_dropped(self):
+        u = ind.reading_universe(["", None, "AAPL"])
+        self.assertEqual([s["ticker"] for s in u[len(ind.AI_TICKERS):]],
+                         ["AAPL"])

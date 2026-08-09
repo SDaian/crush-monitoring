@@ -207,6 +207,17 @@ const schema = [
       schema={schema}
       noindex={t.indexable === false}
     />
+    <!-- Runs before the body parses, so the right panel is the only one ever
+         painted: no flash, no layout shift. It sets two classes and nothing
+         else. Without JavaScript neither class lands and both panels show,
+         which is the page exactly as it read before the tabs. -->
+    <script is:inline>
+      (function () {
+        var r = document.documentElement;
+        r.classList.add("js");
+        if (/^#(technical|market)$/.test(location.hash)) r.classList.add("t-tech");
+      })();
+    </script>
   </head>
   <body>
     <Header active="tickers" />
@@ -238,7 +249,34 @@ const schema = [
       </p>
     </section>
 
-    <section class="mx-auto max-w-[75rem] px-[5vw] pb-[7vh]">
+    <!-- Two tabs, right under the headline: the numbers a reader comes for
+         must not sit a full scroll below the trades table. Both panels are in
+         the HTML — the script only hides one — so search engines read the
+         whole page and a no-JS reader gets it as one long page. -->
+    <div class="mx-auto max-w-[75rem] px-[5vw]">
+      <div class="tktabs" role="tablist" aria-label={`${t.ticker} sections`}>
+        <button
+          id="tab-trades"
+          class="tktab"
+          role="tab"
+          type="button"
+          aria-selected="true"
+          aria-controls="panel-trades">Disclosed trades</button
+        >
+        <button
+          id="tab-tech"
+          class="tktab"
+          role="tab"
+          type="button"
+          aria-selected="false"
+          tabindex="-1"
+          aria-controls="panel-tech">Market &amp; technicals</button
+        >
+      </div>
+    </div>
+
+    <div id="panel-trades" class="tkpanel" role="tabpanel" aria-labelledby="tab-trades">
+    <section class="mx-auto max-w-[75rem] px-[5vw] pt-[4vh] pb-[7vh]">
       <div class="statstrip">
         {
           STAT_CARDS.map((c) => (
@@ -257,10 +295,6 @@ const schema = [
         real position sizes, and {s.pctLate}% of these filings arrived past the
         legal deadline.
       </p>
-      <!-- The weather every one of these trades happened in. One market-wide
-           number, so it is identical on every ticker page and says so. It sits
-           BELOW the stock's own record, which stays the page's subject. -->
-      <div class="mt-8"><MarketStrip reading={market} subject={t.ticker} /></div>
     </section>
 
     {
@@ -375,9 +409,17 @@ const schema = [
         record — never real-time, and never investment advice.
       </p>
     </section>
+    </div>
+
+    <div id="panel-tech" class="tkpanel" role="tabpanel" aria-labelledby="tab-tech">
+    <!-- The weather every one of these trades happened in. One market-wide
+         number, so it is identical on every ticker page and says so. -->
+    <section class="mx-auto max-w-[75rem] px-[5vw] pt-[4vh] pb-[2vh]">
+      <MarketStrip reading={market} subject={t.ticker} />
+    </section>
 
     {
-      tech && (
+      tech ? (
         <section id="technical" class="mx-auto max-w-[75rem] px-[5vw] pb-[7vh]">
           <div class="section-head">
             <h2 class="section-title whitespace-nowrap">Technical read</h2>
@@ -385,9 +427,9 @@ const schema = [
           </div>
 
           <p class="fineprint mt-4 max-w-[80ch]">
-            Mechanical readings computed from past daily closes for the stocks
-            on our watchlist — the same ones in the morning report. A daily
-            snapshot, <b class="text-ink">not real-time</b>, and{" "}
+            Mechanical readings computed from past daily closes — the same ones
+            the morning report scores. A daily snapshot,{" "}
+            <b class="text-ink">not real-time</b>, and{" "}
             <b class="text-ink">not investment advice</b>.
           </p>
 
@@ -491,8 +533,28 @@ const schema = [
             </div>
           )}
         </section>
+      ) : (
+        // No reading for this symbol. Say why and where the readings are —
+        // an empty tab would read as a broken page.
+        <section id="technical" class="mx-auto max-w-[75rem] px-[5vw] pb-[7vh]">
+          <div class="section-head">
+            <h2 class="section-title whitespace-nowrap">Technical read</h2>
+            <span class="eyebrow">Not published for {t.ticker}</span>
+          </div>
+          <p class="fineprint mt-5 max-w-[80ch]">
+            We publish mechanical readings — price against its 20/50/200-day
+            averages, RSI, the 52-week range — for every stock with enough
+            disclosed trades to earn a page here. {t.ticker} is below that bar
+            today, so this page carries its disclosure record and the market
+            reading above.{" "}
+            <a href="/tracker" class="underline underline-offset-2 hover:text-ink"
+              >See the stocks we do read →</a
+            >
+          </p>
+        </section>
       )
     }
+    </div>
 
     <section class="border-t-2 border-ink px-[5vw] py-[10vh] text-center">
       <h2 class="text-[clamp(1.8rem,4.5vw,3.2rem)] font-black leading-[1.15] tracking-[-0.03em] text-balance">
@@ -510,10 +572,106 @@ const schema = [
     <SignupModal title={`Know the next ${t.ticker} trade first.`} />
 
     <CountUp />
+
+    <script>
+      // Wires the tab bar. The head script already painted the right panel;
+      // this only handles clicks, keys and the address bar. Deep links keep
+      // working: the tracker links #technical, and each section keeps its id
+      // inside its panel, so the anchor still resolves.
+      const root = document.documentElement;
+      const tabs = [
+        document.getElementById("tab-trades"),
+        document.getElementById("tab-tech"),
+      ].filter(Boolean) as HTMLButtonElement[];
+
+      if (tabs.length === 2) {
+        const show = (tech: boolean, focus = false) => {
+          root.classList.toggle("t-tech", tech);
+          tabs.forEach((tab, i) => {
+            const on = i === (tech ? 1 : 0);
+            tab.setAttribute("aria-selected", on ? "true" : "false");
+            tab.tabIndex = on ? 0 : -1;
+            if (on && focus) tab.focus();
+          });
+          // Keep the URL honest, without pushing a history entry per click.
+          history.replaceState(null, "", tech ? "#technical" : location.pathname);
+        };
+
+        show(root.classList.contains("t-tech"));
+        tabs.forEach((tab, i) => tab.addEventListener("click", () => show(i === 1)));
+        document.querySelector(".tktabs")?.addEventListener("keydown", (e) => {
+          const key = (e as KeyboardEvent).key;
+          if (key !== "ArrowRight" && key !== "ArrowLeft") return;
+          e.preventDefault();
+          show(!root.classList.contains("t-tech"), true);
+        });
+        // A #technical link followed while already on the page. The browser
+        // tried to scroll to a target that was still hidden, so the jump has
+        // to happen after the panel opens.
+        addEventListener("hashchange", () => {
+          const tech = /^#(technical|market)$/.test(location.hash);
+          show(tech);
+          if (tech) document.getElementById("technical")?.scrollIntoView();
+        });
+      }
+    </script>
   </body>
 </html>
 
 <style>
+  /* --- Tabs (DESIGN.md §8) -------------------------------------------- */
+  .tktabs {
+    display: flex;
+    flex-wrap: wrap;
+    border-bottom: 2px solid var(--color-ink);
+  }
+  .tktab {
+    appearance: none;
+    background: none;
+    border: 0;
+    border-bottom: 3px solid transparent;
+    margin-bottom: -2px;
+    padding: 0.85rem 1.15rem;
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    color: var(--color-ink-soft);
+    cursor: pointer;
+  }
+  .tktab:first-child {
+    padding-left: 0;
+  }
+  .tktab:hover {
+    color: var(--color-ink);
+  }
+  .tktab[aria-selected="true"] {
+    color: var(--color-ink);
+    font-weight: 600;
+    border-bottom-color: var(--color-stamp);
+  }
+  /* The panel switch is CSS, driven by one class on <html> that the head
+     script sets before the body parses. No JS → no class → both panels show,
+     and the page reads as the single long page it was. */
+  :root.js #panel-tech {
+    display: none;
+  }
+  :root.js.t-tech #panel-tech {
+    display: block;
+  }
+  :root.js.t-tech #panel-trades {
+    display: none;
+  }
+  @media (max-width: 26rem) {
+    .tktab {
+      padding: 0.75rem 0.7rem;
+      font-size: 0.72rem;
+    }
+    .tktab:first-child {
+      padding-left: 0;
+    }
+  }
+
   /* Shares the member page's stat strip + trade row system (DESIGN.md §8). */
   .statstrip {
     display: grid;
