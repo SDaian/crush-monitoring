@@ -414,7 +414,9 @@ const schema = [
     <div id="panel-tech" class="tkpanel" role="tabpanel" aria-labelledby="tab-tech">
     <!-- The weather every one of these trades happened in. One market-wide
          number, so it is identical on every ticker page and says so. -->
-    <section class="mx-auto max-w-[75rem] px-[5vw] pt-[4vh] pb-[2vh]">
+    <!-- Tight to the tab bar on purpose: the strip is the first thing the tab
+         promises, and a viewport-sized gap (4vh) read as a loading page. -->
+    <section class="mx-auto max-w-[75rem] px-[5vw] pt-6 pb-7">
       <MarketStrip reading={market} subject={t.ticker} />
     </section>
 
