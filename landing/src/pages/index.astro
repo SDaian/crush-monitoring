@@ -84,11 +84,13 @@ const HOW_STEPS = [
   },
   {
     label: "Structure",
-    title: "Cleaned by AI-built parsers",
+    // The prototype's wording. It says what the reader gets; how the pipeline
+    // is built and maintained is disclosed in full on /how-it-works, which the
+    // link under this band opens.
+    title: "Cleaned and comparable",
     body:
-      "Our AI-maintained pipeline normalizes tickers, buckets amounts, and " +
-      "computes the filing lag — so every trade is comparable across members " +
-      "and time.",
+      "Tickers normalized, amounts bucketed, the filing lag computed on every " +
+      "row. One shape for every trade, so members and years compare.",
   },
   {
     label: "Signal",
@@ -114,7 +116,7 @@ const description = seoDescription(
   <body>
     <Header />
 
-    <!-- ===== Hero: promise + signup (left), live "today's email" (right) ===== -->
+    {/* ===== Hero: promise + signup (left), live "today's email" (right) ===== */}
     <section
       class="mx-auto max-w-[75rem] border-b-[3px] border-double border-ink px-[5vw] pt-[7vh] pb-[6vh]"
       id="feed"
@@ -159,8 +161,8 @@ const description = seoDescription(
           </div>
         </div>
 
-        <!-- Live "today's email" preview — the real curated feed, framed as
-             the daily digest (the product shot). -->
+        {/* Live "today's email" preview — the real curated feed, framed as
+             the daily digest (the product shot). */}
         <div class="stage">
           <span class="tagm">Today's email</span>
           <div class="mail" role="table" aria-label="Sample daily digest of recent disclosures">
@@ -219,7 +221,7 @@ const description = seoDescription(
       </div>
     </section>
 
-    <!-- ===== Problem band + how it works ===== -->
+    {/* ===== Problem band + how it works ===== */}
     <section class="mx-auto max-w-[75rem] px-[5vw] pt-[10vh]">
       <div class="text-center">
         <h2 class="mx-auto max-w-[22ch] text-[clamp(1.9rem,4vw,3.1rem)] font-black leading-[1.08] tracking-[-0.03em] text-balance">
@@ -228,7 +230,7 @@ const description = seoDescription(
         <p class="mx-auto mt-4 max-w-[54ch] text-pretty text-[1.02rem] leading-[1.6] text-ink-soft">
           The disclosures are technically public — scattered across three
           government portals, locked in PDFs, filed weeks or months late. We
-          read all of it, every morning, so you don't have to.
+          read all of it, every morning, and send back what changed.
         </p>
       </div>
       <div class="mt-14">
@@ -243,7 +245,7 @@ const description = seoDescription(
       </div>
     </section>
 
-    <!-- ===== Stats ===== -->
+    {/* ===== Stats ===== */}
     <section
       class="mt-[10vh] grid grid-cols-3 border-t-2 border-t-ink border-b border-b-rule max-[760px]:grid-cols-1"
       aria-label="Tracker statistics"
@@ -268,7 +270,7 @@ const description = seoDescription(
       </div>
     </section>
 
-    <!-- ===== Reviews ===== -->
+    {/* ===== Reviews ===== */}
     <section
       class="mx-auto max-w-[75rem] px-[5vw] py-[10vh]"
       id="reviews"
@@ -302,7 +304,7 @@ const description = seoDescription(
       </div>
     </section>
 
-    <!-- ===== Final CTA ===== -->
+    {/* ===== Final CTA ===== */}
     <section class="border-t-2 border-ink px-[5vw] py-[10vh] text-center">
       <h2 class="text-[clamp(1.8rem,4.5vw,3.2rem)] font-black leading-[1.15] tracking-[-0.03em] text-balance">
         Public records, actually public.
@@ -313,7 +315,7 @@ const description = seoDescription(
       <a href="#join" class="btn btn-stamp inline-block no-underline">Start tracking free</a>
     </section>
 
-    <!-- ===== Contact ===== -->
+    {/* ===== Contact ===== */}
     <section class="border-t border-rule" id="contact">
       <div class="mx-auto max-w-[75rem] px-[5vw] py-[10vh]">
         <div class="section-head">
@@ -374,7 +376,7 @@ const description = seoDescription(
                 placeholder="A correction, a question, a request…"
                 required></textarea>
             </div>
-            <!-- Honeypot: invisible to people, tempting to bots. -->
+            {/* Honeypot: invisible to people, tempting to bots. */}
             <input
               class="sr-only"
               type="text"

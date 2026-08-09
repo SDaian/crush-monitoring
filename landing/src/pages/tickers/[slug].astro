@@ -207,10 +207,10 @@ const schema = [
       schema={schema}
       noindex={t.indexable === false}
     />
-    <!-- Runs before the body parses, so the right panel is the only one ever
+    {/* Runs before the body parses, so the right panel is the only one ever
          painted: no flash, no layout shift. It sets two classes and nothing
          else. Without JavaScript neither class lands and both panels show,
-         which is the page exactly as it read before the tabs. -->
+         which is the page exactly as it read before the tabs. */}
     <script is:inline>
       (function () {
         var r = document.documentElement;
@@ -242,17 +242,17 @@ const schema = [
         {" "}{s.sells} sells. Amounts are the brackets as filed; timing is counted
         against the 45-day legal maximum.
       </p>
-      <!-- Same split as member pages: newest filing in the header's right
-           meta, "checked" (our rebuild date) down here. -->
+      {/* Same split as member pages: newest filing in the header's right
+           meta, "checked" (our rebuild date) down here. */}
       <p class="mono mt-5 text-[.75rem] uppercase tracking-[.08em] text-ink-soft">
         Checked {checkedOn}
       </p>
     </section>
 
-    <!-- Two tabs, right under the headline: the numbers a reader comes for
+    {/* Two tabs, right under the headline: the numbers a reader comes for
          must not sit a full scroll below the trades table. Both panels are in
          the HTML — the script only hides one — so search engines read the
-         whole page and a no-JS reader gets it as one long page. -->
+         whole page and a no-JS reader gets it as one long page. */}
     <div class="mx-auto max-w-[75rem] px-[5vw]">
       <div class="tktabs" role="tablist" aria-label={`${t.ticker} sections`}>
         <button
@@ -412,10 +412,10 @@ const schema = [
     </div>
 
     <div id="panel-tech" class="tkpanel" role="tabpanel" aria-labelledby="tab-tech">
-    <!-- The weather every one of these trades happened in. One market-wide
-         number, so it is identical on every ticker page and says so. -->
-    <!-- Tight to the tab bar on purpose: the strip is the first thing the tab
-         promises, and a viewport-sized gap (4vh) read as a loading page. -->
+    {/* The weather every one of these trades happened in. One market-wide
+         number, so it is identical on every ticker page and says so. */}
+    {/* Tight to the tab bar on purpose: the strip is the first thing the tab
+         promises, and a viewport-sized gap (4vh) read as a loading page. */}
     <section class="mx-auto max-w-[75rem] px-[5vw] pt-6 pb-7">
       <MarketStrip reading={market} subject={t.ticker} />
     </section>

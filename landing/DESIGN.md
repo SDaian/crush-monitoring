@@ -230,6 +230,21 @@ must match it.
     them; quotes may not.
   - "Late" always means past the STOCK Act's 45-day statutory maximum — use the
     word precisely.
+- **The machine-written tells (checked every build by
+  `scripts/check-copy.mjs`, which warns and never fails):**
+  - **No authoring notes in the page source.** Comments in `.astro` use
+    `{/* … */}`; `<!-- … -->` survives the build and lands in View Source.
+    Twenty-five of them once became 686 comments across 124 published pages.
+    `tests/congress/test_landing_source.py` fails the suite on the cause.
+  - **No emoji in interface chrome or copy.** The type system carries the
+    emphasis. Typographic marks are not emoji and stay: arrows (→ ↗), rating
+    stars (★ ☆), the clear glyph (✕).
+  - **At most one em-dash idea per paragraph.** A matched pair around a phrase
+    is correct English; three in a block is the tic. Page-level density is not
+    the signal — the prototype itself runs ~20 per 1,000 words.
+  - **Say what the reader gets, not what built it.** How the pipeline is made
+    and maintained is disclosed in full on `/how-it-works`; a benefit band is
+    not the place to advertise the tooling.
 - **Do / don't:**
   - ✅ "Filed 502 days late." ❌ "🚨 INSANE 502-day delay!!"
   - ✅ "One email per day — always. No spam, ever." ❌ "Join 10,000+ smart investors."

@@ -79,10 +79,10 @@ const alt =
 ---
 
 <figure class="hchart">
-  <!-- Padded only when there are labels to fit. They sit outside the 200-unit
+  {/* Padded only when there are labels to fit. They sit outside the 200-unit
        ring and a 5-character ticker was being sliced ("AAPL" → "AA") by a tight
        box — but on a flat portfolio nothing clears the labelling threshold, and
-       padding an empty margin just shrinks the ring for no reason. -->
+       padding an empty margin just shrinks the ring for no reason. */}
   <svg
     viewBox={labels.length ? "-44 -6 288 212" : "0 0 200 200"}
     class="hring"

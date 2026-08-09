@@ -76,16 +76,16 @@ const schema = [
     <div class="tracker mx-auto max-w-[85rem] px-[5vw] pb-[10vh]">
       <div class="tabs" id="tabs" role="tablist">
         <button class="tab active" data-p="p-all" role="tab" aria-selected="true">
-          📊 All trades
+          All trades
         </button>
         <button class="tab" data-p="p-ai" role="tab" aria-selected="false">
-          ⭐ Featured stocks
+          Featured stocks
         </button>
-        <a class="tab tab-link" href="/tickers">🔎 By ticker →</a>
-        <a class="tab tab-link" href="/members">🧩 Holdings by member →</a>
+        <a class="tab tab-link" href="/tickers">By ticker →</a>
+        <a class="tab tab-link" href="/members">Holdings by member →</a>
       </div>
 
-      <!-- ── All trades ────────────────────────────────────────────── -->
+      {/* ── All trades ────────────────────────────────────────────── */}
       <section class="panel active" id="p-all">
         <div class="filters">
           <input type="search" id="q" placeholder="Search member or ticker…" />
@@ -134,21 +134,21 @@ const schema = [
         </div>
       </section>
 
-      <!-- ── Featured stocks ───────────────────────────────────────── -->
+      {/* ── Featured stocks ───────────────────────────────────────── */}
       <section class="panel" id="p-ai" hidden>
         <div class="banner-sample" id="aiSampleBanner" style="display:none">
-          ⚠️ These indicators are <b>sample data from a synthetic price series —
+          These indicators are <b>sample data from a synthetic price series,
           not real market data.</b> The daily refresh replaces them with real
           closes once the price feed runs.
         </div>
         <p class="legend">
-          <b>Mechanical technical indicators</b> for a featured stock universe —
+          <b>Mechanical technical indicators</b> for a featured stock universe:
           RSI(14), moving averages, volume and the 52-week range, recomputed
-          <b>daily</b> from Twelve Data closes, plus a <b>transparent
-          buy/sell/hold summary</b> that is just a <b>rule-based tally of those
-          indicators</b> (each casts a vote, full breakdown shown) — <b>not
-          investment advice</b>, and blind to fundamentals, news and your own
-          goals. A <b>daily snapshot, not real-time</b>.
+          <b>daily</b> from Twelve Data closes. The buy/sell/hold summary is a
+          <b>rule-based tally of those same indicators</b>, each casting one
+          vote, with the full breakdown shown. It is <b>not investment
+          advice</b>, and it is blind to fundamentals, news and your own goals.
+          A <b>daily snapshot, not real-time</b>.
         </p>
         <div id="aiSignals" class="aisignals"></div>
         <div class="cards" id="aiCards"></div>
@@ -419,7 +419,7 @@ const schema = [
       }
       function sigTags(sigs){
         return (sigs || []).map(s =>
-          `<span class="sigtag ${esc(s.dir||"neutral")}" title="mechanical event on ${esc(s.asof)} — not advice">🔔 ${esc(s.label)}</span>`
+          `<span class="sigtag ${esc(s.dir||"neutral")}" title="mechanical event on ${esc(s.asof)}, not advice">${esc(s.label)}</span>`
         ).join("");
       }
 
@@ -460,14 +460,14 @@ const schema = [
         fired.sort((a,b) => a.asof < b.asof ? 1 : -1);
         $("aiSignals").innerHTML = fired.length
           ? `<span class="note">Latest signals:</span> ` + fired.slice(0, 8).map(s =>
-              `<span class="sigtag ${esc(s.dir||"neutral")}" title="${esc(s.asof)}">🔔 ${esc(s.tk)} · ${esc(s.label)}</span>`).join("")
+              `<span class="sigtag ${esc(s.dir||"neutral")}" title="${esc(s.asof)}">${esc(s.tk)} · ${esc(s.label)}</span>`).join("")
           : `<span class="note">No new signals on the latest session — indicators below are current.</span>`;
       }
 
       function renderAiCards(){
         $("aiCards").innerHTML = aiTickers().map(tk => {
           const a = AI[tk];
-          const dot = (a.signals && a.signals.length) ? " 🔔" : "";
+          const dot = (a.signals && a.signals.length) ? " •" : "";
           const sc = aiScore(a);
           return `<div class="fcard ${state.aiTicker === tk ? "sel" : ""}" data-a="${esc(tk)}">
             <div class="name">${esc(tk)}${dot} <span class="scorepill ${sc.cls}" title="mechanical technical summary — not advice">${esc(sc.label)}</span></div>
@@ -507,7 +507,7 @@ const schema = [
       + `weigh it against fundamentals and news before concluding.`;
         return [
           {title:"📈 Market-trend & opportunities prompt", text:p1},
-          {title:"📊 Technical-analysis prompt (buy / sell / hold)", text:p2},
+          {title:"Technical-analysis prompt (buy / sell / hold)", text:p2},
         ];
       }
 
@@ -524,12 +524,12 @@ const schema = [
         // Congressional angle — ties this ticker back to the tracker's actual data.
         const s = (typeof tickerStats === "function") ? tickerStats(tk, "") : {n:0};
         const congress = s.n
-          ? `<div class="note" style="margin-top:6px">🏛 <b>Congress:</b> ${s.n} disclosed trade${s.n===1?"":"s"} all-time
+          ? `<div class="note" style="margin-top:6px"><b>Congress:</b> ${s.n} disclosed trade${s.n===1?"":"s"} all-time
               (<span class="buy">${s.buy} buy</span> · <span class="sell">${s.sell} sell</span>), ${s.members} member${s.members===1?"":"s"}.
               ${PAGEMAPS.tickers[tk]
                   ? `<a href="/tickers/${PAGEMAPS.tickers[tk]}">See who traded it →</a>`
                   : ""}</div>`
-          : `<div class="note" style="margin-top:6px">🏛 No congressional trades on record for $${esc(tk)}.</div>`;
+          : `<div class="note" style="margin-top:6px">No congressional trades on record for $${esc(tk)}.</div>`;
 
         const cell = (k, v, x) =>
           `<div class="indcell"><div class="k">${k}</div><div class="v">${v}</div>${x?`<div class="x">${x}</div>`:""}</div>`;

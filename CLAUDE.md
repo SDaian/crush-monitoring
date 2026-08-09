@@ -701,6 +701,23 @@ Conventions:
   as npm `postbuild` and **warns** about overruns and missing titles; it
   deliberately does not fail the build (a cosmetic overflow must never take the
   deploy down).
+- **Authoring notes must not ship. Comments in `.astro` use `{/* … */}`.**
+  Astro strips those and **keeps** `<!-- … -->`, so 25 rationale comments in
+  the components became **686 comments and 132 KB across 124 published pages**
+  — every reader who opened View Source read the design notes. Explain code in
+  the frontmatter (`// …`) or in a JSX comment.
+  `tests/congress/test_landing_source.py` **fails the offline suite** on any
+  HTML comment in a `.astro` file (the Action runs that suite first), and
+  `landing/scripts/check-copy.mjs` (npm `postbuild`, next to `check-seo.mjs`)
+  **warns** on the other machine-written tells: comments that reached the
+  output, emoji in visible copy, three-plus em dashes in one block, and a short
+  list of generated-sounding phrases. It warns and never fails, for
+  `check-seo`'s reason — a cosmetic count must not take the deploy down. The
+  rules themselves live in `landing/DESIGN.md` §7; note that em-dash *density*
+  is deliberately not a rule (the prototype runs ~20 per 1,000 words — the tell
+  is stacking, not the dash), typographic marks (→ ★ ✕) are not emoji, and the
+  AI disclosure on `/how-it-works` stays: removing it would hide something
+  true.
 - **The icon set is generated, not hand-made.** `landing/scripts/make-icons.py`
   (stdlib only, run it manually) writes `favicon.svg`, a real multi-size
   `favicon.ico` (16/32/48, the file Google's separate favicon crawler wants at
