@@ -24,3 +24,6 @@ __pycache__/
 # Congress fetcher scratch output (Action artifacts, never committed)
 debug-dump/
 fetch.log
+
+# Python cache from the chat-style hook
+.claude/hooks/__pycache__/
