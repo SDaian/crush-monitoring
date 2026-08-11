@@ -1,9 +1,15 @@
 name: UI checks
 
+# SCHEDULE REMOVED (Actions budget). This repository is PRIVATE, so every
+# minute counts against the 2,000 included each month, and this workflow was
+# the largest consumer: the dev/stg/prod matrix starts three jobs per run,
+# GitHub bills each job at one minute minimum, and it fired hourly. That is
+# ~3,000 minutes a month.
+#
+# The checks move to their own repository. Until then they run on demand from
+# the Actions tab. Restore the cron only with a frequency the budget can carry
+# - hourly costs the whole allowance with this matrix.
 on:
-  schedule:
-    # Hourly.
-    - cron: '0 * * * *'
   workflow_dispatch:
 
 jobs:
