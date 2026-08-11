@@ -6,8 +6,11 @@ on:
     # best-effort — frequently delayed 1–3h and sometimes DROPPED ENTIRELY. So
     # we fire MULTIPLE times across the morning: GitHub would have to skip every
     # one to miss a day, and the report is idempotent per day (report_state) so
-    # the first firing sends and the rest no-op the email. Public repo → the
-    # extra runs are free. Whichever fires first biases early ("before the day
+    # the first firing sends and the rest no-op the email. The repo is PRIVATE,
+    # so the extra runs are NOT free: three firings cost ~830 minutes a month of
+    # the 2,000 included. That is a deliberate trade — the morning email is the
+    # product, and a missed day costs more than the minutes. Weigh it again if
+    # the pipeline gets slower. Whichever fires first biases early ("before the day
     # starts"), late is the failure mode. Cron is UTC and ignores DST (±1h drift
     # over the year). For a hard timing guarantee an external scheduler hitting
     # the workflow_dispatch API would still be needed.
