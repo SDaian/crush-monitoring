@@ -31,8 +31,9 @@ const link =
 const active_cls = "border-stamp text-ink";
 const idle_cls = "border-transparent text-ink-soft";
 const cta =
-  "mono whitespace-nowrap bg-ink px-3.5 py-2 text-[.75rem] uppercase " +
-  "tracking-[.06em] text-paper no-underline hover:bg-stamp focus-visible:bg-stamp";
+  "mono inline-flex items-center min-h-11 whitespace-nowrap bg-ink px-3.5 " +
+  "text-[.75rem] uppercase tracking-[.06em] text-paper no-underline " +
+  "hover:bg-stamp focus-visible:bg-stamp";
 ---
 
 <div class="site-head">
@@ -52,7 +53,7 @@ const cta =
       </button>
       <a
         href={home ? "#top" : "/"}
-        class="text-[1.05rem] font-black uppercase tracking-[-0.02em] text-ink no-underline"
+        class="inline-block py-[0.65rem] text-[1.05rem] font-black uppercase tracking-[-0.02em] text-ink no-underline"
         aria-label="Capitol Ledger — home"
       >
         Capitol <span class="text-stamp">Ledger</span>
@@ -78,6 +79,7 @@ const cta =
   </header>
 
   <nav id="mobileMenu" class="mobile-menu" aria-label="Menu" inert>
+    <div class="mm-inner">
     {
       NAV.map((n) => (
         <a
@@ -89,6 +91,7 @@ const cta =
         </a>
       ))
     }
+  </div>
   </nav>
 </div>
 
@@ -98,9 +101,11 @@ const cta =
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 2.5rem;
-    height: 2.5rem;
-    margin-left: -0.5rem; /* pull the icon out to the content edge */
+    /* 44px: the pointer-target floor. The icon inside stays 18px; only the
+       hit area grows, so the header's optical weight does not change. */
+    width: 2.75rem;
+    height: 2.75rem;
+    margin-left: -0.625rem; /* pull the icon out to the content edge */
     background: none;
     border: 0;
     cursor: pointer;
@@ -144,12 +149,16 @@ const cta =
   /* The panel expands downward from under the header rule. */
   .mobile-menu {
     display: grid;
-    max-height: 0;
+    grid-template-rows: 0fr;
     overflow: hidden;
-    transition: max-height 0.28s ease;
+    transition: grid-template-rows 0.28s ease;
+  }
+  .mm-inner {
+    display: grid;
+    min-height: 0; /* let the row collapse; a grid item floors at auto */
   }
   .mobile-menu.open {
-    max-height: 20rem;
+    grid-template-rows: 1fr;
     border-bottom: 1px solid var(--color-rule);
   }
   .mm-link {
