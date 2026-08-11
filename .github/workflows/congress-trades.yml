@@ -14,9 +14,14 @@ on:
     # starts"), late is the failure mode. Cron is UTC and ignores DST (±1h drift
     # over the year). For a hard timing guarantee an external scheduler hitting
     # the workflow_dispatch API would still be needed.
+    #
+    # NONE of these sit at :00. That minute is the most contended on GitHub's
+    # shared runners, and the queue there is what turns a schedule into a
+    # 30-70 minute delay — our own runs showed the 04:30 firing starting at
+    # 05:xx and the 06:00 firing at 07:xx. Keep new entries off the hour.
     - cron: "30 4 * * *"
-    - cron: "0 6 * * *"
-    - cron: "0 8 * * *"
+    - cron: "20 6 * * *"
+    - cron: "20 8 * * *"
   workflow_dispatch:
     inputs:
       limit:
