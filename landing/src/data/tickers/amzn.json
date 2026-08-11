@@ -5,25 +5,21 @@
   "company": "Amazon.com, Inc.",
   "indexable": true,
   "technical": {
-    "asOf": "2026-08-07",
-    "price": 274.48,
-    "chg1d": 0.82,
-    "chg1w": 1.07,
-    "chg1m": 11.11,
-    "rsi14": 64.2,
-    "sma50": 247.51,
-    "sma200": 236.54,
-    "vsSma50": 10.9,
-    "vsSma200": 16.0,
-    "relVol": 0.68,
+    "asOf": "2026-08-10",
+    "price": 278.09,
+    "chg1d": 1.32,
+    "chg1w": -2.09,
+    "chg1m": 13.35,
+    "rsi14": 65.9,
+    "sma50": 247.59,
+    "sma200": 236.82,
+    "vsSma50": 12.3,
+    "vsSma200": 17.4,
+    "relVol": 0.69,
     "high52w": 284.02,
     "low52w": 198.79,
-    "rangePos": 89.0,
+    "rangePos": 93.0,
     "series": [
-      {
-        "d": "2025-08-15",
-        "c": 231.03
-      },
       {
         "d": "2025-08-22",
         "c": 228.84
@@ -227,27 +223,31 @@
       {
         "d": "2026-08-07",
         "c": 274.48
+      },
+      {
+        "d": "2026-08-10",
+        "c": 278.09
       }
     ],
     "signals": [],
     "nextEarnings": null,
     "score": {
       "label": "Strong Buy",
-      "buys": 6,
-      "sells": 0,
+      "buys": 5,
+      "sells": 1,
       "holds": 1,
-      "ratio": 0.857
+      "ratio": 0.571
     }
   },
   "summary": {
-    "trades": 117,
-    "members": 31,
+    "trades": 119,
+    "members": 32,
     "buys": 87,
-    "sells": 30,
+    "sells": 32,
     "other": 0,
     "firstTx": "2024-10-23",
-    "lastTx": "2026-06-16",
-    "lastFiling": "2026-07-21",
+    "lastTx": "2026-06-25",
+    "lastFiling": "2026-08-07",
     "estBuyLabel": "$4.2M",
     "estSellLabel": "$3.7M",
     "pctLate": 18
@@ -365,6 +365,18 @@
     }
   ],
   "trades": [
+    {
+      "member": "Michael A. Rulli",
+      "memberSlug": "michael-a-rulli",
+      "hasPage": false,
+      "party": "R",
+      "side": "SELL",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-06-25",
+      "filedDate": "2026-08-07",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035147.pdf"
+    },
     {
       "member": "Matthew Robert Van Epps",
       "memberSlug": "matthew-robert-van-epps",
@@ -649,18 +661,6 @@
       "side": "SELL",
       "amountBucket": "$1K – $15K",
       "txDate": "2025-12-24",
-      "filedDate": "2026-01-12",
-      "daysLate": 0,
-      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20033762.pdf"
-    },
-    {
-      "member": "Gilbert Ray Cisneros, Jr.",
-      "memberSlug": "gilbert-ray-cisneros-jr",
-      "hasPage": true,
-      "party": "D",
-      "side": "SELL",
-      "amountBucket": "$1K – $15K",
-      "txDate": "2025-12-19",
       "filedDate": "2026-01-12",
       "daysLate": 0,
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20033762.pdf"

@@ -5,25 +5,21 @@
   "company": "Ford Motor Company",
   "indexable": true,
   "technical": {
-    "asOf": "2026-08-07",
-    "price": 13.98,
-    "chg1d": 1.38,
-    "chg1w": -4.77,
-    "chg1m": 2.72,
-    "rsi14": 45.3,
-    "sma50": 14.48,
-    "sma200": 13.4,
-    "vsSma50": -3.5,
-    "vsSma200": 4.3,
-    "relVol": 0.63,
+    "asOf": "2026-08-10",
+    "price": 14.0,
+    "chg1d": 0.14,
+    "chg1w": -2.98,
+    "chg1m": 0.0,
+    "rsi14": 45.6,
+    "sma50": 14.43,
+    "sma200": 13.41,
+    "vsSma50": -3.0,
+    "vsSma200": 4.4,
+    "relVol": 0.65,
     "high52w": 17.44,
     "low52w": 11.14,
     "rangePos": 45.0,
     "series": [
-      {
-        "d": "2025-08-15",
-        "c": 11.44
-      },
       {
         "d": "2025-08-22",
         "c": 11.74
@@ -227,16 +223,20 @@
       {
         "d": "2026-08-07",
         "c": 13.98
+      },
+      {
+        "d": "2026-08-10",
+        "c": 14.0
       }
     ],
     "signals": [],
     "nextEarnings": null,
     "score": {
       "label": "Hold",
-      "buys": 3,
+      "buys": 2,
       "sells": 3,
-      "holds": 1,
-      "ratio": 0.0
+      "holds": 2,
+      "ratio": -0.143
     }
   },
   "summary": {

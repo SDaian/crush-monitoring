@@ -5,25 +5,21 @@
   "company": "AbbVie Inc.",
   "indexable": true,
   "technical": {
-    "asOf": "2026-08-07",
-    "price": 246.04,
-    "chg1d": 0.89,
-    "chg1w": -1.95,
-    "chg1m": -1.55,
-    "rsi14": 47.2,
-    "sma50": 241.15,
-    "sma200": 225.09,
-    "vsSma50": 2.0,
-    "vsSma200": 9.3,
-    "relVol": 0.87,
+    "asOf": "2026-08-10",
+    "price": 247.97,
+    "chg1d": 0.78,
+    "chg1w": 1.17,
+    "chg1m": -0.04,
+    "rsi14": 49.5,
+    "sma50": 241.74,
+    "sma200": 225.18,
+    "vsSma50": 2.6,
+    "vsSma200": 10.1,
+    "relVol": 0.74,
     "high52w": 263.3,
     "low52w": 197.38,
-    "rangePos": 74.0,
+    "rangePos": 77.0,
     "series": [
-      {
-        "d": "2025-08-15",
-        "c": 206.69
-      },
       {
         "d": "2025-08-22",
         "c": 210.6
@@ -227,16 +223,20 @@
       {
         "d": "2026-08-07",
         "c": 246.04
+      },
+      {
+        "d": "2026-08-10",
+        "c": 247.97
       }
     ],
     "signals": [],
     "nextEarnings": null,
     "score": {
-      "label": "Hold",
-      "buys": 3,
-      "sells": 3,
+      "label": "Buy",
+      "buys": 4,
+      "sells": 2,
       "holds": 1,
-      "ratio": 0.0
+      "ratio": 0.286
     }
   },
   "summary": {

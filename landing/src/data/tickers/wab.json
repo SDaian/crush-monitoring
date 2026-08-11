@@ -5,25 +5,21 @@
   "company": "Westinghouse Air Brake Technologies Corporation",
   "indexable": true,
   "technical": {
-    "asOf": "2026-08-07",
-    "price": 291.81,
-    "chg1d": -1.16,
-    "chg1w": 0.33,
-    "chg1m": 12.33,
-    "rsi14": 57.5,
-    "sma50": 272.83,
-    "sma200": 245.22,
-    "vsSma50": 7.0,
-    "vsSma200": 19.0,
-    "relVol": 1.53,
+    "asOf": "2026-08-10",
+    "price": 294.16,
+    "chg1d": 0.81,
+    "chg1w": -0.78,
+    "chg1m": 12.61,
+    "rsi14": 59.2,
+    "sma50": 273.49,
+    "sma200": 245.71,
+    "vsSma50": 7.6,
+    "vsSma200": 19.7,
+    "relVol": 0.45,
     "high52w": 305.79,
     "low52w": 185.65,
-    "rangePos": 88.0,
+    "rangePos": 90.0,
     "series": [
-      {
-        "d": "2025-08-15",
-        "c": 189.16
-      },
       {
         "d": "2025-08-22",
         "c": 195.74
@@ -227,16 +223,20 @@
       {
         "d": "2026-08-07",
         "c": 291.81
+      },
+      {
+        "d": "2026-08-10",
+        "c": 294.16
       }
     ],
     "signals": [],
     "nextEarnings": null,
     "score": {
       "label": "Strong Buy",
-      "buys": 6,
-      "sells": 0,
+      "buys": 5,
+      "sells": 1,
       "holds": 1,
-      "ratio": 0.857
+      "ratio": 0.571
     }
   },
   "summary": {

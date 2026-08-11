@@ -5,25 +5,21 @@
   "company": "Thermo Fisher Scientific Inc",
   "indexable": true,
   "technical": {
-    "asOf": "2026-08-07",
-    "price": 594.0,
-    "chg1d": 2.41,
-    "chg1w": 3.43,
-    "chg1m": 13.21,
-    "rsi14": 71.7,
-    "sma50": 517.55,
-    "sma200": 531.81,
-    "vsSma50": 14.8,
-    "vsSma200": 11.7,
-    "relVol": 0.96,
+    "asOf": "2026-08-10",
+    "price": 599.69,
+    "chg1d": 0.96,
+    "chg1w": 4.47,
+    "chg1m": 13.78,
+    "rsi14": 73.2,
+    "sma50": 519.8,
+    "sma200": 532.02,
+    "vsSma50": 15.4,
+    "vsSma200": 12.7,
+    "relVol": 0.58,
     "high52w": 639.45,
     "low52w": 438.34,
-    "rangePos": 77.0,
+    "rangePos": 80.0,
     "series": [
-      {
-        "d": "2025-08-15",
-        "c": 489.01
-      },
       {
         "d": "2025-08-22",
         "c": 499.99
@@ -227,16 +223,13 @@
       {
         "d": "2026-08-07",
         "c": 594.0
-      }
-    ],
-    "signals": [
+      },
       {
-        "type": "rsi_overbought",
-        "asof": "2026-08-07",
-        "label": "RSI crossed above 70 (overbought)",
-        "dir": "neutral"
+        "d": "2026-08-10",
+        "c": 599.69
       }
     ],
+    "signals": [],
     "nextEarnings": null,
     "score": {
       "label": "Buy",
@@ -247,17 +240,17 @@
     }
   },
   "summary": {
-    "trades": 35,
-    "members": 16,
+    "trades": 36,
+    "members": 17,
     "buys": 12,
-    "sells": 23,
+    "sells": 24,
     "other": 0,
     "firstTx": "2024-10-23",
     "lastTx": "2026-07-10",
-    "lastFiling": "2026-07-21",
+    "lastFiling": "2026-08-07",
     "estBuyLabel": "$145K",
-    "estSellLabel": "$398K",
-    "pctLate": 26
+    "estSellLabel": "$406K",
+    "pctLate": 28
   },
   "topMembers": [
     {

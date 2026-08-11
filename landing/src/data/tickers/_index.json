@@ -5,10 +5,10 @@
       "slug": "msft",
       "ticker": "MSFT",
       "company": "Microsoft Corporation",
-      "trades": 191,
-      "members": 42,
-      "buys": 100,
-      "sells": 91,
+      "trades": 194,
+      "members": 43,
+      "buys": 101,
+      "sells": 93,
       "lastTx": "2026-07-24",
       "indexable": true
     },
@@ -16,10 +16,10 @@
       "slug": "nvda",
       "ticker": "NVDA",
       "company": "NVIDIA Corporation",
-      "trades": 172,
-      "members": 31,
-      "buys": 113,
-      "sells": 59,
+      "trades": 175,
+      "members": 32,
+      "buys": 115,
+      "sells": 60,
       "lastTx": "2026-07-21",
       "indexable": true
     },
@@ -27,10 +27,10 @@
       "slug": "aapl",
       "ticker": "AAPL",
       "company": "Apple Inc.",
-      "trades": 142,
-      "members": 41,
-      "buys": 71,
-      "sells": 71,
+      "trades": 145,
+      "members": 42,
+      "buys": 72,
+      "sells": 73,
       "lastTx": "2026-07-21",
       "indexable": true
     },
@@ -38,21 +38,21 @@
       "slug": "amzn",
       "ticker": "AMZN",
       "company": "Amazon.com, Inc.",
-      "trades": 117,
-      "members": 31,
+      "trades": 119,
+      "members": 32,
       "buys": 87,
-      "sells": 30,
-      "lastTx": "2026-06-16",
+      "sells": 32,
+      "lastTx": "2026-06-25",
       "indexable": true
     },
     {
       "slug": "meta",
       "ticker": "META",
       "company": "Meta Platforms, Inc.",
-      "trades": 90,
-      "members": 24,
-      "buys": 61,
-      "sells": 29,
+      "trades": 93,
+      "members": 25,
+      "buys": 63,
+      "sells": 30,
       "lastTx": "2026-06-17",
       "indexable": true
     },
@@ -68,6 +68,17 @@
       "indexable": true
     },
     {
+      "slug": "googl",
+      "ticker": "GOOGL",
+      "company": "Alphabet Inc.",
+      "trades": 83,
+      "members": 28,
+      "buys": 41,
+      "sells": 42,
+      "lastTx": "2026-07-17",
+      "indexable": true
+    },
+    {
       "slug": "avgo",
       "ticker": "AVGO",
       "company": "Broadcom Inc.",
@@ -76,17 +87,6 @@
       "buys": 46,
       "sells": 37,
       "lastTx": "2026-07-24",
-      "indexable": true
-    },
-    {
-      "slug": "googl",
-      "ticker": "GOOGL",
-      "company": "Alphabet Inc.",
-      "trades": 80,
-      "members": 27,
-      "buys": 39,
-      "sells": 41,
-      "lastTx": "2026-07-17",
       "indexable": true
     },
     {
@@ -115,11 +115,22 @@
       "slug": "lly",
       "ticker": "LLY",
       "company": "Eli Lilly and Company",
-      "trades": 64,
-      "members": 21,
-      "buys": 25,
-      "sells": 39,
+      "trades": 67,
+      "members": 22,
+      "buys": 26,
+      "sells": 41,
       "lastTx": "2026-07-10",
+      "indexable": true
+    },
+    {
+      "slug": "brk-b",
+      "ticker": "BRK.B",
+      "company": "Berkshire Hathaway Inc. New",
+      "trades": 65,
+      "members": 21,
+      "buys": 32,
+      "sells": 33,
+      "lastTx": "2026-07-28",
       "indexable": true
     },
     {
@@ -131,17 +142,6 @@
       "buys": 30,
       "sells": 34,
       "lastTx": "2026-06-29",
-      "indexable": true
-    },
-    {
-      "slug": "brk-b",
-      "ticker": "BRK.B",
-      "company": "Berkshire Hathaway Inc. New",
-      "trades": 63,
-      "members": 20,
-      "buys": 30,
-      "sells": 33,
-      "lastTx": "2026-06-23",
       "indexable": true
     },
     {
@@ -222,6 +222,17 @@
       "indexable": true
     },
     {
+      "slug": "pltr",
+      "ticker": "PLTR",
+      "company": "Palantir Technologies Inc.",
+      "trades": 49,
+      "members": 14,
+      "buys": 32,
+      "sells": 17,
+      "lastTx": "2026-05-15",
+      "indexable": true
+    },
+    {
       "slug": "nflx",
       "ticker": "NFLX",
       "company": "Netflix, Inc.",
@@ -244,6 +255,17 @@
       "indexable": true
     },
     {
+      "slug": "orcl",
+      "ticker": "ORCL",
+      "company": "Oracle Corporation",
+      "trades": 48,
+      "members": 17,
+      "buys": 18,
+      "sells": 30,
+      "lastTx": "2026-05-07",
+      "indexable": true
+    },
+    {
       "slug": "crm",
       "ticker": "CRM",
       "company": "Salesforce, Inc.",
@@ -263,28 +285,6 @@
       "buys": 23,
       "sells": 24,
       "lastTx": "2026-07-10",
-      "indexable": true
-    },
-    {
-      "slug": "orcl",
-      "ticker": "ORCL",
-      "company": "Oracle Corporation",
-      "trades": 47,
-      "members": 16,
-      "buys": 17,
-      "sells": 30,
-      "lastTx": "2026-05-07",
-      "indexable": true
-    },
-    {
-      "slug": "pltr",
-      "ticker": "PLTR",
-      "company": "Palantir Technologies Inc.",
-      "trades": 47,
-      "members": 13,
-      "buys": 31,
-      "sells": 16,
-      "lastTx": "2026-05-15",
       "indexable": true
     },
     {
@@ -376,6 +376,17 @@
       "indexable": true
     },
     {
+      "slug": "now",
+      "ticker": "NOW",
+      "company": "ServiceNow, Inc.",
+      "trades": 40,
+      "members": 16,
+      "buys": 20,
+      "sells": 20,
+      "lastTx": "2026-04-24",
+      "indexable": true
+    },
+    {
       "slug": "cvx",
       "ticker": "CVX",
       "company": "Chevron Corporation",
@@ -384,17 +395,6 @@
       "buys": 16,
       "sells": 23,
       "lastTx": "2026-06-15",
-      "indexable": true
-    },
-    {
-      "slug": "now",
-      "ticker": "NOW",
-      "company": "ServiceNow, Inc.",
-      "trades": 39,
-      "members": 15,
-      "buys": 20,
-      "sells": 19,
-      "lastTx": "2026-04-24",
       "indexable": true
     },
     {
@@ -453,6 +453,17 @@
       "indexable": true
     },
     {
+      "slug": "tmo",
+      "ticker": "TMO",
+      "company": "Thermo Fisher Scientific Inc",
+      "trades": 36,
+      "members": 17,
+      "buys": 12,
+      "sells": 24,
+      "lastTx": "2026-07-10",
+      "indexable": true
+    },
+    {
       "slug": "intu",
       "ticker": "INTU",
       "company": "Intuit Inc.",
@@ -483,17 +494,6 @@
       "buys": 16,
       "sells": 19,
       "lastTx": "2026-04-14",
-      "indexable": true
-    },
-    {
-      "slug": "tmo",
-      "ticker": "TMO",
-      "company": "Thermo Fisher Scientific Inc",
-      "trades": 35,
-      "members": 16,
-      "buys": 12,
-      "sells": 23,
-      "lastTx": "2026-07-10",
       "indexable": true
     },
     {
@@ -607,6 +607,39 @@
       "indexable": true
     },
     {
+      "slug": "mu",
+      "ticker": "MU",
+      "company": "Micron Technology, Inc.",
+      "trades": 31,
+      "members": 17,
+      "buys": 14,
+      "sells": 17,
+      "lastTx": "2026-07-10",
+      "indexable": true
+    },
+    {
+      "slug": "ko",
+      "ticker": "KO",
+      "company": "Coca-Cola Company",
+      "trades": 31,
+      "members": 15,
+      "buys": 18,
+      "sells": 13,
+      "lastTx": "2026-07-21",
+      "indexable": true
+    },
+    {
+      "slug": "pfe",
+      "ticker": "PFE",
+      "company": "Pfizer, Inc.",
+      "trades": 31,
+      "members": 15,
+      "buys": 11,
+      "sells": 20,
+      "lastTx": "2026-06-08",
+      "indexable": true
+    },
+    {
       "slug": "payx",
       "ticker": "PAYX",
       "company": "Paychex, Inc.",
@@ -673,28 +706,6 @@
       "indexable": true
     },
     {
-      "slug": "ko",
-      "ticker": "KO",
-      "company": "Coca-Cola Company",
-      "trades": 30,
-      "members": 14,
-      "buys": 17,
-      "sells": 13,
-      "lastTx": "2026-07-21",
-      "indexable": true
-    },
-    {
-      "slug": "pfe",
-      "ticker": "PFE",
-      "company": "Pfizer, Inc.",
-      "trades": 30,
-      "members": 14,
-      "buys": 11,
-      "sells": 19,
-      "lastTx": "2026-06-08",
-      "indexable": true
-    },
-    {
       "slug": "vz",
       "ticker": "VZ",
       "company": "Verizon Communications Inc.",
@@ -714,17 +725,6 @@
       "buys": 15,
       "sells": 15,
       "lastTx": "2026-04-14",
-      "indexable": true
-    },
-    {
-      "slug": "mu",
-      "ticker": "MU",
-      "company": "Micron Technology, Inc.",
-      "trades": 30,
-      "members": 16,
-      "buys": 13,
-      "sells": 17,
-      "lastTx": "2026-07-10",
       "indexable": true
     },
     {

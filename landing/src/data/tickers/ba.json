@@ -5,25 +5,21 @@
   "company": "Boeing Company",
   "indexable": true,
   "technical": {
-    "asOf": "2026-08-07",
-    "price": 234.42,
-    "chg1d": 0.96,
-    "chg1w": 8.46,
-    "chg1m": 5.07,
-    "rsi14": 59.4,
-    "sma50": 220.37,
-    "sma200": 218.91,
-    "vsSma50": 6.4,
-    "vsSma200": 7.1,
-    "relVol": 0.65,
+    "asOf": "2026-08-10",
+    "price": 232.79,
+    "chg1d": -0.7,
+    "chg1w": -0.3,
+    "chg1m": 4.73,
+    "rsi14": 57.9,
+    "sma50": 220.45,
+    "sma200": 218.99,
+    "vsSma50": 5.6,
+    "vsSma200": 6.3,
+    "relVol": 0.46,
     "high52w": 252.15,
     "low52w": 179.12,
-    "rangePos": 76.0,
+    "rangePos": 73.0,
     "series": [
-      {
-        "d": "2025-08-15",
-        "c": 235.26
-      },
       {
         "d": "2025-08-22",
         "c": 230.12
@@ -227,16 +223,20 @@
       {
         "d": "2026-08-07",
         "c": 234.42
+      },
+      {
+        "d": "2026-08-10",
+        "c": 232.79
       }
     ],
     "signals": [],
     "nextEarnings": null,
     "score": {
       "label": "Strong Buy",
-      "buys": 6,
-      "sells": 0,
+      "buys": 5,
+      "sells": 1,
       "holds": 1,
-      "ratio": 0.857
+      "ratio": 0.571
     }
   },
   "summary": {

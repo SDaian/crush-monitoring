@@ -5,25 +5,21 @@
   "company": "Coca-Cola Company",
   "indexable": true,
   "technical": {
-    "asOf": "2026-08-07",
-    "price": 87.05,
-    "chg1d": 0.23,
-    "chg1w": -0.62,
-    "chg1m": 5.35,
-    "rsi14": 59.9,
-    "sma50": 82.57,
-    "sma200": 76.56,
-    "vsSma50": 5.4,
-    "vsSma200": 13.7,
-    "relVol": 0.64,
+    "asOf": "2026-08-10",
+    "price": 86.87,
+    "chg1d": -0.21,
+    "chg1w": 0.01,
+    "chg1m": 4.05,
+    "rsi14": 59.0,
+    "sma50": 82.7,
+    "sma200": 76.64,
+    "vsSma50": 5.0,
+    "vsSma200": 13.4,
+    "relVol": 0.56,
     "high52w": 89.08,
     "low52w": 65.67,
     "rangePos": 91.0,
     "series": [
-      {
-        "d": "2025-08-15",
-        "c": 69.92
-      },
       {
         "d": "2025-08-22",
         "c": 70.13
@@ -227,30 +223,34 @@
       {
         "d": "2026-08-07",
         "c": 87.05
+      },
+      {
+        "d": "2026-08-10",
+        "c": 86.87
       }
     ],
     "signals": [],
     "nextEarnings": null,
     "score": {
       "label": "Strong Buy",
-      "buys": 5,
-      "sells": 1,
+      "buys": 6,
+      "sells": 0,
       "holds": 1,
-      "ratio": 0.571
+      "ratio": 0.857
     }
   },
   "summary": {
-    "trades": 30,
-    "members": 14,
-    "buys": 17,
+    "trades": 31,
+    "members": 15,
+    "buys": 18,
     "sells": 13,
     "other": 0,
     "firstTx": "2024-09-26",
     "lastTx": "2026-07-21",
-    "lastFiling": "2026-08-05",
-    "estBuyLabel": "$185K",
+    "lastFiling": "2026-08-07",
+    "estBuyLabel": "$193K",
     "estSellLabel": "$438K",
-    "pctLate": 17
+    "pctLate": 19
   },
   "topMembers": [
     {
@@ -436,6 +436,18 @@
       "filedDate": "2026-01-02",
       "daysLate": 0,
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20033713.pdf"
+    },
+    {
+      "member": "Michael A. Rulli",
+      "memberSlug": "michael-a-rulli",
+      "hasPage": false,
+      "party": "R",
+      "side": "BUY",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2025-12-03",
+      "filedDate": "2026-08-07",
+      "daysLate": 202,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035147.pdf"
     },
     {
       "member": "Sheldon Whitehouse",
@@ -649,18 +661,6 @@
       "side": "BUY",
       "amountBucket": "$1K – $15K",
       "txDate": "2025-01-21",
-      "filedDate": "2025-02-10",
-      "daysLate": 0,
-      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20026732.pdf"
-    },
-    {
-      "member": "Josh Gottheimer",
-      "memberSlug": "josh-gottheimer",
-      "hasPage": true,
-      "party": "D",
-      "side": "BUY",
-      "amountBucket": "$1K – $15K",
-      "txDate": "2025-01-16",
       "filedDate": "2025-02-10",
       "daysLate": 0,
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20026732.pdf"

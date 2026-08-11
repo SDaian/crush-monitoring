@@ -5,25 +5,21 @@
   "company": "Berkshire Hathaway Inc. New",
   "indexable": true,
   "technical": {
-    "asOf": "2026-08-07",
-    "price": 521.8,
-    "chg1d": -0.54,
-    "chg1w": 2.01,
-    "chg1m": 5.32,
-    "rsi14": 70.1,
-    "sma50": 495.07,
-    "sma200": 491.03,
-    "vsSma50": 5.4,
-    "vsSma200": 6.3,
-    "relVol": 0.87,
-    "high52w": 524.61,
-    "low52w": 461.47,
-    "rangePos": 96.0,
+    "asOf": "2026-08-10",
+    "price": 529.42,
+    "chg1d": 1.46,
+    "chg1w": 3.17,
+    "chg1m": 7.23,
+    "rsi14": 74.5,
+    "sma50": 496.11,
+    "sma200": 491.23,
+    "vsSma50": 6.7,
+    "vsSma200": 7.8,
+    "relVol": 1.15,
+    "high52w": 529.42,
+    "low52w": 464.73,
+    "rangePos": 100.0,
     "series": [
-      {
-        "d": "2025-08-15",
-        "c": 477.2
-      },
       {
         "d": "2025-08-22",
         "c": 489.0
@@ -227,9 +223,20 @@
       {
         "d": "2026-08-07",
         "c": 521.8
+      },
+      {
+        "d": "2026-08-10",
+        "c": 529.42
       }
     ],
-    "signals": [],
+    "signals": [
+      {
+        "type": "new_52w_high",
+        "asof": "2026-08-10",
+        "label": "New 52-week high",
+        "dir": "bull"
+      }
+    ],
     "nextEarnings": null,
     "score": {
       "label": "Strong Buy",
@@ -240,17 +247,17 @@
     }
   },
   "summary": {
-    "trades": 63,
-    "members": 20,
-    "buys": 30,
+    "trades": 65,
+    "members": 21,
+    "buys": 32,
     "sells": 33,
     "other": 0,
     "firstTx": "2024-01-30",
-    "lastTx": "2026-06-23",
-    "lastFiling": "2026-07-21",
-    "estBuyLabel": "$472K",
+    "lastTx": "2026-07-28",
+    "lastFiling": "2026-08-07",
+    "estBuyLabel": "$513K",
     "estSellLabel": "$1.1M",
-    "pctLate": 19
+    "pctLate": 18
   },
   "topMembers": [
     {
@@ -365,6 +372,30 @@
     }
   ],
   "trades": [
+    {
+      "member": "Maria Elvira Salazar",
+      "memberSlug": "maria-elvira-salazar",
+      "hasPage": false,
+      "party": "R",
+      "side": "BUY",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-07-28",
+      "filedDate": "2026-08-07",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035138.pdf"
+    },
+    {
+      "member": "Maria Elvira Salazar",
+      "memberSlug": "maria-elvira-salazar",
+      "hasPage": false,
+      "party": "R",
+      "side": "BUY",
+      "amountBucket": "$15K – $50K",
+      "txDate": "2026-07-28",
+      "filedDate": "2026-08-07",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035138.pdf"
+    },
     {
       "member": "Jerry Moran",
       "memberSlug": "jerry-moran",
@@ -637,30 +668,6 @@
       "side": "SELL",
       "amountBucket": "$1K – $15K",
       "txDate": "2025-10-31",
-      "filedDate": "2025-11-21",
-      "daysLate": 0,
-      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20033446.pdf"
-    },
-    {
-      "member": "Lisa C. McClain",
-      "memberSlug": "lisa-c-mcclain",
-      "hasPage": false,
-      "party": "R",
-      "side": "SELL",
-      "amountBucket": "$1K – $15K",
-      "txDate": "2025-10-30",
-      "filedDate": "2025-11-21",
-      "daysLate": 0,
-      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20033446.pdf"
-    },
-    {
-      "member": "Lisa C. McClain",
-      "memberSlug": "lisa-c-mcclain",
-      "hasPage": false,
-      "party": "R",
-      "side": "BUY",
-      "amountBucket": "$1K – $15K",
-      "txDate": "2025-10-30",
       "filedDate": "2025-11-21",
       "daysLate": 0,
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20033446.pdf"

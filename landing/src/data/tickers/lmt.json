@@ -5,25 +5,21 @@
   "company": "Lockheed Martin Corporation",
   "indexable": true,
   "technical": {
-    "asOf": "2026-08-07",
-    "price": 587.95,
-    "chg1d": 0.88,
-    "chg1w": 0.89,
-    "chg1m": 13.45,
-    "rsi14": 65.9,
-    "sma50": 534.31,
-    "sma200": 547.21,
-    "vsSma50": 10.0,
-    "vsSma200": 7.4,
-    "relVol": 0.61,
+    "asOf": "2026-08-10",
+    "price": 603.16,
+    "chg1d": 2.59,
+    "chg1w": 2.88,
+    "chg1m": 15.28,
+    "rsi14": 70.3,
+    "sma50": 535.63,
+    "sma200": 547.78,
+    "vsSma50": 12.6,
+    "vsSma200": 10.1,
+    "relVol": 0.95,
     "high52w": 676.7,
     "low52w": 425.63,
-    "rangePos": 65.0,
+    "rangePos": 71.0,
     "series": [
-      {
-        "d": "2025-08-15",
-        "c": 437.56
-      },
       {
         "d": "2025-08-22",
         "c": 446.2
@@ -227,16 +223,27 @@
       {
         "d": "2026-08-07",
         "c": 587.95
+      },
+      {
+        "d": "2026-08-10",
+        "c": 603.16
       }
     ],
-    "signals": [],
+    "signals": [
+      {
+        "type": "rsi_overbought",
+        "asof": "2026-08-10",
+        "label": "RSI crossed above 70 (overbought)",
+        "dir": "neutral"
+      }
+    ],
     "nextEarnings": null,
     "score": {
-      "label": "Strong Buy",
+      "label": "Buy",
       "buys": 5,
-      "sells": 1,
-      "holds": 1,
-      "ratio": 0.571
+      "sells": 2,
+      "holds": 0,
+      "ratio": 0.429
     }
   },
   "summary": {

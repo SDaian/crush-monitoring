@@ -5,25 +5,21 @@
   "company": "Meta Platforms, Inc.",
   "indexable": true,
   "technical": {
-    "asOf": "2026-08-07",
-    "price": 592.1,
-    "chg1d": 0.37,
-    "chg1w": 6.36,
-    "chg1m": -6.24,
-    "rsi14": 47.7,
-    "sma50": 599.76,
-    "sma200": 631.3,
-    "vsSma50": -1.3,
-    "vsSma200": -6.2,
-    "relVol": 0.65,
+    "asOf": "2026-08-10",
+    "price": 594.92,
+    "chg1d": 0.48,
+    "chg1w": 0.79,
+    "chg1m": -11.1,
+    "rsi14": 48.6,
+    "sma50": 598.95,
+    "sma200": 630.6,
+    "vsSma50": -0.7,
+    "vsSma200": -5.7,
+    "relVol": 0.84,
     "high52w": 790.0,
     "low52w": 525.72,
-    "rangePos": 25.0,
+    "rangePos": 26.0,
     "series": [
-      {
-        "d": "2025-08-15",
-        "c": 785.23
-      },
       {
         "d": "2025-08-22",
         "c": 754.79
@@ -227,6 +223,10 @@
       {
         "d": "2026-08-07",
         "c": 592.1
+      },
+      {
+        "d": "2026-08-10",
+        "c": 594.92
       }
     ],
     "signals": [],
@@ -240,17 +240,17 @@
     }
   },
   "summary": {
-    "trades": 90,
-    "members": 24,
-    "buys": 61,
-    "sells": 29,
+    "trades": 93,
+    "members": 25,
+    "buys": 63,
+    "sells": 30,
     "other": 0,
     "firstTx": "2024-01-02",
     "lastTx": "2026-06-17",
-    "lastFiling": "2026-07-26",
+    "lastFiling": "2026-08-07",
     "estBuyLabel": "$1.9M",
-    "estSellLabel": "$640K",
-    "pctLate": 18
+    "estSellLabel": "$648K",
+    "pctLate": 20
   },
   "topMembers": [
     {
@@ -426,6 +426,18 @@
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035024.pdf"
     },
     {
+      "member": "Michael A. Rulli",
+      "memberSlug": "michael-a-rulli",
+      "hasPage": false,
+      "party": "R",
+      "side": "BUY",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-05-06",
+      "filedDate": "2026-08-07",
+      "daysLate": 48,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035147.pdf"
+    },
+    {
       "member": "Daniel Crenshaw",
       "memberSlug": "daniel-crenshaw",
       "hasPage": false,
@@ -520,6 +532,18 @@
       "filedDate": "2026-02-03",
       "daysLate": 0,
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20033858.pdf"
+    },
+    {
+      "member": "Michael A. Rulli",
+      "memberSlug": "michael-a-rulli",
+      "hasPage": false,
+      "party": "R",
+      "side": "SELL",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-01-09",
+      "filedDate": "2026-08-07",
+      "daysLate": 165,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035147.pdf"
     },
     {
       "member": "Rick Larsen",
@@ -640,30 +664,6 @@
       "filedDate": "2025-11-18",
       "daysLate": 0,
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20033455.pdf"
-    },
-    {
-      "member": "Lisa C. McClain",
-      "memberSlug": "lisa-c-mcclain",
-      "hasPage": false,
-      "party": "R",
-      "side": "SELL",
-      "amountBucket": "$1K – $15K",
-      "txDate": "2025-10-14",
-      "filedDate": "2025-11-21",
-      "daysLate": 0,
-      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20033446.pdf"
-    },
-    {
-      "member": "Val T. Hoyle",
-      "memberSlug": "val-t-hoyle",
-      "hasPage": false,
-      "party": "D",
-      "side": "SELL",
-      "amountBucket": "$15K – $50K",
-      "txDate": "2025-09-23",
-      "filedDate": "2025-10-10",
-      "daysLate": 0,
-      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20032211.pdf"
     }
   ],
   "tradesShown": 25

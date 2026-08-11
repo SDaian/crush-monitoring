@@ -5,25 +5,21 @@
   "company": "ConocoPhillips",
   "indexable": true,
   "technical": {
-    "asOf": "2026-08-07",
-    "price": 117.61,
-    "chg1d": 0.73,
-    "chg1w": -2.38,
-    "chg1m": 8.88,
-    "rsi14": 54.6,
-    "sma50": 113.44,
-    "sma200": 108.49,
-    "vsSma50": 3.7,
-    "vsSma200": 8.4,
-    "relVol": 1.22,
+    "asOf": "2026-08-10",
+    "price": 123.03,
+    "chg1d": 4.61,
+    "chg1w": 3.25,
+    "chg1m": 12.83,
+    "rsi14": 63.3,
+    "sma50": 113.6,
+    "sma200": 108.67,
+    "vsSma50": 8.3,
+    "vsSma200": 13.2,
+    "relVol": 0.74,
     "high52w": 133.8,
     "low52w": 85.66,
-    "rangePos": 66.0,
+    "rangePos": 78.0,
     "series": [
-      {
-        "d": "2025-08-15",
-        "c": 95.33
-      },
       {
         "d": "2025-08-22",
         "c": 96.78
@@ -227,16 +223,20 @@
       {
         "d": "2026-08-07",
         "c": 117.61
+      },
+      {
+        "d": "2026-08-10",
+        "c": 123.03
       }
     ],
     "signals": [],
     "nextEarnings": null,
     "score": {
       "label": "Strong Buy",
-      "buys": 5,
-      "sells": 1,
+      "buys": 6,
+      "sells": 0,
       "holds": 1,
-      "ratio": 0.571
+      "ratio": 0.857
     }
   },
   "summary": {

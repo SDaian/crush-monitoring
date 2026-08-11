@@ -5,25 +5,21 @@
   "company": "Eli Lilly and Company",
   "indexable": true,
   "technical": {
-    "asOf": "2026-08-07",
-    "price": 1185.71,
-    "chg1d": -0.52,
-    "chg1w": 3.21,
-    "chg1m": -2.57,
-    "rsi14": 53.7,
-    "sma50": 1157.55,
-    "sma200": 1033.37,
-    "vsSma50": 2.4,
-    "vsSma200": 14.7,
-    "relVol": 1.06,
+    "asOf": "2026-08-10",
+    "price": 1231.94,
+    "chg1d": 3.9,
+    "chg1w": 9.86,
+    "chg1m": 3.65,
+    "rsi14": 60.7,
+    "sma50": 1159.65,
+    "sma200": 1035.53,
+    "vsSma50": 6.2,
+    "vsSma200": 19.0,
+    "relVol": 1.08,
     "high52w": 1235.56,
     "low52w": 625.65,
-    "rangePos": 92.0,
+    "rangePos": 99.0,
     "series": [
-      {
-        "d": "2025-08-15",
-        "c": 701.23
-      },
       {
         "d": "2025-08-22",
         "c": 711.68
@@ -227,30 +223,34 @@
       {
         "d": "2026-08-07",
         "c": 1185.71
+      },
+      {
+        "d": "2026-08-10",
+        "c": 1231.94
       }
     ],
     "signals": [],
     "nextEarnings": null,
     "score": {
       "label": "Strong Buy",
-      "buys": 5,
-      "sells": 1,
+      "buys": 6,
+      "sells": 0,
       "holds": 1,
-      "ratio": 0.571
+      "ratio": 0.857
     }
   },
   "summary": {
-    "trades": 64,
-    "members": 21,
-    "buys": 25,
-    "sells": 39,
+    "trades": 67,
+    "members": 22,
+    "buys": 26,
+    "sells": 41,
     "other": 0,
     "firstTx": "2024-10-29",
     "lastTx": "2026-07-10",
-    "lastFiling": "2026-08-05",
-    "estBuyLabel": "$475K",
-    "estSellLabel": "$620K",
-    "pctLate": 14
+    "lastFiling": "2026-08-07",
+    "estBuyLabel": "$483K",
+    "estSellLabel": "$636K",
+    "pctLate": 16
   },
   "topMembers": [
     {
@@ -342,9 +342,9 @@
       "hasPage": true
     },
     {
-      "name": "Val T. Hoyle",
-      "slug": "val-t-hoyle",
-      "party": "D",
+      "name": "Michael A. Rulli",
+      "slug": "michael-a-rulli",
+      "party": "R",
       "chamber": "House",
       "trades": 3,
       "buys": 1,
@@ -353,14 +353,14 @@
       "hasPage": false
     },
     {
-      "name": "Ron Wyden",
-      "slug": "ron-wyden",
+      "name": "Val T. Hoyle",
+      "slug": "val-t-hoyle",
       "party": "D",
-      "chamber": "Senate",
-      "trades": 2,
+      "chamber": "House",
+      "trades": 3,
       "buys": 1,
-      "sells": 1,
-      "estLabel": "$150K",
+      "sells": 2,
+      "estLabel": "$24K",
       "hasPage": false
     }
   ],
@@ -376,6 +376,18 @@
       "filedDate": "2026-07-17",
       "daysLate": 0,
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20034998.pdf"
+    },
+    {
+      "member": "Michael A. Rulli",
+      "memberSlug": "michael-a-rulli",
+      "hasPage": false,
+      "party": "R",
+      "side": "SELL",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-07-01",
+      "filedDate": "2026-08-07",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035147.pdf"
     },
     {
       "member": "Gilbert Ray Cisneros, Jr.",
@@ -510,6 +522,18 @@
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20033916.pdf"
     },
     {
+      "member": "Michael A. Rulli",
+      "memberSlug": "michael-a-rulli",
+      "hasPage": false,
+      "party": "R",
+      "side": "BUY",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-01-02",
+      "filedDate": "2026-08-07",
+      "daysLate": 172,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035147.pdf"
+    },
+    {
       "member": "Angus S. King, Jr.",
       "memberSlug": "angus-s-king-jr",
       "hasPage": false,
@@ -556,6 +580,18 @@
       "filedDate": "2025-12-19",
       "daysLate": 0,
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20033666.pdf"
+    },
+    {
+      "member": "Michael A. Rulli",
+      "memberSlug": "michael-a-rulli",
+      "hasPage": false,
+      "party": "R",
+      "side": "SELL",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2025-12-02",
+      "filedDate": "2026-08-07",
+      "daysLate": 203,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035147.pdf"
     },
     {
       "member": "John Boozman",
@@ -628,42 +664,6 @@
       "filedDate": "2025-09-12",
       "daysLate": 0,
       "sourceUrl": "https://efdsearch.senate.gov/search/view/ptr/59bccfcc-9400-4d3d-917f-ce22a0fd2feb/"
-    },
-    {
-      "member": "Julie Johnson",
-      "memberSlug": "julie-johnson",
-      "hasPage": false,
-      "party": "D",
-      "side": "SELL",
-      "amountBucket": "$1K – $15K",
-      "txDate": "2025-08-14",
-      "filedDate": "2025-09-11",
-      "daysLate": 0,
-      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20032066.pdf"
-    },
-    {
-      "member": "David J. Taylor",
-      "memberSlug": "david-j-taylor",
-      "hasPage": false,
-      "party": "R",
-      "side": "BUY",
-      "amountBucket": "$15K – $50K",
-      "txDate": "2025-08-14",
-      "filedDate": "2025-09-02",
-      "daysLate": 0,
-      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20030782.pdf"
-    },
-    {
-      "member": "David J. Taylor",
-      "memberSlug": "david-j-taylor",
-      "hasPage": false,
-      "party": "R",
-      "side": "BUY",
-      "amountBucket": "$1K – $15K",
-      "txDate": "2025-08-14",
-      "filedDate": "2025-09-02",
-      "daysLate": 0,
-      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20030782.pdf"
     }
   ],
   "tradesShown": 25

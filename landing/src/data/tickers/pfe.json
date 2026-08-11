@@ -5,25 +5,21 @@
   "company": "Pfizer, Inc.",
   "indexable": true,
   "technical": {
-    "asOf": "2026-08-07",
-    "price": 26.76,
-    "chg1d": 2.14,
-    "chg1w": 7.0,
-    "chg1m": 10.35,
-    "rsi14": 70.8,
-    "sma50": 25.08,
-    "sma200": 25.87,
-    "vsSma50": 6.7,
-    "vsSma200": 3.5,
-    "relVol": 1.02,
+    "asOf": "2026-08-10",
+    "price": 27.05,
+    "chg1d": 1.08,
+    "chg1w": 8.07,
+    "chg1m": 11.92,
+    "rsi14": 72.8,
+    "sma50": 25.09,
+    "sma200": 25.88,
+    "vsSma50": 7.8,
+    "vsSma200": 4.5,
+    "relVol": 1.03,
     "high52w": 28.55,
     "low52w": 23.6,
-    "rangePos": 64.0,
+    "rangePos": 70.0,
     "series": [
-      {
-        "d": "2025-08-15",
-        "c": 25.14
-      },
       {
         "d": "2025-08-22",
         "c": 25.88
@@ -227,16 +223,13 @@
       {
         "d": "2026-08-07",
         "c": 26.76
-      }
-    ],
-    "signals": [
+      },
       {
-        "type": "rsi_overbought",
-        "asof": "2026-08-07",
-        "label": "RSI crossed above 70 (overbought)",
-        "dir": "neutral"
+        "d": "2026-08-10",
+        "c": 27.05
       }
     ],
+    "signals": [],
     "nextEarnings": null,
     "score": {
       "label": "Buy",
@@ -247,17 +240,17 @@
     }
   },
   "summary": {
-    "trades": 30,
-    "members": 14,
+    "trades": 31,
+    "members": 15,
     "buys": 11,
-    "sells": 19,
+    "sells": 20,
     "other": 0,
     "firstTx": "2024-05-03",
     "lastTx": "2026-06-08",
-    "lastFiling": "2026-08-05",
+    "lastFiling": "2026-08-07",
     "estBuyLabel": "$162K",
-    "estSellLabel": "$509K",
-    "pctLate": 10
+    "estSellLabel": "$517K",
+    "pctLate": 13
   },
   "topMembers": [
     {

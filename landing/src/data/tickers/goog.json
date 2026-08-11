@@ -5,25 +5,21 @@
   "company": "Alphabet Inc.",
   "indexable": true,
   "technical": {
-    "asOf": "2026-08-07",
-    "price": 353.47,
-    "chg1d": -0.88,
-    "chg1w": -0.89,
-    "chg1m": -0.78,
-    "rsi14": 51.0,
-    "sma50": 354.72,
-    "sma200": 328.3,
-    "vsSma50": -0.4,
-    "vsSma200": 7.7,
-    "relVol": 0.68,
+    "asOf": "2026-08-10",
+    "price": 355.84,
+    "chg1d": 0.67,
+    "chg1w": -4.46,
+    "chg1m": 0.23,
+    "rsi14": 52.1,
+    "sma50": 354.11,
+    "sma200": 328.82,
+    "vsSma50": 0.5,
+    "vsSma200": 8.2,
+    "relVol": 0.57,
     "high52w": 399.04,
-    "low52w": 197.28,
-    "rangePos": 77.0,
+    "low52w": 200.19,
+    "rangePos": 78.0,
     "series": [
-      {
-        "d": "2025-08-15",
-        "c": 204.91
-      },
       {
         "d": "2025-08-22",
         "c": 206.72
@@ -227,23 +223,27 @@
       {
         "d": "2026-08-07",
         "c": 353.47
+      },
+      {
+        "d": "2026-08-10",
+        "c": 355.84
       }
     ],
     "signals": [
       {
-        "type": "lose_sma50",
-        "asof": "2026-08-07",
-        "label": "Lost the 50-day average",
-        "dir": "bear"
+        "type": "reclaim_sma50",
+        "asof": "2026-08-10",
+        "label": "Reclaimed the 50-day average",
+        "dir": "bull"
       }
     ],
     "nextEarnings": null,
     "score": {
-      "label": "Hold",
-      "buys": 3,
-      "sells": 3,
+      "label": "Strong Buy",
+      "buys": 5,
+      "sells": 1,
       "holds": 1,
-      "ratio": 0.0
+      "ratio": 0.571
     }
   },
   "summary": {

@@ -5,25 +5,21 @@
   "company": "NVIDIA Corporation",
   "indexable": true,
   "technical": {
-    "asOf": "2026-08-07",
-    "price": 223.96,
-    "chg1d": 2.27,
-    "chg1w": 11.56,
-    "chg1m": 10.44,
-    "rsi14": 64.4,
-    "sma50": 206.07,
-    "sma200": 193.98,
-    "vsSma50": 8.7,
-    "vsSma200": 15.5,
-    "relVol": 0.83,
+    "asOf": "2026-08-10",
+    "price": 217.55,
+    "chg1d": -2.86,
+    "chg1w": 5.28,
+    "chg1m": 3.12,
+    "rsi14": 58.1,
+    "sma50": 206.14,
+    "sma200": 194.16,
+    "vsSma50": 5.5,
+    "vsSma200": 12.0,
+    "relVol": 0.85,
     "high52w": 235.74,
     "low52w": 165.17,
-    "rangePos": 83.0,
+    "rangePos": 74.0,
     "series": [
-      {
-        "d": "2025-08-15",
-        "c": 180.45
-      },
       {
         "d": "2025-08-22",
         "c": 177.99
@@ -227,6 +223,10 @@
       {
         "d": "2026-08-07",
         "c": 223.96
+      },
+      {
+        "d": "2026-08-10",
+        "c": 217.55
       }
     ],
     "signals": [],
@@ -240,17 +240,17 @@
     }
   },
   "summary": {
-    "trades": 172,
-    "members": 31,
-    "buys": 113,
-    "sells": 59,
+    "trades": 175,
+    "members": 32,
+    "buys": 115,
+    "sells": 60,
     "other": 0,
     "firstTx": "2024-01-02",
     "lastTx": "2026-07-21",
-    "lastFiling": "2026-07-27",
+    "lastFiling": "2026-08-07",
     "estBuyLabel": "$11.2M",
     "estSellLabel": "$10.6M",
-    "pctLate": 16
+    "pctLate": 17
   },
   "topMembers": [
     {
@@ -436,6 +436,18 @@
       "filedDate": "2026-07-16",
       "daysLate": 0,
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20034894.pdf"
+    },
+    {
+      "member": "Michael A. Rulli",
+      "memberSlug": "michael-a-rulli",
+      "hasPage": false,
+      "party": "R",
+      "side": "BUY",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-06-25",
+      "filedDate": "2026-08-07",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035147.pdf"
     },
     {
       "member": "Matthew Robert Van Epps",
@@ -652,18 +664,6 @@
       "filedDate": "2026-02-13",
       "daysLate": 0,
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20033983.pdf"
-    },
-    {
-      "member": "John J. McGuire III",
-      "memberSlug": "john-j-mcguire-iii",
-      "hasPage": false,
-      "party": "R",
-      "side": "BUY",
-      "amountBucket": "$1K – $15K",
-      "txDate": "2026-01-30",
-      "filedDate": "2026-02-10",
-      "daysLate": 0,
-      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20033956.pdf"
     }
   ],
   "tradesShown": 25

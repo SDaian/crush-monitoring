@@ -5,25 +5,21 @@
   "company": "Applied Materials, Inc.",
   "indexable": true,
   "technical": {
-    "asOf": "2026-08-07",
-    "price": 539.14,
-    "chg1d": 2.21,
-    "chg1w": 6.2,
-    "chg1m": -8.41,
-    "rsi14": 50.1,
-    "sma50": 553.11,
-    "sma200": 381.16,
-    "vsSma50": -2.5,
-    "vsSma200": 41.4,
-    "relVol": 0.62,
+    "asOf": "2026-08-10",
+    "price": 522.12,
+    "chg1d": -3.16,
+    "chg1w": 0.75,
+    "chg1m": -13.34,
+    "rsi14": 47.4,
+    "sma50": 554.56,
+    "sma200": 382.64,
+    "vsSma50": -5.8,
+    "vsSma200": 36.5,
+    "relVol": 0.95,
     "high52w": 723.0,
     "low52w": 156.25,
-    "rangePos": 68.0,
+    "rangePos": 65.0,
     "series": [
-      {
-        "d": "2025-08-15",
-        "c": 161.76
-      },
       {
         "d": "2025-08-22",
         "c": 162.49
@@ -227,16 +223,20 @@
       {
         "d": "2026-08-07",
         "c": 539.14
+      },
+      {
+        "d": "2026-08-10",
+        "c": 522.12
       }
     ],
     "signals": [],
     "nextEarnings": null,
     "score": {
-      "label": "Buy",
-      "buys": 4,
-      "sells": 2,
+      "label": "Hold",
+      "buys": 3,
+      "sells": 3,
       "holds": 1,
-      "ratio": 0.286
+      "ratio": 0.0
     }
   },
   "summary": {

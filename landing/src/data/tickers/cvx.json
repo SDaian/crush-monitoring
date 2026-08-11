@@ -5,25 +5,21 @@
   "company": "Chevron Corporation",
   "indexable": true,
   "technical": {
-    "asOf": "2026-08-07",
-    "price": 186.56,
-    "chg1d": -1.41,
-    "chg1w": -5.22,
-    "chg1m": 7.19,
-    "rsi14": 49.6,
-    "sma50": 182.85,
-    "sma200": 176.29,
-    "vsSma50": 2.0,
-    "vsSma200": 5.8,
-    "relVol": 0.94,
+    "asOf": "2026-08-10",
+    "price": 194.91,
+    "chg1d": 4.48,
+    "chg1w": 0.9,
+    "chg1m": 10.49,
+    "rsi14": 59.4,
+    "sma50": 183.09,
+    "sma200": 176.49,
+    "vsSma50": 6.5,
+    "vsSma200": 10.4,
+    "relVol": 0.81,
     "high52w": 211.15,
     "low52w": 146.75,
-    "rangePos": 62.0,
+    "rangePos": 75.0,
     "series": [
-      {
-        "d": "2025-08-15",
-        "c": 156.55
-      },
       {
         "d": "2025-08-22",
         "c": 158.18
@@ -227,16 +223,20 @@
       {
         "d": "2026-08-07",
         "c": 186.56
+      },
+      {
+        "d": "2026-08-10",
+        "c": 194.91
       }
     ],
     "signals": [],
     "nextEarnings": null,
     "score": {
-      "label": "Buy",
-      "buys": 4,
-      "sells": 2,
+      "label": "Strong Buy",
+      "buys": 6,
+      "sells": 0,
       "holds": 1,
-      "ratio": 0.286
+      "ratio": 0.857
     }
   },
   "summary": {

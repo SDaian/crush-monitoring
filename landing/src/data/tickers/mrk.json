@@ -5,25 +5,21 @@
   "company": "Merck & Company, Inc.",
   "indexable": true,
   "technical": {
-    "asOf": "2026-08-07",
-    "price": 128.58,
-    "chg1d": 0.16,
-    "chg1w": -1.24,
-    "chg1m": 2.81,
-    "rsi14": 54.4,
-    "sma50": 123.85,
-    "sma200": 112.67,
-    "vsSma50": 3.8,
-    "vsSma200": 14.1,
-    "relVol": 0.83,
+    "asOf": "2026-08-10",
+    "price": 130.92,
+    "chg1d": 1.82,
+    "chg1w": 2.47,
+    "chg1m": 5.97,
+    "rsi14": 59.9,
+    "sma50": 124.07,
+    "sma200": 112.89,
+    "vsSma50": 5.5,
+    "vsSma200": 16.0,
+    "relVol": 0.44,
     "high52w": 131.82,
     "low52w": 77.6,
-    "rangePos": 94.0,
+    "rangePos": 98.0,
     "series": [
-      {
-        "d": "2025-08-15",
-        "c": 84.21
-      },
       {
         "d": "2025-08-22",
         "c": 87.37
@@ -227,16 +223,20 @@
       {
         "d": "2026-08-07",
         "c": 128.58
+      },
+      {
+        "d": "2026-08-10",
+        "c": 130.92
       }
     ],
     "signals": [],
     "nextEarnings": null,
     "score": {
       "label": "Strong Buy",
-      "buys": 5,
-      "sells": 1,
+      "buys": 6,
+      "sells": 0,
       "holds": 1,
-      "ratio": 0.571
+      "ratio": 0.857
     }
   },
   "summary": {

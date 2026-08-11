@@ -5,25 +5,21 @@
   "company": "Alphabet Inc.",
   "indexable": true,
   "technical": {
-    "asOf": "2026-08-07",
-    "price": 354.3,
-    "chg1d": -0.96,
-    "chg1w": -0.51,
-    "chg1m": -1.28,
-    "rsi14": 50.7,
-    "sma50": 356.51,
-    "sma200": 329.11,
-    "vsSma50": -0.6,
-    "vsSma200": 7.7,
-    "relVol": 0.61,
+    "asOf": "2026-08-10",
+    "price": 357.52,
+    "chg1d": 0.91,
+    "chg1w": -4.28,
+    "chg1m": 0.1,
+    "rsi14": 52.2,
+    "sma50": 355.85,
+    "sma200": 329.65,
+    "vsSma50": 0.5,
+    "vsSma200": 8.5,
+    "relVol": 0.58,
     "high52w": 402.62,
-    "low52w": 196.52,
-    "rangePos": 77.0,
+    "low52w": 199.32,
+    "rangePos": 78.0,
     "series": [
-      {
-        "d": "2025-08-15",
-        "c": 203.9
-      },
       {
         "d": "2025-08-22",
         "c": 206.09
@@ -227,37 +223,41 @@
       {
         "d": "2026-08-07",
         "c": 354.3
+      },
+      {
+        "d": "2026-08-10",
+        "c": 357.52
       }
     ],
     "signals": [
       {
-        "type": "lose_sma50",
-        "asof": "2026-08-07",
-        "label": "Lost the 50-day average",
-        "dir": "bear"
+        "type": "reclaim_sma50",
+        "asof": "2026-08-10",
+        "label": "Reclaimed the 50-day average",
+        "dir": "bull"
       }
     ],
     "nextEarnings": null,
     "score": {
-      "label": "Hold",
-      "buys": 3,
-      "sells": 3,
+      "label": "Strong Buy",
+      "buys": 5,
+      "sells": 1,
       "holds": 1,
-      "ratio": 0.0
+      "ratio": 0.571
     }
   },
   "summary": {
-    "trades": 80,
-    "members": 27,
-    "buys": 39,
-    "sells": 41,
+    "trades": 83,
+    "members": 28,
+    "buys": 41,
+    "sells": 42,
     "other": 0,
     "firstTx": "2024-09-26",
     "lastTx": "2026-07-17",
-    "lastFiling": "2026-08-06",
+    "lastFiling": "2026-08-07",
     "estBuyLabel": "$2.8M",
     "estSellLabel": "$6.8M",
-    "pctLate": 21
+    "pctLate": 22
   },
   "topMembers": [
     {
@@ -395,6 +395,30 @@
       "filedDate": "2026-07-17",
       "daysLate": 0,
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20034998.pdf"
+    },
+    {
+      "member": "Michael A. Rulli",
+      "memberSlug": "michael-a-rulli",
+      "hasPage": false,
+      "party": "R",
+      "side": "BUY",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-06-29",
+      "filedDate": "2026-08-07",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035147.pdf"
+    },
+    {
+      "member": "Michael A. Rulli",
+      "memberSlug": "michael-a-rulli",
+      "hasPage": false,
+      "party": "R",
+      "side": "BUY",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-06-25",
+      "filedDate": "2026-08-07",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035147.pdf"
     },
     {
       "member": "Thomas H. Kean, Jr.",
@@ -644,30 +668,6 @@
       "side": "BUY",
       "amountBucket": "$15K – $50K",
       "txDate": "2025-12-15",
-      "filedDate": "2025-12-17",
-      "daysLate": 0,
-      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20033616.pdf"
-    },
-    {
-      "member": "Dan Newhouse",
-      "memberSlug": "dan-newhouse",
-      "hasPage": false,
-      "party": "R",
-      "side": "SELL",
-      "amountBucket": "$1K – $15K",
-      "txDate": "2025-12-11",
-      "filedDate": "2026-01-15",
-      "daysLate": 0,
-      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20033654.pdf"
-    },
-    {
-      "member": "Cleo Fields",
-      "memberSlug": "cleo-fields",
-      "hasPage": true,
-      "party": "D",
-      "side": "BUY",
-      "amountBucket": "$100K – $250K",
-      "txDate": "2025-12-11",
       "filedDate": "2025-12-17",
       "daysLate": 0,
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20033616.pdf"

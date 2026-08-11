@@ -5,25 +5,21 @@
   "company": "Microsoft Corporation",
   "indexable": true,
   "technical": {
-    "asOf": "2026-08-07",
-    "price": 499.99,
-    "chg1d": 0.03,
-    "chg1w": 7.59,
-    "chg1m": 30.08,
-    "rsi14": 78.1,
-    "sma50": 407.01,
-    "sma200": 433.08,
-    "vsSma50": 22.8,
-    "vsSma200": 15.5,
-    "relVol": 0.72,
+    "asOf": "2026-08-10",
+    "price": 506.06,
+    "chg1d": 1.21,
+    "chg1w": 3.78,
+    "chg1m": 31.41,
+    "rsi14": 79.1,
+    "sma50": 408.59,
+    "sma200": 433.02,
+    "vsSma50": 23.9,
+    "vsSma200": 16.9,
+    "relVol": 0.78,
     "high52w": 542.07,
     "low52w": 352.83,
-    "rangePos": 78.0,
+    "rangePos": 81.0,
     "series": [
-      {
-        "d": "2025-08-15",
-        "c": 520.17
-      },
       {
         "d": "2025-08-22",
         "c": 507.23
@@ -227,6 +223,10 @@
       {
         "d": "2026-08-07",
         "c": 499.99
+      },
+      {
+        "d": "2026-08-10",
+        "c": 506.06
       }
     ],
     "signals": [],
@@ -240,15 +240,15 @@
     }
   },
   "summary": {
-    "trades": 191,
-    "members": 42,
-    "buys": 100,
-    "sells": 91,
+    "trades": 194,
+    "members": 43,
+    "buys": 101,
+    "sells": 93,
     "other": 0,
     "firstTx": "2023-03-15",
     "lastTx": "2026-07-24",
-    "lastFiling": "2026-08-06",
-    "estBuyLabel": "$27.5M",
+    "lastFiling": "2026-08-07",
+    "estBuyLabel": "$27.6M",
     "estSellLabel": "$23.7M",
     "pctLate": 13
   },
@@ -400,6 +400,18 @@
       "filedDate": "2026-08-04",
       "daysLate": 0,
       "sourceUrl": "https://efdsearch.senate.gov/search/view/ptr/60c01547-0cf9-46c6-9ce6-f0102f5941f6/"
+    },
+    {
+      "member": "Michael A. Rulli",
+      "memberSlug": "michael-a-rulli",
+      "hasPage": false,
+      "party": "R",
+      "side": "SELL",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-06-25",
+      "filedDate": "2026-08-07",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035147.pdf"
     },
     {
       "member": "Jared Moskowitz",
@@ -652,18 +664,6 @@
       "filedDate": "2026-04-03",
       "daysLate": 0,
       "sourceUrl": "https://efdsearch.senate.gov/search/view/ptr/8d93e30a-19a8-43a9-93d8-e95d629b1039/"
-    },
-    {
-      "member": "Josh Gottheimer",
-      "memberSlug": "josh-gottheimer",
-      "hasPage": true,
-      "party": "D",
-      "side": "BUY",
-      "amountBucket": "$50K – $100K",
-      "txDate": "2026-03-25",
-      "filedDate": "2026-04-08",
-      "daysLate": 0,
-      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20034305.pdf"
     }
   ],
   "tradesShown": 25

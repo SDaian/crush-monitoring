@@ -5,25 +5,21 @@
   "company": "Wells Fargo & Company",
   "indexable": true,
   "technical": {
-    "asOf": "2026-08-07",
-    "price": 87.25,
-    "chg1d": -0.39,
-    "chg1w": 0.93,
-    "chg1m": 0.39,
-    "rsi14": 53.4,
-    "sma50": 84.61,
-    "sma200": 84.89,
-    "vsSma50": 3.1,
-    "vsSma200": 2.8,
-    "relVol": 0.45,
+    "asOf": "2026-08-10",
+    "price": 87.52,
+    "chg1d": 0.31,
+    "chg1w": -0.42,
+    "chg1m": 0.41,
+    "rsi14": 54.3,
+    "sma50": 84.82,
+    "sma200": 84.91,
+    "vsSma50": 3.2,
+    "vsSma200": 3.1,
+    "relVol": 0.56,
     "high52w": 96.39,
     "low52w": 73.42,
-    "rangePos": 60.0,
+    "rangePos": 61.0,
     "series": [
-      {
-        "d": "2025-08-15",
-        "c": 77.1
-      },
       {
         "d": "2025-08-22",
         "c": 79.1
@@ -227,16 +223,20 @@
       {
         "d": "2026-08-07",
         "c": 87.25
+      },
+      {
+        "d": "2026-08-10",
+        "c": 87.52
       }
     ],
     "signals": [],
     "nextEarnings": null,
     "score": {
-      "label": "Strong Buy",
-      "buys": 5,
-      "sells": 1,
+      "label": "Buy",
+      "buys": 4,
+      "sells": 2,
       "holds": 1,
-      "ratio": 0.571
+      "ratio": 0.286
     }
   },
   "summary": {

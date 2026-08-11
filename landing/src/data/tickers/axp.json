@@ -5,25 +5,21 @@
   "company": "American Express Company",
   "indexable": true,
   "technical": {
-    "asOf": "2026-08-07",
-    "price": 340.91,
-    "chg1d": -0.49,
-    "chg1w": 1.39,
-    "chg1m": -1.68,
-    "rsi14": 49.2,
-    "sma50": 336.93,
-    "sma200": 339.65,
-    "vsSma50": 1.2,
-    "vsSma200": 0.4,
-    "relVol": 0.6,
+    "asOf": "2026-08-10",
+    "price": 338.86,
+    "chg1d": -0.6,
+    "chg1w": -1.7,
+    "chg1m": -3.34,
+    "rsi14": 47.6,
+    "sma50": 337.41,
+    "sma200": 339.57,
+    "vsSma50": 0.4,
+    "vsSma200": -0.2,
+    "relVol": 0.49,
     "high52w": 384.89,
     "low52w": 292.27,
-    "rangePos": 53.0,
+    "rangePos": 50.0,
     "series": [
-      {
-        "d": "2025-08-15",
-        "c": 305.47
-      },
       {
         "d": "2025-08-22",
         "c": 319.16
@@ -227,16 +223,20 @@
       {
         "d": "2026-08-07",
         "c": 340.91
+      },
+      {
+        "d": "2026-08-10",
+        "c": 338.86
       }
     ],
     "signals": [],
     "nextEarnings": null,
     "score": {
-      "label": "Hold",
-      "buys": 3,
-      "sells": 3,
+      "label": "Strong Sell",
+      "buys": 1,
+      "sells": 5,
       "holds": 1,
-      "ratio": 0.0
+      "ratio": -0.571
     }
   },
   "summary": {

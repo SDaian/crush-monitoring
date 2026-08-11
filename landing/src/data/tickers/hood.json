@@ -5,25 +5,21 @@
   "company": "Robinhood Markets, Inc.",
   "indexable": true,
   "technical": {
-    "asOf": "2026-08-07",
-    "price": 93.29,
-    "chg1d": 2.84,
-    "chg1w": 7.77,
-    "chg1m": -18.96,
-    "rsi14": 45.7,
-    "sma50": 98.34,
-    "sma200": 98.26,
-    "vsSma50": -5.1,
-    "vsSma200": -5.1,
-    "relVol": 0.74,
+    "asOf": "2026-08-10",
+    "price": 94.52,
+    "chg1d": 1.32,
+    "chg1w": 4.63,
+    "chg1m": -15.58,
+    "rsi14": 47.3,
+    "sma50": 98.53,
+    "sma200": 98.08,
+    "vsSma50": -4.1,
+    "vsSma200": -3.6,
+    "relVol": 0.59,
     "high52w": 152.46,
     "low52w": 65.16,
-    "rangePos": 32.0,
+    "rangePos": 34.0,
     "series": [
-      {
-        "d": "2025-08-15",
-        "c": 114.17
-      },
       {
         "d": "2025-08-22",
         "c": 109.32
@@ -227,16 +223,13 @@
       {
         "d": "2026-08-07",
         "c": 93.29
-      }
-    ],
-    "signals": [
+      },
       {
-        "type": "golden_cross",
-        "asof": "2026-08-07",
-        "label": "Golden cross (50-day above 200-day)",
-        "dir": "bull"
+        "d": "2026-08-10",
+        "c": 94.52
       }
     ],
+    "signals": [],
     "nextEarnings": null,
     "score": {
       "label": "Sell",

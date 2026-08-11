@@ -5,25 +5,21 @@
   "company": "Starbucks Corporation",
   "indexable": true,
   "technical": {
-    "asOf": "2026-08-07",
-    "price": 105.58,
-    "chg1d": 0.4,
-    "chg1w": 0.31,
-    "chg1m": -0.78,
-    "rsi14": 54.4,
-    "sma50": 102.5,
-    "sma200": 95.42,
-    "vsSma50": 3.0,
-    "vsSma200": 10.6,
-    "relVol": 0.79,
+    "asOf": "2026-08-10",
+    "price": 104.65,
+    "chg1d": -0.88,
+    "chg1w": 1.24,
+    "chg1m": -1.28,
+    "rsi14": 51.0,
+    "sma50": 102.58,
+    "sma200": 95.52,
+    "vsSma50": 2.0,
+    "vsSma200": 9.6,
+    "relVol": 0.62,
     "high52w": 108.37,
     "low52w": 78.46,
-    "rangePos": 91.0,
+    "rangePos": 88.0,
     "series": [
-      {
-        "d": "2025-08-15",
-        "c": 90.6
-      },
       {
         "d": "2025-08-22",
         "c": 88.38
@@ -227,16 +223,20 @@
       {
         "d": "2026-08-07",
         "c": 105.58
+      },
+      {
+        "d": "2026-08-10",
+        "c": 104.65
       }
     ],
     "signals": [],
     "nextEarnings": null,
     "score": {
-      "label": "Strong Buy",
-      "buys": 5,
-      "sells": 1,
+      "label": "Buy",
+      "buys": 4,
+      "sells": 2,
       "holds": 1,
-      "ratio": 0.571
+      "ratio": 0.286
     }
   },
   "summary": {

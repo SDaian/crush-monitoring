@@ -5,25 +5,21 @@
   "company": "DoorDash, Inc.",
   "indexable": true,
   "technical": {
-    "asOf": "2026-08-07",
-    "price": 216.26,
-    "chg1d": 1.41,
-    "chg1w": 10.25,
-    "chg1m": 12.43,
-    "rsi14": 71.3,
-    "sma50": 179.65,
-    "sma200": 189.55,
-    "vsSma50": 20.4,
-    "vsSma200": 14.1,
-    "relVol": 1.57,
+    "asOf": "2026-08-10",
+    "price": 209.86,
+    "chg1d": -2.96,
+    "chg1w": 4.67,
+    "chg1m": 9.4,
+    "rsi14": 64.1,
+    "sma50": 180.71,
+    "sma200": 189.29,
+    "vsSma50": 16.1,
+    "vsSma200": 10.9,
+    "relVol": 1.64,
     "high52w": 281.74,
     "low52w": 146.6,
-    "rangePos": 52.0,
+    "rangePos": 47.0,
     "series": [
-      {
-        "d": "2025-08-15",
-        "c": 248.0
-      },
       {
         "d": "2025-08-22",
         "c": 247.32
@@ -227,23 +223,20 @@
       {
         "d": "2026-08-07",
         "c": 216.26
-      }
-    ],
-    "signals": [
+      },
       {
-        "type": "rsi_overbought",
-        "asof": "2026-08-07",
-        "label": "RSI crossed above 70 (overbought)",
-        "dir": "neutral"
+        "d": "2026-08-10",
+        "c": 209.86
       }
     ],
+    "signals": [],
     "nextEarnings": null,
     "score": {
-      "label": "Buy",
+      "label": "Strong Buy",
       "buys": 5,
-      "sells": 2,
-      "holds": 0,
-      "ratio": 0.429
+      "sells": 1,
+      "holds": 1,
+      "ratio": 0.571
     }
   },
   "summary": {

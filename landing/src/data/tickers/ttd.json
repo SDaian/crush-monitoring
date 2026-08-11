@@ -5,25 +5,21 @@
   "company": "The Trade Desk, Inc.",
   "indexable": true,
   "technical": {
-    "asOf": "2026-08-07",
-    "price": 13.8,
-    "chg1d": -21.9,
-    "chg1w": -23.5,
-    "chg1m": -30.13,
-    "rsi14": 28.4,
-    "sma50": 18.92,
-    "sma200": 28.45,
-    "vsSma50": -27.1,
-    "vsSma200": -51.5,
-    "relVol": 5.35,
-    "high52w": 88.33,
-    "low52w": 13.8,
+    "asOf": "2026-08-10",
+    "price": 13.39,
+    "chg1d": -2.97,
+    "chg1w": -26.83,
+    "chg1m": -31.44,
+    "rsi14": 27.3,
+    "sma50": 18.77,
+    "sma200": 28.25,
+    "vsSma50": -28.6,
+    "vsSma200": -52.6,
+    "relVol": 2.1,
+    "high52w": 55.36,
+    "low52w": 13.39,
     "rangePos": 0.0,
     "series": [
-      {
-        "d": "2025-08-15",
-        "c": 52.12
-      },
       {
         "d": "2025-08-22",
         "c": 53.2
@@ -227,18 +223,16 @@
       {
         "d": "2026-08-07",
         "c": 13.8
+      },
+      {
+        "d": "2026-08-10",
+        "c": 13.39
       }
     ],
     "signals": [
       {
-        "type": "rsi_oversold",
-        "asof": "2026-08-07",
-        "label": "RSI crossed below 30 (oversold)",
-        "dir": "neutral"
-      },
-      {
         "type": "new_52w_low",
-        "asof": "2026-08-07",
+        "asof": "2026-08-10",
         "label": "New 52-week low",
         "dir": "bear"
       }

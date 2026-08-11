@@ -5,25 +5,21 @@
   "company": "Amgen Inc.",
   "indexable": true,
   "technical": {
-    "asOf": "2026-08-07",
-    "price": 410.95,
-    "chg1d": 1.51,
-    "chg1w": 6.7,
-    "chg1m": 13.02,
-    "rsi14": 72.1,
-    "sma50": 361.98,
-    "sma200": 346.35,
-    "vsSma50": 13.5,
-    "vsSma200": 18.7,
-    "relVol": 0.67,
-    "high52w": 410.95,
+    "asOf": "2026-08-10",
+    "price": 417.2,
+    "chg1d": 1.52,
+    "chg1w": 10.12,
+    "chg1m": 14.81,
+    "rsi14": 74.2,
+    "sma50": 363.6,
+    "sma200": 346.93,
+    "vsSma50": 14.7,
+    "vsSma200": 20.3,
+    "relVol": 0.61,
+    "high52w": 417.2,
     "low52w": 271.18,
     "rangePos": 100.0,
     "series": [
-      {
-        "d": "2025-08-15",
-        "c": 296.47
-      },
       {
         "d": "2025-08-22",
         "c": 293.72
@@ -227,18 +223,16 @@
       {
         "d": "2026-08-07",
         "c": 410.95
+      },
+      {
+        "d": "2026-08-10",
+        "c": 417.2
       }
     ],
     "signals": [
       {
-        "type": "rsi_overbought",
-        "asof": "2026-08-07",
-        "label": "RSI crossed above 70 (overbought)",
-        "dir": "neutral"
-      },
-      {
         "type": "new_52w_high",
-        "asof": "2026-08-07",
+        "asof": "2026-08-10",
         "label": "New 52-week high",
         "dir": "bull"
       }

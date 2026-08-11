@@ -5,25 +5,21 @@
   "company": "United Parcel Service, Inc.",
   "indexable": true,
   "technical": {
-    "asOf": "2026-08-07",
-    "price": 104.5,
-    "chg1d": 1.26,
-    "chg1w": 0.27,
-    "chg1m": -5.63,
-    "rsi14": 41.8,
-    "sma50": 109.26,
-    "sma200": 103.84,
-    "vsSma50": -4.4,
-    "vsSma200": 0.6,
-    "relVol": 1.0,
+    "asOf": "2026-08-10",
+    "price": 104.72,
+    "chg1d": 0.21,
+    "chg1w": -2.01,
+    "chg1m": -6.89,
+    "rsi14": 42.2,
+    "sma50": 109.22,
+    "sma200": 103.92,
+    "vsSma50": -4.1,
+    "vsSma200": 0.8,
+    "relVol": 0.59,
     "high52w": 120.0,
     "low52w": 82.58,
     "rangePos": 59.0,
     "series": [
-      {
-        "d": "2025-08-15",
-        "c": 88.48
-      },
       {
         "d": "2025-08-22",
         "c": 88.82
@@ -227,16 +223,20 @@
       {
         "d": "2026-08-07",
         "c": 104.5
+      },
+      {
+        "d": "2026-08-10",
+        "c": 104.72
       }
     ],
     "signals": [],
     "nextEarnings": null,
     "score": {
-      "label": "Hold",
-      "buys": 3,
-      "sells": 3,
+      "label": "Sell",
+      "buys": 2,
+      "sells": 4,
       "holds": 1,
-      "ratio": 0.0
+      "ratio": -0.286
     }
   },
   "summary": {

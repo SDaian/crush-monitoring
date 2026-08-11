@@ -5,25 +5,21 @@
   "company": "Visa Inc.",
   "indexable": true,
   "technical": {
-    "asOf": "2026-08-07",
-    "price": 362.5,
-    "chg1d": -2.15,
-    "chg1w": -0.99,
-    "chg1m": 4.11,
-    "rsi14": 55.2,
-    "sma50": 344.28,
-    "sma200": 330.91,
-    "vsSma50": 5.3,
-    "vsSma200": 9.5,
-    "relVol": 0.71,
+    "asOf": "2026-08-10",
+    "price": 361.32,
+    "chg1d": -0.33,
+    "chg1w": -1.19,
+    "chg1m": 3.54,
+    "rsi14": 53.8,
+    "sma50": 345.01,
+    "sma200": 330.98,
+    "vsSma50": 4.7,
+    "vsSma200": 9.2,
+    "relVol": 1.07,
     "high52w": 370.47,
     "low52w": 295.52,
-    "rangePos": 89.0,
+    "rangePos": 88.0,
     "series": [
-      {
-        "d": "2025-08-15",
-        "c": 344.47
-      },
       {
         "d": "2025-08-22",
         "c": 350.04
@@ -227,16 +223,20 @@
       {
         "d": "2026-08-07",
         "c": 362.5
+      },
+      {
+        "d": "2026-08-10",
+        "c": 361.32
       }
     ],
     "signals": [],
     "nextEarnings": null,
     "score": {
-      "label": "Strong Buy",
-      "buys": 5,
-      "sells": 1,
+      "label": "Buy",
+      "buys": 4,
+      "sells": 2,
       "holds": 1,
-      "ratio": 0.571
+      "ratio": 0.286
     }
   },
   "summary": {

@@ -264,124 +264,124 @@
   "tradesShown": 20,
   "holdings": {
     "available": true,
-    "filingDate": "2025-08-08",
+    "filingDate": "2026-08-10",
     "reportYear": 2024,
     "snapDate": "2024-12-31",
     "filingsSince": 9,
-    "sourceUrl": "https://efdsearch.senate.gov/search/view/annual/ec0d2d29-4336-42b7-88af-2f07710b3196/",
-    "totalLabel": "$1.1M",
+    "sourceUrl": "https://efdsearch.senate.gov/search/view/annual/459edef6-ea39-4a09-96ce-f0683f125d6f/",
+    "totalLabel": "$1.0M",
     "positions": 133,
     "stocks": [
       {
         "ticker": "ABNFX",
         "asset": "The Bond Fund of America Class F2",
         "estLabel": "$175K",
-        "pctPortfolio": 15.4,
+        "pctPortfolio": 17.1,
         "isNew": false
       },
       {
         "ticker": "USIG",
         "asset": "iShares Broad USD Investment Grade Corporate Bond",
         "estLabel": "$150K",
-        "pctPortfolio": 13.2,
+        "pctPortfolio": 14.6,
         "isNew": true
-      },
-      {
-        "ticker": "PYPL",
-        "asset": "PayPal Holdings, Inc. - Common Stock",
-        "estLabel": "$110K",
-        "pctPortfolio": 9.7,
-        "isNew": false
       },
       {
         "ticker": "NUE",
         "asset": "Nucor Corporation",
         "estLabel": "$75K",
-        "pctPortfolio": 6.6,
+        "pctPortfolio": 7.3,
         "isNew": false
       },
       {
         "ticker": "RSP",
         "asset": "Invesco S&P 500 Equal Weight ETF",
         "estLabel": "$75K",
-        "pctPortfolio": 6.6,
+        "pctPortfolio": 7.3,
         "isNew": false
       },
       {
         "ticker": "DHS",
         "asset": "Wisdomtree U.S. High Dividend Fund",
         "estLabel": "$75K",
-        "pctPortfolio": 6.6,
+        "pctPortfolio": 7.3,
         "isNew": false
       },
       {
         "ticker": "XLU",
         "asset": "SPDR Select Sector Fund - Utilities",
         "estLabel": "$65K",
-        "pctPortfolio": 5.7,
+        "pctPortfolio": 6.3,
         "isNew": true
       },
       {
         "ticker": "XLP",
         "asset": "SPDR Select Sector Fund - Consumer Staples",
         "estLabel": "$65K",
-        "pctPortfolio": 5.7,
+        "pctPortfolio": 6.3,
         "isNew": true
       },
       {
         "ticker": "XLV",
         "asset": "SPDR Select Sector Fund - Health Care",
         "estLabel": "$65K",
-        "pctPortfolio": 5.7,
+        "pctPortfolio": 6.3,
         "isNew": true
       },
       {
         "ticker": "C",
         "asset": "Citigroup Inc.",
         "estLabel": "$33K",
-        "pctPortfolio": 2.9,
+        "pctPortfolio": 3.2,
         "isNew": false
       },
       {
         "ticker": "PM",
         "asset": "Philip Morris International Inc.",
         "estLabel": "$33K",
-        "pctPortfolio": 2.9,
+        "pctPortfolio": 3.2,
         "isNew": false
       },
       {
         "ticker": "VZ",
         "asset": "Verizon Communications Inc.",
         "estLabel": "$33K",
-        "pctPortfolio": 2.9,
+        "pctPortfolio": 3.2,
         "isNew": false
       },
       {
         "ticker": "WMT",
         "asset": "Walmart Inc.",
         "estLabel": "$33K",
-        "pctPortfolio": 2.9,
+        "pctPortfolio": 3.2,
         "isNew": false
       },
       {
         "ticker": "—",
         "asset": "PayPal Holdings, Inc.",
         "estLabel": "$33K",
-        "pctPortfolio": 2.9,
+        "pctPortfolio": 3.2,
         "isNew": false
       },
       {
         "ticker": "QCOM",
         "asset": "QUALCOMM Incorporated",
         "estLabel": "$33K",
-        "pctPortfolio": 2.9,
+        "pctPortfolio": 3.2,
         "isNew": false
       },
       {
         "ticker": "GS",
         "asset": "The Goldman Sachs Group, Inc.",
         "estLabel": "$10K",
-        "pctPortfolio": 0.9,
+        "pctPortfolio": 1.0,
+        "isNew": false
+      },
+      {
+        "ticker": "UAA",
+        "asset": "Under Armour, Inc.",
+        "estLabel": "$8K",
+        "pctPortfolio": 0.8,
         "isNew": false
       }
     ],
@@ -390,10 +390,10 @@
   "performance": {
     "available": true,
     "benchLabel": "S&P 500",
-    "asofDate": "2026-08-07",
+    "asofDate": "2026-08-10",
     "kpis": {
-      "medianPct": 102.0,
-      "medianBenchPct": 49.1,
+      "medianPct": 101.7,
+      "medianBenchPct": 49.0,
       "beat": 6,
       "beatOf": 8,
       "priced": 8,
@@ -519,7 +519,7 @@
         "2026-07-21",
         "2026-07-28",
         "2026-08-04",
-        "2026-08-07"
+        "2026-08-10"
       ],
       "member": [
         100.0,
@@ -640,7 +640,7 @@
         225.3,
         204.1,
         223.1,
-        222.9
+        218.5
       ],
       "bench": [
         100.0,
@@ -769,58 +769,58 @@
       {
         "ticker": "GILD",
         "txDate": "2024-05-10",
-        "pct": 102.0,
-        "benchPct": 48.5,
-        "excess": 53.5
+        "pct": 101.7,
+        "benchPct": 48.4,
+        "excess": 53.3
       },
       {
         "ticker": "GILD",
         "txDate": "2024-05-10",
-        "pct": 102.0,
-        "benchPct": 48.5,
-        "excess": 53.5
+        "pct": 101.7,
+        "benchPct": 48.4,
+        "excess": 53.3
       },
       {
         "ticker": "GILD",
         "txDate": "2024-05-10",
-        "pct": 102.0,
-        "benchPct": 48.5,
-        "excess": 53.5
+        "pct": 101.7,
+        "benchPct": 48.4,
+        "excess": 53.3
       },
       {
         "ticker": "INTC",
         "txDate": "2024-05-09",
-        "pct": 237.8,
-        "benchPct": 48.7,
-        "excess": 189.1
+        "pct": 224.1,
+        "benchPct": 48.6,
+        "excess": 175.5
       },
       {
         "ticker": "INTC",
         "txDate": "2024-05-08",
-        "pct": 238.8,
+        "pct": 225.1,
         "benchPct": 49.5,
-        "excess": 189.3
+        "excess": 175.6
       },
       {
         "ticker": "ADBE",
         "txDate": "2024-05-08",
-        "pct": -45.7,
+        "pct": -44.1,
         "benchPct": 49.5,
-        "excess": -95.2
+        "excess": -93.6
       },
       {
         "ticker": "INTC",
         "txDate": "2024-05-07",
-        "pct": 231.3,
+        "pct": 217.9,
         "benchPct": 49.5,
-        "excess": 181.8
+        "excess": 168.4
       },
       {
         "ticker": "CVX",
         "txDate": "2024-05-07",
-        "pct": 14.7,
+        "pct": 19.8,
         "benchPct": 49.5,
-        "excess": -34.8
+        "excess": -29.7
       }
     ],
     "rowsOf": 8

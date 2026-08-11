@@ -5,25 +5,21 @@
   "company": "Exxon Mobil Corporation",
   "indexable": true,
   "technical": {
-    "asOf": "2026-08-07",
-    "price": 153.04,
-    "chg1d": -1.16,
-    "chg1w": -1.54,
-    "chg1m": 11.33,
-    "rsi14": 55.2,
-    "sma50": 146.48,
-    "sma200": 140.2,
-    "vsSma50": 4.5,
-    "vsSma200": 9.2,
-    "relVol": 1.26,
+    "asOf": "2026-08-10",
+    "price": 159.79,
+    "chg1d": 4.41,
+    "chg1w": 3.05,
+    "chg1m": 15.06,
+    "rsi14": 65.1,
+    "sma50": 146.74,
+    "sma200": 140.44,
+    "vsSma50": 8.9,
+    "vsSma200": 13.8,
+    "relVol": 0.88,
     "high52w": 171.47,
     "low52w": 105.83,
-    "rangePos": 72.0,
+    "rangePos": 82.0,
     "series": [
-      {
-        "d": "2025-08-15",
-        "c": 106.49
-      },
       {
         "d": "2025-08-22",
         "c": 111.28
@@ -227,16 +223,20 @@
       {
         "d": "2026-08-07",
         "c": 153.04
+      },
+      {
+        "d": "2026-08-10",
+        "c": 159.79
       }
     ],
     "signals": [],
     "nextEarnings": null,
     "score": {
       "label": "Strong Buy",
-      "buys": 5,
-      "sells": 1,
+      "buys": 6,
+      "sells": 0,
       "holds": 1,
-      "ratio": 0.571
+      "ratio": 0.857
     }
   },
   "summary": {

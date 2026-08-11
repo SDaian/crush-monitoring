@@ -5,25 +5,21 @@
   "company": "Alibaba Group Holding Limited American Depositary Shares each representing eight",
   "indexable": true,
   "technical": {
-    "asOf": "2026-08-07",
-    "price": 128.41,
-    "chg1d": 1.26,
-    "chg1w": 5.04,
-    "chg1m": 15.54,
-    "rsi14": 67.9,
-    "sma50": 113.81,
-    "sma200": 140.09,
-    "vsSma50": 12.8,
-    "vsSma200": -8.3,
-    "relVol": 0.6,
+    "asOf": "2026-08-10",
+    "price": 132.32,
+    "chg1d": 3.04,
+    "chg1w": 3.94,
+    "chg1m": 17.8,
+    "rsi14": 71.7,
+    "sma50": 113.94,
+    "sma200": 139.92,
+    "vsSma50": 16.1,
+    "vsSma200": -5.4,
+    "relVol": 0.85,
     "high52w": 189.34,
     "low52w": 94.81,
-    "rangePos": 36.0,
+    "rangePos": 40.0,
     "series": [
-      {
-        "d": "2025-08-15",
-        "c": 121.26
-      },
       {
         "d": "2025-08-22",
         "c": 122.94
@@ -227,16 +223,27 @@
       {
         "d": "2026-08-07",
         "c": 128.41
+      },
+      {
+        "d": "2026-08-10",
+        "c": 132.32
       }
     ],
-    "signals": [],
+    "signals": [
+      {
+        "type": "rsi_overbought",
+        "asof": "2026-08-10",
+        "label": "RSI crossed above 70 (overbought)",
+        "dir": "neutral"
+      }
+    ],
     "nextEarnings": null,
     "score": {
-      "label": "Buy",
+      "label": "Hold",
       "buys": 4,
-      "sells": 2,
-      "holds": 1,
-      "ratio": 0.286
+      "sells": 3,
+      "holds": 0,
+      "ratio": 0.143
     }
   },
   "summary": {

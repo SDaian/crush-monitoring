@@ -2,6 +2,28 @@
   "_comment": "Generated from real official disclosures by congress/landing_data.py (daily Action). Do not edit by hand. 'filedDaysLate' counts days past the STOCK Act's 45-day statutory maximum; 0 = on time.",
   "disclosures": [
     {
+      "member": "C. Menefee",
+      "memberSlug": null,
+      "chamber": "House",
+      "district": "TX-18",
+      "ticker": "PINS",
+      "tickerSlug": null,
+      "side": "SELL",
+      "amountBucket": "$15K – $50K",
+      "filedDaysLate": 0
+    },
+    {
+      "member": "M. Salazar",
+      "memberSlug": null,
+      "chamber": "House",
+      "district": "FL-27",
+      "ticker": "CB",
+      "tickerSlug": null,
+      "side": "BUY",
+      "amountBucket": "$15K – $50K",
+      "filedDaysLate": 0
+    },
+    {
       "member": "T. Tuberville",
       "memberSlug": "tommy-tuberville",
       "chamber": "Senate",
@@ -11,28 +33,6 @@
       "side": "SELL",
       "amountBucket": "$100K – $250K",
       "filedDaysLate": 769
-    },
-    {
-      "member": "S. Capito",
-      "memberSlug": null,
-      "chamber": "Senate",
-      "district": "WV",
-      "ticker": "MSFT",
-      "tickerSlug": "msft",
-      "side": "SELL",
-      "amountBucket": "$15K – $50K",
-      "filedDaysLate": 0
-    },
-    {
-      "member": "A. Delaney",
-      "memberSlug": "april-mcclain-delaney",
-      "chamber": "House",
-      "district": "MD-6",
-      "ticker": "WAB",
-      "tickerSlug": "wab",
-      "side": "SELL",
-      "amountBucket": "$15K – $50K",
-      "filedDaysLate": 0
     },
     {
       "member": "A. Armstrong",

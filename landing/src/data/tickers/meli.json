@@ -5,25 +5,21 @@
   "company": "MercadoLibre, Inc.",
   "indexable": false,
   "technical": {
-    "asOf": "2026-08-07",
-    "price": 1820.69,
-    "chg1d": -0.51,
-    "chg1w": -3.05,
-    "chg1m": 0.71,
-    "rsi14": 49.8,
-    "sma50": 1747.73,
-    "sma200": 1887.39,
+    "asOf": "2026-08-10",
+    "price": 1824.34,
+    "chg1d": 0.2,
+    "chg1w": -3.92,
+    "chg1m": -1.51,
+    "rsi14": 50.4,
+    "sma50": 1750.3,
+    "sma200": 1885.8,
     "vsSma50": 4.2,
-    "vsSma200": -3.5,
-    "relVol": 1.17,
+    "vsSma200": -3.3,
+    "relVol": 0.76,
     "high52w": 2510.97,
     "low52w": 1546.81,
-    "rangePos": 28.0,
+    "rangePos": 29.0,
     "series": [
-      {
-        "d": "2025-08-15",
-        "c": 2392.3
-      },
       {
         "d": "2025-08-22",
         "c": 2430.62
@@ -227,16 +223,20 @@
       {
         "d": "2026-08-07",
         "c": 1820.69
+      },
+      {
+        "d": "2026-08-10",
+        "c": 1824.34
       }
     ],
     "signals": [],
     "nextEarnings": null,
     "score": {
-      "label": "Sell",
-      "buys": 2,
-      "sells": 4,
+      "label": "Strong Sell",
+      "buys": 1,
+      "sells": 5,
       "holds": 1,
-      "ratio": -0.286
+      "ratio": -0.571
     }
   },
   "summary": {

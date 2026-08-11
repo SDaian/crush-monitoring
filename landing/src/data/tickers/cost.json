@@ -5,25 +5,21 @@
   "company": "Costco Wholesale Corporation",
   "indexable": true,
   "technical": {
-    "asOf": "2026-08-07",
-    "price": 947.82,
-    "chg1d": -0.14,
-    "chg1w": -0.43,
-    "chg1m": 3.82,
-    "rsi14": 49.8,
-    "sma50": 951.46,
-    "sma200": 958.09,
-    "vsSma50": -0.4,
-    "vsSma200": -1.1,
-    "relVol": 0.73,
+    "asOf": "2026-08-10",
+    "price": 952.75,
+    "chg1d": 0.52,
+    "chg1w": -0.14,
+    "chg1m": 3.98,
+    "rsi14": 52.0,
+    "sma50": 950.61,
+    "sma200": 958.16,
+    "vsSma50": 0.2,
+    "vsSma200": -0.6,
+    "relVol": 0.67,
     "high52w": 1094.32,
     "low52w": 850.0,
-    "rangePos": 40.0,
+    "rangePos": 42.0,
     "series": [
-      {
-        "d": "2025-08-15",
-        "c": 972.04
-      },
       {
         "d": "2025-08-22",
         "c": 958.54
@@ -227,16 +223,27 @@
       {
         "d": "2026-08-07",
         "c": 947.82
+      },
+      {
+        "d": "2026-08-10",
+        "c": 952.75
       }
     ],
-    "signals": [],
+    "signals": [
+      {
+        "type": "reclaim_sma50",
+        "asof": "2026-08-10",
+        "label": "Reclaimed the 50-day average",
+        "dir": "bull"
+      }
+    ],
     "nextEarnings": null,
     "score": {
-      "label": "Sell",
-      "buys": 2,
-      "sells": 4,
+      "label": "Hold",
+      "buys": 3,
+      "sells": 3,
       "holds": 1,
-      "ratio": -0.286
+      "ratio": 0.0
     }
   },
   "summary": {

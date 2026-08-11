@@ -5,25 +5,21 @@
   "company": "Bank of America Corporation",
   "indexable": true,
   "technical": {
-    "asOf": "2026-08-07",
-    "price": 63.17,
-    "chg1d": 0.27,
-    "chg1w": 1.97,
-    "chg1m": 6.62,
-    "rsi14": 66.6,
-    "sma50": 58.39,
-    "sma200": 53.86,
-    "vsSma50": 8.2,
-    "vsSma200": 17.3,
-    "relVol": 0.68,
-    "high52w": 63.25,
-    "low52w": 44.92,
+    "asOf": "2026-08-10",
+    "price": 63.86,
+    "chg1d": 1.09,
+    "chg1w": 2.21,
+    "chg1m": 7.02,
+    "rsi14": 69.7,
+    "sma50": 58.65,
+    "sma200": 53.92,
+    "vsSma50": 8.9,
+    "vsSma200": 18.4,
+    "relVol": 0.52,
+    "high52w": 63.86,
+    "low52w": 46.01,
     "rangePos": 100.0,
     "series": [
-      {
-        "d": "2025-08-15",
-        "c": 46.94
-      },
       {
         "d": "2025-08-22",
         "c": 49.48
@@ -227,9 +223,20 @@
       {
         "d": "2026-08-07",
         "c": 63.17
+      },
+      {
+        "d": "2026-08-10",
+        "c": 63.86
       }
     ],
-    "signals": [],
+    "signals": [
+      {
+        "type": "new_52w_high",
+        "asof": "2026-08-10",
+        "label": "New 52-week high",
+        "dir": "bull"
+      }
+    ],
     "nextEarnings": null,
     "score": {
       "label": "Strong Buy",

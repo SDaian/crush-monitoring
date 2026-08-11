@@ -5,25 +5,21 @@
   "company": "Advanced Micro Devices, Inc.",
   "indexable": true,
   "technical": {
-    "asOf": "2026-08-07",
-    "price": 483.36,
-    "chg1d": -1.21,
-    "chg1w": 1.51,
-    "chg1m": -11.59,
-    "rsi14": 46.9,
-    "sma50": 514.08,
-    "sma200": 318.29,
-    "vsSma50": -6.0,
-    "vsSma200": 51.9,
-    "relVol": 0.88,
+    "asOf": "2026-08-10",
+    "price": 469.56,
+    "chg1d": -2.86,
+    "chg1w": -3.11,
+    "chg1m": -15.83,
+    "rsi14": 44.7,
+    "sma50": 513.11,
+    "sma200": 319.45,
+    "vsSma50": -8.5,
+    "vsSma200": 47.0,
+    "relVol": 0.65,
     "high52w": 580.91,
     "low52w": 151.14,
-    "rangePos": 77.0,
+    "rangePos": 74.0,
     "series": [
-      {
-        "d": "2025-08-15",
-        "c": 177.51
-      },
       {
         "d": "2025-08-22",
         "c": 167.76
@@ -227,16 +223,20 @@
       {
         "d": "2026-08-07",
         "c": 483.36
+      },
+      {
+        "d": "2026-08-10",
+        "c": 469.56
       }
     ],
     "signals": [],
     "nextEarnings": null,
     "score": {
-      "label": "Hold",
-      "buys": 3,
-      "sells": 3,
+      "label": "Sell",
+      "buys": 2,
+      "sells": 4,
       "holds": 1,
-      "ratio": 0.0
+      "ratio": -0.286
     }
   },
   "summary": {

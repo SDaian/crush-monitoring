@@ -5,25 +5,21 @@
   "company": "JP Morgan Chase & Co.",
   "indexable": true,
   "technical": {
-    "asOf": "2026-08-07",
-    "price": 357.52,
-    "chg1d": 0.34,
-    "chg1w": 1.63,
-    "chg1m": 6.57,
-    "rsi14": 63.0,
-    "sma50": 333.0,
-    "sma200": 313.24,
-    "vsSma50": 7.4,
-    "vsSma200": 14.1,
-    "relVol": 0.56,
-    "high52w": 359.24,
+    "asOf": "2026-08-10",
+    "price": 359.79,
+    "chg1d": 0.63,
+    "chg1w": 2.03,
+    "chg1m": 6.93,
+    "rsi14": 64.8,
+    "sma50": 334.26,
+    "sma200": 313.55,
+    "vsSma50": 7.6,
+    "vsSma200": 14.7,
+    "relVol": 0.44,
+    "high52w": 359.79,
     "low52w": 282.84,
-    "rangePos": 98.0,
+    "rangePos": 100.0,
     "series": [
-      {
-        "d": "2025-08-15",
-        "c": 290.49
-      },
       {
         "d": "2025-08-22",
         "c": 296.24
@@ -227,9 +223,20 @@
       {
         "d": "2026-08-07",
         "c": 357.52
+      },
+      {
+        "d": "2026-08-10",
+        "c": 359.79
       }
     ],
-    "signals": [],
+    "signals": [
+      {
+        "type": "new_52w_high",
+        "asof": "2026-08-10",
+        "label": "New 52-week high",
+        "dir": "bull"
+      }
+    ],
     "nextEarnings": null,
     "score": {
       "label": "Strong Buy",
