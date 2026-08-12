@@ -585,6 +585,32 @@
           "Oversight and Investigations"
         ]
       }
-    ]
+    ],
+    "overlap": [
+      {
+        "sector": "finance",
+        "label": "Banks & financial services",
+        "committees": [
+          "House Financial Services"
+        ],
+        "tickers": [
+          {
+            "ticker": "HOOD",
+            "count": 2
+          },
+          {
+            "ticker": "JPM",
+            "count": 1
+          }
+        ],
+        "more": 0,
+        "symbols": 2,
+        "trades": 3
+      }
+    ],
+    "coverage": {
+      "classified": 24,
+      "total": 33
+    }
   }
 }

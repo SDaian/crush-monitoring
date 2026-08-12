@@ -643,6 +643,60 @@
           "Research and Technology"
         ]
       }
-    ]
+    ],
+    "overlap": [
+      {
+        "sector": "tech",
+        "label": "Technology & semiconductors",
+        "committees": [
+          "House Science, Space & Technology"
+        ],
+        "tickers": [
+          {
+            "ticker": "ENTG",
+            "count": 14
+          },
+          {
+            "ticker": "CDW",
+            "count": 9
+          },
+          {
+            "ticker": "PTC",
+            "count": 7
+          },
+          {
+            "ticker": "DAY",
+            "count": 6
+          },
+          {
+            "ticker": "TRMB",
+            "count": 3
+          }
+        ],
+        "more": 0,
+        "symbols": 5,
+        "trades": 39
+      },
+      {
+        "sector": "agriculture",
+        "label": "Agriculture & food",
+        "committees": [
+          "House Agriculture"
+        ],
+        "tickers": [
+          {
+            "ticker": "TSCO",
+            "count": 19
+          }
+        ],
+        "more": 0,
+        "symbols": 1,
+        "trades": 19
+      }
+    ],
+    "coverage": {
+      "classified": 23,
+      "total": 46
+    }
   }
 }

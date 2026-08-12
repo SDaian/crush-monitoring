@@ -869,6 +869,122 @@
         "title": null,
         "subcommittees": []
       }
-    ]
+    ],
+    "overlap": [
+      {
+        "sector": "health",
+        "label": "Health care & pharma",
+        "committees": [
+          "Senate Health, Education, Labor & Pensions",
+          "Senate Veterans' Affairs",
+          "Senate Aging"
+        ],
+        "tickers": [
+          {
+            "ticker": "HUMA",
+            "count": 5
+          },
+          {
+            "ticker": "GILD",
+            "count": 4
+          },
+          {
+            "ticker": "PFE",
+            "count": 2
+          },
+          {
+            "ticker": "BMY",
+            "count": 2
+          },
+          {
+            "ticker": "LLY",
+            "count": 2
+          },
+          {
+            "ticker": "AMGN",
+            "count": 2
+          },
+          {
+            "ticker": "JNJ",
+            "count": 2
+          },
+          {
+            "ticker": "MDT",
+            "count": 1
+          },
+          {
+            "ticker": "CVS",
+            "count": 1
+          },
+          {
+            "ticker": "WAT",
+            "count": 1
+          }
+        ],
+        "more": 4,
+        "symbols": 14,
+        "trades": 26
+      },
+      {
+        "sector": "agriculture",
+        "label": "Agriculture & food",
+        "committees": [
+          "Senate Agriculture, Nutrition & Forestry"
+        ],
+        "tickers": [
+          {
+            "ticker": "TSCO",
+            "count": 3
+          },
+          {
+            "ticker": "PEP",
+            "count": 3
+          },
+          {
+            "ticker": "ADM",
+            "count": 2
+          },
+          {
+            "ticker": "STZ",
+            "count": 2
+          },
+          {
+            "ticker": "DEO",
+            "count": 2
+          },
+          {
+            "ticker": "CTVA",
+            "count": 2
+          },
+          {
+            "ticker": "HSY",
+            "count": 1
+          }
+        ],
+        "more": 0,
+        "symbols": 7,
+        "trades": 15
+      },
+      {
+        "sector": "defense",
+        "label": "Defense & aerospace",
+        "committees": [
+          "Senate Armed Services"
+        ],
+        "tickers": [
+          {
+            "ticker": "LMT",
+            "count": 1
+          }
+        ],
+        "more": 0,
+        "symbols": 1,
+        "trades": 1
+      }
+    ],
+    "coverage": {
+      "classified": 65,
+      "total": 102
+    }
   }
 }

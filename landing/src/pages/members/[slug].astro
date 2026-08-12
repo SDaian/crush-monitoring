@@ -210,7 +210,7 @@ const schema = [
             <h2 class="section-title whitespace-nowrap">Committee seats</h2>
             <span class="eyebrow">Current assignments</span>
           </div>
-          <div class="mt-8 grid gap-5 [grid-template-columns:repeat(auto-fit,minmax(19rem,1fr))]">
+          <div class="mt-8 grid gap-5 [grid-template-columns:repeat(auto-fit,minmax(min(19rem,100%),1fr))]">
             {m.committees.committees.map((c: any) => (
               <div class="cmte">
                 <div class="cmte-name">
@@ -229,11 +229,53 @@ const schema = [
               </div>
             ))}
           </div>
+          {m.committees.overlap && (
+            <div class="ovl">
+              <h3 class="ovl-head">
+                Disclosed trades in an industry these seats oversee
+              </h3>
+              {m.committees.overlap.map((r: any) => (
+                <div class="ovl-row">
+                  <div class="ovl-label">
+                    {r.label}
+                    <span class="ovl-count">
+                      {r.trades} {r.trades === 1 ? "trade" : "trades"} ·{" "}
+                      {r.symbols} {r.symbols === 1 ? "symbol" : "symbols"}
+                    </span>
+                  </div>
+                  <div class="ovl-seats">{r.committees.join(" · ")}</div>
+                  <div class="ovl-tix">
+                    {r.tickers.map((t: any) => (
+                      <span class="ovl-tk">
+                        <b>{t.ticker}</b>
+                        <span>{t.count}×</span>
+                      </span>
+                    ))}
+                    {r.more > 0 && <span class="ovl-more">+{r.more} more</span>}
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
           <p class="fineprint mt-7 max-w-[80ch]">
             Seats as listed by the official House and Senate committee rosters.
             We publish where a member sits, and what they disclosed. We draw no
             line between the two, and neither should a reader without more
             evidence.
+            {m.committees.coverage && (
+              <>
+                {" "}The industry grouping is ours, not an official
+                classification: we map a committee to the industries it
+                legislates on, and a symbol to one industry. It covers{" "}
+                <b class="text-ink">
+                  {m.committees.coverage.classified} of the{" "}
+                  {m.committees.coverage.total}
+                </b>{" "}
+                symbols {m.name.split(" ").slice(-1)[0]} disclosed, so a symbol
+                missing from a row may be unclassified rather than outside the
+                industry.
+              </>
+            )}
           </p>
         </section>
       )
@@ -469,8 +511,10 @@ const schema = [
 </html>
 
 <style>
+  /* A hairline, not the 2px ink rule .section-head already draws: two heavy
+     rules a few pixels apart read as one broken border. */
   .cmte {
-    border-top: 2px solid var(--color-ink);
+    border-top: 1px solid var(--color-rule);
     padding-top: 0.9rem;
   }
   .cmte-name {
@@ -512,6 +556,68 @@ const schema = [
   .cmte-subs li::before {
     content: "\2014\00a0";
     color: var(--color-rule);
+  }
+  .ovl {
+    margin-top: 2.25rem;
+    border-top: 2px solid var(--color-ink);
+  }
+  .ovl-head {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-ink-soft);
+    padding: 0.7rem 0 0;
+  }
+  .ovl-row {
+    padding: 1.1rem 0;
+    border-bottom: 1px solid var(--color-rule);
+  }
+  .ovl-label {
+    font-family: var(--font-sans);
+    font-weight: 800;
+    font-size: 1rem;
+    line-height: 1.3;
+  }
+  .ovl-count {
+    display: inline-block;
+    margin-left: 0.55rem;
+    font-family: var(--font-mono);
+    font-weight: 400;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-stamp);
+  }
+  .ovl-seats {
+    margin-top: 0.2rem;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--color-ink-soft);
+  }
+  .ovl-tix {
+    margin-top: 0.7rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+  .ovl-tk,
+  .ovl-more {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 0.35rem;
+    padding: 0.2rem 0.5rem;
+    border: 1px solid var(--color-rule);
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--color-ink-soft);
+  }
+  .ovl-tk b {
+    color: var(--color-ink);
+    font-weight: 700;
+  }
+  .ovl-more {
+    border-style: dashed;
   }
   /* A clean 4-across strip framed by hairlines, thin dividers between stats —
      not the boxy 2x2 grid. Collapses to 2x2 on narrow screens. */

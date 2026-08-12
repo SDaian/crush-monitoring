@@ -694,6 +694,32 @@
         "title": null,
         "subcommittees": []
       }
-    ]
+    ],
+    "overlap": [
+      {
+        "sector": "finance",
+        "label": "Banks & financial services",
+        "committees": [
+          "Senate Banking, Housing & Urban Affairs"
+        ],
+        "tickers": [
+          {
+            "ticker": "BITB",
+            "count": 24
+          },
+          {
+            "ticker": "GS",
+            "count": 2
+          }
+        ],
+        "more": 0,
+        "symbols": 2,
+        "trades": 26
+      }
+    ],
+    "coverage": {
+      "classified": 2,
+      "total": 4
+    }
   }
 }

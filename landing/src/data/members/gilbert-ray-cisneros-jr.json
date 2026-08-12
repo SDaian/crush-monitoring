@@ -650,6 +650,64 @@
           "Oversight, Investigations, and Regulations"
         ]
       }
-    ]
+    ],
+    "overlap": [
+      {
+        "sector": "defense",
+        "label": "Defense & aerospace",
+        "committees": [
+          "House Armed Services"
+        ],
+        "tickers": [
+          {
+            "ticker": "PLTR",
+            "count": 12
+          },
+          {
+            "ticker": "SARO",
+            "count": 9
+          },
+          {
+            "ticker": "RNMBF",
+            "count": 6
+          },
+          {
+            "ticker": "TDG",
+            "count": 6
+          },
+          {
+            "ticker": "MHVYF",
+            "count": 6
+          },
+          {
+            "ticker": "BA",
+            "count": 5
+          },
+          {
+            "ticker": "LMT",
+            "count": 5
+          },
+          {
+            "ticker": "AVAV",
+            "count": 4
+          },
+          {
+            "ticker": "CDRE",
+            "count": 3
+          },
+          {
+            "ticker": "GD",
+            "count": 2
+          }
+        ],
+        "more": 4,
+        "symbols": 14,
+        "trades": 64
+      }
+    ],
+    "coverage": {
+      "classified": 211,
+      "total": 450
+    }
   }
 }

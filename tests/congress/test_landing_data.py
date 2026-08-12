@@ -839,6 +839,85 @@ class TestCommitteeBlock(unittest.TestCase):
         self.assertIsNone(p["committees"])
 
 
+class TestCommitteeOverlap(unittest.TestCase):
+    """The seat beside the trade — two public facts, and never a third claim."""
+
+    DATA = {"members": {
+        "Josh Gottheimer": {"reason": "assigned", "committees": [
+            {"id": "HSBA", "name": "House Committee on Financial Services",
+             "shortName": "House Financial Services", "url": None,
+             "title": None, "subcommittees": []},
+            {"id": "HSSM", "name": "House Committee on Small Business",
+             "shortName": "House Small Business", "url": None,
+             "title": None, "subcommittees": []}]},
+    }}
+
+    SECTORS = {
+        "sectors": {"finance": "Banks & financial services",
+                    "tech": "Technology & semiconductors"},
+        "committees": {"HSBA": ["finance"]},
+        "tickers": {"JPM": "finance", "GS": "finance", "NVDA": "tech"},
+    }
+
+    def trades(self, *tickers):
+        return [{"member": "Josh Gottheimer", "ticker": t} for t in tickers]
+
+    def test_overlap_lists_only_the_overseen_industry(self):
+        b = ld.committee_block("Josh Gottheimer", self.DATA,
+                               self.trades("JPM", "JPM", "GS", "NVDA"),
+                               self.SECTORS)
+        self.assertEqual(len(b["overlap"]), 1)
+        row = b["overlap"][0]
+        self.assertEqual(row["label"], "Banks & financial services")
+        self.assertEqual(row["committees"], ["House Financial Services"])
+        self.assertEqual(row["trades"], 3)
+        self.assertEqual(row["symbols"], 2)
+        self.assertEqual([t["ticker"] for t in row["tickers"]], ["JPM", "GS"])
+
+    def test_coverage_counts_distinct_symbols_not_trades(self):
+        b = ld.committee_block("Josh Gottheimer", self.DATA,
+                               self.trades("JPM", "JPM", "GS", "NVDA", "ZZZZ"),
+                               self.SECTORS)
+        # 4 symbols we classify (JPM, GS, NVDA) out of 4 disclosed — ZZZZ is
+        # unclassified, and the page says so instead of implying no overlap.
+        self.assertEqual(b["coverage"], {"classified": 3, "total": 4})
+
+    def test_no_traded_symbol_in_the_sector_shows_nothing(self):
+        b = ld.committee_block("Josh Gottheimer", self.DATA,
+                               self.trades("NVDA"), self.SECTORS)
+        self.assertNotIn("overlap", b)
+        self.assertNotIn("coverage", b)
+        self.assertEqual(len(b["committees"]), 2)
+
+    def test_seats_sharing_a_sector_produce_one_row(self):
+        data = {"members": {"A B": {"reason": "assigned", "committees": [
+            {"id": "SSHR", "shortName": "Senate HELP", "subcommittees": []},
+            {"id": "SSVA", "shortName": "Senate Veterans", "subcommittees": []},
+        ]}}}
+        sd = {"sectors": {"health": "Health care & pharma"},
+              "committees": {"SSHR": ["health"], "SSVA": ["health"]},
+              "tickers": {"LLY": "health"}}
+        b = ld.committee_block("A B", data, [{"ticker": "LLY"}], sd)
+        self.assertEqual(len(b["overlap"]), 1)
+        self.assertEqual(b["overlap"][0]["committees"],
+                         ["Senate HELP", "Senate Veterans"])
+
+    def test_missing_sector_maps_leave_the_seats_untouched(self):
+        b = ld.committee_block("Josh Gottheimer", self.DATA,
+                               self.trades("JPM"), None)
+        self.assertNotIn("overlap", b)
+        self.assertEqual(b["committees"][0]["name"], "House Financial Services")
+
+    def test_payload_carries_the_overlap(self):
+        trades = [{"member": "Josh Gottheimer", "ticker": "JPM", "type": "buy",
+                   "amount_lo": 1001, "amount_hi": 15000, "tx_date": "2026-06-01",
+                   "filing_date": "2026-06-20", "chamber": "house", "state": "NJ",
+                   "id": "x", "asset": "JPMorgan"}]
+        p = ld.member_payload("Josh Gottheimer", trades, {}, "2026-08-01",
+                              committees=self.DATA, sector_data=self.SECTORS)
+        self.assertEqual(p["committees"]["overlap"][0]["sector"], "finance")
+
+
 class TestFeaturedMemberSet(unittest.TestCase):
     def test_mcguire_earns_a_page(self):
         self.assertIn("John J. McGuire III", ld.MEMBER_PAGE_NAMES)
