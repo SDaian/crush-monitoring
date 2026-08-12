@@ -58,6 +58,7 @@ const schema = [
   <body>
     <Header active="tracker" />
 
+    <main id="content">
     <section class="mx-auto max-w-[85rem] px-[5vw] pt-[9vh] pb-[5vh]">
       <p class="eyebrow mb-5">
         Tracker · <b class="font-semibold text-stamp">Every disclosure</b>
@@ -88,30 +89,36 @@ const schema = [
       {/* ── All trades ────────────────────────────────────────────── */}
       <section class="panel active" id="p-all">
         <div class="filters">
+          <label class="sr-only" for="q">Search member or ticker</label>
           <input type="search" id="q" placeholder="Search member or ticker…" />
+          <label class="sr-only" for="fChamber">Filter by chamber</label>
           <select id="fChamber">
             <option value="">Chamber: all</option>
             <option value="house">House</option>
             <option value="senate">Senate</option>
             <option value="executive">Executive (President)</option>
           </select>
+          <label class="sr-only" for="fParty">Filter by party</label>
           <select id="fParty">
             <option value="">Party: all</option>
             <option value="D">Democratic</option>
             <option value="R">Republican</option>
             <option value="I">Independent</option>
           </select>
+          <label class="sr-only" for="fType">Filter by trade type</label>
           <select id="fType">
             <option value="">Type: all</option>
             <option value="buy">Buy</option>
             <option value="sell">Sell</option>
             <option value="exchange">Exchange</option>
           </select>
+          <label class="sr-only" for="fAsset">Filter by asset class</label>
           <select id="fAsset">
             <option value="equity" selected>Stocks &amp; options</option>
             <option value="bond">Bonds &amp; debt</option>
             <option value="">Assets: all</option>
           </select>
+          <label class="sr-only" for="fRange">Filter by date range</label>
           <select id="fRange">
             <option value="90">Last 90 days</option>
             <option value="365">Last year</option>
@@ -153,6 +160,7 @@ const schema = [
         <div id="aiSignals" class="aisignals"></div>
         <div class="cards" id="aiCards"></div>
         <div class="filters">
+          <label class="sr-only" for="aiq">Analyze a ticker</label>
           <input type="search" id="aiq" placeholder="Analyze a ticker (e.g. NVDA)…" />
           <button class="act" id="aiClearBtn">✕ Clear</button>
         </div>
@@ -170,6 +178,8 @@ const schema = [
       </p>
       <SignupForm variant="band" id="join" />
     </section>
+    </main>
+
 
     <Footer />
 
@@ -562,7 +572,7 @@ const schema = [
           </div>`;
 
         box.innerHTML =
-          `<h3>${esc(tk)} <span class="note">${esc(a.name||"")}</span></h3>
+          `<h2 class="tkhead">${esc(tk)} <span class="note">${esc(a.name||"")}</span></h2>
            <div class="tksummary">
              <span><b>${fmtPrice(a.price)}</b> ${pctSpan(a.chg_1d)} <span class="est">daily close · as of ${esc(a.asof_date||"—")}</span></span>
            </div>
@@ -589,8 +599,8 @@ const schema = [
              today's numbers — and this mechanical read) into your AI assistant.
            </div>
            ${aiPrompts(tk, a).map((p, i) => `<div class="promptcard">
-              <h4>${p.title}</h4>
-              <textarea class="promptbox" id="prompt${i}" readonly>${esc(p.text)}</textarea>
+              <h3>${p.title}</h3>
+              <label class="sr-only" for="prompt${i}">${esc(p.title)}</label><textarea class="promptbox" id="prompt${i}" readonly>${esc(p.text)}</textarea>
               <button class="act copybtn" data-copy="prompt${i}">📋 Copy prompt</button>
             </div>`).join("")}`;
       }
@@ -973,6 +983,7 @@ const schema = [
   .tracker .scorepill.neutral { color: var(--color-ink-soft); }
 
   .tracker .panel2 { border-top: 2px solid var(--color-ink); padding-top: 1.25rem; }
+  .tracker .panel2 h2.tkhead,
   .tracker .panel2 h3 {
     font-family: var(--font-sans);
     font-weight: 900;
@@ -983,7 +994,7 @@ const schema = [
     gap: 0.6rem;
     flex-wrap: wrap;
   }
-  .tracker .panel2 h4 { font-family: var(--font-sans); font-weight: 700; font-size: 0.9rem; }
+  .tracker .panel2 h3:not(.tkhead), .tracker .panel2 h4 { font-family: var(--font-sans); font-weight: 700; font-size: 0.9rem; }
   .tracker .tksummary { margin: 0.5rem 0 1rem; font-size: 0.95rem; }
   .tracker .est { font-size: 0.7rem; color: var(--color-ink-soft); }
 

@@ -27,3 +27,6 @@ fetch.log
 
 # Python cache from the chat-style hook
 .claude/hooks/__pycache__/
+
+# Session-start hook virtualenv (web sessions)
+.venv/
