@@ -556,6 +556,15 @@ sites. Full details in `congress/README.md`. Conventions:
   `tests/congress` runs offline with no third-party deps — network code is
   confined to `congress/http.py`, pdfplumber to `house.extract_pdf_text` /
   `oge.extract_pdf_text`, and Twelve Data to `prices.fetch_raw`.
+- **Committee seats are on the member pages.** `landing_data.committee_block`
+  reads `docs/data/committees.json` (written by `congress committees`) and
+  `[slug].astro` renders the seats with their subcommittees. It **states
+  the seat only** — a committee beside a trade is a fact, a claim that one
+  caused the other is not, and the page's fineprint says so. An empty list
+  renders **nothing**, not an empty heading: a seatless sitting member, a
+  former member and an executive filer are three different facts (the
+  `holdings.classify` rule again), and only the reasons in
+  `committees.NEEDS_REVIEW` are gaps worth chasing.
 - **Adding a featured member:** append the canonical name to
   `congress/featured.json` and make sure `congress/members.json` has an entry
   (with the filer-name spellings as `aliases`).
@@ -627,7 +636,7 @@ Conventions:
 - **Member pages** (`/members/<slug>` + a `/members` index) are static SEO
   pages for a **curated featured set** (`landing_data.MEMBER_PAGE_NAMES` —
   Pelosi, Trump, Greene, Tuberville, Gottheimer, Fields, Cisneros, Armstrong,
-  McCormick, McClain Delaney), each showing that member's
+  McCormick, McClain Delaney, McGuire), each showing that member's
   disclosed trades, most-traded tickers, filing timeliness and **estimated
   holdings**. The holdings are the annual snapshot **rolled forward** with
   every trade filed since (buys add / sells subtract by bracket midpoint, new

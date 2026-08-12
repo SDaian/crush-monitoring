@@ -824,5 +824,51 @@
       }
     ],
     "rowsOf": 8
+  },
+  "committees": {
+    "reason": "assigned",
+    "committees": [
+      {
+        "name": "Senate Agriculture, Nutrition & Forestry",
+        "url": "http://www.agriculture.senate.gov/",
+        "title": null,
+        "subcommittees": [
+          "Commodities, Derivatives, Risk Management, and Trade",
+          "Food and Nutrition, Specialty Crops, Organics, and Research",
+          "Rural Development, Energy, and Credit"
+        ]
+      },
+      {
+        "name": "Senate Armed Services",
+        "url": "http://www.armed-services.senate.gov/",
+        "title": null,
+        "subcommittees": [
+          "Personnel",
+          "Seapower",
+          "Strategic Forces"
+        ]
+      },
+      {
+        "name": "Senate Health, Education, Labor & Pensions",
+        "url": "http://www.help.senate.gov/",
+        "title": null,
+        "subcommittees": [
+          "Education and the American Family",
+          "Employment and Workplace Safety"
+        ]
+      },
+      {
+        "name": "Senate Veterans' Affairs",
+        "url": "http://www.veterans.senate.gov/",
+        "title": null,
+        "subcommittees": []
+      },
+      {
+        "name": "Senate Aging",
+        "url": "http://www.aging.senate.gov/",
+        "title": null,
+        "subcommittees": []
+      }
+    ]
   }
 }

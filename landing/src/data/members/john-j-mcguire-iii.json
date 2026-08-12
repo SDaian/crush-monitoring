@@ -1,0 +1,355 @@
+{
+  "_comment": "Generated from real official disclosures by congress/landing_data.py (daily Action). Do not edit by hand.",
+  "slug": "john-j-mcguire-iii",
+  "name": "John J. McGuire III",
+  "party": "R",
+  "state": "VA",
+  "chamber": "House",
+  "district": "VA-5",
+  "summary": {
+    "trades": 16,
+    "distinctTickers": 11,
+    "firstTx": "2025-04-10",
+    "lastTx": "2026-07-07",
+    "lastFiling": "2026-07-08",
+    "pctLate": 0,
+    "worstLate": 0
+  },
+  "topTickers": [
+    {
+      "ticker": "MSFT",
+      "count": 3,
+      "asset": "Microsoft Corporation - Common Stock",
+      "slug": "msft",
+      "hasPage": true
+    },
+    {
+      "ticker": "META",
+      "count": 2,
+      "asset": "Meta Platforms, Inc. - Class A Common Stock",
+      "slug": "meta",
+      "hasPage": true
+    },
+    {
+      "ticker": "NVDA",
+      "count": 2,
+      "asset": "NVIDIA Corporation - Common Stock",
+      "slug": "nvda",
+      "hasPage": true
+    },
+    {
+      "ticker": "NOW",
+      "count": 2,
+      "asset": "ServiceNow, Inc. Common Stock",
+      "slug": "now",
+      "hasPage": true
+    },
+    {
+      "ticker": "BLK",
+      "count": 1,
+      "asset": "BlackRock, Inc. Common Stock",
+      "slug": "blk",
+      "hasPage": true
+    },
+    {
+      "ticker": "SPCX",
+      "count": 1,
+      "asset": "Space Exploration Technologies Corp. - Class A Common Stock",
+      "slug": "spcx",
+      "hasPage": true
+    }
+  ],
+  "trades": [
+    {
+      "ticker": "BLK",
+      "asset": "BlackRock, Inc. Common Stock",
+      "side": "SELL",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-07-07",
+      "filedDate": "2026-07-08",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20034942.pdf"
+    },
+    {
+      "ticker": "SPCX",
+      "asset": "Space Exploration Technologies Corp. - Class A Common Stock",
+      "side": "BUY",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-06-15",
+      "filedDate": "2026-07-08",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20034942.pdf"
+    },
+    {
+      "ticker": "DELL",
+      "asset": "Dell Technologies Inc. Class C Common Stock",
+      "side": "SELL",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-06-04",
+      "filedDate": "2026-06-10",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20034748.pdf"
+    },
+    {
+      "ticker": "META",
+      "asset": "Meta Platforms, Inc. - Class A Common Stock",
+      "side": "BUY",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-06-04",
+      "filedDate": "2026-06-10",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20034748.pdf"
+    },
+    {
+      "ticker": "AAPL",
+      "asset": "Apple Inc. - Common Stock",
+      "side": "BUY",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-04-15",
+      "filedDate": "2026-05-13",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20034521.pdf"
+    },
+    {
+      "ticker": "MSFT",
+      "asset": "Microsoft Corporation - Common Stock",
+      "side": "BUY",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-04-15",
+      "filedDate": "2026-05-13",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20034521.pdf"
+    },
+    {
+      "ticker": "NVDA",
+      "asset": "NVIDIA Corporation - Common Stock",
+      "side": "BUY",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-04-15",
+      "filedDate": "2026-05-13",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20034521.pdf"
+    },
+    {
+      "ticker": "MSFT",
+      "asset": "Microsoft Corporation - Common Stock",
+      "side": "SELL",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-01-30",
+      "filedDate": "2026-02-10",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20033956.pdf"
+    },
+    {
+      "ticker": "NVDA",
+      "asset": "NVIDIA Corporation - Common Stock",
+      "side": "BUY",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-01-30",
+      "filedDate": "2026-02-10",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20033956.pdf"
+    },
+    {
+      "ticker": "MSFT",
+      "asset": "Microsoft Corporation - Common Stock",
+      "side": "BUY",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-01-21",
+      "filedDate": "2026-02-10",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20033956.pdf"
+    },
+    {
+      "ticker": "WMT",
+      "asset": "Walmart Inc. - Common Stock",
+      "side": "SELL",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-01-20",
+      "filedDate": "2026-02-10",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20033956.pdf"
+    },
+    {
+      "ticker": "META",
+      "asset": "Meta Platforms, Inc. - Class A Common Stock",
+      "side": "BUY",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2025-06-30",
+      "filedDate": "2025-07-10",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20030620.pdf"
+    },
+    {
+      "ticker": "NOW",
+      "asset": "ServiceNow, Inc. Common Stock",
+      "side": "SELL",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2025-06-27",
+      "filedDate": "2025-07-10",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20030620.pdf"
+    },
+    {
+      "ticker": "NFLX",
+      "asset": "Netflix, Inc. - Common Stock",
+      "side": "BUY",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2025-06-16",
+      "filedDate": "2025-07-10",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20030620.pdf"
+    },
+    {
+      "ticker": "NOW",
+      "asset": "ServiceNow, Inc. Common Stock",
+      "side": "BUY",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2025-05-16",
+      "filedDate": "2025-06-12",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20030509.pdf"
+    },
+    {
+      "ticker": "UNH",
+      "asset": "UnitedHealth Group Incorporated Common Stock",
+      "side": "BUY",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2025-04-10",
+      "filedDate": "2025-05-16",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20016861.pdf"
+    }
+  ],
+  "tradesShown": 16,
+  "holdings": {
+    "available": false,
+    "filingDate": null,
+    "reportYear": null,
+    "snapDate": null,
+    "filingsSince": 0,
+    "sourceUrl": null,
+    "totalLabel": null,
+    "positions": 0,
+    "stocks": [],
+    "options": []
+  },
+  "performance": {
+    "available": true,
+    "benchLabel": "S&P 500",
+    "asofDate": "2026-08-10",
+    "kpis": {
+      "medianPct": -5.2,
+      "medianBenchPct": 11.7,
+      "beat": 4,
+      "beatOf": 11,
+      "priced": 11,
+      "pricedOf": 11
+    },
+    "series": null,
+    "rows": [
+      {
+        "ticker": "SPCX",
+        "txDate": "2026-06-15",
+        "pct": -27.9,
+        "benchPct": 2.4,
+        "excess": -30.3
+      },
+      {
+        "ticker": "META",
+        "txDate": "2026-06-04",
+        "pct": -5.2,
+        "benchPct": 2.1,
+        "excess": -7.3
+      },
+      {
+        "ticker": "NVDA",
+        "txDate": "2026-04-15",
+        "pct": 9.4,
+        "benchPct": 10.4,
+        "excess": -1.0
+      },
+      {
+        "ticker": "MSFT",
+        "txDate": "2026-04-15",
+        "pct": 23.1,
+        "benchPct": 10.4,
+        "excess": 12.7
+      },
+      {
+        "ticker": "AAPL",
+        "txDate": "2026-04-15",
+        "pct": 15.7,
+        "benchPct": 10.4,
+        "excess": 5.3
+      },
+      {
+        "ticker": "NVDA",
+        "txDate": "2026-01-30",
+        "pct": 13.8,
+        "benchPct": 11.7,
+        "excess": 2.1
+      },
+      {
+        "ticker": "MSFT",
+        "txDate": "2026-01-21",
+        "pct": 13.9,
+        "benchPct": 12.8,
+        "excess": 1.1
+      },
+      {
+        "ticker": "META",
+        "txDate": "2025-06-30",
+        "pct": -19.4,
+        "benchPct": 25.1,
+        "excess": -44.5
+      },
+      {
+        "ticker": "NFLX",
+        "txDate": "2025-06-16",
+        "pct": -37.7,
+        "benchPct": 28.3,
+        "excess": -66.0
+      },
+      {
+        "ticker": "NOW",
+        "txDate": "2025-05-16",
+        "pct": -38.7,
+        "benchPct": 30.1,
+        "excess": -68.8
+      },
+      {
+        "ticker": "UNH",
+        "txDate": "2025-04-10",
+        "pct": -31.2,
+        "benchPct": 47.4,
+        "excess": -78.6
+      }
+    ],
+    "rowsOf": 11
+  },
+  "committees": {
+    "reason": "assigned",
+    "committees": [
+      {
+        "name": "House Armed Services",
+        "url": "https://armedservices.house.gov/",
+        "title": null,
+        "subcommittees": [
+          "Cyber, Information Technologies, and Innovation",
+          "Tactical Air and Land Forces"
+        ]
+      },
+      {
+        "name": "House Oversight & Government Reform",
+        "url": "https://oversight.house.gov/",
+        "title": null,
+        "subcommittees": [
+          "Cybersecurity, Information Technology, and Government Innovation",
+          "Health Care and Financial Services",
+          "Military and Foreign Affairs"
+        ]
+      }
+    ]
+  }
+}
