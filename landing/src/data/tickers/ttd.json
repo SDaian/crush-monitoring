@@ -5,17 +5,17 @@
   "company": "The Trade Desk, Inc.",
   "indexable": true,
   "technical": {
-    "asOf": "2026-08-10",
-    "price": 13.39,
-    "chg1d": -2.97,
-    "chg1w": -26.83,
-    "chg1m": -31.44,
-    "rsi14": 27.3,
-    "sma50": 18.77,
-    "sma200": 28.25,
-    "vsSma50": -28.6,
-    "vsSma200": -52.6,
-    "relVol": 2.1,
+    "asOf": "2026-08-11",
+    "price": 13.56,
+    "chg1d": 1.27,
+    "chg1w": -29.89,
+    "chg1m": -31.48,
+    "rsi14": 28.5,
+    "sma50": 18.61,
+    "sma200": 28.05,
+    "vsSma50": -27.1,
+    "vsSma200": -51.7,
+    "relVol": 1.08,
     "high52w": 55.36,
     "low52w": 13.39,
     "rangePos": 0.0,
@@ -225,18 +225,11 @@
         "c": 13.8
       },
       {
-        "d": "2026-08-10",
-        "c": 13.39
+        "d": "2026-08-11",
+        "c": 13.56
       }
     ],
-    "signals": [
-      {
-        "type": "new_52w_low",
-        "asof": "2026-08-10",
-        "label": "New 52-week low",
-        "dir": "bear"
-      }
-    ],
+    "signals": [],
     "nextEarnings": null,
     "score": {
       "label": "Strong Sell",

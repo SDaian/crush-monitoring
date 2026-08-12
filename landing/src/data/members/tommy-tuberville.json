@@ -264,124 +264,124 @@
   "tradesShown": 20,
   "holdings": {
     "available": true,
-    "filingDate": "2026-08-10",
-    "reportYear": 2024,
-    "snapDate": "2024-12-31",
-    "filingsSince": 9,
-    "sourceUrl": "https://efdsearch.senate.gov/search/view/annual/459edef6-ea39-4a09-96ce-f0683f125d6f/",
-    "totalLabel": "$1.0M",
-    "positions": 133,
+    "filingDate": "2026-08-11",
+    "reportYear": 2025,
+    "snapDate": "2025-12-31",
+    "filingsSince": 1,
+    "sourceUrl": "https://efdsearch.senate.gov/search/view/annual/d4f1a4cf-d450-4f9f-bfaf-c98e41066c2b/",
+    "totalLabel": "$887K",
+    "positions": 31,
     "stocks": [
       {
         "ticker": "ABNFX",
         "asset": "The Bond Fund of America Class F2",
         "estLabel": "$175K",
-        "pctPortfolio": 17.1,
+        "pctPortfolio": 19.7,
         "isNew": false
       },
       {
-        "ticker": "USIG",
-        "asset": "iShares Broad USD Investment Grade Corporate Bond",
-        "estLabel": "$150K",
-        "pctPortfolio": 14.6,
-        "isNew": true
+        "ticker": "C",
+        "asset": "Citigroup Inc.",
+        "estLabel": "$75K",
+        "pctPortfolio": 8.5,
+        "isNew": false
       },
       {
         "ticker": "NUE",
         "asset": "Nucor Corporation",
         "estLabel": "$75K",
-        "pctPortfolio": 7.3,
+        "pctPortfolio": 8.5,
         "isNew": false
       },
       {
         "ticker": "RSP",
         "asset": "Invesco S&P 500 Equal Weight ETF",
         "estLabel": "$75K",
-        "pctPortfolio": 7.3,
+        "pctPortfolio": 8.5,
         "isNew": false
       },
       {
         "ticker": "DHS",
         "asset": "Wisdomtree U.S. High Dividend Fund",
         "estLabel": "$75K",
-        "pctPortfolio": 7.3,
+        "pctPortfolio": 8.5,
         "isNew": false
       },
       {
-        "ticker": "XLU",
-        "asset": "SPDR Select Sector Fund - Utilities",
-        "estLabel": "$65K",
-        "pctPortfolio": 6.3,
-        "isNew": true
-      },
-      {
-        "ticker": "XLP",
-        "asset": "SPDR Select Sector Fund - Consumer Staples",
-        "estLabel": "$65K",
-        "pctPortfolio": 6.3,
-        "isNew": true
-      },
-      {
-        "ticker": "XLV",
-        "asset": "SPDR Select Sector Fund - Health Care",
-        "estLabel": "$65K",
-        "pctPortfolio": 6.3,
-        "isNew": true
-      },
-      {
-        "ticker": "C",
-        "asset": "Citigroup Inc.",
+        "ticker": "GOOGL",
+        "asset": "Alphabet Inc.",
         "estLabel": "$33K",
-        "pctPortfolio": 3.2,
+        "pctPortfolio": 3.7,
+        "isNew": false
+      },
+      {
+        "ticker": "AAPL",
+        "asset": "Apple Inc.",
+        "estLabel": "$33K",
+        "pctPortfolio": 3.7,
         "isNew": false
       },
       {
         "ticker": "PM",
         "asset": "Philip Morris International Inc.",
         "estLabel": "$33K",
-        "pctPortfolio": 3.2,
+        "pctPortfolio": 3.7,
         "isNew": false
       },
       {
         "ticker": "VZ",
         "asset": "Verizon Communications Inc.",
         "estLabel": "$33K",
-        "pctPortfolio": 3.2,
+        "pctPortfolio": 3.7,
         "isNew": false
       },
       {
         "ticker": "WMT",
         "asset": "Walmart Inc.",
         "estLabel": "$33K",
-        "pctPortfolio": 3.2,
+        "pctPortfolio": 3.7,
+        "isNew": false
+      },
+      {
+        "ticker": "ABBV",
+        "asset": "AbbVie Inc.",
+        "estLabel": "$33K",
+        "pctPortfolio": 3.7,
+        "isNew": false
+      },
+      {
+        "ticker": "GS",
+        "asset": "The Goldman Sachs Group, Inc.",
+        "estLabel": "$33K",
+        "pctPortfolio": 3.7,
+        "isNew": false
+      },
+      {
+        "ticker": "MSFT",
+        "asset": "Microsoft Corporation",
+        "estLabel": "$33K",
+        "pctPortfolio": 3.7,
         "isNew": false
       },
       {
         "ticker": "—",
-        "asset": "PayPal Holdings, Inc.",
+        "asset": "NextEra Energy, Inc.",
         "estLabel": "$33K",
-        "pctPortfolio": 3.2,
+        "pctPortfolio": 3.7,
+        "isNew": false
+      },
+      {
+        "ticker": "ORCL",
+        "asset": "Oracle Corporation",
+        "estLabel": "$33K",
+        "pctPortfolio": 3.7,
         "isNew": false
       },
       {
         "ticker": "QCOM",
         "asset": "QUALCOMM Incorporated",
         "estLabel": "$33K",
-        "pctPortfolio": 3.2,
-        "isNew": false
-      },
-      {
-        "ticker": "GS",
-        "asset": "The Goldman Sachs Group, Inc.",
-        "estLabel": "$10K",
-        "pctPortfolio": 1.0,
-        "isNew": false
-      },
-      {
-        "ticker": "UAA",
-        "asset": "Under Armour, Inc.",
-        "estLabel": "$8K",
-        "pctPortfolio": 0.8,
+        "pctPortfolio": 3.7,
         "isNew": false
       }
     ],
@@ -390,10 +390,10 @@
   "performance": {
     "available": true,
     "benchLabel": "S&P 500",
-    "asofDate": "2026-08-10",
+    "asofDate": "2026-08-11",
     "kpis": {
-      "medianPct": 101.7,
-      "medianBenchPct": 49.0,
+      "medianPct": 105.8,
+      "medianBenchPct": 48.5,
       "beat": 6,
       "beatOf": 8,
       "priced": 8,
@@ -519,7 +519,7 @@
         "2026-07-21",
         "2026-07-28",
         "2026-08-04",
-        "2026-08-10"
+        "2026-08-11"
       ],
       "member": [
         100.0,
@@ -640,7 +640,7 @@
         225.3,
         204.1,
         223.1,
-        218.5
+        220.2
       ],
       "bench": [
         100.0,
@@ -761,7 +761,7 @@
         144.2,
         142.8,
         148.6,
-        149.0
+        148.5
       ],
       "buys": 8
     },
@@ -769,58 +769,58 @@
       {
         "ticker": "GILD",
         "txDate": "2024-05-10",
-        "pct": 101.7,
-        "benchPct": 48.4,
-        "excess": 53.3
+        "pct": 105.8,
+        "benchPct": 47.9,
+        "excess": 57.9
       },
       {
         "ticker": "GILD",
         "txDate": "2024-05-10",
-        "pct": 101.7,
-        "benchPct": 48.4,
-        "excess": 53.3
+        "pct": 105.8,
+        "benchPct": 47.9,
+        "excess": 57.9
       },
       {
         "ticker": "GILD",
         "txDate": "2024-05-10",
-        "pct": 101.7,
-        "benchPct": 48.4,
-        "excess": 53.3
+        "pct": 105.8,
+        "benchPct": 47.9,
+        "excess": 57.9
       },
       {
         "ticker": "INTC",
         "txDate": "2024-05-09",
-        "pct": 224.1,
-        "benchPct": 48.6,
-        "excess": 175.5
+        "pct": 224.7,
+        "benchPct": 48.1,
+        "excess": 176.6
       },
       {
         "ticker": "INTC",
         "txDate": "2024-05-08",
-        "pct": 225.1,
-        "benchPct": 49.5,
-        "excess": 175.6
+        "pct": 225.7,
+        "benchPct": 49.0,
+        "excess": 176.7
       },
       {
         "ticker": "ADBE",
         "txDate": "2024-05-08",
-        "pct": -44.1,
-        "benchPct": 49.5,
-        "excess": -93.6
+        "pct": -46.0,
+        "benchPct": 49.0,
+        "excess": -95.0
       },
       {
         "ticker": "INTC",
         "txDate": "2024-05-07",
-        "pct": 217.9,
-        "benchPct": 49.5,
-        "excess": 168.4
+        "pct": 218.5,
+        "benchPct": 49.0,
+        "excess": 169.5
       },
       {
         "ticker": "CVX",
         "txDate": "2024-05-07",
-        "pct": 19.8,
-        "benchPct": 49.5,
-        "excess": -29.7
+        "pct": 20.9,
+        "benchPct": 49.0,
+        "excess": -28.1
       }
     ],
     "rowsOf": 8

@@ -5,20 +5,20 @@
   "company": "Honeywell International Inc.",
   "indexable": true,
   "technical": {
-    "asOf": "2026-08-10",
-    "price": 242.93,
-    "chg1d": -1.33,
-    "chg1w": -1.56,
-    "chg1m": 7.29,
-    "rsi14": 55.5,
-    "sma50": 230.71,
-    "sma200": 219.8,
-    "vsSma50": 5.3,
-    "vsSma200": 10.5,
-    "relVol": 0.62,
+    "asOf": "2026-08-11",
+    "price": 230.12,
+    "chg1d": -5.27,
+    "chg1w": -7.5,
+    "chg1m": 3.54,
+    "rsi14": 43.8,
+    "sma50": 230.56,
+    "sma200": 219.98,
+    "vsSma50": -0.2,
+    "vsSma200": 4.6,
+    "relVol": 1.53,
     "high52w": 248.79,
     "low52w": 188.14,
-    "rangePos": 90.0,
+    "rangePos": 69.0,
     "series": [
       {
         "d": "2025-08-22",
@@ -225,18 +225,25 @@
         "c": 246.21
       },
       {
-        "d": "2026-08-10",
-        "c": 242.93
+        "d": "2026-08-11",
+        "c": 230.12
       }
     ],
-    "signals": [],
+    "signals": [
+      {
+        "type": "lose_sma50",
+        "asof": "2026-08-11",
+        "label": "Lost the 50-day average",
+        "dir": "bear"
+      }
+    ],
     "nextEarnings": null,
     "score": {
-      "label": "Strong Buy",
-      "buys": 5,
-      "sells": 1,
+      "label": "Hold",
+      "buys": 3,
+      "sells": 3,
       "holds": 1,
-      "ratio": 0.571
+      "ratio": 0.0
     }
   },
   "summary": {

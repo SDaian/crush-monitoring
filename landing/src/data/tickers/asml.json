@@ -5,20 +5,20 @@
   "company": "ASML Holding N.V. - New York Registry Shares",
   "indexable": true,
   "technical": {
-    "asOf": "2026-08-10",
-    "price": 1733.48,
-    "chg1d": -0.43,
-    "chg1w": 5.54,
-    "chg1m": -3.55,
-    "rsi14": 51.3,
-    "sma50": 1763.14,
-    "sma200": 1412.59,
-    "vsSma50": -1.7,
-    "vsSma200": 22.7,
-    "relVol": 0.57,
+    "asOf": "2026-08-11",
+    "price": 1799.38,
+    "chg1d": 3.8,
+    "chg1w": 5.11,
+    "chg1m": 4.25,
+    "rsi14": 56.4,
+    "sma50": 1766.87,
+    "sma200": 1416.53,
+    "vsSma50": 1.8,
+    "vsSma200": 27.0,
+    "relVol": 0.78,
     "high52w": 1989.44,
     "low52w": 721.31,
-    "rangePos": 80.0,
+    "rangePos": 85.0,
     "series": [
       {
         "d": "2025-08-22",
@@ -225,18 +225,25 @@
         "c": 1740.99
       },
       {
-        "d": "2026-08-10",
-        "c": 1733.48
+        "d": "2026-08-11",
+        "c": 1799.38
       }
     ],
-    "signals": [],
+    "signals": [
+      {
+        "type": "reclaim_sma50",
+        "asof": "2026-08-11",
+        "label": "Reclaimed the 50-day average",
+        "dir": "bull"
+      }
+    ],
     "nextEarnings": null,
     "score": {
-      "label": "Buy",
-      "buys": 4,
-      "sells": 2,
+      "label": "Strong Buy",
+      "buys": 6,
+      "sells": 0,
       "holds": 1,
-      "ratio": 0.286
+      "ratio": 0.857
     }
   },
   "summary": {

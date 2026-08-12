@@ -5,17 +5,17 @@
   "company": "Snowflake Inc.",
   "indexable": false,
   "technical": {
-    "asOf": "2026-08-10",
-    "price": 334.7,
-    "chg1d": 1.27,
-    "chg1w": 8.83,
-    "chg1m": 28.02,
-    "rsi14": 81.7,
-    "sma50": 264.11,
-    "sma200": 212.86,
-    "vsSma50": 26.7,
-    "vsSma200": 57.2,
-    "relVol": 0.77,
+    "asOf": "2026-08-11",
+    "price": 334.14,
+    "chg1d": -0.17,
+    "chg1w": 5.48,
+    "chg1m": 24.38,
+    "rsi14": 81.1,
+    "sma50": 265.68,
+    "sma200": 213.32,
+    "vsSma50": 25.8,
+    "vsSma200": 56.6,
+    "relVol": 0.67,
     "high52w": 334.7,
     "low52w": 121.11,
     "rangePos": 100.0,
@@ -225,18 +225,11 @@
         "c": 330.49
       },
       {
-        "d": "2026-08-10",
-        "c": 334.7
+        "d": "2026-08-11",
+        "c": 334.14
       }
     ],
-    "signals": [
-      {
-        "type": "new_52w_high",
-        "asof": "2026-08-10",
-        "label": "New 52-week high",
-        "dir": "bull"
-      }
-    ],
+    "signals": [],
     "nextEarnings": null,
     "score": {
       "label": "Strong Buy",

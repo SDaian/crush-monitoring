@@ -5,20 +5,20 @@
   "company": "International Business Machines Corporation",
   "indexable": true,
   "technical": {
-    "asOf": "2026-08-10",
-    "price": 236.31,
-    "chg1d": -0.41,
-    "chg1w": 4.42,
-    "chg1m": -17.82,
-    "rsi14": 49.2,
-    "sma50": 258.49,
-    "sma200": 269.11,
-    "vsSma50": -8.6,
-    "vsSma200": -12.2,
-    "relVol": 0.33,
+    "asOf": "2026-08-11",
+    "price": 238.42,
+    "chg1d": 0.89,
+    "chg1w": 1.39,
+    "chg1m": -17.85,
+    "rsi14": 50.7,
+    "sma50": 257.3,
+    "sma200": 268.87,
+    "vsSma50": -7.3,
+    "vsSma200": -11.3,
+    "relVol": 0.31,
     "high52w": 329.23,
     "low52w": 205.77,
-    "rangePos": 25.0,
+    "rangePos": 26.0,
     "series": [
       {
         "d": "2025-08-22",
@@ -225,8 +225,8 @@
         "c": 237.28
       },
       {
-        "d": "2026-08-10",
-        "c": 236.31
+        "d": "2026-08-11",
+        "c": 238.42
       }
     ],
     "signals": [],
@@ -240,16 +240,16 @@
     }
   },
   "summary": {
-    "trades": 45,
+    "trades": 47,
     "members": 15,
     "buys": 27,
-    "sells": 18,
+    "sells": 20,
     "other": 0,
     "firstTx": "2024-12-10",
-    "lastTx": "2026-06-16",
-    "lastFiling": "2026-07-21",
+    "lastTx": "2026-07-16",
+    "lastFiling": "2026-08-10",
     "estBuyLabel": "$430K",
-    "estSellLabel": "$334K",
+    "estSellLabel": "$350K",
     "pctLate": 9
   },
   "topMembers": [
@@ -276,6 +276,17 @@
       "hasPage": false
     },
     {
+      "name": "Josh Gottheimer",
+      "slug": "josh-gottheimer",
+      "party": "D",
+      "chamber": "House",
+      "trades": 6,
+      "buys": 1,
+      "sells": 5,
+      "estLabel": "$48K",
+      "hasPage": true
+    },
+    {
       "name": "Lloyd Doggett",
       "slug": "lloyd-doggett",
       "party": "D",
@@ -296,17 +307,6 @@
       "sells": 2,
       "estLabel": "$81K",
       "hasPage": false
-    },
-    {
-      "name": "Josh Gottheimer",
-      "slug": "josh-gottheimer",
-      "party": "D",
-      "chamber": "House",
-      "trades": 4,
-      "buys": 1,
-      "sells": 3,
-      "estLabel": "$32K",
-      "hasPage": true
     },
     {
       "name": "Julie Johnson",
@@ -365,6 +365,30 @@
     }
   ],
   "trades": [
+    {
+      "member": "Josh Gottheimer",
+      "memberSlug": "josh-gottheimer",
+      "hasPage": true,
+      "party": "D",
+      "side": "SELL",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-07-16",
+      "filedDate": "2026-08-10",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035186.pdf"
+    },
+    {
+      "member": "Josh Gottheimer",
+      "memberSlug": "josh-gottheimer",
+      "hasPage": true,
+      "party": "D",
+      "side": "SELL",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-07-15",
+      "filedDate": "2026-08-10",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035186.pdf"
+    },
     {
       "member": "Gilbert Ray Cisneros, Jr.",
       "memberSlug": "gilbert-ray-cisneros-jr",
@@ -637,30 +661,6 @@
       "side": "BUY",
       "amountBucket": "$1K – $15K",
       "txDate": "2025-11-18",
-      "filedDate": "2025-12-15",
-      "daysLate": 0,
-      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20033619.pdf"
-    },
-    {
-      "member": "Julie Johnson",
-      "memberSlug": "julie-johnson",
-      "hasPage": false,
-      "party": "D",
-      "side": "SELL",
-      "amountBucket": "$1K – $15K",
-      "txDate": "2025-11-13",
-      "filedDate": "2025-12-11",
-      "daysLate": 0,
-      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20033611.pdf"
-    },
-    {
-      "member": "Gilbert Ray Cisneros, Jr.",
-      "memberSlug": "gilbert-ray-cisneros-jr",
-      "hasPage": true,
-      "party": "D",
-      "side": "BUY",
-      "amountBucket": "$1K – $15K",
-      "txDate": "2025-11-12",
       "filedDate": "2025-12-15",
       "daysLate": 0,
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20033619.pdf"

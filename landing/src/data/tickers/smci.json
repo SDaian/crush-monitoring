@@ -5,17 +5,17 @@
   "company": "Super Micro Computer, Inc.",
   "indexable": false,
   "technical": {
-    "asOf": "2026-08-10",
-    "price": 31.46,
-    "chg1d": 1.06,
-    "chg1w": 9.85,
-    "chg1m": 11.13,
-    "rsi14": 55.7,
-    "sma50": 31.66,
-    "sma200": 32.07,
-    "vsSma50": -0.6,
-    "vsSma200": -1.9,
-    "relVol": 1.2,
+    "asOf": "2026-08-11",
+    "price": 31.6,
+    "chg1d": 0.45,
+    "chg1w": -0.28,
+    "chg1m": 14.24,
+    "rsi14": 56.0,
+    "sma50": 31.37,
+    "sma200": 31.97,
+    "vsSma50": 0.7,
+    "vsSma200": -1.2,
+    "relVol": 1.31,
     "high52w": 58.68,
     "low52w": 20.53,
     "rangePos": 29.0,
@@ -225,11 +225,18 @@
         "c": 31.13
       },
       {
-        "d": "2026-08-10",
-        "c": 31.46
+        "d": "2026-08-11",
+        "c": 31.6
       }
     ],
-    "signals": [],
+    "signals": [
+      {
+        "type": "reclaim_sma50",
+        "asof": "2026-08-11",
+        "label": "Reclaimed the 50-day average",
+        "dir": "bull"
+      }
+    ],
     "nextEarnings": null,
     "score": {
       "label": "Hold",

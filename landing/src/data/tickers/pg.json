@@ -5,20 +5,20 @@
   "company": "Procter & Gamble Company",
   "indexable": true,
   "technical": {
-    "asOf": "2026-08-10",
-    "price": 146.44,
-    "chg1d": 0.45,
-    "chg1w": 1.01,
-    "chg1m": -0.41,
-    "rsi14": 47.9,
-    "sma50": 147.58,
-    "sma200": 147.94,
-    "vsSma50": -0.8,
-    "vsSma200": -1.0,
-    "relVol": 0.54,
+    "asOf": "2026-08-11",
+    "price": 145.21,
+    "chg1d": -0.84,
+    "chg1w": -1.89,
+    "chg1m": -2.13,
+    "rsi14": 44.9,
+    "sma50": 147.61,
+    "sma200": 147.9,
+    "vsSma50": -1.6,
+    "vsSma200": -1.8,
+    "relVol": 0.76,
     "high52w": 167.2,
     "low52w": 138.04,
-    "rangePos": 29.0,
+    "rangePos": 25.0,
     "series": [
       {
         "d": "2025-08-22",
@@ -225,18 +225,18 @@
         "c": 145.79
       },
       {
-        "d": "2026-08-10",
-        "c": 146.44
+        "d": "2026-08-11",
+        "c": 145.21
       }
     ],
     "signals": [],
     "nextEarnings": null,
     "score": {
       "label": "Strong Sell",
-      "buys": 1,
-      "sells": 5,
+      "buys": 0,
+      "sells": 6,
       "holds": 1,
-      "ratio": -0.571
+      "ratio": -0.857
     }
   },
   "summary": {

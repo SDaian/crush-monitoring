@@ -390,13 +390,13 @@
   "performance": {
     "available": true,
     "benchLabel": "S&P 500",
-    "asofDate": "2026-08-10",
+    "asofDate": "2026-08-11",
     "kpis": {
-      "medianPct": 22.2,
-      "medianBenchPct": 21.9,
-      "beat": 37,
-      "beatOf": 73,
-      "priced": 73,
+      "medianPct": 22.4,
+      "medianBenchPct": 21.5,
+      "beat": 38,
+      "beatOf": 72,
+      "priced": 72,
       "pricedOf": 320
     },
     "series": {
@@ -421,30 +421,30 @@
         "2026-07-24",
         "2026-07-31",
         "2026-08-07",
-        "2026-08-10"
+        "2026-08-11"
       ],
       "member": [
         100.0,
         103.6,
         105.9,
-        111.9,
-        111.9,
-        112.4,
-        116.3,
-        115.7,
-        118.6,
-        123.5,
-        119.2,
-        121.4,
-        122.6,
-        121.5,
-        123.6,
-        124.1,
-        120.9,
-        120.2,
-        120.7,
-        125.6,
-        125.9
+        112.0,
+        112.2,
+        112.7,
+        116.6,
+        116.1,
+        118.9,
+        123.9,
+        119.6,
+        121.8,
+        122.9,
+        121.8,
+        123.9,
+        124.4,
+        121.1,
+        120.3,
+        120.8,
+        125.7,
+        125.8
       ],
       "bench": [
         100.0,
@@ -467,96 +467,96 @@
         116.5,
         117.8,
         121.9,
-        121.9
+        121.5
       ],
-      "buys": 73
+      "buys": 72
     },
     "rows": [
       {
         "ticker": "ASML",
         "txDate": "2026-03-31",
-        "pct": 31.2,
-        "benchPct": 18.9,
-        "excess": 12.3
+        "pct": 36.2,
+        "benchPct": 18.5,
+        "excess": 17.7
       },
       {
         "ticker": "AZN",
         "txDate": "2026-03-31",
-        "pct": -17.9,
-        "benchPct": 18.9,
-        "excess": -36.8
+        "pct": -19.5,
+        "benchPct": 18.5,
+        "excess": -38.0
       },
       {
         "ticker": "TSLA",
         "txDate": "2026-03-30",
-        "pct": -6.9,
-        "benchPct": 22.3,
-        "excess": -29.2
+        "pct": -6.3,
+        "benchPct": 21.9,
+        "excess": -28.2
       },
       {
         "ticker": "UBER",
         "txDate": "2026-03-30",
-        "pct": 11.6,
-        "benchPct": 22.3,
-        "excess": -10.7
+        "pct": 12.3,
+        "benchPct": 21.9,
+        "excess": -9.6
       },
       {
         "ticker": "GOOG",
         "txDate": "2026-03-30",
-        "pct": 30.3,
-        "benchPct": 22.3,
-        "excess": 8.0
+        "pct": 25.6,
+        "benchPct": 21.9,
+        "excess": 3.7
       },
       {
         "ticker": "AAPL",
         "txDate": "2026-03-30",
-        "pct": 25.0,
-        "benchPct": 22.3,
-        "excess": 2.7
+        "pct": 23.6,
+        "benchPct": 21.9,
+        "excess": 1.7
       },
       {
         "ticker": "ASML",
         "txDate": "2026-03-30",
-        "pct": 38.2,
-        "benchPct": 22.3,
-        "excess": 15.9
+        "pct": 43.5,
+        "benchPct": 21.9,
+        "excess": 21.6
       },
       {
         "ticker": "AZN",
         "txDate": "2026-03-30",
-        "pct": -16.5,
-        "benchPct": 22.3,
-        "excess": -38.8
+        "pct": -18.1,
+        "benchPct": 21.9,
+        "excess": -40.0
       },
       {
         "ticker": "GS",
         "txDate": "2026-03-30",
         "pct": 28.1,
-        "benchPct": 22.3,
-        "excess": 5.8
+        "benchPct": 21.9,
+        "excess": 6.2
       },
       {
         "ticker": "JNJ",
         "txDate": "2026-03-30",
-        "pct": 8.0,
-        "benchPct": 22.3,
-        "excess": -14.3
+        "pct": 7.1,
+        "benchPct": 21.9,
+        "excess": -14.8
       },
       {
         "ticker": "MSFT",
         "txDate": "2026-03-30",
-        "pct": 41.0,
-        "benchPct": 22.3,
-        "excess": 18.7
+        "pct": 40.4,
+        "benchPct": 21.9,
+        "excess": 18.5
       },
       {
         "ticker": "NVO",
         "txDate": "2026-03-30",
-        "pct": 35.3,
-        "benchPct": 22.3,
-        "excess": 13.0
+        "pct": 33.7,
+        "benchPct": 21.9,
+        "excess": 11.8
       }
     ],
-    "rowsOf": 73
+    "rowsOf": 72
   }
 }
