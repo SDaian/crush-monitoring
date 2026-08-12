@@ -649,5 +649,51 @@
       }
     ],
     "rowsOf": 24
+  },
+  "committees": {
+    "reason": "assigned",
+    "committees": [
+      {
+        "name": "Joint Economic Committee",
+        "url": "http://www.jec.senate.gov/",
+        "title": null,
+        "subcommittees": []
+      },
+      {
+        "name": "Senate Banking, Housing & Urban Affairs",
+        "url": "http://banking.senate.gov/",
+        "title": null,
+        "subcommittees": [
+          "Digital Assets",
+          "Housing, Transportation, and Community Development",
+          "National Security and International Trade and Finance"
+        ]
+      },
+      {
+        "name": "Senate Energy & Natural Resources",
+        "url": "http://www.energy.senate.gov/",
+        "title": null,
+        "subcommittees": [
+          "Energy",
+          "Water and Power"
+        ]
+      },
+      {
+        "name": "Senate Foreign Relations",
+        "url": "http://www.foreign.senate.gov/",
+        "title": null,
+        "subcommittees": [
+          "East Asia, the Pacific, and International Cybersecurity Policy",
+          "Multilateral International Development, Multilateral Institutions, and International Economic, Energy, and Environmental Policy",
+          "Near East, South Asia, Central Asia, and Counterterrorism"
+        ]
+      },
+      {
+        "name": "Senate Aging",
+        "url": "http://www.aging.senate.gov/",
+        "title": null,
+        "subcommittees": []
+      }
+    ]
   }
 }

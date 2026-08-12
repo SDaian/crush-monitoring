@@ -311,6 +311,7 @@ MEMBER_PAGE_NAMES = [
     "Alan Armstrong",
     "David McCormick",
     "April McClain Delaney",
+    "John J. McGuire III",
 ]
 MEMBER_TRADE_CAP = 20
 MEMBER_HOLDINGS_CAP = 16
@@ -414,7 +415,8 @@ def member_payload(name: str, trades: list[dict], holdings: dict,
                    today_iso: str = "9999-12-31",
                    ticker_pages: set[str] | None = None,
                    returns: dict | None = None,
-                   perf: dict | None = None) -> dict:
+                   perf: dict | None = None,
+                   committees: dict | None = None) -> dict:
     """Per-member page data: summary, most-traded tickers, the most recent
     ``MEMBER_TRADE_CAP`` disclosed trades, and estimated holdings from the
     member's annual report (``holdings`` is the ``holdings.json`` ``holdings``
@@ -517,6 +519,7 @@ def member_payload(name: str, trades: list[dict], holdings: dict,
         "tradesShown": len(rows),
         "holdings": holdings_block,
         "performance": performance_block(name, ts, returns, perf),
+        "committees": committee_block(name, committees),
     }
 
 
@@ -607,11 +610,13 @@ def write_member_files(
     # Which symbols have their own page — lets member chips link to them
     # (internal linking between the two page sets).
     ticker_pages = set(select_ticker_pages(trades))
+    # Read once, not once per member: the file holds all 541 sitting members.
+    committees = load_committees()
     index = []
     written = []
     for name in names:
         payload = member_payload(name, trades, holdings, today_iso,
-                                 ticker_pages, returns, perf)
+                                 ticker_pages, returns, perf, committees)
         if payload["summary"]["trades"] == 0:
             continue
         (members_dir / f"{payload['slug']}.json").write_text(
@@ -739,6 +744,50 @@ def load_indicators(path: Path = AI_INDICATORS_PATH) -> dict:
         return json.loads(path.read_text(encoding="utf-8")).get("tickers", {})
     except (OSError, ValueError, AttributeError):
         return {}
+
+
+COMMITTEES_PATH = (Path(__file__).resolve().parent.parent
+                   / "docs" / "data" / "committees.json")
+
+
+def load_committees(path: Path = COMMITTEES_PATH) -> dict:
+    """The committee assignments written by `congress committees`. Missing or
+    unreadable → an empty map, and every member page omits the block."""
+    try:
+        return json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, ValueError, AttributeError):
+        return {"members": {}}
+
+
+def committee_block(name: str, data: dict | None) -> dict | None:
+    """A member's seats, for their page. None when there is nothing to show.
+
+    It reports the seat and nothing more. A committee beside a trade is a
+    fact; a claim that one caused the other is not, and this project does not
+    make it. The reader sees where the member sits and decides.
+
+    An empty list is not one thing (the `holdings.classify` rule again). A
+    sitting member with no seats genuinely has none, a former member left
+    Congress, and an executive filer has no committees at all. Only the first
+    is worth stating on a page, so the other reasons return None instead of a
+    puzzling blank heading.
+    """
+    rec = (data or {}).get("members", {}).get(name)
+    if not rec:
+        return None
+    seats = rec.get("committees") or []
+    if not seats:
+        return None
+    return {
+        "reason": rec.get("reason"),
+        "committees": [{
+            "name": c.get("shortName") or c.get("name"),
+            "url": c.get("url"),
+            "title": c.get("title"),
+            "subcommittees": [s.get("name") for s in c.get("subcommittees", [])
+                              if s.get("name")],
+        } for c in seats],
+    }
 
 
 def load_market(path: Path = AI_INDICATORS_PATH) -> dict | None:

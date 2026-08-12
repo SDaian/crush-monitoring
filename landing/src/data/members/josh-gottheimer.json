@@ -762,5 +762,29 @@
       }
     ],
     "rowsOf": 84
+  },
+  "committees": {
+    "reason": "assigned",
+    "committees": [
+      {
+        "name": "House Financial Services",
+        "url": "https://financialservices.house.gov/",
+        "title": null,
+        "subcommittees": [
+          "Capital Markets",
+          "Digital Assets, Financial Technology, and Artificial Intelligence",
+          "National Security, Illicit Finance, and International Financial Institutions"
+        ]
+      },
+      {
+        "name": "House Intelligence",
+        "url": "https://intelligence.house.gov/",
+        "title": null,
+        "subcommittees": [
+          "Defense Intelligence and Overhead Architecture",
+          "National Security Agency and Cyber"
+        ]
+      }
+    ]
   }
 }

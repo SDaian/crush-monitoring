@@ -204,6 +204,42 @@ const schema = [
     </section>
 
     {
+      m.committees && (
+        <section class="mx-auto max-w-[75rem] px-[5vw] pb-[7vh]">
+          <div class="section-head">
+            <h2 class="section-title whitespace-nowrap">Committee seats</h2>
+            <span class="eyebrow">Current assignments</span>
+          </div>
+          <div class="mt-8 grid gap-5 [grid-template-columns:repeat(auto-fit,minmax(19rem,1fr))]">
+            {m.committees.committees.map((c: any) => (
+              <div class="cmte">
+                <div class="cmte-name">
+                  {c.url ? (
+                    <a href={c.url} rel="nofollow noopener">{c.name}</a>
+                  ) : (
+                    c.name
+                  )}
+                  {c.title && <span class="cmte-role">{c.title}</span>}
+                </div>
+                {c.subcommittees.length > 0 && (
+                  <ul class="cmte-subs">
+                    {c.subcommittees.map((sub: string) => <li>{sub}</li>)}
+                  </ul>
+                )}
+              </div>
+            ))}
+          </div>
+          <p class="fineprint mt-7 max-w-[80ch]">
+            Seats as listed by the official House and Senate committee rosters.
+            We publish where a member sits, and what they disclosed. We draw no
+            line between the two, and neither should a reader without more
+            evidence.
+          </p>
+        </section>
+      )
+    }
+
+    {
       m.topTickers.length > 0 && (
         <section class="mx-auto max-w-[75rem] px-[5vw] pb-[7vh]">
           <div class="section-head">
@@ -433,6 +469,50 @@ const schema = [
 </html>
 
 <style>
+  .cmte {
+    border-top: 2px solid var(--color-ink);
+    padding-top: 0.9rem;
+  }
+  .cmte-name {
+    font-family: var(--font-sans);
+    font-weight: 800;
+    font-size: 1.05rem;
+    line-height: 1.25;
+  }
+  .cmte-name a {
+    color: var(--color-ink);
+    text-decoration: none;
+    border-bottom: 1px solid var(--color-rule);
+  }
+  .cmte-name a:hover {
+    border-color: var(--color-ink);
+  }
+  .cmte-role {
+    display: inline-block;
+    margin-left: 0.5rem;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-stamp);
+  }
+  .cmte-subs {
+    margin: 0.6rem 0 0;
+    padding: 0;
+    list-style: none;
+  }
+  .cmte-subs li {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    line-height: 1.5;
+    color: var(--color-ink-soft);
+    padding-left: 0.9rem;
+    text-indent: -0.9rem;
+  }
+  .cmte-subs li::before {
+    content: "\2014\00a0";
+    color: var(--color-rule);
+  }
   /* A clean 4-across strip framed by hairlines, thin dividers between stats —
      not the boxy 2x2 grid. Collapses to 2x2 on narrow screens. */
   .statstrip {

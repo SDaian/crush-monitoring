@@ -60,7 +60,7 @@ Three claims a neighbouring product could not truthfully copy today.
 ## Capabilities and Constraints
 
 **Confirmed capabilities.** 13,016 disclosed trades from 161 filers across the
-House, the Senate and the executive branch. 98 ticker pages, 10 featured
+House, the Senate and the executive branch. 98 ticker pages, 11 featured
 member pages, per-member estimated holdings, return-since-buy estimates
 against the S&P 500, daily technical readings for every ticker page, and a
 market volatility reading.
@@ -120,8 +120,10 @@ its terms are binding.
   evidence of real reception.
 - There are no subscriber counts, no press mentions, no case studies, and no
   customer logos. Do not invent any.
-- Committee assignments exist as data (`docs/data/committees.json`) but no
-  page shows them yet.
+- Committee assignments are real and now visible: each featured member
+  page lists their seats and subcommittees from the official rosters.
+  The page states the seat and the trade, and draws no line between
+  them.
 
 ## Product Principles
 

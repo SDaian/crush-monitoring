@@ -785,3 +785,63 @@ class TestMarketFile(unittest.TestCase):
             ld.write_files([], out, today=date(2026, 8, 1))
             data = json.loads((out / "market.json").read_text())
             self.assertIn("market", data)
+
+
+class TestCommitteeBlock(unittest.TestCase):
+    """Seats on a member page: the seat only, and an empty list is not one thing."""
+
+    DATA = {"members": {
+        "Josh Gottheimer": {"reason": "assigned", "committees": [
+            {"id": "HLIG", "name": "House Permanent Select Committee on Intelligence",
+             "shortName": "House Intelligence", "url": "https://intelligence.house.gov/",
+             "title": "Member",
+             "subcommittees": [{"name": "National Security Agency and Cyber"}]}]},
+        "Nancy Pelosi": {"reason": "none_current", "committees": []},
+        "Donald J. Trump": {"reason": "not_in_congress", "committees": []},
+    }}
+
+    def test_assigned_member_gets_the_block(self):
+        b = ld.committee_block("Josh Gottheimer", self.DATA)
+        self.assertEqual(b["committees"][0]["name"], "House Intelligence")
+        self.assertEqual(b["committees"][0]["subcommittees"],
+                         ["National Security Agency and Cyber"])
+        self.assertEqual(b["committees"][0]["title"], "Member")
+
+    def test_short_name_wins_over_the_official_mouthful(self):
+        # "House Permanent Select Committee on Intelligence" is correct and
+        # unreadable in a card heading.
+        self.assertNotIn("Permanent Select",
+                         ld.committee_block("Josh Gottheimer", self.DATA)["committees"][0]["name"])
+
+    def test_no_seats_renders_nothing(self):
+        # A seatless sitting member, an executive filer and an unknown name
+        # each produce no block: the page omits the heading rather than
+        # showing an empty one.
+        for name in ("Nancy Pelosi", "Donald J. Trump", "Nobody At All"):
+            self.assertIsNone(ld.committee_block(name, self.DATA), name)
+
+    def test_missing_file_is_not_an_error(self):
+        self.assertIsNone(ld.committee_block("Josh Gottheimer", None))
+        self.assertIsNone(ld.committee_block("Josh Gottheimer", {"members": {}}))
+
+    def test_payload_carries_the_block(self):
+        trades = [{"member": "Josh Gottheimer", "ticker": "NVDA", "type": "buy",
+                   "amount_lo": 1001, "amount_hi": 15000, "tx_date": "2026-06-01",
+                   "filing_date": "2026-06-20", "chamber": "house", "state": "NJ",
+                   "id": "x", "asset": "NVIDIA"}]
+        p = ld.member_payload("Josh Gottheimer", trades, {}, "2026-08-01",
+                              committees=self.DATA)
+        self.assertEqual(p["committees"]["committees"][0]["name"],
+                         "House Intelligence")
+
+    def test_payload_without_committee_data_still_builds(self):
+        p = ld.member_payload("Josh Gottheimer", [], {}, "2026-08-01")
+        self.assertIsNone(p["committees"])
+
+
+class TestFeaturedMemberSet(unittest.TestCase):
+    def test_mcguire_earns_a_page(self):
+        self.assertIn("John J. McGuire III", ld.MEMBER_PAGE_NAMES)
+
+    def test_every_page_name_is_unique(self):
+        self.assertEqual(len(set(ld.MEMBER_PAGE_NAMES)), len(ld.MEMBER_PAGE_NAMES))
