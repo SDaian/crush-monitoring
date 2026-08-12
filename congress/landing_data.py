@@ -39,6 +39,8 @@ from collections import Counter
 from datetime import date
 from pathlib import Path
 
+from . import sectors
+
 FEED_SIZE = 5
 STATUTORY_MAX_DAYS = 45
 # Widen the window until enough distinct members exist (quiet weeks happen).
@@ -416,7 +418,8 @@ def member_payload(name: str, trades: list[dict], holdings: dict,
                    ticker_pages: set[str] | None = None,
                    returns: dict | None = None,
                    perf: dict | None = None,
-                   committees: dict | None = None) -> dict:
+                   committees: dict | None = None,
+                   sector_data: dict | None = None) -> dict:
     """Per-member page data: summary, most-traded tickers, the most recent
     ``MEMBER_TRADE_CAP`` disclosed trades, and estimated holdings from the
     member's annual report (``holdings`` is the ``holdings.json`` ``holdings``
@@ -519,7 +522,7 @@ def member_payload(name: str, trades: list[dict], holdings: dict,
         "tradesShown": len(rows),
         "holdings": holdings_block,
         "performance": performance_block(name, ts, returns, perf),
-        "committees": committee_block(name, committees),
+        "committees": committee_block(name, committees, ts, sector_data),
     }
 
 
@@ -612,11 +615,13 @@ def write_member_files(
     ticker_pages = set(select_ticker_pages(trades))
     # Read once, not once per member: the file holds all 541 sitting members.
     committees = load_committees()
+    sector_data = sectors.load()
     index = []
     written = []
     for name in names:
         payload = member_payload(name, trades, holdings, today_iso,
-                                 ticker_pages, returns, perf, committees)
+                                 ticker_pages, returns, perf, committees,
+                                 sector_data)
         if payload["summary"]["trades"] == 0:
             continue
         (members_dir / f"{payload['slug']}.json").write_text(
@@ -759,18 +764,27 @@ def load_committees(path: Path = COMMITTEES_PATH) -> dict:
         return {"members": {}}
 
 
-def committee_block(name: str, data: dict | None) -> dict | None:
+def committee_block(name: str, data: dict | None,
+                    trades: list[dict] | None = None,
+                    sector_data: dict | None = None) -> dict | None:
     """A member's seats, for their page. None when there is nothing to show.
 
-    It reports the seat and nothing more. A committee beside a trade is a
-    fact; a claim that one caused the other is not, and this project does not
-    make it. The reader sees where the member sits and decides.
+    It reports the seat and the trade, and it stops there. A committee beside
+    a trade in the industry that committee oversees is a coincidence of two
+    public facts. A claim that one caused the other is not, and this project
+    does not make it. The reader sees both and decides.
 
     An empty list is not one thing (the `holdings.classify` rule again). A
     sitting member with no seats genuinely has none, a former member left
     Congress, and an executive filer has no committees at all. Only the first
     is worth stating on a page, so the other reasons return None instead of a
     puzzling blank heading.
+
+    ``trades`` are that member's trades and ``sector_data`` the curated maps
+    from `congress.sectors`. Given both, the block also lists the symbols the
+    member disclosed in an industry one of their seats oversees, with the
+    coverage counts, so the page can say how much of the trading our map
+    classifies.
     """
     rec = (data or {}).get("members", {}).get(name)
     if not rec:
@@ -778,7 +792,7 @@ def committee_block(name: str, data: dict | None) -> dict | None:
     seats = rec.get("committees") or []
     if not seats:
         return None
-    return {
+    block = {
         "reason": rec.get("reason"),
         "committees": [{
             "name": c.get("shortName") or c.get("name"),
@@ -788,6 +802,18 @@ def committee_block(name: str, data: dict | None) -> dict | None:
                               if s.get("name")],
         } for c in seats],
     }
+    sd = sector_data or {}
+    if not sd:
+        return block
+    grouped = sectors.classify(trades or [], sd)
+    named = [{"id": c.get("id"), "name": c.get("shortName") or c.get("name")}
+             for c in seats]
+    rows = sectors.overlap(named, grouped, sd)
+    if rows:
+        block["overlap"] = rows
+        block["coverage"] = {"classified": grouped["classified"],
+                             "total": grouped["total"]}
+    return block
 
 
 def load_market(path: Path = AI_INDICATORS_PATH) -> dict | None:

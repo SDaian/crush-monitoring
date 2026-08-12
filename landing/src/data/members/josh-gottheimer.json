@@ -785,6 +785,92 @@
           "National Security Agency and Cyber"
         ]
       }
-    ]
+    ],
+    "overlap": [
+      {
+        "sector": "finance",
+        "label": "Banks & financial services",
+        "committees": [
+          "House Financial Services"
+        ],
+        "tickers": [
+          {
+            "ticker": "V",
+            "count": 18
+          },
+          {
+            "ticker": "BRK.B",
+            "count": 6
+          },
+          {
+            "ticker": "KKR",
+            "count": 5
+          },
+          {
+            "ticker": "FI",
+            "count": 5
+          },
+          {
+            "ticker": "MA",
+            "count": 5
+          },
+          {
+            "ticker": "GS",
+            "count": 4
+          },
+          {
+            "ticker": "ICE",
+            "count": 3
+          },
+          {
+            "ticker": "FIS",
+            "count": 3
+          },
+          {
+            "ticker": "BX",
+            "count": 3
+          },
+          {
+            "ticker": "PYPL",
+            "count": 3
+          }
+        ],
+        "more": 8,
+        "symbols": 18,
+        "trades": 66
+      },
+      {
+        "sector": "defense",
+        "label": "Defense & aerospace",
+        "committees": [
+          "House Intelligence"
+        ],
+        "tickers": [
+          {
+            "ticker": "CDRE",
+            "count": 4
+          },
+          {
+            "ticker": "TDG",
+            "count": 2
+          },
+          {
+            "ticker": "RTX",
+            "count": 1
+          },
+          {
+            "ticker": "NOC",
+            "count": 1
+          }
+        ],
+        "more": 0,
+        "symbols": 4,
+        "trades": 8
+      }
+    ],
+    "coverage": {
+      "classified": 98,
+      "total": 224
+    }
   }
 }

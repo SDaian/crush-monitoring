@@ -577,6 +577,64 @@
         "title": null,
         "subcommittees": []
       }
-    ]
+    ],
+    "overlap": [
+      {
+        "sector": "health",
+        "label": "Health care & pharma",
+        "committees": [
+          "Senate Health, Education, Labor & Pensions"
+        ],
+        "tickers": [
+          {
+            "ticker": "NVS",
+            "count": 2
+          },
+          {
+            "ticker": "AZN",
+            "count": 2
+          },
+          {
+            "ticker": "DGX",
+            "count": 2
+          },
+          {
+            "ticker": "JNJ",
+            "count": 2
+          },
+          {
+            "ticker": "SNY",
+            "count": 1
+          },
+          {
+            "ticker": "NVO",
+            "count": 1
+          },
+          {
+            "ticker": "UHS",
+            "count": 1
+          },
+          {
+            "ticker": "ZBH",
+            "count": 1
+          },
+          {
+            "ticker": "VRTX",
+            "count": 1
+          },
+          {
+            "ticker": "UNH",
+            "count": 1
+          }
+        ],
+        "more": 32,
+        "symbols": 42,
+        "trades": 46
+      }
+    ],
+    "coverage": {
+      "classified": 206,
+      "total": 345
+    }
   }
 }

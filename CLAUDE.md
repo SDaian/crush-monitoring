@@ -305,6 +305,19 @@ sites. Full details in `congress/README.md`. Conventions:
   managed-account **bond** purchases (chamber `executive`, no ticker, no return
   estimate). To track a newly posted 278-T, append its `unid` + `filename`.
   This file *is* hand-maintained (unlike the generated data files above).
+- **The seat beside the trade is two facts, never three.** Member pages list
+  the symbols a member disclosed in an industry one of their committees
+  oversees. Both halves are public record; the line between them is not drawn,
+  and no surface may draw it — not in copy, not by layout, not by colour. The
+  banned words are in `landing/CONTEXT.md` under **Oversees**.
+  `congress/sectors.json` holds the two curated maps (committee → industries,
+  ticker → industry) and is **hand-maintained**, like `oge_filings.json`;
+  `congress/sectors.py` is pure and offline-tested. Two rules hold it honest:
+  **committees with jurisdiction over every industry stay unmapped** (the money
+  committees, Judiciary, the tax committees — a flag that always fires says
+  nothing), and **every page prints its own coverage** ("covers 65 of the 102
+  symbols"), because an unlisted ticker is unclassified, not out of the
+  industry. Add a missing ticker to the map rather than widening a committee.
 - **Trading performance vs the S&P 500 (member pages):** the prices run also
   fetches one benchmark series (SPY) and (a) stamps each priced buy in
   `returns.json` with `bench_pct` — the index's move over the *same* window —

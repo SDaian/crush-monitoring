@@ -45,3 +45,16 @@ The landing feed: five real disclosures from the trailing window of
 filings, distinct members, chosen for variety — a curated window, never
 the literal five latest (that claim would need the header "Latest").
 _Avoid_: latest disclosures, live feed (in copy; nav label is legacy)
+
+**Industry**:
+One of the eight groups in `congress/sectors.json`. It is our own
+grouping, not an official classification, and every page that uses it
+says so and prints how many of the member's symbols it covers.
+_Avoid_: sector (in reader-facing copy; the code keys are `sector`)
+
+**Oversees**:
+The relation between a committee and an industry it has direct
+legislative jurisdiction over. A member's seat next to their trade in
+that industry is a coincidence of two public facts. Never write, imply,
+or lay out the page so as to suggest that one caused the other.
+_Avoid_: conflict of interest, insider, benefits from, profits from
