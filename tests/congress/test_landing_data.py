@@ -482,6 +482,30 @@ class TestTickerPages(unittest.TestCase):
             self.assertEqual([r["ticker"] for r in idx["tickers"]], ["NVDA"])
             self.assertEqual(idx["tickers"][0]["trades"], 30)
 
+    def test_industry_badge_rides_the_payload_and_the_index(self):
+        trades = [MT(ticker="NVDA", tx="2026-06-01") for _ in range(30)]
+        sd = {"sectors": {"tech": "Technology & semiconductors"},
+              "committees": {}, "tickers": {"NVDA": "tech"}}
+        p = ld.ticker_payload("NVDA", trades, sector_data=sd)
+        self.assertEqual(p["industry"],
+                         {"key": "tech", "label": "Technology & semiconductors"})
+        with TemporaryDirectory() as d:
+            out = Path(d)
+            ld.write_ticker_files(trades, out)
+            idx = json.loads((out / "tickers" / "_index.json").read_text())
+        # The index ships the label map too: the filter builds its options
+        # from it, so a page cannot offer an industry the data does not have.
+        self.assertEqual(idx["tickers"][0]["industry"]["key"], "tech")
+        self.assertIn("tech", idx["industries"])
+
+    def test_an_unclassified_ticker_gets_no_badge(self):
+        # None, not a blank label: the surfaces count it as uncovered and say
+        # so, instead of drawing an empty box.
+        p = ld.ticker_payload("ZZZZ", [MT(ticker="ZZZZ")],
+                              sector_data={"sectors": {}, "committees": {},
+                                           "tickers": {}})
+        self.assertIsNone(p["industry"])
+
     def test_member_chips_link_to_ticker_pages(self):
         trades = [MT(ticker="NVDA", tx="2026-06-01") for _ in range(30)]
         p = ld.member_payload("Nancy Pelosi", trades, {},

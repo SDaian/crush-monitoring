@@ -1,11 +1,16 @@
 """The curated committee→industry and ticker→industry maps."""
 
 import json
+import re
 import unittest
+from collections import Counter
 from pathlib import Path
 from tempfile import TemporaryDirectory
 
 from congress import sectors
+
+INDEX_PATH = (Path(__file__).resolve().parents[2]
+              / "landing" / "src" / "data" / "tickers" / "_index.json")
 
 
 class TestLoad(unittest.TestCase):
@@ -54,9 +59,39 @@ class TestShippedMaps(unittest.TestCase):
         for cid in ("HSAP", "SSAP", "HSJU", "SSJU", "HSWM", "SSFI", "HSBU"):
             self.assertNotIn(cid, self.DATA["committees"], cid)
 
-    def test_every_sector_is_reachable_from_some_committee(self):
-        used = {k for keys in self.DATA["committees"].values() for k in keys}
+    def test_every_industry_classifies_at_least_one_ticker(self):
+        # NOT "every industry maps to a committee": six of them deliberately
+        # map to none. They exist so every stock page carries a badge, and
+        # adding them to a committee would widen the member-page flag.
+        used = set(self.DATA["tickers"].values())
         self.assertEqual(used, set(self.DATA["sectors"]))
+
+    def test_no_ticker_is_listed_twice(self):
+        # json.loads keeps the LAST duplicate key silently, so a repeated
+        # symbol changes the map with no error anywhere.
+        raw = sectors.SECTORS_PATH.read_text(encoding="utf-8")
+        keys = re.findall(r'^\s*"([A-Z0-9.]+)":\s*"\w+",?$', raw, re.M)
+        dupes = [k for k, n in Counter(keys).items() if n > 1]
+        self.assertEqual(dupes, [])
+
+    def test_every_ticker_page_carries_an_industry(self):
+        # The badge and the /tickers filter both assume full coverage of the
+        # generated page set. A new page arriving unclassified must fail here,
+        # not ship a blank badge.
+        try:
+            index = json.loads(INDEX_PATH.read_text(encoding="utf-8"))
+        except OSError:
+            self.skipTest("ticker index not generated")
+        missing = [t["ticker"] for t in index["tickers"]
+                   if not sectors.ticker_sector(t["ticker"], self.DATA)]
+        self.assertEqual(missing, [])
+
+    def test_labels_fit_the_industry_select(self):
+        # The <select> on /tickers takes its width from its longest option, so
+        # a long label pushes the control off a 320px screen. Measured, not
+        # guessed: 21 characters plus the " (NN)" count is the fit.
+        for key, label in self.DATA["sectors"].items():
+            self.assertLessEqual(len(label), 21, f"{key}: {label!r}")
 
     def test_the_file_declares_that_the_grouping_is_ours(self):
         raw = json.loads(sectors.SECTORS_PATH.read_text(encoding="utf-8"))

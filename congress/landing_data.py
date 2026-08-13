@@ -869,9 +869,23 @@ def ticker_is_indexable(trade_count: int,
     return trade_count >= minimum
 
 
+def industry_block(ticker: str, sector_data: dict | None) -> dict | None:
+    """The industry a symbol belongs to, for the badge and the filter.
+
+    None when the map does not classify the symbol. The badge then does not
+    render and the filter counts the symbol as uncovered, which the page
+    states out loud — a missing badge must never read as "belongs nowhere".
+    """
+    key = sectors.ticker_sector(ticker, sector_data or {})
+    if not key:
+        return None
+    return {"key": key, "label": sectors.label(key, sector_data or {})}
+
+
 def ticker_payload(ticker: str, trades: list[dict],
                    page_names: list[str] = MEMBER_PAGE_NAMES,
-                   indicators: dict | None = None) -> dict:
+                   indicators: dict | None = None,
+                   sector_data: dict | None = None) -> dict:
     """Per-ticker page data: who traded it, how much, and the recent trades with
     a link to each official filing. Dollar figures are bracket **midpoints** —
     an estimate, never a real position size."""
@@ -928,6 +942,11 @@ def ticker_payload(ticker: str, trades: list[dict],
         "slug": ticker_slug(ticker),
         "ticker": ticker,
         "company": company,
+        # OUR industry grouping (congress/sectors.json), for the page badge and
+        # the /tickers filter. None when the map does not classify the symbol,
+        # and the surfaces then print their own coverage rather than imply the
+        # stock belongs nowhere.
+        "industry": industry_block(ticker, sector_data),
         # A featured-watchlist stub exists so the tracker's link resolves;
         # only pages with real substance are offered to search engines.
         "indexable": ticker_is_indexable(len(ts)),
@@ -973,13 +992,18 @@ def write_ticker_files(trades: list[dict], out_dir: Path,
     )
     names = select_ticker_pages(trades) if tickers is None else tickers
     ind = load_indicators()
+    sector_data = sectors.load()
     tickers_dir = out_dir / "tickers"
     tickers_dir.mkdir(parents=True, exist_ok=True)
     index, written = [], []
+    unclassified = []
     for tk in names:
-        payload = ticker_payload(tk, trades, indicators=ind)
+        payload = ticker_payload(tk, trades, indicators=ind,
+                                 sector_data=sector_data)
         if payload["summary"]["trades"] == 0:
             continue
+        if not payload["industry"]:
+            unclassified.append(payload["ticker"])
         (tickers_dir / f"{payload['slug']}.json").write_text(
             json.dumps({"_comment": comment, **payload},
                        indent=2, ensure_ascii=False) + "\n",
@@ -995,13 +1019,21 @@ def write_ticker_files(trades: list[dict], out_dir: Path,
             "sells": payload["summary"]["sells"],
             "lastTx": payload["summary"]["lastTx"],
             "indexable": payload["indexable"],
+            "industry": payload["industry"],
         })
     index.sort(key=lambda r: -r["trades"])
     (tickers_dir / "_index.json").write_text(
-        json.dumps({"_comment": comment, "tickers": index},
+        json.dumps({"_comment": comment, "tickers": index,
+                    "industries": sector_data.get("sectors") or {}},
                    indent=2, ensure_ascii=False) + "\n",
         encoding="utf-8",
     )
+    # The page universe is picked fresh every run, so a newly-qualifying stock
+    # can arrive with no industry. Say so in the Action log (the holdings
+    # NEEDS_REVIEW rule): a silent gap is how a coverage hole survives.
+    for tk in unclassified:
+        print(f"::warning::no industry for ticker page {tk} — "
+              f"add it to congress/sectors.json")
     return written
 
 
