@@ -618,6 +618,28 @@
           "Military and Foreign Affairs"
         ]
       }
-    ]
+    ],
+    "overlap": [
+      {
+        "sector": "defense",
+        "label": "Defense & aerospace",
+        "committees": [
+          "House Armed Services"
+        ],
+        "tickers": [
+          {
+            "ticker": "SPCX",
+            "count": 1
+          }
+        ],
+        "more": 0,
+        "symbols": 1,
+        "trades": 1
+      }
+    ],
+    "coverage": {
+      "classified": 13,
+      "total": 13
+    }
   }
 }

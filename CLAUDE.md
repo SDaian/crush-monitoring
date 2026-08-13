@@ -318,6 +318,21 @@ sites. Full details in `congress/README.md`. Conventions:
   nothing), and **every page prints its own coverage** ("covers 65 of the 102
   symbols"), because an unlisted ticker is unclassified, not out of the
   industry. Add a missing ticker to the map rather than widening a committee.
+- **The two sector maps have two jobs, so they cover different ground.** The
+  `tickers` map also badges every `/tickers/<symbol>` page and drives the
+  **industry filter** on `/tickers` (`?industry=<key>` deep-links from each
+  stock page), so it aims to be **complete**: a stock with no badge reads as a
+  broken dataset, not as a stock with no industry. That is why six of the
+  fourteen industries (consumer, industrial, autos, materials, realestate,
+  business) map to **no committee at all** — they exist to classify stocks, and
+  adding one to a committee would silently widen the member-page flag. The
+  `committees` map stays deliberately partial (above). Three guards:
+  `tests/congress/test_sectors.py` fails if any generated ticker page lacks an
+  industry, if a symbol is listed twice (`json.loads` keeps the last duplicate
+  silently), or if a label exceeds **21 characters** — the industry `<select>`
+  takes its width from its longest option and a longer label pushes the control
+  off a 320px screen. `write_ticker_files` also emits a `::warning::` per
+  unclassified page, because the page universe is re-picked every run.
 - **Trading performance vs the S&P 500 (member pages):** the prices run also
   fetches one benchmark series (SPY) and (a) stamps each priced buy in
   `returns.json` with `bench_pct` — the index's move over the *same* window —

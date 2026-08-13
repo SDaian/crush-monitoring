@@ -47,9 +47,11 @@ the literal five latest (that claim would need the header "Latest").
 _Avoid_: latest disclosures, live feed (in copy; nav label is legacy)
 
 **Industry**:
-One of the eight groups in `congress/sectors.json`. It is our own
+One of the fourteen groups in `congress/sectors.json`. It is our own
 grouping, not an official classification, and every page that uses it
-says so and prints how many of the member's symbols it covers.
+says so and prints its coverage. The ticker map aims to cover every
+stock page; the committee map stays partial on purpose, so six
+industries belong to no committee.
 _Avoid_: sector (in reader-facing copy; the code keys are `sector`)
 
 **Oversees**:

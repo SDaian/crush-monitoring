@@ -792,7 +792,7 @@
     "overlap": [
       {
         "sector": "finance",
-        "label": "Banks & financial services",
+        "label": "Banks & finance",
         "committees": [
           "House Financial Services"
         ],
@@ -822,6 +822,10 @@
             "count": 4
           },
           {
+            "ticker": "HDB",
+            "count": 3
+          },
+          {
             "ticker": "ICE",
             "count": 3
           },
@@ -832,15 +836,11 @@
           {
             "ticker": "BX",
             "count": 3
-          },
-          {
-            "ticker": "PYPL",
-            "count": 3
           }
         ],
-        "more": 8,
-        "symbols": 18,
-        "trades": 66
+        "more": 9,
+        "symbols": 19,
+        "trades": 69
       },
       {
         "sector": "defense",
@@ -872,7 +872,7 @@
       }
     ],
     "coverage": {
-      "classified": 98,
+      "classified": 140,
       "total": 224
     }
   }

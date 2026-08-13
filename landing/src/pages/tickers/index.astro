@@ -14,6 +14,23 @@ import { plural, seoDescription } from "../../lib/seo";
 const tickers = index.tickers;
 const totalTrades = tickers.reduce((n: number, t: any) => n + t.trades, 0);
 
+// Industry options, built from the stocks actually on this page — an option
+// that matches nothing is worse than no option. Count each one so the reader
+// sees the size of a group before they pick it. `classified` drives the
+// fineprint: an unbadged stock is unclassified, not industry-less, and the
+// page has to say which.
+const industryCount = new Map<string, number>();
+for (const t of tickers as any[]) {
+  if (t.industry) {
+    industryCount.set(t.industry.key, (industryCount.get(t.industry.key) ?? 0) + 1);
+  }
+}
+const industries = Object.entries(index.industries as Record<string, string>)
+  .filter(([key]) => industryCount.has(key))
+  .map(([key, label]) => ({ key, label, count: industryCount.get(key)! }))
+  .sort((a, b) => b.count - a.count || a.label.localeCompare(b.label));
+const classified = [...industryCount.values()].reduce((n, v) => n + v, 0);
+
 const title =
   "What stocks does Congress trade? — the most-traded tickers · Capitol Ledger";
 const description = seoDescription(
@@ -72,6 +89,19 @@ const schema = [
             placeholder="Filter by ticker or company"
           />
         </label>
+        <label class="tctl-sort tctl-ind">
+          <span class="eyebrow">Industry</span>
+          <select id="tind">
+            <option value="">All ({tickers.length})</option>
+            {
+              industries.map((i) => (
+                <option value={i.key}>
+                  {i.label} ({i.count})
+                </option>
+              ))
+            }
+          </select>
+        </label>
         <label class="tctl-sort">
           <span class="eyebrow">Sort</span>
           <select id="tsort">
@@ -95,12 +125,14 @@ const schema = [
               data-c={(t.company ?? "").toLowerCase()}
               data-trades={t.trades}
               data-members={t.members}
+              data-i={t.industry?.key ?? ""}
             >
               <div class="tcard-name">
                 {t.ticker}
                 <span class="tcard-co">{t.company}</span>
               </div>
               <div class="tcard-stat">
+                {t.industry && <span class="tcard-ind">{t.industry.label}</span>}
                 <b>{t.trades.toLocaleString("en-US")}</b> trades ·{" "}
                 <b>{t.members}</b> members ·{" "}
                 <span class="text-buy">{t.buys} buy</span>/
@@ -123,8 +155,11 @@ const schema = [
         <a
           href="/tracker"
           class="underline underline-offset-2 hover:text-ink">full tracker</a
-        >. Disclosures arrive 30–45 days after the trade; nothing here is
-        investment advice.
+        >. The industry on each stock is <b class="text-ink">our own grouping</b>,
+        not an official classification, and it covers{" "}
+        <b class="text-ink">{classified} of the {tickers.length}</b> stocks here —
+        an unlabelled stock is one we have not classified. Disclosures arrive
+        30–45 days after the trade; nothing here is investment advice.
       </p>
     </section>
 
@@ -157,10 +192,11 @@ const schema = [
     var box = document.getElementById("tfilter");
     var grid = document.getElementById("tgrid");
     var q = document.getElementById("tq");
+    var indSel = document.getElementById("tind");
     var sortSel = document.getElementById("tsort");
     var count = document.getElementById("tcount");
     var empty = document.getElementById("tempty");
-    if (!box || !grid || !q || !sortSel || !count || !empty) return;
+    if (!box || !grid || !q || !indSel || !sortSel || !count || !empty) return;
 
     var rows = Array.prototype.slice.call(grid.querySelectorAll(".tcard"));
     var total = rows.length;
@@ -170,12 +206,14 @@ const schema = [
 
     function apply() {
       var term = q.value.trim().toLowerCase();
+      var ind = indSel.value;
       var shown = 0;
       rows.forEach(function (row) {
         var hit =
-          !term ||
-          row.getAttribute("data-t").indexOf(term) !== -1 ||
-          row.getAttribute("data-c").indexOf(term) !== -1;
+          (!term ||
+            row.getAttribute("data-t").indexOf(term) !== -1 ||
+            row.getAttribute("data-c").indexOf(term) !== -1) &&
+          (!ind || row.getAttribute("data-i") === ind);
         row.hidden = !hit;
         if (hit) shown++;
       });
@@ -184,6 +222,20 @@ const schema = [
         shown === total
           ? total + " stocks"
           : shown + " of " + total + " stocks";
+    }
+
+    // A stock page links here as /tickers?industry=tech, so the select has to
+    // honour the query string. An unknown value leaves the select on "All"
+    // rather than showing an empty grid the reader cannot explain.
+    function fromQuery() {
+      var want = new URLSearchParams(location.search).get("industry");
+      if (!want) return;
+      for (var i = 0; i < indSel.options.length; i++) {
+        if (indSel.options[i].value === want) {
+          indSel.value = want;
+          return;
+        }
+      }
     }
 
     function sort() {
@@ -205,11 +257,19 @@ const schema = [
     }
 
     q.addEventListener("input", apply);
+    indSel.addEventListener("change", function () {
+      var url = new URL(location.href);
+      if (indSel.value) url.searchParams.set("industry", indSel.value);
+      else url.searchParams.delete("industry");
+      history.replaceState(null, "", url);
+      apply();
+    });
     sortSel.addEventListener("change", function () {
       sort();
       apply();
     });
     box.hidden = false;
+    fromQuery();
     apply();
   })();
 </script>
@@ -245,6 +305,7 @@ const schema = [
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
+    min-width: 0;
   }
   .tctl-sort select {
     border: 1px solid var(--color-rule);
@@ -253,6 +314,17 @@ const schema = [
     font-family: var(--font-mono);
     font-size: 0.85rem;
     color: var(--color-ink);
+    min-width: 0;
+    max-width: 100%;
+  }
+  /* A <select> takes its intrinsic width from its longest option, so the
+     industry list pushed the control off a 320px screen. It shrinks now, and
+     sectors.json caps every label at 21 characters so nothing clips. */
+  .tctl-ind {
+    flex: 1 1 16rem;
+  }
+  .tctl-ind select {
+    flex: 1 1 auto;
   }
   .tctl-count {
     margin-left: auto;
@@ -262,8 +334,17 @@ const schema = [
     .tctl {
       gap: 0.6rem 0.8rem;
     }
-    .tctl-search {
+    .tctl-search,
+    .tctl-ind {
       flex: 1 1 100%;
+    }
+    /* Label above, select across the row. Beside the label the control kept
+       only 213px of a 320px screen, and "Health care & pharma (14)" clipped
+       inside it — an overflow no scrollWidth check reports. */
+    .tctl-ind {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 0.35rem;
     }
     .tctl-search input,
     .tctl-sort select {
@@ -322,6 +403,17 @@ const schema = [
   .tcard-stat b {
     color: var(--color-ink);
     font-weight: 600;
+  }
+  /* One box for all fourteen industries, deliberately. The identity carries a
+     single accent, and colour-coding the set would need fourteen hues the
+     token set does not have. */
+  .tcard-ind {
+    border: 1px solid var(--color-rule);
+    padding: 0.12rem 0.45rem;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    white-space: nowrap;
   }
   .tcard-go {
     margin-left: auto;
