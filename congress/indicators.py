@@ -37,6 +37,7 @@ AI_TICKERS: list[dict[str, str]] = [
     {"ticker": "TSM", "name": "Taiwan Semiconductor (TSMC)"},
     {"ticker": "ASML", "name": "ASML Holding"},
     {"ticker": "AMAT", "name": "Applied Materials"},
+    {"ticker": "LRCX", "name": "Lam Research"},
     {"ticker": "SNDK", "name": "Sandisk"},
     {"ticker": "MSFT", "name": "Microsoft"},
     {"ticker": "GOOGL", "name": "Alphabet (Class A)"},
