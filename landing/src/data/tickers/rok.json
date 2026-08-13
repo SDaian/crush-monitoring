@@ -1,0 +1,111 @@
+{
+  "_comment": "Generated from real official disclosures by congress/landing_data.py (daily Action). Do not edit by hand. Dollar figures are bracket midpoints — estimates, not real position sizes.",
+  "slug": "rok",
+  "ticker": "ROK",
+  "company": "Rockwell Automation, Inc.",
+  "industry": {
+    "key": "industrial",
+    "label": "Manufacturing"
+  },
+  "indexable": false,
+  "technical": null,
+  "summary": {
+    "trades": 4,
+    "members": 3,
+    "buys": 1,
+    "sells": 3,
+    "other": 0,
+    "firstTx": "2025-02-21",
+    "lastTx": "2025-04-08",
+    "lastFiling": "2025-04-28",
+    "estBuyLabel": "$8K",
+    "estSellLabel": "$116K",
+    "pctLate": 0
+  },
+  "topMembers": [
+    {
+      "name": "Robert P. Bresnahan, Jr.",
+      "slug": "robert-p-bresnahan-jr",
+      "party": "R",
+      "chamber": "House",
+      "trades": 2,
+      "buys": 1,
+      "sells": 1,
+      "estLabel": "$16K",
+      "hasPage": false
+    },
+    {
+      "name": "George Whitesides",
+      "slug": "george-whitesides",
+      "party": "D",
+      "chamber": "House",
+      "trades": 1,
+      "buys": 0,
+      "sells": 1,
+      "estLabel": "$75K",
+      "hasPage": false
+    },
+    {
+      "name": "Tim Moore",
+      "slug": "tim-moore",
+      "party": "R",
+      "chamber": "House",
+      "trades": 1,
+      "buys": 0,
+      "sells": 1,
+      "estLabel": "$33K",
+      "hasPage": false
+    }
+  ],
+  "trades": [
+    {
+      "member": "Robert P. Bresnahan, Jr.",
+      "memberSlug": "robert-p-bresnahan-jr",
+      "hasPage": false,
+      "party": "R",
+      "side": "SELL",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2025-04-08",
+      "filedDate": "2025-04-28",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20030238.pdf"
+    },
+    {
+      "member": "George Whitesides",
+      "memberSlug": "george-whitesides",
+      "hasPage": false,
+      "party": "D",
+      "side": "SELL",
+      "amountBucket": "$50K – $100K",
+      "txDate": "2025-03-24",
+      "filedDate": "2025-04-23",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20027982.pdf"
+    },
+    {
+      "member": "Robert P. Bresnahan, Jr.",
+      "memberSlug": "robert-p-bresnahan-jr",
+      "hasPage": false,
+      "party": "R",
+      "side": "BUY",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2025-02-25",
+      "filedDate": "2025-03-27",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20029034.pdf"
+    },
+    {
+      "member": "Tim Moore",
+      "memberSlug": "tim-moore",
+      "hasPage": false,
+      "party": "R",
+      "side": "SELL",
+      "amountBucket": "$15K – $50K",
+      "txDate": "2025-02-21",
+      "filedDate": "2025-03-11",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20027944.pdf"
+    }
+  ],
+  "tradesShown": 4
+}
