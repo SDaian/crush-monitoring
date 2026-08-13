@@ -313,10 +313,10 @@
   "performance": {
     "available": true,
     "benchLabel": "S&P 500",
-    "asofDate": "2026-08-11",
+    "asofDate": "2026-08-12",
     "kpis": {
-      "medianPct": -25.7,
-      "medianBenchPct": 33.0,
+      "medianPct": -25.8,
+      "medianBenchPct": 33.4,
       "beat": 0,
       "beatOf": 24,
       "priced": 24,
@@ -400,7 +400,8 @@
         "2026-07-21",
         "2026-07-28",
         "2026-08-04",
-        "2026-08-11"
+        "2026-08-11",
+        "2026-08-12"
       ],
       "member": [
         100.0,
@@ -479,7 +480,8 @@
         77.8,
         74.7,
         75.2,
-        74.3
+        74.3,
+        74.2
       ],
       "bench": [
         100.0,
@@ -558,7 +560,8 @@
         128.1,
         126.9,
         132.1,
-        131.9
+        131.9,
+        132.3
       ],
       "buys": 24
     },
@@ -566,86 +569,86 @@
       {
         "ticker": "BITB",
         "txDate": "2025-11-28",
-        "pct": -30.2,
-        "benchPct": 12.8,
-        "excess": -43.0
+        "pct": -30.3,
+        "benchPct": 13.0,
+        "excess": -43.3
       },
       {
         "ticker": "BITB",
         "txDate": "2025-11-26",
-        "pct": -29.5,
-        "benchPct": 13.4,
-        "excess": -42.9
+        "pct": -29.6,
+        "benchPct": 13.7,
+        "excess": -43.3
       },
       {
         "ticker": "BITB",
         "txDate": "2025-11-25",
-        "pct": -27.5,
-        "benchPct": 14.2,
-        "excess": -41.7
+        "pct": -27.6,
+        "benchPct": 14.4,
+        "excess": -42.0
       },
       {
         "ticker": "BITB",
         "txDate": "2025-11-24",
-        "pct": -28.9,
-        "benchPct": 15.2,
-        "excess": -44.1
+        "pct": -29.0,
+        "benchPct": 15.5,
+        "excess": -44.5
       },
       {
         "ticker": "BITB",
         "txDate": "2025-04-09",
-        "pct": -23.1,
-        "benchPct": 40.5,
-        "excess": -63.6
+        "pct": -23.2,
+        "benchPct": 40.8,
+        "excess": -64.0
       },
       {
         "ticker": "BITB",
         "txDate": "2025-04-07",
-        "pct": -18.9,
-        "benchPct": 52.8,
-        "excess": -71.7
+        "pct": -19.0,
+        "benchPct": 53.2,
+        "excess": -72.2
       },
       {
         "ticker": "BITB",
         "txDate": "2025-04-03",
-        "pct": -22.8,
-        "benchPct": 43.6,
-        "excess": -66.4
+        "pct": -22.9,
+        "benchPct": 43.9,
+        "excess": -66.8
       },
       {
         "ticker": "BITB",
         "txDate": "2025-04-02",
-        "pct": -27.3,
-        "benchPct": 36.5,
-        "excess": -63.8
+        "pct": -27.4,
+        "benchPct": 36.8,
+        "excess": -64.2
       },
       {
         "ticker": "BITB",
         "txDate": "2025-03-31",
-        "pct": -23.3,
-        "benchPct": 37.8,
-        "excess": -61.1
+        "pct": -23.4,
+        "benchPct": 38.1,
+        "excess": -61.5
       },
       {
         "ticker": "BITB",
         "txDate": "2025-03-27",
-        "pct": -27.3,
-        "benchPct": 35.9,
-        "excess": -63.2
+        "pct": -27.4,
+        "benchPct": 36.2,
+        "excess": -63.6
       },
       {
         "ticker": "BITB",
         "txDate": "2025-03-25",
-        "pct": -28.3,
-        "benchPct": 33.9,
-        "excess": -62.2
+        "pct": -28.4,
+        "benchPct": 34.2,
+        "excess": -62.6
       },
       {
         "ticker": "BITB",
         "txDate": "2025-03-24",
-        "pct": -28.3,
-        "benchPct": 34.2,
-        "excess": -62.5
+        "pct": -28.4,
+        "benchPct": 34.6,
+        "excess": -63.0
       }
     ],
     "rowsOf": 24

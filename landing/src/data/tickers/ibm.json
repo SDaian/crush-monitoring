@@ -5,20 +5,20 @@
   "company": "International Business Machines Corporation",
   "indexable": true,
   "technical": {
-    "asOf": "2026-08-11",
-    "price": 238.42,
-    "chg1d": 0.89,
-    "chg1w": 1.39,
-    "chg1m": -17.85,
-    "rsi14": 50.7,
-    "sma50": 257.3,
-    "sma200": 268.87,
-    "vsSma50": -7.3,
-    "vsSma200": -11.3,
-    "relVol": 0.31,
+    "asOf": "2026-08-12",
+    "price": 235.98,
+    "chg1d": -1.02,
+    "chg1w": 0.03,
+    "chg1m": 8.71,
+    "rsi14": 48.9,
+    "sma50": 255.61,
+    "sma200": 268.62,
+    "vsSma50": -7.7,
+    "vsSma200": -12.2,
+    "relVol": 0.45,
     "high52w": 329.23,
     "low52w": 205.77,
-    "rangePos": 26.0,
+    "rangePos": 24.0,
     "series": [
       {
         "d": "2025-08-22",
@@ -225,18 +225,18 @@
         "c": 237.28
       },
       {
-        "d": "2026-08-11",
-        "c": 238.42
+        "d": "2026-08-12",
+        "c": 235.98
       }
     ],
     "signals": [],
     "nextEarnings": null,
     "score": {
-      "label": "Sell",
-      "buys": 2,
-      "sells": 4,
+      "label": "Hold",
+      "buys": 3,
+      "sells": 3,
       "holds": 1,
-      "ratio": -0.286
+      "ratio": 0.0
     }
   },
   "summary": {

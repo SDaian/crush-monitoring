@@ -5,19 +5,19 @@
   "company": "Bank of America Corporation",
   "indexable": true,
   "technical": {
-    "asOf": "2026-08-11",
-    "price": 64.0,
-    "chg1d": 0.22,
-    "chg1w": 1.75,
-    "chg1m": 7.56,
-    "rsi14": 70.3,
-    "sma50": 58.9,
-    "sma200": 53.99,
-    "vsSma50": 8.7,
-    "vsSma200": 18.6,
-    "relVol": 0.48,
-    "high52w": 64.0,
-    "low52w": 46.16,
+    "asOf": "2026-08-12",
+    "price": 64.81,
+    "chg1d": 1.27,
+    "chg1w": 2.47,
+    "chg1m": 6.91,
+    "rsi14": 73.6,
+    "sma50": 59.16,
+    "sma200": 54.05,
+    "vsSma50": 9.5,
+    "vsSma200": 19.9,
+    "relVol": 0.76,
+    "high52w": 64.81,
+    "low52w": 46.72,
     "rangePos": 100.0,
     "series": [
       {
@@ -225,20 +225,14 @@
         "c": 63.17
       },
       {
-        "d": "2026-08-11",
-        "c": 64.0
+        "d": "2026-08-12",
+        "c": 64.81
       }
     ],
     "signals": [
       {
-        "type": "rsi_overbought",
-        "asof": "2026-08-11",
-        "label": "RSI crossed above 70 (overbought)",
-        "dir": "neutral"
-      },
-      {
         "type": "new_52w_high",
-        "asof": "2026-08-11",
+        "asof": "2026-08-12",
         "label": "New 52-week high",
         "dir": "bull"
       }

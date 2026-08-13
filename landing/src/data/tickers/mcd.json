@@ -5,20 +5,20 @@
   "company": "McDonald's Corporation",
   "indexable": true,
   "technical": {
-    "asOf": "2026-08-11",
-    "price": 274.15,
-    "chg1d": 0.16,
-    "chg1w": 2.17,
-    "chg1m": 0.56,
-    "rsi14": 53.0,
-    "sma50": 273.73,
-    "sma200": 299.29,
-    "vsSma50": 0.2,
-    "vsSma200": -8.4,
-    "relVol": 0.64,
+    "asOf": "2026-08-12",
+    "price": 275.7,
+    "chg1d": 0.57,
+    "chg1w": 0.62,
+    "chg1m": 2.51,
+    "rsi14": 54.9,
+    "sma50": 273.72,
+    "sma200": 299.13,
+    "vsSma50": 0.7,
+    "vsSma200": -7.8,
+    "relVol": 0.93,
     "high52w": 341.06,
     "low52w": 262.8,
-    "rangePos": 15.0,
+    "rangePos": 16.0,
     "series": [
       {
         "d": "2025-08-22",
@@ -225,18 +225,11 @@
         "c": 274.48
       },
       {
-        "d": "2026-08-11",
-        "c": 274.15
+        "d": "2026-08-12",
+        "c": 275.7
       }
     ],
-    "signals": [
-      {
-        "type": "reclaim_sma50",
-        "asof": "2026-08-11",
-        "label": "Reclaimed the 50-day average",
-        "dir": "bull"
-      }
-    ],
+    "signals": [],
     "nextEarnings": null,
     "score": {
       "label": "Buy",

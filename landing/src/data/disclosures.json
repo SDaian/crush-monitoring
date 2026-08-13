@@ -2,6 +2,17 @@
   "_comment": "Generated from real official disclosures by congress/landing_data.py (daily Action). Do not edit by hand. 'filedDaysLate' counts days past the STOCK Act's 45-day statutory maximum; 0 = on time.",
   "disclosures": [
     {
+      "member": "M. Kelly",
+      "memberSlug": null,
+      "chamber": "House",
+      "district": "PA-16",
+      "ticker": "PEP",
+      "tickerSlug": "pep",
+      "side": "SELL",
+      "amountBucket": "$15K – $50K",
+      "filedDaysLate": 0
+    },
+    {
       "member": "C. Menefee",
       "memberSlug": null,
       "chamber": "House",
@@ -9,17 +20,6 @@
       "ticker": "PINS",
       "tickerSlug": null,
       "side": "SELL",
-      "amountBucket": "$15K – $50K",
-      "filedDaysLate": 0
-    },
-    {
-      "member": "M. Salazar",
-      "memberSlug": null,
-      "chamber": "House",
-      "district": "FL-27",
-      "ticker": "CB",
-      "tickerSlug": null,
-      "side": "BUY",
       "amountBucket": "$15K – $50K",
       "filedDaysLate": 0
     },

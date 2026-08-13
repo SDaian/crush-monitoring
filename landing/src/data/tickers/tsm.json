@@ -5,20 +5,20 @@
   "company": "Taiwan Semiconductor Manufacturing Company Ltd.",
   "indexable": true,
   "technical": {
-    "asOf": "2026-08-11",
-    "price": 422.06,
-    "chg1d": 0.86,
-    "chg1w": 1.17,
-    "chg1m": 0.11,
-    "rsi14": 53.1,
-    "sma50": 425.82,
-    "sma200": 361.48,
-    "vsSma50": -0.9,
-    "vsSma200": 16.8,
-    "relVol": 0.66,
+    "asOf": "2026-08-12",
+    "price": 429.15,
+    "chg1d": 1.68,
+    "chg1w": 3.66,
+    "chg1m": 2.08,
+    "rsi14": 56.1,
+    "sma50": 425.69,
+    "sma200": 362.18,
+    "vsSma50": 0.8,
+    "vsSma200": 18.5,
+    "relVol": 0.59,
     "high52w": 477.57,
     "low52w": 227.33,
-    "rangePos": 78.0,
+    "rangePos": 81.0,
     "series": [
       {
         "d": "2025-08-22",
@@ -225,18 +225,25 @@
         "c": 420.04
       },
       {
-        "d": "2026-08-11",
-        "c": 422.06
+        "d": "2026-08-12",
+        "c": 429.15
       }
     ],
-    "signals": [],
+    "signals": [
+      {
+        "type": "reclaim_sma50",
+        "asof": "2026-08-12",
+        "label": "Reclaimed the 50-day average",
+        "dir": "bull"
+      }
+    ],
     "nextEarnings": null,
     "score": {
       "label": "Strong Buy",
-      "buys": 5,
-      "sells": 1,
+      "buys": 6,
+      "sells": 0,
       "holds": 1,
-      "ratio": 0.571
+      "ratio": 0.857
     }
   },
   "summary": {

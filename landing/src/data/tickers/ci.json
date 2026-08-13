@@ -5,20 +5,20 @@
   "company": "The Cigna Group",
   "indexable": true,
   "technical": {
-    "asOf": "2026-08-11",
-    "price": 273.87,
-    "chg1d": -1.63,
-    "chg1w": -0.07,
-    "chg1m": -10.06,
-    "rsi14": 42.6,
-    "sma50": 285.62,
-    "sma200": 279.07,
-    "vsSma50": -4.1,
-    "vsSma200": -1.9,
-    "relVol": 0.67,
+    "asOf": "2026-08-12",
+    "price": 277.41,
+    "chg1d": 1.29,
+    "chg1w": 2.55,
+    "chg1m": -8.55,
+    "rsi14": 45.5,
+    "sma50": 285.69,
+    "sma200": 278.93,
+    "vsSma50": -2.9,
+    "vsSma200": -0.5,
+    "relVol": 0.54,
     "high52w": 311.0,
     "low52w": 244.41,
-    "rangePos": 44.0,
+    "rangePos": 50.0,
     "series": [
       {
         "d": "2025-08-22",
@@ -225,18 +225,18 @@
         "c": 282.49
       },
       {
-        "d": "2026-08-11",
-        "c": 273.87
+        "d": "2026-08-12",
+        "c": 277.41
       }
     ],
     "signals": [],
     "nextEarnings": null,
     "score": {
-      "label": "Strong Sell",
-      "buys": 1,
-      "sells": 5,
+      "label": "Sell",
+      "buys": 2,
+      "sells": 4,
       "holds": 1,
-      "ratio": -0.571
+      "ratio": -0.286
     }
   },
   "summary": {

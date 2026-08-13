@@ -5,20 +5,20 @@
   "company": "Quanta Services, Inc.",
   "indexable": true,
   "technical": {
-    "asOf": "2026-08-11",
-    "price": 670.58,
-    "chg1d": 1.47,
-    "chg1w": -3.24,
-    "chg1m": 3.69,
-    "rsi14": 52.4,
-    "sma50": 674.28,
-    "sma200": 569.83,
-    "vsSma50": -0.5,
-    "vsSma200": 17.7,
-    "relVol": 0.67,
+    "asOf": "2026-08-12",
+    "price": 678.02,
+    "chg1d": 1.11,
+    "chg1w": -0.73,
+    "chg1m": 2.58,
+    "rsi14": 54.0,
+    "sma50": 674.09,
+    "sma200": 571.08,
+    "vsSma50": 0.6,
+    "vsSma200": 18.7,
+    "relVol": 0.88,
     "high52w": 785.24,
     "low52w": 372.5,
-    "rangePos": 72.0,
+    "rangePos": 74.0,
     "series": [
       {
         "d": "2025-08-22",
@@ -225,18 +225,25 @@
         "c": 671.86
       },
       {
-        "d": "2026-08-11",
-        "c": 670.58
+        "d": "2026-08-12",
+        "c": 678.02
       }
     ],
-    "signals": [],
+    "signals": [
+      {
+        "type": "reclaim_sma50",
+        "asof": "2026-08-12",
+        "label": "Reclaimed the 50-day average",
+        "dir": "bull"
+      }
+    ],
     "nextEarnings": null,
     "score": {
-      "label": "Buy",
-      "buys": 4,
-      "sells": 2,
+      "label": "Strong Buy",
+      "buys": 5,
+      "sells": 1,
       "holds": 1,
-      "ratio": 0.286
+      "ratio": 0.571
     }
   },
   "summary": {

@@ -5,20 +5,20 @@
   "company": "Palo Alto Networks, Inc.",
   "indexable": true,
   "technical": {
-    "asOf": "2026-08-11",
-    "price": 383.8,
-    "chg1d": -0.32,
-    "chg1w": 4.77,
-    "chg1m": 16.2,
-    "rsi14": 69.6,
-    "sma50": 320.54,
-    "sma200": 219.82,
-    "vsSma50": 19.7,
-    "vsSma200": 74.6,
-    "relVol": 0.9,
-    "high52w": 385.04,
+    "asOf": "2026-08-12",
+    "price": 387.01,
+    "chg1d": 0.84,
+    "chg1w": 6.71,
+    "chg1m": 9.67,
+    "rsi14": 70.4,
+    "sma50": 322.27,
+    "sma200": 220.68,
+    "vsSma50": 20.1,
+    "vsSma200": 75.4,
+    "relVol": 0.87,
+    "high52w": 387.01,
     "low52w": 141.67,
-    "rangePos": 99.0,
+    "rangePos": 100.0,
     "series": [
       {
         "d": "2025-08-22",
@@ -225,18 +225,31 @@
         "c": 363.86
       },
       {
-        "d": "2026-08-11",
-        "c": 383.8
+        "d": "2026-08-12",
+        "c": 387.01
       }
     ],
-    "signals": [],
+    "signals": [
+      {
+        "type": "rsi_overbought",
+        "asof": "2026-08-12",
+        "label": "RSI crossed above 70 (overbought)",
+        "dir": "neutral"
+      },
+      {
+        "type": "new_52w_high",
+        "asof": "2026-08-12",
+        "label": "New 52-week high",
+        "dir": "bull"
+      }
+    ],
     "nextEarnings": null,
     "score": {
       "label": "Strong Buy",
       "buys": 6,
-      "sells": 0,
-      "holds": 1,
-      "ratio": 0.857
+      "sells": 1,
+      "holds": 0,
+      "ratio": 0.714
     }
   },
   "summary": {

@@ -5,18 +5,18 @@
   "company": "Arista Networks, Inc.",
   "indexable": true,
   "technical": {
-    "asOf": "2026-08-11",
-    "price": 197.85,
-    "chg1d": 3.31,
-    "chg1w": 3.85,
-    "chg1m": 9.22,
-    "rsi14": 63.5,
-    "sma50": 172.04,
-    "sma200": 147.51,
-    "vsSma50": 15.0,
-    "vsSma200": 34.1,
-    "relVol": 0.67,
-    "high52w": 197.85,
+    "asOf": "2026-08-12",
+    "price": 210.5,
+    "chg1d": 6.39,
+    "chg1w": 6.68,
+    "chg1m": 15.3,
+    "rsi14": 69.2,
+    "sma50": 172.84,
+    "sma200": 147.8,
+    "vsSma50": 21.8,
+    "vsSma200": 42.4,
+    "relVol": 1.26,
+    "high52w": 210.5,
     "low52w": 116.13,
     "rangePos": 100.0,
     "series": [
@@ -225,14 +225,14 @@
         "c": 188.67
       },
       {
-        "d": "2026-08-11",
-        "c": 197.85
+        "d": "2026-08-12",
+        "c": 210.5
       }
     ],
     "signals": [
       {
         "type": "new_52w_high",
-        "asof": "2026-08-11",
+        "asof": "2026-08-12",
         "label": "New 52-week high",
         "dir": "bull"
       }

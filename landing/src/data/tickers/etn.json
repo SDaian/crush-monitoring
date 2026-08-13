@@ -5,18 +5,18 @@
   "company": "Eaton Corporation, PLC",
   "indexable": true,
   "technical": {
-    "asOf": "2026-08-11",
-    "price": 459.29,
-    "chg1d": 3.22,
-    "chg1w": 3.26,
-    "chg1m": 14.01,
-    "rsi14": 65.1,
-    "sma50": 410.77,
-    "sma200": 376.86,
-    "vsSma50": 11.8,
+    "asOf": "2026-08-12",
+    "price": 459.96,
+    "chg1d": 0.15,
+    "chg1w": 2.83,
+    "chg1m": 10.7,
+    "rsi14": 65.2,
+    "sma50": 411.97,
+    "sma200": 377.3,
+    "vsSma50": 11.7,
     "vsSma200": 21.9,
-    "relVol": 0.72,
-    "high52w": 459.29,
+    "relVol": 0.67,
+    "high52w": 459.96,
     "low52w": 315.82,
     "rangePos": 100.0,
     "series": [
@@ -225,14 +225,14 @@
         "c": 448.68
       },
       {
-        "d": "2026-08-11",
-        "c": 459.29
+        "d": "2026-08-12",
+        "c": 459.96
       }
     ],
     "signals": [
       {
         "type": "new_52w_high",
-        "asof": "2026-08-11",
+        "asof": "2026-08-12",
         "label": "New 52-week high",
         "dir": "bull"
       }

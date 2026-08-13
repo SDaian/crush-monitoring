@@ -5,20 +5,20 @@
   "company": "Dell Technologies Inc.",
   "indexable": false,
   "technical": {
-    "asOf": "2026-08-11",
-    "price": 440.97,
-    "chg1d": -3.69,
-    "chg1w": -5.63,
-    "chg1m": 3.25,
-    "rsi14": 53.7,
-    "sma50": 419.19,
-    "sma200": 224.84,
-    "vsSma50": 5.2,
-    "vsSma200": 96.1,
-    "relVol": 0.75,
-    "high52w": 467.27,
+    "asOf": "2026-08-12",
+    "price": 484.5,
+    "chg1d": 9.87,
+    "chg1w": 4.71,
+    "chg1m": 5.89,
+    "rsi14": 61.1,
+    "sma50": 419.56,
+    "sma200": 226.5,
+    "vsSma50": 15.5,
+    "vsSma200": 113.9,
+    "relVol": 1.03,
+    "high52w": 484.5,
     "low52w": 111.07,
-    "rangePos": 93.0,
+    "rangePos": 100.0,
     "series": [
       {
         "d": "2025-08-22",
@@ -225,18 +225,25 @@
         "c": 453.77
       },
       {
-        "d": "2026-08-11",
-        "c": 440.97
+        "d": "2026-08-12",
+        "c": 484.5
       }
     ],
-    "signals": [],
+    "signals": [
+      {
+        "type": "new_52w_high",
+        "asof": "2026-08-12",
+        "label": "New 52-week high",
+        "dir": "bull"
+      }
+    ],
     "nextEarnings": null,
     "score": {
       "label": "Strong Buy",
-      "buys": 5,
-      "sells": 1,
+      "buys": 6,
+      "sells": 0,
       "holds": 1,
-      "ratio": 0.571
+      "ratio": 0.857
     }
   },
   "summary": {
