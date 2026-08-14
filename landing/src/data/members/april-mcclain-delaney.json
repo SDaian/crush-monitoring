@@ -277,11 +277,11 @@
   "performance": {
     "available": true,
     "benchLabel": "S&P 500",
-    "asofDate": "2026-08-12",
+    "asofDate": "2026-08-13",
     "kpis": {
-      "medianPct": -3.0,
-      "medianBenchPct": 12.6,
-      "beat": 28,
+      "medianPct": -2.5,
+      "medianBenchPct": 13.4,
+      "beat": 24,
       "beatOf": 102,
       "priced": 102,
       "pricedOf": 209
@@ -367,7 +367,8 @@
         "2026-07-22",
         "2026-07-29",
         "2026-08-05",
-        "2026-08-12"
+        "2026-08-12",
+        "2026-08-13"
       ],
       "member": [
         100.0,
@@ -449,7 +450,8 @@
         93.4,
         93.8,
         95.8,
-        97.2
+        97.2,
+        97.7
       ],
       "bench": [
         100.0,
@@ -531,7 +533,8 @@
         112.4,
         109.1,
         114.9,
-        115.3
+        115.3,
+        116.1
       ],
       "buys": 102
     },
@@ -539,86 +542,86 @@
       {
         "ticker": "CHRW",
         "txDate": "2026-07-31",
-        "pct": -0.7,
-        "benchPct": 3.4,
-        "excess": -4.1
+        "pct": 1.1,
+        "benchPct": 4.1,
+        "excess": -3.0
       },
       {
         "ticker": "ENTG",
         "txDate": "2026-07-30",
-        "pct": 37.5,
-        "benchPct": 4.2,
-        "excess": 33.3
+        "pct": 39.9,
+        "benchPct": 4.9,
+        "excess": 35.0
       },
       {
         "ticker": "TDG",
         "txDate": "2026-07-28",
-        "pct": -5.5,
-        "benchPct": 4.3,
-        "excess": -9.8
+        "pct": -4.7,
+        "benchPct": 5.0,
+        "excess": -9.7
       },
       {
         "ticker": "CHRW",
         "txDate": "2026-07-28",
-        "pct": -13.4,
-        "benchPct": 4.3,
-        "excess": -17.7
+        "pct": -11.8,
+        "benchPct": 5.0,
+        "excess": -16.8
       },
       {
         "ticker": "CHRW",
         "txDate": "2026-07-27",
-        "pct": -15.9,
-        "benchPct": 4.5,
-        "excess": -20.4
+        "pct": -14.4,
+        "benchPct": 5.2,
+        "excess": -19.6
       },
       {
         "ticker": "CHRW",
         "txDate": "2026-07-24",
-        "pct": -21.3,
-        "benchPct": 4.5,
-        "excess": -25.8
+        "pct": -19.9,
+        "benchPct": 5.3,
+        "excess": -25.2
       },
       {
         "ticker": "HUBB",
         "txDate": "2026-07-23",
-        "pct": 5.0,
-        "benchPct": 4.6,
-        "excess": 0.4
+        "pct": 3.8,
+        "benchPct": 5.4,
+        "excess": -1.6
       },
       {
         "ticker": "CHRW",
         "txDate": "2026-07-22",
-        "pct": -29.3,
-        "benchPct": 3.4,
-        "excess": -32.7
+        "pct": -28.0,
+        "benchPct": 4.1,
+        "excess": -32.1
       },
       {
         "ticker": "CHRW",
         "txDate": "2026-07-20",
-        "pct": -28.7,
-        "benchPct": 4.1,
-        "excess": -32.8
+        "pct": -27.4,
+        "benchPct": 4.8,
+        "excess": -32.2
       },
       {
         "ticker": "ENTG",
         "txDate": "2026-07-08",
-        "pct": 16.1,
-        "benchPct": 3.6,
-        "excess": 12.5
+        "pct": 18.1,
+        "benchPct": 4.4,
+        "excess": 13.7
       },
       {
         "ticker": "HUBB",
         "txDate": "2026-06-17",
-        "pct": 0.8,
-        "benchPct": 4.3,
-        "excess": -3.5
+        "pct": -0.3,
+        "benchPct": 5.0,
+        "excess": -5.3
       },
       {
         "ticker": "HUBB",
         "txDate": "2026-06-16",
-        "pct": 2.0,
-        "benchPct": 3.0,
-        "excess": -1.0
+        "pct": 0.9,
+        "benchPct": 3.7,
+        "excess": -2.8
       }
     ],
     "rowsOf": 102
