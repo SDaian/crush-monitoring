@@ -9,20 +9,20 @@
   },
   "indexable": true,
   "technical": {
-    "asOf": "2026-08-13",
-    "price": 179.01,
-    "chg1d": 4.66,
-    "chg1w": 14.81,
-    "chg1m": 33.83,
-    "rsi14": 72.9,
-    "sma50": 134.35,
-    "sma200": 152.17,
-    "vsSma50": 33.2,
-    "vsSma200": 17.6,
-    "relVol": 0.77,
+    "asOf": "2026-08-14",
+    "price": 174.04,
+    "chg1d": -2.78,
+    "chg1w": 1.18,
+    "chg1m": 29.46,
+    "rsi14": 68.1,
+    "sma50": 134.99,
+    "sma200": 152.09,
+    "vsSma50": 28.9,
+    "vsSma200": 14.4,
+    "relVol": 0.51,
     "high52w": 207.18,
     "low52w": 107.27,
-    "rangePos": 72.0,
+    "rangePos": 67.0,
     "series": [
       {
         "d": "2025-08-22",
@@ -229,25 +229,18 @@
         "c": 172.01
       },
       {
-        "d": "2026-08-13",
-        "c": 179.01
+        "d": "2026-08-14",
+        "c": 174.04
       }
     ],
-    "signals": [
-      {
-        "type": "rsi_overbought",
-        "asof": "2026-08-13",
-        "label": "RSI crossed above 70 (overbought)",
-        "dir": "neutral"
-      }
-    ],
+    "signals": [],
     "nextEarnings": null,
     "score": {
-      "label": "Buy",
+      "label": "Strong Buy",
       "buys": 5,
-      "sells": 2,
-      "holds": 0,
-      "ratio": 0.429
+      "sells": 1,
+      "holds": 1,
+      "ratio": 0.571
     }
   },
   "summary": {

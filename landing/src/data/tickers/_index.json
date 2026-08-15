@@ -35,10 +35,10 @@
       "slug": "aapl",
       "ticker": "AAPL",
       "company": "Apple Inc.",
-      "trades": 145,
-      "members": 42,
+      "trades": 146,
+      "members": 43,
       "buys": 72,
-      "sells": 73,
+      "sells": 74,
       "lastTx": "2026-07-21",
       "indexable": true,
       "industry": {
@@ -782,6 +782,21 @@
       }
     },
     {
+      "slug": "pfe",
+      "ticker": "PFE",
+      "company": "Pfizer, Inc.",
+      "trades": 32,
+      "members": 15,
+      "buys": 11,
+      "sells": 21,
+      "lastTx": "2026-06-08",
+      "indexable": true,
+      "industry": {
+        "key": "health",
+        "label": "Health care & pharma"
+      }
+    },
+    {
       "slug": "cmcsa",
       "ticker": "CMCSA",
       "company": "Comcast Corporation",
@@ -869,21 +884,6 @@
       "industry": {
         "key": "agriculture",
         "label": "Agriculture & food"
-      }
-    },
-    {
-      "slug": "pfe",
-      "ticker": "PFE",
-      "company": "Pfizer, Inc.",
-      "trades": 31,
-      "members": 15,
-      "buys": 11,
-      "sells": 20,
-      "lastTx": "2026-06-08",
-      "indexable": true,
-      "industry": {
-        "key": "health",
-        "label": "Health care & pharma"
       }
     },
     {
