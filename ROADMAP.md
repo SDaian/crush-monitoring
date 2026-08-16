@@ -135,10 +135,14 @@ In rough priority order; each item states its blocking dependency.
 - **Personal section** (decided 2026-08-16, widens the earlier "member and
   ticker follows" entry — the site already promises "Member and ticker follows
   are next"). Two stages, so infrastructure waits for its trigger:
-  - **Stage A — no login (`localStorage`)**: ⭐ star stocks and members, and
-    saved tracker filters. No account, no database, no `/privacy` change; the
-    tracker already remembers modal dismissals this way. Ships first and
-    proves demand for stage B.
+  - **Stage A — no login (`localStorage`)**: ✅ shipped 2026-08-16. ★ star
+    stocks and members (`StarButton.astro`, key `cl-stars`; the ticker and
+    member indexes mark starred entries, and `/tickers` gains a "★ Starred"
+    toggle that renders only when stars exist), and saved tracker filters
+    (key `cl-tracker-filters`; filter fields and sort persist, `shown` never
+    does, and Clear also forgets the saved set). No account, no database, no
+    `/privacy` change — nothing leaves the browser, and every star button
+    says so. Proves demand for stage B.
   - **Stage B — accounts (Supabase)**: the trigger is wanting the
     **personalized email**, not saving stars. Unlocks the three server
     features: the personalized digest (your follows first, then everything

@@ -1,0 +1,113 @@
+---
+// A star on a stock or a member — roadmap "personal section", stage A.
+// Stars live in THIS BROWSER ONLY (localStorage key "cl-stars"): no account,
+// no server, nothing leaves the page. That is the stage-A contract, and the
+// button's title says it, so nobody mistakes a star for a synced follow.
+// Stage B (accounts) migrates the same key up on first login.
+//
+// The button ships hidden and the script reveals it: without JavaScript a
+// star can neither save nor read, so a reader without JS never sees a
+// control that cannot work (the /tickers filter rule).
+interface Props {
+  kind: "tickers" | "members";
+  id: string; // ticker symbol, or member slug
+  name: string; // display name, for the button label
+}
+const { kind, id, name } = Astro.props;
+---
+
+<button
+  class="starbtn"
+  data-kind={kind}
+  data-star={id}
+  data-name={name}
+  hidden
+  title="Saved in this browser only"></button>
+
+<script is:inline>
+  // One shared handler for every star on the page (and one storage helper,
+  // window.clStars, that the index pages reuse). Guarded: Astro repeats an
+  // is:inline script per component instance.
+  if (!window.clStars) {
+    window.clStars = {
+      read() {
+        try {
+          const raw = JSON.parse(localStorage.getItem("cl-stars")) || {};
+          return {
+            tickers: Array.isArray(raw.tickers) ? raw.tickers : [],
+            members: Array.isArray(raw.members) ? raw.members : [],
+          };
+        } catch (e) {
+          return { tickers: [], members: [] };
+        }
+      },
+      has(kind, id) {
+        return this.read()[kind].indexOf(id) !== -1;
+      },
+      toggle(kind, id) {
+        const all = this.read();
+        const at = all[kind].indexOf(id);
+        if (at === -1) all[kind].push(id);
+        else all[kind].splice(at, 1);
+        try {
+          localStorage.setItem("cl-stars", JSON.stringify(all));
+        } catch (e) {
+          /* storage full or blocked: the star simply does not stick */
+        }
+        return at === -1;
+      },
+    };
+
+    document.addEventListener("click", (e) => {
+      const btn = e.target.closest(".starbtn");
+      if (!btn) return;
+      const on = window.clStars.toggle(btn.dataset.kind, btn.dataset.star);
+      window.clStarPaint(btn, on);
+    });
+
+    window.clStarPaint = (btn, on) => {
+      btn.classList.toggle("starred", on);
+      btn.textContent = on ? "★ Starred" : "☆ Star " + btn.dataset.name;
+      btn.setAttribute("aria-pressed", on ? "true" : "false");
+    };
+
+    document.querySelectorAll(".starbtn").forEach((btn) => {
+      window.clStarPaint(
+        btn,
+        window.clStars.has(btn.dataset.kind, btn.dataset.star),
+      );
+      btn.hidden = false;
+    });
+  }
+</script>
+
+<style is:global>
+  /* Global for the same reason as the tracker's CSS: the button's state
+     classes are set at runtime. Same box language as .indbadge. */
+  .starbtn {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 0.4rem;
+    border: 1px solid var(--color-rule);
+    background: var(--color-paper);
+    padding: 0.35rem 0.7rem;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.09em;
+    color: var(--color-ink-soft);
+    cursor: pointer;
+    transition:
+      color 0.15s,
+      border-color 0.15s;
+  }
+  .starbtn:hover,
+  .starbtn:focus-visible {
+    color: var(--color-ink);
+    border-color: var(--color-ink);
+  }
+  .starbtn.starred {
+    color: var(--color-ink);
+    border-color: var(--color-ink);
+  }
+</style>

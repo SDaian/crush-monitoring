@@ -110,6 +110,12 @@ const schema = [
             <option value="members">Most members</option>
           </select>
         </label>
+        <button
+          id="tstars"
+          class="tctl-stars"
+          hidden
+          aria-pressed="false"
+          title="Stars are saved in this browser only">★ Starred</button>
         <p id="tcount" class="eyebrow tctl-count" aria-live="polite" />
       </div>
     </section>
@@ -194,9 +200,11 @@ const schema = [
     var q = document.getElementById("tq");
     var indSel = document.getElementById("tind");
     var sortSel = document.getElementById("tsort");
+    var starsBtn = document.getElementById("tstars");
     var count = document.getElementById("tcount");
     var empty = document.getElementById("tempty");
-    if (!box || !grid || !q || !indSel || !sortSel || !count || !empty) return;
+    if (!box || !grid || !q || !indSel || !sortSel || !starsBtn || !count || !empty)
+      return;
 
     var rows = Array.prototype.slice.call(grid.querySelectorAll(".tcard"));
     var total = rows.length;
@@ -204,16 +212,31 @@ const schema = [
       return parseInt(el.getAttribute(name) || "0", 10) || 0;
     };
 
+    // Stars come from the StarButton helper when a starred page loaded it;
+    // this page has no star buttons of its own, so read the key directly.
+    function starred() {
+      try {
+        var raw = JSON.parse(localStorage.getItem("cl-stars")) || {};
+        return Array.isArray(raw.tickers) ? raw.tickers : [];
+      } catch (e) {
+        return [];
+      }
+    }
+    var starsOnly = false;
+
     function apply() {
       var term = q.value.trim().toLowerCase();
       var ind = indSel.value;
+      var stars = starred();
       var shown = 0;
       rows.forEach(function (row) {
         var hit =
           (!term ||
             row.getAttribute("data-t").indexOf(term) !== -1 ||
             row.getAttribute("data-c").indexOf(term) !== -1) &&
-          (!ind || row.getAttribute("data-i") === ind);
+          (!ind || row.getAttribute("data-i") === ind) &&
+          (!starsOnly ||
+            stars.indexOf(row.getAttribute("data-t").toUpperCase()) !== -1);
         row.hidden = !hit;
         if (hit) shown++;
       });
@@ -222,6 +245,19 @@ const schema = [
         shown === total
           ? total + " stocks"
           : shown + " of " + total + " stocks";
+    }
+
+    // Mark the starred cards, and reveal the toggle only when stars exist:
+    // a filter over an empty set is a control that cannot work.
+    function paintStars() {
+      var stars = starred();
+      rows.forEach(function (row) {
+        row.classList.toggle(
+          "is-starred",
+          stars.indexOf(row.getAttribute("data-t").toUpperCase()) !== -1,
+        );
+      });
+      starsBtn.hidden = stars.length === 0 && !starsOnly;
     }
 
     // A stock page links here as /tickers?industry=tech, so the select has to
@@ -257,6 +293,12 @@ const schema = [
     }
 
     q.addEventListener("input", apply);
+    starsBtn.addEventListener("click", function () {
+      starsOnly = !starsOnly;
+      starsBtn.classList.toggle("on", starsOnly);
+      starsBtn.setAttribute("aria-pressed", starsOnly ? "true" : "false");
+      apply();
+    });
     indSel.addEventListener("change", function () {
       var url = new URL(location.href);
       if (indSel.value) url.searchParams.set("industry", indSel.value);
@@ -270,6 +312,7 @@ const schema = [
     });
     box.hidden = false;
     fromQuery();
+    paintStars();
     apply();
   })();
 </script>
@@ -404,6 +447,34 @@ const schema = [
     color: var(--color-ink);
     font-weight: 600;
   }
+  /* The star toggle and card marker (roadmap personal section, stage A).
+     Marker classes are set at runtime, so they ride the global StarButton
+     rules' reasoning — but these selectors exist at build time, so scoped
+     styles work: Astro tags the elements, JS only flips classes. */
+  .tctl-stars {
+    border: 1px solid var(--color-rule);
+    background: var(--color-paper);
+    padding: 0.55rem 0.7rem;
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: var(--color-ink-soft);
+    cursor: pointer;
+  }
+  .tctl-stars:hover,
+  .tctl-stars:focus-visible {
+    color: var(--color-ink);
+    border-color: var(--color-ink);
+  }
+  .tctl-stars.on {
+    color: var(--color-paper);
+    background: var(--color-ink);
+    border-color: var(--color-ink);
+  }
+  .tcard.is-starred .tcard-name::before {
+    content: "★ ";
+    color: var(--color-stamp);
+  }
+
   /* One box for all fourteen industries, deliberately. The identity carries a
      single accent, and colour-coding the set would need fourteen hues the
      token set does not have. */
