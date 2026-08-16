@@ -5,6 +5,13 @@ gated by **triggers, not dates**: each move happens when its trigger is real,
 never before — premature infrastructure is how small products die. Keep this
 file current when a stage ships or a decision changes.
 
+**Public surface:** `/roadmap` (`landing/src/pages/roadmap.astro`, shipped
+2026-08-16) tells customers the same story in outcomes — shipped / now /
+next / later — never infrastructure. When a stage here ships or a plan
+changes, update that page in the same PR. Its future items carry **no
+dates** (triggers, not dates, applies to the copy too), and follows stay in
+the future tense until they exist (the standing conversion-surface rule).
+
 ## 1. Data storage
 
 Guiding principle: **git + JSON is the canonical, auditable record** — every

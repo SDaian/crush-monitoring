@@ -1,0 +1,162 @@
+---
+// "/roadmap" — the public roadmap: what shipped, what we build now, and what
+// comes next. The internal ROADMAP.md is the source of truth for stages and
+// triggers; this page is its customer-facing surface, so it names outcomes,
+// never infrastructure. Two standing rules shape the copy: stages are
+// trigger-gated, not date-gated (so future items carry no dates), and no
+// surface may promise per-member or per-ticker alerts as if they exist today
+// — follows are named as a plan, in the future tense, explicitly.
+import "../styles/global.css";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import Seo from "../components/Seo.astro";
+import SignupForm from "../components/SignupForm.astro";
+import SignupModal from "../components/SignupModal.astro";
+import Timeline from "../components/Timeline.astro";
+import { seoDescription } from "../lib/seo";
+
+const title = "Roadmap — what we ship next · Capitol Ledger";
+const description = seoDescription(
+  "Where Capitol Ledger is going: what already shipped, what we are " +
+    "building now, and what comes next — follows, alerts and full coverage.",
+  "Built in public.",
+);
+
+const STEPS = [
+  {
+    label: "Shipped · summer 2026",
+    title: "The record, made readable",
+    body:
+      "The <b>live tracker</b> over every disclosure we parse: House, " +
+      "Senate and the executive branch. A <b>daily morning email</b> with " +
+      "each day's new filings, plus its web edition and archive. Pages for " +
+      "the <b>most-watched members</b> (trades, estimated holdings, " +
+      "committee seats) and for <b>a hundred stocks</b>, each with who " +
+      "traded it, its industry, and a daily technical read.",
+  },
+  {
+    label: "Now",
+    title: "Your own corner of the ledger",
+    body:
+      "Just shipped: <b>star</b> any stock or member, and the tracker now " +
+      "remembers your filters between visits. Both live in your browser " +
+      "only — no account, and nothing leaves your device. Alongside that, " +
+      "coverage keeps widening: more featured members, more stocks on the " +
+      "daily watchlist.",
+  },
+  {
+    label: "Next",
+    title: "Follows and personal alerts",
+    body:
+      "Accounts, so your stars sync across devices and start working for " +
+      "you: the daily email <b>will lead with the members and stocks you " +
+      "follow</b>, and a new filing by one of them will be able to reach " +
+      "you on its own. Still one email a day — that promise does not " +
+      "change. Your follows will stay private: we will store nothing we " +
+      "do not need.",
+  },
+  {
+    label: "Later",
+    title: "The whole ledger",
+    body:
+      "A page for <b>every filing member</b> of Congress, not only the " +
+      "featured set, and for <b>every disclosed ticker</b> — about 1,400. " +
+      "Today's technology carries the site comfortably; scaling to the " +
+      "full record is planned, and it comes with the same rule as " +
+      "everything above.",
+  },
+];
+---
+
+<html lang="en">
+  <head>
+    <Seo title={title} description={description} path="/roadmap" />
+  </head>
+  <body>
+    <Header />
+
+    <main id="content">
+      <section class="mx-auto max-w-[75rem] px-[5vw] pt-[9vh] pb-[6vh]">
+        <p class="eyebrow mb-5">
+          Roadmap · <b class="font-semibold text-stamp">Built in public</b>
+        </p>
+        <h1 class="headline max-w-[18ch] text-[clamp(2.4rem,6.5vw,4.6rem)]">
+          Where this is <span class="underline-stamp">going</span>.
+        </h1>
+        <p class="mt-6 max-w-[58ch] text-[1.05rem] leading-[1.65] text-pretty text-ink-soft">
+          One rule drives the order below: a stage ships when the product is
+          ready for it, never because a date says so. That is why the shipped
+          work carries dates and the future work does not — we would rather
+          keep a promise than publish one.
+        </p>
+      </section>
+
+      <section class="mx-auto max-w-[75rem] px-[5vw] pb-[8vh]">
+        <Timeline steps={STEPS} />
+      </section>
+
+      <section class="mx-auto max-w-[75rem] px-[5vw] pb-[9vh]">
+        <div class="section-head">
+          <h2 class="section-title">What will not change</h2>
+          <span class="eyebrow">The standing promises</span>
+        </div>
+        <ul class="promises mt-8 max-w-[80ch]">
+          <li>
+            <b>One email a day.</b> Personalization reorders it; it never
+            multiplies it.
+          </li>
+          <li>
+            <b>Official sources only.</b> Every row links to the filing it
+            came from — House Clerk, Senate eFD, or the OGE.
+          </li>
+          <li>
+            <b>Honest numbers.</b> Amounts stay the brackets members file,
+            estimates say they are estimates, and nothing here is investment
+            advice.
+          </li>
+          <li>
+            <b>Your data stays yours.</b> Stars live in your browser today.
+            When accounts arrive, we will store nothing we do not need.
+          </li>
+        </ul>
+      </section>
+
+      <section class="border-t-2 border-ink px-[5vw] py-[10vh] text-center">
+        <h2 class="text-[clamp(1.8rem,4.5vw,3.2rem)] font-black leading-[1.15] tracking-[-0.03em] text-balance">
+          Follow along as it ships.
+        </h2>
+        <p class="mx-auto mt-4 mb-6 max-w-[46ch] text-pretty text-ink-soft">
+          Every step above lands in the same place first: the daily email.
+        </p>
+        <SignupForm variant="band" id="join" />
+      </section>
+    </main>
+
+    <Footer />
+
+    <SignupModal />
+  </body>
+</html>
+
+<style>
+  .promises {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .promises li {
+    font-family: var(--font-mono);
+    font-size: 0.88rem;
+    line-height: 1.6;
+    color: var(--color-ink-soft);
+    border-top: 1px solid var(--color-rule);
+    padding: 0.85rem 0;
+  }
+  .promises li:first-child {
+    border-top: 0;
+    padding-top: 0.2rem;
+  }
+  .promises b {
+    color: var(--color-ink);
+  }
+</style>
