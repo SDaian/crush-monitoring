@@ -132,17 +132,33 @@ In rough priority order; each item states its blocking dependency.
   up to the hero form — worth making a real form too). **Standing constraint:** the copy on these
   surfaces may not promise a per-ticker or per-member alert until follows
   actually exist (below). Today's honest promise is the whole daily email.
-- **Member and ticker follows** — already promised on the site ("Member and
-  ticker follows are next"): per-user watchlists and filtered alerts. Requires
-  accounts → triggers storage stage 2 (Supabase) and contact stage 3. The
-  signup surfaces above make this the most-requested next thing by construction:
-  someone subscribing from `/tickers/nvda` wants NVDA, and we send them
-  everything.
-- **Ticker pages** — same machinery as member pages, second wave.
+- **Personal section** (decided 2026-08-16, widens the earlier "member and
+  ticker follows" entry — the site already promises "Member and ticker follows
+  are next"). Two stages, so infrastructure waits for its trigger:
+  - **Stage A — no login (`localStorage`)**: ⭐ star stocks and members, and
+    saved tracker filters. No account, no database, no `/privacy` change; the
+    tracker already remembers modal dismissals this way. Ships first and
+    proves demand for stage B.
+  - **Stage B — accounts (Supabase)**: the trigger is wanting the
+    **personalized email**, not saving stars. Unlocks the three server
+    features: the personalized digest (your follows first, then everything
+    new — the one-daily-email promise stays), **"new filing by a favorite"
+    alerts** (the killer feature: someone subscribing from `/tickers/nvda`
+    wants NVDA, and today we send them everything), and **portfolio overlap**
+    (enter the tickers you hold → which members trade them; reuses the
+    sector + ticker-index machinery). Stage A stars migrate up on first
+    login. Fires storage stage 2 and contact stage 3.
+  - **Privacy rule, set now before any code:** a favorites list here is a
+    financial-interest signal tied to an email address. Store nothing we do
+    not need, row-level security from day one, no analytics on favorites,
+    and `/privacy` updates in the same PR that ships accounts.
+  - **Cut for now, kept on the list:** private notes on a member or stock
+    (small, revisit after stage B), and public shared watchlists (large —
+    moderation burden; deliberately not planned).
+- **Ticker pages, full universe** — same machinery as member pages, second
+  wave.
 - **Feed curation preference** — surface featured members in the landing feed
   when present (owner request, parked during the design review).
-- **Digest evolution** — once follows exist, the one-daily-email promise
-  stays; the email personalizes (your follows first, then everything new).
 
 ## 4. Technologies to evaluate / discover
 
