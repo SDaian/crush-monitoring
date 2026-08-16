@@ -23,6 +23,9 @@ Write the chat replies to these rules:
 - Use a maximum of three words in a noun cluster.
 - Do not use "-ing" forms as nouns or adjectives when a simple verb works.
 - Write one topic in one paragraph. Use a maximum of six sentences.
+- Never restate a header in the sentence below it. A header names the topic;
+  the paragraph must say something new, or the reader reads the thought twice
+  (owner request, 2026-08-16). The hook blocks this on sight.
 
 **Follow Zinsser's four principles too**: clarity, simplicity, brevity,
 humanity. STE gives the mechanics; Zinsser gives the reason for them. Two of

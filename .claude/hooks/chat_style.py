@@ -15,6 +15,9 @@ What it measures, and what it deliberately does not:
   clutter            Zinsser's chapter on it: "very", "basically", "in order
                      to", "the fact that"
   long paragraphs    over 6 sentences
+  announcing         a bold header whose words the next sentence repeats —
+                     the reader reads the same thought twice (owner request,
+                     2026-08-16: "confusing reading twice when brainstorming")
 
   clarity, humanity  NOT measured. No regex judges those. The block message
                      names them so they stay in view.
@@ -53,6 +56,11 @@ CLUTTER = (
     "it should be noted", "needless to say", "for all intents and purposes",
     "a bit of a", "kind of a", "sort of a",
 )
+# A header re-announced: this share of its content words in the next sentence.
+ANNOUNCE_OVERLAP = 0.6
+STOPWORDS = frozenset(
+    "the a an and or of to in on at is are was were it this that not no "
+    "for with as by from we you i our your".split())
 
 
 def strip_non_prose(text: str) -> str:
@@ -78,10 +86,42 @@ def paragraphs(text: str) -> list[str]:
     return [p for p in re.split(r"\n\s*\n", text) if p.strip()]
 
 
+def announcing(text: str) -> list[str]:
+    """Headers that the next sentence merely restates.
+
+    Runs on the RAW text, because it needs the bold markers the prose
+    stripper removes. A header names a topic; when the sentence under it
+    repeats the header's words, the reader reads the same thought twice.
+    The fix is one or the other, never both.
+    """
+    lines = text.splitlines()
+    found = []
+    for i, line in enumerate(lines):
+        m = re.fullmatch(r"\s*(?:#{1,6}\s+)?\*\*(.+?)\*\*:?\s*", line)
+        if not m:
+            continue
+        head = m.group(1)
+        head_words = {w for w in re.findall(r"[a-z’']+", head.lower())
+                      if w not in STOPWORDS}
+        if len(head_words) < 2:
+            continue
+        body = next((l for l in lines[i + 1:] if l.strip()), "")
+        first = sentences(strip_non_prose(body))
+        if not first:
+            continue
+        body_words = set(re.findall(r"[a-z’']+", first[0].lower()))
+        overlap = len(head_words & body_words) / len(head_words)
+        if overlap >= ANNOUNCE_OVERLAP:
+            found.append(
+                f"announcing: the sentence under \"{head[:60]}\" repeats it — "
+                "keep the header or the sentence, not both")
+    return found
+
+
 def faults(text: str) -> list[str]:
     """Every measurable fault, as one display line each."""
     prose = strip_non_prose(text)
-    found: list[str] = []
+    found: list[str] = announcing(text)
 
     for sentence in sentences(prose):
         words = len(sentence.split())
@@ -148,8 +188,12 @@ def main() -> int:
         return 0
 
     found = faults(reply)
-    hard = any(f.split("-")[0].isdigit() and int(f.split("-")[0]) >= HARD_WORDS
-               for f in found)
+    # Two faults send a reply back. Two faults also stand alone: one very
+    # long sentence, or one announced header (the owner asked for zero).
+    hard = any(
+        (f.split("-")[0].isdigit() and int(f.split("-")[0]) >= HARD_WORDS)
+        or f.startswith("announcing")
+        for f in found)
     if len(found) < MIN_FAULTS and not hard:
         return 0
 
@@ -165,7 +209,8 @@ def main() -> int:
             + (f"\n  - …and {more} more" if more > 0 else "")
             + "\n\nRewrite the reply and send it again. Cut each sentence to "
               "25 words or fewer. Use the active voice. Use simple tenses. "
-              "Delete the clutter words. Keep a paragraph to six sentences.\n"
+              "Delete the clutter words. Keep a paragraph to six sentences. "
+              "Never restate a header in the sentence below it.\n"
               "Two things no check can measure: write with clarity, and write "
               "like a person. Do not strip the warmth to satisfy a counter.\n"
               "Code blocks, tables and paths do not count — only prose."),
