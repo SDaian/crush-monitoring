@@ -213,6 +213,29 @@ const schema = [
       let state = {q:"", chamber:"", party:"", type:"", range:"", member:"", asset:"equity",
                    sortKey:"filing_date", sortDir:-1, shown:PAGE, aiTicker:"NVDA"};
 
+      // Saved filters (roadmap personal section, stage A): the filter set a
+      // reader left with is the one they come back to, in THIS browser only.
+      // Only the filter fields persist — never `shown` (a 10-page scroll
+      // restored a week later is a wall of rows nobody asked for).
+      const SAVED_KEYS = ["q","chamber","party","type","range","asset","sortKey","sortDir"];
+      function saveFilters(){
+        const out = {};
+        SAVED_KEYS.forEach(k => { out[k] = state[k]; });
+        try { localStorage.setItem("cl-tracker-filters", JSON.stringify(out)); }
+        catch(e){ /* blocked storage loses the convenience, nothing else */ }
+      }
+      function restoreFilters(){
+        let saved;
+        try { saved = JSON.parse(localStorage.getItem("cl-tracker-filters")); }
+        catch(e){ return; }
+        if (!saved || typeof saved !== "object") return;
+        SAVED_KEYS.forEach(k => { if (k in saved) state[k] = saved[k]; });
+        $("q").value = state.q;
+        $("fChamber").value = state.chamber; $("fParty").value = state.party;
+        $("fType").value = state.type; $("fRange").value = state.range;
+        $("fAsset").value = state.asset;
+      }
+
       const $ = id => document.getElementById(id);
       const esc = s => String(s ?? "").replace(/[&<>"']/g,
         c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
@@ -640,7 +663,7 @@ const schema = [
           });
         });
 
-        const rerender = () => { state.shown = PAGE; renderRows(); };
+        const rerender = () => { state.shown = PAGE; saveFilters(); renderRows(); };
         $("q").addEventListener("input", e => { state.q = e.target.value; rerender(); });
         $("fChamber").addEventListener("change", e => { state.chamber = e.target.value; rerender(); });
         $("fParty").addEventListener("change", e => { state.party = e.target.value; rerender(); });
@@ -649,9 +672,12 @@ const schema = [
         $("fAsset").addEventListener("change", e => { state.asset = e.target.value; rerender(); });
         $("clearBtn").addEventListener("click", () => {
           // Back to the DEFAULT view — which is stocks/options, not "all".
+          // Clear also forgets the saved set: "Clear" must mean clear, not
+          // "clean until the next visit restores what I just removed".
           state = {...state, q:"", chamber:"", party:"", type:"", range:"", member:"", asset:"equity", shown:PAGE};
           $("q").value = ""; $("fChamber").value = ""; $("fParty").value = "";
           $("fType").value = ""; $("fRange").value = ""; $("fAsset").value = "equity";
+          try { localStorage.removeItem("cl-tracker-filters"); } catch(e){}
           renderRows();
         });
         $("moreBtn").addEventListener("click", () => { state.shown += PAGE; renderRows(); });
@@ -663,6 +689,7 @@ const schema = [
           if (state.sortKey === k) state.sortDir *= -1;
           else { state.sortKey = k; state.sortDir = -1; }
           state.shown = PAGE;
+          saveFilters();
           renderHead(); renderRows();
         });
 
@@ -737,6 +764,7 @@ const schema = [
             '<div class="note">Indicator data is unavailable right now.</div>';
         });
 
+      restoreFilters();
       wire();
     </script>
   </body>

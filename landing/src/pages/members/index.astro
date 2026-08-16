@@ -65,7 +65,7 @@ const schema = [
       <div class="grid grid-cols-2 gap-x-10 gap-y-1 max-[720px]:grid-cols-1">
         {
           members.map((m: any) => (
-            <a href={`/members/${m.slug}`} class="mcard">
+            <a href={`/members/${m.slug}`} class="mcard" data-s={m.slug}>
               <div class="mcard-namerow">
                 <div class="mcard-name">{m.name}</div>
                 {m.perfPct != null && m.perfBenchPct != null && (
@@ -118,10 +118,33 @@ const schema = [
     <Footer />
 
     <SignupModal />
+
+    <script is:inline>
+      // Mark the members this browser starred (stage A: localStorage only,
+      // written by the StarButton on each member page). Without JS nothing
+      // renders, which is correct — there are no stars to show.
+      (function () {
+        var stars;
+        try {
+          stars = (JSON.parse(localStorage.getItem("cl-stars")) || {}).members || [];
+        } catch (e) {
+          stars = [];
+        }
+        if (!stars.length) return;
+        document.querySelectorAll(".mcard").forEach(function (card) {
+          if (stars.indexOf(card.getAttribute("data-s")) !== -1)
+            card.classList.add("is-starred");
+        });
+      })();
+    </script>
   </body>
 </html>
 
 <style>
+  .mcard.is-starred .mcard-name::before {
+    content: "★ ";
+    color: var(--color-stamp);
+  }
   .mcard {
     display: block;
     padding: 1.75rem 0;

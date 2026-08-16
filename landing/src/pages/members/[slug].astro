@@ -13,6 +13,7 @@ import SignupModal from "../../components/SignupModal.astro";
 import CountUp from "../../components/CountUp.astro";
 import HoldingsChart from "../../components/HoldingsChart.astro";
 import PerformanceChart from "../../components/PerformanceChart.astro";
+import StarButton from "../../components/StarButton.astro";
 import { plural, seoDescription } from "../../lib/seo";
 
 // Build-time "checked" date: when this page was last regenerated. Deliberately
@@ -185,9 +186,16 @@ const schema = [
            filing" (how recent THEIR data is) lives in the header's right
            meta. Keeping the two apart stops 30-45-day-old trades from
            dressing up as current. */}
-      <p class="mono mt-5 text-[.75rem] uppercase tracking-[.08em] text-ink-soft">
-        Checked {checkedOn}
-      </p>
+      <div class="mt-5 flex flex-wrap items-center gap-x-5 gap-y-3">
+        <StarButton
+          kind="members"
+          id={m.slug}
+          name={m.name.split(" ").slice(-1)[0]}
+        />
+        <p class="mono text-[.75rem] uppercase tracking-[.08em] text-ink-soft">
+          Checked {checkedOn}
+        </p>
+      </div>
     </section>
 
     <section class="mx-auto max-w-[75rem] px-[5vw] pb-[7vh]">

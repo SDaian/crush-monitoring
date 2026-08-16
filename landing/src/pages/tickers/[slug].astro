@@ -15,6 +15,7 @@ import SignupForm from "../../components/SignupForm.astro";
 import SignupModal from "../../components/SignupModal.astro";
 import CountUp from "../../components/CountUp.astro";
 import MarketStrip from "../../components/MarketStrip.astro";
+import StarButton from "../../components/StarButton.astro";
 import marketData from "../../data/market.json";
 import { plural, seoDescription } from "../../lib/seo";
 
@@ -236,13 +237,16 @@ const schema = [
       <h1 class="headline max-w-[16ch] text-[clamp(2.4rem,6.5vw,4.6rem)]">
         Congress trades <span class="underline-stamp">{t.ticker}</span>.
       </h1>
-      {
-        t.industry && (
-          <a class="indbadge" href={`/tickers?industry=${t.industry.key}`}>
-            {t.industry.label} <span aria-hidden="true">→</span>
-          </a>
-        )
-      }
+      <div class="mt-5 flex flex-wrap items-center gap-3">
+        {
+          t.industry && (
+            <a class="indbadge" href={`/tickers?industry=${t.industry.key}`}>
+              {t.industry.label} <span aria-hidden="true">→</span>
+            </a>
+          )
+        }
+        <StarButton kind="tickers" id={t.ticker} name={t.ticker} />
+      </div>
       <p class="mt-6 max-w-[58ch] text-[1.05rem] leading-[1.65] text-pretty text-ink-soft">
         {s.members} member{s.members === 1 ? "" : "s"} of Congress have disclosed
         {" "}{s.trades.toLocaleString("en-US")} trades in {t.company} between
@@ -638,7 +642,6 @@ const schema = [
     display: inline-flex;
     align-items: baseline;
     gap: 0.4rem;
-    margin-top: 1.35rem;
     border: 1px solid var(--color-rule);
     padding: 0.35rem 0.7rem;
     font-family: var(--font-mono);
