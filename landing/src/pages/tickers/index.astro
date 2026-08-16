@@ -139,11 +139,16 @@ const schema = [
               </div>
               <div class="tcard-stat">
                 {t.industry && <span class="tcard-ind">{t.industry.label}</span>}
-                <b>{t.trades.toLocaleString("en-US")}</b> trades ·{" "}
-                <b>{t.members}</b> members ·{" "}
-                <span class="text-buy">{t.buys} buy</span>/
-                <span class="text-sell">{t.sells} sell</span>
-                <span class="tcard-go">View →</span>
+                <span class="tcard-counts">
+                  <b>{t.trades.toLocaleString("en-US")}</b> trades ·{" "}
+                  <b>{t.members}</b> members
+                </span>
+                <span class="tcard-split">
+                  <span class="whitespace-nowrap">
+                    <span class="text-buy">{t.buys} buy</span>/<span class="text-sell">{t.sells} sell</span>
+                  </span>
+                  <span class="tcard-go">View →</span>
+                </span>
               </div>
             </a>
           ))
@@ -446,6 +451,40 @@ const schema = [
   .tcard-stat b {
     color: var(--color-ink);
     font-weight: 600;
+  }
+  /* Facts wrap as whole units, never mid-thought: the counts pair and the
+     buy/sell split each hold together, and the dot between the two lives in
+     CSS so it can never dangle at a line end. */
+  .tcard-counts {
+    white-space: nowrap;
+  }
+  .tcard-counts::after {
+    content: " ·";
+  }
+  .tcard-split {
+    display: flex;
+    flex: 1 1 auto;
+    align-items: baseline;
+    gap: 0.75rem;
+    white-space: nowrap;
+  }
+  /* Phone: the badge is a label, so it heads the numbers on its own row;
+     the counts take the next; View pins to the buy/sell row's right edge. */
+  @media (max-width: 40rem) {
+    .tcard-stat {
+      display: block;
+    }
+    .tcard-ind {
+      display: inline-block;
+      margin-bottom: 0.6rem;
+    }
+    .tcard-counts {
+      display: block;
+      margin-bottom: 0.4rem;
+    }
+    .tcard-counts::after {
+      content: none;
+    }
   }
   /* The star toggle and card marker (roadmap personal section, stage A).
      Marker classes are set at runtime, so they ride the global StarButton
