@@ -188,6 +188,15 @@ Not commitments — things to test when their stage approaches.
   deeper funnels are needed while keeping the privacy page honest.
 - **Monitoring**: GitHub Actions already alerts on pipeline failure via the
   daily report; add uptime checks (e.g. UptimeRobot free) at launch.
+- **PDF extraction**: OpenDataLoader PDF (Apache 2.0, Java 11+ engine with a
+  Python wrapper; layout analysis + built-in OCR) — evaluated 2026-08-17 and
+  parked. It would recover only the scanned-no-text annual FDs (Khanna,
+  McCaul, and Trump's ~250-page OGE 278); the daily PTR path is born-digital
+  and pdfplumber already parses it clean, so a JVM in the Action is a poor
+  trade today. **Trigger**: scanned annual FDs block more featured members
+  than a couple, or holdings coverage becomes a headline feature. Adoption
+  would confine it behind one `extract_*` seam like pdfplumber, keeping the
+  parsers stdlib-importable (the dependency policy stands).
 
 ## Standing rules
 
