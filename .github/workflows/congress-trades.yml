@@ -199,7 +199,7 @@ jobs:
           # Daily mechanical indicators (RSI / moving averages / volume / 52w)
           # for the AI universe + named signals. Reuses the Twelve Data key.
           # A source outage must not fail the whole refresh.
-          python3 -m congress ai --skip-if-fresh 2>&1 | tee -a fetch.log \
+          python3 -m congress ai --skip-if-fresh --skip-if-closed 2>&1 | tee -a fetch.log \
             || echo "::warning::AI indicators refresh failed; keeping prior ai-indicators.json"
           # Open a GitHub issue (emails repo watchers) for each brand-new signal.
           # Runs before the commit so a fresh file's new_signals are read; the
@@ -291,8 +291,11 @@ jobs:
           CONGRESS_PRICES_KEY: ${{ secrets.CONGRESS_PRICES_KEY || vars.CONGRESS_PRICES_KEY }}
         run: |
           # Prices move daily even when no new filing arrives, so this runs
-          # every day. A price-source outage must not fail the whole refresh.
-          python3 -m congress prices --skip-if-fresh 2>&1 | tee -a fetch.log \
+          # every day the market produced a new close. --skip-if-closed makes
+          # it a no-op otherwise (Sunday and the pre-close Monday run both
+          # see Friday's close), which is where ~29 min of paced sleeping
+          # went. A price-source outage must not fail the whole refresh.
+          python3 -m congress prices --skip-if-fresh --skip-if-closed 2>&1 | tee -a fetch.log \
             || echo "::warning::price refresh failed; keeping prior returns.json"
           # The landing step above ran before prices, so the member pages'
           # performance section was built from YESTERDAY's returns. Re-run the

@@ -113,3 +113,44 @@ class TestAiCommand(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class TestSkipWhenClosed(unittest.TestCase):
+    """The guard reads what the output already holds, not the calendar."""
+
+    def write(self, tmp, section, asof):
+        path = Path(tmp) / "out.json"
+        path.write_text(json.dumps(
+            {"meta": {}, section: {"NVDA": {"asof_date": asof}}}), encoding="utf-8")
+        return path
+
+    def test_newest_close_reads_either_output_shape(self):
+        with TemporaryDirectory() as tmp:
+            # returns.json keys its rows under "prices", indicators under
+            # "tickers"; one helper serves both steps.
+            self.assertEqual(
+                cli.newest_close(self.write(tmp, "prices", "2026-08-14")),
+                "2026-08-14")
+            self.assertEqual(
+                cli.newest_close(self.write(tmp, "tickers", "2026-08-17")),
+                "2026-08-17")
+
+    def test_newest_close_takes_the_maximum(self):
+        with TemporaryDirectory() as tmp:
+            path = Path(tmp) / "out.json"
+            path.write_text(json.dumps({"tickers": {
+                "A": {"asof_date": "2026-08-11"},
+                "B": {"asof_date": "2026-08-14"},
+            }}), encoding="utf-8")
+            self.assertEqual(cli.newest_close(path), "2026-08-14")
+
+    def test_a_missing_file_never_skips(self):
+        with TemporaryDirectory() as tmp:
+            self.assertIsNone(cli.newest_close(Path(tmp) / "absent.json"))
+            self.assertFalse(cli.market_shut(Path(tmp) / "absent.json"))
+
+    def test_unreadable_file_never_skips(self):
+        with TemporaryDirectory() as tmp:
+            path = Path(tmp) / "broken.json"
+            path.write_text("{ not json", encoding="utf-8")
+            self.assertIsNone(cli.newest_close(path))

@@ -3,6 +3,7 @@
 import json
 import math
 import unittest
+from datetime import date, datetime, timezone
 
 from congress import indicators, market
 
@@ -132,3 +133,55 @@ class TestSummary(unittest.TestCase):
 
     def test_no_reading_is_an_empty_string(self):
         self.assertEqual(market.summary(None), "")
+
+
+class TestSessionCalendar(unittest.TestCase):
+    """When a paced fetch cannot return anything new.
+
+    The dates below are the REAL run log from 2026-08-10..19, which is what
+    proved the naive weekend guard wrong: our crons fire hours before the US
+    close, so each run captures the previous session.
+    """
+
+    @staticmethod
+    def utc(text: str) -> datetime:
+        return datetime.fromisoformat(text).replace(tzinfo=timezone.utc)
+
+    def test_a_run_before_the_close_sees_the_previous_session(self):
+        # Friday 05:00 UTC — Friday's bell has not rung yet.
+        self.assertEqual(market.last_closed_session(self.utc("2026-08-14 05:00")),
+                         date(2026, 8, 13))
+
+    def test_saturday_is_the_run_that_captures_friday(self):
+        # The one weekend run that earns its keep. Skipping it would leave
+        # the site on Thursday's numbers until Tuesday.
+        self.assertEqual(market.last_closed_session(self.utc("2026-08-15 05:00")),
+                         date(2026, 8, 14))
+
+    def test_sunday_and_monday_repeat_friday(self):
+        for stamp in ("2026-08-16 05:00", "2026-08-17 05:00"):
+            self.assertEqual(market.last_closed_session(self.utc(stamp)),
+                             date(2026, 8, 14), stamp)
+
+    def test_tuesday_sees_monday(self):
+        self.assertEqual(market.last_closed_session(self.utc("2026-08-18 05:00")),
+                         date(2026, 8, 17))
+
+    def test_after_the_settle_hour_the_same_day_counts(self):
+        self.assertEqual(market.last_closed_session(self.utc("2026-08-18 23:00")),
+                         date(2026, 8, 18))
+
+    def test_holding_fridays_close_skips_sunday_and_monday(self):
+        for stamp in ("2026-08-16 05:00", "2026-08-17 05:00"):
+            self.assertTrue(
+                market.have_newest_close("2026-08-14", self.utc(stamp)), stamp)
+
+    def test_holding_thursdays_close_still_fetches_on_saturday(self):
+        self.assertFalse(
+            market.have_newest_close("2026-08-13", self.utc("2026-08-15 05:00")))
+
+    def test_no_held_date_means_do_the_work(self):
+        # A first run, a wiped file, or a garbled date must never skip.
+        for held in (None, "", "not-a-date", "2026-13-99"):
+            self.assertFalse(
+                market.have_newest_close(held, self.utc("2026-08-17 05:00")), held)
