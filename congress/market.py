@@ -31,6 +31,7 @@ a convention we chose (and label as such), not an official classification.
 from __future__ import annotations
 
 import math
+from datetime import date, datetime, timedelta
 
 # Annualisation factor for daily returns (trading days in a year).
 YEAR = 252
@@ -158,3 +159,65 @@ def summary(reading: dict | None) -> str:
         move = f" ({'+' if chg > 0 else ''}{chg} pts)"
     return (f"{reading['label']} {reading['level']}{move} — "
             f"{reading['bandLabel'].lower()}")
+
+
+# ---------------------------------------------------------------------------
+# Session calendar — when a fetch cannot return anything new
+# ---------------------------------------------------------------------------
+#
+# The daily Action pays GitHub for the ~29 minutes it spends sleeping between
+# free-tier Twelve Data calls (8s apart, ~220 calls). On a day when no new
+# close exists, every one of those calls returns the number we already hold.
+#
+# The naive guard — "skip at the weekend" — is WRONG here, and the run log
+# says why. Our crons fire at 04:30-08:20 UTC, hours BEFORE the US close, so
+# each run captures the PREVIOUS session:
+#
+#     Fri 05:00 UTC -> Thursday's close
+#     Sat 05:00 UTC -> Friday's close     <- Saturday earns its keep
+#     Sun 05:00 UTC -> Friday's close     <- duplicate
+#     Mon 05:00 UTC -> Friday's close     <- duplicate
+#
+# Skipping Saturday would leave the site on Thursday's numbers until Tuesday.
+# So the test is not the weekday: it is whether the newest session that has
+# actually settled is one we already hold. That is the same shape as the
+# quiet-day email skip — compare what we hold against what exists, never
+# against the calendar.
+#
+# Holidays get no table. A hardcoded list goes stale and would silently skip
+# a real trading day, which is far worse than paying for one wasted fetch a
+# few times a year. On a holiday we fetch once, store the unchanged close,
+# and the comparison then skips the following run on its own.
+
+# A US session closes 20:00 UTC (EDT) or 21:00 UTC (EST). Allow an hour for
+# the daily bar to settle at the source, so 22:00 UTC is "certainly done".
+SESSION_SETTLED_HOUR_UTC = 22
+
+
+def last_closed_session(now: datetime) -> date:
+    """The most recent US trading date whose closing bell has already rung.
+
+    ``now`` must be timezone-aware UTC (or naive UTC). Weekends walk back to
+    the Friday; a time before the settle hour walks back a day first.
+    """
+    day = now.date()
+    if now.hour < SESSION_SETTLED_HOUR_UTC:
+        day -= timedelta(days=1)
+    while day.weekday() >= 5:  # 5 = Saturday, 6 = Sunday
+        day -= timedelta(days=1)
+    return day
+
+
+def have_newest_close(held: str | None, now: datetime) -> bool:
+    """True when ``held`` (an ISO date) already covers the newest session.
+
+    A missing or unparseable date means "we hold nothing" → do the work. The
+    caller uses this to skip a paced fetch that cannot return new numbers.
+    """
+    if not held:
+        return False
+    try:
+        held_date = date.fromisoformat(held[:10])
+    except (ValueError, TypeError):
+        return False
+    return held_date >= last_closed_session(now)

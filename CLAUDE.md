@@ -411,6 +411,22 @@ sites. Full details in `congress/README.md`. Conventions:
   series omits the chart. `nextEarnings` is opt-in via the `EARNINGS_DATES`
   variable, because it is an extra per-ticker call on an endpoint that is not
   on every Twelve Data plan — unset or failing, the line is simply absent.
+- **A paced fetch that cannot return new numbers must not run.** The two
+  Twelve Data steps sleep 8s between ~220 calls, so a run costs ~29 minutes of
+  GitHub runner time — 88% of the daily Action bill, spent waiting. `congress
+  prices` and `congress ai` take **`--skip-if-closed`**, which compares the
+  newest `asof_date` the output already holds against
+  `market.last_closed_session(now)`. **The test is the settled session, not
+  the weekday**, and the run log says why: the crons fire at 04:30-08:20 UTC,
+  hours *before* the US close, so each run captures the PREVIOUS session
+  (Fri 05:00 → Thursday's close, Sat 05:00 → **Friday's** close). A naive
+  "skip at the weekend" would drop the Saturday run that captures Friday and
+  leave the site a day behind until Tuesday. Steady state skips **Sunday and
+  the pre-close Monday run** — 2 days in 7, ~253 min/month. Holidays get **no
+  hardcoded table**: a stale list would silently skip a real trading day,
+  which is worse than one wasted fetch a few times a year (we fetch once, store
+  the unchanged close, and the comparison skips the next run by itself). A
+  missing, unreadable or garbled date always fetches.
 - **Market context is one number, and it never votes:** `congress/market.py`
   turns a daily series into the market-wide volatility reading the morning
   report and **every** ticker page show. First choice is the **VIX**

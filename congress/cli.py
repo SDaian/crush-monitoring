@@ -656,6 +656,41 @@ FEATURED_TICKERS = ["MU", "INTC", "NVDA", "TSM", "AMD", "AVGO", "TSLA", "MSFT",
                     "SPCX", "NU", "MELI"]
 
 
+def newest_close(*paths: str | Path) -> str | None:
+    """The newest ``asof_date`` held across the given generated files.
+
+    Both Twelve Data outputs stamp every row with the close date it came
+    from (``returns.json`` under ``prices``, ``ai-indicators.json`` under
+    ``tickers``). Missing or unreadable → None, which the caller reads as
+    "we hold nothing", so the work goes ahead.
+    """
+    best: str | None = None
+    for path in paths:
+        try:
+            doc = json.loads(Path(path).read_text(encoding="utf-8"))
+        except (OSError, ValueError, AttributeError):
+            continue
+        for section in ("prices", "tickers"):
+            for row in (doc.get(section) or {}).values():
+                got = (row or {}).get("asof_date")
+                if got and (best is None or got > best):
+                    best = got
+    return best
+
+
+def market_shut(*paths: str | Path) -> bool:
+    """True when the newest settled session is one these files already hold.
+
+    A paced Twelve Data fetch then costs ~29 minutes of GitHub runner time to
+    re-read numbers we have. See `market.last_closed_session` for why this
+    tests the settled session and not the weekday.
+    """
+    from . import market
+
+    return market.have_newest_close(
+        newest_close(*paths), datetime.now(timezone.utc))
+
+
 def generated_today(path: str | Path, today_iso: str | None = None) -> bool:
     """True when ``path`` already carries a ``meta.generated_at`` from today.
 
@@ -683,6 +718,10 @@ def _cmd_prices(args: argparse.Namespace) -> int:
     if (getattr(args, "skip_if_fresh", False) and generated_today(args.output)
             and generated_today(args.perf_output)):
         print(f"returns already generated today — skipping ({args.output})")
+        return 0
+
+    if getattr(args, "skip_if_closed", False) and market_shut(args.output):
+        print(f"no session since the newest close held — skipping ({args.output})")
         return 0
 
     key = prices.api_key()
@@ -894,6 +933,10 @@ def _cmd_ai(args: argparse.Namespace) -> int:
         print(f"indicators already generated today — skipping ({args.output})")
         return 0
 
+    if getattr(args, "skip_if_closed", False) and market_shut(args.output):
+        print(f"no session since the newest close held — skipping ({args.output})")
+        return 0
+
     key = prices.api_key()
     if not key:
         print(
@@ -1082,6 +1125,10 @@ def build_parser() -> argparse.ArgumentParser:
     prices_p.add_argument("--skip-if-fresh", action="store_true",
                           help="No-op if the output was already generated today "
                                "(daily closes cannot change within a day).")
+    prices_p.add_argument("--skip-if-closed", action="store_true",
+                          help="No-op when the newest settled US session is "
+                               "already the one the output holds (weekends "
+                               "and the Monday run before the US close).")
     prices_p.set_defaults(func=_cmd_prices)
 
     holdings_p = sub.add_parser(
@@ -1102,6 +1149,10 @@ def build_parser() -> argparse.ArgumentParser:
     ai_p.add_argument("--skip-if-fresh", action="store_true",
                       help="No-op if the output was already generated today "
                            "(daily closes cannot change within a day).")
+    ai_p.add_argument("--skip-if-closed", action="store_true",
+                      help="No-op when the newest settled US session is "
+                           "already the one the output holds (weekends and "
+                           "the Monday run before the US close).")
     ai_p.set_defaults(func=_cmd_ai)
 
     landing_p = sub.add_parser(
