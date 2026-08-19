@@ -6,11 +6,15 @@ on:
     # best-effort — frequently delayed 1–3h and sometimes DROPPED ENTIRELY. So
     # we fire MULTIPLE times across the morning: GitHub would have to skip every
     # one to miss a day, and the report is idempotent per day (report_state) so
-    # the first firing sends and the rest no-op the email. The repo is PRIVATE,
-    # so the extra runs are NOT free: three firings cost ~830 minutes a month of
-    # the 2,000 included. That is a deliberate trade — the morning email is the
-    # product, and a missed day costs more than the minutes. Weigh it again if
-    # the pipeline gets slower. Whichever fires first biases early ("before the day
+    # the first firing sends and the rest no-op the email. The repo is PUBLIC
+    # (2026-08-19), so runner minutes are free and the extra firings cost
+    # nothing in billing. They are NOT free in API budget: each paced Twelve
+    # Data fetch is ~29 minutes of 8s sleeps, which is why the price and
+    # indicator steps carry --skip-if-fresh (same day) and --skip-if-closed
+    # (no session has settled since the close we hold). Read the history here
+    # before changing it: as a PRIVATE repo these three crons burned ~1,000 of
+    # the 2,000 included minutes a month and exhausted the quota on 2026-08-16,
+    # which killed every run for three days. Whichever fires first biases early ("before the day
     # starts"), late is the failure mode. Cron is UTC and ignores DST (±1h drift
     # over the year). For a hard timing guarantee an external scheduler hitting
     # the workflow_dispatch API would still be needed.
