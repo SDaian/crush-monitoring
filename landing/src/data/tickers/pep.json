@@ -9,25 +9,21 @@
   },
   "indexable": true,
   "technical": {
-    "asOf": "2026-08-14",
-    "price": 140.79,
-    "chg1d": 0.12,
-    "chg1w": 1.27,
-    "chg1m": 0.98,
-    "rsi14": 54.0,
-    "sma50": 140.16,
-    "sma200": 149.08,
-    "vsSma50": 0.4,
-    "vsSma200": -5.6,
-    "relVol": 0.53,
+    "asOf": "2026-08-19",
+    "price": 142.58,
+    "chg1d": 1.75,
+    "chg1w": 2.8,
+    "chg1m": 5.61,
+    "rsi14": 57.7,
+    "sma50": 140.08,
+    "sma200": 148.97,
+    "vsSma50": 1.8,
+    "vsSma200": -4.3,
+    "relVol": 0.89,
     "high52w": 170.49,
     "low52w": 134.95,
-    "rangePos": 16.0,
+    "rangePos": 21.0,
     "series": [
-      {
-        "d": "2025-08-22",
-        "c": 149.64
-      },
       {
         "d": "2025-08-29",
         "c": 148.65
@@ -231,6 +227,10 @@
       {
         "d": "2026-08-14",
         "c": 140.79
+      },
+      {
+        "d": "2026-08-19",
+        "c": 142.58
       }
     ],
     "signals": [],
@@ -244,16 +244,16 @@
     }
   },
   "summary": {
-    "trades": 46,
+    "trades": 47,
     "members": 23,
     "buys": 16,
-    "sells": 30,
+    "sells": 31,
     "other": 0,
     "firstTx": "2023-03-15",
-    "lastTx": "2026-07-17",
-    "lastFiling": "2026-08-12",
+    "lastTx": "2026-07-30",
+    "lastFiling": "2026-08-14",
     "estBuyLabel": "$177K",
-    "estSellLabel": "$770K",
+    "estSellLabel": "$778K",
     "pctLate": 13
   },
   "topMembers": [
@@ -313,6 +313,17 @@
       "hasPage": true
     },
     {
+      "name": "Richard McCormick",
+      "slug": "richard-mccormick",
+      "party": "R",
+      "chamber": "House",
+      "trades": 3,
+      "buys": 2,
+      "sells": 1,
+      "estLabel": "$24K",
+      "hasPage": false
+    },
+    {
       "name": "Sheldon Whitehouse",
       "slug": "sheldon-whitehouse",
       "party": "D",
@@ -355,20 +366,21 @@
       "sells": 0,
       "estLabel": "$16K",
       "hasPage": true
-    },
-    {
-      "name": "Richard McCormick",
-      "slug": "richard-mccormick",
-      "party": "R",
-      "chamber": "House",
-      "trades": 2,
-      "buys": 2,
-      "sells": 0,
-      "estLabel": "$16K",
-      "hasPage": false
     }
   ],
   "trades": [
+    {
+      "member": "Richard McCormick",
+      "memberSlug": "richard-mccormick",
+      "hasPage": false,
+      "party": "R",
+      "side": "SELL",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-07-30",
+      "filedDate": "2026-08-14",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035204.pdf"
+    },
     {
       "member": "Mike Kelly",
       "memberSlug": "mike-kelly",
@@ -656,18 +668,6 @@
       "filedDate": "2025-08-20",
       "daysLate": 0,
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20030930.pdf"
-    },
-    {
-      "member": "Lisa C. McClain",
-      "memberSlug": "lisa-c-mcclain",
-      "hasPage": false,
-      "party": "R",
-      "side": "BUY",
-      "amountBucket": "$1K – $15K",
-      "txDate": "2025-06-24",
-      "filedDate": "2025-08-13",
-      "daysLate": 5,
-      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20030891.pdf"
     }
   ],
   "tradesShown": 25

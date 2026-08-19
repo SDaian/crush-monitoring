@@ -9,25 +9,21 @@
   },
   "indexable": true,
   "technical": {
-    "asOf": "2026-08-14",
-    "price": 364.15,
-    "chg1d": -0.36,
-    "chg1w": 0.46,
-    "chg1m": -0.27,
-    "rsi14": 55.7,
-    "sma50": 348.47,
-    "sma200": 331.31,
-    "vsSma50": 4.5,
-    "vsSma200": 9.9,
-    "relVol": 1.22,
+    "asOf": "2026-08-19",
+    "price": 365.54,
+    "chg1d": 0.35,
+    "chg1w": 1.7,
+    "chg1m": 2.73,
+    "rsi14": 56.2,
+    "sma50": 350.97,
+    "sma200": 331.58,
+    "vsSma50": 4.1,
+    "vsSma200": 10.2,
+    "relVol": 0.52,
     "high52w": 370.47,
     "low52w": 295.52,
-    "rangePos": 92.0,
+    "rangePos": 93.0,
     "series": [
-      {
-        "d": "2025-08-22",
-        "c": 350.04
-      },
       {
         "d": "2025-08-29",
         "c": 351.78
@@ -231,30 +227,34 @@
       {
         "d": "2026-08-14",
         "c": 364.15
+      },
+      {
+        "d": "2026-08-19",
+        "c": 365.54
       }
     ],
     "signals": [],
     "nextEarnings": null,
     "score": {
       "label": "Strong Buy",
-      "buys": 5,
-      "sells": 1,
+      "buys": 6,
+      "sells": 0,
       "holds": 1,
-      "ratio": 0.571
+      "ratio": 0.857
     }
   },
   "summary": {
-    "trades": 62,
+    "trades": 63,
     "members": 23,
     "buys": 38,
-    "sells": 24,
+    "sells": 25,
     "other": 0,
     "firstTx": "2024-05-03",
-    "lastTx": "2026-04-27",
-    "lastFiling": "2026-08-05",
+    "lastTx": "2026-07-30",
+    "lastFiling": "2026-08-14",
     "estBuyLabel": "$353K",
-    "estSellLabel": "$573K",
-    "pctLate": 18
+    "estSellLabel": "$581K",
+    "pctLate": 17
   },
   "topMembers": [
     {
@@ -369,6 +369,18 @@
     }
   ],
   "trades": [
+    {
+      "member": "Richard McCormick",
+      "memberSlug": "richard-mccormick",
+      "hasPage": false,
+      "party": "R",
+      "side": "SELL",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-07-30",
+      "filedDate": "2026-08-14",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035204.pdf"
+    },
     {
       "member": "David J. Taylor",
       "memberSlug": "david-j-taylor",
@@ -653,18 +665,6 @@
       "side": "SELL",
       "amountBucket": "$1K – $15K",
       "txDate": "2025-06-26",
-      "filedDate": "2025-07-16",
-      "daysLate": 0,
-      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20030621.pdf"
-    },
-    {
-      "member": "Josh Gottheimer",
-      "memberSlug": "josh-gottheimer",
-      "hasPage": true,
-      "party": "D",
-      "side": "SELL",
-      "amountBucket": "$1K – $15K",
-      "txDate": "2025-06-25",
       "filedDate": "2025-07-16",
       "daysLate": 0,
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20030621.pdf"

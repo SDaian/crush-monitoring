@@ -9,25 +9,21 @@
   },
   "indexable": true,
   "technical": {
-    "asOf": "2026-08-14",
-    "price": 160.1,
-    "chg1d": 0.94,
-    "chg1w": 4.61,
-    "chg1m": 9.7,
-    "rsi14": 64.3,
-    "sma50": 147.57,
-    "sma200": 141.32,
-    "vsSma50": 8.5,
-    "vsSma200": 13.3,
-    "relVol": 0.73,
+    "asOf": "2026-08-19",
+    "price": 164.77,
+    "chg1d": -0.48,
+    "chg1w": 3.14,
+    "chg1m": 8.61,
+    "rsi14": 69.2,
+    "sma50": 148.33,
+    "sma200": 142.05,
+    "vsSma50": 11.1,
+    "vsSma200": 16.0,
+    "relVol": 0.95,
     "high52w": 171.47,
-    "low52w": 106.49,
-    "rangePos": 83.0,
+    "low52w": 107.42,
+    "rangePos": 90.0,
     "series": [
-      {
-        "d": "2025-08-22",
-        "c": 111.28
-      },
       {
         "d": "2025-08-29",
         "c": 114.29
@@ -231,6 +227,10 @@
       {
         "d": "2026-08-14",
         "c": 160.1
+      },
+      {
+        "d": "2026-08-19",
+        "c": 164.77
       }
     ],
     "signals": [],
@@ -244,14 +244,14 @@
     }
   },
   "summary": {
-    "trades": 38,
-    "members": 20,
+    "trades": 40,
+    "members": 21,
     "buys": 17,
     "sells": 18,
-    "other": 3,
+    "other": 5,
     "firstTx": "2024-05-06",
     "lastTx": "2026-07-20",
-    "lastFiling": "2026-07-21",
+    "lastFiling": "2026-08-14",
     "estBuyLabel": "$319K",
     "estSellLabel": "$327K",
     "pctLate": 18
@@ -357,13 +357,13 @@
       "hasPage": false
     },
     {
-      "name": "Val T. Hoyle",
-      "slug": "val-t-hoyle",
-      "party": "D",
+      "name": "Michael Guest",
+      "slug": "michael-guest",
+      "party": "R",
       "chamber": "House",
       "trades": 2,
-      "buys": 1,
-      "sells": 1,
+      "buys": 0,
+      "sells": 0,
       "estLabel": "$16K",
       "hasPage": false
     }
@@ -380,6 +380,30 @@
       "filedDate": "2026-07-20",
       "daysLate": 0,
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035047.pdf"
+    },
+    {
+      "member": "Michael Guest",
+      "memberSlug": "michael-guest",
+      "hasPage": false,
+      "party": "R",
+      "side": "EXCHANGE",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-07-02",
+      "filedDate": "2026-08-14",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035130.pdf"
+    },
+    {
+      "member": "Michael Guest",
+      "memberSlug": "michael-guest",
+      "hasPage": false,
+      "party": "R",
+      "side": "EXCHANGE",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-07-02",
+      "filedDate": "2026-08-14",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035130.pdf"
     },
     {
       "member": "Kevin Hern",
@@ -644,30 +668,6 @@
       "filedDate": "2025-05-31",
       "daysLate": 0,
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20030433.pdf"
-    },
-    {
-      "member": "Jefferson Shreve",
-      "memberSlug": "jefferson-shreve",
-      "hasPage": false,
-      "party": "R",
-      "side": "SELL",
-      "amountBucket": "$50K – $100K",
-      "txDate": "2025-05-12",
-      "filedDate": "2025-06-22",
-      "daysLate": 0,
-      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20030387.pdf"
-    },
-    {
-      "member": "Katie Boyd Britt",
-      "memberSlug": "katie-boyd-britt",
-      "hasPage": false,
-      "party": "R",
-      "side": "SELL",
-      "amountBucket": "$1K – $15K",
-      "txDate": "2025-04-30",
-      "filedDate": "2026-01-26",
-      "daysLate": 226,
-      "sourceUrl": "https://efdsearch.senate.gov/search/view/ptr/28e79480-3dcb-4793-86ed-48e7fd214587/"
     }
   ],
   "tradesShown": 25

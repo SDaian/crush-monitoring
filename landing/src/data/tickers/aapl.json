@@ -9,25 +9,21 @@
   },
   "indexable": true,
   "technical": {
-    "asOf": "2026-08-14",
-    "price": 305.93,
-    "chg1d": 0.22,
-    "chg1w": -2.36,
-    "chg1m": -8.2,
-    "rsi14": 43.7,
-    "sma50": 309.19,
-    "sma200": 280.48,
-    "vsSma50": -1.1,
-    "vsSma200": 9.1,
-    "relVol": 0.54,
+    "asOf": "2026-08-19",
+    "price": 316.83,
+    "chg1d": 2.19,
+    "chg1w": 4.82,
+    "chg1m": -3.33,
+    "rsi14": 53.8,
+    "sma50": 309.44,
+    "sma200": 281.1,
+    "vsSma50": 2.4,
+    "vsSma200": 12.7,
+    "relVol": 0.94,
     "high52w": 340.08,
     "low52w": 224.9,
-    "rangePos": 70.0,
+    "rangePos": 80.0,
     "series": [
-      {
-        "d": "2025-08-22",
-        "c": 227.76
-      },
       {
         "d": "2025-08-29",
         "c": 232.14
@@ -231,27 +227,31 @@
       {
         "d": "2026-08-14",
         "c": 305.93
+      },
+      {
+        "d": "2026-08-19",
+        "c": 316.83
       }
     ],
     "signals": [],
     "nextEarnings": null,
     "score": {
-      "label": "Sell",
-      "buys": 2,
-      "sells": 4,
+      "label": "Strong Buy",
+      "buys": 5,
+      "sells": 1,
       "holds": 1,
-      "ratio": -0.286
+      "ratio": 0.571
     }
   },
   "summary": {
-    "trades": 146,
+    "trades": 147,
     "members": 43,
     "buys": 72,
-    "sells": 74,
+    "sells": 75,
     "other": 0,
     "firstTx": "2023-03-15",
-    "lastTx": "2026-07-21",
-    "lastFiling": "2026-08-13",
+    "lastTx": "2026-07-30",
+    "lastFiling": "2026-08-14",
     "estBuyLabel": "$3.6M",
     "estSellLabel": "$47.8M",
     "pctLate": 27
@@ -369,6 +369,18 @@
     }
   ],
   "trades": [
+    {
+      "member": "Richard McCormick",
+      "memberSlug": "richard-mccormick",
+      "hasPage": false,
+      "party": "R",
+      "side": "SELL",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-07-30",
+      "filedDate": "2026-08-14",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035204.pdf"
+    },
     {
       "member": "Shelley Moore Capito",
       "memberSlug": "shelley-moore-capito",
@@ -656,18 +668,6 @@
       "filedDate": "2026-02-02",
       "daysLate": 0,
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20033918.pdf"
-    },
-    {
-      "member": "John Boozman",
-      "memberSlug": "john-boozman",
-      "hasPage": false,
-      "party": "R",
-      "side": "BUY",
-      "amountBucket": "$1K – $15K",
-      "txDate": "2026-01-15",
-      "filedDate": "2026-02-15",
-      "daysLate": 0,
-      "sourceUrl": "https://efdsearch.senate.gov/search/view/ptr/135ebfe9-099e-4d58-ba46-f739b90d61da/"
     }
   ],
   "tradesShown": 25

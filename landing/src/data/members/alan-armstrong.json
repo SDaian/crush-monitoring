@@ -390,11 +390,11 @@
   "performance": {
     "available": true,
     "benchLabel": "S&P 500",
-    "asofDate": "2026-08-14",
+    "asofDate": "2026-08-19",
     "kpis": {
-      "medianPct": 21.6,
-      "medianBenchPct": 22.4,
-      "beat": 35,
+      "medianPct": 23.1,
+      "medianBenchPct": 21.3,
+      "beat": 37,
       "beatOf": 72,
       "priced": 72,
       "pricedOf": 320
@@ -421,7 +421,8 @@
         "2026-07-24",
         "2026-07-31",
         "2026-08-07",
-        "2026-08-14"
+        "2026-08-14",
+        "2026-08-19"
       ],
       "member": [
         100.0,
@@ -444,7 +445,8 @@
         120.3,
         120.8,
         125.7,
-        127.5
+        127.5,
+        125.5
       ],
       "bench": [
         100.0,
@@ -467,7 +469,8 @@
         116.5,
         117.8,
         121.9,
-        122.4
+        122.4,
+        121.3
       ],
       "buys": 72
     },
@@ -475,86 +478,86 @@
       {
         "ticker": "ASML",
         "txDate": "2026-03-31",
-        "pct": 39.6,
-        "benchPct": 19.4,
-        "excess": 20.2
+        "pct": 32.6,
+        "benchPct": 18.3,
+        "excess": 14.3
       },
       {
         "ticker": "AZN",
         "txDate": "2026-03-31",
-        "pct": -20.7,
-        "benchPct": 19.4,
-        "excess": -40.1
+        "pct": -16.4,
+        "benchPct": 18.3,
+        "excess": -34.7
       },
       {
         "ticker": "TSLA",
         "txDate": "2026-03-30",
-        "pct": -3.7,
-        "benchPct": 22.8,
-        "excess": -26.5
+        "pct": -1.2,
+        "benchPct": 21.7,
+        "excess": -22.9
       },
       {
         "ticker": "UBER",
         "txDate": "2026-03-30",
-        "pct": 8.6,
-        "benchPct": 22.8,
-        "excess": -14.2
+        "pct": 11.6,
+        "benchPct": 21.7,
+        "excess": -10.1
       },
       {
         "ticker": "GOOG",
         "txDate": "2026-03-30",
-        "pct": 25.8,
-        "benchPct": 22.8,
-        "excess": 3.0
+        "pct": 25.1,
+        "benchPct": 21.7,
+        "excess": 3.4
       },
       {
         "ticker": "AAPL",
         "txDate": "2026-03-30",
-        "pct": 24.0,
-        "benchPct": 22.8,
-        "excess": 1.2
+        "pct": 28.5,
+        "benchPct": 21.7,
+        "excess": 6.8
       },
       {
         "ticker": "ASML",
         "txDate": "2026-03-30",
-        "pct": 47.1,
-        "benchPct": 22.8,
-        "excess": 24.3
+        "pct": 39.7,
+        "benchPct": 21.7,
+        "excess": 18.0
       },
       {
         "ticker": "AZN",
         "txDate": "2026-03-30",
-        "pct": -19.3,
-        "benchPct": 22.8,
-        "excess": -42.1
+        "pct": -14.9,
+        "benchPct": 21.7,
+        "excess": -36.6
       },
       {
         "ticker": "GS",
         "txDate": "2026-03-30",
-        "pct": 28.7,
-        "benchPct": 22.8,
-        "excess": 5.9
+        "pct": 26.5,
+        "benchPct": 21.7,
+        "excess": 4.8
       },
       {
         "ticker": "JNJ",
         "txDate": "2026-03-30",
-        "pct": 7.4,
-        "benchPct": 22.8,
-        "excess": -15.4
+        "pct": 12.8,
+        "benchPct": 21.7,
+        "excess": -8.9
       },
       {
         "ticker": "MSFT",
         "txDate": "2026-03-30",
-        "pct": 38.0,
-        "benchPct": 22.8,
-        "excess": 15.2
+        "pct": 34.9,
+        "benchPct": 21.7,
+        "excess": 13.2
       },
       {
         "ticker": "NVO",
         "txDate": "2026-03-30",
-        "pct": 30.0,
-        "benchPct": 22.8,
-        "excess": 7.2
+        "pct": 31.7,
+        "benchPct": 21.7,
+        "excess": 10.0
       }
     ],
     "rowsOf": 72

@@ -9,25 +9,21 @@
   },
   "indexable": true,
   "technical": {
-    "asOf": "2026-08-14",
-    "price": 504.03,
-    "chg1d": -0.57,
-    "chg1w": -3.41,
-    "chg1m": 2.21,
-    "rsi14": 47.6,
-    "sma50": 499.03,
-    "sma200": 491.6,
-    "vsSma50": 1.0,
-    "vsSma200": 2.5,
-    "relVol": 0.93,
+    "asOf": "2026-08-19",
+    "price": 499.62,
+    "chg1d": -0.66,
+    "chg1w": -2.04,
+    "chg1m": 2.04,
+    "rsi14": 44.9,
+    "sma50": 499.97,
+    "sma200": 491.93,
+    "vsSma50": -0.1,
+    "vsSma200": 1.6,
+    "relVol": 0.82,
     "high52w": 529.42,
     "low52w": 465.4,
-    "rangePos": 60.0,
+    "rangePos": 53.0,
     "series": [
-      {
-        "d": "2025-08-22",
-        "c": 489.0
-      },
       {
         "d": "2025-08-29",
         "c": 502.98
@@ -231,28 +227,39 @@
       {
         "d": "2026-08-14",
         "c": 504.03
+      },
+      {
+        "d": "2026-08-19",
+        "c": 499.62
       }
     ],
-    "signals": [],
+    "signals": [
+      {
+        "type": "lose_sma50",
+        "asof": "2026-08-19",
+        "label": "Lost the 50-day average",
+        "dir": "bear"
+      }
+    ],
     "nextEarnings": null,
     "score": {
-      "label": "Buy",
-      "buys": 4,
-      "sells": 2,
+      "label": "Hold",
+      "buys": 3,
+      "sells": 3,
       "holds": 1,
-      "ratio": 0.286
+      "ratio": 0.0
     }
   },
   "summary": {
-    "trades": 65,
+    "trades": 66,
     "members": 21,
-    "buys": 32,
+    "buys": 33,
     "sells": 33,
     "other": 0,
     "firstTx": "2024-01-30",
-    "lastTx": "2026-07-28",
-    "lastFiling": "2026-08-07",
-    "estBuyLabel": "$513K",
+    "lastTx": "2026-07-30",
+    "lastFiling": "2026-08-14",
+    "estBuyLabel": "$521K",
     "estSellLabel": "$1.1M",
     "pctLate": 18
   },
@@ -369,6 +376,18 @@
     }
   ],
   "trades": [
+    {
+      "member": "Richard McCormick",
+      "memberSlug": "richard-mccormick",
+      "hasPage": false,
+      "party": "R",
+      "side": "BUY",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-07-30",
+      "filedDate": "2026-08-14",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035204.pdf"
+    },
     {
       "member": "Maria Elvira Salazar",
       "memberSlug": "maria-elvira-salazar",
@@ -656,18 +675,6 @@
       "filedDate": "2025-11-21",
       "daysLate": 0,
       "sourceUrl": "https://efdsearch.senate.gov/search/view/ptr/849c731f-a2a7-4ed8-91ad-8fee325ab75e/"
-    },
-    {
-      "member": "Lisa C. McClain",
-      "memberSlug": "lisa-c-mcclain",
-      "hasPage": false,
-      "party": "R",
-      "side": "SELL",
-      "amountBucket": "$1K – $15K",
-      "txDate": "2025-10-31",
-      "filedDate": "2025-11-21",
-      "daysLate": 0,
-      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20033446.pdf"
     }
   ],
   "tradesShown": 25

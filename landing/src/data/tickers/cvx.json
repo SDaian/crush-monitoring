@@ -9,25 +9,21 @@
   },
   "indexable": true,
   "technical": {
-    "asOf": "2026-08-14",
-    "price": 200.0,
-    "chg1d": 1.16,
-    "chg1w": 7.2,
-    "chg1m": 8.78,
-    "rsi14": 64.5,
-    "sma50": 183.99,
-    "sma200": 177.33,
-    "vsSma50": 8.7,
-    "vsSma200": 12.8,
-    "relVol": 1.0,
+    "asOf": "2026-08-19",
+    "price": 205.76,
+    "chg1d": 0.01,
+    "chg1w": 4.66,
+    "chg1m": 7.69,
+    "rsi14": 69.8,
+    "sma50": 184.98,
+    "sma200": 178.09,
+    "vsSma50": 11.2,
+    "vsSma200": 15.5,
+    "relVol": 1.02,
     "high52w": 211.15,
     "low52w": 146.75,
-    "rangePos": 83.0,
+    "rangePos": 92.0,
     "series": [
-      {
-        "d": "2025-08-22",
-        "c": 158.18
-      },
       {
         "d": "2025-08-29",
         "c": 160.6
@@ -231,6 +227,10 @@
       {
         "d": "2026-08-14",
         "c": 200.0
+      },
+      {
+        "d": "2026-08-19",
+        "c": 205.76
       }
     ],
     "signals": [],
@@ -244,17 +244,17 @@
     }
   },
   "summary": {
-    "trades": 40,
-    "members": 17,
-    "buys": 16,
-    "sells": 23,
+    "trades": 43,
+    "members": 19,
+    "buys": 18,
+    "sells": 24,
     "other": 1,
     "firstTx": "2024-05-07",
-    "lastTx": "2026-06-15",
-    "lastFiling": "2026-08-05",
-    "estBuyLabel": "$293K",
-    "estSellLabel": "$331K",
-    "pctLate": 18
+    "lastTx": "2026-07-02",
+    "lastFiling": "2026-08-17",
+    "estBuyLabel": "$309K",
+    "estSellLabel": "$339K",
+    "pctLate": 23
   },
   "topMembers": [
     {
@@ -335,6 +335,17 @@
       "hasPage": false
     },
     {
+      "name": "John Boozman",
+      "slug": "john-boozman",
+      "party": "R",
+      "chamber": "Senate",
+      "trades": 2,
+      "buys": 2,
+      "sells": 0,
+      "estLabel": "$16K",
+      "hasPage": false
+    },
+    {
       "name": "Lisa C. McClain",
       "slug": "lisa-c-mcclain",
       "party": "R",
@@ -355,20 +366,33 @@
       "sells": 2,
       "estLabel": "$16K",
       "hasPage": false
-    },
-    {
-      "name": "Roger Williams",
-      "slug": "roger-williams",
-      "party": "R",
-      "chamber": "House",
-      "trades": 1,
-      "buys": 0,
-      "sells": 1,
-      "estLabel": "$33K",
-      "hasPage": false
     }
   ],
   "trades": [
+    {
+      "member": "John Boozman",
+      "memberSlug": "john-boozman",
+      "hasPage": false,
+      "party": "R",
+      "side": "BUY",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-07-02",
+      "filedDate": "2026-08-17",
+      "daysLate": 1,
+      "sourceUrl": "https://efdsearch.senate.gov/search/view/ptr/4184cc9a-78e0-45f3-84f7-642011e6ff98/"
+    },
+    {
+      "member": "John Boozman",
+      "memberSlug": "john-boozman",
+      "hasPage": false,
+      "party": "R",
+      "side": "BUY",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-07-02",
+      "filedDate": "2026-08-17",
+      "daysLate": 1,
+      "sourceUrl": "https://efdsearch.senate.gov/search/view/ptr/4a558db2-e492-4e8f-8a28-7b703a5c8e08/"
+    },
     {
       "member": "David J. Taylor",
       "memberSlug": "david-j-taylor",
@@ -514,6 +538,18 @@
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20033789.pdf"
     },
     {
+      "member": "Michael Guest",
+      "memberSlug": "michael-guest",
+      "hasPage": false,
+      "party": "R",
+      "side": "SELL",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2025-12-16",
+      "filedDate": "2026-08-14",
+      "daysLate": 196,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035130.pdf"
+    },
+    {
       "member": "Gilbert Ray Cisneros, Jr.",
       "memberSlug": "gilbert-ray-cisneros-jr",
       "hasPage": true,
@@ -632,42 +668,6 @@
       "filedDate": "2025-08-13",
       "daysLate": 12,
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20030891.pdf"
-    },
-    {
-      "member": "Marjorie Taylor Greene",
-      "memberSlug": "marjorie-taylor-greene",
-      "hasPage": true,
-      "party": "R",
-      "side": "BUY",
-      "amountBucket": "$1K – $15K",
-      "txDate": "2025-05-14",
-      "filedDate": "2025-05-19",
-      "daysLate": 0,
-      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20030389.pdf"
-    },
-    {
-      "member": "Markwayne Mullin",
-      "memberSlug": "markwayne-mullin",
-      "hasPage": false,
-      "party": "R",
-      "side": "BUY",
-      "amountBucket": "$50K – $100K",
-      "txDate": "2025-05-13",
-      "filedDate": "2025-06-11",
-      "daysLate": 0,
-      "sourceUrl": "https://efdsearch.senate.gov/search/view/ptr/8bb121de-bbff-4550-9dd4-b60d4002e230/"
-    },
-    {
-      "member": "Jefferson Shreve",
-      "memberSlug": "jefferson-shreve",
-      "hasPage": false,
-      "party": "R",
-      "side": "SELL",
-      "amountBucket": "$15K – $50K",
-      "txDate": "2025-05-12",
-      "filedDate": "2025-06-22",
-      "daysLate": 0,
-      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20030387.pdf"
     }
   ],
   "tradesShown": 25

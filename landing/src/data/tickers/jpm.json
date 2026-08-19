@@ -9,25 +9,21 @@
   },
   "indexable": true,
   "technical": {
-    "asOf": "2026-08-14",
-    "price": 362.84,
-    "chg1d": -0.07,
-    "chg1w": 1.49,
-    "chg1m": 5.74,
-    "rsi14": 65.2,
-    "sma50": 339.37,
-    "sma200": 314.85,
-    "vsSma50": 6.9,
-    "vsSma200": 15.2,
-    "relVol": 0.77,
+    "asOf": "2026-08-19",
+    "price": 357.26,
+    "chg1d": -1.65,
+    "chg1w": -2.17,
+    "chg1m": 3.48,
+    "rsi14": 55.4,
+    "sma50": 342.32,
+    "sma200": 315.66,
+    "vsSma50": 4.4,
+    "vsSma200": 13.2,
+    "relVol": 0.79,
     "high52w": 365.18,
     "low52w": 282.84,
-    "rangePos": 97.0,
+    "rangePos": 90.0,
     "series": [
-      {
-        "d": "2025-08-22",
-        "c": 296.24
-      },
       {
         "d": "2025-08-29",
         "c": 301.42
@@ -231,30 +227,34 @@
       {
         "d": "2026-08-14",
         "c": 362.84
+      },
+      {
+        "d": "2026-08-19",
+        "c": 357.26
       }
     ],
     "signals": [],
     "nextEarnings": null,
     "score": {
       "label": "Strong Buy",
-      "buys": 6,
-      "sells": 0,
+      "buys": 5,
+      "sells": 1,
       "holds": 1,
-      "ratio": 0.857
+      "ratio": 0.571
     }
   },
   "summary": {
-    "trades": 61,
+    "trades": 62,
     "members": 27,
     "buys": 30,
-    "sells": 31,
+    "sells": 32,
     "other": 0,
     "firstTx": "2024-03-12",
-    "lastTx": "2026-04-13",
-    "lastFiling": "2026-08-05",
+    "lastTx": "2026-07-23",
+    "lastFiling": "2026-08-17",
     "estBuyLabel": "$332K",
-    "estSellLabel": "$654K",
-    "pctLate": 28
+    "estSellLabel": "$662K",
+    "pctLate": 27
   },
   "topMembers": [
     {
@@ -302,6 +302,17 @@
       "hasPage": false
     },
     {
+      "name": "John Boozman",
+      "slug": "john-boozman",
+      "party": "R",
+      "chamber": "Senate",
+      "trades": 4,
+      "buys": 0,
+      "sells": 4,
+      "estLabel": "$32K",
+      "hasPage": false
+    },
+    {
       "name": "Tommy Tuberville",
       "slug": "tommy-tuberville",
       "party": "R",
@@ -311,17 +322,6 @@
       "sells": 3,
       "estLabel": "$73K",
       "hasPage": true
-    },
-    {
-      "name": "John Boozman",
-      "slug": "john-boozman",
-      "party": "R",
-      "chamber": "Senate",
-      "trades": 3,
-      "buys": 0,
-      "sells": 3,
-      "estLabel": "$24K",
-      "hasPage": false
     },
     {
       "name": "Jefferson Shreve",
@@ -369,6 +369,18 @@
     }
   ],
   "trades": [
+    {
+      "member": "John Boozman",
+      "memberSlug": "john-boozman",
+      "hasPage": false,
+      "party": "R",
+      "side": "SELL",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-07-23",
+      "filedDate": "2026-08-17",
+      "daysLate": 0,
+      "sourceUrl": "https://efdsearch.senate.gov/search/view/ptr/28e465df-caf1-4a98-8ebc-605e1e1ba99b/"
+    },
     {
       "member": "Sheldon Whitehouse",
       "memberSlug": "sheldon-whitehouse",
@@ -656,18 +668,6 @@
       "filedDate": "2025-07-14",
       "daysLate": 0,
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20030670.pdf"
-    },
-    {
-      "member": "Lisa C. McClain",
-      "memberSlug": "lisa-c-mcclain",
-      "hasPage": false,
-      "party": "R",
-      "side": "BUY",
-      "amountBucket": "$1K – $15K",
-      "txDate": "2025-06-11",
-      "filedDate": "2025-08-13",
-      "daysLate": 18,
-      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20030891.pdf"
     }
   ],
   "tradesShown": 25

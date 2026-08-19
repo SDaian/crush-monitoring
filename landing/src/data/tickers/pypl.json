@@ -9,25 +9,21 @@
   },
   "indexable": true,
   "technical": {
-    "asOf": "2026-08-14",
-    "price": 61.66,
-    "chg1d": 1.77,
-    "chg1w": 4.38,
-    "chg1m": 8.69,
-    "rsi14": 77.2,
-    "sma50": 50.05,
-    "sma200": 51.66,
-    "vsSma50": 23.2,
-    "vsSma200": 19.4,
-    "relVol": 1.25,
+    "asOf": "2026-08-19",
+    "price": 61.25,
+    "chg1d": 1.36,
+    "chg1w": 3.46,
+    "chg1m": 9.67,
+    "rsi14": 71.4,
+    "sma50": 51.19,
+    "sma200": 51.51,
+    "vsSma50": 19.7,
+    "vsSma200": 18.9,
+    "relVol": 0.78,
     "high52w": 76.13,
     "low52w": 39.08,
-    "rangePos": 61.0,
+    "rangePos": 60.0,
     "series": [
-      {
-        "d": "2025-08-22",
-        "c": 69.9
-      },
       {
         "d": "2025-08-29",
         "c": 70.19
@@ -231,9 +227,20 @@
       {
         "d": "2026-08-14",
         "c": 61.66
+      },
+      {
+        "d": "2026-08-19",
+        "c": 61.25
       }
     ],
-    "signals": [],
+    "signals": [
+      {
+        "type": "rsi_overbought",
+        "asof": "2026-08-19",
+        "label": "RSI crossed above 70 (overbought)",
+        "dir": "neutral"
+      }
+    ],
     "nextEarnings": null,
     "score": {
       "label": "Buy",
@@ -244,17 +251,17 @@
     }
   },
   "summary": {
-    "trades": 37,
+    "trades": 39,
     "members": 17,
-    "buys": 15,
+    "buys": 17,
     "sells": 22,
     "other": 0,
     "firstTx": "2023-01-03",
-    "lastTx": "2026-05-15",
-    "lastFiling": "2026-08-05",
-    "estBuyLabel": "$145K",
+    "lastTx": "2026-07-30",
+    "lastFiling": "2026-08-17",
+    "estBuyLabel": "$161K",
     "estSellLabel": "$808K",
-    "pctLate": 16
+    "pctLate": 15
   },
   "topMembers": [
     {
@@ -266,6 +273,17 @@
       "buys": 4,
       "sells": 2,
       "estLabel": "$48K",
+      "hasPage": false
+    },
+    {
+      "name": "John Boozman",
+      "slug": "john-boozman",
+      "party": "R",
+      "chamber": "Senate",
+      "trades": 4,
+      "buys": 4,
+      "sells": 0,
+      "estLabel": "$32K",
       "hasPage": false
     },
     {
@@ -355,20 +373,33 @@
       "sells": 1,
       "estLabel": "$16K",
       "hasPage": false
-    },
-    {
-      "name": "John Boozman",
-      "slug": "john-boozman",
-      "party": "R",
-      "chamber": "Senate",
-      "trades": 2,
-      "buys": 2,
-      "sells": 0,
-      "estLabel": "$16K",
-      "hasPage": false
     }
   ],
   "trades": [
+    {
+      "member": "John Boozman",
+      "memberSlug": "john-boozman",
+      "hasPage": false,
+      "party": "R",
+      "side": "BUY",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-07-30",
+      "filedDate": "2026-08-17",
+      "daysLate": 0,
+      "sourceUrl": "https://efdsearch.senate.gov/search/view/ptr/4184cc9a-78e0-45f3-84f7-642011e6ff98/"
+    },
+    {
+      "member": "John Boozman",
+      "memberSlug": "john-boozman",
+      "hasPage": false,
+      "party": "R",
+      "side": "BUY",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-07-30",
+      "filedDate": "2026-08-17",
+      "daysLate": 0,
+      "sourceUrl": "https://efdsearch.senate.gov/search/view/ptr/4a558db2-e492-4e8f-8a28-7b703a5c8e08/"
+    },
     {
       "member": "Gilbert Ray Cisneros, Jr.",
       "memberSlug": "gilbert-ray-cisneros-jr",
@@ -644,30 +675,6 @@
       "filedDate": "2025-05-08",
       "daysLate": 0,
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20030231.pdf"
-    },
-    {
-      "member": "Julie Johnson",
-      "memberSlug": "julie-johnson",
-      "hasPage": false,
-      "party": "D",
-      "side": "SELL",
-      "amountBucket": "$1K – $15K",
-      "txDate": "2025-04-01",
-      "filedDate": "2025-05-14",
-      "daysLate": 0,
-      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20030296.pdf"
-    },
-    {
-      "member": "Byron Donalds",
-      "memberSlug": "byron-donalds",
-      "hasPage": false,
-      "party": "R",
-      "side": "BUY",
-      "amountBucket": "$1K – $15K",
-      "txDate": "2025-03-20",
-      "filedDate": "2025-04-14",
-      "daysLate": 0,
-      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20029092.pdf"
     }
   ],
   "tradesShown": 25

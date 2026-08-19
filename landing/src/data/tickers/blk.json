@@ -9,25 +9,21 @@
   },
   "indexable": true,
   "technical": {
-    "asOf": "2026-08-14",
-    "price": 1173.73,
-    "chg1d": -0.77,
-    "chg1w": 3.29,
-    "chg1m": 7.97,
-    "rsi14": 69.1,
-    "sma50": 1053.23,
-    "sma200": 1053.87,
-    "vsSma50": 11.4,
-    "vsSma200": 11.4,
-    "relVol": 0.78,
+    "asOf": "2026-08-19",
+    "price": 1158.92,
+    "chg1d": 0.4,
+    "chg1w": -0.17,
+    "chg1m": 11.62,
+    "rsi14": 62.8,
+    "sma50": 1062.18,
+    "sma200": 1054.56,
+    "vsSma50": 9.1,
+    "vsSma200": 9.9,
+    "relVol": 0.58,
     "high52w": 1202.59,
     "low52w": 922.9,
-    "rangePos": 90.0,
+    "rangePos": 84.0,
     "series": [
-      {
-        "d": "2025-08-22",
-        "c": 1148.17
-      },
       {
         "d": "2025-08-29",
         "c": 1127.14
@@ -231,6 +227,10 @@
       {
         "d": "2026-08-14",
         "c": 1173.73
+      },
+      {
+        "d": "2026-08-19",
+        "c": 1158.92
       }
     ],
     "signals": [],
@@ -244,19 +244,30 @@
     }
   },
   "summary": {
-    "trades": 36,
+    "trades": 37,
     "members": 14,
     "buys": 12,
-    "sells": 24,
+    "sells": 25,
     "other": 0,
     "firstTx": "2023-03-15",
-    "lastTx": "2026-07-14",
-    "lastFiling": "2026-08-10",
+    "lastTx": "2026-07-30",
+    "lastFiling": "2026-08-14",
     "estBuyLabel": "$255K",
-    "estSellLabel": "$418K",
+    "estSellLabel": "$426K",
     "pctLate": 11
   },
   "topMembers": [
+    {
+      "name": "Richard McCormick",
+      "slug": "richard-mccormick",
+      "party": "R",
+      "chamber": "House",
+      "trades": 6,
+      "buys": 3,
+      "sells": 3,
+      "estLabel": "$48K",
+      "hasPage": false
+    },
     {
       "name": "Jefferson Shreve",
       "slug": "jefferson-shreve",
@@ -266,17 +277,6 @@
       "buys": 2,
       "sells": 3,
       "estLabel": "$375K",
-      "hasPage": false
-    },
-    {
-      "name": "Richard McCormick",
-      "slug": "richard-mccormick",
-      "party": "R",
-      "chamber": "House",
-      "trades": 5,
-      "buys": 3,
-      "sells": 2,
-      "estLabel": "$40K",
       "hasPage": false
     },
     {
@@ -369,6 +369,18 @@
     }
   ],
   "trades": [
+    {
+      "member": "Richard McCormick",
+      "memberSlug": "richard-mccormick",
+      "hasPage": false,
+      "party": "R",
+      "side": "SELL",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-07-30",
+      "filedDate": "2026-08-14",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035204.pdf"
+    },
     {
       "member": "John J. McGuire III",
       "memberSlug": "john-j-mcguire-iii",
@@ -656,18 +668,6 @@
       "filedDate": "2025-04-08",
       "daysLate": 0,
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20029084.pdf"
-    },
-    {
-      "member": "Sheri Biggs",
-      "memberSlug": "sheri-biggs",
-      "hasPage": false,
-      "party": "R",
-      "side": "SELL",
-      "amountBucket": "$15K – $50K",
-      "txDate": "2025-03-18",
-      "filedDate": "2025-10-05",
-      "daysLate": 156,
-      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20032149.pdf"
     }
   ],
   "tradesShown": 25

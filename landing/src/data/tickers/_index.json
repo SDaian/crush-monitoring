@@ -5,11 +5,11 @@
       "slug": "msft",
       "ticker": "MSFT",
       "company": "Microsoft Corporation",
-      "trades": 194,
+      "trades": 195,
       "members": 43,
       "buys": 101,
-      "sells": 93,
-      "lastTx": "2026-07-24",
+      "sells": 94,
+      "lastTx": "2026-07-30",
       "indexable": true,
       "industry": {
         "key": "tech",
@@ -35,11 +35,11 @@
       "slug": "aapl",
       "ticker": "AAPL",
       "company": "Apple Inc.",
-      "trades": 146,
+      "trades": 147,
       "members": 43,
       "buys": 72,
-      "sells": 74,
-      "lastTx": "2026-07-21",
+      "sells": 75,
+      "lastTx": "2026-07-30",
       "indexable": true,
       "industry": {
         "key": "tech",
@@ -80,11 +80,11 @@
       "slug": "unh",
       "ticker": "UNH",
       "company": "UnitedHealth Group Incorporated",
-      "trades": 90,
+      "trades": 91,
       "members": 29,
       "buys": 44,
-      "sells": 46,
-      "lastTx": "2026-07-10",
+      "sells": 47,
+      "lastTx": "2026-07-30",
       "indexable": true,
       "industry": {
         "key": "health",
@@ -140,11 +140,11 @@
       "slug": "hd",
       "ticker": "HD",
       "company": "Home Depot, Inc.",
-      "trades": 71,
+      "trades": 73,
       "members": 23,
       "buys": 42,
-      "sells": 29,
-      "lastTx": "2026-07-20",
+      "sells": 31,
+      "lastTx": "2026-07-30",
       "indexable": true,
       "industry": {
         "key": "consumer",
@@ -170,11 +170,11 @@
       "slug": "brk-b",
       "ticker": "BRK.B",
       "company": "Berkshire Hathaway Inc. New",
-      "trades": 65,
+      "trades": 66,
       "members": 21,
-      "buys": 32,
+      "buys": 33,
       "sells": 33,
-      "lastTx": "2026-07-28",
+      "lastTx": "2026-07-30",
       "indexable": true,
       "industry": {
         "key": "finance",
@@ -185,11 +185,11 @@
       "slug": "jnj",
       "ticker": "JNJ",
       "company": "Johnson & Johnson",
-      "trades": 64,
+      "trades": 65,
       "members": 24,
       "buys": 30,
-      "sells": 34,
-      "lastTx": "2026-06-29",
+      "sells": 35,
+      "lastTx": "2026-07-30",
       "indexable": true,
       "industry": {
         "key": "health",
@@ -200,11 +200,26 @@
       "slug": "v",
       "ticker": "V",
       "company": "Visa Inc.",
-      "trades": 62,
+      "trades": 63,
       "members": 23,
       "buys": 38,
-      "sells": 24,
-      "lastTx": "2026-04-27",
+      "sells": 25,
+      "lastTx": "2026-07-30",
+      "indexable": true,
+      "industry": {
+        "key": "finance",
+        "label": "Banks & finance"
+      }
+    },
+    {
+      "slug": "jpm",
+      "ticker": "JPM",
+      "company": "JP Morgan Chase & Co.",
+      "trades": 62,
+      "members": 27,
+      "buys": 30,
+      "sells": 32,
+      "lastTx": "2026-07-23",
       "indexable": true,
       "industry": {
         "key": "finance",
@@ -220,21 +235,6 @@
       "buys": 33,
       "sells": 28,
       "lastTx": "2026-04-16",
-      "indexable": true,
-      "industry": {
-        "key": "finance",
-        "label": "Banks & finance"
-      }
-    },
-    {
-      "slug": "jpm",
-      "ticker": "JPM",
-      "company": "JP Morgan Chase & Co.",
-      "trades": 61,
-      "members": 27,
-      "buys": 30,
-      "sells": 31,
-      "lastTx": "2026-04-13",
       "indexable": true,
       "industry": {
         "key": "finance",
@@ -260,11 +260,11 @@
       "slug": "pg",
       "ticker": "PG",
       "company": "Procter & Gamble Company",
-      "trades": 55,
+      "trades": 56,
       "members": 26,
       "buys": 25,
-      "sells": 30,
-      "lastTx": "2026-06-08",
+      "sells": 31,
+      "lastTx": "2026-07-30",
       "indexable": true,
       "industry": {
         "key": "consumer",
@@ -377,6 +377,36 @@
       }
     },
     {
+      "slug": "abt",
+      "ticker": "ABT",
+      "company": "Abbott Laboratories",
+      "trades": 47,
+      "members": 19,
+      "buys": 19,
+      "sells": 27,
+      "lastTx": "2026-07-30",
+      "indexable": true,
+      "industry": {
+        "key": "health",
+        "label": "Health care & pharma"
+      }
+    },
+    {
+      "slug": "pep",
+      "ticker": "PEP",
+      "company": "Pepsico, Inc.",
+      "trades": 47,
+      "members": 23,
+      "buys": 16,
+      "sells": 31,
+      "lastTx": "2026-07-30",
+      "indexable": true,
+      "industry": {
+        "key": "agriculture",
+        "label": "Agriculture & food"
+      }
+    },
+    {
       "slug": "ibm",
       "ticker": "IBM",
       "company": "International Business Machines Corporation",
@@ -407,36 +437,6 @@
       }
     },
     {
-      "slug": "abt",
-      "ticker": "ABT",
-      "company": "Abbott Laboratories",
-      "trades": 46,
-      "members": 19,
-      "buys": 19,
-      "sells": 26,
-      "lastTx": "2026-07-17",
-      "indexable": true,
-      "industry": {
-        "key": "health",
-        "label": "Health care & pharma"
-      }
-    },
-    {
-      "slug": "pep",
-      "ticker": "PEP",
-      "company": "Pepsico, Inc.",
-      "trades": 46,
-      "members": 23,
-      "buys": 16,
-      "sells": 30,
-      "lastTx": "2026-07-17",
-      "indexable": true,
-      "industry": {
-        "key": "agriculture",
-        "label": "Agriculture & food"
-      }
-    },
-    {
       "slug": "acn",
       "ticker": "ACN",
       "company": "Accenture plc",
@@ -449,6 +449,21 @@
       "industry": {
         "key": "tech",
         "label": "Technology"
+      }
+    },
+    {
+      "slug": "cvx",
+      "ticker": "CVX",
+      "company": "Chevron Corporation",
+      "trades": 43,
+      "members": 19,
+      "buys": 18,
+      "sells": 24,
+      "lastTx": "2026-07-02",
+      "indexable": true,
+      "industry": {
+        "key": "energy",
+        "label": "Energy & utilities"
       }
     },
     {
@@ -512,6 +527,21 @@
       }
     },
     {
+      "slug": "xom",
+      "ticker": "XOM",
+      "company": "Exxon Mobil Corporation",
+      "trades": 40,
+      "members": 21,
+      "buys": 17,
+      "sells": 18,
+      "lastTx": "2026-07-20",
+      "indexable": true,
+      "industry": {
+        "key": "energy",
+        "label": "Energy & utilities"
+      }
+    },
+    {
       "slug": "now",
       "ticker": "NOW",
       "company": "ServiceNow, Inc.",
@@ -527,18 +557,33 @@
       }
     },
     {
-      "slug": "cvx",
-      "ticker": "CVX",
-      "company": "Chevron Corporation",
-      "trades": 40,
+      "slug": "pypl",
+      "ticker": "PYPL",
+      "company": "PayPal Holdings, Inc.",
+      "trades": 39,
       "members": 17,
-      "buys": 16,
-      "sells": 23,
-      "lastTx": "2026-06-15",
+      "buys": 17,
+      "sells": 22,
+      "lastTx": "2026-07-30",
       "indexable": true,
       "industry": {
-        "key": "energy",
-        "label": "Energy & utilities"
+        "key": "finance",
+        "label": "Banks & finance"
+      }
+    },
+    {
+      "slug": "wmt",
+      "ticker": "WMT",
+      "company": "Walmart Inc.",
+      "trades": 39,
+      "members": 18,
+      "buys": 22,
+      "sells": 17,
+      "lastTx": "2026-07-30",
+      "indexable": true,
+      "industry": {
+        "key": "consumer",
+        "label": "Consumer & retail"
       }
     },
     {
@@ -572,33 +617,18 @@
       }
     },
     {
-      "slug": "wmt",
-      "ticker": "WMT",
-      "company": "Walmart Inc.",
-      "trades": 38,
-      "members": 18,
-      "buys": 22,
-      "sells": 16,
-      "lastTx": "2026-03-27",
+      "slug": "blk",
+      "ticker": "BLK",
+      "company": "BlackRock, Inc.",
+      "trades": 37,
+      "members": 14,
+      "buys": 12,
+      "sells": 25,
+      "lastTx": "2026-07-30",
       "indexable": true,
       "industry": {
-        "key": "consumer",
-        "label": "Consumer & retail"
-      }
-    },
-    {
-      "slug": "xom",
-      "ticker": "XOM",
-      "company": "Exxon Mobil Corporation",
-      "trades": 38,
-      "members": 20,
-      "buys": 17,
-      "sells": 18,
-      "lastTx": "2026-07-20",
-      "indexable": true,
-      "industry": {
-        "key": "energy",
-        "label": "Energy & utilities"
+        "key": "finance",
+        "label": "Banks & finance"
       }
     },
     {
@@ -614,36 +644,6 @@
       "industry": {
         "key": "tech",
         "label": "Technology"
-      }
-    },
-    {
-      "slug": "pypl",
-      "ticker": "PYPL",
-      "company": "PayPal Holdings, Inc.",
-      "trades": 37,
-      "members": 17,
-      "buys": 15,
-      "sells": 22,
-      "lastTx": "2026-05-15",
-      "indexable": true,
-      "industry": {
-        "key": "finance",
-        "label": "Banks & finance"
-      }
-    },
-    {
-      "slug": "blk",
-      "ticker": "BLK",
-      "company": "BlackRock, Inc.",
-      "trades": 36,
-      "members": 14,
-      "buys": 12,
-      "sells": 24,
-      "lastTx": "2026-07-14",
-      "indexable": true,
-      "industry": {
-        "key": "finance",
-        "label": "Banks & finance"
       }
     },
     {
@@ -779,6 +779,21 @@
       "industry": {
         "key": "tech",
         "label": "Technology"
+      }
+    },
+    {
+      "slug": "cost",
+      "ticker": "COST",
+      "company": "Costco Wholesale Corporation",
+      "trades": 32,
+      "members": 15,
+      "buys": 16,
+      "sells": 16,
+      "lastTx": "2026-07-30",
+      "indexable": true,
+      "industry": {
+        "key": "consumer",
+        "label": "Consumer & retail"
       }
     },
     {
@@ -932,21 +947,6 @@
       }
     },
     {
-      "slug": "cost",
-      "ticker": "COST",
-      "company": "Costco Wholesale Corporation",
-      "trades": 31,
-      "members": 15,
-      "buys": 16,
-      "sells": 15,
-      "lastTx": "2026-07-10",
-      "indexable": true,
-      "industry": {
-        "key": "consumer",
-        "label": "Consumer & retail"
-      }
-    },
-    {
       "slug": "amat",
       "ticker": "AMAT",
       "company": "Applied Materials, Inc.",
@@ -1019,6 +1019,21 @@
       "industry": {
         "key": "health",
         "label": "Health care & pharma"
+      }
+    },
+    {
+      "slug": "nee",
+      "ticker": "NEE",
+      "company": "NextEra Energy, Inc.",
+      "trades": 29,
+      "members": 15,
+      "buys": 11,
+      "sells": 18,
+      "lastTx": "2026-07-30",
+      "indexable": true,
+      "industry": {
+        "key": "energy",
+        "label": "Energy & utilities"
       }
     },
     {
@@ -1097,6 +1112,36 @@
       }
     },
     {
+      "slug": "mcd",
+      "ticker": "MCD",
+      "company": "McDonald's Corporation",
+      "trades": 28,
+      "members": 14,
+      "buys": 12,
+      "sells": 16,
+      "lastTx": "2026-07-30",
+      "indexable": true,
+      "industry": {
+        "key": "consumer",
+        "label": "Consumer & retail"
+      }
+    },
+    {
+      "slug": "csco",
+      "ticker": "CSCO",
+      "company": "Cisco Systems, Inc.",
+      "trades": 28,
+      "members": 17,
+      "buys": 14,
+      "sells": 14,
+      "lastTx": "2026-07-30",
+      "indexable": true,
+      "industry": {
+        "key": "tech",
+        "label": "Technology"
+      }
+    },
+    {
       "slug": "ma",
       "ticker": "MA",
       "company": "Mastercard Incorporated",
@@ -1127,21 +1172,6 @@
       }
     },
     {
-      "slug": "nee",
-      "ticker": "NEE",
-      "company": "NextEra Energy, Inc.",
-      "trades": 28,
-      "members": 15,
-      "buys": 11,
-      "sells": 17,
-      "lastTx": "2026-06-08",
-      "indexable": true,
-      "industry": {
-        "key": "energy",
-        "label": "Energy & utilities"
-      }
-    },
-    {
       "slug": "hon",
       "ticker": "HON",
       "company": "Honeywell International Inc.",
@@ -1169,36 +1199,6 @@
       "industry": {
         "key": "health",
         "label": "Health care & pharma"
-      }
-    },
-    {
-      "slug": "mcd",
-      "ticker": "MCD",
-      "company": "McDonald's Corporation",
-      "trades": 27,
-      "members": 14,
-      "buys": 12,
-      "sells": 15,
-      "lastTx": "2026-03-31",
-      "indexable": true,
-      "industry": {
-        "key": "consumer",
-        "label": "Consumer & retail"
-      }
-    },
-    {
-      "slug": "csco",
-      "ticker": "CSCO",
-      "company": "Cisco Systems, Inc.",
-      "trades": 27,
-      "members": 17,
-      "buys": 14,
-      "sells": 13,
-      "lastTx": "2026-07-21",
-      "indexable": true,
-      "industry": {
-        "key": "tech",
-        "label": "Technology"
       }
     },
     {
@@ -1307,6 +1307,21 @@
       }
     },
     {
+      "slug": "adi",
+      "ticker": "ADI",
+      "company": "Analog Devices, Inc.",
+      "trades": 25,
+      "members": 11,
+      "buys": 9,
+      "sells": 16,
+      "lastTx": "2026-07-30",
+      "indexable": true,
+      "industry": {
+        "key": "tech",
+        "label": "Technology"
+      }
+    },
+    {
       "slug": "wab",
       "ticker": "WAB",
       "company": "Westinghouse Air Brake Technologies Corporation",
@@ -1400,11 +1415,11 @@
       "slug": "emr",
       "ticker": "EMR",
       "company": "Emerson Electric Company",
-      "trades": 12,
+      "trades": 13,
       "members": 7,
       "buys": 7,
-      "sells": 5,
-      "lastTx": "2026-03-27",
+      "sells": 6,
+      "lastTx": "2026-07-30",
       "indexable": false,
       "industry": {
         "key": "industrial",

@@ -9,25 +9,21 @@
   },
   "indexable": true,
   "technical": {
-    "asOf": "2026-08-14",
-    "price": 260.35,
-    "chg1d": -0.66,
-    "chg1w": 0.43,
-    "chg1m": 4.15,
-    "rsi14": 55.2,
-    "sma50": 251.31,
-    "sma200": 229.78,
-    "vsSma50": 3.6,
-    "vsSma200": 13.3,
-    "relVol": 0.69,
-    "high52w": 267.24,
+    "asOf": "2026-08-19",
+    "price": 273.41,
+    "chg1d": 0.85,
+    "chg1w": 4.81,
+    "chg1m": 9.1,
+    "rsi14": 68.6,
+    "sma50": 253.59,
+    "sma200": 231.0,
+    "vsSma50": 7.8,
+    "vsSma200": 18.4,
+    "relVol": 0.89,
+    "high52w": 273.41,
     "low52w": 174.16,
-    "rangePos": 93.0,
+    "rangePos": 100.0,
     "series": [
-      {
-        "d": "2025-08-22",
-        "c": 179.29
-      },
       {
         "d": "2025-08-29",
         "c": 177.17
@@ -231,9 +227,20 @@
       {
         "d": "2026-08-14",
         "c": 260.35
+      },
+      {
+        "d": "2026-08-19",
+        "c": 273.41
       }
     ],
-    "signals": [],
+    "signals": [
+      {
+        "type": "new_52w_high",
+        "asof": "2026-08-19",
+        "label": "New 52-week high",
+        "dir": "bull"
+      }
+    ],
     "nextEarnings": null,
     "score": {
       "label": "Strong Buy",
@@ -244,16 +251,16 @@
     }
   },
   "summary": {
-    "trades": 64,
+    "trades": 65,
     "members": 24,
     "buys": 30,
-    "sells": 34,
+    "sells": 35,
     "other": 0,
     "firstTx": "2023-03-15",
-    "lastTx": "2026-06-29",
-    "lastFiling": "2026-08-05",
+    "lastTx": "2026-07-30",
+    "lastFiling": "2026-08-14",
     "estBuyLabel": "$363K",
-    "estSellLabel": "$869K",
+    "estSellLabel": "$877K",
     "pctLate": 17
   },
   "topMembers": [
@@ -302,6 +309,17 @@
       "hasPage": false
     },
     {
+      "name": "Richard McCormick",
+      "slug": "richard-mccormick",
+      "party": "R",
+      "chamber": "House",
+      "trades": 5,
+      "buys": 2,
+      "sells": 3,
+      "estLabel": "$40K",
+      "hasPage": false
+    },
+    {
       "name": "Gilbert Ray Cisneros, Jr.",
       "slug": "gilbert-ray-cisneros-jr",
       "party": "D",
@@ -335,17 +353,6 @@
       "hasPage": true
     },
     {
-      "name": "Richard McCormick",
-      "slug": "richard-mccormick",
-      "party": "R",
-      "chamber": "House",
-      "trades": 4,
-      "buys": 2,
-      "sells": 2,
-      "estLabel": "$32K",
-      "hasPage": false
-    },
-    {
       "name": "Jefferson Shreve",
       "slug": "jefferson-shreve",
       "party": "R",
@@ -369,6 +376,18 @@
     }
   ],
   "trades": [
+    {
+      "member": "Richard McCormick",
+      "memberSlug": "richard-mccormick",
+      "hasPage": false,
+      "party": "R",
+      "side": "SELL",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-07-30",
+      "filedDate": "2026-08-14",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035204.pdf"
+    },
     {
       "member": "Thomas H. Kean, Jr.",
       "memberSlug": "thomas-h-kean-jr",
@@ -656,18 +675,6 @@
       "filedDate": "2025-09-11",
       "daysLate": 0,
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20032066.pdf"
-    },
-    {
-      "member": "Lisa C. McClain",
-      "memberSlug": "lisa-c-mcclain",
-      "hasPage": false,
-      "party": "R",
-      "side": "BUY",
-      "amountBucket": "$1K – $15K",
-      "txDate": "2025-08-04",
-      "filedDate": "2025-09-12",
-      "daysLate": 0,
-      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20030932.pdf"
     }
   ],
   "tradesShown": 25
