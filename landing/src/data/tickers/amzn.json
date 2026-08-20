@@ -244,15 +244,15 @@
     }
   },
   "summary": {
-    "trades": 119,
+    "trades": 120,
     "members": 32,
-    "buys": 87,
+    "buys": 88,
     "sells": 32,
     "other": 0,
     "firstTx": "2024-10-23",
-    "lastTx": "2026-06-25",
-    "lastFiling": "2026-08-07",
-    "estBuyLabel": "$4.2M",
+    "lastTx": "2026-07-08",
+    "lastFiling": "2026-08-18",
+    "estBuyLabel": "$4.3M",
     "estSellLabel": "$3.7M",
     "pctLate": 18
   },
@@ -346,6 +346,17 @@
       "hasPage": false
     },
     {
+      "name": "Thomas H. Kean, Jr.",
+      "slug": "thomas-h-kean-jr",
+      "party": "R",
+      "chamber": "House",
+      "trades": 5,
+      "buys": 5,
+      "sells": 0,
+      "estLabel": "$40K",
+      "hasPage": false
+    },
+    {
       "name": "Nancy Pelosi",
       "slug": "nancy-pelosi",
       "party": "D",
@@ -355,20 +366,21 @@
       "sells": 1,
       "estLabel": "$4.3M",
       "hasPage": true
-    },
-    {
-      "name": "Thomas H. Kean, Jr.",
-      "slug": "thomas-h-kean-jr",
-      "party": "R",
-      "chamber": "House",
-      "trades": 4,
-      "buys": 4,
-      "sells": 0,
-      "estLabel": "$32K",
-      "hasPage": false
     }
   ],
   "trades": [
+    {
+      "member": "Thomas H. Kean, Jr.",
+      "memberSlug": "thomas-h-kean-jr",
+      "hasPage": false,
+      "party": "R",
+      "side": "BUY",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-07-08",
+      "filedDate": "2026-08-18",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035273.pdf"
+    },
     {
       "member": "Michael A. Rulli",
       "memberSlug": "michael-a-rulli",
@@ -656,18 +668,6 @@
       "filedDate": "2026-01-23",
       "daysLate": 0,
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20033725.pdf"
-    },
-    {
-      "member": "Gilbert Ray Cisneros, Jr.",
-      "memberSlug": "gilbert-ray-cisneros-jr",
-      "hasPage": true,
-      "party": "D",
-      "side": "SELL",
-      "amountBucket": "$1K – $15K",
-      "txDate": "2025-12-24",
-      "filedDate": "2026-01-12",
-      "daysLate": 0,
-      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20033762.pdf"
     }
   ],
   "tradesShown": 25

@@ -35,11 +35,11 @@
       "slug": "aapl",
       "ticker": "AAPL",
       "company": "Apple Inc.",
-      "trades": 147,
+      "trades": 148,
       "members": 43,
-      "buys": 72,
+      "buys": 73,
       "sells": 75,
-      "lastTx": "2026-07-30",
+      "lastTx": "2026-08-13",
       "indexable": true,
       "industry": {
         "key": "tech",
@@ -50,11 +50,11 @@
       "slug": "amzn",
       "ticker": "AMZN",
       "company": "Amazon.com, Inc.",
-      "trades": 119,
+      "trades": 120,
       "members": 32,
-      "buys": 87,
+      "buys": 88,
       "sells": 32,
-      "lastTx": "2026-06-25",
+      "lastTx": "2026-07-08",
       "indexable": true,
       "industry": {
         "key": "tech",
@@ -92,14 +92,14 @@
       }
     },
     {
-      "slug": "googl",
-      "ticker": "GOOGL",
-      "company": "Alphabet Inc.",
-      "trades": 83,
-      "members": 28,
-      "buys": 41,
-      "sells": 42,
-      "lastTx": "2026-07-17",
+      "slug": "avgo",
+      "ticker": "AVGO",
+      "company": "Broadcom Inc.",
+      "trades": 84,
+      "members": 23,
+      "buys": 47,
+      "sells": 37,
+      "lastTx": "2026-07-24",
       "indexable": true,
       "industry": {
         "key": "tech",
@@ -107,14 +107,14 @@
       }
     },
     {
-      "slug": "avgo",
-      "ticker": "AVGO",
-      "company": "Broadcom Inc.",
-      "trades": 83,
-      "members": 22,
-      "buys": 46,
-      "sells": 37,
-      "lastTx": "2026-07-24",
+      "slug": "googl",
+      "ticker": "GOOGL",
+      "company": "Alphabet Inc.",
+      "trades": 84,
+      "members": 28,
+      "buys": 41,
+      "sells": 43,
+      "lastTx": "2026-07-22",
       "indexable": true,
       "industry": {
         "key": "tech",
@@ -272,6 +272,21 @@
       }
     },
     {
+      "slug": "amd",
+      "ticker": "AMD",
+      "company": "Advanced Micro Devices, Inc.",
+      "trades": 50,
+      "members": 15,
+      "buys": 38,
+      "sells": 12,
+      "lastTx": "2026-07-14",
+      "indexable": true,
+      "industry": {
+        "key": "tech",
+        "label": "Technology"
+      }
+    },
+    {
       "slug": "ups",
       "ticker": "UPS",
       "company": "United Parcel Service, Inc.",
@@ -332,18 +347,18 @@
       }
     },
     {
-      "slug": "amd",
-      "ticker": "AMD",
-      "company": "Advanced Micro Devices, Inc.",
-      "trades": 49,
-      "members": 14,
-      "buys": 37,
-      "sells": 12,
-      "lastTx": "2026-07-10",
+      "slug": "abt",
+      "ticker": "ABT",
+      "company": "Abbott Laboratories",
+      "trades": 48,
+      "members": 19,
+      "buys": 19,
+      "sells": 28,
+      "lastTx": "2026-07-30",
       "indexable": true,
       "industry": {
-        "key": "tech",
-        "label": "Technology"
+        "key": "health",
+        "label": "Health care & pharma"
       }
     },
     {
@@ -374,21 +389,6 @@
       "industry": {
         "key": "tech",
         "label": "Technology"
-      }
-    },
-    {
-      "slug": "abt",
-      "ticker": "ABT",
-      "company": "Abbott Laboratories",
-      "trades": 47,
-      "members": 19,
-      "buys": 19,
-      "sells": 27,
-      "lastTx": "2026-07-30",
-      "indexable": true,
-      "industry": {
-        "key": "health",
-        "label": "Health care & pharma"
       }
     },
     {

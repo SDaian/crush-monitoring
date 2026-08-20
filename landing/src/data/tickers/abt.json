@@ -244,17 +244,17 @@
     }
   },
   "summary": {
-    "trades": 47,
+    "trades": 48,
     "members": 19,
     "buys": 19,
-    "sells": 27,
+    "sells": 28,
     "other": 1,
     "firstTx": "2023-03-15",
     "lastTx": "2026-07-30",
-    "lastFiling": "2026-08-14",
+    "lastFiling": "2026-08-18",
     "estBuyLabel": "$152K",
-    "estSellLabel": "$332K",
-    "pctLate": 11
+    "estSellLabel": "$365K",
+    "pctLate": 10
   },
   "topMembers": [
     {
@@ -335,6 +335,17 @@
       "hasPage": false
     },
     {
+      "name": "Rick W. Allen",
+      "slug": "rick-w-allen",
+      "party": "R",
+      "chamber": "House",
+      "trades": 2,
+      "buys": 0,
+      "sells": 2,
+      "estLabel": "$65K",
+      "hasPage": false
+    },
+    {
       "name": "Bruce Westerman",
       "slug": "bruce-westerman",
       "party": "R",
@@ -348,17 +359,6 @@
     {
       "name": "Julia Letlow",
       "slug": "julia-letlow",
-      "party": "R",
-      "chamber": "House",
-      "trades": 2,
-      "buys": 1,
-      "sells": 1,
-      "estLabel": "$16K",
-      "hasPage": false
-    },
-    {
-      "name": "Lisa C. McClain",
-      "slug": "lisa-c-mcclain",
       "party": "R",
       "chamber": "House",
       "trades": 2,
@@ -392,6 +392,18 @@
       "filedDate": "2026-08-12",
       "daysLate": 0,
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035203.pdf"
+    },
+    {
+      "member": "Rick W. Allen",
+      "memberSlug": "rick-w-allen",
+      "hasPage": false,
+      "party": "R",
+      "side": "SELL",
+      "amountBucket": "$15K – $50K",
+      "txDate": "2026-07-14",
+      "filedDate": "2026-08-18",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035260.pdf"
     },
     {
       "member": "Rick Larsen",
@@ -656,18 +668,6 @@
       "filedDate": "2025-10-16",
       "daysLate": 0,
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20032298.pdf"
-    },
-    {
-      "member": "Julie Johnson",
-      "memberSlug": "julie-johnson",
-      "hasPage": false,
-      "party": "D",
-      "side": "SELL",
-      "amountBucket": "$1K – $15K",
-      "txDate": "2025-08-14",
-      "filedDate": "2025-09-11",
-      "daysLate": 0,
-      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20032066.pdf"
     }
   ],
   "tradesShown": 25

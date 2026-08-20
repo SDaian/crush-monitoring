@@ -244,17 +244,17 @@
     }
   },
   "summary": {
-    "trades": 147,
+    "trades": 148,
     "members": 43,
-    "buys": 72,
+    "buys": 73,
     "sells": 75,
     "other": 0,
     "firstTx": "2023-03-15",
-    "lastTx": "2026-07-30",
-    "lastFiling": "2026-08-14",
+    "lastTx": "2026-08-13",
+    "lastFiling": "2026-08-18",
     "estBuyLabel": "$3.6M",
     "estSellLabel": "$47.8M",
-    "pctLate": 27
+    "pctLate": 26
   },
   "topMembers": [
     {
@@ -280,6 +280,17 @@
       "hasPage": true
     },
     {
+      "name": "Ed Case",
+      "slug": "ed-case",
+      "party": "D",
+      "chamber": "House",
+      "trades": 10,
+      "buys": 10,
+      "sells": 0,
+      "estLabel": "$80K",
+      "hasPage": false
+    },
+    {
       "name": "Lisa C. McClain",
       "slug": "lisa-c-mcclain",
       "party": "R",
@@ -288,17 +299,6 @@
       "buys": 5,
       "sells": 4,
       "estLabel": "$146K",
-      "hasPage": false
-    },
-    {
-      "name": "Ed Case",
-      "slug": "ed-case",
-      "party": "D",
-      "chamber": "House",
-      "trades": 9,
-      "buys": 9,
-      "sells": 0,
-      "estLabel": "$72K",
       "hasPage": false
     },
     {
@@ -369,6 +369,18 @@
     }
   ],
   "trades": [
+    {
+      "member": "Ed Case",
+      "memberSlug": "ed-case",
+      "hasPage": false,
+      "party": "D",
+      "side": "BUY",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-08-13",
+      "filedDate": "2026-08-18",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035275.pdf"
+    },
     {
       "member": "Richard McCormick",
       "memberSlug": "richard-mccormick",
@@ -656,18 +668,6 @@
       "filedDate": "2026-02-02",
       "daysLate": 0,
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20033916.pdf"
-    },
-    {
-      "member": "David J. Taylor",
-      "memberSlug": "david-j-taylor",
-      "hasPage": false,
-      "party": "R",
-      "side": "BUY",
-      "amountBucket": "$1K – $15K",
-      "txDate": "2026-01-16",
-      "filedDate": "2026-02-02",
-      "daysLate": 0,
-      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20033918.pdf"
     }
   ],
   "tradesShown": 25
