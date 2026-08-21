@@ -9,20 +9,20 @@
   },
   "indexable": true,
   "technical": {
-    "asOf": "2026-08-19",
-    "price": 143.81,
-    "chg1d": 0.71,
-    "chg1w": -6.18,
-    "chg1m": 13.19,
-    "rsi14": 50.3,
-    "sma50": 147.8,
-    "sma200": 174.23,
-    "vsSma50": -2.7,
-    "vsSma200": -17.5,
-    "relVol": 0.77,
+    "asOf": "2026-08-20",
+    "price": 142.07,
+    "chg1d": -1.21,
+    "chg1w": -9.06,
+    "chg1m": 12.9,
+    "rsi14": 48.8,
+    "sma50": 146.52,
+    "sma200": 173.63,
+    "vsSma50": -3.0,
+    "vsSma200": -18.2,
+    "relVol": 0.5,
     "high52w": 328.33,
     "low52w": 114.99,
-    "rangePos": 14.0,
+    "rangePos": 13.0,
     "series": [
       {
         "d": "2025-08-29",
@@ -229,8 +229,8 @@
         "c": 150.52
       },
       {
-        "d": "2026-08-19",
-        "c": 143.81
+        "d": "2026-08-20",
+        "c": 142.07
       }
     ],
     "signals": [],
@@ -244,17 +244,17 @@
     }
   },
   "summary": {
-    "trades": 48,
+    "trades": 49,
     "members": 17,
-    "buys": 18,
+    "buys": 19,
     "sells": 30,
     "other": 0,
     "firstTx": "2024-09-26",
     "lastTx": "2026-05-07",
-    "lastFiling": "2026-08-07",
-    "estBuyLabel": "$358K",
+    "lastFiling": "2026-08-20",
+    "estBuyLabel": "$366K",
     "estSellLabel": "$412K",
-    "pctLate": 15
+    "pctLate": 16
   },
   "topMembers": [
     {
@@ -335,6 +335,17 @@
       "hasPage": true
     },
     {
+      "name": "John Boozman",
+      "slug": "john-boozman",
+      "party": "R",
+      "chamber": "Senate",
+      "trades": 3,
+      "buys": 2,
+      "sells": 1,
+      "estLabel": "$24K",
+      "hasPage": false
+    },
+    {
       "name": "Val T. Hoyle",
       "slug": "val-t-hoyle",
       "party": "D",
@@ -355,17 +366,6 @@
       "sells": 2,
       "estLabel": "$65K",
       "hasPage": true
-    },
-    {
-      "name": "Thomas H. Kean, Jr.",
-      "slug": "thomas-h-kean-jr",
-      "party": "R",
-      "chamber": "House",
-      "trades": 2,
-      "buys": 0,
-      "sells": 2,
-      "estLabel": "$41K",
-      "hasPage": false
     }
   ],
   "trades": [

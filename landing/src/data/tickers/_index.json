@@ -5,9 +5,9 @@
       "slug": "msft",
       "ticker": "MSFT",
       "company": "Microsoft Corporation",
-      "trades": 195,
+      "trades": 197,
       "members": 43,
-      "buys": 101,
+      "buys": 103,
       "sells": 94,
       "lastTx": "2026-07-30",
       "indexable": true,
@@ -65,9 +65,9 @@
       "slug": "meta",
       "ticker": "META",
       "company": "Meta Platforms, Inc.",
-      "trades": 93,
+      "trades": 94,
       "members": 25,
-      "buys": 63,
+      "buys": 64,
       "sells": 30,
       "lastTx": "2026-06-17",
       "indexable": true,
@@ -80,9 +80,9 @@
       "slug": "unh",
       "ticker": "UNH",
       "company": "UnitedHealth Group Incorporated",
-      "trades": 91,
+      "trades": 92,
       "members": 29,
-      "buys": 44,
+      "buys": 45,
       "sells": 47,
       "lastTx": "2026-07-30",
       "indexable": true,
@@ -95,9 +95,9 @@
       "slug": "avgo",
       "ticker": "AVGO",
       "company": "Broadcom Inc.",
-      "trades": 84,
+      "trades": 85,
       "members": 23,
-      "buys": 47,
+      "buys": 48,
       "sells": 37,
       "lastTx": "2026-07-24",
       "indexable": true,
@@ -317,6 +317,21 @@
       }
     },
     {
+      "slug": "orcl",
+      "ticker": "ORCL",
+      "company": "Oracle Corporation",
+      "trades": 49,
+      "members": 17,
+      "buys": 19,
+      "sells": 30,
+      "lastTx": "2026-05-07",
+      "indexable": true,
+      "industry": {
+        "key": "tech",
+        "label": "Technology"
+      }
+    },
+    {
       "slug": "pltr",
       "ticker": "PLTR",
       "company": "Palantir Technologies Inc.",
@@ -359,21 +374,6 @@
       "industry": {
         "key": "health",
         "label": "Health care & pharma"
-      }
-    },
-    {
-      "slug": "orcl",
-      "ticker": "ORCL",
-      "company": "Oracle Corporation",
-      "trades": 48,
-      "members": 17,
-      "buys": 18,
-      "sells": 30,
-      "lastTx": "2026-05-07",
-      "indexable": true,
-      "industry": {
-        "key": "tech",
-        "label": "Technology"
       }
     },
     {

@@ -9,20 +9,20 @@
   },
   "indexable": true,
   "technical": {
-    "asOf": "2026-08-19",
-    "price": 484.31,
-    "chg1d": 0.56,
-    "chg1w": -1.65,
-    "chg1m": 21.76,
-    "rsi14": 63.5,
-    "sma50": 416.57,
-    "sma200": 431.67,
-    "vsSma50": 16.3,
-    "vsSma200": 12.2,
-    "relVol": 0.53,
+    "asOf": "2026-08-20",
+    "price": 481.15,
+    "chg1d": -0.65,
+    "chg1w": -3.17,
+    "chg1m": 23.26,
+    "rsi14": 61.6,
+    "sma50": 418.13,
+    "sma200": 431.48,
+    "vsSma50": 15.1,
+    "vsSma200": 11.5,
+    "relVol": 0.54,
     "high52w": 542.07,
     "low52w": 352.83,
-    "rangePos": 69.0,
+    "rangePos": 68.0,
     "series": [
       {
         "d": "2025-08-29",
@@ -229,8 +229,8 @@
         "c": 495.4
       },
       {
-        "d": "2026-08-19",
-        "c": 484.31
+        "d": "2026-08-20",
+        "c": 481.15
       }
     ],
     "signals": [],
@@ -244,17 +244,17 @@
     }
   },
   "summary": {
-    "trades": 195,
+    "trades": 197,
     "members": 43,
-    "buys": 101,
+    "buys": 103,
     "sells": 94,
     "other": 0,
     "firstTx": "2023-03-15",
     "lastTx": "2026-07-30",
-    "lastFiling": "2026-08-14",
+    "lastFiling": "2026-08-20",
     "estBuyLabel": "$27.6M",
     "estSellLabel": "$23.7M",
-    "pctLate": 13
+    "pctLate": 14
   },
   "topMembers": [
     {
@@ -324,6 +324,17 @@
       "hasPage": false
     },
     {
+      "name": "John Boozman",
+      "slug": "john-boozman",
+      "party": "R",
+      "chamber": "Senate",
+      "trades": 9,
+      "buys": 9,
+      "sells": 0,
+      "estLabel": "$72K",
+      "hasPage": false
+    },
+    {
       "name": "Tommy Tuberville",
       "slug": "tommy-tuberville",
       "party": "R",
@@ -354,17 +365,6 @@
       "buys": 0,
       "sells": 7,
       "estLabel": "$81K",
-      "hasPage": false
-    },
-    {
-      "name": "John Boozman",
-      "slug": "john-boozman",
-      "party": "R",
-      "chamber": "Senate",
-      "trades": 7,
-      "buys": 7,
-      "sells": 0,
-      "estLabel": "$56K",
       "hasPage": false
     }
   ],

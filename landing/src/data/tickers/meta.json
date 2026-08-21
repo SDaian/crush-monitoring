@@ -9,17 +9,17 @@
   },
   "indexable": true,
   "technical": {
-    "asOf": "2026-08-19",
-    "price": 546.03,
-    "chg1d": 0.43,
-    "chg1w": -5.67,
-    "chg1m": -15.19,
-    "rsi14": 37.1,
-    "sma50": 594.19,
-    "sma200": 625.08,
-    "vsSma50": -8.1,
+    "asOf": "2026-08-20",
+    "price": 545.83,
+    "chg1d": -0.04,
+    "chg1w": -8.26,
+    "chg1m": -12.97,
+    "rsi14": 37.0,
+    "sma50": 593.41,
+    "sma200": 624.57,
+    "vsSma50": -8.0,
     "vsSma200": -12.6,
-    "relVol": 0.95,
+    "relVol": 0.8,
     "high52w": 780.25,
     "low52w": 525.72,
     "rangePos": 8.0,
@@ -229,8 +229,8 @@
         "c": 589.85
       },
       {
-        "d": "2026-08-19",
-        "c": 546.03
+        "d": "2026-08-20",
+        "c": 545.83
       }
     ],
     "signals": [],
@@ -244,17 +244,17 @@
     }
   },
   "summary": {
-    "trades": 93,
+    "trades": 94,
     "members": 25,
-    "buys": 63,
+    "buys": 64,
     "sells": 30,
     "other": 0,
     "firstTx": "2024-01-02",
     "lastTx": "2026-06-17",
-    "lastFiling": "2026-08-07",
+    "lastFiling": "2026-08-20",
     "estBuyLabel": "$1.9M",
     "estSellLabel": "$648K",
-    "pctLate": 20
+    "pctLate": 21
   },
   "topMembers": [
     {
@@ -280,6 +280,17 @@
       "hasPage": false
     },
     {
+      "name": "John Boozman",
+      "slug": "john-boozman",
+      "party": "R",
+      "chamber": "Senate",
+      "trades": 7,
+      "buys": 7,
+      "sells": 0,
+      "estLabel": "$56K",
+      "hasPage": false
+    },
+    {
       "name": "Lisa C. McClain",
       "slug": "lisa-c-mcclain",
       "party": "R",
@@ -288,17 +299,6 @@
       "buys": 4,
       "sells": 3,
       "estLabel": "$56K",
-      "hasPage": false
-    },
-    {
-      "name": "John Boozman",
-      "slug": "john-boozman",
-      "party": "R",
-      "chamber": "Senate",
-      "trades": 6,
-      "buys": 6,
-      "sells": 0,
-      "estLabel": "$48K",
       "hasPage": false
     },
     {

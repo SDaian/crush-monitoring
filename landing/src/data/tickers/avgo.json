@@ -9,20 +9,20 @@
   },
   "indexable": true,
   "technical": {
-    "asOf": "2026-08-19",
-    "price": 362.48,
-    "chg1d": -4.61,
-    "chg1w": -12.88,
-    "chg1m": -6.21,
-    "rsi14": 35.3,
-    "sma50": 389.14,
-    "sma200": 369.2,
-    "vsSma50": -6.9,
-    "vsSma200": -1.8,
-    "relVol": 1.78,
+    "asOf": "2026-08-20",
+    "price": 364.03,
+    "chg1d": 0.43,
+    "chg1w": -12.87,
+    "chg1m": -8.26,
+    "rsi14": 36.2,
+    "sma50": 388.58,
+    "sma200": 369.17,
+    "vsSma50": -6.3,
+    "vsSma200": -1.4,
+    "relVol": 1.0,
     "high52w": 481.57,
     "low52w": 289.6,
-    "rangePos": 38.0,
+    "rangePos": 39.0,
     "series": [
       {
         "d": "2025-08-29",
@@ -229,8 +229,8 @@
         "c": 392.99
       },
       {
-        "d": "2026-08-19",
-        "c": 362.48
+        "d": "2026-08-20",
+        "c": 364.03
       }
     ],
     "signals": [],
@@ -244,17 +244,17 @@
     }
   },
   "summary": {
-    "trades": 84,
+    "trades": 85,
     "members": 23,
-    "buys": 47,
+    "buys": 48,
     "sells": 37,
     "other": 0,
     "firstTx": "2024-09-26",
     "lastTx": "2026-07-24",
-    "lastFiling": "2026-08-18",
+    "lastFiling": "2026-08-20",
     "estBuyLabel": "$3.8M",
     "estSellLabel": "$561K",
-    "pctLate": 15
+    "pctLate": 16
   },
   "topMembers": [
     {
@@ -357,13 +357,13 @@
       "hasPage": false
     },
     {
-      "name": "Julia Letlow",
-      "slug": "julia-letlow",
+      "name": "John Boozman",
+      "slug": "john-boozman",
       "party": "R",
-      "chamber": "House",
+      "chamber": "Senate",
       "trades": 4,
-      "buys": 1,
-      "sells": 3,
+      "buys": 4,
+      "sells": 0,
       "estLabel": "$32K",
       "hasPage": false
     }
