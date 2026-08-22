@@ -25,7 +25,7 @@ Write the chat replies to these rules:
 - Write one topic in one paragraph. Use a maximum of six sentences.
 - Never restate a header in the sentence below it. A header names the topic;
   the paragraph must say something new, or the reader reads the thought twice
-  (owner request, 2026-08-16). The hook blocks this on sight.
+  (owner request, 2026-08-16).
 
 **Follow Zinsser's four principles too**: clarity, simplicity, brevity,
 humanity. STE gives the mechanics; Zinsser gives the reason for them. Two of
@@ -34,16 +34,12 @@ his principles are not mechanical, and no check measures them:
 - **Clarity.** The reader must not read a sentence twice.
 - **Humanity.** Write like a person, not like a form. Short does not mean cold.
 
-**The rule is enforced, not promised.** A promise decays inside a long session:
-in this one the replies drifted to 30-word sentences, passive voice and
-compound tenses before the user noticed. `.claude/hooks/chat_style.py` runs as
-a **Stop hook** and measures the reply — sentence length, passive voice,
-compound tenses, Zinsser's clutter words, paragraph length. Two faults, or one
-sentence over 32 words, block the turn and return the faults so the reply gets
-rewritten. It blocks once per turn (`stop_hook_active` guards the retry), and
-it strips code blocks, tables, links and paths first, because a command line is
-not prose. Clarity and humanity stay in the block message as a reminder: never
-strip the warmth to satisfy a counter.
+**The rule stands on its own now** (owner decision, 2026-08-23). A Stop hook
+(`.claude/hooks/chat_style.py`) used to measure every reply and block the
+faulty ones; the owner removed it after a week of enforcement, keeping the
+rule. Honor the rule without the referee — and when a reply drifts into long
+sentences, passive voice or restated headers, that is the drift the hook
+existed to catch. Never strip the warmth to satisfy the rules.
 
 **Always read the `CONTEXT.md` files before you change related code, and use
 their ubiquitous language.** The files are:
