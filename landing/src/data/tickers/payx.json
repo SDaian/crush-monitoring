@@ -244,15 +244,15 @@
     }
   },
   "summary": {
-    "trades": 31,
-    "members": 13,
-    "buys": 13,
+    "trades": 32,
+    "members": 14,
+    "buys": 14,
     "sells": 18,
     "other": 0,
     "firstTx": "2024-05-03",
-    "lastTx": "2026-04-21",
+    "lastTx": "2026-05-15",
     "lastFiling": "2026-08-05",
-    "estBuyLabel": "$129K",
+    "estBuyLabel": "$137K",
     "estSellLabel": "$193K",
     "pctLate": 16
   },
@@ -357,10 +357,10 @@
       "hasPage": true
     },
     {
-      "name": "Gilbert Ray Cisneros, Jr.",
-      "slug": "gilbert-ray-cisneros-jr",
-      "party": "D",
-      "chamber": "House",
+      "name": "Donald J. Trump",
+      "slug": "donald-j-trump",
+      "party": "R",
+      "chamber": "Executive",
       "trades": 1,
       "buys": 1,
       "sells": 0,
@@ -369,6 +369,18 @@
     }
   ],
   "trades": [
+    {
+      "member": "Donald J. Trump",
+      "memberSlug": "donald-j-trump",
+      "hasPage": true,
+      "party": "R",
+      "side": "BUY",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-05-15",
+      "filedDate": "2026-06-25",
+      "daysLate": 0,
+      "sourceUrl": "https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/F9CA13B970439E8F85258E27002DDF15/$FILE/Donald-J-Trump-06.25.2026-278T%20%282%29.pdf"
+    },
     {
       "member": "April McClain Delaney",
       "memberSlug": "april-mcclain-delaney",
@@ -656,18 +668,6 @@
       "filedDate": "2025-10-05",
       "daysLate": 155,
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20032149.pdf"
-    },
-    {
-      "member": "April McClain Delaney",
-      "memberSlug": "april-mcclain-delaney",
-      "hasPage": true,
-      "party": "D",
-      "side": "BUY",
-      "amountBucket": "$1K – $15K",
-      "txDate": "2025-02-27",
-      "filedDate": "2025-03-20",
-      "daysLate": 0,
-      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20027975.pdf"
     }
   ],
   "tradesShown": 25

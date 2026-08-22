@@ -244,17 +244,17 @@
     }
   },
   "summary": {
-    "trades": 175,
-    "members": 32,
+    "trades": 176,
+    "members": 33,
     "buys": 115,
-    "sells": 60,
+    "sells": 61,
     "other": 0,
     "firstTx": "2024-01-02",
     "lastTx": "2026-07-21",
     "lastFiling": "2026-08-07",
     "estBuyLabel": "$11.2M",
     "estSellLabel": "$10.6M",
-    "pctLate": 17
+    "pctLate": 16
   },
   "topMembers": [
     {
@@ -478,6 +478,18 @@
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20034774.pdf"
     },
     {
+      "member": "Donald J. Trump",
+      "memberSlug": "donald-j-trump",
+      "hasPage": true,
+      "party": "R",
+      "side": "SELL",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-05-18",
+      "filedDate": "2026-06-25",
+      "daysLate": 0,
+      "sourceUrl": "https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/F9CA13B970439E8F85258E27002DDF15/$FILE/Donald-J-Trump-06.25.2026-278T%20%282%29.pdf"
+    },
+    {
       "member": "Sheldon Whitehouse",
       "memberSlug": "sheldon-whitehouse",
       "hasPage": false,
@@ -656,18 +668,6 @@
       "filedDate": "2026-02-17",
       "daysLate": 0,
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20034016.pdf"
-    },
-    {
-      "member": "Gilbert Ray Cisneros, Jr.",
-      "memberSlug": "gilbert-ray-cisneros-jr",
-      "hasPage": true,
-      "party": "D",
-      "side": "BUY",
-      "amountBucket": "$1K – $15K",
-      "txDate": "2026-01-30",
-      "filedDate": "2026-02-13",
-      "daysLate": 0,
-      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20033983.pdf"
     }
   ],
   "tradesShown": 25

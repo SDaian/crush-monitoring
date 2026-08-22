@@ -244,15 +244,15 @@
     }
   },
   "summary": {
-    "trades": 37,
-    "members": 14,
-    "buys": 12,
+    "trades": 38,
+    "members": 15,
+    "buys": 13,
     "sells": 25,
     "other": 0,
     "firstTx": "2023-03-15",
     "lastTx": "2026-07-30",
     "lastFiling": "2026-08-14",
-    "estBuyLabel": "$255K",
+    "estBuyLabel": "$263K",
     "estSellLabel": "$426K",
     "pctLate": 11
   },
@@ -428,6 +428,18 @@
       "filedDate": "2026-07-09",
       "daysLate": 0,
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20034954.pdf"
+    },
+    {
+      "member": "Donald J. Trump",
+      "memberSlug": "donald-j-trump",
+      "hasPage": true,
+      "party": "R",
+      "side": "BUY",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-05-18",
+      "filedDate": "2026-06-25",
+      "daysLate": 0,
+      "sourceUrl": "https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/F9CA13B970439E8F85258E27002DDF15/$FILE/Donald-J-Trump-06.25.2026-278T%20%282%29.pdf"
     },
     {
       "member": "Richard McCormick",
@@ -656,18 +668,6 @@
       "filedDate": "2025-04-11",
       "daysLate": 0,
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20029038.pdf"
-    },
-    {
-      "member": "Greg Landsman",
-      "memberSlug": "greg-landsman",
-      "hasPage": false,
-      "party": "D",
-      "side": "SELL",
-      "amountBucket": "$1K – $15K",
-      "txDate": "2025-03-27",
-      "filedDate": "2025-04-08",
-      "daysLate": 0,
-      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20029084.pdf"
     }
   ],
   "tradesShown": 25

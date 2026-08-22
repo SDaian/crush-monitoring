@@ -5,10 +5,10 @@
       "slug": "msft",
       "ticker": "MSFT",
       "company": "Microsoft Corporation",
-      "trades": 198,
-      "members": 43,
-      "buys": 103,
-      "sells": 95,
+      "trades": 200,
+      "members": 44,
+      "buys": 104,
+      "sells": 96,
       "lastTx": "2026-08-11",
       "indexable": true,
       "industry": {
@@ -20,10 +20,10 @@
       "slug": "nvda",
       "ticker": "NVDA",
       "company": "NVIDIA Corporation",
-      "trades": 175,
-      "members": 32,
+      "trades": 176,
+      "members": 33,
       "buys": 115,
-      "sells": 60,
+      "sells": 61,
       "lastTx": "2026-07-21",
       "indexable": true,
       "industry": {
@@ -50,10 +50,10 @@
       "slug": "amzn",
       "ticker": "AMZN",
       "company": "Amazon.com, Inc.",
-      "trades": 120,
-      "members": 32,
+      "trades": 121,
+      "members": 33,
       "buys": 88,
-      "sells": 32,
+      "sells": 33,
       "lastTx": "2026-07-08",
       "indexable": true,
       "industry": {
@@ -122,6 +122,21 @@
       }
     },
     {
+      "slug": "hd",
+      "ticker": "HD",
+      "company": "Home Depot, Inc.",
+      "trades": 75,
+      "members": 24,
+      "buys": 43,
+      "sells": 32,
+      "lastTx": "2026-07-30",
+      "indexable": true,
+      "industry": {
+        "key": "consumer",
+        "label": "Consumer & retail"
+      }
+    },
+    {
       "slug": "goog",
       "ticker": "GOOG",
       "company": "Alphabet Inc.",
@@ -134,21 +149,6 @@
       "industry": {
         "key": "tech",
         "label": "Technology"
-      }
-    },
-    {
-      "slug": "hd",
-      "ticker": "HD",
-      "company": "Home Depot, Inc.",
-      "trades": 73,
-      "members": 23,
-      "buys": 42,
-      "sells": 31,
-      "lastTx": "2026-07-30",
-      "indexable": true,
-      "industry": {
-        "key": "consumer",
-        "label": "Consumer & retail"
       }
     },
     {
@@ -242,6 +242,21 @@
       }
     },
     {
+      "slug": "pg",
+      "ticker": "PG",
+      "company": "Procter & Gamble Company",
+      "trades": 58,
+      "members": 27,
+      "buys": 27,
+      "sells": 31,
+      "lastTx": "2026-08-11",
+      "indexable": true,
+      "industry": {
+        "key": "consumer",
+        "label": "Consumer & retail"
+      }
+    },
+    {
       "slug": "tsla",
       "ticker": "TSLA",
       "company": "Tesla, Inc.",
@@ -254,21 +269,6 @@
       "industry": {
         "key": "autos",
         "label": "Autos & mobility"
-      }
-    },
-    {
-      "slug": "pg",
-      "ticker": "PG",
-      "company": "Procter & Gamble Company",
-      "trades": 57,
-      "members": 26,
-      "buys": 26,
-      "sells": 31,
-      "lastTx": "2026-08-11",
-      "indexable": true,
-      "industry": {
-        "key": "consumer",
-        "label": "Consumer & retail"
       }
     },
     {
@@ -317,6 +317,21 @@
       }
     },
     {
+      "slug": "crm",
+      "ticker": "CRM",
+      "company": "Salesforce, Inc.",
+      "trades": 50,
+      "members": 19,
+      "buys": 24,
+      "sells": 26,
+      "lastTx": "2026-06-02",
+      "indexable": true,
+      "industry": {
+        "key": "tech",
+        "label": "Technology"
+      }
+    },
+    {
       "slug": "orcl",
       "ticker": "ORCL",
       "company": "Oracle Corporation",
@@ -329,6 +344,21 @@
       "industry": {
         "key": "tech",
         "label": "Technology"
+      }
+    },
+    {
+      "slug": "pep",
+      "ticker": "PEP",
+      "company": "Pepsico, Inc.",
+      "trades": 49,
+      "members": 24,
+      "buys": 17,
+      "sells": 32,
+      "lastTx": "2026-07-30",
+      "indexable": true,
+      "industry": {
+        "key": "agriculture",
+        "label": "Agriculture & food"
       }
     },
     {
@@ -374,36 +404,6 @@
       "industry": {
         "key": "health",
         "label": "Health care & pharma"
-      }
-    },
-    {
-      "slug": "crm",
-      "ticker": "CRM",
-      "company": "Salesforce, Inc.",
-      "trades": 48,
-      "members": 18,
-      "buys": 23,
-      "sells": 25,
-      "lastTx": "2026-06-02",
-      "indexable": true,
-      "industry": {
-        "key": "tech",
-        "label": "Technology"
-      }
-    },
-    {
-      "slug": "pep",
-      "ticker": "PEP",
-      "company": "Pepsico, Inc.",
-      "trades": 47,
-      "members": 23,
-      "buys": 16,
-      "sells": 31,
-      "lastTx": "2026-07-30",
-      "indexable": true,
-      "industry": {
-        "key": "agriculture",
-        "label": "Agriculture & food"
       }
     },
     {
@@ -587,6 +587,36 @@
       }
     },
     {
+      "slug": "panw",
+      "ticker": "PANW",
+      "company": "Palo Alto Networks, Inc.",
+      "trades": 39,
+      "members": 17,
+      "buys": 24,
+      "sells": 15,
+      "lastTx": "2026-07-31",
+      "indexable": true,
+      "industry": {
+        "key": "tech",
+        "label": "Technology"
+      }
+    },
+    {
+      "slug": "bro",
+      "ticker": "BRO",
+      "company": "Brown & Brown, Inc.",
+      "trades": 39,
+      "members": 11,
+      "buys": 19,
+      "sells": 20,
+      "lastTx": "2026-05-18",
+      "indexable": true,
+      "industry": {
+        "key": "finance",
+        "label": "Banks & finance"
+      }
+    },
+    {
       "slug": "etn",
       "ticker": "ETN",
       "company": "Eaton Corporation, PLC",
@@ -602,27 +632,12 @@
       }
     },
     {
-      "slug": "bro",
-      "ticker": "BRO",
-      "company": "Brown & Brown, Inc.",
-      "trades": 38,
-      "members": 10,
-      "buys": 19,
-      "sells": 19,
-      "lastTx": "2026-04-17",
-      "indexable": true,
-      "industry": {
-        "key": "finance",
-        "label": "Banks & finance"
-      }
-    },
-    {
       "slug": "blk",
       "ticker": "BLK",
       "company": "BlackRock, Inc.",
-      "trades": 37,
-      "members": 14,
-      "buys": 12,
+      "trades": 38,
+      "members": 15,
+      "buys": 13,
       "sells": 25,
       "lastTx": "2026-07-30",
       "indexable": true,
@@ -632,33 +647,33 @@
       }
     },
     {
-      "slug": "panw",
-      "ticker": "PANW",
-      "company": "Palo Alto Networks, Inc.",
-      "trades": 37,
-      "members": 16,
-      "buys": 22,
-      "sells": 15,
-      "lastTx": "2026-07-31",
-      "indexable": true,
-      "industry": {
-        "key": "tech",
-        "label": "Technology"
-      }
-    },
-    {
       "slug": "tmo",
       "ticker": "TMO",
       "company": "Thermo Fisher Scientific Inc",
-      "trades": 36,
-      "members": 17,
-      "buys": 12,
+      "trades": 37,
+      "members": 18,
+      "buys": 13,
       "sells": 24,
       "lastTx": "2026-07-10",
       "indexable": true,
       "industry": {
         "key": "health",
         "label": "Health care & pharma"
+      }
+    },
+    {
+      "slug": "txn",
+      "ticker": "TXN",
+      "company": "Texas Instruments Incorporated",
+      "trades": 36,
+      "members": 15,
+      "buys": 17,
+      "sells": 19,
+      "lastTx": "2026-05-15",
+      "indexable": true,
+      "industry": {
+        "key": "tech",
+        "label": "Technology"
       }
     },
     {
@@ -669,6 +684,21 @@
       "members": 14,
       "buys": 15,
       "sells": 21,
+      "lastTx": "2026-07-10",
+      "indexable": true,
+      "industry": {
+        "key": "tech",
+        "label": "Technology"
+      }
+    },
+    {
+      "slug": "anet",
+      "ticker": "ANET",
+      "company": "Arista Networks, Inc.",
+      "trades": 36,
+      "members": 15,
+      "buys": 18,
+      "sells": 18,
       "lastTx": "2026-07-10",
       "indexable": true,
       "industry": {
@@ -692,36 +722,6 @@
       }
     },
     {
-      "slug": "txn",
-      "ticker": "TXN",
-      "company": "Texas Instruments Incorporated",
-      "trades": 35,
-      "members": 14,
-      "buys": 16,
-      "sells": 19,
-      "lastTx": "2026-04-14",
-      "indexable": true,
-      "industry": {
-        "key": "tech",
-        "label": "Technology"
-      }
-    },
-    {
-      "slug": "anet",
-      "ticker": "ANET",
-      "company": "Arista Networks, Inc.",
-      "trades": 35,
-      "members": 14,
-      "buys": 18,
-      "sells": 17,
-      "lastTx": "2026-07-10",
-      "indexable": true,
-      "industry": {
-        "key": "tech",
-        "label": "Technology"
-      }
-    },
-    {
       "slug": "hog",
       "ticker": "HOG",
       "company": "Harley-Davidson, Inc.",
@@ -734,6 +734,21 @@
       "industry": {
         "key": "autos",
         "label": "Autos & mobility"
+      }
+    },
+    {
+      "slug": "t",
+      "ticker": "T",
+      "company": "AT&T Inc.",
+      "trades": 34,
+      "members": 15,
+      "buys": 17,
+      "sells": 17,
+      "lastTx": "2026-08-14",
+      "indexable": true,
+      "industry": {
+        "key": "telecom",
+        "label": "Telecom & media"
       }
     },
     {
@@ -752,29 +767,29 @@
       }
     },
     {
-      "slug": "t",
-      "ticker": "T",
-      "company": "AT&T Inc.",
-      "trades": 33,
-      "members": 14,
-      "buys": 17,
-      "sells": 16,
-      "lastTx": "2026-08-14",
-      "indexable": true,
-      "industry": {
-        "key": "telecom",
-        "label": "Telecom & media"
-      }
-    },
-    {
       "slug": "bsx",
       "ticker": "BSX",
       "company": "Boston Scientific Corporation",
-      "trades": 33,
-      "members": 9,
-      "buys": 15,
+      "trades": 34,
+      "members": 10,
+      "buys": 16,
       "sells": 18,
       "lastTx": "2026-06-05",
+      "indexable": true,
+      "industry": {
+        "key": "health",
+        "label": "Health care & pharma"
+      }
+    },
+    {
+      "slug": "pfe",
+      "ticker": "PFE",
+      "company": "Pfizer, Inc.",
+      "trades": 33,
+      "members": 16,
+      "buys": 11,
+      "sells": 22,
+      "lastTx": "2026-06-08",
       "indexable": true,
       "industry": {
         "key": "health",
@@ -812,21 +827,6 @@
       }
     },
     {
-      "slug": "pfe",
-      "ticker": "PFE",
-      "company": "Pfizer, Inc.",
-      "trades": 32,
-      "members": 15,
-      "buys": 11,
-      "sells": 21,
-      "lastTx": "2026-06-08",
-      "indexable": true,
-      "industry": {
-        "key": "health",
-        "label": "Health care & pharma"
-      }
-    },
-    {
       "slug": "cmcsa",
       "ticker": "CMCSA",
       "company": "Comcast Corporation",
@@ -835,6 +835,66 @@
       "buys": 8,
       "sells": 24,
       "lastTx": "2026-08-05",
+      "indexable": true,
+      "industry": {
+        "key": "telecom",
+        "label": "Telecom & media"
+      }
+    },
+    {
+      "slug": "ko",
+      "ticker": "KO",
+      "company": "Coca-Cola Company",
+      "trades": 32,
+      "members": 16,
+      "buys": 19,
+      "sells": 13,
+      "lastTx": "2026-07-21",
+      "indexable": true,
+      "industry": {
+        "key": "agriculture",
+        "label": "Agriculture & food"
+      }
+    },
+    {
+      "slug": "payx",
+      "ticker": "PAYX",
+      "company": "Paychex, Inc.",
+      "trades": 32,
+      "members": 14,
+      "buys": 14,
+      "sells": 18,
+      "lastTx": "2026-05-15",
+      "indexable": true,
+      "industry": {
+        "key": "business",
+        "label": "Business services"
+      }
+    },
+    {
+      "slug": "amgn",
+      "ticker": "AMGN",
+      "company": "Amgen Inc.",
+      "trades": 32,
+      "members": 17,
+      "buys": 16,
+      "sells": 16,
+      "lastTx": "2026-06-05",
+      "indexable": true,
+      "industry": {
+        "key": "health",
+        "label": "Health care & pharma"
+      }
+    },
+    {
+      "slug": "vz",
+      "ticker": "VZ",
+      "company": "Verizon Communications Inc.",
+      "trades": 32,
+      "members": 17,
+      "buys": 13,
+      "sells": 19,
+      "lastTx": "2026-05-15",
       "indexable": true,
       "industry": {
         "key": "telecom",
@@ -887,48 +947,33 @@
       }
     },
     {
-      "slug": "ko",
-      "ticker": "KO",
-      "company": "Coca-Cola Company",
-      "trades": 31,
-      "members": 15,
-      "buys": 18,
-      "sells": 13,
-      "lastTx": "2026-07-21",
-      "indexable": true,
-      "industry": {
-        "key": "agriculture",
-        "label": "Agriculture & food"
-      }
-    },
-    {
-      "slug": "payx",
-      "ticker": "PAYX",
-      "company": "Paychex, Inc.",
+      "slug": "ba",
+      "ticker": "BA",
+      "company": "Boeing Company",
       "trades": 31,
       "members": 13,
-      "buys": 13,
-      "sells": 18,
-      "lastTx": "2026-04-21",
+      "buys": 17,
+      "sells": 14,
+      "lastTx": "2026-05-18",
       "indexable": true,
       "industry": {
-        "key": "business",
-        "label": "Business services"
+        "key": "defense",
+        "label": "Defense & aerospace"
       }
     },
     {
-      "slug": "amgn",
-      "ticker": "AMGN",
-      "company": "Amgen Inc.",
+      "slug": "hood",
+      "ticker": "HOOD",
+      "company": "Robinhood Markets, Inc.",
       "trades": 31,
-      "members": 16,
+      "members": 7,
       "buys": 16,
       "sells": 15,
-      "lastTx": "2026-06-05",
+      "lastTx": "2026-05-11",
       "indexable": true,
       "industry": {
-        "key": "health",
-        "label": "Health care & pharma"
+        "key": "finance",
+        "label": "Banks & finance"
       }
     },
     {
@@ -959,51 +1004,6 @@
       "industry": {
         "key": "tech",
         "label": "Technology"
-      }
-    },
-    {
-      "slug": "ba",
-      "ticker": "BA",
-      "company": "Boeing Company",
-      "trades": 30,
-      "members": 12,
-      "buys": 16,
-      "sells": 14,
-      "lastTx": "2026-03-27",
-      "indexable": true,
-      "industry": {
-        "key": "defense",
-        "label": "Defense & aerospace"
-      }
-    },
-    {
-      "slug": "vz",
-      "ticker": "VZ",
-      "company": "Verizon Communications Inc.",
-      "trades": 30,
-      "members": 16,
-      "buys": 11,
-      "sells": 19,
-      "lastTx": "2026-04-23",
-      "indexable": true,
-      "industry": {
-        "key": "telecom",
-        "label": "Telecom & media"
-      }
-    },
-    {
-      "slug": "hood",
-      "ticker": "HOOD",
-      "company": "Robinhood Markets, Inc.",
-      "trades": 30,
-      "members": 6,
-      "buys": 15,
-      "sells": 15,
-      "lastTx": "2026-04-14",
-      "indexable": true,
-      "industry": {
-        "key": "finance",
-        "label": "Banks & finance"
       }
     },
     {
@@ -1157,6 +1157,21 @@
       }
     },
     {
+      "slug": "tdg",
+      "ticker": "TDG",
+      "company": "Transdigm Group Incorporated",
+      "trades": 28,
+      "members": 8,
+      "buys": 19,
+      "sells": 9,
+      "lastTx": "2026-07-28",
+      "indexable": true,
+      "industry": {
+        "key": "defense",
+        "label": "Defense & aerospace"
+      }
+    },
+    {
       "slug": "unp",
       "ticker": "UNP",
       "company": "Union Pacific Corporation",
@@ -1217,14 +1232,14 @@
       }
     },
     {
-      "slug": "tdg",
-      "ticker": "TDG",
-      "company": "Transdigm Group Incorporated",
+      "slug": "ge",
+      "ticker": "GE",
+      "company": "GE Aerospace",
       "trades": 27,
-      "members": 7,
-      "buys": 19,
-      "sells": 8,
-      "lastTx": "2026-07-28",
+      "members": 13,
+      "buys": 11,
+      "sells": 16,
+      "lastTx": "2026-06-16",
       "indexable": true,
       "industry": {
         "key": "defense",
@@ -1277,6 +1292,21 @@
       }
     },
     {
+      "slug": "lmt",
+      "ticker": "LMT",
+      "company": "Lockheed Martin Corporation",
+      "trades": 26,
+      "members": 15,
+      "buys": 16,
+      "sells": 10,
+      "lastTx": "2026-06-08",
+      "indexable": true,
+      "industry": {
+        "key": "defense",
+        "label": "Defense & aerospace"
+      }
+    },
+    {
       "slug": "gddy",
       "ticker": "GDDY",
       "company": "GoDaddy Inc.",
@@ -1289,6 +1319,21 @@
       "industry": {
         "key": "tech",
         "label": "Technology"
+      }
+    },
+    {
+      "slug": "dhr",
+      "ticker": "DHR",
+      "company": "Danaher Corporation",
+      "trades": 26,
+      "members": 16,
+      "buys": 10,
+      "sells": 16,
+      "lastTx": "2026-05-11",
+      "indexable": true,
+      "industry": {
+        "key": "health",
+        "label": "Health care & pharma"
       }
     },
     {
@@ -1337,33 +1382,18 @@
       }
     },
     {
-      "slug": "lmt",
-      "ticker": "LMT",
-      "company": "Lockheed Martin Corporation",
+      "slug": "ph",
+      "ticker": "PH",
+      "company": "Parker-Hannifin Corporation",
       "trades": 25,
-      "members": 14,
-      "buys": 15,
-      "sells": 10,
-      "lastTx": "2026-06-08",
-      "indexable": true,
-      "industry": {
-        "key": "defense",
-        "label": "Defense & aerospace"
-      }
-    },
-    {
-      "slug": "dhr",
-      "ticker": "DHR",
-      "company": "Danaher Corporation",
-      "trades": 25,
-      "members": 15,
+      "members": 9,
       "buys": 10,
       "sells": 15,
-      "lastTx": "2026-03-27",
+      "lastTx": "2026-05-18",
       "indexable": true,
       "industry": {
-        "key": "health",
-        "label": "Health care & pharma"
+        "key": "industrial",
+        "label": "Manufacturing"
       }
     },
     {

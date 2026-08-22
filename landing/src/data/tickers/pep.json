@@ -244,17 +244,17 @@
     }
   },
   "summary": {
-    "trades": 47,
-    "members": 23,
-    "buys": 16,
-    "sells": 31,
+    "trades": 49,
+    "members": 24,
+    "buys": 17,
+    "sells": 32,
     "other": 0,
     "firstTx": "2023-03-15",
     "lastTx": "2026-07-30",
     "lastFiling": "2026-08-14",
-    "estBuyLabel": "$177K",
-    "estSellLabel": "$778K",
-    "pctLate": 13
+    "estBuyLabel": "$185K",
+    "estSellLabel": "$853K",
+    "pctLate": 12
   },
   "topMembers": [
     {
@@ -335,6 +335,17 @@
       "hasPage": false
     },
     {
+      "name": "Donald J. Trump",
+      "slug": "donald-j-trump",
+      "party": "R",
+      "chamber": "Executive",
+      "trades": 2,
+      "buys": 1,
+      "sells": 1,
+      "estLabel": "$83K",
+      "hasPage": true
+    },
+    {
       "name": "Jefferson Shreve",
       "slug": "jefferson-shreve",
       "party": "R",
@@ -355,17 +366,6 @@
       "sells": 1,
       "estLabel": "$16K",
       "hasPage": false
-    },
-    {
-      "name": "Marjorie Taylor Greene",
-      "slug": "marjorie-taylor-greene",
-      "party": "R",
-      "chamber": "House",
-      "trades": 2,
-      "buys": 2,
-      "sells": 0,
-      "estLabel": "$16K",
-      "hasPage": true
     }
   ],
   "trades": [
@@ -392,6 +392,30 @@
       "filedDate": "2026-08-12",
       "daysLate": 0,
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035203.pdf"
+    },
+    {
+      "member": "Donald J. Trump",
+      "memberSlug": "donald-j-trump",
+      "hasPage": true,
+      "party": "R",
+      "side": "SELL",
+      "amountBucket": "$50K – $100K",
+      "txDate": "2026-05-18",
+      "filedDate": "2026-06-25",
+      "daysLate": 0,
+      "sourceUrl": "https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/F9CA13B970439E8F85258E27002DDF15/$FILE/Donald-J-Trump-06.25.2026-278T%20%282%29.pdf"
+    },
+    {
+      "member": "Donald J. Trump",
+      "memberSlug": "donald-j-trump",
+      "hasPage": true,
+      "party": "R",
+      "side": "BUY",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-05-15",
+      "filedDate": "2026-06-25",
+      "daysLate": 0,
+      "sourceUrl": "https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/F9CA13B970439E8F85258E27002DDF15/$FILE/Donald-J-Trump-06.25.2026-278T%20%282%29.pdf"
     },
     {
       "member": "Sheldon Whitehouse",
@@ -644,30 +668,6 @@
       "filedDate": "2025-09-11",
       "daysLate": 0,
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20032066.pdf"
-    },
-    {
-      "member": "Marjorie Taylor Greene",
-      "memberSlug": "marjorie-taylor-greene",
-      "hasPage": true,
-      "party": "R",
-      "side": "BUY",
-      "amountBucket": "$1K – $15K",
-      "txDate": "2025-07-15",
-      "filedDate": "2025-07-22",
-      "daysLate": 0,
-      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20030711.pdf"
-    },
-    {
-      "member": "Ritchie Torres",
-      "memberSlug": "ritchie-torres",
-      "hasPage": false,
-      "party": "D",
-      "side": "SELL",
-      "amountBucket": "$1K – $15K",
-      "txDate": "2025-07-11",
-      "filedDate": "2025-08-20",
-      "daysLate": 0,
-      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20030930.pdf"
     }
   ],
   "tradesShown": 25

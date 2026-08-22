@@ -7,215 +7,258 @@
   "chamber": "Executive",
   "district": null,
   "summary": {
-    "trades": 57,
-    "distinctTickers": 0,
+    "trades": 451,
+    "distinctTickers": 81,
     "firstTx": "2025-09-18",
-    "lastTx": "2025-10-02",
-    "lastFiling": "2025-10-20",
-    "pctLate": 0,
-    "worstLate": 0
+    "lastTx": "2028-03-23",
+    "lastFiling": "2026-06-25",
+    "pctLate": 13,
+    "worstLate": 77
   },
-  "topTickers": [],
+  "topTickers": [
+    {
+      "ticker": "AMT",
+      "count": 3,
+      "asset": "AMERICAN TOWER CORP",
+      "slug": "amt",
+      "hasPage": false
+    },
+    {
+      "ticker": "GE",
+      "count": 3,
+      "asset": "GE AEROSPACE",
+      "slug": "ge",
+      "hasPage": true
+    },
+    {
+      "ticker": "MSI",
+      "count": 3,
+      "asset": "MOTOROLA SOLUTIONS INC",
+      "slug": "msi",
+      "hasPage": false
+    },
+    {
+      "ticker": "BKNG",
+      "count": 2,
+      "asset": "BOOKING HLDGS INC",
+      "slug": "bkng",
+      "hasPage": false
+    },
+    {
+      "ticker": "BMY",
+      "count": 2,
+      "asset": "BRISTOL MYERS SQUIBB CO",
+      "slug": "bmy",
+      "hasPage": false
+    },
+    {
+      "ticker": "FICO",
+      "count": 2,
+      "asset": "FAIR ISAAC CORP",
+      "slug": "fico",
+      "hasPage": false
+    }
+  ],
   "trades": [
     {
       "ticker": "—",
-      "asset": "TANGIPAHOA PARISH L 4%DUE 02/01/37",
-      "side": "BUY",
-      "amountBucket": "$1M – $5M",
-      "txDate": "2025-10-02",
-      "filedDate": "2025-10-20",
-      "daysLate": 0,
-      "sourceUrl": "https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/18353894FE440B3685258D430031A337/$FILE/Donald%20J.%20Trump%2010.20.2025%20278-T%20%282%29.pdf"
-    },
-    {
-      "ticker": "—",
-      "asset": "NORTH EAST TEX REGL 5% TOLL TRAN DUE 01/01/40",
-      "side": "BUY",
-      "amountBucket": "$500K – $1M",
-      "txDate": "2025-10-02",
-      "filedDate": "2025-10-20",
-      "daysLate": 0,
-      "sourceUrl": "https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/18353894FE440B3685258D430031A337/$FILE/Donald%20J.%20Trump%2010.20.2025%20278-T%20%282%29.pdf"
-    },
-    {
-      "ticker": "—",
-      "asset": "NORTH CAROLINA HSG FIN AGY HMOWNRSHP REV SER SSC B/E 3.20 % Due JL",
-      "side": "BUY",
-      "amountBucket": "$100K – $250K",
-      "txDate": "2025-10-01",
-      "filedDate": "2025-10-20",
-      "daysLate": 0,
-      "sourceUrl": "https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/18353894FE440B3685258D430031A337/$FILE/Donald%20J.%20Trump%2010.20.2025%20278-T%20%282%29.pdf"
-    },
-    {
-      "ticker": "—",
-      "asset": "WINFIELD KS 2022 A B/E B/Q 4.00 % Due Sep 1, 2026",
-      "side": "BUY",
+      "asset": "3328 DATADOG INC UNSOLICITED",
+      "side": "SELL",
       "amountBucket": "$50K – $100K",
-      "txDate": "2025-10-01",
-      "filedDate": "2025-10-20",
+      "txDate": "2028-03-23",
+      "filedDate": "2026-05-08",
       "daysLate": 0,
-      "sourceUrl": "https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/18353894FE440B3685258D430031A337/$FILE/Donald%20J.%20Trump%2010.20.2025%20278-T%20%282%29.pdf"
+      "sourceUrl": "https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/405E4EC4E27BE8D185258DF7002DD1C0/$FILE/Trump%2C%20Donald%20J.-05.08.2026-278T%282%29.pdf"
     },
     {
       "ticker": "—",
-      "asset": "LIBERTY HILL TX RFDG 2018 B/E B/Q 4.00 % Due Sep 1, 2026",
-      "side": "BUY",
-      "amountBucket": "$50K – $100K",
-      "txDate": "2025-10-01",
-      "filedDate": "2025-10-20",
-      "daysLate": 0,
-      "sourceUrl": "https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/18353894FE440B3685258D430031A337/$FILE/Donald%20J.%20Trump%2010.20.2025%20278-T%20%282%29.pdf"
-    },
-    {
-      "ticker": "—",
-      "asset": "UNIVERSITY AR UNIV REV ATHLETIC FACS SER A B/E 5.00 % Due Seo 15, 2026",
-      "side": "BUY",
-      "amountBucket": "$100K – $250K",
-      "txDate": "2025-10-01",
-      "filedDate": "2025-10-20",
-      "daysLate": 0,
-      "sourceUrl": "https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/18353894FE440B3685258D430031A337/$FILE/Donald%20J.%20Trump%2010.20.2025%20278-T%20%282%29.pdf"
-    },
-    {
-      "ticker": "—",
-      "asset": "SOUTH LYON Ml CMNTY SCHS RFDG 8/E 5.00 % Due May 1, 2026",
-      "side": "BUY",
-      "amountBucket": "$100K – $250K",
-      "txDate": "2025-10-01",
-      "filedDate": "2025-10-20",
-      "daysLate": 0,
-      "sourceUrl": "https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/18353894FE440B3685258D430031A337/$FILE/Donald%20J.%20Trump%2010.20.2025%20278-T%20%282%29.pdf"
-    },
-    {
-      "ticker": "—",
-      "asset": "SANDY SPRINGS GA PUB FACS AUTH REV B/E 5.00 % Due May 1, 2026",
-      "side": "BUY",
-      "amountBucket": "$50K – $100K",
-      "txDate": "2025-10-01",
-      "filedDate": "2025-10-20",
-      "daysLate": 0,
-      "sourceUrl": "https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/18353894FE440B3685258D430031A337/$FILE/Donald%20J.%20Trump%2010.20.2025%20278-T%20%282%29.pdf"
-    },
-    {
-      "ticker": "—",
-      "asset": "DALLAS CNTY TX UTIL & RECLAMATION DIST RFDG B/E 5.00 % Due Feb 15, 2021",
-      "side": "BUY",
-      "amountBucket": "$50K – $100K",
-      "txDate": "2025-10-01",
-      "filedDate": "2025-10-20",
-      "daysLate": 0,
-      "sourceUrl": "https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/18353894FE440B3685258D430031A337/$FILE/Donald%20J.%20Trump%2010.20.2025%20278-T%20%282%29.pdf"
-    },
-    {
-      "ticker": "—",
-      "asset": "EAU CLAIRE CNTY WI HWY FAC SER B B/E 3.00 % Due Sep 1, 2026",
-      "side": "BUY",
-      "amountBucket": "$100K – $250K",
-      "txDate": "2025-10-01",
-      "filedDate": "2025-10-20",
-      "daysLate": 0,
-      "sourceUrl": "https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/18353894FE440B3685258D430031A337/$FILE/Donald%20J.%20Trump%2010.20.2025%20278-T%20%282%29.pdf"
-    },
-    {
-      "ticker": "—",
-      "asset": "GEORGIA MUN ASSN INC INSTALL SALE PG CTF PARTN RFDG REV B/E 5.00 % I",
-      "side": "BUY",
-      "amountBucket": "$100K – $250K",
-      "txDate": "2025-10-01",
-      "filedDate": "2025-10-20",
-      "daysLate": 0,
-      "sourceUrl": "https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/18353894FE440B3685258D430031A337/$FILE/Donald%20J.%20Trump%2010.20.2025%20278-T%20%282%29.pdf"
-    },
-    {
-      "ticker": "—",
-      "asset": "MARYLAND ST CMNTY DEV ADMIN DEPT HSG & REV SER A GREEN BD B/E 3.11",
-      "side": "BUY",
-      "amountBucket": "$100K – $250K",
-      "txDate": "2025-10-01",
-      "filedDate": "2025-10-20",
-      "daysLate": 0,
-      "sourceUrl": "https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/18353894FE440B3685258D430031A337/$FILE/Donald%20J.%20Trump%2010.20.2025%20278-T%20%282%29.pdf"
-    },
-    {
-      "ticker": "—",
-      "asset": "LIBERTY HILL TX TAX WTR SYS SURPLUS REV CTF OBLIG 2018 DB B/E B/Q 4.0C",
-      "side": "BUY",
-      "amountBucket": "$100K – $250K",
-      "txDate": "2025-10-01",
-      "filedDate": "2025-10-20",
-      "daysLate": 0,
-      "sourceUrl": "https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/18353894FE440B3685258D430031A337/$FILE/Donald%20J.%20Trump%2010.20.2025%20278-T%20%282%29.pdf"
-    },
-    {
-      "ticker": "—",
-      "asset": "MAINE ST HSG AUTH MTG PURCH SERB REV 8/E 2.10 % Due Nov 15, 2026",
-      "side": "BUY",
-      "amountBucket": "$500K – $1M",
-      "txDate": "2025-10-01",
-      "filedDate": "2025-10-20",
-      "daysLate": 0,
-      "sourceUrl": "https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/18353894FE440B3685258D430031A337/$FILE/Donald%20J.%20Trump%2010.20.2025%20278-T%20%282%29.pdf"
-    },
-    {
-      "ticker": "—",
-      "asset": "COLUMBIA MO SCH DIST RFDG 2024 B B/E MDDP 4.00 % Due Mar 1, 2026",
+      "asset": "1052 MASTERCARD INC CL A UNSOLICITED",
       "side": "BUY",
       "amountBucket": "$15K – $50K",
-      "txDate": "2025-10-01",
-      "filedDate": "2025-10-20",
+      "txDate": "2028-03-12",
+      "filedDate": "2026-05-08",
       "daysLate": 0,
-      "sourceUrl": "https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/18353894FE440B3685258D430031A337/$FILE/Donald%20J.%20Trump%2010.20.2025%20278-T%20%282%29.pdf"
+      "sourceUrl": "https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/405E4EC4E27BE8D185258DF7002DD1C0/$FILE/Trump%2C%20Donald%20J.-05.08.2026-278T%282%29.pdf"
     },
     {
       "ticker": "—",
-      "asset": "NORTH ADAMS IN CMNTY SCHS RENOVTN BLDG CORP REV B/E B/Q ST INTRC",
-      "side": "BUY",
-      "amountBucket": "$100K – $250K",
-      "txDate": "2025-10-01",
-      "filedDate": "2025-10-20",
+      "asset": "2902 SAMSARA INC CLASS A",
+      "side": "SELL",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2028-02-12",
+      "filedDate": "2026-05-08",
       "daysLate": 0,
-      "sourceUrl": "https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/18353894FE440B3685258D430031A337/$FILE/Donald%20J.%20Trump%2010.20.2025%20278-T%20%282%29.pdf"
+      "sourceUrl": "https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/405E4EC4E27BE8D185258DF7002DD1C0/$FILE/Trump%2C%20Donald%20J.-05.08.2026-278T%282%29.pdf"
     },
     {
       "ticker": "—",
-      "asset": "FORT ZUMWALT MO SCH DIST RFDG & IMPT BAM B/E 5.00 % Due Mar 1, 2026",
-      "side": "BUY",
-      "amountBucket": "$50K – $100K",
-      "txDate": "2025-10-01",
-      "filedDate": "2025-10-20",
+      "asset": "2891 VERIZON COMMUNICATIONS I",
+      "side": "SELL",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2028-01-21",
+      "filedDate": "2026-05-08",
       "daysLate": 0,
-      "sourceUrl": "https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/18353894FE440B3685258D430031A337/$FILE/Donald%20J.%20Trump%2010.20.2025%20278-T%20%282%29.pdf"
+      "sourceUrl": "https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/405E4EC4E27BE8D185258DF7002DD1C0/$FILE/Trump%2C%20Donald%20J.-05.08.2026-278T%282%29.pdf"
     },
     {
       "ticker": "—",
-      "asset": "HARRIS WALLER CNTY MUD 5 TX RD AGI B/E 6.00 % Due Sep 1, 2026",
+      "asset": "1143 ALBUQUERQUE NM STORM SWR SERB B1E 3.00 % Duo Jul 1, 2033",
       "side": "BUY",
-      "amountBucket": "$50K – $100K",
-      "txDate": "2025-10-01",
-      "filedDate": "2025-10-20",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-05-28",
+      "filedDate": "2026-06-25",
       "daysLate": 0,
-      "sourceUrl": "https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/18353894FE440B3685258D430031A337/$FILE/Donald%20J.%20Trump%2010.20.2025%20278-T%20%282%29.pdf"
+      "sourceUrl": "https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/F9CA13B970439E8F85258E27002DDF15/$FILE/Donald-J-Trump-06.25.2026-278T%20%282%29.pdf"
     },
     {
       "ticker": "—",
-      "asset": "UTAH WTR FIN AGY LN FING PG SER C REV B/E 5.00 % Due Mar 1, 2026",
-      "side": "BUY",
-      "amountBucket": "$15K – $50K",
-      "txDate": "2025-10-01",
-      "filedDate": "2025-10-20",
+      "asset": "1145 TRJ POINTE HOMES INC",
+      "side": "SELL",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-05-28",
+      "filedDate": "2026-06-25",
       "daysLate": 0,
-      "sourceUrl": "https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/18353894FE440B3685258D430031A337/$FILE/Donald%20J.%20Trump%2010.20.2025%20278-T%20%282%29.pdf"
+      "sourceUrl": "https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/F9CA13B970439E8F85258E27002DDF15/$FILE/Donald-J-Trump-06.25.2026-278T%20%282%29.pdf"
     },
     {
       "ticker": "—",
-      "asset": "BEDFORD TX RFDG IMPT B/E 5.00 % Due Feb 1, 2026",
-      "side": "BUY",
-      "amountBucket": "$50K – $100K",
-      "txDate": "2025-10-01",
-      "filedDate": "2025-10-20",
+      "asset": "1030 ALBERTSONS CO SHS CL A CLASS A",
+      "side": "SELL",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-05-22",
+      "filedDate": "2026-06-25",
       "daysLate": 0,
-      "sourceUrl": "https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/18353894FE440B3685258D430031A337/$FILE/Donald%20J.%20Trump%2010.20.2025%20278-T%20%282%29.pdf"
+      "sourceUrl": "https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/F9CA13B970439E8F85258E27002DDF15/$FILE/Donald-J-Trump-06.25.2026-278T%20%282%29.pdf"
+    },
+    {
+      "ticker": "—",
+      "asset": "1035 ATLASSIAN CORP CLASS A",
+      "side": "SELL",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-05-22",
+      "filedDate": "2026-06-25",
+      "daysLate": 0,
+      "sourceUrl": "https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/F9CA13B970439E8F85258E27002DDF15/$FILE/Donald-J-Trump-06.25.2026-278T%20%282%29.pdf"
+    },
+    {
+      "ticker": "—",
+      "asset": "1037 AUTOZONEINC",
+      "side": "SELL",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-05-22",
+      "filedDate": "2026-06-25",
+      "daysLate": 0,
+      "sourceUrl": "https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/F9CA13B970439E8F85258E27002DDF15/$FILE/Donald-J-Trump-06.25.2026-278T%20%282%29.pdf"
+    },
+    {
+      "ticker": "—",
+      "asset": "1038 AVANTORINC -",
+      "side": "BUY",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-05-22",
+      "filedDate": "2026-06-25",
+      "daysLate": 0,
+      "sourceUrl": "https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/F9CA13B970439E8F85258E27002DDF15/$FILE/Donald-J-Trump-06.25.2026-278T%20%282%29.pdf"
+    },
+    {
+      "ticker": "—",
+      "asset": "1039 AXON ENTERPRISE INC",
+      "side": "SELL",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-05-22",
+      "filedDate": "2026-06-25",
+      "daysLate": 0,
+      "sourceUrl": "https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/F9CA13B970439E8F85258E27002DDF15/$FILE/Donald-J-Trump-06.25.2026-278T%20%282%29.pdf"
+    },
+    {
+      "ticker": "—",
+      "asset": "1040 BATH & BODY WK$ INC",
+      "side": "BUY",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-05-22",
+      "filedDate": "2026-06-25",
+      "daysLate": 0,
+      "sourceUrl": "https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/F9CA13B970439E8F85258E27002DDF15/$FILE/Donald-J-Trump-06.25.2026-278T%20%282%29.pdf"
+    },
+    {
+      "ticker": "—",
+      "asset": "1056 COMCAST CORP NEW CLASS CLASS A",
+      "side": "BUY",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-05-22",
+      "filedDate": "2026-06-25",
+      "daysLate": 0,
+      "sourceUrl": "https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/F9CA13B970439E8F85258E27002DDF15/$FILE/Donald-J-Trump-06.25.2026-278T%20%282%29.pdf"
+    },
+    {
+      "ticker": "—",
+      "asset": "1060 CRH PUBLIC LIMITED CO F",
+      "side": "SELL",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-05-22",
+      "filedDate": "2026-06-25",
+      "daysLate": 0,
+      "sourceUrl": "https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/F9CA13B970439E8F85258E27002DDF15/$FILE/Donald-J-Trump-06.25.2026-278T%20%282%29.pdf"
+    },
+    {
+      "ticker": "—",
+      "asset": "1062 CUYAHOGA CNTY OH 5.25% DUE 12/01/56",
+      "side": "BUY",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-05-22",
+      "filedDate": "2026-06-25",
+      "daysLate": 0,
+      "sourceUrl": "https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/F9CA13B970439E8F85258E27002DDF15/$FILE/Donald-J-Trump-06.25.2026-278T%20%282%29.pdf"
+    },
+    {
+      "ticker": "—",
+      "asset": "1063 DANAHER CORP",
+      "side": "SELL",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-05-22",
+      "filedDate": "2026-06-25",
+      "daysLate": 0,
+      "sourceUrl": "https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/F9CA13B970439E8F85258E27002DDF15/$FILE/Donald-J-Trump-06.25.2026-278T%20%282%29.pdf"
+    },
+    {
+      "ticker": "—",
+      "asset": "1064 DOCUSIGN INC",
+      "side": "SELL",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-05-22",
+      "filedDate": "2026-06-25",
+      "daysLate": 0,
+      "sourceUrl": "https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/F9CA13B970439E8F85258E27002DDF15/$FILE/Donald-J-Trump-06.25.2026-278T%20%282%29.pdf"
+    },
+    {
+      "ticker": "—",
+      "asset": "1066 OUOLINGO INC CLASS A",
+      "side": "SELL",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-05-22",
+      "filedDate": "2026-06-25",
+      "daysLate": 0,
+      "sourceUrl": "https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/F9CA13B970439E8F85258E27002DDF15/$FILE/Donald-J-Trump-06.25.2026-278T%20%282%29.pdf"
+    },
+    {
+      "ticker": "—",
+      "asset": "1067 E L F BEAUTY INC",
+      "side": "SELL",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-05-22",
+      "filedDate": "2026-06-25",
+      "daysLate": 0,
+      "sourceUrl": "https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/F9CA13B970439E8F85258E27002DDF15/$FILE/Donald-J-Trump-06.25.2026-278T%20%282%29.pdf"
+    },
+    {
+      "ticker": "—",
+      "asset": "1070 EQUIFAX INC I",
+      "side": "BUY",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-05-22",
+      "filedDate": "2026-06-25",
+      "daysLate": 0,
+      "sourceUrl": "https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/F9CA13B970439E8F85258E27002DDF15/$FILE/Donald-J-Trump-06.25.2026-278T%20%282%29.pdf"
     }
   ],
   "tradesShown": 20,
@@ -233,9 +276,9 @@
   },
   "performance": {
     "available": false,
-    "reason": "not_enough_priced_buys",
+    "reason": "no_benchmark",
     "pricedBuys": 0,
-    "stockBuys": 0
+    "stockBuys": 41
   },
   "committees": null
 }

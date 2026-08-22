@@ -244,16 +244,16 @@
     }
   },
   "summary": {
-    "trades": 38,
-    "members": 10,
+    "trades": 39,
+    "members": 11,
     "buys": 19,
-    "sells": 19,
+    "sells": 20,
     "other": 0,
     "firstTx": "2024-05-03",
-    "lastTx": "2026-04-17",
+    "lastTx": "2026-05-18",
     "lastFiling": "2026-08-05",
     "estBuyLabel": "$152K",
-    "estSellLabel": "$152K",
+    "estSellLabel": "$227K",
     "pctLate": 8
   },
   "topMembers": [
@@ -335,6 +335,17 @@
       "hasPage": false
     },
     {
+      "name": "Donald J. Trump",
+      "slug": "donald-j-trump",
+      "party": "R",
+      "chamber": "Executive",
+      "trades": 1,
+      "buys": 0,
+      "sells": 1,
+      "estLabel": "$75K",
+      "hasPage": true
+    },
+    {
       "name": "Alan Armstrong",
       "slug": "alan-armstrong",
       "party": "R",
@@ -355,20 +366,21 @@
       "sells": 1,
       "estLabel": "$8K",
       "hasPage": false
-    },
-    {
-      "name": "Tommy Tuberville",
-      "slug": "tommy-tuberville",
-      "party": "R",
-      "chamber": "Senate",
-      "trades": 1,
-      "buys": 0,
-      "sells": 1,
-      "estLabel": "$8K",
-      "hasPage": true
     }
   ],
   "trades": [
+    {
+      "member": "Donald J. Trump",
+      "memberSlug": "donald-j-trump",
+      "hasPage": true,
+      "party": "R",
+      "side": "SELL",
+      "amountBucket": "$50K – $100K",
+      "txDate": "2026-05-18",
+      "filedDate": "2026-06-25",
+      "daysLate": 0,
+      "sourceUrl": "https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/F9CA13B970439E8F85258E27002DDF15/$FILE/Donald-J-Trump-06.25.2026-278T%20%282%29.pdf"
+    },
     {
       "member": "April McClain Delaney",
       "memberSlug": "april-mcclain-delaney",
@@ -656,18 +668,6 @@
       "filedDate": "2025-10-10",
       "daysLate": 0,
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20032211.pdf"
-    },
-    {
-      "member": "April McClain Delaney",
-      "memberSlug": "april-mcclain-delaney",
-      "hasPage": true,
-      "party": "D",
-      "side": "BUY",
-      "amountBucket": "$1K – $15K",
-      "txDate": "2025-09-18",
-      "filedDate": "2025-10-06",
-      "daysLate": 0,
-      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20032233.pdf"
     }
   ],
   "tradesShown": 25
