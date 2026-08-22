@@ -184,14 +184,18 @@ def retick_executive(output_path: Path) -> tuple[int, list[str]]:
     index = tickermatch.build_index(trades)
     fixed, refused = 0, []
     for t in trades:
-        if (t.get("chamber") != "executive" or t.get("ticker")
-                or t.get("asset_type") != "Stock"):
+        if t.get("chamber") != "executive":
             continue
+        # Strip a stray leading row number from EVERY executive row — the
+        # bond rows keep their numbers too, and a muni named "1143
+        # ALBUQUERQUE..." reads as a defect on the page.
         asset = re.sub(r"^\d{1,4}\s+", "", t.get("asset") or "")
-        ticker = tickermatch.resolve(asset, index)
         if asset != t.get("asset"):
             t["asset"] = asset
-            fixed += ticker is None  # count the cleanup even without a hit
+            fixed += 1
+        if t.get("ticker") or t.get("asset_type") != "Stock":
+            continue
+        ticker = tickermatch.resolve(asset, index)
         if ticker:
             t["ticker"] = ticker
             fixed += 1
