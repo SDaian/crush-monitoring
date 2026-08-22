@@ -212,7 +212,9 @@ def _parse_tx_date(raw: str) -> str:
 def _clean_description(desc: str) -> str:
     desc = _LEADING_JUNK.sub("", desc)
     # A stray leading row number that landed on the description line.
-    desc = re.sub(r"^\d{1,3}\s+(?=[A-Za-z])", "", desc)
+    # Four digits, not three: the June-2026 filing numbers past 999,
+    # and rows 1000+ kept their numbers and failed ticker resolution.
+    desc = re.sub(r"^\d{1,4}\s+(?=[A-Za-z])", "", desc)
     return re.sub(r"\s+", " ", desc).strip()
 
 
