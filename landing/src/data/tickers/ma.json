@@ -250,11 +250,11 @@
     "sells": 18,
     "other": 0,
     "firstTx": "2024-05-03",
-    "lastTx": "2028-03-12",
+    "lastTx": "2026-06-08",
     "lastFiling": "2026-08-05",
     "estBuyLabel": "$188K",
     "estSellLabel": "$334K",
-    "pctLate": 20
+    "pctLate": 23
   },
   "topMembers": [
     {
@@ -370,18 +370,6 @@
   ],
   "trades": [
     {
-      "member": "Donald J. Trump",
-      "memberSlug": "donald-j-trump",
-      "hasPage": true,
-      "party": "R",
-      "side": "BUY",
-      "amountBucket": "$15K – $50K",
-      "txDate": "2028-03-12",
-      "filedDate": "2026-05-08",
-      "daysLate": 0,
-      "sourceUrl": "https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/405E4EC4E27BE8D185258DF7002DD1C0/$FILE/Trump%2C%20Donald%20J.-05.08.2026-278T%282%29.pdf"
-    },
-    {
       "member": "Tommy Tuberville",
       "memberSlug": "tommy-tuberville",
       "hasPage": true,
@@ -440,6 +428,18 @@
       "filedDate": "2026-07-21",
       "daysLate": 71,
       "sourceUrl": "https://efdsearch.senate.gov/search/view/ptr/fda235b3-bad7-4637-8fa1-053f354d929c/"
+    },
+    {
+      "member": "Donald J. Trump",
+      "memberSlug": "donald-j-trump",
+      "hasPage": true,
+      "party": "R",
+      "side": "BUY",
+      "amountBucket": "$15K – $50K",
+      "txDate": "2026-03-12",
+      "filedDate": "2026-05-08",
+      "daysLate": 12,
+      "sourceUrl": "https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/405E4EC4E27BE8D185258DF7002DD1C0/$FILE/Trump%2C%20Donald%20J.-05.08.2026-278T%282%29.pdf"
     },
     {
       "member": "Sheldon Whitehouse",

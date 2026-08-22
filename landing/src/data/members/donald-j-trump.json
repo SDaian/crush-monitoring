@@ -10,9 +10,9 @@
     "trades": 451,
     "distinctTickers": 302,
     "firstTx": "2025-09-18",
-    "lastTx": "2028-03-23",
+    "lastTx": "2026-05-28",
     "lastFiling": "2026-06-25",
-    "pctLate": 13,
+    "pctLate": 14,
     "worstLate": 77
   },
   "topTickers": [
@@ -22,13 +22,6 @@
       "asset": "FAIR ISAAC CORP",
       "slug": "fico",
       "hasPage": false
-    },
-    {
-      "ticker": "VZ",
-      "count": 4,
-      "asset": "VERIZON COMMUNICATIONS I",
-      "slug": "vz",
-      "hasPage": true
     },
     {
       "ticker": "HD",
@@ -42,6 +35,13 @@
       "count": 4,
       "asset": "ACCENTURE PLC IRELAND F CLASS A",
       "slug": "acn",
+      "hasPage": true
+    },
+    {
+      "ticker": "VZ",
+      "count": 4,
+      "asset": "VERIZON COMMUNICATIONS I",
+      "slug": "vz",
       "hasPage": true
     },
     {
@@ -61,48 +61,8 @@
   ],
   "trades": [
     {
-      "ticker": "DDOG",
-      "asset": "DATADOG INC UNSOLICITED",
-      "side": "SELL",
-      "amountBucket": "$50K – $100K",
-      "txDate": "2028-03-23",
-      "filedDate": "2026-05-08",
-      "daysLate": 0,
-      "sourceUrl": "https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/405E4EC4E27BE8D185258DF7002DD1C0/$FILE/Trump%2C%20Donald%20J.-05.08.2026-278T%282%29.pdf"
-    },
-    {
-      "ticker": "MA",
-      "asset": "MASTERCARD INC CL A UNSOLICITED",
-      "side": "BUY",
-      "amountBucket": "$15K – $50K",
-      "txDate": "2028-03-12",
-      "filedDate": "2026-05-08",
-      "daysLate": 0,
-      "sourceUrl": "https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/405E4EC4E27BE8D185258DF7002DD1C0/$FILE/Trump%2C%20Donald%20J.-05.08.2026-278T%282%29.pdf"
-    },
-    {
-      "ticker": "IOT",
-      "asset": "SAMSARA INC CLASS A",
-      "side": "SELL",
-      "amountBucket": "$1K – $15K",
-      "txDate": "2028-02-12",
-      "filedDate": "2026-05-08",
-      "daysLate": 0,
-      "sourceUrl": "https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/405E4EC4E27BE8D185258DF7002DD1C0/$FILE/Trump%2C%20Donald%20J.-05.08.2026-278T%282%29.pdf"
-    },
-    {
-      "ticker": "VZ",
-      "asset": "VERIZON COMMUNICATIONS I",
-      "side": "SELL",
-      "amountBucket": "$1K – $15K",
-      "txDate": "2028-01-21",
-      "filedDate": "2026-05-08",
-      "daysLate": 0,
-      "sourceUrl": "https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/405E4EC4E27BE8D185258DF7002DD1C0/$FILE/Trump%2C%20Donald%20J.-05.08.2026-278T%282%29.pdf"
-    },
-    {
       "ticker": "—",
-      "asset": "1143 ALBUQUERQUE NM STORM SWR SERB B1E 3.00 % Duo Jul 1, 2033",
+      "asset": "ALBUQUERQUE NM STORM SWR SERB B1E 3.00 % Duo Jul 1, 2033",
       "side": "BUY",
       "amountBucket": "$1K – $15K",
       "txDate": "2026-05-28",
@@ -202,7 +162,7 @@
     },
     {
       "ticker": "—",
-      "asset": "1062 CUYAHOGA CNTY OH 5.25% DUE 12/01/56",
+      "asset": "CUYAHOGA CNTY OH 5.25% DUE 12/01/56",
       "side": "BUY",
       "amountBucket": "$1K – $15K",
       "txDate": "2026-05-22",
@@ -253,6 +213,46 @@
     {
       "ticker": "EFX",
       "asset": "EQUIFAX INC I",
+      "side": "BUY",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-05-22",
+      "filedDate": "2026-06-25",
+      "daysLate": 0,
+      "sourceUrl": "https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/F9CA13B970439E8F85258E27002DDF15/$FILE/Donald-J-Trump-06.25.2026-278T%20%282%29.pdf"
+    },
+    {
+      "ticker": "EXPE",
+      "asset": "EXPEDIA GROUP INC",
+      "side": "SELL",
+      "amountBucket": "$15K – $50K",
+      "txDate": "2026-05-22",
+      "filedDate": "2026-06-25",
+      "daysLate": 0,
+      "sourceUrl": "https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/F9CA13B970439E8F85258E27002DDF15/$FILE/Donald-J-Trump-06.25.2026-278T%20%282%29.pdf"
+    },
+    {
+      "ticker": "FI",
+      "asset": "FISERV INC",
+      "side": "SELL",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-05-22",
+      "filedDate": "2026-06-25",
+      "daysLate": 0,
+      "sourceUrl": "https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/F9CA13B970439E8F85258E27002DDF15/$FILE/Donald-J-Trump-06.25.2026-278T%20%282%29.pdf"
+    },
+    {
+      "ticker": "FLUT",
+      "asset": "FLUTTER ENTMT PLC F",
+      "side": "SELL",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-05-22",
+      "filedDate": "2026-06-25",
+      "daysLate": 0,
+      "sourceUrl": "https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/F9CA13B970439E8F85258E27002DDF15/$FILE/Donald-J-Trump-06.25.2026-278T%20%282%29.pdf"
+    },
+    {
+      "ticker": "GIS",
+      "asset": "GENERAL MILLS INC",
       "side": "BUY",
       "amountBucket": "$1K – $15K",
       "txDate": "2026-05-22",

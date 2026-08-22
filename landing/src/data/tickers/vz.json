@@ -250,11 +250,11 @@
     "sells": 21,
     "other": 0,
     "firstTx": "2025-01-06",
-    "lastTx": "2028-01-21",
+    "lastTx": "2026-05-18",
     "lastFiling": "2026-07-21",
     "estBuyLabel": "$485K",
     "estSellLabel": "$576K",
-    "pctLate": 6
+    "pctLate": 9
   },
   "topMembers": [
     {
@@ -376,18 +376,6 @@
       "party": "R",
       "side": "SELL",
       "amountBucket": "$1K – $15K",
-      "txDate": "2028-01-21",
-      "filedDate": "2026-05-08",
-      "daysLate": 0,
-      "sourceUrl": "https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/405E4EC4E27BE8D185258DF7002DD1C0/$FILE/Trump%2C%20Donald%20J.-05.08.2026-278T%282%29.pdf"
-    },
-    {
-      "member": "Donald J. Trump",
-      "memberSlug": "donald-j-trump",
-      "hasPage": true,
-      "party": "R",
-      "side": "SELL",
-      "amountBucket": "$1K – $15K",
       "txDate": "2026-05-18",
       "filedDate": "2026-06-25",
       "daysLate": 0,
@@ -500,6 +488,18 @@
       "filedDate": "2026-02-20",
       "daysLate": 0,
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20034034.pdf"
+    },
+    {
+      "member": "Donald J. Trump",
+      "memberSlug": "donald-j-trump",
+      "hasPage": true,
+      "party": "R",
+      "side": "SELL",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-01-21",
+      "filedDate": "2026-05-08",
+      "daysLate": 62,
+      "sourceUrl": "https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/405E4EC4E27BE8D185258DF7002DD1C0/$FILE/Trump%2C%20Donald%20J.-05.08.2026-278T%282%29.pdf"
     },
     {
       "member": "Julie Johnson",
