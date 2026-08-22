@@ -9,20 +9,20 @@
   },
   "indexable": true,
   "technical": {
-    "asOf": "2026-08-20",
-    "price": 340.67,
-    "chg1d": -1.17,
-    "chg1w": -1.64,
-    "chg1m": -0.42,
-    "rsi14": 44.0,
-    "sma50": 352.0,
-    "sma200": 332.72,
-    "vsSma50": -3.2,
-    "vsSma200": 2.4,
-    "relVol": 0.68,
+    "asOf": "2026-08-21",
+    "price": 344.9,
+    "chg1d": 1.24,
+    "chg1w": -0.29,
+    "chg1m": 8.56,
+    "rsi14": 47.2,
+    "sma50": 351.77,
+    "sma200": 333.03,
+    "vsSma50": -2.0,
+    "vsSma200": 3.6,
+    "relVol": -0.58,
     "high52w": 402.62,
-    "low52w": 199.32,
-    "rangePos": 70.0,
+    "low52w": 199.75,
+    "rangePos": 72.0,
     "series": [
       {
         "d": "2025-08-29",
@@ -229,29 +229,29 @@
         "c": 345.9
       },
       {
-        "d": "2026-08-20",
-        "c": 340.67
+        "d": "2026-08-21",
+        "c": 344.9
       }
     ],
     "signals": [],
     "nextEarnings": null,
     "score": {
-      "label": "Sell",
-      "buys": 2,
-      "sells": 4,
+      "label": "Hold",
+      "buys": 3,
+      "sells": 3,
       "holds": 1,
-      "ratio": -0.286
+      "ratio": 0.0
     }
   },
   "summary": {
-    "trades": 84,
+    "trades": 86,
     "members": 28,
-    "buys": 41,
+    "buys": 43,
     "sells": 43,
     "other": 0,
     "firstTx": "2024-09-26",
-    "lastTx": "2026-07-22",
-    "lastFiling": "2026-08-18",
+    "lastTx": "2026-08-11",
+    "lastFiling": "2026-08-20",
     "estBuyLabel": "$2.8M",
     "estSellLabel": "$6.8M",
     "pctLate": 21
@@ -262,10 +262,10 @@
       "slug": "david-j-taylor",
       "party": "R",
       "chamber": "House",
-      "trades": 10,
-      "buys": 3,
+      "trades": 12,
+      "buys": 5,
       "sells": 7,
-      "estLabel": "$105K",
+      "estLabel": "$121K",
       "hasPage": false
     },
     {
@@ -369,6 +369,30 @@
     }
   ],
   "trades": [
+    {
+      "member": "David J. Taylor",
+      "memberSlug": "david-j-taylor",
+      "hasPage": false,
+      "party": "R",
+      "side": "BUY",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-08-11",
+      "filedDate": "2026-08-20",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035289.pdf"
+    },
+    {
+      "member": "David J. Taylor",
+      "memberSlug": "david-j-taylor",
+      "hasPage": false,
+      "party": "R",
+      "side": "BUY",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-08-11",
+      "filedDate": "2026-08-20",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035289.pdf"
+    },
     {
       "member": "Thomas H. Kean, Jr.",
       "memberSlug": "thomas-h-kean-jr",
@@ -644,30 +668,6 @@
       "filedDate": "2026-08-05",
       "daysLate": 186,
       "sourceUrl": "https://efdsearch.senate.gov/search/view/ptr/57cf1745-e3dd-4afd-8685-228153848631/"
-    },
-    {
-      "member": "Tommy Tuberville",
-      "memberSlug": "tommy-tuberville",
-      "hasPage": true,
-      "party": "R",
-      "side": "SELL",
-      "amountBucket": "$1K – $15K",
-      "txDate": "2025-12-17",
-      "filedDate": "2026-01-15",
-      "daysLate": 0,
-      "sourceUrl": "https://efdsearch.senate.gov/search/view/ptr/b2bdf363-af39-43c8-ae93-13ed14aa3752/"
-    },
-    {
-      "member": "Shelley Moore Capito",
-      "memberSlug": "shelley-moore-capito",
-      "hasPage": false,
-      "party": "R",
-      "side": "SELL",
-      "amountBucket": "$1K – $15K",
-      "txDate": "2025-12-16",
-      "filedDate": "2026-01-06",
-      "daysLate": 0,
-      "sourceUrl": "https://efdsearch.senate.gov/search/view/ptr/439c1ac8-2955-486b-9f9c-4f1c6524671a/"
     }
   ],
   "tradesShown": 25

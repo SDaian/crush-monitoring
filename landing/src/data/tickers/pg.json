@@ -9,20 +9,20 @@
   },
   "indexable": true,
   "technical": {
-    "asOf": "2026-08-20",
-    "price": 142.97,
-    "chg1d": -0.98,
-    "chg1w": -0.89,
-    "chg1m": -4.13,
-    "rsi14": 40.9,
-    "sma50": 147.7,
-    "sma200": 147.65,
-    "vsSma50": -3.2,
-    "vsSma200": -3.2,
-    "relVol": 1.64,
+    "asOf": "2026-08-21",
+    "price": 144.69,
+    "chg1d": 1.2,
+    "chg1w": 0.1,
+    "chg1m": -1.55,
+    "rsi14": 46.9,
+    "sma50": 147.61,
+    "sma200": 147.64,
+    "vsSma50": -2.0,
+    "vsSma200": -2.0,
+    "relVol": 0.83,
     "high52w": 167.2,
     "low52w": 138.04,
-    "rangePos": 17.0,
+    "rangePos": 23.0,
     "series": [
       {
         "d": "2025-08-29",
@@ -229,11 +229,18 @@
         "c": 144.55
       },
       {
-        "d": "2026-08-20",
-        "c": 142.97
+        "d": "2026-08-21",
+        "c": 144.69
       }
     ],
-    "signals": [],
+    "signals": [
+      {
+        "type": "death_cross",
+        "asof": "2026-08-21",
+        "label": "Death cross (50-day below 200-day)",
+        "dir": "bear"
+      }
+    ],
     "nextEarnings": null,
     "score": {
       "label": "Strong Sell",
@@ -244,15 +251,15 @@
     }
   },
   "summary": {
-    "trades": 56,
+    "trades": 57,
     "members": 26,
-    "buys": 25,
+    "buys": 26,
     "sells": 31,
     "other": 0,
     "firstTx": "2024-05-03",
-    "lastTx": "2026-07-30",
-    "lastFiling": "2026-08-14",
-    "estBuyLabel": "$225K",
+    "lastTx": "2026-08-11",
+    "lastFiling": "2026-08-20",
+    "estBuyLabel": "$233K",
     "estSellLabel": "$721K",
     "pctLate": 18
   },
@@ -262,10 +269,10 @@
       "slug": "david-j-taylor",
       "party": "R",
       "chamber": "House",
-      "trades": 11,
-      "buys": 9,
+      "trades": 12,
+      "buys": 10,
       "sells": 2,
-      "estLabel": "$88K",
+      "estLabel": "$96K",
       "hasPage": false
     },
     {
@@ -369,6 +376,18 @@
     }
   ],
   "trades": [
+    {
+      "member": "David J. Taylor",
+      "memberSlug": "david-j-taylor",
+      "hasPage": false,
+      "party": "R",
+      "side": "BUY",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-08-11",
+      "filedDate": "2026-08-20",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035289.pdf"
+    },
     {
       "member": "Richard McCormick",
       "memberSlug": "richard-mccormick",
@@ -656,18 +675,6 @@
       "filedDate": "2026-01-13",
       "daysLate": 44,
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20030977.pdf"
-    },
-    {
-      "member": "Val T. Hoyle",
-      "memberSlug": "val-t-hoyle",
-      "hasPage": false,
-      "party": "D",
-      "side": "SELL",
-      "amountBucket": "$1K – $15K",
-      "txDate": "2025-09-23",
-      "filedDate": "2025-10-10",
-      "daysLate": 0,
-      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20032211.pdf"
     }
   ],
   "tradesShown": 25

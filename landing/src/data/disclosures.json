@@ -2,12 +2,23 @@
   "_comment": "Generated from real official disclosures by congress/landing_data.py (daily Action). Do not edit by hand. 'filedDaysLate' counts days past the STOCK Act's 45-day statutory maximum; 0 = on time.",
   "disclosures": [
     {
-      "member": "R. Allen",
+      "member": "T. Moore",
       "memberSlug": null,
       "chamber": "House",
-      "district": "GA-12",
-      "ticker": "ABT",
-      "tickerSlug": "abt",
+      "district": "NC-14",
+      "ticker": "T",
+      "tickerSlug": "t",
+      "side": "SELL",
+      "amountBucket": "$50K – $100K",
+      "filedDaysLate": 0
+    },
+    {
+      "member": "D. Taylor",
+      "memberSlug": null,
+      "chamber": "House",
+      "district": "OH-2",
+      "ticker": "MSFT",
+      "tickerSlug": "msft",
       "side": "SELL",
       "amountBucket": "$15K – $50K",
       "filedDaysLate": 0
@@ -22,17 +33,6 @@
       "side": "SELL",
       "amountBucket": "$100K – $250K",
       "filedDaysLate": 171
-    },
-    {
-      "member": "C. Miller",
-      "memberSlug": null,
-      "chamber": "House",
-      "district": "WV-1",
-      "ticker": "USB",
-      "tickerSlug": null,
-      "side": "SELL",
-      "amountBucket": "$15K – $50K",
-      "filedDaysLate": 476
     },
     {
       "member": "T. Tuberville",

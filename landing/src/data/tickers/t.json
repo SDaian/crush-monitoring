@@ -9,20 +9,20 @@
   },
   "indexable": true,
   "technical": {
-    "asOf": "2026-08-20",
-    "price": 25.15,
-    "chg1d": 0.12,
-    "chg1w": 2.32,
-    "chg1m": 9.16,
-    "rsi14": 66.4,
-    "sma50": 22.86,
-    "sma200": 25.1,
-    "vsSma50": 10.0,
-    "vsSma200": 0.2,
-    "relVol": 0.53,
+    "asOf": "2026-08-21",
+    "price": 25.31,
+    "chg1d": 0.64,
+    "chg1w": 1.69,
+    "chg1m": 10.24,
+    "rsi14": 67.7,
+    "sma50": 22.91,
+    "sma200": 25.11,
+    "vsSma50": 10.5,
+    "vsSma200": 0.8,
+    "relVol": 0.48,
     "high52w": 29.62,
     "low52w": 20.48,
-    "rangePos": 51.0,
+    "rangePos": 53.0,
     "series": [
       {
         "d": "2025-08-29",
@@ -229,8 +229,8 @@
         "c": 24.89
       },
       {
-        "d": "2026-08-20",
-        "c": 25.15
+        "d": "2026-08-21",
+        "c": 25.31
       }
     ],
     "signals": [],
@@ -244,17 +244,17 @@
     }
   },
   "summary": {
-    "trades": 32,
+    "trades": 33,
     "members": 14,
     "buys": 17,
-    "sells": 15,
+    "sells": 16,
     "other": 0,
     "firstTx": "2024-10-23",
-    "lastTx": "2026-06-29",
-    "lastFiling": "2026-07-21",
+    "lastTx": "2026-08-14",
+    "lastFiling": "2026-08-20",
     "estBuyLabel": "$301K",
-    "estSellLabel": "$218K",
-    "pctLate": 19
+    "estSellLabel": "$293K",
+    "pctLate": 18
   },
   "topMembers": [
     {
@@ -273,10 +273,10 @@
       "slug": "tim-moore",
       "party": "R",
       "chamber": "House",
-      "trades": 5,
+      "trades": 6,
       "buys": 3,
-      "sells": 2,
-      "estLabel": "$205K",
+      "sells": 3,
+      "estLabel": "$280K",
       "hasPage": false
     },
     {
@@ -369,6 +369,18 @@
     }
   ],
   "trades": [
+    {
+      "member": "Tim Moore",
+      "memberSlug": "tim-moore",
+      "hasPage": false,
+      "party": "R",
+      "side": "SELL",
+      "amountBucket": "$50K – $100K",
+      "txDate": "2026-08-14",
+      "filedDate": "2026-08-20",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035291.pdf"
+    },
     {
       "member": "Gary C. Peters",
       "memberSlug": "gary-c-peters",
@@ -656,18 +668,6 @@
       "filedDate": "2026-01-13",
       "daysLate": 150,
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20030977.pdf"
-    },
-    {
-      "member": "Cleo Fields",
-      "memberSlug": "cleo-fields",
-      "hasPage": true,
-      "party": "D",
-      "side": "BUY",
-      "amountBucket": "$15K – $50K",
-      "txDate": "2025-06-30",
-      "filedDate": "2025-07-01",
-      "daysLate": 0,
-      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20030472.pdf"
     }
   ],
   "tradesShown": 25
