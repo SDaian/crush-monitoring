@@ -253,3 +253,17 @@ class TestInvalidTradeRepair(unittest.TestCase):
         output = {"trades": [dict(r) for r in self.ROWS]}
         self.assertEqual(pipeline.forget_filings(state, output, {"NOPE"}), 0)
         self.assertEqual(list(state["processed"]["house"]), ["F1"])
+
+
+class TestFutureDateInvariant(unittest.TestCase):
+    def test_executive_future_trade_date_is_invalid(self):
+        rows = [{"chamber": "executive", "tx_date": "2028-03-23",
+                 "filing_date": "2026-05-08"}]
+        self.assertEqual(pipeline.invalid_trades(rows), rows)
+
+    def test_house_future_trade_date_is_the_filers_statement(self):
+        # The e-filed form itself says the date; re-parsing reproduces it,
+        # so flagging it would re-download the filing forever.
+        rows = [{"chamber": "house", "tx_date": "2026-12-26",
+                 "filing_date": "2026-08-01"}]
+        self.assertEqual(pipeline.invalid_trades(rows), [])

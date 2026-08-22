@@ -182,3 +182,26 @@ class TestEquityRows(unittest.TestCase):
     def test_yes_notification_rows_parse(self):
         # Earlier filings said "No"; the June filing says "Yes" on every row.
         self.assertEqual(len(self.rows()), 4)
+
+
+class TestDateClamp(unittest.TestCase):
+    """A 278-T discloses past trades; the filing date bounds the trade date."""
+
+    def one(self, date_token, filing="2026-05-08"):
+        rows = oge.parse_transactions(
+            f"1 DATADOG INC purchase {date_token} Yes $1,001 - $15,000",
+            unid="U", source_url="u", filing_date=filing, name_index={})
+        return rows[0].tx_date
+
+    def test_ocr_year_overshoot_walks_back(self):
+        # "202B" repairs to 2028; a March-2028 trade cannot sit in a
+        # May-2026 filing, so the year walks back to the possible one.
+        self.assertEqual(self.one("3/23/202B"), "2026-03-23")
+
+    def test_late_year_trade_in_an_early_year_filing(self):
+        # A December trade filed the next January crosses a year boundary.
+        self.assertEqual(self.one("12/30/2026", filing="2026-01-14"),
+                         "2025-12-30")
+
+    def test_a_possible_date_is_untouched(self):
+        self.assertEqual(self.one("3/23/2026"), "2026-03-23")
