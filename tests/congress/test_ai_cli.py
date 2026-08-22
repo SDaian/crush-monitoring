@@ -154,3 +154,60 @@ class TestSkipWhenClosed(unittest.TestCase):
             path = Path(tmp) / "broken.json"
             path.write_text("{ not json", encoding="utf-8")
             self.assertIsNone(cli.newest_close(path))
+
+
+class TestRetickExecutive(unittest.TestCase):
+    """The self-heal pass: OVERRIDES additions land without a re-download."""
+
+    def write(self, tmp, trades):
+        path = Path(tmp) / "trades.json"
+        path.write_text(json.dumps({"trades": trades}), encoding="utf-8")
+        return path
+
+    def test_fills_tickers_and_strips_row_numbers(self):
+        trades = [
+            {"chamber": "executive", "asset_type": "Stock", "ticker": None,
+             "asset": "1082 HOME DEPOT INC"},
+            {"chamber": "executive", "asset_type": "Stock", "ticker": None,
+             "asset": "QUALM INC"},
+            {"chamber": "house", "asset_type": "Stock", "ticker": "HD",
+             "asset": "Home Depot, Inc. (The) Common Stock"},
+        ]
+        with TemporaryDirectory() as tmp:
+            path = self.write(tmp, trades)
+            fixed, refused = cli.retick_executive(path)
+            doc = json.loads(path.read_text())
+        by = {t["asset"]: t for t in doc["trades"]}
+        self.assertIn("HOME DEPOT INC", by)          # number stripped
+        self.assertEqual(by["HOME DEPOT INC"]["ticker"], "HD")
+        self.assertEqual(by["QUALM INC"]["ticker"], "QCOM")
+        self.assertEqual(refused, [])
+
+    def test_refusals_are_reported_and_rows_untouched(self):
+        trades = [{"chamber": "executive", "asset_type": "Stock",
+                   "ticker": None, "asset": "TOTAL OCR MUSH XYZQ"}]
+        with TemporaryDirectory() as tmp:
+            path = self.write(tmp, trades)
+            fixed, refused = cli.retick_executive(path)
+            doc = json.loads(path.read_text())
+        self.assertEqual(refused, ["TOTAL OCR MUSH XYZQ"])
+        self.assertIsNone(doc["trades"][0]["ticker"])
+
+    def test_bond_rows_and_other_chambers_stay_alone(self):
+        trades = [
+            {"chamber": "executive", "asset_type": "bond", "ticker": None,
+             "asset": "SOME MUNI 4.5% DUE 2031"},
+            {"chamber": "house", "asset_type": "Stock", "ticker": None,
+             "asset": "QUALM INC"},
+        ]
+        with TemporaryDirectory() as tmp:
+            path = self.write(tmp, trades)
+            fixed, refused = cli.retick_executive(path)
+            doc = json.loads(path.read_text())
+        self.assertEqual((fixed, refused), (0, []))
+        self.assertTrue(all(t["ticker"] is None for t in doc["trades"]))
+
+    def test_missing_file_is_quiet(self):
+        with TemporaryDirectory() as tmp:
+            self.assertEqual(
+                cli.retick_executive(Path(tmp) / "gone.json"), (0, []))

@@ -24,6 +24,7 @@ from __future__ import annotations
 import argparse
 import json
 import os
+import re
 import sys
 from datetime import date, datetime, timezone
 from pathlib import Path
@@ -163,6 +164,46 @@ def make_executive_source(
 # Subcommands
 # ---------------------------------------------------------------------------
 
+def retick_executive(output_path: Path) -> tuple[int, list[str]]:
+    """Re-resolve tickers for published executive rows that lack one.
+
+    Resolution runs at parse time, so a name that misses lands in the output
+    with ``ticker=None`` — and a filing is fetched only once, so without this
+    pass an OVERRIDES addition would need a re-download to take effect. This
+    runs after every fetch instead: load the output, clean a stray leading
+    row number out of the asset text, resolve again, rewrite when anything
+    changed. Returns (rows fixed, names still refused).
+    """
+    from . import tickermatch
+
+    try:
+        doc = json.loads(Path(output_path).read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        return 0, []
+    trades = doc.get("trades") or []
+    index = tickermatch.build_index(trades)
+    fixed, refused = 0, []
+    for t in trades:
+        if (t.get("chamber") != "executive" or t.get("ticker")
+                or t.get("asset_type") != "Stock"):
+            continue
+        asset = re.sub(r"^\d{1,4}\s+", "", t.get("asset") or "")
+        ticker = tickermatch.resolve(asset, index)
+        if asset != t.get("asset"):
+            t["asset"] = asset
+            fixed += ticker is None  # count the cleanup even without a hit
+        if ticker:
+            t["ticker"] = ticker
+            fixed += 1
+        else:
+            refused.append(asset)
+    if fixed:
+        Path(output_path).write_text(
+            json.dumps(doc, indent=2, ensure_ascii=False) + "\n",
+            encoding="utf-8")
+    return fixed, refused
+
+
 def _cmd_fetch(args: argparse.Namespace) -> int:
     from .http import make_session
 
@@ -192,6 +233,13 @@ def _cmd_fetch(args: argparse.Namespace) -> int:
         f"recovered={result.recovered_errors} pruned={result.pruned_trades} "
         f"changed={result.changed}"
     )
+    if not args.dry_run:
+        fixed, refused = retick_executive(Path(args.output))
+        if fixed:
+            print(f"executive retick: {fixed} rows resolved/cleaned")
+        for name in sorted(set(refused)):
+            print(f"::warning::no ticker resolved for 278-T asset "
+                  f"{name!r} — add it to congress/tickermatch.py")
     return 0
 
 

@@ -312,8 +312,10 @@ sites. Full details in `congress/README.md`. Conventions:
   from the published House/Senate rows (name + ticker pairs). **Resolution is
   exact or refused, never guessed**: the form has no ticker column and its OCR
   garbles names ("QUALM INC", "BOEING PANY"), so a miss prints a `::warning::`
-  and a human adds the name to `OVERRIDES` (then `--reparse-invalid` refills
-  it). A bond ETF is never debt — it trades as shares. To track a newly posted
+  and a human adds the name to `OVERRIDES` — no re-download needed: the fetch
+  command ends with a **retick pass** (`cli.retick_executive`) that re-resolves
+  every published executive stock row lacking a ticker on every run, so an
+  override lands the next morning by itself. A bond ETF is never debt — it trades as shares. To track a newly posted
   278-T, append its `unid` + `filename`.
   This file *is* hand-maintained (unlike the generated data files above).
 - **The seat beside the trade is two facts, never three.** Member pages list
