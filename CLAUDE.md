@@ -305,8 +305,16 @@ sites. Full details in `congress/README.md`. Conventions:
   `congress/oge_filings.json` lists the President's OGE Form 278-T Periodic
   Transaction Reports by stable document UNID (he is not in any browsable OGE
   view). `congress/oge.py` fetches + OCR-parses each on every run; the rows are
-  managed-account **bond** purchases (chamber `executive`, no ticker, no return
-  estimate). To track a newly posted 278-T, append its `unid` + `filename`.
+  managed-account purchases (chamber `executive`). Early filings held only
+  **bonds**; the June-2026 filing added **stocks and ETFs**, so `oge.py` now
+  classifies each row (`tickermatch.is_debt`) and resolves equity tickers via
+  `congress/tickermatch.py` — the curated `OVERRIDES` map plus an index built
+  from the published House/Senate rows (name + ticker pairs). **Resolution is
+  exact or refused, never guessed**: the form has no ticker column and its OCR
+  garbles names ("QUALM INC", "BOEING PANY"), so a miss prints a `::warning::`
+  and a human adds the name to `OVERRIDES` (then `--reparse-invalid` refills
+  it). A bond ETF is never debt — it trades as shares. To track a newly posted
+  278-T, append its `unid` + `filename`.
   This file *is* hand-maintained (unlike the generated data files above).
 - **The seat beside the trade is two facts, never three.** Member pages list
   the symbols a member disclosed in an industry one of their committees
@@ -350,8 +358,9 @@ sites. Full details in `congress/README.md`. Conventions:
   filings disclose brackets, so weighting by position size would be invented.
 - **Bonds are kept but de-emphasized:** ticker-less debt rows (Trump's
   executive 278-T bonds, munis, treasuries) stay in the record, the tracker
-  and the member pages — removing them would erase Trump's page entirely
-  (57/57 rows are bonds) and the executive coverage is a differentiator. But
+  and the member pages. Until June 2026 they were his entire page (57/57
+  rows); his newer filings add tickered stocks and ETFs beside them, and the
+  executive coverage is a differentiator either way. But
   they are excluded from the HEADLINE surfaces (`landing_data.is_bond`): the
   home-page stats say "stock trades" and count exactly that, and the live
   feed already requires a ticker. Don't widen `is_bond` to tickered rows.

@@ -2,6 +2,8 @@
 
 import unittest
 from collections import Counter
+
+from congress import oge
 from pathlib import Path
 
 from congress.oge import (
@@ -84,7 +86,12 @@ class TestTransactionParsing(unittest.TestCase):
         self.assertTrue(all(t.ticker is None for t in self.trades))
         self.assertTrue(all(t.chamber == "executive" for t in self.trades))
         self.assertTrue(all(t.member == "Donald J. Trump" for t in self.trades))
-        self.assertTrue(all(t.asset_type == "bond" for t in self.trades))
+        # 56 debt rows; the SPDR High Yield Bond ETF is a tickered fund, so
+        # it classifies as Stock (with the ticker refused, not guessed) —
+        # a bond ETF trades as shares, whatever it holds.
+        self.assertEqual(
+            Counter(t.asset_type for t in self.trades),
+            Counter({"bond": 56, "Stock": 1}))
 
     def test_ids_are_row_indexed(self):
         self.assertEqual(
@@ -129,3 +136,49 @@ class TestTransactionParsing(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class TestEquityRows(unittest.TestCase):
+    """The June-2026 filing shape: stocks and ETFs beside the bonds."""
+
+    TEXT = """\
+199 CINTAS CORP purchase 6/18/2026 Yes $1,000,001 - $5,000,000
+206 BOEING PANY purchase 6/18/2026 Yes $250,001 - $500,000
+216 SCHWAB CHARLES CORP PERP SUB 4.0000% purchase 6/1/2026 Yes $100,001 - $250,000
+221 QUALM INC purchase 6/18/2026 Yes $100,001 - $250,000
+"""
+    INDEX = {"CINTAS": "CTAS", "BOEING": "BA"}
+
+    def rows(self):
+        return oge.parse_transactions(
+            self.TEXT, unid="U1", source_url="u", filing_date="2026-08-22",
+            name_index=self.INDEX)
+
+    def test_equities_resolve_and_ship_as_stock(self):
+        by = {t.asset: t for t in self.rows()}
+        self.assertEqual(by["CINTAS CORP"].ticker, "CTAS")
+        self.assertEqual(by["CINTAS CORP"].asset_type, "Stock")
+        # OCR garble resolves through normalize_name, not a literal match.
+        self.assertEqual(by["BOEING PANY"].ticker, "BA")
+
+    def test_bond_rows_keep_the_old_contract(self):
+        bond = [t for t in self.rows() if "SCHWAB" in t.asset][0]
+        self.assertIsNone(bond.ticker)
+        self.assertEqual(bond.asset_type, "bond")
+
+    def test_curated_override_beats_an_empty_index(self):
+        # QUALM INC is in tickermatch.OVERRIDES; no index entry needed.
+        q = [t for t in self.rows() if "QUALM" in t.asset][0]
+        self.assertEqual(q.ticker, "QCOM")
+
+    def test_unresolved_equity_is_refused_not_guessed(self):
+        rows = oge.parse_transactions(
+            "1 MYSTERY NEWCO INC purchase 6/18/2026 Yes $1,001 - $15,000",
+            unid="U2", source_url="u", filing_date="2026-08-22",
+            name_index={})
+        self.assertEqual(rows[0].asset_type, "Stock")
+        self.assertIsNone(rows[0].ticker)
+
+    def test_yes_notification_rows_parse(self):
+        # Earlier filings said "No"; the June filing says "Yes" on every row.
+        self.assertEqual(len(self.rows()), 4)
