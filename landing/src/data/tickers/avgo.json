@@ -244,17 +244,17 @@
     }
   },
   "summary": {
-    "trades": 85,
-    "members": 23,
-    "buys": 48,
-    "sells": 37,
+    "trades": 87,
+    "members": 24,
+    "buys": 49,
+    "sells": 38,
     "other": 0,
     "firstTx": "2024-09-26",
     "lastTx": "2026-07-24",
     "lastFiling": "2026-08-20",
     "estBuyLabel": "$3.8M",
-    "estSellLabel": "$561K",
-    "pctLate": 16
+    "estSellLabel": "$936K",
+    "pctLate": 17
   },
   "topMembers": [
     {
@@ -394,6 +394,18 @@
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035260.pdf"
     },
     {
+      "member": "Donald J. Trump",
+      "memberSlug": "donald-j-trump",
+      "hasPage": true,
+      "party": "R",
+      "side": "BUY",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-05-15",
+      "filedDate": "2026-06-25",
+      "daysLate": 0,
+      "sourceUrl": "https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/F9CA13B970439E8F85258E27002DDF15/$FILE/Donald-J-Trump-06.25.2026-278T%20%282%29.pdf"
+    },
+    {
       "member": "David J. Taylor",
       "memberSlug": "david-j-taylor",
       "hasPage": false,
@@ -464,6 +476,18 @@
       "filedDate": "2026-04-07",
       "daysLate": 0,
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20034285.pdf"
+    },
+    {
+      "member": "Donald J. Trump",
+      "memberSlug": "donald-j-trump",
+      "hasPage": true,
+      "party": "R",
+      "side": "SELL",
+      "amountBucket": "$250K – $500K",
+      "txDate": "2026-03-02",
+      "filedDate": "2026-05-08",
+      "daysLate": 22,
+      "sourceUrl": "https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/405E4EC4E27BE8D185258DF7002DD1C0/$FILE/Trump%2C%20Donald%20J.-05.08.2026-278T%282%29.pdf"
     },
     {
       "member": "David J. Taylor",
@@ -644,30 +668,6 @@
       "filedDate": "2026-01-13",
       "daysLate": 44,
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20030977.pdf"
-    },
-    {
-      "member": "Jared Moskowitz",
-      "memberSlug": "jared-moskowitz",
-      "hasPage": false,
-      "party": "D",
-      "side": "BUY",
-      "amountBucket": "$1K – $15K",
-      "txDate": "2025-10-10",
-      "filedDate": "2025-11-22",
-      "daysLate": 0,
-      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20033421.pdf"
-    },
-    {
-      "member": "Jared Moskowitz",
-      "memberSlug": "jared-moskowitz",
-      "hasPage": false,
-      "party": "D",
-      "side": "BUY",
-      "amountBucket": "$1K – $15K",
-      "txDate": "2025-10-10",
-      "filedDate": "2025-11-22",
-      "daysLate": 0,
-      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20033421.pdf"
     }
   ],
   "tradesShown": 25

@@ -251,15 +251,15 @@
     }
   },
   "summary": {
-    "trades": 29,
-    "members": 10,
-    "buys": 12,
+    "trades": 30,
+    "members": 11,
+    "buys": 13,
     "sells": 17,
     "other": 0,
     "firstTx": "2025-01-15",
-    "lastTx": "2026-02-10",
-    "lastFiling": "2026-03-09",
-    "estBuyLabel": "$219K",
+    "lastTx": "2026-05-15",
+    "lastFiling": "2026-06-25",
+    "estBuyLabel": "$251K",
     "estSellLabel": "$234K",
     "pctLate": 7
   },
@@ -353,6 +353,17 @@
       "hasPage": false
     },
     {
+      "name": "Donald J. Trump",
+      "slug": "donald-j-trump",
+      "party": "R",
+      "chamber": "Executive",
+      "trades": 1,
+      "buys": 1,
+      "sells": 0,
+      "estLabel": "$33K",
+      "hasPage": true
+    },
+    {
       "name": "Dan Newhouse",
       "slug": "dan-newhouse",
       "party": "R",
@@ -362,20 +373,21 @@
       "sells": 0,
       "estLabel": "$8K",
       "hasPage": false
-    },
-    {
-      "name": "Josh Gottheimer",
-      "slug": "josh-gottheimer",
-      "party": "D",
-      "chamber": "House",
-      "trades": 1,
-      "buys": 0,
-      "sells": 1,
-      "estLabel": "$8K",
-      "hasPage": true
     }
   ],
   "trades": [
+    {
+      "member": "Donald J. Trump",
+      "memberSlug": "donald-j-trump",
+      "hasPage": true,
+      "party": "R",
+      "side": "BUY",
+      "amountBucket": "$15K – $50K",
+      "txDate": "2026-05-15",
+      "filedDate": "2026-06-25",
+      "daysLate": 0,
+      "sourceUrl": "https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/F9CA13B970439E8F85258E27002DDF15/$FILE/Donald-J-Trump-06.25.2026-278T%20%282%29.pdf"
+    },
     {
       "member": "Gilbert Ray Cisneros, Jr.",
       "memberSlug": "gilbert-ray-cisneros-jr",
@@ -663,18 +675,6 @@
       "filedDate": "2025-05-08",
       "daysLate": 0,
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20030231.pdf"
-    },
-    {
-      "member": "Julie Johnson",
-      "memberSlug": "julie-johnson",
-      "hasPage": false,
-      "party": "D",
-      "side": "SELL",
-      "amountBucket": "$1K – $15K",
-      "txDate": "2025-04-01",
-      "filedDate": "2025-05-14",
-      "daysLate": 0,
-      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20030296.pdf"
     }
   ],
   "tradesShown": 25

@@ -244,16 +244,16 @@
     }
   },
   "summary": {
-    "trades": 45,
-    "members": 19,
+    "trades": 49,
+    "members": 20,
     "buys": 12,
-    "sells": 33,
+    "sells": 37,
     "other": 0,
     "firstTx": "2024-03-12",
     "lastTx": "2026-07-10",
     "lastFiling": "2026-08-05",
     "estBuyLabel": "$163K",
-    "estSellLabel": "$970K",
+    "estSellLabel": "$4.0M",
     "pctLate": 18
   },
   "topMembers": [
@@ -289,6 +289,17 @@
       "sells": 5,
       "estLabel": "$40K",
       "hasPage": false
+    },
+    {
+      "name": "Donald J. Trump",
+      "slug": "donald-j-trump",
+      "party": "R",
+      "chamber": "Executive",
+      "trades": 4,
+      "buys": 0,
+      "sells": 4,
+      "estLabel": "$3.0M",
+      "hasPage": true
     },
     {
       "name": "Jared Moskowitz",
@@ -355,17 +366,6 @@
       "sells": 2,
       "estLabel": "$41K",
       "hasPage": false
-    },
-    {
-      "name": "Dan Newhouse",
-      "slug": "dan-newhouse",
-      "party": "R",
-      "chamber": "House",
-      "trades": 2,
-      "buys": 1,
-      "sells": 1,
-      "estLabel": "$16K",
-      "hasPage": false
     }
   ],
   "trades": [
@@ -392,6 +392,42 @@
       "filedDate": "2026-07-02",
       "daysLate": 0,
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20034906.pdf"
+    },
+    {
+      "member": "Donald J. Trump",
+      "memberSlug": "donald-j-trump",
+      "hasPage": true,
+      "party": "R",
+      "side": "SELL",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-05-21",
+      "filedDate": "2026-06-25",
+      "daysLate": 0,
+      "sourceUrl": "https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/F9CA13B970439E8F85258E27002DDF15/$FILE/Donald-J-Trump-06.25.2026-278T%20%282%29.pdf"
+    },
+    {
+      "member": "Donald J. Trump",
+      "memberSlug": "donald-j-trump",
+      "hasPage": true,
+      "party": "R",
+      "side": "SELL",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-05-18",
+      "filedDate": "2026-06-25",
+      "daysLate": 0,
+      "sourceUrl": "https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/F9CA13B970439E8F85258E27002DDF15/$FILE/Donald-J-Trump-06.25.2026-278T%20%282%29.pdf"
+    },
+    {
+      "member": "Donald J. Trump",
+      "memberSlug": "donald-j-trump",
+      "hasPage": true,
+      "party": "R",
+      "side": "SELL",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-05-18",
+      "filedDate": "2026-06-25",
+      "daysLate": 0,
+      "sourceUrl": "https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/F9CA13B970439E8F85258E27002DDF15/$FILE/Donald-J-Trump-06.25.2026-278T%20%282%29.pdf"
     },
     {
       "member": "John Boozman",
@@ -488,6 +524,18 @@
       "filedDate": "2026-04-30",
       "daysLate": 0,
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20034274.pdf"
+    },
+    {
+      "member": "Donald J. Trump",
+      "memberSlug": "donald-j-trump",
+      "hasPage": true,
+      "party": "R",
+      "side": "SELL",
+      "amountBucket": "$1M – $5M",
+      "txDate": "2026-03-17",
+      "filedDate": "2026-05-08",
+      "daysLate": 7,
+      "sourceUrl": "https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/405E4EC4E27BE8D185258DF7002DD1C0/$FILE/Trump%2C%20Donald%20J.-05.08.2026-278T%282%29.pdf"
     },
     {
       "member": "Kevin Hern",
@@ -620,54 +668,6 @@
       "filedDate": "2025-09-11",
       "daysLate": 0,
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20032061.pdf"
-    },
-    {
-      "member": "Kelly Morrison",
-      "memberSlug": "kelly-morrison",
-      "hasPage": false,
-      "party": "D",
-      "side": "SELL",
-      "amountBucket": "$1K – $15K",
-      "txDate": "2025-08-19",
-      "filedDate": "2025-09-11",
-      "daysLate": 0,
-      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20032061.pdf"
-    },
-    {
-      "member": "Kelly Morrison",
-      "memberSlug": "kelly-morrison",
-      "hasPage": false,
-      "party": "D",
-      "side": "SELL",
-      "amountBucket": "$1K – $15K",
-      "txDate": "2025-08-19",
-      "filedDate": "2025-09-11",
-      "daysLate": 0,
-      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20032061.pdf"
-    },
-    {
-      "member": "Kelly Morrison",
-      "memberSlug": "kelly-morrison",
-      "hasPage": false,
-      "party": "D",
-      "side": "SELL",
-      "amountBucket": "$1K – $15K",
-      "txDate": "2025-08-19",
-      "filedDate": "2025-09-11",
-      "daysLate": 0,
-      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20032061.pdf"
-    },
-    {
-      "member": "Julia Letlow",
-      "memberSlug": "julia-letlow",
-      "hasPage": false,
-      "party": "R",
-      "side": "SELL",
-      "amountBucket": "$1K – $15K",
-      "txDate": "2025-07-24",
-      "filedDate": "2026-01-13",
-      "daysLate": 128,
-      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20030977.pdf"
     }
   ],
   "tradesShown": 25

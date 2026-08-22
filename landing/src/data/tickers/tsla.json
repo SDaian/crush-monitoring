@@ -244,16 +244,16 @@
     }
   },
   "summary": {
-    "trades": 58,
-    "members": 12,
+    "trades": 59,
+    "members": 13,
     "buys": 37,
-    "sells": 21,
+    "sells": 22,
     "other": 0,
     "firstTx": "2024-10-29",
     "lastTx": "2026-05-29",
     "lastFiling": "2026-07-21",
     "estBuyLabel": "$345K",
-    "estSellLabel": "$384K",
+    "estSellLabel": "$392K",
     "pctLate": 10
   },
   "topMembers": [
@@ -380,6 +380,18 @@
       "filedDate": "2026-06-08",
       "daysLate": 0,
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20034713.pdf"
+    },
+    {
+      "member": "Donald J. Trump",
+      "memberSlug": "donald-j-trump",
+      "hasPage": true,
+      "party": "R",
+      "side": "SELL",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-05-22",
+      "filedDate": "2026-06-25",
+      "daysLate": 0,
+      "sourceUrl": "https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/F9CA13B970439E8F85258E27002DDF15/$FILE/Donald-J-Trump-06.25.2026-278T%20%282%29.pdf"
     },
     {
       "member": "Gilbert Ray Cisneros, Jr.",
@@ -656,18 +668,6 @@
       "filedDate": "2025-06-23",
       "daysLate": 0,
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20030546.pdf"
-    },
-    {
-      "member": "Josh Gottheimer",
-      "memberSlug": "josh-gottheimer",
-      "hasPage": true,
-      "party": "D",
-      "side": "BUY",
-      "amountBucket": "$1K – $15K",
-      "txDate": "2025-05-16",
-      "filedDate": "2025-06-11",
-      "daysLate": 0,
-      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20030462.pdf"
     }
   ],
   "tradesShown": 25

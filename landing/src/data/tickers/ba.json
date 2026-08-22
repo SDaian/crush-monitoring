@@ -244,17 +244,17 @@
     }
   },
   "summary": {
-    "trades": 31,
+    "trades": 32,
     "members": 13,
     "buys": 17,
-    "sells": 14,
+    "sells": 15,
     "other": 0,
     "firstTx": "2024-10-23",
     "lastTx": "2026-05-18",
     "lastFiling": "2026-08-05",
     "estBuyLabel": "$210K",
-    "estSellLabel": "$228K",
-    "pctLate": 23
+    "estSellLabel": "$978K",
+    "pctLate": 25
   },
   "topMembers": [
     {
@@ -300,6 +300,17 @@
       "sells": 1,
       "estLabel": "$24K",
       "hasPage": false
+    },
+    {
+      "name": "Donald J. Trump",
+      "slug": "donald-j-trump",
+      "party": "R",
+      "chamber": "Executive",
+      "trades": 2,
+      "buys": 1,
+      "sells": 1,
+      "estLabel": "$758K",
+      "hasPage": true
     },
     {
       "name": "Jefferson Shreve",
@@ -355,17 +366,6 @@
       "sells": 1,
       "estLabel": "$16K",
       "hasPage": false
-    },
-    {
-      "name": "Tim Walberg",
-      "slug": "tim-walberg",
-      "party": "R",
-      "chamber": "House",
-      "trades": 1,
-      "buys": 1,
-      "sells": 0,
-      "estLabel": "$33K",
-      "hasPage": false
     }
   ],
   "trades": [
@@ -416,6 +416,18 @@
       "filedDate": "2026-04-21",
       "daysLate": 0,
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20033993.pdf"
+    },
+    {
+      "member": "Donald J. Trump",
+      "memberSlug": "donald-j-trump",
+      "hasPage": true,
+      "party": "R",
+      "side": "SELL",
+      "amountBucket": "$500K – $1M",
+      "txDate": "2026-03-17",
+      "filedDate": "2026-05-08",
+      "daysLate": 7,
+      "sourceUrl": "https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/405E4EC4E27BE8D185258DF7002DD1C0/$FILE/Trump%2C%20Donald%20J.-05.08.2026-278T%282%29.pdf"
     },
     {
       "member": "Julia Letlow",
@@ -656,18 +668,6 @@
       "filedDate": "2025-03-09",
       "daysLate": 0,
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20027879.pdf"
-    },
-    {
-      "member": "Julie Johnson",
-      "memberSlug": "julie-johnson",
-      "hasPage": false,
-      "party": "D",
-      "side": "BUY",
-      "amountBucket": "$1K – $15K",
-      "txDate": "2025-02-12",
-      "filedDate": "2025-03-12",
-      "daysLate": 0,
-      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20027936.pdf"
     }
   ],
   "tradesShown": 25

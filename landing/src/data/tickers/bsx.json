@@ -244,15 +244,15 @@
     }
   },
   "summary": {
-    "trades": 34,
+    "trades": 35,
     "members": 10,
-    "buys": 16,
+    "buys": 17,
     "sells": 18,
     "other": 0,
     "firstTx": "2024-10-29",
     "lastTx": "2026-06-05",
     "lastFiling": "2026-07-21",
-    "estBuyLabel": "$153K",
+    "estBuyLabel": "$161K",
     "estSellLabel": "$193K",
     "pctLate": 9
   },
@@ -300,6 +300,17 @@
       "sells": 1,
       "estLabel": "$16K",
       "hasPage": false
+    },
+    {
+      "name": "Donald J. Trump",
+      "slug": "donald-j-trump",
+      "party": "R",
+      "chamber": "Executive",
+      "trades": 2,
+      "buys": 2,
+      "sells": 0,
+      "estLabel": "$16K",
+      "hasPage": true
     },
     {
       "name": "Val T. Hoyle",
@@ -350,17 +361,6 @@
       "slug": "alan-armstrong",
       "party": "R",
       "chamber": "Senate",
-      "trades": 1,
-      "buys": 1,
-      "sells": 0,
-      "estLabel": "$8K",
-      "hasPage": true
-    },
-    {
-      "name": "Donald J. Trump",
-      "slug": "donald-j-trump",
-      "party": "R",
-      "chamber": "Executive",
       "trades": 1,
       "buys": 1,
       "sells": 0,
@@ -452,6 +452,18 @@
       "filedDate": "2026-06-08",
       "daysLate": 0,
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20034713.pdf"
+    },
+    {
+      "member": "Donald J. Trump",
+      "memberSlug": "donald-j-trump",
+      "hasPage": true,
+      "party": "R",
+      "side": "BUY",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-03-28",
+      "filedDate": "2026-05-08",
+      "daysLate": 0,
+      "sourceUrl": "https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/405E4EC4E27BE8D185258DF7002DD1C0/$FILE/Trump%2C%20Donald%20J.-05.08.2026-278T%282%29.pdf"
     },
     {
       "member": "Alan Armstrong",
@@ -656,18 +668,6 @@
       "filedDate": "2025-07-10",
       "daysLate": 0,
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20030634.pdf"
-    },
-    {
-      "member": "Gilbert Ray Cisneros, Jr.",
-      "memberSlug": "gilbert-ray-cisneros-jr",
-      "hasPage": true,
-      "party": "D",
-      "side": "SELL",
-      "amountBucket": "$1K – $15K",
-      "txDate": "2025-05-13",
-      "filedDate": "2025-06-06",
-      "daysLate": 0,
-      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20030461.pdf"
     }
   ],
   "tradesShown": 25

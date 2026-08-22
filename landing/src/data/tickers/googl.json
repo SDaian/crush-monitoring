@@ -244,10 +244,10 @@
     }
   },
   "summary": {
-    "trades": 86,
-    "members": 28,
+    "trades": 87,
+    "members": 29,
     "buys": 43,
-    "sells": 43,
+    "sells": 44,
     "other": 0,
     "firstTx": "2024-09-26",
     "lastTx": "2026-08-11",
@@ -502,6 +502,18 @@
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035003.pdf"
     },
     {
+      "member": "Donald J. Trump",
+      "memberSlug": "donald-j-trump",
+      "hasPage": true,
+      "party": "R",
+      "side": "SELL",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-05-18",
+      "filedDate": "2026-06-25",
+      "daysLate": 0,
+      "sourceUrl": "https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/F9CA13B970439E8F85258E27002DDF15/$FILE/Donald-J-Trump-06.25.2026-278T%20%282%29.pdf"
+    },
+    {
       "member": "David J. Taylor",
       "memberSlug": "david-j-taylor",
       "hasPage": false,
@@ -656,18 +668,6 @@
       "filedDate": "2026-01-16",
       "daysLate": 0,
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20033732.pdf"
-    },
-    {
-      "member": "Tommy Tuberville",
-      "memberSlug": "tommy-tuberville",
-      "hasPage": true,
-      "party": "R",
-      "side": "SELL",
-      "amountBucket": "$1K – $15K",
-      "txDate": "2025-12-17",
-      "filedDate": "2026-08-05",
-      "daysLate": 186,
-      "sourceUrl": "https://efdsearch.senate.gov/search/view/ptr/57cf1745-e3dd-4afd-8685-228153848631/"
     }
   ],
   "tradesShown": 25

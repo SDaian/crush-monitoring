@@ -244,15 +244,15 @@
     }
   },
   "summary": {
-    "trades": 94,
-    "members": 25,
-    "buys": 64,
+    "trades": 95,
+    "members": 26,
+    "buys": 65,
     "sells": 30,
     "other": 0,
     "firstTx": "2024-01-02",
     "lastTx": "2026-06-17",
     "lastFiling": "2026-08-20",
-    "estBuyLabel": "$1.9M",
+    "estBuyLabel": "$2.0M",
     "estSellLabel": "$648K",
     "pctLate": 21
   },
@@ -428,6 +428,18 @@
       "filedDate": "2026-07-16",
       "daysLate": 0,
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035024.pdf"
+    },
+    {
+      "member": "Donald J. Trump",
+      "memberSlug": "donald-j-trump",
+      "hasPage": true,
+      "party": "R",
+      "side": "BUY",
+      "amountBucket": "$50K – $100K",
+      "txDate": "2026-05-15",
+      "filedDate": "2026-06-25",
+      "daysLate": 0,
+      "sourceUrl": "https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/F9CA13B970439E8F85258E27002DDF15/$FILE/Donald-J-Trump-06.25.2026-278T%20%282%29.pdf"
     },
     {
       "member": "Michael A. Rulli",
@@ -656,18 +668,6 @@
       "filedDate": "2025-11-21",
       "daysLate": 0,
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20033446.pdf"
-    },
-    {
-      "member": "Gilbert Ray Cisneros, Jr.",
-      "memberSlug": "gilbert-ray-cisneros-jr",
-      "hasPage": true,
-      "party": "D",
-      "side": "BUY",
-      "amountBucket": "$1K – $15K",
-      "txDate": "2025-10-17",
-      "filedDate": "2025-11-18",
-      "daysLate": 0,
-      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20033455.pdf"
     }
   ],
   "tradesShown": 25

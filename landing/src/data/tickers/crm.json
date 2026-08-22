@@ -244,16 +244,16 @@
     }
   },
   "summary": {
-    "trades": 50,
+    "trades": 51,
     "members": 19,
     "buys": 24,
-    "sells": 26,
+    "sells": 27,
     "other": 0,
     "firstTx": "2024-09-26",
     "lastTx": "2026-06-02",
     "lastFiling": "2026-07-21",
     "estBuyLabel": "$290K",
-    "estSellLabel": "$355K",
+    "estSellLabel": "$363K",
     "pctLate": 20
   },
   "topMembers": [
@@ -313,6 +313,17 @@
       "hasPage": false
     },
     {
+      "name": "Donald J. Trump",
+      "slug": "donald-j-trump",
+      "party": "R",
+      "chamber": "Executive",
+      "trades": 3,
+      "buys": 1,
+      "sells": 2,
+      "estLabel": "$24K",
+      "hasPage": true
+    },
+    {
       "name": "John Boozman",
       "slug": "john-boozman",
       "party": "R",
@@ -355,17 +366,6 @@
       "sells": 1,
       "estLabel": "$16K",
       "hasPage": false
-    },
-    {
-      "name": "Donald J. Trump",
-      "slug": "donald-j-trump",
-      "party": "R",
-      "chamber": "Executive",
-      "trades": 2,
-      "buys": 1,
-      "sells": 1,
-      "estLabel": "$16K",
-      "hasPage": true
     }
   ],
   "trades": [
@@ -380,6 +380,18 @@
       "filedDate": "2026-07-07",
       "daysLate": 0,
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20034928.pdf"
+    },
+    {
+      "member": "Donald J. Trump",
+      "memberSlug": "donald-j-trump",
+      "hasPage": true,
+      "party": "R",
+      "side": "SELL",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-05-22",
+      "filedDate": "2026-06-25",
+      "daysLate": 0,
+      "sourceUrl": "https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/F9CA13B970439E8F85258E27002DDF15/$FILE/Donald-J-Trump-06.25.2026-278T%20%282%29.pdf"
     },
     {
       "member": "Donald J. Trump",
@@ -656,18 +668,6 @@
       "filedDate": "2025-06-26",
       "daysLate": 0,
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20030567.pdf"
-    },
-    {
-      "member": "Josh Gottheimer",
-      "memberSlug": "josh-gottheimer",
-      "hasPage": true,
-      "party": "D",
-      "side": "SELL",
-      "amountBucket": "$1K – $15K",
-      "txDate": "2025-06-04",
-      "filedDate": "2025-07-16",
-      "daysLate": 0,
-      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20030621.pdf"
     }
   ],
   "tradesShown": 25

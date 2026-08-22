@@ -244,16 +244,16 @@
     }
   },
   "summary": {
-    "trades": 50,
-    "members": 18,
+    "trades": 51,
+    "members": 19,
     "buys": 19,
-    "sells": 31,
+    "sells": 32,
     "other": 0,
     "firstTx": "2024-08-07",
     "lastTx": "2026-07-10",
     "lastFiling": "2026-08-05",
     "estBuyLabel": "$219K",
-    "estSellLabel": "$438K",
+    "estSellLabel": "$446K",
     "pctLate": 12
   },
   "topMembers": [
@@ -380,6 +380,18 @@
       "filedDate": "2026-07-17",
       "daysLate": 0,
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20034998.pdf"
+    },
+    {
+      "member": "Donald J. Trump",
+      "memberSlug": "donald-j-trump",
+      "hasPage": true,
+      "party": "R",
+      "side": "SELL",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-05-11",
+      "filedDate": "2026-06-25",
+      "daysLate": 0,
+      "sourceUrl": "https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/F9CA13B970439E8F85258E27002DDF15/$FILE/Donald-J-Trump-06.25.2026-278T%20%282%29.pdf"
     },
     {
       "member": "Alan Armstrong",
@@ -632,18 +644,6 @@
       "filedDate": "2025-07-14",
       "daysLate": 0,
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20030670.pdf"
-    },
-    {
-      "member": "Kelly Morrison",
-      "memberSlug": "kelly-morrison",
-      "hasPage": false,
-      "party": "D",
-      "side": "SELL",
-      "amountBucket": "$1K – $15K",
-      "txDate": "2025-06-04",
-      "filedDate": "2025-06-18",
-      "daysLate": 0,
-      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20030475.pdf"
     },
     {
       "member": "Kelly Morrison",

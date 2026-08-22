@@ -244,17 +244,17 @@
     }
   },
   "summary": {
-    "trades": 26,
-    "members": 5,
-    "buys": 9,
-    "sells": 17,
+    "trades": 28,
+    "members": 6,
+    "buys": 10,
+    "sells": 18,
     "other": 0,
     "firstTx": "2025-01-07",
     "lastTx": "2026-06-16",
     "lastFiling": "2026-07-21",
-    "estBuyLabel": "$72K",
-    "estSellLabel": "$210K",
-    "pctLate": 4
+    "estBuyLabel": "$80K",
+    "estSellLabel": "$218K",
+    "pctLate": 7
   },
   "topMembers": [
     {
@@ -278,6 +278,17 @@
       "sells": 2,
       "estLabel": "$48K",
       "hasPage": false
+    },
+    {
+      "name": "Donald J. Trump",
+      "slug": "donald-j-trump",
+      "party": "R",
+      "chamber": "Executive",
+      "trades": 2,
+      "buys": 1,
+      "sells": 1,
+      "estLabel": "$16K",
+      "hasPage": true
     },
     {
       "name": "Robert P. Bresnahan, Jr.",
@@ -327,6 +338,18 @@
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20034906.pdf"
     },
     {
+      "member": "Donald J. Trump",
+      "memberSlug": "donald-j-trump",
+      "hasPage": true,
+      "party": "R",
+      "side": "BUY",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-05-16",
+      "filedDate": "2026-06-25",
+      "daysLate": 0,
+      "sourceUrl": "https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/F9CA13B970439E8F85258E27002DDF15/$FILE/Donald-J-Trump-06.25.2026-278T%20%282%29.pdf"
+    },
+    {
       "member": "Gilbert Ray Cisneros, Jr.",
       "memberSlug": "gilbert-ray-cisneros-jr",
       "hasPage": true,
@@ -373,6 +396,18 @@
       "filedDate": "2026-03-09",
       "daysLate": 0,
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20034144.pdf"
+    },
+    {
+      "member": "Donald J. Trump",
+      "memberSlug": "donald-j-trump",
+      "hasPage": true,
+      "party": "R",
+      "side": "SELL",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-01-21",
+      "filedDate": "2026-05-08",
+      "daysLate": 62,
+      "sourceUrl": "https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/405E4EC4E27BE8D185258DF7002DD1C0/$FILE/Trump%2C%20Donald%20J.-05.08.2026-278T%282%29.pdf"
     },
     {
       "member": "Gilbert Ray Cisneros, Jr.",
@@ -589,30 +624,6 @@
       "filedDate": "2025-02-10",
       "daysLate": 0,
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20026712.pdf"
-    },
-    {
-      "member": "Byron Donalds",
-      "memberSlug": "byron-donalds",
-      "hasPage": false,
-      "party": "R",
-      "side": "BUY",
-      "amountBucket": "$1K – $15K",
-      "txDate": "2025-01-16",
-      "filedDate": "2025-02-10",
-      "daysLate": 0,
-      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20026712.pdf"
-    },
-    {
-      "member": "Robert P. Bresnahan, Jr.",
-      "memberSlug": "robert-p-bresnahan-jr",
-      "hasPage": false,
-      "party": "R",
-      "side": "SELL",
-      "amountBucket": "$1K – $15K",
-      "txDate": "2025-01-13",
-      "filedDate": "2025-02-13",
-      "daysLate": 0,
-      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20024346.pdf"
     }
   ],
   "tradesShown": 25

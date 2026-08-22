@@ -244,17 +244,17 @@
     }
   },
   "summary": {
-    "trades": 49,
-    "members": 14,
-    "buys": 32,
-    "sells": 17,
+    "trades": 51,
+    "members": 15,
+    "buys": 33,
+    "sells": 18,
     "other": 0,
     "firstTx": "2024-06-06",
-    "lastTx": "2026-05-15",
+    "lastTx": "2026-05-18",
     "lastFiling": "2026-08-07",
-    "estBuyLabel": "$938K",
-    "estSellLabel": "$344K",
-    "pctLate": 20
+    "estBuyLabel": "$971K",
+    "estSellLabel": "$352K",
+    "pctLate": 22
   },
   "topMembers": [
     {
@@ -335,6 +335,17 @@
       "hasPage": false
     },
     {
+      "name": "Donald J. Trump",
+      "slug": "donald-j-trump",
+      "party": "R",
+      "chamber": "Executive",
+      "trades": 2,
+      "buys": 1,
+      "sells": 1,
+      "estLabel": "$41K",
+      "hasPage": true
+    },
+    {
       "name": "John W. Hickenlooper",
       "slug": "john-w-hickenlooper",
       "party": "D",
@@ -355,20 +366,21 @@
       "sells": 1,
       "estLabel": "$16K",
       "hasPage": false
-    },
-    {
-      "name": "Jefferson Shreve",
-      "slug": "jefferson-shreve",
-      "party": "R",
-      "chamber": "House",
-      "trades": 1,
-      "buys": 0,
-      "sells": 1,
-      "estLabel": "$75K",
-      "hasPage": false
     }
   ],
   "trades": [
+    {
+      "member": "Donald J. Trump",
+      "memberSlug": "donald-j-trump",
+      "hasPage": true,
+      "party": "R",
+      "side": "SELL",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-05-18",
+      "filedDate": "2026-06-25",
+      "daysLate": 0,
+      "sourceUrl": "https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/F9CA13B970439E8F85258E27002DDF15/$FILE/Donald-J-Trump-06.25.2026-278T%20%282%29.pdf"
+    },
     {
       "member": "John Boozman",
       "memberSlug": "john-boozman",
@@ -476,6 +488,18 @@
       "filedDate": "2026-04-07",
       "daysLate": 0,
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20034285.pdf"
+    },
+    {
+      "member": "Donald J. Trump",
+      "memberSlug": "donald-j-trump",
+      "hasPage": true,
+      "party": "R",
+      "side": "BUY",
+      "amountBucket": "$15K – $50K",
+      "txDate": "2026-03-12",
+      "filedDate": "2026-05-08",
+      "daysLate": 12,
+      "sourceUrl": "https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/405E4EC4E27BE8D185258DF7002DD1C0/$FILE/Trump%2C%20Donald%20J.-05.08.2026-278T%282%29.pdf"
     },
     {
       "member": "Thomas R. Suozzi",
@@ -644,30 +668,6 @@
       "filedDate": "2025-08-06",
       "daysLate": 0,
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20030803.pdf"
-    },
-    {
-      "member": "Cleo Fields",
-      "memberSlug": "cleo-fields",
-      "hasPage": true,
-      "party": "D",
-      "side": "BUY",
-      "amountBucket": "$100K – $250K",
-      "txDate": "2025-07-18",
-      "filedDate": "2025-08-06",
-      "daysLate": 0,
-      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20030803.pdf"
-    },
-    {
-      "member": "Marjorie Taylor Greene",
-      "memberSlug": "marjorie-taylor-greene",
-      "hasPage": true,
-      "party": "R",
-      "side": "BUY",
-      "amountBucket": "$1K – $15K",
-      "txDate": "2025-07-15",
-      "filedDate": "2025-07-22",
-      "daysLate": 0,
-      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20030711.pdf"
     }
   ],
   "tradesShown": 25

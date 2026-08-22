@@ -244,16 +244,16 @@
     }
   },
   "summary": {
-    "trades": 49,
-    "members": 21,
+    "trades": 51,
+    "members": 22,
     "buys": 28,
-    "sells": 21,
+    "sells": 23,
     "other": 0,
     "firstTx": "2024-05-03",
-    "lastTx": "2026-03-27",
+    "lastTx": "2026-05-22",
     "lastFiling": "2026-08-05",
     "estBuyLabel": "$1.3M",
-    "estSellLabel": "$594K",
+    "estSellLabel": "$610K",
     "pctLate": 10
   },
   "topMembers": [
@@ -369,6 +369,30 @@
     }
   ],
   "trades": [
+    {
+      "member": "Donald J. Trump",
+      "memberSlug": "donald-j-trump",
+      "hasPage": true,
+      "party": "R",
+      "side": "SELL",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-05-22",
+      "filedDate": "2026-06-25",
+      "daysLate": 0,
+      "sourceUrl": "https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/F9CA13B970439E8F85258E27002DDF15/$FILE/Donald-J-Trump-06.25.2026-278T%20%282%29.pdf"
+    },
+    {
+      "member": "Donald J. Trump",
+      "memberSlug": "donald-j-trump",
+      "hasPage": true,
+      "party": "R",
+      "side": "SELL",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-05-18",
+      "filedDate": "2026-06-25",
+      "daysLate": 0,
+      "sourceUrl": "https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/F9CA13B970439E8F85258E27002DDF15/$FILE/Donald-J-Trump-06.25.2026-278T%20%282%29.pdf"
+    },
     {
       "member": "Alan Armstrong",
       "memberSlug": "alan-armstrong",
@@ -644,30 +668,6 @@
       "filedDate": "2025-11-18",
       "daysLate": 0,
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20033455.pdf"
-    },
-    {
-      "member": "Val T. Hoyle",
-      "memberSlug": "val-t-hoyle",
-      "hasPage": false,
-      "party": "D",
-      "side": "SELL",
-      "amountBucket": "$1K – $15K",
-      "txDate": "2025-09-23",
-      "filedDate": "2025-10-10",
-      "daysLate": 0,
-      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20032211.pdf"
-    },
-    {
-      "member": "Angus S. King, Jr.",
-      "memberSlug": "angus-s-king-jr",
-      "hasPage": false,
-      "party": "I",
-      "side": "BUY",
-      "amountBucket": "$1K – $15K",
-      "txDate": "2025-07-21",
-      "filedDate": "2025-08-18",
-      "daysLate": 0,
-      "sourceUrl": "https://efdsearch.senate.gov/search/view/ptr/218c16a3-d408-4cc0-aa89-08730d05dfc3/"
     }
   ],
   "tradesShown": 25

@@ -8,7 +8,7 @@
   "district": null,
   "summary": {
     "trades": 451,
-    "distinctTickers": 81,
+    "distinctTickers": 302,
     "firstTx": "2025-09-18",
     "lastTx": "2028-03-23",
     "lastFiling": "2026-06-25",
@@ -17,52 +17,52 @@
   },
   "topTickers": [
     {
-      "ticker": "AMT",
-      "count": 3,
-      "asset": "AMERICAN TOWER CORP",
-      "slug": "amt",
-      "hasPage": false
-    },
-    {
-      "ticker": "GE",
-      "count": 3,
-      "asset": "GE AEROSPACE",
-      "slug": "ge",
-      "hasPage": true
-    },
-    {
-      "ticker": "MSI",
-      "count": 3,
-      "asset": "MOTOROLA SOLUTIONS INC",
-      "slug": "msi",
-      "hasPage": false
-    },
-    {
-      "ticker": "BKNG",
-      "count": 2,
-      "asset": "BOOKING HLDGS INC",
-      "slug": "bkng",
-      "hasPage": false
-    },
-    {
-      "ticker": "BMY",
-      "count": 2,
-      "asset": "BRISTOL MYERS SQUIBB CO",
-      "slug": "bmy",
-      "hasPage": false
-    },
-    {
       "ticker": "FICO",
-      "count": 2,
+      "count": 5,
       "asset": "FAIR ISAAC CORP",
       "slug": "fico",
       "hasPage": false
+    },
+    {
+      "ticker": "VZ",
+      "count": 4,
+      "asset": "VERIZON COMMUNICATIONS I",
+      "slug": "vz",
+      "hasPage": true
+    },
+    {
+      "ticker": "HD",
+      "count": 4,
+      "asset": "HOME DEPOT INC",
+      "slug": "hd",
+      "hasPage": true
+    },
+    {
+      "ticker": "ACN",
+      "count": 4,
+      "asset": "ACCENTURE PLC IRELAND F CLASS A",
+      "slug": "acn",
+      "hasPage": true
+    },
+    {
+      "ticker": "FI",
+      "count": 3,
+      "asset": "FISERV INC",
+      "slug": "fi",
+      "hasPage": false
+    },
+    {
+      "ticker": "MCD",
+      "count": 3,
+      "asset": "MCDONALDS CORP",
+      "slug": "mcd",
+      "hasPage": true
     }
   ],
   "trades": [
     {
-      "ticker": "—",
-      "asset": "3328 DATADOG INC UNSOLICITED",
+      "ticker": "DDOG",
+      "asset": "DATADOG INC UNSOLICITED",
       "side": "SELL",
       "amountBucket": "$50K – $100K",
       "txDate": "2028-03-23",
@@ -71,8 +71,8 @@
       "sourceUrl": "https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/405E4EC4E27BE8D185258DF7002DD1C0/$FILE/Trump%2C%20Donald%20J.-05.08.2026-278T%282%29.pdf"
     },
     {
-      "ticker": "—",
-      "asset": "1052 MASTERCARD INC CL A UNSOLICITED",
+      "ticker": "MA",
+      "asset": "MASTERCARD INC CL A UNSOLICITED",
       "side": "BUY",
       "amountBucket": "$15K – $50K",
       "txDate": "2028-03-12",
@@ -81,8 +81,8 @@
       "sourceUrl": "https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/405E4EC4E27BE8D185258DF7002DD1C0/$FILE/Trump%2C%20Donald%20J.-05.08.2026-278T%282%29.pdf"
     },
     {
-      "ticker": "—",
-      "asset": "2902 SAMSARA INC CLASS A",
+      "ticker": "IOT",
+      "asset": "SAMSARA INC CLASS A",
       "side": "SELL",
       "amountBucket": "$1K – $15K",
       "txDate": "2028-02-12",
@@ -91,8 +91,8 @@
       "sourceUrl": "https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/405E4EC4E27BE8D185258DF7002DD1C0/$FILE/Trump%2C%20Donald%20J.-05.08.2026-278T%282%29.pdf"
     },
     {
-      "ticker": "—",
-      "asset": "2891 VERIZON COMMUNICATIONS I",
+      "ticker": "VZ",
+      "asset": "VERIZON COMMUNICATIONS I",
       "side": "SELL",
       "amountBucket": "$1K – $15K",
       "txDate": "2028-01-21",
@@ -111,8 +111,8 @@
       "sourceUrl": "https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/F9CA13B970439E8F85258E27002DDF15/$FILE/Donald-J-Trump-06.25.2026-278T%20%282%29.pdf"
     },
     {
-      "ticker": "—",
-      "asset": "1145 TRJ POINTE HOMES INC",
+      "ticker": "TPH",
+      "asset": "TRJ POINTE HOMES INC",
       "side": "SELL",
       "amountBucket": "$1K – $15K",
       "txDate": "2026-05-28",
@@ -121,8 +121,8 @@
       "sourceUrl": "https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/F9CA13B970439E8F85258E27002DDF15/$FILE/Donald-J-Trump-06.25.2026-278T%20%282%29.pdf"
     },
     {
-      "ticker": "—",
-      "asset": "1030 ALBERTSONS CO SHS CL A CLASS A",
+      "ticker": "ACI",
+      "asset": "ALBERTSONS CO SHS CL A CLASS A",
       "side": "SELL",
       "amountBucket": "$1K – $15K",
       "txDate": "2026-05-22",
@@ -131,8 +131,8 @@
       "sourceUrl": "https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/F9CA13B970439E8F85258E27002DDF15/$FILE/Donald-J-Trump-06.25.2026-278T%20%282%29.pdf"
     },
     {
-      "ticker": "—",
-      "asset": "1035 ATLASSIAN CORP CLASS A",
+      "ticker": "TEAM",
+      "asset": "ATLASSIAN CORP CLASS A",
       "side": "SELL",
       "amountBucket": "$1K – $15K",
       "txDate": "2026-05-22",
@@ -141,8 +141,8 @@
       "sourceUrl": "https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/F9CA13B970439E8F85258E27002DDF15/$FILE/Donald-J-Trump-06.25.2026-278T%20%282%29.pdf"
     },
     {
-      "ticker": "—",
-      "asset": "1037 AUTOZONEINC",
+      "ticker": "AZO",
+      "asset": "AUTOZONEINC",
       "side": "SELL",
       "amountBucket": "$1K – $15K",
       "txDate": "2026-05-22",
@@ -151,8 +151,8 @@
       "sourceUrl": "https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/F9CA13B970439E8F85258E27002DDF15/$FILE/Donald-J-Trump-06.25.2026-278T%20%282%29.pdf"
     },
     {
-      "ticker": "—",
-      "asset": "1038 AVANTORINC -",
+      "ticker": "AVTR",
+      "asset": "AVANTORINC -",
       "side": "BUY",
       "amountBucket": "$1K – $15K",
       "txDate": "2026-05-22",
@@ -161,8 +161,8 @@
       "sourceUrl": "https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/F9CA13B970439E8F85258E27002DDF15/$FILE/Donald-J-Trump-06.25.2026-278T%20%282%29.pdf"
     },
     {
-      "ticker": "—",
-      "asset": "1039 AXON ENTERPRISE INC",
+      "ticker": "AXON",
+      "asset": "AXON ENTERPRISE INC",
       "side": "SELL",
       "amountBucket": "$1K – $15K",
       "txDate": "2026-05-22",
@@ -171,8 +171,8 @@
       "sourceUrl": "https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/F9CA13B970439E8F85258E27002DDF15/$FILE/Donald-J-Trump-06.25.2026-278T%20%282%29.pdf"
     },
     {
-      "ticker": "—",
-      "asset": "1040 BATH & BODY WK$ INC",
+      "ticker": "BBWI",
+      "asset": "BATH & BODY WK$ INC",
       "side": "BUY",
       "amountBucket": "$1K – $15K",
       "txDate": "2026-05-22",
@@ -181,8 +181,8 @@
       "sourceUrl": "https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/F9CA13B970439E8F85258E27002DDF15/$FILE/Donald-J-Trump-06.25.2026-278T%20%282%29.pdf"
     },
     {
-      "ticker": "—",
-      "asset": "1056 COMCAST CORP NEW CLASS CLASS A",
+      "ticker": "CMCSA",
+      "asset": "COMCAST CORP NEW CLASS CLASS A",
       "side": "BUY",
       "amountBucket": "$1K – $15K",
       "txDate": "2026-05-22",
@@ -191,8 +191,8 @@
       "sourceUrl": "https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/F9CA13B970439E8F85258E27002DDF15/$FILE/Donald-J-Trump-06.25.2026-278T%20%282%29.pdf"
     },
     {
-      "ticker": "—",
-      "asset": "1060 CRH PUBLIC LIMITED CO F",
+      "ticker": "CRH",
+      "asset": "CRH PUBLIC LIMITED CO F",
       "side": "SELL",
       "amountBucket": "$1K – $15K",
       "txDate": "2026-05-22",
@@ -211,8 +211,8 @@
       "sourceUrl": "https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/F9CA13B970439E8F85258E27002DDF15/$FILE/Donald-J-Trump-06.25.2026-278T%20%282%29.pdf"
     },
     {
-      "ticker": "—",
-      "asset": "1063 DANAHER CORP",
+      "ticker": "DHR",
+      "asset": "DANAHER CORP",
       "side": "SELL",
       "amountBucket": "$1K – $15K",
       "txDate": "2026-05-22",
@@ -221,8 +221,8 @@
       "sourceUrl": "https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/F9CA13B970439E8F85258E27002DDF15/$FILE/Donald-J-Trump-06.25.2026-278T%20%282%29.pdf"
     },
     {
-      "ticker": "—",
-      "asset": "1064 DOCUSIGN INC",
+      "ticker": "DOCU",
+      "asset": "DOCUSIGN INC",
       "side": "SELL",
       "amountBucket": "$1K – $15K",
       "txDate": "2026-05-22",
@@ -231,8 +231,8 @@
       "sourceUrl": "https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/F9CA13B970439E8F85258E27002DDF15/$FILE/Donald-J-Trump-06.25.2026-278T%20%282%29.pdf"
     },
     {
-      "ticker": "—",
-      "asset": "1066 OUOLINGO INC CLASS A",
+      "ticker": "DUOL",
+      "asset": "OUOLINGO INC CLASS A",
       "side": "SELL",
       "amountBucket": "$1K – $15K",
       "txDate": "2026-05-22",
@@ -241,8 +241,8 @@
       "sourceUrl": "https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/F9CA13B970439E8F85258E27002DDF15/$FILE/Donald-J-Trump-06.25.2026-278T%20%282%29.pdf"
     },
     {
-      "ticker": "—",
-      "asset": "1067 E L F BEAUTY INC",
+      "ticker": "ELF",
+      "asset": "E L F BEAUTY INC",
       "side": "SELL",
       "amountBucket": "$1K – $15K",
       "txDate": "2026-05-22",
@@ -251,8 +251,8 @@
       "sourceUrl": "https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/F9CA13B970439E8F85258E27002DDF15/$FILE/Donald-J-Trump-06.25.2026-278T%20%282%29.pdf"
     },
     {
-      "ticker": "—",
-      "asset": "1070 EQUIFAX INC I",
+      "ticker": "EFX",
+      "asset": "EQUIFAX INC I",
       "side": "BUY",
       "amountBucket": "$1K – $15K",
       "txDate": "2026-05-22",
@@ -278,7 +278,7 @@
     "available": false,
     "reason": "no_benchmark",
     "pricedBuys": 0,
-    "stockBuys": 41
+    "stockBuys": 99
   },
   "committees": null
 }
