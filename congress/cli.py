@@ -28,7 +28,7 @@ import sys
 from datetime import date, datetime, timezone
 from pathlib import Path
 
-from . import house, oge, pipeline, senate
+from . import house, oge, pipeline, senate, tickermatch
 from .normalize import MEMBERS_PATH, prune_cutoff
 
 # raw.githubusercontent, not unitedstates.github.io: the gh-pages host is
@@ -118,6 +118,12 @@ def make_house_source(
 def make_executive_source(
     session, debug_dir: Path | None
 ) -> pipeline.ChamberSource:
+    # Name → ticker index for the equity rows in newer 278-Ts, built from the
+    # rows we already publish (House/Senate carry both name and ticker).
+    # Loaded once per run; {} on a first run, and resolution then leans on
+    # the curated overrides alone.
+    name_index = tickermatch.load_index(pipeline.DEFAULT_OUTPUT)
+
     def list_filings():
         return oge.list_filings()
 
@@ -129,9 +135,18 @@ def make_executive_source(
         if not text.strip():
             raise pipeline.PaperFiling(ref.url)
         _dump(debug_dir, f"executive-{ref.unid}.txt", text)
-        return oge.parse_transactions(
-            text, unid=ref.unid, source_url=ref.url, filing_date=ref.filing_date
+        rows = oge.parse_transactions(
+            text, unid=ref.unid, source_url=ref.url,
+            filing_date=ref.filing_date, name_index=name_index,
         )
+        # Every refusal is a report, never a guess: add the name to
+        # tickermatch.OVERRIDES and the next fetch of this filing (via
+        # --reparse-invalid) fills the ticker in.
+        for t in rows:
+            if t.asset_type == "Stock" and not t.ticker:
+                print(f"::warning::no ticker resolved for 278-T asset "
+                      f"{t.asset!r} — add it to congress/tickermatch.py")
+        return rows
 
     return pipeline.ChamberSource(
         chamber="executive",

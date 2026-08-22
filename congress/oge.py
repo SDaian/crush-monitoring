@@ -36,6 +36,7 @@ from dataclasses import dataclass
 from pathlib import Path
 from urllib.parse import quote
 
+from . import tickermatch
 from .http import polite_get
 from .normalize import AMOUNT_BRACKETS, Trade, parse_date
 
@@ -223,11 +224,20 @@ def parse_transactions(
     filing_date: str,
     member: str = FILER_NAME,
     chamber: str = "executive",
+    name_index: dict[str, str] | None = None,
 ) -> list[Trade]:
     """Parse an OGE 278-T's OCR text into normalized :class:`Trade` rows.
 
     Lines that do not match the transaction tail (headers, footers, the
     certification block, the Privacy Act notice) are simply skipped.
+
+    Early 278-Ts held only managed-account bonds. The June-2026 filing added
+    stocks and ETFs, so each row is classified: a debt row keeps
+    ``ticker=None, asset_type="bond"``; anything else resolves through
+    ``tickermatch`` against ``name_index`` (plus the curated overrides) and
+    ships as ``asset_type="Stock"`` — with ``ticker=None`` when resolution
+    refuses, because the form has no ticker column and a guessed ticker
+    would put a false row on a real stock page.
     """
     trades: list[Trade] = []
     row = 0
@@ -248,12 +258,17 @@ def parse_transactions(
         if not asset:
             continue
         row += 1
+        if tickermatch.is_debt(asset):
+            ticker, asset_type = None, "bond"
+        else:
+            ticker = tickermatch.resolve(asset, name_index or {})
+            asset_type = "Stock"
         trades.append(
             Trade(
                 id=f"{chamber}:{unid}:{row}",
                 chamber=chamber,
                 member=member,
-                ticker=None,          # 278-T assets are bonds — no equity ticker
+                ticker=ticker,
                 asset=asset,
                 type=tx_type,
                 tx_date=tx_date,
@@ -264,7 +279,7 @@ def parse_transactions(
                 filing_id=unid,
                 source_url=source_url,
                 partial=partial,
-                asset_type="bond",
+                asset_type=asset_type,
             )
         )
     return trades
