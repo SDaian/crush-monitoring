@@ -256,6 +256,13 @@ def parse_transactions(
             lo, hi, label = _parse_amount(m.group("amt"))
         except ValueError:
             continue
+        # A 278-T discloses PAST trades, so the filing date bounds the trade
+        # date. The OCR digit repair can overshoot a year ("202B" -> 2028
+        # when the page said 2026); walk the year back until the date is
+        # possible again. The month and day are left alone — they were
+        # legible, only the year glyph broke.
+        while tx_date > filing_date:
+            tx_date = f"{int(tx_date[:4]) - 1}{tx_date[4:]}"
         asset = _clean_description(m.group("desc"))
         if not asset:
             continue

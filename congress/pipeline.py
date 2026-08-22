@@ -134,6 +134,16 @@ def invalid_trades(trades: list[dict]) -> list[dict]:
         lo, hi = t.get("amount_lo"), t.get("amount_hi")
         if lo is not None and hi is not None and hi < lo:
             bad.append(t)
+            continue
+        # An executive 278-T discloses past trades, so a trade date after
+        # the filing date is an OCR year misread, not a fact. Executive
+        # ONLY: a House e-filed form with a future date says what the
+        # filer typed, and re-parsing it would reproduce the same date
+        # forever (an infinite re-download loop, not a repair).
+        if (t.get("chamber") == "executive" and t.get("tx_date")
+                and t.get("filing_date")
+                and t["tx_date"] > t["filing_date"]):
+            bad.append(t)
     return bad
 
 
