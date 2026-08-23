@@ -211,3 +211,51 @@ class TestRetickExecutive(unittest.TestCase):
         with TemporaryDirectory() as tmp:
             self.assertEqual(
                 cli.retick_executive(Path(tmp) / "gone.json"), (0, []))
+
+
+class TestExecutiveZeroRows(unittest.TestCase):
+    """A 278-T with text but no parseable rows must raise, not succeed.
+
+    Returning [] would mark the run a success while publishing nothing —
+    the filing would neither error, nor land in skipped_filings, nor be
+    recorded as processed (run #222, the 12-Aug 278-T).
+    """
+
+    def _fetch(self, text):
+        from unittest import mock
+
+        ref = types.SimpleNamespace(
+            unid="UNID1", filename="f.pdf", filing_date="2026-08-12",
+            url="https://extapps2.oge.gov/doc.pdf", member="Donald J. Trump",
+        )
+        with mock.patch.object(cli.tickermatch, "load_index",
+                               return_value={}), \
+             mock.patch.object(cli.oge, "polite_get",
+                               return_value=types.SimpleNamespace(
+                                   content=b"%PDF")), \
+             mock.patch.object(cli.oge, "extract_pdf_text",
+                               return_value=text):
+            source = cli.make_executive_source(None, None)
+            return source.fetch_trades(ref)
+
+    def test_unparseable_text_raises_with_a_sample(self):
+        text = "OGE Form 278-T\nPART I\n$ see attached schedule\nfooter"
+        with self.assertRaises(ValueError) as ctx:
+            self._fetch(text)
+        msg = str(ctx.exception)
+        self.assertIn("no transaction rows parsed", msg)
+        self.assertIn("$ see attached schedule", msg)
+
+    def test_blank_text_is_still_a_paper_filing(self):
+        from congress import pipeline
+
+        with self.assertRaises(pipeline.PaperFiling):
+            self._fetch("   \n \n")
+
+    def test_a_parseable_row_still_parses(self):
+        text = ("1 APPLE INC Purchase 06/18/2026 No "
+                "$1,001 - $15,000")
+        rows = self._fetch(text)
+        self.assertEqual(len(rows), 1)
+        self.assertEqual(rows[0].asset, "APPLE INC")
+        self.assertEqual(rows[0].type, "buy")
