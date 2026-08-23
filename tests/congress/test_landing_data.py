@@ -269,8 +269,10 @@ class TestMemberPayload(unittest.TestCase):
         trades = [MT(ticker=f"T{i}", tx=f"2026-06-{i:02d}") for i in range(1, 26)]
         p = ld.member_payload("Nancy Pelosi", trades, {})
         self.assertEqual(p["summary"]["trades"], 25)
-        self.assertEqual(p["tradesShown"], ld.MEMBER_TRADE_CAP)
-        self.assertEqual(len(p["trades"]), ld.MEMBER_TRADE_CAP)
+        # The whole record ships: a filter over a truncated list lies
+        # (owner request, 2026-08-23), so there is no row cap any more.
+        self.assertEqual(p["tradesShown"], len(trades))
+        self.assertEqual(len(p["trades"]), len(trades))
         # Most recent first.
         self.assertEqual(p["trades"][0]["txDate"], "2026-06-25")
 

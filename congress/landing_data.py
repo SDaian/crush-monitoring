@@ -19,8 +19,8 @@ disclosures (see landing/docs/adr/0001):
   filer cannot flood the board, plus each member's total late filings
   this year.
 - ``members/<slug>.json`` + ``members/_index.json`` — one page per
-  featured filer (``MEMBER_PAGE_NAMES``): their disclosed trades (most
-  recent ``MEMBER_TRADE_CAP``), most-traded tickers, filing-timeliness
+  featured filer (``MEMBER_PAGE_NAMES``): their WHOLE disclosed record
+  (find-my-company needs every row in the HTML), most-traded tickers, filing-timeliness
   summary and estimated holdings (from the annual report). The /members
   index lists the set. Scaling this to every member is the storage-stage-1
   trigger in ROADMAP.md.
@@ -315,7 +315,10 @@ MEMBER_PAGE_NAMES = [
     "April McClain Delaney",
     "John J. McGuire III",
 ]
-MEMBER_TRADE_CAP = 20
+# Member pages ship the member's WHOLE disclosed record (owner request,
+# 2026-08-23): the page's job is find-my-company, and a filter over a
+# truncated list lies — the row someone searches for must be in the HTML.
+# The page collapses long tables client-side instead of capping the data.
 MEMBER_HOLDINGS_CAP = 16
 
 
@@ -420,8 +423,8 @@ def member_payload(name: str, trades: list[dict], holdings: dict,
                    perf: dict | None = None,
                    committees: dict | None = None,
                    sector_data: dict | None = None) -> dict:
-    """Per-member page data: summary, most-traded tickers, the most recent
-    ``MEMBER_TRADE_CAP`` disclosed trades, and estimated holdings from the
+    """Per-member page data: summary, most-traded tickers, every disclosed
+    trade (the page filters client-side), and estimated holdings from the
     member's annual report (``holdings`` is the ``holdings.json`` ``holdings``
     map, keyed by full member name). ``ticker_pages`` is the set of symbols
     that have a /tickers/<slug> page, so the chips can link there.
@@ -453,7 +456,11 @@ def member_payload(name: str, trades: list[dict], holdings: dict,
         "filedDate": t.get("filing_date"),
         "daysLate": days_late(t),
         "sourceUrl": t.get("source_url"),
-    } for t in ts[:MEMBER_TRADE_CAP]]
+        # Explicit, from the same predicate as the home-page stats: the
+        # Assets filter must never guess bond-ness from a missing ticker
+        # (an unresolved equity also lacks one).
+        "bond": is_bond(t),
+    } for t in ts]
 
     # Estimated CURRENT holdings: the annual snapshot rolled forward with every
     # trade filed since (so a recent buy/option that post-dates the annual
