@@ -100,6 +100,11 @@ const untracked = Math.max(0, (m.holdings?.positions ?? 0) - heldPcts.length);
 const barWidth = (pct: number) =>
   Math.min(100, Math.max(2, (pct / maxPct) * 100));
 
+// The Assets filter renders only when the record holds both classes: a
+// select with one meaningful option is noise (Pelosi has no bonds).
+const hasBonds = m.trades.some((t: any) => t.bond);
+const hasEquities = m.trades.some((t: any) => !t.bond);
+
 const STAT_CARDS = [
   { n: s.trades.toLocaleString("en-US"), l: "trades disclosed" },
   { n: s.distinctTickers.toLocaleString("en-US"), l: "distinct tickers" },
@@ -428,9 +433,40 @@ const schema = [
     <section class="mx-auto max-w-[75rem] px-[5vw] pb-[6vh]">
       <div class="section-head">
         <h2 class="section-title whitespace-nowrap">Disclosed trades</h2>
-        <span class="eyebrow">
-          Most recent {m.tradesShown} of {s.trades}
-        </span>
+        <span class="eyebrow">Most recent first</span>
+      </div>
+
+      <div id="tfilter" class="tctl" hidden>
+        <label class="tctl-search">
+          <span class="sr-only">Filter the trades</span>
+          <input
+            id="tfq"
+            type="search"
+            autocomplete="off"
+            placeholder="Filter by ticker or company"
+          />
+        </label>
+        <label class="tctl-pick">
+          <span class="eyebrow">Side</span>
+          <select id="tfside">
+            <option value="">All</option>
+            <option value="BUY">Buys</option>
+            <option value="SELL">Sells</option>
+          </select>
+        </label>
+        {
+          hasBonds && hasEquities && (
+            <label class="tctl-pick">
+              <span class="eyebrow">Assets</span>
+              <select id="tfasset">
+                <option value="">All</option>
+                <option value="eq">Stocks & options</option>
+                <option value="bond">Bonds & munis</option>
+              </select>
+            </label>
+          )
+        }
+        <p id="tfcount" class="eyebrow tctl-count" aria-live="polite" />
       </div>
 
       <p class="tswipe" aria-hidden="true">swipe →</p>
@@ -445,7 +481,14 @@ const schema = [
           </div>
           {
             m.trades.map((t: any) => (
-              <div role="row" class="trow">
+              <div
+                role="row"
+                class="trow"
+                data-t={(t.ticker || "").toLowerCase()}
+                data-c={(t.asset || "").toLowerCase()}
+                data-s={t.side.startsWith("SELL") ? "SELL" : t.side}
+                data-b={t.bond ? "1" : ""}
+              >
                 <div role="cell" class="ttick">
                   {t.ticker}
                   <small>{t.asset}</small>
@@ -484,6 +527,12 @@ const schema = [
         </div>
       </div>
 
+      <p id="tfempty" class="mt-6 text-ink-soft" hidden>
+        No disclosed trade matches that filter.
+        <button id="tfclear" class="tclear">Clear filters</button>
+      </p>
+      <button id="tfmore" class="tmore" hidden></button>
+
       <p class="fineprint mt-6 max-w-[80ch]">
         Amounts are the brackets as filed; "days late" counts days past the
         STOCK Act's 45-day maximum (<a
@@ -515,10 +564,173 @@ const schema = [
     <SignupModal title={`Know ${m.name.split(' ').slice(-1)[0]}'s next trade first.`} />
 
     <CountUp />
+
+    <script is:inline>
+      // Filter + collapse for the disclosed-trades table. The full record
+      // ships in the HTML (crawlers and no-JS readers see every row); this
+      // only hides and reveals. Controls start hidden so a reader without
+      // JavaScript never sees a control that cannot work.
+      (function () {
+        var box = document.getElementById("tfilter");
+        var q = document.getElementById("tfq");
+        var side = document.getElementById("tfside");
+        var asset = document.getElementById("tfasset"); // absent on bond-less pages
+        var count = document.getElementById("tfcount");
+        var empty = document.getElementById("tfempty");
+        var clear = document.getElementById("tfclear");
+        var more = document.getElementById("tfmore");
+        if (!box || !q || !side || !count || !empty || !clear || !more) return;
+
+        var rows = Array.prototype.slice.call(
+          document.querySelectorAll(".trow:not(.thead)"));
+        var total = rows.length;
+        var COLLAPSE_AT = 25;
+        // Collapsed by default only when the table is long; filtering always
+        // expands, because a filter over hidden rows lies about the record.
+        var collapsed = total > COLLAPSE_AT + 5;
+
+        function filtering() {
+          return !!(q.value.trim() || side.value || (asset && asset.value));
+        }
+
+        function apply() {
+          var term = q.value.trim().toLowerCase();
+          var wantSide = side.value;
+          var wantAsset = asset ? asset.value : "";
+          var showAll = !collapsed || filtering();
+          var shown = 0;
+          rows.forEach(function (row) {
+            var hit =
+              (!term ||
+                row.getAttribute("data-t").indexOf(term) !== -1 ||
+                row.getAttribute("data-c").indexOf(term) !== -1) &&
+              (!wantSide || row.getAttribute("data-s") === wantSide) &&
+              (!wantAsset ||
+                (wantAsset === "bond") === (row.getAttribute("data-b") === "1"));
+            if (hit) shown++;
+            row.hidden = !hit || (!showAll && shown > COLLAPSE_AT);
+          });
+          empty.hidden = shown !== 0;
+          count.textContent =
+            shown === total
+              ? total + " trades"
+              : shown + " of " + total + " trades";
+          var canExpand = collapsed && !filtering() && shown > COLLAPSE_AT;
+          more.hidden = !canExpand;
+          if (canExpand) more.textContent = "Show all " + shown + " trades";
+        }
+
+        q.addEventListener("input", apply);
+        side.addEventListener("change", apply);
+        if (asset) asset.addEventListener("change", apply);
+        more.addEventListener("click", function () {
+          collapsed = false;
+          apply();
+        });
+        clear.addEventListener("click", function () {
+          q.value = "";
+          side.value = "";
+          if (asset) asset.value = "";
+          apply();
+        });
+        box.hidden = false;
+        apply();
+      })();
+    </script>
   </body>
 </html>
 
 <style>
+  /* The disclosed-trades filter row — the /tickers control idiom. */
+  .tctl {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.75rem 1.25rem;
+    border-bottom: 1px solid var(--color-rule);
+    padding: 0.9rem 0;
+  }
+  .tctl-search {
+    flex: 1 1 18rem;
+    min-width: 0;
+  }
+  .tctl-search input {
+    width: 100%;
+    border: 1px solid var(--color-rule);
+    background: var(--color-paper);
+    padding: 0.7rem 0.9rem;
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+    color: var(--color-ink);
+  }
+  .tctl-search input:focus {
+    outline: 2px solid var(--color-ink);
+    outline-offset: -1px;
+  }
+  .tctl-pick {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    min-width: 0;
+  }
+  .tctl-pick select {
+    border: 1px solid var(--color-rule);
+    background: var(--color-paper);
+    padding: 0.55rem 0.6rem;
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: var(--color-ink);
+    max-width: 100%;
+  }
+  .tctl-count {
+    margin-left: auto;
+    white-space: nowrap;
+  }
+  @media (max-width: 40rem) {
+    .tctl-search {
+      flex: 1 1 100%;
+    }
+    .tctl-count {
+      margin-left: 0;
+      flex: 1 1 100%;
+    }
+  }
+  .tmore {
+    margin-top: 1.25rem;
+    border: 1px solid var(--color-ink);
+    background: var(--color-paper);
+    padding: 0.65rem 1.1rem;
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-ink);
+    cursor: pointer;
+  }
+  .tmore:hover,
+  .tmore:focus-visible {
+    background: var(--color-ink);
+    color: var(--color-paper);
+  }
+  .tclear {
+    border: 0;
+    background: none;
+    padding: 0;
+    font: inherit;
+    color: var(--color-ink);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    cursor: pointer;
+  }
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+  }
+
   /* A hairline, not the 2px ink rule .section-head already draws: two heavy
      rules a few pixels apart read as one broken border. */
   .cmte {
