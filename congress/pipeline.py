@@ -201,6 +201,7 @@ def run(
     trades = {t["id"]: t for t in output["trades"]}
     skipped = {s["filing_id"]: s for s in output["skipped_filings"]}
     before = _content_key(output)
+    state_before = json.dumps(state, sort_keys=True)
 
     for source in sources:
         processed = state["processed"].setdefault(source.chamber, {})
@@ -275,6 +276,13 @@ def run(
     result.changed = _content_key(output) != before
     if dry_run or not result.changed:
         log("no changes" if not result.changed else "dry run: not writing")
+        # The output is unchanged, but `processed` may still have advanced
+        # (a filing fetched fine and yielded rows identical to what is
+        # already published). Without this save the filing is re-fetched
+        # on every run forever, with each run reporting success.
+        if not dry_run and json.dumps(state, sort_keys=True) != state_before:
+            save_state(state, state_path)
+            log("state updated (filings processed with no output changes)")
         return result
 
     output["meta"] = _build_meta(

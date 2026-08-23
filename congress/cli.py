@@ -140,6 +140,19 @@ def make_executive_source(
             text, unid=ref.unid, source_url=ref.url,
             filing_date=ref.filing_date, name_index=name_index,
         )
+        if not rows:
+            # A 278-T with a text layer but no parseable transaction rows is
+            # an anomaly, never a success. Raise so the run logs it, the
+            # filing lands in skipped_filings, and the next run retries —
+            # returning [] here would report success while publishing
+            # nothing. The sample says WHY the row regex matched nothing.
+            dollar = [l.strip() for l in text.splitlines() if "$" in l]
+            sample = " | ".join(l[:90] for l in dollar[:3]) \
+                or text.strip()[:200]
+            raise ValueError(
+                f"no transaction rows parsed ({len(text)} chars of text, "
+                f"{len(dollar)} $-lines; sample: {sample!r})"
+            )
         # Every refusal is a report, never a guess: add the name to
         # tickermatch.OVERRIDES and the next fetch of this filing (via
         # --reparse-invalid) fills the ticker in.

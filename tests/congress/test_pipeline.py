@@ -97,6 +97,33 @@ class PipelineTest(unittest.TestCase):
         self.assertEqual(calls, ["f1"])  # not refetched
         self.assertFalse(result.changed)
 
+    def test_zero_row_filing_is_recorded_and_not_refetched(self):
+        # A filing that fetches fine but adds nothing to the output (its
+        # rows duplicate published ones, or it yields none) must still be
+        # recorded as processed — otherwise it is re-fetched on every run
+        # forever, with each run logging "no changes".
+        self._run([StubRef("f1")], lambda r: [_trade(r.fid)])
+        calls = []
+
+        def fetch(r):
+            calls.append(r.fid)
+            return []
+
+        refs = [StubRef("f1"), StubRef("f2")]
+        result = self._run(refs, fetch)
+        self.assertFalse(result.changed)
+        state = json.loads(self.state.read_text())
+        self.assertIn("f2", state["processed"]["senate"])
+        self._run(refs, fetch)
+        self.assertEqual(calls, ["f2"])  # fetched once, never again
+
+    def test_dry_run_zero_row_filing_saves_no_state(self):
+        self._run([StubRef("f1")], lambda r: [_trade(r.fid)])
+        refs = [StubRef("f1"), StubRef("f2")]
+        self._run(refs, lambda r: [], dry_run=True)
+        state = json.loads(self.state.read_text())
+        self.assertNotIn("f2", state["processed"]["senate"])
+
     def test_data_version_serial_increments_same_day(self):
         self._run([StubRef("f1")], lambda r: [_trade(r.fid)])
         self._run([StubRef("f2")], lambda r: [_trade(r.fid)])
