@@ -649,6 +649,9 @@ const schema = [
     gap: 0.75rem 1.25rem;
     border-bottom: 1px solid var(--color-rule);
     padding: 0.9rem 0;
+    /* Desktop hides the mobile swipe note, so without this the table's
+       header row sits pressed against the hairline above. */
+    margin-bottom: 1.4rem;
   }
   .tctl-search {
     flex: 1 1 18rem;
@@ -1141,7 +1144,8 @@ const schema = [
     }
     .tswipe {
       display: block;
-      margin: 0.7rem 0 0.35rem;
+      /* .tctl's margin-bottom already spaces this; no doubling on phones. */
+      margin: -0.7rem 0 0.35rem;
       text-align: right;
       font-family: var(--font-mono);
       font-size: 0.68rem;
