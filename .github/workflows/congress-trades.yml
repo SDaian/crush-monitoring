@@ -2,29 +2,30 @@ name: Congress trades refresh
 
 on:
   schedule:
-    # Target ~9am Madrid (07:00 UTC summer). GitHub scheduled runs are
-    # best-effort — frequently delayed 1–3h and sometimes DROPPED ENTIRELY. So
-    # we fire MULTIPLE times across the morning: GitHub would have to skip every
-    # one to miss a day, and the report is idempotent per day (report_state) so
-    # the first firing sends and the rest no-op the email. The repo is PUBLIC
-    # (2026-08-19), so runner minutes are free and the extra firings cost
-    # nothing in billing. They are NOT free in API budget: each paced Twelve
-    # Data fetch is ~29 minutes of 8s sleeps, which is why the price and
-    # indicator steps carry --skip-if-fresh (same day) and --skip-if-closed
-    # (no session has settled since the close we hold). Read the history here
-    # before changing it: as a PRIVATE repo these three crons burned ~1,000 of
-    # the 2,000 included minutes a month and exhausted the quota on 2026-08-16,
-    # which killed every run for three days. Whichever fires first biases early ("before the day
-    # starts"), late is the failure mode. Cron is UTC and ignores DST (±1h drift
-    # over the year). For a hard timing guarantee an external scheduler hitting
-    # the workflow_dispatch API would still be needed.
+    # FALLBACK ONLY. The primary trigger is now an external scheduler (a
+    # Raspberry Pi cron) that dispatches this workflow at exactly 09:00
+    # Europe/Madrid with scheduled=true. GitHub cron cannot do that job: it
+    # runs in UTC, so it drifts ±1h across DST, and its scheduled runs are
+    # best-effort — frequently delayed 1–3h and sometimes DROPPED ENTIRELY.
     #
-    # NONE of these sit at :00. That minute is the most contended on GitHub's
-    # shared runners, and the queue there is what turns a schedule into a
-    # 30-70 minute delay — our own runs showed the 04:30 firing starting at
-    # 05:xx and the 06:00 firing at 07:xx. Keep new entries off the hour.
-    - cron: "30 4 * * *"
-    - cron: "20 6 * * *"
+    # This single entry catches the day the Pi is off, its network is down, or
+    # its token expired. It fires AFTER the Pi's slot on purpose: if the Pi
+    # already ran, the report's per-day idempotency (report_state.date) makes
+    # this one a no-op, so the fallback costs a few runner minutes and sends
+    # nothing twice. The repo is PUBLIC (2026-08-19) so those minutes are free.
+    #
+    # Runner minutes are free; the Twelve Data budget is NOT. Each paced fetch
+    # is ~29 minutes of 8s sleeps, which is why the price and indicator steps
+    # carry --skip-if-fresh (same day) and --skip-if-closed (no session has
+    # settled since the close we hold). Read the history before adding crons
+    # back: as a PRIVATE repo three of these burned ~1,000 of the 2,000
+    # included minutes a month and exhausted the quota on 2026-08-16, which
+    # killed every run for three days.
+    #
+    # Not at :00. That minute is the most contended on GitHub's shared runners,
+    # and the queue there is what turns a schedule into a 30-70 minute delay —
+    # our own runs showed the 04:30 firing starting at 05:xx. Keep it off the
+    # hour.
     - cron: "20 8 * * *"
   workflow_dispatch:
     inputs:
@@ -32,6 +33,10 @@ on:
         description: "Max new filings per chamber this run (empty = no cap)"
         required: false
         default: ""
+      scheduled:
+        description: "External scheduler (Pi cron): run as the daily job — sends the report but KEEPS the per-day and quiet-day guards"
+        required: false
+        default: "false"
       report:
         description: "Also send the morning report issue (true to test on demand)"
         required: false
@@ -227,8 +232,14 @@ jobs:
       - name: Morning report → GitHub issue email (scheduled/on-demand, non-fatal)
         # report_only implies report — otherwise setting it alone would skip
         # every data step AND the report, running nothing at all.
+        # `scheduled` is the external scheduler's "this IS the daily run"
+        # signal. It enables the report exactly like a GitHub cron does — and
+        # deliberately does NOT set REPORT_FORCE below, so the per-day
+        # idempotency and the quiet-day skip still hold. `report` is the
+        # on-demand test flag and does force delivery.
         if: >-
           github.event_name == 'schedule'
+          || github.event.inputs.scheduled == 'true'
           || github.event.inputs.report == 'true'
           || github.event.inputs.report_only == 'true'
         env:
