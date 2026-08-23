@@ -424,9 +424,10 @@ sites. Full details in `congress/README.md`. Conventions:
   prices` and `congress ai` take **`--skip-if-closed`**, which compares the
   newest `asof_date` the output already holds against
   `market.last_closed_session(now)`. **The test is the settled session, not
-  the weekday**, and the run log says why: the crons fire at 04:30-08:20 UTC,
-  hours *before* the US close, so each run captures the PREVIOUS session
-  (Fri 05:00 → Thursday's close, Sat 05:00 → **Friday's** close). A naive
+  the weekday**, and the run log says why: the daily run fires at 07:00 UTC
+  (the Pi's 09:00 Madrid) or 08:20 UTC (the fallback cron), hours *before* the
+  US close, so each run captures the PREVIOUS session (Fri → Thursday's close,
+  Sat → **Friday's** close). A naive
   "skip at the weekend" would drop the Saturday run that captures Friday and
   leave the site a day behind until Tuesday. Steady state skips **Sunday and
   the pre-close Monday run** — 2 days in 7, ~253 min/month. Holidays get **no
@@ -482,12 +483,22 @@ sites. Full details in `congress/README.md`. Conventions:
   are optional `vars` defaulting to Gmail:587 and the sender), and **(2) a dated
   GitHub issue** (archive + flip-diff state, assigned to the owner). `smtplib`
   is stdlib so no new deps. It runs from the daily Action's report step (guarded
-  to `schedule` or the `report` dispatch input) **before** the slow price step
-  so it's timely. It targets ~9am Madrid via **multiple morning crons (04:30 /
-  06:00 / 08:00 UTC)** because GitHub scheduled runs are best-effort — delayed
-  1–3h and sometimes dropped entirely; firing several times means GitHub must
-  skip them all to miss a day, and the per-day idempotency makes only the first
-  firing send. Early is safe, late/missing is the failure. It **assigns the issue to the repo owner**
+  to `schedule` or the `scheduled` / `report` dispatch inputs) **before** the
+  slow price step so it's timely.
+  - **An external scheduler owns the clock; GitHub cron is the fallback.** A
+    Raspberry Pi cron dispatches the workflow at **09:00 Europe/Madrid** with
+    `scheduled=true`. GitHub cron cannot hold that time: it runs in UTC (±1h
+    DST drift) and its scheduled runs are best-effort — delayed 1–3h and
+    sometimes dropped entirely. Three morning crons used to paper over that;
+    **one** now remains (`20 8 * * *`) to catch the day the Pi is off, and it
+    fires *after* the Pi's slot so the per-day idempotency turns it into a
+    no-op when the Pi already ran. **`scheduled` is not `report`**: it enables
+    the report exactly as a cron does and deliberately leaves `REPORT_FORCE`
+    unset, so the per-day and quiet-day guards still hold. `report` is the
+    on-demand test flag and *does* force delivery — never wire a scheduler to
+    it, or every quiet Sunday emails a duplicate. Early is safe,
+    late/missing is the failure.
+  It **assigns the issue to the repo owner**
   (`REPORT_ASSIGNEE` override) so email reaches them without needing to "watch"
   the repo, is **idempotent per day** (skips if `report_state.date == today`, so
   a manual send + a delayed scheduled run don't double-post), closes the prior

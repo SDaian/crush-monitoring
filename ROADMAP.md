@@ -188,6 +188,17 @@ Not commitments — things to test when their stage approaches.
   deeper funnels are needed while keeping the privacy page honest.
 - **Monitoring**: GitHub Actions already alerts on pipeline failure via the
   daily report; add uptime checks (e.g. UptimeRobot free) at launch.
+- **Scheduling**: a Raspberry Pi cron dispatches the daily workflow at 09:00
+  Europe/Madrid (`scheduled=true`), because GitHub cron runs in UTC and drops
+  runs. ✅ Shipped 2026-08-23. The Pi is the **clock only** — the job still
+  runs on GitHub's free public-repo runners. Moving execution to a self-hosted
+  runner was considered and **rejected**: the repo is public, so runner
+  minutes are already free, and a self-hosted runner on a public repo puts
+  every pipeline secret on a home machine that a fork PR could reach. Revisit
+  only if the repo goes private again. **Trigger for uptime checks**: the Pi
+  is now a single point of failure for on-time delivery; the `20 8 * * *`
+  fallback cron covers a missed day, but a silent Pi is invisible until the
+  email is late.
 - **PDF extraction**: OpenDataLoader PDF (Apache 2.0, Java 11+ engine with a
   Python wrapper; layout analysis + built-in OCR) — evaluated 2026-08-17 and
   parked. It would recover only the scanned-no-text annual FDs (Khanna,
