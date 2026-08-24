@@ -413,8 +413,10 @@
     "totalLabel": "$145.1M",
     "positions": 25,
     "optionsCount": 6,
-    "stocks": [
+    "positionsTotal": 31,
+    "ranked": [
       {
+        "kind": "stock",
         "ticker": "GOOGL",
         "asset": "Alphabet Inc. - Class A",
         "estLabel": "$15.8M",
@@ -422,6 +424,7 @@
         "isNew": false
       },
       {
+        "kind": "stock",
         "ticker": "AMZN",
         "asset": "Amazon.com, Inc.",
         "estLabel": "$15.8M",
@@ -429,6 +432,7 @@
         "isNew": false
       },
       {
+        "kind": "stock",
         "ticker": "NVDA",
         "asset": "NVIDIA Corporation",
         "estLabel": "$15.4M",
@@ -436,6 +440,7 @@
         "isNew": false
       },
       {
+        "kind": "stock",
         "ticker": "AAPL",
         "asset": "Apple Inc.",
         "estLabel": "$15.0M",
@@ -443,6 +448,7 @@
         "isNew": false
       },
       {
+        "kind": "stock",
         "ticker": "AVGO",
         "asset": "Broadcom Inc.",
         "estLabel": "$15.0M",
@@ -450,6 +456,7 @@
         "isNew": false
       },
       {
+        "kind": "stock",
         "ticker": "MSFT",
         "asset": "Microsoft Corporation",
         "estLabel": "$15.0M",
@@ -457,6 +464,7 @@
         "isNew": false
       },
       {
+        "kind": "stock",
         "ticker": "CRM",
         "asset": "Salesforce.com Inc",
         "estLabel": "$15.0M",
@@ -464,6 +472,7 @@
         "isNew": false
       },
       {
+        "kind": "stock",
         "ticker": "V",
         "asset": "Visa Inc.",
         "estLabel": "$15.0M",
@@ -471,6 +480,7 @@
         "isNew": false
       },
       {
+        "kind": "stock",
         "ticker": "AXP",
         "asset": "American Express Company",
         "estLabel": "$3.0M",
@@ -478,6 +488,7 @@
         "isNew": false
       },
       {
+        "kind": "stock",
         "ticker": "CRWD",
         "asset": "CrowdStrike Holdings, Inc. - Class A",
         "estLabel": "$3.0M",
@@ -485,6 +496,7 @@
         "isNew": false
       },
       {
+        "kind": "stock",
         "ticker": "NFLX",
         "asset": "Netflix, Inc.",
         "estLabel": "$3.0M",
@@ -492,6 +504,7 @@
         "isNew": false
       },
       {
+        "kind": "stock",
         "ticker": "PANW",
         "asset": "Palo Alto Networks, Inc.",
         "estLabel": "$3.0M",
@@ -499,6 +512,7 @@
         "isNew": false
       },
       {
+        "kind": "stock",
         "ticker": "AB",
         "asset": "AllianceBernstein Holding L.P. Units",
         "estLabel": "$3.0M",
@@ -506,6 +520,15 @@
         "isNew": true
       },
       {
+        "kind": "option",
+        "ticker": "INTC",
+        "asset": "Intel Corporation - Common Stock",
+        "estLabel": "$3.0M",
+        "pctPortfolio": 2.1,
+        "isNew": false
+      },
+      {
+        "kind": "stock",
         "ticker": "CMCSA",
         "asset": "Comcast Corporation - Class A",
         "estLabel": "$750K",
@@ -513,17 +536,11 @@
         "isNew": false
       },
       {
+        "kind": "stock",
         "ticker": "IBKR",
         "asset": "Interactive Brokers Group, Inc.",
         "estLabel": "$750K",
         "pctPortfolio": 0.5,
-        "isNew": false
-      },
-      {
-        "ticker": "SQ",
-        "asset": "Block, Inc.",
-        "estLabel": "$375K",
-        "pctPortfolio": 0.3,
         "isNew": false
       }
     ],

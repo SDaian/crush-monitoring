@@ -86,25 +86,20 @@ const pctLateLabel =
   s.pctLate === 0 && s.worstLate > 0 ? "<1%" : `${s.pctLate}%`;
 // Bars are scaled to the biggest holding, not to 100%, so a diversified
 // portfolio still shows a readable shape instead of sixteen slivers.
-const heldPcts: number[] = (m.holdings?.stocks ?? []).map(
+const heldPcts: number[] = (m.holdings?.ranked ?? []).map(
   (h: any) => h.pctPortfolio ?? 0,
 );
 const maxPct = Math.max(...heldPcts, 1);
 // What the 16 listed rows leave out. pctPortfolio is a share of the FULL
-// estimated portfolio, so the shortfall is the untracked tail — MINUS the
-// options, which are their own denominator members and are each listed
-// below. Without that subtraction the tail row absorbed them silently:
-// Pelosi's read "9 smaller positions not listed · 4.3%" when 3.4 of those
-// points were six named contracts and the real stock tail was 0.9%.
-const optionPcts: number[] = (m.holdings?.options ?? []).map(
-  (o: any) => o.pctPortfolio ?? 0,
-);
-const optionsPct = optionPcts.reduce((a, b) => a + b, 0);
-const restPct = Math.max(
+// estimated portfolio, so the shortfall is the untracked tail. The ranked
+// list holds stocks AND options, so both the percentage and the count come
+// off the same list — an earlier split, where options sat outside it, let
+// the tail absorb their share without naming it.
+const restPct = Math.max(0, 100 - heldPcts.reduce((a, b) => a + b, 0));
+const untracked = Math.max(
   0,
-  100 - heldPcts.reduce((a, b) => a + b, 0) - optionsPct,
+  (m.holdings?.positionsTotal ?? 0) - heldPcts.length,
 );
-const untracked = Math.max(0, (m.holdings?.positions ?? 0) - heldPcts.length);
 // Clamped at both ends: a sliver still reads as a bar, and the untracked
 // tail (which can far exceed the largest listed holding) stops at full width
 // instead of running off the page.
@@ -332,7 +327,7 @@ const schema = [
     }
 
     {
-      m.holdings.available && m.holdings.stocks.length > 0 && (
+      m.holdings.available && m.holdings.ranked.length > 0 && (
         <section class="mx-auto max-w-[75rem] px-[5vw] pb-[7vh]">
           <div class="section-head">
             <h2 class="section-title whitespace-nowrap">Estimated holdings</h2>
@@ -352,18 +347,19 @@ const schema = [
             directional estimate, never exact or real-time.
           </p>
           <HoldingsChart
-            holdings={m.holdings.stocks}
-            positions={m.holdings.positions + (m.holdings.optionsCount ?? 0)}
+            holdings={m.holdings.ranked}
+            positions={m.holdings.positionsTotal ?? m.holdings.positions}
             totalLabel={m.holdings.totalLabel}
             name={m.name}
           />
 
           <div class="mt-9 grid grid-cols-2 gap-x-12 gap-y-1 max-[720px]:grid-cols-1">
-            {m.holdings.stocks.map((h: any) => (
+            {m.holdings.ranked.map((h: any) => (
               <div class="hrow">
                 <span class="htick">{h.ticker}</span>
                 <span class="hname">
                   <span>{h.asset}</span>
+                  {h.kind === "option" && <b class="hopt">call</b>}
                   {h.isNew && <b class="hnew">new</b>}
                 </span>
                 {/* The bar IS the row — scaled to the largest holding so the
@@ -391,23 +387,6 @@ const schema = [
                 </span>
                 <span class="hval">—</span>
                 <span class="hpct">{Number(restPct.toFixed(1))}%</span>
-              </div>
-            )}
-            {/* Options are part of this total, so name their share here
-                rather than letting the tail above swallow it. Each contract
-                is itemised in the block below. */}
-            {optionsPct > 0 && (
-              <div class="hrow is-rest">
-                <span class="htick">···</span>
-                <span class="hname">
-                  {m.holdings.optionsCount} option{m.holdings.optionsCount === 1 ? "" : "s"},
-                  {" "}listed below
-                </span>
-                <span class="hbar" aria-hidden="true">
-                  <i style={`width:${barWidth(optionsPct)}%`} />
-                </span>
-                <span class="hval">—</span>
-                <span class="hpct">{Number(optionsPct.toFixed(1))}%</span>
               </div>
             )}
           </div>
@@ -1045,6 +1024,21 @@ const schema = [
     font-variant-numeric: tabular-nums;
   }
   /* "new" = a position first traded after the annual snapshot. */
+  /* An option row ranks beside the stocks, so it must never read as share
+     ownership. Outline, not the filled stamp of `new`: it labels the
+     instrument rather than flagging a change. */
+  .hopt {
+    margin-left: 0.5rem;
+    padding: 0.1rem 0.4rem;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    line-height: 1;
+    color: var(--color-ink-soft);
+    border: 1px solid var(--color-rule);
+    vertical-align: middle;
+  }
   .hnew {
     margin-left: 0.5rem;
     padding: 0.1rem 0.4rem;

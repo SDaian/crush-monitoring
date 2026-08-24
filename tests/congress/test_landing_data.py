@@ -293,11 +293,11 @@ class TestMemberPayload(unittest.TestCase):
         h = p["holdings"]
         self.assertTrue(h["available"])
         self.assertEqual(h["reportYear"], 2025)
-        self.assertEqual([s["ticker"] for s in h["stocks"]], ["NVDA", "AAPL"])
+        self.assertEqual([s["ticker"] for s in h["ranked"]], ["NVDA", "AAPL"])
         self.assertIsNotNone(h["totalLabel"])
-        self.assertTrue(all(s["estLabel"].startswith("$") for s in h["stocks"]))
-        self.assertFalse(any(s["isNew"] for s in h["stocks"]))
-        pcts = [s["pctPortfolio"] for s in h["stocks"]]
+        self.assertTrue(all(s["estLabel"].startswith("$") for s in h["ranked"]))
+        self.assertFalse(any(s["isNew"] for s in h["ranked"]))
+        pcts = [s["pctPortfolio"] for s in h["ranked"]]
         self.assertAlmostEqual(sum(pcts), 100.0, delta=0.2)
         self.assertGreater(pcts[0], pcts[1])
 
@@ -306,7 +306,7 @@ class TestMemberPayload(unittest.TestCase):
                      lo=1_000_001, hi=5_000_000)]
         p = ld.member_payload("Nancy Pelosi", trades, HOLDINGS,
                               today_iso="2026-07-01")
-        pos = {s["ticker"]: s for s in p["holdings"]["stocks"]}
+        pos = {s["ticker"]: s for s in p["holdings"]["ranked"]}
         self.assertIn("TSLA", pos)
         self.assertTrue(pos["TSLA"]["isNew"])
 
@@ -316,7 +316,7 @@ class TestMemberPayload(unittest.TestCase):
                      lo=1_000_001, hi=5_000_000)]
         p = ld.member_payload("Nancy Pelosi", trades, HOLDINGS,
                               today_iso="2026-07-01")
-        tickers = {s["ticker"] for s in p["holdings"]["stocks"]}
+        tickers = {s["ticker"] for s in p["holdings"]["ranked"]}
         self.assertNotIn("NVDA", tickers)
         self.assertIn("AAPL", tickers)
 
@@ -347,7 +347,7 @@ class TestMemberPayload(unittest.TestCase):
     def test_holdings_absent_when_no_annual(self):
         p = ld.member_payload("Nancy Pelosi", [MT()], {})
         self.assertFalse(p["holdings"]["available"])
-        self.assertEqual(p["holdings"]["stocks"], [])
+        self.assertEqual(p["holdings"]["ranked"], [])
         self.assertIsNone(p["holdings"]["totalLabel"])
 
     def test_write_member_files_skips_zero_trade_members(self):
@@ -1164,14 +1164,14 @@ class TestOptionsInThePortfolioShare(unittest.TestCase):
         h = self.payload([self.stock(1, 1_000_000),   # mid 500,000.5
                           OPT(lo=1, hi=1_000_000)])["holdings"]
         self.assertEqual(h["options"][0]["pctPortfolio"], 50.0)
-        self.assertEqual(h["stocks"][0]["pctPortfolio"], 50.0)
+        self.assertEqual(h["ranked"][0]["pctPortfolio"], 50.0)
 
     def test_the_option_is_in_the_denominator(self):
         with_opt = self.payload([self.stock(1, 1_000_000),
                                  OPT(lo=1, hi=1_000_000)])["holdings"]
         without = self.payload([self.stock(1, 1_000_000)])["holdings"]
-        self.assertEqual(without["stocks"][0]["pctPortfolio"], 100.0)
-        self.assertLess(with_opt["stocks"][0]["pctPortfolio"], 100.0)
+        self.assertEqual(without["ranked"][0]["pctPortfolio"], 100.0)
+        self.assertLess(with_opt["ranked"][0]["pctPortfolio"], 100.0)
 
     def test_counts_are_reported_separately(self):
         h = self.payload([self.stock(1, 1000), OPT()])["holdings"]
@@ -1181,3 +1181,50 @@ class TestOptionsInThePortfolioShare(unittest.TestCase):
         h = self.payload([OPT()])["holdings"]
         self.assertIsNotNone(h["totalLabel"])
         self.assertEqual(h["options"][0]["pctPortfolio"], 100.0)
+
+
+class TestRankedList(unittest.TestCase):
+    """Stocks and options rank in ONE list, biggest first.
+
+    They share a denominator, so a $3.0M call is the same size position as
+    $3.0M of stock. Keeping options in a separate block meant Pelosi's INTC
+    call never appeared beside the Netflix and Amex holdings it matches.
+    """
+
+    def payload(self, trades):
+        return ld.member_payload(
+            "Nancy Pelosi", trades,
+            {"Nancy Pelosi": SNAP()}, today_iso="2026-08-24")
+
+    def stock(self, lo, hi, ticker):
+        return T(member="Nancy Pelosi", ticker=ticker, lo=lo, hi=hi,
+                 tx="2026-02-01", filed="2026-02-10", id=f"s-{ticker}")
+
+    def test_an_option_ranks_between_stocks_by_size(self):
+        h = self.payload([
+            self.stock(9_000_000, 11_000_000, "BIG"),     # ~10.0M
+            self.stock(1, 1000, "SMALL"),                 # ~500
+            OPT(lo=900_000, hi=1_100_000),                # ~1.0M, AMZN
+        ])["holdings"]
+        self.assertEqual([r["ticker"] for r in h["ranked"]],
+                         ["BIG", "AMZN", "SMALL"])
+
+    def test_rows_are_marked_by_kind(self):
+        h = self.payload([self.stock(1, 1000, "MSFT"), OPT()])["holdings"]
+        kinds = {r["ticker"]: r["kind"] for r in h["ranked"]}
+        self.assertEqual(kinds["MSFT"], "stock")
+        self.assertEqual(kinds["AMZN"], "option")
+
+    def test_an_option_row_carries_the_company_name(self):
+        h = self.payload([OPT()])["holdings"]
+        self.assertIn("AMZN", h["ranked"][0]["asset"])
+
+    def test_positions_total_counts_both(self):
+        h = self.payload([self.stock(1, 1000, "MSFT"), OPT()])["holdings"]
+        self.assertEqual(h["positionsTotal"], 2)
+        self.assertEqual((h["positions"], h["optionsCount"]), (1, 1))
+
+    def test_options_keep_their_own_detail_block(self):
+        h = self.payload([OPT()])["holdings"]
+        self.assertEqual(h["options"][0]["strike"], 120.0)
+        self.assertEqual(h["options"][0]["expiration"], "2027-01-15")
