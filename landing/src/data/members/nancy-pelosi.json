@@ -410,63 +410,64 @@
     "snapDate": "2025-12-31",
     "filingsSince": 2,
     "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/financial-pdfs/2025/10075701.pdf",
-    "totalLabel": "$140.2M",
+    "totalLabel": "$145.1M",
     "positions": 25,
+    "optionsCount": 6,
     "stocks": [
       {
         "ticker": "GOOGL",
         "asset": "Alphabet Inc. - Class A",
         "estLabel": "$15.8M",
-        "pctPortfolio": 11.2,
+        "pctPortfolio": 10.9,
         "isNew": false
       },
       {
         "ticker": "AMZN",
         "asset": "Amazon.com, Inc.",
         "estLabel": "$15.8M",
-        "pctPortfolio": 11.2,
+        "pctPortfolio": 10.9,
         "isNew": false
       },
       {
         "ticker": "NVDA",
         "asset": "NVIDIA Corporation",
         "estLabel": "$15.4M",
-        "pctPortfolio": 11.0,
+        "pctPortfolio": 10.6,
         "isNew": false
       },
       {
         "ticker": "AAPL",
         "asset": "Apple Inc.",
         "estLabel": "$15.0M",
-        "pctPortfolio": 10.7,
+        "pctPortfolio": 10.3,
         "isNew": false
       },
       {
         "ticker": "AVGO",
         "asset": "Broadcom Inc.",
         "estLabel": "$15.0M",
-        "pctPortfolio": 10.7,
+        "pctPortfolio": 10.3,
         "isNew": false
       },
       {
         "ticker": "MSFT",
         "asset": "Microsoft Corporation",
         "estLabel": "$15.0M",
-        "pctPortfolio": 10.7,
+        "pctPortfolio": 10.3,
         "isNew": false
       },
       {
         "ticker": "CRM",
         "asset": "Salesforce.com Inc",
         "estLabel": "$15.0M",
-        "pctPortfolio": 10.7,
+        "pctPortfolio": 10.3,
         "isNew": false
       },
       {
         "ticker": "V",
         "asset": "Visa Inc.",
         "estLabel": "$15.0M",
-        "pctPortfolio": 10.7,
+        "pctPortfolio": 10.3,
         "isNew": false
       },
       {
@@ -534,7 +535,8 @@
         "expiration": "2027-03-19",
         "contracts": 200,
         "shares": 20000,
-        "estLabel": "$3.0M"
+        "estLabel": "$3.0M",
+        "pctPortfolio": 2.1
       },
       {
         "ticker": "UBER",
@@ -543,7 +545,8 @@
         "expiration": "2027-03-19",
         "contracts": 200,
         "shares": 20000,
-        "estLabel": "$750K"
+        "estLabel": "$750K",
+        "pctPortfolio": 0.5
       },
       {
         "ticker": "AAPL",
@@ -552,7 +555,8 @@
         "expiration": "2027-01-15",
         "contracts": 20,
         "shares": 2000,
-        "estLabel": "$375K"
+        "estLabel": "$375K",
+        "pctPortfolio": 0.3
       },
       {
         "ticker": "GOOGL",
@@ -561,7 +565,8 @@
         "expiration": "2027-01-15",
         "contracts": 20,
         "shares": 2000,
-        "estLabel": "$375K"
+        "estLabel": "$375K",
+        "pctPortfolio": 0.3
       },
       {
         "ticker": "NVDA",
@@ -570,7 +575,8 @@
         "expiration": "2027-01-15",
         "contracts": 20,
         "shares": 2000,
-        "estLabel": "$175K"
+        "estLabel": "$175K",
+        "pctPortfolio": 0.1
       },
       {
         "ticker": "AMZN",
@@ -579,7 +585,8 @@
         "expiration": "2027-01-15",
         "contracts": 20,
         "shares": 2000,
-        "estLabel": "$175K"
+        "estLabel": "$175K",
+        "pctPortfolio": 0.1
       }
     ]
   },

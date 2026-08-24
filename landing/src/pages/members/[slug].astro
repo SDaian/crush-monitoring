@@ -327,7 +327,7 @@ const schema = [
             <h2 class="section-title whitespace-nowrap">Estimated holdings</h2>
             <span class="eyebrow">
               ~<b class="font-semibold text-stamp">{m.holdings.totalLabel}</b> ·
-              {" "}{m.holdings.positions} positions
+              {" "}{m.holdings.positions + (m.holdings.optionsCount ?? 0)} positions
             </span>
           </div>
           <p class="fineprint mt-4 max-w-[85ch]">
@@ -337,12 +337,12 @@ const schema = [
             {" "}filing{m.holdings.filingsSince === 1 ? "" : "s"} since — so
             recent buys and sells nudge the year-end snapshot toward today.
             Bracket midpoints, <b>not</b> share counts; the percentage is each
-            stock's share of the estimated total. A directional estimate, never
-            exact or real-time.
+            position's share of the estimated total, options included. A
+            directional estimate, never exact or real-time.
           </p>
           <HoldingsChart
             holdings={m.holdings.stocks}
-            positions={m.holdings.positions}
+            positions={m.holdings.positions + (m.holdings.optionsCount ?? 0)}
             totalLabel={m.holdings.totalLabel}
             name={m.name}
           />
@@ -402,16 +402,19 @@ const schema = [
                           ? ` · ${o.contracts} contracts = ${o.shares.toLocaleString("en-US")} shares`
                           : ""}
                       </span>
-                      <span class="oval">~{o.estLabel}</span>
+                      <span class="oval">
+                        ~{o.estLabel}
+                        {o.pctPortfolio != null ? ` · ${o.pctPortfolio}%` : ""}
+                      </span>
                     </div>
                   ))}
                 </div>
                 <p class="fineprint mt-3">
                   One contract carries 100 shares, so a contract count states
-                  the shares the position controls. The amount is the
-                  disclosed purchase bracket, not what the contracts are worth
-                  today. A contract count appears only where the filing stated
-                  one.
+                  the shares the position controls. The amount and the share
+                  of the portfolio both come from the disclosed purchase
+                  bracket, not from what the contracts are worth today. A
+                  contract count appears only where the filing stated one.
                 </p>
               </>
             )

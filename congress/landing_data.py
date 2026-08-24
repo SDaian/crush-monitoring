@@ -586,7 +586,14 @@ def member_payload(name: str, trades: list[dict], holdings: dict,
     h = holdings.get(name, {}) if holdings else {}
     rf = rolled_holdings(ts, h, today_iso)
     held = rf["stocks"]
-    total_est = sum(x["est"] for x in held)
+    # ONE denominator for both lists. Options were excluded from it, so a
+    # position worth millions of disclosed bracket showed no share of the
+    # portfolio at all — Pelosi's six carry $4.85M and read as 0%. Summing
+    # them is unit-consistent: a stock's `est` and an option's `est` are both
+    # disclosure-bracket midpoints, not market values. It follows that a
+    # deep-in-the-money contract is understated here, exactly as a stock
+    # bought years ago is.
+    total_est = sum(x["est"] for x in held) + sum(o["est"] for o in rf["options"])
     holdings_block = {
         "available": bool(h.get("available")),
         "filingDate": h.get("filing_date"),
@@ -594,8 +601,14 @@ def member_payload(name: str, trades: list[dict], holdings: dict,
         "snapDate": rf["snap"],
         "filingsSince": rf["filings"],
         "sourceUrl": h.get("source_url"),
-        "totalLabel": money(total_est) if held else None,
+        "totalLabel": money(total_est) if (held or rf["options"]) else None,
+        # `positions` counts STOCK positions only, because it drives the
+        # "N smaller positions not listed" tail — and every option is listed
+        # in its own block, so none of them is ever part of that tail. The
+        # headline count and the ring's "everything else" slice add
+        # `optionsCount`, since both describe the whole estimated portfolio.
         "positions": len(held),
+        "optionsCount": len(rf["options"]),
         "stocks": [{
             "ticker": x["ticker"],
             "asset": x["asset"],
@@ -617,6 +630,9 @@ def member_payload(name: str, trades: list[dict], holdings: dict,
             "shares": (o["contracts"] * SHARES_PER_CONTRACT
                        if o.get("contracts") else None),
             "estLabel": money(o["est"]),
+            "pctPortfolio": (
+                round(100 * o["est"] / total_est, 1) if total_est else None
+            ),
         } for o in rf["options"][:MEMBER_HOLDINGS_CAP]],
     }
 
