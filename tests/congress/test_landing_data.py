@@ -950,3 +950,68 @@ class TestFeaturedMemberSet(unittest.TestCase):
 
     def test_every_page_name_is_unique(self):
         self.assertEqual(len(set(ld.MEMBER_PAGE_NAMES)), len(ld.MEMBER_PAGE_NAMES))
+
+
+def OPT(ticker="AMZN", type="buy", strike=120.0, exp="2027-01-15",
+        tx="2025-12-30", lo=100001, hi=250000, contracts=20):
+    return {"member": "Nancy Pelosi", "ticker": ticker, "type": type,
+            "asset": f"{ticker} - Common Stock", "asset_type": "Option",
+            "amount_lo": lo, "amount_hi": hi, "tx_date": tx,
+            "filing_date": "2026-01-23", "chamber": "house",
+            "filing_id": "f1", "id": f"{ticker}-{strike}-{exp}",
+            "option": {"type": "call", "strike": strike,
+                       "expiration": exp, "contracts": contracts}}
+
+
+def SNAP(stocks=(), year=2025):
+    return {"available": True, "report_year": year,
+            "filing_date": f"{year + 1}-05-15", "stocks": list(stocks)}
+
+
+class TestRolledOptions(unittest.TestCase):
+    """The live-options half of the roll-forward.
+
+    An option bought in the days BEFORE the snapshot date belongs to the
+    annual report; when that report's parser misses it, the position used to
+    exist in no path at all. Pelosi's Jan-2027 calls were bought 2025-12-30
+    against a 2025-12-31 snapshot, so AMZN, GOOGL and NVDA vanished from her
+    page while AAPL survived only because the parser caught that one.
+    """
+
+    TODAY = "2026-08-24"
+
+    def roll(self, trades, snap=None):
+        return ld.rolled_holdings(trades, snap or SNAP(), self.TODAY)
+
+    def test_buy_before_the_snapshot_is_recovered(self):
+        out = self.roll([OPT(tx="2025-12-30")])   # snapshot date 2025-12-31
+        self.assertEqual([o["ticker"] for o in out["options"]], ["AMZN"])
+
+    def test_snapshot_and_trade_collapse_to_one_entry(self):
+        snap_opt = {"ticker": "AAPL", "asset_type": "Option",
+                    "amount_lo": 250001, "amount_hi": 500000,
+                    "option": {"type": "call", "strike": 100.0,
+                               "expiration": "2027-01-15"}}
+        out = self.roll([OPT(ticker="AAPL", strike=100.0)],
+                        SNAP(stocks=[snap_opt]))
+        self.assertEqual(len(out["options"]), 1)
+
+    def test_expired_options_stay_out(self):
+        out = self.roll([OPT(exp="2026-01-16")])  # expired before TODAY
+        self.assertEqual(out["options"], [])
+
+    def test_a_disclosed_sale_closes_the_position(self):
+        out = self.roll([OPT(), OPT(type="sell")])
+        self.assertEqual(out["options"], [])
+
+    def test_a_sale_of_a_different_contract_leaves_it_alone(self):
+        out = self.roll([OPT(strike=120.0), OPT(strike=150.0, type="sell")])
+        self.assertEqual([o["strike"] for o in out["options"]], [120.0])
+
+    def test_options_never_enter_the_stock_list(self):
+        out = self.roll([OPT()])
+        self.assertEqual(out["stocks"], [])
+
+    def test_no_annual_baseline_means_no_estimate(self):
+        out = ld.rolled_holdings([OPT()], {"available": False}, self.TODAY)
+        self.assertEqual((out["stocks"], out["options"]), ([], []))

@@ -333,13 +333,16 @@ def _side_label(t: dict) -> str:
 
 def rolled_holdings(member_trades: list[dict], h: dict, today_iso: str) -> dict:
     """Estimated CURRENT holdings — the member's latest annual snapshot rolled
-    forward with every disclosed trade dated after it (a Python port of the
-    tracker's ``rollForward`` in docs/trades.html, kept in sync with it):
+    forward with every disclosed trade dated after it. This was a port of the
+    tracker's JS ``rollForward``; that tab is gone, so this is now the only
+    implementation:
 
     - stock buys add / sells subtract by bracket midpoint;
     - tickers first traded *after* the snapshot appear (flagged ``isNew``);
-    - live options = snapshot options + option buys since, minus any already
-      expired (expiration < today), deduped by (ticker, type, strike, expiry).
+    - live options = snapshot options + EVERY disclosed option buy (not only
+      those after the snapshot — see the comment at the option pass), minus
+      any already expired (expiration < today) and any closed by a disclosed
+      sale, deduped by (ticker, type, strike, expiry).
 
     Bracket midpoints, NOT share counts — a directional estimate. Returns
     ``{snap, filings, stocks, options}`` with dollar-midpoint ``est`` values."""
@@ -362,12 +365,14 @@ def rolled_holdings(member_trades: list[dict], h: dict, today_iso: str) -> dict:
                   "base": _holding_mid(s), "delta": 0.0, "inSnap": True}
 
     since = [t for t in member_trades if (t.get("tx_date") or "") > snap]
-    filings, opt_trades = set(), []
+    # Options are swept from the WHOLE record, not just `since` — see the
+    # comment on the option pass below.
+    opt_trades = [t for t in member_trades if _is_option_trade(t)]
+    filings = set()
     for t in since:
         if t.get("filing_id"):
             filings.add(t["filing_id"])
         if _is_option_trade(t):
-            opt_trades.append(t)
             continue
         tk = t.get("ticker")
         if not tk:
@@ -407,9 +412,29 @@ def rolled_holdings(member_trades: list[dict], h: dict, today_iso: str) -> dict:
     for s in stocks_in:
         if s.get("asset_type") == "Option":
             _add_opt(s.get("ticker"), s.get("option") or {}, _holding_mid(s))
+    # EVERY disclosed option buy, not only those dated after the snapshot. An
+    # option bought in the days BEFORE the snapshot belongs to the annual
+    # report, so when that report's parser misses it the position exists in no
+    # path at all and the page silently omits it: Pelosi's Jan-2027 calls were
+    # bought 2025-12-30 against a 2025-12-31 snapshot, and AMZN, GOOGL and NVDA
+    # vanished while AAPL survived only because the parser happened to catch
+    # it. The dedup key makes the wider sweep safe — a contract present in both
+    # the snapshot and the trades collapses to one entry.
     for t in opt_trades:
         if t.get("type") == "buy":
             _add_opt(t.get("ticker"), t.get("option") or {}, _mid(t))
+    # A disclosed sale closes the position. Sales are rarer than purchases in
+    # this record, so an option closed without one stays listed until it
+    # expires — the estimate errs toward showing a position, never toward
+    # inventing a strike.
+    for t in opt_trades:
+        if t.get("type") == "sell":
+            o = t.get("option") or {}
+            exp = o.get("expiration")
+            if t.get("ticker") and exp:
+                opt_map.pop(
+                    (t["ticker"], o.get("type") or "", o.get("strike") or "",
+                     exp), None)
     options = sorted(opt_map.values(), key=lambda x: -x["est"])
 
     return {"snap": snap, "filings": len(filings), "stocks": stocks,

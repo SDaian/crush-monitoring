@@ -547,6 +547,27 @@
         "strike": 100.0,
         "expiration": "2027-01-15",
         "estLabel": "$375K"
+      },
+      {
+        "ticker": "GOOGL",
+        "type": "call",
+        "strike": 150.0,
+        "expiration": "2027-01-15",
+        "estLabel": "$375K"
+      },
+      {
+        "ticker": "NVDA",
+        "type": "call",
+        "strike": 100.0,
+        "expiration": "2027-01-15",
+        "estLabel": "$175K"
+      },
+      {
+        "ticker": "AMZN",
+        "type": "call",
+        "strike": 120.0,
+        "expiration": "2027-01-15",
+        "estLabel": "$175K"
       }
     ]
   },
