@@ -1015,3 +1015,51 @@ class TestRolledOptions(unittest.TestCase):
     def test_no_annual_baseline_means_no_estimate(self):
         out = ld.rolled_holdings([OPT()], {"available": False}, self.TODAY)
         self.assertEqual((out["stocks"], out["options"]), ([], []))
+
+
+class TestExerciseRows(unittest.TestCase):
+    """An exercise turns an option into shares, and is filed as a STOCK row
+    that still names the contract it converted. Routing on the presence of
+    that `option` key sent 5,000 real VST shares into the option pass, which
+    dropped them for having no expiry left — so the position showed in
+    neither list."""
+
+    TODAY = "2026-08-24"
+
+    def exercise(self, ticker="VST", lo=100001, hi=250000):
+        return {"member": "Nancy Pelosi", "ticker": ticker, "type": "buy",
+                "asset": "Vistra Corp. Common Stock", "asset_type": "Stock",
+                "amount_lo": lo, "amount_hi": hi, "tx_date": "2026-01-16",
+                "filing_date": "2026-01-23", "chamber": "house",
+                "filing_id": "f9", "id": "ex1",
+                "comment": ("Exercised 50 call options purchased 1/14/25 "
+                            "(5,000 shares) at a strike price of $50."),
+                "option": {"type": "call", "strike": 50.0}}
+
+    def test_exercise_lands_in_stocks_not_options(self):
+        out = ld.rolled_holdings([self.exercise()], SNAP(), self.TODAY)
+        self.assertEqual([s["ticker"] for s in out["stocks"]], ["VST"])
+        self.assertEqual(out["options"], [])
+
+    def test_exercise_uses_its_own_bracket_midpoint(self):
+        out = ld.rolled_holdings([self.exercise()], SNAP(), self.TODAY)
+        self.assertAlmostEqual(out["stocks"][0]["est"], 175000.5)
+
+    def test_a_real_option_row_still_routes_to_options(self):
+        out = ld.rolled_holdings([OPT()], SNAP(), self.TODAY)
+        self.assertEqual(out["stocks"], [])
+        self.assertEqual(len(out["options"]), 1)
+
+    def test_capital_call_is_not_an_option(self):
+        # The free-text parser attaches {"type": "call"} to a hedge-fund
+        # "Capital call of $3,723.39". It is not an option, and with no
+        # ticker it must not reach either list.
+        row = {"member": "Nancy Pelosi", "ticker": None, "type": "buy",
+               "asset": "Some Fund LP", "asset_type": "HN",
+               "amount_lo": 1001, "amount_hi": 15000,
+               "tx_date": "2026-07-22", "filing_date": "2026-07-30",
+               "chamber": "house", "id": "cc1",
+               "comment": "Capital call of $3,723.39",
+               "option": {"type": "call"}}
+        out = ld.rolled_holdings([row], SNAP(), self.TODAY)
+        self.assertEqual((out["stocks"], out["options"]), ([], []))

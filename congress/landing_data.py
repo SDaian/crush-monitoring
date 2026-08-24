@@ -112,7 +112,21 @@ def _holding_mid(h: dict) -> float:
 
 
 def _is_option_trade(t: dict) -> bool:
-    return t.get("asset_type") == "Option" or bool(t.get("option"))
+    """True when the row IS an option position, not merely one that mentions
+    an option.
+
+    An **exercise** is the case that matters: it is filed as ``asset_type
+    "Stock"`` and still carries the ``option`` sub-object describing the
+    contract it converted. Testing that key routed those rows into the option
+    pass, which then dropped them for having no expiry left, so Pelosi's
+    5,000 exercised VST shares appeared in neither list — six exercise rows
+    were lost this way. The free-text parser also attaches ``{"type":
+    "call"}`` to a hedge-fund "Capital call of $3,723.39", which is not an
+    option at all.
+
+    ``asset_type`` is the field the pipeline sets deliberately, so it decides.
+    """
+    return t.get("asset_type") == "Option"
 
 
 def _eligible(trades: list[dict]) -> list[dict]:
