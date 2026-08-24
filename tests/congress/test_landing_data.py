@@ -1063,3 +1063,80 @@ class TestExerciseRows(unittest.TestCase):
                "option": {"type": "call"}}
         out = ld.rolled_holdings([row], SNAP(), self.TODAY)
         self.assertEqual((out["stocks"], out["options"]), ([], []))
+
+
+class TestExerciseClosesTheContract(unittest.TestCase):
+    """An exercise both adds shares and closes the contract it consumed.
+
+    Until expiry passed, an exercised contract stayed listed, so one
+    exercised early counted twice — as the option and as the stock it became.
+    Four of Pelosi's exercises sit on tickers that also carry a live contract.
+    """
+
+    TODAY = "2026-08-24"
+
+    def ex(self, ticker="AMZN", strike=120.0, bought="12/30/25"):
+        return {"member": "Nancy Pelosi", "ticker": ticker, "type": "buy",
+                "asset": f"{ticker} Common Stock", "asset_type": "Stock",
+                "amount_lo": 100001, "amount_hi": 250000,
+                "tx_date": "2026-02-01", "filing_date": "2026-02-10",
+                "chamber": "house", "id": "e1",
+                "comment": (f"Exercised 20 call options purchased {bought} "
+                            f"(2,000 shares) at a strike price of ${strike:.0f}."),
+                "option": {"type": "call", "strike": strike}}
+
+    def test_exercise_removes_the_contract_it_names(self):
+        out = ld.rolled_holdings([OPT(), self.ex()], SNAP(), self.TODAY)
+        self.assertEqual(out["options"], [])
+        self.assertEqual([s["ticker"] for s in out["stocks"]], ["AMZN"])
+
+    def test_same_ticker_same_strike_different_purchase_survives(self):
+        # Pelosi's real case: a GOOGL $150 call bought 2025-12-30 is LIVE
+        # while a GOOGL $150 call bought 2025-01-14 was exercised. Closing by
+        # ticker and strike deleted the live one.
+        out = ld.rolled_holdings(
+            [OPT(ticker="GOOGL", strike=150.0, tx="2025-12-30"),
+             self.ex(ticker="GOOGL", strike=150.0, bought="1/14/25")],
+            SNAP(), self.TODAY)
+        self.assertEqual([o["ticker"] for o in out["options"]], ["GOOGL"])
+
+    def test_a_different_ticker_survives(self):
+        out = ld.rolled_holdings([OPT(ticker="AMZN"), self.ex(ticker="GOOGL")],
+                                 SNAP(), self.TODAY)
+        self.assertEqual([o["ticker"] for o in out["options"]], ["AMZN"])
+
+    def test_two_purchase_dates_both_close(self):
+        out = ld.rolled_holdings(
+            [OPT(tx="2024-02-12"), OPT(tx="2024-02-21", strike=200.0),
+             self.ex(bought="2/12/24 & 2/21/24")], SNAP(), self.TODAY)
+        self.assertEqual(out["options"], [])
+
+    def test_an_unparseable_exercise_closes_nothing(self):
+        bad = dict(self.ex(), comment="Exercised some options.")
+        out = ld.rolled_holdings([OPT(), bad], SNAP(), self.TODAY)
+        self.assertEqual(len(out["options"]), 1)
+
+    def test_a_plain_stock_buy_closes_nothing(self):
+        buy = dict(self.ex(), comment="Bought shares.", option=None)
+        out = ld.rolled_holdings([OPT(), buy], SNAP(), self.TODAY)
+        self.assertEqual(len(out["options"]), 1)
+
+
+class TestContractShares(unittest.TestCase):
+    """One contract is 100 shares — stated, never used to value a position."""
+
+    def payload(self, trades):
+        return ld.member_payload(
+            "Nancy Pelosi", trades,
+            {"Nancy Pelosi": SNAP()}, today_iso="2026-08-24")
+
+    def test_shares_are_contracts_times_one_hundred(self):
+        o = self.payload([OPT(contracts=20)])["holdings"]["options"][0]
+        self.assertEqual((o["contracts"], o["shares"]), (20, 2000))
+
+    def test_no_contract_count_means_no_share_figure(self):
+        t = OPT()
+        t["option"].pop("contracts")
+        o = self.payload([t])["holdings"]["options"][0]
+        self.assertIsNone(o["contracts"])
+        self.assertIsNone(o["shares"])
