@@ -532,6 +532,8 @@
         "type": "call",
         "strike": 50.0,
         "expiration": "2027-03-19",
+        "contracts": 200,
+        "shares": 20000,
         "estLabel": "$3.0M"
       },
       {
@@ -539,6 +541,8 @@
         "type": "call",
         "strike": 50.0,
         "expiration": "2027-03-19",
+        "contracts": 200,
+        "shares": 20000,
         "estLabel": "$750K"
       },
       {
@@ -546,6 +550,8 @@
         "type": "call",
         "strike": 100.0,
         "expiration": "2027-01-15",
+        "contracts": 20,
+        "shares": 2000,
         "estLabel": "$375K"
       },
       {
@@ -553,6 +559,8 @@
         "type": "call",
         "strike": 150.0,
         "expiration": "2027-01-15",
+        "contracts": 20,
+        "shares": 2000,
         "estLabel": "$375K"
       },
       {
@@ -560,6 +568,8 @@
         "type": "call",
         "strike": 100.0,
         "expiration": "2027-01-15",
+        "contracts": 20,
+        "shares": 2000,
         "estLabel": "$175K"
       },
       {
@@ -567,6 +577,8 @@
         "type": "call",
         "strike": 120.0,
         "expiration": "2027-01-15",
+        "contracts": 20,
+        "shares": 2000,
         "estLabel": "$175K"
       }
     ]

@@ -40,6 +40,7 @@ from datetime import date
 from pathlib import Path
 
 from . import sectors
+from .normalize import _norm_short_date
 
 FEED_SIZE = 5
 STATUTORY_MAX_DAYS = 45
@@ -109,6 +110,47 @@ def _holding_mid(h: dict) -> float:
     if lo is None:
         return 0.0
     return (lo + (hi if hi is not None else lo)) / 2
+
+
+# One listed US equity option contract carries 100 shares. Used only to state
+# the share equivalence of a disclosed contract count — never to value a
+# position, which would need an option price we do not have.
+SHARES_PER_CONTRACT = 100
+
+
+def _is_exercise(t: dict) -> bool:
+    """True for a row that converted an option into shares.
+
+    An exercise is filed as a stock acquisition that still names the contract
+    it consumed, so it both ADDS shares and CLOSES an option. The wording is
+    the only marker the filings give ("Exercised 50 call options purchased
+    1/14/25 (5,000 shares)…"), so match the verb and require the option
+    sub-object — text alone would catch a stock row that merely discusses one.
+    """
+    return (t.get("asset_type") == "Stock" and bool(t.get("option"))
+            and "exercis" in (t.get("comment") or "").lower())
+
+
+_EXERCISED_ON = re.compile(r"purchased\s+([\d/&\s]+?)\s*\(", re.I)
+_SHORT_DATE = re.compile(r"\d{1,2}/\d{1,2}/\d{2,4}")
+
+
+def _exercised_purchase_dates(comment: str | None) -> set[str]:
+    """ISO purchase dates an exercise names, e.g. "purchased 2/12/24 & 2/21/24".
+
+    These identify WHICH contract was exercised. Ticker and strike do not: a
+    member can hold two calls on one ticker at one strike with different
+    expiries, and closing by strike deletes the live one.
+    """
+    m = _EXERCISED_ON.search(comment or "")
+    if not m:
+        return set()
+    out = set()
+    for raw in _SHORT_DATE.findall(m.group(1)):
+        iso = _norm_short_date(raw)
+        if iso:
+            out.add(iso)
+    return out
 
 
 def _is_option_trade(t: dict) -> bool:
@@ -411,18 +453,31 @@ def rolled_holdings(member_trades: list[dict], h: dict, today_iso: str) -> dict:
     stocks.sort(key=lambda x: -x["est"])
 
     opt_map: dict = {}
-    def _add_opt(ticker, opt, est):
+    def _add_opt(ticker, opt, est, src=None):
         exp = (opt or {}).get("expiration")
         if not ticker or not exp or exp < today_iso:
             return
         key = (ticker, (opt.get("type") or ""), (opt.get("strike") or ""), exp)
         prev = opt_map.get(key)
+        # `contracts` comes from the filing's free text ("Purchased 20 call
+        # options…"), so most rows do not carry it. It stays None rather than
+        # defaulting to a number, because one contract is 100 shares and a
+        # guessed count would print a share figure nobody disclosed.
+        contracts = (opt or {}).get("contracts")
         if prev is None:
             opt_map[key] = {"ticker": ticker, "type": opt.get("type"),
                             "strike": opt.get("strike"), "expiration": exp,
-                            "est": est or 0.0}
+                            "est": est or 0.0, "contracts": contracts,
+                            # Purchase dates that produced this contract. An
+                            # exercise names the date it bought, which is the
+                            # only way to tell two same-strike contracts apart.
+                            "_bought": {src} if src else set()}
         else:
             prev["est"] = max(prev["est"], est or 0.0)
+            if prev.get("contracts") is None:
+                prev["contracts"] = contracts
+            if src:
+                prev["_bought"].add(src)
     for s in stocks_in:
         if s.get("asset_type") == "Option":
             _add_opt(s.get("ticker"), s.get("option") or {}, _holding_mid(s))
@@ -436,7 +491,8 @@ def rolled_holdings(member_trades: list[dict], h: dict, today_iso: str) -> dict:
     # the snapshot and the trades collapses to one entry.
     for t in opt_trades:
         if t.get("type") == "buy":
-            _add_opt(t.get("ticker"), t.get("option") or {}, _mid(t))
+            _add_opt(t.get("ticker"), t.get("option") or {}, _mid(t),
+                     t.get("tx_date"))
     # A disclosed sale closes the position. Sales are rarer than purchases in
     # this record, so an option closed without one stays listed until it
     # expires — the estimate errs toward showing a position, never toward
@@ -449,6 +505,29 @@ def rolled_holdings(member_trades: list[dict], h: dict, today_iso: str) -> dict:
                 opt_map.pop(
                     (t["ticker"], o.get("type") or "", o.get("strike") or "",
                      exp), None)
+    # An EXERCISE closes it too, and the shares it produced are already
+    # counted in `stocks` above. Until expiry passed, an exercised contract
+    # stayed listed, so one exercised early counted twice — as the option and
+    # as the stock it became.
+    #
+    # Match on the PURCHASE DATE the exercise names ("Exercised 50 call
+    # options purchased 1/14/25"), never on ticker and strike: Pelosi holds a
+    # GOOGL $150 call bought 2025-12-30 AND exercised a GOOGL $150 call bought
+    # 2025-01-14. Same ticker, same strike, different contract — closing by
+    # strike deleted the live one. An exercise naming no parseable date closes
+    # nothing, which leaves a stale contract until it expires; that is the
+    # older, safer error.
+    for t in member_trades:
+        if not _is_exercise(t):
+            continue
+        bought = _exercised_purchase_dates(t.get("comment"))
+        if not bought:
+            continue
+        for key, entry in list(opt_map.items()):
+            if key[0] == t.get("ticker") and entry["_bought"] & bought:
+                opt_map.pop(key, None)
+    for entry in opt_map.values():
+        entry.pop("_bought", None)
     options = sorted(opt_map.values(), key=lambda x: -x["est"])
 
     return {"snap": snap, "filings": len(filings), "stocks": stocks,
@@ -526,11 +605,17 @@ def member_payload(name: str, trades: list[dict], holdings: dict,
             ),
             "isNew": x["isNew"],
         } for x in held[:MEMBER_HOLDINGS_CAP]],
+        # `shares` is contracts x 100 — the standard US equity contract size,
+        # and a fact of the disclosed position rather than a valuation. It is
+        # absent whenever the filing's text did not state a contract count.
         "options": [{
             "ticker": o["ticker"],
             "type": o["type"],
             "strike": o["strike"],
             "expiration": o["expiration"],
+            "contracts": o.get("contracts"),
+            "shares": (o["contracts"] * SHARES_PER_CONTRACT
+                       if o.get("contracts") else None),
             "estLabel": money(o["est"]),
         } for o in rf["options"][:MEMBER_HOLDINGS_CAP]],
     }

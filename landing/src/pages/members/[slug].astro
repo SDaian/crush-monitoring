@@ -398,11 +398,21 @@ const schema = [
                         {o.type ?? "option"}
                         {o.strike != null ? ` $${o.strike}` : ""}
                         {o.expiration ? ` · exp ${fmtMonth(o.expiration)}` : ""}
+                        {o.contracts
+                          ? ` · ${o.contracts} contracts = ${o.shares.toLocaleString("en-US")} shares`
+                          : ""}
                       </span>
                       <span class="oval">~{o.estLabel}</span>
                     </div>
                   ))}
                 </div>
+                <p class="fineprint mt-3">
+                  One contract carries 100 shares, so a contract count states
+                  the shares the position controls. The amount is the
+                  disclosed purchase bracket, not what the contracts are worth
+                  today. A contract count appears only where the filing stated
+                  one.
+                </p>
               </>
             )
           }
