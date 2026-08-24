@@ -1140,3 +1140,44 @@ class TestContractShares(unittest.TestCase):
         o = self.payload([t])["holdings"]["options"][0]
         self.assertIsNone(o["contracts"])
         self.assertIsNone(o["shares"])
+
+
+class TestOptionsInThePortfolioShare(unittest.TestCase):
+    """Stocks and options share ONE denominator.
+
+    Options were excluded from it, so a position worth millions of disclosed
+    bracket showed no share of the portfolio at all — Pelosi's six carry
+    $4.85M and read as 0%. Both `est` values are bracket midpoints, so the
+    sum is unit-consistent.
+    """
+
+    def payload(self, trades, snap=None):
+        return ld.member_payload(
+            "Nancy Pelosi", trades,
+            {"Nancy Pelosi": snap or SNAP()}, today_iso="2026-08-24")
+
+    def stock(self, lo, hi, ticker="MSFT"):
+        return T(member="Nancy Pelosi", ticker=ticker, lo=lo, hi=hi,
+                 tx="2026-02-01", filed="2026-02-10", id=f"s-{ticker}")
+
+    def test_an_option_gets_a_percentage(self):
+        h = self.payload([self.stock(1, 1_000_000),   # mid 500,000.5
+                          OPT(lo=1, hi=1_000_000)])["holdings"]
+        self.assertEqual(h["options"][0]["pctPortfolio"], 50.0)
+        self.assertEqual(h["stocks"][0]["pctPortfolio"], 50.0)
+
+    def test_the_option_is_in_the_denominator(self):
+        with_opt = self.payload([self.stock(1, 1_000_000),
+                                 OPT(lo=1, hi=1_000_000)])["holdings"]
+        without = self.payload([self.stock(1, 1_000_000)])["holdings"]
+        self.assertEqual(without["stocks"][0]["pctPortfolio"], 100.0)
+        self.assertLess(with_opt["stocks"][0]["pctPortfolio"], 100.0)
+
+    def test_counts_are_reported_separately(self):
+        h = self.payload([self.stock(1, 1000), OPT()])["holdings"]
+        self.assertEqual((h["positions"], h["optionsCount"]), (1, 1))
+
+    def test_options_only_still_produces_a_total(self):
+        h = self.payload([OPT()])["holdings"]
+        self.assertIsNotNone(h["totalLabel"])
+        self.assertEqual(h["options"][0]["pctPortfolio"], 100.0)
