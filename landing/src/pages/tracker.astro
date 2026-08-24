@@ -792,11 +792,14 @@ const schema = [
   }
 
   /* ── Tabs ─────────────────────────────────────────────────────── */
+  /* Hairline, not a 2px ink rule — see the note on .tktabs in
+     tickers/[slug].astro. The two surfaces share this pattern and must
+     stay in step. */
   .tracker .tabs {
     display: flex;
     flex-wrap: wrap;
     gap: 0;
-    border-bottom: 2px solid var(--color-ink);
+    border-bottom: 1px solid var(--color-rule);
     margin-bottom: 1.75rem;
   }
   .tracker .tab {
@@ -804,7 +807,7 @@ const schema = [
     background: none;
     border: 0;
     border-bottom: 3px solid transparent;
-    margin-bottom: -2px;
+    margin-bottom: -1px;
     padding: 0.85rem 1.15rem;
     font-family: var(--font-mono);
     font-size: 0.78rem;

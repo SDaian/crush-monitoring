@@ -378,8 +378,13 @@ shared Astro components in `src/components/`.
   `buy`/`sell`/`late` semantic colors, `min-width:0` cells that wrap rather than
   overflow, and real data behind every value.
 - **Live dot** — the one circle; pulses only to mean "live."
-- **Section tabs** — a mono, uppercase bar under a 2px ink rule, the active
-  tab marked by a stamp underline. Used on the tracker and on ticker pages to
+- **Section tabs** — a mono, uppercase bar over a **hairline rule**, the
+  active tab marked by a stamp underline. The rule is a hairline and not the
+  2px ink rule used for section headings: a full-width black line beside a
+  short red one wins the eye, so the active tab read as decoration and
+  readers missed that a second tab existed. The rule still earns its place —
+  it separates the tab row from the panel below, which is why it was demoted
+  rather than removed. Used on the tracker and on ticker pages to
   put a second view one click away instead of one scroll down; it belongs
   **directly under the headline**, or it lands below the fold and solves
   nothing. Three rules make it safe on a static, search-first site: **every
