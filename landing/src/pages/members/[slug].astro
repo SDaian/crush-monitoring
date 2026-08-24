@@ -91,8 +91,19 @@ const heldPcts: number[] = (m.holdings?.stocks ?? []).map(
 );
 const maxPct = Math.max(...heldPcts, 1);
 // What the 16 listed rows leave out. pctPortfolio is a share of the FULL
-// estimated portfolio, so the shortfall is the untracked tail.
-const restPct = Math.max(0, 100 - heldPcts.reduce((a, b) => a + b, 0));
+// estimated portfolio, so the shortfall is the untracked tail — MINUS the
+// options, which are their own denominator members and are each listed
+// below. Without that subtraction the tail row absorbed them silently:
+// Pelosi's read "9 smaller positions not listed · 4.3%" when 3.4 of those
+// points were six named contracts and the real stock tail was 0.9%.
+const optionPcts: number[] = (m.holdings?.options ?? []).map(
+  (o: any) => o.pctPortfolio ?? 0,
+);
+const optionsPct = optionPcts.reduce((a, b) => a + b, 0);
+const restPct = Math.max(
+  0,
+  100 - heldPcts.reduce((a, b) => a + b, 0) - optionsPct,
+);
 const untracked = Math.max(0, (m.holdings?.positions ?? 0) - heldPcts.length);
 // Clamped at both ends: a sliver still reads as a bar, and the untracked
 // tail (which can far exceed the largest listed holding) stops at full width
@@ -380,6 +391,23 @@ const schema = [
                 </span>
                 <span class="hval">—</span>
                 <span class="hpct">{Number(restPct.toFixed(1))}%</span>
+              </div>
+            )}
+            {/* Options are part of this total, so name their share here
+                rather than letting the tail above swallow it. Each contract
+                is itemised in the block below. */}
+            {optionsPct > 0 && (
+              <div class="hrow is-rest">
+                <span class="htick">···</span>
+                <span class="hname">
+                  {m.holdings.optionsCount} option{m.holdings.optionsCount === 1 ? "" : "s"},
+                  {" "}listed below
+                </span>
+                <span class="hbar" aria-hidden="true">
+                  <i style={`width:${barWidth(optionsPct)}%`} />
+                </span>
+                <span class="hval">—</span>
+                <span class="hpct">{Number(optionsPct.toFixed(1))}%</span>
               </div>
             )}
           </div>
