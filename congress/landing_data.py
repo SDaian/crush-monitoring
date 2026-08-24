@@ -453,7 +453,7 @@ def rolled_holdings(member_trades: list[dict], h: dict, today_iso: str) -> dict:
     stocks.sort(key=lambda x: -x["est"])
 
     opt_map: dict = {}
-    def _add_opt(ticker, opt, est, src=None):
+    def _add_opt(ticker, opt, est, src=None, asset=None):
         exp = (opt or {}).get("expiration")
         if not ticker or not exp or exp < today_iso:
             return
@@ -467,7 +467,8 @@ def rolled_holdings(member_trades: list[dict], h: dict, today_iso: str) -> dict:
         if prev is None:
             opt_map[key] = {"ticker": ticker, "type": opt.get("type"),
                             "strike": opt.get("strike"), "expiration": exp,
-                            "est": est or 0.0, "contracts": contracts,
+                            "asset": asset or "", "est": est or 0.0,
+                            "contracts": contracts,
                             # Purchase dates that produced this contract. An
                             # exercise names the date it bought, which is the
                             # only way to tell two same-strike contracts apart.
@@ -480,7 +481,8 @@ def rolled_holdings(member_trades: list[dict], h: dict, today_iso: str) -> dict:
                 prev["_bought"].add(src)
     for s in stocks_in:
         if s.get("asset_type") == "Option":
-            _add_opt(s.get("ticker"), s.get("option") or {}, _holding_mid(s))
+            _add_opt(s.get("ticker"), s.get("option") or {},
+                     _holding_mid(s), asset=s.get("asset"))
     # EVERY disclosed option buy, not only those dated after the snapshot. An
     # option bought in the days BEFORE the snapshot belongs to the annual
     # report, so when that report's parser misses it the position exists in no
@@ -492,7 +494,7 @@ def rolled_holdings(member_trades: list[dict], h: dict, today_iso: str) -> dict:
     for t in opt_trades:
         if t.get("type") == "buy":
             _add_opt(t.get("ticker"), t.get("option") or {}, _mid(t),
-                     t.get("tx_date"))
+                     t.get("tx_date"), asset=t.get("asset"))
     # A disclosed sale closes the position. Sales are rarer than purchases in
     # this record, so an option closed without one stays listed until it
     # expires — the estimate errs toward showing a position, never toward
@@ -594,6 +596,15 @@ def member_payload(name: str, trades: list[dict], holdings: dict,
     # deep-in-the-money contract is understated here, exactly as a stock
     # bought years ago is.
     total_est = sum(x["est"] for x in held) + sum(o["est"] for o in rf["options"])
+    # Merge for display. Options keep their own detail block below, so this
+    # list needs only what a bar row draws.
+    ranked = sorted(
+        [dict(x, kind="stock") for x in held]
+        + [{"kind": "option", "ticker": o["ticker"],
+            "asset": o.get("asset") or "", "est": o["est"]}
+           for o in rf["options"]],
+        key=lambda x: -x["est"],
+    )
     holdings_block = {
         "available": bool(h.get("available")),
         "filingDate": h.get("filing_date"),
@@ -609,15 +620,26 @@ def member_payload(name: str, trades: list[dict], holdings: dict,
         # `optionsCount`, since both describe the whole estimated portfolio.
         "positions": len(held),
         "optionsCount": len(rf["options"]),
-        "stocks": [{
+        # Everything the ranked list could show, so the page's tail row counts
+        # what it actually left out.
+        "positionsTotal": len(ranked),
+        # ONE ranked list: stocks and options together, biggest first. They
+        # share a denominator, so a $3.0M call is the same size position as
+        # $3.0M of stock and belongs on the same rung — keeping options in a
+        # separate block below meant an INTC call worth more than her Netflix
+        # holding never appeared beside it. `kind` marks each row so an option
+        # can never read as share ownership; the block below still itemises
+        # every contract's strike and expiry.
+        "ranked": [{
+            "kind": x["kind"],
             "ticker": x["ticker"],
             "asset": x["asset"],
             "estLabel": money(x["est"]),
             "pctPortfolio": (
                 round(100 * x["est"] / total_est, 1) if total_est else None
             ),
-            "isNew": x["isNew"],
-        } for x in held[:MEMBER_HOLDINGS_CAP]],
+            "isNew": x.get("isNew", False),
+        } for x in ranked[:MEMBER_HOLDINGS_CAP]],
         # `shares` is contracts x 100 — the standard US equity contract size,
         # and a fact of the disclosed position rather than a valuation. It is
         # absent whenever the filing's text did not state a contract count.
