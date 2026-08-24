@@ -419,11 +419,14 @@ const schema = [
       }
 
 
-      // Display order for the featured universe; any ticker present in the data
-      // but missing here is appended alphabetically by aiTickers().
-      const AI_ORDER = ["NVDA","AMD","INTC","AVGO","MU","TSM","ASML","SNDK","MSFT",
-                        "GOOGL","AMZN","META","TSLA","VRT","SMCI","DELL","YPF",
-                        "MELI","NU","SPCX"];
+      // Display order only — NOT the membership test. Membership comes from
+      // the data's own `featured` flag (see aiTickers). Anything featured and
+      // missing here still renders, appended alphabetically.
+      const AI_ORDER = ["NVDA","AMD","INTC","AVGO","MU","TSM","ASML","AMAT",
+                        "LRCX","KLAC","SNDK","MSFT","GOOGL","AMZN","META",
+                        "TSLA","VRT","SMCI","DELL","YPF","MELI","NU","SPCX",
+                        "MP","UUUU","REMX","CC","ROK","EMR","V","PYPL","SNOW",
+                        "NOW"];
 
       function fmtPrice(n){ return n == null ? "—" : "$" + Number(n).toFixed(2); }
       function fmtVol(n){
@@ -443,12 +446,17 @@ const schema = [
         return r < 30 ? "oversold" : r > 70 ? "overbought" : "neutral";
       }
       function aiTickers(){ // the FEATURED watchlist, in its order
-        // ai-indicators.json also carries a reading for every ticker page
-        // (~90 symbols) so those pages can show one. This tab is the featured
-        // watchlist, so it lists AI_ORDER and nothing else — otherwise one
-        // data change would silently turn 23 cards into ninety.
-        const have = new Set(Object.keys(AI));
-        return AI_ORDER.filter(t => have.has(t));
+        // ai-indicators.json carries a reading for EVERY ticker page (~107
+        // symbols) so those pages can show one, and flags the featured ones.
+        // Membership is that flag, never a list kept here: this file's array
+        // drifted to 20 entries while the watchlist grew to 33, so twelve
+        // featured stocks had a reading computed and paid for every morning
+        // and never got a card. Filtering on `featured` also keeps the tab
+        // short — without it one data change turns 33 cards into a hundred.
+        const featured = Object.keys(AI).filter(t => AI[t] && AI[t].featured);
+        const set = new Set(featured);
+        return AI_ORDER.filter(t => set.has(t))
+          .concat(featured.filter(t => !AI_ORDER.includes(t)).sort());
       }
       function sigTags(sigs){
         return (sigs || []).map(s =>
