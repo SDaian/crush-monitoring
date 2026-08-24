@@ -661,17 +661,21 @@ const schema = [
   }
 
   /* --- Tabs (DESIGN.md §8) -------------------------------------------- */
+  /* Hairline, not a 2px ink rule. The rule still separates the tab row
+     from the panel, but it no longer competes with the stamp underline:
+     a full-width black line beside a short red one wins the eye, so the
+     active tab read as decoration and readers missed the second tab. */
   .tktabs {
     display: flex;
     flex-wrap: wrap;
-    border-bottom: 2px solid var(--color-ink);
+    border-bottom: 1px solid var(--color-rule);
   }
   .tktab {
     appearance: none;
     background: none;
     border: 0;
     border-bottom: 3px solid transparent;
-    margin-bottom: -2px;
+    margin-bottom: -1px;
     padding: 0.85rem 1.15rem;
     font-family: var(--font-mono);
     font-size: 0.78rem;
