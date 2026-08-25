@@ -504,6 +504,21 @@ sites. Full details in `congress/README.md`. Conventions:
   a manual send + a delayed scheduled run don't double-post), closes the prior
   day's report issue, and tracks the last issue number + ratings in
   `congress/report_state.json` (generated; do not hand-edit).
+  - **"New disclosure" means not-yet-reported, never filed-recently.** The
+    section used a 3-day **filing-date** window, which silently dropped
+    anything ingested late — and ingestion lags routinely (the Clerk
+    publishes on its own schedule; a scanned document takes several runs to
+    parse). Pelosi's 21-Aug filing (BE + INTC, $3M–$12M of brackets) reached
+    the data on the 25th: too new to be ingested on the 23rd, too old to
+    clear the 22-Aug cutoff on the 25th, so it would never have been
+    reported. `build_report` now takes `reported_ids` and sends anything
+    inside a **45-day lookback** it has not already sent, recording the ids
+    in `report_state.json` (pruned to the lookback, so the file cannot grow
+    without bound). Only a real delivery records them — a quiet day writes
+    nothing, so a pending filing stays pending. With no memory yet,
+    `seed_reported_ids` marks everything older than **7 days** as seen: never
+    drip-feed old disclosures as news (the social `--seed` rule), while still
+    recovering a filing ingested a few days late.
   - **Quiet days do not send** (`daily_report.whats_new`). The market closes at
     the weekend and on holidays, so a Sunday email repeats Saturday's word for
     word. When the latest daily close has not advanced **and** no new filing
