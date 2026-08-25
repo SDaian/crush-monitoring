@@ -618,22 +618,37 @@ def member_payload(name: str, trades: list[dict], holdings: dict,
     # deep-in-the-money contract is understated here, exactly as a stock
     # bought years ago is.
     total_est = sum(x["est"] for x in held) + sum(o["est"] for o in rf["options"])
-    # Merge for display. Options keep their own detail block below, so this
-    # list needs only what a bar row draws.
-    ranked = sorted(
-        [dict(x, kind="stock") for x in held]
-        + [{"kind": "option", "ticker": o["ticker"],
-            "asset": o.get("asset") or "", "est": o["est"],
-            # The contract's own terms, so a row reads as the position it is.
-            # Without them a member holding both the stock and a call on one
-            # ticker shows two rows with the same name and no way to tell
-            # them apart (Pelosi holds BE shares AND BE $100 calls).
-            "optType": o.get("type"), "strike": o.get("strike"),
-            "expiration": o.get("expiration"),
-            "contracts": o.get("contracts")}
-           for o in rf["options"]],
-        key=lambda x: -x["est"],
-    )
+    # ONE row per ticker. Stocks and options merge into a single position,
+    # because two rows naming one company read as a duplicate however they
+    # are labelled — Pelosi holds BE shares AND BE $100 calls, and the list
+    # showed "BE" twice. Summing is consistent with the shared denominator
+    # they already feed: both `est` values are disclosure-bracket midpoints.
+    #
+    # A row that contains options says so (`hasOptions`), because a total of
+    # $7.5M must never read as $7.5M of shares. A ticker with ONLY options
+    # keeps the contract's terms as its name; the detail block below itemises
+    # every strike, expiry and contract count either way.
+    merged: dict = {}
+    for x in held:
+        merged[x["ticker"]] = {
+            "kind": "stock", "ticker": x["ticker"], "asset": x["asset"],
+            "est": x["est"], "isNew": x["isNew"], "hasOptions": False,
+        }
+    for o in rf["options"]:
+        e = merged.get(o["ticker"])
+        if e is None:
+            merged[o["ticker"]] = {
+                "kind": "option", "ticker": o["ticker"],
+                "asset": o.get("asset") or "", "est": o["est"],
+                "isNew": False, "hasOptions": True,
+                "optType": o.get("type"), "strike": o.get("strike"),
+                "expiration": o.get("expiration"),
+                "contracts": o.get("contracts"),
+            }
+        else:
+            e["est"] += o["est"]
+            e["hasOptions"] = True
+    ranked = sorted(merged.values(), key=lambda x: -x["est"])
     holdings_block = {
         "available": bool(h.get("available")),
         "filingDate": h.get("filing_date"),
@@ -649,8 +664,8 @@ def member_payload(name: str, trades: list[dict], holdings: dict,
         # `optionsCount`, since both describe the whole estimated portfolio.
         "positions": len(held),
         "optionsCount": len(rf["options"]),
-        # Everything the ranked list could show, so the page's tail row counts
-        # what it actually left out.
+        # Everything the ranked list could show — merged rows, so a ticker
+        # held as both stock and options counts once, exactly as it is drawn.
         "positionsTotal": len(ranked),
         # ONE ranked list: stocks and options together, biggest first. They
         # share a denominator, so a $3.0M call is the same size position as
@@ -668,6 +683,7 @@ def member_payload(name: str, trades: list[dict], holdings: dict,
                 round(100 * x["est"] / total_est, 1) if total_est else None
             ),
             "isNew": x.get("isNew", False),
+            "hasOptions": x.get("hasOptions", False),
             "optType": x.get("optType"),
             "strike": x.get("strike"),
             "expiration": x.get("expiration"),

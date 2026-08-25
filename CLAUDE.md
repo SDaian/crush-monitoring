@@ -752,10 +752,13 @@ Conventions:
   Stocks and options rank in **one list** (`holdings.ranked`, capped at
   `MEMBER_HOLDINGS_CAP`), because a $3.0M call is the same size position as
   $3.0M of stock — Pelosi's INTC call belongs beside her Netflix and Amex
-  holdings, not in a footnote. Each row carries `kind`, and an option row
-  **names its contract** ("$100 call · exp Jun 2027") rather than the company:
-  a member can hold the stock AND a call on one ticker, and two rows reading
-  "Bloom Energy" tell them apart by nothing. The detail block below still
+  holdings, not in a footnote. **One row per ticker**: a member holding both
+  the stock and a call on one symbol gets ONE position, because two rows
+  naming one company read as a duplicate however they are labelled (Pelosi's
+  page listed "BE" twice). Summing is consistent with the shared denominator
+  they already feed. A merged row is flagged `hasOptions` and badged, because
+  $7.5M must never read as $7.5M of shares; a ticker held ONLY as contracts
+  **names the contract** ("$100 call · exp Jun 2027") instead of the company. The detail block below still
   itemises every strike, expiry and contract count. **Two purchases of the
   same contract are two lots**: the dedup key collapses them, so `_add_opt`
   SUMS a purchase dated after the snapshot and takes `max` otherwise — the
