@@ -9,25 +9,21 @@
   },
   "indexable": true,
   "technical": {
-    "asOf": "2026-08-21",
-    "price": 209.15,
-    "chg1d": 1.81,
-    "chg1w": 6.59,
-    "chg1m": 33.28,
-    "rsi14": 66.1,
-    "sma50": 174.59,
-    "sma200": 200.82,
-    "vsSma50": 19.8,
-    "vsSma200": 4.1,
-    "relVol": 0.66,
+    "asOf": "2026-08-24",
+    "price": 209.06,
+    "chg1d": -0.05,
+    "chg1w": 9.47,
+    "chg1m": 27.74,
+    "rsi14": 66.0,
+    "sma50": 175.45,
+    "sma200": 200.59,
+    "vsSma50": 19.2,
+    "vsSma200": 4.2,
+    "relVol": 0.68,
     "high52w": 266.23,
     "low52w": 150.12,
     "rangePos": 51.0,
     "series": [
-      {
-        "d": "2025-08-29",
-        "c": 256.25
-      },
       {
         "d": "2025-09-05",
         "c": 250.76
@@ -230,7 +226,11 @@
       },
       {
         "d": "2026-08-21",
-        "c": 209.15
+        "c": 209.17
+      },
+      {
+        "d": "2026-08-24",
+        "c": 209.06
       }
     ],
     "signals": [],
@@ -244,17 +244,17 @@
     }
   },
   "summary": {
-    "trades": 51,
+    "trades": 52,
     "members": 19,
     "buys": 24,
-    "sells": 27,
+    "sells": 28,
     "other": 0,
     "firstTx": "2024-09-26",
     "lastTx": "2026-06-02",
-    "lastFiling": "2026-07-21",
+    "lastFiling": "2026-08-24",
     "estBuyLabel": "$290K",
-    "estSellLabel": "$363K",
-    "pctLate": 20
+    "estSellLabel": "$371K",
+    "pctLate": 21
   },
   "topMembers": [
     {
@@ -302,6 +302,17 @@
       "hasPage": false
     },
     {
+      "name": "John Boozman",
+      "slug": "john-boozman",
+      "party": "R",
+      "chamber": "Senate",
+      "trades": 4,
+      "buys": 1,
+      "sells": 3,
+      "estLabel": "$32K",
+      "hasPage": false
+    },
+    {
       "name": "Jefferson Shreve",
       "slug": "jefferson-shreve",
       "party": "R",
@@ -322,17 +333,6 @@
       "sells": 2,
       "estLabel": "$24K",
       "hasPage": true
-    },
-    {
-      "name": "John Boozman",
-      "slug": "john-boozman",
-      "party": "R",
-      "chamber": "Senate",
-      "trades": 3,
-      "buys": 1,
-      "sells": 2,
-      "estLabel": "$24K",
-      "hasPage": false
     },
     {
       "name": "Maria Elvira Salazar",
@@ -533,6 +533,18 @@
       "side": "SELL",
       "amountBucket": "$1K – $15K",
       "txDate": "2025-11-13",
+      "filedDate": "2026-08-24",
+      "daysLate": 239,
+      "sourceUrl": "https://efdsearch.senate.gov/search/view/ptr/51455bcd-4966-4e77-b481-09897ada81ae/"
+    },
+    {
+      "member": "John Boozman",
+      "memberSlug": "john-boozman",
+      "hasPage": false,
+      "party": "R",
+      "side": "SELL",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2025-11-13",
       "filedDate": "2025-12-08",
       "daysLate": 0,
       "sourceUrl": "https://efdsearch.senate.gov/search/view/ptr/3a779539-8451-49d2-8419-d3eb72c7922a/"
@@ -656,18 +668,6 @@
       "filedDate": "2025-08-13",
       "daysLate": 12,
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20030891.pdf"
-    },
-    {
-      "member": "David J. Taylor",
-      "memberSlug": "david-j-taylor",
-      "hasPage": false,
-      "party": "R",
-      "side": "BUY",
-      "amountBucket": "$1K – $15K",
-      "txDate": "2025-06-11",
-      "filedDate": "2025-06-26",
-      "daysLate": 0,
-      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20030567.pdf"
     }
   ],
   "tradesShown": 25

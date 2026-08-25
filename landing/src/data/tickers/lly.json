@@ -9,25 +9,21 @@
   },
   "indexable": true,
   "technical": {
-    "asOf": "2026-08-21",
-    "price": 1254.77,
-    "chg1d": 0.83,
-    "chg1w": 6.32,
-    "chg1m": 5.81,
-    "rsi14": 59.4,
-    "sma50": 1179.57,
-    "sma200": 1052.98,
-    "vsSma50": 6.4,
-    "vsSma200": 19.2,
-    "relVol": 0.66,
+    "asOf": "2026-08-24",
+    "price": 1246.93,
+    "chg1d": -0.67,
+    "chg1w": 5.39,
+    "chg1m": 4.26,
+    "rsi14": 57.8,
+    "sma50": 1181.3,
+    "sma200": 1054.68,
+    "vsSma50": 5.6,
+    "vsSma200": 18.2,
+    "relVol": 0.58,
     "high52w": 1280.34,
     "low52w": 695.33,
-    "rangePos": 96.0,
+    "rangePos": 94.0,
     "series": [
-      {
-        "d": "2025-08-29",
-        "c": 732.58
-      },
       {
         "d": "2025-09-05",
         "c": 727.21
@@ -230,7 +226,11 @@
       },
       {
         "d": "2026-08-21",
-        "c": 1254.77
+        "c": 1255.4
+      },
+      {
+        "d": "2026-08-24",
+        "c": 1246.93
       }
     ],
     "signals": [],
@@ -244,17 +244,17 @@
     }
   },
   "summary": {
-    "trades": 67,
+    "trades": 68,
     "members": 22,
     "buys": 26,
-    "sells": 41,
+    "sells": 42,
     "other": 0,
     "firstTx": "2024-10-29",
     "lastTx": "2026-07-10",
-    "lastFiling": "2026-08-07",
+    "lastFiling": "2026-08-24",
     "estBuyLabel": "$483K",
-    "estSellLabel": "$636K",
-    "pctLate": 16
+    "estSellLabel": "$644K",
+    "pctLate": 18
   },
   "topMembers": [
     {
@@ -302,6 +302,17 @@
       "hasPage": false
     },
     {
+      "name": "John Boozman",
+      "slug": "john-boozman",
+      "party": "R",
+      "chamber": "Senate",
+      "trades": 4,
+      "buys": 2,
+      "sells": 2,
+      "estLabel": "$32K",
+      "hasPage": false
+    },
+    {
       "name": "Julie Johnson",
       "slug": "julie-johnson",
       "party": "D",
@@ -321,17 +332,6 @@
       "buys": 2,
       "sells": 2,
       "estLabel": "$32K",
-      "hasPage": false
-    },
-    {
-      "name": "John Boozman",
-      "slug": "john-boozman",
-      "party": "R",
-      "chamber": "Senate",
-      "trades": 3,
-      "buys": 2,
-      "sells": 1,
-      "estLabel": "$24K",
       "hasPage": false
     },
     {
@@ -605,6 +605,18 @@
       "side": "SELL",
       "amountBucket": "$1K – $15K",
       "txDate": "2025-11-21",
+      "filedDate": "2026-08-24",
+      "daysLate": 231,
+      "sourceUrl": "https://efdsearch.senate.gov/search/view/ptr/51455bcd-4966-4e77-b481-09897ada81ae/"
+    },
+    {
+      "member": "John Boozman",
+      "memberSlug": "john-boozman",
+      "hasPage": false,
+      "party": "R",
+      "side": "SELL",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2025-11-21",
       "filedDate": "2025-12-08",
       "daysLate": 0,
       "sourceUrl": "https://efdsearch.senate.gov/search/view/ptr/3a779539-8451-49d2-8419-d3eb72c7922a/"
@@ -656,18 +668,6 @@
       "filedDate": "2025-10-10",
       "daysLate": 0,
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20032211.pdf"
-    },
-    {
-      "member": "John Boozman",
-      "memberSlug": "john-boozman",
-      "hasPage": false,
-      "party": "R",
-      "side": "BUY",
-      "amountBucket": "$1K – $15K",
-      "txDate": "2025-08-22",
-      "filedDate": "2025-09-12",
-      "daysLate": 0,
-      "sourceUrl": "https://efdsearch.senate.gov/search/view/ptr/59bccfcc-9400-4d3d-917f-ce22a0fd2feb/"
     }
   ],
   "tradesShown": 25

@@ -152,6 +152,21 @@
       }
     },
     {
+      "slug": "lly",
+      "ticker": "LLY",
+      "company": "Eli Lilly and Company",
+      "trades": 68,
+      "members": 22,
+      "buys": 26,
+      "sells": 42,
+      "lastTx": "2026-07-10",
+      "indexable": true,
+      "industry": {
+        "key": "health",
+        "label": "Health care & pharma"
+      }
+    },
+    {
       "slug": "brk-b",
       "ticker": "BRK.B",
       "company": "Berkshire Hathaway Inc. New",
@@ -164,21 +179,6 @@
       "industry": {
         "key": "finance",
         "label": "Banks & finance"
-      }
-    },
-    {
-      "slug": "lly",
-      "ticker": "LLY",
-      "company": "Eli Lilly and Company",
-      "trades": 67,
-      "members": 22,
-      "buys": 26,
-      "sells": 41,
-      "lastTx": "2026-07-10",
-      "indexable": true,
-      "industry": {
-        "key": "health",
-        "label": "Health care & pharma"
       }
     },
     {
@@ -272,6 +272,21 @@
       }
     },
     {
+      "slug": "crm",
+      "ticker": "CRM",
+      "company": "Salesforce, Inc.",
+      "trades": 52,
+      "members": 19,
+      "buys": 24,
+      "sells": 28,
+      "lastTx": "2026-06-02",
+      "indexable": true,
+      "industry": {
+        "key": "tech",
+        "label": "Technology"
+      }
+    },
+    {
       "slug": "pltr",
       "ticker": "PLTR",
       "company": "Palantir Technologies Inc.",
@@ -314,21 +329,6 @@
       "industry": {
         "key": "telecom",
         "label": "Telecom & media"
-      }
-    },
-    {
-      "slug": "crm",
-      "ticker": "CRM",
-      "company": "Salesforce, Inc.",
-      "trades": 51,
-      "members": 19,
-      "buys": 24,
-      "sells": 27,
-      "lastTx": "2026-06-02",
-      "indexable": true,
-      "industry": {
-        "key": "tech",
-        "label": "Technology"
       }
     },
     {
@@ -452,6 +452,21 @@
       }
     },
     {
+      "slug": "intc",
+      "ticker": "INTC",
+      "company": "Intel Corporation",
+      "trades": 45,
+      "members": 18,
+      "buys": 28,
+      "sells": 17,
+      "lastTx": "2026-07-24",
+      "indexable": true,
+      "industry": {
+        "key": "tech",
+        "label": "Technology"
+      }
+    },
+    {
       "slug": "cvx",
       "ticker": "CVX",
       "company": "Chevron Corporation",
@@ -464,21 +479,6 @@
       "industry": {
         "key": "energy",
         "label": "Energy & utilities"
-      }
-    },
-    {
-      "slug": "intc",
-      "ticker": "INTC",
-      "company": "Intel Corporation",
-      "trades": 43,
-      "members": 18,
-      "buys": 26,
-      "sells": 17,
-      "lastTx": "2026-07-21",
-      "indexable": true,
-      "industry": {
-        "key": "tech",
-        "label": "Technology"
       }
     },
     {

@@ -2,6 +2,17 @@
   "_comment": "Generated from real official disclosures by congress/landing_data.py (daily Action). Do not edit by hand. 'filedDaysLate' counts days past the STOCK Act's 45-day statutory maximum; 0 = on time.",
   "disclosures": [
     {
+      "member": "N. Pelosi",
+      "memberSlug": "nancy-pelosi",
+      "chamber": "House",
+      "district": "CA-11",
+      "ticker": "BE",
+      "tickerSlug": null,
+      "side": "BUY",
+      "amountBucket": "$1M – $5M",
+      "filedDaysLate": 0
+    },
+    {
       "member": "T. Moore",
       "memberSlug": null,
       "chamber": "House",
@@ -44,17 +55,6 @@
       "side": "SELL",
       "amountBucket": "$100K – $250K",
       "filedDaysLate": 769
-    },
-    {
-      "member": "A. Armstrong",
-      "memberSlug": "alan-armstrong",
-      "chamber": "Senate",
-      "district": "OK",
-      "ticker": "AAPL",
-      "tickerSlug": "aapl",
-      "side": "BUY",
-      "amountBucket": "$250K – $500K",
-      "filedDaysLate": 71
     }
   ]
 }

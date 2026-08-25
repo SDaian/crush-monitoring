@@ -7,11 +7,11 @@
   "chamber": "House",
   "district": "CA-11",
   "summary": {
-    "trades": 31,
-    "distinctTickers": 13,
+    "trades": 38,
+    "distinctTickers": 14,
     "firstTx": "2024-12-20",
-    "lastTx": "2026-05-29",
-    "lastFiling": "2026-06-23",
+    "lastTx": "2026-07-28",
+    "lastFiling": "2026-08-21",
     "pctLate": 0,
     "worstLate": 0
   },
@@ -31,6 +31,13 @@
       "hasPage": true
     },
     {
+      "ticker": "BE",
+      "count": 4,
+      "asset": "Bloom Energy Corporation Class A Common Stock",
+      "slug": "be",
+      "hasPage": false
+    },
+    {
       "ticker": "GOOGL",
       "count": 4,
       "asset": "Alphabet Inc. - Class A Common Stock",
@@ -45,21 +52,91 @@
       "hasPage": true
     },
     {
-      "ticker": "TEM",
-      "count": 2,
-      "asset": "Tempus AI, Inc. - Class A Common $200? Stock",
-      "slug": "tem",
-      "hasPage": false
-    },
-    {
-      "ticker": "VST",
-      "count": 2,
-      "asset": "Vistra Corp. Common Stock",
-      "slug": "vst",
-      "hasPage": false
+      "ticker": "INTC",
+      "count": 3,
+      "asset": "Intel Corporation - Common Stock",
+      "slug": "intc",
+      "hasPage": true
     }
   ],
   "trades": [
+    {
+      "ticker": "BE",
+      "asset": "Bloom Energy Corporation Class A Common Stock",
+      "side": "BUY",
+      "amountBucket": "$500K – $1M",
+      "txDate": "2026-07-28",
+      "filedDate": "2026-08-21",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035143.pdf",
+      "bond": false
+    },
+    {
+      "ticker": "BE",
+      "asset": "Bloom Energy Corporation Class A Common Stock",
+      "side": "BUY",
+      "amountBucket": "$500K – $1M",
+      "txDate": "2026-07-28",
+      "filedDate": "2026-08-21",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035143.pdf",
+      "bond": false
+    },
+    {
+      "ticker": "—",
+      "asset": "REOF XXV, LLC",
+      "side": "BUY",
+      "amountBucket": "$500K – $1M",
+      "txDate": "2026-07-27",
+      "filedDate": "2026-08-21",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035143.pdf",
+      "bond": false
+    },
+    {
+      "ticker": "BE",
+      "asset": "Bloom Energy Corporation Class A Common Stock",
+      "side": "BUY",
+      "amountBucket": "$1M – $5M",
+      "txDate": "2026-07-24",
+      "filedDate": "2026-08-21",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035143.pdf",
+      "bond": false
+    },
+    {
+      "ticker": "BE",
+      "asset": "Bloom Energy Corporation Class A Common Stock",
+      "side": "BUY",
+      "amountBucket": "$1M – $5M",
+      "txDate": "2026-07-24",
+      "filedDate": "2026-08-21",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035143.pdf",
+      "bond": false
+    },
+    {
+      "ticker": "INTC",
+      "asset": "Intel Corporation - Common Stock",
+      "side": "BUY",
+      "amountBucket": "$250K – $500K",
+      "txDate": "2026-07-24",
+      "filedDate": "2026-08-21",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035143.pdf",
+      "bond": false
+    },
+    {
+      "ticker": "INTC",
+      "asset": "Intel Corporation - Common Stock",
+      "side": "BUY",
+      "amountBucket": "$500K – $1M",
+      "txDate": "2026-07-24",
+      "filedDate": "2026-08-21",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035143.pdf",
+      "bond": false
+    },
     {
       "ticker": "INTC",
       "asset": "Intel Corporation - Common Stock",
@@ -402,25 +479,25 @@
       "bond": false
     }
   ],
-  "tradesShown": 31,
+  "tradesShown": 38,
   "holdings": {
     "available": true,
     "filingDate": "2026-05-15",
     "reportYear": 2025,
     "snapDate": "2025-12-31",
-    "filingsSince": 2,
+    "filingsSince": 3,
     "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/financial-pdfs/2025/10075701.pdf",
-    "totalLabel": "$145.1M",
-    "positions": 25,
-    "optionsCount": 6,
-    "positionsTotal": 31,
+    "totalLabel": "$152.9M",
+    "positions": 27,
+    "optionsCount": 8,
+    "positionsTotal": 35,
     "ranked": [
       {
         "kind": "stock",
         "ticker": "GOOGL",
         "asset": "Alphabet Inc. - Class A",
         "estLabel": "$15.8M",
-        "pctPortfolio": 10.9,
+        "pctPortfolio": 10.3,
         "isNew": false
       },
       {
@@ -428,7 +505,7 @@
         "ticker": "AMZN",
         "asset": "Amazon.com, Inc.",
         "estLabel": "$15.8M",
-        "pctPortfolio": 10.9,
+        "pctPortfolio": 10.3,
         "isNew": false
       },
       {
@@ -436,7 +513,7 @@
         "ticker": "NVDA",
         "asset": "NVIDIA Corporation",
         "estLabel": "$15.4M",
-        "pctPortfolio": 10.6,
+        "pctPortfolio": 10.1,
         "isNew": false
       },
       {
@@ -444,7 +521,7 @@
         "ticker": "AAPL",
         "asset": "Apple Inc.",
         "estLabel": "$15.0M",
-        "pctPortfolio": 10.3,
+        "pctPortfolio": 9.8,
         "isNew": false
       },
       {
@@ -452,7 +529,7 @@
         "ticker": "AVGO",
         "asset": "Broadcom Inc.",
         "estLabel": "$15.0M",
-        "pctPortfolio": 10.3,
+        "pctPortfolio": 9.8,
         "isNew": false
       },
       {
@@ -460,7 +537,7 @@
         "ticker": "MSFT",
         "asset": "Microsoft Corporation",
         "estLabel": "$15.0M",
-        "pctPortfolio": 10.3,
+        "pctPortfolio": 9.8,
         "isNew": false
       },
       {
@@ -468,7 +545,7 @@
         "ticker": "CRM",
         "asset": "Salesforce.com Inc",
         "estLabel": "$15.0M",
-        "pctPortfolio": 10.3,
+        "pctPortfolio": 9.8,
         "isNew": false
       },
       {
@@ -476,15 +553,23 @@
         "ticker": "V",
         "asset": "Visa Inc.",
         "estLabel": "$15.0M",
-        "pctPortfolio": 10.3,
+        "pctPortfolio": 9.8,
         "isNew": false
+      },
+      {
+        "kind": "stock",
+        "ticker": "BE",
+        "asset": "Bloom Energy Corporation Class A Common Stock",
+        "estLabel": "$3.8M",
+        "pctPortfolio": 2.5,
+        "isNew": true
       },
       {
         "kind": "stock",
         "ticker": "AXP",
         "asset": "American Express Company",
         "estLabel": "$3.0M",
-        "pctPortfolio": 2.1,
+        "pctPortfolio": 2.0,
         "isNew": false
       },
       {
@@ -492,7 +577,7 @@
         "ticker": "CRWD",
         "asset": "CrowdStrike Holdings, Inc. - Class A",
         "estLabel": "$3.0M",
-        "pctPortfolio": 2.1,
+        "pctPortfolio": 2.0,
         "isNew": false
       },
       {
@@ -500,7 +585,7 @@
         "ticker": "NFLX",
         "asset": "Netflix, Inc.",
         "estLabel": "$3.0M",
-        "pctPortfolio": 2.1,
+        "pctPortfolio": 2.0,
         "isNew": false
       },
       {
@@ -508,7 +593,7 @@
         "ticker": "PANW",
         "asset": "Palo Alto Networks, Inc.",
         "estLabel": "$3.0M",
-        "pctPortfolio": 2.1,
+        "pctPortfolio": 2.0,
         "isNew": false
       },
       {
@@ -516,35 +601,37 @@
         "ticker": "AB",
         "asset": "AllianceBernstein Holding L.P. Units",
         "estLabel": "$3.0M",
-        "pctPortfolio": 2.1,
+        "pctPortfolio": 2.0,
         "isNew": true
+      },
+      {
+        "kind": "option",
+        "ticker": "BE",
+        "asset": "Bloom Energy Corporation Class A Common Stock",
+        "estLabel": "$3.0M",
+        "pctPortfolio": 2.0,
+        "isNew": false
       },
       {
         "kind": "option",
         "ticker": "INTC",
         "asset": "Intel Corporation - Common Stock",
         "estLabel": "$3.0M",
-        "pctPortfolio": 2.1,
-        "isNew": false
-      },
-      {
-        "kind": "stock",
-        "ticker": "CMCSA",
-        "asset": "Comcast Corporation - Class A",
-        "estLabel": "$750K",
-        "pctPortfolio": 0.5,
-        "isNew": false
-      },
-      {
-        "kind": "stock",
-        "ticker": "IBKR",
-        "asset": "Interactive Brokers Group, Inc.",
-        "estLabel": "$750K",
-        "pctPortfolio": 0.5,
+        "pctPortfolio": 2.0,
         "isNew": false
       }
     ],
     "options": [
+      {
+        "ticker": "BE",
+        "type": "call",
+        "strike": 100.0,
+        "expiration": "2027-06-17",
+        "contracts": 100,
+        "shares": 10000,
+        "estLabel": "$3.0M",
+        "pctPortfolio": 2.0
+      },
       {
         "ticker": "INTC",
         "type": "call",
@@ -553,7 +640,7 @@
         "contracts": 200,
         "shares": 20000,
         "estLabel": "$3.0M",
-        "pctPortfolio": 2.1
+        "pctPortfolio": 2.0
       },
       {
         "ticker": "UBER",
@@ -573,7 +660,17 @@
         "contracts": 20,
         "shares": 2000,
         "estLabel": "$375K",
-        "pctPortfolio": 0.3
+        "pctPortfolio": 0.2
+      },
+      {
+        "ticker": "INTC",
+        "type": "call",
+        "strike": 50.0,
+        "expiration": "2027-06-17",
+        "contracts": 50,
+        "shares": 5000,
+        "estLabel": "$375K",
+        "pctPortfolio": 0.2
       },
       {
         "ticker": "GOOGL",
@@ -583,7 +680,7 @@
         "contracts": 20,
         "shares": 2000,
         "estLabel": "$375K",
-        "pctPortfolio": 0.3
+        "pctPortfolio": 0.2
       },
       {
         "ticker": "NVDA",
@@ -610,14 +707,14 @@
   "performance": {
     "available": true,
     "benchLabel": "S&P 500",
-    "asofDate": "2026-08-21",
+    "asofDate": "2026-08-24",
     "kpis": {
-      "medianPct": 31.4,
-      "medianBenchPct": 19.8,
+      "medianPct": 11.9,
+      "medianBenchPct": 10.4,
       "beat": 4,
-      "beatOf": 6,
-      "priced": 6,
-      "pricedOf": 9
+      "beatOf": 7,
+      "priced": 7,
+      "pricedOf": 12
     },
     "series": {
       "dates": [
@@ -708,7 +805,8 @@
         "2026-07-31",
         "2026-08-07",
         "2026-08-14",
-        "2026-08-21"
+        "2026-08-21",
+        "2026-08-24"
       ],
       "member": [
         100.0,
@@ -794,11 +892,12 @@
         131.7,
         135.9,
         134.7,
-        130.8,
-        135.3,
-        145.8,
-        144.3,
-        137.7
+        126.4,
+        129.9,
+        140.7,
+        139.5,
+        132.0,
+        129.7
       ],
       "bench": [
         100.0,
@@ -884,59 +983,67 @@
         116.7,
         118.3,
         116.5,
-        115.8,
-        117.1,
-        121.2,
-        121.7,
-        120.0
+        113.5,
+        114.8,
+        118.8,
+        119.3,
+        117.7,
+        117.3
       ],
-      "buys": 6
+      "buys": 7
     },
     "rows": [
       {
+        "ticker": "INTC",
+        "txDate": "2026-07-24",
+        "pct": -5.5,
+        "benchPct": 3.3,
+        "excess": -8.8
+      },
+      {
         "ticker": "AMZN",
         "txDate": "2026-01-16",
-        "pct": 8.2,
-        "benchPct": 10.7,
-        "excess": -2.5
+        "pct": 9.6,
+        "benchPct": 10.4,
+        "excess": -0.8
       },
       {
         "ticker": "NVDA",
         "txDate": "2026-01-16",
-        "pct": 15.3,
-        "benchPct": 10.7,
-        "excess": 4.6
+        "pct": 11.9,
+        "benchPct": 10.4,
+        "excess": 1.5
       },
       {
         "ticker": "GOOGL",
         "txDate": "2026-01-16",
-        "pct": 4.5,
-        "benchPct": 10.7,
-        "excess": -6.2
+        "pct": 5.5,
+        "benchPct": 10.4,
+        "excess": -4.9
       },
       {
         "ticker": "AVGO",
         "txDate": "2025-06-20",
-        "pct": 47.4,
-        "benchPct": 28.8,
-        "excess": 18.6
+        "pct": 43.5,
+        "benchPct": 28.5,
+        "excess": 15.0
       },
       {
         "ticker": "PANW",
         "txDate": "2024-12-20",
-        "pct": 91.6,
-        "benchPct": 29.5,
-        "excess": 62.1
+        "pct": 87.9,
+        "benchPct": 29.1,
+        "excess": 58.8
       },
       {
         "ticker": "NVDA",
         "txDate": "2024-12-20",
-        "pct": 59.4,
-        "benchPct": 29.5,
-        "excess": 29.9
+        "pct": 54.8,
+        "benchPct": 29.1,
+        "excess": 25.7
       }
     ],
-    "rowsOf": 6
+    "rowsOf": 7
   },
   "committees": null
 }
