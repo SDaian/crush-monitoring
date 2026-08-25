@@ -358,8 +358,17 @@ const schema = [
               <div class="hrow">
                 <span class="htick">{h.ticker}</span>
                 <span class="hname">
-                  <span>{h.asset}</span>
-                  {h.kind === "option" && <b class="hopt">call</b>}
+                  {/* An option row names its CONTRACT, not just the company:
+                      a member can hold the stock and a call on one ticker,
+                      and two rows reading "Bloom Energy" tell them apart by
+                      nothing. Terms first so truncation eats the company
+                      name, which the ticker cell already gives. */}
+                  <span>
+                    {h.kind === "option"
+                      ? `$${h.strike} ${h.optType ?? "call"}` +
+                        (h.expiration ? ` · exp ${fmtMonth(h.expiration)}` : "")
+                      : h.asset}
+                  </span>
                   {h.isNew && <b class="hnew">new</b>}
                 </span>
                 {/* The bar IS the row — scaled to the largest holding so the
@@ -1024,21 +1033,6 @@ const schema = [
     font-variant-numeric: tabular-nums;
   }
   /* "new" = a position first traded after the annual snapshot. */
-  /* An option row ranks beside the stocks, so it must never read as share
-     ownership. Outline, not the filled stamp of `new`: it labels the
-     instrument rather than flagging a change. */
-  .hopt {
-    margin-left: 0.5rem;
-    padding: 0.1rem 0.4rem;
-    font-size: 0.75rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    line-height: 1;
-    color: var(--color-ink-soft);
-    border: 1px solid var(--color-rule);
-    vertical-align: middle;
-  }
   .hnew {
     margin-left: 0.5rem;
     padding: 0.1rem 0.4rem;

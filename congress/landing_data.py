@@ -468,17 +468,35 @@ def rolled_holdings(member_trades: list[dict], h: dict, today_iso: str) -> dict:
             opt_map[key] = {"ticker": ticker, "type": opt.get("type"),
                             "strike": opt.get("strike"), "expiration": exp,
                             "asset": asset or "", "est": est or 0.0,
-                            "contracts": contracts,
+                            # One entry per lot. Summed at the end only when
+                            # EVERY lot stated a count: "200 contracts" when
+                            # one lot's count is unknown would be a guess.
+                            "_lots": [contracts],
                             # Purchase dates that produced this contract. An
                             # exercise names the date it bought, which is the
                             # only way to tell two same-strike contracts apart.
                             "_bought": {src} if src else set()}
+        elif src and src > snap and src not in prev["_bought"]:
+            # A SEPARATE purchase, made AFTER the snapshot — add the lots.
+            # Pelosi bought 100 BE $100 calls on 24 July and 100 more on 28
+            # July, identical strike and expiry, so the dedup key collapsed
+            # them and `max` reported 100 contracts worth $3.0M instead of
+            # 200 worth $3.75M.
+            #
+            # The snapshot date is what separates the two cases. A purchase
+            # dated on or before it is ALREADY inside the annual report's
+            # figure, so adding it would double-count the same position;
+            # only a purchase after it is genuinely additional.
+            prev["est"] += est or 0.0
+            prev["_lots"].append(contracts)
         else:
+            # One position seen twice — the annual snapshot and the purchase
+            # it already contains — so take one, never the sum.
             prev["est"] = max(prev["est"], est or 0.0)
-            if prev.get("contracts") is None:
-                prev["contracts"] = contracts
-            if src:
-                prev["_bought"].add(src)
+            if prev["_lots"] == [None]:
+                prev["_lots"] = [contracts]
+        if prev is not None and src:
+            prev["_bought"].add(src)
     for s in stocks_in:
         if s.get("asset_type") == "Option":
             _add_opt(s.get("ticker"), s.get("option") or {},
@@ -530,6 +548,10 @@ def rolled_holdings(member_trades: list[dict], h: dict, today_iso: str) -> dict:
                 opt_map.pop(key, None)
     for entry in opt_map.values():
         entry.pop("_bought", None)
+        lots = entry.pop("_lots", [])
+        entry["contracts"] = (sum(lots) if lots and all(l is not None
+                                                        for l in lots)
+                              else None)
     options = sorted(opt_map.values(), key=lambda x: -x["est"])
 
     return {"snap": snap, "filings": len(filings), "stocks": stocks,
@@ -601,7 +623,14 @@ def member_payload(name: str, trades: list[dict], holdings: dict,
     ranked = sorted(
         [dict(x, kind="stock") for x in held]
         + [{"kind": "option", "ticker": o["ticker"],
-            "asset": o.get("asset") or "", "est": o["est"]}
+            "asset": o.get("asset") or "", "est": o["est"],
+            # The contract's own terms, so a row reads as the position it is.
+            # Without them a member holding both the stock and a call on one
+            # ticker shows two rows with the same name and no way to tell
+            # them apart (Pelosi holds BE shares AND BE $100 calls).
+            "optType": o.get("type"), "strike": o.get("strike"),
+            "expiration": o.get("expiration"),
+            "contracts": o.get("contracts")}
            for o in rf["options"]],
         key=lambda x: -x["est"],
     )
@@ -639,6 +668,10 @@ def member_payload(name: str, trades: list[dict], holdings: dict,
                 round(100 * x["est"] / total_est, 1) if total_est else None
             ),
             "isNew": x.get("isNew", False),
+            "optType": x.get("optType"),
+            "strike": x.get("strike"),
+            "expiration": x.get("expiration"),
+            "contracts": x.get("contracts"),
         } for x in ranked[:MEMBER_HOLDINGS_CAP]],
         # `shares` is contracts x 100 — the standard US equity contract size,
         # and a fact of the disclosed position rather than a valuation. It is

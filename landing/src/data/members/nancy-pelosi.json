@@ -487,7 +487,7 @@
     "snapDate": "2025-12-31",
     "filingsSince": 3,
     "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/financial-pdfs/2025/10075701.pdf",
-    "totalLabel": "$152.9M",
+    "totalLabel": "$153.7M",
     "positions": 27,
     "optionsCount": 8,
     "positionsTotal": 35,
@@ -497,24 +497,36 @@
         "ticker": "GOOGL",
         "asset": "Alphabet Inc. - Class A",
         "estLabel": "$15.8M",
-        "pctPortfolio": 10.3,
-        "isNew": false
+        "pctPortfolio": 10.2,
+        "isNew": false,
+        "optType": null,
+        "strike": null,
+        "expiration": null,
+        "contracts": null
       },
       {
         "kind": "stock",
         "ticker": "AMZN",
         "asset": "Amazon.com, Inc.",
         "estLabel": "$15.8M",
-        "pctPortfolio": 10.3,
-        "isNew": false
+        "pctPortfolio": 10.2,
+        "isNew": false,
+        "optType": null,
+        "strike": null,
+        "expiration": null,
+        "contracts": null
       },
       {
         "kind": "stock",
         "ticker": "NVDA",
         "asset": "NVIDIA Corporation",
         "estLabel": "$15.4M",
-        "pctPortfolio": 10.1,
-        "isNew": false
+        "pctPortfolio": 10.0,
+        "isNew": false,
+        "optType": null,
+        "strike": null,
+        "expiration": null,
+        "contracts": null
       },
       {
         "kind": "stock",
@@ -522,7 +534,11 @@
         "asset": "Apple Inc.",
         "estLabel": "$15.0M",
         "pctPortfolio": 9.8,
-        "isNew": false
+        "isNew": false,
+        "optType": null,
+        "strike": null,
+        "expiration": null,
+        "contracts": null
       },
       {
         "kind": "stock",
@@ -530,7 +546,11 @@
         "asset": "Broadcom Inc.",
         "estLabel": "$15.0M",
         "pctPortfolio": 9.8,
-        "isNew": false
+        "isNew": false,
+        "optType": null,
+        "strike": null,
+        "expiration": null,
+        "contracts": null
       },
       {
         "kind": "stock",
@@ -538,7 +558,11 @@
         "asset": "Microsoft Corporation",
         "estLabel": "$15.0M",
         "pctPortfolio": 9.8,
-        "isNew": false
+        "isNew": false,
+        "optType": null,
+        "strike": null,
+        "expiration": null,
+        "contracts": null
       },
       {
         "kind": "stock",
@@ -546,7 +570,11 @@
         "asset": "Salesforce.com Inc",
         "estLabel": "$15.0M",
         "pctPortfolio": 9.8,
-        "isNew": false
+        "isNew": false,
+        "optType": null,
+        "strike": null,
+        "expiration": null,
+        "contracts": null
       },
       {
         "kind": "stock",
@@ -554,15 +582,35 @@
         "asset": "Visa Inc.",
         "estLabel": "$15.0M",
         "pctPortfolio": 9.8,
-        "isNew": false
+        "isNew": false,
+        "optType": null,
+        "strike": null,
+        "expiration": null,
+        "contracts": null
       },
       {
         "kind": "stock",
         "ticker": "BE",
         "asset": "Bloom Energy Corporation Class A Common Stock",
         "estLabel": "$3.8M",
-        "pctPortfolio": 2.5,
-        "isNew": true
+        "pctPortfolio": 2.4,
+        "isNew": true,
+        "optType": null,
+        "strike": null,
+        "expiration": null,
+        "contracts": null
+      },
+      {
+        "kind": "option",
+        "ticker": "BE",
+        "asset": "Bloom Energy Corporation Class A Common Stock",
+        "estLabel": "$3.8M",
+        "pctPortfolio": 2.4,
+        "isNew": false,
+        "optType": "call",
+        "strike": 100.0,
+        "expiration": "2027-06-17",
+        "contracts": 200
       },
       {
         "kind": "stock",
@@ -570,7 +618,11 @@
         "asset": "American Express Company",
         "estLabel": "$3.0M",
         "pctPortfolio": 2.0,
-        "isNew": false
+        "isNew": false,
+        "optType": null,
+        "strike": null,
+        "expiration": null,
+        "contracts": null
       },
       {
         "kind": "stock",
@@ -578,7 +630,11 @@
         "asset": "CrowdStrike Holdings, Inc. - Class A",
         "estLabel": "$3.0M",
         "pctPortfolio": 2.0,
-        "isNew": false
+        "isNew": false,
+        "optType": null,
+        "strike": null,
+        "expiration": null,
+        "contracts": null
       },
       {
         "kind": "stock",
@@ -586,7 +642,11 @@
         "asset": "Netflix, Inc.",
         "estLabel": "$3.0M",
         "pctPortfolio": 2.0,
-        "isNew": false
+        "isNew": false,
+        "optType": null,
+        "strike": null,
+        "expiration": null,
+        "contracts": null
       },
       {
         "kind": "stock",
@@ -594,7 +654,11 @@
         "asset": "Palo Alto Networks, Inc.",
         "estLabel": "$3.0M",
         "pctPortfolio": 2.0,
-        "isNew": false
+        "isNew": false,
+        "optType": null,
+        "strike": null,
+        "expiration": null,
+        "contracts": null
       },
       {
         "kind": "stock",
@@ -602,15 +666,11 @@
         "asset": "AllianceBernstein Holding L.P. Units",
         "estLabel": "$3.0M",
         "pctPortfolio": 2.0,
-        "isNew": true
-      },
-      {
-        "kind": "option",
-        "ticker": "BE",
-        "asset": "Bloom Energy Corporation Class A Common Stock",
-        "estLabel": "$3.0M",
-        "pctPortfolio": 2.0,
-        "isNew": false
+        "isNew": true,
+        "optType": null,
+        "strike": null,
+        "expiration": null,
+        "contracts": null
       },
       {
         "kind": "option",
@@ -618,7 +678,11 @@
         "asset": "Intel Corporation - Common Stock",
         "estLabel": "$3.0M",
         "pctPortfolio": 2.0,
-        "isNew": false
+        "isNew": false,
+        "optType": "call",
+        "strike": 50.0,
+        "expiration": "2027-03-19",
+        "contracts": 200
       }
     ],
     "options": [
@@ -627,10 +691,10 @@
         "type": "call",
         "strike": 100.0,
         "expiration": "2027-06-17",
-        "contracts": 100,
-        "shares": 10000,
-        "estLabel": "$3.0M",
-        "pctPortfolio": 2.0
+        "contracts": 200,
+        "shares": 20000,
+        "estLabel": "$3.8M",
+        "pctPortfolio": 2.4
       },
       {
         "ticker": "INTC",
