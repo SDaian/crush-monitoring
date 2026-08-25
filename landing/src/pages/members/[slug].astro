@@ -363,12 +363,19 @@ const schema = [
                       and two rows reading "Bloom Energy" tell them apart by
                       nothing. Terms first so truncation eats the company
                       name, which the ticker cell already gives. */}
+                  {/* One row per ticker. A ticker held ONLY as contracts
+                      names the contract; one held as both names the company
+                      and flags that the total includes options, because
+                      $7.5M must never read as $7.5M of shares. */}
                   <span>
                     {h.kind === "option"
                       ? `$${h.strike} ${h.optType ?? "call"}` +
                         (h.expiration ? ` · exp ${fmtMonth(h.expiration)}` : "")
                       : h.asset}
                   </span>
+                  {h.kind !== "option" && h.hasOptions && (
+                    <b class="hopt">+ options</b>
+                  )}
                   {h.isNew && <b class="hnew">new</b>}
                 </span>
                 {/* The bar IS the row — scaled to the largest holding so the
@@ -1033,6 +1040,22 @@ const schema = [
     font-variant-numeric: tabular-nums;
   }
   /* "new" = a position first traded after the annual snapshot. */
+  /* Marks a row whose total includes option contracts as well as shares.
+     Outline, not the filled stamp of `new`: it qualifies the number rather
+     than flagging a change. */
+  .hopt {
+    margin-left: 0.5rem;
+    padding: 0.1rem 0.4rem;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    line-height: 1;
+    white-space: nowrap;
+    color: var(--color-ink-soft);
+    border: 1px solid var(--color-rule);
+    vertical-align: middle;
+  }
   .hnew {
     margin-left: 0.5rem;
     padding: 0.1rem 0.4rem;

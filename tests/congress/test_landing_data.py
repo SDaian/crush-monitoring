@@ -1281,3 +1281,56 @@ class TestOptionLots(unittest.TestCase):
         self.assertEqual(row["kind"], "option")
         self.assertEqual((row["strike"], row["expiration"]),
                          (120.0, "2027-01-15"))
+
+
+class TestOneRowPerTicker(unittest.TestCase):
+    """Stocks and options on one ticker are ONE row.
+
+    Two rows naming one company read as a duplicate however they are
+    labelled — Pelosi holds BE shares and BE $100 calls, and the list showed
+    "BE" twice. Summing is consistent with the shared denominator they
+    already feed.
+    """
+
+    TODAY = "2026-08-25"
+
+    def payload(self, trades):
+        return ld.member_payload("Nancy Pelosi", trades,
+                                 {"Nancy Pelosi": SNAP()},
+                                 today_iso=self.TODAY)["holdings"]
+
+    def stock(self, ticker, lo, hi):
+        return T(member="Nancy Pelosi", ticker=ticker, lo=lo, hi=hi,
+                 tx="2026-02-01", filed="2026-02-10", id=f"s-{ticker}")
+
+    def test_stock_and_option_collapse_to_one_row(self):
+        h = self.payload([self.stock("AMZN", 1, 1_000_000), OPT()])
+        rows = [r for r in h["ranked"] if r["ticker"] == "AMZN"]
+        self.assertEqual(len(rows), 1)
+
+    def test_the_row_sums_both(self):
+        h = self.payload([self.stock("AMZN", 1, 1_000_000),   # mid 500,000.5
+                          OPT(lo=1, hi=1_000_000)])           # mid 500,000.5
+        row = next(r for r in h["ranked"] if r["ticker"] == "AMZN")
+        self.assertEqual(row["pctPortfolio"], 100.0)
+
+    def test_a_merged_row_is_flagged(self):
+        h = self.payload([self.stock("AMZN", 1, 1000), OPT()])
+        row = next(r for r in h["ranked"] if r["ticker"] == "AMZN")
+        self.assertTrue(row["hasOptions"])
+        self.assertEqual(row["kind"], "stock")
+
+    def test_a_stock_only_row_is_not_flagged(self):
+        h = self.payload([self.stock("MSFT", 1, 1000)])
+        self.assertFalse(h["ranked"][0]["hasOptions"])
+
+    def test_an_options_only_ticker_keeps_its_contract_terms(self):
+        h = self.payload([OPT()])
+        row = h["ranked"][0]
+        self.assertEqual(row["kind"], "option")
+        self.assertEqual((row["strike"], row["expiration"]),
+                         (120.0, "2027-01-15"))
+
+    def test_positions_total_counts_merged_rows(self):
+        h = self.payload([self.stock("AMZN", 1, 1000), OPT()])
+        self.assertEqual(h["positionsTotal"], 1)
