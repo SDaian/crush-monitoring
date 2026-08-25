@@ -1228,3 +1228,56 @@ class TestRankedList(unittest.TestCase):
         h = self.payload([OPT()])["holdings"]
         self.assertEqual(h["options"][0]["strike"], 120.0)
         self.assertEqual(h["options"][0]["expiration"], "2027-01-15")
+
+
+class TestOptionLots(unittest.TestCase):
+    """Two purchases of the SAME contract are two lots, not one.
+
+    The dedup key is (ticker, type, strike, expiry) and it took `max`, which
+    is right when the annual snapshot and the trade that bought it describe
+    one position — and wrong for a second purchase. Pelosi bought 100 BE $100
+    calls on 24 July and 100 more on 28 July: the page showed 100 contracts
+    worth $3.0M instead of 200 worth $3.75M.
+    """
+
+    TODAY = "2026-08-25"
+
+    def test_separate_purchases_add_up(self):
+        out = ld.rolled_holdings(
+            [OPT(tx="2026-07-24", lo=1_000_001, hi=5_000_000, contracts=100),
+             OPT(tx="2026-07-28", lo=500_001, hi=1_000_000, contracts=100)],
+            SNAP(), self.TODAY)
+        self.assertEqual(len(out["options"]), 1)
+        self.assertEqual(out["options"][0]["contracts"], 200)
+        self.assertAlmostEqual(out["options"][0]["est"], 3_750_001.0)
+
+    def test_the_snapshot_and_its_trade_are_one_position(self):
+        snap_opt = {"ticker": "AMZN", "asset_type": "Option",
+                    "amount_lo": 100001, "amount_hi": 250000,
+                    "option": {"type": "call", "strike": 120.0,
+                               "expiration": "2027-01-15", "contracts": 20}}
+        out = ld.rolled_holdings([OPT(contracts=20)], SNAP(stocks=[snap_opt]),
+                                 self.TODAY)
+        self.assertEqual(out["options"][0]["contracts"], 20)   # not 40
+
+    def test_an_unknown_lot_size_makes_the_total_unknown(self):
+        # "200 contracts" when one lot's count was never stated is a guess.
+        a = OPT(tx="2026-07-24", contracts=100)
+        b = OPT(tx="2026-07-28")
+        b["option"].pop("contracts")
+        out = ld.rolled_holdings([a, b], SNAP(), self.TODAY)
+        self.assertIsNone(out["options"][0]["contracts"])
+
+    def test_different_expiries_stay_separate_contracts(self):
+        out = ld.rolled_holdings(
+            [OPT(exp="2027-01-15"), OPT(exp="2027-06-17")],
+            SNAP(), self.TODAY)
+        self.assertEqual(len(out["options"]), 2)
+
+    def test_a_ranked_option_row_carries_its_contract_terms(self):
+        p = ld.member_payload("Nancy Pelosi", [OPT()],
+                              {"Nancy Pelosi": SNAP()}, today_iso=self.TODAY)
+        row = p["holdings"]["ranked"][0]
+        self.assertEqual(row["kind"], "option")
+        self.assertEqual((row["strike"], row["expiration"]),
+                         (120.0, "2027-01-15"))
