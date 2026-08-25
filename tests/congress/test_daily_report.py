@@ -653,3 +653,76 @@ class TestMarketFromTheIndicatorsFile(TestMainDelivery):
         daily_report.main()
         self.assertEqual(
             json.loads(self.report_json.read_text())["market"], VIX)
+
+
+class TestReportedMemory(unittest.TestCase):
+    """"New disclosure" means "not told to you yet", not "filed recently".
+
+    A three-day filing-date window dropped anything ingested late. Pelosi's
+    21 August filing (BE + INTC, $3M-$12M of brackets) reached the data on
+    the 25th: too new to be ingested on the 23rd, too old to clear the
+    cutoff on the 25th. It would never have been reported.
+    """
+
+    def trade(self, tid, filed, member="Nancy Pelosi", ticker="BE"):
+        return {"id": tid, "member": member, "party": "D", "ticker": ticker,
+                "type": "buy", "amount_label": "$1,001 - $15,000",
+                "tx_date": filed, "filing_date": filed}
+
+    def report(self, trades, reported=None, today="2026-08-25"):
+        return build_report(trades, AI, [], {}, today,
+                            reported_ids=reported)
+
+    def members(self, r):
+        return [d["member"] for d in r["payload"]["disclosures"]]
+
+    def test_a_late_ingested_filing_is_still_reported(self):
+        # Filed 4 days ago — the old 3-day window would have missed it.
+        r = self.report([self.trade("t1", "2026-08-21")], reported=[])
+        self.assertEqual(self.members(r), ["Nancy Pelosi"])
+
+    def test_an_already_reported_filing_is_not_resent(self):
+        r = self.report([self.trade("t1", "2026-08-21")], reported=["t1"])
+        self.assertEqual(self.members(r), [])
+
+    def test_the_memory_carries_forward(self):
+        trades = [self.trade("t1", "2026-08-21"), self.trade("t2", "2026-08-24")]
+        first = self.report(trades, reported=[])
+        self.assertEqual(len(first["payload"]["disclosures"]), 2)
+        second = self.report(trades, reported=first["reported_ids"])
+        self.assertEqual(second["payload"]["disclosures"], [])
+
+    def test_ids_outside_the_lookback_are_forgotten(self):
+        # Keeps report_state.json from growing without bound.
+        trades = [self.trade("t1", "2026-08-24")]
+        r = self.report(trades, reported=["t1", "ancient-id"])
+        self.assertEqual(r["reported_ids"], ["t1"])
+
+    def test_a_filing_older_than_the_lookback_is_never_new(self):
+        r = self.report([self.trade("t1", "2026-01-01")], reported=[])
+        self.assertEqual(self.members(r), [])
+
+
+class TestSeedReportedIds(unittest.TestCase):
+    """Cold start must not drip-feed old disclosures as if they were news."""
+
+    def trades(self):
+        return [
+            {"id": "old", "filing_date": "2026-06-01"},
+            {"id": "recent", "filing_date": "2026-08-21"},
+            {"id": "today", "filing_date": "2026-08-25"},
+        ]
+
+    def test_older_filings_are_marked_seen(self):
+        seed = daily_report.seed_reported_ids(self.trades(), "2026-08-25")
+        self.assertIn("old", seed)
+
+    def test_a_short_recent_tail_stays_reportable(self):
+        seed = daily_report.seed_reported_ids(self.trades(), "2026-08-25")
+        self.assertNotIn("recent", seed)   # 4 days back — recovered
+        self.assertNotIn("today", seed)
+
+    def test_rows_without_an_id_are_skipped(self):
+        seed = daily_report.seed_reported_ids(
+            [{"filing_date": "2026-01-01"}], "2026-08-25")
+        self.assertEqual(seed, [])

@@ -57,7 +57,11 @@ HOLDINGS_JSON = pipeline.REPO_ROOT / "docs" / "data" / "holdings.json"
 MEMBER_INDEX_JSON = (pipeline.REPO_ROOT / "landing" / "src" / "data"
                      / "members" / "_index.json")
 STATE_JSON = pipeline.REPO_ROOT / "congress" / "report_state.json"
-DISCLOSURE_WINDOW_DAYS = 3
+# How far back a not-yet-reported filing may be and still be worth sending.
+# Generous on purpose: the point is to catch a filing we ingested late, and
+# the statutory filing deadline is 45 days after the trade. `reported_ids`
+# stops anything inside it from being sent twice.
+DISCLOSURE_LOOKBACK_DAYS = 45
 MAX_DISCLOSURES = 20
 PARTY = {"D": "D", "R": "R", "I": "I"}
 DISCLAIMER = (
@@ -149,11 +153,34 @@ def holdings_gaps(holdings: dict) -> list[str]:
     return gaps
 
 
+# Cold start: with no memory, every filing in the 45-day lookback would count
+# as new and the first email would carry over a thousand rows. Seed instead —
+# mark the older ones as already seen, and leave only a short recent tail
+# reportable, so a filing we ingested late is still recovered. Seven days is
+# the smallest window that covers a weekend plus a couple of missed runs.
+SEED_GRACE_DAYS = 7
+
+
+def seed_reported_ids(trades: list[dict], today_iso: str,
+                      grace_days: int = SEED_GRACE_DAYS) -> list[str]:
+    """Ids to treat as already reported when no memory exists yet.
+
+    Everything filed before the grace boundary; anything newer stays
+    reportable. Never drip-feed old disclosures as if they were news — the
+    same rule the social drafts' --seed follows.
+    """
+    boundary = (date.fromisoformat(today_iso)
+                - timedelta(days=grace_days)).isoformat()
+    return sorted(t["id"] for t in trades
+                  if t.get("id") and (t.get("filing_date") or "") < boundary)
+
+
 def build_report(trades: list[dict], ai_tickers: dict, new_signals: list[dict],
                  prev_ratings: dict, today_iso: str,
                  ticker_urls: dict | None = None,
                  coverage_gaps: list[str] | None = None,
-                 market_reading: dict | None = None) -> dict:
+                 market_reading: dict | None = None,
+                 reported_ids: set[str] | list[str] | None = None) -> dict:
     """Compose the trade/scorecard digest in markdown (GitHub issue) and HTML
     (email). Site traffic is delivered in its own email — see
     ``build_traffic_email``. Pure — no I/O. Returns
@@ -226,9 +253,29 @@ def build_report(trades: list[dict], ai_tickers: dict, new_signals: list[dict],
         signals_md += "_No new signals or rating changes since yesterday._\n"
 
     # --- Section 3: new congressional disclosures ---
+    # The question is "have we told you about this yet?", NOT "was this filed
+    # recently?". Those differ whenever ingestion lags the filing date, and it
+    # lags routinely: the House Clerk publishes on its own schedule and a
+    # scanned document can take several runs to parse. A three-day filing-date
+    # window silently dropped anything that arrived late — Pelosi's 21 August
+    # filing (BE and INTC, $3M-$12M of brackets) reached our data on the 25th,
+    # by which time the cutoff had moved past it. Too new to be ingested on
+    # the 23rd, too old to qualify on the 25th, so it would never have been
+    # reported at all.
+    #
+    # `reported_ids` is what previous reports actually sent. Anything filed
+    # inside the lookback and not in that set is new TO THE READER, whenever
+    # it happens to arrive.
     cutoff = (date.fromisoformat(today_iso) -
-              timedelta(days=DISCLOSURE_WINDOW_DAYS)).isoformat()
-    window = [t for t in trades if (t.get("filing_date") or "") >= cutoff]
+              timedelta(days=DISCLOSURE_LOOKBACK_DAYS)).isoformat()
+    already = set(reported_ids or ())
+    in_lookback = [t for t in trades
+                   if (t.get("filing_date") or "") >= cutoff]
+    # Every id still inside the lookback, used only to prune the memory below
+    # — an id that has aged out can be forgotten, because a trade older than
+    # the lookback is never a candidate again.
+    ids_in_window = {t["id"] for t in in_lookback if t.get("id")}
+    window = [t for t in in_lookback if t.get("id") not in already]
     window.sort(key=lambda t: (t.get("filing_date", ""), t.get("tx_date", "")),
                 reverse=True)
     # The EMAIL is a headline surface: stock/option rows only (owner's
@@ -331,7 +378,13 @@ def build_report(trades: list[dict], ai_tickers: dict, new_signals: list[dict],
         "emailShown": len(disc_data),
     }
     return {"markdown": markdown, "html": html, "html_embed": html_embed,
-            "ratings": ratings, "counts": counts, "payload": payload}
+            "ratings": ratings, "counts": counts, "payload": payload,
+            # Everything this report told the reader about, plus what earlier
+            # reports sent that is still inside the lookback. Pruned to the
+            # window so the file cannot grow without bound.
+            "reported_ids": sorted(
+                {t["id"] for t in window if t.get("id")}
+                | {i for i in already if i in ids_in_window})}
 
 
 def market_date(ai_tickers: dict) -> str:
@@ -556,7 +609,11 @@ def main() -> int:
     report = build_report(trades, ai_tickers, new_signals, prev_ratings,
                           today_iso, ticker_urls=ticker_urls,
                           coverage_gaps=gaps,
-                          market_reading=ai.get("market"))
+                          market_reading=ai.get("market"),
+                          reported_ids=(
+                              state["reported_ids"]
+                              if "reported_ids" in state
+                              else seed_reported_ids(trades, today_iso)))
     title = f"📋 Morning report — {today_iso}"
 
     # A quiet day: the market printed no new close and no filing arrived, so
@@ -637,6 +694,11 @@ def main() -> int:
         json.dumps({"date": today_iso,
                     "issue_number": new_number or state.get("issue_number"),
                     "ratings": report["ratings"],
+                    # What the reader has now been told about. Only written on
+                    # a real delivery: a quiet day records nothing, so an
+                    # unsent filing stays unsent-and-pending rather than being
+                    # marked as reported.
+                    "reported_ids": report["reported_ids"],
                     **now},
                    separators=(",", ":"), ensure_ascii=False) + "\n",
         encoding="utf-8",
