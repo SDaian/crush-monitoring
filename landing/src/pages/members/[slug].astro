@@ -344,7 +344,10 @@ const schema = [
             recent buys and sells nudge the year-end snapshot toward today.
             Bracket midpoints, <b>not</b> share counts; the percentage is each
             position's share of the estimated total, options included. A
-            directional estimate, never exact or real-time.
+            directional estimate, never exact or real-time. The annual report
+            carries <b>no acquisition date</b>, so "first disclosed buy" is
+            the earliest purchase on record here — a position may have been
+            held for years before it.
           </p>
           <HoldingsChart
             holdings={m.holdings.ranked}
@@ -989,7 +992,11 @@ const schema = [
      redundant encoding — the % sits right beside it — so it carries no
      information the numbers don't, which is exactly what makes it safe. */
   .hbar {
-    align-self: center;
+    /* Sits on the FIRST line of the name cell, not centred in it. With the
+       date on a second line, centring dropped the bar into the gap between
+       the two lines and it no longer read as belonging to the position. */
+    align-self: start;
+    margin-top: 0.3rem;
     display: block;
     height: 0.5rem;
     background: var(--color-wash);
