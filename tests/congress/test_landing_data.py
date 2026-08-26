@@ -1334,3 +1334,42 @@ class TestOneRowPerTicker(unittest.TestCase):
     def test_positions_total_counts_merged_rows(self):
         h = self.payload([self.stock("AMZN", 1, 1000), OPT()])
         self.assertEqual(h["positionsTotal"], 1)
+
+
+class TestFirstDisclosedBuy(unittest.TestCase):
+    """The earliest BUY we hold for a symbol — NOT when the position began.
+
+    The annual report lists positions with no acquisition date, so for
+    anything already in the snapshot this is the earliest purchase inside
+    our window. Pelosi's GOOGL shows Jan 2025 and she may have held it for
+    a decade, which is why the label says "first disclosed buy".
+    """
+
+    TODAY = "2026-08-25"
+
+    def payload(self, trades):
+        return ld.member_payload("Nancy Pelosi", trades,
+                                 {"Nancy Pelosi": SNAP()},
+                                 today_iso=self.TODAY)["holdings"]
+
+    def buy(self, ticker, tx, tid):
+        return T(member="Nancy Pelosi", ticker=ticker, lo=1, hi=1000,
+                 tx=tx, filed="2026-08-01", id=tid)
+
+    def test_the_earliest_buy_wins(self):
+        h = self.payload([self.buy("MSFT", "2026-03-01", "a"),
+                          self.buy("MSFT", "2026-01-05", "b")])
+        self.assertEqual(h["ranked"][0]["firstBuy"], "2026-01-05")
+
+    def test_a_position_with_no_buy_on_record_has_none(self):
+        snap = SNAP(stocks=[{"ticker": "MSFT", "asset": "Microsoft",
+                             "asset_type": "Stock", "value_lo": 1,
+                             "value_hi": 1000}])
+        h = ld.member_payload("Nancy Pelosi", [], {"Nancy Pelosi": snap},
+                              today_iso=self.TODAY)["holdings"]
+        self.assertIsNone(h["ranked"][0]["firstBuy"])
+
+    def test_a_sale_does_not_count_as_a_buy(self):
+        sell = dict(self.buy("MSFT", "2025-01-01", "s"), type="sell")
+        h = self.payload([self.buy("MSFT", "2026-03-01", "a"), sell])
+        self.assertEqual(h["ranked"][0]["firstBuy"], "2026-03-01")
