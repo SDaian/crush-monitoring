@@ -1373,3 +1373,32 @@ class TestFirstDisclosedBuy(unittest.TestCase):
         sell = dict(self.buy("MSFT", "2025-01-01", "s"), type="sell")
         h = self.payload([self.buy("MSFT", "2026-03-01", "a"), sell])
         self.assertEqual(h["ranked"][0]["firstBuy"], "2026-03-01")
+
+
+class TestOptionBoughtDate(unittest.TestCase):
+    """A live contract has a REAL purchase date, unlike a stock inherited
+    from the undated annual snapshot — so its line says "bought", not the
+    hedged "first disclosed buy" the stock rows carry."""
+
+    TODAY = "2026-08-26"
+
+    def payload(self, trades, snap=None):
+        return ld.member_payload("Nancy Pelosi", trades,
+                                 {"Nancy Pelosi": snap or SNAP()},
+                                 today_iso=self.TODAY)["holdings"]
+
+    def test_the_purchase_date_reaches_the_payload(self):
+        h = self.payload([OPT(tx="2026-07-24")])
+        self.assertEqual(h["options"][0]["bought"], "2026-07-24")
+
+    def test_the_earliest_lot_dates_the_contract(self):
+        h = self.payload([OPT(tx="2026-07-28"), OPT(tx="2026-07-24")])
+        self.assertEqual(h["options"][0]["bought"], "2026-07-24")
+
+    def test_a_snapshot_only_contract_has_no_date(self):
+        snap_opt = {"ticker": "AMZN", "asset_type": "Option",
+                    "amount_lo": 1, "amount_hi": 1000,
+                    "option": {"type": "call", "strike": 120.0,
+                               "expiration": "2027-01-15"}}
+        h = self.payload([], SNAP(stocks=[snap_opt]))
+        self.assertIsNone(h["options"][0]["bought"])

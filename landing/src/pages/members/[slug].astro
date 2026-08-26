@@ -438,6 +438,11 @@ const schema = [
                         {o.contracts
                           ? ` · ${o.contracts} contracts = ${o.shares.toLocaleString("en-US")} shares`
                           : ""}
+                        {/* A real purchase date, not the hedged "first
+                            disclosed buy" the stock rows carry: a live
+                            contract came from a disclosed BUY, so we know
+                            when it was opened. */}
+                        {o.bought ? ` · bought ${fmtMonth(o.bought)}` : ""}
                       </span>
                       <span class="oval">
                         ~{o.estLabel}
