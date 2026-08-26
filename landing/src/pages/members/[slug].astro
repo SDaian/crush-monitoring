@@ -358,6 +358,7 @@ const schema = [
               <div class="hrow">
                 <span class="htick">{h.ticker}</span>
                 <span class="hname">
+                  <span class="hline">
                   {/* An option row names its CONTRACT, not just the company:
                       a member can hold the stock and a call on one ticker,
                       and two rows reading "Bloom Energy" tell them apart by
@@ -376,7 +377,17 @@ const schema = [
                   {h.kind !== "option" && h.hasOptions && (
                     <b class="hopt">+ options</b>
                   )}
+                  {/* NOT "held since". The annual report lists positions with
+                      no acquisition date, so for anything already in the
+                      snapshot this is the earliest purchase inside our
+                      window — she may have held it for years before. */}
                   {h.isNew && <b class="hnew">new</b>}
+                  </span>
+                  {h.firstBuy && (
+                    <span class="hsince">
+                      first disclosed buy {fmtMonth(h.firstBuy)}
+                    </span>
+                  )}
                 </span>
                 {/* The bar IS the row — scaled to the largest holding so the
                     shape is readable even when every share is small. */}
@@ -991,7 +1002,7 @@ const schema = [
   .hrow.is-rest .hpct {
     color: var(--color-ink-soft);
   }
-  .hrow.is-rest .hname > span,
+  .hrow.is-rest .hline > span,
   .hrow.is-rest .hname {
     white-space: normal;
     overflow: visible;
@@ -1013,16 +1024,30 @@ const schema = [
     font-weight: 700;
     color: var(--color-ink);
   }
+  /* Two explicit lines: name + badges, then the date. Wrapping a single
+     flex row does NOT work — the browser wraps a long name's badge onto its
+     own line rather than shrinking the name, so every badge got a line of
+     its own. */
   .hname {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    color: var(--color-ink-soft);
+  }
+  .hline {
     display: flex;
     align-items: baseline;
     gap: 0.5rem;
     min-width: 0;
-    color: var(--color-ink-soft);
   }
   /* The company name is what truncates — not the badge beside it, which was
      being sliced in half by the ellipsis on long names. */
-  .hname > span {
+  .hline > span {
+    /* Shrinkable, so a long name truncates and the badge stays BESIDE it.
+       Without the explicit basis, flex-wrap lets the name take its natural
+       width and pushes every badge onto its own line. */
+    flex: 0 1 auto;
+    min-width: 0;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -1055,6 +1080,18 @@ const schema = [
     color: var(--color-ink-soft);
     border: 1px solid var(--color-rule);
     vertical-align: middle;
+  }
+  /* Sits under the company name, quiet by design: it qualifies the row
+     rather than competing with the value. */
+  .hsince {
+    /* Its own line. `.hname` is a flex row, so a plain block would sit
+       BESIDE the company name and crush it to an ellipsis — which is what
+       the first attempt did. */
+    margin-top: 0.1rem;
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.03em;
+    color: var(--color-ink-soft);
   }
   .hnew {
     margin-left: 0.5rem;

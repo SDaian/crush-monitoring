@@ -649,6 +649,20 @@ def member_payload(name: str, trades: list[dict], holdings: dict,
             e["est"] += o["est"]
             e["hasOptions"] = True
     ranked = sorted(merged.values(), key=lambda x: -x["est"])
+    # The earliest BUY we hold for each symbol. Deliberately labelled "first
+    # disclosed buy", never "held since": the annual report lists positions
+    # with no acquisition date, so for anything already in the snapshot this
+    # is the earliest purchase INSIDE our two-year window, not when the
+    # position started. Pelosi's GOOGL shows Jan 2025 and she may have held
+    # it for a decade.
+    first_buy: dict = {}
+    for t in ts:
+        tk, d = t.get("ticker"), t.get("tx_date")
+        if tk and d and t.get("type") == "buy":
+            if tk not in first_buy or d < first_buy[tk]:
+                first_buy[tk] = d
+    for row in ranked:
+        row["firstBuy"] = first_buy.get(row["ticker"])
     holdings_block = {
         "available": bool(h.get("available")),
         "filingDate": h.get("filing_date"),
@@ -688,6 +702,7 @@ def member_payload(name: str, trades: list[dict], holdings: dict,
             "strike": x.get("strike"),
             "expiration": x.get("expiration"),
             "contracts": x.get("contracts"),
+            "firstBuy": x.get("firstBuy"),
         } for x in ranked[:MEMBER_HOLDINGS_CAP]],
         # `shares` is contracts x 100 — the standard US equity contract size,
         # and a fact of the disclosed position rather than a valuation. It is
