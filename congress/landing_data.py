@@ -547,7 +547,12 @@ def rolled_holdings(member_trades: list[dict], h: dict, today_iso: str) -> dict:
             if key[0] == t.get("ticker") and entry["_bought"] & bought:
                 opt_map.pop(key, None)
     for entry in opt_map.values():
-        entry.pop("_bought", None)
+        # The earliest purchase date recorded for this contract. Unlike a
+        # stock inherited from the undated annual snapshot, a contract we
+        # hold from a disclosed BUY has a real purchase date — so this one
+        # can be labelled "bought", not "first disclosed buy".
+        bought = entry.pop("_bought", None) or set()
+        entry["bought"] = min(bought) if bought else None
         lots = entry.pop("_lots", [])
         entry["contracts"] = (sum(lots) if lots and all(l is not None
                                                         for l in lots)
@@ -716,6 +721,7 @@ def member_payload(name: str, trades: list[dict], holdings: dict,
             "shares": (o["contracts"] * SHARES_PER_CONTRACT
                        if o.get("contracts") else None),
             "estLabel": money(o["est"]),
+            "bought": o.get("bought"),
             "pctPortfolio": (
                 round(100 * o["est"] / total_est, 1) if total_est else None
             ),
