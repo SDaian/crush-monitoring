@@ -9,20 +9,20 @@
   },
   "indexable": true,
   "technical": {
-    "asOf": "2026-08-25",
-    "price": 346.96,
-    "chg1d": -0.32,
-    "chg1w": 0.8,
-    "chg1m": 6.25,
-    "rsi14": 48.7,
-    "sma50": 351.32,
-    "sma200": 333.69,
-    "vsSma50": -1.2,
-    "vsSma200": 4.0,
-    "relVol": 0.79,
+    "asOf": "2026-08-26",
+    "price": 342.0,
+    "chg1d": -1.43,
+    "chg1w": -0.79,
+    "chg1m": 2.48,
+    "rsi14": 45.2,
+    "sma50": 350.77,
+    "sma200": 333.98,
+    "vsSma50": -2.5,
+    "vsSma200": 2.4,
+    "relVol": 0.78,
     "high52w": 402.62,
     "low52w": 207.14,
-    "rangePos": 72.0,
+    "rangePos": 69.0,
     "series": [
       {
         "d": "2025-09-05",
@@ -229,32 +229,32 @@
         "c": 344.82
       },
       {
-        "d": "2026-08-25",
-        "c": 346.96
+        "d": "2026-08-26",
+        "c": 342.0
       }
     ],
     "signals": [],
     "nextEarnings": null,
     "score": {
-      "label": "Buy",
-      "buys": 4,
-      "sells": 2,
+      "label": "Hold",
+      "buys": 3,
+      "sells": 3,
       "holds": 1,
-      "ratio": 0.286
+      "ratio": 0.0
     }
   },
   "summary": {
-    "trades": 87,
+    "trades": 88,
     "members": 29,
     "buys": 43,
-    "sells": 44,
+    "sells": 45,
     "other": 0,
     "firstTx": "2024-09-26",
-    "lastTx": "2026-08-11",
-    "lastFiling": "2026-08-20",
+    "lastTx": "2026-08-24",
+    "lastFiling": "2026-08-25",
     "estBuyLabel": "$2.8M",
-    "estSellLabel": "$6.8M",
-    "pctLate": 21
+    "estSellLabel": "$6.9M",
+    "pctLate": 20
   },
   "topMembers": [
     {
@@ -335,6 +335,17 @@
       "hasPage": true
     },
     {
+      "name": "Michael A. Rulli",
+      "slug": "michael-a-rulli",
+      "party": "R",
+      "chamber": "House",
+      "trades": 4,
+      "buys": 2,
+      "sells": 2,
+      "estLabel": "$99K",
+      "hasPage": false
+    },
+    {
       "name": "Thomas H. Kean, Jr.",
       "slug": "thomas-h-kean-jr",
       "party": "R",
@@ -355,20 +366,21 @@
       "sells": 2,
       "estLabel": "$32K",
       "hasPage": true
-    },
-    {
-      "name": "Shelley Moore Capito",
-      "slug": "shelley-moore-capito",
-      "party": "R",
-      "chamber": "Senate",
-      "trades": 4,
-      "buys": 3,
-      "sells": 1,
-      "estLabel": "$32K",
-      "hasPage": false
     }
   ],
   "trades": [
+    {
+      "member": "Michael A. Rulli",
+      "memberSlug": "michael-a-rulli",
+      "hasPage": false,
+      "party": "R",
+      "side": "SELL",
+      "amountBucket": "$50K – $100K",
+      "txDate": "2026-08-24",
+      "filedDate": "2026-08-25",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035309.pdf"
+    },
     {
       "member": "David J. Taylor",
       "memberSlug": "david-j-taylor",
@@ -656,18 +668,6 @@
       "filedDate": "2026-01-16",
       "daysLate": 0,
       "sourceUrl": "https://efdsearch.senate.gov/search/view/ptr/b195126e-7bb2-4d54-baf5-e6fc8e7a0165/"
-    },
-    {
-      "member": "Cleo Fields",
-      "memberSlug": "cleo-fields",
-      "hasPage": true,
-      "party": "D",
-      "side": "BUY",
-      "amountBucket": "$50K – $100K",
-      "txDate": "2025-12-26",
-      "filedDate": "2026-01-16",
-      "daysLate": 0,
-      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20033732.pdf"
     }
   ],
   "tradesShown": 25

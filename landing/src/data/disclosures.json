@@ -2,6 +2,17 @@
   "_comment": "Generated from real official disclosures by congress/landing_data.py (daily Action). Do not edit by hand. 'filedDaysLate' counts days past the STOCK Act's 45-day statutory maximum; 0 = on time.",
   "disclosures": [
     {
+      "member": "M. Rulli",
+      "memberSlug": null,
+      "chamber": "House",
+      "district": "OH-6",
+      "ticker": "GOOGL",
+      "tickerSlug": "googl",
+      "side": "SELL",
+      "amountBucket": "$50K – $100K",
+      "filedDaysLate": 0
+    },
+    {
       "member": "N. Pelosi",
       "memberSlug": "nancy-pelosi",
       "chamber": "House",
@@ -21,17 +32,6 @@
       "tickerSlug": "t",
       "side": "SELL",
       "amountBucket": "$50K – $100K",
-      "filedDaysLate": 0
-    },
-    {
-      "member": "D. Taylor",
-      "memberSlug": null,
-      "chamber": "House",
-      "district": "OH-2",
-      "ticker": "MSFT",
-      "tickerSlug": "msft",
-      "side": "SELL",
-      "amountBucket": "$15K – $50K",
       "filedDaysLate": 0
     },
     {

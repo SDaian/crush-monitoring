@@ -2746,9 +2746,9 @@
   "performance": {
     "available": true,
     "benchLabel": "S&P 500",
-    "asofDate": "2026-08-25",
+    "asofDate": "2026-08-26",
     "kpis": {
-      "medianPct": 125.5,
+      "medianPct": 124.5,
       "medianBenchPct": 47.7,
       "beat": 6,
       "beatOf": 8,
@@ -2877,7 +2877,8 @@
         "2026-08-04",
         "2026-08-11",
         "2026-08-18",
-        "2026-08-25"
+        "2026-08-25",
+        "2026-08-26"
       ],
       "member": [
         100.0,
@@ -3000,7 +3001,8 @@
         223.1,
         220.2,
         223.9,
-        215.4
+        215.4,
+        216.0
       ],
       "bench": [
         100.0,
@@ -3123,6 +3125,7 @@
         148.6,
         148.5,
         147.9,
+        147.6,
         147.6
       ],
       "buys": 8
@@ -3131,58 +3134,58 @@
       {
         "ticker": "GILD",
         "txDate": "2024-05-10",
-        "pct": 125.5,
+        "pct": 124.5,
         "benchPct": 47.1,
-        "excess": 78.4
+        "excess": 77.4
       },
       {
         "ticker": "GILD",
         "txDate": "2024-05-10",
-        "pct": 125.5,
+        "pct": 124.5,
         "benchPct": 47.1,
-        "excess": 78.4
+        "excess": 77.4
       },
       {
         "ticker": "GILD",
         "txDate": "2024-05-10",
-        "pct": 125.5,
+        "pct": 124.5,
         "benchPct": 47.1,
-        "excess": 78.4
+        "excess": 77.4
       },
       {
         "ticker": "INTC",
         "txDate": "2024-05-09",
-        "pct": 190.7,
-        "benchPct": 47.2,
-        "excess": 143.5
+        "pct": 193.3,
+        "benchPct": 47.3,
+        "excess": 146.0
       },
       {
         "ticker": "INTC",
         "txDate": "2024-05-08",
-        "pct": 191.6,
+        "pct": 194.1,
         "benchPct": 48.1,
-        "excess": 143.5
+        "excess": 146.0
       },
       {
         "ticker": "ADBE",
         "txDate": "2024-05-08",
-        "pct": -43.9,
+        "pct": -44.0,
         "benchPct": 48.1,
-        "excess": -92.0
+        "excess": -92.1
       },
       {
         "ticker": "INTC",
         "txDate": "2024-05-07",
-        "pct": 185.1,
+        "pct": 187.6,
         "benchPct": 48.1,
-        "excess": 137.0
+        "excess": 139.5
       },
       {
         "ticker": "CVX",
         "txDate": "2024-05-07",
-        "pct": 22.9,
+        "pct": 23.1,
         "benchPct": 48.1,
-        "excess": -25.2
+        "excess": -25.0
       }
     ],
     "rowsOf": 8

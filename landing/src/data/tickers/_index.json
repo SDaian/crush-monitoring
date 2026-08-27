@@ -95,11 +95,11 @@
       "slug": "googl",
       "ticker": "GOOGL",
       "company": "Alphabet Inc.",
-      "trades": 87,
+      "trades": 88,
       "members": 29,
       "buys": 43,
-      "sells": 44,
-      "lastTx": "2026-08-11",
+      "sells": 45,
+      "lastTx": "2026-08-24",
       "indexable": true,
       "industry": {
         "key": "tech",
@@ -272,6 +272,21 @@
       }
     },
     {
+      "slug": "acn",
+      "ticker": "ACN",
+      "company": "Accenture plc",
+      "trades": 52,
+      "members": 20,
+      "buys": 12,
+      "sells": 40,
+      "lastTx": "2026-08-11",
+      "indexable": true,
+      "industry": {
+        "key": "tech",
+        "label": "Technology"
+      }
+    },
+    {
       "slug": "crm",
       "ticker": "CRM",
       "company": "Salesforce, Inc.",
@@ -404,21 +419,6 @@
       "industry": {
         "key": "agriculture",
         "label": "Agriculture & food"
-      }
-    },
-    {
-      "slug": "acn",
-      "ticker": "ACN",
-      "company": "Accenture plc",
-      "trades": 49,
-      "members": 20,
-      "buys": 12,
-      "sells": 37,
-      "lastTx": "2026-07-10",
-      "indexable": true,
-      "industry": {
-        "key": "tech",
-        "label": "Technology"
       }
     },
     {

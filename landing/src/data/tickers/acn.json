@@ -9,20 +9,20 @@
   },
   "indexable": true,
   "technical": {
-    "asOf": "2026-08-25",
-    "price": 186.93,
-    "chg1d": 0.21,
-    "chg1w": 8.1,
-    "chg1m": 21.34,
-    "rsi14": 68.0,
-    "sma50": 154.06,
-    "sma200": 205.16,
-    "vsSma50": 21.3,
-    "vsSma200": -8.9,
-    "relVol": 0.67,
+    "asOf": "2026-08-26",
+    "price": 181.38,
+    "chg1d": -2.97,
+    "chg1w": -0.98,
+    "chg1m": 10.15,
+    "rsi14": 60.5,
+    "sma50": 154.38,
+    "sma200": 204.86,
+    "vsSma50": 17.5,
+    "vsSma200": -11.5,
+    "relVol": 0.76,
     "high52w": 288.54,
     "low52w": 124.44,
-    "rangePos": 38.0,
+    "rangePos": 35.0,
     "series": [
       {
         "d": "2025-09-05",
@@ -229,32 +229,32 @@
         "c": 185.28
       },
       {
-        "d": "2026-08-25",
-        "c": 186.93
+        "d": "2026-08-26",
+        "c": 181.38
       }
     ],
     "signals": [],
     "nextEarnings": null,
     "score": {
-      "label": "Buy",
-      "buys": 4,
-      "sells": 2,
+      "label": "Hold",
+      "buys": 3,
+      "sells": 3,
       "holds": 1,
-      "ratio": 0.286
+      "ratio": 0.0
     }
   },
   "summary": {
-    "trades": 49,
+    "trades": 52,
     "members": 20,
     "buys": 12,
-    "sells": 37,
+    "sells": 40,
     "other": 0,
     "firstTx": "2024-03-12",
-    "lastTx": "2026-07-10",
-    "lastFiling": "2026-08-05",
+    "lastTx": "2026-08-11",
+    "lastFiling": "2026-08-25",
     "estBuyLabel": "$163K",
     "estSellLabel": "$4.0M",
-    "pctLate": 18
+    "pctLate": 17
   },
   "topMembers": [
     {
@@ -262,10 +262,10 @@
       "slug": "kelly-morrison",
       "party": "D",
       "chamber": "House",
-      "trades": 5,
+      "trades": 8,
       "buys": 0,
-      "sells": 5,
-      "estLabel": "$89K",
+      "sells": 8,
+      "estLabel": "$138K",
       "hasPage": false
     },
     {
@@ -369,6 +369,42 @@
     }
   ],
   "trades": [
+    {
+      "member": "Kelly Morrison",
+      "memberSlug": "kelly-morrison",
+      "hasPage": false,
+      "party": "D",
+      "side": "SELL",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-08-11",
+      "filedDate": "2026-08-25",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035244.pdf"
+    },
+    {
+      "member": "Kelly Morrison",
+      "memberSlug": "kelly-morrison",
+      "hasPage": false,
+      "party": "D",
+      "side": "SELL",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-08-11",
+      "filedDate": "2026-08-25",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035244.pdf"
+    },
+    {
+      "member": "Kelly Morrison",
+      "memberSlug": "kelly-morrison",
+      "hasPage": false,
+      "party": "D",
+      "side": "SELL",
+      "amountBucket": "$15K – $50K",
+      "txDate": "2026-08-11",
+      "filedDate": "2026-08-25",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035244.pdf"
+    },
     {
       "member": "Dan Newhouse",
       "memberSlug": "dan-newhouse",
@@ -632,42 +668,6 @@
       "filedDate": "2025-10-07",
       "daysLate": 0,
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20032204.pdf"
-    },
-    {
-      "member": "Rick W. Allen",
-      "memberSlug": "rick-w-allen",
-      "hasPage": false,
-      "party": "R",
-      "side": "SELL",
-      "amountBucket": "$1K – $15K",
-      "txDate": "2025-08-19",
-      "filedDate": "2025-09-12",
-      "daysLate": 0,
-      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20032052.pdf"
-    },
-    {
-      "member": "Kelly Morrison",
-      "memberSlug": "kelly-morrison",
-      "hasPage": false,
-      "party": "D",
-      "side": "SELL",
-      "amountBucket": "$15K – $50K",
-      "txDate": "2025-08-19",
-      "filedDate": "2025-09-11",
-      "daysLate": 0,
-      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20032061.pdf"
-    },
-    {
-      "member": "Kelly Morrison",
-      "memberSlug": "kelly-morrison",
-      "hasPage": false,
-      "party": "D",
-      "side": "SELL",
-      "amountBucket": "$15K – $50K",
-      "txDate": "2025-08-19",
-      "filedDate": "2025-09-11",
-      "daysLate": 0,
-      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20032061.pdf"
     }
   ],
   "tradesShown": 25
