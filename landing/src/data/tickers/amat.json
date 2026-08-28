@@ -244,15 +244,15 @@
     }
   },
   "summary": {
-    "trades": 30,
+    "trades": 31,
     "members": 13,
-    "buys": 20,
+    "buys": 21,
     "sells": 10,
     "other": 0,
     "firstTx": "2024-01-02",
     "lastTx": "2026-07-15",
-    "lastFiling": "2026-08-10",
-    "estBuyLabel": "$541K",
+    "lastFiling": "2026-08-27",
+    "estBuyLabel": "$549K",
     "estSellLabel": "$281K",
     "pctLate": 10
   },
@@ -280,6 +280,17 @@
       "hasPage": false
     },
     {
+      "name": "Jared Moskowitz",
+      "slug": "jared-moskowitz",
+      "party": "D",
+      "chamber": "House",
+      "trades": 4,
+      "buys": 4,
+      "sells": 0,
+      "estLabel": "$32K",
+      "hasPage": false
+    },
+    {
       "name": "John Boozman",
       "slug": "john-boozman",
       "party": "R",
@@ -300,17 +311,6 @@
       "sells": 0,
       "estLabel": "$32K",
       "hasPage": true
-    },
-    {
-      "name": "Jared Moskowitz",
-      "slug": "jared-moskowitz",
-      "party": "D",
-      "chamber": "House",
-      "trades": 3,
-      "buys": 3,
-      "sells": 0,
-      "estLabel": "$24K",
-      "hasPage": false
     },
     {
       "name": "Dan Newhouse",
@@ -380,6 +380,18 @@
       "filedDate": "2026-08-10",
       "daysLate": 0,
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035180.pdf"
+    },
+    {
+      "member": "Jared Moskowitz",
+      "memberSlug": "jared-moskowitz",
+      "hasPage": false,
+      "party": "D",
+      "side": "BUY",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-07-13",
+      "filedDate": "2026-08-27",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035243.pdf"
     },
     {
       "member": "Dan Newhouse",
@@ -656,18 +668,6 @@
       "filedDate": "2025-04-20",
       "daysLate": 0,
       "sourceUrl": "https://efdsearch.senate.gov/search/view/ptr/fcacc112-3bf8-4a43-82f6-38d14a699357/"
-    },
-    {
-      "member": "Marjorie Taylor Greene",
-      "memberSlug": "marjorie-taylor-greene",
-      "hasPage": true,
-      "party": "R",
-      "side": "BUY",
-      "amountBucket": "$1K – $15K",
-      "txDate": "2025-03-17",
-      "filedDate": "2025-03-19",
-      "daysLate": 0,
-      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20028002.pdf"
     }
   ],
   "tradesShown": 25

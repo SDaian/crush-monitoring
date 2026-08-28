@@ -962,6 +962,21 @@
       }
     },
     {
+      "slug": "amat",
+      "ticker": "AMAT",
+      "company": "Applied Materials, Inc.",
+      "trades": 31,
+      "members": 13,
+      "buys": 21,
+      "sells": 10,
+      "lastTx": "2026-07-15",
+      "indexable": true,
+      "industry": {
+        "key": "tech",
+        "label": "Technology"
+      }
+    },
+    {
       "slug": "mcd",
       "ticker": "MCD",
       "company": "McDonald's Corporation",
@@ -1019,21 +1034,6 @@
       "industry": {
         "key": "health",
         "label": "Health care & pharma"
-      }
-    },
-    {
-      "slug": "amat",
-      "ticker": "AMAT",
-      "company": "Applied Materials, Inc.",
-      "trades": 30,
-      "members": 13,
-      "buys": 20,
-      "sells": 10,
-      "lastTx": "2026-07-15",
-      "indexable": true,
-      "industry": {
-        "key": "tech",
-        "label": "Technology"
       }
     },
     {
