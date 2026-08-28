@@ -46,6 +46,8 @@ AI_TICKERS: list[dict[str, str]] = [
     {"ticker": "META", "name": "Meta Platforms"},
     {"ticker": "TSLA", "name": "Tesla"},
     {"ticker": "VRT", "name": "Vertiv Holdings"},
+    {"ticker": "VST", "name": "Vistra"},
+    {"ticker": "BE", "name": "Bloom Energy"},
     {"ticker": "SMCI", "name": "Super Micro Computer"},
     {"ticker": "DELL", "name": "Dell Technologies"},
     # Off-theme (not AI) but featured by request — tracked for their own sake.

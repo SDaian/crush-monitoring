@@ -1,0 +1,217 @@
+{
+  "_comment": "Generated from real official disclosures by congress/landing_data.py (daily Action). Do not edit by hand. Dollar figures are bracket midpoints — estimates, not real position sizes.",
+  "slug": "vst",
+  "ticker": "VST",
+  "company": "Vistra Corp.",
+  "industry": {
+    "key": "energy",
+    "label": "Energy & utilities"
+  },
+  "indexable": false,
+  "technical": null,
+  "summary": {
+    "trades": 11,
+    "members": 5,
+    "buys": 7,
+    "sells": 4,
+    "other": 0,
+    "firstTx": "2025-01-14",
+    "lastTx": "2026-02-17",
+    "lastFiling": "2026-03-12",
+    "estBuyLabel": "$990K",
+    "estSellLabel": "$57K",
+    "pctLate": 9
+  },
+  "topMembers": [
+    {
+      "name": "Lisa C. McClain",
+      "slug": "lisa-c-mcclain",
+      "party": "R",
+      "chamber": "House",
+      "trades": 4,
+      "buys": 2,
+      "sells": 2,
+      "estLabel": "$32K",
+      "hasPage": false
+    },
+    {
+      "name": "Nancy Pelosi",
+      "slug": "nancy-pelosi",
+      "party": "D",
+      "chamber": "House",
+      "trades": 2,
+      "buys": 2,
+      "sells": 0,
+      "estLabel": "$925K",
+      "hasPage": true
+    },
+    {
+      "name": "Jefferson Shreve",
+      "slug": "jefferson-shreve",
+      "party": "R",
+      "chamber": "House",
+      "trades": 2,
+      "buys": 1,
+      "sells": 1,
+      "estLabel": "$65K",
+      "hasPage": false
+    },
+    {
+      "name": "Julie Johnson",
+      "slug": "julie-johnson",
+      "party": "D",
+      "chamber": "House",
+      "trades": 2,
+      "buys": 1,
+      "sells": 1,
+      "estLabel": "$16K",
+      "hasPage": false
+    },
+    {
+      "name": "Julia Letlow",
+      "slug": "julia-letlow",
+      "party": "R",
+      "chamber": "House",
+      "trades": 1,
+      "buys": 1,
+      "sells": 0,
+      "estLabel": "$8K",
+      "hasPage": false
+    }
+  ],
+  "trades": [
+    {
+      "member": "Julia Letlow",
+      "memberSlug": "julia-letlow",
+      "hasPage": false,
+      "party": "R",
+      "side": "BUY",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-02-17",
+      "filedDate": "2026-03-12",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20034106.pdf"
+    },
+    {
+      "member": "Nancy Pelosi",
+      "memberSlug": "nancy-pelosi",
+      "hasPage": true,
+      "party": "D",
+      "side": "BUY",
+      "amountBucket": "$100K – $250K",
+      "txDate": "2026-01-16",
+      "filedDate": "2026-01-23",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20033725.pdf"
+    },
+    {
+      "member": "Lisa C. McClain",
+      "memberSlug": "lisa-c-mcclain",
+      "hasPage": false,
+      "party": "R",
+      "side": "SELL",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2025-10-31",
+      "filedDate": "2025-11-21",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20033446.pdf"
+    },
+    {
+      "member": "Lisa C. McClain",
+      "memberSlug": "lisa-c-mcclain",
+      "hasPage": false,
+      "party": "R",
+      "side": "SELL",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2025-10-30",
+      "filedDate": "2025-11-21",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20033446.pdf"
+    },
+    {
+      "member": "Lisa C. McClain",
+      "memberSlug": "lisa-c-mcclain",
+      "hasPage": false,
+      "party": "R",
+      "side": "BUY",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2025-10-30",
+      "filedDate": "2025-11-21",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20033446.pdf"
+    },
+    {
+      "member": "Lisa C. McClain",
+      "memberSlug": "lisa-c-mcclain",
+      "hasPage": false,
+      "party": "R",
+      "side": "BUY",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2025-06-17",
+      "filedDate": "2025-08-13",
+      "daysLate": 12,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20030891.pdf"
+    },
+    {
+      "member": "Jefferson Shreve",
+      "memberSlug": "jefferson-shreve",
+      "hasPage": false,
+      "party": "R",
+      "side": "SELL",
+      "amountBucket": "$15K – $50K",
+      "txDate": "2025-04-07",
+      "filedDate": "2025-05-08",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20030231.pdf"
+    },
+    {
+      "member": "Julie Johnson",
+      "memberSlug": "julie-johnson",
+      "hasPage": false,
+      "party": "D",
+      "side": "SELL",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2025-04-01",
+      "filedDate": "2025-05-14",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20030296.pdf"
+    },
+    {
+      "member": "Jefferson Shreve",
+      "memberSlug": "jefferson-shreve",
+      "hasPage": false,
+      "party": "R",
+      "side": "BUY",
+      "amountBucket": "$15K – $50K",
+      "txDate": "2025-03-05",
+      "filedDate": "2025-04-11",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20029038.pdf"
+    },
+    {
+      "member": "Julie Johnson",
+      "memberSlug": "julie-johnson",
+      "hasPage": false,
+      "party": "D",
+      "side": "BUY",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2025-02-12",
+      "filedDate": "2025-03-12",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20027936.pdf"
+    },
+    {
+      "member": "Nancy Pelosi",
+      "memberSlug": "nancy-pelosi",
+      "hasPage": true,
+      "party": "D",
+      "side": "BUY",
+      "amountBucket": "$500K – $1M",
+      "txDate": "2025-01-14",
+      "filedDate": "2025-01-17",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20026590.pdf"
+    }
+  ],
+  "tradesShown": 11
+}
