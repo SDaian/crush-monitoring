@@ -9,20 +9,20 @@
   },
   "indexable": true,
   "technical": {
-    "asOf": "2026-09-01",
-    "price": 295.14,
-    "chg1d": -2.11,
-    "chg1w": -6.2,
-    "chg1m": 0.18,
-    "rsi14": 42.1,
-    "sma50": 327.17,
-    "sma200": 258.72,
-    "vsSma50": -9.8,
-    "vsSma200": 14.1,
-    "relVol": 0.0,
+    "asOf": "2026-09-02",
+    "price": 288.32,
+    "chg1d": -0.65,
+    "chg1w": -7.85,
+    "chg1m": -9.26,
+    "rsi14": 39.9,
+    "sma50": 325.41,
+    "sma200": 259.37,
+    "vsSma50": -11.4,
+    "vsSma200": 11.2,
+    "relVol": 0.65,
     "high52w": 433.33,
-    "low52w": 97.03,
-    "rangePos": 59.0,
+    "low52w": 97.74,
+    "rangePos": 57.0,
     "series": [
       {
         "d": "2025-09-12",
@@ -229,32 +229,32 @@
         "c": 301.9
       },
       {
-        "d": "2026-09-01",
-        "c": 295.14
+        "d": "2026-09-02",
+        "c": 288.32
       }
     ],
     "signals": [],
     "nextEarnings": null,
     "score": {
-      "label": "Hold",
-      "buys": 3,
-      "sells": 3,
+      "label": "Sell",
+      "buys": 2,
+      "sells": 4,
       "holds": 1,
-      "ratio": 0.0
+      "ratio": -0.286
     }
   },
   "summary": {
-    "trades": 41,
+    "trades": 42,
     "members": 15,
     "buys": 13,
-    "sells": 28,
+    "sells": 29,
     "other": 0,
     "firstTx": "2024-01-02",
-    "lastTx": "2026-06-05",
-    "lastFiling": "2026-07-21",
+    "lastTx": "2026-08-13",
+    "lastFiling": "2026-09-02",
     "estBuyLabel": "$312K",
-    "estSellLabel": "$530K",
-    "pctLate": 15
+    "estSellLabel": "$538K",
+    "pctLate": 14
   },
   "topMembers": [
     {
@@ -291,6 +291,17 @@
       "hasPage": false
     },
     {
+      "name": "Sheldon Whitehouse",
+      "slug": "sheldon-whitehouse",
+      "party": "D",
+      "chamber": "Senate",
+      "trades": 3,
+      "buys": 0,
+      "sells": 3,
+      "estLabel": "$73K",
+      "hasPage": false
+    },
+    {
       "name": "John Boozman",
       "slug": "john-boozman",
       "party": "R",
@@ -310,17 +321,6 @@
       "buys": 1,
       "sells": 2,
       "estLabel": "$24K",
-      "hasPage": false
-    },
-    {
-      "name": "Sheldon Whitehouse",
-      "slug": "sheldon-whitehouse",
-      "party": "D",
-      "chamber": "Senate",
-      "trades": 2,
-      "buys": 0,
-      "sells": 2,
-      "estLabel": "$65K",
       "hasPage": false
     },
     {
@@ -369,6 +369,18 @@
     }
   ],
   "trades": [
+    {
+      "member": "Sheldon Whitehouse",
+      "memberSlug": "sheldon-whitehouse",
+      "hasPage": false,
+      "party": "D",
+      "side": "SELL",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-08-13",
+      "filedDate": "2026-09-02",
+      "daysLate": 0,
+      "sourceUrl": "https://efdsearch.senate.gov/search/view/ptr/f8d003c0-ca1e-4c39-9d66-632d220180e1/"
+    },
     {
       "member": "David J. Taylor",
       "memberSlug": "david-j-taylor",
@@ -656,18 +668,6 @@
       "filedDate": "2025-06-11",
       "daysLate": 0,
       "sourceUrl": "https://efdsearch.senate.gov/search/view/ptr/8bb121de-bbff-4550-9dd4-b60d4002e230/"
-    },
-    {
-      "member": "Jefferson Shreve",
-      "memberSlug": "jefferson-shreve",
-      "hasPage": false,
-      "party": "R",
-      "side": "SELL",
-      "amountBucket": "$15K – $50K",
-      "txDate": "2025-05-12",
-      "filedDate": "2025-06-22",
-      "daysLate": 0,
-      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20030387.pdf"
     }
   ],
   "tradesShown": 25

@@ -5,11 +5,11 @@
       "slug": "msft",
       "ticker": "MSFT",
       "company": "Microsoft Corporation",
-      "trades": 200,
+      "trades": 201,
       "members": 44,
       "buys": 104,
-      "sells": 96,
-      "lastTx": "2026-08-11",
+      "sells": 97,
+      "lastTx": "2026-08-21",
       "indexable": true,
       "industry": {
         "key": "tech",
@@ -20,11 +20,11 @@
       "slug": "nvda",
       "ticker": "NVDA",
       "company": "NVIDIA Corporation",
-      "trades": 176,
+      "trades": 178,
       "members": 33,
       "buys": 115,
-      "sells": 61,
-      "lastTx": "2026-07-21",
+      "sells": 63,
+      "lastTx": "2026-08-13",
       "indexable": true,
       "industry": {
         "key": "tech",
@@ -125,11 +125,11 @@
       "slug": "hd",
       "ticker": "HD",
       "company": "Home Depot, Inc.",
-      "trades": 77,
+      "trades": 78,
       "members": 24,
       "buys": 43,
-      "sells": 34,
-      "lastTx": "2026-07-30",
+      "sells": 35,
+      "lastTx": "2026-08-24",
       "indexable": true,
       "industry": {
         "key": "consumer",
@@ -242,6 +242,21 @@
       }
     },
     {
+      "slug": "pg",
+      "ticker": "PG",
+      "company": "Procter & Gamble Company",
+      "trades": 60,
+      "members": 28,
+      "buys": 27,
+      "sells": 33,
+      "lastTx": "2026-08-24",
+      "indexable": true,
+      "industry": {
+        "key": "consumer",
+        "label": "Consumer & retail"
+      }
+    },
+    {
       "slug": "tsla",
       "ticker": "TSLA",
       "company": "Tesla, Inc.",
@@ -254,21 +269,6 @@
       "industry": {
         "key": "autos",
         "label": "Autos & mobility"
-      }
-    },
-    {
-      "slug": "pg",
-      "ticker": "PG",
-      "company": "Procter & Gamble Company",
-      "trades": 58,
-      "members": 27,
-      "buys": 27,
-      "sells": 31,
-      "lastTx": "2026-08-11",
-      "indexable": true,
-      "industry": {
-        "key": "consumer",
-        "label": "Consumer & retail"
       }
     },
     {
@@ -422,6 +422,21 @@
       }
     },
     {
+      "slug": "adbe",
+      "ticker": "ADBE",
+      "company": "Adobe Inc.",
+      "trades": 48,
+      "members": 15,
+      "buys": 23,
+      "sells": 25,
+      "lastTx": "2026-08-14",
+      "indexable": true,
+      "industry": {
+        "key": "tech",
+        "label": "Technology"
+      }
+    },
+    {
       "slug": "ibm",
       "ticker": "IBM",
       "company": "International Business Machines Corporation",
@@ -430,21 +445,6 @@
       "buys": 27,
       "sells": 20,
       "lastTx": "2026-07-16",
-      "indexable": true,
-      "industry": {
-        "key": "tech",
-        "label": "Technology"
-      }
-    },
-    {
-      "slug": "adbe",
-      "ticker": "ADBE",
-      "company": "Adobe Inc.",
-      "trades": 47,
-      "members": 14,
-      "buys": 23,
-      "sells": 24,
-      "lastTx": "2026-07-10",
       "indexable": true,
       "industry": {
         "key": "tech",
@@ -482,6 +482,21 @@
       }
     },
     {
+      "slug": "lrcx",
+      "ticker": "LRCX",
+      "company": "Lam Research Corporation",
+      "trades": 42,
+      "members": 15,
+      "buys": 13,
+      "sells": 29,
+      "lastTx": "2026-08-13",
+      "indexable": true,
+      "industry": {
+        "key": "tech",
+        "label": "Technology"
+      }
+    },
+    {
       "slug": "uber",
       "ticker": "UBER",
       "company": "Uber Technologies, Inc.",
@@ -509,21 +524,6 @@
       "industry": {
         "key": "health",
         "label": "Health care & pharma"
-      }
-    },
-    {
-      "slug": "lrcx",
-      "ticker": "LRCX",
-      "company": "Lam Research Corporation",
-      "trades": 41,
-      "members": 15,
-      "buys": 13,
-      "sells": 28,
-      "lastTx": "2026-06-05",
-      "indexable": true,
-      "industry": {
-        "key": "tech",
-        "label": "Technology"
       }
     },
     {
@@ -767,6 +767,21 @@
       }
     },
     {
+      "slug": "ba",
+      "ticker": "BA",
+      "company": "Boeing Company",
+      "trades": 34,
+      "members": 14,
+      "buys": 17,
+      "sells": 17,
+      "lastTx": "2026-08-13",
+      "indexable": true,
+      "industry": {
+        "key": "defense",
+        "label": "Defense & aerospace"
+      }
+    },
+    {
       "slug": "asml",
       "ticker": "ASML",
       "company": "ASML Holding N.V. - New York Registry Shares",
@@ -794,6 +809,21 @@
       "industry": {
         "key": "telecom",
         "label": "Telecom & media"
+      }
+    },
+    {
+      "slug": "amgn",
+      "ticker": "AMGN",
+      "company": "Amgen Inc.",
+      "trades": 33,
+      "members": 17,
+      "buys": 16,
+      "sells": 17,
+      "lastTx": "2026-08-12",
+      "indexable": true,
+      "industry": {
+        "key": "health",
+        "label": "Health care & pharma"
       }
     },
     {
@@ -899,36 +929,6 @@
       "industry": {
         "key": "agriculture",
         "label": "Agriculture & food"
-      }
-    },
-    {
-      "slug": "ba",
-      "ticker": "BA",
-      "company": "Boeing Company",
-      "trades": 32,
-      "members": 13,
-      "buys": 17,
-      "sells": 15,
-      "lastTx": "2026-05-18",
-      "indexable": true,
-      "industry": {
-        "key": "defense",
-        "label": "Defense & aerospace"
-      }
-    },
-    {
-      "slug": "amgn",
-      "ticker": "AMGN",
-      "company": "Amgen Inc.",
-      "trades": 32,
-      "members": 17,
-      "buys": 16,
-      "sells": 16,
-      "lastTx": "2026-06-05",
-      "indexable": true,
-      "industry": {
-        "key": "health",
-        "label": "Health care & pharma"
       }
     },
     {
@@ -1307,6 +1307,21 @@
       }
     },
     {
+      "slug": "dis",
+      "ticker": "DIS",
+      "company": "Walt Disney Company",
+      "trades": 26,
+      "members": 18,
+      "buys": 7,
+      "sells": 19,
+      "lastTx": "2026-08-10",
+      "indexable": true,
+      "industry": {
+        "key": "telecom",
+        "label": "Telecom & media"
+      }
+    },
+    {
       "slug": "wfc",
       "ticker": "WFC",
       "company": "Wells Fargo & Company",
@@ -1364,21 +1379,6 @@
       "industry": {
         "key": "tech",
         "label": "Technology"
-      }
-    },
-    {
-      "slug": "dis",
-      "ticker": "DIS",
-      "company": "Walt Disney Company",
-      "trades": 25,
-      "members": 17,
-      "buys": 7,
-      "sells": 18,
-      "lastTx": "2026-07-17",
-      "indexable": true,
-      "industry": {
-        "key": "telecom",
-        "label": "Telecom & media"
       }
     },
     {

@@ -9,20 +9,20 @@
   },
   "indexable": true,
   "technical": {
-    "asOf": "2026-09-01",
-    "price": 216.05,
-    "chg1d": -2.14,
-    "chg1w": 1.41,
-    "chg1m": 4.55,
-    "rsi14": 50.8,
-    "sma50": 208.77,
-    "sma200": 196.07,
-    "vsSma50": 3.5,
-    "vsSma200": 10.2,
-    "relVol": 0.0,
+    "asOf": "2026-09-02",
+    "price": 224.41,
+    "chg1d": 3.21,
+    "chg1w": 7.04,
+    "chg1m": 5.88,
+    "rsi14": 56.7,
+    "sma50": 209.28,
+    "sma200": 196.27,
+    "vsSma50": 7.2,
+    "vsSma200": 14.3,
+    "relVol": 1.24,
     "high52w": 235.74,
     "low52w": 165.17,
-    "rangePos": 72.0,
+    "rangePos": 84.0,
     "series": [
       {
         "d": "2025-09-12",
@@ -229,29 +229,29 @@
         "c": 217.55
       },
       {
-        "d": "2026-09-01",
-        "c": 216.05
+        "d": "2026-09-02",
+        "c": 224.41
       }
     ],
     "signals": [],
     "nextEarnings": null,
     "score": {
       "label": "Strong Buy",
-      "buys": 5,
-      "sells": 1,
+      "buys": 6,
+      "sells": 0,
       "holds": 1,
-      "ratio": 0.571
+      "ratio": 0.857
     }
   },
   "summary": {
-    "trades": 176,
+    "trades": 178,
     "members": 33,
     "buys": 115,
-    "sells": 61,
+    "sells": 63,
     "other": 0,
     "firstTx": "2024-01-02",
-    "lastTx": "2026-07-21",
-    "lastFiling": "2026-08-07",
+    "lastTx": "2026-08-13",
+    "lastFiling": "2026-09-02",
     "estBuyLabel": "$11.2M",
     "estSellLabel": "$10.6M",
     "pctLate": 16
@@ -280,6 +280,17 @@
       "hasPage": false
     },
     {
+      "name": "Sheldon Whitehouse",
+      "slug": "sheldon-whitehouse",
+      "party": "D",
+      "chamber": "Senate",
+      "trades": 12,
+      "buys": 0,
+      "sells": 12,
+      "estLabel": "$602K",
+      "hasPage": false
+    },
+    {
       "name": "Lisa C. McClain",
       "slug": "lisa-c-mcclain",
       "party": "R",
@@ -288,17 +299,6 @@
       "buys": 8,
       "sells": 4,
       "estLabel": "$595K",
-      "hasPage": false
-    },
-    {
-      "name": "Sheldon Whitehouse",
-      "slug": "sheldon-whitehouse",
-      "party": "D",
-      "chamber": "Senate",
-      "trades": 10,
-      "buys": 0,
-      "sells": 10,
-      "estLabel": "$561K",
       "hasPage": false
     },
     {
@@ -369,6 +369,30 @@
     }
   ],
   "trades": [
+    {
+      "member": "Sheldon Whitehouse",
+      "memberSlug": "sheldon-whitehouse",
+      "hasPage": false,
+      "party": "D",
+      "side": "SELL",
+      "amountBucket": "$15K – $50K",
+      "txDate": "2026-08-13",
+      "filedDate": "2026-09-02",
+      "daysLate": 0,
+      "sourceUrl": "https://efdsearch.senate.gov/search/view/ptr/f8d003c0-ca1e-4c39-9d66-632d220180e1/"
+    },
+    {
+      "member": "Sheldon Whitehouse",
+      "memberSlug": "sheldon-whitehouse",
+      "hasPage": false,
+      "party": "D",
+      "side": "SELL",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-08-13",
+      "filedDate": "2026-09-02",
+      "daysLate": 0,
+      "sourceUrl": "https://efdsearch.senate.gov/search/view/ptr/f8d003c0-ca1e-4c39-9d66-632d220180e1/"
+    },
     {
       "member": "Sam T. Liccardo",
       "memberSlug": "sam-t-liccardo",
@@ -644,30 +668,6 @@
       "filedDate": "2026-04-07",
       "daysLate": 0,
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20034285.pdf"
-    },
-    {
-      "member": "Daniel Meuser",
-      "memberSlug": "daniel-meuser",
-      "hasPage": false,
-      "party": "R",
-      "side": "SELL",
-      "amountBucket": "$1K – $15K",
-      "txDate": "2026-02-25",
-      "filedDate": "2026-04-03",
-      "daysLate": 0,
-      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20034158.pdf"
-    },
-    {
-      "member": "Daniel Meuser",
-      "memberSlug": "daniel-meuser",
-      "hasPage": false,
-      "party": "R",
-      "side": "SELL",
-      "amountBucket": "$1K – $15K",
-      "txDate": "2026-01-30",
-      "filedDate": "2026-02-17",
-      "daysLate": 0,
-      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20034016.pdf"
     }
   ],
   "tradesShown": 25

@@ -9,20 +9,20 @@
   },
   "indexable": true,
   "technical": {
-    "asOf": "2026-09-01",
-    "price": 206.63,
-    "chg1d": -0.55,
-    "chg1w": -2.11,
-    "chg1m": -11.5,
-    "rsi14": 34.4,
-    "sma50": 219.9,
-    "sma200": 220.0,
-    "vsSma50": -6.0,
-    "vsSma200": -6.1,
-    "relVol": 0.0,
+    "asOf": "2026-09-02",
+    "price": 208.87,
+    "chg1d": 1.56,
+    "chg1w": -1.52,
+    "chg1m": -11.93,
+    "rsi14": 38.9,
+    "sma50": 219.72,
+    "sma200": 220.06,
+    "vsSma50": -4.9,
+    "vsSma200": -5.1,
+    "relVol": 1.31,
     "high52w": 252.15,
     "low52w": 179.12,
-    "rangePos": 38.0,
+    "rangePos": 41.0,
     "series": [
       {
         "d": "2025-09-12",
@@ -229,18 +229,11 @@
         "c": 209.82
       },
       {
-        "d": "2026-09-01",
-        "c": 206.63
+        "d": "2026-09-02",
+        "c": 208.87
       }
     ],
-    "signals": [
-      {
-        "type": "death_cross",
-        "asof": "2026-09-01",
-        "label": "Death cross (50-day below 200-day)",
-        "dir": "bear"
-      }
-    ],
+    "signals": [],
     "nextEarnings": null,
     "score": {
       "label": "Strong Sell",
@@ -251,17 +244,17 @@
     }
   },
   "summary": {
-    "trades": 32,
-    "members": 13,
+    "trades": 34,
+    "members": 14,
     "buys": 17,
-    "sells": 15,
+    "sells": 17,
     "other": 0,
     "firstTx": "2024-10-23",
-    "lastTx": "2026-05-18",
-    "lastFiling": "2026-08-05",
+    "lastTx": "2026-08-13",
+    "lastFiling": "2026-09-01",
     "estBuyLabel": "$210K",
-    "estSellLabel": "$978K",
-    "pctLate": 25
+    "estSellLabel": "$1.0M",
+    "pctLate": 24
   },
   "topMembers": [
     {
@@ -331,6 +324,17 @@
       "hasPage": false
     },
     {
+      "name": "Kevin Hern",
+      "slug": "kevin-hern",
+      "party": "R",
+      "chamber": "House",
+      "trades": 2,
+      "buys": 0,
+      "sells": 2,
+      "estLabel": "$41K",
+      "hasPage": false
+    },
+    {
       "name": "Maria Elvira Salazar",
       "slug": "maria-elvira-salazar",
       "party": "R",
@@ -362,20 +366,33 @@
       "sells": 2,
       "estLabel": "$16K",
       "hasPage": false
-    },
-    {
-      "name": "Val T. Hoyle",
-      "slug": "val-t-hoyle",
-      "party": "D",
-      "chamber": "House",
-      "trades": 2,
-      "buys": 1,
-      "sells": 1,
-      "estLabel": "$16K",
-      "hasPage": false
     }
   ],
   "trades": [
+    {
+      "member": "Kevin Hern",
+      "memberSlug": "kevin-hern",
+      "hasPage": false,
+      "party": "R",
+      "side": "SELL",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-08-13",
+      "filedDate": "2026-09-01",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035326.pdf"
+    },
+    {
+      "member": "Kevin Hern",
+      "memberSlug": "kevin-hern",
+      "hasPage": false,
+      "party": "R",
+      "side": "SELL",
+      "amountBucket": "$15K – $50K",
+      "txDate": "2026-08-13",
+      "filedDate": "2026-09-01",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035326.pdf"
+    },
     {
       "member": "Donald J. Trump",
       "memberSlug": "donald-j-trump",
@@ -651,30 +668,6 @@
       "filedDate": "2025-04-07",
       "daysLate": 0,
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20029026.pdf"
-    },
-    {
-      "member": "Robert P. Bresnahan, Jr.",
-      "memberSlug": "robert-p-bresnahan-jr",
-      "hasPage": false,
-      "party": "R",
-      "side": "BUY",
-      "amountBucket": "$15K – $50K",
-      "txDate": "2025-02-25",
-      "filedDate": "2025-03-27",
-      "daysLate": 0,
-      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20029034.pdf"
-    },
-    {
-      "member": "Jefferson Shreve",
-      "memberSlug": "jefferson-shreve",
-      "hasPage": false,
-      "party": "R",
-      "side": "SELL",
-      "amountBucket": "$15K – $50K",
-      "txDate": "2025-02-24",
-      "filedDate": "2025-03-09",
-      "daysLate": 0,
-      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20027879.pdf"
     }
   ],
   "tradesShown": 25

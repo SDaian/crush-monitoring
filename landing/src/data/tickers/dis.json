@@ -9,17 +9,17 @@
   },
   "indexable": true,
   "technical": {
-    "asOf": "2026-09-01",
-    "price": 107.9,
-    "chg1d": 0.33,
-    "chg1w": -3.01,
-    "chg1m": 9.94,
-    "rsi14": 58.5,
-    "sma50": 100.89,
+    "asOf": "2026-09-02",
+    "price": 107.98,
+    "chg1d": 1.66,
+    "chg1w": -1.51,
+    "chg1m": 9.98,
+    "rsi14": 57.9,
+    "sma50": 100.94,
     "sma200": 103.96,
-    "vsSma50": 6.9,
-    "vsSma200": 3.8,
-    "relVol": 0.0,
+    "vsSma50": 7.0,
+    "vsSma200": 3.9,
+    "relVol": 0.92,
     "high52w": 118.84,
     "low52w": 92.42,
     "rangePos": 59.0,
@@ -229,8 +229,8 @@
         "c": 108.1
       },
       {
-        "d": "2026-09-01",
-        "c": 107.9
+        "d": "2026-09-02",
+        "c": 107.98
       }
     ],
     "signals": [],
@@ -244,17 +244,17 @@
     }
   },
   "summary": {
-    "trades": 25,
-    "members": 17,
+    "trades": 26,
+    "members": 18,
     "buys": 7,
-    "sells": 18,
+    "sells": 19,
     "other": 0,
     "firstTx": "2024-10-29",
-    "lastTx": "2026-07-17",
-    "lastFiling": "2026-08-12",
+    "lastTx": "2026-08-10",
+    "lastFiling": "2026-09-01",
     "estBuyLabel": "$81K",
-    "estSellLabel": "$3.4M",
-    "pctLate": 16
+    "estSellLabel": "$3.5M",
+    "pctLate": 15
   },
   "topMembers": [
     {
@@ -346,6 +346,17 @@
       "hasPage": false
     },
     {
+      "name": "Kevin Hern",
+      "slug": "kevin-hern",
+      "party": "R",
+      "chamber": "House",
+      "trades": 1,
+      "buys": 0,
+      "sells": 1,
+      "estLabel": "$33K",
+      "hasPage": false
+    },
+    {
       "name": "Adam Smith",
       "slug": "adam-smith",
       "party": "D",
@@ -355,20 +366,21 @@
       "sells": 1,
       "estLabel": "$8K",
       "hasPage": false
-    },
-    {
-      "name": "Alan Armstrong",
-      "slug": "alan-armstrong",
-      "party": "R",
-      "chamber": "Senate",
-      "trades": 1,
-      "buys": 1,
-      "sells": 0,
-      "estLabel": "$8K",
-      "hasPage": true
     }
   ],
   "trades": [
+    {
+      "member": "Kevin Hern",
+      "memberSlug": "kevin-hern",
+      "hasPage": false,
+      "party": "R",
+      "side": "SELL",
+      "amountBucket": "$15K – $50K",
+      "txDate": "2026-08-10",
+      "filedDate": "2026-09-01",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035326.pdf"
+    },
     {
       "member": "Mike Kelly",
       "memberSlug": "mike-kelly",
@@ -656,18 +668,6 @@
       "filedDate": "2025-02-13",
       "daysLate": 0,
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20024346.pdf"
-    },
-    {
-      "member": "Val T. Hoyle",
-      "memberSlug": "val-t-hoyle",
-      "hasPage": false,
-      "party": "D",
-      "side": "BUY",
-      "amountBucket": "$1K – $15K",
-      "txDate": "2024-10-29",
-      "filedDate": "2025-09-12",
-      "daysLate": 273,
-      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20032070.pdf"
     }
   ],
   "tradesShown": 25
