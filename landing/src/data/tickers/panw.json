@@ -9,20 +9,20 @@
   },
   "indexable": true,
   "technical": {
-    "asOf": "2026-09-02",
-    "price": 328.48,
-    "chg1d": -9.28,
-    "chg1w": -3.19,
-    "chg1m": -10.33,
-    "rsi14": 41.8,
-    "sma50": 347.57,
-    "sma200": 231.78,
-    "vsSma50": -5.5,
-    "vsSma200": 41.7,
-    "relVol": 2.18,
+    "asOf": "2026-09-03",
+    "price": 331.94,
+    "chg1d": 1.05,
+    "chg1w": -13.3,
+    "chg1m": -8.47,
+    "rsi14": 43.0,
+    "sma50": 348.5,
+    "sma200": 232.42,
+    "vsSma50": -4.8,
+    "vsSma200": 42.8,
+    "relVol": 1.13,
     "high52w": 396.0,
     "low52w": 141.67,
-    "rangePos": 73.0,
+    "rangePos": 75.0,
     "series": [
       {
         "d": "2025-09-12",
@@ -229,18 +229,11 @@
         "c": 371.59
       },
       {
-        "d": "2026-09-02",
-        "c": 328.48
+        "d": "2026-09-03",
+        "c": 331.94
       }
     ],
-    "signals": [
-      {
-        "type": "lose_sma50",
-        "asof": "2026-09-02",
-        "label": "Lost the 50-day average",
-        "dir": "bear"
-      }
-    ],
+    "signals": [],
     "nextEarnings": null,
     "score": {
       "label": "Sell",

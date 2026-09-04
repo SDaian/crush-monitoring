@@ -9,20 +9,20 @@
   },
   "indexable": false,
   "technical": {
-    "asOf": "2026-09-02",
-    "price": 492.2,
-    "chg1d": 15.81,
-    "chg1w": 6.12,
-    "chg1m": 5.34,
-    "rsi14": 58.9,
-    "sma50": 435.51,
-    "sma200": 249.53,
-    "vsSma50": 13.0,
-    "vsSma200": 97.3,
-    "relVol": 5.01,
-    "high52w": 494.51,
+    "asOf": "2026-09-03",
+    "price": 516.39,
+    "chg1d": 4.91,
+    "chg1w": 9.34,
+    "chg1m": 11.6,
+    "rsi14": 62.5,
+    "sma50": 437.16,
+    "sma200": 251.44,
+    "vsSma50": 18.1,
+    "vsSma200": 105.4,
+    "relVol": 2.53,
+    "high52w": 516.39,
     "low52w": 111.07,
-    "rangePos": 99.0,
+    "rangePos": 100.0,
     "series": [
       {
         "d": "2025-09-12",
@@ -229,15 +229,15 @@
         "c": 456.24
       },
       {
-        "d": "2026-09-02",
-        "c": 492.2
+        "d": "2026-09-03",
+        "c": 516.39
       }
     ],
     "signals": [
       {
-        "type": "reclaim_sma50",
-        "asof": "2026-09-02",
-        "label": "Reclaimed the 50-day average",
+        "type": "new_52w_high",
+        "asof": "2026-09-03",
+        "label": "New 52-week high",
         "dir": "bull"
       }
     ],

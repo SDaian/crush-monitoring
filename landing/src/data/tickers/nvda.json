@@ -9,20 +9,20 @@
   },
   "indexable": true,
   "technical": {
-    "asOf": "2026-09-02",
-    "price": 224.41,
-    "chg1d": 3.21,
-    "chg1w": 7.04,
-    "chg1m": 5.88,
-    "rsi14": 56.7,
-    "sma50": 209.28,
-    "sma200": 196.27,
-    "vsSma50": 7.2,
-    "vsSma200": 14.3,
-    "relVol": 1.24,
+    "asOf": "2026-09-03",
+    "price": 228.45,
+    "chg1d": 1.8,
+    "chg1w": 0.21,
+    "chg1m": 4.21,
+    "rsi14": 59.2,
+    "sma50": 209.87,
+    "sma200": 196.46,
+    "vsSma50": 8.9,
+    "vsSma200": 16.3,
+    "relVol": 1.05,
     "high52w": 235.74,
     "low52w": 165.17,
-    "rangePos": 84.0,
+    "rangePos": 90.0,
     "series": [
       {
         "d": "2025-09-12",
@@ -229,8 +229,8 @@
         "c": 217.55
       },
       {
-        "d": "2026-09-02",
-        "c": 224.41
+        "d": "2026-09-03",
+        "c": 228.45
       }
     ],
     "signals": [],
@@ -244,13 +244,13 @@
     }
   },
   "summary": {
-    "trades": 178,
+    "trades": 179,
     "members": 33,
-    "buys": 115,
+    "buys": 116,
     "sells": 63,
     "other": 0,
     "firstTx": "2024-01-02",
-    "lastTx": "2026-08-13",
+    "lastTx": "2026-08-18",
     "lastFiling": "2026-09-02",
     "estBuyLabel": "$11.2M",
     "estSellLabel": "$10.6M",
@@ -369,6 +369,18 @@
     }
   ],
   "trades": [
+    {
+      "member": "John J. McGuire III",
+      "memberSlug": "john-j-mcguire-iii",
+      "hasPage": true,
+      "party": "R",
+      "side": "BUY",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-08-18",
+      "filedDate": "2026-09-02",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035367.pdf"
+    },
     {
       "member": "Sheldon Whitehouse",
       "memberSlug": "sheldon-whitehouse",
@@ -656,18 +668,6 @@
       "filedDate": "2026-04-14",
       "daysLate": 0,
       "sourceUrl": "https://efdsearch.senate.gov/search/view/ptr/88c765c5-6550-47af-a81d-2e052c1c1b7e/"
-    },
-    {
-      "member": "Gilbert Ray Cisneros, Jr.",
-      "memberSlug": "gilbert-ray-cisneros-jr",
-      "hasPage": true,
-      "party": "D",
-      "side": "BUY",
-      "amountBucket": "$1K – $15K",
-      "txDate": "2026-03-13",
-      "filedDate": "2026-04-07",
-      "daysLate": 0,
-      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20034285.pdf"
     }
   ],
   "tradesShown": 25

@@ -7,15 +7,22 @@
   "chamber": "House",
   "district": "VA-5",
   "summary": {
-    "trades": 20,
+    "trades": 22,
     "distinctTickers": 13,
     "firstTx": "2025-04-10",
-    "lastTx": "2026-07-31",
-    "lastFiling": "2026-08-10",
+    "lastTx": "2026-08-18",
+    "lastFiling": "2026-09-02",
     "pctLate": 0,
     "worstLate": 0
   },
   "topTickers": [
+    {
+      "ticker": "NVDA",
+      "count": 3,
+      "asset": "NVIDIA Corporation - Common Stock",
+      "slug": "nvda",
+      "hasPage": true
+    },
     {
       "ticker": "BLK",
       "count": 3,
@@ -31,17 +38,17 @@
       "hasPage": true
     },
     {
+      "ticker": "AAPL",
+      "count": 2,
+      "asset": "Apple Inc. - Common Stock",
+      "slug": "aapl",
+      "hasPage": true
+    },
+    {
       "ticker": "META",
       "count": 2,
       "asset": "Meta Platforms, Inc. - Class A Common Stock",
       "slug": "meta",
-      "hasPage": true
-    },
-    {
-      "ticker": "NVDA",
-      "count": 2,
-      "asset": "NVIDIA Corporation - Common Stock",
-      "slug": "nvda",
       "hasPage": true
     },
     {
@@ -50,16 +57,31 @@
       "asset": "ServiceNow, Inc. Common Stock",
       "slug": "now",
       "hasPage": true
-    },
-    {
-      "ticker": "PANW",
-      "count": 1,
-      "asset": "Palo Alto Networks, Inc.",
-      "slug": "panw",
-      "hasPage": true
     }
   ],
   "trades": [
+    {
+      "ticker": "AAPL",
+      "asset": "Apple Inc. - Common Stock",
+      "side": "SELL",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-08-18",
+      "filedDate": "2026-09-02",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035367.pdf",
+      "bond": false
+    },
+    {
+      "ticker": "NVDA",
+      "asset": "NVIDIA Corporation - Common Stock",
+      "side": "BUY",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-08-18",
+      "filedDate": "2026-09-02",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035367.pdf",
+      "bond": false
+    },
     {
       "ticker": "PANW",
       "asset": "Palo Alto Networks, Inc.",
@@ -281,7 +303,7 @@
       "bond": false
     }
   ],
-  "tradesShown": 20,
+  "tradesShown": 22,
   "holdings": {
     "available": false,
     "filingDate": null,
@@ -299,14 +321,14 @@
   "performance": {
     "available": true,
     "benchLabel": "S&P 500",
-    "asofDate": "2026-09-02",
+    "asofDate": "2026-09-03",
     "kpis": {
-      "medianPct": -12.6,
-      "medianBenchPct": 9.9,
-      "beat": 5,
-      "beatOf": 12,
-      "priced": 12,
-      "pricedOf": 12
+      "medianPct": -2.7,
+      "medianBenchPct": 10.5,
+      "beat": 6,
+      "beatOf": 13,
+      "priced": 13,
+      "pricedOf": 13
     },
     "series": {
       "dates": [
@@ -383,7 +405,7 @@
         "2026-08-13",
         "2026-08-20",
         "2026-08-27",
-        "2026-09-02"
+        "2026-09-03"
       ],
       "member": [
         100.0,
@@ -457,9 +479,9 @@
         85.3,
         90.4,
         92.6,
-        89.4,
-        92.6,
-        92.4
+        90.2,
+        93.5,
+        95.3
       ],
       "bench": [
         100.0,
@@ -533,99 +555,99 @@
         111.4,
         115.5,
         116.9,
-        114.6,
-        115.8,
+        113.4,
+        114.7,
         115.0
       ],
-      "buys": 12
+      "buys": 13
     },
     "rows": [
       {
+        "ticker": "NVDA",
+        "txDate": "2026-08-18",
+        "pct": 4.0,
+        "benchPct": 0.7,
+        "excess": 3.3
+      },
+      {
         "ticker": "AMAT",
         "txDate": "2026-07-15",
-        "pct": -24.3,
-        "benchPct": 1.4,
-        "excess": -25.7
+        "pct": -24.8,
+        "benchPct": 2.4,
+        "excess": -27.2
       },
       {
         "ticker": "SPCX",
         "txDate": "2026-06-15",
-        "pct": -26.9,
-        "benchPct": 1.4,
-        "excess": -28.3
+        "pct": -22.2,
+        "benchPct": 2.4,
+        "excess": -24.6
       },
       {
         "ticker": "META",
         "txDate": "2026-06-04",
-        "pct": -5.5,
-        "benchPct": 1.1,
-        "excess": -6.6
+        "pct": -2.7,
+        "benchPct": 2.1,
+        "excess": -4.8
       },
       {
         "ticker": "NVDA",
         "txDate": "2026-04-15",
-        "pct": 12.8,
-        "benchPct": 9.3,
-        "excess": 3.5
+        "pct": 14.9,
+        "benchPct": 10.5,
+        "excess": 4.4
       },
       {
         "ticker": "MSFT",
         "txDate": "2026-04-15",
-        "pct": 20.8,
-        "benchPct": 9.3,
-        "excess": 11.5
+        "pct": 24.1,
+        "benchPct": 10.5,
+        "excess": 13.6
       },
       {
         "ticker": "AAPL",
         "txDate": "2026-04-15",
-        "pct": 22.0,
-        "benchPct": 9.3,
+        "pct": 23.2,
+        "benchPct": 10.5,
         "excess": 12.7
       },
       {
         "ticker": "NVDA",
         "txDate": "2026-01-30",
-        "pct": 17.4,
-        "benchPct": 10.6,
-        "excess": 6.8
+        "pct": 19.5,
+        "benchPct": 11.7,
+        "excess": 7.8
       },
       {
         "ticker": "MSFT",
         "txDate": "2026-01-21",
-        "pct": 11.9,
-        "benchPct": 11.6,
-        "excess": 0.3
+        "pct": 14.9,
+        "benchPct": 12.8,
+        "excess": 2.1
       },
       {
         "ticker": "META",
         "txDate": "2025-06-30",
-        "pct": -19.7,
-        "benchPct": 23.8,
-        "excess": -43.5
+        "pct": -17.3,
+        "benchPct": 25.1,
+        "excess": -42.4
       },
       {
         "ticker": "NFLX",
         "txDate": "2025-06-16",
         "pct": -32.5,
-        "benchPct": 27.0,
-        "excess": -59.5
+        "benchPct": 28.3,
+        "excess": -60.8
       },
       {
         "ticker": "NOW",
         "txDate": "2025-05-16",
-        "pct": -34.3,
-        "benchPct": 28.8,
-        "excess": -63.1
-      },
-      {
-        "ticker": "UNH",
-        "txDate": "2025-04-10",
-        "pct": -32.8,
-        "benchPct": 45.9,
-        "excess": -78.7
+        "pct": -30.0,
+        "benchPct": 30.1,
+        "excess": -60.1
       }
     ],
-    "rowsOf": 12
+    "rowsOf": 13
   },
   "committees": {
     "reason": "assigned",

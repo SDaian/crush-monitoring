@@ -9,20 +9,20 @@
   },
   "indexable": true,
   "technical": {
-    "asOf": "2026-09-02",
-    "price": 324.96,
-    "chg1d": -0.05,
-    "chg1w": 3.67,
-    "chg1m": 5.04,
-    "rsi14": 60.9,
-    "sma50": 313.55,
-    "sma200": 283.33,
-    "vsSma50": 3.6,
-    "vsSma200": 14.7,
-    "relVol": 0.85,
+    "asOf": "2026-09-03",
+    "price": 328.21,
+    "chg1d": 1.0,
+    "chg1w": 4.33,
+    "chg1m": 5.53,
+    "rsi14": 63.4,
+    "sma50": 314.25,
+    "sma200": 283.61,
+    "vsSma50": 4.4,
+    "vsSma200": 15.7,
+    "relVol": 0.94,
     "high52w": 340.08,
     "low52w": 226.79,
-    "rangePos": 87.0,
+    "rangePos": 90.0,
     "series": [
       {
         "d": "2025-09-12",
@@ -229,8 +229,8 @@
         "c": 319.7
       },
       {
-        "d": "2026-09-02",
-        "c": 324.96
+        "d": "2026-09-03",
+        "c": 328.21
       }
     ],
     "signals": [],
@@ -244,16 +244,16 @@
     }
   },
   "summary": {
-    "trades": 148,
+    "trades": 150,
     "members": 43,
-    "buys": 73,
-    "sells": 75,
+    "buys": 74,
+    "sells": 76,
     "other": 0,
     "firstTx": "2023-03-15",
-    "lastTx": "2026-08-13",
-    "lastFiling": "2026-08-18",
+    "lastTx": "2026-08-18",
+    "lastFiling": "2026-09-02",
     "estBuyLabel": "$3.6M",
-    "estSellLabel": "$47.8M",
+    "estSellLabel": "$47.9M",
     "pctLate": 26
   },
   "topMembers": [
@@ -262,8 +262,8 @@
       "slug": "cleo-fields",
       "party": "D",
       "chamber": "House",
-      "trades": 21,
-      "buys": 21,
+      "trades": 22,
+      "buys": 22,
       "sells": 0,
       "estLabel": "$1.9M",
       "hasPage": true
@@ -369,6 +369,30 @@
     }
   ],
   "trades": [
+    {
+      "member": "John J. McGuire III",
+      "memberSlug": "john-j-mcguire-iii",
+      "hasPage": true,
+      "party": "R",
+      "side": "SELL",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-08-18",
+      "filedDate": "2026-09-02",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035367.pdf"
+    },
+    {
+      "member": "Cleo Fields",
+      "memberSlug": "cleo-fields",
+      "hasPage": true,
+      "party": "D",
+      "side": "BUY",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-08-13",
+      "filedDate": "2026-09-02",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035345.pdf"
+    },
     {
       "member": "Ed Case",
       "memberSlug": "ed-case",
@@ -644,30 +668,6 @@
       "filedDate": "2026-02-24",
       "daysLate": 0,
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20034018.pdf"
-    },
-    {
-      "member": "Julia Letlow",
-      "memberSlug": "julia-letlow",
-      "hasPage": false,
-      "party": "R",
-      "side": "BUY",
-      "amountBucket": "$1K – $15K",
-      "txDate": "2026-02-02",
-      "filedDate": "2026-03-12",
-      "daysLate": 0,
-      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20034106.pdf"
-    },
-    {
-      "member": "David J. Taylor",
-      "memberSlug": "david-j-taylor",
-      "hasPage": false,
-      "party": "R",
-      "side": "BUY",
-      "amountBucket": "$1K – $15K",
-      "txDate": "2026-01-16",
-      "filedDate": "2026-02-02",
-      "daysLate": 0,
-      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20033916.pdf"
     }
   ],
   "tradesShown": 25
