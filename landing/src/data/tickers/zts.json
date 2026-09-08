@@ -244,17 +244,17 @@
     }
   },
   "summary": {
-    "trades": 31,
+    "trades": 32,
     "members": 10,
     "buys": 14,
-    "sells": 17,
+    "sells": 18,
     "other": 0,
     "firstTx": "2024-01-04",
-    "lastTx": "2026-06-16",
-    "lastFiling": "2026-07-15",
+    "lastTx": "2026-07-17",
+    "lastFiling": "2026-09-04",
     "estBuyLabel": "$228K",
-    "estSellLabel": "$259K",
-    "pctLate": 16
+    "estSellLabel": "$267K",
+    "pctLate": 19
   },
   "topMembers": [
     {
@@ -262,10 +262,10 @@
       "slug": "gilbert-ray-cisneros-jr",
       "party": "D",
       "chamber": "House",
-      "trades": 7,
+      "trades": 8,
       "buys": 4,
-      "sells": 3,
-      "estLabel": "$56K",
+      "sells": 4,
+      "estLabel": "$64K",
       "hasPage": true
     },
     {
@@ -369,6 +369,18 @@
     }
   ],
   "trades": [
+    {
+      "member": "Gilbert Ray Cisneros, Jr.",
+      "memberSlug": "gilbert-ray-cisneros-jr",
+      "hasPage": true,
+      "party": "D",
+      "side": "SELL",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-07-17",
+      "filedDate": "2026-09-04",
+      "daysLate": 4,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035190.pdf"
+    },
     {
       "member": "Gilbert Ray Cisneros, Jr.",
       "memberSlug": "gilbert-ray-cisneros-jr",
@@ -656,18 +668,6 @@
       "filedDate": "2025-04-11",
       "daysLate": 0,
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20029038.pdf"
-    },
-    {
-      "member": "Julie Johnson",
-      "memberSlug": "julie-johnson",
-      "hasPage": false,
-      "party": "D",
-      "side": "SELL",
-      "amountBucket": "$1K – $15K",
-      "txDate": "2025-03-03",
-      "filedDate": "2025-04-14",
-      "daysLate": 0,
-      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20029064.pdf"
     }
   ],
   "tradesShown": 25

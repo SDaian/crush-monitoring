@@ -244,19 +244,30 @@
     }
   },
   "summary": {
-    "trades": 50,
+    "trades": 51,
     "members": 15,
-    "buys": 38,
+    "buys": 39,
     "sells": 12,
     "other": 0,
     "firstTx": "2024-01-02",
-    "lastTx": "2026-07-14",
-    "lastFiling": "2026-08-18",
-    "estBuyLabel": "$708K",
+    "lastTx": "2026-07-17",
+    "lastFiling": "2026-09-04",
+    "estBuyLabel": "$716K",
     "estSellLabel": "$371K",
-    "pctLate": 14
+    "pctLate": 16
   },
   "topMembers": [
+    {
+      "name": "Gilbert Ray Cisneros, Jr.",
+      "slug": "gilbert-ray-cisneros-jr",
+      "party": "D",
+      "chamber": "House",
+      "trades": 9,
+      "buys": 7,
+      "sells": 2,
+      "estLabel": "$146K",
+      "hasPage": true
+    },
     {
       "name": "Marjorie Taylor Greene",
       "slug": "marjorie-taylor-greene",
@@ -266,17 +277,6 @@
       "buys": 9,
       "sells": 0,
       "estLabel": "$72K",
-      "hasPage": true
-    },
-    {
-      "name": "Gilbert Ray Cisneros, Jr.",
-      "slug": "gilbert-ray-cisneros-jr",
-      "party": "D",
-      "chamber": "House",
-      "trades": 8,
-      "buys": 6,
-      "sells": 2,
-      "estLabel": "$138K",
       "hasPage": true
     },
     {
@@ -369,6 +369,18 @@
     }
   ],
   "trades": [
+    {
+      "member": "Gilbert Ray Cisneros, Jr.",
+      "memberSlug": "gilbert-ray-cisneros-jr",
+      "hasPage": true,
+      "party": "D",
+      "side": "BUY",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-07-17",
+      "filedDate": "2026-09-04",
+      "daysLate": 4,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035190.pdf"
+    },
     {
       "member": "Rick W. Allen",
       "memberSlug": "rick-w-allen",
@@ -656,18 +668,6 @@
       "filedDate": "2025-09-03",
       "daysLate": 0,
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20031017.pdf"
-    },
-    {
-      "member": "Cleo Fields",
-      "memberSlug": "cleo-fields",
-      "hasPage": true,
-      "party": "D",
-      "side": "BUY",
-      "amountBucket": "$15K – $50K",
-      "txDate": "2025-07-30",
-      "filedDate": "2025-08-06",
-      "daysLate": 0,
-      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20030803.pdf"
     }
   ],
   "tradesShown": 25

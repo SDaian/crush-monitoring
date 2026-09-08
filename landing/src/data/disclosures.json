@@ -2,6 +2,17 @@
   "_comment": "Generated from real official disclosures by congress/landing_data.py (daily Action). Do not edit by hand. 'filedDaysLate' counts days past the STOCK Act's 45-day statutory maximum; 0 = on time.",
   "disclosures": [
     {
+      "member": "G. Cisneros",
+      "memberSlug": "gilbert-ray-cisneros-jr",
+      "chamber": "House",
+      "district": "CA-31",
+      "ticker": "BABA",
+      "tickerSlug": "baba",
+      "side": "SELL",
+      "amountBucket": "$100K – $250K",
+      "filedDaysLate": 0
+    },
+    {
       "member": "K. Hern",
       "memberSlug": null,
       "chamber": "House",
@@ -44,17 +55,6 @@
       "side": "SELL",
       "amountBucket": "$100K – $250K",
       "filedDaysLate": 171
-    },
-    {
-      "member": "T. Tuberville",
-      "memberSlug": "tommy-tuberville",
-      "chamber": "Senate",
-      "district": "AL",
-      "ticker": "CLF",
-      "tickerSlug": null,
-      "side": "SELL",
-      "amountBucket": "$100K – $250K",
-      "filedDaysLate": 769
     }
   ]
 }

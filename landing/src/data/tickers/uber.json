@@ -244,17 +244,17 @@
     }
   },
   "summary": {
-    "trades": 42,
+    "trades": 43,
     "members": 16,
     "buys": 22,
-    "sells": 20,
+    "sells": 21,
     "other": 0,
     "firstTx": "2024-10-29",
-    "lastTx": "2026-07-10",
-    "lastFiling": "2026-07-21",
+    "lastTx": "2026-07-17",
+    "lastFiling": "2026-09-04",
     "estBuyLabel": "$1.1M",
-    "estSellLabel": "$294K",
-    "pctLate": 10
+    "estSellLabel": "$302K",
+    "pctLate": 12
   },
   "topMembers": [
     {
@@ -262,10 +262,10 @@
       "slug": "gilbert-ray-cisneros-jr",
       "party": "D",
       "chamber": "House",
-      "trades": 8,
+      "trades": 9,
       "buys": 5,
-      "sells": 3,
-      "estLabel": "$64K",
+      "sells": 4,
+      "estLabel": "$72K",
       "hasPage": true
     },
     {
@@ -369,6 +369,18 @@
     }
   ],
   "trades": [
+    {
+      "member": "Gilbert Ray Cisneros, Jr.",
+      "memberSlug": "gilbert-ray-cisneros-jr",
+      "hasPage": true,
+      "party": "D",
+      "side": "SELL",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-07-17",
+      "filedDate": "2026-09-04",
+      "daysLate": 4,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035190.pdf"
+    },
     {
       "member": "Dan Newhouse",
       "memberSlug": "dan-newhouse",
@@ -656,18 +668,6 @@
       "filedDate": "2025-08-06",
       "daysLate": 0,
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20030803.pdf"
-    },
-    {
-      "member": "Josh Gottheimer",
-      "memberSlug": "josh-gottheimer",
-      "hasPage": true,
-      "party": "D",
-      "side": "BUY",
-      "amountBucket": "$1K – $15K",
-      "txDate": "2025-05-15",
-      "filedDate": "2025-06-11",
-      "daysLate": 0,
-      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20030462.pdf"
     }
   ],
   "tradesShown": 25

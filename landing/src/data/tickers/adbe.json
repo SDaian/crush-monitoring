@@ -244,16 +244,16 @@
     }
   },
   "summary": {
-    "trades": 48,
+    "trades": 49,
     "members": 15,
     "buys": 23,
-    "sells": 25,
+    "sells": 26,
     "other": 0,
     "firstTx": "2024-01-02",
     "lastTx": "2026-08-14",
-    "lastFiling": "2026-09-01",
+    "lastFiling": "2026-09-04",
     "estBuyLabel": "$405K",
-    "estSellLabel": "$372K",
+    "estSellLabel": "$380K",
     "pctLate": 31
   },
   "topMembers": [
@@ -302,6 +302,17 @@
       "hasPage": false
     },
     {
+      "name": "Gilbert Ray Cisneros, Jr.",
+      "slug": "gilbert-ray-cisneros-jr",
+      "party": "D",
+      "chamber": "House",
+      "trades": 4,
+      "buys": 1,
+      "sells": 3,
+      "estLabel": "$32K",
+      "hasPage": true
+    },
+    {
       "name": "Julie Johnson",
       "slug": "julie-johnson",
       "party": "D",
@@ -322,17 +333,6 @@
       "sells": 2,
       "estLabel": "$49K",
       "hasPage": false
-    },
-    {
-      "name": "Gilbert Ray Cisneros, Jr.",
-      "slug": "gilbert-ray-cisneros-jr",
-      "party": "D",
-      "chamber": "House",
-      "trades": 3,
-      "buys": 1,
-      "sells": 2,
-      "estLabel": "$24K",
-      "hasPage": true
     },
     {
       "name": "John Boozman",
@@ -380,6 +380,18 @@
       "filedDate": "2026-09-01",
       "daysLate": 0,
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035326.pdf"
+    },
+    {
+      "member": "Gilbert Ray Cisneros, Jr.",
+      "memberSlug": "gilbert-ray-cisneros-jr",
+      "hasPage": true,
+      "party": "D",
+      "side": "SELL",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-07-24",
+      "filedDate": "2026-09-04",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035190.pdf"
     },
     {
       "member": "Dan Newhouse",
@@ -656,18 +668,6 @@
       "filedDate": "2025-06-11",
       "daysLate": 0,
       "sourceUrl": "https://efdsearch.senate.gov/search/view/ptr/8bb121de-bbff-4550-9dd4-b60d4002e230/"
-    },
-    {
-      "member": "Jefferson Shreve",
-      "memberSlug": "jefferson-shreve",
-      "hasPage": false,
-      "party": "R",
-      "side": "SELL",
-      "amountBucket": "$15K – $50K",
-      "txDate": "2025-05-12",
-      "filedDate": "2025-06-22",
-      "daysLate": 0,
-      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20030387.pdf"
     }
   ],
   "tradesShown": 25

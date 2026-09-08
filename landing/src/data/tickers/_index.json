@@ -5,11 +5,11 @@
       "slug": "msft",
       "ticker": "MSFT",
       "company": "Microsoft Corporation",
-      "trades": 201,
+      "trades": 203,
       "members": 44,
-      "buys": 104,
-      "sells": 97,
-      "lastTx": "2026-08-21",
+      "buys": 105,
+      "sells": 98,
+      "lastTx": "2026-08-26",
       "indexable": true,
       "industry": {
         "key": "tech",
@@ -20,9 +20,9 @@
       "slug": "nvda",
       "ticker": "NVDA",
       "company": "NVIDIA Corporation",
-      "trades": 179,
+      "trades": 180,
       "members": 33,
-      "buys": 116,
+      "buys": 117,
       "sells": 63,
       "lastTx": "2026-08-18",
       "indexable": true,
@@ -92,6 +92,21 @@
       }
     },
     {
+      "slug": "avgo",
+      "ticker": "AVGO",
+      "company": "Broadcom Inc.",
+      "trades": 89,
+      "members": 24,
+      "buys": 51,
+      "sells": 38,
+      "lastTx": "2026-08-26",
+      "indexable": true,
+      "industry": {
+        "key": "tech",
+        "label": "Technology"
+      }
+    },
+    {
       "slug": "googl",
       "ticker": "GOOGL",
       "company": "Alphabet Inc.",
@@ -100,21 +115,6 @@
       "buys": 43,
       "sells": 45,
       "lastTx": "2026-08-24",
-      "indexable": true,
-      "industry": {
-        "key": "tech",
-        "label": "Technology"
-      }
-    },
-    {
-      "slug": "avgo",
-      "ticker": "AVGO",
-      "company": "Broadcom Inc.",
-      "trades": 87,
-      "members": 24,
-      "buys": 49,
-      "sells": 38,
-      "lastTx": "2026-07-24",
       "indexable": true,
       "industry": {
         "key": "tech",
@@ -275,15 +275,30 @@
       "slug": "acn",
       "ticker": "ACN",
       "company": "Accenture plc",
-      "trades": 52,
+      "trades": 53,
       "members": 20,
-      "buys": 12,
+      "buys": 13,
       "sells": 40,
       "lastTx": "2026-08-11",
       "indexable": true,
       "industry": {
         "key": "tech",
         "label": "Technology"
+      }
+    },
+    {
+      "slug": "pltr",
+      "ticker": "PLTR",
+      "company": "Palantir Technologies Inc.",
+      "trades": 52,
+      "members": 15,
+      "buys": 34,
+      "sells": 18,
+      "lastTx": "2026-07-17",
+      "indexable": true,
+      "industry": {
+        "key": "defense",
+        "label": "Defense & aerospace"
       }
     },
     {
@@ -302,18 +317,18 @@
       }
     },
     {
-      "slug": "pltr",
-      "ticker": "PLTR",
-      "company": "Palantir Technologies Inc.",
+      "slug": "amd",
+      "ticker": "AMD",
+      "company": "Advanced Micro Devices, Inc.",
       "trades": 51,
       "members": 15,
-      "buys": 33,
-      "sells": 18,
-      "lastTx": "2026-05-18",
+      "buys": 39,
+      "sells": 12,
+      "lastTx": "2026-07-17",
       "indexable": true,
       "industry": {
-        "key": "defense",
-        "label": "Defense & aerospace"
+        "key": "tech",
+        "label": "Technology"
       }
     },
     {
@@ -362,21 +377,6 @@
       }
     },
     {
-      "slug": "amd",
-      "ticker": "AMD",
-      "company": "Advanced Micro Devices, Inc.",
-      "trades": 50,
-      "members": 15,
-      "buys": 38,
-      "sells": 12,
-      "lastTx": "2026-07-14",
-      "indexable": true,
-      "industry": {
-        "key": "tech",
-        "label": "Technology"
-      }
-    },
-    {
       "slug": "tsm",
       "ticker": "TSM",
       "company": "Taiwan Semiconductor Manufacturing Company Ltd.",
@@ -385,6 +385,21 @@
       "buys": 34,
       "sells": 16,
       "lastTx": "2026-07-10",
+      "indexable": true,
+      "industry": {
+        "key": "tech",
+        "label": "Technology"
+      }
+    },
+    {
+      "slug": "adbe",
+      "ticker": "ADBE",
+      "company": "Adobe Inc.",
+      "trades": 49,
+      "members": 15,
+      "buys": 23,
+      "sells": 26,
+      "lastTx": "2026-08-14",
       "indexable": true,
       "industry": {
         "key": "tech",
@@ -422,29 +437,14 @@
       }
     },
     {
-      "slug": "adbe",
-      "ticker": "ADBE",
-      "company": "Adobe Inc.",
-      "trades": 48,
-      "members": 15,
-      "buys": 23,
-      "sells": 25,
-      "lastTx": "2026-08-14",
-      "indexable": true,
-      "industry": {
-        "key": "tech",
-        "label": "Technology"
-      }
-    },
-    {
       "slug": "ibm",
       "ticker": "IBM",
       "company": "International Business Machines Corporation",
-      "trades": 47,
+      "trades": 48,
       "members": 15,
       "buys": 27,
-      "sells": 20,
-      "lastTx": "2026-07-16",
+      "sells": 21,
+      "lastTx": "2026-07-17",
       "indexable": true,
       "industry": {
         "key": "tech",
@@ -482,6 +482,21 @@
       }
     },
     {
+      "slug": "uber",
+      "ticker": "UBER",
+      "company": "Uber Technologies, Inc.",
+      "trades": 43,
+      "members": 16,
+      "buys": 22,
+      "sells": 21,
+      "lastTx": "2026-07-17",
+      "indexable": true,
+      "industry": {
+        "key": "tech",
+        "label": "Technology"
+      }
+    },
+    {
       "slug": "lrcx",
       "ticker": "LRCX",
       "company": "Lam Research Corporation",
@@ -490,21 +505,6 @@
       "buys": 13,
       "sells": 29,
       "lastTx": "2026-08-13",
-      "indexable": true,
-      "industry": {
-        "key": "tech",
-        "label": "Technology"
-      }
-    },
-    {
-      "slug": "uber",
-      "ticker": "UBER",
-      "company": "Uber Technologies, Inc.",
-      "trades": 42,
-      "members": 16,
-      "buys": 22,
-      "sells": 20,
-      "lastTx": "2026-07-10",
       "indexable": true,
       "industry": {
         "key": "tech",
@@ -722,6 +722,36 @@
       }
     },
     {
+      "slug": "amgn",
+      "ticker": "AMGN",
+      "company": "Amgen Inc.",
+      "trades": 35,
+      "members": 17,
+      "buys": 16,
+      "sells": 19,
+      "lastTx": "2026-08-26",
+      "indexable": true,
+      "industry": {
+        "key": "health",
+        "label": "Health care & pharma"
+      }
+    },
+    {
+      "slug": "vz",
+      "ticker": "VZ",
+      "company": "Verizon Communications Inc.",
+      "trades": 35,
+      "members": 17,
+      "buys": 13,
+      "sells": 22,
+      "lastTx": "2026-07-17",
+      "indexable": true,
+      "industry": {
+        "key": "telecom",
+        "label": "Telecom & media"
+      }
+    },
+    {
       "slug": "t",
       "ticker": "T",
       "company": "AT&T Inc.",
@@ -767,6 +797,51 @@
       }
     },
     {
+      "slug": "cmcsa",
+      "ticker": "CMCSA",
+      "company": "Comcast Corporation",
+      "trades": 34,
+      "members": 16,
+      "buys": 9,
+      "sells": 25,
+      "lastTx": "2026-08-05",
+      "indexable": true,
+      "industry": {
+        "key": "telecom",
+        "label": "Telecom & media"
+      }
+    },
+    {
+      "slug": "pgr",
+      "ticker": "PGR",
+      "company": "Progressive Corporation",
+      "trades": 34,
+      "members": 12,
+      "buys": 19,
+      "sells": 15,
+      "lastTx": "2026-07-17",
+      "indexable": true,
+      "industry": {
+        "key": "finance",
+        "label": "Banks & finance"
+      }
+    },
+    {
+      "slug": "ttd",
+      "ticker": "TTD",
+      "company": "The Trade Desk, Inc.",
+      "trades": 34,
+      "members": 7,
+      "buys": 17,
+      "sells": 17,
+      "lastTx": "2026-07-17",
+      "indexable": true,
+      "industry": {
+        "key": "tech",
+        "label": "Technology"
+      }
+    },
+    {
       "slug": "ba",
       "ticker": "BA",
       "company": "Boeing Company",
@@ -797,36 +872,6 @@
       }
     },
     {
-      "slug": "vz",
-      "ticker": "VZ",
-      "company": "Verizon Communications Inc.",
-      "trades": 34,
-      "members": 17,
-      "buys": 13,
-      "sells": 21,
-      "lastTx": "2026-05-18",
-      "indexable": true,
-      "industry": {
-        "key": "telecom",
-        "label": "Telecom & media"
-      }
-    },
-    {
-      "slug": "amgn",
-      "ticker": "AMGN",
-      "company": "Amgen Inc.",
-      "trades": 33,
-      "members": 17,
-      "buys": 16,
-      "sells": 17,
-      "lastTx": "2026-08-12",
-      "indexable": true,
-      "industry": {
-        "key": "health",
-        "label": "Health care & pharma"
-      }
-    },
-    {
       "slug": "pfe",
       "ticker": "PFE",
       "company": "Pfizer, Inc.",
@@ -839,21 +884,6 @@
       "industry": {
         "key": "health",
         "label": "Health care & pharma"
-      }
-    },
-    {
-      "slug": "cmcsa",
-      "ticker": "CMCSA",
-      "company": "Comcast Corporation",
-      "trades": 33,
-      "members": 16,
-      "buys": 9,
-      "sells": 24,
-      "lastTx": "2026-08-05",
-      "indexable": true,
-      "industry": {
-        "key": "telecom",
-        "label": "Telecom & media"
       }
     },
     {
@@ -872,33 +902,18 @@
       }
     },
     {
-      "slug": "pgr",
-      "ticker": "PGR",
-      "company": "Progressive Corporation",
-      "trades": 33,
-      "members": 12,
-      "buys": 19,
-      "sells": 14,
-      "lastTx": "2026-06-16",
+      "slug": "zts",
+      "ticker": "ZTS",
+      "company": "Zoetis Inc.",
+      "trades": 32,
+      "members": 10,
+      "buys": 14,
+      "sells": 18,
+      "lastTx": "2026-07-17",
       "indexable": true,
       "industry": {
-        "key": "finance",
-        "label": "Banks & finance"
-      }
-    },
-    {
-      "slug": "ttd",
-      "ticker": "TTD",
-      "company": "The Trade Desk, Inc.",
-      "trades": 33,
-      "members": 7,
-      "buys": 16,
-      "sells": 17,
-      "lastTx": "2026-06-16",
-      "indexable": true,
-      "industry": {
-        "key": "tech",
-        "label": "Technology"
+        "key": "health",
+        "label": "Health care & pharma"
       }
     },
     {
@@ -1019,21 +1034,6 @@
       "industry": {
         "key": "finance",
         "label": "Banks & finance"
-      }
-    },
-    {
-      "slug": "zts",
-      "ticker": "ZTS",
-      "company": "Zoetis Inc.",
-      "trades": 31,
-      "members": 10,
-      "buys": 14,
-      "sells": 17,
-      "lastTx": "2026-06-16",
-      "indexable": true,
-      "industry": {
-        "key": "health",
-        "label": "Health care & pharma"
       }
     },
     {
@@ -1187,6 +1187,21 @@
       }
     },
     {
+      "slug": "baba",
+      "ticker": "BABA",
+      "company": "Alibaba Group Holding Limited American Depositary Shares each representing eight",
+      "trades": 28,
+      "members": 6,
+      "buys": 19,
+      "sells": 9,
+      "lastTx": "2026-07-24",
+      "indexable": true,
+      "industry": {
+        "key": "tech",
+        "label": "Technology"
+      }
+    },
+    {
       "slug": "ci",
       "ticker": "CI",
       "company": "The Cigna Group",
@@ -1292,21 +1307,6 @@
       }
     },
     {
-      "slug": "baba",
-      "ticker": "BABA",
-      "company": "Alibaba Group Holding Limited American Depositary Shares each representing eight",
-      "trades": 27,
-      "members": 6,
-      "buys": 19,
-      "sells": 8,
-      "lastTx": "2026-06-01",
-      "indexable": true,
-      "industry": {
-        "key": "tech",
-        "label": "Technology"
-      }
-    },
-    {
       "slug": "dis",
       "ticker": "DIS",
       "company": "Walt Disney Company",
@@ -1364,6 +1364,21 @@
       "industry": {
         "key": "finance",
         "label": "Banks & finance"
+      }
+    },
+    {
+      "slug": "app",
+      "ticker": "APP",
+      "company": "Applovin Corporation",
+      "trades": 25,
+      "members": 6,
+      "buys": 14,
+      "sells": 11,
+      "lastTx": "2026-07-17",
+      "indexable": true,
+      "industry": {
+        "key": "tech",
+        "label": "Technology"
       }
     },
     {

@@ -244,17 +244,17 @@
     }
   },
   "summary": {
-    "trades": 27,
+    "trades": 28,
     "members": 6,
     "buys": 19,
-    "sells": 8,
+    "sells": 9,
     "other": 0,
     "firstTx": "2023-12-29",
-    "lastTx": "2026-06-01",
-    "lastFiling": "2026-07-07",
+    "lastTx": "2026-07-24",
+    "lastFiling": "2026-09-04",
     "estBuyLabel": "$293K",
-    "estSellLabel": "$256K",
-    "pctLate": 15
+    "estSellLabel": "$431K",
+    "pctLate": 14
   },
   "topMembers": [
     {
@@ -295,10 +295,10 @@
       "slug": "gilbert-ray-cisneros-jr",
       "party": "D",
       "chamber": "House",
-      "trades": 4,
+      "trades": 5,
       "buys": 4,
-      "sells": 0,
-      "estLabel": "$173K",
+      "sells": 1,
+      "estLabel": "$348K",
       "hasPage": true
     },
     {
@@ -325,6 +325,18 @@
     }
   ],
   "trades": [
+    {
+      "member": "Gilbert Ray Cisneros, Jr.",
+      "memberSlug": "gilbert-ray-cisneros-jr",
+      "hasPage": true,
+      "party": "D",
+      "side": "SELL",
+      "amountBucket": "$100K – $250K",
+      "txDate": "2026-07-24",
+      "filedDate": "2026-09-04",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035190.pdf"
+    },
     {
       "member": "Josh Gottheimer",
       "memberSlug": "josh-gottheimer",
@@ -612,18 +624,6 @@
       "filedDate": "2025-02-13",
       "daysLate": 0,
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20024346.pdf"
-    },
-    {
-      "member": "Josh Gottheimer",
-      "memberSlug": "josh-gottheimer",
-      "hasPage": true,
-      "party": "D",
-      "side": "BUY",
-      "amountBucket": "$1K – $15K",
-      "txDate": "2025-01-16",
-      "filedDate": "2025-02-10",
-      "daysLate": 0,
-      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20026732.pdf"
     }
   ],
   "tradesShown": 25
