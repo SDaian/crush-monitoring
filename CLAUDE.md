@@ -870,6 +870,20 @@ Conventions:
   is stacking, not the dash), typographic marks (→ ★ ✕) are not emoji, and the
   AI disclosure on `/how-it-works` stays: removing it would hide something
   true.
+- **Open Graph cards are one per page, and deliberately stable.** Every
+  ticker and member page shares its own 1200x630 card from `/og`
+  (`congress/social/og_template.html` + `scripts/make_og.mjs`, the same
+  repo-local fonts as the social card); every other page keeps the sitewide
+  `og.png`. The card carries the **symbol, the company and the seat — never a
+  trade count or a price**: the generator commits ~120 binaries, so a card
+  built from changing data would rewrite all of them every morning and bloat
+  the repo. That is why `make_og.mjs` **skips a card that already exists**
+  (`--force` to re-render after a design change) and why the daily step costs
+  a second on a normal day. Two guards: the workflow stages
+  `landing/public/og` (an unstaged generator output is discarded at the next
+  checkout), and `check-seo.mjs` fails a page whose `og:image` points at a
+  card that was never rendered — a broken preview is worse than the fallback
+  it replaced.
 - **The icon set is generated, not hand-made.** `landing/scripts/make-icons.py`
   (stdlib only, run it manually) writes `favicon.svg`, a real multi-size
   `favicon.ico` (16/32/48, the file Google's separate favicon crawler wants at

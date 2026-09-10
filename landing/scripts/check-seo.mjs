@@ -14,9 +14,11 @@
  */
 
 import { readdir, readFile } from "node:fs/promises";
+import { existsSync } from "node:fs";
 import path from "node:path";
 
 const DIST = path.resolve(import.meta.dirname, "..", "dist");
+const PUBLIC = path.resolve(import.meta.dirname, "..", "public");
 const MAX = 150; // keep in sync with DESC_MAX in src/lib/seo.ts
 
 async function pages(dir) {
@@ -76,6 +78,14 @@ for (const file of files.sort()) {
   // not by anyone reading the page.
   if (!/class="skip-link/.test(html))
     problems.push(`${url} — missing skip link`);
+
+  // A page pointing at a card that was never rendered previews as a broken
+  // image — worse than the sitewide fallback it replaced. The generator
+  // skips existing files, so a NEW ticker page is exactly the case that
+  // would slip through.
+  const card = attr(html, /property="og:image" content="[^"]*\/og\/([^"]+)"/);
+  if (card && !existsSync(path.join(PUBLIC, "og", decode(card))))
+    problems.push(`${url} — og:image /og/${card} does not exist`);
 
   const levels = [...html.matchAll(/<h([1-6])[\s>]/g)].map((m) => +m[1]);
   const h1s = levels.filter((n) => n === 1).length;
