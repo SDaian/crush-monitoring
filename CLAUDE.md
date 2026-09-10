@@ -460,9 +460,28 @@ sites. Full details in `congress/README.md`. Conventions:
 - **Site traffic — its OWN email (Vercel Web Analytics):** `congress/analytics.py`
   pulls the site's aggregated, cookieless page views via Vercel's public Web
   Analytics API (`/v1/query/web-analytics/visits/{count,aggregate}`, Bearer
-  token). It ships as a **separate "📈 Traffic report" email** (not embedded in
-  the trade digest — `daily_report.build_traffic_email` +
-  `email_template.render_traffic_html`), so the digest stays focused on trades.
+  token). It ships as **its own email, not embedded in the trade digest**
+  (`daily_report.build_traffic_email` + `email_template.render_traffic_html`),
+  so the digest stays focused on trades. **Two of them**: a **daily** report
+  every morning covering yesterday, and a **weekly** one on **Monday** as well
+  covering the seven days behind it (`daily_report.traffic_periods`). Both
+  land on a Monday by owner's choice — they answer different questions, and
+  the weekly is the one that survives a noisy Tuesday. The subjects differ
+  ("Traffic report" / "Weekly traffic"), because an inbox showing one subject
+  twice is one the reader stops opening.
+  - **Every number carries its change against the period before it**, and
+    **nothing at all when there is no baseline** (`analytics.pct_delta` returns
+    None for a missing or ZERO previous value — "+100%" off a zero week is
+    noise dressed as a fact). `analytics.window_bounds` builds two adjacent,
+    equal-length windows that never touch **today**: today is still in
+    progress, and comparing a partial day against a complete one invents a
+    fall every morning. `until` is treated as exclusive, which the previous
+    call shape implied; the assumption is not load-bearing, because both
+    windows use identical arithmetic and a wrong reading shifts both equally.
+  - **The traffic emails run OUTSIDE the quiet-day gate.** Site traffic
+    changes whether or not the market opened, and the gate skips Sunday and
+    the pre-close Monday run — exactly when the weekly report is due, so
+    gating it would have made the weekly the email that rarely arrives.
   The traffic email shows total + top pages + a **per-member-page breakdown**
   (the `by=route` aggregate rows under `/members/<slug>`, resolved to real names
   via the generated `members/_index.json`). **Gated + non-fatal:** needs
@@ -523,7 +542,8 @@ sites. Full details in `congress/README.md`. Conventions:
     the weekend and on holidays, so a Sunday email repeats Saturday's word for
     word. When the latest daily close has not advanced **and** no new filing
     has arrived since the last delivered report, the run skips *every* delivery
-    — digest, Buttondown broadcast, traffic email, GitHub issue — and writes no
+    — digest, Buttondown broadcast, GitHub issue (the traffic emails ship
+    BEFORE this gate and are unaffected) — and writes no
     dated permalink, but **still publishes `report.json` so `/report` stays
     current**, and records **nothing** in `report_state.json` (its fingerprint
     keeps describing the last report that went out, so a later cron re-asks the

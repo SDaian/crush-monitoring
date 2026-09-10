@@ -262,22 +262,47 @@ def _prettify_slug(slug: str) -> str:
 
 def traffic_block(traffic: dict, member_names: dict | None = None) -> str:
     """The Vercel traffic summary as a brand-styled inner block, from the
-    ``analytics.daily_summary`` dict. Returns '' if there is nothing to show."""
+    ``analytics.period_summary`` dict. Returns '' if there is nothing to show.
+
+    A row carries its change against the same row in the previous period, in
+    green or red — and NOTHING at all when there is no baseline. A reader
+    who sees a percentage on one line and none on the next learns that we
+    could not compare that one, which is true.
+    """
     if not traffic:
         return ""
+    from . import analytics
+
     total = traffic.get("total")
     pages = traffic.get("pages") or []
     member_pages = traffic.get("memberPages") or []
+    prev = traffic.get("previous") or {}
     names = member_names or {}
+
+    def delta_html(current, previous, size="13px"):
+        pct = analytics.pct_delta(current, previous)
+        if pct is None:
+            return ""
+        color = BUY if pct > 0 else (SELL if pct < 0 else INK_SOFT)
+        return (f"<span style='{_f(size, '1.4', MONO, 700)}color:{color};"
+                f"padding-left:6px'>{pct:+.1f}%</span>")
+
+    def prev_of(field, key):
+        for k, v in prev.get(field) or []:
+            if k == key:
+                return v
+        return None
+
     total_txt = f"{total:,} page views" if total is not None else "views unavailable"
     html = (f"<p style='margin:0;{_f('20px', '1.2', MONO, 700)}color:{INK}'>"
-            f"{_esc(total_txt)}</p>")
+            f"{_esc(total_txt)}{delta_html(total, prev.get('total'), '15px')}</p>")
     if pages:
         rows = "".join(
             f"<tr><td style='padding:4px 0;{_f('13px', '1.4', MONO)}color:{INK_SOFT};"
             f"border-bottom:1px solid {RULE}'>{_esc(p)}</td>"
             f"<td style='padding:4px 0;text-align:right;{_f('13px', '1.4', MONO, 700)}"
-            f"color:{INK};border-bottom:1px solid {RULE}'>{v:,}</td></tr>"
+            f"color:{INK};border-bottom:1px solid {RULE}'>{v:,}"
+            f"{delta_html(v, prev_of('pages', p))}</td></tr>"
             for p, v in pages)
         html += (f"<p style='margin:14px 0 4px;{_f('12px', '1.4', MONO, 700)}"
                  f"letter-spacing:.5px;text-transform:uppercase;color:{INK_SOFT}'>"
@@ -291,7 +316,8 @@ def traffic_block(traffic: dict, member_names: dict | None = None) -> str:
             f"<tr><td style='padding:4px 0;{_f('13px', '1.4', SANS)}color:{INK};"
             f"border-bottom:1px solid {RULE}'>{_esc(label(s))}</td>"
             f"<td style='padding:4px 0;text-align:right;{_f('13px', '1.4', MONO, 700)}"
-            f"color:{INK};border-bottom:1px solid {RULE}'>{v:,}</td></tr>"
+            f"color:{INK};border-bottom:1px solid {RULE}'>{v:,}"
+            f"{delta_html(v, prev_of('memberPages', s))}</td></tr>"
             for s, v in member_pages)
         html += (f"<p style='margin:14px 0 4px;{_f('12px', '1.4', MONO, 700)}"
                  f"letter-spacing:.5px;text-transform:uppercase;color:{INK_SOFT}'>"
@@ -468,16 +494,24 @@ def render_traffic_html(*, date_label: str, traffic: dict,
                         member_names: dict | None, tracker_url: str,
                         preheader: str) -> str:
     """The standalone site-traffic email (Vercel Web Analytics), same chrome."""
-    days = traffic.get("windowDays", 7)
+    # The window names itself ("yesterday" / "last 7 days") — two of these can
+    # arrive on one Monday morning, so neither may read as the other.
+    from . import analytics
+
+    window = analytics.period_label(traffic)
+    weekly = traffic.get("kind") == analytics.WEEKLY
+    compared = "the previous week" if weekly else "the day before"
     intro = (f"<p style='margin:12px 0 0;{_f('12px', '1.5', SANS)}color:{INK_SOFT};'>"
-             f"<i>Aggregated, cookieless page views over the last {days} days "
-             "(Vercel Web Analytics).</i></p>")
+             f"<i>Aggregated, cookieless page views for {window}, against "
+             f"{compared} (Vercel Web Analytics). A percentage is shown only "
+             "where there is a period to compare against.</i></p>")
     body_rows = _section("Audience", f"Site traffic "
                          f"<span style='font-weight:400;font-size:13px;color:{INK_SOFT}'>"
-                         f"(last {days} days)</span>",
+                         f"({window})</span>",
                          traffic_block(traffic, member_names))
     return _document(
-        right_label="Traffic report", date_label=date_label,
+        right_label="Weekly traffic" if weekly else "Traffic report",
+        date_label=date_label,
         intro_html=intro, body_rows=body_rows, tracker_url=tracker_url,
         subscribe_note="Internal audience metrics for the Capitol Ledger project.",
         title="Capitol Ledger — Traffic report", preheader=preheader)
