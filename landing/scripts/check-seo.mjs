@@ -69,6 +69,25 @@ for (const file of files.sort()) {
       `${url} — description is ${description.length} chars (max ${MAX}): ` +
         `"${description.slice(0, 60)}…"`,
     );
+
+  // Structure, not metadata — but it regresses the same silent way. A page
+  // without a skip link makes a keyboard visitor tab the whole nav before
+  // the record they came for, and both defects below were found by audit,
+  // not by anyone reading the page.
+  if (!/class="skip-link/.test(html))
+    problems.push(`${url} — missing skip link`);
+
+  const levels = [...html.matchAll(/<h([1-6])[\s>]/g)].map((m) => +m[1]);
+  const h1s = levels.filter((n) => n === 1).length;
+  if (h1s !== 1) problems.push(`${url} — has ${h1s} <h1> (want exactly 1)`);
+  for (let i = 1; i < levels.length; i++) {
+    if (levels[i] > levels[i - 1] + 1) {
+      problems.push(
+        `${url} — heading jumps h${levels[i - 1]} to h${levels[i]}`,
+      );
+      break;
+    }
+  }
 }
 
 if (problems.length) {
@@ -79,6 +98,7 @@ if (problems.length) {
   console.warn("");
 } else {
   console.log(
-    `check-seo: ${files.length} pages, all titled and within ${MAX} chars.`,
+    `check-seo: ${files.length} pages — titled, within ${MAX} chars, ` +
+      `one <h1>, ordered headings, skip link present.`,
   );
 }
