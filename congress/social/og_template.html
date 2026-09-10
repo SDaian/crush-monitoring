@@ -1,0 +1,133 @@
+<!doctype html>
+<!-- The Open Graph card template, rendered by scripts/make_og.mjs into a
+     1200x630 PNG per ticker and member page. EDIT THIS FILE to change the
+     design; the generator only substitutes {{PLACEHOLDER}} tokens and
+     screenshots #card.
+
+     1200x630, NOT the 1600x900 of card_template.html. Both are "our card"
+     but they are different surfaces: the social card carries one filing's
+     detail for a timeline post, this one names a page for a link preview.
+
+     The content is deliberately STABLE — the symbol, the company, the seat.
+     No trade counts and no prices: those change every morning, and a card
+     that carries them would rewrite ~120 binaries in the repo daily. The
+     numbers are one click away on the page itself.
+
+     Fonts are the repo-local woff2 files in ./fonts, shared with
+     card_template.html — self-contained, so CI output is deterministic.
+
+     Placeholders:
+       {{KICKER}}    "Congressional trades" / "Disclosed trades"
+       {{TITLE}}     "NVDA" / "Nancy Pelosi"
+       {{TITLE_PX}}  headline font size, fitted to the title's length
+       {{SUBTITLE}}  "NVIDIA Corporation" / "Democrat · CA-11"
+-->
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <style>
+      @font-face { font-family: LF; src: url(fonts/libre-franklin-latin-400-normal.woff2); font-weight: 400; }
+      @font-face { font-family: LF; src: url(fonts/libre-franklin-latin-900-normal.woff2); font-weight: 900; }
+      @font-face { font-family: PM; src: url(fonts/ibm-plex-mono-latin-400-normal.woff2); font-weight: 400; }
+      @font-face { font-family: PM; src: url(fonts/ibm-plex-mono-latin-700-normal.woff2); font-weight: 700; }
+      * { margin: 0; box-sizing: border-box; }
+      :root {
+        --paper: #fbfbf9;
+        --ink: #14161a;
+        --soft: #5a5e66;
+        --rule: #e3e2dc;
+        --stamp: #c8102e;
+      }
+      body { font-family: LF, sans-serif; }
+      .card {
+        width: 1200px;
+        height: 630px;
+        overflow: hidden;
+        background: var(--paper);
+        color: var(--ink);
+        padding: 56px 64px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+      /* The masthead rule is the site's 3px double rule, the one editorial
+         signature a reader sees before any words. */
+      .head {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        border-bottom: 3px double var(--ink);
+        padding-bottom: 20px;
+      }
+      .wordmark {
+        font-family: LF, sans-serif;
+        font-weight: 900;
+        font-size: 30px;
+        letter-spacing: -0.02em;
+      }
+      .wordmark .b { color: var(--stamp); }
+      .domain {
+        font-family: PM, monospace;
+        font-size: 19px;
+        color: var(--soft);
+        letter-spacing: 0.04em;
+      }
+      .body { flex: 1; display: flex; flex-direction: column; justify-content: center; }
+      .kicker {
+        font-family: PM, monospace;
+        font-weight: 700;
+        font-size: 21px;
+        text-transform: uppercase;
+        letter-spacing: 0.14em;
+        color: var(--stamp);
+        margin-bottom: 22px;
+      }
+      .title {
+        font-family: LF, sans-serif;
+        font-weight: 900;
+        line-height: 1.02;
+        letter-spacing: -0.035em;
+        /* Fitted by the generator so a five-letter ticker and a long name
+           both fill the column without wrapping to three lines. */
+        font-size: {{TITLE_PX}}px;
+      }
+      .rule { width: 148px; height: 7px; background: var(--stamp); margin: 26px 0 24px; }
+      .subtitle {
+        font-family: PM, monospace;
+        font-size: 30px;
+        color: var(--soft);
+        line-height: 1.35;
+        /* Two lines maximum: a very long company name truncates rather than
+           pushing the card's footer off the bottom. */
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+      }
+      .foot {
+        font-family: PM, monospace;
+        font-size: 19px;
+        color: var(--soft);
+        border-top: 1px solid var(--rule);
+        padding-top: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="card" id="card">
+      <div class="head">
+        <div class="wordmark">CAPITOL <span class="b">LEDGER</span></div>
+        <div class="domain">capitolledger.io</div>
+      </div>
+      <div class="body">
+        <div class="kicker">{{KICKER}}</div>
+        <div class="title">{{TITLE}}</div>
+        <div class="rule"></div>
+        <div class="subtitle">{{SUBTITLE}}</div>
+      </div>
+      <div class="foot">
+        Official STOCK Act disclosures · amounts are the filed brackets
+      </div>
+    </div>
+  </body>
+</html>

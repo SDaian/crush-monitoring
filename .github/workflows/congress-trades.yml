@@ -158,6 +158,19 @@ jobs:
           python3 -m congress landing 2>&1 | tee -a fetch.log \
             || echo "::warning::landing data refresh failed; keeping prior files"
 
+      # Open Graph cards, one per ticker and member page. The generator SKIPS
+      # a card that already exists, so a normal day renders nothing and the
+      # step costs a second; only a newly qualifying ticker adds a file. The
+      # cards carry stable content (symbol, company, seat) precisely so this
+      # stays true — a card with a trade count on it would rewrite ~120
+      # binaries here every morning.
+      - name: Render Open Graph cards for new pages (non-fatal)
+        if: github.event.inputs.report_only != 'true'
+        run: |
+          npm ci --ignore-scripts --no-audit --no-fund 2>&1 | tail -1
+          node scripts/make_og.mjs 2>&1 | tee -a fetch.log \
+            || echo "::warning::OG card render failed; pages keep the sitewide og.png"
+
       - name: Draft social posts for notable new filings (non-fatal)
         if: github.event.inputs.report_only != 'true'
         env:
@@ -327,7 +340,7 @@ jobs:
           # landing/src/data/tickers was missing, so the ticker pages served
           # whatever a manual run last happened to commit (TSM was 2 months
           # and 1 trade behind the tracker).
-          FILES="docs/data/congress-trades.json congress/state.json congress/social_state.json congress/members.json docs/data/committees.json docs/data/returns.json docs/data/performance.json landing/src/data/disclosures.json landing/src/data/stats.json landing/src/data/late.json landing/src/data/market.json landing/src/data/members landing/src/data/tickers"
+          FILES="docs/data/congress-trades.json congress/state.json congress/social_state.json congress/members.json docs/data/committees.json docs/data/returns.json docs/data/performance.json landing/src/data/disclosures.json landing/src/data/stats.json landing/src/data/late.json landing/src/data/market.json landing/src/data/members landing/src/data/tickers landing/public/og"
           if git diff --quiet -- $FILES; then
             echo "No new trades or price changes."
             exit 0

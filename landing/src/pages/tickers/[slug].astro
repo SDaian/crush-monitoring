@@ -207,6 +207,7 @@ const schema = [
       path={`/tickers/${t.slug}`}
       schema={schema}
       noindex={t.indexable === false}
+      ogCard={`ticker-${t.slug}.png`}
     />
     {/* Runs before the body parses, so the right panel is the only one ever
          painted: no flash, no layout shift. It sets two classes and nothing
