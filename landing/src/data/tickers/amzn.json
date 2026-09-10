@@ -9,20 +9,20 @@
   },
   "indexable": true,
   "technical": {
-    "asOf": "2026-09-08",
-    "price": 256.97,
-    "chg1d": -0.6,
-    "chg1w": -1.08,
-    "chg1m": -6.38,
-    "rsi14": 48.1,
-    "sma50": 254.43,
-    "sma200": 239.29,
-    "vsSma50": 1.0,
-    "vsSma200": 7.4,
-    "relVol": 0.89,
+    "asOf": "2026-09-09",
+    "price": 252.4,
+    "chg1d": -1.78,
+    "chg1w": -0.99,
+    "chg1m": -9.24,
+    "rsi14": 44.1,
+    "sma50": 254.68,
+    "sma200": 239.44,
+    "vsSma50": -0.9,
+    "vsSma200": 5.4,
+    "relVol": 1.02,
     "high52w": 284.02,
     "low52w": 198.79,
-    "rangePos": 68.0,
+    "rangePos": 63.0,
     "series": [
       {
         "d": "2025-09-19",
@@ -229,31 +229,38 @@
         "c": 258.51
       },
       {
-        "d": "2026-09-08",
-        "c": 256.97
+        "d": "2026-09-09",
+        "c": 252.4
       }
     ],
-    "signals": [],
+    "signals": [
+      {
+        "type": "lose_sma50",
+        "asof": "2026-09-09",
+        "label": "Lost the 50-day average",
+        "dir": "bear"
+      }
+    ],
     "nextEarnings": null,
     "score": {
-      "label": "Hold",
-      "buys": 3,
-      "sells": 3,
+      "label": "Sell",
+      "buys": 2,
+      "sells": 4,
       "holds": 1,
-      "ratio": 0.0
+      "ratio": -0.286
     }
   },
   "summary": {
-    "trades": 121,
-    "members": 33,
+    "trades": 122,
+    "members": 34,
     "buys": 88,
-    "sells": 33,
+    "sells": 34,
     "other": 0,
     "firstTx": "2024-10-23",
-    "lastTx": "2026-07-08",
-    "lastFiling": "2026-08-18",
+    "lastTx": "2026-08-11",
+    "lastFiling": "2026-09-09",
     "estBuyLabel": "$4.3M",
-    "estSellLabel": "$3.7M",
+    "estSellLabel": "$3.9M",
     "pctLate": 18
   },
   "topMembers": [
@@ -369,6 +376,18 @@
     }
   ],
   "trades": [
+    {
+      "member": "Cory A. Booker",
+      "memberSlug": "cory-a-booker",
+      "hasPage": false,
+      "party": "D",
+      "side": "SELL",
+      "amountBucket": "$100K – $250K",
+      "txDate": "2026-08-11",
+      "filedDate": "2026-09-09",
+      "daysLate": 0,
+      "sourceUrl": "https://efdsearch.senate.gov/search/view/ptr/e5144197-e49c-4f74-bec4-19f1f3124668/"
+    },
     {
       "member": "Thomas H. Kean, Jr.",
       "memberSlug": "thomas-h-kean-jr",
@@ -656,18 +675,6 @@
       "filedDate": "2026-01-23",
       "daysLate": 0,
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20033725.pdf"
-    },
-    {
-      "member": "Markwayne Mullin",
-      "memberSlug": "markwayne-mullin",
-      "hasPage": false,
-      "party": "R",
-      "side": "BUY",
-      "amountBucket": "$100K – $250K",
-      "txDate": "2025-12-29",
-      "filedDate": "2026-01-16",
-      "daysLate": 0,
-      "sourceUrl": "https://efdsearch.senate.gov/search/view/ptr/b195126e-7bb2-4d54-baf5-e6fc8e7a0165/"
     }
   ],
   "tradesShown": 25

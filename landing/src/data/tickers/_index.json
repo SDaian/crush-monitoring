@@ -20,10 +20,10 @@
       "slug": "nvda",
       "ticker": "NVDA",
       "company": "NVIDIA Corporation",
-      "trades": 180,
-      "members": 33,
+      "trades": 181,
+      "members": 34,
       "buys": 117,
-      "sells": 63,
+      "sells": 64,
       "lastTx": "2026-08-18",
       "indexable": true,
       "industry": {
@@ -50,11 +50,11 @@
       "slug": "amzn",
       "ticker": "AMZN",
       "company": "Amazon.com, Inc.",
-      "trades": 121,
-      "members": 33,
+      "trades": 122,
+      "members": 34,
       "buys": 88,
-      "sells": 33,
-      "lastTx": "2026-07-08",
+      "sells": 34,
+      "lastTx": "2026-08-11",
       "indexable": true,
       "industry": {
         "key": "tech",
@@ -227,6 +227,21 @@
       }
     },
     {
+      "slug": "pg",
+      "ticker": "PG",
+      "company": "Procter & Gamble Company",
+      "trades": 61,
+      "members": 28,
+      "buys": 28,
+      "sells": 33,
+      "lastTx": "2026-08-24",
+      "indexable": true,
+      "industry": {
+        "key": "consumer",
+        "label": "Consumer & retail"
+      }
+    },
+    {
       "slug": "gs",
       "ticker": "GS",
       "company": "Goldman Sachs Group, Inc.",
@@ -239,21 +254,6 @@
       "industry": {
         "key": "finance",
         "label": "Banks & finance"
-      }
-    },
-    {
-      "slug": "pg",
-      "ticker": "PG",
-      "company": "Procter & Gamble Company",
-      "trades": 60,
-      "members": 28,
-      "buys": 27,
-      "sells": 33,
-      "lastTx": "2026-08-24",
-      "indexable": true,
-      "industry": {
-        "key": "consumer",
-        "label": "Consumer & retail"
       }
     },
     {
@@ -284,6 +284,21 @@
       "industry": {
         "key": "tech",
         "label": "Technology"
+      }
+    },
+    {
+      "slug": "nflx",
+      "ticker": "NFLX",
+      "company": "Netflix, Inc.",
+      "trades": 52,
+      "members": 23,
+      "buys": 28,
+      "sells": 24,
+      "lastTx": "2026-08-11",
+      "indexable": true,
+      "industry": {
+        "key": "telecom",
+        "label": "Telecom & media"
       }
     },
     {
@@ -344,21 +359,6 @@
       "industry": {
         "key": "transport",
         "label": "Transport & logistics"
-      }
-    },
-    {
-      "slug": "nflx",
-      "ticker": "NFLX",
-      "company": "Netflix, Inc.",
-      "trades": 51,
-      "members": 22,
-      "buys": 28,
-      "sells": 23,
-      "lastTx": "2026-05-22",
-      "indexable": true,
-      "industry": {
-        "key": "telecom",
-        "label": "Telecom & media"
       }
     },
     {
@@ -902,6 +902,21 @@
       }
     },
     {
+      "slug": "mcd",
+      "ticker": "MCD",
+      "company": "McDonald's Corporation",
+      "trades": 32,
+      "members": 16,
+      "buys": 13,
+      "sells": 19,
+      "lastTx": "2026-08-11",
+      "indexable": true,
+      "industry": {
+        "key": "consumer",
+        "label": "Consumer & retail"
+      }
+    },
+    {
       "slug": "zts",
       "ticker": "ZTS",
       "company": "Zoetis Inc.",
@@ -989,21 +1004,6 @@
       "industry": {
         "key": "tech",
         "label": "Technology"
-      }
-    },
-    {
-      "slug": "mcd",
-      "ticker": "MCD",
-      "company": "McDonald's Corporation",
-      "trades": 31,
-      "members": 15,
-      "buys": 13,
-      "sells": 18,
-      "lastTx": "2026-07-30",
-      "indexable": true,
-      "industry": {
-        "key": "consumer",
-        "label": "Consumer & retail"
       }
     },
     {

@@ -9,19 +9,19 @@
   },
   "indexable": true,
   "technical": {
-    "asOf": "2026-09-08",
-    "price": 255.81,
-    "chg1d": 0.05,
-    "chg1w": -2.93,
-    "chg1m": -6.8,
-    "rsi14": 34.5,
-    "sma50": 269.19,
-    "sma200": 295.7,
-    "vsSma50": -5.0,
-    "vsSma200": -13.5,
-    "relVol": 1.01,
+    "asOf": "2026-09-09",
+    "price": 253.48,
+    "chg1d": -0.91,
+    "chg1w": -2.92,
+    "chg1m": -7.39,
+    "rsi14": 32.2,
+    "sma50": 268.92,
+    "sma200": 295.45,
+    "vsSma50": -5.7,
+    "vsSma200": -14.2,
+    "relVol": 1.05,
     "high52w": 341.06,
-    "low52w": 255.69,
+    "low52w": 253.48,
     "rangePos": 0.0,
     "series": [
       {
@@ -229,11 +229,18 @@
         "c": 255.69
       },
       {
-        "d": "2026-09-08",
-        "c": 255.81
+        "d": "2026-09-09",
+        "c": 253.48
       }
     ],
-    "signals": [],
+    "signals": [
+      {
+        "type": "new_52w_low",
+        "asof": "2026-09-09",
+        "label": "New 52-week low",
+        "dir": "bear"
+      }
+    ],
     "nextEarnings": null,
     "score": {
       "label": "Strong Sell",
@@ -244,16 +251,16 @@
     }
   },
   "summary": {
-    "trades": 31,
-    "members": 15,
+    "trades": 32,
+    "members": 16,
     "buys": 13,
-    "sells": 18,
+    "sells": 19,
     "other": 0,
     "firstTx": "2023-03-15",
-    "lastTx": "2026-07-30",
-    "lastFiling": "2026-08-14",
+    "lastTx": "2026-08-11",
+    "lastFiling": "2026-09-09",
     "estBuyLabel": "$294K",
-    "estSellLabel": "$625K",
+    "estSellLabel": "$658K",
     "pctLate": 19
   },
   "topMembers": [
@@ -369,6 +376,18 @@
     }
   ],
   "trades": [
+    {
+      "member": "Cory A. Booker",
+      "memberSlug": "cory-a-booker",
+      "hasPage": false,
+      "party": "D",
+      "side": "SELL",
+      "amountBucket": "$15K – $50K",
+      "txDate": "2026-08-11",
+      "filedDate": "2026-09-09",
+      "daysLate": 0,
+      "sourceUrl": "https://efdsearch.senate.gov/search/view/ptr/e5144197-e49c-4f74-bec4-19f1f3124668/"
+    },
     {
       "member": "Richard McCormick",
       "memberSlug": "richard-mccormick",
@@ -656,18 +675,6 @@
       "filedDate": "2025-06-22",
       "daysLate": 0,
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20030387.pdf"
-    },
-    {
-      "member": "Jefferson Shreve",
-      "memberSlug": "jefferson-shreve",
-      "hasPage": false,
-      "party": "R",
-      "side": "BUY",
-      "amountBucket": "$15K – $50K",
-      "txDate": "2025-04-11",
-      "filedDate": "2025-05-08",
-      "daysLate": 0,
-      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20030231.pdf"
     }
   ],
   "tradesShown": 25
