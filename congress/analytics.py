@@ -33,7 +33,13 @@ ENV_TOKEN = "VERCEL_TOKEN"
 ENV_PROJECT = "VERCEL_PROJECT_ID"
 ENV_TEAM = "VERCEL_TEAM_ID"
 
-WINDOW_DAYS = 7          # traffic reported over a trailing week (steadier than 1 day)
+# Two reports, two windows. The daily one is noisy at this traffic level and
+# the weekly one is the honest read; both ship because a spike is worth seeing
+# the morning it happens, not the following Monday.
+DAILY = "daily"
+WEEKLY = "weekly"
+PERIOD_DAYS = {DAILY: 1, WEEKLY: 7}
+
 TOP_PAGES = 5
 TIMEOUT = 20            # seconds
 
@@ -56,6 +62,41 @@ def config() -> tuple[str, str, str]:
         os.environ.get(ENV_PROJECT, "").strip(),
         os.environ.get(ENV_TEAM, "").strip(),
     )
+
+
+def window_bounds(kind: str, today_iso: str) -> tuple[tuple, tuple]:
+    """((since, until), (prev_since, prev_until)) for a period and the one
+    before it — adjacent, equal length, and never touching today.
+
+    `until` is treated as EXCLUSIVE, which is what the existing call shape
+    implies: it passed `until=today` for a window described as trailing, and
+    today is still in progress. That matters because a partial day compared
+    against a complete one invents a fall every morning.
+
+    The assumption is not load-bearing for the comparison: both windows use
+    identical arithmetic, so if the API reads the bound the other way, both
+    shift by the same day and the delta between them still means what it says.
+    """
+    days = PERIOD_DAYS[kind]
+    today = date.fromisoformat(today_iso)
+    cur_until = today
+    cur_since = today - timedelta(days=days)
+    return (
+        (cur_since.isoformat(), cur_until.isoformat()),
+        ((cur_since - timedelta(days=days)).isoformat(), cur_since.isoformat()),
+    )
+
+
+def pct_delta(current, previous) -> float | None:
+    """Percent change, or None when there is nothing honest to compare.
+
+    None whenever a number is missing OR the baseline is zero: "+100%" off a
+    zero week says nothing a reader can use, and the surfaces hide the delta
+    rather than print it.
+    """
+    if current is None or previous is None or previous <= 0:
+        return None
+    return round((current - previous) / previous * 100, 1)
 
 
 def _base_params(project_id: str, team_id: str, since: str, until: str) -> dict:
@@ -170,50 +211,91 @@ def _esc(s) -> str:
     return (str(s).replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;"))
 
 
+def period_label(summary: dict) -> str:
+    """"yesterday" / "last 7 days" — what the window actually covers."""
+    return ("yesterday" if summary.get("windowDays") == 1
+            else f"last {summary.get('windowDays', 7)} days")
+
+
+def delta_text(current, previous) -> str:
+    """" (+18% vs the previous week)" — or "" when there is no baseline.
+
+    An absent comparison prints nothing at all. A reader who sees a delta on
+    one line and none on the next learns that we could not compare that one,
+    which is true; a "+100%" off a zero baseline would be noise dressed as a
+    fact (owner request, 2026-09-10).
+    """
+    pct = pct_delta(current, previous)
+    if pct is None:
+        return ""
+    return f" ({pct:+.1f}%)"
+
+
+def _lookup(rows, key):
+    """The metric for `key` in a [(key, value)] list, or None if absent."""
+    for k, v in rows or []:
+        if k == key:
+            return v
+    return None
+
+
 def format_block(summary: dict, member_names: dict | None = None) -> tuple[str, str]:
-    """(markdown, html) for the report's traffic section from a daily_summary.
+    """(markdown, html) for a traffic email from a ``period_summary`` dict.
     ``member_names`` maps slug→display name for the member-page breakdown; any
     missing slug falls back to a prettified slug."""
     total = summary.get("total")
     pages = summary.get("pages") or []
     member_pages = summary.get("memberPages") or []
-    days = summary.get("windowDays", WINDOW_DAYS)
+    prev = summary.get("previous") or {}
+    window = period_label(summary)
+    against = ("the day before" if summary.get("windowDays") == 1
+               else "the previous week")
     names = member_names or {}
-    head = f"## 📈 Traffic — last {days} days"
-    total_txt = f"{total:,} page views" if total is not None else "views unavailable"
 
-    md = f"{head}\n\n**{total_txt}**"
+    head = f"## 📈 Traffic — {window}"
+    total_txt = f"{total:,} page views" if total is not None else "views unavailable"
+    total_d = delta_text(total, prev.get("total"))
+    # The comparison is named once, on the total, rather than repeated on
+    # every row — the per-row percentages then read as the same comparison.
+    vs = f" vs {against}" if total_d else ""
+
+    md = f"{head}\n\n**{total_txt}{total_d}{vs}**"
     html = (f"<h2>📈 Traffic <span style='font-weight:400;font-size:13px'>"
-            f"(last {days} days)</span></h2><p><b>{_esc(total_txt)}</b></p>")
+            f"({_esc(window)})</span></h2><p><b>{_esc(total_txt)}"
+            f"{_esc(total_d)}{_esc(vs)}</b></p>")
     if pages:
         md += "\n\nTop pages:\n" + "\n".join(
-            f"- `{p}` — {v:,}" for p, v in pages)
+            f"- `{p}` — {v:,}{delta_text(v, _lookup(prev.get('pages'), p))}"
+            for p, v in pages)
         html += "<ul>" + "".join(
-            f"<li><code>{_esc(p)}</code> — {v:,}</li>" for p, v in pages) + "</ul>"
+            f"<li><code>{_esc(p)}</code> — {v:,}"
+            f"{_esc(delta_text(v, _lookup(prev.get('pages'), p)))}</li>"
+            for p, v in pages) + "</ul>"
     if member_pages:
         def label(slug):
             return names.get(slug) or prettify_slug(slug)
         md += "\n\nMember pages:\n" + "\n".join(
-            f"- {label(s)} — {v:,}" for s, v in member_pages)
+            f"- {label(s)} — {v:,}"
+            f"{delta_text(v, _lookup(prev.get('memberPages'), s))}"
+            for s, v in member_pages)
         html += ("<p style='margin:8px 0 2px'><b>Member pages</b></p><ul>"
-                 + "".join(f"<li>{_esc(label(s))} — {v:,}</li>"
-                           for s, v in member_pages) + "</ul>")
+                 + "".join(
+                     f"<li>{_esc(label(s))} — {v:,}"
+                     f"{_esc(delta_text(v, _lookup(prev.get('memberPages'), s)))}"
+                     "</li>"
+                     for s, v in member_pages) + "</ul>")
     return md, html
 
 
 # --- orchestration (network) --------------------------------------------
 
-def daily_summary(today_iso: str, window_days: int = WINDOW_DAYS) -> dict | None:
-    """Fetch the trailing-window traffic summary, or ``None`` if analytics is
-    not configured or the API is unreachable (the report skips the section)."""
-    token, project_id, team_id = config()
-    if not token or not project_id:
-        return None
-    until = today_iso
-    since = (date.fromisoformat(today_iso) - timedelta(days=window_days)).isoformat()
+def _fetch_window(since, until, token, project_id, team_id) -> dict | None:
+    """One window's numbers, or None when neither endpoint answered.
+
+    The total and the per-page rows are fetched independently: a failure in one
+    (a plan limit on aggregate, say) must not discard the other.
+    """
     base = _base_params(project_id, team_id, since, until)
-    # Fetch the total and the per-page rows independently — a failure in one
-    # (e.g. a plan limit on aggregate) must not discard the other.
     total = None
     try:
         total = parse_total(_fetch_json("visits/count", base, token))
@@ -229,7 +311,32 @@ def daily_summary(today_iso: str, window_days: int = WINDOW_DAYS) -> dict | None
         pass
     if total is None and not pages:
         return None
+    return {"since": since, "until": until, "total": total,
+            "pages": pages, "memberPages": member_pages}
+
+
+def period_summary(kind: str, today_iso: str) -> dict | None:
+    """A period's traffic plus the period before it, or ``None`` when analytics
+    is not configured or the API is unreachable (the report skips the email).
+
+    The previous window is best-effort on its own: losing it costs the deltas,
+    never the report. `previous` is None then, and every surface hides the
+    comparison rather than printing a number it cannot stand behind.
+    """
+    token, project_id, team_id = config()
+    if not token or not project_id:
+        return None
+    (since, until), (prev_since, prev_until) = window_bounds(kind, today_iso)
+    current = _fetch_window(since, until, token, project_id, team_id)
+    if current is None:
+        return None
+    previous = _fetch_window(prev_since, prev_until, token, project_id, team_id)
     return {
-        "since": since, "until": until, "windowDays": window_days,
-        "total": total, "pages": pages, "memberPages": member_pages,
+        "kind": kind,
+        "windowDays": PERIOD_DAYS[kind],
+        "since": since, "until": until,
+        "total": current["total"],
+        "pages": current["pages"],
+        "memberPages": current["memberPages"],
+        "previous": previous,
     }

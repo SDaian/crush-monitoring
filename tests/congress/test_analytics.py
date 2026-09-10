@@ -5,6 +5,7 @@ defensively, so these lock in that a few plausible Vercel shapes all parse.
 """
 
 import unittest
+from datetime import date
 from unittest import mock
 
 from congress import analytics as a
@@ -132,12 +133,97 @@ class TestFormatBlock(unittest.TestCase):
         self.assertIn("&lt;script&gt;", html)
 
 
-class TestDailySummaryGating(unittest.TestCase):
+class TestPeriodSummaryGating(unittest.TestCase):
     def test_none_without_token(self):
         # No VERCEL_TOKEN configured → no network attempted, returns None.
         with mock.patch.dict("os.environ",
                              {a.ENV_TOKEN: "", a.ENV_PROJECT: ""}, clear=False):
-            self.assertIsNone(a.daily_summary("2026-07-21"))
+            self.assertIsNone(a.period_summary(a.DAILY, "2026-07-21"))
+            self.assertIsNone(a.period_summary(a.WEEKLY, "2026-07-21"))
+
+
+class TestWindowBounds(unittest.TestCase):
+    """Two adjacent windows of equal length, neither touching today."""
+
+    def test_daily_reads_yesterday_not_today(self):
+        (since, until), _ = a.window_bounds(a.DAILY, "2026-09-10")
+        self.assertEqual((since, until), ("2026-09-09", "2026-09-10"))
+
+    def test_weekly_reads_the_seven_days_behind_today(self):
+        (since, until), _ = a.window_bounds(a.WEEKLY, "2026-09-10")
+        self.assertEqual((since, until), ("2026-09-03", "2026-09-10"))
+
+    def test_the_previous_window_is_adjacent_and_equal(self):
+        span = lambda lo, hi: date.fromisoformat(hi) - date.fromisoformat(lo)
+        for kind in (a.DAILY, a.WEEKLY):
+            (since, until), (psince, puntil) = a.window_bounds(kind, "2026-09-10")
+            self.assertEqual(puntil, since, "windows must not gap or overlap")
+            self.assertEqual(span(psince, puntil), span(since, until),
+                             "a comparison needs two windows of one length")
+
+
+class TestDelta(unittest.TestCase):
+    """A percentage appears only where there is something to compare."""
+
+    def test_a_real_change_reads_as_a_percentage(self):
+        self.assertEqual(a.pct_delta(118, 100), 18.0)
+        self.assertEqual(a.delta_text(118, 100), " (+18.0%)")
+
+    def test_a_fall_keeps_its_sign(self):
+        self.assertEqual(a.delta_text(82, 100), " (-18.0%)")
+
+    def test_no_baseline_prints_nothing(self):
+        self.assertEqual(a.delta_text(118, None), "")
+
+    def test_a_zero_baseline_prints_nothing(self):
+        # "+100%" off a zero week is noise dressed as a fact.
+        self.assertIsNone(a.pct_delta(118, 0))
+        self.assertEqual(a.delta_text(118, 0), "")
+
+    def test_a_missing_current_prints_nothing(self):
+        self.assertEqual(a.delta_text(None, 100), "")
+
+
+class TestFormatBlockComparison(unittest.TestCase):
+    CURRENT = {
+        "kind": a.WEEKLY, "windowDays": 7,
+        "total": 1180, "pages": [("/", 600), ("/tracker", 200)],
+        "memberPages": [("nancy-pelosi", 180)],
+        "previous": {"total": 1000, "pages": [("/", 500)],
+                     "memberPages": [("nancy-pelosi", 200)]},
+    }
+
+    def test_the_total_carries_its_change_and_names_the_comparison(self):
+        md, html = a.format_block(self.CURRENT)
+        self.assertIn("1,180 page views (+18.0%) vs the previous week", md)
+        self.assertIn("+18.0%", html)
+
+    def test_a_page_present_in_both_periods_carries_its_change(self):
+        md, _ = a.format_block(self.CURRENT)
+        self.assertIn("`/` — 600 (+20.0%)", md)
+
+    def test_a_page_absent_from_the_previous_period_carries_none(self):
+        md, _ = a.format_block(self.CURRENT)
+        self.assertIn("`/tracker` — 200\n", md + "\n")
+        self.assertNotIn("/tracker` — 200 (", md)
+
+    def test_a_member_page_that_fell_shows_the_fall(self):
+        md, _ = a.format_block(self.CURRENT)
+        self.assertIn("Nancy Pelosi — 180 (-10.0%)",
+                      md.replace("nancy-pelosi", "Nancy Pelosi"))
+
+    def test_without_a_previous_period_no_percentage_appears(self):
+        md, html = a.format_block({**self.CURRENT, "previous": None})
+        self.assertIn("1,180 page views", md)
+        self.assertNotIn("%", md)
+        self.assertNotIn("vs the previous week", md)
+        self.assertNotIn("%", html)
+
+    def test_the_daily_window_names_itself(self):
+        md, _ = a.format_block({**self.CURRENT, "kind": a.DAILY,
+                                "windowDays": 1})
+        self.assertIn("Traffic — yesterday", md)
+        self.assertIn("vs the day before", md)
 
 
 if __name__ == "__main__":

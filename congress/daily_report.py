@@ -443,21 +443,61 @@ def whats_new(state: dict, now: dict) -> list[str]:
 
 def build_traffic_email(traffic: dict, today_iso: str,
                         member_names: dict | None = None) -> dict:
-    """Compose the standalone site-traffic email (subject, markdown, html) from
-    a ``analytics.daily_summary`` dict. Pure — no I/O."""
+    """Compose a standalone site-traffic email (subject, markdown, html) from
+    an ``analytics.period_summary`` dict. Pure — no I/O.
+
+    The subject names the period, because two of these can land on the same
+    Monday morning and an inbox that shows two identical subjects is one the
+    reader stops opening.
+    """
     md, _ = analytics.format_block(traffic, member_names)
     markdown = (f"{md}\n\n---\n_Aggregated, cookieless Vercel Web Analytics · "
                 f"[Capitol Ledger tracker]({TRACKER_URL})._")
     date_label = date.fromisoformat(today_iso).strftime("%A, %B %-d, %Y")
     total = traffic.get("total")
-    days = traffic.get("windowDays", 7)
+    window = analytics.period_label(traffic)
+    weekly = traffic.get("kind") == analytics.WEEKLY
     preheader = (f"{total:,} page views" if total is not None
-                 else "site traffic") + f" · last {days} days"
+                 else "site traffic") + f" · {window}"
     html = email_template.render_traffic_html(
         date_label=date_label, traffic=traffic, member_names=member_names,
         tracker_url=TRACKER_URL, preheader=preheader)
-    return {"subject": f"📈 Traffic report — {today_iso}",
+    kind_label = "Weekly traffic" if weekly else "Traffic report"
+    return {"subject": f"📈 {kind_label} — {today_iso}",
             "markdown": markdown, "html": html}
+
+
+def traffic_periods(today_iso: str) -> list[str]:
+    """Which traffic emails to send today.
+
+    The daily one every morning; the weekly one on MONDAY as well, covering
+    the seven days behind it. Both land that morning by owner's choice — they
+    answer different questions, and the weekly is the one that survives a
+    noisy Tuesday.
+    """
+    kinds = [analytics.DAILY]
+    if date.fromisoformat(today_iso).weekday() == 0:
+        kinds.append(analytics.WEEKLY)
+    return kinds
+
+
+def send_traffic_emails(today_iso: str, member_names: dict | None = None) -> int:
+    """Send today's traffic emails; return how many went out.
+
+    Deliberately OUTSIDE the quiet-day gate. Site traffic changes whether or
+    not the market opened, and the gate skips Sunday and the pre-close Monday
+    run — which is exactly when the weekly report is due, so gating it would
+    have made the weekly email the one that rarely arrives.
+    """
+    sent = 0
+    for kind in traffic_periods(today_iso):
+        traffic = analytics.period_summary(kind, today_iso)
+        if not traffic:
+            continue
+        tr = build_traffic_email(traffic, today_iso, member_names)
+        send_email(tr["subject"], tr["markdown"], tr["html"])
+        sent += 1
+    return sent
 
 
 # --- GitHub API (network) ------------------------------------------------
@@ -617,11 +657,23 @@ def main() -> int:
     title = f"📋 Morning report — {today_iso}"
 
     # A quiet day: the market printed no new close and no filing arrived, so
-    # this email would repeat yesterday's word for word. Skip every delivery —
-    # the digest, the subscriber broadcast, the traffic email and the issue —
-    # but still publish the web edition, so /report stays current. Nothing is
+    # this email would repeat yesterday's word for word. Skip the trade
+    # deliveries — the digest, the subscriber broadcast and the issue — but
+    # still publish the web edition, so /report stays current. The traffic
+    # emails already went out above: they are a different subject and a
+    # market holiday says nothing about who read the site. Nothing is
     # recorded in the state either: the fingerprint keeps describing the last
     # report that actually went out, and a later cron re-asks the question.
+    # Site traffic ships as its OWN email(s) so the digest stays focused on
+    # trades — and it runs BEFORE the quiet-day gate below, because traffic
+    # changes whether or not the market opened. Non-fatal: None unless
+    # VERCEL_TOKEN + VERCEL_PROJECT_ID are set, so the run never fails on
+    # analytics. Real names for the member-page breakdown (slug → display).
+    send_traffic_emails(today_iso, {
+        m["slug"]: m["name"]
+        for m in _load(MEMBER_INDEX_JSON, {}).get("members", [])
+    })
+
     now = fingerprint(trades, ai_tickers)
     news = whats_new(state, now)
     if not news and not force:
@@ -640,17 +692,6 @@ def main() -> int:
     # non-fatal — the owner's copy above must land either way. Runs inside the
     # per-day idempotency gate, so subscribers can't be double-sent.
     buttondown.send(title, report["html_embed"])
-
-    # Site traffic (Vercel Web Analytics) ships as its OWN email so the digest
-    # stays focused on trades. Non-fatal; None unless VERCEL_TOKEN +
-    # VERCEL_PROJECT_ID are set, so the run never fails on analytics.
-    traffic = analytics.daily_summary(today_iso)
-    if traffic:
-        # Real names for the member-page breakdown (slug → display name).
-        member_names = {m["slug"]: m["name"]
-                        for m in _load(MEMBER_INDEX_JSON, {}).get("members", [])}
-        tr = build_traffic_email(traffic, today_iso, member_names)
-        send_email(tr["subject"], tr["markdown"], tr["html"])
 
     # Secondary: a dated GitHub issue as an archive + the flip-diff state. Also
     # assign it to the repo owner (override REPORT_ASSIGNEE) so watchers/owners

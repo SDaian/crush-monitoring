@@ -2,7 +2,9 @@
 
 import json
 import os
+import re
 import unittest
+from unittest import mock
 from pathlib import Path
 from tempfile import TemporaryDirectory
 
@@ -156,8 +158,10 @@ class TestBuildReport(unittest.TestCase):
 
 
 class TestTrafficEmail(unittest.TestCase):
-    TRAFFIC = {"total": 1284, "windowDays": 7,
-               "pages": [("/", 640)], "memberPages": [("nancy-pelosi", 180)]}
+    TRAFFIC = {"kind": "daily", "total": 1284, "windowDays": 1,
+               "pages": [("/", 640)], "memberPages": [("nancy-pelosi", 180)],
+               "previous": {"total": 1000, "pages": [("/", 500)],
+                            "memberPages": [("nancy-pelosi", 200)]}}
 
     def test_build_traffic_email(self):
         tr = daily_report.build_traffic_email(
@@ -168,6 +172,69 @@ class TestTrafficEmail(unittest.TestCase):
         self.assertIn("Nancy Pelosi", tr["markdown"])
         self.assertIn("1,284 page views", tr["html"])
         self.assertNotIn("<script", tr["html"])
+
+    def test_the_two_reports_have_different_subjects(self):
+        # Two of these can land on one Monday morning; an inbox showing the
+        # same subject twice is one the reader stops opening.
+        weekly = {**self.TRAFFIC, "kind": "weekly", "windowDays": 7}
+        d = daily_report.build_traffic_email(self.TRAFFIC, "2026-07-24")
+        w = daily_report.build_traffic_email(weekly, "2026-07-24")
+        self.assertIn("Traffic report", d["subject"])
+        self.assertIn("Weekly traffic", w["subject"])
+        self.assertNotEqual(d["subject"], w["subject"])
+
+    def test_the_change_is_shown_against_the_period_before(self):
+        tr = daily_report.build_traffic_email(self.TRAFFIC, "2026-07-24")
+        self.assertIn("+28.4%", tr["markdown"])
+        self.assertIn("vs the day before", tr["markdown"])
+        self.assertIn("+28.4%", tr["html"])
+
+    def test_without_a_baseline_no_percentage_is_shown(self):
+        tr = daily_report.build_traffic_email(
+            {**self.TRAFFIC, "previous": None}, "2026-07-24")
+        self.assertIn("1,284 page views", tr["markdown"])
+        # Match the delta's own shape, not a bare "%": the HTML is full of
+        # width="100%" table attributes.
+        delta = re.compile(r"[+-]\d+\.\d%")
+        self.assertIsNone(delta.search(tr["markdown"]))
+        self.assertIsNone(delta.search(tr["html"]))
+        self.assertNotIn("vs the day before", tr["markdown"])
+
+
+class TestTrafficSchedule(unittest.TestCase):
+    """Daily every morning, weekly on Monday as well."""
+
+    def test_a_weekday_sends_only_the_daily(self):
+        # 2026-07-24 is a Friday.
+        self.assertEqual(daily_report.traffic_periods("2026-07-24"), ["daily"])
+
+    def test_monday_sends_both(self):
+        # 2026-07-27 is a Monday.
+        self.assertEqual(daily_report.traffic_periods("2026-07-27"),
+                         ["daily", "weekly"])
+
+    def test_sunday_sends_only_the_daily(self):
+        self.assertEqual(daily_report.traffic_periods("2026-07-26"), ["daily"])
+
+    def test_a_period_with_no_data_sends_nothing(self):
+        with mock.patch.object(daily_report.analytics, "period_summary",
+                               return_value=None), \
+             mock.patch.object(daily_report, "send_email") as send:
+            sent = daily_report.send_traffic_emails("2026-07-27")
+        self.assertEqual(sent, 0)
+        send.assert_not_called()
+
+    def test_monday_sends_two_emails_when_both_have_data(self):
+        with mock.patch.object(daily_report.analytics, "period_summary",
+                               side_effect=lambda k, d: {**self.SUMMARY,
+                                                         "kind": k}), \
+             mock.patch.object(daily_report, "send_email") as send:
+            sent = daily_report.send_traffic_emails("2026-07-27")
+        self.assertEqual(sent, 2)
+        self.assertEqual(send.call_count, 2)
+
+    SUMMARY = {"windowDays": 7, "total": 10, "pages": [], "memberPages": [],
+               "previous": None}
 
 
 class TestMainDelivery(unittest.TestCase):
