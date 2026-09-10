@@ -1,4 +1,8 @@
 User-agent: *
 Allow: /
 
+# A plain-text brief for language models — what the data is, what it is not,
+# and where the raw JSON lives (llmstxt.org convention).
+# https://capitolledger.io/llms.txt
+
 Sitemap: https://capitolledger.io/sitemap-index.xml

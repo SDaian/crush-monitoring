@@ -91,7 +91,13 @@ const STEPS = [
         </p>
       </section>
 
+      {/* The timeline's steps are <h3>, so this section needs its own <h2>:
+           without it the page jumped h1 to h3 four times and a screen reader
+           read the stages as subsections of nothing. */}
       <section class="mx-auto max-w-[75rem] px-[5vw] pb-[8vh]">
+        <div class="section-head">
+          <h2 class="section-title">The stages</h2>
+        </div>
         <Timeline steps={STEPS} />
       </section>
 

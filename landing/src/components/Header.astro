@@ -36,6 +36,13 @@ const cta =
   "hover:bg-stamp focus-visible:bg-stamp";
 ---
 
+{/* First focusable element on every page. A keyboard or screen-reader
+     visitor otherwise tabs through the whole nav before reaching the record
+     they came for — and on a ticker page that nav is the same five links on
+     all 152 pages. Visually hidden until focused, so it costs sighted
+     readers nothing. Every page's <main> already carries id="content". */}
+<a class="skip-link mono" href="#content">Skip to content</a>
+
 <div class="site-head">
   <header
     class="flex items-center justify-between border-b-[3px] border-double border-ink px-[5vw] py-4"
@@ -96,6 +103,26 @@ const cta =
 </div>
 
 <style>
+  /* Off-screen until focused, then it lands as a normal editorial chip in
+     the top-left. `clip-path` rather than `display:none`, which would take
+     it out of the tab order entirely and defeat the point. */
+  .skip-link {
+    position: absolute;
+    left: -9999px;
+    top: 0;
+    z-index: 100;
+    padding: 0.6rem 1rem;
+    background: var(--color-ink);
+    color: var(--color-paper);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    text-decoration: none;
+  }
+  .skip-link:focus-visible,
+  .skip-link:focus {
+    left: 0;
+  }
   /* Hamburger button: a 3-bar icon that morphs to an ✕ when open. */
   .menu-btn {
     display: inline-flex;
