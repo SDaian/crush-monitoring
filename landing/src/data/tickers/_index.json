@@ -152,6 +152,21 @@
       }
     },
     {
+      "slug": "brk-b",
+      "ticker": "BRK.B",
+      "company": "Berkshire Hathaway Inc. New",
+      "trades": 68,
+      "members": 22,
+      "buys": 34,
+      "sells": 34,
+      "lastTx": "2026-08-07",
+      "indexable": true,
+      "industry": {
+        "key": "finance",
+        "label": "Banks & finance"
+      }
+    },
+    {
       "slug": "lly",
       "ticker": "LLY",
       "company": "Eli Lilly and Company",
@@ -164,21 +179,6 @@
       "industry": {
         "key": "health",
         "label": "Health care & pharma"
-      }
-    },
-    {
-      "slug": "brk-b",
-      "ticker": "BRK.B",
-      "company": "Berkshire Hathaway Inc. New",
-      "trades": 67,
-      "members": 22,
-      "buys": 33,
-      "sells": 34,
-      "lastTx": "2026-07-30",
-      "indexable": true,
-      "industry": {
-        "key": "finance",
-        "label": "Banks & finance"
       }
     },
     {
@@ -362,6 +362,21 @@
       }
     },
     {
+      "slug": "ibm",
+      "ticker": "IBM",
+      "company": "International Business Machines Corporation",
+      "trades": 50,
+      "members": 15,
+      "buys": 27,
+      "sells": 23,
+      "lastTx": "2026-08-24",
+      "indexable": true,
+      "industry": {
+        "key": "tech",
+        "label": "Technology"
+      }
+    },
+    {
       "slug": "abt",
       "ticker": "ABT",
       "company": "Abbott Laboratories",
@@ -437,21 +452,6 @@
       }
     },
     {
-      "slug": "ibm",
-      "ticker": "IBM",
-      "company": "International Business Machines Corporation",
-      "trades": 48,
-      "members": 15,
-      "buys": 27,
-      "sells": 21,
-      "lastTx": "2026-07-17",
-      "indexable": true,
-      "industry": {
-        "key": "tech",
-        "label": "Technology"
-      }
-    },
-    {
       "slug": "intc",
       "ticker": "INTC",
       "company": "Intel Corporation",
@@ -479,6 +479,21 @@
       "industry": {
         "key": "energy",
         "label": "Energy & utilities"
+      }
+    },
+    {
+      "slug": "mrk",
+      "ticker": "MRK",
+      "company": "Merck & Company, Inc.",
+      "trades": 43,
+      "members": 17,
+      "buys": 20,
+      "sells": 23,
+      "lastTx": "2026-08-19",
+      "indexable": true,
+      "industry": {
+        "key": "health",
+        "label": "Health care & pharma"
       }
     },
     {
@@ -512,18 +527,18 @@
       }
     },
     {
-      "slug": "mrk",
-      "ticker": "MRK",
-      "company": "Merck & Company, Inc.",
-      "trades": 41,
-      "members": 16,
-      "buys": 18,
-      "sells": 23,
-      "lastTx": "2026-03-27",
+      "slug": "bro",
+      "ticker": "BRO",
+      "company": "Brown & Brown, Inc.",
+      "trades": 40,
+      "members": 11,
+      "buys": 19,
+      "sells": 21,
+      "lastTx": "2026-08-25",
       "indexable": true,
       "industry": {
-        "key": "health",
-        "label": "Health care & pharma"
+        "key": "finance",
+        "label": "Banks & finance"
       }
     },
     {
@@ -599,21 +614,6 @@
       "industry": {
         "key": "tech",
         "label": "Technology"
-      }
-    },
-    {
-      "slug": "bro",
-      "ticker": "BRO",
-      "company": "Brown & Brown, Inc.",
-      "trades": 39,
-      "members": 11,
-      "buys": 19,
-      "sells": 20,
-      "lastTx": "2026-05-18",
-      "indexable": true,
-      "industry": {
-        "key": "finance",
-        "label": "Banks & finance"
       }
     },
     {
@@ -797,6 +797,21 @@
       }
     },
     {
+      "slug": "payx",
+      "ticker": "PAYX",
+      "company": "Paychex, Inc.",
+      "trades": 34,
+      "members": 14,
+      "buys": 15,
+      "sells": 19,
+      "lastTx": "2026-08-25",
+      "indexable": true,
+      "industry": {
+        "key": "business",
+        "label": "Business services"
+      }
+    },
+    {
       "slug": "cmcsa",
       "ticker": "CMCSA",
       "company": "Comcast Corporation",
@@ -884,21 +899,6 @@
       "industry": {
         "key": "health",
         "label": "Health care & pharma"
-      }
-    },
-    {
-      "slug": "payx",
-      "ticker": "PAYX",
-      "company": "Paychex, Inc.",
-      "trades": 33,
-      "members": 14,
-      "buys": 15,
-      "sells": 18,
-      "lastTx": "2026-05-15",
-      "indexable": true,
-      "industry": {
-        "key": "business",
-        "label": "Business services"
       }
     },
     {
@@ -992,6 +992,21 @@
       }
     },
     {
+      "slug": "tsco",
+      "ticker": "TSCO",
+      "company": "Tractor Supply Company",
+      "trades": 31,
+      "members": 6,
+      "buys": 14,
+      "sells": 17,
+      "lastTx": "2026-08-25",
+      "indexable": true,
+      "industry": {
+        "key": "agriculture",
+        "label": "Agriculture & food"
+      }
+    },
+    {
       "slug": "amat",
       "ticker": "AMAT",
       "company": "Applied Materials, Inc.",
@@ -1034,6 +1049,21 @@
       "industry": {
         "key": "finance",
         "label": "Banks & finance"
+      }
+    },
+    {
+      "slug": "tdg",
+      "ticker": "TDG",
+      "company": "Transdigm Group Incorporated",
+      "trades": 30,
+      "members": 8,
+      "buys": 20,
+      "sells": 10,
+      "lastTx": "2026-08-25",
+      "indexable": true,
+      "industry": {
+        "key": "defense",
+        "label": "Defense & aerospace"
       }
     },
     {
@@ -1127,36 +1157,6 @@
       }
     },
     {
-      "slug": "tsco",
-      "ticker": "TSCO",
-      "company": "Tractor Supply Company",
-      "trades": 29,
-      "members": 6,
-      "buys": 14,
-      "sells": 15,
-      "lastTx": "2026-07-27",
-      "indexable": true,
-      "industry": {
-        "key": "agriculture",
-        "label": "Agriculture & food"
-      }
-    },
-    {
-      "slug": "tdg",
-      "ticker": "TDG",
-      "company": "Transdigm Group Incorporated",
-      "trades": 29,
-      "members": 8,
-      "buys": 20,
-      "sells": 9,
-      "lastTx": "2026-07-28",
-      "indexable": true,
-      "industry": {
-        "key": "defense",
-        "label": "Defense & aerospace"
-      }
-    },
-    {
       "slug": "pwr",
       "ticker": "PWR",
       "company": "Quanta Services, Inc.",
@@ -1184,6 +1184,21 @@
       "industry": {
         "key": "health",
         "label": "Health care & pharma"
+      }
+    },
+    {
+      "slug": "mkl",
+      "ticker": "MKL",
+      "company": "Markel Group Inc.",
+      "trades": 28,
+      "members": 3,
+      "buys": 19,
+      "sells": 9,
+      "lastTx": "2026-08-25",
+      "indexable": true,
+      "industry": {
+        "key": "finance",
+        "label": "Banks & finance"
       }
     },
     {
@@ -1247,18 +1262,18 @@
       }
     },
     {
-      "slug": "mkl",
-      "ticker": "MKL",
-      "company": "Markel Group Inc.",
+      "slug": "wab",
+      "ticker": "WAB",
+      "company": "Westinghouse Air Brake Technologies Corporation",
       "trades": 27,
-      "members": 3,
-      "buys": 19,
-      "sells": 8,
-      "lastTx": "2026-07-29",
+      "members": 8,
+      "buys": 6,
+      "sells": 21,
+      "lastTx": "2026-08-25",
       "indexable": true,
       "industry": {
-        "key": "finance",
-        "label": "Banks & finance"
+        "key": "transport",
+        "label": "Transport & logistics"
       }
     },
     {
@@ -1367,6 +1382,21 @@
       }
     },
     {
+      "slug": "qcom",
+      "ticker": "QCOM",
+      "company": "QUALCOMM Incorporated",
+      "trades": 25,
+      "members": 13,
+      "buys": 12,
+      "sells": 13,
+      "lastTx": "2026-08-19",
+      "indexable": true,
+      "industry": {
+        "key": "tech",
+        "label": "Technology"
+      }
+    },
+    {
       "slug": "app",
       "ticker": "APP",
       "company": "Applovin Corporation",
@@ -1394,21 +1424,6 @@
       "industry": {
         "key": "tech",
         "label": "Technology"
-      }
-    },
-    {
-      "slug": "wab",
-      "ticker": "WAB",
-      "company": "Westinghouse Air Brake Technologies Corporation",
-      "trades": 25,
-      "members": 8,
-      "buys": 6,
-      "sells": 19,
-      "lastTx": "2026-07-28",
-      "indexable": true,
-      "industry": {
-        "key": "transport",
-        "label": "Transport & logistics"
       }
     },
     {
@@ -1610,11 +1625,11 @@
       "slug": "spcx",
       "ticker": "SPCX",
       "company": "Space Exploration Technologies Corp.",
-      "trades": 7,
-      "members": 6,
-      "buys": 7,
+      "trades": 9,
+      "members": 7,
+      "buys": 9,
       "sells": 0,
-      "lastTx": "2026-06-18",
+      "lastTx": "2026-08-12",
       "indexable": false,
       "industry": {
         "key": "defense",

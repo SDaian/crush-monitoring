@@ -9,20 +9,20 @@
   },
   "indexable": true,
   "technical": {
-    "asOf": "2026-09-09",
-    "price": 239.94,
-    "chg1d": 3.38,
-    "chg1w": 3.69,
-    "chg1m": 1.54,
-    "rsi14": 54.9,
-    "sma50": 239.8,
-    "sma200": 261.79,
-    "vsSma50": 0.1,
-    "vsSma200": -8.3,
-    "relVol": 1.33,
+    "asOf": "2026-09-10",
+    "price": 234.02,
+    "chg1d": -2.47,
+    "chg1w": 1.0,
+    "chg1m": -1.85,
+    "rsi14": 49.1,
+    "sma50": 238.85,
+    "sma200": 261.51,
+    "vsSma50": -2.0,
+    "vsSma200": -10.5,
+    "relVol": 1.2,
     "high52w": 329.23,
     "low52w": 205.77,
-    "rangePos": 28.0,
+    "rangePos": 23.0,
     "series": [
       {
         "d": "2025-09-19",
@@ -229,38 +229,38 @@
         "c": 234.89
       },
       {
-        "d": "2026-09-09",
-        "c": 239.94
+        "d": "2026-09-10",
+        "c": 234.02
       }
     ],
     "signals": [
       {
-        "type": "reclaim_sma50",
-        "asof": "2026-09-09",
-        "label": "Reclaimed the 50-day average",
-        "dir": "bull"
+        "type": "lose_sma50",
+        "asof": "2026-09-10",
+        "label": "Lost the 50-day average",
+        "dir": "bear"
       }
     ],
     "nextEarnings": null,
     "score": {
-      "label": "Buy",
-      "buys": 4,
-      "sells": 2,
+      "label": "Strong Sell",
+      "buys": 1,
+      "sells": 5,
       "holds": 1,
-      "ratio": 0.286
+      "ratio": -0.571
     }
   },
   "summary": {
-    "trades": 48,
+    "trades": 50,
     "members": 15,
     "buys": 27,
-    "sells": 21,
+    "sells": 23,
     "other": 0,
     "firstTx": "2024-12-10",
-    "lastTx": "2026-07-17",
-    "lastFiling": "2026-09-04",
+    "lastTx": "2026-08-24",
+    "lastFiling": "2026-09-09",
     "estBuyLabel": "$430K",
-    "estSellLabel": "$358K",
+    "estSellLabel": "$374K",
     "pctLate": 10
   },
   "topMembers": [
@@ -320,6 +320,17 @@
       "hasPage": false
     },
     {
+      "name": "Maria Elvira Salazar",
+      "slug": "maria-elvira-salazar",
+      "party": "R",
+      "chamber": "House",
+      "trades": 4,
+      "buys": 2,
+      "sells": 2,
+      "estLabel": "$81K",
+      "hasPage": false
+    },
+    {
       "name": "Julie Johnson",
       "slug": "julie-johnson",
       "party": "D",
@@ -339,17 +350,6 @@
       "buys": 3,
       "sells": 0,
       "estLabel": "$24K",
-      "hasPage": false
-    },
-    {
-      "name": "Maria Elvira Salazar",
-      "slug": "maria-elvira-salazar",
-      "party": "R",
-      "chamber": "House",
-      "trades": 2,
-      "buys": 2,
-      "sells": 0,
-      "estLabel": "$65K",
       "hasPage": false
     },
     {
@@ -376,6 +376,30 @@
     }
   ],
   "trades": [
+    {
+      "member": "Maria Elvira Salazar",
+      "memberSlug": "maria-elvira-salazar",
+      "hasPage": false,
+      "party": "R",
+      "side": "SELL",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-08-24",
+      "filedDate": "2026-09-09",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035411.pdf"
+    },
+    {
+      "member": "Maria Elvira Salazar",
+      "memberSlug": "maria-elvira-salazar",
+      "hasPage": false,
+      "party": "R",
+      "side": "SELL",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-08-24",
+      "filedDate": "2026-09-09",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035411.pdf"
+    },
     {
       "member": "Gilbert Ray Cisneros, Jr.",
       "memberSlug": "gilbert-ray-cisneros-jr",
@@ -651,30 +675,6 @@
       "filedDate": "2026-01-12",
       "daysLate": 0,
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20033762.pdf"
-    },
-    {
-      "member": "Julie Johnson",
-      "memberSlug": "julie-johnson",
-      "hasPage": false,
-      "party": "D",
-      "side": "SELL",
-      "amountBucket": "$1K – $15K",
-      "txDate": "2025-12-18",
-      "filedDate": "2026-01-15",
-      "daysLate": 0,
-      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20033789.pdf"
-    },
-    {
-      "member": "Lloyd Doggett",
-      "memberSlug": "lloyd-doggett",
-      "hasPage": false,
-      "party": "D",
-      "side": "BUY",
-      "amountBucket": "$1K – $15K",
-      "txDate": "2025-12-12",
-      "filedDate": "2026-01-02",
-      "daysLate": 0,
-      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20033713.pdf"
     }
   ],
   "tradesShown": 25

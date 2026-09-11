@@ -9,20 +9,20 @@
   },
   "indexable": true,
   "technical": {
-    "asOf": "2026-09-09",
-    "price": 147.53,
-    "chg1d": -0.63,
-    "chg1w": -1.55,
-    "chg1m": 12.69,
-    "rsi14": 56.9,
-    "sma50": 135.35,
-    "sma200": 118.93,
-    "vsSma50": 9.0,
-    "vsSma200": 24.1,
-    "relVol": 0.76,
+    "asOf": "2026-09-10",
+    "price": 144.71,
+    "chg1d": -1.91,
+    "chg1w": -4.57,
+    "chg1m": 10.96,
+    "rsi14": 51.7,
+    "sma50": 135.67,
+    "sma200": 119.18,
+    "vsSma50": 6.7,
+    "vsSma200": 21.4,
+    "relVol": 0.68,
     "high52w": 156.45,
     "low52w": 77.6,
-    "rangePos": 89.0,
+    "rangePos": 85.0,
     "series": [
       {
         "d": "2025-09-19",
@@ -229,32 +229,32 @@
         "c": 150.33
       },
       {
-        "d": "2026-09-09",
-        "c": 147.53
+        "d": "2026-09-10",
+        "c": 144.71
       }
     ],
     "signals": [],
     "nextEarnings": null,
     "score": {
-      "label": "Strong Buy",
-      "buys": 5,
-      "sells": 1,
+      "label": "Buy",
+      "buys": 4,
+      "sells": 2,
       "holds": 1,
-      "ratio": 0.571
+      "ratio": 0.286
     }
   },
   "summary": {
-    "trades": 41,
-    "members": 16,
-    "buys": 18,
+    "trades": 43,
+    "members": 17,
+    "buys": 20,
     "sells": 23,
     "other": 0,
     "firstTx": "2024-08-07",
-    "lastTx": "2026-03-27",
-    "lastFiling": "2026-07-21",
-    "estBuyLabel": "$218K",
+    "lastTx": "2026-08-19",
+    "lastFiling": "2026-09-09",
+    "estBuyLabel": "$283K",
     "estSellLabel": "$356K",
-    "pctLate": 15
+    "pctLate": 14
   },
   "topMembers": [
     {
@@ -324,6 +324,17 @@
       "hasPage": false
     },
     {
+      "name": "Maria Elvira Salazar",
+      "slug": "maria-elvira-salazar",
+      "party": "R",
+      "chamber": "House",
+      "trades": 2,
+      "buys": 2,
+      "sells": 0,
+      "estLabel": "$65K",
+      "hasPage": false
+    },
+    {
       "name": "Josh Gottheimer",
       "slug": "josh-gottheimer",
       "party": "D",
@@ -355,20 +366,33 @@
       "sells": 2,
       "estLabel": "$16K",
       "hasPage": false
-    },
-    {
-      "name": "Lisa C. McClain",
-      "slug": "lisa-c-mcclain",
-      "party": "R",
-      "chamber": "House",
-      "trades": 2,
-      "buys": 1,
-      "sells": 1,
-      "estLabel": "$16K",
-      "hasPage": false
     }
   ],
   "trades": [
+    {
+      "member": "Maria Elvira Salazar",
+      "memberSlug": "maria-elvira-salazar",
+      "hasPage": false,
+      "party": "R",
+      "side": "BUY",
+      "amountBucket": "$15K – $50K",
+      "txDate": "2026-08-19",
+      "filedDate": "2026-09-09",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035411.pdf"
+    },
+    {
+      "member": "Maria Elvira Salazar",
+      "memberSlug": "maria-elvira-salazar",
+      "hasPage": false,
+      "party": "R",
+      "side": "BUY",
+      "amountBucket": "$15K – $50K",
+      "txDate": "2026-08-19",
+      "filedDate": "2026-09-09",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035411.pdf"
+    },
     {
       "member": "Alan Armstrong",
       "memberSlug": "alan-armstrong",
@@ -644,30 +668,6 @@
       "filedDate": "2025-05-08",
       "daysLate": 0,
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20030291.pdf"
-    },
-    {
-      "member": "Gilbert Ray Cisneros, Jr.",
-      "memberSlug": "gilbert-ray-cisneros-jr",
-      "hasPage": true,
-      "party": "D",
-      "side": "SELL",
-      "amountBucket": "$15K – $50K",
-      "txDate": "2025-03-31",
-      "filedDate": "2025-04-07",
-      "daysLate": 0,
-      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20029026.pdf"
-    },
-    {
-      "member": "Kelly Morrison",
-      "memberSlug": "kelly-morrison",
-      "hasPage": false,
-      "party": "D",
-      "side": "SELL",
-      "amountBucket": "$1K – $15K",
-      "txDate": "2025-03-20",
-      "filedDate": "2025-04-11",
-      "daysLate": 0,
-      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20029121.pdf"
     }
   ],
   "tradesShown": 25

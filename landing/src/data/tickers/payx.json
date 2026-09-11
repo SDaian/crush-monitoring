@@ -9,20 +9,20 @@
   },
   "indexable": true,
   "technical": {
-    "asOf": "2026-09-09",
-    "price": 114.75,
-    "chg1d": -1.86,
-    "chg1w": -8.67,
-    "chg1m": -5.31,
-    "rsi14": 37.5,
-    "sma50": 117.01,
-    "sma200": 104.09,
-    "vsSma50": -1.9,
-    "vsSma200": 10.2,
-    "relVol": 1.23,
+    "asOf": "2026-09-10",
+    "price": 115.18,
+    "chg1d": 0.37,
+    "chg1w": -7.11,
+    "chg1m": -5.05,
+    "rsi14": 38.6,
+    "sma50": 117.35,
+    "sma200": 104.12,
+    "vsSma50": -1.8,
+    "vsSma200": 10.6,
+    "relVol": 0.94,
     "high52w": 135.46,
     "low52w": 85.57,
-    "rangePos": 58.0,
+    "rangePos": 59.0,
     "series": [
       {
         "d": "2025-09-19",
@@ -229,18 +229,11 @@
         "c": 121.71
       },
       {
-        "d": "2026-09-09",
-        "c": 114.75
+        "d": "2026-09-10",
+        "c": 115.18
       }
     ],
-    "signals": [
-      {
-        "type": "lose_sma50",
-        "asof": "2026-09-09",
-        "label": "Lost the 50-day average",
-        "dir": "bear"
-      }
-    ],
+    "signals": [],
     "nextEarnings": null,
     "score": {
       "label": "Sell",
@@ -251,16 +244,16 @@
     }
   },
   "summary": {
-    "trades": 33,
+    "trades": 34,
     "members": 14,
     "buys": 15,
-    "sells": 18,
+    "sells": 19,
     "other": 0,
     "firstTx": "2024-05-03",
-    "lastTx": "2026-05-15",
-    "lastFiling": "2026-08-05",
+    "lastTx": "2026-08-25",
+    "lastFiling": "2026-09-09",
     "estBuyLabel": "$169K",
-    "estSellLabel": "$193K",
+    "estSellLabel": "$368K",
     "pctLate": 18
   },
   "topMembers": [
@@ -269,10 +262,10 @@
       "slug": "april-mcclain-delaney",
       "party": "D",
       "chamber": "House",
-      "trades": 12,
+      "trades": 13,
       "buys": 8,
-      "sells": 4,
-      "estLabel": "$96K",
+      "sells": 5,
+      "estLabel": "$271K",
       "hasPage": true
     },
     {
@@ -376,6 +369,18 @@
     }
   ],
   "trades": [
+    {
+      "member": "April McClain Delaney",
+      "memberSlug": "april-mcclain-delaney",
+      "hasPage": true,
+      "party": "D",
+      "side": "SELL",
+      "amountBucket": "$100K – $250K",
+      "txDate": "2026-08-25",
+      "filedDate": "2026-09-09",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035408.pdf"
+    },
     {
       "member": "Donald J. Trump",
       "memberSlug": "donald-j-trump",
@@ -663,18 +668,6 @@
       "filedDate": "2025-05-14",
       "daysLate": 0,
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20030338.pdf"
-    },
-    {
-      "member": "April McClain Delaney",
-      "memberSlug": "april-mcclain-delaney",
-      "hasPage": true,
-      "party": "D",
-      "side": "BUY",
-      "amountBucket": "$1K – $15K",
-      "txDate": "2025-04-09",
-      "filedDate": "2025-05-02",
-      "daysLate": 0,
-      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20030265.pdf"
     }
   ],
   "tradesShown": 25

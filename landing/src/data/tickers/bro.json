@@ -9,17 +9,17 @@
   },
   "indexable": true,
   "technical": {
-    "asOf": "2026-09-09",
-    "price": 66.53,
-    "chg1d": -2.42,
-    "chg1w": -7.66,
-    "chg1m": -7.08,
-    "rsi14": 36.2,
-    "sma50": 70.16,
-    "sma200": 69.32,
-    "vsSma50": -5.2,
-    "vsSma200": -4.0,
-    "relVol": 1.04,
+    "asOf": "2026-09-10",
+    "price": 66.33,
+    "chg1d": -0.3,
+    "chg1w": -7.93,
+    "chg1m": -7.15,
+    "rsi14": 35.7,
+    "sma50": 70.21,
+    "sma200": 69.26,
+    "vsSma50": -5.5,
+    "vsSma200": -4.2,
+    "relVol": 1.03,
     "high52w": 95.96,
     "low52w": 54.38,
     "rangePos": 29.0,
@@ -229,8 +229,8 @@
         "c": 71.42
       },
       {
-        "d": "2026-09-09",
-        "c": 66.53
+        "d": "2026-09-10",
+        "c": 66.33
       }
     ],
     "signals": [],
@@ -244,16 +244,16 @@
     }
   },
   "summary": {
-    "trades": 39,
+    "trades": 40,
     "members": 11,
     "buys": 19,
-    "sells": 20,
+    "sells": 21,
     "other": 0,
     "firstTx": "2024-05-03",
-    "lastTx": "2026-05-18",
-    "lastFiling": "2026-08-05",
+    "lastTx": "2026-08-25",
+    "lastFiling": "2026-09-09",
     "estBuyLabel": "$152K",
-    "estSellLabel": "$227K",
+    "estSellLabel": "$402K",
     "pctLate": 8
   },
   "topMembers": [
@@ -262,10 +262,10 @@
       "slug": "april-mcclain-delaney",
       "party": "D",
       "chamber": "House",
-      "trades": 13,
+      "trades": 14,
       "buys": 8,
-      "sells": 5,
-      "estLabel": "$104K",
+      "sells": 6,
+      "estLabel": "$279K",
       "hasPage": true
     },
     {
@@ -369,6 +369,18 @@
     }
   ],
   "trades": [
+    {
+      "member": "April McClain Delaney",
+      "memberSlug": "april-mcclain-delaney",
+      "hasPage": true,
+      "party": "D",
+      "side": "SELL",
+      "amountBucket": "$100K – $250K",
+      "txDate": "2026-08-25",
+      "filedDate": "2026-09-09",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035408.pdf"
+    },
     {
       "member": "Donald J. Trump",
       "memberSlug": "donald-j-trump",
@@ -656,18 +668,6 @@
       "filedDate": "2025-11-18",
       "daysLate": 0,
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20033491.pdf"
-    },
-    {
-      "member": "Val T. Hoyle",
-      "memberSlug": "val-t-hoyle",
-      "hasPage": false,
-      "party": "D",
-      "side": "SELL",
-      "amountBucket": "$1K – $15K",
-      "txDate": "2025-09-23",
-      "filedDate": "2025-10-10",
-      "daysLate": 0,
-      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20032211.pdf"
     }
   ],
   "tradesShown": 25
