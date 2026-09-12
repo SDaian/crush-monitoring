@@ -373,6 +373,37 @@ def ai_score(t: dict) -> dict:
             "ratio": round(ratio, 3)}
 
 
+def agreement(score: dict) -> dict:
+    """How much of the vote stood behind the headline read.
+
+    Returns ``{agree, votes, unanimous}``: how many checks pointed the label's
+    own way, how many were cast at all, and whether every one of them agreed.
+
+    The DENOMINATOR carries the meaning, so it is never dropped. Not every
+    symbol casts all seven checks — under 200 bars the two 200-day votes are
+    absent, under 21 the EMA pair is — and "5 in favour" is unanimous out of
+    five and split out of seven.
+
+    A Hold counts its hold votes, because no check is "in favour" of a Hold in
+    the way one is of a Buy. But an all-hold read is never ``unanimous``: seven
+    zero-votes means the stock is not moving, and marking that as conviction
+    would say the opposite of what it is.
+    """
+    buys = score.get("buys", 0)
+    sells = score.get("sells", 0)
+    holds = score.get("holds", 0)
+    votes = buys + sells + holds
+    label = score.get("label", "Hold")
+    if "Buy" in label:
+        agree, directional = buys, True
+    elif "Sell" in label:
+        agree, directional = sells, True
+    else:
+        agree, directional = holds, False
+    return {"agree": agree, "votes": votes,
+            "unanimous": bool(directional and votes and agree == votes)}
+
+
 def next_earnings(body: str, today: str) -> dict | None:
     """The next scheduled earnings date from a Twelve Data ``earnings`` body,
     or None. Pure, so it is tested offline.

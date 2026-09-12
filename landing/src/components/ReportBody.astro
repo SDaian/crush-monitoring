@@ -136,6 +136,12 @@ const fmtDate = (iso: string | null) =>
                     <td class="text-ink-soft">{s.trend}</td>
                     <td class={`num font-semibold ${READ_CLASS[s.label] ?? ""}`}>
                       {s.label}
+                      {s.unanimous && (
+                        <span class="star" title="every vote agreed">★</span>
+                      )}
+                      {s.votes ? (
+                        <div class="agree">{s.agree} of {s.votes} votes</div>
+                      ) : null}
                     </td>
                   </tr>
                 ))}
@@ -148,7 +154,9 @@ const fmtDate = (iso: string | null) =>
       }
       <p class="fineprint mt-5 max-w-[80ch]">
         "Read" is a rule-based tally of the indicators shown — each casts a
-        buy/hold/sell vote. It is a reproducible mechanical summary, <b
+        buy/hold/sell vote. The count is how many checks agreed with the read,
+        out of those cast; a stock with a short price history casts fewer, and
+        ★ marks a clean sweep. It is a reproducible mechanical summary, <b
           class="text-ink">not a recommendation</b
         >, and it is blind to fundamentals, news and your own goals. See the
         full breakdown on the <a
@@ -223,6 +231,21 @@ const fmtDate = (iso: string | null) =>
   .rtbl tbody tr:nth-child(even) { background: var(--color-wash); }
   .rtbl .num { text-align: right; font-variant-numeric: tabular-nums; }
   .rtbl .tk { font-weight: 700; }
+  /* The vote count sits under its label rather than in a seventh column —
+     the table already carries six on a 320px screen. */
+  /* IBM Plex Mono has no ★, so the fallback stack decides how it draws.
+     Naming a serif face first keeps it solid rather than hairline. */
+  .rtbl .star {
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 0.95em;
+    margin-left: 0.25em;
+  }
+  .rtbl .agree {
+    font-weight: 400;
+    font-size: 0.72rem;
+    color: var(--color-ink-soft);
+    white-space: nowrap;
+  }
   .rtbl .tk a { color: inherit; text-decoration: none; border-bottom: 1px solid var(--color-rule); }
   .rtbl .tk a:hover { color: var(--color-stamp); border-color: var(--color-stamp); }
 

@@ -54,6 +54,26 @@ class TestBuildReport(unittest.TestCase):
         self.assertEqual(self.r["ratings"]["MSFT"], "Strong Sell")
         self.assertIn("| NVDA |", self.r["markdown"])
 
+    def test_vote_agreement_reaches_the_payload(self):
+        # /report renders from this payload and the email from the same
+        # build, so the two can never show a different count.
+        row = next(r for r in self.r["payload"]["scorecard"]
+                   if r["ticker"] == "NVDA")
+        self.assertEqual(row["agree"] + 0, row["agree"])  # present
+        self.assertGreater(row["votes"], 0)
+        self.assertLessEqual(row["agree"], row["votes"])
+        self.assertIn("unanimous", row)
+
+    def test_markdown_carries_the_count_and_the_key(self):
+        md = self.r["markdown"]
+        self.assertRegex(md, r"\d+ of \d+ votes")
+        self.assertIn("how many checks agreed with the read", md)
+
+    def test_the_email_and_the_page_agree_on_every_row(self):
+        html = self.r["html"]
+        for row in self.r["payload"]["scorecard"]:
+            self.assertIn(f"{row['agree']} of {row['votes']} votes", html)
+
     def test_new_signal_listed(self):
         self.assertIn("Golden cross", self.r["markdown"])
 

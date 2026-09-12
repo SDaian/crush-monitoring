@@ -123,8 +123,14 @@ def market_line(reading: dict | None) -> str:
 def scorecard_table(scorecard: list[dict]) -> str:
     """The featured-stocks read as a full-width, zebra-striped table.
 
-    Each row: ``{ticker, price, chg, chg_dir, rsi, trend, label}`` (already
-    formatted strings, plus ``chg_dir`` in {-1,0,1})."""
+    Each row: ``{ticker, price, chg, chg_dir, rsi, trend, label, agree,
+    votes, unanimous}`` (already formatted strings, plus ``chg_dir`` in
+    {-1,0,1}).
+
+    The vote count rides on a SECOND LINE inside the Read cell, never a
+    seventh column: six columns already do not fit a 390px phone at this
+    padding (see PAD_EMBED), and a narrower Read column would wrap the label
+    itself."""
     if not scorecard:
         return (f"<p style='margin:0;{_f('14px', '1.5', SANS)}color:{INK_SOFT}'>"
                 "<i>No indicator data.</i></p>")
@@ -142,7 +148,15 @@ def scorecard_table(scorecard: list[dict]) -> str:
         # Colour rides on an inline <span>/<font> around the text — not the <td> —
         # so it survives even a client that strips a cell's style attribute.
         chg = (f"<font color='{_chg_color(r['chg_dir'])}'>{_esc(r['chg'])}</font>")
-        read = (f"<font color='{color}'><b>{_esc(r['label'])}</b></font>")
+        # The label, then how much of the vote stood behind it. A clean sweep
+        # takes a ★ — a typographic mark, not an emoji, so it renders as text
+        # in a client that blocks images and in a plain-text fallback.
+        read = (f"<font color='{color}'><b>{_esc(r['label'])}</b>"
+                + (" &#9733;" if r.get("unanimous") else "") + "</font>")
+        if r.get("votes"):
+            sub = _f("11px", "1.3", MONO)
+            read += (f"<br><span style='{sub}color:{INK_SOFT}'>"
+                     f"{r['agree']} of {r['votes']} votes</span>")
         # Tickers with a public page become links back into the site (UTM-tagged
         # so Vercel analytics can attribute the email as a traffic source).
         sym = f"<b>{_esc(r['ticker'])}</b>"
@@ -170,7 +184,8 @@ def scorecard_table(scorecard: list[dict]) -> str:
         + "".join(body) + "</table>"
         f"<p style='margin:8px 0 0;{_f('12px', '1.5', SANS)}color:{INK_SOFT}'>"
         "Read = a rule-based tally of the indicators (each votes buy/hold/sell), "
-        "not a recommendation.</p>")
+        "not a recommendation. The count is how many checks agreed with the "
+        "read, out of those cast; &#9733; marks a clean sweep.</p>")
 
 
 def _list_block(items: list[str]) -> str:

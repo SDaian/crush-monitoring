@@ -202,13 +202,21 @@ def build_report(trades: list[dict], ai_tickers: dict, new_signals: list[dict],
         price, chg = t.get("price", "—"), _pct(t.get("chg_1d"))
         rsi = "—" if t.get("rsi14") is None else round(t["rsi14"])
         trend = _trend(t)
+        # How much of the vote stood behind the read. A bare label hides the
+        # difference between a clean sweep and a one-vote edge, and those are
+        # not the same finding.
+        agr = indicators.agreement(sc)
+        star = " ★" if agr["unanimous"] else ""
         rows.append(
-            f"| {tk} | ${price} | {chg} | {rsi} | {trend} | **{sc['label']}** |")
+            f"| {tk} | ${price} | {chg} | {rsi} | {trend} | "
+            f"**{sc['label']}**{star}<br>{agr['agree']} of {agr['votes']} votes |")
         chg_val = t.get("chg_1d") or 0
         sc_rows.append({
             "ticker": tk, "price": price, "chg": chg,
             "chg_dir": 1 if chg_val > 0 else (-1 if chg_val < 0 else 0),
             "rsi": rsi, "trend": trend, "label": sc["label"],
+            "agree": agr["agree"], "votes": agr["votes"],
+            "unanimous": agr["unanimous"],
             "url": (ticker_urls or {}).get(tk),
         })
     # Market-wide volatility leads the readings it gives context to. It never
@@ -222,7 +230,8 @@ def build_report(trades: list[dict], ai_tickers: dict, new_signals: list[dict],
         "| Ticker | Price | 1d | RSI | Trend | Read |\n"
         "|---|---|---|---|---|---|\n" + "\n".join(rows) +
         "\n\n_Read = a rule-based tally of the indicators (each votes "
-        "buy/hold/sell), not a recommendation._"
+        "buy/hold/sell), not a recommendation. The count is how many checks "
+        "agreed with the read, out of those cast; ★ marks a clean sweep._"
     ) if rows else "## ⭐ Featured stocks — technical read\n\n_No indicator data._"
 
     # --- Section 2: signals + rating flips ---

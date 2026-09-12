@@ -429,6 +429,20 @@ sites. Full details in `congress/README.md`. Conventions:
     roughly ten times a year per symbol; across ~93 readings that would flood
     `meta.new_signals`, which opens a GitHub issue and fills the email. The
     golden/death cross stays the rare event worth naming.
+  - **The read carries its own margin.** A bare label hides the difference
+    between a clean sweep and a one-vote edge, so every scorecard row states
+    how many checks agreed with it — `indicators.agreement` — and marks a
+    unanimous one with a ★. **The denominator is never dropped**: a symbol
+    with a short history casts fewer than seven checks (under 200 bars loses
+    both 200-day votes, under 21 loses the EMA pair), and "5 in favour" is
+    unanimous out of five and split out of seven. A **Hold counts its holds
+    but is never starred** — seven zero-votes means the stock is not moving,
+    and a mark for conviction would say the opposite of what it is. The count
+    is a second LINE inside the Read cell on every surface, never a seventh
+    column: six already do not fit a 390px phone at `email_template.PAD_EMBED`.
+    The email, the GitHub issue and `/report` all render it from the one
+    `build_report` payload, and the footnote on each states what the fraction
+    counts and what ★ means — a bare "5/7" makes the reader guess.
   - **Changing the vote set bumps `indicators.SCORE_VERSION`.** A changed set
     moves many ratings on one morning for a reason that is not the market, so
     `daily_report.main` drops the flip baseline for the single run that first
