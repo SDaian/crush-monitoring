@@ -146,30 +146,115 @@ class TestSignals(unittest.TestCase):
                          "NVDA|golden_cross|2026-07-06")
 
 
+class TestEma(unittest.TestCase):
+    def test_flat_series_equals_the_level(self):
+        self.assertAlmostEqual(ind.ema([5.0] * 30, 8), 5.0)
+
+    def test_seed_is_the_simple_mean_of_the_first_n(self):
+        # Exactly n values: no smoothing steps run, so it IS the SMA.
+        self.assertAlmostEqual(ind.ema([1, 2, 3, 4], 4), 2.5)
+
+    def test_known_single_step(self):
+        # Seed = mean(1..4) = 2.5; k = 2/5 = 0.4; next close 10.
+        # 10*0.4 + 2.5*0.6 = 5.5
+        self.assertAlmostEqual(ind.ema([1, 2, 3, 4, 10], 4), 5.5)
+
+    def test_reacts_faster_than_the_sma(self):
+        # A flat run then one jump: the exponential average weights the newest
+        # close most, so it moves further than the simple one. (A straight
+        # ramp would NOT show this — on a linear series both averages lag by
+        # the same (n-1)/2, which is why the test uses a step.)
+        closes = [10.0] * 30 + [20.0]
+        self.assertGreater(ind.ema(closes, 21), ind.sma(closes, 21))
+
+    def test_too_few_values_is_none(self):
+        self.assertIsNone(ind.ema([1, 2, 3], 8))
+        self.assertIsNone(ind.ema([], 8))
+
+
+class TestEmaCrossVote(unittest.TestCase):
+    """The 8/21 pair, confirmed against the 200-day average."""
+
+    def test_bullish_cross_above_the_200_day_votes_buy(self):
+        self.assertEqual(ind.ema_cross_vote(
+            {"ema8": 105, "ema21": 100, "price": 110, "sma200": 90}), 1)
+
+    def test_bearish_cross_below_the_200_day_votes_sell(self):
+        self.assertEqual(ind.ema_cross_vote(
+            {"ema8": 95, "ema21": 100, "price": 90, "sma200": 110}), -1)
+
+    def test_bullish_cross_under_the_200_day_is_muted(self):
+        # A bounce inside a downtrend: the short-term pair turned up, the
+        # macro trend did not. It votes hold, never buy.
+        self.assertEqual(ind.ema_cross_vote(
+            {"ema8": 105, "ema21": 100, "price": 90, "sma200": 120}), 0)
+
+    def test_bearish_cross_above_the_200_day_is_muted(self):
+        self.assertEqual(ind.ema_cross_vote(
+            {"ema8": 95, "ema21": 100, "price": 120, "sma200": 90}), 0)
+
+    def test_equal_averages_vote_hold(self):
+        self.assertEqual(ind.ema_cross_vote(
+            {"ema8": 100, "ema21": 100, "price": 90, "sma200": 120}), 0)
+
+    def test_ungated_when_there_is_no_200_day(self):
+        # Under 200 bars there is no macro trend to confirm against, so the
+        # vote stands rather than being silently muted to hold.
+        self.assertEqual(ind.ema_cross_vote({"ema8": 105, "ema21": 100}), 1)
+        self.assertEqual(ind.ema_cross_vote(
+            {"ema8": 105, "ema21": 100, "price": 90}), 1)
+
+    def test_missing_pair_casts_no_vote(self):
+        self.assertIsNone(ind.ema_cross_vote({"ema8": 105}))
+        self.assertIsNone(ind.ema_cross_vote({}))
+
+
 class TestAiScore(unittest.TestCase):
     def test_all_bullish_strong_buy(self):
-        # price above every MA, golden alignment, neutral RSI, positive momentum.
-        t = {"price": 100, "sma20": 90, "sma50": 80, "sma200": 70,
+        # 8 over 21 confirmed by the 200-day, price above every MA, golden
+        # alignment, neutral RSI, positive momentum.
+        t = {"price": 100, "ema8": 96, "ema21": 94, "sma50": 80, "sma200": 70,
              "rsi14": 55, "chg_1m": 5, "chg_1w": 2}
         sc = ind.ai_score(t)
         self.assertEqual(sc["label"], "Strong Buy")
         self.assertEqual((sc["buys"], sc["holds"], sc["sells"]), (6, 1, 0))
 
     def test_all_bearish_strong_sell(self):
-        t = {"price": 50, "sma20": 60, "sma50": 70, "sma200": 80,
+        t = {"price": 50, "ema8": 54, "ema21": 56, "sma50": 70, "sma200": 80,
              "rsi14": 75, "chg_1m": -5, "chg_1w": -2}
         self.assertEqual(ind.ai_score(t)["label"], "Strong Sell")
 
+    def test_the_vote_set_is_seven_checks(self):
+        t = {"price": 100, "ema8": 96, "ema21": 94, "sma50": 80, "sma200": 70,
+             "rsi14": 55, "chg_1m": 5, "chg_1w": 2}
+        sc = ind.ai_score(t)
+        self.assertEqual(sc["buys"] + sc["holds"] + sc["sells"], 7)
+
+    def test_the_20_day_average_no_longer_votes(self):
+        # It is still displayed; it stopped voting when the EMA pair took its
+        # slot. Passing it alone must therefore score nothing.
+        self.assertEqual(ind.ai_score({"price": 10, "sma20": 9})["label"],
+                         "Hold")
+
+    def test_macro_filter_moves_the_headline(self):
+        # Identical readings except the macro trend. The muted cross costs a
+        # buy vote, which is the whole point of the filter.
+        base = {"price": 100, "ema8": 105, "ema21": 100, "sma50": 95,
+                "rsi14": 50, "chg_1m": 1, "chg_1w": 1}
+        with_trend = ind.ai_score({**base, "sma200": 90})
+        against = ind.ai_score({**base, "sma200": 130})
+        self.assertGreater(with_trend["buys"], against["buys"])
+
     def test_mixed_holds(self):
-        # 2 buy, 2 sell, 3 hold → ratio 0 → Hold.
-        t = {"price": 100, "sma20": 90, "sma50": 110, "sma200": 95,
-             "rsi14": 50, "chg_1m": 0, "chg_1w": 0}
-        # votes: sma20 +1, sma50 -1, sma200 +1, 50v200(110>95) +1, rsi 0,
-        # chg_1m 0, chg_1w 0 → 3 buy / 1 sell / 3 hold → ratio 2/7 ≈ 0.29 → Buy
+        # votes: ema cross (105>100, price 100 > sma200 95) +1, sma50 -1,
+        # sma200 +1, 50v200 (110>95) +1, rsi 0, chg_1m 0, chg_1w 0
+        # → 3 buy / 1 sell / 3 hold → ratio 2/7 ≈ 0.29 → Buy
+        t = {"price": 100, "ema8": 105, "ema21": 100, "sma50": 110,
+             "sma200": 95, "rsi14": 50, "chg_1m": 0, "chg_1w": 0}
         self.assertEqual(ind.ai_score(t)["label"], "Buy")
 
     def test_partial_data(self):
-        sc = ind.ai_score({"price": 10, "sma20": 9})  # single check
+        sc = ind.ai_score({"price": 10, "sma50": 9})  # single check
         self.assertEqual(sc["label"], "Strong Buy")  # 1/1
         self.assertEqual(ind.ai_score({})["label"], "Hold")  # no checks
 

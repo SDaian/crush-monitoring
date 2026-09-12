@@ -149,6 +149,10 @@ const cells = tech
       { k: "1 month", v: signed(tech.chg1m), cls: dirClass(tech.chg1m) },
       { k: "RSI (14)", v: num(tech.rsi14, "", 1),
         x: tech.rsi14 == null ? "" : tech.rsi14 < 30 ? "oversold" : tech.rsi14 > 70 ? "overbought" : "neutral" },
+      // The 8/21 EMA pair votes in the score, so it has to be visible: the
+      // panel's promise is a tally of the readings shown, not of hidden ones.
+      { k: "8d vs 21d EMA", v: signed(tech.emaGap), cls: dirClass(tech.emaGap),
+        x: tech.ema8 == null ? "" : `${num(tech.ema8)} vs ${num(tech.ema21)}` },
       { k: "vs 50-day", v: signed(tech.vsSma50), cls: dirClass(tech.vsSma50),
         x: `avg ${num(tech.sma50)}` },
       { k: "vs 200-day", v: signed(tech.vsSma200), cls: dirClass(tech.vsSma200),
@@ -519,8 +523,9 @@ const schema = [
             </p>
             <p class="fineprint mt-3 max-w-[80ch]">
               A rule-based tally of the indicators shown above — each casts one
-              buy/hold/sell vote (price vs. its 20/50/200-day averages, the
-              50-vs-200 cross, RSI, and the 1-week and 1-month changes). It is
+              buy/hold/sell vote (the 8-day vs 21-day trend, confirmed against
+              the 200-day; price vs. its 50-day and 200-day averages; the
+              50-vs-200 cross; RSI; and the 1-week and 1-month changes). It is
               reproducible and blind to fundamentals, news and your own goals.
               <b class="text-ink"> Not a recommendation.</b>
             </p>
@@ -557,8 +562,9 @@ const schema = [
             <span class="eyebrow">Not published for {t.ticker}</span>
           </div>
           <p class="fineprint mt-5 max-w-[80ch]">
-            We publish mechanical readings — price against its 20/50/200-day
-            averages, RSI, the 52-week range — for every stock with enough
+            We publish mechanical readings — the 8/21-day trend, price against
+            its 50-day and 200-day averages, RSI, the 52-week range — for every
+            stock with enough
             disclosed trades to earn a page here. {t.ticker} is below that bar
             today, so this page carries its disclosure record and the market
             reading above.{" "}

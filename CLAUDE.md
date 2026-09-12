@@ -392,8 +392,10 @@ sites. Full details in `congress/README.md`. Conventions:
   now labelled **"⭐ Featured stocks"** since it includes off-theme names like
   YPF/MELI/NU) → `docs/data/ai-indicators.json`, shown on the "⭐ Featured
   stocks" tab. The page shows a **transparent buy/sell/hold summary** (`aiScore`
-  in `docs/trades.html`) — a rule-based *tally* of the displayed indicators
-  (each votes buy/hold/sell), with the full breakdown visible and labelled
+  in `landing/src/pages/tracker.astro` — `docs/trades.html` is a redirect stub
+  now and holds no copy of it) — a rule-based *tally* of the displayed
+  indicators (each votes buy/hold/sell), with the full breakdown visible and
+  labelled
   **"not investment advice"**. It is a reproducible mechanical read, **not** an
   opaque recommendation; keep the breakdown + disclaimer, and never present it
   as advice or hide how it's computed. It also states named *events* (golden
@@ -406,7 +408,33 @@ sites. Full details in `congress/README.md`. Conventions:
   Values are a **daily snapshot, not real-time**. The committed JSON ships as
   `_sample` data (synthetic series, banner-flagged) until the first live refresh.
   The page's `aiScore` and Python `indicators.ai_score` **must stay in sync**
-  (same checks + thresholds) — the report reuses the Python one. The **ticker
+  (same checks + thresholds) — the report reuses the Python one.
+  - **Seven votes, and adding an eighth is the wrong move.** Five of them
+    already read trend (the 8/21 EMA pair, price vs the 50- and 200-day, the
+    50/200 cross); RSI and the two momentum windows are the rest. Correlated
+    votes all swing together, so an extra trend check compresses the scale
+    until Hold is rare and "Strong Buy" stops meaning broad agreement. That is
+    why the **8/21 EMA cross REPLACED** the old "price vs the 20-day SMA" vote
+    rather than joining it — both answer the same question and the EMA pair
+    answers it better. The 20-day average is still *displayed*; it just does
+    not vote. A new reading earns a slot by taking one, not by adding one.
+  - **The macro filter is the 200-day SMA we already have.** A bullish 8/21
+    cross while the price sits under its 200-day is a bounce inside a
+    downtrend, so `indicators.ema_cross_vote` mutes it to hold (and the
+    mirror-image case too). Do **not** add a 200 EMA for this: it would land
+    about a percent from the SMA, mean the same thing, and put a second
+    200-line on every surface. Under 200 bars there is no macro trend to
+    confirm against and the vote stands ungated.
+  - **The 8/21 cross fires no named signal, deliberately.** The pair crosses
+    roughly ten times a year per symbol; across ~93 readings that would flood
+    `meta.new_signals`, which opens a GitHub issue and fills the email. The
+    golden/death cross stays the rare event worth naming.
+  - **Changing the vote set bumps `indicators.SCORE_VERSION`.** A changed set
+    moves many ratings on one morning for a reason that is not the market, so
+    `daily_report.main` drops the flip baseline for the single run that first
+    sees a new version and the flip list renders empty. Without that, the
+    report's rating-flip diff is a page of noise on ship day — the same
+    argument that keeps market-wide volatility out of the score. The **ticker
   page** (`/tickers/<symbol>`) carries the same reading in a "Technical read"
   panel, for featured symbols only, built by `landing_data.technical_block` —
   which calls `indicators.ai_score` directly, so that surface cannot drift

@@ -107,9 +107,20 @@ def reading_universe(page_tickers: list[str],
 # Trading-day windows (approximate calendar spans in sessions).
 RSI_PERIOD = 14
 SMA_WINDOWS = (20, 50, 200)
+# The short-term trend pair. 8 over 21 is the conventional fast/slow couple;
+# read here on DAILY closes, which is the only cadence this project holds.
+EMA_FAST = 8
+EMA_SLOW = 21
 WEEK = 5
 MONTH = 21
 YEAR = 252
+
+# Bumped whenever the ai_score vote set changes. The morning report compares
+# today's ratings against yesterday's, and a changed vote set moves many of
+# them at once for a reason that has nothing to do with the market. On the
+# run that first sees a new version, daily_report suppresses the flip list
+# rather than mailing a page of meaningless changes.
+SCORE_VERSION = 2
 
 
 def parse_series(body: str) -> list[dict]:
@@ -149,6 +160,22 @@ def sma(values: list[float], n: int) -> float | None:
     if len(values) < n or n <= 0:
         return None
     return sum(values[-n:]) / n
+
+
+def ema(values: list[float], n: int) -> float | None:
+    """Exponential moving average of ``values`` over ``n`` periods, or None.
+
+    Seeded with the simple mean of the first ``n`` values, then smoothed with
+    k = 2/(n+1) over the rest — the same seed-then-smooth shape as
+    :func:`wilder_rsi`, so both read alike. Needs at least ``n`` values.
+    """
+    if len(values) < n or n <= 0:
+        return None
+    k = 2.0 / (n + 1)
+    e = sum(values[:n]) / n
+    for v in values[n:]:
+        e = v * k + e * (1.0 - k)
+    return e
 
 
 def pct_change(closes: list[float], periods: int) -> float | None:
@@ -260,21 +287,59 @@ def signal_key(ticker: str, sig: dict) -> str:
     return f"{ticker}|{sig['type']}|{sig['asof']}"
 
 
+def ema_cross_vote(t: dict) -> int | None:
+    """The 8/21 EMA trend vote, confirmed against the 200-day average.
+
+    Returns +1 (fast above slow), -1 (fast below slow), 0 (equal, or the
+    cross disagrees with the macro trend), or None when the pair is missing.
+
+    The macro filter is the point. An 8-over-21 cross is a SHORT-term trend
+    reading, and a bullish one while the price sits under its 200-day average
+    is a bounce inside a downtrend — so it votes hold, not buy. The filter
+    reuses the 200-day SMA the page already shows: a second 200-line (an EMA
+    one) would sit about a percent away from it and mean the same thing, which
+    is double-counting dressed as a new indicator.
+
+    With fewer than 200 bars there is no macro trend to confirm against, and
+    the vote stands ungated — the same degradation every other reading makes
+    when its history is short.
+    """
+    fast, slow = t.get("ema8"), t.get("ema21")
+    if fast is None or slow is None:
+        return None
+    raw = 1 if fast > slow else -1 if fast < slow else 0
+    if raw == 0:
+        return 0
+    price, macro = t.get("price"), t.get("sma200")
+    if price is not None and macro is not None:
+        if (raw > 0 and price < macro) or (raw < 0 and price > macro):
+            return 0
+    return raw
+
+
 def ai_score(t: dict) -> dict:
     """Mechanical buy/hold/sell tally from one ticker's indicators.
 
-    This MUST mirror ``aiScore`` in docs/trades.html exactly (same checks,
-    same thresholds) so the page and the morning report agree. Each check
-    votes buy(+1)/hold(0)/sell(-1); the net ratio maps to a label. It is a
-    transparent rule-based read, NOT investment advice.
+    This MUST mirror ``aiScore`` in landing/src/pages/tracker.astro exactly
+    (same checks, same thresholds) so the page and the morning report agree.
+    Each check votes buy(+1)/hold(0)/sell(-1); the net ratio maps to a label.
+    It is a transparent rule-based read, NOT investment advice.
+
+    Seven votes, deliberately. The 8/21 EMA cross REPLACED the old "price vs
+    the 20-day SMA" vote rather than joining it: both measure the same
+    short-term trend, five of the seven votes already measure trend, and an
+    eighth correlated one would swing the whole tally on a single move —
+    compressing the scale until Hold is rare and "Strong Buy" stops meaning
+    broad agreement. Bump SCORE_VERSION whenever this set changes.
     """
     def cmp(x, y):
         return 1 if x > y else -1 if x < y else 0
 
     votes: list[int] = []
     p = t.get("price")
-    if p is not None and t.get("sma20") is not None:
-        votes.append(cmp(p, t["sma20"]))
+    cross = ema_cross_vote(t)
+    if cross is not None:
+        votes.append(cross)
     if p is not None and t.get("sma50") is not None:
         votes.append(cmp(p, t["sma50"]))
     if p is not None and t.get("sma200") is not None:
@@ -373,6 +438,8 @@ def compute_indicators(rows: list[dict]) -> dict | None:
     low52 = min(window52)
 
     smas = {n: sma(closes, n) for n in SMA_WINDOWS}
+    ema_fast = ema(closes, EMA_FAST)
+    ema_slow = ema(closes, EMA_SLOW)
     vol = vols[-1] if vols else None
     avg_vol = sma(vols, 20) if len(vols) >= 20 else None
 
@@ -386,6 +453,14 @@ def compute_indicators(rows: list[dict]) -> dict | None:
         "sma20": _round(smas[20], 2),
         "sma50": _round(smas[50], 2),
         "sma200": _round(smas[200], 2),
+        "ema8": _round(ema_fast, 2),
+        "ema21": _round(ema_slow, 2),
+        # The spread between the pair, in percent — positive means the fast
+        # average leads. One number says both which way the pair points and
+        # how far apart they are, which a bare crossover flag cannot.
+        "ema_gap": _round(
+            (ema_fast / ema_slow - 1) * 100
+            if ema_fast is not None and ema_slow else None, 2),
         # Price relative to each MA, in percent (positive = price above the MA).
         "vs_sma50": _round(
             (last / smas[50] - 1) * 100 if smas[50] else None, 1),

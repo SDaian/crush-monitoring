@@ -642,6 +642,14 @@ def main() -> int:
     ai_tickers = ai.get("tickers", {})
     new_signals = ai.get("meta", {}).get("new_signals", [])
     prev_ratings = state.get("ratings", {})
+    # A changed vote set moves many ratings at once for a reason that has
+    # nothing to do with the market, so the flip list that morning would be a
+    # page of noise. Drop the baseline for that single run: no flips render,
+    # and the ratings written below become tomorrow's honest comparison.
+    if state.get("score_version") != indicators.SCORE_VERSION:
+        if prev_ratings:
+            print("scoring changed — suppressing today's rating flips")
+        prev_ratings = {}
 
     # Deep-link the email's tickers into their public pages (UTM-tagged).
     ticker_urls = ticker_links(_load(TICKER_INDEX_JSON, {}))
@@ -735,6 +743,7 @@ def main() -> int:
         json.dumps({"date": today_iso,
                     "issue_number": new_number or state.get("issue_number"),
                     "ratings": report["ratings"],
+                    "score_version": indicators.SCORE_VERSION,
                     # What the reader has now been told about. Only written on
                     # a real delivery: a quiet day records nothing, so an
                     # unsent filing stays unsent-and-pending rather than being

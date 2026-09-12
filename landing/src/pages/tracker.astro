@@ -206,7 +206,7 @@ const schema = [
       let DATA = null;
       let RET = {};       // trade id -> {entry_date, entry_close, pct}
       let PRICES = {};    // ticker -> {asof_date, asof_close}
-      let AI = {};        // ticker -> {name, price, rsi14, sma20/50/200, …}
+      let AI = {};        // ticker -> {name, price, rsi14, ema8/21, sma20/50/200, …}
       let AI_META = {};
       let retSample = false;
       let aiSample = false;
@@ -466,14 +466,31 @@ const schema = [
 
       // Transparent mechanical scorecard: each indicator already shown on the page
       // casts a buy(+1)/hold(0)/sell(-1) vote; the votes sum to a headline read.
-      // This is a rule-based tally, NOT investment advice — trend checks (price vs
-      // the moving averages, 50d/200d alignment) dominate, with RSI (mean-reversion)
-      // and short-term momentum as oscillators.
+      // This is a rule-based tally, NOT investment advice — trend checks (the 8/21
+      // EMA pair, price vs the moving averages, 50d/200d alignment) dominate, with
+      // RSI (mean-reversion) and short-term momentum as oscillators.
+      //
+      // The TWIN of congress/indicators.py ai_score(): same checks, same order,
+      // same thresholds. Change one and you must change the other, or the page
+      // and the morning email disagree about the same stock on the same day.
       function aiScore(a){
         const checks = [];
         const add = (label, vote, note) => checks.push({label, vote, note});
         const cmp = (x, y) => x > y ? 1 : x < y ? -1 : 0;
-        if (a.price != null && a.sma20  != null) add("Price vs 20-day",  cmp(a.price, a.sma20),  `${fmtPrice(a.price)} vs ${fmtPrice(a.sma20)}`);
+        // The 8/21 EMA pair, confirmed against the 200-day average. It took
+        // the old "price vs the 20-day SMA" slot rather than adding an eighth
+        // vote: both read the same short-term trend, and a correlated extra
+        // vote would swing the whole tally on one move. A bullish cross while
+        // the price sits under its 200-day is a bounce inside a downtrend, so
+        // the macro filter mutes it to hold.
+        if (a.ema8 != null && a.ema21 != null) {
+          const raw = cmp(a.ema8, a.ema21);
+          const against = raw !== 0 && a.price != null && a.sma200 != null &&
+            ((raw > 0 && a.price < a.sma200) || (raw < 0 && a.price > a.sma200));
+          add("8-day vs 21-day EMA", against ? 0 : raw,
+            `${fmtPrice(a.ema8)} vs ${fmtPrice(a.ema21)}` +
+            (against ? " · against the 200-day" : ""));
+        }
         if (a.price != null && a.sma50  != null) add("Price vs 50-day",  cmp(a.price, a.sma50),  `${fmtPrice(a.price)} vs ${fmtPrice(a.sma50)}`);
         if (a.price != null && a.sma200 != null) add("Price vs 200-day", cmp(a.price, a.sma200), `${fmtPrice(a.price)} vs ${fmtPrice(a.sma200)}`);
         if (a.sma50 != null && a.sma200 != null) add("50-day vs 200-day", cmp(a.sma50, a.sma200), a.sma50 >= a.sma200 ? "golden alignment" : "death alignment");
@@ -540,7 +557,8 @@ const schema = [
       + `Analyze recent price movements, volume, and key indicators such as moving averages `
       + `and the RSI. Provide a recommendation to buy, sell, or hold.\n\n`
       + `Current readings ($${tk}, daily close ${asof}): price ${fmtPrice(a.price)}, `
-      + `1-day ${a.chg_1d ?? "—"}%, RSI(14) ${a.rsi14 ?? "—"}, SMA20 ${fmtPrice(a.sma20)}, `
+      + `1-day ${a.chg_1d ?? "—"}%, RSI(14) ${a.rsi14 ?? "—"}, `
+      + `EMA8 ${fmtPrice(a.ema8)}, EMA21 ${fmtPrice(a.ema21)}, SMA20 ${fmtPrice(a.sma20)}, `
       + `SMA50 ${fmtPrice(a.sma50)}, SMA200 ${fmtPrice(a.sma200)}, `
       + `52-week range ${fmtPrice(a.low_52w)}–${fmtPrice(a.high_52w)}, `
       + `volume ${fmtVol(a.volume)} vs 20-day avg ${fmtVol(a.avg_vol_20)}. `
@@ -597,7 +615,8 @@ const schema = [
                   <span class="scrk">${esc(c.label)}</span>
                   <span class="note">${esc(c.note)}</span></div>`).join("")}</div>
               <div class="note" style="margin-top:6px">A plain rule-based tally of the indicators shown below — trend checks
-                (price vs each moving average, 50d/200d alignment), RSI (oversold = buy, overbought = sell) and momentum each cast
+                (the 8-day vs 21-day pair, muted to hold when it runs against the 200-day; price vs the 50- and 200-day averages;
+                50d/200d alignment), RSI (oversold = buy, overbought = sell) and momentum each cast
                 one vote. It is <b>not</b> a recommendation and ignores fundamentals, news and your own risk/goals.</div>
             </details>
           </div>`;
@@ -617,7 +636,8 @@ const schema = [
                 a.sma50 != null && a.sma200 != null ? `50d ${fmtPrice(a.sma50)} · 200d ${fmtPrice(a.sma200)}` : "")}
              ${cell("Price vs 50-day", a.vs_sma50 == null ? "—" : pctSpan(a.vs_sma50))}
              ${cell("Price vs 200-day", a.vs_sma200 == null ? "—" : pctSpan(a.vs_sma200))}
-             ${cell("SMA 20", fmtPrice(a.sma20))}
+             ${cell("8d vs 21d EMA", a.ema_gap == null ? "—" : pctSpan(a.ema_gap),
+                a.ema8 != null && a.ema21 != null ? `8d ${fmtPrice(a.ema8)} · 21d ${fmtPrice(a.ema21)}` : "")}
              ${cell("Volume vs 20d avg", a.rel_vol == null ? "—" : a.rel_vol + "×", `${fmtVol(a.volume)} vs ${fmtVol(a.avg_vol_20)}`)}
              ${cell("52-week range", `${fmtPrice(a.low_52w)} – ${fmtPrice(a.high_52w)}`,
                 rp == null ? "" : `${Math.round(rp)}% of range` +
