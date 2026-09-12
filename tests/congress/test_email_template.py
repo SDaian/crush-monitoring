@@ -6,9 +6,11 @@ from congress import email_template as et
 
 SCORECARD = [
     {"ticker": "NVDA", "price": 124.9, "chg": "+0.7%", "chg_dir": 1,
-     "rsi": 55, "trend": "50d›200d", "label": "Strong Buy"},
+     "rsi": 55, "trend": "50d›200d", "label": "Strong Buy",
+     "agree": 7, "votes": 7, "unanimous": True},
     {"ticker": "TSLA", "price": 251.7, "chg": "-3.2%", "chg_dir": -1,
-     "rsi": 33, "trend": "50d‹200d", "label": "Strong Sell"},
+     "rsi": 33, "trend": "50d‹200d", "label": "Strong Sell",
+     "agree": 4, "votes": 6, "unanimous": False},
 ]
 SIGNALS = [{"ticker": "SPCX", "label": "New 52-week high", "asof": "2026-07-24"}]
 FLIPS = [{"ticker": "TSLA", "prev": "Sell", "label": "Strong Sell"}]
@@ -45,6 +47,33 @@ class TestRenderHtml(unittest.TestCase):
         self.assertIn("Strong Sell", html)
         self.assertIn(et.BUY, html)                  # green somewhere
         self.assertIn(et.SELL, html)                 # red somewhere
+
+    def test_vote_count_rides_under_the_label(self):
+        html = _render()
+        self.assertIn("7 of 7 votes", html)
+        self.assertIn("4 of 6 votes", html)
+        # The key, so a bare fraction never leaves the reader guessing.
+        self.assertIn("how many checks agreed with the read", html)
+
+    def test_clean_sweep_is_starred_and_a_split_is_not(self):
+        html = et.scorecard_table(SCORECARD)
+        self.assertEqual(html.count("&#9733;"), 2)  # NVDA's row + the key
+        rows = html.split("TSLA")
+        self.assertNotIn("&#9733;", rows[1].split("</tr>")[0])
+
+    def test_a_row_with_no_votes_shows_only_the_label(self):
+        # An indicator file that predates the field must still render.
+        html = et.scorecard_table([
+            {"ticker": "BE", "price": 92.4, "chg": "+0.1%", "chg_dir": 1,
+             "rsi": 48, "trend": "50d‹200d", "label": "Hold"}])
+        self.assertIn("Hold", html)
+        self.assertNotIn("votes</span>", html)
+
+    def test_the_read_stays_in_six_columns(self):
+        # The count is a second LINE in the Read cell, never a seventh column:
+        # six already do not fit a 390px phone at this padding.
+        html = et.scorecard_table(SCORECARD)
+        self.assertEqual(html.count("<th"), 6)
 
     def test_sections(self):
         html = _render()

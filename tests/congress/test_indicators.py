@@ -209,6 +209,51 @@ class TestEmaCrossVote(unittest.TestCase):
         self.assertIsNone(ind.ema_cross_vote({}))
 
 
+class TestAgreement(unittest.TestCase):
+    """How much of the vote stood behind the headline read."""
+
+    def test_a_buy_counts_the_buy_votes(self):
+        a = ind.agreement({"label": "Strong Buy", "buys": 6, "holds": 1,
+                           "sells": 0})
+        self.assertEqual((a["agree"], a["votes"]), (6, 7))
+        self.assertFalse(a["unanimous"])
+
+    def test_a_sell_counts_the_sell_votes(self):
+        a = ind.agreement({"label": "Sell", "buys": 1, "holds": 2, "sells": 4})
+        self.assertEqual((a["agree"], a["votes"]), (4, 7))
+
+    def test_a_clean_sweep_is_unanimous(self):
+        a = ind.agreement({"label": "Strong Buy", "buys": 7, "holds": 0,
+                           "sells": 0})
+        self.assertEqual((a["agree"], a["votes"]), (7, 7))
+        self.assertTrue(a["unanimous"])
+
+    def test_a_short_history_lowers_the_denominator(self):
+        # Five checks cast, all agreeing, is a clean sweep of five — not a
+        # five-out-of-seven split. The denominator is what says which.
+        a = ind.agreement({"label": "Buy", "buys": 5, "holds": 0, "sells": 0})
+        self.assertEqual((a["agree"], a["votes"]), (5, 5))
+        self.assertTrue(a["unanimous"])
+
+    def test_a_hold_counts_its_holds_but_is_never_unanimous(self):
+        # Seven zero-votes means the stock is not moving. Marking that as a
+        # clean sweep would report conviction where there is none.
+        a = ind.agreement({"label": "Hold", "buys": 0, "holds": 7, "sells": 0})
+        self.assertEqual((a["agree"], a["votes"]), (7, 7))
+        self.assertFalse(a["unanimous"])
+
+    def test_no_votes_at_all(self):
+        a = ind.agreement(ind.ai_score({}))
+        self.assertEqual((a["agree"], a["votes"]), (0, 0))
+        self.assertFalse(a["unanimous"])
+
+    def test_reads_a_real_score_end_to_end(self):
+        t = {"price": 100, "ema8": 96, "ema21": 94, "sma50": 80, "sma200": 70,
+             "rsi14": 55, "chg_1m": 5, "chg_1w": 2}
+        a = ind.agreement(ind.ai_score(t))
+        self.assertEqual((a["agree"], a["votes"]), (6, 7))
+
+
 class TestAiScore(unittest.TestCase):
     def test_all_bullish_strong_buy(self):
         # 8 over 21 confirmed by the 200-day, price above every MA, golden
