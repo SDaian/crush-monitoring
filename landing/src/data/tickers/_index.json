@@ -5,9 +5,9 @@
       "slug": "msft",
       "ticker": "MSFT",
       "company": "Microsoft Corporation",
-      "trades": 203,
+      "trades": 204,
       "members": 44,
-      "buys": 105,
+      "buys": 106,
       "sells": 98,
       "lastTx": "2026-08-26",
       "indexable": true,
@@ -20,10 +20,10 @@
       "slug": "nvda",
       "ticker": "NVDA",
       "company": "NVIDIA Corporation",
-      "trades": 181,
+      "trades": 182,
       "members": 34,
       "buys": 117,
-      "sells": 64,
+      "sells": 65,
       "lastTx": "2026-08-18",
       "indexable": true,
       "industry": {
@@ -65,11 +65,11 @@
       "slug": "meta",
       "ticker": "META",
       "company": "Meta Platforms, Inc.",
-      "trades": 95,
+      "trades": 96,
       "members": 26,
       "buys": 65,
-      "sells": 30,
-      "lastTx": "2026-06-17",
+      "sells": 31,
+      "lastTx": "2026-08-20",
       "indexable": true,
       "industry": {
         "key": "tech",
@@ -185,11 +185,11 @@
       "slug": "jnj",
       "ticker": "JNJ",
       "company": "Johnson & Johnson",
-      "trades": 65,
+      "trades": 66,
       "members": 24,
       "buys": 30,
-      "sells": 35,
-      "lastTx": "2026-07-30",
+      "sells": 36,
+      "lastTx": "2026-08-20",
       "indexable": true,
       "industry": {
         "key": "health",
@@ -227,6 +227,21 @@
       }
     },
     {
+      "slug": "gs",
+      "ticker": "GS",
+      "company": "Goldman Sachs Group, Inc.",
+      "trades": 62,
+      "members": 19,
+      "buys": 34,
+      "sells": 28,
+      "lastTx": "2026-08-26",
+      "indexable": true,
+      "industry": {
+        "key": "finance",
+        "label": "Banks & finance"
+      }
+    },
+    {
       "slug": "pg",
       "ticker": "PG",
       "company": "Procter & Gamble Company",
@@ -242,29 +257,14 @@
       }
     },
     {
-      "slug": "gs",
-      "ticker": "GS",
-      "company": "Goldman Sachs Group, Inc.",
-      "trades": 61,
-      "members": 18,
-      "buys": 33,
-      "sells": 28,
-      "lastTx": "2026-04-16",
-      "indexable": true,
-      "industry": {
-        "key": "finance",
-        "label": "Banks & finance"
-      }
-    },
-    {
       "slug": "tsla",
       "ticker": "TSLA",
       "company": "Tesla, Inc.",
-      "trades": 59,
+      "trades": 60,
       "members": 13,
       "buys": 37,
-      "sells": 22,
-      "lastTx": "2026-05-29",
+      "sells": 23,
+      "lastTx": "2026-08-18",
       "indexable": true,
       "industry": {
         "key": "autos",
@@ -280,6 +280,21 @@
       "buys": 13,
       "sells": 40,
       "lastTx": "2026-08-11",
+      "indexable": true,
+      "industry": {
+        "key": "tech",
+        "label": "Technology"
+      }
+    },
+    {
+      "slug": "amd",
+      "ticker": "AMD",
+      "company": "Advanced Micro Devices, Inc.",
+      "trades": 52,
+      "members": 15,
+      "buys": 39,
+      "sells": 13,
+      "lastTx": "2026-08-18",
       "indexable": true,
       "industry": {
         "key": "tech",
@@ -332,14 +347,14 @@
       }
     },
     {
-      "slug": "amd",
-      "ticker": "AMD",
-      "company": "Advanced Micro Devices, Inc.",
+      "slug": "ibm",
+      "ticker": "IBM",
+      "company": "International Business Machines Corporation",
       "trades": 51,
       "members": 15,
-      "buys": 39,
-      "sells": 12,
-      "lastTx": "2026-07-17",
+      "buys": 28,
+      "sells": 23,
+      "lastTx": "2026-08-24",
       "indexable": true,
       "industry": {
         "key": "tech",
@@ -359,21 +374,6 @@
       "industry": {
         "key": "transport",
         "label": "Transport & logistics"
-      }
-    },
-    {
-      "slug": "ibm",
-      "ticker": "IBM",
-      "company": "International Business Machines Corporation",
-      "trades": 50,
-      "members": 15,
-      "buys": 27,
-      "sells": 23,
-      "lastTx": "2026-08-24",
-      "indexable": true,
-      "industry": {
-        "key": "tech",
-        "label": "Technology"
       }
     },
     {
@@ -527,6 +527,36 @@
       }
     },
     {
+      "slug": "etn",
+      "ticker": "ETN",
+      "company": "Eaton Corporation, PLC",
+      "trades": 40,
+      "members": 15,
+      "buys": 21,
+      "sells": 19,
+      "lastTx": "2026-08-27",
+      "indexable": true,
+      "industry": {
+        "key": "industrial",
+        "label": "Manufacturing"
+      }
+    },
+    {
+      "slug": "wmt",
+      "ticker": "WMT",
+      "company": "Walmart Inc.",
+      "trades": 40,
+      "members": 18,
+      "buys": 23,
+      "sells": 17,
+      "lastTx": "2026-08-26",
+      "indexable": true,
+      "industry": {
+        "key": "consumer",
+        "label": "Consumer & retail"
+      }
+    },
+    {
       "slug": "bro",
       "ticker": "BRO",
       "company": "Brown & Brown, Inc.",
@@ -587,21 +617,6 @@
       }
     },
     {
-      "slug": "wmt",
-      "ticker": "WMT",
-      "company": "Walmart Inc.",
-      "trades": 39,
-      "members": 18,
-      "buys": 22,
-      "sells": 17,
-      "lastTx": "2026-07-30",
-      "indexable": true,
-      "industry": {
-        "key": "consumer",
-        "label": "Consumer & retail"
-      }
-    },
-    {
       "slug": "panw",
       "ticker": "PANW",
       "company": "Palo Alto Networks, Inc.",
@@ -617,21 +632,6 @@
       }
     },
     {
-      "slug": "etn",
-      "ticker": "ETN",
-      "company": "Eaton Corporation, PLC",
-      "trades": 39,
-      "members": 15,
-      "buys": 20,
-      "sells": 19,
-      "lastTx": "2026-04-08",
-      "indexable": true,
-      "industry": {
-        "key": "industrial",
-        "label": "Manufacturing"
-      }
-    },
-    {
       "slug": "blk",
       "ticker": "BLK",
       "company": "BlackRock, Inc.",
@@ -644,6 +644,21 @@
       "industry": {
         "key": "finance",
         "label": "Banks & finance"
+      }
+    },
+    {
+      "slug": "intu",
+      "ticker": "INTU",
+      "company": "Intuit Inc.",
+      "trades": 37,
+      "members": 14,
+      "buys": 16,
+      "sells": 21,
+      "lastTx": "2026-08-18",
+      "indexable": true,
+      "industry": {
+        "key": "tech",
+        "label": "Technology"
       }
     },
     {
@@ -677,6 +692,21 @@
       }
     },
     {
+      "slug": "bsx",
+      "ticker": "BSX",
+      "company": "Boston Scientific Corporation",
+      "trades": 36,
+      "members": 10,
+      "buys": 18,
+      "sells": 18,
+      "lastTx": "2026-08-18",
+      "indexable": true,
+      "industry": {
+        "key": "health",
+        "label": "Health care & pharma"
+      }
+    },
+    {
       "slug": "txn",
       "ticker": "TXN",
       "company": "Texas Instruments Incorporated",
@@ -692,21 +722,6 @@
       }
     },
     {
-      "slug": "intu",
-      "ticker": "INTU",
-      "company": "Intuit Inc.",
-      "trades": 36,
-      "members": 14,
-      "buys": 15,
-      "sells": 21,
-      "lastTx": "2026-07-10",
-      "indexable": true,
-      "industry": {
-        "key": "tech",
-        "label": "Technology"
-      }
-    },
-    {
       "slug": "anet",
       "ticker": "ANET",
       "company": "Arista Networks, Inc.",
@@ -715,6 +730,21 @@
       "buys": 18,
       "sells": 18,
       "lastTx": "2026-07-10",
+      "indexable": true,
+      "industry": {
+        "key": "tech",
+        "label": "Technology"
+      }
+    },
+    {
+      "slug": "ttd",
+      "ticker": "TTD",
+      "company": "The Trade Desk, Inc.",
+      "trades": 35,
+      "members": 7,
+      "buys": 18,
+      "sells": 17,
+      "lastTx": "2026-08-18",
       "indexable": true,
       "industry": {
         "key": "tech",
@@ -764,21 +794,6 @@
       "industry": {
         "key": "telecom",
         "label": "Telecom & media"
-      }
-    },
-    {
-      "slug": "bsx",
-      "ticker": "BSX",
-      "company": "Boston Scientific Corporation",
-      "trades": 35,
-      "members": 10,
-      "buys": 17,
-      "sells": 18,
-      "lastTx": "2026-06-05",
-      "indexable": true,
-      "industry": {
-        "key": "health",
-        "label": "Health care & pharma"
       }
     },
     {
@@ -842,21 +857,6 @@
       }
     },
     {
-      "slug": "ttd",
-      "ticker": "TTD",
-      "company": "The Trade Desk, Inc.",
-      "trades": 34,
-      "members": 7,
-      "buys": 17,
-      "sells": 17,
-      "lastTx": "2026-07-17",
-      "indexable": true,
-      "industry": {
-        "key": "tech",
-        "label": "Technology"
-      }
-    },
-    {
       "slug": "ba",
       "ticker": "BA",
       "company": "Boeing Company",
@@ -880,6 +880,21 @@
       "buys": 22,
       "sells": 12,
       "lastTx": "2026-03-31",
+      "indexable": true,
+      "industry": {
+        "key": "tech",
+        "label": "Technology"
+      }
+    },
+    {
+      "slug": "dash",
+      "ticker": "DASH",
+      "company": "DoorDash, Inc.",
+      "trades": 33,
+      "members": 8,
+      "buys": 23,
+      "sells": 10,
+      "lastTx": "2026-08-28",
       "indexable": true,
       "industry": {
         "key": "tech",
@@ -977,21 +992,6 @@
       }
     },
     {
-      "slug": "dash",
-      "ticker": "DASH",
-      "company": "DoorDash, Inc.",
-      "trades": 32,
-      "members": 8,
-      "buys": 23,
-      "sells": 9,
-      "lastTx": "2026-06-09",
-      "indexable": true,
-      "industry": {
-        "key": "tech",
-        "label": "Technology"
-      }
-    },
-    {
       "slug": "tsco",
       "ticker": "TSCO",
       "company": "Tractor Supply Company",
@@ -1049,6 +1049,21 @@
       "industry": {
         "key": "finance",
         "label": "Banks & finance"
+      }
+    },
+    {
+      "slug": "pwr",
+      "ticker": "PWR",
+      "company": "Quanta Services, Inc.",
+      "trades": 30,
+      "members": 11,
+      "buys": 12,
+      "sells": 18,
+      "lastTx": "2026-08-27",
+      "indexable": true,
+      "industry": {
+        "key": "industrial",
+        "label": "Manufacturing"
       }
     },
     {
@@ -1112,6 +1127,21 @@
       }
     },
     {
+      "slug": "gddy",
+      "ticker": "GDDY",
+      "company": "GoDaddy Inc.",
+      "trades": 29,
+      "members": 6,
+      "buys": 11,
+      "sells": 18,
+      "lastTx": "2026-08-18",
+      "indexable": true,
+      "industry": {
+        "key": "tech",
+        "label": "Technology"
+      }
+    },
+    {
       "slug": "nee",
       "ticker": "NEE",
       "company": "NextEra Energy, Inc.",
@@ -1150,21 +1180,6 @@
       "buys": 9,
       "sells": 20,
       "lastTx": "2026-07-10",
-      "indexable": true,
-      "industry": {
-        "key": "industrial",
-        "label": "Manufacturing"
-      }
-    },
-    {
-      "slug": "pwr",
-      "ticker": "PWR",
-      "company": "Quanta Services, Inc.",
-      "trades": 29,
-      "members": 11,
-      "buys": 11,
-      "sells": 18,
-      "lastTx": "2026-05-14",
       "indexable": true,
       "industry": {
         "key": "industrial",
@@ -1247,21 +1262,6 @@
       }
     },
     {
-      "slug": "gddy",
-      "ticker": "GDDY",
-      "company": "GoDaddy Inc.",
-      "trades": 28,
-      "members": 6,
-      "buys": 10,
-      "sells": 18,
-      "lastTx": "2026-06-16",
-      "indexable": true,
-      "industry": {
-        "key": "tech",
-        "label": "Technology"
-      }
-    },
-    {
       "slug": "wab",
       "ticker": "WAB",
       "company": "Westinghouse Air Brake Technologies Corporation",
@@ -1319,6 +1319,21 @@
       "industry": {
         "key": "finance",
         "label": "Banks & finance"
+      }
+    },
+    {
+      "slug": "app",
+      "ticker": "APP",
+      "company": "Applovin Corporation",
+      "trades": 26,
+      "members": 6,
+      "buys": 14,
+      "sells": 12,
+      "lastTx": "2026-08-18",
+      "indexable": true,
+      "industry": {
+        "key": "tech",
+        "label": "Technology"
       }
     },
     {
@@ -1390,21 +1405,6 @@
       "buys": 12,
       "sells": 13,
       "lastTx": "2026-08-19",
-      "indexable": true,
-      "industry": {
-        "key": "tech",
-        "label": "Technology"
-      }
-    },
-    {
-      "slug": "app",
-      "ticker": "APP",
-      "company": "Applovin Corporation",
-      "trades": 25,
-      "members": 6,
-      "buys": 14,
-      "sells": 11,
-      "lastTx": "2026-07-17",
       "indexable": true,
       "industry": {
         "key": "tech",
@@ -1592,6 +1592,21 @@
       }
     },
     {
+      "slug": "snow",
+      "ticker": "SNOW",
+      "company": "Snowflake Inc.",
+      "trades": 11,
+      "members": 5,
+      "buys": 9,
+      "sells": 2,
+      "lastTx": "2026-08-07",
+      "indexable": false,
+      "industry": {
+        "key": "tech",
+        "label": "Technology"
+      }
+    },
+    {
       "slug": "klac",
       "ticker": "KLAC",
       "company": "KLA Corporation",
@@ -1600,21 +1615,6 @@
       "buys": 5,
       "sells": 5,
       "lastTx": "2026-07-01",
-      "indexable": false,
-      "industry": {
-        "key": "tech",
-        "label": "Technology"
-      }
-    },
-    {
-      "slug": "snow",
-      "ticker": "SNOW",
-      "company": "Snowflake Inc.",
-      "trades": 10,
-      "members": 4,
-      "buys": 8,
-      "sells": 2,
-      "lastTx": "2025-06-17",
       "indexable": false,
       "industry": {
         "key": "tech",

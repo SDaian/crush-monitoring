@@ -9,20 +9,20 @@
   },
   "indexable": true,
   "technical": {
-    "asOf": "2026-09-10",
-    "price": 363.56,
-    "chg1d": -1.16,
-    "chg1w": 1.83,
-    "chg1m": 9.24,
-    "rsi14": 53.7,
-    "sma50": 355.7,
-    "sma200": 399.05,
-    "vsSma50": 2.2,
-    "vsSma200": -8.9,
-    "relVol": 0.74,
+    "asOf": "2026-09-11",
+    "price": 365.47,
+    "chg1d": 0.53,
+    "chg1w": -2.9,
+    "chg1m": 11.59,
+    "rsi14": 54.5,
+    "sma50": 354.5,
+    "sma200": 398.93,
+    "vsSma50": 3.1,
+    "vsSma200": -8.4,
+    "relVol": 0.76,
     "high52w": 489.88,
     "low52w": 298.32,
-    "rangePos": 34.0,
+    "rangePos": 35.0,
     "series": [
       {
         "d": "2025-09-19",
@@ -229,31 +229,31 @@
         "c": 354.08
       },
       {
-        "d": "2026-09-10",
-        "c": 363.56
+        "d": "2026-09-11",
+        "c": 365.47
       }
     ],
     "signals": [],
     "nextEarnings": null,
     "score": {
-      "label": "Buy",
-      "buys": 4,
-      "sells": 2,
+      "label": "Hold",
+      "buys": 3,
+      "sells": 3,
       "holds": 1,
-      "ratio": 0.286
+      "ratio": 0.0
     }
   },
   "summary": {
-    "trades": 59,
+    "trades": 60,
     "members": 13,
     "buys": 37,
-    "sells": 22,
+    "sells": 23,
     "other": 0,
     "firstTx": "2024-10-29",
-    "lastTx": "2026-05-29",
-    "lastFiling": "2026-07-21",
+    "lastTx": "2026-08-18",
+    "lastFiling": "2026-09-10",
     "estBuyLabel": "$345K",
-    "estSellLabel": "$392K",
+    "estSellLabel": "$400K",
     "pctLate": 10
   },
   "topMembers": [
@@ -269,6 +269,17 @@
       "hasPage": true
     },
     {
+      "name": "Gilbert Ray Cisneros, Jr.",
+      "slug": "gilbert-ray-cisneros-jr",
+      "party": "D",
+      "chamber": "House",
+      "trades": 10,
+      "buys": 7,
+      "sells": 3,
+      "estLabel": "$105K",
+      "hasPage": true
+    },
+    {
       "name": "Robert P. Bresnahan, Jr.",
       "slug": "robert-p-bresnahan-jr",
       "party": "R",
@@ -278,17 +289,6 @@
       "sells": 5,
       "estLabel": "$80K",
       "hasPage": false
-    },
-    {
-      "name": "Gilbert Ray Cisneros, Jr.",
-      "slug": "gilbert-ray-cisneros-jr",
-      "party": "D",
-      "chamber": "House",
-      "trades": 9,
-      "buys": 7,
-      "sells": 2,
-      "estLabel": "$97K",
-      "hasPage": true
     },
     {
       "name": "Marjorie Taylor Greene",
@@ -369,6 +369,18 @@
     }
   ],
   "trades": [
+    {
+      "member": "Gilbert Ray Cisneros, Jr.",
+      "memberSlug": "gilbert-ray-cisneros-jr",
+      "hasPage": true,
+      "party": "D",
+      "side": "SELL",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-08-18",
+      "filedDate": "2026-09-10",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035390.pdf"
+    },
     {
       "member": "Gilbert Ray Cisneros, Jr.",
       "memberSlug": "gilbert-ray-cisneros-jr",
@@ -656,18 +668,6 @@
       "filedDate": "2025-06-11",
       "daysLate": 0,
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20030462.pdf"
-    },
-    {
-      "member": "Robert P. Bresnahan, Jr.",
-      "memberSlug": "robert-p-bresnahan-jr",
-      "hasPage": false,
-      "party": "R",
-      "side": "BUY",
-      "amountBucket": "$1K – $15K",
-      "txDate": "2025-05-23",
-      "filedDate": "2025-06-23",
-      "daysLate": 0,
-      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20030546.pdf"
     }
   ],
   "tradesShown": 25

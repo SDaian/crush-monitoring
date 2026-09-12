@@ -9,20 +9,20 @@
   },
   "indexable": false,
   "technical": {
-    "asOf": "2026-09-10",
-    "price": 506.62,
-    "chg1d": -5.35,
-    "chg1w": 2.93,
-    "chg1m": 14.89,
-    "rsi14": 57.7,
-    "sma50": 446.06,
-    "sma200": 259.53,
-    "vsSma50": 13.6,
-    "vsSma200": 95.2,
-    "relVol": 0.69,
-    "high52w": 535.25,
+    "asOf": "2026-09-11",
+    "price": 567.29,
+    "chg1d": 11.98,
+    "chg1w": 9.86,
+    "chg1m": 17.09,
+    "rsi14": 66.6,
+    "sma50": 448.9,
+    "sma200": 261.76,
+    "vsSma50": 26.4,
+    "vsSma200": 116.7,
+    "relVol": 1.63,
+    "high52w": 567.29,
     "low52w": 111.07,
-    "rangePos": 93.0,
+    "rangePos": 100.0,
     "series": [
       {
         "d": "2025-09-19",
@@ -229,11 +229,18 @@
         "c": 524.14
       },
       {
-        "d": "2026-09-10",
-        "c": 506.62
+        "d": "2026-09-11",
+        "c": 567.29
       }
     ],
-    "signals": [],
+    "signals": [
+      {
+        "type": "new_52w_high",
+        "asof": "2026-09-11",
+        "label": "New 52-week high",
+        "dir": "bull"
+      }
+    ],
     "nextEarnings": null,
     "score": {
       "label": "Strong Buy",

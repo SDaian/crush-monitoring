@@ -9,20 +9,20 @@
   },
   "indexable": true,
   "technical": {
-    "asOf": "2026-09-10",
-    "price": 201.03,
-    "chg1d": 1.92,
-    "chg1w": -11.14,
-    "chg1m": -5.17,
-    "rsi14": 39.9,
-    "sma50": 204.56,
-    "sma200": 188.47,
-    "vsSma50": -1.7,
-    "vsSma200": 6.7,
-    "relVol": 0.84,
+    "asOf": "2026-09-11",
+    "price": 201.98,
+    "chg1d": 0.47,
+    "chg1w": -9.02,
+    "chg1m": -4.95,
+    "rsi14": 40.8,
+    "sma50": 204.82,
+    "sma200": 188.53,
+    "vsSma50": -1.4,
+    "vsSma200": 7.1,
+    "relVol": 0.45,
     "high52w": 281.74,
     "low52w": 146.6,
-    "rangePos": 40.0,
+    "rangePos": 41.0,
     "series": [
       {
         "d": "2025-09-19",
@@ -229,8 +229,8 @@
         "c": 211.73
       },
       {
-        "d": "2026-09-10",
-        "c": 201.03
+        "d": "2026-09-11",
+        "c": 201.98
       }
     ],
     "signals": [],
@@ -244,16 +244,16 @@
     }
   },
   "summary": {
-    "trades": 32,
+    "trades": 33,
     "members": 8,
     "buys": 23,
-    "sells": 9,
+    "sells": 10,
     "other": 0,
     "firstTx": "2025-02-13",
-    "lastTx": "2026-06-09",
-    "lastFiling": "2026-07-21",
+    "lastTx": "2026-08-28",
+    "lastFiling": "2026-09-10",
     "estBuyLabel": "$209K",
-    "estSellLabel": "$121K",
+    "estSellLabel": "$129K",
     "pctLate": 6
   },
   "topMembers": [
@@ -262,10 +262,10 @@
       "slug": "gilbert-ray-cisneros-jr",
       "party": "D",
       "chamber": "House",
-      "trades": 20,
+      "trades": 21,
       "buys": 18,
-      "sells": 2,
-      "estLabel": "$160K",
+      "sells": 3,
+      "estLabel": "$168K",
       "hasPage": true
     },
     {
@@ -347,6 +347,18 @@
     }
   ],
   "trades": [
+    {
+      "member": "Gilbert Ray Cisneros, Jr.",
+      "memberSlug": "gilbert-ray-cisneros-jr",
+      "hasPage": true,
+      "party": "D",
+      "side": "SELL",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-08-28",
+      "filedDate": "2026-09-10",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035390.pdf"
+    },
     {
       "member": "Tim Moore",
       "memberSlug": "tim-moore",
@@ -634,18 +646,6 @@
       "filedDate": "2025-06-22",
       "daysLate": 0,
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20030387.pdf"
-    },
-    {
-      "member": "Josh Gottheimer",
-      "memberSlug": "josh-gottheimer",
-      "hasPage": true,
-      "party": "D",
-      "side": "SELL",
-      "amountBucket": "$1K – $15K",
-      "txDate": "2025-04-09",
-      "filedDate": "2025-05-14",
-      "daysLate": 0,
-      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20030338.pdf"
     }
   ],
   "tradesShown": 25

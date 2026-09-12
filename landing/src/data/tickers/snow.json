@@ -9,20 +9,20 @@
   },
   "indexable": false,
   "technical": {
-    "asOf": "2026-09-10",
-    "price": 329.72,
-    "chg1d": -0.53,
-    "chg1w": 7.81,
-    "chg1m": -1.32,
-    "rsi14": 54.1,
-    "sma50": 302.15,
-    "sma200": 220.17,
-    "vsSma50": 9.1,
-    "vsSma200": 49.8,
-    "relVol": 0.65,
+    "asOf": "2026-09-11",
+    "price": 328.99,
+    "chg1d": -0.22,
+    "chg1w": -7.71,
+    "chg1m": -0.98,
+    "rsi14": 53.7,
+    "sma50": 303.51,
+    "sma200": 220.64,
+    "vsSma50": 8.4,
+    "vsSma200": 49.1,
+    "relVol": 0.84,
     "high52w": 356.47,
     "low52w": 121.11,
-    "rangePos": 89.0,
+    "rangePos": 88.0,
     "series": [
       {
         "d": "2025-09-19",
@@ -229,30 +229,30 @@
         "c": 337.18
       },
       {
-        "d": "2026-09-10",
-        "c": 329.72
+        "d": "2026-09-11",
+        "c": 328.99
       }
     ],
     "signals": [],
     "nextEarnings": null,
     "score": {
-      "label": "Strong Buy",
-      "buys": 5,
-      "sells": 1,
+      "label": "Buy",
+      "buys": 4,
+      "sells": 2,
       "holds": 1,
-      "ratio": 0.571
+      "ratio": 0.286
     }
   },
   "summary": {
-    "trades": 10,
-    "members": 4,
-    "buys": 8,
+    "trades": 11,
+    "members": 5,
+    "buys": 9,
     "sells": 2,
     "other": 0,
     "firstTx": "2025-02-12",
-    "lastTx": "2025-06-17",
-    "lastFiling": "2025-06-23",
-    "estBuyLabel": "$64K",
+    "lastTx": "2026-08-07",
+    "lastFiling": "2026-09-10",
+    "estBuyLabel": "$72K",
     "estSellLabel": "$41K",
     "pctLate": 0
   },
@@ -300,9 +300,32 @@
       "sells": 1,
       "estLabel": "$33K",
       "hasPage": false
+    },
+    {
+      "name": "Gilbert Ray Cisneros, Jr.",
+      "slug": "gilbert-ray-cisneros-jr",
+      "party": "D",
+      "chamber": "House",
+      "trades": 1,
+      "buys": 1,
+      "sells": 0,
+      "estLabel": "$8K",
+      "hasPage": true
     }
   ],
   "trades": [
+    {
+      "member": "Gilbert Ray Cisneros, Jr.",
+      "memberSlug": "gilbert-ray-cisneros-jr",
+      "hasPage": true,
+      "party": "D",
+      "side": "BUY",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-08-07",
+      "filedDate": "2026-09-10",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035390.pdf"
+    },
     {
       "member": "Marjorie Taylor Greene",
       "memberSlug": "marjorie-taylor-greene",
@@ -424,5 +447,5 @@
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20027923.pdf"
     }
   ],
-  "tradesShown": 10
+  "tradesShown": 11
 }

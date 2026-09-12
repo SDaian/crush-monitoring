@@ -9,17 +9,17 @@
   },
   "indexable": true,
   "technical": {
-    "asOf": "2026-09-10",
-    "price": 266.35,
-    "chg1d": -0.27,
-    "chg1w": -3.22,
-    "chg1m": 2.52,
-    "rsi14": 49.5,
-    "sma50": 262.48,
-    "sma200": 236.81,
-    "vsSma50": 1.5,
-    "vsSma200": 12.5,
-    "relVol": 0.79,
+    "asOf": "2026-09-11",
+    "price": 265.58,
+    "chg1d": -0.29,
+    "chg1w": -4.62,
+    "chg1m": 1.81,
+    "rsi14": 48.5,
+    "sma50": 262.71,
+    "sma200": 237.12,
+    "vsSma50": 1.1,
+    "vsSma200": 12.0,
+    "relVol": 0.75,
     "high52w": 278.43,
     "low52w": 174.16,
     "rangePos": 88.0,
@@ -229,8 +229,8 @@
         "c": 275.23
       },
       {
-        "d": "2026-09-10",
-        "c": 266.35
+        "d": "2026-09-11",
+        "c": 265.58
       }
     ],
     "signals": [],
@@ -244,16 +244,16 @@
     }
   },
   "summary": {
-    "trades": 65,
+    "trades": 66,
     "members": 24,
     "buys": 30,
-    "sells": 35,
+    "sells": 36,
     "other": 0,
     "firstTx": "2023-03-15",
-    "lastTx": "2026-07-30",
-    "lastFiling": "2026-08-14",
+    "lastTx": "2026-08-20",
+    "lastFiling": "2026-09-11",
     "estBuyLabel": "$363K",
-    "estSellLabel": "$877K",
+    "estSellLabel": "$885K",
     "pctLate": 17
   },
   "topMembers": [
@@ -369,6 +369,18 @@
     }
   ],
   "trades": [
+    {
+      "member": "John Boozman",
+      "memberSlug": "john-boozman",
+      "hasPage": false,
+      "party": "R",
+      "side": "SELL",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-08-20",
+      "filedDate": "2026-09-11",
+      "daysLate": 0,
+      "sourceUrl": "https://efdsearch.senate.gov/search/view/ptr/6298991b-e48f-4b11-9bbb-dfc94a7e1b32/"
+    },
     {
       "member": "Richard McCormick",
       "memberSlug": "richard-mccormick",
@@ -656,18 +668,6 @@
       "filedDate": "2025-09-11",
       "daysLate": 0,
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20032061.pdf"
-    },
-    {
-      "member": "Julie Johnson",
-      "memberSlug": "julie-johnson",
-      "hasPage": false,
-      "party": "D",
-      "side": "SELL",
-      "amountBucket": "$1K – $15K",
-      "txDate": "2025-08-14",
-      "filedDate": "2025-09-11",
-      "daysLate": 0,
-      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20032066.pdf"
     }
   ],
   "tradesShown": 25

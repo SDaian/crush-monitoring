@@ -9,20 +9,20 @@
   },
   "indexable": true,
   "technical": {
-    "asOf": "2026-09-10",
-    "price": 492.44,
-    "chg1d": 0.16,
-    "chg1w": -0.88,
-    "chg1m": -2.26,
-    "rsi14": 55.0,
-    "sma50": 451.44,
-    "sma200": 431.14,
-    "vsSma50": 9.1,
-    "vsSma200": 14.2,
-    "relVol": 0.75,
+    "asOf": "2026-09-11",
+    "price": 495.63,
+    "chg1d": 0.65,
+    "chg1w": -2.84,
+    "chg1m": 0.65,
+    "rsi14": 56.7,
+    "sma50": 453.67,
+    "sma200": 431.26,
+    "vsSma50": 9.2,
+    "vsSma200": 14.9,
+    "relVol": 0.7,
     "high52w": 542.07,
     "low52w": 352.83,
-    "rangePos": 74.0,
+    "rangePos": 75.0,
     "series": [
       {
         "d": "2025-09-19",
@@ -229,29 +229,29 @@
         "c": 499.7
       },
       {
-        "d": "2026-09-10",
-        "c": 492.44
+        "d": "2026-09-11",
+        "c": 495.63
       }
     ],
     "signals": [],
     "nextEarnings": null,
     "score": {
-      "label": "Hold",
-      "buys": 3,
-      "sells": 3,
+      "label": "Strong Buy",
+      "buys": 5,
+      "sells": 1,
       "holds": 1,
-      "ratio": 0.0
+      "ratio": 0.571
     }
   },
   "summary": {
-    "trades": 203,
+    "trades": 204,
     "members": 44,
-    "buys": 105,
+    "buys": 106,
     "sells": 98,
     "other": 0,
     "firstTx": "2023-03-15",
     "lastTx": "2026-08-26",
-    "lastFiling": "2026-09-05",
+    "lastFiling": "2026-09-10",
     "estBuyLabel": "$27.6M",
     "estSellLabel": "$23.8M",
     "pctLate": 14
@@ -284,10 +284,10 @@
       "slug": "gilbert-ray-cisneros-jr",
       "party": "D",
       "chamber": "House",
-      "trades": 15,
-      "buys": 10,
+      "trades": 16,
+      "buys": 11,
       "sells": 5,
-      "estLabel": "$475K",
+      "estLabel": "$507K",
       "hasPage": true
     },
     {
@@ -392,6 +392,18 @@
       "filedDate": "2026-09-01",
       "daysLate": 0,
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035326.pdf"
+    },
+    {
+      "member": "Gilbert Ray Cisneros, Jr.",
+      "memberSlug": "gilbert-ray-cisneros-jr",
+      "hasPage": true,
+      "party": "D",
+      "side": "BUY",
+      "amountBucket": "$15K – $50K",
+      "txDate": "2026-08-18",
+      "filedDate": "2026-09-10",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035390.pdf"
     },
     {
       "member": "David J. Taylor",
@@ -656,18 +668,6 @@
       "filedDate": "2026-06-16",
       "daysLate": 0,
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20034688.pdf"
-    },
-    {
-      "member": "Maria Elvira Salazar",
-      "memberSlug": "maria-elvira-salazar",
-      "hasPage": false,
-      "party": "R",
-      "side": "BUY",
-      "amountBucket": "$15K – $50K",
-      "txDate": "2026-04-17",
-      "filedDate": "2026-05-08",
-      "daysLate": 0,
-      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20034479.pdf"
     }
   ],
   "tradesShown": 25

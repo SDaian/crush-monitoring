@@ -9,20 +9,20 @@
   },
   "indexable": true,
   "technical": {
-    "asOf": "2026-09-10",
-    "price": 314.49,
-    "chg1d": 3.09,
-    "chg1w": -1.43,
-    "chg1m": -1.31,
-    "rsi14": 41.4,
-    "sma50": 382.4,
-    "sma200": 482.82,
-    "vsSma50": -17.8,
-    "vsSma200": -34.9,
-    "relVol": 1.0,
+    "asOf": "2026-09-11",
+    "price": 323.9,
+    "chg1d": 2.99,
+    "chg1w": 3.29,
+    "chg1m": 6.63,
+    "rsi14": 46.1,
+    "sma50": 377.58,
+    "sma200": 481.83,
+    "vsSma50": -14.2,
+    "vsSma200": -32.8,
+    "relVol": 0.68,
     "high52w": 733.6,
     "low52w": 298.59,
-    "rangePos": 4.0,
+    "rangePos": 6.0,
     "series": [
       {
         "d": "2025-09-19",
@@ -229,31 +229,31 @@
         "c": 320.56
       },
       {
-        "d": "2026-09-10",
-        "c": 314.49
+        "d": "2026-09-11",
+        "c": 323.9
       }
     ],
     "signals": [],
     "nextEarnings": null,
     "score": {
-      "label": "Strong Sell",
-      "buys": 1,
-      "sells": 5,
+      "label": "Hold",
+      "buys": 3,
+      "sells": 3,
       "holds": 1,
-      "ratio": -0.571
+      "ratio": 0.0
     }
   },
   "summary": {
-    "trades": 25,
+    "trades": 26,
     "members": 6,
     "buys": 14,
-    "sells": 11,
+    "sells": 12,
     "other": 0,
     "firstTx": "2025-02-24",
-    "lastTx": "2026-07-17",
-    "lastFiling": "2026-09-04",
+    "lastTx": "2026-08-18",
+    "lastFiling": "2026-09-10",
     "estBuyLabel": "$161K",
-    "estSellLabel": "$162K",
+    "estSellLabel": "$170K",
     "pctLate": 8
   },
   "topMembers": [
@@ -262,10 +262,10 @@
       "slug": "gilbert-ray-cisneros-jr",
       "party": "D",
       "chamber": "House",
-      "trades": 12,
+      "trades": 13,
       "buys": 8,
-      "sells": 4,
-      "estLabel": "$121K",
+      "sells": 5,
+      "estLabel": "$129K",
       "hasPage": true
     },
     {
@@ -325,6 +325,18 @@
     }
   ],
   "trades": [
+    {
+      "member": "Gilbert Ray Cisneros, Jr.",
+      "memberSlug": "gilbert-ray-cisneros-jr",
+      "hasPage": true,
+      "party": "D",
+      "side": "SELL",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-08-18",
+      "filedDate": "2026-09-10",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035390.pdf"
+    },
     {
       "member": "Gilbert Ray Cisneros, Jr.",
       "memberSlug": "gilbert-ray-cisneros-jr",
@@ -612,18 +624,6 @@
       "filedDate": "2025-03-27",
       "daysLate": 0,
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20029034.pdf"
-    },
-    {
-      "member": "Jefferson Shreve",
-      "memberSlug": "jefferson-shreve",
-      "hasPage": false,
-      "party": "R",
-      "side": "BUY",
-      "amountBucket": "$15K – $50K",
-      "txDate": "2025-02-24",
-      "filedDate": "2025-03-09",
-      "daysLate": 0,
-      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20027879.pdf"
     }
   ],
   "tradesShown": 25

@@ -9,20 +9,20 @@
   },
   "indexable": true,
   "technical": {
-    "asOf": "2026-09-10",
-    "price": 644.38,
-    "chg1d": -1.42,
-    "chg1w": 8.69,
-    "chg1m": 7.55,
-    "rsi14": 66.4,
-    "sma50": 600.2,
-    "sma200": 622.96,
-    "vsSma50": 7.4,
-    "vsSma200": 3.4,
-    "relVol": 1.22,
+    "asOf": "2026-09-11",
+    "price": 648.03,
+    "chg1d": 0.57,
+    "chg1w": 6.12,
+    "chg1m": 11.95,
+    "rsi14": 67.2,
+    "sma50": 600.9,
+    "sma200": 623.23,
+    "vsSma50": 7.8,
+    "vsSma200": 4.0,
+    "relVol": 0.94,
     "high52w": 780.25,
     "low52w": 525.72,
-    "rangePos": 47.0,
+    "rangePos": 48.0,
     "series": [
       {
         "d": "2025-09-19",
@@ -229,8 +229,8 @@
         "c": 616.77
       },
       {
-        "d": "2026-09-10",
-        "c": 644.38
+        "d": "2026-09-11",
+        "c": 648.03
       }
     ],
     "signals": [],
@@ -244,16 +244,16 @@
     }
   },
   "summary": {
-    "trades": 95,
+    "trades": 96,
     "members": 26,
     "buys": 65,
-    "sells": 30,
+    "sells": 31,
     "other": 0,
     "firstTx": "2024-01-02",
-    "lastTx": "2026-06-17",
-    "lastFiling": "2026-08-20",
+    "lastTx": "2026-08-20",
+    "lastFiling": "2026-09-10",
     "estBuyLabel": "$2.0M",
-    "estSellLabel": "$648K",
+    "estSellLabel": "$656K",
     "pctLate": 21
   },
   "topMembers": [
@@ -335,6 +335,17 @@
       "hasPage": false
     },
     {
+      "name": "Gilbert Ray Cisneros, Jr.",
+      "slug": "gilbert-ray-cisneros-jr",
+      "party": "D",
+      "chamber": "House",
+      "trades": 4,
+      "buys": 2,
+      "sells": 2,
+      "estLabel": "$32K",
+      "hasPage": true
+    },
+    {
       "name": "Marjorie Taylor Greene",
       "slug": "marjorie-taylor-greene",
       "party": "R",
@@ -355,20 +366,21 @@
       "sells": 3,
       "estLabel": "$383K",
       "hasPage": false
-    },
-    {
-      "name": "Val T. Hoyle",
-      "slug": "val-t-hoyle",
-      "party": "D",
-      "chamber": "House",
-      "trades": 3,
-      "buys": 2,
-      "sells": 1,
-      "estLabel": "$49K",
-      "hasPage": false
     }
   ],
   "trades": [
+    {
+      "member": "Gilbert Ray Cisneros, Jr.",
+      "memberSlug": "gilbert-ray-cisneros-jr",
+      "hasPage": true,
+      "party": "D",
+      "side": "SELL",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-08-20",
+      "filedDate": "2026-09-10",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035390.pdf"
+    },
     {
       "member": "Jared Moskowitz",
       "memberSlug": "jared-moskowitz",
@@ -651,18 +663,6 @@
       "hasPage": false,
       "party": "R",
       "side": "BUY",
-      "amountBucket": "$1K – $15K",
-      "txDate": "2025-10-30",
-      "filedDate": "2025-11-21",
-      "daysLate": 0,
-      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20033446.pdf"
-    },
-    {
-      "member": "Lisa C. McClain",
-      "memberSlug": "lisa-c-mcclain",
-      "hasPage": false,
-      "party": "R",
-      "side": "SELL",
       "amountBucket": "$1K – $15K",
       "txDate": "2025-10-30",
       "filedDate": "2025-11-21",

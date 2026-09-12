@@ -9,17 +9,17 @@
   },
   "indexable": true,
   "technical": {
-    "asOf": "2026-09-10",
-    "price": 218.36,
-    "chg1d": -2.37,
-    "chg1w": -2.7,
-    "chg1m": 0.4,
-    "rsi14": 49.8,
-    "sma50": 212.17,
-    "sma200": 197.28,
-    "vsSma50": 2.9,
-    "vsSma200": 10.7,
-    "relVol": 0.82,
+    "asOf": "2026-09-11",
+    "price": 218.2,
+    "chg1d": -0.07,
+    "chg1w": -4.49,
+    "chg1m": -2.63,
+    "rsi14": 49.7,
+    "sma50": 212.58,
+    "sma200": 197.47,
+    "vsSma50": 2.6,
+    "vsSma200": 10.5,
+    "relVol": 0.68,
     "high52w": 235.74,
     "low52w": 165.17,
     "rangePos": 75.0,
@@ -229,32 +229,32 @@
         "c": 230.36
       },
       {
-        "d": "2026-09-10",
-        "c": 218.36
+        "d": "2026-09-11",
+        "c": 218.2
       }
     ],
     "signals": [],
     "nextEarnings": null,
     "score": {
-      "label": "Buy",
-      "buys": 4,
-      "sells": 2,
+      "label": "Hold",
+      "buys": 3,
+      "sells": 3,
       "holds": 1,
-      "ratio": 0.286
+      "ratio": 0.0
     }
   },
   "summary": {
-    "trades": 181,
+    "trades": 182,
     "members": 34,
     "buys": 117,
-    "sells": 64,
+    "sells": 65,
     "other": 0,
     "firstTx": "2024-01-02",
     "lastTx": "2026-08-18",
-    "lastFiling": "2026-09-09",
+    "lastFiling": "2026-09-10",
     "estBuyLabel": "$11.2M",
     "estSellLabel": "$10.7M",
-    "pctLate": 17
+    "pctLate": 16
   },
   "topMembers": [
     {
@@ -302,6 +302,17 @@
       "hasPage": false
     },
     {
+      "name": "Gilbert Ray Cisneros, Jr.",
+      "slug": "gilbert-ray-cisneros-jr",
+      "party": "D",
+      "chamber": "House",
+      "trades": 10,
+      "buys": 5,
+      "sells": 5,
+      "estLabel": "$129K",
+      "hasPage": true
+    },
+    {
       "name": "Daniel Meuser",
       "slug": "daniel-meuser",
       "party": "R",
@@ -311,17 +322,6 @@
       "sells": 9,
       "estLabel": "$1.5M",
       "hasPage": false
-    },
-    {
-      "name": "Gilbert Ray Cisneros, Jr.",
-      "slug": "gilbert-ray-cisneros-jr",
-      "party": "D",
-      "chamber": "House",
-      "trades": 9,
-      "buys": 5,
-      "sells": 4,
-      "estLabel": "$121K",
-      "hasPage": true
     },
     {
       "name": "Jared Moskowitz",
@@ -369,6 +369,18 @@
     }
   ],
   "trades": [
+    {
+      "member": "Gilbert Ray Cisneros, Jr.",
+      "memberSlug": "gilbert-ray-cisneros-jr",
+      "hasPage": true,
+      "party": "D",
+      "side": "SELL",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-08-18",
+      "filedDate": "2026-09-10",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035390.pdf"
+    },
     {
       "member": "John J. McGuire III",
       "memberSlug": "john-j-mcguire-iii",
@@ -656,18 +668,6 @@
       "filedDate": "2026-04-21",
       "daysLate": 0,
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20034359.pdf"
-    },
-    {
-      "member": "Gilbert Ray Cisneros, Jr.",
-      "memberSlug": "gilbert-ray-cisneros-jr",
-      "hasPage": true,
-      "party": "D",
-      "side": "SELL",
-      "amountBucket": "$1K – $15K",
-      "txDate": "2026-03-25",
-      "filedDate": "2026-04-07",
-      "daysLate": 0,
-      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20034285.pdf"
     }
   ],
   "tradesShown": 25
