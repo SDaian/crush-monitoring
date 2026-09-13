@@ -17,6 +17,9 @@
     "rsi14": 56.7,
     "sma50": 453.67,
     "sma200": 431.26,
+    "ema8": null,
+    "ema21": null,
+    "emaGap": null,
     "vsSma50": 9.2,
     "vsSma200": 14.9,
     "relVol": 0.7,
@@ -237,10 +240,10 @@
     "nextEarnings": null,
     "score": {
       "label": "Strong Buy",
-      "buys": 5,
+      "buys": 4,
       "sells": 1,
       "holds": 1,
-      "ratio": 0.571
+      "ratio": 0.5
     }
   },
   "summary": {

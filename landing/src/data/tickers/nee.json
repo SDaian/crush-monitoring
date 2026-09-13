@@ -17,6 +17,9 @@
     "rsi14": 36.4,
     "sma50": 86.15,
     "sma200": 87.78,
+    "ema8": null,
+    "ema21": null,
+    "emaGap": null,
     "vsSma50": -4.5,
     "vsSma200": -6.2,
     "relVol": 0.92,
@@ -238,9 +241,9 @@
     "score": {
       "label": "Strong Sell",
       "buys": 0,
-      "sells": 6,
+      "sells": 5,
       "holds": 1,
-      "ratio": -0.857
+      "ratio": -0.833
     }
   },
   "summary": {
