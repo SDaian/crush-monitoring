@@ -9,28 +9,24 @@
   },
   "indexable": true,
   "technical": {
-    "asOf": "2026-09-11",
-    "price": 265.58,
-    "chg1d": -0.29,
-    "chg1w": -4.62,
-    "chg1m": 1.81,
-    "rsi14": 48.5,
-    "sma50": 262.71,
-    "sma200": 237.12,
-    "ema8": null,
-    "ema21": null,
-    "emaGap": null,
-    "vsSma50": 1.1,
-    "vsSma200": 12.0,
-    "relVol": 0.75,
+    "asOf": "2026-09-14",
+    "price": 266.32,
+    "chg1d": 0.28,
+    "chg1w": -3.24,
+    "chg1m": 1.62,
+    "rsi14": 49.5,
+    "sma50": 262.77,
+    "sma200": 237.42,
+    "ema8": 268.31,
+    "ema21": 267.74,
+    "emaGap": 0.21,
+    "vsSma50": 1.3,
+    "vsSma200": 12.2,
+    "relVol": 0.76,
     "high52w": 278.43,
     "low52w": 174.16,
     "rangePos": 88.0,
     "series": [
-      {
-        "d": "2025-09-19",
-        "c": 176.19
-      },
       {
         "d": "2025-09-26",
         "c": 179.71
@@ -234,30 +230,34 @@
       {
         "d": "2026-09-11",
         "c": 265.58
+      },
+      {
+        "d": "2026-09-14",
+        "c": 266.32
       }
     ],
     "signals": [],
     "nextEarnings": null,
     "score": {
       "label": "Strong Buy",
-      "buys": 4,
+      "buys": 5,
       "sells": 1,
       "holds": 1,
-      "ratio": 0.5
+      "ratio": 0.571
     }
   },
   "summary": {
-    "trades": 66,
+    "trades": 67,
     "members": 24,
     "buys": 30,
-    "sells": 36,
+    "sells": 37,
     "other": 0,
     "firstTx": "2023-03-15",
-    "lastTx": "2026-08-20",
-    "lastFiling": "2026-09-11",
+    "lastTx": "2026-08-27",
+    "lastFiling": "2026-09-12",
     "estBuyLabel": "$363K",
-    "estSellLabel": "$885K",
-    "pctLate": 17
+    "estSellLabel": "$893K",
+    "pctLate": 16
   },
   "topMembers": [
     {
@@ -265,10 +265,10 @@
       "slug": "thomas-h-kean-jr",
       "party": "R",
       "chamber": "House",
-      "trades": 6,
+      "trades": 7,
       "buys": 0,
-      "sells": 6,
-      "estLabel": "$122K",
+      "sells": 7,
+      "estLabel": "$130K",
       "hasPage": false
     },
     {
@@ -372,6 +372,18 @@
     }
   ],
   "trades": [
+    {
+      "member": "Thomas H. Kean, Jr.",
+      "memberSlug": "thomas-h-kean-jr",
+      "hasPage": false,
+      "party": "R",
+      "side": "SELL",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-08-27",
+      "filedDate": "2026-09-12",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035431.pdf"
+    },
     {
       "member": "John Boozman",
       "memberSlug": "john-boozman",
@@ -659,18 +671,6 @@
       "filedDate": "2025-10-10",
       "daysLate": 0,
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20032211.pdf"
-    },
-    {
-      "member": "Kelly Morrison",
-      "memberSlug": "kelly-morrison",
-      "hasPage": false,
-      "party": "D",
-      "side": "SELL",
-      "amountBucket": "$1K – $15K",
-      "txDate": "2025-08-19",
-      "filedDate": "2025-09-11",
-      "daysLate": 0,
-      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20032061.pdf"
     }
   ],
   "tradesShown": 25

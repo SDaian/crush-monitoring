@@ -9,28 +9,24 @@
   },
   "indexable": true,
   "technical": {
-    "asOf": "2026-09-11",
-    "price": 495.63,
-    "chg1d": 0.65,
-    "chg1w": -2.84,
-    "chg1m": 0.65,
-    "rsi14": 56.7,
-    "sma50": 453.67,
-    "sma200": 431.26,
-    "ema8": null,
-    "ema21": null,
-    "emaGap": null,
-    "vsSma50": 9.2,
-    "vsSma200": 14.9,
-    "relVol": 0.7,
+    "asOf": "2026-09-14",
+    "price": 505.41,
+    "chg1d": 1.97,
+    "chg1w": 1.14,
+    "chg1m": 1.72,
+    "rsi14": 61.4,
+    "sma50": 455.97,
+    "sma200": 431.41,
+    "ema8": 498.39,
+    "ema21": 491.76,
+    "emaGap": 1.35,
+    "vsSma50": 10.8,
+    "vsSma200": 17.2,
+    "relVol": 1.09,
     "high52w": 542.07,
     "low52w": 352.83,
-    "rangePos": 75.0,
+    "rangePos": 81.0,
     "series": [
-      {
-        "d": "2025-09-19",
-        "c": 517.93
-      },
       {
         "d": "2025-09-26",
         "c": 511.46
@@ -234,27 +230,31 @@
       {
         "d": "2026-09-11",
         "c": 495.63
+      },
+      {
+        "d": "2026-09-14",
+        "c": 505.41
       }
     ],
     "signals": [],
     "nextEarnings": null,
     "score": {
       "label": "Strong Buy",
-      "buys": 4,
-      "sells": 1,
+      "buys": 6,
+      "sells": 0,
       "holds": 1,
-      "ratio": 0.5
+      "ratio": 0.857
     }
   },
   "summary": {
-    "trades": 204,
+    "trades": 205,
     "members": 44,
     "buys": 106,
-    "sells": 98,
+    "sells": 99,
     "other": 0,
     "firstTx": "2023-03-15",
-    "lastTx": "2026-08-26",
-    "lastFiling": "2026-09-10",
+    "lastTx": "2026-08-27",
+    "lastFiling": "2026-09-12",
     "estBuyLabel": "$27.6M",
     "estSellLabel": "$23.8M",
     "pctLate": 14
@@ -372,6 +372,18 @@
     }
   ],
   "trades": [
+    {
+      "member": "Thomas H. Kean, Jr.",
+      "memberSlug": "thomas-h-kean-jr",
+      "hasPage": false,
+      "party": "R",
+      "side": "SELL",
+      "amountBucket": "$15K – $50K",
+      "txDate": "2026-08-27",
+      "filedDate": "2026-09-12",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035431.pdf"
+    },
     {
       "member": "David J. Taylor",
       "memberSlug": "david-j-taylor",
@@ -659,18 +671,6 @@
       "filedDate": "2026-06-08",
       "daysLate": 0,
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20034713.pdf"
-    },
-    {
-      "member": "Jonathan L. Jackson",
-      "memberSlug": "jonathan-l-jackson",
-      "hasPage": false,
-      "party": "D",
-      "side": "SELL",
-      "amountBucket": "$15K – $50K",
-      "txDate": "2026-05-12",
-      "filedDate": "2026-06-16",
-      "daysLate": 0,
-      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20034688.pdf"
     }
   ],
   "tradesShown": 25

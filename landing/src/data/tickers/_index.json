@@ -5,11 +5,11 @@
       "slug": "msft",
       "ticker": "MSFT",
       "company": "Microsoft Corporation",
-      "trades": 204,
+      "trades": 205,
       "members": 44,
       "buys": 106,
-      "sells": 98,
-      "lastTx": "2026-08-26",
+      "sells": 99,
+      "lastTx": "2026-08-27",
       "indexable": true,
       "industry": {
         "key": "tech",
@@ -92,6 +92,21 @@
       }
     },
     {
+      "slug": "googl",
+      "ticker": "GOOGL",
+      "company": "Alphabet Inc.",
+      "trades": 90,
+      "members": 29,
+      "buys": 43,
+      "sells": 47,
+      "lastTx": "2026-08-27",
+      "indexable": true,
+      "industry": {
+        "key": "tech",
+        "label": "Technology"
+      }
+    },
+    {
       "slug": "avgo",
       "ticker": "AVGO",
       "company": "Broadcom Inc.",
@@ -100,21 +115,6 @@
       "buys": 51,
       "sells": 38,
       "lastTx": "2026-08-26",
-      "indexable": true,
-      "industry": {
-        "key": "tech",
-        "label": "Technology"
-      }
-    },
-    {
-      "slug": "googl",
-      "ticker": "GOOGL",
-      "company": "Alphabet Inc.",
-      "trades": 88,
-      "members": 29,
-      "buys": 43,
-      "sells": 45,
-      "lastTx": "2026-08-24",
       "indexable": true,
       "industry": {
         "key": "tech",
@@ -185,11 +185,11 @@
       "slug": "jnj",
       "ticker": "JNJ",
       "company": "Johnson & Johnson",
-      "trades": 66,
+      "trades": 67,
       "members": 24,
       "buys": 30,
-      "sells": 36,
-      "lastTx": "2026-08-20",
+      "sells": 37,
+      "lastTx": "2026-08-27",
       "indexable": true,
       "industry": {
         "key": "health",
