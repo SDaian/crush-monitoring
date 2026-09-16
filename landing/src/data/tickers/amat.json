@@ -9,23 +9,23 @@
   },
   "indexable": true,
   "technical": {
-    "asOf": "2026-09-14",
-    "price": 424.21,
-    "chg1d": -7.07,
-    "chg1w": -6.71,
-    "chg1m": -20.64,
-    "rsi14": 34.7,
-    "sma50": 513.28,
-    "sma200": 412.77,
-    "ema8": 451.69,
-    "ema21": 471.35,
-    "emaGap": -4.17,
+    "asOf": "2026-09-15",
+    "price": 421.17,
+    "chg1d": -0.72,
+    "chg1w": -10.92,
+    "chg1m": -16.96,
+    "rsi14": 34.1,
+    "sma50": 509.84,
+    "sma200": 413.66,
+    "ema8": 444.91,
+    "ema21": 466.79,
+    "emaGap": -4.69,
     "vsSma50": -17.4,
-    "vsSma200": 2.8,
-    "relVol": 1.25,
+    "vsSma200": 1.8,
+    "relVol": 0.9,
     "high52w": 723.0,
-    "low52w": 167.8,
-    "rangePos": 46.0,
+    "low52w": 170.93,
+    "rangePos": 45.0,
     "series": [
       {
         "d": "2025-09-26",
@@ -232,8 +232,8 @@
         "c": 456.49
       },
       {
-        "d": "2026-09-14",
-        "c": 424.21
+        "d": "2026-09-15",
+        "c": 421.17
       }
     ],
     "signals": [],
@@ -247,17 +247,17 @@
     }
   },
   "summary": {
-    "trades": 31,
-    "members": 13,
-    "buys": 21,
+    "trades": 32,
+    "members": 14,
+    "buys": 22,
     "sells": 10,
     "other": 0,
     "firstTx": "2024-01-02",
-    "lastTx": "2026-07-15",
-    "lastFiling": "2026-08-27",
-    "estBuyLabel": "$549K",
+    "lastTx": "2026-08-06",
+    "lastFiling": "2026-09-14",
+    "estBuyLabel": "$557K",
     "estSellLabel": "$281K",
-    "pctLate": 10
+    "pctLate": 9
   },
   "topMembers": [
     {
@@ -372,6 +372,18 @@
     }
   ],
   "trades": [
+    {
+      "member": "Josh Gottheimer",
+      "memberSlug": "josh-gottheimer",
+      "hasPage": true,
+      "party": "D",
+      "side": "BUY",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-08-06",
+      "filedDate": "2026-09-14",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035455.pdf"
+    },
     {
       "member": "John J. McGuire III",
       "memberSlug": "john-j-mcguire-iii",
@@ -659,18 +671,6 @@
       "filedDate": "2025-05-08",
       "daysLate": 0,
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20030291.pdf"
-    },
-    {
-      "member": "John Boozman",
-      "memberSlug": "john-boozman",
-      "hasPage": false,
-      "party": "R",
-      "side": "BUY",
-      "amountBucket": "$1K – $15K",
-      "txDate": "2025-03-19",
-      "filedDate": "2025-04-20",
-      "daysLate": 0,
-      "sourceUrl": "https://efdsearch.senate.gov/search/view/ptr/fcacc112-3bf8-4a43-82f6-38d14a699357/"
     }
   ],
   "tradesShown": 25

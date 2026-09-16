@@ -321,10 +321,10 @@
   "performance": {
     "available": true,
     "benchLabel": "S&P 500",
-    "asofDate": "2026-09-14",
+    "asofDate": "2026-09-15",
     "kpis": {
-      "medianPct": -4.0,
-      "medianBenchPct": 8.7,
+      "medianPct": -3.4,
+      "medianBenchPct": 8.2,
       "beat": 5,
       "beatOf": 13,
       "priced": 13,
@@ -407,7 +407,7 @@
         "2026-08-27",
         "2026-09-03",
         "2026-09-10",
-        "2026-09-14"
+        "2026-09-15"
       ],
       "member": [
         100.0,
@@ -485,7 +485,7 @@
         93.5,
         95.3,
         93.3,
-        93.8
+        93.2
       ],
       "bench": [
         100.0,
@@ -563,7 +563,7 @@
         114.7,
         115.0,
         112.7,
-        113.1
+        112.6
       ],
       "buys": 13
     },
@@ -571,86 +571,86 @@
       {
         "ticker": "NVDA",
         "txDate": "2026-08-18",
-        "pct": -4.0,
-        "benchPct": -0.9,
-        "excess": -3.1
+        "pct": -3.4,
+        "benchPct": -1.3,
+        "excess": -2.1
       },
       {
         "ticker": "AMAT",
         "txDate": "2026-07-15",
-        "pct": -26.8,
-        "benchPct": 0.8,
+        "pct": -27.3,
+        "benchPct": 0.3,
         "excess": -27.6
       },
       {
         "ticker": "SPCX",
         "txDate": "2026-06-15",
-        "pct": -23.0,
-        "benchPct": 0.8,
-        "excess": -23.8
+        "pct": -25.5,
+        "benchPct": 0.3,
+        "excess": -25.8
       },
       {
         "ticker": "META",
         "txDate": "2026-06-04",
-        "pct": 6.1,
-        "benchPct": 0.5,
-        "excess": 5.6
+        "pct": 6.8,
+        "benchPct": 0.0,
+        "excess": 6.8
       },
       {
         "ticker": "NVDA",
         "txDate": "2026-04-15",
-        "pct": 6.1,
-        "benchPct": 8.7,
-        "excess": -2.6
+        "pct": 6.7,
+        "benchPct": 8.2,
+        "excess": -1.5
       },
       {
         "ticker": "MSFT",
         "txDate": "2026-04-15",
-        "pct": 22.9,
-        "benchPct": 8.7,
-        "excess": 14.2
+        "pct": 20.9,
+        "benchPct": 8.2,
+        "excess": 12.7
       },
       {
         "ticker": "AAPL",
         "txDate": "2026-04-15",
-        "pct": 25.0,
-        "benchPct": 8.7,
-        "excess": 16.3
+        "pct": 24.4,
+        "benchPct": 8.2,
+        "excess": 16.2
       },
       {
         "ticker": "NVDA",
         "txDate": "2026-01-30",
-        "pct": 10.4,
-        "benchPct": 10.0,
-        "excess": 0.4
+        "pct": 11.0,
+        "benchPct": 9.5,
+        "excess": 1.5
       },
       {
         "ticker": "MSFT",
         "txDate": "2026-01-21",
-        "pct": 13.8,
-        "benchPct": 11.0,
-        "excess": 2.8
+        "pct": 11.9,
+        "benchPct": 10.5,
+        "excess": 1.4
       },
       {
         "ticker": "META",
         "txDate": "2025-06-30",
-        "pct": -9.8,
-        "benchPct": 23.1,
-        "excess": -32.9
+        "pct": -9.2,
+        "benchPct": 22.6,
+        "excess": -31.8
       },
       {
         "ticker": "NFLX",
         "txDate": "2025-06-16",
-        "pct": -34.5,
-        "benchPct": 26.2,
-        "excess": -60.7
+        "pct": -36.4,
+        "benchPct": 25.7,
+        "excess": -62.1
       },
       {
         "ticker": "NOW",
         "txDate": "2025-05-16",
-        "pct": -31.6,
-        "benchPct": 28.1,
-        "excess": -59.7
+        "pct": -31.8,
+        "benchPct": 27.5,
+        "excess": -59.3
       }
     ],
     "rowsOf": 13

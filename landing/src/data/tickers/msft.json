@@ -9,23 +9,23 @@
   },
   "indexable": true,
   "technical": {
-    "asOf": "2026-09-14",
-    "price": 505.41,
-    "chg1d": 1.97,
-    "chg1w": 1.14,
-    "chg1m": 1.72,
-    "rsi14": 61.4,
-    "sma50": 455.97,
-    "sma200": 431.41,
-    "ema8": 498.39,
-    "ema21": 491.76,
-    "emaGap": 1.35,
-    "vsSma50": 10.8,
-    "vsSma200": 17.2,
-    "relVol": 1.09,
+    "asOf": "2026-09-15",
+    "price": 497.12,
+    "chg1d": -1.64,
+    "chg1w": 0.64,
+    "chg1m": 0.35,
+    "rsi14": 55.9,
+    "sma50": 458.17,
+    "sma200": 431.52,
+    "ema8": 498.11,
+    "ema21": 492.25,
+    "emaGap": 1.19,
+    "vsSma50": 8.5,
+    "vsSma200": 15.2,
+    "relVol": 0.86,
     "high52w": 542.07,
     "low52w": 352.83,
-    "rangePos": 81.0,
+    "rangePos": 76.0,
     "series": [
       {
         "d": "2025-09-26",
@@ -232,8 +232,8 @@
         "c": 495.63
       },
       {
-        "d": "2026-09-14",
-        "c": 505.41
+        "d": "2026-09-15",
+        "c": 497.12
       }
     ],
     "signals": [],
@@ -247,16 +247,16 @@
     }
   },
   "summary": {
-    "trades": 205,
+    "trades": 209,
     "members": 44,
-    "buys": 106,
-    "sells": 99,
+    "buys": 108,
+    "sells": 101,
     "other": 0,
     "firstTx": "2023-03-15",
     "lastTx": "2026-08-27",
-    "lastFiling": "2026-09-12",
-    "estBuyLabel": "$27.6M",
-    "estSellLabel": "$23.8M",
+    "lastFiling": "2026-09-14",
+    "estBuyLabel": "$28.8M",
+    "estSellLabel": "$24.9M",
     "pctLate": 14
   },
   "topMembers": [
@@ -265,10 +265,10 @@
       "slug": "josh-gottheimer",
       "party": "D",
       "chamber": "House",
-      "trades": 31,
-      "buys": 15,
-      "sells": 16,
-      "estLabel": "$44.1M",
+      "trades": 35,
+      "buys": 17,
+      "sells": 18,
+      "estLabel": "$46.3M",
       "hasPage": true
     },
     {
@@ -419,6 +419,54 @@
       "filedDate": "2026-09-10",
       "daysLate": 0,
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035390.pdf"
+    },
+    {
+      "member": "Josh Gottheimer",
+      "memberSlug": "josh-gottheimer",
+      "hasPage": true,
+      "party": "D",
+      "side": "BUY",
+      "amountBucket": "$250K – $500K",
+      "txDate": "2026-08-14",
+      "filedDate": "2026-09-14",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035455.pdf"
+    },
+    {
+      "member": "Josh Gottheimer",
+      "memberSlug": "josh-gottheimer",
+      "hasPage": true,
+      "party": "D",
+      "side": "BUY",
+      "amountBucket": "$500K – $1M",
+      "txDate": "2026-08-14",
+      "filedDate": "2026-09-14",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035455.pdf"
+    },
+    {
+      "member": "Josh Gottheimer",
+      "memberSlug": "josh-gottheimer",
+      "hasPage": true,
+      "party": "D",
+      "side": "SELL",
+      "amountBucket": "$250K – $500K",
+      "txDate": "2026-08-14",
+      "filedDate": "2026-09-14",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035455.pdf"
+    },
+    {
+      "member": "Josh Gottheimer",
+      "memberSlug": "josh-gottheimer",
+      "hasPage": true,
+      "party": "D",
+      "side": "SELL",
+      "amountBucket": "$500K – $1M",
+      "txDate": "2026-08-14",
+      "filedDate": "2026-09-14",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035455.pdf"
     },
     {
       "member": "David J. Taylor",
@@ -623,54 +671,6 @@
       "filedDate": "2026-06-03",
       "daysLate": 0,
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20034693.pdf"
-    },
-    {
-      "member": "Josh Gottheimer",
-      "memberSlug": "josh-gottheimer",
-      "hasPage": true,
-      "party": "D",
-      "side": "BUY",
-      "amountBucket": "$500K – $1M",
-      "txDate": "2026-05-19",
-      "filedDate": "2026-06-03",
-      "daysLate": 0,
-      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20034693.pdf"
-    },
-    {
-      "member": "Donald J. Trump",
-      "memberSlug": "donald-j-trump",
-      "hasPage": true,
-      "party": "R",
-      "side": "SELL",
-      "amountBucket": "$1K – $15K",
-      "txDate": "2026-05-18",
-      "filedDate": "2026-06-25",
-      "daysLate": 0,
-      "sourceUrl": "https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/F9CA13B970439E8F85258E27002DDF15/$FILE/Donald-J-Trump-06.25.2026-278T%20%282%29.pdf"
-    },
-    {
-      "member": "Donald J. Trump",
-      "memberSlug": "donald-j-trump",
-      "hasPage": true,
-      "party": "R",
-      "side": "BUY",
-      "amountBucket": "$1K – $15K",
-      "txDate": "2026-05-18",
-      "filedDate": "2026-06-25",
-      "daysLate": 0,
-      "sourceUrl": "https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/F9CA13B970439E8F85258E27002DDF15/$FILE/Donald-J-Trump-06.25.2026-278T%20%282%29.pdf"
-    },
-    {
-      "member": "Gilbert Ray Cisneros, Jr.",
-      "memberSlug": "gilbert-ray-cisneros-jr",
-      "hasPage": true,
-      "party": "D",
-      "side": "BUY",
-      "amountBucket": "$50K – $100K",
-      "txDate": "2026-05-15",
-      "filedDate": "2026-06-08",
-      "daysLate": 0,
-      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20034713.pdf"
     }
   ],
   "tradesShown": 25
