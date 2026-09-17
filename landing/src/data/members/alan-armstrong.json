@@ -7,19 +7,19 @@
   "chamber": "Senate",
   "district": null,
   "summary": {
-    "trades": 703,
+    "trades": 707,
     "distinctTickers": 345,
     "firstTx": "2026-03-24",
-    "lastTx": "2026-06-24",
-    "lastFiling": "2026-07-21",
-    "pctLate": 100,
+    "lastTx": "2026-08-20",
+    "lastFiling": "2026-09-17",
+    "pctLate": 99,
     "worstLate": 74
   },
   "topTickers": [
     {
       "ticker": "WMB",
-      "count": 2,
-      "asset": "Williams Companies, Inc. (The) Common Stock",
+      "count": 4,
+      "asset": "Williams Companies, Inc. (The) Common Stock Option Type: Call Strike price: $75.00 Expires: 2026-08-21",
       "slug": "wmb",
       "hasPage": false
     },
@@ -60,6 +60,50 @@
     }
   ],
   "trades": [
+    {
+      "ticker": "WMB",
+      "asset": "Williams Companies, Inc. (The) Common Stock Option Type: Call Strike price: $75.00 Expires: 2026-08-21",
+      "side": "BUY",
+      "amountBucket": "$15K – $50K",
+      "txDate": "2026-08-20",
+      "filedDate": "2026-09-17",
+      "daysLate": 0,
+      "sourceUrl": "https://efdsearch.senate.gov/search/view/ptr/b999bc0e-3eb0-4ca9-ab07-8e8f2e04b41f/",
+      "bond": false
+    },
+    {
+      "ticker": "WMB",
+      "asset": "Williams Companies, Inc. (The) Common Stock Option Type: Call Strike price: $75.00 Expires: 2026-08-21",
+      "side": "BUY",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-08-19",
+      "filedDate": "2026-09-17",
+      "daysLate": 0,
+      "sourceUrl": "https://efdsearch.senate.gov/search/view/ptr/b999bc0e-3eb0-4ca9-ab07-8e8f2e04b41f/",
+      "bond": false
+    },
+    {
+      "ticker": "—",
+      "asset": "AvalonBay Communities, Inc. Common Stock (AVB) (Exchanged) VMRK - Vivmark Residential Common Shares of Beneficial Interest (Received)",
+      "side": "EXCHANGE",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-08-14",
+      "filedDate": "2026-09-17",
+      "daysLate": 0,
+      "sourceUrl": "https://efdsearch.senate.gov/search/view/ptr/b999bc0e-3eb0-4ca9-ab07-8e8f2e04b41f/",
+      "bond": false
+    },
+    {
+      "ticker": "—",
+      "asset": "Electronic Arts Inc. (EA)",
+      "side": "SELL",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-08-04",
+      "filedDate": "2026-09-17",
+      "daysLate": 0,
+      "sourceUrl": "https://efdsearch.senate.gov/search/view/ptr/b999bc0e-3eb0-4ca9-ab07-8e8f2e04b41f/",
+      "bond": false
+    },
     {
       "ticker": "WMB",
       "asset": "Williams Companies, Inc. (The) Common Stock",
@@ -7794,7 +7838,7 @@
       "bond": false
     }
   ],
-  "tradesShown": 703,
+  "tradesShown": 707,
   "holdings": {
     "available": true,
     "filingDate": "2026-07-21",
@@ -7819,7 +7863,7 @@
         "strike": null,
         "expiration": null,
         "contracts": null,
-        "firstBuy": null
+        "firstBuy": "2026-08-19"
       },
       {
         "kind": "stock",
@@ -8044,7 +8088,7 @@
       "beat": 34,
       "beatOf": 71,
       "priced": 71,
-      "pricedOf": 320
+      "pricedOf": 322
     },
     "series": {
       "dates": [
