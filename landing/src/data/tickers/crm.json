@@ -9,23 +9,23 @@
   },
   "indexable": true,
   "technical": {
-    "asOf": "2026-09-15",
-    "price": 255.65,
-    "chg1d": -1.46,
-    "chg1w": 2.62,
-    "chg1m": 30.29,
-    "rsi14": 66.5,
-    "sma50": 202.27,
-    "sma200": 201.37,
-    "ema8": 251.2,
-    "ema21": 236.78,
-    "emaGap": 6.09,
-    "vsSma50": 26.4,
-    "vsSma200": 27.0,
-    "relVol": 0.69,
+    "asOf": "2026-09-16",
+    "price": 250.54,
+    "chg1d": -2.0,
+    "chg1w": 2.61,
+    "chg1m": 31.19,
+    "rsi14": 62.4,
+    "sma50": 203.89,
+    "sma200": 201.48,
+    "ema8": 251.06,
+    "ema21": 238.03,
+    "emaGap": 5.47,
+    "vsSma50": 22.9,
+    "vsSma200": 24.3,
+    "relVol": 0.58,
     "high52w": 266.23,
     "low52w": 150.12,
-    "rangePos": 91.0,
+    "rangePos": 86.0,
     "series": [
       {
         "d": "2025-09-26",
@@ -232,18 +232,11 @@
         "c": 247.72
       },
       {
-        "d": "2026-09-15",
-        "c": 255.65
+        "d": "2026-09-16",
+        "c": 250.54
       }
     ],
-    "signals": [
-      {
-        "type": "golden_cross",
-        "asof": "2026-09-15",
-        "label": "Golden cross (50-day above 200-day)",
-        "dir": "bull"
-      }
-    ],
+    "signals": [],
     "nextEarnings": null,
     "score": {
       "label": "Strong Buy",

@@ -9,22 +9,22 @@
   },
   "indexable": true,
   "technical": {
-    "asOf": "2026-09-15",
-    "price": 1085.0,
-    "chg1d": -2.36,
-    "chg1w": -5.25,
-    "chg1m": -13.68,
-    "rsi14": 26.5,
-    "sma50": 1216.97,
-    "sma200": 1262.75,
-    "ema8": 1127.55,
-    "ema21": 1163.62,
-    "emaGap": -3.1,
-    "vsSma50": -10.8,
-    "vsSma200": -14.1,
-    "relVol": 1.24,
+    "asOf": "2026-09-16",
+    "price": 1080.11,
+    "chg1d": -0.45,
+    "chg1w": -4.05,
+    "chg1m": -12.74,
+    "rsi14": 25.8,
+    "sma50": 1211.98,
+    "sma200": 1261.37,
+    "ema8": 1117.0,
+    "ema21": 1156.03,
+    "emaGap": -3.38,
+    "vsSma50": -10.9,
+    "vsSma200": -14.4,
+    "relVol": 1.63,
     "high52w": 1450.0,
-    "low52w": 1085.0,
+    "low52w": 1080.11,
     "rangePos": 0.0,
     "series": [
       {
@@ -232,20 +232,14 @@
         "c": 1140.32
       },
       {
-        "d": "2026-09-15",
-        "c": 1085.0
+        "d": "2026-09-16",
+        "c": 1080.11
       }
     ],
     "signals": [
       {
-        "type": "rsi_oversold",
-        "asof": "2026-09-15",
-        "label": "RSI crossed below 30 (oversold)",
-        "dir": "neutral"
-      },
-      {
         "type": "new_52w_low",
-        "asof": "2026-09-15",
+        "asof": "2026-09-16",
         "label": "New 52-week low",
         "dir": "bear"
       }

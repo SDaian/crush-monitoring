@@ -272,6 +272,21 @@
       }
     },
     {
+      "slug": "nflx",
+      "ticker": "NFLX",
+      "company": "Netflix, Inc.",
+      "trades": 54,
+      "members": 23,
+      "buys": 30,
+      "sells": 24,
+      "lastTx": "2026-08-12",
+      "indexable": true,
+      "industry": {
+        "key": "telecom",
+        "label": "Telecom & media"
+      }
+    },
+    {
       "slug": "acn",
       "ticker": "ACN",
       "company": "Accenture plc",
@@ -299,21 +314,6 @@
       "industry": {
         "key": "tech",
         "label": "Technology"
-      }
-    },
-    {
-      "slug": "nflx",
-      "ticker": "NFLX",
-      "company": "Netflix, Inc.",
-      "trades": 52,
-      "members": 23,
-      "buys": 28,
-      "sells": 24,
-      "lastTx": "2026-08-11",
-      "indexable": true,
-      "industry": {
-        "key": "telecom",
-        "label": "Telecom & media"
       }
     },
     {
@@ -1262,6 +1262,21 @@
       }
     },
     {
+      "slug": "ph",
+      "ticker": "PH",
+      "company": "Parker-Hannifin Corporation",
+      "trades": 27,
+      "members": 9,
+      "buys": 10,
+      "sells": 17,
+      "lastTx": "2026-08-11",
+      "indexable": true,
+      "industry": {
+        "key": "industrial",
+        "label": "Manufacturing"
+      }
+    },
+    {
       "slug": "wab",
       "ticker": "WAB",
       "company": "Westinghouse Air Brake Technologies Corporation",
@@ -1424,21 +1439,6 @@
       "industry": {
         "key": "tech",
         "label": "Technology"
-      }
-    },
-    {
-      "slug": "ph",
-      "ticker": "PH",
-      "company": "Parker-Hannifin Corporation",
-      "trades": 25,
-      "members": 9,
-      "buys": 10,
-      "sells": 15,
-      "lastTx": "2026-05-18",
-      "indexable": true,
-      "industry": {
-        "key": "industrial",
-        "label": "Manufacturing"
       }
     },
     {
