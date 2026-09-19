@@ -35,11 +35,11 @@
       "slug": "aapl",
       "ticker": "AAPL",
       "company": "Apple Inc.",
-      "trades": 150,
+      "trades": 151,
       "members": 43,
       "buys": 74,
-      "sells": 76,
-      "lastTx": "2026-08-18",
+      "sells": 77,
+      "lastTx": "2026-08-20",
       "indexable": true,
       "industry": {
         "key": "tech",
@@ -140,11 +140,11 @@
       "slug": "goog",
       "ticker": "GOOG",
       "company": "Alphabet Inc.",
-      "trades": 75,
+      "trades": 77,
       "members": 21,
       "buys": 47,
-      "sells": 28,
-      "lastTx": "2026-06-23",
+      "sells": 30,
+      "lastTx": "2026-08-20",
       "indexable": true,
       "industry": {
         "key": "tech",
@@ -200,11 +200,11 @@
       "slug": "jpm",
       "ticker": "JPM",
       "company": "JP Morgan Chase & Co.",
-      "trades": 64,
+      "trades": 66,
       "members": 28,
       "buys": 31,
-      "sells": 33,
-      "lastTx": "2026-07-23",
+      "sells": 35,
+      "lastTx": "2026-08-20",
       "indexable": true,
       "industry": {
         "key": "finance",
@@ -227,6 +227,21 @@
       }
     },
     {
+      "slug": "pg",
+      "ticker": "PG",
+      "company": "Procter & Gamble Company",
+      "trades": 62,
+      "members": 28,
+      "buys": 29,
+      "sells": 33,
+      "lastTx": "2026-09-08",
+      "indexable": true,
+      "industry": {
+        "key": "consumer",
+        "label": "Consumer & retail"
+      }
+    },
+    {
       "slug": "gs",
       "ticker": "GS",
       "company": "Goldman Sachs Group, Inc.",
@@ -239,21 +254,6 @@
       "industry": {
         "key": "finance",
         "label": "Banks & finance"
-      }
-    },
-    {
-      "slug": "pg",
-      "ticker": "PG",
-      "company": "Procter & Gamble Company",
-      "trades": 61,
-      "members": 28,
-      "buys": 28,
-      "sells": 33,
-      "lastTx": "2026-08-24",
-      "indexable": true,
-      "industry": {
-        "key": "consumer",
-        "label": "Consumer & retail"
       }
     },
     {
@@ -272,6 +272,21 @@
       }
     },
     {
+      "slug": "acn",
+      "ticker": "ACN",
+      "company": "Accenture plc",
+      "trades": 55,
+      "members": 20,
+      "buys": 15,
+      "sells": 40,
+      "lastTx": "2026-08-26",
+      "indexable": true,
+      "industry": {
+        "key": "tech",
+        "label": "Technology"
+      }
+    },
+    {
       "slug": "nflx",
       "ticker": "NFLX",
       "company": "Netflix, Inc.",
@@ -284,21 +299,6 @@
       "industry": {
         "key": "telecom",
         "label": "Telecom & media"
-      }
-    },
-    {
-      "slug": "acn",
-      "ticker": "ACN",
-      "company": "Accenture plc",
-      "trades": 53,
-      "members": 20,
-      "buys": 13,
-      "sells": 40,
-      "lastTx": "2026-08-11",
-      "indexable": true,
-      "industry": {
-        "key": "tech",
-        "label": "Technology"
       }
     },
     {
@@ -344,6 +344,21 @@
       "industry": {
         "key": "tech",
         "label": "Technology"
+      }
+    },
+    {
+      "slug": "pep",
+      "ticker": "PEP",
+      "company": "Pepsico, Inc.",
+      "trades": 51,
+      "members": 24,
+      "buys": 19,
+      "sells": 32,
+      "lastTx": "2026-08-26",
+      "indexable": true,
+      "industry": {
+        "key": "agriculture",
+        "label": "Agriculture & food"
       }
     },
     {
@@ -434,21 +449,6 @@
       "industry": {
         "key": "tech",
         "label": "Technology"
-      }
-    },
-    {
-      "slug": "pep",
-      "ticker": "PEP",
-      "company": "Pepsico, Inc.",
-      "trades": 49,
-      "members": 24,
-      "buys": 17,
-      "sells": 32,
-      "lastTx": "2026-07-30",
-      "indexable": true,
-      "industry": {
-        "key": "agriculture",
-        "label": "Agriculture & food"
       }
     },
     {
@@ -887,6 +887,21 @@
       }
     },
     {
+      "slug": "mcd",
+      "ticker": "MCD",
+      "company": "McDonald's Corporation",
+      "trades": 33,
+      "members": 16,
+      "buys": 14,
+      "sells": 19,
+      "lastTx": "2026-08-26",
+      "indexable": true,
+      "industry": {
+        "key": "consumer",
+        "label": "Consumer & retail"
+      }
+    },
+    {
       "slug": "dash",
       "ticker": "DASH",
       "company": "DoorDash, Inc.",
@@ -929,21 +944,6 @@
       "industry": {
         "key": "tech",
         "label": "Technology"
-      }
-    },
-    {
-      "slug": "mcd",
-      "ticker": "MCD",
-      "company": "McDonald's Corporation",
-      "trades": 32,
-      "members": 16,
-      "buys": 13,
-      "sells": 19,
-      "lastTx": "2026-08-11",
-      "indexable": true,
-      "industry": {
-        "key": "consumer",
-        "label": "Consumer & retail"
       }
     },
     {

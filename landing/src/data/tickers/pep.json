@@ -9,22 +9,22 @@
   },
   "indexable": true,
   "technical": {
-    "asOf": "2026-09-17",
-    "price": 133.66,
-    "chg1d": -0.51,
-    "chg1w": -2.19,
-    "chg1m": -4.62,
-    "rsi14": 32.7,
-    "sma50": 138.77,
-    "sma200": 148.34,
-    "ema8": 135.89,
-    "ema21": 137.85,
-    "emaGap": -1.43,
-    "vsSma50": -3.7,
-    "vsSma200": -9.9,
-    "relVol": 1.37,
+    "asOf": "2026-09-18",
+    "price": 129.75,
+    "chg1d": -2.93,
+    "chg1w": -4.82,
+    "chg1m": -9.0,
+    "rsi14": 25.4,
+    "sma50": 138.61,
+    "sma200": 148.24,
+    "ema8": 134.52,
+    "ema21": 137.12,
+    "emaGap": -1.89,
+    "vsSma50": -6.4,
+    "vsSma200": -12.5,
+    "relVol": 2.73,
     "high52w": 170.49,
-    "low52w": 133.66,
+    "low52w": 129.75,
     "rangePos": 0.0,
     "series": [
       {
@@ -232,14 +232,20 @@
         "c": 136.32
       },
       {
-        "d": "2026-09-17",
-        "c": 133.66
+        "d": "2026-09-18",
+        "c": 129.75
       }
     ],
     "signals": [
       {
+        "type": "rsi_oversold",
+        "asof": "2026-09-18",
+        "label": "RSI crossed below 30 (oversold)",
+        "dir": "neutral"
+      },
+      {
         "type": "new_52w_low",
-        "asof": "2026-09-17",
+        "asof": "2026-09-18",
         "label": "New 52-week low",
         "dir": "bear"
       }
@@ -247,22 +253,22 @@
     "nextEarnings": null,
     "score": {
       "label": "Strong Sell",
-      "buys": 0,
+      "buys": 1,
       "sells": 6,
-      "holds": 1,
-      "ratio": -0.857
+      "holds": 0,
+      "ratio": -0.714
     }
   },
   "summary": {
-    "trades": 49,
+    "trades": 51,
     "members": 24,
-    "buys": 17,
+    "buys": 19,
     "sells": 32,
     "other": 0,
     "firstTx": "2023-03-15",
-    "lastTx": "2026-07-30",
-    "lastFiling": "2026-08-14",
-    "estBuyLabel": "$185K",
+    "lastTx": "2026-08-26",
+    "lastFiling": "2026-09-17",
+    "estBuyLabel": "$201K",
     "estSellLabel": "$853K",
     "pctLate": 12
   },
@@ -297,6 +303,17 @@
       "trades": 4,
       "buys": 2,
       "sells": 2,
+      "estLabel": "$32K",
+      "hasPage": false
+    },
+    {
+      "name": "Scott Franklin",
+      "slug": "scott-franklin",
+      "party": "R",
+      "chamber": "House",
+      "trades": 4,
+      "buys": 3,
+      "sells": 1,
       "estLabel": "$32K",
       "hasPage": false
     },
@@ -365,20 +382,33 @@
       "sells": 1,
       "estLabel": "$65K",
       "hasPage": false
-    },
-    {
-      "name": "Bruce Westerman",
-      "slug": "bruce-westerman",
-      "party": "R",
-      "chamber": "House",
-      "trades": 2,
-      "buys": 1,
-      "sells": 1,
-      "estLabel": "$16K",
-      "hasPage": false
     }
   ],
   "trades": [
+    {
+      "member": "Scott Franklin",
+      "memberSlug": "scott-franklin",
+      "hasPage": false,
+      "party": "R",
+      "side": "BUY",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-08-26",
+      "filedDate": "2026-09-17",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035450.pdf"
+    },
+    {
+      "member": "Scott Franklin",
+      "memberSlug": "scott-franklin",
+      "hasPage": false,
+      "party": "R",
+      "side": "BUY",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-08-26",
+      "filedDate": "2026-09-17",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035450.pdf"
+    },
     {
       "member": "Richard McCormick",
       "memberSlug": "richard-mccormick",
@@ -654,30 +684,6 @@
       "filedDate": "2025-10-06",
       "daysLate": 0,
       "sourceUrl": "https://efdsearch.senate.gov/search/view/ptr/8a808088-5410-434a-a082-cf86637ba3d7/"
-    },
-    {
-      "member": "Marjorie Taylor Greene",
-      "memberSlug": "marjorie-taylor-greene",
-      "hasPage": true,
-      "party": "R",
-      "side": "BUY",
-      "amountBucket": "$1K – $15K",
-      "txDate": "2025-08-28",
-      "filedDate": "2025-08-29",
-      "daysLate": 0,
-      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20030996.pdf"
-    },
-    {
-      "member": "Julie Johnson",
-      "memberSlug": "julie-johnson",
-      "hasPage": false,
-      "party": "D",
-      "side": "SELL",
-      "amountBucket": "$1K – $15K",
-      "txDate": "2025-08-14",
-      "filedDate": "2025-09-11",
-      "daysLate": 0,
-      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20032066.pdf"
     }
   ],
   "tradesShown": 25

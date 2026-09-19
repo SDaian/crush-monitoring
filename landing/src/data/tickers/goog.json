@@ -9,20 +9,20 @@
   },
   "indexable": true,
   "technical": {
-    "asOf": "2026-09-17",
-    "price": 343.68,
-    "chg1d": 1.27,
-    "chg1w": 4.02,
-    "chg1m": 0.7,
-    "rsi14": 52.9,
-    "sma50": 343.71,
-    "sma200": 336.03,
-    "ema8": 339.4,
-    "ema21": 339.51,
-    "emaGap": -0.03,
-    "vsSma50": -0.0,
-    "vsSma200": 2.3,
-    "relVol": 0.96,
+    "asOf": "2026-09-18",
+    "price": 344.41,
+    "chg1d": 0.21,
+    "chg1w": 2.67,
+    "chg1m": 0.79,
+    "rsi14": 53.5,
+    "sma50": 343.48,
+    "sma200": 336.18,
+    "ema8": 340.51,
+    "ema21": 339.96,
+    "emaGap": 0.16,
+    "vsSma50": 0.3,
+    "vsSma200": 2.4,
+    "relVol": 2.0,
     "high52w": 399.04,
     "low52w": 237.49,
     "rangePos": 66.0,
@@ -232,31 +232,38 @@
         "c": 335.45
       },
       {
-        "d": "2026-09-17",
-        "c": 343.68
+        "d": "2026-09-18",
+        "c": 344.41
       }
     ],
-    "signals": [],
+    "signals": [
+      {
+        "type": "reclaim_sma50",
+        "asof": "2026-09-18",
+        "label": "Reclaimed the 50-day average",
+        "dir": "bull"
+      }
+    ],
     "nextEarnings": null,
     "score": {
-      "label": "Buy",
-      "buys": 4,
-      "sells": 1,
-      "holds": 2,
-      "ratio": 0.429
+      "label": "Strong Buy",
+      "buys": 6,
+      "sells": 0,
+      "holds": 1,
+      "ratio": 0.857
     }
   },
   "summary": {
-    "trades": 75,
+    "trades": 77,
     "members": 21,
     "buys": 47,
-    "sells": 28,
+    "sells": 30,
     "other": 0,
     "firstTx": "2024-08-07",
-    "lastTx": "2026-06-23",
-    "lastFiling": "2026-07-21",
+    "lastTx": "2026-08-20",
+    "lastFiling": "2026-09-17",
     "estBuyLabel": "$1.8M",
-    "estSellLabel": "$850K",
+    "estSellLabel": "$866K",
     "pctLate": 12
   },
   "topMembers": [
@@ -327,6 +334,17 @@
       "hasPage": false
     },
     {
+      "name": "Scott Franklin",
+      "slug": "scott-franklin",
+      "party": "R",
+      "chamber": "House",
+      "trades": 4,
+      "buys": 1,
+      "sells": 3,
+      "estLabel": "$32K",
+      "hasPage": false
+    },
+    {
       "name": "Josh Gottheimer",
       "slug": "josh-gottheimer",
       "party": "D",
@@ -358,20 +376,33 @@
       "sells": 0,
       "estLabel": "$16K",
       "hasPage": false
-    },
-    {
-      "name": "Katie Boyd Britt",
-      "slug": "katie-boyd-britt",
-      "party": "R",
-      "chamber": "Senate",
-      "trades": 2,
-      "buys": 1,
-      "sells": 1,
-      "estLabel": "$16K",
-      "hasPage": false
     }
   ],
   "trades": [
+    {
+      "member": "Scott Franklin",
+      "memberSlug": "scott-franklin",
+      "hasPage": false,
+      "party": "R",
+      "side": "SELL",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-08-20",
+      "filedDate": "2026-09-17",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035450.pdf"
+    },
+    {
+      "member": "Scott Franklin",
+      "memberSlug": "scott-franklin",
+      "hasPage": false,
+      "party": "R",
+      "side": "SELL",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-08-20",
+      "filedDate": "2026-09-17",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035450.pdf"
+    },
     {
       "member": "Jerry Moran",
       "memberSlug": "jerry-moran",
@@ -647,30 +678,6 @@
       "filedDate": "2025-11-14",
       "daysLate": 0,
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20033420.pdf"
-    },
-    {
-      "member": "Cleo Fields",
-      "memberSlug": "cleo-fields",
-      "hasPage": true,
-      "party": "D",
-      "side": "BUY",
-      "amountBucket": "$15K – $50K",
-      "txDate": "2025-10-10",
-      "filedDate": "2025-10-30",
-      "daysLate": 0,
-      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20033326.pdf"
-    },
-    {
-      "member": "Jerry Moran",
-      "memberSlug": "jerry-moran",
-      "hasPage": false,
-      "party": "R",
-      "side": "SELL",
-      "amountBucket": "$1K – $15K",
-      "txDate": "2025-09-23",
-      "filedDate": "2025-10-27",
-      "daysLate": 0,
-      "sourceUrl": "https://efdsearch.senate.gov/search/view/ptr/b83b6502-520b-4403-9777-60f6c2d93bc1/"
     }
   ],
   "tradesShown": 25
