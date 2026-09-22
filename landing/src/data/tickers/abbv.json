@@ -9,28 +9,24 @@
   },
   "indexable": true,
   "technical": {
-    "asOf": "2026-09-18",
-    "price": 263.96,
-    "chg1d": -0.02,
-    "chg1w": 2.66,
-    "chg1m": -0.76,
-    "rsi14": 58.9,
-    "sma50": 255.35,
-    "sma200": 229.6,
-    "ema8": 261.17,
-    "ema21": 258.8,
-    "emaGap": 0.91,
+    "asOf": "2026-09-21",
+    "price": 264.48,
+    "chg1d": 0.2,
+    "chg1w": 1.04,
+    "chg1m": 1.01,
+    "rsi14": 59.5,
+    "sma50": 255.68,
+    "sma200": 229.8,
+    "ema8": 261.9,
+    "ema21": 259.32,
+    "emaGap": 1.0,
     "vsSma50": 3.4,
-    "vsSma200": 15.0,
-    "relVol": 1.89,
+    "vsSma200": 15.1,
+    "relVol": 0.81,
     "high52w": 265.97,
     "low52w": 197.38,
-    "rangePos": 97.0,
+    "rangePos": 98.0,
     "series": [
-      {
-        "d": "2025-09-26",
-        "c": 220.61
-      },
       {
         "d": "2025-10-03",
         "c": 233.91
@@ -234,29 +230,33 @@
       {
         "d": "2026-09-18",
         "c": 263.96
+      },
+      {
+        "d": "2026-09-21",
+        "c": 264.48
       }
     ],
     "signals": [],
     "nextEarnings": null,
     "score": {
       "label": "Strong Buy",
-      "buys": 5,
-      "sells": 1,
+      "buys": 6,
+      "sells": 0,
       "holds": 1,
-      "ratio": 0.571
+      "ratio": 0.857
     }
   },
   "summary": {
-    "trades": 37,
-    "members": 14,
+    "trades": 38,
+    "members": 15,
     "buys": 20,
-    "sells": 17,
+    "sells": 18,
     "other": 0,
     "firstTx": "2024-09-26",
-    "lastTx": "2026-05-18",
-    "lastFiling": "2026-07-21",
+    "lastTx": "2026-09-14",
+    "lastFiling": "2026-09-18",
     "estBuyLabel": "$252K",
-    "estSellLabel": "$203K",
+    "estSellLabel": "$236K",
     "pctLate": 16
   },
   "topMembers": [
@@ -372,6 +372,18 @@
     }
   ],
   "trades": [
+    {
+      "member": "Pete Sessions",
+      "memberSlug": "pete-sessions",
+      "hasPage": false,
+      "party": "R",
+      "side": "SELL",
+      "amountBucket": "$15K – $50K",
+      "txDate": "2026-09-14",
+      "filedDate": "2026-09-18",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035480.pdf"
+    },
     {
       "member": "Donald J. Trump",
       "memberSlug": "donald-j-trump",
@@ -659,18 +671,6 @@
       "filedDate": "2025-05-08",
       "daysLate": 0,
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20030291.pdf"
-    },
-    {
-      "member": "Jared Moskowitz",
-      "memberSlug": "jared-moskowitz",
-      "hasPage": false,
-      "party": "D",
-      "side": "BUY",
-      "amountBucket": "$1K – $15K",
-      "txDate": "2025-04-07",
-      "filedDate": "2025-05-09",
-      "daysLate": 0,
-      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20030282.pdf"
     }
   ],
   "tradesShown": 25

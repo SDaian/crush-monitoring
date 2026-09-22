@@ -95,11 +95,11 @@
       "slug": "googl",
       "ticker": "GOOGL",
       "company": "Alphabet Inc.",
-      "trades": 90,
-      "members": 29,
+      "trades": 91,
+      "members": 30,
       "buys": 43,
-      "sells": 47,
-      "lastTx": "2026-08-27",
+      "sells": 48,
+      "lastTx": "2026-09-14",
       "indexable": true,
       "industry": {
         "key": "tech",
@@ -632,6 +632,21 @@
       }
     },
     {
+      "slug": "abbv",
+      "ticker": "ABBV",
+      "company": "AbbVie Inc.",
+      "trades": 38,
+      "members": 15,
+      "buys": 20,
+      "sells": 18,
+      "lastTx": "2026-09-14",
+      "indexable": true,
+      "industry": {
+        "key": "health",
+        "label": "Health care & pharma"
+      }
+    },
+    {
       "slug": "blk",
       "ticker": "BLK",
       "company": "BlackRock, Inc.",
@@ -670,21 +685,6 @@
       "buys": 13,
       "sells": 24,
       "lastTx": "2026-07-10",
-      "indexable": true,
-      "industry": {
-        "key": "health",
-        "label": "Health care & pharma"
-      }
-    },
-    {
-      "slug": "abbv",
-      "ticker": "ABBV",
-      "company": "AbbVie Inc.",
-      "trades": 37,
-      "members": 14,
-      "buys": 20,
-      "sells": 17,
-      "lastTx": "2026-05-18",
       "indexable": true,
       "industry": {
         "key": "health",
@@ -1262,6 +1262,21 @@
       }
     },
     {
+      "slug": "wfc",
+      "ticker": "WFC",
+      "company": "Wells Fargo & Company",
+      "trades": 27,
+      "members": 13,
+      "buys": 17,
+      "sells": 10,
+      "lastTx": "2026-09-01",
+      "indexable": true,
+      "industry": {
+        "key": "finance",
+        "label": "Banks & finance"
+      }
+    },
+    {
       "slug": "ph",
       "ticker": "PH",
       "company": "Parker-Hannifin Corporation",
@@ -1364,21 +1379,6 @@
       "industry": {
         "key": "telecom",
         "label": "Telecom & media"
-      }
-    },
-    {
-      "slug": "wfc",
-      "ticker": "WFC",
-      "company": "Wells Fargo & Company",
-      "trades": 26,
-      "members": 13,
-      "buys": 16,
-      "sells": 10,
-      "lastTx": "2026-06-01",
-      "indexable": true,
-      "industry": {
-        "key": "finance",
-        "label": "Banks & finance"
       }
     },
     {
