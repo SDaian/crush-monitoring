@@ -12,7 +12,8 @@ import SignupForm from "../components/SignupForm.astro";
 import SignupModal from "../components/SignupModal.astro";
 import Timeline from "../components/Timeline.astro";
 import feed from "../data/disclosures.json";
-import { seoDescription } from "../lib/seo";
+import { seoDescription, faqSchema } from "../lib/seo";
+import Faq from "../components/Faq.astro";
 
 // The four-step pipeline, rendered as a scroll timeline (Timeline.astro).
 const PIPELINE = [
@@ -120,17 +121,7 @@ const description = seoDescription(
 );
 
 // FAQPage structured data, built from the same FAQ array shown on the page.
-const schema = [
-  {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    mainEntity: FAQ.map((item) => ({
-      "@type": "Question",
-      name: item.q,
-      acceptedAnswer: { "@type": "Answer", text: item.a },
-    })),
-  },
-];
+const schema = [faqSchema(FAQ)];
 ---
 
 <html lang="en">
@@ -337,24 +328,7 @@ const schema = [
     </section>
 
     <section class="mx-auto max-w-[75rem] px-[5vw] py-[10vh]">
-      <div class="section-head">
-        <h2 class="section-title">
-          Fair questions
-        </h2>
-        <span class="eyebrow">
-          Asked often
-        </span>
-      </div>
-      <div class="mt-10 grid grid-cols-2 gap-x-14 gap-y-10 max-[760px]:grid-cols-1">
-        {
-          FAQ.map((item) => (
-            <div class="qa">
-              <h3>{item.q}</h3>
-              <p>{item.a}</p>
-            </div>
-          ))
-        }
-      </div>
+      <Faq title="Fair questions" eyebrow="Asked often" items={FAQ} />
     </section>
 
     <section class="border-t-2 border-ink px-[5vw] py-[10vh] text-center">
@@ -439,24 +413,6 @@ const schema = [
     font-family: var(--font-sans);
     font-weight: 600;
     font-size: 0.82rem;
-  }
-
-  .qa h3 {
-    font-size: 0.98rem;
-    font-weight: 800;
-    margin-bottom: 0.5rem;
-  }
-  .qa h3::before {
-    content: "Q · ";
-    color: var(--color-stamp);
-    font-family: var(--font-mono);
-    font-weight: 600;
-    font-size: 0.8rem;
-  }
-  .qa p {
-    font-size: 0.9rem;
-    line-height: 1.6;
-    color: var(--color-ink-soft);
   }
 
   @media (max-width:47.5rem) {

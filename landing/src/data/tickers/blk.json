@@ -249,6 +249,9 @@
   "summary": {
     "trades": 38,
     "members": 15,
+    "congress": 14,
+    "executive": 1,
+    "whoLabel": "14 members of Congress and 1 executive-branch filer",
     "buys": 13,
     "sells": 25,
     "other": 0,
@@ -673,5 +676,19 @@
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20029038.pdf"
     }
   ],
-  "tradesShown": 25
+  "tradesShown": 25,
+  "faq": [
+    {
+      "q": "Who in Congress has traded BLK stock?",
+      "a": "14 members of Congress and 1 executive-branch filer have disclosed 38 BLK trades since March 2023. The most active is Richard McCormick, with 6 trades, followed by Jefferson Shreve and Greg Landsman. Each trade on this page links to the official filing it came from."
+    },
+    {
+      "q": "Is Congress buying or selling BLK?",
+      "a": "Of the 38 disclosed BLK trades, 13 were buys and 25 were sells. By the midpoint of each filed amount bracket, the buying comes to about $263K and the selling to about $426K. Filings disclose brackets, never exact amounts, so these totals are estimates."
+    },
+    {
+      "q": "How late are BLK trades disclosed?",
+      "a": "11% of the disclosed BLK trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Jul 30, 2026, and the newest filing arrived on Aug 14, 2026."
+    }
+  ]
 }

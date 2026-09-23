@@ -249,6 +249,9 @@
   "summary": {
     "trades": 40,
     "members": 15,
+    "congress": 15,
+    "executive": 0,
+    "whoLabel": "15 members of Congress",
     "buys": 21,
     "sells": 19,
     "other": 0,
@@ -673,5 +676,19 @@
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20030296.pdf"
     }
   ],
-  "tradesShown": 25
+  "tradesShown": 25,
+  "faq": [
+    {
+      "q": "Who in Congress has traded ETN stock?",
+      "a": "15 members of Congress have disclosed 40 ETN trades since January 2024. The most active is Julie Johnson, with 7 trades, followed by Lisa C. McClain and Gilbert Ray Cisneros, Jr.. Each trade on this page links to the official filing it came from."
+    },
+    {
+      "q": "Is Congress buying or selling ETN?",
+      "a": "Of the 40 disclosed ETN trades, 21 were buys and 19 were sells. By the midpoint of each filed amount bracket, the buying comes to about $284K and the selling to about $177K. Filings disclose brackets, never exact amounts, so these totals are estimates."
+    },
+    {
+      "q": "How late are ETN trades disclosed?",
+      "a": "25% of the disclosed ETN trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Aug 27, 2026, and the newest filing arrived on Sep 10, 2026."
+    }
+  ]
 }

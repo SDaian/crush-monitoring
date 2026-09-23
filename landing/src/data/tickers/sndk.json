@@ -249,6 +249,9 @@
   "summary": {
     "trades": 11,
     "members": 6,
+    "congress": 6,
+    "executive": 0,
+    "whoLabel": "6 members of Congress",
     "buys": 5,
     "sells": 5,
     "other": 1,
@@ -461,5 +464,19 @@
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20027879.pdf"
     }
   ],
-  "tradesShown": 11
+  "tradesShown": 11,
+  "faq": [
+    {
+      "q": "Who in Congress has traded SNDK stock?",
+      "a": "6 members of Congress have disclosed 11 SNDK trades since February 2025. The most active is Lisa C. McClain, with 3 trades, followed by Jefferson Shreve and Gilbert Ray Cisneros, Jr.. Each trade on this page links to the official filing it came from."
+    },
+    {
+      "q": "Is Congress buying or selling SNDK?",
+      "a": "Of the 11 disclosed SNDK trades, 5 were buys and 5 were sells. By the midpoint of each filed amount bracket, the buying comes to about $40K and the selling to about $65K. Filings disclose brackets, never exact amounts, so these totals are estimates."
+    },
+    {
+      "q": "How late are SNDK trades disclosed?",
+      "a": "9% of the disclosed SNDK trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated May 7, 2026, and the newest filing arrived on Jul 21, 2026."
+    }
+  ]
 }

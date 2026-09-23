@@ -249,6 +249,9 @@
   "summary": {
     "trades": 38,
     "members": 15,
+    "congress": 14,
+    "executive": 1,
+    "whoLabel": "14 members of Congress and 1 executive-branch filer",
     "buys": 20,
     "sells": 18,
     "other": 0,
@@ -673,5 +676,19 @@
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20030291.pdf"
     }
   ],
-  "tradesShown": 25
+  "tradesShown": 25,
+  "faq": [
+    {
+      "q": "Who in Congress has traded ABBV stock?",
+      "a": "14 members of Congress and 1 executive-branch filer have disclosed 38 ABBV trades since September 2024. The most active is Lisa C. McClain, with 6 trades, followed by Josh Gottheimer and Julia Letlow. Each trade on this page links to the official filing it came from."
+    },
+    {
+      "q": "Is Congress buying or selling ABBV?",
+      "a": "Of the 38 disclosed ABBV trades, 20 were buys and 18 were sells. By the midpoint of each filed amount bracket, the buying comes to about $252K and the selling to about $236K. Filings disclose brackets, never exact amounts, so these totals are estimates."
+    },
+    {
+      "q": "How late are ABBV trades disclosed?",
+      "a": "16% of the disclosed ABBV trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Sep 14, 2026, and the newest filing arrived on Sep 18, 2026."
+    }
+  ]
 }

@@ -249,6 +249,9 @@
   "summary": {
     "trades": 17,
     "members": 6,
+    "congress": 6,
+    "executive": 0,
+    "whoLabel": "6 members of Congress",
     "buys": 11,
     "sells": 6,
     "other": 0,
@@ -533,5 +536,19 @@
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20026732.pdf"
     }
   ],
-  "tradesShown": 17
+  "tradesShown": 17,
+  "faq": [
+    {
+      "q": "Who in Congress has traded MELI stock?",
+      "a": "6 members of Congress have disclosed 17 MELI trades since January 2025. The most active is Gilbert Ray Cisneros, Jr., with 8 trades, followed by Marjorie Taylor Greene and Val T. Hoyle. Each trade on this page links to the official filing it came from."
+    },
+    {
+      "q": "Is Congress buying or selling MELI?",
+      "a": "Of the 17 disclosed MELI trades, 11 were buys and 6 were sells. By the midpoint of each filed amount bracket, the buying comes to about $137K and the selling to about $73K. Filings disclose brackets, never exact amounts, so these totals are estimates."
+    },
+    {
+      "q": "How late are MELI trades disclosed?",
+      "a": "6% of the disclosed MELI trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Jun 10, 2026, and the newest filing arrived on Jul 2, 2026."
+    }
+  ]
 }

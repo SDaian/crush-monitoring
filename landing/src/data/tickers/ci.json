@@ -249,6 +249,9 @@
   "summary": {
     "trades": 28,
     "members": 9,
+    "congress": 8,
+    "executive": 1,
+    "whoLabel": "8 members of Congress and 1 executive-branch filer",
     "buys": 11,
     "sells": 17,
     "other": 0,
@@ -662,5 +665,19 @@
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20026762.pdf"
     }
   ],
-  "tradesShown": 25
+  "tradesShown": 25,
+  "faq": [
+    {
+      "q": "Who in Congress has traded CI stock?",
+      "a": "8 members of Congress and 1 executive-branch filer have disclosed 28 CI trades since October 2024. The most active is Julie Johnson, with 9 trades, followed by Gilbert Ray Cisneros, Jr. and Jared Moskowitz. Each trade on this page links to the official filing it came from."
+    },
+    {
+      "q": "Is Congress buying or selling CI?",
+      "a": "Of the 28 disclosed CI trades, 11 were buys and 17 were sells. By the midpoint of each filed amount bracket, the buying comes to about $113K and the selling to about $161K. Filings disclose brackets, never exact amounts, so these totals are estimates."
+    },
+    {
+      "q": "How late are CI trades disclosed?",
+      "a": "21% of the disclosed CI trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated May 18, 2026, and the newest filing arrived on Aug 5, 2026."
+    }
+  ]
 }

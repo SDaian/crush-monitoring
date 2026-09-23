@@ -249,6 +249,9 @@
   "summary": {
     "trades": 34,
     "members": 12,
+    "congress": 11,
+    "executive": 1,
+    "whoLabel": "11 members of Congress and 1 executive-branch filer",
     "buys": 19,
     "sells": 15,
     "other": 0,
@@ -673,5 +676,19 @@
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20032070.pdf"
     }
   ],
-  "tradesShown": 25
+  "tradesShown": 25,
+  "faq": [
+    {
+      "q": "Who in Congress has traded PGR stock?",
+      "a": "11 members of Congress and 1 executive-branch filer have disclosed 34 PGR trades since January 2025. The most active is Byron Donalds, with 7 trades, followed by Julie Johnson and David J. Taylor. Each trade on this page links to the official filing it came from."
+    },
+    {
+      "q": "Is Congress buying or selling PGR?",
+      "a": "Of the 34 disclosed PGR trades, 19 were buys and 15 were sells. By the midpoint of each filed amount bracket, the buying comes to about $152K and the selling to about $261K. Filings disclose brackets, never exact amounts, so these totals are estimates."
+    },
+    {
+      "q": "How late are PGR trades disclosed?",
+      "a": "15% of the disclosed PGR trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Jul 17, 2026, and the newest filing arrived on Sep 4, 2026."
+    }
+  ]
 }

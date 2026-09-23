@@ -249,6 +249,9 @@
   "summary": {
     "trades": 13,
     "members": 6,
+    "congress": 6,
+    "executive": 0,
+    "whoLabel": "6 members of Congress",
     "buys": 8,
     "sells": 5,
     "other": 0,
@@ -485,5 +488,19 @@
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20032070.pdf"
     }
   ],
-  "tradesShown": 13
+  "tradesShown": 13,
+  "faq": [
+    {
+      "q": "Who in Congress has traded VRT stock?",
+      "a": "6 members of Congress have disclosed 13 VRT trades since October 2024. The most active is Lisa C. McClain, with 5 trades, followed by Gilbert Ray Cisneros, Jr. and Alan Armstrong. Each trade on this page links to the official filing it came from."
+    },
+    {
+      "q": "Is Congress buying or selling VRT?",
+      "a": "Of the 13 disclosed VRT trades, 8 were buys and 5 were sells. By the midpoint of each filed amount bracket, the buying comes to about $64K and the selling to about $40K. Filings disclose brackets, never exact amounts, so these totals are estimates."
+    },
+    {
+      "q": "How late are VRT trades disclosed?",
+      "a": "31% of the disclosed VRT trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Mar 27, 2026, and the newest filing arrived on Jul 21, 2026."
+    }
+  ]
 }

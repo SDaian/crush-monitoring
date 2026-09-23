@@ -249,6 +249,9 @@
   "summary": {
     "trades": 26,
     "members": 15,
+    "congress": 14,
+    "executive": 1,
+    "whoLabel": "14 members of Congress and 1 executive-branch filer",
     "buys": 16,
     "sells": 10,
     "other": 0,
@@ -673,5 +676,19 @@
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20030930.pdf"
     }
   ],
-  "tradesShown": 25
+  "tradesShown": 25,
+  "faq": [
+    {
+      "q": "Who in Congress has traded LMT stock?",
+      "a": "14 members of Congress and 1 executive-branch filer have disclosed 26 LMT trades since August 2024. The most active is Gilbert Ray Cisneros, Jr., with 5 trades, followed by Scott Franklin and Jefferson Shreve. Each trade on this page links to the official filing it came from."
+    },
+    {
+      "q": "Is Congress buying or selling LMT?",
+      "a": "Of the 26 disclosed LMT trades, 16 were buys and 10 were sells. By the midpoint of each filed amount bracket, the buying comes to about $177K and the selling to about $196K. Filings disclose brackets, never exact amounts, so these totals are estimates."
+    },
+    {
+      "q": "How late are LMT trades disclosed?",
+      "a": "19% of the disclosed LMT trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Jun 8, 2026, and the newest filing arrived on Jul 21, 2026."
+    }
+  ]
 }

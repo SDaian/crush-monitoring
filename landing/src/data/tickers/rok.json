@@ -249,6 +249,9 @@
   "summary": {
     "trades": 4,
     "members": 3,
+    "congress": 3,
+    "executive": 0,
+    "whoLabel": "3 members of Congress",
     "buys": 1,
     "sells": 3,
     "other": 0,
@@ -344,5 +347,19 @@
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20027944.pdf"
     }
   ],
-  "tradesShown": 4
+  "tradesShown": 4,
+  "faq": [
+    {
+      "q": "Who in Congress has traded ROK stock?",
+      "a": "3 members of Congress have disclosed 4 ROK trades since February 2025. The most active is Robert P. Bresnahan, Jr., with 2 trades, followed by George Whitesides and Tim Moore. Each trade on this page links to the official filing it came from."
+    },
+    {
+      "q": "Is Congress buying or selling ROK?",
+      "a": "Of the 4 disclosed ROK trades, 1 were buys and 3 were sells. By the midpoint of each filed amount bracket, the buying comes to about $8K and the selling to about $116K. Filings disclose brackets, never exact amounts, so these totals are estimates."
+    },
+    {
+      "q": "How late are ROK trades disclosed?",
+      "a": "None of the 4 disclosed ROK trades was filed late: each arrived within the STOCK Act's 45-day legal maximum. The newest trade is dated Apr 8, 2025, and the newest filing arrived on Apr 28, 2025."
+    }
+  ]
 }

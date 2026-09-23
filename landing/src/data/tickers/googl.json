@@ -249,6 +249,9 @@
   "summary": {
     "trades": 91,
     "members": 30,
+    "congress": 29,
+    "executive": 1,
+    "whoLabel": "29 members of Congress and 1 executive-branch filer",
     "buys": 43,
     "sells": 48,
     "other": 0,
@@ -673,5 +676,19 @@
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20033725.pdf"
     }
   ],
-  "tradesShown": 25
+  "tradesShown": 25,
+  "faq": [
+    {
+      "q": "Who in Congress has traded GOOGL stock?",
+      "a": "29 members of Congress and 1 executive-branch filer have disclosed 91 GOOGL trades since September 2024. The most active is David J. Taylor, with 12 trades, followed by Cleo Fields and Val T. Hoyle. Each trade on this page links to the official filing it came from."
+    },
+    {
+      "q": "Is Congress buying or selling GOOGL?",
+      "a": "Of the 91 disclosed GOOGL trades, 43 were buys and 48 were sells. By the midpoint of each filed amount bracket, the buying comes to about $2.8M and the selling to about $7.3M. Filings disclose brackets, never exact amounts, so these totals are estimates."
+    },
+    {
+      "q": "How late are GOOGL trades disclosed?",
+      "a": "21% of the disclosed GOOGL trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Sep 14, 2026, and the newest filing arrived on Sep 18, 2026."
+    }
+  ]
 }

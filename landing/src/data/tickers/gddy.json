@@ -249,6 +249,9 @@
   "summary": {
     "trades": 29,
     "members": 6,
+    "congress": 5,
+    "executive": 1,
+    "whoLabel": "5 members of Congress and 1 executive-branch filer",
     "buys": 11,
     "sells": 18,
     "other": 0,
@@ -629,5 +632,19 @@
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20026712.pdf"
     }
   ],
-  "tradesShown": 25
+  "tradesShown": 25,
+  "faq": [
+    {
+      "q": "Who in Congress has traded GDDY stock?",
+      "a": "5 members of Congress and 1 executive-branch filer have disclosed 29 GDDY trades since January 2025. The most active is Gilbert Ray Cisneros, Jr., with 17 trades, followed by Byron Donalds and Donald J. Trump. Each trade on this page links to the official filing it came from."
+    },
+    {
+      "q": "Is Congress buying or selling GDDY?",
+      "a": "Of the 29 disclosed GDDY trades, 11 were buys and 18 were sells. By the midpoint of each filed amount bracket, the buying comes to about $88K and the selling to about $218K. Filings disclose brackets, never exact amounts, so these totals are estimates."
+    },
+    {
+      "q": "How late are GDDY trades disclosed?",
+      "a": "7% of the disclosed GDDY trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Aug 18, 2026, and the newest filing arrived on Sep 10, 2026."
+    }
+  ]
 }

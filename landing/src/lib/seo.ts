@@ -148,3 +148,16 @@ export function breadcrumbs(...trail: [string, string][]) {
     })),
   };
 }
+
+/** FAQPage markup from the same list `Faq.astro` renders. */
+export function faqSchema(items: { q: string; a: string }[]) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: items.map((item) => ({
+      "@type": "Question",
+      name: item.q,
+      acceptedAnswer: { "@type": "Answer", text: item.a },
+    })),
+  };
+}

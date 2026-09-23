@@ -256,6 +256,9 @@
   "summary": {
     "trades": 96,
     "members": 26,
+    "congress": 25,
+    "executive": 1,
+    "whoLabel": "25 members of Congress and 1 executive-branch filer",
     "buys": 65,
     "sells": 31,
     "other": 0,
@@ -680,5 +683,19 @@
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20033446.pdf"
     }
   ],
-  "tradesShown": 25
+  "tradesShown": 25,
+  "faq": [
+    {
+      "q": "Who in Congress has traded META stock?",
+      "a": "25 members of Congress and 1 executive-branch filer have disclosed 96 META trades since January 2024. The most active is Cleo Fields, with 13 trades, followed by Robert P. Bresnahan, Jr. and John Boozman. Each trade on this page links to the official filing it came from."
+    },
+    {
+      "q": "Is Congress buying or selling META?",
+      "a": "Of the 96 disclosed META trades, 65 were buys and 31 were sells. By the midpoint of each filed amount bracket, the buying comes to about $2.0M and the selling to about $656K. Filings disclose brackets, never exact amounts, so these totals are estimates."
+    },
+    {
+      "q": "How late are META trades disclosed?",
+      "a": "21% of the disclosed META trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Aug 20, 2026, and the newest filing arrived on Sep 10, 2026."
+    }
+  ]
 }

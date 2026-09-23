@@ -249,6 +249,9 @@
   "summary": {
     "trades": 27,
     "members": 9,
+    "congress": 8,
+    "executive": 1,
+    "whoLabel": "8 members of Congress and 1 executive-branch filer",
     "buys": 10,
     "sells": 17,
     "other": 0,
@@ -662,5 +665,19 @@
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20027885.pdf"
     }
   ],
-  "tradesShown": 25
+  "tradesShown": 25,
+  "faq": [
+    {
+      "q": "Who in Congress has traded PH stock?",
+      "a": "8 members of Congress and 1 executive-branch filer have disclosed 27 PH trades since October 2024. The most active is David J. Taylor, with 8 trades, followed by Julie Johnson and Greg Landsman. Each trade on this page links to the official filing it came from."
+    },
+    {
+      "q": "Is Congress buying or selling PH?",
+      "a": "Of the 27 disclosed PH trades, 10 were buys and 17 were sells. By the midpoint of each filed amount bracket, the buying comes to about $80K and the selling to about $228K. Filings disclose brackets, never exact amounts, so these totals are estimates."
+    },
+    {
+      "q": "How late are PH trades disclosed?",
+      "a": "15% of the disclosed PH trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Aug 11, 2026, and the newest filing arrived on Sep 15, 2026."
+    }
+  ]
 }

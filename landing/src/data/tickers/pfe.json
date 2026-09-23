@@ -249,6 +249,9 @@
   "summary": {
     "trades": 33,
     "members": 16,
+    "congress": 15,
+    "executive": 1,
+    "whoLabel": "15 members of Congress and 1 executive-branch filer",
     "buys": 11,
     "sells": 22,
     "other": 0,
@@ -673,5 +676,19 @@
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20027891.pdf"
     }
   ],
-  "tradesShown": 25
+  "tradesShown": 25,
+  "faq": [
+    {
+      "q": "Who in Congress has traded PFE stock?",
+      "a": "15 members of Congress and 1 executive-branch filer have disclosed 33 PFE trades since May 2024. The most active is Gilbert Ray Cisneros, Jr., with 10 trades, followed by Robert P. Bresnahan, Jr. and Jefferson Shreve. Each trade on this page links to the official filing it came from."
+    },
+    {
+      "q": "Is Congress buying or selling PFE?",
+      "a": "Of the 33 disclosed PFE trades, 11 were buys and 22 were sells. By the midpoint of each filed amount bracket, the buying comes to about $162K and the selling to about $557K. Filings disclose brackets, never exact amounts, so these totals are estimates."
+    },
+    {
+      "q": "How late are PFE trades disclosed?",
+      "a": "15% of the disclosed PFE trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Jun 8, 2026, and the newest filing arrived on Aug 13, 2026."
+    }
+  ]
 }

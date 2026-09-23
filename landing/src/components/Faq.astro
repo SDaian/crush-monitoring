@@ -1,0 +1,59 @@
+---
+// A question-and-answer block: a section head over a two-column grid of
+// questions (h3) and plain-text answers.
+//
+// Pass the SAME list to `faqSchema()` for the page's FAQPage markup, so the
+// visible answers and the structured data are one source and cannot drift —
+// Google requires the markup to match the page, and an answer engine quoting
+// the markup must quote what a reader can see.
+//
+// Renders nothing for an empty list: a page with no data behind its questions
+// shows no heading, not an empty one.
+interface Props {
+  title: string;
+  eyebrow?: string;
+  items: { q: string; a: string }[];
+}
+const { title, eyebrow, items } = Astro.props;
+---
+
+{
+  items.length > 0 && (
+    <>
+      <div class="section-head">
+        <h2 class="section-title">{title}</h2>
+        {eyebrow && <span class="eyebrow">{eyebrow}</span>}
+      </div>
+      <div class="mt-10 grid grid-cols-2 gap-x-14 gap-y-10 max-[760px]:grid-cols-1">
+        {items.map((item) => (
+          <div class="qa">
+            <h3>{item.q}</h3>
+            <p>{item.a}</p>
+          </div>
+        ))}
+      </div>
+    </>
+  )
+}
+
+<style>
+  .qa h3 {
+    font-size: 0.98rem;
+    font-weight: 800;
+    margin-bottom: 0.5rem;
+    text-wrap: balance;
+  }
+  .qa h3::before {
+    content: "Q · ";
+    color: var(--color-stamp);
+    font-family: var(--font-mono);
+    font-weight: 600;
+    font-size: 0.8rem;
+  }
+  .qa p {
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: var(--color-ink-soft);
+    text-wrap: pretty;
+  }
+</style>

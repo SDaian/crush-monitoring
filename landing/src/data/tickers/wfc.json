@@ -249,6 +249,9 @@
   "summary": {
     "trades": 27,
     "members": 13,
+    "congress": 13,
+    "executive": 0,
+    "whoLabel": "13 members of Congress",
     "buys": 17,
     "sells": 10,
     "other": 0,
@@ -673,5 +676,19 @@
       "sourceUrl": "https://efdsearch.senate.gov/search/view/ptr/de5dbd67-5370-432c-a943-a267f16ef49d/"
     }
   ],
-  "tradesShown": 25
+  "tradesShown": 25,
+  "faq": [
+    {
+      "q": "Who in Congress has traded WFC stock?",
+      "a": "13 members of Congress have disclosed 27 WFC trades since October 2024. The most active is Mitch McConnell, with 8 trades, followed by Julie Johnson and Val T. Hoyle. Each trade on this page links to the official filing it came from."
+    },
+    {
+      "q": "Is Congress buying or selling WFC?",
+      "a": "Of the 27 disclosed WFC trades, 17 were buys and 10 were sells. By the midpoint of each filed amount bracket, the buying comes to about $210K and the selling to about $196K. Filings disclose brackets, never exact amounts, so these totals are estimates."
+    },
+    {
+      "q": "How late are WFC trades disclosed?",
+      "a": "19% of the disclosed WFC trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Sep 1, 2026, and the newest filing arrived on Sep 21, 2026."
+    }
+  ]
 }

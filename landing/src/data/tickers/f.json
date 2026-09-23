@@ -249,6 +249,9 @@
   "summary": {
     "trades": 32,
     "members": 7,
+    "congress": 7,
+    "executive": 0,
+    "whoLabel": "7 members of Congress",
     "buys": 20,
     "sells": 12,
     "other": 0,
@@ -640,5 +643,19 @@
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20026726.pdf"
     }
   ],
-  "tradesShown": 25
+  "tradesShown": 25,
+  "faq": [
+    {
+      "q": "Who in Congress has traded F stock?",
+      "a": "7 members of Congress have disclosed 32 F trades since October 2024. The most active is Tim Moore, with 21 trades, followed by Gilbert Ray Cisneros, Jr. and Austin Scott. Each trade on this page links to the official filing it came from."
+    },
+    {
+      "q": "Is Congress buying or selling F?",
+      "a": "Of the 32 disclosed F trades, 20 were buys and 12 were sells. By the midpoint of each filed amount bracket, the buying comes to about $740K and the selling to about $823K. Filings disclose brackets, never exact amounts, so these totals are estimates."
+    },
+    {
+      "q": "How late are F trades disclosed?",
+      "a": "25% of the disclosed F trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Apr 9, 2026, and the newest filing arrived on Jul 21, 2026."
+    }
+  ]
 }

@@ -249,6 +249,9 @@
   "summary": {
     "trades": 49,
     "members": 17,
+    "congress": 17,
+    "executive": 0,
+    "whoLabel": "17 members of Congress",
     "buys": 19,
     "sells": 30,
     "other": 0,
@@ -673,5 +676,19 @@
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20030930.pdf"
     }
   ],
-  "tradesShown": 25
+  "tradesShown": 25,
+  "faq": [
+    {
+      "q": "Who in Congress has traded ORCL stock?",
+      "a": "17 members of Congress have disclosed 49 ORCL trades since September 2024. The most active is Gilbert Ray Cisneros, Jr., with 7 trades, followed by Jefferson Shreve and Jared Moskowitz. Each trade on this page links to the official filing it came from."
+    },
+    {
+      "q": "Is Congress buying or selling ORCL?",
+      "a": "Of the 49 disclosed ORCL trades, 19 were buys and 30 were sells. By the midpoint of each filed amount bracket, the buying comes to about $366K and the selling to about $412K. Filings disclose brackets, never exact amounts, so these totals are estimates."
+    },
+    {
+      "q": "How late are ORCL trades disclosed?",
+      "a": "16% of the disclosed ORCL trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated May 7, 2026, and the newest filing arrived on Aug 20, 2026."
+    }
+  ]
 }

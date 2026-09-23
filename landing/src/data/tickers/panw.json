@@ -249,6 +249,9 @@
   "summary": {
     "trades": 39,
     "members": 17,
+    "congress": 16,
+    "executive": 1,
+    "whoLabel": "16 members of Congress and 1 executive-branch filer",
     "buys": 24,
     "sells": 15,
     "other": 0,
@@ -673,5 +676,19 @@
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20030296.pdf"
     }
   ],
-  "tradesShown": 25
+  "tradesShown": 25,
+  "faq": [
+    {
+      "q": "Who in Congress has traded PANW stock?",
+      "a": "16 members of Congress and 1 executive-branch filer have disclosed 39 PANW trades since December 2024. The most active is Marjorie Taylor Greene, with 5 trades, followed by Gilbert Ray Cisneros, Jr. and Josh Gottheimer. Each trade on this page links to the official filing it came from."
+    },
+    {
+      "q": "Is Congress buying or selling PANW?",
+      "a": "Of the 39 disclosed PANW trades, 24 were buys and 15 were sells. By the midpoint of each filed amount bracket, the buying comes to about $3.4M and the selling to about $236K. Filings disclose brackets, never exact amounts, so these totals are estimates."
+    },
+    {
+      "q": "How late are PANW trades disclosed?",
+      "a": "15% of the disclosed PANW trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Jul 31, 2026, and the newest filing arrived on Aug 10, 2026."
+    }
+  ]
 }

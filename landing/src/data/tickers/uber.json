@@ -249,6 +249,9 @@
   "summary": {
     "trades": 43,
     "members": 16,
+    "congress": 16,
+    "executive": 0,
+    "whoLabel": "16 members of Congress",
     "buys": 22,
     "sells": 21,
     "other": 0,
@@ -673,5 +676,19 @@
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20030803.pdf"
     }
   ],
-  "tradesShown": 25
+  "tradesShown": 25,
+  "faq": [
+    {
+      "q": "Who in Congress has traded UBER stock?",
+      "a": "16 members of Congress have disclosed 43 UBER trades since October 2024. The most active is Gilbert Ray Cisneros, Jr., with 9 trades, followed by Josh Gottheimer and Lisa C. McClain. Each trade on this page links to the official filing it came from."
+    },
+    {
+      "q": "Is Congress buying or selling UBER?",
+      "a": "Of the 43 disclosed UBER trades, 22 were buys and 21 were sells. By the midpoint of each filed amount bracket, the buying comes to about $1.1M and the selling to about $302K. Filings disclose brackets, never exact amounts, so these totals are estimates."
+    },
+    {
+      "q": "How late are UBER trades disclosed?",
+      "a": "12% of the disclosed UBER trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Jul 17, 2026, and the newest filing arrived on Sep 4, 2026."
+    }
+  ]
 }

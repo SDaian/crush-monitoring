@@ -249,6 +249,9 @@
   "summary": {
     "trades": 29,
     "members": 18,
+    "congress": 17,
+    "executive": 1,
+    "whoLabel": "17 members of Congress and 1 executive-branch filer",
     "buys": 14,
     "sells": 15,
     "other": 0,
@@ -673,5 +676,19 @@
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20027901.pdf"
     }
   ],
-  "tradesShown": 25
+  "tradesShown": 25,
+  "faq": [
+    {
+      "q": "Who in Congress has traded CSCO stock?",
+      "a": "17 members of Congress and 1 executive-branch filer have disclosed 29 CSCO trades since March 2023. The most active is Richard McCormick, with 5 trades, followed by Jared Moskowitz and Maria Elvira Salazar. Each trade on this page links to the official filing it came from."
+    },
+    {
+      "q": "Is Congress buying or selling CSCO?",
+      "a": "Of the 29 disclosed CSCO trades, 14 were buys and 15 were sells. By the midpoint of each filed amount bracket, the buying comes to about $253K and the selling to about $212K. Filings disclose brackets, never exact amounts, so these totals are estimates."
+    },
+    {
+      "q": "How late are CSCO trades disclosed?",
+      "a": "21% of the disclosed CSCO trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Jul 30, 2026, and the newest filing arrived on Aug 14, 2026."
+    }
+  ]
 }

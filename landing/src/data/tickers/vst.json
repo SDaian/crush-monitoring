@@ -249,6 +249,9 @@
   "summary": {
     "trades": 11,
     "members": 5,
+    "congress": 5,
+    "executive": 0,
+    "whoLabel": "5 members of Congress",
     "buys": 7,
     "sells": 4,
     "other": 0,
@@ -450,5 +453,19 @@
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20026590.pdf"
     }
   ],
-  "tradesShown": 11
+  "tradesShown": 11,
+  "faq": [
+    {
+      "q": "Who in Congress has traded VST stock?",
+      "a": "5 members of Congress have disclosed 11 VST trades since January 2025. The most active is Lisa C. McClain, with 4 trades, followed by Nancy Pelosi and Jefferson Shreve. Each trade on this page links to the official filing it came from."
+    },
+    {
+      "q": "Is Congress buying or selling VST?",
+      "a": "Of the 11 disclosed VST trades, 7 were buys and 4 were sells. By the midpoint of each filed amount bracket, the buying comes to about $990K and the selling to about $57K. Filings disclose brackets, never exact amounts, so these totals are estimates."
+    },
+    {
+      "q": "How late are VST trades disclosed?",
+      "a": "9% of the disclosed VST trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Feb 17, 2026, and the newest filing arrived on Mar 12, 2026."
+    }
+  ]
 }

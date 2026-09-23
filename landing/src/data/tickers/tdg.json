@@ -249,6 +249,9 @@
   "summary": {
     "trades": 30,
     "members": 8,
+    "congress": 7,
+    "executive": 1,
+    "whoLabel": "7 members of Congress and 1 executive-branch filer",
     "buys": 20,
     "sells": 10,
     "other": 0,
@@ -651,5 +654,19 @@
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20030231.pdf"
     }
   ],
-  "tradesShown": 25
+  "tradesShown": 25,
+  "faq": [
+    {
+      "q": "Who in Congress has traded TDG stock?",
+      "a": "7 members of Congress and 1 executive-branch filer have disclosed 30 TDG trades since October 2024. The most active is April McClain Delaney, with 12 trades, followed by Gilbert Ray Cisneros, Jr. and Jefferson Shreve. Each trade on this page links to the official filing it came from."
+    },
+    {
+      "q": "Is Congress buying or selling TDG?",
+      "a": "Of the 30 disclosed TDG trades, 20 were buys and 10 were sells. By the midpoint of each filed amount bracket, the buying comes to about $234K and the selling to about $296K. Filings disclose brackets, never exact amounts, so these totals are estimates."
+    },
+    {
+      "q": "How late are TDG trades disclosed?",
+      "a": "7% of the disclosed TDG trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Aug 25, 2026, and the newest filing arrived on Sep 9, 2026."
+    }
+  ]
 }

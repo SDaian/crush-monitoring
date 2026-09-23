@@ -249,6 +249,9 @@
   "summary": {
     "trades": 52,
     "members": 15,
+    "congress": 14,
+    "executive": 1,
+    "whoLabel": "14 members of Congress and 1 executive-branch filer",
     "buys": 34,
     "sells": 18,
     "other": 0,
@@ -673,5 +676,19 @@
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20031017.pdf"
     }
   ],
-  "tradesShown": 25
+  "tradesShown": 25,
+  "faq": [
+    {
+      "q": "Who in Congress has traded PLTR stock?",
+      "a": "14 members of Congress and 1 executive-branch filer have disclosed 52 PLTR trades since June 2024. The most active is Gilbert Ray Cisneros, Jr., with 13 trades, followed by Lisa C. McClain and Cleo Fields. Each trade on this page links to the official filing it came from."
+    },
+    {
+      "q": "Is Congress buying or selling PLTR?",
+      "a": "Of the 52 disclosed PLTR trades, 34 were buys and 18 were sells. By the midpoint of each filed amount bracket, the buying comes to about $979K and the selling to about $352K. Filings disclose brackets, never exact amounts, so these totals are estimates."
+    },
+    {
+      "q": "How late are PLTR trades disclosed?",
+      "a": "23% of the disclosed PLTR trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Jul 17, 2026, and the newest filing arrived on Sep 4, 2026."
+    }
+  ]
 }

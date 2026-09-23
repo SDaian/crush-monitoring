@@ -249,6 +249,9 @@
   "summary": {
     "trades": 50,
     "members": 20,
+    "congress": 19,
+    "executive": 1,
+    "whoLabel": "19 members of Congress and 1 executive-branch filer",
     "buys": 20,
     "sells": 29,
     "other": 1,
@@ -673,5 +676,19 @@
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20033611.pdf"
     }
   ],
-  "tradesShown": 25
+  "tradesShown": 25,
+  "faq": [
+    {
+      "q": "Who in Congress has traded ABT stock?",
+      "a": "19 members of Congress and 1 executive-branch filer have disclosed 50 ABT trades since March 2023. The most active is Josh Gottheimer, with 6 trades, followed by Richard McCormick and Gilbert Ray Cisneros, Jr.. Each trade on this page links to the official filing it came from."
+    },
+    {
+      "q": "Is Congress buying or selling ABT?",
+      "a": "Of the 50 disclosed ABT trades, 20 were buys and 29 were sells. By the midpoint of each filed amount bracket, the buying comes to about $160K and the selling to about $373K. Filings disclose brackets, never exact amounts, so these totals are estimates."
+    },
+    {
+      "q": "How late are ABT trades disclosed?",
+      "a": "10% of the disclosed ABT trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Jul 30, 2026, and the newest filing arrived on Aug 18, 2026."
+    }
+  ]
 }

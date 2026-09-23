@@ -256,6 +256,9 @@
   "summary": {
     "trades": 122,
     "members": 34,
+    "congress": 33,
+    "executive": 1,
+    "whoLabel": "33 members of Congress and 1 executive-branch filer",
     "buys": 88,
     "sells": 34,
     "other": 0,
@@ -680,5 +683,19 @@
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20033725.pdf"
     }
   ],
-  "tradesShown": 25
+  "tradesShown": 25,
+  "faq": [
+    {
+      "q": "Who in Congress has traded AMZN stock?",
+      "a": "33 members of Congress and 1 executive-branch filer have disclosed 122 AMZN trades since October 2024. The most active is Cleo Fields, with 16 trades, followed by Gilbert Ray Cisneros, Jr. and Marjorie Taylor Greene. Each trade on this page links to the official filing it came from."
+    },
+    {
+      "q": "Is Congress buying or selling AMZN?",
+      "a": "Of the 122 disclosed AMZN trades, 88 were buys and 34 were sells. By the midpoint of each filed amount bracket, the buying comes to about $4.3M and the selling to about $3.9M. Filings disclose brackets, never exact amounts, so these totals are estimates."
+    },
+    {
+      "q": "How late are AMZN trades disclosed?",
+      "a": "18% of the disclosed AMZN trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Aug 11, 2026, and the newest filing arrived on Sep 9, 2026."
+    }
+  ]
 }

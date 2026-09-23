@@ -249,6 +249,9 @@
   "summary": {
     "trades": 30,
     "members": 11,
+    "congress": 10,
+    "executive": 1,
+    "whoLabel": "10 members of Congress and 1 executive-branch filer",
     "buys": 13,
     "sells": 17,
     "other": 0,
@@ -673,5 +676,19 @@
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20030231.pdf"
     }
   ],
-  "tradesShown": 25
+  "tradesShown": 25,
+  "faq": [
+    {
+      "q": "Who in Congress has traded COP stock?",
+      "a": "10 members of Congress and 1 executive-branch filer have disclosed 30 COP trades since January 2025. The most active is Julie Johnson, with 5 trades, followed by Jefferson Shreve and Gilbert Ray Cisneros, Jr.. Each trade on this page links to the official filing it came from."
+    },
+    {
+      "q": "Is Congress buying or selling COP?",
+      "a": "Of the 30 disclosed COP trades, 13 were buys and 17 were sells. By the midpoint of each filed amount bracket, the buying comes to about $251K and the selling to about $234K. Filings disclose brackets, never exact amounts, so these totals are estimates."
+    },
+    {
+      "q": "How late are COP trades disclosed?",
+      "a": "7% of the disclosed COP trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated May 15, 2026, and the newest filing arrived on Jun 25, 2026."
+    }
+  ]
 }

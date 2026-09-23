@@ -249,6 +249,9 @@
   "summary": {
     "trades": 51,
     "members": 19,
+    "congress": 18,
+    "executive": 1,
+    "whoLabel": "18 members of Congress and 1 executive-branch filer",
     "buys": 19,
     "sells": 32,
     "other": 0,
@@ -673,5 +676,19 @@
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20030475.pdf"
     }
   ],
-  "tradesShown": 25
+  "tradesShown": 25,
+  "faq": [
+    {
+      "q": "Who in Congress has traded UPS stock?",
+      "a": "18 members of Congress and 1 executive-branch filer have disclosed 51 UPS trades since August 2024. The most active is Marjorie Taylor Greene, with 9 trades, followed by Kelly Morrison and Scott Franklin. Each trade on this page links to the official filing it came from."
+    },
+    {
+      "q": "Is Congress buying or selling UPS?",
+      "a": "Of the 51 disclosed UPS trades, 19 were buys and 32 were sells. By the midpoint of each filed amount bracket, the buying comes to about $219K and the selling to about $446K. Filings disclose brackets, never exact amounts, so these totals are estimates."
+    },
+    {
+      "q": "How late are UPS trades disclosed?",
+      "a": "12% of the disclosed UPS trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Jul 10, 2026, and the newest filing arrived on Aug 5, 2026."
+    }
+  ]
 }

@@ -249,6 +249,9 @@
   "summary": {
     "trades": 32,
     "members": 15,
+    "congress": 15,
+    "executive": 0,
+    "whoLabel": "15 members of Congress",
     "buys": 16,
     "sells": 16,
     "other": 0,
@@ -673,5 +676,19 @@
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20027995.pdf"
     }
   ],
-  "tradesShown": 25
+  "tradesShown": 25,
+  "faq": [
+    {
+      "q": "Who in Congress has traded COST stock?",
+      "a": "15 members of Congress have disclosed 32 COST trades since March 2023. The most active is Scott Franklin, with 4 trades, followed by Greg Landsman and Lisa C. McClain. Each trade on this page links to the official filing it came from."
+    },
+    {
+      "q": "Is Congress buying or selling COST?",
+      "a": "Of the 32 disclosed COST trades, 16 were buys and 16 were sells. By the midpoint of each filed amount bracket, the buying comes to about $153K and the selling to about $411K. Filings disclose brackets, never exact amounts, so these totals are estimates."
+    },
+    {
+      "q": "How late are COST trades disclosed?",
+      "a": "31% of the disclosed COST trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Jul 30, 2026, and the newest filing arrived on Aug 14, 2026."
+    }
+  ]
 }

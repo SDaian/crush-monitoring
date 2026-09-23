@@ -249,6 +249,9 @@
   "summary": {
     "trades": 32,
     "members": 14,
+    "congress": 14,
+    "executive": 0,
+    "whoLabel": "14 members of Congress",
     "buys": 22,
     "sells": 10,
     "other": 0,
@@ -673,5 +676,19 @@
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20030291.pdf"
     }
   ],
-  "tradesShown": 25
+  "tradesShown": 25,
+  "faq": [
+    {
+      "q": "Who in Congress has traded AMAT stock?",
+      "a": "14 members of Congress have disclosed 32 AMAT trades since January 2024. The most active is Jefferson Shreve, with 5 trades, followed by Markwayne Mullin and Jared Moskowitz. Each trade on this page links to the official filing it came from."
+    },
+    {
+      "q": "Is Congress buying or selling AMAT?",
+      "a": "Of the 32 disclosed AMAT trades, 22 were buys and 10 were sells. By the midpoint of each filed amount bracket, the buying comes to about $557K and the selling to about $281K. Filings disclose brackets, never exact amounts, so these totals are estimates."
+    },
+    {
+      "q": "How late are AMAT trades disclosed?",
+      "a": "9% of the disclosed AMAT trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Aug 6, 2026, and the newest filing arrived on Sep 14, 2026."
+    }
+  ]
 }

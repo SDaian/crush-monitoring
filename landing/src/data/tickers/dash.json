@@ -249,6 +249,9 @@
   "summary": {
     "trades": 33,
     "members": 8,
+    "congress": 7,
+    "executive": 1,
+    "whoLabel": "7 members of Congress and 1 executive-branch filer",
     "buys": 23,
     "sells": 10,
     "other": 0,
@@ -651,5 +654,19 @@
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20030387.pdf"
     }
   ],
-  "tradesShown": 25
+  "tradesShown": 25,
+  "faq": [
+    {
+      "q": "Who in Congress has traded DASH stock?",
+      "a": "7 members of Congress and 1 executive-branch filer have disclosed 33 DASH trades since February 2025. The most active is Gilbert Ray Cisneros, Jr., with 21 trades, followed by Byron Donalds and Tim Moore. Each trade on this page links to the official filing it came from."
+    },
+    {
+      "q": "Is Congress buying or selling DASH?",
+      "a": "Of the 33 disclosed DASH trades, 23 were buys and 10 were sells. By the midpoint of each filed amount bracket, the buying comes to about $209K and the selling to about $129K. Filings disclose brackets, never exact amounts, so these totals are estimates."
+    },
+    {
+      "q": "How late are DASH trades disclosed?",
+      "a": "6% of the disclosed DASH trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Aug 28, 2026, and the newest filing arrived on Sep 10, 2026."
+    }
+  ]
 }
