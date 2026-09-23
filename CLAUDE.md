@@ -684,6 +684,10 @@ sites. Full details in `congress/README.md`. Conventions:
   Yahoo). Ownership proof is `landing/public/<KEY>.txt`; the key is public by
   design, NOT a secret. Bing Webmaster Tools itself is a one-time manual
   setup (import from Google Search Console).
+  IndexNow submits **only indexable pages**: `indexnow._slugs` skips a row
+  flagged `indexable: false`, the same flag the sitemap filter and the page's
+  own `noindex` read. It once pushed 13 hidden ticker stubs every morning —
+  telling Bing to crawl pages we tell every robot to ignore.
 - **A parser fix does not reach data already published.** `congress/state.json`
   records every processed `filing_id`, so a document is never read twice —
   which means a bad row stays live forever unless the filing is forgotten.
@@ -902,6 +906,17 @@ Conventions:
   clamped — the untracked tail can exceed the largest listed holding and will
   otherwise render past 100% and off the page. Charts are inline SVG built at
   build time; no chart library, no client JS.
+- **Titles are capped at 60 chars, the same way.** 114 of 119 indexable titles
+  once ran past what Google shows (~580px), the ticker ones to 82, so the cut
+  words were the ones naming the page. `seoTitle()` in `src/lib/seo.ts` takes
+  candidates in order of preference and returns the first that fits: list the
+  `branded()` form first and the brand-free forms after it, so the " · Capitol
+  Ledger" suffix is the first thing given up (Google prints the site name above
+  the result anyway) and the search term the last. Ticker titles name the
+  company — "NVIDIA (NVDA) stock trades by Congress" — through `shortCompany()`,
+  because filings carry legal names with share-class notes attached; a name
+  still too long falls through to the ticker-only form. `check-seo.mjs` warns
+  on any title over 60.
 - **Meta descriptions are capped at 150 chars, structurally.** Google truncates
   what it shows at ~155 desktop / ~120 mobile, and most of our descriptions
   interpolate pipeline data (a company name, a member's name, a trade count) —

@@ -17,12 +17,12 @@ import SignupForm from "../components/SignupForm.astro";
 import SignupModal from "../components/SignupModal.astro";
 import ReportBody from "../components/ReportBody.astro";
 import report from "../data/report.json";
-import { plural, seoDescription } from "../lib/seo";
+import { plural, seoDescription, seoTitle, branded } from "../lib/seo";
 
 const r = report as any;
 const c = r.counts ?? {};
 
-const title = "Congress stock trades today — the morning report · Capitol Ledger";
+const title = seoTitle(branded("Congress stock trades today: morning report"));
 const description = seoDescription(
   "Today's newly filed congressional trades, plus a mechanical technical " +
     `read on ${plural(c.tickers ?? 0, "featured stock")}.`,

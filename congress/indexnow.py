@@ -41,7 +41,11 @@ def _slugs(index_path: Path, list_key: str, slug_key: str = "slug") -> list[str]
         data = json.loads(index_path.read_text(encoding="utf-8"))
     except (OSError, ValueError):
         return []
-    return [row[slug_key] for row in data.get(list_key, []) if row.get(slug_key)]
+    # A row flagged `indexable: false` is a page we tell robots to ignore and
+    # keep out of the sitemap. Pushing it here would send the opposite signal
+    # every morning, so it is skipped by the same flag the page reads.
+    return [row[slug_key] for row in data.get(list_key, [])
+            if row.get(slug_key) and row.get("indexable") is not False]
 
 
 def daily_urls(data_dir: Path = LANDING_DATA) -> list[str]:

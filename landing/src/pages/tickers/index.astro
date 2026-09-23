@@ -9,7 +9,7 @@ import Seo from "../../components/Seo.astro";
 import SignupForm from "../../components/SignupForm.astro";
 import SignupModal from "../../components/SignupModal.astro";
 import index from "../../data/tickers/_index.json";
-import { plural, seoDescription } from "../../lib/seo";
+import { plural, seoDescription, seoTitle, branded } from "../../lib/seo";
 
 const tickers = index.tickers;
 const totalTrades = tickers.reduce((n: number, t: any) => n + t.trades, 0);
@@ -31,8 +31,7 @@ const industries = Object.entries(index.industries as Record<string, string>)
   .sort((a, b) => b.count - a.count || a.label.localeCompare(b.label));
 const classified = [...industryCount.values()].reduce((n, v) => n + v, 0);
 
-const title =
-  "What stocks does Congress trade? — the most-traded tickers · Capitol Ledger";
+const title = seoTitle(branded("What stocks does Congress trade?"));
 const description = seoDescription(
   `The ${plural(tickers.length, "stock")} members of Congress trade most, ` +
     `ranked across ${plural(totalTrades, "disclosed trade")} — who bought, ` +

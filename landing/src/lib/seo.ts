@@ -49,6 +49,51 @@ export function seoDescription(required: string, ...optional: string[]): string 
   return out;
 }
 
+/**
+ * Page titles.
+ *
+ * Google shows roughly 580px of a title — about 55-60 characters — and Bing
+ * cuts sooner. 114 of 119 indexable titles once ran past that, the ticker ones
+ * to 82, so the words that were cut were the ones that said what the page is.
+ *
+ * `seoTitle` takes candidates in order of preference and returns the first
+ * that fits. Callers list the full form first and the brand-free, shorter
+ * forms after it, so the brand suffix is the first thing given up and the
+ * search term is the last. Google prints the site name separately above the
+ * result, which is why the suffix is the cheapest thing to lose.
+ */
+export const TITLE_MAX = 60;
+export const BRAND = "Capitol Ledger";
+
+/** "…  · Capitol Ledger" — the suffix every page title uses. */
+export const branded = (core: string) => `${squash(core)} · ${BRAND}`;
+
+export function seoTitle(...candidates: string[]): string {
+  const clean = candidates.map(squash).filter(Boolean);
+  const fit = clean.find((c) => c.length <= TITLE_MAX);
+  return fit ?? clamp(clean[clean.length - 1] ?? BRAND, TITLE_MAX);
+}
+
+/**
+ * A company name short enough for a title: "Apple Inc." → "Apple",
+ * "ASML Holding N.V. - New York Registry Shares" → "ASML". The filings carry
+ * the legal name with share-class notes attached; a title wants the name a
+ * person would search for. Anything still too long simply fails to fit, and
+ * `seoTitle` falls through to the ticker-only candidate.
+ */
+export function shortCompany(name: string): string {
+  let s = squash(name)
+    .split(/ - | American Depositary| Common Stock| Class [A-Z]\b/i)[0]
+    .trim();
+  const tail =
+    /[,\s]+(inc\.?|incorporated|corp\.?|corporation|company|co\.?|ltd\.?|limited|n\.v\.?|plc|s\.a\.?|holdings?|l\.p\.?)$/i;
+  for (let prev = ""; prev !== s; ) {
+    prev = s;
+    s = s.replace(tail, "").trim();
+  }
+  return s.replace(/[,.]$/, "");
+}
+
 /** "1 trade" / "31 trades", with the count thousands-separated. */
 export function plural(n: number, one: string, many = `${one}s`): string {
   return `${n.toLocaleString("en-US")} ${n === 1 ? one : many}`;

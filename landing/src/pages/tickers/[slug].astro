@@ -17,7 +17,7 @@ import CountUp from "../../components/CountUp.astro";
 import MarketStrip from "../../components/MarketStrip.astro";
 import StarButton from "../../components/StarButton.astro";
 import marketData from "../../data/market.json";
-import { plural, seoDescription } from "../../lib/seo";
+import { plural, seoDescription, seoTitle, branded, shortCompany } from "../../lib/seo";
 
 // Build-time "checked" date: when this page was last regenerated. Deliberately
 // computed here, not stamped into the data files — a timestamp in the payload
@@ -168,7 +168,17 @@ const scoreClass = tech
       Sell: "text-sell", Hold: "text-ink-soft" }[tech.score.label] ?? ""
   : "";
 
-const title = `${t.ticker} congressional stock trades — who in Congress bought and sold · Capitol Ledger`;
+// "NVIDIA (NVDA) stock trades by Congress" — the company name is what many
+// people search, but filings carry legal names with share-class notes, so a
+// long one falls through to the ticker-only form rather than being cut.
+const co = shortCompany(t.company || "");
+const withCo = co && co.toUpperCase() !== t.ticker
+  ? `${co} (${t.ticker}) stock trades by Congress` : "";
+const title = seoTitle(
+  withCo && branded(withCo),
+  withCo,
+  branded(`${t.ticker} stock trades by Congress`),
+);
 // Front-loaded with this ticker's own numbers — the company name goes in an
 // optional tail clause because it is the one part whose length we do not
 // control ("Taiwan Semiconductor Manufacturing Company Ltd." alone is 47).

@@ -11,7 +11,7 @@ import SignupForm from "../components/SignupForm.astro";
 import SignupModal from "../components/SignupModal.astro";
 import late from "../data/late.json";
 import stats from "../data/stats.json";
-import { plural, seoDescription } from "../lib/seo";
+import { plural, seoDescription, seoTitle, branded } from "../lib/seo";
 
 const rows = late.worst;
 const fmtMonth = (iso: string) =>
@@ -21,7 +21,10 @@ const fmtMonth = (iso: string) =>
     timeZone: "UTC",
   });
 
-const title = `Late filers — the ${late.year} filing-delay leaderboard · Capitol Ledger`;
+const title = seoTitle(
+  branded(`Late STOCK Act filings by Congress, ${late.year}`),
+  `Late STOCK Act filings by Congress, ${late.year}`,
+);
 const description = seoDescription(
   `${plural(late.totalLateFilings, "late STOCK Act filing")} in ${late.year}: ` +
     "who disclosed stock trades past the 45-day legal deadline, and by how much.",
