@@ -1,0 +1,26 @@
+---
+// The dateline a summary page carries: when the newest record in it was
+// filed. A `<time>` element, so a crawler reads the date as a date rather
+// than guessing it out of prose. Renders nothing without a date.
+interface Props {
+  iso: string | null | undefined;
+  label?: string;
+}
+const { iso, label = "Newest filing" } = Astro.props;
+const text = iso
+  ? new Date(`${iso}T00:00:00Z`).toLocaleDateString("en-US", {
+      month: "short",
+      day: "numeric",
+      year: "numeric",
+      timeZone: "UTC",
+    })
+  : "";
+---
+
+{iso && (
+  <span>
+    {/* An explicit space: Astro trims the one between an expression and a
+         tag, which printed "NEWEST FILINGSEP 21, 2026". */}
+    {label}{" "}<b class="font-semibold whitespace-nowrap text-ink"><time datetime={iso}>{text}</time></b>
+  </span>
+)}

@@ -12,6 +12,7 @@ import SignupModal from "../components/SignupModal.astro";
 import late from "../data/late.json";
 import stats from "../data/stats.json";
 import { plural, seoDescription, seoTitle, branded, dataset } from "../lib/seo";
+import NewestFiling from "../components/NewestFiling.astro";
 
 const rows = late.worst;
 const fmtMonth = (iso: string) =>
@@ -52,10 +53,13 @@ const schema = [
 
     <main id="content">
     <section class="mx-auto max-w-[75rem] px-[5vw] pt-[9vh] pb-[7vh]">
-      <p class="mono mb-5 text-[.75rem] uppercase tracking-[.12em] text-ink-soft">
-        Accountability · <b class="font-semibold text-stamp"
-          >{late.totalLateFilings} late filings in {late.year}</b
-        >
+      <p class="mono mb-5 flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1 text-[.75rem] uppercase tracking-[.12em] text-ink-soft">
+        <span>
+          Accountability · <b class="font-semibold text-stamp"
+            >{late.totalLateFilings} late filings in {late.year}</b
+          >
+        </span>
+        <NewestFiling iso={stats.lastFiling} />
       </p>
       <h1 class="headline max-w-[18ch] text-[clamp(2.4rem,6.5vw,4.6rem)]">
         The law says <span class="underline-stamp">45 days</span>.

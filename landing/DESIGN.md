@@ -371,7 +371,8 @@ shared Astro components in `src/components/`.
   outline for upcoming, filled stamp red once reached — passed and current stay
   filled, so progress accumulates). Each step's title and
   body are split into words that **scrub from dim to full opacity, word by word,
-  as they rise through the reading band** (the Kevin-Powell scroll reveal, driven
+  as they rise through the reading band** — "dim" floored at the AA threshold
+  (titles 0.50, body 0.87; §3 contrast wins over the effect) (the Kevin-Powell scroll reveal, driven
   in JS so it works in Safari/iOS too). Motion is *meaningful* (literal progress
   through the pipeline), and it degrades honestly: no-JS renders every step lit
   with a static rail and full-opacity text; reduced motion and

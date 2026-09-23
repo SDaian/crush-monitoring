@@ -731,6 +731,10 @@ sites. Full details in `congress/README.md`. Conventions:
   build-time elements, so scoping it would silently unstyle every row and card.
   `docs/trades.html` still serves the old standalone build on GitHub Pages and
   is retired only once the apex domain resolves.
+  The tracker fetches with `cache: "no-cache"` (revalidate by ETag), never
+  `"no-store"`: the file compresses to ~0.4 MB on the wire, but `no-store`
+  re-downloaded it on every visit even when unchanged. A slimmer projection
+  was measured and rejected — the page reads all but one field.
 - The `node --check` rule for inline scripts applies to the tracker's inline
   script (extract it from `tracker.astro`) and to `docs/index.html`.
 - **Honest labelling:** the page must keep the 30–45-day legal lag, the
@@ -917,6 +921,11 @@ Conventions:
   because filings carry legal names with share-class notes attached; a name
   still too long falls through to the ticker-only form. `check-seo.mjs` warns
   on any title over 60.
+- **Every summary page is dated.** The home stats, `/late`, `/tickers` and
+  `/members` carry "Newest filing <date>" (`NewestFiling.astro`, a `<time>`
+  element, from `stats.lastFiling`) beside the eyebrow, as the entity pages
+  already did — an undated number is one an answer engine cannot place in
+  time. The date never breaks across lines (`whitespace-nowrap`).
 - **Every ticker and member page answers its own questions.** `landing_data`
   `ticker_faq` / `member_faq` build a Q&A list into each payload — the
   questions people type ("Who in Congress has traded NVDA stock?", "Does

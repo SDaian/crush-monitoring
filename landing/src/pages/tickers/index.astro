@@ -10,6 +10,8 @@ import SignupForm from "../../components/SignupForm.astro";
 import SignupModal from "../../components/SignupModal.astro";
 import index from "../../data/tickers/_index.json";
 import { plural, seoDescription, seoTitle, branded, WEBSITE_ID } from "../../lib/seo";
+import stats from "../../data/stats.json";
+import NewestFiling from "../../components/NewestFiling.astro";
 
 const tickers = index.tickers;
 const totalTrades = tickers.reduce((n: number, t: any) => n + t.trades, 0);
@@ -64,8 +66,9 @@ const schema = [
 
     <main id="content">
     <section class="mx-auto max-w-[75rem] px-[5vw] pt-[9vh] pb-[6vh]">
-      <p class="eyebrow mb-5">
-        Stocks · <b class="font-semibold text-stamp">Most traded</b>
+      <p class="eyebrow mb-5 flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
+        <span>Stocks · <b class="font-semibold text-stamp">Most traded</b></span>
+        <NewestFiling iso={stats.lastFiling} />
       </p>
       <h1 class="headline max-w-[18ch] text-[clamp(2.4rem,6.5vw,4.6rem)]">
         What Congress <span class="underline-stamp">actually buys</span>.

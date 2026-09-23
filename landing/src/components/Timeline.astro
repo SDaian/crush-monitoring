@@ -93,6 +93,15 @@ const n = (i: number) => String(i + 1).padStart(2, "0");
     };
     tl.querySelectorAll(".tl-title, .tl-text").forEach(wrapWords);
     const words = Array.from(tl.querySelectorAll<HTMLElement>(".w"));
+    // The dimmest a word may get is the lowest opacity that still passes WCAG
+    // AA on paper — DESIGN.md calls contrast non-negotiable, and a word you
+    // can see must be a word you can read. Titles are large text (800 weight,
+    // ≥19.2px) and need 3:1, reached at 0.46 over paper; body copy is
+    // ink-soft at 0.98rem and needs 4.5:1, reached at 0.86. Both rounded up.
+    // The reveal used to start every word at 0.18 (≈1.3:1).
+    const TITLE_FLOOR = 0.5;
+    const BODY_FLOOR = 0.87;
+    const floors = words.map((w) => (w.closest(".tl-title") ? TITLE_FLOOR : BODY_FLOOR));
 
     let ticking = false;
 
@@ -119,13 +128,14 @@ const n = (i: number) => String(i + 1).padStart(2, "0");
       // Word scrub: full above `end`, dim below `start`, ramped between.
       const start = vh * 0.86;
       const end = vh * 0.42;
-      for (const w of words) {
+      words.forEach((w, i) => {
         const r = w.getBoundingClientRect();
         const y = r.top + r.height / 2;
         let t = (start - y) / (start - end);
         t = t < 0 ? 0 : t > 1 ? 1 : t;
-        w.style.opacity = (0.18 + 0.82 * t).toFixed(3);
-      }
+        const floor = floors[i];
+        w.style.opacity = (floor + (1 - floor) * t).toFixed(3);
+      });
     };
 
     const onScroll = () => {

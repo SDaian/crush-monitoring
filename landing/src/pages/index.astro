@@ -16,6 +16,7 @@ import SignupModal from "../components/SignupModal.astro";
 import feed from "../data/disclosures.json";
 import stats from "../data/stats.json";
 import { seoDescription } from "../lib/seo";
+import NewestFiling from "../components/NewestFiling.astro";
 
 const disclosures = feed.disclosures;
 const lateCount = disclosures.filter((d) => d.filedDaysLate > 0).length;
@@ -131,7 +132,10 @@ const description = seoDescription(
           <h1
             class="headline max-w-none whitespace-nowrap leading-[0.95] text-[clamp(2.35rem,5vw,4rem)] max-[840px]:whitespace-normal max-[840px]:text-[clamp(2.35rem,9vw,3.4rem)]"
           >
-            They trade.<br />They file.<br /><span class="underline-stamp"
+            {/* The space before each <br /> is invisible at a line end, but a text
+                 extractor reads it — without it the headline reached crawlers
+                 as "They trade.They file." */}
+            They trade. <br />They file. <br /><span class="underline-stamp"
               >You see it first.</span
             >
           </h1>
@@ -270,6 +274,9 @@ const description = seoDescription(
         </div>
       </div>
     </section>
+    <p class="eyebrow px-[5vw] pt-3 text-right max-[760px]:text-left">
+      <NewestFiling iso={stats.lastFiling} label="Figures as of the newest filing," />
+    </p>
 
     {/* ===== Reviews ===== */}
     <section
