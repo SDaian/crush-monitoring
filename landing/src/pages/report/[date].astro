@@ -10,7 +10,7 @@ import Footer from "../../components/Footer.astro";
 import Seo from "../../components/Seo.astro";
 import SignupForm from "../../components/SignupForm.astro";
 import ReportBody from "../../components/ReportBody.astro";
-import { seoDescription } from "../../lib/seo";
+import { seoDescription, seoTitle, branded } from "../../lib/seo";
 
 export async function getStaticPaths() {
   const all = import.meta.glob("../../data/reports/*.json", { eager: true });
@@ -25,7 +25,10 @@ export async function getStaticPaths() {
 const { r } = Astro.props as { r: any };
 const c = r.counts ?? {};
 
-const title = `Morning report, ${r.dateLabel} · Capitol Ledger`;
+const title = seoTitle(
+  branded(`Morning report, ${r.dateLabel}`),
+  `Morning report, ${r.dateLabel}`,
+);
 const description = seoDescription(
   `The Capitol Ledger morning report for ${r.dateLabel}: ` +
     `${c.disclosures ?? 0} newly filed congressional trades and the day's ` +

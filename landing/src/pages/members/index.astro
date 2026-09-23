@@ -8,7 +8,7 @@ import Seo from "../../components/Seo.astro";
 import SignupForm from "../../components/SignupForm.astro";
 import SignupModal from "../../components/SignupModal.astro";
 import index from "../../data/members/_index.json";
-import { plural, seoDescription } from "../../lib/seo";
+import { plural, seoDescription, seoTitle, branded } from "../../lib/seo";
 
 const members = index.members;
 const partyName: Record<string, string> = {
@@ -17,7 +17,7 @@ const partyName: Record<string, string> = {
   I: "Independent",
 };
 
-const title = "Featured filers — politician stock-trade pages · Capitol Ledger";
+const title = seoTitle(branded("Politician stock trades by member"));
 const description = seoDescription(
   `${plural(members.length, "featured filer")}, one page each: every stock ` +
     "trade they disclosed, their estimated holdings and their filing delays.",

@@ -220,8 +220,14 @@ must match it.
   - **Every number on a public page traces to an official filing.** Nothing is
     modelled, guessed, or invented.
   - **Estimates are labelled** as estimates (bracket midpoints, "est.").
-  - **Not investment advice, ever** — no signals, tips, predictions, or
+  - **Not investment advice, ever** — no tips, predictions, or personal
     "buy/sell" recommendations. We publish records; the reader decides.
+    One surface shows a Buy/Hold/Sell word on purpose: the featured-stock
+    **mechanical tally**, a rule-based count of indicators already on the
+    page. It ships only with its full vote breakdown and a "not a
+    recommendation" caption, never as a bare label. Named events (golden
+    cross, new 52-week high) state what happened, never what to do. Copy
+    that says we publish "no signals" is false and must not ship.
   - **Placeholders are flagged** in-source and replaced before launch; fabricated
     content (fake reviews, fake records) never ships as if real.
 - **Tone conventions already set:**

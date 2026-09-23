@@ -16,7 +16,7 @@ import Footer from "../components/Footer.astro";
 import Seo from "../components/Seo.astro";
 import SignupForm from "../components/SignupForm.astro";
 import SignupModal from "../components/SignupModal.astro";
-import { seoDescription } from "../lib/seo";
+import { seoDescription, seoTitle, branded } from "../lib/seo";
 import memberIndex from "../data/members/_index.json";
 import tickerIndex from "../data/tickers/_index.json";
 
@@ -31,7 +31,7 @@ const TICKER_PAGES = Object.fromEntries(
   (tickerIndex as any).tickers.map((t: any) => [t.ticker, t.slug]),
 );
 
-const title = "Congressional stock-trade tracker — search every disclosure · Capitol Ledger";
+const title = seoTitle(branded("Congress stock trades tracker"));
 const description = seoDescription(
   "Search every stock trade disclosed by Congress and the executive branch " +
     "— filter by member, ticker, chamber, party or date.",

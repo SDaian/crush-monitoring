@@ -14,7 +14,7 @@ import CountUp from "../../components/CountUp.astro";
 import HoldingsChart from "../../components/HoldingsChart.astro";
 import PerformanceChart from "../../components/PerformanceChart.astro";
 import StarButton from "../../components/StarButton.astro";
-import { plural, seoDescription } from "../../lib/seo";
+import { plural, seoDescription, seoTitle, branded } from "../../lib/seo";
 
 // Build-time "checked" date: when this page was last regenerated. Deliberately
 // computed here, not stamped into the data files — a timestamp in the payload
@@ -121,7 +121,11 @@ const STAT_CARDS = [
   },
 ];
 
-const title = `${m.name} stock trades — every disclosed trade · Capitol Ledger`;
+const title = seoTitle(
+  branded(`${m.name} stock trades: every disclosure`),
+  branded(`${m.name} stock trades`),
+  `${m.name} stock trades`,
+);
 // Lead with the name and the counts; the party/state gloss is the droppable
 // tail, since a long name would otherwise push the numbers out of view.
 // Executive-branch filers disclose managed-account bonds that carry no ticker,

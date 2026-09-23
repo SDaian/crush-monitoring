@@ -30,6 +30,27 @@ class TestDailyUrls(unittest.TestCase):
         self.assertIn("https://capitolledger.io/tickers/tsm", urls)
         self.assertTrue(all(u.startswith(indexnow.SITE) for u in urls))
 
+    def test_noindex_pages_are_never_pushed(self):
+        # The sitemap leaves these out; IndexNow must agree with it.
+        with TemporaryDirectory() as d:
+            root = Path(d)
+            write_indexes(root, [], ["nvda"])
+            (root / "tickers" / "_index.json").write_text(json.dumps({"tickers": [
+                {"ticker": "NVDA", "slug": "nvda", "indexable": True},
+                {"ticker": "VST", "slug": "vst", "indexable": False},
+                {"ticker": "TSM", "slug": "tsm"}]}))
+            urls = indexnow.daily_urls(root)
+        self.assertIn("https://capitolledger.io/tickers/nvda", urls)
+        self.assertIn("https://capitolledger.io/tickers/tsm", urls)
+        self.assertNotIn("https://capitolledger.io/tickers/vst", urls)
+
+    def test_real_repo_data_matches_the_sitemap_rule(self):
+        ix = json.loads((indexnow.LANDING_DATA / "tickers" / "_index.json")
+                        .read_text())["tickers"]
+        hidden = {f"{indexnow.SITE}/tickers/{t['slug']}" for t in ix
+                  if t.get("indexable") is False}
+        self.assertFalse(hidden & set(indexnow.daily_urls()))
+
     def test_missing_indexes_still_submit_sections(self):
         with TemporaryDirectory() as d:
             urls = indexnow.daily_urls(Path(d))

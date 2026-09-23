@@ -20,6 +20,7 @@ import path from "node:path";
 const DIST = path.resolve(import.meta.dirname, "..", "dist");
 const PUBLIC = path.resolve(import.meta.dirname, "..", "public");
 const MAX = 150; // keep in sync with DESC_MAX in src/lib/seo.ts
+const TITLE_MAX = 60; // keep in sync with TITLE_MAX in src/lib/seo.ts
 
 async function pages(dir) {
   const out = [];
@@ -59,6 +60,8 @@ for (const file of files.sort()) {
   const title = decode(attr(html, /<title>([^<]*)<\/title>/));
 
   if (!title) problems.push(`${url} — missing <title>`);
+  else if (title.length > TITLE_MAX)
+    problems.push(`${url} — title is ${title.length} chars (max ${TITLE_MAX}): "${title}"`);
   if (!description) problems.push(`${url} — missing meta description`);
   // Dated report permalinks must stay OUT of search indexes — /report is the
   // one indexable report URL (a year of near-duplicate dated pages is an SEO
@@ -108,7 +111,7 @@ if (problems.length) {
   console.warn("");
 } else {
   console.log(
-    `check-seo: ${files.length} pages — titled, within ${MAX} chars, ` +
+    `check-seo: ${files.length} pages — titles within ${TITLE_MAX} chars, descriptions within ${MAX}, ` +
       `one <h1>, ordered headings, skip link present.`,
   );
 }
