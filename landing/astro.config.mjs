@@ -3,6 +3,8 @@ import { defineConfig } from "astro/config";
 import tailwindcss from "@tailwindcss/vite";
 import sitemap from "@astrojs/sitemap";
 import tickerIndex from "./src/data/tickers/_index.json" with { type: "json" };
+import memberIndex from "./src/data/members/_index.json" with { type: "json" };
+import report from "./src/data/report.json" with { type: "json" };
 import { FontaineTransform } from "fontaine";
 
 // @fontsource ships every @font-face with `font-display: swap`, which shows
@@ -34,6 +36,27 @@ const fontDisplayOptional = {
   },
 };
 
+// The sitemap's <lastmod>, per page, from the data rather than the build.
+// A page's substance changes when a new filing reaches it, so an entity page
+// takes its own newest filing, the pages that summarise everything take the
+// newest filing anywhere, and /report takes its report date. Static pages
+// (how-it-works, privacy, roadmap) get NO lastmod: Google only trusts the
+// field while it stays accurate, and a build date on an unchanged page is
+// exactly the inaccuracy that teaches it to ignore ours.
+const lastFiling = (rows) =>
+  Object.fromEntries(rows.filter((r) => r.lastFiling).map((r) => [r.slug, r.lastFiling]));
+const tickerMod = lastFiling(tickerIndex.tickers);
+const memberMod = lastFiling(memberIndex.members);
+const newest = [...Object.values(tickerMod), ...Object.values(memberMod)].sort().at(-1);
+const SUMMARY_PAGES = new Set(["", "/tracker", "/late", "/tickers", "/members"]);
+function lastmodFor(path) {
+  if (path.startsWith("/tickers/")) return tickerMod[path.slice(9)];
+  if (path.startsWith("/members/")) return memberMod[path.slice(9)];
+  if (path === "/report" || path === "/report/archive") return report.date;
+  if (SUMMARY_PAGES.has(path)) return newest;
+  return undefined;
+}
+
 // Static output (no server runtime) per the PRD; deployed on Vercel with
 // this directory as the project root. Set `site` to the real domain before
 // launch — the sitemap and canonical URLs derive from it.
@@ -62,10 +85,11 @@ export default defineConfig({
         }
         return true;
       },
-      serialize: (item) => ({
-        ...item,
-        url: item.url.replace(/(?<!\/\/)\/$/, ""),
-      }),
+      serialize: (item) => {
+        const url = item.url.replace(/(?<!\/\/)\/$/, "");
+        const lastmod = lastmodFor(new URL(url).pathname.replace(/\/$/, ""));
+        return { ...item, url, ...(lastmod ? { lastmod } : {}) };
+      },
     }),
   ],
   vite: {

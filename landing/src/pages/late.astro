@@ -11,7 +11,7 @@ import SignupForm from "../components/SignupForm.astro";
 import SignupModal from "../components/SignupModal.astro";
 import late from "../data/late.json";
 import stats from "../data/stats.json";
-import { plural, seoDescription, seoTitle, branded } from "../lib/seo";
+import { plural, seoDescription, seoTitle, branded, dataset } from "../lib/seo";
 
 const rows = late.worst;
 const fmtMonth = (iso: string) =>
@@ -33,16 +33,13 @@ const description = seoDescription(
 
 // The leaderboard is a real, free, dated dataset — mark it as one.
 const schema = [
-  {
-    "@context": "https://schema.org",
-    "@type": "Dataset",
+  dataset("/late", {
     name: `${late.year} congressional STOCK Act filing-delay leaderboard`,
     description,
-    creator: { "@type": "Organization", name: "Capitol Ledger" },
+    keywords: ["late STOCK Act filings", "congressional disclosure delays", `${late.year}`],
     temporalCoverage: String(late.year),
-    isAccessibleForFree: true,
-    license: "https://www.usa.gov/government-works",
-  },
+    variableMeasured: ["member", "days late", "late filings"],
+  }),
 ];
 ---
 

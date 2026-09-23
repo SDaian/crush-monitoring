@@ -739,6 +739,11 @@ def member_payload(name: str, trades: list[dict], holdings: dict,
             ref.get("chamber"), "House"
         ),
         "district": ref.get("district"),
+        # The official congressional id, for the page's Person.sameAs — the
+        # link that tells an answer engine WHICH Nancy Pelosi this is. None
+        # for an executive filer, who has no Bioguide entry.
+        "bioguide": ((committees or {}).get("members", {})
+                     .get(name, {}).get("bioguide")),
         "summary": {
             "trades": len(ts),
             "distinctTickers": len(tickers),
@@ -885,6 +890,9 @@ def write_member_files(
             "chamber": payload["chamber"],
             "district": payload["district"],
             "trades": payload["summary"]["trades"],
+            # The sitemap's lastmod: the newest filing is when the page's
+            # substance last changed, which a build date would misstate.
+            "lastFiling": payload["summary"]["lastFiling"],
             "pctLate": payload["summary"]["pctLate"],
             "worstLate": payload["summary"]["worstLate"],
             "perfPct": (round(series["member"][-1] - 100)
@@ -1260,6 +1268,7 @@ def write_ticker_files(trades: list[dict], out_dir: Path,
             "buys": payload["summary"]["buys"],
             "sells": payload["summary"]["sells"],
             "lastTx": payload["summary"]["lastTx"],
+            "lastFiling": payload["summary"]["lastFiling"],
             "indexable": payload["indexable"],
             "industry": payload["industry"],
         })

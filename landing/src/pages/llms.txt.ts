@@ -18,6 +18,26 @@ export const GET: APIRoute = () => {
   const tickers = (tickerIndex.tickers ?? []).length;
   const members = (memberIndex.members ?? []).length;
   const trades = stats.tradesThisYear.toLocaleString("en-US");
+  // "Last updated" is the newest filing in the data — the date the record
+  // itself last changed. A build date would claim a refresh that may have
+  // added nothing.
+  const updated = [...(tickerIndex.tickers ?? []), ...(memberIndex.members ?? [])]
+    .map((r: { lastFiling?: string | null }) => r.lastFiling)
+    .filter(Boolean)
+    .sort()
+    .at(-1);
+  // The pages an answer engine is most likely to be asked about: the most-
+  // traded stocks with a public page, and every member page.
+  const topTickers = (tickerIndex.tickers ?? [])
+    .filter((t: { indexable?: boolean }) => t.indexable !== false)
+    .slice(0, 12)
+    .map((t: { ticker: string; company: string; slug: string; trades: number }) =>
+      `- [${t.ticker}](${SITE}/tickers/${t.slug}): ${t.company}, ${t.trades} disclosed trades`)
+    .join("\n");
+  const memberPages = (memberIndex.members ?? [])
+    .map((m: { name: string; slug: string; trades: number }) =>
+      `- [${m.name}](${SITE}/members/${m.slug}): ${m.trades} disclosed trades`)
+    .join("\n");
 
   const body = `# Capitol Ledger
 
@@ -67,6 +87,14 @@ Government Ethics Form 278-T filings for executive-branch officials.
 - [Roadmap](${SITE}/roadmap): what is shipped and what is planned.
 - [Privacy](${SITE}/privacy): what the site collects, which is very little.
 
+## Most-traded stocks
+
+${topTickers}
+
+## Member pages
+
+${memberPages}
+
 ## Raw data
 
 - [congress-trades.json](${SITE}/data/congress-trades.json): the full
@@ -83,6 +111,10 @@ Government Ethics Form 278-T filings for executive-branch officials.
 - Office of Government Ethics: https://extapps2.oge.gov
 
 Public-domain government works. Attribution appreciated: ${SITE}
+
+## Last updated
+
+${updated ?? "unknown"} (the newest filing in the data)
 `;
 
   return new Response(body, {
