@@ -98,3 +98,53 @@ export function shortCompany(name: string): string {
 export function plural(n: number, one: string, many = `${one}s`): string {
   return `${n.toLocaleString("en-US")} ${n === 1 ? one : many}`;
 }
+
+/**
+ * Structured data: one entity graph.
+ *
+ * Every page used to describe the publisher as a bare {name: "Capitol
+ * Ledger"}, and the WebSite node carried each page's own description — 119
+ * different accounts of what "the site" is. Answer engines match entities by
+ * name, and a namesake publication covers the same subject, so the graph now
+ * gives the publisher one stable @id and every Dataset, page and breadcrumb
+ * points at it. Keep in step with `site` in astro.config.mjs.
+ */
+export const SITE = "https://capitolledger.io";
+export const ORG_ID = `${SITE}/#organization`;
+export const WEBSITE_ID = `${SITE}/#website`;
+/** The whole record — every disclosed trade — declared once, on /tracker. */
+export const RECORD_ID = `${SITE}/tracker#dataset`;
+
+/** An absolute URL for a site path. Schema consumers do not resolve relative ones. */
+export const abs = (path: string) => new URL(path, SITE).href;
+
+/** What every Dataset here shares: the publisher, the licence, and the
+ *  record each one is a slice of. Page-specific fields spread on top. */
+export function dataset(path: string, fields: Record<string, unknown>) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Dataset",
+    url: abs(path),
+    creator: { "@id": ORG_ID },
+    publisher: { "@id": ORG_ID },
+    isAccessibleForFree: true,
+    license: "https://www.usa.gov/government-works",
+    inLanguage: "en",
+    ...(path === "/tracker" ? {} : { isPartOf: { "@id": RECORD_ID } }),
+    ...fields,
+  };
+}
+
+/** A BreadcrumbList from [name, path] pairs, with absolute URLs. */
+export function breadcrumbs(...trail: [string, string][]) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: trail.map(([name, path], i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      name,
+      item: abs(path),
+    })),
+  };
+}

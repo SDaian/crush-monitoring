@@ -9,7 +9,7 @@ import Seo from "../../components/Seo.astro";
 import SignupForm from "../../components/SignupForm.astro";
 import SignupModal from "../../components/SignupModal.astro";
 import index from "../../data/tickers/_index.json";
-import { plural, seoDescription, seoTitle, branded } from "../../lib/seo";
+import { plural, seoDescription, seoTitle, branded, WEBSITE_ID } from "../../lib/seo";
 
 const tickers = index.tickers;
 const totalTrades = tickers.reduce((n: number, t: any) => n + t.trades, 0);
@@ -43,6 +43,7 @@ const schema = [
   {
     "@context": "https://schema.org",
     "@type": "CollectionPage",
+    isPartOf: { "@id": WEBSITE_ID },
     name: "Most-traded stocks in Congress",
     description,
     hasPart: tickers.map((t: any) => ({

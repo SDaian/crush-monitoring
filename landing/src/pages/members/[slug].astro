@@ -14,7 +14,7 @@ import CountUp from "../../components/CountUp.astro";
 import HoldingsChart from "../../components/HoldingsChart.astro";
 import PerformanceChart from "../../components/PerformanceChart.astro";
 import StarButton from "../../components/StarButton.astro";
-import { plural, seoDescription, seoTitle, branded } from "../../lib/seo";
+import { plural, seoDescription, seoTitle, branded, dataset, breadcrumbs, abs, WEBSITE_ID } from "../../lib/seo";
 
 // Build-time "checked" date: when this page was last regenerated. Deliberately
 // computed here, not stamped into the data files — a timestamp in the payload
@@ -139,29 +139,37 @@ const description = seoDescription(
   `${partyName}, ${m.state}.`,
 );
 
+const personId = abs(`/members/${m.slug}#person`);
 const schema = [
   {
     "@context": "https://schema.org",
     "@type": "ProfilePage",
+    url: abs(`/members/${m.slug}`),
+    isPartOf: { "@id": WEBSITE_ID },
     dateModified: s.lastFiling ?? s.lastTx ?? undefined,
     mainEntity: {
       "@type": "Person",
+      "@id": personId,
       name: m.name,
       jobTitle,
       affiliation: { "@type": "Organization", name: affiliation },
+      // The official Bioguide page settles WHICH person this is. An
+      // executive filer has no entry, and then there is no sameAs at all.
+      ...(m.bioguide
+        ? { sameAs: [`https://bioguide.congress.gov/search/bio/${m.bioguide}`] }
+        : {}),
     },
   },
-  {
-    "@context": "https://schema.org",
-    "@type": "Dataset",
+  dataset(`/members/${m.slug}`, {
     name: `${m.name} — disclosed stock trades`,
     description,
-    creator: { "@type": "Organization", name: "Capitol Ledger" },
-    isAccessibleForFree: true,
-    license: "https://www.usa.gov/government-works",
+    about: { "@id": personId },
+    keywords: [`${m.name} stock trades`, "STOCK Act disclosures", "congressional stock trades"],
+    dateModified: s.lastFiling ?? undefined,
     temporalCoverage:
       s.firstTx && s.lastTx ? `${s.firstTx}/${s.lastTx}` : undefined,
-  },
+  }),
+  breadcrumbs(["Members", "/members"], [m.name, `/members/${m.slug}`]),
 ];
 ---
 

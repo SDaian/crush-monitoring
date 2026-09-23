@@ -17,7 +17,7 @@ import CountUp from "../../components/CountUp.astro";
 import MarketStrip from "../../components/MarketStrip.astro";
 import StarButton from "../../components/StarButton.astro";
 import marketData from "../../data/market.json";
-import { plural, seoDescription, seoTitle, branded, shortCompany } from "../../lib/seo";
+import { plural, seoDescription, seoTitle, branded, shortCompany, dataset, breadcrumbs } from "../../lib/seo";
 
 // Build-time "checked" date: when this page was last regenerated. Deliberately
 // computed here, not stamped into the data files — a timestamp in the payload
@@ -190,26 +190,19 @@ const description = seoDescription(
 );
 
 const schema = [
-  {
-    "@context": "https://schema.org",
-    "@type": "Dataset",
+  dataset(`/tickers/${t.slug}`, {
     name: `${t.ticker} — stock trades disclosed by members of Congress`,
     description,
-    creator: { "@type": "Organization", name: "Capitol Ledger" },
-    isAccessibleForFree: true,
-    license: "https://www.usa.gov/government-works",
+    // The company as an entity, so "who in Congress traded NVIDIA" and "NVDA
+    // congress trades" resolve to the same page.
+    about: { "@type": "Corporation", name: co || t.company || t.ticker, tickerSymbol: t.ticker },
+    keywords: [`${t.ticker} congress trades`, `${co || t.ticker} congressional stock trades`, "STOCK Act disclosures"],
+    dateModified: s.lastFiling ?? undefined,
     temporalCoverage:
       s.firstTx && s.lastTx ? `${s.firstTx}/${s.lastTx}` : undefined,
     variableMeasured: ["member", "transaction type", "amount bracket", "filing delay"],
-  },
-  {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Stocks", item: "/tickers" },
-      { "@type": "ListItem", position: 2, name: t.ticker },
-    ],
-  },
+  }),
+  breadcrumbs(["Stocks", "/tickers"], [t.ticker, `/tickers/${t.slug}`]),
 ];
 ---
 

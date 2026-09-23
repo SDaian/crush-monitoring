@@ -917,6 +917,28 @@ Conventions:
   because filings carry legal names with share-class notes attached; a name
   still too long falls through to the ticker-only form. `check-seo.mjs` warns
   on any title over 60.
+- **Structured data is one entity graph.** `Seo.astro` gives the publisher a
+  stable `@id` (`ORG_ID`) with an `alternateName` and a
+  `disambiguatingDescription`, and every Dataset, page and breadcrumb points at
+  it by id — a namesake publication (readcapitolledger.com) covers the same
+  subject, and answer engines match entities by name. The WebSite description
+  is **the same on every page**: it describes the site, and it once carried
+  each page's own description. The whole record is declared ONCE, as the
+  `/tracker` Dataset (`RECORD_ID`), which is the only node offering the
+  download (`/data/congress-trades.json`, the file the tracker itself reads);
+  ticker, member and late-filer Datasets are slices of it (`isPartOf`), built
+  with `dataset()` from `src/lib/seo.ts` so the licence and publisher cannot
+  drift. A ticker Dataset is `about` a `Corporation` with its `tickerSymbol`; a
+  member page's `Person` carries `sameAs` → the official Bioguide page
+  (`bioguide` from `committees.json`) and none at all for an executive filer.
+  Breadcrumbs are absolute (`breadcrumbs()`). **No `sameAs` on the
+  Organization until real social accounts exist.**
+- **The sitemap's `lastmod` comes from the data, never the build.** An entity
+  page takes its own newest filing (`lastFiling` in each `_index.json`), the
+  summary pages take the newest filing anywhere, `/report` its report date,
+  and static pages get **none** — Google trusts the field only while it stays
+  accurate, and a build date on an unchanged page teaches it to ignore ours.
+  `llms.txt` states the same date as its "Last updated" line.
 - **Meta descriptions are capped at 150 chars, structurally.** Google truncates
   what it shows at ~155 desktop / ~120 mobile, and most of our descriptions
   interpolate pipeline data (a company name, a member's name, a trade count) —

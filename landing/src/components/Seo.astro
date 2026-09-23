@@ -7,6 +7,7 @@
 // here once instead of in four page files.
 import FontPreloads from "./FontPreloads.astro";
 import Analytics from "@vercel/analytics/astro";
+import { ORG_ID, WEBSITE_ID } from "../lib/seo";
 
 interface Props {
   title: string;
@@ -40,13 +41,22 @@ const ogAlt = ogCard
   : "Capitol Ledger — They trade. They file. You see it first.";
 const ORG_NAME = "Capitol Ledger";
 
-// Sitewide structured data — the publisher and the site itself. Kept minimal
-// and true (no sameAs/social until those accounts exist).
+// Sitewide structured data — the publisher and the site itself, each with a
+// stable @id that every page's Dataset, breadcrumb and page node points at.
+// Kept minimal and true: no sameAs until the social accounts exist.
+//
+// Two things here are deliberate. The WebSite description is the SAME on
+// every page — it describes the site, not the page, and it used to carry each
+// page's own description. And the Organization says plainly where it lives
+// and what it does, because a publication with a near-identical name covers
+// the same subject and answer engines match on names.
 const sitewide: Record<string, unknown>[] = [
   {
     "@context": "https://schema.org",
     "@type": "Organization",
+    "@id": ORG_ID,
     name: ORG_NAME,
+    alternateName: "capitolledger.io",
     url: site.href,
     // Google wants a raster logo of at least 112px square here, so this points
     // at the 180px icon rather than the vector one browsers use.
@@ -54,13 +64,24 @@ const sitewide: Record<string, unknown>[] = [
     description:
       "Capitol Ledger tracks the stock trades US politicians disclose " +
       "under the STOCK Act, straight from official filings.",
+    disambiguatingDescription:
+      "Capitol Ledger at capitolledger.io is an independent daily tracker " +
+      "built from official House, Senate and OGE disclosure filings. It " +
+      "publishes the records and how late each was filed, and draws no " +
+      "conclusions about the people who file them.",
   },
   {
     "@context": "https://schema.org",
     "@type": "WebSite",
+    "@id": WEBSITE_ID,
     name: ORG_NAME,
     url: site.href,
-    description,
+    inLanguage: "en",
+    publisher: { "@id": ORG_ID },
+    description:
+      "Every stock trade a US politician discloses under the STOCK Act: " +
+      "who traded, what, how much and how late, from official filings, " +
+      "updated daily.",
   },
 ];
 

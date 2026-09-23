@@ -16,7 +16,7 @@ import Footer from "../components/Footer.astro";
 import Seo from "../components/Seo.astro";
 import SignupForm from "../components/SignupForm.astro";
 import SignupModal from "../components/SignupModal.astro";
-import { seoDescription, seoTitle, branded } from "../lib/seo";
+import { seoDescription, seoTitle, branded, dataset, abs, RECORD_ID, WEBSITE_ID } from "../lib/seo";
 import memberIndex from "../data/members/_index.json";
 import tickerIndex from "../data/tickers/_index.json";
 
@@ -47,7 +47,29 @@ const schema = [
     description,
     isAccessibleForFree: true,
     offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
+    isPartOf: { "@id": WEBSITE_ID },
   },
+  // The whole record, declared once. Every ticker, member and late-filer
+  // Dataset is a slice of it (isPartOf), and this is the one node that
+  // offers the download: the same JSON the page itself reads, so the raw
+  // data an answer engine can cite is the data a reader sees.
+  dataset("/tracker", {
+    "@id": RECORD_ID,
+    name: "Stock trades disclosed by US politicians under the STOCK Act",
+    description:
+      "Every stock trade members of Congress and executive-branch officials " +
+      "disclose under the STOCK Act, normalized from the House Clerk, Senate " +
+      "eFD and OGE filings: member, ticker, trade and filing dates, amount " +
+      "bracket, and a link to each official filing. Updated daily.",
+    keywords: ["congressional stock trades", "STOCK Act disclosures", "politician stock trades", "periodic transaction reports"],
+    variableMeasured: ["member", "ticker", "transaction type", "amount bracket", "trade date", "filing date"],
+    distribution: [{
+      "@type": "DataDownload",
+      name: "Every disclosed trade (JSON)",
+      encodingFormat: "application/json",
+      contentUrl: abs("/data/congress-trades.json"),
+    }],
+  }),
 ];
 ---
 

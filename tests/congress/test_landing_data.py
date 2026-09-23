@@ -674,6 +674,43 @@ class TestLastFiling(unittest.TestCase):
         self.assertEqual(p["summary"]["lastFiling"], "2026-07-05")
 
 
+class TestEntityFields(unittest.TestCase):
+    """The fields the structured data and the sitemap read."""
+
+    def test_member_payload_carries_the_bioguide_id(self):
+        # Person.sameAs links the official Bioguide page — the link that says
+        # WHICH person a name refers to.
+        data = {"members": {"Nancy Pelosi": {"bioguide": "P000197",
+                                             "reason": "none_current",
+                                             "committees": []}}}
+        p = ld.member_payload("Nancy Pelosi", [], {}, committees=data)
+        self.assertEqual(p["bioguide"], "P000197")
+
+    def test_an_executive_filer_has_no_bioguide(self):
+        data = {"members": {"Donald J. Trump": {"reason": "not_in_congress",
+                                                "committees": []}}}
+        self.assertIsNone(ld.member_payload("Donald J. Trump", [], {},
+                                            committees=data)["bioguide"])
+        self.assertIsNone(ld.member_payload("Donald J. Trump", [], {})["bioguide"])
+
+    def test_both_indexes_carry_the_newest_filing(self):
+        # The sitemap's lastmod reads these; without them every entity page
+        # would ship with no date at all.
+        trades = [MT(tx="2026-06-01", filed="2026-07-05"),
+                  MT(tx="2026-06-02", filed="2026-06-20")]
+        for i, t in enumerate(trades):
+            t["id"] = f"t{i}"
+        with TemporaryDirectory() as d:
+            out = Path(d)
+            ld.write_member_files(trades, {}, out, names=["Nancy Pelosi"])
+            ld.write_ticker_files(trades * 10, out)
+            members = json.loads((out / "members" / "_index.json").read_text())
+            tickers = json.loads((out / "tickers" / "_index.json").read_text())
+        self.assertEqual(members["members"][0]["lastFiling"], "2026-07-05")
+        self.assertTrue(tickers["tickers"])  # a page qualified, so the check bites
+        self.assertEqual(tickers["tickers"][0]["lastFiling"], "2026-07-05")
+
+
 class TestMemberIndexPerf(unittest.TestCase):
     def _write(self, perf_members):
         perf = {"benchmark": {"label": "S&P 500", "asof_date": "2026-07-31"},
