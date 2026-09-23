@@ -124,6 +124,16 @@ class TestPayloads(unittest.TestCase):
         self.assertEqual(r["chamber"], "Senate")
         self.assertEqual(r["district"], "AL")
 
+    def test_stats_carry_the_newest_filing(self):
+        # The summary pages' dateline. Bonds count: this says when the record
+        # last changed, not a stock-only statistic.
+        trades = [MT(tx="2026-06-01", filed="2026-07-05"),
+                  {"ticker": None, "asset_type": "Municipal Security",
+                   "tx_date": "2026-07-01", "filing_date": "2026-07-09"}]
+        self.assertEqual(ld.stats_payload(trades, today=date(2026, 7, 12))["lastFiling"],
+                         "2026-07-09")
+        self.assertIsNone(ld.stats_payload([], today=date(2026, 7, 12))["lastFiling"])
+
     def test_stats_scoped_per_noun(self):
         trades = [
             T(tx="2026-01-10", filed="2026-01-20", lo=1001, hi=15000),      # traded+filed 2026, on time

@@ -427,6 +427,11 @@ def stats_payload(trades: list[dict], today: date) -> dict:
         # The product's core tension: how long the public normally waits
         # between a trade happening and learning about it.
         "medianLagDays": lags[len(lags) // 2] if lags else 0,
+        # The dateline on the summary pages: how recent the newest record
+        # is. Every filing counts here, bonds included — this states when the
+        # record last changed, not a stock-only statistic.
+        "lastFiling": max((t["filing_date"] for t in trades
+                           if t.get("filing_date")), default=None),
     }
 
 

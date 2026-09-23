@@ -97,19 +97,26 @@ const schema = [
     </section>
 
     <div class="tracker mx-auto max-w-[85rem] px-[5vw] pb-[10vh]">
-      <div class="tabs" id="tabs" role="tablist">
-        <button class="tab active" data-p="p-all" role="tab" aria-selected="true">
-          All trades
-        </button>
-        <button class="tab" data-p="p-ai" role="tab" aria-selected="false">
-          Featured stocks
-        </button>
+      {/* Only the two real tabs sit inside the tablist; the two links beside
+           them go to other pages, and a tablist may hold nothing but tabs.
+           `display: contents` keeps all four on the row they always shared. */}
+      <div class="tabs" id="tabs">
+        <div role="tablist" aria-label="Tracker views" style="display: contents">
+          <button class="tab active" id="tab-all" data-p="p-all" role="tab"
+            aria-selected="true" aria-controls="p-all">
+            All trades
+          </button>
+          <button class="tab" id="tab-ai" data-p="p-ai" role="tab"
+            aria-selected="false" aria-controls="p-ai">
+            Featured stocks
+          </button>
+        </div>
         <a class="tab tab-link" href="/tickers">By ticker →</a>
         <a class="tab tab-link" href="/members">Holdings by member →</a>
       </div>
 
       {/* ── All trades ────────────────────────────────────────────── */}
-      <section class="panel active" id="p-all">
+      <section class="panel active" id="p-all" role="tabpanel" aria-labelledby="tab-all">
         <div class="filters">
           <label class="sr-only" for="q">Search member or ticker</label>
           <input type="search" id="q" placeholder="Search member or ticker…" />
@@ -164,7 +171,7 @@ const schema = [
       </section>
 
       {/* ── Featured stocks ───────────────────────────────────────── */}
-      <section class="panel" id="p-ai" hidden>
+      <section class="panel" id="p-ai" role="tabpanel" aria-labelledby="tab-ai" hidden>
         <div class="banner-sample" id="aiSampleBanner" style="display:none">
           These indicators are <b>sample data from a synthetic price series,
           not real market data.</b> The daily refresh replaces them with real
@@ -772,7 +779,7 @@ const schema = [
       // ── Boot ───────────────────────────────────────────────────────────
       // Each feed loads independently: the trade table must render even if the
       // prices or indicators file is missing, and vice versa.
-      fetch("/data/congress-trades.json", {cache:"no-store"})
+      fetch("/data/congress-trades.json", {cache:"no-cache"})
         .then(r => r.json())
         .then(d => {
           DATA = d;
@@ -785,7 +792,7 @@ const schema = [
             "Could not load the disclosure data. Please refresh.";
         });
 
-      fetch("/data/returns.json", {cache:"no-store"})
+      fetch("/data/returns.json", {cache:"no-cache"})
         .then(r => r.json())
         .then(d => {
           RET = d.returns || {};
@@ -800,7 +807,7 @@ const schema = [
         })
         .catch(() => {});
 
-      fetch("/data/ai-indicators.json", {cache:"no-store"})
+      fetch("/data/ai-indicators.json", {cache:"no-cache"})
         .then(r => r.json())
         .then(d => {
           AI = d.tickers || {};
