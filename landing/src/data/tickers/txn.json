@@ -249,6 +249,9 @@
   "summary": {
     "trades": 36,
     "members": 15,
+    "congress": 14,
+    "executive": 1,
+    "whoLabel": "14 members of Congress and 1 executive-branch filer",
     "buys": 17,
     "sells": 19,
     "other": 0,
@@ -673,5 +676,19 @@
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20030231.pdf"
     }
   ],
-  "tradesShown": 25
+  "tradesShown": 25,
+  "faq": [
+    {
+      "q": "Who in Congress has traded TXN stock?",
+      "a": "14 members of Congress and 1 executive-branch filer have disclosed 36 TXN trades since March 2024. The most active is Robert P. Bresnahan, Jr., with 7 trades, followed by Jefferson Shreve and Jared Moskowitz. Each trade on this page links to the official filing it came from."
+    },
+    {
+      "q": "Is Congress buying or selling TXN?",
+      "a": "Of the 36 disclosed TXN trades, 17 were buys and 19 were sells. By the midpoint of each filed amount bracket, the buying comes to about $301K and the selling to about $1.3M. Filings disclose brackets, never exact amounts, so these totals are estimates."
+    },
+    {
+      "q": "How late are TXN trades disclosed?",
+      "a": "17% of the disclosed TXN trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated May 15, 2026, and the newest filing arrived on Aug 5, 2026."
+    }
+  ]
 }

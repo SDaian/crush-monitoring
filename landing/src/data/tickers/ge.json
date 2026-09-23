@@ -249,6 +249,9 @@
   "summary": {
     "trades": 27,
     "members": 13,
+    "congress": 12,
+    "executive": 1,
+    "whoLabel": "12 members of Congress and 1 executive-branch filer",
     "buys": 11,
     "sells": 16,
     "other": 0,
@@ -673,5 +676,19 @@
       "sourceUrl": "https://efdsearch.senate.gov/search/view/ptr/37265fce-ec98-4bba-8b2b-33b30def336f/"
     }
   ],
-  "tradesShown": 25
+  "tradesShown": 25,
+  "faq": [
+    {
+      "q": "Who in Congress has traded GE stock?",
+      "a": "12 members of Congress and 1 executive-branch filer have disclosed 27 GE trades since October 2024. The most active is Austin Scott, with 6 trades, followed by Jefferson Shreve and Donald J. Trump. Each trade on this page links to the official filing it came from."
+    },
+    {
+      "q": "Is Congress buying or selling GE?",
+      "a": "Of the 27 disclosed GE trades, 11 were buys and 16 were sells. By the midpoint of each filed amount bracket, the buying comes to about $271K and the selling to about $244K. Filings disclose brackets, never exact amounts, so these totals are estimates."
+    },
+    {
+      "q": "How late are GE trades disclosed?",
+      "a": "26% of the disclosed GE trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Jun 16, 2026, and the newest filing arrived on Jul 21, 2026."
+    }
+  ]
 }

@@ -249,6 +249,9 @@
   "summary": {
     "trades": 37,
     "members": 14,
+    "congress": 14,
+    "executive": 0,
+    "whoLabel": "14 members of Congress",
     "buys": 16,
     "sells": 21,
     "other": 0,
@@ -673,5 +676,19 @@
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20030292.pdf"
     }
   ],
-  "tradesShown": 25
+  "tradesShown": 25,
+  "faq": [
+    {
+      "q": "Who in Congress has traded INTU stock?",
+      "a": "14 members of Congress have disclosed 37 INTU trades since October 2024. The most active is Lisa C. McClain, with 6 trades, followed by Rick W. Allen and Robert P. Bresnahan, Jr.. Each trade on this page links to the official filing it came from."
+    },
+    {
+      "q": "Is Congress buying or selling INTU?",
+      "a": "Of the 37 disclosed INTU trades, 16 were buys and 21 were sells. By the midpoint of each filed amount bracket, the buying comes to about $511K and the selling to about $458K. Filings disclose brackets, never exact amounts, so these totals are estimates."
+    },
+    {
+      "q": "How late are INTU trades disclosed?",
+      "a": "24% of the disclosed INTU trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Aug 18, 2026, and the newest filing arrived on Sep 10, 2026."
+    }
+  ]
 }

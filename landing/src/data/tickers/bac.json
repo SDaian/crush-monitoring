@@ -249,6 +249,9 @@
   "summary": {
     "trades": 26,
     "members": 15,
+    "congress": 15,
+    "executive": 0,
+    "whoLabel": "15 members of Congress",
     "buys": 10,
     "sells": 16,
     "other": 0,
@@ -673,5 +676,19 @@
       "sourceUrl": "https://efdsearch.senate.gov/search/view/ptr/b6f24083-8ed9-4368-b482-3d14155c1e9b/"
     }
   ],
-  "tradesShown": 25
+  "tradesShown": 25,
+  "faq": [
+    {
+      "q": "Who in Congress has traded BAC stock?",
+      "a": "15 members of Congress have disclosed 26 BAC trades since October 2024. The most active is Lisa C. McClain, with 4 trades, followed by Jefferson Shreve and Julie Johnson. Each trade on this page links to the official filing it came from."
+    },
+    {
+      "q": "Is Congress buying or selling BAC?",
+      "a": "Of the 26 disclosed BAC trades, 10 were buys and 16 were sells. By the midpoint of each filed amount bracket, the buying comes to about $154K and the selling to about $244K. Filings disclose brackets, never exact amounts, so these totals are estimates."
+    },
+    {
+      "q": "How late are BAC trades disclosed?",
+      "a": "23% of the disclosed BAC trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Jul 20, 2026, and the newest filing arrived on Jul 21, 2026."
+    }
+  ]
 }

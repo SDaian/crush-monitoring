@@ -249,6 +249,9 @@
   "summary": {
     "trades": 44,
     "members": 20,
+    "congress": 19,
+    "executive": 1,
+    "whoLabel": "19 members of Congress and 1 executive-branch filer",
     "buys": 18,
     "sells": 25,
     "other": 1,
@@ -673,5 +676,19 @@
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20030891.pdf"
     }
   ],
-  "tradesShown": 25
+  "tradesShown": 25,
+  "faq": [
+    {
+      "q": "Who in Congress has traded CVX stock?",
+      "a": "19 members of Congress and 1 executive-branch filer have disclosed 44 CVX trades since May 2024. The most active is Julie Johnson, with 7 trades, followed by Gilbert Ray Cisneros, Jr. and David J. Taylor. Each trade on this page links to the official filing it came from."
+    },
+    {
+      "q": "Is Congress buying or selling CVX?",
+      "a": "Of the 44 disclosed CVX trades, 18 were buys and 25 were sells. By the midpoint of each filed amount bracket, the buying comes to about $309K and the selling to about $347K. Filings disclose brackets, never exact amounts, so these totals are estimates."
+    },
+    {
+      "q": "How late are CVX trades disclosed?",
+      "a": "25% of the disclosed CVX trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Jul 2, 2026, and the newest filing arrived on Aug 17, 2026."
+    }
+  ]
 }

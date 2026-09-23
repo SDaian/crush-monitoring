@@ -249,6 +249,9 @@
   "summary": {
     "trades": 25,
     "members": 11,
+    "congress": 10,
+    "executive": 1,
+    "whoLabel": "10 members of Congress and 1 executive-branch filer",
     "buys": 11,
     "sells": 14,
     "other": 0,
@@ -673,5 +676,19 @@
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20030930.pdf"
     }
   ],
-  "tradesShown": 25
+  "tradesShown": 25,
+  "faq": [
+    {
+      "q": "Who in Congress has traded MS stock?",
+      "a": "10 members of Congress and 1 executive-branch filer have disclosed 25 MS trades since September 2024. The most active is Julie Johnson, with 7 trades, followed by Marjorie Taylor Greene and Val T. Hoyle. Each trade on this page links to the official filing it came from."
+    },
+    {
+      "q": "Is Congress buying or selling MS?",
+      "a": "Of the 25 disclosed MS trades, 11 were buys and 14 were sells. By the midpoint of each filed amount bracket, the buying comes to about $88K and the selling to about $204K. Filings disclose brackets, never exact amounts, so these totals are estimates."
+    },
+    {
+      "q": "How late are MS trades disclosed?",
+      "a": "20% of the disclosed MS trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Jul 10, 2026, and the newest filing arrived on Jul 21, 2026."
+    }
+  ]
 }

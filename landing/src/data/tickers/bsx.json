@@ -249,6 +249,9 @@
   "summary": {
     "trades": 36,
     "members": 10,
+    "congress": 9,
+    "executive": 1,
+    "whoLabel": "9 members of Congress and 1 executive-branch filer",
     "buys": 18,
     "sells": 18,
     "other": 0,
@@ -673,5 +676,19 @@
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20030634.pdf"
     }
   ],
-  "tradesShown": 25
+  "tradesShown": 25,
+  "faq": [
+    {
+      "q": "Who in Congress has traded BSX stock?",
+      "a": "9 members of Congress and 1 executive-branch filer have disclosed 36 BSX trades since October 2024. The most active is Gilbert Ray Cisneros, Jr., with 18 trades, followed by Lisa C. McClain and John Boozman. Each trade on this page links to the official filing it came from."
+    },
+    {
+      "q": "Is Congress buying or selling BSX?",
+      "a": "Of the 36 disclosed BSX trades, 18 were buys and 18 were sells. By the midpoint of each filed amount bracket, the buying comes to about $169K and the selling to about $193K. Filings disclose brackets, never exact amounts, so these totals are estimates."
+    },
+    {
+      "q": "How late are BSX trades disclosed?",
+      "a": "8% of the disclosed BSX trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Aug 18, 2026, and the newest filing arrived on Sep 10, 2026."
+    }
+  ]
 }

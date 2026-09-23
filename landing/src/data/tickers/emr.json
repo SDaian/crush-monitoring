@@ -256,6 +256,9 @@
   "summary": {
     "trades": 13,
     "members": 7,
+    "congress": 7,
+    "executive": 0,
+    "whoLabel": "7 members of Congress",
     "buys": 7,
     "sells": 6,
     "other": 0,
@@ -503,5 +506,19 @@
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20030699.pdf"
     }
   ],
-  "tradesShown": 13
+  "tradesShown": 13,
+  "faq": [
+    {
+      "q": "Who in Congress has traded EMR stock?",
+      "a": "7 members of Congress have disclosed 13 EMR trades since March 2023. The most active is Richard McCormick, with 3 trades, followed by Bruce Westerman and Lisa C. McClain. Each trade on this page links to the official filing it came from."
+    },
+    {
+      "q": "Is Congress buying or selling EMR?",
+      "a": "Of the 13 disclosed EMR trades, 7 were buys and 6 were sells. By the midpoint of each filed amount bracket, the buying comes to about $56K and the selling to about $48K. Filings disclose brackets, never exact amounts, so these totals are estimates."
+    },
+    {
+      "q": "How late are EMR trades disclosed?",
+      "a": "38% of the disclosed EMR trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Jul 30, 2026, and the newest filing arrived on Aug 14, 2026."
+    }
+  ]
 }

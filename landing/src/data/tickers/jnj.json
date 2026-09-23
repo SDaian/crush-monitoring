@@ -249,6 +249,9 @@
   "summary": {
     "trades": 67,
     "members": 24,
+    "congress": 24,
+    "executive": 0,
+    "whoLabel": "24 members of Congress",
     "buys": 30,
     "sells": 37,
     "other": 0,
@@ -673,5 +676,19 @@
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20032211.pdf"
     }
   ],
-  "tradesShown": 25
+  "tradesShown": 25,
+  "faq": [
+    {
+      "q": "Who in Congress has traded JNJ stock?",
+      "a": "24 members of Congress have disclosed 67 JNJ trades since March 2023. The most active is Thomas H. Kean, Jr., with 7 trades, followed by Josh Gottheimer and Lisa C. McClain. Each trade on this page links to the official filing it came from."
+    },
+    {
+      "q": "Is Congress buying or selling JNJ?",
+      "a": "Of the 67 disclosed JNJ trades, 30 were buys and 37 were sells. By the midpoint of each filed amount bracket, the buying comes to about $363K and the selling to about $893K. Filings disclose brackets, never exact amounts, so these totals are estimates."
+    },
+    {
+      "q": "How late are JNJ trades disclosed?",
+      "a": "16% of the disclosed JNJ trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Aug 27, 2026, and the newest filing arrived on Sep 12, 2026."
+    }
+  ]
 }

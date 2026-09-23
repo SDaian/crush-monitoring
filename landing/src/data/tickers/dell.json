@@ -249,6 +249,9 @@
   "summary": {
     "trades": 20,
     "members": 8,
+    "congress": 8,
+    "executive": 0,
+    "whoLabel": "8 members of Congress",
     "buys": 12,
     "sells": 8,
     "other": 0,
@@ -591,5 +594,19 @@
       "sourceUrl": "https://efdsearch.senate.gov/search/view/ptr/446c7588-5f97-42c0-8983-3ca975b91793/"
     }
   ],
-  "tradesShown": 20
+  "tradesShown": 20,
+  "faq": [
+    {
+      "q": "Who in Congress has traded DELL stock?",
+      "a": "8 members of Congress have disclosed 20 DELL trades since January 2025. The most active is Markwayne Mullin, with 6 trades, followed by Lisa C. McClain and Jared Moskowitz. Each trade on this page links to the official filing it came from."
+    },
+    {
+      "q": "Is Congress buying or selling DELL?",
+      "a": "Of the 20 disclosed DELL trades, 12 were buys and 8 were sells. By the midpoint of each filed amount bracket, the buying comes to about $170K and the selling to about $138K. Filings disclose brackets, never exact amounts, so these totals are estimates."
+    },
+    {
+      "q": "How late are DELL trades disclosed?",
+      "a": "15% of the disclosed DELL trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Jun 4, 2026, and the newest filing arrived on Jul 21, 2026."
+    }
+  ]
 }

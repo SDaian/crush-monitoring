@@ -249,6 +249,9 @@
   "summary": {
     "trades": 40,
     "members": 18,
+    "congress": 18,
+    "executive": 0,
+    "whoLabel": "18 members of Congress",
     "buys": 23,
     "sells": 17,
     "other": 0,
@@ -673,5 +676,19 @@
       "sourceUrl": "https://efdsearch.senate.gov/search/view/ptr/28e79480-3dcb-4793-86ed-48e7fd214587/"
     }
   ],
-  "tradesShown": 25
+  "tradesShown": 25,
+  "faq": [
+    {
+      "q": "Who in Congress has traded WMT stock?",
+      "a": "18 members of Congress have disclosed 40 WMT trades since March 2023. The most active is Josh Gottheimer, with 8 trades, followed by Julie Johnson and Lisa C. McClain. Each trade on this page links to the official filing it came from."
+    },
+    {
+      "q": "Is Congress buying or selling WMT?",
+      "a": "Of the 40 disclosed WMT trades, 23 were buys and 17 were sells. By the midpoint of each filed amount bracket, the buying comes to about $300K and the selling to about $377K. Filings disclose brackets, never exact amounts, so these totals are estimates."
+    },
+    {
+      "q": "How late are WMT trades disclosed?",
+      "a": "15% of the disclosed WMT trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Aug 26, 2026, and the newest filing arrived on Sep 10, 2026."
+    }
+  ]
 }

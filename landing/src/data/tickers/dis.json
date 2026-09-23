@@ -256,6 +256,9 @@
   "summary": {
     "trades": 26,
     "members": 18,
+    "congress": 17,
+    "executive": 1,
+    "whoLabel": "17 members of Congress and 1 executive-branch filer",
     "buys": 7,
     "sells": 19,
     "other": 0,
@@ -680,5 +683,19 @@
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20024346.pdf"
     }
   ],
-  "tradesShown": 25
+  "tradesShown": 25,
+  "faq": [
+    {
+      "q": "Who in Congress has traded DIS stock?",
+      "a": "17 members of Congress and 1 executive-branch filer have disclosed 26 DIS trades since October 2024. The most active is Jefferson Shreve, with 4 trades, followed by Robert P. Bresnahan, Jr. and Gilbert Ray Cisneros, Jr.. Each trade on this page links to the official filing it came from."
+    },
+    {
+      "q": "Is Congress buying or selling DIS?",
+      "a": "Of the 26 disclosed DIS trades, 7 were buys and 19 were sells. By the midpoint of each filed amount bracket, the buying comes to about $81K and the selling to about $3.5M. Filings disclose brackets, never exact amounts, so these totals are estimates."
+    },
+    {
+      "q": "How late are DIS trades disclosed?",
+      "a": "15% of the disclosed DIS trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Aug 10, 2026, and the newest filing arrived on Sep 1, 2026."
+    }
+  ]
 }

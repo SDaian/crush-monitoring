@@ -249,6 +249,9 @@
   "summary": {
     "trades": 28,
     "members": 3,
+    "congress": 3,
+    "executive": 0,
+    "whoLabel": "3 members of Congress",
     "buys": 19,
     "sells": 9,
     "other": 0,
@@ -596,5 +599,19 @@
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20030265.pdf"
     }
   ],
-  "tradesShown": 25
+  "tradesShown": 25,
+  "faq": [
+    {
+      "q": "Who in Congress has traded MKL stock?",
+      "a": "3 members of Congress have disclosed 28 MKL trades since March 2025. The most active is April McClain Delaney, with 22 trades, followed by Thomas H. Kean, Jr. and James French Hill. Each trade on this page links to the official filing it came from."
+    },
+    {
+      "q": "Is Congress buying or selling MKL?",
+      "a": "Of the 28 disclosed MKL trades, 19 were buys and 9 were sells. By the midpoint of each filed amount bracket, the buying comes to about $317K and the selling to about $288K. Filings disclose brackets, never exact amounts, so these totals are estimates."
+    },
+    {
+      "q": "How late are MKL trades disclosed?",
+      "a": "None of the 28 disclosed MKL trades was filed late: each arrived within the STOCK Act's 45-day legal maximum. The newest trade is dated Aug 25, 2026, and the newest filing arrived on Sep 9, 2026."
+    }
+  ]
 }

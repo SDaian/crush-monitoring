@@ -249,6 +249,9 @@
   "summary": {
     "trades": 35,
     "members": 17,
+    "congress": 16,
+    "executive": 1,
+    "whoLabel": "16 members of Congress and 1 executive-branch filer",
     "buys": 16,
     "sells": 19,
     "other": 0,
@@ -673,5 +676,19 @@
       "sourceUrl": "https://efdsearch.senate.gov/search/view/ptr/014817f0-9809-457f-8ac5-048948608e02/"
     }
   ],
-  "tradesShown": 25
+  "tradesShown": 25,
+  "faq": [
+    {
+      "q": "Who in Congress has traded AMGN stock?",
+      "a": "16 members of Congress and 1 executive-branch filer have disclosed 35 AMGN trades since August 2024. The most active is David J. Taylor, with 8 trades, followed by Marjorie Taylor Greene and Jefferson Shreve. Each trade on this page links to the official filing it came from."
+    },
+    {
+      "q": "Is Congress buying or selling AMGN?",
+      "a": "Of the 35 disclosed AMGN trades, 16 were buys and 19 were sells. By the midpoint of each filed amount bracket, the buying comes to about $202K and the selling to about $275K. Filings disclose brackets, never exact amounts, so these totals are estimates."
+    },
+    {
+      "q": "How late are AMGN trades disclosed?",
+      "a": "20% of the disclosed AMGN trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Aug 26, 2026, and the newest filing arrived on Sep 5, 2026."
+    }
+  ]
 }

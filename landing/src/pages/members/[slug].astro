@@ -14,7 +14,8 @@ import CountUp from "../../components/CountUp.astro";
 import HoldingsChart from "../../components/HoldingsChart.astro";
 import PerformanceChart from "../../components/PerformanceChart.astro";
 import StarButton from "../../components/StarButton.astro";
-import { plural, seoDescription, seoTitle, branded, dataset, breadcrumbs, abs, WEBSITE_ID } from "../../lib/seo";
+import { plural, seoDescription, seoTitle, branded, dataset, breadcrumbs, abs, WEBSITE_ID, faqSchema } from "../../lib/seo";
+import Faq from "../../components/Faq.astro";
 
 // Build-time "checked" date: when this page was last regenerated. Deliberately
 // computed here, not stamped into the data files — a timestamp in the payload
@@ -170,6 +171,7 @@ const schema = [
       s.firstTx && s.lastTx ? `${s.firstTx}/${s.lastTx}` : undefined,
   }),
   breadcrumbs(["Members", "/members"], [m.name, `/members/${m.slug}`]),
+  ...(m.faq?.length ? [faqSchema(m.faq)] : []),
 ];
 ---
 
@@ -612,6 +614,10 @@ const schema = [
           class="underline underline-offset-2 hover:text-ink">live tracker</a
         >. Source: official House and Senate disclosure portals.
       </p>
+    </section>
+
+    <section class="mx-auto max-w-[75rem] px-[5vw] pb-[8vh]">
+      <Faq title={`Questions about ${m.name}`} eyebrow="Answered from the record" items={m.faq ?? []} />
     </section>
 
     <section class="border-t-2 border-ink px-[5vw] py-[10vh] text-center">

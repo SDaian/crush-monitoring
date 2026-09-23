@@ -256,6 +256,9 @@
   "summary": {
     "trades": 37,
     "members": 18,
+    "congress": 17,
+    "executive": 1,
+    "whoLabel": "17 members of Congress and 1 executive-branch filer",
     "buys": 13,
     "sells": 24,
     "other": 0,
@@ -680,5 +683,19 @@
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20030316.pdf"
     }
   ],
-  "tradesShown": 25
+  "tradesShown": 25,
+  "faq": [
+    {
+      "q": "Who in Congress has traded TMO stock?",
+      "a": "17 members of Congress and 1 executive-branch filer have disclosed 37 TMO trades since October 2024. The most active is Lisa C. McClain, with 6 trades, followed by Kelly Morrison and Val T. Hoyle. Each trade on this page links to the official filing it came from."
+    },
+    {
+      "q": "Is Congress buying or selling TMO?",
+      "a": "Of the 37 disclosed TMO trades, 13 were buys and 24 were sells. By the midpoint of each filed amount bracket, the buying comes to about $153K and the selling to about $406K. Filings disclose brackets, never exact amounts, so these totals are estimates."
+    },
+    {
+      "q": "How late are TMO trades disclosed?",
+      "a": "27% of the disclosed TMO trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Jul 10, 2026, and the newest filing arrived on Aug 7, 2026."
+    }
+  ]
 }

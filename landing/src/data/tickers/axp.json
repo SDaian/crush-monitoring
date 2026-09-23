@@ -249,6 +249,9 @@
   "summary": {
     "trades": 27,
     "members": 12,
+    "congress": 12,
+    "executive": 0,
+    "whoLabel": "12 members of Congress",
     "buys": 17,
     "sells": 10,
     "other": 0,
@@ -673,5 +676,19 @@
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20030146.pdf"
     }
   ],
-  "tradesShown": 25
+  "tradesShown": 25,
+  "faq": [
+    {
+      "q": "Who in Congress has traded AXP stock?",
+      "a": "12 members of Congress have disclosed 27 AXP trades since February 2025. The most active is Jefferson Shreve, with 4 trades, followed by Jared Moskowitz and Lisa C. McClain. Each trade on this page links to the official filing it came from."
+    },
+    {
+      "q": "Is Congress buying or selling AXP?",
+      "a": "Of the 27 disclosed AXP trades, 17 were buys and 10 were sells. By the midpoint of each filed amount bracket, the buying comes to about $210K and the selling to about $154K. Filings disclose brackets, never exact amounts, so these totals are estimates."
+    },
+    {
+      "q": "How late are AXP trades disclosed?",
+      "a": "7% of the disclosed AXP trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated May 8, 2026, and the newest filing arrived on Jul 21, 2026."
+    }
+  ]
 }

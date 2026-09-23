@@ -917,6 +917,24 @@ Conventions:
   because filings carry legal names with share-class notes attached; a name
   still too long falls through to the ticker-only form. `check-seo.mjs` warns
   on any title over 60.
+- **Every ticker and member page answers its own questions.** `landing_data`
+  `ticker_faq` / `member_faq` build a Q&A list into each payload — the
+  questions people type ("Who in Congress has traded NVDA stock?", "Does
+  Nancy Pelosi disclose trades on time?") answered from the page's own
+  numbers, the entity named in full, ≤60 words (a test holds every generated
+  answer to it). `Faq.astro` renders the list and `faqSchema()` builds the
+  FAQPage markup from the SAME list, so what an answer engine quotes is what a
+  reader sees; `/how-it-works` uses the same pair. Two rules: a question with
+  no data behind it is **omitted**, never answered with a zero ("What does
+  she own?" needs parsed holdings), and a yes/no question opens with the word
+  that answers it — a first draft opened a clean filing record with "No."
+  Google shows FAQ rich results only for government and health sites since
+  2023; the block is for answer engines and literal-question searches.
+- **A count that mixes branches says so.** The President's 278-T filings list
+  stocks since June 2026, so 58 of 111 ticker pages called him a member of
+  Congress ("34 members of Congress have disclosed…" on NVDA). The ticker
+  summary now splits `congress` / `executive` and every surface uses
+  `filers_label()` — "33 members of Congress and 1 executive-branch filer".
 - **Structured data is one entity graph.** `Seo.astro` gives the publisher a
   stable `@id` (`ORG_ID`) with an `alternateName` and a
   `disambiguatingDescription`, and every Dataset, page and breadcrumb points at

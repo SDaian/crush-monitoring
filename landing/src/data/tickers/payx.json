@@ -249,6 +249,9 @@
   "summary": {
     "trades": 34,
     "members": 14,
+    "congress": 13,
+    "executive": 1,
+    "whoLabel": "13 members of Congress and 1 executive-branch filer",
     "buys": 15,
     "sells": 19,
     "other": 0,
@@ -673,5 +676,19 @@
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20030338.pdf"
     }
   ],
-  "tradesShown": 25
+  "tradesShown": 25,
+  "faq": [
+    {
+      "q": "Who in Congress has traded PAYX stock?",
+      "a": "13 members of Congress and 1 executive-branch filer have disclosed 34 PAYX trades since May 2024. The most active is April McClain Delaney, with 13 trades, followed by Julie Johnson and Shelley Moore Capito. Each trade on this page links to the official filing it came from."
+    },
+    {
+      "q": "Is Congress buying or selling PAYX?",
+      "a": "Of the 34 disclosed PAYX trades, 15 were buys and 19 were sells. By the midpoint of each filed amount bracket, the buying comes to about $169K and the selling to about $368K. Filings disclose brackets, never exact amounts, so these totals are estimates."
+    },
+    {
+      "q": "How late are PAYX trades disclosed?",
+      "a": "18% of the disclosed PAYX trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Aug 25, 2026, and the newest filing arrived on Sep 9, 2026."
+    }
+  ]
 }

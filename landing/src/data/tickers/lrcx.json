@@ -249,6 +249,9 @@
   "summary": {
     "trades": 42,
     "members": 15,
+    "congress": 15,
+    "executive": 0,
+    "whoLabel": "15 members of Congress",
     "buys": 13,
     "sells": 29,
     "other": 0,
@@ -673,5 +676,19 @@
       "sourceUrl": "https://efdsearch.senate.gov/search/view/ptr/8bb121de-bbff-4550-9dd4-b60d4002e230/"
     }
   ],
-  "tradesShown": 25
+  "tradesShown": 25,
+  "faq": [
+    {
+      "q": "Who in Congress has traded LRCX stock?",
+      "a": "15 members of Congress have disclosed 42 LRCX trades since January 2024. The most active is David J. Taylor, with 13 trades, followed by Jefferson Shreve and Markwayne Mullin. Each trade on this page links to the official filing it came from."
+    },
+    {
+      "q": "Is Congress buying or selling LRCX?",
+      "a": "Of the 42 disclosed LRCX trades, 13 were buys and 29 were sells. By the midpoint of each filed amount bracket, the buying comes to about $312K and the selling to about $538K. Filings disclose brackets, never exact amounts, so these totals are estimates."
+    },
+    {
+      "q": "How late are LRCX trades disclosed?",
+      "a": "14% of the disclosed LRCX trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Aug 13, 2026, and the newest filing arrived on Sep 2, 2026."
+    }
+  ]
 }

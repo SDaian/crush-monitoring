@@ -249,6 +249,9 @@
   "summary": {
     "trades": 27,
     "members": 16,
+    "congress": 15,
+    "executive": 1,
+    "whoLabel": "15 members of Congress and 1 executive-branch filer",
     "buys": 10,
     "sells": 17,
     "other": 0,
@@ -673,5 +676,19 @@
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20026762.pdf"
     }
   ],
-  "tradesShown": 25
+  "tradesShown": 25,
+  "faq": [
+    {
+      "q": "Who in Congress has traded DHR stock?",
+      "a": "15 members of Congress and 1 executive-branch filer have disclosed 27 DHR trades since May 2015. The most active is Julie Johnson, with 4 trades, followed by Jefferson Shreve and Robert P. Bresnahan, Jr.. Each trade on this page links to the official filing it came from."
+    },
+    {
+      "q": "Is Congress buying or selling DHR?",
+      "a": "Of the 27 disclosed DHR trades, 10 were buys and 17 were sells. By the midpoint of each filed amount bracket, the buying comes to about $129K and the selling to about $301K. Filings disclose brackets, never exact amounts, so these totals are estimates."
+    },
+    {
+      "q": "How late are DHR trades disclosed?",
+      "a": "15% of the disclosed DHR trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated May 22, 2026, and the newest filing arrived on Jul 21, 2026."
+    }
+  ]
 }

@@ -249,6 +249,9 @@
   "summary": {
     "trades": 34,
     "members": 14,
+    "congress": 13,
+    "executive": 1,
+    "whoLabel": "13 members of Congress and 1 executive-branch filer",
     "buys": 17,
     "sells": 17,
     "other": 0,
@@ -673,5 +676,19 @@
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20029026.pdf"
     }
   ],
-  "tradesShown": 25
+  "tradesShown": 25,
+  "faq": [
+    {
+      "q": "Who in Congress has traded BA stock?",
+      "a": "13 members of Congress and 1 executive-branch filer have disclosed 34 BA trades since October 2024. The most active is Julie Johnson, with 6 trades, followed by Gilbert Ray Cisneros, Jr. and Robert P. Bresnahan, Jr.. Each trade on this page links to the official filing it came from."
+    },
+    {
+      "q": "Is Congress buying or selling BA?",
+      "a": "Of the 34 disclosed BA trades, 17 were buys and 17 were sells. By the midpoint of each filed amount bracket, the buying comes to about $210K and the selling to about $1.0M. Filings disclose brackets, never exact amounts, so these totals are estimates."
+    },
+    {
+      "q": "How late are BA trades disclosed?",
+      "a": "24% of the disclosed BA trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Aug 13, 2026, and the newest filing arrived on Sep 1, 2026."
+    }
+  ]
 }

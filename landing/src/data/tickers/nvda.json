@@ -249,6 +249,9 @@
   "summary": {
     "trades": 182,
     "members": 34,
+    "congress": 33,
+    "executive": 1,
+    "whoLabel": "33 members of Congress and 1 executive-branch filer",
     "buys": 117,
     "sells": 65,
     "other": 0,
@@ -673,5 +676,19 @@
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20034359.pdf"
     }
   ],
-  "tradesShown": 25
+  "tradesShown": 25,
+  "faq": [
+    {
+      "q": "Who in Congress has traded NVDA stock?",
+      "a": "33 members of Congress and 1 executive-branch filer have disclosed 182 NVDA trades since January 2024. The most active is Cleo Fields, with 47 trades, followed by Robert P. Bresnahan, Jr. and Sheldon Whitehouse. Each trade on this page links to the official filing it came from."
+    },
+    {
+      "q": "Is Congress buying or selling NVDA?",
+      "a": "Of the 182 disclosed NVDA trades, 117 were buys and 65 were sells. By the midpoint of each filed amount bracket, the buying comes to about $11.2M and the selling to about $10.7M. Filings disclose brackets, never exact amounts, so these totals are estimates."
+    },
+    {
+      "q": "How late are NVDA trades disclosed?",
+      "a": "16% of the disclosed NVDA trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Aug 18, 2026, and the newest filing arrived on Sep 10, 2026."
+    }
+  ]
 }

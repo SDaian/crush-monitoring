@@ -249,6 +249,9 @@
   "summary": {
     "trades": 25,
     "members": 13,
+    "congress": 12,
+    "executive": 1,
+    "whoLabel": "12 members of Congress and 1 executive-branch filer",
     "buys": 12,
     "sells": 13,
     "other": 0,
@@ -673,5 +676,19 @@
       "sourceUrl": "https://efdsearch.senate.gov/search/view/ptr/548cacbf-7cf2-42cb-9f23-71250938caae/"
     }
   ],
-  "tradesShown": 25
+  "tradesShown": 25,
+  "faq": [
+    {
+      "q": "Who in Congress has traded QCOM stock?",
+      "a": "12 members of Congress and 1 executive-branch filer have disclosed 25 QCOM trades since March 2024. The most active is Maria Elvira Salazar, with 4 trades, followed by Marjorie Taylor Greene and Val T. Hoyle. Each trade on this page links to the official filing it came from."
+    },
+    {
+      "q": "Is Congress buying or selling QCOM?",
+      "a": "Of the 25 disclosed QCOM trades, 12 were buys and 13 were sells. By the midpoint of each filed amount bracket, the buying comes to about $194K and the selling to about $1.9M. Filings disclose brackets, never exact amounts, so these totals are estimates."
+    },
+    {
+      "q": "How late are QCOM trades disclosed?",
+      "a": "28% of the disclosed QCOM trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Aug 19, 2026, and the newest filing arrived on Sep 9, 2026."
+    }
+  ]
 }

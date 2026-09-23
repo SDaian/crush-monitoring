@@ -256,6 +256,9 @@
   "summary": {
     "trades": 30,
     "members": 14,
+    "congress": 13,
+    "executive": 1,
+    "whoLabel": "13 members of Congress and 1 executive-branch filer",
     "buys": 12,
     "sells": 18,
     "other": 0,
@@ -680,5 +683,19 @@
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20026732.pdf"
     }
   ],
-  "tradesShown": 25
+  "tradesShown": 25,
+  "faq": [
+    {
+      "q": "Who in Congress has traded MA stock?",
+      "a": "13 members of Congress and 1 executive-branch filer have disclosed 30 MA trades since May 2024. The most active is Josh Gottheimer, with 5 trades, followed by Tommy Tuberville and Gilbert Ray Cisneros, Jr.. Each trade on this page links to the official filing it came from."
+    },
+    {
+      "q": "Is Congress buying or selling MA?",
+      "a": "Of the 30 disclosed MA trades, 12 were buys and 18 were sells. By the midpoint of each filed amount bracket, the buying comes to about $188K and the selling to about $334K. Filings disclose brackets, never exact amounts, so these totals are estimates."
+    },
+    {
+      "q": "How late are MA trades disclosed?",
+      "a": "23% of the disclosed MA trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Jun 8, 2026, and the newest filing arrived on Aug 5, 2026."
+    }
+  ]
 }

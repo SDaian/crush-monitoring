@@ -105,6 +105,9 @@
   "summary": {
     "trades": 9,
     "members": 7,
+    "congress": 7,
+    "executive": 0,
+    "whoLabel": "7 members of Congress",
     "buys": 9,
     "sells": 0,
     "other": 0,
@@ -304,5 +307,19 @@
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20034949.pdf"
     }
   ],
-  "tradesShown": 9
+  "tradesShown": 9,
+  "faq": [
+    {
+      "q": "Who in Congress has traded SPCX stock?",
+      "a": "7 members of Congress have disclosed 9 SPCX trades since June 2026. The most active is William R. Timmons IV, with 2 trades, followed by Maria Elvira Salazar and Daniel Meuser. Each trade on this page links to the official filing it came from."
+    },
+    {
+      "q": "Is Congress buying or selling SPCX?",
+      "a": "Of the 9 disclosed SPCX trades, 9 were buys and 0 were sells. By the midpoint of each filed amount bracket, the buying comes to about $255K and the selling to about $0. Filings disclose brackets, never exact amounts, so these totals are estimates."
+    },
+    {
+      "q": "How late are SPCX trades disclosed?",
+      "a": "None of the 9 disclosed SPCX trades was filed late: each arrived within the STOCK Act's 45-day legal maximum. The newest trade is dated Aug 12, 2026, and the newest filing arrived on Sep 9, 2026."
+    }
+  ]
 }

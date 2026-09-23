@@ -249,6 +249,9 @@
   "summary": {
     "trades": 28,
     "members": 6,
+    "congress": 6,
+    "executive": 0,
+    "whoLabel": "6 members of Congress",
     "buys": 19,
     "sells": 9,
     "other": 0,
@@ -629,5 +632,19 @@
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20024346.pdf"
     }
   ],
-  "tradesShown": 25
+  "tradesShown": 25,
+  "faq": [
+    {
+      "q": "Who in Congress has traded BABA stock?",
+      "a": "6 members of Congress have disclosed 28 BABA trades since December 2023. The most active is Robert P. Bresnahan, Jr., with 9 trades, followed by Josh Gottheimer and Lisa C. McClain. Each trade on this page links to the official filing it came from."
+    },
+    {
+      "q": "Is Congress buying or selling BABA?",
+      "a": "Of the 28 disclosed BABA trades, 19 were buys and 9 were sells. By the midpoint of each filed amount bracket, the buying comes to about $293K and the selling to about $431K. Filings disclose brackets, never exact amounts, so these totals are estimates."
+    },
+    {
+      "q": "How late are BABA trades disclosed?",
+      "a": "14% of the disclosed BABA trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Jul 24, 2026, and the newest filing arrived on Sep 4, 2026."
+    }
+  ]
 }

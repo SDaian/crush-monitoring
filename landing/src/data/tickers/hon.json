@@ -249,6 +249,9 @@
   "summary": {
     "trades": 29,
     "members": 18,
+    "congress": 17,
+    "executive": 1,
+    "whoLabel": "17 members of Congress and 1 executive-branch filer",
     "buys": 9,
     "sells": 20,
     "other": 0,
@@ -673,5 +676,19 @@
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20029135.pdf"
     }
   ],
-  "tradesShown": 25
+  "tradesShown": 25,
+  "faq": [
+    {
+      "q": "Who in Congress has traded HON stock?",
+      "a": "17 members of Congress and 1 executive-branch filer have disclosed 29 HON trades since October 2024. The most active is Julie Johnson, with 5 trades, followed by Alan Armstrong and Sheldon Whitehouse. Each trade on this page links to the official filing it came from."
+    },
+    {
+      "q": "Is Congress buying or selling HON?",
+      "a": "Of the 29 disclosed HON trades, 9 were buys and 20 were sells. By the midpoint of each filed amount bracket, the buying comes to about $97K and the selling to about $423K. Filings disclose brackets, never exact amounts, so these totals are estimates."
+    },
+    {
+      "q": "How late are HON trades disclosed?",
+      "a": "28% of the disclosed HON trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Jul 10, 2026, and the newest filing arrived on Aug 5, 2026."
+    }
+  ]
 }

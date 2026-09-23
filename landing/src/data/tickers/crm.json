@@ -249,6 +249,9 @@
   "summary": {
     "trades": 52,
     "members": 19,
+    "congress": 18,
+    "executive": 1,
+    "whoLabel": "18 members of Congress and 1 executive-branch filer",
     "buys": 24,
     "sells": 28,
     "other": 0,
@@ -673,5 +676,19 @@
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20030891.pdf"
     }
   ],
-  "tradesShown": 25
+  "tradesShown": 25,
+  "faq": [
+    {
+      "q": "Who in Congress has traded CRM stock?",
+      "a": "18 members of Congress and 1 executive-branch filer have disclosed 52 CRM trades since September 2024. The most active is David J. Taylor, with 8 trades, followed by Julia Letlow and Josh Gottheimer. Each trade on this page links to the official filing it came from."
+    },
+    {
+      "q": "Is Congress buying or selling CRM?",
+      "a": "Of the 52 disclosed CRM trades, 24 were buys and 28 were sells. By the midpoint of each filed amount bracket, the buying comes to about $290K and the selling to about $371K. Filings disclose brackets, never exact amounts, so these totals are estimates."
+    },
+    {
+      "q": "How late are CRM trades disclosed?",
+      "a": "21% of the disclosed CRM trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Jun 2, 2026, and the newest filing arrived on Aug 24, 2026."
+    }
+  ]
 }

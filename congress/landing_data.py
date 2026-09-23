@@ -94,6 +94,127 @@ def compact_bucket(lo, hi) -> str:
     return f"{one(lo)} – {one(hi)}"
 
 
+def filers_label(congress: int, executive: int) -> str:
+    """Who disclosed the trades, as a noun phrase: "34 members of Congress",
+    "33 members of Congress and 1 executive-branch filer".
+
+    The President's 278-T filings list stocks since June 2026, so 58 of 111
+    ticker pages counted him among "members of Congress". A count that mixes
+    the two branches must say so, or the page states something false.
+    """
+    parts = []
+    if congress:
+        parts.append(f"{congress:,} member{'s' if congress != 1 else ''} of Congress")
+    if executive:
+        parts.append(f"{executive:,} executive-branch filer"
+                     f"{'s' if executive != 1 else ''}")
+    return " and ".join(parts) or "No filer"
+
+
+def _day(iso: str | None) -> str:
+    """"2026-09-10" → "Sep 10, 2026" — the page's own date style."""
+    d = date.fromisoformat(iso)
+    return f"{d:%b} {d.day}, {d.year}"
+
+
+def _month(iso: str | None) -> str:
+    d = date.fromisoformat(iso)
+    return f"{d:%B} {d.year}"
+
+
+def _names(names: list[str]) -> str:
+    """"A", "A and B", "A, B and C"."""
+    return names[0] if len(names) == 1 else f"{', '.join(names[:-1])} and {names[-1]}"
+
+
+# A question-and-answer block on every ticker and member page.
+#
+# These are the questions people type ("which members of congress traded
+# nvda"), answered in a sentence an answer engine can lift whole: the page's
+# own numbers, the entity named in full rather than "it", 25-60 words. They are
+# built HERE, not in the template, so the visible block and the page's
+# FAQPage markup read one list and can never disagree (Google's rule, and ours
+# on /how-it-works). A question with nothing behind it is omitted rather than
+# answered with a zero — the empty-list rule again.
+def ticker_faq(p: dict) -> list[dict]:
+    tk, s = p["ticker"], p["summary"]
+    if not s.get("trades"):
+        return []
+    out = []
+    top = p.get("topMembers") or []
+    who = s.get("whoLabel") or filers_label(s.get("members", 0), 0)
+    verb = "has" if s.get("members") == 1 else "have"
+    if top:
+        lead = top[0]
+        rest = [m["name"] for m in top[1:3]]
+        a = (f"{who} {verb} disclosed {s['trades']:,} {tk} trade"
+             f"{'s' if s['trades'] != 1 else ''} since {_month(s['firstTx'])}. "
+             f"The most active is {lead['name']}, with {lead['trades']} trade"
+             f"{'s' if lead['trades'] != 1 else ''}")
+        a += f", followed by {_names(rest)}." if rest else "."
+        a += " Each trade on this page links to the official filing it came from."
+        out.append({"q": f"Who in Congress has traded {tk} stock?", "a": a})
+    a = (f"Of the {s['trades']:,} disclosed {tk} trades, {s['buys']:,} were "
+         f"buys and {s['sells']:,} were sells. By the midpoint of each filed "
+         f"amount bracket, the buying comes to about {s['estBuyLabel']} and "
+         f"the selling to about {s['estSellLabel']}. Filings disclose brackets, "
+         f"never exact amounts, so these totals are estimates.")
+    out.append({"q": f"Is Congress buying or selling {tk}?", "a": a})
+    pct = s.get("pctLate", 0)
+    a = ((f"{pct}% of the disclosed {tk} trades were filed late, past the "
+          f"STOCK Act's 45-day legal maximum.") if pct else
+         f"None of the {s['trades']:,} disclosed {tk} trades was filed late: "
+         f"each arrived within the STOCK Act's 45-day legal maximum.")
+    if s.get("lastTx") and s.get("lastFiling"):
+        a += (f" The newest trade is dated {_day(s['lastTx'])}, and the newest "
+              f"filing arrived on {_day(s['lastFiling'])}.")
+    out.append({"q": f"How late are {tk} trades disclosed?", "a": a})
+    return out
+
+
+def member_faq(p: dict) -> list[dict]:
+    name, s = p["name"], p["summary"]
+    if not s.get("trades"):
+        return []
+    out = []
+    top = [t for t in (p.get("topTickers") or [])][:3]
+    if top and s.get("distinctTickers"):
+        listed = _names([f"{t['ticker']} ({t['count']})" for t in top])
+        a = (f"{name} has disclosed {s['trades']:,} trade"
+             f"{'s' if s['trades'] != 1 else ''} across "
+             f"{s['distinctTickers']:,} ticker"
+             f"{'s' if s['distinctTickers'] != 1 else ''} since "
+             f"{_month(s['firstTx'])}. The most traded "
+             f"{'is' if len(top) == 1 else 'are'} {listed}. Each trade on this "
+             f"page links to the official filing it came from.")
+        out.append({"q": f"What stocks does {name} trade?", "a": a})
+    pct, worst = s.get("pctLate", 0), s.get("worstLate", 0)
+    a = ((f"{pct}% of {name}'s disclosed trades were filed late, past the "
+          f"STOCK Act's 45-day legal maximum. The worst was {worst:,} "
+          f"day{'s' if worst != 1 else ''} late.") if pct else
+         f"None of {name}'s {s['trades']:,} disclosed trades was filed late: "
+         f"each arrived within the STOCK Act's 45-day legal maximum.")
+    # The question is "on time?", so the answer opens with the word that
+    # answers it. (A first draft opened a clean record with "No." — true of
+    # "late?", false of the question actually asked.)
+    a = ("Not always. " if pct else "Yes. ") + a
+    if s.get("lastFiling"):
+        a += f" The newest filing arrived on {_day(s['lastFiling'])}."
+    out.append({"q": f"Does {name} disclose trades on time?", "a": a})
+    h = p.get("holdings") or {}
+    ranked = h.get("ranked") or []
+    if h.get("available") and ranked and h.get("totalLabel"):
+        big = ranked[0]
+        a = (f"An estimate from {name}'s {h['reportYear']} annual financial "
+             f"disclosure, rolled forward with every trade filed since, puts the "
+             f"listed stocks and options at about {h['totalLabel']} across "
+             f"{h['positionsTotal']:,} positions. The largest is {big['ticker']}, "
+             f"at about {big['estLabel']}. These are bracket midpoints, not "
+             f"share counts or a live valuation.")
+        out.append({"q": f"What stocks does {name} own?", "a": a})
+    return out
+
+
 def money(x: float) -> str:
     """A single point-estimate dollar amount, compact: "$5.0M" / "$250K"."""
     x = max(0.0, x)
@@ -728,7 +849,7 @@ def member_payload(name: str, trades: list[dict], holdings: dict,
         } for o in rf["options"][:MEMBER_HOLDINGS_CAP]],
     }
 
-    return {
+    payload = {
         "slug": slugify(name),
         "name": name,
         "party": ref.get("party"),
@@ -768,6 +889,8 @@ def member_payload(name: str, trades: list[dict], holdings: dict,
         "performance": performance_block(name, ts, returns, perf),
         "committees": committee_block(name, committees, ts, sector_data),
     }
+    payload["faq"] = member_faq(payload)
+    return payload
 
 
 # Options and crypto have their own price dynamics; a "return since buy" of
@@ -1188,7 +1311,7 @@ def ticker_payload(ticker: str, trades: list[dict],
         "sourceUrl": t.get("source_url"),
     } for t in ts[:TICKER_TRADE_CAP]]
 
-    return {
+    payload = {
         "slug": ticker_slug(ticker),
         "ticker": ticker,
         "company": company,
@@ -1206,6 +1329,15 @@ def ticker_payload(ticker: str, trades: list[dict],
         "summary": {
             "trades": len(ts),
             "members": len(by_member),
+            # The same filers split by branch, and the phrase every surface
+            # uses for them — see filers_label.
+            "congress": sum(1 for m in by_member.values()
+                            if m["chamber"] != "Executive"),
+            "executive": sum(1 for m in by_member.values()
+                             if m["chamber"] == "Executive"),
+            "whoLabel": filers_label(
+                sum(1 for m in by_member.values() if m["chamber"] != "Executive"),
+                sum(1 for m in by_member.values() if m["chamber"] == "Executive")),
             "buys": sides.get("buy", 0),
             "sells": sides.get("sell", 0),
             "other": len(ts) - sides.get("buy", 0) - sides.get("sell", 0),
@@ -1229,6 +1361,8 @@ def ticker_payload(ticker: str, trades: list[dict],
         "trades": rows,
         "tradesShown": len(rows),
     }
+    payload["faq"] = ticker_faq(payload)
+    return payload
 
 
 def write_ticker_files(trades: list[dict], out_dir: Path,

@@ -249,6 +249,9 @@
   "summary": {
     "trades": 34,
     "members": 16,
+    "congress": 15,
+    "executive": 1,
+    "whoLabel": "15 members of Congress and 1 executive-branch filer",
     "buys": 9,
     "sells": 25,
     "other": 0,
@@ -673,5 +676,19 @@
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20029038.pdf"
     }
   ],
-  "tradesShown": 25
+  "tradesShown": 25,
+  "faq": [
+    {
+      "q": "Who in Congress has traded CMCSA stock?",
+      "a": "15 members of Congress and 1 executive-branch filer have disclosed 34 CMCSA trades since August 2024. The most active is Gilbert Ray Cisneros, Jr., with 8 trades, followed by Scott Franklin and Julie Johnson. Each trade on this page links to the official filing it came from."
+    },
+    {
+      "q": "Is Congress buying or selling CMCSA?",
+      "a": "Of the 34 disclosed CMCSA trades, 9 were buys and 25 were sells. By the midpoint of each filed amount bracket, the buying comes to about $121K and the selling to about $390K. Filings disclose brackets, never exact amounts, so these totals are estimates."
+    },
+    {
+      "q": "How late are CMCSA trades disclosed?",
+      "a": "18% of the disclosed CMCSA trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Aug 5, 2026, and the newest filing arrived on Sep 4, 2026."
+    }
+  ]
 }

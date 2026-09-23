@@ -711,6 +711,91 @@ class TestEntityFields(unittest.TestCase):
         self.assertEqual(tickers["tickers"][0]["lastFiling"], "2026-07-05")
 
 
+class TestFilersLabel(unittest.TestCase):
+    """A count that mixes the branches must say so."""
+
+    def test_congress_only(self):
+        self.assertEqual(ld.filers_label(34, 0), "34 members of Congress")
+        self.assertEqual(ld.filers_label(1, 0), "1 member of Congress")
+
+    def test_mixed_branches_are_named_apart(self):
+        # The President's 278-T stocks put him on 58 of 111 ticker pages,
+        # each of which called him a member of Congress.
+        self.assertEqual(ld.filers_label(33, 1),
+                         "33 members of Congress and 1 executive-branch filer")
+        self.assertEqual(ld.filers_label(0, 1), "1 executive-branch filer")
+
+    def test_ticker_summary_splits_the_count(self):
+        ts = [MT(member="Nancy Pelosi"), MT(member="Donald J. Trump")]
+        ts[1]["chamber"] = "executive"
+        s = ld.ticker_payload("NVDA", ts)["summary"]
+        self.assertEqual((s["congress"], s["executive"]), (1, 1))
+        self.assertEqual(s["whoLabel"],
+                         "1 member of Congress and 1 executive-branch filer")
+
+
+class TestFaq(unittest.TestCase):
+    """The question-and-answer block: answers an engine can lift whole."""
+
+    def _member(self, pct=0, worst=0, holdings=None):
+        return {"name": "Nancy Pelosi", "holdings": holdings,
+                "summary": {"trades": 38, "distinctTickers": 14,
+                            "firstTx": "2024-12-20", "lastFiling": "2026-08-21",
+                            "pctLate": pct, "worstLate": worst},
+                "topTickers": [{"ticker": "NVDA", "count": 6},
+                               {"ticker": "AAPL", "count": 5}]}
+
+    def _answer(self, faq, start):
+        return next(x["a"] for x in faq if x["q"].startswith(start))
+
+    def test_a_clean_record_answers_yes(self):
+        a = self._answer(ld.member_faq(self._member()), "Does")
+        self.assertTrue(a.startswith("Yes. None of"), a)
+
+    def test_a_late_record_answers_not_always(self):
+        a = self._answer(ld.member_faq(self._member(pct=14, worst=77)), "Does")
+        self.assertTrue(a.startswith("Not always. 14%"), a)
+        self.assertIn("77 days late", a)
+
+    def test_holdings_question_needs_parsed_holdings(self):
+        # "What does she own?" with nothing parsed is omitted, never
+        # answered with a zero.
+        qs = [x["q"] for x in ld.member_faq(self._member())]
+        self.assertNotIn("What stocks does Nancy Pelosi own?", qs)
+        h = {"available": True, "reportYear": 2025, "totalLabel": "$153.7M",
+             "positionsTotal": 28,
+             "ranked": [{"ticker": "GOOGL", "estLabel": "$16.1M"}]}
+        a = self._answer(ld.member_faq(self._member(holdings=h)), "What stocks does Nancy Pelosi own")
+        self.assertIn("estimate", a)
+        self.assertIn("not share counts", a)
+
+    def test_no_trades_no_block(self):
+        m = self._member(); m["summary"]["trades"] = 0
+        self.assertEqual(ld.member_faq(m), [])
+        self.assertEqual(ld.ticker_faq({"ticker": "X", "summary": {"trades": 0}}), [])
+
+    def test_ticker_answers_name_the_ticker_and_the_branches(self):
+        ts = [MT(member="Nancy Pelosi"), MT(member="Donald J. Trump")]
+        ts[1]["chamber"] = "executive"
+        faq = ld.ticker_payload("NVDA", ts)["faq"]
+        who = self._answer(faq, "Who in Congress")
+        # Two filers, so the compound subject takes "have".
+        self.assertIn("1 member of Congress and 1 executive-branch filer have disclosed", who)
+        for x in faq:
+            self.assertIn("NVDA", x["a"])          # self-contained, never "it"
+            self.assertLessEqual(len(x["a"].split()), 60)
+
+    def test_real_pages_stay_within_the_answer_length(self):
+        data = Path(__file__).resolve().parents[2] / "landing" / "src" / "data"
+        files = list(data.glob("members/*.json")) + list(data.glob("tickers/*.json"))
+        self.assertTrue(files)
+        for f in files:
+            if f.name.startswith("_"):
+                continue
+            for x in json.loads(f.read_text()).get("faq", []):
+                self.assertLessEqual(len(x["a"].split()), 60, (f.name, x["q"]))
+
+
 class TestMemberIndexPerf(unittest.TestCase):
     def _write(self, perf_members):
         perf = {"benchmark": {"label": "S&P 500", "asof_date": "2026-07-31"},

@@ -249,6 +249,9 @@
   "summary": {
     "trades": 40,
     "members": 16,
+    "congress": 16,
+    "executive": 0,
+    "whoLabel": "16 members of Congress",
     "buys": 20,
     "sells": 20,
     "other": 0,
@@ -673,5 +676,19 @@
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20030295.pdf"
     }
   ],
-  "tradesShown": 25
+  "tradesShown": 25,
+  "faq": [
+    {
+      "q": "Who in Congress has traded NOW stock?",
+      "a": "16 members of Congress have disclosed 40 NOW trades since December 2024. The most active is Lisa C. McClain, with 7 trades, followed by Josh Gottheimer and Robert P. Bresnahan, Jr.. Each trade on this page links to the official filing it came from."
+    },
+    {
+      "q": "Is Congress buying or selling NOW?",
+      "a": "Of the 40 disclosed NOW trades, 20 were buys and 20 were sells. By the midpoint of each filed amount bracket, the buying comes to about $185K and the selling to about $252K. Filings disclose brackets, never exact amounts, so these totals are estimates."
+    },
+    {
+      "q": "How late are NOW trades disclosed?",
+      "a": "25% of the disclosed NOW trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Apr 24, 2026, and the newest filing arrived on Aug 7, 2026."
+    }
+  ]
 }

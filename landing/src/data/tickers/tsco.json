@@ -249,6 +249,9 @@
   "summary": {
     "trades": 31,
     "members": 6,
+    "congress": 6,
+    "executive": 0,
+    "whoLabel": "6 members of Congress",
     "buys": 14,
     "sells": 17,
     "other": 0,
@@ -629,5 +632,19 @@
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20030442.pdf"
     }
   ],
-  "tradesShown": 25
+  "tradesShown": 25,
+  "faq": [
+    {
+      "q": "Who in Congress has traded TSCO stock?",
+      "a": "6 members of Congress have disclosed 31 TSCO trades since January 2025. The most active is April McClain Delaney, with 21 trades, followed by Jared Moskowitz and Tommy Tuberville. Each trade on this page links to the official filing it came from."
+    },
+    {
+      "q": "Is Congress buying or selling TSCO?",
+      "a": "Of the 31 disclosed TSCO trades, 14 were buys and 17 were sells. By the midpoint of each filed amount bracket, the buying comes to about $112K and the selling to about $283K. Filings disclose brackets, never exact amounts, so these totals are estimates."
+    },
+    {
+      "q": "How late are TSCO trades disclosed?",
+      "a": "3% of the disclosed TSCO trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Aug 25, 2026, and the newest filing arrived on Sep 9, 2026."
+    }
+  ]
 }

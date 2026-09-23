@@ -256,6 +256,9 @@
   "summary": {
     "trades": 45,
     "members": 18,
+    "congress": 18,
+    "executive": 0,
+    "whoLabel": "18 members of Congress",
     "buys": 28,
     "sells": 17,
     "other": 0,
@@ -680,5 +683,19 @@
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20030179.pdf"
     }
   ],
-  "tradesShown": 25
+  "tradesShown": 25,
+  "faq": [
+    {
+      "q": "Who in Congress has traded INTC stock?",
+      "a": "18 members of Congress have disclosed 45 INTC trades since May 2024. The most active is Robert P. Bresnahan, Jr., with 10 trades, followed by Tommy Tuberville and Tim Moore. Each trade on this page links to the official filing it came from."
+    },
+    {
+      "q": "Is Congress buying or selling INTC?",
+      "a": "Of the 45 disclosed INTC trades, 28 were buys and 17 were sells. By the midpoint of each filed amount bracket, the buying comes to about $4.8M and the selling to about $969K. Filings disclose brackets, never exact amounts, so these totals are estimates."
+    },
+    {
+      "q": "How late are INTC trades disclosed?",
+      "a": "18% of the disclosed INTC trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Jul 24, 2026, and the newest filing arrived on Aug 21, 2026."
+    }
+  ]
 }

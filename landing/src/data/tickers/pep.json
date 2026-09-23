@@ -256,6 +256,9 @@
   "summary": {
     "trades": 51,
     "members": 24,
+    "congress": 23,
+    "executive": 1,
+    "whoLabel": "23 members of Congress and 1 executive-branch filer",
     "buys": 19,
     "sells": 32,
     "other": 0,
@@ -680,5 +683,19 @@
       "sourceUrl": "https://efdsearch.senate.gov/search/view/ptr/8a808088-5410-434a-a082-cf86637ba3d7/"
     }
   ],
-  "tradesShown": 25
+  "tradesShown": 25,
+  "faq": [
+    {
+      "q": "Who in Congress has traded PEP stock?",
+      "a": "23 members of Congress and 1 executive-branch filer have disclosed 51 PEP trades since March 2023. The most active is Julie Johnson, with 7 trades, followed by Jared Moskowitz and Lisa C. McClain. Each trade on this page links to the official filing it came from."
+    },
+    {
+      "q": "Is Congress buying or selling PEP?",
+      "a": "Of the 51 disclosed PEP trades, 19 were buys and 32 were sells. By the midpoint of each filed amount bracket, the buying comes to about $201K and the selling to about $853K. Filings disclose brackets, never exact amounts, so these totals are estimates."
+    },
+    {
+      "q": "How late are PEP trades disclosed?",
+      "a": "12% of the disclosed PEP trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Aug 26, 2026, and the newest filing arrived on Sep 17, 2026."
+    }
+  ]
 }

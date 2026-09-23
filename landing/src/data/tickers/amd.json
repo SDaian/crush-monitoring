@@ -262,6 +262,9 @@
   "summary": {
     "trades": 52,
     "members": 15,
+    "congress": 15,
+    "executive": 0,
+    "whoLabel": "15 members of Congress",
     "buys": 39,
     "sells": 13,
     "other": 0,
@@ -686,5 +689,19 @@
       "sourceUrl": "https://efdsearch.senate.gov/search/view/ptr/59bccfcc-9400-4d3d-917f-ce22a0fd2feb/"
     }
   ],
-  "tradesShown": 25
+  "tradesShown": 25,
+  "faq": [
+    {
+      "q": "Who in Congress has traded AMD stock?",
+      "a": "15 members of Congress have disclosed 52 AMD trades since January 2024. The most active is Gilbert Ray Cisneros, Jr., with 10 trades, followed by Marjorie Taylor Greene and Lisa C. McClain. Each trade on this page links to the official filing it came from."
+    },
+    {
+      "q": "Is Congress buying or selling AMD?",
+      "a": "Of the 52 disclosed AMD trades, 39 were buys and 13 were sells. By the midpoint of each filed amount bracket, the buying comes to about $716K and the selling to about $379K. Filings disclose brackets, never exact amounts, so these totals are estimates."
+    },
+    {
+      "q": "How late are AMD trades disclosed?",
+      "a": "15% of the disclosed AMD trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Aug 18, 2026, and the newest filing arrived on Sep 10, 2026."
+    }
+  ]
 }

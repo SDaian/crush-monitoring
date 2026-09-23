@@ -249,6 +249,9 @@
   "summary": {
     "trades": 10,
     "members": 7,
+    "congress": 7,
+    "executive": 0,
+    "whoLabel": "7 members of Congress",
     "buys": 5,
     "sells": 5,
     "other": 0,
@@ -460,5 +463,19 @@
       "sourceUrl": "https://efdsearch.senate.gov/search/view/ptr/0a25588d-a3f8-4ed6-971a-706097f78e3a/"
     }
   ],
-  "tradesShown": 10
+  "tradesShown": 10,
+  "faq": [
+    {
+      "q": "Who in Congress has traded KLAC stock?",
+      "a": "7 members of Congress have disclosed 10 KLAC trades since May 2024. The most active is Val T. Hoyle, with 4 trades, followed by Alan Armstrong and Elizabeth Fletcher. Each trade on this page links to the official filing it came from."
+    },
+    {
+      "q": "Is Congress buying or selling KLAC?",
+      "a": "Of the 10 disclosed KLAC trades, 5 were buys and 5 were sells. By the midpoint of each filed amount bracket, the buying comes to about $40K and the selling to about $40K. Filings disclose brackets, never exact amounts, so these totals are estimates."
+    },
+    {
+      "q": "How late are KLAC trades disclosed?",
+      "a": "50% of the disclosed KLAC trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Jul 1, 2026, and the newest filing arrived on Aug 7, 2026."
+    }
+  ]
 }

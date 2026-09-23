@@ -249,6 +249,9 @@
   "summary": {
     "trades": 77,
     "members": 21,
+    "congress": 20,
+    "executive": 1,
+    "whoLabel": "20 members of Congress and 1 executive-branch filer",
     "buys": 47,
     "sells": 30,
     "other": 0,
@@ -673,5 +676,19 @@
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20033420.pdf"
     }
   ],
-  "tradesShown": 25
+  "tradesShown": 25,
+  "faq": [
+    {
+      "q": "Who in Congress has traded GOOG stock?",
+      "a": "20 members of Congress and 1 executive-branch filer have disclosed 77 GOOG trades since August 2024. The most active is Cleo Fields, with 19 trades, followed by Jerry Moran and Marjorie Taylor Greene. Each trade on this page links to the official filing it came from."
+    },
+    {
+      "q": "Is Congress buying or selling GOOG?",
+      "a": "Of the 77 disclosed GOOG trades, 47 were buys and 30 were sells. By the midpoint of each filed amount bracket, the buying comes to about $1.8M and the selling to about $866K. Filings disclose brackets, never exact amounts, so these totals are estimates."
+    },
+    {
+      "q": "How late are GOOG trades disclosed?",
+      "a": "12% of the disclosed GOOG trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Aug 20, 2026, and the newest filing arrived on Sep 17, 2026."
+    }
+  ]
 }

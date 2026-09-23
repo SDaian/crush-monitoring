@@ -249,6 +249,9 @@
   "summary": {
     "trades": 26,
     "members": 6,
+    "congress": 6,
+    "executive": 0,
+    "whoLabel": "6 members of Congress",
     "buys": 14,
     "sells": 12,
     "other": 0,
@@ -629,5 +632,19 @@
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20029034.pdf"
     }
   ],
-  "tradesShown": 25
+  "tradesShown": 25,
+  "faq": [
+    {
+      "q": "Who in Congress has traded APP stock?",
+      "a": "6 members of Congress have disclosed 26 APP trades since February 2025. The most active is Gilbert Ray Cisneros, Jr., with 13 trades, followed by Jefferson Shreve and Josh Gottheimer. Each trade on this page links to the official filing it came from."
+    },
+    {
+      "q": "Is Congress buying or selling APP?",
+      "a": "Of the 26 disclosed APP trades, 14 were buys and 12 were sells. By the midpoint of each filed amount bracket, the buying comes to about $161K and the selling to about $170K. Filings disclose brackets, never exact amounts, so these totals are estimates."
+    },
+    {
+      "q": "How late are APP trades disclosed?",
+      "a": "8% of the disclosed APP trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Aug 18, 2026, and the newest filing arrived on Sep 10, 2026."
+    }
+  ]
 }

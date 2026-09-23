@@ -17,7 +17,8 @@ import CountUp from "../../components/CountUp.astro";
 import MarketStrip from "../../components/MarketStrip.astro";
 import StarButton from "../../components/StarButton.astro";
 import marketData from "../../data/market.json";
-import { plural, seoDescription, seoTitle, branded, shortCompany, dataset, breadcrumbs } from "../../lib/seo";
+import { plural, seoDescription, seoTitle, branded, shortCompany, dataset, breadcrumbs, faqSchema } from "../../lib/seo";
+import Faq from "../../components/Faq.astro";
 
 // Build-time "checked" date: when this page was last regenerated. Deliberately
 // computed here, not stamped into the data files — a timestamp in the payload
@@ -183,7 +184,7 @@ const title = seoTitle(
 // optional tail clause because it is the one part whose length we do not
 // control ("Taiwan Semiconductor Manufacturing Company Ltd." alone is 47).
 const description = seoDescription(
-  `${plural(s.members, "member")} of Congress disclosed ` +
+  `${s.whoLabel} disclosed ` +
     `${plural(s.trades, `${t.ticker} trade`)} — ${plural(s.buys, "buy")}, ` +
     `${plural(s.sells, "sell")}, the amounts and how late each filing arrived.`,
   `${t.company}.`,
@@ -191,7 +192,7 @@ const description = seoDescription(
 
 const schema = [
   dataset(`/tickers/${t.slug}`, {
-    name: `${t.ticker} — stock trades disclosed by members of Congress`,
+    name: `${t.ticker} — stock trades disclosed by ${s.executive ? "US politicians" : "members of Congress"}`,
     description,
     // The company as an entity, so "who in Congress traded NVIDIA" and "NVDA
     // congress trades" resolve to the same page.
@@ -203,6 +204,7 @@ const schema = [
     variableMeasured: ["member", "transaction type", "amount bracket", "filing delay"],
   }),
   breadcrumbs(["Stocks", "/tickers"], [t.ticker, `/tickers/${t.slug}`]),
+  ...(t.faq?.length ? [faqSchema(t.faq)] : []),
 ];
 ---
 
@@ -256,7 +258,7 @@ const schema = [
         <StarButton kind="tickers" id={t.ticker} name={t.ticker} />
       </div>
       <p class="mt-6 max-w-[58ch] text-[1.05rem] leading-[1.65] text-pretty text-ink-soft">
-        {s.members} member{s.members === 1 ? "" : "s"} of Congress have disclosed
+        {s.whoLabel} {s.members === 1 ? "has" : "have"} disclosed
         {" "}{s.trades.toLocaleString("en-US")} trades in {t.company} between
         {" "}{fmtMonth(s.firstTx)} and {fmtMonth(s.lastTx)} — {s.buys} buys and
         {" "}{s.sells} sells. Amounts are the brackets as filed; timing is counted
@@ -579,6 +581,10 @@ const schema = [
       )
     }
     </div>
+
+    <section class="mx-auto max-w-[75rem] px-[5vw] pb-[8vh]">
+      <Faq title={`Questions about ${t.ticker}`} eyebrow="Answered from the record" items={t.faq ?? []} />
+    </section>
 
     <section class="border-t-2 border-ink px-[5vw] py-[10vh] text-center">
       <h2 class="text-[clamp(1.8rem,4.5vw,3.2rem)] font-black leading-[1.15] tracking-[-0.03em] text-balance">
