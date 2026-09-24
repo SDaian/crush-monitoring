@@ -9,23 +9,23 @@
   },
   "indexable": true,
   "technical": {
-    "asOf": "2026-09-22",
-    "price": 364.54,
-    "chg1d": 0.52,
-    "chg1w": 7.45,
-    "chg1m": -1.06,
-    "rsi14": 49.8,
-    "sma50": 378.62,
-    "sma200": 368.92,
-    "ema8": 356.73,
-    "ema21": 361.91,
-    "emaGap": -1.43,
-    "vsSma50": -3.7,
-    "vsSma200": -1.2,
-    "relVol": 0.75,
+    "asOf": "2026-09-23",
+    "price": 354.99,
+    "chg1d": -2.62,
+    "chg1w": 4.56,
+    "chg1m": -1.05,
+    "rsi14": 44.4,
+    "sma50": 377.94,
+    "sma200": 368.79,
+    "ema8": 356.34,
+    "ema21": 361.28,
+    "emaGap": -1.37,
+    "vsSma50": -6.1,
+    "vsSma200": -3.7,
+    "relVol": 0.85,
     "high52w": 481.57,
     "low52w": 293.41,
-    "rangePos": 38.0,
+    "rangePos": 33.0,
     "series": [
       {
         "d": "2025-10-03",
@@ -232,8 +232,8 @@
         "c": 357.61
       },
       {
-        "d": "2026-09-22",
-        "c": 364.54
+        "d": "2026-09-23",
+        "c": 354.99
       }
     ],
     "signals": [],
@@ -247,17 +247,17 @@
     }
   },
   "summary": {
-    "trades": 89,
+    "trades": 90,
     "members": 24,
     "congress": 23,
     "executive": 1,
     "whoLabel": "23 members of Congress and 1 executive-branch filer",
-    "buys": 51,
+    "buys": 52,
     "sells": 38,
     "other": 0,
     "firstTx": "2024-09-26",
     "lastTx": "2026-08-26",
-    "lastFiling": "2026-09-05",
+    "lastFiling": "2026-09-22",
     "estBuyLabel": "$3.8M",
     "estSellLabel": "$936K",
     "pctLate": 17
@@ -398,6 +398,18 @@
       "filedDate": "2026-09-05",
       "daysLate": 0,
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035392.pdf"
+    },
+    {
+      "member": "Rick W. Allen",
+      "memberSlug": "rick-w-allen",
+      "hasPage": false,
+      "party": "R",
+      "side": "BUY",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-08-12",
+      "filedDate": "2026-09-22",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035492.pdf"
     },
     {
       "member": "David J. Taylor",
@@ -662,33 +674,21 @@
       "filedDate": "2025-11-21",
       "daysLate": 0,
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20033446.pdf"
-    },
-    {
-      "member": "Lisa C. McClain",
-      "memberSlug": "lisa-c-mcclain",
-      "hasPage": false,
-      "party": "R",
-      "side": "SELL",
-      "amountBucket": "$1K – $15K",
-      "txDate": "2025-10-30",
-      "filedDate": "2025-11-21",
-      "daysLate": 0,
-      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20033446.pdf"
     }
   ],
   "tradesShown": 25,
   "faq": [
     {
       "q": "Who in Congress has traded AVGO stock?",
-      "a": "23 members of Congress and 1 executive-branch filer have disclosed 89 AVGO trades since September 2024. The most active is David J. Taylor, with 11 trades, followed by Jared Moskowitz and Lisa C. McClain. Each trade on this page links to the official filing it came from."
+      "a": "23 members of Congress and 1 executive-branch filer have disclosed 90 AVGO trades since September 2024. The most active is David J. Taylor, with 11 trades, followed by Jared Moskowitz and Lisa C. McClain. Each trade on this page links to the official filing it came from."
     },
     {
       "q": "Is Congress buying or selling AVGO?",
-      "a": "Of the 89 disclosed AVGO trades, 51 were buys and 38 were sells. By the midpoint of each filed amount bracket, the buying comes to about $3.8M and the selling to about $936K. Filings disclose brackets, never exact amounts, so these totals are estimates."
+      "a": "Of the 90 disclosed AVGO trades, 52 were buys and 38 were sells. By the midpoint of each filed amount bracket, the buying comes to about $3.8M and the selling to about $936K. Filings disclose brackets, never exact amounts, so these totals are estimates."
     },
     {
       "q": "How late are AVGO trades disclosed?",
-      "a": "17% of the disclosed AVGO trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Aug 26, 2026, and the newest filing arrived on Sep 5, 2026."
+      "a": "17% of the disclosed AVGO trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Aug 26, 2026, and the newest filing arrived on Sep 22, 2026."
     }
   ]
 }

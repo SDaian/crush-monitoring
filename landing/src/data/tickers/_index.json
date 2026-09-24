@@ -37,12 +37,12 @@
       "slug": "aapl",
       "ticker": "AAPL",
       "company": "Apple Inc.",
-      "trades": 151,
-      "members": 43,
+      "trades": 152,
+      "members": 44,
       "buys": 74,
-      "sells": 77,
-      "lastTx": "2026-08-20",
-      "lastFiling": "2026-09-17",
+      "sells": 78,
+      "lastTx": "2026-09-22",
+      "lastFiling": "2026-09-22",
       "indexable": true,
       "industry": {
         "key": "tech",
@@ -117,12 +117,12 @@
       "slug": "avgo",
       "ticker": "AVGO",
       "company": "Broadcom Inc.",
-      "trades": 89,
+      "trades": 90,
       "members": 24,
-      "buys": 51,
+      "buys": 52,
       "sells": 38,
       "lastTx": "2026-08-26",
-      "lastFiling": "2026-09-05",
+      "lastFiling": "2026-09-22",
       "indexable": true,
       "industry": {
         "key": "tech",
@@ -370,6 +370,22 @@
       }
     },
     {
+      "slug": "tsm",
+      "ticker": "TSM",
+      "company": "Taiwan Semiconductor Manufacturing Company Ltd.",
+      "trades": 51,
+      "members": 12,
+      "buys": 35,
+      "sells": 16,
+      "lastTx": "2026-08-12",
+      "lastFiling": "2026-09-22",
+      "indexable": true,
+      "industry": {
+        "key": "tech",
+        "label": "Technology"
+      }
+    },
+    {
       "slug": "pep",
       "ticker": "PEP",
       "company": "Pepsico, Inc.",
@@ -431,22 +447,6 @@
       "industry": {
         "key": "health",
         "label": "Health care & pharma"
-      }
-    },
-    {
-      "slug": "tsm",
-      "ticker": "TSM",
-      "company": "Taiwan Semiconductor Manufacturing Company Ltd.",
-      "trades": 50,
-      "members": 12,
-      "buys": 34,
-      "sells": 16,
-      "lastTx": "2026-07-10",
-      "lastFiling": "2026-07-30",
-      "indexable": true,
-      "industry": {
-        "key": "tech",
-        "label": "Technology"
       }
     },
     {
