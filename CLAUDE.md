@@ -939,6 +939,19 @@ Conventions:
   that answers it — a first draft opened a clean filing record with "No."
   Google shows FAQ rich results only for government and health sites since
   2023; the block is for answer engines and literal-question searches.
+- **"What stocks is Congress buying?" has its own page**
+  (`/what-congress-is-buying`, from `landing_data.buying_payload` →
+  `landing/src/data/buying.json`, staged in the workflow's `FILES`). It is the
+  question in the site's own Search Console data. The window is the last **45
+  days of filings counted back from the newest congressional filing**, not from
+  today, so a slow week at the Clerk never empties it. **Congress only**: the
+  President's managed accounts file hundreds of 278-T purchases and would swamp
+  it; the page says so and links his page. Rows rank by **how many members
+  bought** — breadth is what "Congress is buying" means — then purchases, then
+  the bracket-midpoint estimate. **Options are counted as options** everywhere
+  the page and its answers state a total: Pelosi's $7.5M of BE was call
+  options, and "stock purchases" would have overstated it. `/tickers` stays the
+  all-time most-traded list; the two link to each other.
 - **One company, one page.** `landing_data.SAME_COMPANY` folds a ticker onto
   another company's page — GOOG (Alphabet Class C) onto GOOGL, FB (Meta until
   2022) onto META — at the PAGE layer only: the record keeps every trade as

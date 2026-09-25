@@ -5,6 +5,7 @@ import sitemap from "@astrojs/sitemap";
 import tickerIndex from "./src/data/tickers/_index.json" with { type: "json" };
 import memberIndex from "./src/data/members/_index.json" with { type: "json" };
 import report from "./src/data/report.json" with { type: "json" };
+import buying from "./src/data/buying.json" with { type: "json" };
 import { FontaineTransform } from "fontaine";
 
 // @fontsource ships every @font-face with `font-display: swap`, which shows
@@ -53,6 +54,8 @@ function lastmodFor(path) {
   if (path.startsWith("/tickers/")) return tickerMod[path.slice(9)];
   if (path.startsWith("/members/")) return memberMod[path.slice(9)];
   if (path === "/report" || path === "/report/archive") return report.date;
+  // Its own window ends at the newest CONGRESSIONAL filing, which is its date.
+  if (path === "/what-congress-is-buying") return buying.to ?? undefined;
   if (SUMMARY_PAGES.has(path)) return newest;
   return undefined;
 }

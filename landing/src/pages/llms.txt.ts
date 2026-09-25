@@ -80,6 +80,9 @@ Government Ethics Form 278-T filings for executive-branch officials.
   tickers, filing timeliness and estimated holdings.
 - [Stocks](${SITE}/tickers): per-symbol pages — who in Congress traded it, the
   buy/sell split, and a link to every official filing.
+- [What Congress is buying](${SITE}/what-congress-is-buying): the stocks
+  members of Congress disclosed buying in the last 45 days of filings, ranked
+  by how many members bought each.
 - [Late filers](${SITE}/late): filings that arrived past the statutory maximum.
 - [Morning report](${SITE}/report): the daily digest, with a dated archive.
 - [How it works](${SITE}/how-it-works): the pipeline, the sources, and the
