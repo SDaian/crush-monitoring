@@ -870,6 +870,35 @@ class TestSameCompany(unittest.TestCase):
             self.assertIn((f"/tickers/{ld.ticker_slug(alias)}", dest), redirects, alias)
 
 
+class TestFormerMember(unittest.TestCase):
+    """A member who left Congress is never presented as sitting."""
+
+    DATA = {"members": {
+        "Marjorie Taylor Greene": {"reason": "former_member", "committees": []},
+        "Nancy Pelosi": {"reason": "none_current", "committees": []},
+    }}
+
+    def _p(self, name):
+        ts = [MT(member=name, tx=f"2025-06-0{d}") for d in range(1, 4)]
+        for i, t in enumerate(ts):
+            t["id"] = f"{name[:2]}{i}"
+        return ld.member_payload(name, ts, {}, committees=self.DATA)
+
+    def test_former_is_carried(self):
+        self.assertTrue(self._p("Marjorie Taylor Greene")["former"])
+        # A sitting member with no seats is NOT former — the empty-list rule.
+        self.assertFalse(self._p("Nancy Pelosi")["former"])
+
+    def test_the_answer_names_a_former_member_as_one(self):
+        a = self._p("Marjorie Taylor Greene")["faq"][0]["a"]
+        self.assertTrue(a.startswith("Marjorie Taylor Greene, a former member of Congress, has"), a)
+        self.assertNotIn("former", self._p("Nancy Pelosi")["faq"][0]["a"])
+
+    def test_known_as_is_carried(self):
+        self.assertEqual(self._p("Marjorie Taylor Greene")["knownAs"], ["MTG"])
+        self.assertEqual(self._p("Nancy Pelosi")["knownAs"], [])
+
+
 class TestMemberIndexPerf(unittest.TestCase):
     def _write(self, perf_members):
         perf = {"benchmark": {"label": "S&P 500", "asof_date": "2026-07-31"},
