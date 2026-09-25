@@ -127,6 +127,16 @@ def _names(names: list[str]) -> str:
     return names[0] if len(names) == 1 else f"{', '.join(names[:-1])} and {names[-1]}"
 
 
+# The names people search for a member by, beyond the one on the filing.
+# Curated here rather than in members.json, whose sitting entries the roster
+# refresh rebuilds from the download — a hand-added field there would vanish.
+# Only a name in real use belongs here: "mtg stock trades" is a query in the
+# site's own Search Console data.
+KNOWN_AS = {
+    "Marjorie Taylor Greene": ["MTG"],
+}
+
+
 # A question-and-answer block on every ticker and member page.
 #
 # These are the questions people type ("which members of congress traded
@@ -182,7 +192,10 @@ def member_faq(p: dict) -> list[dict]:
     top = [t for t in (p.get("topTickers") or [])][:3]
     if top and s.get("distinctTickers"):
         listed = _names([f"{t['ticker']} ({t['count']})" for t in top])
-        a = (f"{name} has disclosed {s['trades']:,} trade"
+        # A former member is named as one: an answer engine lifting this
+        # sentence must not present someone who left Congress as sitting.
+        who = f"{name}, a former member of Congress," if p.get("former") else name
+        a = (f"{who} has disclosed {s['trades']:,} trade"
              f"{'s' if s['trades'] != 1 else ''} across "
              f"{s['distinctTickers']:,} ticker"
              f"{'s' if s['distinctTickers'] != 1 else ''} since "
@@ -872,6 +885,13 @@ def member_payload(name: str, trades: list[dict], holdings: dict,
         # for an executive filer, who has no Bioguide entry.
         "bioguide": ((committees or {}).get("members", {})
                      .get(name, {}).get("bioguide")),
+        # No longer in Congress: the roster marks them not sitting, and the
+        # committee record carries it as "former_member". The page says so
+        # in its header and its structured data; before this it called
+        # Marjorie Taylor Greene a "Member of Congress" after she left.
+        "former": ((committees or {}).get("members", {})
+                   .get(name, {}).get("reason") == "former_member"),
+        "knownAs": KNOWN_AS.get(name, []),
         "summary": {
             "trades": len(ts),
             "distinctTickers": len(tickers),
@@ -1020,6 +1040,7 @@ def write_member_files(
             "state": payload["state"],
             "chamber": payload["chamber"],
             "district": payload["district"],
+            "former": payload["former"],
             "trades": payload["summary"]["trades"],
             # The sitemap's lastmod: the newest filing is when the page's
             # substance last changed, which a build date would misstate.

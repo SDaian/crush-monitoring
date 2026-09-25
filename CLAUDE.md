@@ -957,6 +957,15 @@ Conventions:
   writers used to only add files — so a ticker leaving the universe kept a
   live, indexable page forever. `_prune_pages` removes them; the workflow
   stages the folders, so the deletion is committed.
+- **A former member is labelled as one.** The roster marks a member who left
+  Congress `sitting: false`, which the committee record carries as
+  `former_member`; `member_payload` turns that into `former`, and the page says
+  "Former member" in its header, "Former Member of Congress" as the Person's
+  `jobTitle`, and names them as one in the first Q&A answer. Greene's page
+  called her a sitting member months after she left. `KNOWN_AS` adds the name
+  people search by ("MTG" — a real query in Search Console) as the Person's
+  `alternateName` and in the title; it lives in `landing_data`, not
+  `members.json`, because the roster refresh rebuilds sitting entries.
 - **A count that mixes branches says so.** The President's 278-T filings list
   stocks since June 2026, so 58 of 111 ticker pages called him a member of
   Congress ("34 members of Congress have disclosed…" on NVDA). The ticker

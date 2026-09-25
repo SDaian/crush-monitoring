@@ -82,7 +82,9 @@ const schema = [
               </div>
               <div class="mcard-meta">
                 {partyName[m.party] ?? m.party} · {m.state} ·{" "}
-                {m.chamber}
+                {m.former
+                  ? `Former ${m.chamber === "Senate" ? "senator" : "House member"}`
+                  : m.chamber}
               </div>
               <div class="mcard-stat">
                 <b>{m.trades.toLocaleString("en-US")}</b> trades ·{" "}
