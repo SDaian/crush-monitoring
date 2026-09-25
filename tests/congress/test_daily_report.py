@@ -177,6 +177,15 @@ class TestBuildReport(unittest.TestCase):
         self.assertNotIn("page views", self.r["html"])
 
 
+
+class TestTickerLinkAliases(unittest.TestCase):
+    def test_a_folded_ticker_links_to_its_company_page(self):
+        links = daily_report.ticker_links({"tickers": [
+            {"ticker": "GOOGL", "slug": "googl", "aliases": ["GOOG"]}]},
+            site="https://example.test")
+        self.assertEqual(links["GOOG"], links["GOOGL"])
+        self.assertIn("/tickers/googl?", links["GOOG"])
+
 class TestTrafficEmail(unittest.TestCase):
     TRAFFIC = {"kind": "daily", "total": 1284, "windowDays": 1,
                "pages": [("/", 640)], "memberPages": [("nancy-pelosi", 180)],

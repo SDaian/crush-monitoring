@@ -2,6 +2,11 @@
   "_comment": "Generated from real official disclosures by congress/landing_data.py (daily Action). Do not edit by hand. Dollar figures are bracket midpoints — estimates, not real position sizes.",
   "slug": "googl",
   "ticker": "GOOGL",
+  "aliases": [
+    "GOOG"
+  ],
+  "tickerLabel": "GOOGL and GOOG",
+  "aliasNote": "Also counts trades filed under GOOG, Alphabet's Class C shares.",
   "company": "Alphabet Inc.",
   "industry": {
     "key": "tech",
@@ -254,22 +259,33 @@
     }
   },
   "summary": {
-    "trades": 91,
-    "members": 30,
-    "congress": 29,
+    "trades": 168,
+    "members": 42,
+    "congress": 41,
     "executive": 1,
-    "whoLabel": "29 members of Congress and 1 executive-branch filer",
-    "buys": 43,
-    "sells": 48,
+    "whoLabel": "41 members of Congress and 1 executive-branch filer",
+    "buys": 90,
+    "sells": 78,
     "other": 0,
-    "firstTx": "2024-09-26",
+    "firstTx": "2024-08-07",
     "lastTx": "2026-09-14",
     "lastFiling": "2026-09-18",
-    "estBuyLabel": "$2.8M",
-    "estSellLabel": "$7.3M",
-    "pctLate": 21
+    "estBuyLabel": "$4.6M",
+    "estSellLabel": "$8.2M",
+    "pctLate": 17
   },
   "topMembers": [
+    {
+      "name": "Cleo Fields",
+      "slug": "cleo-fields",
+      "party": "D",
+      "chamber": "House",
+      "trades": 27,
+      "buys": 27,
+      "sells": 0,
+      "estLabel": "$2.3M",
+      "hasPage": true
+    },
     {
       "name": "David J. Taylor",
       "slug": "david-j-taylor",
@@ -282,25 +298,69 @@
       "hasPage": false
     },
     {
-      "name": "Cleo Fields",
-      "slug": "cleo-fields",
-      "party": "D",
+      "name": "Lisa C. McClain",
+      "slug": "lisa-c-mcclain",
+      "party": "R",
       "chamber": "House",
-      "trades": 8,
-      "buys": 8,
-      "sells": 0,
-      "estLabel": "$815K",
-      "hasPage": true
+      "trades": 11,
+      "buys": 6,
+      "sells": 5,
+      "estLabel": "$88K",
+      "hasPage": false
     },
     {
       "name": "Val T. Hoyle",
       "slug": "val-t-hoyle",
       "party": "D",
       "chamber": "House",
+      "trades": 10,
+      "buys": 6,
+      "sells": 4,
+      "estLabel": "$105K",
+      "hasPage": false
+    },
+    {
+      "name": "Jerry Moran",
+      "slug": "jerry-moran",
+      "party": "R",
+      "chamber": "Senate",
       "trades": 8,
       "buys": 5,
       "sells": 3,
-      "estLabel": "$89K",
+      "estLabel": "$64K",
+      "hasPage": false
+    },
+    {
+      "name": "Marjorie Taylor Greene",
+      "slug": "marjorie-taylor-greene",
+      "party": "R",
+      "chamber": "House",
+      "trades": 8,
+      "buys": 8,
+      "sells": 0,
+      "estLabel": "$64K",
+      "hasPage": true
+    },
+    {
+      "name": "Robert P. Bresnahan, Jr.",
+      "slug": "robert-p-bresnahan-jr",
+      "party": "R",
+      "chamber": "House",
+      "trades": 7,
+      "buys": 1,
+      "sells": 6,
+      "estLabel": "$123K",
+      "hasPage": false
+    },
+    {
+      "name": "Julie Johnson",
+      "slug": "julie-johnson",
+      "party": "D",
+      "chamber": "House",
+      "trades": 7,
+      "buys": 3,
+      "sells": 4,
+      "estLabel": "$56K",
       "hasPage": false
     },
     {
@@ -319,66 +379,11 @@
       "slug": "thomas-h-kean-jr",
       "party": "R",
       "chamber": "House",
-      "trades": 5,
+      "trades": 6,
       "buys": 0,
-      "sells": 5,
-      "estLabel": "$89K",
+      "sells": 6,
+      "estLabel": "$97K",
       "hasPage": false
-    },
-    {
-      "name": "John Boozman",
-      "slug": "john-boozman",
-      "party": "R",
-      "chamber": "Senate",
-      "trades": 5,
-      "buys": 5,
-      "sells": 0,
-      "estLabel": "$65K",
-      "hasPage": false
-    },
-    {
-      "name": "Lisa C. McClain",
-      "slug": "lisa-c-mcclain",
-      "party": "R",
-      "chamber": "House",
-      "trades": 5,
-      "buys": 3,
-      "sells": 2,
-      "estLabel": "$40K",
-      "hasPage": false
-    },
-    {
-      "name": "Nancy Pelosi",
-      "slug": "nancy-pelosi",
-      "party": "D",
-      "chamber": "House",
-      "trades": 4,
-      "buys": 3,
-      "sells": 1,
-      "estLabel": "$4.5M",
-      "hasPage": true
-    },
-    {
-      "name": "Michael A. Rulli",
-      "slug": "michael-a-rulli",
-      "party": "R",
-      "chamber": "House",
-      "trades": 4,
-      "buys": 2,
-      "sells": 2,
-      "estLabel": "$99K",
-      "hasPage": false
-    },
-    {
-      "name": "Gilbert Ray Cisneros, Jr.",
-      "slug": "gilbert-ray-cisneros-jr",
-      "party": "D",
-      "chamber": "House",
-      "trades": 4,
-      "buys": 2,
-      "sells": 2,
-      "estLabel": "$32K",
-      "hasPage": true
     }
   ],
   "trades": [
@@ -417,6 +422,30 @@
       "filedDate": "2026-08-25",
       "daysLate": 0,
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035309.pdf"
+    },
+    {
+      "member": "Scott Franklin",
+      "memberSlug": "scott-franklin",
+      "hasPage": false,
+      "party": "R",
+      "side": "SELL",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-08-20",
+      "filedDate": "2026-09-17",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035450.pdf"
+    },
+    {
+      "member": "Scott Franklin",
+      "memberSlug": "scott-franklin",
+      "hasPage": false,
+      "party": "R",
+      "side": "SELL",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-08-20",
+      "filedDate": "2026-09-17",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035450.pdf"
     },
     {
       "member": "David J. Taylor",
@@ -515,6 +544,18 @@
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035003.pdf"
     },
     {
+      "member": "Jerry Moran",
+      "memberSlug": "jerry-moran",
+      "hasPage": false,
+      "party": "R",
+      "side": "BUY",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-06-23",
+      "filedDate": "2026-07-21",
+      "daysLate": 0,
+      "sourceUrl": "https://efdsearch.senate.gov/search/view/ptr/cff197e2-b90b-4b53-b97d-eecf226a1980/"
+    },
+    {
       "member": "Matthew Robert Van Epps",
       "memberSlug": "matthew-robert-van-epps",
       "hasPage": false,
@@ -525,6 +566,18 @@
       "filedDate": "2026-06-17",
       "daysLate": 0,
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20034807.pdf"
+    },
+    {
+      "member": "Cleo Fields",
+      "memberSlug": "cleo-fields",
+      "hasPage": true,
+      "party": "D",
+      "side": "BUY",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-06-15",
+      "filedDate": "2026-06-26",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20034800.pdf"
     },
     {
       "member": "David J. Taylor",
@@ -549,6 +602,42 @@
       "filedDate": "2026-07-15",
       "daysLate": 0,
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035003.pdf"
+    },
+    {
+      "member": "Daniel Crenshaw",
+      "memberSlug": "daniel-crenshaw",
+      "hasPage": false,
+      "party": null,
+      "side": "SELL",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-06-01",
+      "filedDate": "2026-07-16",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035024.pdf"
+    },
+    {
+      "member": "Jerry Moran",
+      "memberSlug": "jerry-moran",
+      "hasPage": false,
+      "party": "R",
+      "side": "SELL",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-05-27",
+      "filedDate": "2026-06-25",
+      "daysLate": 0,
+      "sourceUrl": "https://efdsearch.senate.gov/search/view/ptr/7caf1b69-3678-4420-8812-a1476a1a6158/"
+    },
+    {
+      "member": "Donald J. Trump",
+      "memberSlug": "donald-j-trump",
+      "hasPage": true,
+      "party": "R",
+      "side": "SELL",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-05-18",
+      "filedDate": "2026-06-25",
+      "daysLate": 0,
+      "sourceUrl": "https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/F9CA13B970439E8F85258E27002DDF15/$FILE/Donald-J-Trump-06.25.2026-278T%20%282%29.pdf"
     },
     {
       "member": "Donald J. Trump",
@@ -597,105 +686,21 @@
       "filedDate": "2026-06-08",
       "daysLate": 0,
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20034713.pdf"
-    },
-    {
-      "member": "Elizabeth Fletcher",
-      "memberSlug": "elizabeth-fletcher",
-      "hasPage": false,
-      "party": null,
-      "side": "SELL",
-      "amountBucket": "$1K – $15K",
-      "txDate": "2026-04-08",
-      "filedDate": "2026-05-01",
-      "daysLate": 0,
-      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20034413.pdf"
-    },
-    {
-      "member": "David J. Taylor",
-      "memberSlug": "david-j-taylor",
-      "hasPage": false,
-      "party": "R",
-      "side": "BUY",
-      "amountBucket": "$1K – $15K",
-      "txDate": "2026-02-26",
-      "filedDate": "2026-03-06",
-      "daysLate": 0,
-      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20034138.pdf"
-    },
-    {
-      "member": "Thomas H. Kean, Jr.",
-      "memberSlug": "thomas-h-kean-jr",
-      "hasPage": false,
-      "party": "R",
-      "side": "SELL",
-      "amountBucket": "$15K – $50K",
-      "txDate": "2026-02-05",
-      "filedDate": "2026-03-18",
-      "daysLate": 0,
-      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20034190.pdf"
-    },
-    {
-      "member": "Cleo Fields",
-      "memberSlug": "cleo-fields",
-      "hasPage": true,
-      "party": "D",
-      "side": "BUY",
-      "amountBucket": "$100K – $250K",
-      "txDate": "2026-02-03",
-      "filedDate": "2026-02-24",
-      "daysLate": 0,
-      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20034018.pdf"
-    },
-    {
-      "member": "David J. Taylor",
-      "memberSlug": "david-j-taylor",
-      "hasPage": false,
-      "party": "R",
-      "side": "SELL",
-      "amountBucket": "$1K – $15K",
-      "txDate": "2026-01-16",
-      "filedDate": "2026-02-02",
-      "daysLate": 0,
-      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20033916.pdf"
-    },
-    {
-      "member": "Nancy Pelosi",
-      "memberSlug": "nancy-pelosi",
-      "hasPage": true,
-      "party": "D",
-      "side": "BUY",
-      "amountBucket": "$500K – $1M",
-      "txDate": "2026-01-16",
-      "filedDate": "2026-01-23",
-      "daysLate": 0,
-      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20033725.pdf"
-    },
-    {
-      "member": "Nancy Pelosi",
-      "memberSlug": "nancy-pelosi",
-      "hasPage": true,
-      "party": "D",
-      "side": "BUY",
-      "amountBucket": "$250K – $500K",
-      "txDate": "2025-12-30",
-      "filedDate": "2026-01-23",
-      "daysLate": 0,
-      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20033725.pdf"
     }
   ],
   "tradesShown": 25,
   "faq": [
     {
-      "q": "Who in Congress has traded GOOGL stock?",
-      "a": "29 members of Congress and 1 executive-branch filer have disclosed 91 GOOGL trades since September 2024. The most active is David J. Taylor, with 12 trades, followed by Cleo Fields and Val T. Hoyle. Each trade on this page links to the official filing it came from."
+      "q": "Who in Congress has traded GOOGL and GOOG stock?",
+      "a": "41 members of Congress and 1 executive-branch filer have disclosed 168 GOOGL and GOOG trades since August 2024. The most active is Cleo Fields, with 27 trades, followed by David J. Taylor and Lisa C. McClain. Each trade on this page links to the official filing it came from."
     },
     {
-      "q": "Is Congress buying or selling GOOGL?",
-      "a": "Of the 91 disclosed GOOGL trades, 43 were buys and 48 were sells. By the midpoint of each filed amount bracket, the buying comes to about $2.8M and the selling to about $7.3M. Filings disclose brackets, never exact amounts, so these totals are estimates."
+      "q": "Is Congress buying or selling GOOGL and GOOG?",
+      "a": "Of the 168 disclosed GOOGL and GOOG trades, 90 were buys and 78 were sells. By the midpoint of each filed amount bracket, the buying comes to about $4.6M and the selling to about $8.2M. Filings disclose brackets, never exact amounts, so these totals are estimates."
     },
     {
-      "q": "How late are GOOGL trades disclosed?",
-      "a": "21% of the disclosed GOOGL trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Sep 14, 2026, and the newest filing arrived on Sep 18, 2026."
+      "q": "How late are GOOGL and GOOG trades disclosed?",
+      "a": "17% of the disclosed GOOGL and GOOG trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Sep 14, 2026, and the newest filing arrived on Sep 18, 2026."
     }
   ]
 }

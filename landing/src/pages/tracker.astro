@@ -27,8 +27,11 @@ import tickerIndex from "../data/tickers/_index.json";
 const MEMBER_PAGES = Object.fromEntries(
   (memberIndex as any).members.map((m: any) => [m.name, m.slug]),
 );
+// A ticker folded onto another company's page (GOOG → Alphabet at GOOGL)
+// links there too, so a row filed as GOOG still reaches its page.
 const TICKER_PAGES = Object.fromEntries(
-  (tickerIndex as any).tickers.map((t: any) => [t.ticker, t.slug]),
+  (tickerIndex as any).tickers.flatMap((t: any) =>
+    [t.ticker, ...(t.aliases ?? [])].map((sym: string) => [sym, t.slug])),
 );
 
 const title = seoTitle(branded("Congress stock trades tracker"));
