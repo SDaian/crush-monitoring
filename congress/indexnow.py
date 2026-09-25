@@ -33,7 +33,8 @@ LANDING_DATA = pipeline.REPO_ROOT / "landing" / "src" / "data"
 
 # Pages whose content moves with the daily refresh, beyond the generated
 # member/ticker sets.
-DAILY_PAGES = ["/", "/tracker", "/report", "/late", "/tickers", "/members"]
+DAILY_PAGES = ["/", "/tracker", "/report", "/late", "/tickers", "/members",
+               "/what-congress-is-buying"]
 
 
 def _slugs(index_path: Path, list_key: str, slug_key: str = "slug") -> list[str]:

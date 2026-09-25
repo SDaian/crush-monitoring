@@ -36,7 +36,7 @@ from __future__ import annotations
 import json
 import re
 from collections import Counter
-from datetime import date
+from datetime import date, timedelta
 from pathlib import Path
 
 from . import sectors
@@ -448,6 +448,144 @@ def stats_payload(trades: list[dict], today: date) -> dict:
         "lastFiling": max((t["filing_date"] for t in trades
                            if t.get("filing_date")), default=None),
     }
+
+
+# "What stocks is Congress buying?" — the question people type, answered from
+# the record. The window is the statutory one: filings from the last 45 days,
+# counted back from the NEWEST filing in the data rather than from today, so a
+# slow week at the Clerk shortens nothing and the page never empties.
+#
+# Congress only. The President's managed accounts file hundreds of purchases
+# on OGE Form 278-T (302 tickers since June 2026); counted here they would
+# swamp a page whose question is about Congress. His page lists them.
+#
+# Ranked by how many MEMBERS bought — breadth is what "Congress is buying"
+# means; one member's large order is a single decision, and the dollar column
+# is beside it for that. Dollar figures are bracket midpoints, as everywhere.
+BUYING_WINDOW_DAYS = 45
+BUYING_ROWS = 20
+
+
+def buying_payload(trades: list[dict], ticker_pages: set[str] | None = None,
+                   window: int = BUYING_WINDOW_DAYS,
+                   count: int = BUYING_ROWS) -> dict:
+    ticker_pages = ticker_pages or set()
+    cong = [t for t in trades
+            if t.get("chamber") in ("house", "senate") and t.get("filing_date")]
+    empty = {"windowDays": window, "from": None, "to": None, "members": 0,
+             "buys": 0, "companies": 0, "rows": [], "faq": []}
+    if not cong:
+        return empty
+    newest = max(t["filing_date"] for t in cong)
+    cutoff = (date.fromisoformat(newest) - timedelta(days=window)).isoformat()
+    buys = [t for t in cong
+            if t.get("type") == "buy" and t.get("ticker") and not is_bond(t)
+            and t["filing_date"] > cutoff]
+    if not buys:
+        return {**empty, "from": cutoff, "to": newest}
+
+    groups: dict[str, dict] = {}
+    for t in buys:
+        tk = page_ticker(t["ticker"])
+        g = groups.setdefault(tk, {"ticker": tk, "raw": set(), "members": Counter(),
+                                   "buys": 0, "options": 0, "est": 0.0,
+                                   "assets": Counter(), "lastFiling": ""})
+        g["raw"].add(t["ticker"])
+        g["members"][t["member"]] += 1
+        g["buys"] += 1
+        g["options"] += t.get("asset_type") == "Option"
+        g["est"] += _mid(t)
+        if t.get("asset"):
+            g["assets"][t["asset"]] += 1
+        g["lastFiling"] = max(g["lastFiling"], t["filing_date"])
+
+    ranked = sorted(groups.values(),
+                    key=lambda g: (-len(g["members"]), -g["buys"], -g["est"], g["ticker"]))
+    featured = set(MEMBER_PAGE_NAMES)
+    rows = []
+    for g in ranked[:count]:
+        classes = sorted(a for a in g["raw"] - {g["ticker"]}
+                         if SAME_COMPANY.get(a, {}).get("share_class"))
+        company = clean_company(g["assets"].most_common(1)[0][0]
+                                if g["assets"] else "", g["ticker"])
+        rows.append({
+            "ticker": g["ticker"],
+            "tickerLabel": " and ".join([g["ticker"], *classes]),
+            "slug": ticker_slug(g["ticker"]) if g["ticker"] in ticker_pages else None,
+            "company": company,
+            "members": len(g["members"]),
+            # Most active buyer first, then by name, so the line is stable.
+            "buyers": [{"name": n, "slug": slugify(n) if n in featured else None}
+                       for n, _ in sorted(g["members"].items(), key=lambda kv: (-kv[1], kv[0]))],
+            "buys": g["buys"],
+            "options": g["options"],
+            "estLabel": money(g["est"]),
+            "est": round(g["est"]),
+            "lastFiling": g["lastFiling"],
+        })
+    payload = {
+        "windowDays": window, "from": cutoff, "to": newest,
+        "members": len({t["member"] for t in buys}),
+        "buys": len(buys),
+        # Call options are purchases too, and Pelosi's are the biggest dollar
+        # figure on the page — so every count says how many were options
+        # rather than calling them all "stock purchases".
+        "options": sum(g["options"] for g in groups.values()),
+        "companies": len(groups),
+        "rows": rows,
+        # The single largest estimated buying, for the answer that asks for it.
+        "largest": (lambda g: {
+            "ticker": g["ticker"], "estLabel": money(g["est"]), "buys": g["buys"],
+            "options": g["options"],
+            "company": clean_company(g["assets"].most_common(1)[0][0]
+                                     if g["assets"] else "", g["ticker"]),
+            "buyers": sorted(g["members"]),
+        })(max(groups.values(), key=lambda g: (g["est"], g["ticker"]))),
+    }
+    payload["faq"] = buying_faq(payload)
+    return payload
+
+
+def buying_faq(p: dict) -> list[dict]:
+    """The page's own questions, answered from its numbers — the same rules as
+    ticker_faq: the entity named, 25-60 words, nothing asked of empty data."""
+    if not p.get("rows"):
+        return []
+    top = p["rows"][:3]
+    listed = _names([f"{r['tickerLabel']} ({r['members']} members)" for r in top])
+    out = [{
+        "q": "What stocks is Congress buying?",
+        "a": (f"In filings from the last {p['windowDays']} days, to "
+              f"{_day(p['to'])}, {filers_label(p['members'], 0)} disclosed "
+              f"{p['buys']:,} purchases"
+              + (f", {p['options']:,} of them options," if p.get("options") else "")
+              + f" across {p['companies']:,} companies. The stocks bought by the "
+              f"most members were {listed}. "
+              f"Filings arrive up to 45 days after the trade: this is recent "
+              f"disclosure, not live trading."),
+    }]
+    big = p.get("largest")
+    if big:
+        who = _names(big["buyers"][:2]) + (" and others" if len(big["buyers"]) > 2 else "")
+        out.append({
+            "q": "What is the largest stock purchase Congress disclosed recently?",
+            "a": (f"By the midpoint of each filed amount bracket, the largest "
+                  f"recent buying was in {big['company']} ({big['ticker']}): about "
+                  f"{big['estLabel']} across {big['buys']} purchase"
+                  f"{'s' if big['buys'] != 1 else ''}"
+                  + (f" ({'all' if big['options'] == big['buys'] else big['options']} "
+                     f"of them options)" if big.get("options") else "")
+                  + f", by {who}. Filings disclose "
+                  f"brackets, never exact amounts, so this is an estimate."),
+        })
+    out.append({
+        "q": "Does this include the President's trades?",
+        "a": ("No. This page counts members of Congress only. The President's "
+              "managed-account purchases, disclosed on OGE Form 278-T, would "
+              "outnumber them by far, so they are listed on his own page "
+              "instead."),
+    })
+    return out
 
 
 LATE_BOARD_SIZE = 10
@@ -1537,6 +1675,12 @@ def write_files(trades: list[dict], out_dir: Path, today: date) -> tuple[int, di
     )
     (out_dir / "stats.json").write_text(
         json.dumps({"_comment": comment, **stats},
+                   indent=2, ensure_ascii=False) + "\n",
+        encoding="utf-8",
+    )
+    (out_dir / "buying.json").write_text(
+        json.dumps({"_comment": comment,
+                    **buying_payload(trades, set(select_ticker_pages(trades)))},
                    indent=2, ensure_ascii=False) + "\n",
         encoding="utf-8",
     )

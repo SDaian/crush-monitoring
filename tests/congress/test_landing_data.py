@@ -899,6 +899,74 @@ class TestFormerMember(unittest.TestCase):
         self.assertEqual(self._p("Nancy Pelosi")["knownAs"], [])
 
 
+class TestBuying(unittest.TestCase):
+    """What stocks is Congress buying — the page's rows and answers."""
+
+    def _t(self, member, tk, filed, chamber="house", typ="buy", asset_type="Stock",
+           lo=1001, hi=15000, i=[0]):
+        i[0] += 1
+        return {"id": f"b{i[0]}", "member": member, "ticker": tk, "type": typ,
+                "chamber": chamber, "asset": f"{tk} Inc.", "asset_type": asset_type,
+                "tx_date": "2026-08-01", "filing_date": filed,
+                "amount_lo": lo, "amount_hi": hi}
+
+    def test_ranks_by_members_then_purchases(self):
+        ts = [self._t("A", "MSFT", "2026-09-20"), self._t("B", "MSFT", "2026-09-20"),
+              self._t("A", "NVDA", "2026-09-20"), self._t("A", "NVDA", "2026-09-21"),
+              self._t("A", "NVDA", "2026-09-22")]
+        p = ld.buying_payload(ts, {"MSFT"})
+        self.assertEqual([r["ticker"] for r in p["rows"]], ["MSFT", "NVDA"])
+        self.assertEqual(p["rows"][0]["members"], 2)
+        self.assertEqual(p["rows"][0]["slug"], "msft")
+        self.assertIsNone(p["rows"][1]["slug"])  # no page, no dead link
+
+    def test_window_counts_back_from_the_newest_filing(self):
+        # 45 days before the NEWEST filing, not before today: a slow week at
+        # the Clerk must not empty the page.
+        ts = [self._t("A", "MSFT", "2026-09-22"), self._t("B", "OLD", "2026-08-01")]
+        p = ld.buying_payload(ts)
+        self.assertEqual([r["ticker"] for r in p["rows"]], ["MSFT"])
+        self.assertEqual((p["from"], p["to"]), ("2026-08-08", "2026-09-22"))
+
+    def test_congress_only_and_buys_only(self):
+        ts = [self._t("A", "MSFT", "2026-09-20"),
+              self._t("Donald J. Trump", "HD", "2026-09-20", chamber="executive"),
+              self._t("B", "AAPL", "2026-09-20", typ="sell"),
+              {**self._t("C", None, "2026-09-20"), "asset_type": "Municipal Security"}]
+        p = ld.buying_payload(ts)
+        self.assertEqual([r["ticker"] for r in p["rows"]], ["MSFT"])
+        self.assertEqual(p["members"], 1)
+
+    def test_options_are_counted_as_options(self):
+        # Pelosi's $7.5M "purchase" of BE was call options; calling it stock
+        # would overstate what was bought.
+        ts = [self._t("Nancy Pelosi", "BE", "2026-09-20", asset_type="Option",
+                      lo=1_000_001, hi=5_000_000),
+              self._t("Nancy Pelosi", "BE", "2026-09-21")]
+        p = ld.buying_payload(ts)
+        self.assertEqual(p["options"], 1)
+        self.assertEqual(p["rows"][0]["options"], 1)
+        big = next(x["a"] for x in p["faq"] if x["q"].startswith("What is the largest"))
+        self.assertIn("1 of them options", big)
+        what = next(x["a"] for x in p["faq"] if x["q"] == "What stocks is Congress buying?")
+        self.assertIn("1 of them options", what)
+
+    def test_a_share_class_is_named(self):
+        ts = [self._t("A", "GOOGL", "2026-09-20"), self._t("B", "GOOG", "2026-09-20")]
+        row = ld.buying_payload(ts)["rows"][0]
+        self.assertEqual((row["ticker"], row["tickerLabel"], row["members"]),
+                         ("GOOGL", "GOOGL and GOOG", 2))
+
+    def test_empty_record_asks_nothing(self):
+        p = ld.buying_payload([])
+        self.assertEqual((p["rows"], p["faq"]), ([], []))
+
+    def test_real_answers_stay_within_the_length(self):
+        data = Path(__file__).resolve().parents[2] / "landing" / "src" / "data" / "buying.json"
+        for x in json.loads(data.read_text())["faq"]:
+            self.assertLessEqual(len(x["a"].split()), 60, x["q"])
+
+
 class TestMemberIndexPerf(unittest.TestCase):
     def _write(self, perf_members):
         perf = {"benchmark": {"label": "S&P 500", "asof_date": "2026-07-31"},

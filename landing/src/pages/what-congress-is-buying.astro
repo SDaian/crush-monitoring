@@ -1,0 +1,263 @@
+---
+// "/what-congress-is-buying" — the question people type ("what stocks is
+// congress buying", "stocks bought by congress"), answered from the record.
+// Built from landing/src/data/buying.json (landing_data.buying_payload): the
+// last 45 days of filings, Congress only, ranked by how many members bought.
+// The first sentence answers the question with the page's own numbers, and
+// the Q&A below is generated from the same payload as its FAQPage markup.
+import "../styles/global.css";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import Seo from "../components/Seo.astro";
+import SignupForm from "../components/SignupForm.astro";
+import SignupModal from "../components/SignupModal.astro";
+import NewestFiling from "../components/NewestFiling.astro";
+import Faq from "../components/Faq.astro";
+import buying from "../data/buying.json";
+import { plural, seoDescription, seoTitle, branded, dataset, faqSchema } from "../lib/seo";
+
+const b = buying as any;
+const rows: any[] = b.rows ?? [];
+const top = rows[0];
+const fmtDay = (iso: string) =>
+  new Date(`${iso}T00:00:00Z`).toLocaleDateString("en-US", {
+    month: "short",
+    day: "numeric",
+    year: "numeric",
+    timeZone: "UTC",
+  });
+
+const title = seoTitle(branded("What stocks is Congress buying?"));
+const description = seoDescription(
+  top
+    ? `${plural(b.members, "member")} of Congress disclosed ${plural(b.buys, "purchase")} ` +
+        `in the last ${b.windowDays} days. Most bought: ${rows
+          .slice(0, 3)
+          .map((r) => r.tickerLabel)
+          .join(", ")}.`
+    : `The stocks members of Congress disclosed buying in the last ${b.windowDays} days.`,
+  "Official filings, updated daily.",
+);
+
+const schema = [
+  dataset("/what-congress-is-buying", {
+    name: `Stocks bought by members of Congress, last ${b.windowDays} days of filings`,
+    description,
+    keywords: ["what stocks is congress buying", "stocks bought by congress", "congress stock purchases"],
+    ...(b.from && b.to ? { temporalCoverage: `${b.from}/${b.to}`, dateModified: b.to } : {}),
+    variableMeasured: ["ticker", "members buying", "purchases", "amount bracket midpoint"],
+  }),
+  ...(b.faq?.length ? [faqSchema(b.faq)] : []),
+];
+---
+
+<html lang="en">
+  <head>
+    <Seo title={title} description={description} path="/what-congress-is-buying" schema={schema} />
+  </head>
+  <body>
+    <Header active="tickers" />
+
+    <main id="content">
+    <section class="mx-auto max-w-[75rem] px-[5vw] pt-[9vh] pb-[7vh]">
+      <p class="eyebrow mb-5 flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
+        <span>Buys · <b class="font-semibold text-stamp">Last {b.windowDays} days of filings</b></span>
+        <NewestFiling iso={b.to} />
+      </p>
+      <h1 class="headline max-w-[18ch] text-[clamp(2.4rem,6.5vw,4.6rem)]">
+        What Congress is <span class="underline-stamp">buying</span>.
+      </h1>
+      {
+        top ? (
+          <p class="mt-6 max-w-[58ch] text-[1.05rem] leading-[1.65] text-pretty text-ink-soft">
+            In filings from the last {b.windowDays} days, {b.members} members of
+            Congress disclosed {b.buys.toLocaleString("en-US")} purchases
+            {b.options ? ` (${b.options} of them options)` : ""} across{" "}
+            {b.companies.toLocaleString("en-US")} companies. The stock bought by
+            the most members is <b class="text-ink">{top.company} ({top.tickerLabel})</b>:
+            {" "}{top.members} members, {top.buys} purchases.
+          </p>
+        ) : (
+          <p class="mt-6 max-w-[58ch] text-[1.05rem] leading-[1.65] text-pretty text-ink-soft">
+            No purchases were disclosed in the last {b.windowDays} days of filings.
+          </p>
+        )
+      }
+      <p class="fineprint mt-4 max-w-[62ch]">
+        Filings arrive up to 45 days after the trade, so this is recent
+        disclosure, not live trading. Members of Congress only: the President's
+        purchases are on <a href="/members/donald-j-trump" class="underline underline-offset-2 hover:text-ink">his own page</a>.
+      </p>
+    </section>
+
+    {
+      rows.length > 0 && (
+        <section class="mx-auto max-w-[75rem] px-[5vw] pb-[6vh]">
+          <div class="section-head">
+            <h2 class="section-title whitespace-nowrap">Most bought</h2>
+            <span class="eyebrow">By number of members buying</span>
+          </div>
+
+          <div role="table" aria-label={`Stocks most bought by members of Congress, last ${b.windowDays} days of filings`}>
+            <div role="row" class="sr-only">
+              <span role="columnheader">Rank</span>
+              <span role="columnheader">Stock</span>
+              <span role="columnheader">Members</span>
+              <span role="columnheader">Purchases</span>
+              <span role="columnheader">Estimated amount</span>
+            </div>
+            {rows.map((r, i) => (
+              <div role="row" class="brow">
+                <div role="cell" class="brank">{String(i + 1).padStart(2, "0")}</div>
+                <div role="cell" class="bwho">
+                  {r.slug ? (
+                    <a href={`/tickers/${r.slug}`} class="bstock">
+                      {r.company} <span class="btk">{r.tickerLabel}</span>
+                    </a>
+                  ) : (
+                    <span class="bstock">
+                      {r.company} <span class="btk">{r.tickerLabel}</span>
+                    </span>
+                  )}
+                  <small>
+                    {r.buyers.slice(0, 3).map((m: any, j: number) => (
+                      <>
+                        {j > 0 && ", "}
+                        {m.slug ? <a href={`/members/${m.slug}`}>{m.name}</a> : m.name}
+                      </>
+                    ))}
+                    {r.buyers.length > 3 && ` and ${r.buyers.length - 3} more`}
+                  </small>
+                </div>
+                <div role="cell" class="bnum">
+                  <b>{r.members}</b>
+                  <small>{r.members === 1 ? "member" : "members"}</small>
+                </div>
+                <div role="cell" class="bnum bbuys">
+                  <b>{r.buys}</b>
+                  <small>{r.options ? `incl. ${r.options} option${r.options === 1 ? "" : "s"}` : r.buys === 1 ? "purchase" : "purchases"}</small>
+                </div>
+                <div role="cell" class="bnum best">
+                  <b>{r.estLabel}</b>
+                  {/* The purchases column hides on phones, so the estimate
+                       carries its own options note: MSFT's $1.2M is mostly
+                       two option purchases. */}
+                  <small>{r.options ? "est., incl. options" : "est."}</small>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <p class="mono mt-5 max-w-[80ch] text-[.75rem] leading-[1.7] text-ink-soft">
+            Filings from {fmtDay(b.from)} to {fmtDay(b.to)}. Estimated amounts
+            are the midpoints of the brackets as filed, never exact figures.
+            Every purchase, with a link to its official filing, is in the{" "}
+            <a href="/tracker" class="underline underline-offset-2 hover:text-ink">tracker</a>;
+            the most-traded stocks of all time are on{" "}
+            <a href="/tickers" class="underline underline-offset-2 hover:text-ink">Stocks</a>.
+            Not investment advice.
+          </p>
+        </section>
+      )
+    }
+
+    <section class="mx-auto max-w-[75rem] px-[5vw] pb-[8vh]">
+      <Faq title="Questions about what Congress is buying" eyebrow="Answered from the record" items={b.faq ?? []} />
+    </section>
+
+    <section class="border-t-2 border-ink px-[5vw] py-[10vh] text-center">
+      <h2 class="text-[clamp(1.8rem,4.5vw,3.2rem)] font-black leading-[1.15] tracking-[-0.03em] text-balance">
+        See every new purchase the morning it is filed.
+      </h2>
+      <p class="mx-auto mt-4 mb-6 max-w-[46ch] text-pretty text-ink-soft">
+        {b.buys.toLocaleString("en-US")} purchases filed in the last {b.windowDays} days.
+        Each new one lands in one morning email.
+      </p>
+      <SignupForm variant="band" id="join" />
+    </section>
+    </main>
+
+    <Footer />
+
+    <SignupModal title="See what Congress buys next." />
+  </body>
+</html>
+
+<style>
+  .brow {
+    display: grid;
+    grid-template-columns: 3.5rem 2fr 0.7fr 0.8fr 0.8fr;
+    gap: 0.75rem;
+    align-items: center;
+    padding: 1.1rem 0.25rem;
+    border-bottom: 1px solid var(--color-rule);
+    font-family: var(--font-mono);
+    font-size: 0.83rem;
+  }
+  .brow > * {
+    min-width: 0;
+    overflow-wrap: break-word;
+  }
+  .brank {
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: var(--color-stamp);
+  }
+  .bstock {
+    font-family: var(--font-sans);
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: var(--color-ink);
+    text-decoration: none;
+  }
+  a.bstock:hover {
+    color: var(--color-stamp);
+  }
+  .btk {
+    font-family: var(--font-mono);
+    font-weight: 600;
+    font-size: 0.78rem;
+    color: var(--color-ink-soft);
+  }
+  .bwho small,
+  .bnum small {
+    display: block;
+    font-weight: 400;
+    color: var(--color-ink-soft);
+    font-size: 0.75rem;
+    margin-top: 0.125rem;
+  }
+  .bwho small a {
+    color: inherit;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+  .bnum {
+    text-align: right;
+  }
+  .bnum b {
+    font-family: var(--font-sans);
+    font-weight: 900;
+    font-size: 1.3rem;
+    letter-spacing: -0.02em;
+    font-variant-numeric: tabular-nums;
+    line-height: 1;
+  }
+
+  @media (max-width:47.5rem) {
+    .brow {
+      grid-template-columns: 2.125rem 1fr 3.6rem 4.4rem;
+      font-size: 0.75rem;
+      gap: 0.5rem;
+    }
+    .bbuys {
+      display: none; /* rank, stock, members and the estimate stay */
+    }
+    .brank {
+      font-size: 0.9rem;
+    }
+    .bnum b {
+      font-size: 1.05rem;
+    }
+  }
+</style>
