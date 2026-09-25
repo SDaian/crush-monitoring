@@ -173,6 +173,9 @@ const scoreClass = tech
 // people search, but filings carry legal names with share-class notes, so a
 // long one falls through to the ticker-only form rather than being cut.
 const co = shortCompany(t.company || "");
+// "GOOGL and GOOG" where a second share class is folded onto the page; every
+// COUNT on the page uses it, while the headline keeps the page's own ticker.
+const label: string = t.tickerLabel ?? t.ticker;
 const withCo = co && co.toUpperCase() !== t.ticker
   ? `${co} (${t.ticker}) stock trades by Congress` : "";
 const title = seoTitle(
@@ -185,19 +188,19 @@ const title = seoTitle(
 // control ("Taiwan Semiconductor Manufacturing Company Ltd." alone is 47).
 const description = seoDescription(
   `${s.whoLabel} disclosed ` +
-    `${plural(s.trades, `${t.ticker} trade`)} — ${plural(s.buys, "buy")}, ` +
+    `${plural(s.trades, `${label} trade`)} — ${plural(s.buys, "buy")}, ` +
     `${plural(s.sells, "sell")}, the amounts and how late each filing arrived.`,
   `${t.company}.`,
 );
 
 const schema = [
   dataset(`/tickers/${t.slug}`, {
-    name: `${t.ticker} — stock trades disclosed by ${s.executive ? "US politicians" : "members of Congress"}`,
+    name: `${label} — stock trades disclosed by ${s.executive ? "US politicians" : "members of Congress"}`,
     description,
     // The company as an entity, so "who in Congress traded NVIDIA" and "NVDA
     // congress trades" resolve to the same page.
     about: { "@type": "Corporation", name: co || t.company || t.ticker, tickerSymbol: t.ticker },
-    keywords: [`${t.ticker} congress trades`, `${co || t.ticker} congressional stock trades`, "STOCK Act disclosures"],
+    keywords: [...[t.ticker, ...(t.aliases ?? [])].map((sym: string) => `${sym} congress trades`), `${co || t.ticker} congressional stock trades`, "STOCK Act disclosures"],
     dateModified: s.lastFiling ?? undefined,
     temporalCoverage:
       s.firstTx && s.lastTx ? `${s.firstTx}/${s.lastTx}` : undefined,
@@ -264,6 +267,9 @@ const schema = [
         {" "}{s.sells} sells. Amounts are the brackets as filed; timing is counted
         against the 45-day legal maximum.
       </p>
+      {t.aliasNote && (
+        <p class="fineprint mt-3 max-w-[58ch]">{t.aliasNote}</p>
+      )}
       {/* Same split as member pages: newest filing in the header's right
            meta, "checked" (our rebuild date) down here. */}
       <p class="mono mt-5 text-[.75rem] uppercase tracking-[.08em] text-ink-soft">
@@ -324,7 +330,7 @@ const schema = [
         <section class="mx-auto max-w-[75rem] px-[5vw] pb-[7vh]">
           <div class="section-head">
             <h2 class="section-title whitespace-nowrap">
-              Who trades {t.ticker}
+              Who trades {label}
             </h2>
             <span class="eyebrow">Most active filers first</span>
           </div>
@@ -358,7 +364,7 @@ const schema = [
 
     <section class="mx-auto max-w-[75rem] px-[5vw] pb-[6vh]">
       <div class="section-head">
-        <h2 class="section-title whitespace-nowrap">Recent {t.ticker} trades</h2>
+        <h2 class="section-title whitespace-nowrap">Recent {label} trades</h2>
         <span class="eyebrow">
           Most recent {t.tradesShown} of {s.trades}
         </span>
@@ -366,7 +372,7 @@ const schema = [
 
       <p class="tswipe" aria-hidden="true">swipe →</p>
       <div class="tscroll">
-        <div role="table" aria-label={`${t.ticker} trades disclosed by Congress`}>
+        <div role="table" aria-label={`${label} trades disclosed by Congress`}>
           <div role="row" class="trow thead">
             <span role="columnheader">Member</span>
             <span role="columnheader">Side</span>
@@ -583,7 +589,7 @@ const schema = [
     </div>
 
     <section class="mx-auto max-w-[75rem] px-[5vw] pb-[8vh]">
-      <Faq title={`Questions about ${t.ticker}`} eyebrow="Answered from the record" items={t.faq ?? []} />
+      <Faq title={`Questions about ${label}`} eyebrow="Answered from the record" items={t.faq ?? []} />
     </section>
 
     <section class="border-t-2 border-ink px-[5vw] py-[10vh] text-center">

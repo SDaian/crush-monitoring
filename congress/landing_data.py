@@ -137,7 +137,9 @@ def _names(names: list[str]) -> str:
 # on /how-it-works). A question with nothing behind it is omitted rather than
 # answered with a zero — the empty-list rule again.
 def ticker_faq(p: dict) -> list[dict]:
-    tk, s = p["ticker"], p["summary"]
+    # The label, not the bare ticker: on the Alphabet page a count of GOOGL and
+    # GOOG trades must not call them all "GOOGL trades".
+    tk, s = p.get("tickerLabel") or p["ticker"], p["summary"]
     if not s.get("trades"):
         return []
     out = []
@@ -377,8 +379,8 @@ def feed_payload(trades: list[dict],
             "district": district,
             "ticker": t["ticker"],
             "tickerSlug": (
-                ticker_slug(t["ticker"]) if t["ticker"] in ticker_pages
-                else None
+                ticker_slug(page_ticker(t["ticker"]))
+                if page_ticker(t["ticker"]) in ticker_pages else None
             ),
             "side": t["type"].upper(),
             "amountBucket": compact_bucket(t.get("amount_lo"), t.get("amount_hi")),
@@ -885,7 +887,8 @@ def member_payload(name: str, trades: list[dict], holdings: dict,
         },
         "topTickers": [
             {"ticker": tk, "count": n, "asset": asset_of.get(tk, tk),
-             "slug": ticker_slug(tk), "hasPage": tk in has_ticker_page}
+             "slug": ticker_slug(page_ticker(tk)),
+             "hasPage": page_ticker(tk) in has_ticker_page}
             for tk, n in tickers.most_common(6)
         ],
         "trades": rows,
@@ -1033,6 +1036,7 @@ def write_member_files(
                    indent=2, ensure_ascii=False) + "\n",
         encoding="utf-8",
     )
+    _prune_pages(members_dir, written)
     return written
 
 
@@ -1063,6 +1067,37 @@ _ASSET_NOISE = re.compile(
     r"unsponsored\s+adr|adr)\s*$",
     re.IGNORECASE,
 )
+
+
+# Tickers that name the same company as another ticker's page. The record
+# keeps every trade exactly as filed — a filing that says GOOG stays GOOG —
+# but a PAGE is per company: two pages for Alphabet split its 168 trades in
+# two and made the pair compete with each other in search.
+#
+# Only certain equivalences belong here. BRCM ("Broadcom Corporation", bought
+# in 2016, yet "traded" in 2026) is almost surely a filer's slip for AVGO, but
+# almost is a guess; GOOGM/GOOGN are Alphabet's convertible PREFERRED shares,
+# a different security. Neither is folded.
+#
+# `share_class` separates a second class of the company's stock from an old
+# name for the same one: a count that includes a share class must name it (a
+# GOOG trade is not a "GOOGL trade"), while an FB trade simply IS a META
+# trade. `note` is what the page prints so the reader knows what is included.
+# landing/vercel.json redirects /tickers/<alias> to the page; a test holds the
+# two in step.
+SAME_COMPANY = {
+    "GOOG": {"page": "GOOGL", "share_class": True,
+             "note": "GOOG, Alphabet's Class C shares"},
+    "FB": {"page": "META", "share_class": False,
+           "note": "FB, Meta's ticker until 2022"},
+}
+
+
+def page_ticker(ticker: str | None) -> str | None:
+    """The ticker whose page a trade in ``ticker`` belongs on."""
+    if not ticker or ticker not in SAME_COMPANY:
+        return ticker
+    return SAME_COMPANY[ticker]["page"]
 
 
 def ticker_slug(ticker: str) -> str:
@@ -1101,10 +1136,11 @@ def select_ticker_pages(trades: list[dict],
     the featured watchlist (linked from the tracker, so it must resolve —
     noindex when thin; see `ticker_is_indexable`).
     """
-    counts = Counter(t["ticker"] for t in trades if t.get("ticker"))
+    counts = Counter(page_ticker(t["ticker"]) for t in trades if t.get("ticker"))
     picked = [tk for tk, n in counts.most_common() if n >= minimum]
     seen = set(picked)
     for tk in (featured if featured is not None else featured_tickers()):
+        tk = page_ticker(tk)
         if tk and tk not in seen:
             picked.append(tk)
             seen.add(tk)
@@ -1267,11 +1303,22 @@ def ticker_payload(ticker: str, trades: list[dict],
     """Per-ticker page data: who traded it, how much, and the recent trades with
     a link to each official filing. Dollar figures are bracket **midpoints** —
     an estimate, never a real position size."""
-    ts = [t for t in trades if t.get("ticker") == ticker]
+    ts = [t for t in trades if page_ticker(t.get("ticker")) == ticker]
     ts.sort(key=lambda t: (t.get("tx_date") or "", t.get("filing_date") or ""),
             reverse=True)
+    # Other tickers folded onto this page, and the label every count uses:
+    # "GOOGL and GOOG" when a second share class is in, plain "META" when the
+    # only alias is an old name for the same security.
+    aliases = sorted({t["ticker"] for t in ts} - {ticker})
+    classes = [a for a in aliases if SAME_COMPANY[a]["share_class"]]
+    label = " and ".join([ticker, *classes])
+    alias_note = ("Also counts trades filed under "
+                  + _names([SAME_COMPANY[a]["note"] for a in aliases]) + "."
+                  ) if aliases else None
 
-    assets = Counter(t["asset"] for t in ts if t.get("asset"))
+    assets = Counter(t["asset"] for t in ts
+                     if t.get("asset") and t.get("ticker") == ticker)
+    assets = assets or Counter(t["asset"] for t in ts if t.get("asset"))
     company = clean_company(assets.most_common(1)[0][0] if assets else "", ticker)
     have_page = {n for n in page_names}
 
@@ -1319,6 +1366,9 @@ def ticker_payload(ticker: str, trades: list[dict],
     payload = {
         "slug": ticker_slug(ticker),
         "ticker": ticker,
+        "aliases": aliases,
+        "tickerLabel": label,
+        "aliasNote": alias_note,
         "company": company,
         # OUR industry grouping (congress/sectors.json), for the page badge and
         # the /tickers filter. None when the map does not classify the symbol,
@@ -1370,6 +1420,25 @@ def ticker_payload(ticker: str, trades: list[dict],
     return payload
 
 
+def _prune_pages(pages_dir: Path, keep: list[str]) -> list[str]:
+    """Delete page files this run did not write; return their slugs.
+
+    The pages are built from every JSON file in the folder, not from the
+    index, and the writers used to only ever ADD files. A ticker leaving the
+    universe therefore kept a live, indexable page forever — stale, missing
+    from the sitemap, and nowhere in the index that should describe it. The
+    workflow stages the folder, so a deletion here is committed like a write.
+    """
+    gone = []
+    for f in pages_dir.glob("*.json"):
+        if f.name != "_index.json" and f.stem not in keep:
+            f.unlink()
+            gone.append(f.stem)
+    for slug in sorted(gone):
+        print(f"removed stale page data {pages_dir.name}/{slug}.json")
+    return gone
+
+
 def write_ticker_files(trades: list[dict], out_dir: Path,
                        tickers: list[str] | None = None) -> list[str]:
     """Write tickers/<slug>.json for each qualifying ticker + tickers/_index.json.
@@ -1401,6 +1470,7 @@ def write_ticker_files(trades: list[dict], out_dir: Path,
         written.append(payload["slug"])
         index.append({
             "slug": payload["slug"], "ticker": payload["ticker"],
+            "aliases": payload["aliases"],
             "company": payload["company"],
             "trades": payload["summary"]["trades"],
             "members": payload["summary"]["members"],
@@ -1424,6 +1494,7 @@ def write_ticker_files(trades: list[dict], out_dir: Path,
     for tk in unclassified:
         print(f"::warning::no industry for ticker page {tk} — "
               f"add it to congress/sectors.json")
+    _prune_pages(tickers_dir, written)
     return written
 
 

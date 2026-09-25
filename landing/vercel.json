@@ -1,0 +1,9 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "redirects": [
+    { "source": "/tickers/goog", "destination": "/tickers/googl", "permanent": true },
+    { "source": "/tickers/goog/", "destination": "/tickers/googl", "permanent": true },
+    { "source": "/tickers/fb", "destination": "/tickers/meta", "permanent": true },
+    { "source": "/tickers/fb/", "destination": "/tickers/meta", "permanent": true }
+  ]
+}

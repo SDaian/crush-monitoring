@@ -4,6 +4,7 @@
     {
       "slug": "msft",
       "ticker": "MSFT",
+      "aliases": [],
       "company": "Microsoft Corporation",
       "trades": 209,
       "members": 44,
@@ -20,6 +21,7 @@
     {
       "slug": "nvda",
       "ticker": "NVDA",
+      "aliases": [],
       "company": "NVIDIA Corporation",
       "trades": 182,
       "members": 34,
@@ -34,8 +36,28 @@
       }
     },
     {
+      "slug": "googl",
+      "ticker": "GOOGL",
+      "aliases": [
+        "GOOG"
+      ],
+      "company": "Alphabet Inc.",
+      "trades": 168,
+      "members": 42,
+      "buys": 90,
+      "sells": 78,
+      "lastTx": "2026-09-14",
+      "lastFiling": "2026-09-18",
+      "indexable": true,
+      "industry": {
+        "key": "tech",
+        "label": "Technology"
+      }
+    },
+    {
       "slug": "aapl",
       "ticker": "AAPL",
+      "aliases": [],
       "company": "Apple Inc.",
       "trades": 152,
       "members": 44,
@@ -52,6 +74,7 @@
     {
       "slug": "amzn",
       "ticker": "AMZN",
+      "aliases": [],
       "company": "Amazon.com, Inc.",
       "trades": 122,
       "members": 34,
@@ -68,10 +91,13 @@
     {
       "slug": "meta",
       "ticker": "META",
+      "aliases": [
+        "FB"
+      ],
       "company": "Meta Platforms, Inc.",
-      "trades": 96,
+      "trades": 97,
       "members": 26,
-      "buys": 65,
+      "buys": 66,
       "sells": 31,
       "lastTx": "2026-08-20",
       "lastFiling": "2026-09-10",
@@ -84,6 +110,7 @@
     {
       "slug": "unh",
       "ticker": "UNH",
+      "aliases": [],
       "company": "UnitedHealth Group Incorporated",
       "trades": 92,
       "members": 29,
@@ -98,24 +125,9 @@
       }
     },
     {
-      "slug": "googl",
-      "ticker": "GOOGL",
-      "company": "Alphabet Inc.",
-      "trades": 91,
-      "members": 30,
-      "buys": 43,
-      "sells": 48,
-      "lastTx": "2026-09-14",
-      "lastFiling": "2026-09-18",
-      "indexable": true,
-      "industry": {
-        "key": "tech",
-        "label": "Technology"
-      }
-    },
-    {
       "slug": "avgo",
       "ticker": "AVGO",
+      "aliases": [],
       "company": "Broadcom Inc.",
       "trades": 90,
       "members": 24,
@@ -132,6 +144,7 @@
     {
       "slug": "hd",
       "ticker": "HD",
+      "aliases": [],
       "company": "Home Depot, Inc.",
       "trades": 78,
       "members": 24,
@@ -146,24 +159,9 @@
       }
     },
     {
-      "slug": "goog",
-      "ticker": "GOOG",
-      "company": "Alphabet Inc.",
-      "trades": 77,
-      "members": 21,
-      "buys": 47,
-      "sells": 30,
-      "lastTx": "2026-08-20",
-      "lastFiling": "2026-09-17",
-      "indexable": true,
-      "industry": {
-        "key": "tech",
-        "label": "Technology"
-      }
-    },
-    {
       "slug": "brk-b",
       "ticker": "BRK.B",
+      "aliases": [],
       "company": "Berkshire Hathaway Inc. New",
       "trades": 68,
       "members": 22,
@@ -180,6 +178,7 @@
     {
       "slug": "lly",
       "ticker": "LLY",
+      "aliases": [],
       "company": "Eli Lilly and Company",
       "trades": 68,
       "members": 22,
@@ -196,6 +195,7 @@
     {
       "slug": "jnj",
       "ticker": "JNJ",
+      "aliases": [],
       "company": "Johnson & Johnson",
       "trades": 67,
       "members": 24,
@@ -212,6 +212,7 @@
     {
       "slug": "jpm",
       "ticker": "JPM",
+      "aliases": [],
       "company": "JP Morgan Chase & Co.",
       "trades": 66,
       "members": 28,
@@ -228,6 +229,7 @@
     {
       "slug": "v",
       "ticker": "V",
+      "aliases": [],
       "company": "Visa Inc.",
       "trades": 63,
       "members": 23,
@@ -244,6 +246,7 @@
     {
       "slug": "pg",
       "ticker": "PG",
+      "aliases": [],
       "company": "Procter & Gamble Company",
       "trades": 62,
       "members": 28,
@@ -260,6 +263,7 @@
     {
       "slug": "gs",
       "ticker": "GS",
+      "aliases": [],
       "company": "Goldman Sachs Group, Inc.",
       "trades": 62,
       "members": 19,
@@ -276,6 +280,7 @@
     {
       "slug": "tsla",
       "ticker": "TSLA",
+      "aliases": [],
       "company": "Tesla, Inc.",
       "trades": 60,
       "members": 13,
@@ -292,6 +297,7 @@
     {
       "slug": "acn",
       "ticker": "ACN",
+      "aliases": [],
       "company": "Accenture plc",
       "trades": 55,
       "members": 20,
@@ -308,6 +314,7 @@
     {
       "slug": "nflx",
       "ticker": "NFLX",
+      "aliases": [],
       "company": "Netflix, Inc.",
       "trades": 54,
       "members": 23,
@@ -324,6 +331,7 @@
     {
       "slug": "amd",
       "ticker": "AMD",
+      "aliases": [],
       "company": "Advanced Micro Devices, Inc.",
       "trades": 52,
       "members": 15,
@@ -340,6 +348,7 @@
     {
       "slug": "pltr",
       "ticker": "PLTR",
+      "aliases": [],
       "company": "Palantir Technologies Inc.",
       "trades": 52,
       "members": 15,
@@ -356,6 +365,7 @@
     {
       "slug": "crm",
       "ticker": "CRM",
+      "aliases": [],
       "company": "Salesforce, Inc.",
       "trades": 52,
       "members": 19,
@@ -372,6 +382,7 @@
     {
       "slug": "tsm",
       "ticker": "TSM",
+      "aliases": [],
       "company": "Taiwan Semiconductor Manufacturing Company Ltd.",
       "trades": 51,
       "members": 12,
@@ -388,6 +399,7 @@
     {
       "slug": "pep",
       "ticker": "PEP",
+      "aliases": [],
       "company": "Pepsico, Inc.",
       "trades": 51,
       "members": 24,
@@ -404,6 +416,7 @@
     {
       "slug": "ibm",
       "ticker": "IBM",
+      "aliases": [],
       "company": "International Business Machines Corporation",
       "trades": 51,
       "members": 15,
@@ -420,6 +433,7 @@
     {
       "slug": "ups",
       "ticker": "UPS",
+      "aliases": [],
       "company": "United Parcel Service, Inc.",
       "trades": 51,
       "members": 19,
@@ -436,6 +450,7 @@
     {
       "slug": "abt",
       "ticker": "ABT",
+      "aliases": [],
       "company": "Abbott Laboratories",
       "trades": 50,
       "members": 20,
@@ -452,6 +467,7 @@
     {
       "slug": "adbe",
       "ticker": "ADBE",
+      "aliases": [],
       "company": "Adobe Inc.",
       "trades": 49,
       "members": 15,
@@ -468,6 +484,7 @@
     {
       "slug": "orcl",
       "ticker": "ORCL",
+      "aliases": [],
       "company": "Oracle Corporation",
       "trades": 49,
       "members": 17,
@@ -484,6 +501,7 @@
     {
       "slug": "intc",
       "ticker": "INTC",
+      "aliases": [],
       "company": "Intel Corporation",
       "trades": 45,
       "members": 18,
@@ -500,6 +518,7 @@
     {
       "slug": "cvx",
       "ticker": "CVX",
+      "aliases": [],
       "company": "Chevron Corporation",
       "trades": 44,
       "members": 20,
@@ -516,6 +535,7 @@
     {
       "slug": "mrk",
       "ticker": "MRK",
+      "aliases": [],
       "company": "Merck & Company, Inc.",
       "trades": 43,
       "members": 17,
@@ -532,6 +552,7 @@
     {
       "slug": "uber",
       "ticker": "UBER",
+      "aliases": [],
       "company": "Uber Technologies, Inc.",
       "trades": 43,
       "members": 16,
@@ -548,6 +569,7 @@
     {
       "slug": "lrcx",
       "ticker": "LRCX",
+      "aliases": [],
       "company": "Lam Research Corporation",
       "trades": 42,
       "members": 15,
@@ -564,6 +586,7 @@
     {
       "slug": "etn",
       "ticker": "ETN",
+      "aliases": [],
       "company": "Eaton Corporation, PLC",
       "trades": 40,
       "members": 15,
@@ -580,6 +603,7 @@
     {
       "slug": "wmt",
       "ticker": "WMT",
+      "aliases": [],
       "company": "Walmart Inc.",
       "trades": 40,
       "members": 18,
@@ -596,6 +620,7 @@
     {
       "slug": "bro",
       "ticker": "BRO",
+      "aliases": [],
       "company": "Brown & Brown, Inc.",
       "trades": 40,
       "members": 11,
@@ -612,6 +637,7 @@
     {
       "slug": "xom",
       "ticker": "XOM",
+      "aliases": [],
       "company": "Exxon Mobil Corporation",
       "trades": 40,
       "members": 21,
@@ -628,6 +654,7 @@
     {
       "slug": "now",
       "ticker": "NOW",
+      "aliases": [],
       "company": "ServiceNow, Inc.",
       "trades": 40,
       "members": 16,
@@ -644,6 +671,7 @@
     {
       "slug": "pypl",
       "ticker": "PYPL",
+      "aliases": [],
       "company": "PayPal Holdings, Inc.",
       "trades": 39,
       "members": 17,
@@ -660,6 +688,7 @@
     {
       "slug": "panw",
       "ticker": "PANW",
+      "aliases": [],
       "company": "Palo Alto Networks, Inc.",
       "trades": 39,
       "members": 17,
@@ -676,6 +705,7 @@
     {
       "slug": "abbv",
       "ticker": "ABBV",
+      "aliases": [],
       "company": "AbbVie Inc.",
       "trades": 38,
       "members": 15,
@@ -692,6 +722,7 @@
     {
       "slug": "blk",
       "ticker": "BLK",
+      "aliases": [],
       "company": "BlackRock, Inc.",
       "trades": 38,
       "members": 15,
@@ -708,6 +739,7 @@
     {
       "slug": "intu",
       "ticker": "INTU",
+      "aliases": [],
       "company": "Intuit Inc.",
       "trades": 37,
       "members": 14,
@@ -724,6 +756,7 @@
     {
       "slug": "tmo",
       "ticker": "TMO",
+      "aliases": [],
       "company": "Thermo Fisher Scientific Inc",
       "trades": 37,
       "members": 18,
@@ -740,6 +773,7 @@
     {
       "slug": "bsx",
       "ticker": "BSX",
+      "aliases": [],
       "company": "Boston Scientific Corporation",
       "trades": 36,
       "members": 10,
@@ -756,6 +790,7 @@
     {
       "slug": "txn",
       "ticker": "TXN",
+      "aliases": [],
       "company": "Texas Instruments Incorporated",
       "trades": 36,
       "members": 15,
@@ -772,6 +807,7 @@
     {
       "slug": "anet",
       "ticker": "ANET",
+      "aliases": [],
       "company": "Arista Networks, Inc.",
       "trades": 36,
       "members": 15,
@@ -788,6 +824,7 @@
     {
       "slug": "ttd",
       "ticker": "TTD",
+      "aliases": [],
       "company": "The Trade Desk, Inc.",
       "trades": 35,
       "members": 7,
@@ -804,6 +841,7 @@
     {
       "slug": "amgn",
       "ticker": "AMGN",
+      "aliases": [],
       "company": "Amgen Inc.",
       "trades": 35,
       "members": 17,
@@ -820,6 +858,7 @@
     {
       "slug": "vz",
       "ticker": "VZ",
+      "aliases": [],
       "company": "Verizon Communications Inc.",
       "trades": 35,
       "members": 17,
@@ -836,6 +875,7 @@
     {
       "slug": "t",
       "ticker": "T",
+      "aliases": [],
       "company": "AT&T Inc.",
       "trades": 35,
       "members": 15,
@@ -852,6 +892,7 @@
     {
       "slug": "hog",
       "ticker": "HOG",
+      "aliases": [],
       "company": "Harley-Davidson, Inc.",
       "trades": 35,
       "members": 2,
@@ -868,6 +909,7 @@
     {
       "slug": "payx",
       "ticker": "PAYX",
+      "aliases": [],
       "company": "Paychex, Inc.",
       "trades": 34,
       "members": 14,
@@ -884,6 +926,7 @@
     {
       "slug": "cmcsa",
       "ticker": "CMCSA",
+      "aliases": [],
       "company": "Comcast Corporation",
       "trades": 34,
       "members": 16,
@@ -900,6 +943,7 @@
     {
       "slug": "pgr",
       "ticker": "PGR",
+      "aliases": [],
       "company": "Progressive Corporation",
       "trades": 34,
       "members": 12,
@@ -916,6 +960,7 @@
     {
       "slug": "ba",
       "ticker": "BA",
+      "aliases": [],
       "company": "Boeing Company",
       "trades": 34,
       "members": 14,
@@ -932,6 +977,7 @@
     {
       "slug": "asml",
       "ticker": "ASML",
+      "aliases": [],
       "company": "ASML Holding N.V. - New York Registry Shares",
       "trades": 34,
       "members": 11,
@@ -948,6 +994,7 @@
     {
       "slug": "mcd",
       "ticker": "MCD",
+      "aliases": [],
       "company": "McDonald's Corporation",
       "trades": 33,
       "members": 16,
@@ -964,6 +1011,7 @@
     {
       "slug": "dash",
       "ticker": "DASH",
+      "aliases": [],
       "company": "DoorDash, Inc.",
       "trades": 33,
       "members": 8,
@@ -980,6 +1028,7 @@
     {
       "slug": "pfe",
       "ticker": "PFE",
+      "aliases": [],
       "company": "Pfizer, Inc.",
       "trades": 33,
       "members": 16,
@@ -996,6 +1045,7 @@
     {
       "slug": "amat",
       "ticker": "AMAT",
+      "aliases": [],
       "company": "Applied Materials, Inc.",
       "trades": 32,
       "members": 14,
@@ -1012,6 +1062,7 @@
     {
       "slug": "zts",
       "ticker": "ZTS",
+      "aliases": [],
       "company": "Zoetis Inc.",
       "trades": 32,
       "members": 10,
@@ -1028,6 +1079,7 @@
     {
       "slug": "cost",
       "ticker": "COST",
+      "aliases": [],
       "company": "Costco Wholesale Corporation",
       "trades": 32,
       "members": 15,
@@ -1044,6 +1096,7 @@
     {
       "slug": "ko",
       "ticker": "KO",
+      "aliases": [],
       "company": "Coca-Cola Company",
       "trades": 32,
       "members": 16,
@@ -1060,6 +1113,7 @@
     {
       "slug": "f",
       "ticker": "F",
+      "aliases": [],
       "company": "Ford Motor Company",
       "trades": 32,
       "members": 7,
@@ -1076,6 +1130,7 @@
     {
       "slug": "tsco",
       "ticker": "TSCO",
+      "aliases": [],
       "company": "Tractor Supply Company",
       "trades": 31,
       "members": 6,
@@ -1092,6 +1147,7 @@
     {
       "slug": "mu",
       "ticker": "MU",
+      "aliases": [],
       "company": "Micron Technology, Inc.",
       "trades": 31,
       "members": 17,
@@ -1108,6 +1164,7 @@
     {
       "slug": "hood",
       "ticker": "HOOD",
+      "aliases": [],
       "company": "Robinhood Markets, Inc.",
       "trades": 31,
       "members": 7,
@@ -1124,6 +1181,7 @@
     {
       "slug": "pwr",
       "ticker": "PWR",
+      "aliases": [],
       "company": "Quanta Services, Inc.",
       "trades": 30,
       "members": 11,
@@ -1140,6 +1198,7 @@
     {
       "slug": "tdg",
       "ticker": "TDG",
+      "aliases": [],
       "company": "Transdigm Group Incorporated",
       "trades": 30,
       "members": 8,
@@ -1156,6 +1215,7 @@
     {
       "slug": "ma",
       "ticker": "MA",
+      "aliases": [],
       "company": "Mastercard Incorporated",
       "trades": 30,
       "members": 14,
@@ -1172,6 +1232,7 @@
     {
       "slug": "sbux",
       "ticker": "SBUX",
+      "aliases": [],
       "company": "Starbucks Corporation",
       "trades": 30,
       "members": 17,
@@ -1188,6 +1249,7 @@
     {
       "slug": "cop",
       "ticker": "COP",
+      "aliases": [],
       "company": "ConocoPhillips",
       "trades": 30,
       "members": 11,
@@ -1204,6 +1266,7 @@
     {
       "slug": "gddy",
       "ticker": "GDDY",
+      "aliases": [],
       "company": "GoDaddy Inc.",
       "trades": 29,
       "members": 6,
@@ -1220,6 +1283,7 @@
     {
       "slug": "nee",
       "ticker": "NEE",
+      "aliases": [],
       "company": "NextEra Energy, Inc.",
       "trades": 29,
       "members": 15,
@@ -1236,6 +1300,7 @@
     {
       "slug": "csco",
       "ticker": "CSCO",
+      "aliases": [],
       "company": "Cisco Systems, Inc.",
       "trades": 29,
       "members": 18,
@@ -1252,6 +1317,7 @@
     {
       "slug": "hon",
       "ticker": "HON",
+      "aliases": [],
       "company": "Honeywell International Inc.",
       "trades": 29,
       "members": 18,
@@ -1268,6 +1334,7 @@
     {
       "slug": "mck",
       "ticker": "MCK",
+      "aliases": [],
       "company": "McKesson Corporation",
       "trades": 29,
       "members": 12,
@@ -1284,6 +1351,7 @@
     {
       "slug": "mkl",
       "ticker": "MKL",
+      "aliases": [],
       "company": "Markel Group Inc.",
       "trades": 28,
       "members": 3,
@@ -1300,6 +1368,7 @@
     {
       "slug": "baba",
       "ticker": "BABA",
+      "aliases": [],
       "company": "Alibaba Group Holding Limited American Depositary Shares each representing eight",
       "trades": 28,
       "members": 6,
@@ -1316,6 +1385,7 @@
     {
       "slug": "ci",
       "ticker": "CI",
+      "aliases": [],
       "company": "The Cigna Group",
       "trades": 28,
       "members": 9,
@@ -1332,6 +1402,7 @@
     {
       "slug": "unp",
       "ticker": "UNP",
+      "aliases": [],
       "company": "Union Pacific Corporation",
       "trades": 28,
       "members": 13,
@@ -1348,6 +1419,7 @@
     {
       "slug": "wfc",
       "ticker": "WFC",
+      "aliases": [],
       "company": "Wells Fargo & Company",
       "trades": 27,
       "members": 13,
@@ -1364,6 +1436,7 @@
     {
       "slug": "ph",
       "ticker": "PH",
+      "aliases": [],
       "company": "Parker-Hannifin Corporation",
       "trades": 27,
       "members": 9,
@@ -1380,6 +1453,7 @@
     {
       "slug": "wab",
       "ticker": "WAB",
+      "aliases": [],
       "company": "Westinghouse Air Brake Technologies Corporation",
       "trades": 27,
       "members": 8,
@@ -1396,6 +1470,7 @@
     {
       "slug": "ge",
       "ticker": "GE",
+      "aliases": [],
       "company": "GE Aerospace",
       "trades": 27,
       "members": 13,
@@ -1412,6 +1487,7 @@
     {
       "slug": "dhr",
       "ticker": "DHR",
+      "aliases": [],
       "company": "Danaher Corporation",
       "trades": 27,
       "members": 16,
@@ -1428,6 +1504,7 @@
     {
       "slug": "axp",
       "ticker": "AXP",
+      "aliases": [],
       "company": "American Express Company",
       "trades": 27,
       "members": 12,
@@ -1444,6 +1521,7 @@
     {
       "slug": "app",
       "ticker": "APP",
+      "aliases": [],
       "company": "Applovin Corporation",
       "trades": 26,
       "members": 6,
@@ -1460,6 +1538,7 @@
     {
       "slug": "dis",
       "ticker": "DIS",
+      "aliases": [],
       "company": "Walt Disney Company",
       "trades": 26,
       "members": 18,
@@ -1476,6 +1555,7 @@
     {
       "slug": "lmt",
       "ticker": "LMT",
+      "aliases": [],
       "company": "Lockheed Martin Corporation",
       "trades": 26,
       "members": 15,
@@ -1492,6 +1572,7 @@
     {
       "slug": "bac",
       "ticker": "BAC",
+      "aliases": [],
       "company": "Bank of America Corporation",
       "trades": 26,
       "members": 15,
@@ -1508,6 +1589,7 @@
     {
       "slug": "qcom",
       "ticker": "QCOM",
+      "aliases": [],
       "company": "QUALCOMM Incorporated",
       "trades": 25,
       "members": 13,
@@ -1524,6 +1606,7 @@
     {
       "slug": "adi",
       "ticker": "ADI",
+      "aliases": [],
       "company": "Analog Devices, Inc.",
       "trades": 25,
       "members": 11,
@@ -1540,6 +1623,7 @@
     {
       "slug": "ms",
       "ticker": "MS",
+      "aliases": [],
       "company": "Morgan Stanley",
       "trades": 25,
       "members": 11,
@@ -1556,6 +1640,7 @@
     {
       "slug": "isrg",
       "ticker": "ISRG",
+      "aliases": [],
       "company": "Intuitive Surgical, Inc.",
       "trades": 25,
       "members": 9,
@@ -1572,6 +1657,7 @@
     {
       "slug": "dell",
       "ticker": "DELL",
+      "aliases": [],
       "company": "Dell Technologies Inc.",
       "trades": 20,
       "members": 8,
@@ -1588,6 +1674,7 @@
     {
       "slug": "meli",
       "ticker": "MELI",
+      "aliases": [],
       "company": "MercadoLibre, Inc.",
       "trades": 17,
       "members": 6,
@@ -1604,6 +1691,7 @@
     {
       "slug": "vrt",
       "ticker": "VRT",
+      "aliases": [],
       "company": "Vertiv Holdings, LLC",
       "trades": 13,
       "members": 6,
@@ -1620,6 +1708,7 @@
     {
       "slug": "emr",
       "ticker": "EMR",
+      "aliases": [],
       "company": "Emerson Electric Company",
       "trades": 13,
       "members": 7,
@@ -1636,6 +1725,7 @@
     {
       "slug": "sndk",
       "ticker": "SNDK",
+      "aliases": [],
       "company": "Sandisk Corporation",
       "trades": 11,
       "members": 6,
@@ -1652,6 +1742,7 @@
     {
       "slug": "vst",
       "ticker": "VST",
+      "aliases": [],
       "company": "Vistra Corp.",
       "trades": 11,
       "members": 5,
@@ -1668,6 +1759,7 @@
     {
       "slug": "be",
       "ticker": "BE",
+      "aliases": [],
       "company": "Bloom Energy Corporation",
       "trades": 11,
       "members": 4,
@@ -1684,6 +1776,7 @@
     {
       "slug": "smci",
       "ticker": "SMCI",
+      "aliases": [],
       "company": "Super Micro Computer, Inc.",
       "trades": 11,
       "members": 5,
@@ -1700,6 +1793,7 @@
     {
       "slug": "snow",
       "ticker": "SNOW",
+      "aliases": [],
       "company": "Snowflake Inc.",
       "trades": 11,
       "members": 5,
@@ -1716,6 +1810,7 @@
     {
       "slug": "klac",
       "ticker": "KLAC",
+      "aliases": [],
       "company": "KLA Corporation",
       "trades": 10,
       "members": 7,
@@ -1732,6 +1827,7 @@
     {
       "slug": "spcx",
       "ticker": "SPCX",
+      "aliases": [],
       "company": "Space Exploration Technologies Corp.",
       "trades": 9,
       "members": 7,
@@ -1748,6 +1844,7 @@
     {
       "slug": "nu",
       "ticker": "NU",
+      "aliases": [],
       "company": "Nu Holdings Ltd.",
       "trades": 4,
       "members": 2,
@@ -1764,6 +1861,7 @@
     {
       "slug": "rok",
       "ticker": "ROK",
+      "aliases": [],
       "company": "Rockwell Automation, Inc.",
       "trades": 4,
       "members": 3,

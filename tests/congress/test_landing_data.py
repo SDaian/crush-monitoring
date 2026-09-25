@@ -806,6 +806,70 @@ class TestFaq(unittest.TestCase):
                 self.assertLessEqual(len(x["a"].split()), 60, (f.name, x["q"]))
 
 
+class TestSameCompany(unittest.TestCase):
+    """One company, one page — the record keeps every ticker as filed."""
+
+    def _t(self, tk, i):
+        t = MT(member=f"Member {i % 3}")
+        t["ticker"], t["id"] = tk, f"{tk}{i}"
+        return t
+
+    def test_page_ticker(self):
+        self.assertEqual(ld.page_ticker("GOOG"), "GOOGL")
+        self.assertEqual(ld.page_ticker("FB"), "META")
+        self.assertEqual(ld.page_ticker("NVDA"), "NVDA")
+        self.assertIsNone(ld.page_ticker(None))
+
+    def test_a_share_class_is_counted_and_named(self):
+        ts = [self._t("GOOGL", i) for i in range(3)] + [self._t("GOOG", i) for i in range(2)]
+        p = ld.ticker_payload("GOOGL", ts)
+        self.assertEqual(p["summary"]["trades"], 5)
+        self.assertEqual(p["aliases"], ["GOOG"])
+        # A GOOG trade is not a "GOOGL trade", so every count names both.
+        self.assertEqual(p["tickerLabel"], "GOOGL and GOOG")
+        self.assertIn("5 GOOGL and GOOG trades", p["faq"][0]["a"])
+        self.assertIn("Class C", p["aliasNote"])
+
+    def test_an_old_name_is_counted_silently(self):
+        ts = [self._t("META", 0), self._t("FB", 1)]
+        p = ld.ticker_payload("META", ts)
+        self.assertEqual(p["summary"]["trades"], 2)
+        self.assertEqual(p["tickerLabel"], "META")  # an FB trade IS a META trade
+        self.assertIn("FB", p["aliasNote"])
+
+    def test_one_page_not_two(self):
+        ts = ([self._t("GOOGL", i) for i in range(ld.TICKER_PAGE_MIN_TRADES)]
+              + [self._t("GOOG", i) for i in range(ld.TICKER_PAGE_MIN_TRADES)])
+        pages = ld.select_ticker_pages(ts, featured=["GOOG"])
+        self.assertEqual(pages, ["GOOGL"])
+
+    def test_links_reach_the_company_page(self):
+        rows = ld.feed_payload([self._t("GOOG", 0)], {"GOOGL"})
+        self.assertEqual(rows[0]["ticker"], "GOOG")        # shown as filed
+        self.assertEqual(rows[0]["tickerSlug"], "googl")   # linked to the company page
+
+    def test_stale_pages_are_removed(self):
+        # Pages are built from every file in the folder, so a ticker that left
+        # the universe must lose its file or it stays live forever.
+        ts = [self._t("NVDA", i) for i in range(ld.TICKER_PAGE_MIN_TRADES)]
+        with TemporaryDirectory() as d:
+            out = Path(d)
+            (out / "tickers").mkdir()
+            (out / "tickers" / "goog.json").write_text("{}")
+            ld.write_ticker_files(ts, out)
+            left = sorted(f.name for f in (out / "tickers").glob("*.json"))
+        self.assertNotIn("goog.json", left)
+        self.assertIn("nvda.json", left)
+
+    def test_every_alias_redirects_on_the_host(self):
+        # A folded ticker's old URL must land on the company page, not a 404.
+        cfg = json.loads((Path(__file__).resolve().parents[2] / "landing" / "vercel.json").read_text())
+        redirects = {(r["source"], r["destination"]) for r in cfg["redirects"] if r.get("permanent")}
+        for alias, spec in ld.SAME_COMPANY.items():
+            dest = f"/tickers/{ld.ticker_slug(spec['page'])}"
+            self.assertIn((f"/tickers/{ld.ticker_slug(alias)}", dest), redirects, alias)
+
+
 class TestMemberIndexPerf(unittest.TestCase):
     def _write(self, perf_members):
         perf = {"benchmark": {"label": "S&P 500", "asof_date": "2026-07-31"},

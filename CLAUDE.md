@@ -939,6 +939,24 @@ Conventions:
   that answers it — a first draft opened a clean filing record with "No."
   Google shows FAQ rich results only for government and health sites since
   2023; the block is for answer engines and literal-question searches.
+- **One company, one page.** `landing_data.SAME_COMPANY` folds a ticker onto
+  another company's page — GOOG (Alphabet Class C) onto GOOGL, FB (Meta until
+  2022) onto META — at the PAGE layer only: the record keeps every trade as
+  filed. Selection, the page payload, feed links, member chips, email links
+  and the tracker all resolve through `page_ticker()`. A second **share class**
+  is named in every count ("168 GOOGL and GOOG trades" — a GOOG trade is not
+  a GOOGL trade); an **old name** counts silently (an FB trade IS a META
+  trade); each page prints its `aliasNote`. `landing/vercel.json` 308-
+  redirects `/tickers/<alias>` to the company page, and a test fails if an
+  alias lacks one. Only certain equivalences go in the map: BRCM ("Broadcom
+  Corporation", bought in 2016, yet "traded" in 2026) is almost surely AVGO,
+  and almost is a guess; GOOGM/GOOGN are convertible preferred, a different
+  security.
+- **A page file the run did not write is deleted.** Pages are built from every
+  JSON file in `landing/src/data/{tickers,members}`, not from the index, and the
+  writers used to only add files — so a ticker leaving the universe kept a
+  live, indexable page forever. `_prune_pages` removes them; the workflow
+  stages the folders, so the deletion is committed.
 - **A count that mixes branches says so.** The President's 278-T filings list
   stocks since June 2026, so 58 of 111 ticker pages called him a member of
   Congress ("34 members of Congress have disclosed…" on NVDA). The ticker

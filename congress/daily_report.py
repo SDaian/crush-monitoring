@@ -119,13 +119,19 @@ TICKER_INDEX_JSON = (pipeline.REPO_ROOT / "landing" / "src" / "data"
 
 
 def ticker_links(ticker_pages: dict | None, site: str | None = None) -> dict:
-    """{SYMBOL: absolute UTM-tagged page URL} for the tickers that have a page."""
+    """{SYMBOL: absolute UTM-tagged page URL} for the tickers that have a page.
+
+    A ticker folded onto another company's page (GOOG → the Alphabet page at
+    GOOGL) links there too, so an email row filed as GOOG still resolves."""
     base = (site or SITE_URL).rstrip("/")
-    return {
-        t["ticker"]: f"{base}/tickers/{t['slug']}?{EMAIL_UTM}"
-        for t in (ticker_pages or {}).get("tickers", [])
-        if t.get("ticker") and t.get("slug")
-    }
+    links = {}
+    for t in (ticker_pages or {}).get("tickers", []):
+        if not (t.get("ticker") and t.get("slug")):
+            continue
+        url = f"{base}/tickers/{t['slug']}?{EMAIL_UTM}"
+        for sym in [t["ticker"], *(t.get("aliases") or [])]:
+            links[sym] = url
+    return links
 
 
 def holdings_gaps(holdings: dict) -> list[str]:
