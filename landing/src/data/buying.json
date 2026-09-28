@@ -1,12 +1,12 @@
 {
   "_comment": "Generated from real official disclosures by congress/landing_data.py (daily Action). Do not edit by hand. 'filedDaysLate' counts days past the STOCK Act's 45-day statutory maximum; 0 = on time.",
   "windowDays": 45,
-  "from": "2026-08-08",
-  "to": "2026-09-22",
-  "members": 20,
-  "buys": 183,
+  "from": "2026-08-14",
+  "to": "2026-09-28",
+  "members": 19,
+  "buys": 173,
   "options": 5,
-  "companies": 122,
+  "companies": 117,
   "rows": [
     {
       "ticker": "MSFT",
@@ -61,32 +61,6 @@
       "lastFiling": "2026-09-22"
     },
     {
-      "ticker": "AMAT",
-      "tickerLabel": "AMAT",
-      "slug": "amat",
-      "company": "Applied Materials, Inc.",
-      "members": 3,
-      "buyers": [
-        {
-          "name": "Jared Moskowitz",
-          "slug": null
-        },
-        {
-          "name": "John J. McGuire III",
-          "slug": "john-j-mcguire-iii"
-        },
-        {
-          "name": "Josh Gottheimer",
-          "slug": "josh-gottheimer"
-        }
-      ],
-      "buys": 3,
-      "options": 0,
-      "estLabel": "$24K",
-      "est": 24002,
-      "lastFiling": "2026-09-14"
-    },
-    {
       "ticker": "ACN",
       "tickerLabel": "ACN",
       "slug": "acn",
@@ -107,28 +81,6 @@
       "estLabel": "$24K",
       "est": 24002,
       "lastFiling": "2026-09-17"
-    },
-    {
-      "ticker": "CRWD",
-      "tickerLabel": "CRWD",
-      "slug": null,
-      "company": "CrowdStrike Holdings, Inc.",
-      "members": 2,
-      "buyers": [
-        {
-          "name": "Gilbert Ray Cisneros, Jr.",
-          "slug": "gilbert-ray-cisneros-jr"
-        },
-        {
-          "name": "Josh Gottheimer",
-          "slug": "josh-gottheimer"
-        }
-      ],
-      "buys": 3,
-      "options": 0,
-      "estLabel": "$24K",
-      "est": 24002,
-      "lastFiling": "2026-09-10"
     },
     {
       "ticker": "PG",
@@ -175,6 +127,28 @@
       "lastFiling": "2026-09-02"
     },
     {
+      "ticker": "AMAT",
+      "tickerLabel": "AMAT",
+      "slug": "amat",
+      "company": "Applied Materials, Inc.",
+      "members": 2,
+      "buyers": [
+        {
+          "name": "Jared Moskowitz",
+          "slug": null
+        },
+        {
+          "name": "Josh Gottheimer",
+          "slug": "josh-gottheimer"
+        }
+      ],
+      "buys": 2,
+      "options": 0,
+      "estLabel": "$16K",
+      "est": 16001,
+      "lastFiling": "2026-09-14"
+    },
+    {
       "ticker": "AMD",
       "tickerLabel": "AMD",
       "slug": "amd",
@@ -197,28 +171,6 @@
       "lastFiling": "2026-09-04"
     },
     {
-      "ticker": "BRK.B",
-      "tickerLabel": "BRK.B",
-      "slug": "brk-b",
-      "company": "Berkshire Hathaway Inc. New",
-      "members": 2,
-      "buyers": [
-        {
-          "name": "Maria Elvira Salazar",
-          "slug": null
-        },
-        {
-          "name": "Richard McCormick",
-          "slug": null
-        }
-      ],
-      "buys": 2,
-      "options": 0,
-      "estLabel": "$16K",
-      "est": 16001,
-      "lastFiling": "2026-09-09"
-    },
-    {
       "ticker": "NVDA",
       "tickerLabel": "NVDA",
       "slug": "nvda",
@@ -232,28 +184,6 @@
         {
           "name": "John J. McGuire III",
           "slug": "john-j-mcguire-iii"
-        }
-      ],
-      "buys": 2,
-      "options": 0,
-      "estLabel": "$16K",
-      "est": 16001,
-      "lastFiling": "2026-09-04"
-    },
-    {
-      "ticker": "SAIL",
-      "tickerLabel": "SAIL",
-      "slug": null,
-      "company": "SailPoint, Inc.",
-      "members": 2,
-      "buyers": [
-        {
-          "name": "Gilbert Ray Cisneros, Jr.",
-          "slug": "gilbert-ray-cisneros-jr"
-        },
-        {
-          "name": "Josh Gottheimer",
-          "slug": "josh-gottheimer"
         }
       ],
       "buys": 2,
@@ -423,6 +353,60 @@
       "estLabel": "$65K",
       "est": 65001,
       "lastFiling": "2026-09-09"
+    },
+    {
+      "ticker": "WMB",
+      "tickerLabel": "WMB",
+      "slug": null,
+      "company": "Williams Companies, Inc. Common Stock Option Type: Call Strike price: $75.00 Expires: 2026-08-21",
+      "members": 1,
+      "buyers": [
+        {
+          "name": "Alan Armstrong",
+          "slug": "alan-armstrong"
+        }
+      ],
+      "buys": 2,
+      "options": 0,
+      "estLabel": "$41K",
+      "est": 40501,
+      "lastFiling": "2026-09-17"
+    },
+    {
+      "ticker": "AEP",
+      "tickerLabel": "AEP",
+      "slug": null,
+      "company": "American Electric Power Company, Inc.",
+      "members": 1,
+      "buyers": [
+        {
+          "name": "David J. Taylor",
+          "slug": null
+        }
+      ],
+      "buys": 2,
+      "options": 0,
+      "estLabel": "$16K",
+      "est": 16001,
+      "lastFiling": "2026-09-05"
+    },
+    {
+      "ticker": "AORT",
+      "tickerLabel": "AORT",
+      "slug": null,
+      "company": "Artivion, Inc.",
+      "members": 1,
+      "buyers": [
+        {
+          "name": "Gilbert Ray Cisneros, Jr.",
+          "slug": "gilbert-ray-cisneros-jr"
+        }
+      ],
+      "buys": 2,
+      "options": 0,
+      "estLabel": "$16K",
+      "est": 16001,
+      "lastFiling": "2026-09-10"
     }
   ],
   "largest": {
@@ -438,7 +422,7 @@
   "faq": [
     {
       "q": "What stocks is Congress buying?",
-      "a": "In filings from the last 45 days, to Sep 22, 2026, 20 members of Congress disclosed 183 purchases, 5 of them options, across 122 companies. The stocks bought by the most members were MSFT (3 members), AVGO (3 members) and AMAT (3 members). Filings arrive up to 45 days after the trade: this is recent disclosure, not live trading."
+      "a": "In filings from the last 45 days, to Sep 28, 2026, 19 members of Congress disclosed 173 purchases, 5 of them options, across 117 companies. The stocks bought by the most members were MSFT (3 members), AVGO (3 members) and ACN (2 members). Filings arrive up to 45 days after the trade: this is recent disclosure, not live trading."
     },
     {
       "q": "What is the largest stock purchase Congress disclosed recently?",
