@@ -216,9 +216,10 @@ const {
       track("signup_modal_open", { path: location.pathname });
     };
 
+    // Closing after a signup must not demote "subscribed" to "dismissed".
     const close = (why: string) => {
       if (dialog.open) dialog.close();
-      write(why);
+      if (read().state !== "subscribed") write(why);
     };
 
     dialog
@@ -226,12 +227,18 @@ const {
       .forEach((b) => b.addEventListener("click", () => close("dismissed")));
     // Esc, and clicking the backdrop (the dialog element itself receives the
     // click when the press lands outside the card).
-    dialog.addEventListener("cancel", () => write("dismissed"));
+    dialog.addEventListener("cancel", () => close("dismissed"));
     dialog.addEventListener("click", (e) => {
       if (e.target === dialog) close("dismissed");
     });
-    // Subscribing anywhere on the site retires the modal for good.
-    document.addEventListener("signup:done", () => close("subscribed"));
+    // Subscribing anywhere on the site retires the modal for good. It stays
+    // open when the signup came from inside it: the form has just written
+    // "check your inbox to confirm", and double opt-in fails if nobody reads
+    // that. The reader closes it with the X or Esc.
+    document.addEventListener("signup:done", () => {
+      done = true;
+      write("subscribed");
+    });
 
     if (!done) {
       let armed = false;

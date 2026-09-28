@@ -160,12 +160,21 @@
     position: relative;
   }
   /* Extend the small header links to a ~44px touch target without moving
-     a pixel of layout. */
-  nav a::after,
+     a pixel of layout. Scoped to the header: the phone menu's rows are
+     already 52px tall, and an extension there reached into the row below,
+     so a tap near a link's bottom edge opened the next link. */
+  header nav a::after,
   header > a::after {
     content: "";
     position: absolute;
     inset: -0.875rem -0.5rem;
+  }
+  /* Footer links sit 0.5rem apart: extend by half the gap, never into a
+     neighbour. */
+  footer nav a::after {
+    content: "";
+    position: absolute;
+    inset: -0.25rem -0.5rem;
   }
 
   /* ---------- hero ---------- */
@@ -272,6 +281,12 @@
     background: transparent;
     width: 100%;
     color: var(--color-ink);
+  }
+  /* The field's only visible label: ink-soft (6.28:1), not the preflight's
+     half-transparent ink (3.43:1). */
+  .email-input::placeholder,
+  .contact-field::placeholder {
+    color: var(--color-ink-soft);
   }
   textarea.contact-field {
     min-height: 8.125rem;

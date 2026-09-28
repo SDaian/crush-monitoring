@@ -64,7 +64,8 @@ const fmtMonth = (iso: string | null) =>
 
 const STAT_CARDS = [
   { n: s.trades.toLocaleString("en-US"), l: "trades disclosed" },
-  { n: s.members.toLocaleString("en-US"), l: "members trading" },
+  // "members" alone would count the President as a member of Congress.
+  { n: s.members.toLocaleString("en-US"), l: s.executive ? "filers trading" : "members trading" },
   { n: s.buys.toLocaleString("en-US"), l: "buys" },
   { n: s.sells.toLocaleString("en-US"), l: "sells" },
 ];
@@ -760,7 +761,9 @@ const schema = [
     letter-spacing: -0.03em;
     line-height: 1;
     font-variant-numeric: tabular-nums;
-    color: var(--color-stamp);
+    /* Ink, as on the home page: stamp red means late, and a red "buys"
+       count beside green BUY / red SELL rows reads as bad news. */
+    color: var(--color-ink);
   }
   .statlabel {
     font-family: var(--font-mono);
