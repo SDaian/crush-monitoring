@@ -19,16 +19,9 @@
         "source": "github",
         "repo": "pbakaus/impeccable"
       }
-    },
-    "interfaces": {
-      "source": {
-        "source": "github",
-        "repo": "jakubkrehel/skills"
-      }
     }
   },
   "enabledPlugins": {
-    "impeccable@impeccable": true,
-    "interfaces@interfaces": true
+    "impeccable@impeccable": true
   }
 }
