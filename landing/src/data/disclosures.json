@@ -2,6 +2,17 @@
   "_comment": "Generated from real official disclosures by congress/landing_data.py (daily Action). Do not edit by hand. 'filedDaysLate' counts days past the STOCK Act's 45-day statutory maximum; 0 = on time.",
   "disclosures": [
     {
+      "member": "K. Hern",
+      "memberSlug": null,
+      "chamber": "House",
+      "district": "OK-1",
+      "ticker": "MRSH",
+      "tickerSlug": null,
+      "side": "SELL",
+      "amountBucket": "$100K – $250K",
+      "filedDaysLate": 0
+    },
+    {
       "member": "P. Sessions",
       "memberSlug": null,
       "chamber": "House",
@@ -43,17 +54,6 @@
       "tickerSlug": null,
       "side": "SELL",
       "amountBucket": "$250K – $500K",
-      "filedDaysLate": 0
-    },
-    {
-      "member": "C. Booker",
-      "memberSlug": null,
-      "chamber": "Senate",
-      "district": "NJ",
-      "ticker": "AMZN",
-      "tickerSlug": "amzn",
-      "side": "SELL",
-      "amountBucket": "$100K – $250K",
       "filedDaysLate": 0
     }
   ]

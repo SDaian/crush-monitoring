@@ -12,28 +12,24 @@
   },
   "indexable": true,
   "technical": {
-    "asOf": "2026-09-25",
-    "price": 376.59,
-    "chg1d": 0.42,
-    "chg1w": -0.08,
-    "chg1m": -6.09,
-    "rsi14": 39.9,
-    "sma50": 399.38,
-    "sma200": 355.43,
-    "ema8": 376.54,
-    "ema21": 383.58,
-    "emaGap": -1.83,
-    "vsSma50": -5.7,
-    "vsSma200": 6.0,
-    "relVol": 0.8,
+    "asOf": "2026-09-28",
+    "price": 377.83,
+    "chg1d": 0.33,
+    "chg1w": 0.07,
+    "chg1m": -4.36,
+    "rsi14": 41.4,
+    "sma50": 398.41,
+    "sma200": 355.7,
+    "ema8": 376.83,
+    "ema21": 383.06,
+    "emaGap": -1.63,
+    "vsSma50": -5.2,
+    "vsSma200": 6.2,
+    "relVol": 0.88,
     "high52w": 436.35,
     "low52w": 259.02,
-    "rangePos": 66.0,
+    "rangePos": 67.0,
     "series": [
-      {
-        "d": "2025-10-03",
-        "c": 360.2
-      },
       {
         "d": "2025-10-10",
         "c": 354.5
@@ -237,30 +233,34 @@
       {
         "d": "2026-09-25",
         "c": 376.59
+      },
+      {
+        "d": "2026-09-28",
+        "c": 377.83
       }
     ],
     "signals": [],
     "nextEarnings": null,
     "score": {
       "label": "Hold",
-      "buys": 2,
-      "sells": 3,
+      "buys": 3,
+      "sells": 2,
       "holds": 2,
-      "ratio": -0.143
+      "ratio": 0.143
     }
   },
   "summary": {
-    "trades": 92,
+    "trades": 93,
     "members": 29,
     "congress": 29,
     "executive": 0,
     "whoLabel": "29 members of Congress",
     "buys": 45,
-    "sells": 47,
+    "sells": 48,
     "other": 0,
     "firstTx": "2023-03-15",
-    "lastTx": "2026-07-30",
-    "lastFiling": "2026-08-20",
+    "lastTx": "2026-09-10",
+    "lastFiling": "2026-09-25",
     "estBuyLabel": "$697K",
     "estSellLabel": "$1.1M",
     "pctLate": 18
@@ -378,6 +378,18 @@
     }
   ],
   "trades": [
+    {
+      "member": "Kevin Hern",
+      "memberSlug": "kevin-hern",
+      "hasPage": false,
+      "party": "R",
+      "side": "SELL",
+      "amountBucket": "$15K – $50K",
+      "txDate": "2026-09-10",
+      "filedDate": "2026-09-25",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035491.pdf"
+    },
     {
       "member": "Richard McCormick",
       "memberSlug": "richard-mccormick",
@@ -665,33 +677,21 @@
       "filedDate": "2025-11-21",
       "daysLate": 0,
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20033446.pdf"
-    },
-    {
-      "member": "Lisa C. McClain",
-      "memberSlug": "lisa-c-mcclain",
-      "hasPage": false,
-      "party": "R",
-      "side": "BUY",
-      "amountBucket": "$1K – $15K",
-      "txDate": "2025-10-30",
-      "filedDate": "2025-11-21",
-      "daysLate": 0,
-      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20033446.pdf"
     }
   ],
   "tradesShown": 25,
   "faq": [
     {
       "q": "Who in Congress has traded UNH stock?",
-      "a": "29 members of Congress have disclosed 92 UNH trades since March 2023. The most active is Gilbert Ray Cisneros, Jr., with 13 trades, followed by Richard McCormick and Lisa C. McClain. Each trade on this page links to the official filing it came from."
+      "a": "29 members of Congress have disclosed 93 UNH trades since March 2023. The most active is Gilbert Ray Cisneros, Jr., with 13 trades, followed by Richard McCormick and Lisa C. McClain. Each trade on this page links to the official filing it came from."
     },
     {
       "q": "Is Congress buying or selling UNH?",
-      "a": "Of the 92 disclosed UNH trades, 45 were buys and 47 were sells. By the midpoint of each filed amount bracket, the buying comes to about $697K and the selling to about $1.1M. Filings disclose brackets, never exact amounts, so these totals are estimates."
+      "a": "Of the 93 disclosed UNH trades, 45 were buys and 48 were sells. By the midpoint of each filed amount bracket, the buying comes to about $697K and the selling to about $1.1M. Filings disclose brackets, never exact amounts, so these totals are estimates."
     },
     {
       "q": "How late are UNH trades disclosed?",
-      "a": "18% of the disclosed UNH trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Jul 30, 2026, and the newest filing arrived on Aug 20, 2026."
+      "a": "18% of the disclosed UNH trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Sep 10, 2026, and the newest filing arrived on Sep 25, 2026."
     }
   ]
 }

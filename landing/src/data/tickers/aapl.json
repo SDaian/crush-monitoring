@@ -12,28 +12,24 @@
   },
   "indexable": true,
   "technical": {
-    "asOf": "2026-09-25",
-    "price": 341.07,
-    "chg1d": 1.53,
-    "chg1w": 1.47,
-    "chg1m": 8.81,
-    "rsi14": 65.7,
-    "sma50": 321.83,
-    "sma200": 287.77,
-    "ema8": 336.55,
-    "ema21": 329.94,
-    "emaGap": 2.0,
-    "vsSma50": 6.0,
-    "vsSma200": 18.5,
-    "relVol": 0.7,
+    "asOf": "2026-09-28",
+    "price": 338.4,
+    "chg1d": -0.78,
+    "chg1w": -0.17,
+    "chg1m": 7.57,
+    "rsi14": 61.8,
+    "sma50": 321.93,
+    "sma200": 288.07,
+    "ema8": 336.96,
+    "ema21": 330.71,
+    "emaGap": 1.89,
+    "vsSma50": 5.1,
+    "vsSma200": 17.5,
+    "relVol": 0.77,
     "high52w": 341.07,
     "low52w": 245.27,
-    "rangePos": 100.0,
+    "rangePos": 97.0,
     "series": [
-      {
-        "d": "2025-10-03",
-        "c": 258.02
-      },
       {
         "d": "2025-10-10",
         "c": 245.27
@@ -237,40 +233,37 @@
       {
         "d": "2026-09-25",
         "c": 341.07
-      }
-    ],
-    "signals": [
+      },
       {
-        "type": "new_52w_high",
-        "asof": "2026-09-25",
-        "label": "New 52-week high",
-        "dir": "bull"
+        "d": "2026-09-28",
+        "c": 338.4
       }
     ],
+    "signals": [],
     "nextEarnings": null,
     "score": {
       "label": "Strong Buy",
-      "buys": 6,
-      "sells": 0,
+      "buys": 5,
+      "sells": 1,
       "holds": 1,
-      "ratio": 0.857
+      "ratio": 0.571
     }
   },
   "summary": {
-    "trades": 152,
-    "members": 44,
-    "congress": 44,
+    "trades": 154,
+    "members": 45,
+    "congress": 45,
     "executive": 0,
-    "whoLabel": "44 members of Congress",
+    "whoLabel": "45 members of Congress",
     "buys": 74,
-    "sells": 78,
+    "sells": 80,
     "other": 0,
     "firstTx": "2023-03-15",
     "lastTx": "2026-09-22",
-    "lastFiling": "2026-09-22",
+    "lastFiling": "2026-09-25",
     "estBuyLabel": "$3.6M",
-    "estSellLabel": "$48.0M",
-    "pctLate": 26
+    "estSellLabel": "$48.1M",
+    "pctLate": 25
   },
   "topMembers": [
     {
@@ -396,6 +389,30 @@
       "filedDate": "2026-09-22",
       "daysLate": 0,
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035499.pdf"
+    },
+    {
+      "member": "Kevin Hern",
+      "memberSlug": "kevin-hern",
+      "hasPage": false,
+      "party": "R",
+      "side": "SELL",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-09-08",
+      "filedDate": "2026-09-25",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035491.pdf"
+    },
+    {
+      "member": "Kevin Hern",
+      "memberSlug": "kevin-hern",
+      "hasPage": false,
+      "party": "R",
+      "side": "SELL",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-09-08",
+      "filedDate": "2026-09-25",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035491.pdf"
     },
     {
       "member": "Scott Franklin",
@@ -660,45 +677,21 @@
       "filedDate": "2026-03-31",
       "daysLate": 0,
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20034201.pdf"
-    },
-    {
-      "member": "David J. Taylor",
-      "memberSlug": "david-j-taylor",
-      "hasPage": false,
-      "party": "R",
-      "side": "SELL",
-      "amountBucket": "$1K – $15K",
-      "txDate": "2026-02-26",
-      "filedDate": "2026-03-06",
-      "daysLate": 0,
-      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20034138.pdf"
-    },
-    {
-      "member": "Thomas R. Suozzi",
-      "memberSlug": "thomas-r-suozzi",
-      "hasPage": false,
-      "party": "D",
-      "side": "SELL",
-      "amountBucket": "$15K – $50K",
-      "txDate": "2026-02-18",
-      "filedDate": "2026-03-17",
-      "daysLate": 0,
-      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20034188.pdf"
     }
   ],
   "tradesShown": 25,
   "faq": [
     {
       "q": "Who in Congress has traded AAPL stock?",
-      "a": "44 members of Congress have disclosed 152 AAPL trades since March 2023. The most active is Cleo Fields, with 22 trades, followed by Tommy Tuberville and Ed Case. Each trade on this page links to the official filing it came from."
+      "a": "45 members of Congress have disclosed 154 AAPL trades since March 2023. The most active is Cleo Fields, with 22 trades, followed by Tommy Tuberville and Ed Case. Each trade on this page links to the official filing it came from."
     },
     {
       "q": "Is Congress buying or selling AAPL?",
-      "a": "Of the 152 disclosed AAPL trades, 74 were buys and 78 were sells. By the midpoint of each filed amount bracket, the buying comes to about $3.6M and the selling to about $48.0M. Filings disclose brackets, never exact amounts, so these totals are estimates."
+      "a": "Of the 154 disclosed AAPL trades, 74 were buys and 80 were sells. By the midpoint of each filed amount bracket, the buying comes to about $3.6M and the selling to about $48.1M. Filings disclose brackets, never exact amounts, so these totals are estimates."
     },
     {
       "q": "How late are AAPL trades disclosed?",
-      "a": "26% of the disclosed AAPL trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Sep 22, 2026, and the newest filing arrived on Sep 22, 2026."
+      "a": "25% of the disclosed AAPL trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Sep 22, 2026, and the newest filing arrived on Sep 25, 2026."
     }
   ]
 }

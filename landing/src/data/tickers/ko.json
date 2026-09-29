@@ -12,28 +12,24 @@
   },
   "indexable": true,
   "technical": {
-    "asOf": "2026-09-25",
-    "price": 87.81,
-    "chg1d": -0.33,
-    "chg1w": -0.5,
-    "chg1m": -2.52,
-    "rsi14": 48.4,
-    "sma50": 87.48,
-    "sma200": 79.61,
-    "ema8": 88.07,
-    "ema21": 88.2,
-    "emaGap": -0.14,
-    "vsSma50": 0.4,
-    "vsSma200": 10.3,
-    "relVol": 0.77,
+    "asOf": "2026-09-28",
+    "price": 87.18,
+    "chg1d": -0.72,
+    "chg1w": 0.07,
+    "chg1m": -2.11,
+    "rsi14": 45.0,
+    "sma50": 87.59,
+    "sma200": 79.69,
+    "ema8": 87.87,
+    "ema21": 88.1,
+    "emaGap": -0.26,
+    "vsSma50": -0.5,
+    "vsSma200": 9.4,
+    "relVol": 0.91,
     "high52w": 91.99,
     "low52w": 65.67,
-    "rangePos": 84.0,
+    "rangePos": 82.0,
     "series": [
-      {
-        "d": "2025-10-03",
-        "c": 66.65
-      },
       {
         "d": "2025-10-10",
         "c": 67.04
@@ -237,9 +233,20 @@
       {
         "d": "2026-09-25",
         "c": 87.81
+      },
+      {
+        "d": "2026-09-28",
+        "c": 87.18
       }
     ],
-    "signals": [],
+    "signals": [
+      {
+        "type": "lose_sma50",
+        "asof": "2026-09-28",
+        "label": "Lost the 50-day average",
+        "dir": "bear"
+      }
+    ],
     "nextEarnings": null,
     "score": {
       "label": "Hold",
@@ -250,20 +257,20 @@
     }
   },
   "summary": {
-    "trades": 32,
-    "members": 16,
-    "congress": 15,
+    "trades": 33,
+    "members": 17,
+    "congress": 16,
     "executive": 1,
-    "whoLabel": "15 members of Congress and 1 executive-branch filer",
-    "buys": 19,
+    "whoLabel": "16 members of Congress and 1 executive-branch filer",
+    "buys": 20,
     "sells": 13,
     "other": 0,
     "firstTx": "2024-09-26",
-    "lastTx": "2026-07-21",
-    "lastFiling": "2026-08-07",
-    "estBuyLabel": "$201K",
+    "lastTx": "2026-08-31",
+    "lastFiling": "2026-09-25",
+    "estBuyLabel": "$209K",
     "estSellLabel": "$438K",
-    "pctLate": 19
+    "pctLate": 18
   },
   "topMembers": [
     {
@@ -378,6 +385,18 @@
     }
   ],
   "trades": [
+    {
+      "member": "Kevin Hern",
+      "memberSlug": "kevin-hern",
+      "hasPage": false,
+      "party": "R",
+      "side": "BUY",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-08-31",
+      "filedDate": "2026-09-25",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035491.pdf"
+    },
     {
       "member": "Shelley Moore Capito",
       "memberSlug": "shelley-moore-capito",
@@ -665,33 +684,21 @@
       "filedDate": "2025-04-23",
       "daysLate": 0,
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20027982.pdf"
-    },
-    {
-      "member": "Robert P. Bresnahan, Jr.",
-      "memberSlug": "robert-p-bresnahan-jr",
-      "hasPage": false,
-      "party": "R",
-      "side": "SELL",
-      "amountBucket": "$1K – $15K",
-      "txDate": "2025-01-21",
-      "filedDate": "2025-02-13",
-      "daysLate": 0,
-      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20024346.pdf"
     }
   ],
   "tradesShown": 25,
   "faq": [
     {
       "q": "Who in Congress has traded KO stock?",
-      "a": "15 members of Congress and 1 executive-branch filer have disclosed 32 KO trades since September 2024. The most active is Lisa C. McClain, with 6 trades, followed by Lloyd Doggett and Josh Gottheimer. Each trade on this page links to the official filing it came from."
+      "a": "16 members of Congress and 1 executive-branch filer have disclosed 33 KO trades since September 2024. The most active is Lisa C. McClain, with 6 trades, followed by Lloyd Doggett and Josh Gottheimer. Each trade on this page links to the official filing it came from."
     },
     {
       "q": "Is Congress buying or selling KO?",
-      "a": "Of the 32 disclosed KO trades, 19 were buys and 13 were sells. By the midpoint of each filed amount bracket, the buying comes to about $201K and the selling to about $438K. Filings disclose brackets, never exact amounts, so these totals are estimates."
+      "a": "Of the 33 disclosed KO trades, 20 were buys and 13 were sells. By the midpoint of each filed amount bracket, the buying comes to about $209K and the selling to about $438K. Filings disclose brackets, never exact amounts, so these totals are estimates."
     },
     {
       "q": "How late are KO trades disclosed?",
-      "a": "19% of the disclosed KO trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Jul 21, 2026, and the newest filing arrived on Aug 7, 2026."
+      "a": "18% of the disclosed KO trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Aug 31, 2026, and the newest filing arrived on Sep 25, 2026."
     }
   ]
 }
