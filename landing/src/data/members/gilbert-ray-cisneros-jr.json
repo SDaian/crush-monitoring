@@ -17561,10 +17561,10 @@
   "performance": {
     "available": true,
     "benchLabel": "S&P 500",
-    "asofDate": "2026-09-30",
+    "asofDate": "2026-10-01",
     "kpis": {
-      "medianPct": 1.0,
-      "medianBenchPct": 14.0,
+      "medianPct": 1.2,
+      "medianBenchPct": 14.2,
       "beat": 99,
       "beatOf": 282,
       "priced": 282,
@@ -17660,7 +17660,7 @@
         "2026-09-11",
         "2026-09-18",
         "2026-09-25",
-        "2026-09-30"
+        "2026-10-01"
       ],
       "member": [
         100.0,
@@ -17751,7 +17751,7 @@
         108.0,
         107.7,
         108.8,
-        107.0
+        107.5
       ],
       "bench": [
         100.0,
@@ -17842,7 +17842,7 @@
         113.2,
         112.8,
         114.2,
-        112.9
+        113.1
       ],
       "buys": 282
     },
@@ -17850,86 +17850,86 @@
       {
         "ticker": "PWR",
         "txDate": "2026-08-27",
-        "pct": 3.3,
-        "benchPct": -1.1,
-        "excess": 4.4
+        "pct": 6.6,
+        "benchPct": -0.9,
+        "excess": 7.5
       },
       {
         "ticker": "ETN",
         "txDate": "2026-08-27",
-        "pct": 3.3,
-        "benchPct": -1.1,
-        "excess": 4.4
+        "pct": 5.1,
+        "benchPct": -0.9,
+        "excess": 6.0
       },
       {
         "ticker": "WMT",
         "txDate": "2026-08-26",
-        "pct": -0.4,
-        "benchPct": -0.5,
-        "excess": 0.1
+        "pct": -0.1,
+        "benchPct": -0.3,
+        "excess": 0.2
       },
       {
         "ticker": "GS",
         "txDate": "2026-08-26",
-        "pct": -13.5,
-        "benchPct": -0.5,
-        "excess": -13.0
+        "pct": -13.8,
+        "benchPct": -0.3,
+        "excess": -13.5
       },
       {
         "ticker": "FSV",
         "txDate": "2026-08-19",
-        "pct": -12.7,
-        "benchPct": -0.8,
-        "excess": -11.9
+        "pct": -12.3,
+        "benchPct": -0.7,
+        "excess": -11.6
       },
       {
         "ticker": "CSGP",
         "txDate": "2026-08-19",
-        "pct": -18.8,
-        "benchPct": -0.8,
-        "excess": -18.0
+        "pct": -17.8,
+        "benchPct": -0.7,
+        "excess": -17.1
       },
       {
         "ticker": "BSX",
         "txDate": "2026-08-18",
-        "pct": -13.5,
-        "benchPct": -0.6,
-        "excess": -12.9
+        "pct": -14.3,
+        "benchPct": -0.5,
+        "excess": -13.8
       },
       {
         "ticker": "WDAY",
         "txDate": "2026-08-18",
-        "pct": -0.1,
-        "benchPct": -0.6,
-        "excess": 0.5
+        "pct": -2.0,
+        "benchPct": -0.5,
+        "excess": -1.5
       },
       {
         "ticker": "TTD",
         "txDate": "2026-08-18",
-        "pct": -9.3,
-        "benchPct": -0.6,
-        "excess": -8.7
+        "pct": -9.8,
+        "benchPct": -0.5,
+        "excess": -9.3
       },
       {
         "ticker": "MSFT",
         "txDate": "2026-08-18",
         "pct": 6.5,
-        "benchPct": -0.6,
-        "excess": 7.1
+        "benchPct": -0.5,
+        "excess": 7.0
       },
       {
         "ticker": "INTU",
         "txDate": "2026-08-18",
-        "pct": -21.3,
-        "benchPct": -0.6,
-        "excess": -20.7
+        "pct": -19.3,
+        "benchPct": -0.5,
+        "excess": -18.8
       },
       {
         "ticker": "IBM",
         "txDate": "2026-08-18",
-        "pct": -5.5,
-        "benchPct": -0.6,
-        "excess": -4.9
+        "pct": -3.0,
+        "benchPct": -0.5,
+        "excess": -2.5
       }
     ],
     "rowsOf": 282

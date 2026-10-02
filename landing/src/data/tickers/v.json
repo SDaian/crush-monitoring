@@ -12,23 +12,23 @@
   },
   "indexable": true,
   "technical": {
-    "asOf": "2026-09-30",
-    "price": 359.33,
-    "chg1d": -1.79,
-    "chg1w": -0.61,
-    "chg1m": -5.28,
-    "rsi14": 39.2,
-    "sma50": 368.36,
-    "sma200": 337.34,
-    "ema8": 365.41,
-    "ema21": 368.02,
-    "emaGap": -0.71,
-    "vsSma50": -2.5,
-    "vsSma200": 6.5,
-    "relVol": 1.21,
+    "asOf": "2026-10-01",
+    "price": 359.85,
+    "chg1d": 0.14,
+    "chg1w": -2.21,
+    "chg1m": -3.44,
+    "rsi14": 40.0,
+    "sma50": 368.49,
+    "sma200": 337.4,
+    "ema8": 364.17,
+    "ema21": 367.28,
+    "emaGap": -0.84,
+    "vsSma50": -2.3,
+    "vsSma200": 6.7,
+    "relVol": 0.86,
     "high52w": 384.14,
     "low52w": 295.52,
-    "rangePos": 72.0,
+    "rangePos": 73.0,
     "series": [
       {
         "d": "2025-10-10",
@@ -235,8 +235,8 @@
         "c": 367.38
       },
       {
-        "d": "2026-09-30",
-        "c": 359.33
+        "d": "2026-10-01",
+        "c": 359.85
       }
     ],
     "signals": [],
@@ -250,19 +250,19 @@
     }
   },
   "summary": {
-    "trades": 63,
-    "members": 23,
-    "congress": 23,
+    "trades": 65,
+    "members": 24,
+    "congress": 24,
     "executive": 0,
-    "whoLabel": "23 members of Congress",
+    "whoLabel": "24 members of Congress",
     "buys": 38,
-    "sells": 25,
+    "sells": 27,
     "other": 0,
     "firstTx": "2024-05-03",
-    "lastTx": "2026-07-30",
-    "lastFiling": "2026-08-14",
+    "lastTx": "2026-09-04",
+    "lastFiling": "2026-10-01",
     "estBuyLabel": "$353K",
-    "estSellLabel": "$581K",
+    "estSellLabel": "$597K",
     "pctLate": 17
   },
   "topMembers": [
@@ -378,6 +378,30 @@
     }
   ],
   "trades": [
+    {
+      "member": "Sheldon Whitehouse",
+      "memberSlug": "sheldon-whitehouse",
+      "hasPage": false,
+      "party": "D",
+      "side": "SELL",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-09-04",
+      "filedDate": "2026-10-01",
+      "daysLate": 0,
+      "sourceUrl": "https://efdsearch.senate.gov/search/view/ptr/6bf3b6f7-9e1b-499a-bd5a-990292ce2e72/"
+    },
+    {
+      "member": "Sheldon Whitehouse",
+      "memberSlug": "sheldon-whitehouse",
+      "hasPage": false,
+      "party": "D",
+      "side": "SELL",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-09-04",
+      "filedDate": "2026-10-01",
+      "daysLate": 0,
+      "sourceUrl": "https://efdsearch.senate.gov/search/view/ptr/6bf3b6f7-9e1b-499a-bd5a-990292ce2e72/"
+    },
     {
       "member": "Richard McCormick",
       "memberSlug": "richard-mccormick",
@@ -653,45 +677,21 @@
       "filedDate": "2026-01-13",
       "daysLate": 128,
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20030977.pdf"
-    },
-    {
-      "member": "Josh Gottheimer",
-      "memberSlug": "josh-gottheimer",
-      "hasPage": true,
-      "party": "D",
-      "side": "SELL",
-      "amountBucket": "$1K – $15K",
-      "txDate": "2025-07-14",
-      "filedDate": "2025-08-11",
-      "daysLate": 0,
-      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20030848.pdf"
-    },
-    {
-      "member": "Josh Gottheimer",
-      "memberSlug": "josh-gottheimer",
-      "hasPage": true,
-      "party": "D",
-      "side": "SELL",
-      "amountBucket": "$1K – $15K",
-      "txDate": "2025-06-26",
-      "filedDate": "2025-07-16",
-      "daysLate": 0,
-      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20030621.pdf"
     }
   ],
   "tradesShown": 25,
   "faq": [
     {
       "q": "Who in Congress has traded V stock?",
-      "a": "23 members of Congress have disclosed 63 V trades since May 2024. The most active is Josh Gottheimer, with 18 trades, followed by David J. Taylor and Lisa C. McClain. Each trade on this page links to the official filing it came from."
+      "a": "24 members of Congress have disclosed 65 V trades since May 2024. The most active is Josh Gottheimer, with 18 trades, followed by David J. Taylor and Lisa C. McClain. Each trade on this page links to the official filing it came from."
     },
     {
       "q": "Is Congress buying or selling V?",
-      "a": "Of the 63 disclosed V trades, 38 were buys and 25 were sells. By the midpoint of each filed amount bracket, the buying comes to about $353K and the selling to about $581K. Filings disclose brackets, never exact amounts, so these totals are estimates."
+      "a": "Of the 65 disclosed V trades, 38 were buys and 27 were sells. By the midpoint of each filed amount bracket, the buying comes to about $353K and the selling to about $597K. Filings disclose brackets, never exact amounts, so these totals are estimates."
     },
     {
       "q": "How late are V trades disclosed?",
-      "a": "17% of the disclosed V trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Jul 30, 2026, and the newest filing arrived on Aug 14, 2026."
+      "a": "17% of the disclosed V trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Sep 4, 2026, and the newest filing arrived on Oct 1, 2026."
     }
   ]
 }

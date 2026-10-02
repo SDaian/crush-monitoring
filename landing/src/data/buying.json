@@ -1,12 +1,12 @@
 {
   "_comment": "Generated from real official disclosures by congress/landing_data.py (daily Action). Do not edit by hand. 'filedDaysLate' counts days past the STOCK Act's 45-day statutory maximum; 0 = on time.",
   "windowDays": 45,
-  "from": "2026-08-14",
-  "to": "2026-09-28",
+  "from": "2026-08-17",
+  "to": "2026-10-01",
   "members": 20,
-  "buys": 175,
+  "buys": 164,
   "options": 5,
-  "companies": 119,
+  "companies": 115,
   "rows": [
     {
       "ticker": "MSFT",
@@ -265,24 +265,6 @@
       "lastFiling": "2026-09-09"
     },
     {
-      "ticker": "SPYM",
-      "tickerLabel": "SPYM",
-      "slug": null,
-      "company": "Tradr 2X Long SPY Monthly ETF",
-      "members": 1,
-      "buyers": [
-        {
-          "name": "John Boozman",
-          "slug": null
-        }
-      ],
-      "buys": 4,
-      "options": 0,
-      "estLabel": "$32K",
-      "est": 32002,
-      "lastFiling": "2026-09-11"
-    },
-    {
       "ticker": "FWONK",
       "tickerLabel": "FWONK",
       "slug": null,
@@ -407,6 +389,24 @@
       "estLabel": "$16K",
       "est": 16001,
       "lastFiling": "2026-09-10"
+    },
+    {
+      "ticker": "CRWD",
+      "tickerLabel": "CRWD",
+      "slug": null,
+      "company": "CrowdStrike Holdings, Inc. - Class A $200?",
+      "members": 1,
+      "buyers": [
+        {
+          "name": "Gilbert Ray Cisneros, Jr.",
+          "slug": "gilbert-ray-cisneros-jr"
+        }
+      ],
+      "buys": 2,
+      "options": 0,
+      "estLabel": "$16K",
+      "est": 16001,
+      "lastFiling": "2026-09-10"
     }
   ],
   "largest": {
@@ -422,7 +422,7 @@
   "faq": [
     {
       "q": "What stocks is Congress buying?",
-      "a": "In filings from the last 45 days, to Sep 28, 2026, 20 members of Congress disclosed 175 purchases, 5 of them options, across 119 companies. The stocks bought by the most members were MSFT (3 members), AVGO (3 members) and ACN (2 members). Filings arrive up to 45 days after the trade: this is recent disclosure, not live trading."
+      "a": "In filings from the last 45 days, to Oct 1, 2026, 20 members of Congress disclosed 164 purchases, 5 of them options, across 115 companies. The stocks bought by the most members were MSFT (3 members), AVGO (3 members) and ACN (2 members). Filings arrive up to 45 days after the trade: this is recent disclosure, not live trading."
     },
     {
       "q": "What is the largest stock purchase Congress disclosed recently?",

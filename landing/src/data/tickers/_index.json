@@ -159,6 +159,23 @@
       }
     },
     {
+      "slug": "jpm",
+      "ticker": "JPM",
+      "aliases": [],
+      "company": "JP Morgan Chase & Co.",
+      "trades": 68,
+      "members": 28,
+      "buys": 31,
+      "sells": 37,
+      "lastTx": "2026-09-04",
+      "lastFiling": "2026-10-01",
+      "indexable": true,
+      "industry": {
+        "key": "finance",
+        "label": "Banks & finance"
+      }
+    },
+    {
       "slug": "brk-b",
       "ticker": "BRK.B",
       "aliases": [],
@@ -210,33 +227,16 @@
       }
     },
     {
-      "slug": "jpm",
-      "ticker": "JPM",
-      "aliases": [],
-      "company": "JP Morgan Chase & Co.",
-      "trades": 66,
-      "members": 28,
-      "buys": 31,
-      "sells": 35,
-      "lastTx": "2026-08-20",
-      "lastFiling": "2026-09-17",
-      "indexable": true,
-      "industry": {
-        "key": "finance",
-        "label": "Banks & finance"
-      }
-    },
-    {
       "slug": "v",
       "ticker": "V",
       "aliases": [],
       "company": "Visa Inc.",
-      "trades": 63,
-      "members": 23,
+      "trades": 65,
+      "members": 24,
       "buys": 38,
-      "sells": 25,
-      "lastTx": "2026-07-30",
-      "lastFiling": "2026-08-14",
+      "sells": 27,
+      "lastTx": "2026-09-04",
+      "lastFiling": "2026-10-01",
       "indexable": true,
       "industry": {
         "key": "finance",
@@ -1536,6 +1536,23 @@
       }
     },
     {
+      "slug": "adi",
+      "ticker": "ADI",
+      "aliases": [],
+      "company": "Analog Devices, Inc.",
+      "trades": 26,
+      "members": 11,
+      "buys": 9,
+      "sells": 17,
+      "lastTx": "2026-09-04",
+      "lastFiling": "2026-10-01",
+      "indexable": true,
+      "industry": {
+        "key": "tech",
+        "label": "Technology"
+      }
+    },
+    {
       "slug": "app",
       "ticker": "APP",
       "aliases": [],
@@ -1614,23 +1631,6 @@
       "sells": 13,
       "lastTx": "2026-08-19",
       "lastFiling": "2026-09-09",
-      "indexable": true,
-      "industry": {
-        "key": "tech",
-        "label": "Technology"
-      }
-    },
-    {
-      "slug": "adi",
-      "ticker": "ADI",
-      "aliases": [],
-      "company": "Analog Devices, Inc.",
-      "trades": 25,
-      "members": 11,
-      "buys": 9,
-      "sells": 16,
-      "lastTx": "2026-07-30",
-      "lastFiling": "2026-08-14",
       "indexable": true,
       "industry": {
         "key": "tech",
