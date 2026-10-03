@@ -10,11 +10,11 @@
   "former": false,
   "knownAs": [],
   "summary": {
-    "trades": 233,
+    "trades": 238,
     "distinctTickers": 33,
     "firstTx": "2025-02-05",
-    "lastTx": "2026-08-13",
-    "lastFiling": "2026-09-02",
+    "lastTx": "2026-09-14",
+    "lastFiling": "2026-10-01",
     "pctLate": 0,
     "worstLate": 0
   },
@@ -28,21 +28,21 @@
     },
     {
       "ticker": "AAPL",
-      "count": 22,
+      "count": 23,
       "asset": "Apple Inc. - Common Stock",
       "slug": "aapl",
       "hasPage": true
     },
     {
       "ticker": "GOOG",
-      "count": 19,
+      "count": 20,
       "asset": "Alphabet Inc. - Class C Capital Stock",
       "slug": "googl",
       "hasPage": true
     },
     {
       "ticker": "MSFT",
-      "count": 18,
+      "count": 20,
       "asset": "Microsoft Corporation - Common Stock",
       "slug": "msft",
       "hasPage": true
@@ -63,6 +63,61 @@
     }
   ],
   "trades": [
+    {
+      "ticker": "GOOG",
+      "asset": "Alphabet Inc. - Class C Capital Stock",
+      "side": "BUY",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-09-14",
+      "filedDate": "2026-10-01",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035464.pdf",
+      "bond": false
+    },
+    {
+      "ticker": "NFLX",
+      "asset": "Netflix, Inc. - Common Stock",
+      "side": "BUY",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-09-14",
+      "filedDate": "2026-10-01",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035464.pdf",
+      "bond": false
+    },
+    {
+      "ticker": "MSFT",
+      "asset": "Microsoft Corporation - Common Stock",
+      "side": "BUY",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-09-10",
+      "filedDate": "2026-10-01",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035464.pdf",
+      "bond": false
+    },
+    {
+      "ticker": "MSFT",
+      "asset": "Microsoft Corporation - Common Stock",
+      "side": "BUY",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-09-10",
+      "filedDate": "2026-10-01",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035464.pdf",
+      "bond": false
+    },
+    {
+      "ticker": "AAPL",
+      "asset": "Apple Inc. - Common Stock",
+      "side": "BUY",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-09-08",
+      "filedDate": "2026-10-01",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035464.pdf",
+      "bond": false
+    },
     {
       "ticker": "AAPL",
       "asset": "Apple Inc. - Common Stock",
@@ -2627,7 +2682,7 @@
       "bond": false
     }
   ],
-  "tradesShown": 233,
+  "tradesShown": 238,
   "holdings": {
     "available": false,
     "filingDate": "2026-05-14",
@@ -2645,14 +2700,14 @@
   "performance": {
     "available": true,
     "benchLabel": "S&P 500",
-    "asofDate": "2026-10-01",
+    "asofDate": "2026-10-02",
     "kpis": {
-      "medianPct": 26.2,
-      "medianBenchPct": 20.3,
-      "beat": 113,
-      "beatOf": 195,
-      "priced": 195,
-      "pricedOf": 219
+      "medianPct": 24.5,
+      "medianBenchPct": 21.2,
+      "beat": 116,
+      "beatOf": 200,
+      "priced": 200,
+      "pricedOf": 224
     },
     "series": {
       "dates": [
@@ -2726,7 +2781,7 @@
         "2026-09-15",
         "2026-09-22",
         "2026-09-29",
-        "2026-10-01"
+        "2026-10-02"
       ],
       "member": [
         100.0,
@@ -2795,11 +2850,11 @@
         123.9,
         123.8,
         124.3,
-        126.6,
-        124.9,
-        131.8,
-        129.9,
-        130.3
+        126.4,
+        124.2,
+        131.0,
+        129.1,
+        131.3
       ],
       "bench": [
         100.0,
@@ -2868,101 +2923,101 @@
         119.6,
         119.3,
         118.7,
-        119.3,
-        118.0,
-        120.5,
-        119.1,
-        119.0
+        119.2,
+        117.5,
+        120.0,
+        118.6,
+        119.4
       ],
-      "buys": 195
+      "buys": 200
     },
     "rows": [
       {
+        "ticker": "NFLX",
+        "txDate": "2026-09-14",
+        "pct": -16.5,
+        "benchPct": 1.2,
+        "excess": -17.7
+      },
+      {
+        "ticker": "GOOG",
+        "txDate": "2026-09-14",
+        "pct": -1.6,
+        "benchPct": 1.2,
+        "excess": -2.8
+      },
+      {
+        "ticker": "MSFT",
+        "txDate": "2026-09-10",
+        "pct": 5.1,
+        "benchPct": 1.6,
+        "excess": 3.5
+      },
+      {
+        "ticker": "MSFT",
+        "txDate": "2026-09-10",
+        "pct": 5.1,
+        "benchPct": 1.6,
+        "excess": 3.5
+      },
+      {
+        "ticker": "AAPL",
+        "txDate": "2026-09-08",
+        "pct": 5.5,
+        "benchPct": 0.5,
+        "excess": 5.0
+      },
+      {
         "ticker": "AAPL",
         "txDate": "2026-08-13",
-        "pct": 8.2,
-        "benchPct": -1.8,
-        "excess": 10.0
+        "pct": 9.3,
+        "benchPct": -1.1,
+        "excess": 10.4
       },
       {
         "ticker": "TSM",
         "txDate": "2026-07-10",
-        "pct": 5.8,
-        "benchPct": 1.2,
-        "excess": 4.6
+        "pct": 8.9,
+        "benchPct": 1.9,
+        "excess": 7.0
       },
       {
         "ticker": "NVDA",
         "txDate": "2026-06-26",
-        "pct": 19.9,
-        "benchPct": 4.8,
-        "excess": 15.1
+        "pct": 21.5,
+        "benchPct": 5.6,
+        "excess": 15.9
       },
       {
         "ticker": "NVDA",
         "txDate": "2026-06-26",
-        "pct": 19.9,
-        "benchPct": 4.8,
-        "excess": 15.1
+        "pct": 21.5,
+        "benchPct": 5.6,
+        "excess": 15.9
       },
       {
         "ticker": "NVDA",
         "txDate": "2026-06-26",
-        "pct": 19.9,
-        "benchPct": 4.8,
-        "excess": 15.1
+        "pct": 21.5,
+        "benchPct": 5.6,
+        "excess": 15.9
       },
       {
         "ticker": "GOOG",
         "txDate": "2026-06-15",
-        "pct": -8.8,
-        "benchPct": 1.2,
-        "excess": -10.0
+        "pct": -7.3,
+        "benchPct": 2.0,
+        "excess": -9.3
       },
       {
         "ticker": "MSFT",
         "txDate": "2026-06-11",
-        "pct": 31.4,
-        "benchPct": 3.6,
-        "excess": 27.8
-      },
-      {
-        "ticker": "MSFT",
-        "txDate": "2026-06-11",
-        "pct": 31.4,
-        "benchPct": 3.6,
-        "excess": 27.8
-      },
-      {
-        "ticker": "AAPL",
-        "txDate": "2026-05-14",
-        "pct": 10.8,
-        "benchPct": 2.1,
-        "excess": 8.7
-      },
-      {
-        "ticker": "TSM",
-        "txDate": "2026-04-09",
-        "pct": 25.6,
-        "benchPct": 12.4,
-        "excess": 13.2
-      },
-      {
-        "ticker": "GOOG",
-        "txDate": "2026-03-16",
-        "pct": 10.0,
-        "benchPct": 14.2,
-        "excess": -4.2
-      },
-      {
-        "ticker": "MSFT",
-        "txDate": "2026-03-12",
-        "pct": 27.6,
-        "benchPct": 14.7,
-        "excess": 12.9
+        "pct": 32.6,
+        "benchPct": 4.3,
+        "excess": 28.3
       }
     ],
-    "rowsOf": 195
+    "rowsOf": 200
   },
   "committees": {
     "reason": "assigned",
@@ -3008,11 +3063,11 @@
   "faq": [
     {
       "q": "What stocks does Cleo Fields trade?",
-      "a": "Cleo Fields has disclosed 233 trades across 33 tickers since February 2025. The most traded are NVDA (47), AAPL (22) and GOOG (19). Each trade on this page links to the official filing it came from."
+      "a": "Cleo Fields has disclosed 238 trades across 33 tickers since February 2025. The most traded are NVDA (47), AAPL (23) and GOOG (20). Each trade on this page links to the official filing it came from."
     },
     {
       "q": "Does Cleo Fields disclose trades on time?",
-      "a": "Yes. None of Cleo Fields's 233 disclosed trades was filed late: each arrived within the STOCK Act's 45-day legal maximum. The newest filing arrived on Sep 2, 2026."
+      "a": "Yes. None of Cleo Fields's 238 disclosed trades was filed late: each arrived within the STOCK Act's 45-day legal maximum. The newest filing arrived on Oct 1, 2026."
     }
   ]
 }

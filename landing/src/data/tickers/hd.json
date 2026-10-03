@@ -12,21 +12,21 @@
   },
   "indexable": true,
   "technical": {
-    "asOf": "2026-10-01",
-    "price": 282.46,
-    "chg1d": -0.71,
-    "chg1w": -3.33,
-    "chg1m": -11.67,
-    "rsi14": 25.2,
-    "sma50": 323.42,
-    "sma200": 339.43,
-    "ema8": 290.34,
-    "ema21": 301.7,
+    "asOf": "2026-10-02",
+    "price": 282.85,
+    "chg1d": 0.14,
+    "chg1w": -3.53,
+    "chg1m": -11.2,
+    "rsi14": 25.8,
+    "sma50": 322.58,
+    "sma200": 339.05,
+    "ema8": 288.67,
+    "ema21": 299.98,
     "emaGap": -3.77,
-    "vsSma50": -12.7,
-    "vsSma200": -16.8,
-    "relVol": 1.54,
-    "high52w": 397.02,
+    "vsSma50": -12.3,
+    "vsSma200": -16.6,
+    "relVol": 0.93,
+    "high52w": 395.06,
     "low52w": 282.46,
     "rangePos": 0.0,
     "series": [
@@ -235,18 +235,11 @@
         "c": 293.2
       },
       {
-        "d": "2026-10-01",
-        "c": 282.46
+        "d": "2026-10-02",
+        "c": 282.85
       }
     ],
-    "signals": [
-      {
-        "type": "new_52w_low",
-        "asof": "2026-10-01",
-        "label": "New 52-week low",
-        "dir": "bear"
-      }
-    ],
+    "signals": [],
     "nextEarnings": null,
     "score": {
       "label": "Strong Sell",
@@ -257,20 +250,20 @@
     }
   },
   "summary": {
-    "trades": 84,
+    "trades": 86,
     "members": 24,
     "congress": 23,
     "executive": 1,
     "whoLabel": "23 members of Congress and 1 executive-branch filer",
-    "buys": 43,
+    "buys": 45,
     "sells": 41,
     "other": 0,
     "firstTx": "2023-03-15",
-    "lastTx": "2026-09-14",
-    "lastFiling": "2026-09-25",
-    "estBuyLabel": "$442K",
+    "lastTx": "2026-09-22",
+    "lastFiling": "2026-10-01",
+    "estBuyLabel": "$458K",
     "estSellLabel": "$941K",
-    "pctLate": 11
+    "pctLate": 10
   },
   "topMembers": [
     {
@@ -289,10 +282,10 @@
       "slug": "david-j-taylor",
       "party": "R",
       "chamber": "House",
-      "trades": 8,
-      "buys": 6,
+      "trades": 10,
+      "buys": 8,
       "sells": 2,
-      "estLabel": "$64K",
+      "estLabel": "$80K",
       "hasPage": false
     },
     {
@@ -385,6 +378,30 @@
     }
   ],
   "trades": [
+    {
+      "member": "David J. Taylor",
+      "memberSlug": "david-j-taylor",
+      "hasPage": false,
+      "party": "R",
+      "side": "BUY",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-09-22",
+      "filedDate": "2026-10-01",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035549.pdf"
+    },
+    {
+      "member": "David J. Taylor",
+      "memberSlug": "david-j-taylor",
+      "hasPage": false,
+      "party": "R",
+      "side": "BUY",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-09-22",
+      "filedDate": "2026-10-01",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035549.pdf"
+    },
     {
       "member": "Kevin Hern",
       "memberSlug": "kevin-hern",
@@ -660,45 +677,21 @@
       "filedDate": "2026-07-21",
       "daysLate": 71,
       "sourceUrl": "https://efdsearch.senate.gov/search/view/ptr/fda235b3-bad7-4637-8fa1-053f354d929c/"
-    },
-    {
-      "member": "Lloyd Doggett",
-      "memberSlug": "lloyd-doggett",
-      "hasPage": false,
-      "party": "D",
-      "side": "BUY",
-      "amountBucket": "$1K – $15K",
-      "txDate": "2026-03-26",
-      "filedDate": "2026-04-06",
-      "daysLate": 0,
-      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20034292.pdf"
-    },
-    {
-      "member": "Alan Armstrong",
-      "memberSlug": "alan-armstrong",
-      "hasPage": true,
-      "party": "R",
-      "side": "SELL",
-      "amountBucket": "$50K – $100K",
-      "txDate": "2026-03-24",
-      "filedDate": "2026-07-21",
-      "daysLate": 74,
-      "sourceUrl": "https://efdsearch.senate.gov/search/view/ptr/fda235b3-bad7-4637-8fa1-053f354d929c/"
     }
   ],
   "tradesShown": 25,
   "faq": [
     {
       "q": "Who in Congress has traded HD stock?",
-      "a": "23 members of Congress and 1 executive-branch filer have disclosed 84 HD trades since March 2023. The most active is Kevin Hern, with 10 trades, followed by David J. Taylor and Lloyd Doggett. Each trade on this page links to the official filing it came from."
+      "a": "23 members of Congress and 1 executive-branch filer have disclosed 86 HD trades since March 2023. The most active is Kevin Hern, with 10 trades, followed by David J. Taylor and Lloyd Doggett. Each trade on this page links to the official filing it came from."
     },
     {
       "q": "Is Congress buying or selling HD?",
-      "a": "Of the 84 disclosed HD trades, 43 were buys and 41 were sells. By the midpoint of each filed amount bracket, the buying comes to about $442K and the selling to about $941K. Filings disclose brackets, never exact amounts, so these totals are estimates."
+      "a": "Of the 86 disclosed HD trades, 45 were buys and 41 were sells. By the midpoint of each filed amount bracket, the buying comes to about $458K and the selling to about $941K. Filings disclose brackets, never exact amounts, so these totals are estimates."
     },
     {
       "q": "How late are HD trades disclosed?",
-      "a": "11% of the disclosed HD trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Sep 14, 2026, and the newest filing arrived on Sep 25, 2026."
+      "a": "10% of the disclosed HD trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Sep 22, 2026, and the newest filing arrived on Oct 1, 2026."
     }
   ]
 }

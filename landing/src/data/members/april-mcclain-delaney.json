@@ -5428,10 +5428,10 @@
   "performance": {
     "available": true,
     "benchLabel": "S&P 500",
-    "asofDate": "2026-10-01",
+    "asofDate": "2026-10-02",
     "kpis": {
-      "medianPct": -9.2,
-      "medianBenchPct": 9.2,
+      "medianPct": -8.6,
+      "medianBenchPct": 10.0,
       "beat": 19,
       "beatOf": 123,
       "priced": 123,
@@ -5526,7 +5526,7 @@
         "2026-09-16",
         "2026-09-23",
         "2026-09-30",
-        "2026-10-01"
+        "2026-10-02"
       ],
       "member": [
         100.0,
@@ -5616,7 +5616,7 @@
         90.9,
         90.5,
         89.6,
-        91.1
+        92.1
       ],
       "bench": [
         100.0,
@@ -5706,7 +5706,7 @@
         110.4,
         112.4,
         111.6,
-        111.8
+        112.7
       ],
       "buys": 123
     },
@@ -5714,86 +5714,86 @@
       {
         "ticker": "LTH",
         "txDate": "2026-08-24",
-        "pct": -11.7,
-        "benchPct": 0.1,
-        "excess": -11.8
+        "pct": -10.4,
+        "benchPct": 0.8,
+        "excess": -11.2
       },
       {
         "ticker": "HUBB",
         "txDate": "2026-08-19",
-        "pct": -1.8,
-        "benchPct": -0.7,
-        "excess": -1.1
+        "pct": -0.0,
+        "benchPct": 0.1,
+        "excess": -0.1
       },
       {
         "ticker": "HUBB",
         "txDate": "2026-08-18",
-        "pct": -3.5,
-        "benchPct": -0.5,
-        "excess": -3.0
+        "pct": -1.7,
+        "benchPct": 0.3,
+        "excess": -2.0
       },
       {
         "ticker": "CHRW",
         "txDate": "2026-08-14",
-        "pct": 3.1,
-        "benchPct": -1.6,
-        "excess": 4.7
+        "pct": 6.2,
+        "benchPct": -0.9,
+        "excess": 7.1
       },
       {
         "ticker": "HUBB",
         "txDate": "2026-08-14",
-        "pct": -8.7,
-        "benchPct": -1.6,
-        "excess": -7.1
+        "pct": -7.0,
+        "benchPct": -0.9,
+        "excess": -6.1
       },
       {
         "ticker": "CHRW",
         "txDate": "2026-08-12",
-        "pct": 4.4,
-        "benchPct": -1.1,
-        "excess": 5.5
+        "pct": 7.5,
+        "benchPct": -0.4,
+        "excess": 7.9
       },
       {
         "ticker": "LTH",
         "txDate": "2026-08-07",
-        "pct": -7.9,
-        "benchPct": -1.2,
-        "excess": -6.7
+        "pct": -6.4,
+        "benchPct": -0.5,
+        "excess": -5.9
       },
       {
         "ticker": "LTH",
         "txDate": "2026-08-06",
-        "pct": -7.2,
-        "benchPct": -0.6,
-        "excess": -6.6
+        "pct": -5.7,
+        "benchPct": 0.1,
+        "excess": -5.8
       },
       {
         "ticker": "CHRW",
         "txDate": "2026-08-05",
-        "pct": -0.3,
-        "benchPct": -0.8,
-        "excess": 0.5
+        "pct": 2.7,
+        "benchPct": -0.0,
+        "excess": 2.7
       },
       {
         "ticker": "LTH",
         "txDate": "2026-08-03",
-        "pct": -8.6,
-        "benchPct": 0.8,
-        "excess": -9.4
+        "pct": -7.2,
+        "benchPct": 1.6,
+        "excess": -8.8
       },
       {
         "ticker": "CHRW",
         "txDate": "2026-08-03",
-        "pct": 4.2,
-        "benchPct": 0.8,
-        "excess": 3.4
+        "pct": 7.3,
+        "benchPct": 1.6,
+        "excess": 5.7
       },
       {
         "ticker": "HUBB",
         "txDate": "2026-08-03",
-        "pct": -1.9,
-        "benchPct": 0.8,
-        "excess": -2.7
+        "pct": -0.1,
+        "benchPct": 1.6,
+        "excess": -1.7
       }
     ],
     "rowsOf": 123

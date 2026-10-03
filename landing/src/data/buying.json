@@ -4,17 +4,21 @@
   "from": "2026-08-17",
   "to": "2026-10-01",
   "members": 20,
-  "buys": 164,
+  "buys": 172,
   "options": 5,
-  "companies": 115,
+  "companies": 117,
   "rows": [
     {
       "ticker": "MSFT",
       "tickerLabel": "MSFT",
       "slug": "msft",
       "company": "Microsoft Corporation",
-      "members": 3,
+      "members": 4,
       "buyers": [
+        {
+          "name": "Cleo Fields",
+          "slug": "cleo-fields"
+        },
         {
           "name": "Gilbert Ray Cisneros, Jr.",
           "slug": "gilbert-ray-cisneros-jr"
@@ -28,11 +32,11 @@
           "slug": "josh-gottheimer"
         }
       ],
-      "buys": 6,
+      "buys": 8,
       "options": 2,
       "estLabel": "$1.2M",
-      "est": 1206003,
-      "lastFiling": "2026-09-14"
+      "est": 1222004,
+      "lastFiling": "2026-10-01"
     },
     {
       "ticker": "AVGO",
@@ -61,6 +65,28 @@
       "lastFiling": "2026-09-22"
     },
     {
+      "ticker": "AAPL",
+      "tickerLabel": "AAPL",
+      "slug": "aapl",
+      "company": "Apple Inc.",
+      "members": 2,
+      "buyers": [
+        {
+          "name": "Cleo Fields",
+          "slug": "cleo-fields"
+        },
+        {
+          "name": "Ed Case",
+          "slug": null
+        }
+      ],
+      "buys": 3,
+      "options": 0,
+      "estLabel": "$24K",
+      "est": 24002,
+      "lastFiling": "2026-10-01"
+    },
+    {
       "ticker": "ACN",
       "tickerLabel": "ACN",
       "slug": "acn",
@@ -83,6 +109,50 @@
       "lastFiling": "2026-09-17"
     },
     {
+      "ticker": "GOOGL",
+      "tickerLabel": "GOOGL and GOOG",
+      "slug": "googl",
+      "company": "Alphabet Inc.",
+      "members": 2,
+      "buyers": [
+        {
+          "name": "David J. Taylor",
+          "slug": null
+        },
+        {
+          "name": "Cleo Fields",
+          "slug": "cleo-fields"
+        }
+      ],
+      "buys": 3,
+      "options": 0,
+      "estLabel": "$24K",
+      "est": 24002,
+      "lastFiling": "2026-10-01"
+    },
+    {
+      "ticker": "NFLX",
+      "tickerLabel": "NFLX",
+      "slug": "nflx",
+      "company": "Netflix, Inc.",
+      "members": 2,
+      "buyers": [
+        {
+          "name": "Byron Donalds",
+          "slug": null
+        },
+        {
+          "name": "Cleo Fields",
+          "slug": "cleo-fields"
+        }
+      ],
+      "buys": 3,
+      "options": 0,
+      "estLabel": "$24K",
+      "est": 24002,
+      "lastFiling": "2026-10-01"
+    },
+    {
       "ticker": "PG",
       "tickerLabel": "PG",
       "slug": "pg",
@@ -103,28 +173,6 @@
       "estLabel": "$24K",
       "est": 24002,
       "lastFiling": "2026-09-17"
-    },
-    {
-      "ticker": "AAPL",
-      "tickerLabel": "AAPL",
-      "slug": "aapl",
-      "company": "Apple Inc.",
-      "members": 2,
-      "buyers": [
-        {
-          "name": "Cleo Fields",
-          "slug": "cleo-fields"
-        },
-        {
-          "name": "Ed Case",
-          "slug": null
-        }
-      ],
-      "buys": 2,
-      "options": 0,
-      "estLabel": "$16K",
-      "est": 16001,
-      "lastFiling": "2026-09-02"
     },
     {
       "ticker": "AMAT",
@@ -371,42 +419,6 @@
       "estLabel": "$16K",
       "est": 16001,
       "lastFiling": "2026-09-05"
-    },
-    {
-      "ticker": "AORT",
-      "tickerLabel": "AORT",
-      "slug": null,
-      "company": "Artivion, Inc.",
-      "members": 1,
-      "buyers": [
-        {
-          "name": "Gilbert Ray Cisneros, Jr.",
-          "slug": "gilbert-ray-cisneros-jr"
-        }
-      ],
-      "buys": 2,
-      "options": 0,
-      "estLabel": "$16K",
-      "est": 16001,
-      "lastFiling": "2026-09-10"
-    },
-    {
-      "ticker": "CRWD",
-      "tickerLabel": "CRWD",
-      "slug": null,
-      "company": "CrowdStrike Holdings, Inc. - Class A $200?",
-      "members": 1,
-      "buyers": [
-        {
-          "name": "Gilbert Ray Cisneros, Jr.",
-          "slug": "gilbert-ray-cisneros-jr"
-        }
-      ],
-      "buys": 2,
-      "options": 0,
-      "estLabel": "$16K",
-      "est": 16001,
-      "lastFiling": "2026-09-10"
     }
   ],
   "largest": {
@@ -422,7 +434,7 @@
   "faq": [
     {
       "q": "What stocks is Congress buying?",
-      "a": "In filings from the last 45 days, to Oct 1, 2026, 20 members of Congress disclosed 164 purchases, 5 of them options, across 115 companies. The stocks bought by the most members were MSFT (3 members), AVGO (3 members) and ACN (2 members). Filings arrive up to 45 days after the trade: this is recent disclosure, not live trading."
+      "a": "In filings from the last 45 days, to Oct 1, 2026, 20 members of Congress disclosed 172 purchases, 5 of them options, across 117 companies. The stocks bought by the most members were MSFT (4 members), AVGO (3 members) and AAPL (2 members). Filings arrive up to 45 days after the trade: this is recent disclosure, not live trading."
     },
     {
       "q": "What is the largest stock purchase Congress disclosed recently?",

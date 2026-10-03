@@ -6,12 +6,12 @@
       "ticker": "MSFT",
       "aliases": [],
       "company": "Microsoft Corporation",
-      "trades": 209,
+      "trades": 211,
       "members": 44,
-      "buys": 108,
+      "buys": 110,
       "sells": 101,
-      "lastTx": "2026-08-27",
-      "lastFiling": "2026-09-14",
+      "lastTx": "2026-09-10",
+      "lastFiling": "2026-10-01",
       "indexable": true,
       "industry": {
         "key": "tech",
@@ -42,12 +42,12 @@
         "GOOG"
       ],
       "company": "Alphabet Inc.",
-      "trades": 168,
+      "trades": 169,
       "members": 42,
-      "buys": 90,
+      "buys": 91,
       "sells": 78,
       "lastTx": "2026-09-14",
-      "lastFiling": "2026-09-18",
+      "lastFiling": "2026-10-01",
       "indexable": true,
       "industry": {
         "key": "tech",
@@ -59,12 +59,12 @@
       "ticker": "AAPL",
       "aliases": [],
       "company": "Apple Inc.",
-      "trades": 154,
+      "trades": 155,
       "members": 45,
-      "buys": 74,
+      "buys": 75,
       "sells": 80,
       "lastTx": "2026-09-22",
-      "lastFiling": "2026-09-25",
+      "lastFiling": "2026-10-01",
       "indexable": true,
       "industry": {
         "key": "tech",
@@ -146,12 +146,12 @@
       "ticker": "HD",
       "aliases": [],
       "company": "Home Depot, Inc.",
-      "trades": 84,
+      "trades": 86,
       "members": 24,
-      "buys": 43,
+      "buys": 45,
       "sells": 41,
-      "lastTx": "2026-09-14",
-      "lastFiling": "2026-09-25",
+      "lastTx": "2026-09-22",
+      "lastFiling": "2026-10-01",
       "indexable": true,
       "industry": {
         "key": "consumer",
@@ -295,6 +295,23 @@
       }
     },
     {
+      "slug": "nflx",
+      "ticker": "NFLX",
+      "aliases": [],
+      "company": "Netflix, Inc.",
+      "trades": 55,
+      "members": 23,
+      "buys": 31,
+      "sells": 24,
+      "lastTx": "2026-09-14",
+      "lastFiling": "2026-10-01",
+      "indexable": true,
+      "industry": {
+        "key": "telecom",
+        "label": "Telecom & media"
+      }
+    },
+    {
       "slug": "acn",
       "ticker": "ACN",
       "aliases": [],
@@ -309,23 +326,6 @@
       "industry": {
         "key": "tech",
         "label": "Technology"
-      }
-    },
-    {
-      "slug": "nflx",
-      "ticker": "NFLX",
-      "aliases": [],
-      "company": "Netflix, Inc.",
-      "trades": 54,
-      "members": 23,
-      "buys": 30,
-      "sells": 24,
-      "lastTx": "2026-08-12",
-      "lastFiling": "2026-09-15",
-      "indexable": true,
-      "industry": {
-        "key": "telecom",
-        "label": "Telecom & media"
       }
     },
     {
@@ -788,6 +788,23 @@
       }
     },
     {
+      "slug": "amgn",
+      "ticker": "AMGN",
+      "aliases": [],
+      "company": "Amgen Inc.",
+      "trades": 36,
+      "members": 17,
+      "buys": 17,
+      "sells": 19,
+      "lastTx": "2026-09-22",
+      "lastFiling": "2026-10-01",
+      "indexable": true,
+      "industry": {
+        "key": "health",
+        "label": "Health care & pharma"
+      }
+    },
+    {
       "slug": "txn",
       "ticker": "TXN",
       "aliases": [],
@@ -836,23 +853,6 @@
       "industry": {
         "key": "tech",
         "label": "Technology"
-      }
-    },
-    {
-      "slug": "amgn",
-      "ticker": "AMGN",
-      "aliases": [],
-      "company": "Amgen Inc.",
-      "trades": 35,
-      "members": 17,
-      "buys": 16,
-      "sells": 19,
-      "lastTx": "2026-08-26",
-      "lastFiling": "2026-09-05",
-      "indexable": true,
-      "industry": {
-        "key": "health",
-        "label": "Health care & pharma"
       }
     },
     {
