@@ -1,19 +1,19 @@
 {
   "_comment": "Generated from real official disclosures by congress/landing_data.py (daily Action). Do not edit by hand. 'filedDaysLate' counts days past the STOCK Act's 45-day statutory maximum; 0 = on time.",
   "windowDays": 45,
-  "from": "2026-08-18",
-  "to": "2026-10-02",
-  "members": 19,
-  "buys": 166,
-  "options": 5,
-  "companies": 113,
+  "from": "2026-08-21",
+  "to": "2026-10-05",
+  "members": 18,
+  "buys": 151,
+  "options": 2,
+  "companies": 107,
   "rows": [
     {
       "ticker": "MSFT",
       "tickerLabel": "MSFT",
       "slug": "msft",
       "company": "Microsoft Corporation",
-      "members": 4,
+      "members": 3,
       "buyers": [
         {
           "name": "Cleo Fields",
@@ -24,45 +24,15 @@
           "slug": "gilbert-ray-cisneros-jr"
         },
         {
-          "name": "John Boozman",
-          "slug": null
-        },
-        {
           "name": "Josh Gottheimer",
           "slug": "josh-gottheimer"
         }
       ],
-      "buys": 8,
+      "buys": 6,
       "options": 2,
       "estLabel": "$1.2M",
-      "est": 1222004,
+      "est": 1206003,
       "lastFiling": "2026-10-01"
-    },
-    {
-      "ticker": "AVGO",
-      "tickerLabel": "AVGO",
-      "slug": "avgo",
-      "company": "Broadcom Inc.",
-      "members": 3,
-      "buyers": [
-        {
-          "name": "David J. Taylor",
-          "slug": null
-        },
-        {
-          "name": "John Boozman",
-          "slug": null
-        },
-        {
-          "name": "Rick W. Allen",
-          "slug": null
-        }
-      ],
-      "buys": 4,
-      "options": 0,
-      "estLabel": "$32K",
-      "est": 32002,
-      "lastFiling": "2026-09-22"
     },
     {
       "ticker": "ACN",
@@ -87,10 +57,10 @@
       "lastFiling": "2026-09-17"
     },
     {
-      "ticker": "GOOGL",
-      "tickerLabel": "GOOGL and GOOG",
-      "slug": "googl",
-      "company": "Alphabet Inc.",
+      "ticker": "AVGO",
+      "tickerLabel": "AVGO",
+      "slug": "avgo",
+      "company": "Broadcom Inc.",
       "members": 2,
       "buyers": [
         {
@@ -98,15 +68,37 @@
           "slug": null
         },
         {
-          "name": "Cleo Fields",
-          "slug": "cleo-fields"
+          "name": "Rick W. Allen",
+          "slug": null
         }
       ],
       "buys": 3,
       "options": 0,
       "estLabel": "$24K",
       "est": 24002,
-      "lastFiling": "2026-10-01"
+      "lastFiling": "2026-09-22"
+    },
+    {
+      "ticker": "HD",
+      "tickerLabel": "HD",
+      "slug": "hd",
+      "company": "Home Depot, Inc.",
+      "members": 2,
+      "buyers": [
+        {
+          "name": "David J. Taylor",
+          "slug": null
+        },
+        {
+          "name": "Lloyd Doggett",
+          "slug": null
+        }
+      ],
+      "buys": 3,
+      "options": 0,
+      "estLabel": "$24K",
+      "est": 24002,
+      "lastFiling": "2026-10-05"
     },
     {
       "ticker": "NFLX",
@@ -129,28 +121,6 @@
       "estLabel": "$24K",
       "est": 24002,
       "lastFiling": "2026-10-01"
-    },
-    {
-      "ticker": "PG",
-      "tickerLabel": "PG",
-      "slug": "pg",
-      "company": "Procter & Gamble Company",
-      "members": 2,
-      "buyers": [
-        {
-          "name": "David J. Taylor",
-          "slug": null
-        },
-        {
-          "name": "Lloyd Doggett",
-          "slug": null
-        }
-      ],
-      "buys": 3,
-      "options": 0,
-      "estLabel": "$24K",
-      "est": 24002,
-      "lastFiling": "2026-09-17"
     },
     {
       "ticker": "AMAT",
@@ -197,6 +167,28 @@
       "lastFiling": "2026-10-02"
     },
     {
+      "ticker": "IBM",
+      "tickerLabel": "IBM",
+      "slug": "ibm",
+      "company": "International Business Machines Corporation",
+      "members": 2,
+      "buyers": [
+        {
+          "name": "Gilbert Ray Cisneros, Jr.",
+          "slug": "gilbert-ray-cisneros-jr"
+        },
+        {
+          "name": "Lloyd Doggett",
+          "slug": null
+        }
+      ],
+      "buys": 2,
+      "options": 0,
+      "estLabel": "$16K",
+      "est": 16001,
+      "lastFiling": "2026-10-05"
+    },
+    {
       "ticker": "NVDA",
       "tickerLabel": "NVDA",
       "slug": "nvda",
@@ -219,22 +211,26 @@
       "lastFiling": "2026-09-04"
     },
     {
-      "ticker": "BE",
-      "tickerLabel": "BE",
-      "slug": "be",
-      "company": "Bloom Energy Corporation",
-      "members": 1,
+      "ticker": "PG",
+      "tickerLabel": "PG",
+      "slug": "pg",
+      "company": "Procter & Gamble Company",
+      "members": 2,
       "buyers": [
         {
-          "name": "Nancy Pelosi",
-          "slug": "nancy-pelosi"
+          "name": "David J. Taylor",
+          "slug": null
+        },
+        {
+          "name": "Lloyd Doggett",
+          "slug": null
         }
       ],
-      "buys": 4,
-      "options": 2,
-      "estLabel": "$7.5M",
-      "est": 7500002,
-      "lastFiling": "2026-08-21"
+      "buys": 2,
+      "options": 0,
+      "estLabel": "$16K",
+      "est": 16001,
+      "lastFiling": "2026-09-17"
     },
     {
       "ticker": "CHRW",
@@ -327,24 +323,6 @@
       "lastFiling": "2026-09-09"
     },
     {
-      "ticker": "INTC",
-      "tickerLabel": "INTC",
-      "slug": "intc",
-      "company": "Intel Corporation",
-      "members": 1,
-      "buyers": [
-        {
-          "name": "Nancy Pelosi",
-          "slug": "nancy-pelosi"
-        }
-      ],
-      "buys": 2,
-      "options": 1,
-      "estLabel": "$1.1M",
-      "est": 1125001,
-      "lastFiling": "2026-08-21"
-    },
-    {
       "ticker": "MRK",
       "tickerLabel": "MRK",
       "slug": "mrk",
@@ -415,26 +393,46 @@
       "estLabel": "$16K",
       "est": 16001,
       "lastFiling": "2026-09-05"
+    },
+    {
+      "ticker": "AORT",
+      "tickerLabel": "AORT",
+      "slug": null,
+      "company": "Artivion, Inc.",
+      "members": 1,
+      "buyers": [
+        {
+          "name": "Gilbert Ray Cisneros, Jr.",
+          "slug": "gilbert-ray-cisneros-jr"
+        }
+      ],
+      "buys": 2,
+      "options": 0,
+      "estLabel": "$16K",
+      "est": 16001,
+      "lastFiling": "2026-09-10"
     }
   ],
   "largest": {
-    "ticker": "BE",
-    "estLabel": "$7.5M",
-    "buys": 4,
+    "ticker": "MSFT",
+    "estLabel": "$1.2M",
+    "buys": 6,
     "options": 2,
-    "company": "Bloom Energy Corporation",
+    "company": "Microsoft Corporation",
     "buyers": [
-      "Nancy Pelosi"
+      "Cleo Fields",
+      "Gilbert Ray Cisneros, Jr.",
+      "Josh Gottheimer"
     ]
   },
   "faq": [
     {
       "q": "What stocks is Congress buying?",
-      "a": "In filings from the last 45 days, to Oct 2, 2026, 19 members of Congress disclosed 166 purchases, 5 of them options, across 113 companies. The stocks bought by the most members were MSFT (4 members), AVGO (3 members) and ACN (2 members). Filings arrive up to 45 days after the trade: this is recent disclosure, not live trading."
+      "a": "In filings from the last 45 days, to Oct 5, 2026, 18 members of Congress disclosed 151 purchases, 2 of them options, across 107 companies. The stocks bought by the most members were MSFT (3 members), ACN (2 members) and AVGO (2 members). Filings arrive up to 45 days after the trade: this is recent disclosure, not live trading."
     },
     {
       "q": "What is the largest stock purchase Congress disclosed recently?",
-      "a": "By the midpoint of each filed amount bracket, the largest recent buying was in Bloom Energy Corporation (BE): about $7.5M across 4 purchases (2 of them options), by Nancy Pelosi. Filings disclose brackets, never exact amounts, so this is an estimate."
+      "a": "By the midpoint of each filed amount bracket, the largest recent buying was in Microsoft Corporation (MSFT): about $1.2M across 6 purchases (2 of them options), by Cleo Fields and Gilbert Ray Cisneros, Jr. and others. Filings disclose brackets, never exact amounts, so this is an estimate."
     },
     {
       "q": "Does this include the President's trades?",

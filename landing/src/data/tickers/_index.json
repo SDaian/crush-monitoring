@@ -146,16 +146,33 @@
       "ticker": "HD",
       "aliases": [],
       "company": "Home Depot, Inc.",
-      "trades": 86,
+      "trades": 87,
       "members": 24,
-      "buys": 45,
+      "buys": 46,
       "sells": 41,
       "lastTx": "2026-09-22",
-      "lastFiling": "2026-10-01",
+      "lastFiling": "2026-10-05",
       "indexable": true,
       "industry": {
         "key": "consumer",
         "label": "Consumer & retail"
+      }
+    },
+    {
+      "slug": "jnj",
+      "ticker": "JNJ",
+      "aliases": [],
+      "company": "Johnson & Johnson",
+      "trades": 68,
+      "members": 24,
+      "buys": 31,
+      "sells": 37,
+      "lastTx": "2026-09-08",
+      "lastFiling": "2026-10-05",
+      "indexable": true,
+      "industry": {
+        "key": "health",
+        "label": "Health care & pharma"
       }
     },
     {
@@ -203,23 +220,6 @@
       "sells": 42,
       "lastTx": "2026-07-10",
       "lastFiling": "2026-08-24",
-      "indexable": true,
-      "industry": {
-        "key": "health",
-        "label": "Health care & pharma"
-      }
-    },
-    {
-      "slug": "jnj",
-      "ticker": "JNJ",
-      "aliases": [],
-      "company": "Johnson & Johnson",
-      "trades": 67,
-      "members": 24,
-      "buys": 30,
-      "sells": 37,
-      "lastTx": "2026-08-27",
-      "lastFiling": "2026-09-12",
       "indexable": true,
       "industry": {
         "key": "health",
@@ -329,6 +329,23 @@
       }
     },
     {
+      "slug": "ibm",
+      "ticker": "IBM",
+      "aliases": [],
+      "company": "International Business Machines Corporation",
+      "trades": 52,
+      "members": 15,
+      "buys": 29,
+      "sells": 23,
+      "lastTx": "2026-09-10",
+      "lastFiling": "2026-10-05",
+      "indexable": true,
+      "industry": {
+        "key": "tech",
+        "label": "Technology"
+      }
+    },
+    {
       "slug": "amd",
       "ticker": "AMD",
       "aliases": [],
@@ -411,23 +428,6 @@
       "industry": {
         "key": "agriculture",
         "label": "Agriculture & food"
-      }
-    },
-    {
-      "slug": "ibm",
-      "ticker": "IBM",
-      "aliases": [],
-      "company": "International Business Machines Corporation",
-      "trades": 51,
-      "members": 15,
-      "buys": 28,
-      "sells": 23,
-      "lastTx": "2026-08-24",
-      "lastFiling": "2026-09-10",
-      "indexable": true,
-      "industry": {
-        "key": "tech",
-        "label": "Technology"
       }
     },
     {

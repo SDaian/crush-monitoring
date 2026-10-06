@@ -257,18 +257,18 @@
     }
   },
   "summary": {
-    "trades": 86,
+    "trades": 87,
     "members": 24,
     "congress": 23,
     "executive": 1,
     "whoLabel": "23 members of Congress and 1 executive-branch filer",
-    "buys": 45,
+    "buys": 46,
     "sells": 41,
     "other": 0,
     "firstTx": "2023-03-15",
     "lastTx": "2026-09-22",
-    "lastFiling": "2026-10-01",
-    "estBuyLabel": "$458K",
+    "lastFiling": "2026-10-05",
+    "estBuyLabel": "$466K",
     "estSellLabel": "$941K",
     "pctLate": 10
   },
@@ -300,10 +300,10 @@
       "slug": "lloyd-doggett",
       "party": "D",
       "chamber": "House",
-      "trades": 6,
-      "buys": 6,
+      "trades": 7,
+      "buys": 7,
       "sells": 0,
-      "estLabel": "$48K",
+      "estLabel": "$56K",
       "hasPage": false
     },
     {
@@ -408,6 +408,18 @@
       "filedDate": "2026-10-01",
       "daysLate": 0,
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035549.pdf"
+    },
+    {
+      "member": "Lloyd Doggett",
+      "memberSlug": "lloyd-doggett",
+      "hasPage": false,
+      "party": "D",
+      "side": "BUY",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-09-17",
+      "filedDate": "2026-10-05",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035580.pdf"
     },
     {
       "member": "Kevin Hern",
@@ -672,33 +684,21 @@
       "filedDate": "2026-04-30",
       "daysLate": 0,
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20034274.pdf"
-    },
-    {
-      "member": "Alan Armstrong",
-      "memberSlug": "alan-armstrong",
-      "hasPage": true,
-      "party": "R",
-      "side": "SELL",
-      "amountBucket": "$15K – $50K",
-      "txDate": "2026-03-27",
-      "filedDate": "2026-07-21",
-      "daysLate": 71,
-      "sourceUrl": "https://efdsearch.senate.gov/search/view/ptr/fda235b3-bad7-4637-8fa1-053f354d929c/"
     }
   ],
   "tradesShown": 25,
   "faq": [
     {
       "q": "Who in Congress has traded HD stock?",
-      "a": "23 members of Congress and 1 executive-branch filer have disclosed 86 HD trades since March 2023. The most active is Kevin Hern, with 10 trades, followed by David J. Taylor and Lloyd Doggett. Each trade on this page links to the official filing it came from."
+      "a": "23 members of Congress and 1 executive-branch filer have disclosed 87 HD trades since March 2023. The most active is Kevin Hern, with 10 trades, followed by David J. Taylor and Lloyd Doggett. Each trade on this page links to the official filing it came from."
     },
     {
       "q": "Is Congress buying or selling HD?",
-      "a": "Of the 86 disclosed HD trades, 45 were buys and 41 were sells. By the midpoint of each filed amount bracket, the buying comes to about $458K and the selling to about $941K. Filings disclose brackets, never exact amounts, so these totals are estimates."
+      "a": "Of the 87 disclosed HD trades, 46 were buys and 41 were sells. By the midpoint of each filed amount bracket, the buying comes to about $466K and the selling to about $941K. Filings disclose brackets, never exact amounts, so these totals are estimates."
     },
     {
       "q": "How late are HD trades disclosed?",
-      "a": "10% of the disclosed HD trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Sep 22, 2026, and the newest filing arrived on Oct 1, 2026."
+      "a": "10% of the disclosed HD trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Sep 22, 2026, and the newest filing arrived on Oct 5, 2026."
     }
   ]
 }

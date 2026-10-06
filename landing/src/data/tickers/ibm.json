@@ -250,18 +250,18 @@
     }
   },
   "summary": {
-    "trades": 51,
+    "trades": 52,
     "members": 15,
     "congress": 15,
     "executive": 0,
     "whoLabel": "15 members of Congress",
-    "buys": 28,
+    "buys": 29,
     "sells": 23,
     "other": 0,
     "firstTx": "2024-12-10",
-    "lastTx": "2026-08-24",
-    "lastFiling": "2026-09-10",
-    "estBuyLabel": "$438K",
+    "lastTx": "2026-09-10",
+    "lastFiling": "2026-10-05",
+    "estBuyLabel": "$446K",
     "estSellLabel": "$374K",
     "pctLate": 10
   },
@@ -276,6 +276,17 @@
       "sells": 4,
       "estLabel": "$178K",
       "hasPage": true
+    },
+    {
+      "name": "Lloyd Doggett",
+      "slug": "lloyd-doggett",
+      "party": "D",
+      "chamber": "House",
+      "trades": 7,
+      "buys": 7,
+      "sells": 0,
+      "estLabel": "$56K",
+      "hasPage": false
     },
     {
       "name": "Jonathan L. Jackson",
@@ -298,17 +309,6 @@
       "sells": 5,
       "estLabel": "$48K",
       "hasPage": true
-    },
-    {
-      "name": "Lloyd Doggett",
-      "slug": "lloyd-doggett",
-      "party": "D",
-      "chamber": "House",
-      "trades": 6,
-      "buys": 6,
-      "sells": 0,
-      "estLabel": "$48K",
-      "hasPage": false
     },
     {
       "name": "David J. Taylor",
@@ -378,6 +378,18 @@
     }
   ],
   "trades": [
+    {
+      "member": "Lloyd Doggett",
+      "memberSlug": "lloyd-doggett",
+      "hasPage": false,
+      "party": "D",
+      "side": "BUY",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-09-10",
+      "filedDate": "2026-10-05",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035580.pdf"
+    },
     {
       "member": "Maria Elvira Salazar",
       "memberSlug": "maria-elvira-salazar",
@@ -665,33 +677,21 @@
       "filedDate": "2026-01-21",
       "daysLate": 0,
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20033845.pdf"
-    },
-    {
-      "member": "David J. Taylor",
-      "memberSlug": "david-j-taylor",
-      "hasPage": false,
-      "party": "R",
-      "side": "BUY",
-      "amountBucket": "$15K – $50K",
-      "txDate": "2026-01-08",
-      "filedDate": "2026-01-21",
-      "daysLate": 0,
-      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20033845.pdf"
     }
   ],
   "tradesShown": 25,
   "faq": [
     {
       "q": "Who in Congress has traded IBM stock?",
-      "a": "15 members of Congress have disclosed 51 IBM trades since December 2024. The most active is Gilbert Ray Cisneros, Jr., with 10 trades, followed by Jonathan L. Jackson and Josh Gottheimer. Each trade on this page links to the official filing it came from."
+      "a": "15 members of Congress have disclosed 52 IBM trades since December 2024. The most active is Gilbert Ray Cisneros, Jr., with 10 trades, followed by Lloyd Doggett and Jonathan L. Jackson. Each trade on this page links to the official filing it came from."
     },
     {
       "q": "Is Congress buying or selling IBM?",
-      "a": "Of the 51 disclosed IBM trades, 28 were buys and 23 were sells. By the midpoint of each filed amount bracket, the buying comes to about $438K and the selling to about $374K. Filings disclose brackets, never exact amounts, so these totals are estimates."
+      "a": "Of the 52 disclosed IBM trades, 29 were buys and 23 were sells. By the midpoint of each filed amount bracket, the buying comes to about $446K and the selling to about $374K. Filings disclose brackets, never exact amounts, so these totals are estimates."
     },
     {
       "q": "How late are IBM trades disclosed?",
-      "a": "10% of the disclosed IBM trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Aug 24, 2026, and the newest filing arrived on Sep 10, 2026."
+      "a": "10% of the disclosed IBM trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Sep 10, 2026, and the newest filing arrived on Oct 5, 2026."
     }
   ]
 }
