@@ -10,11 +10,11 @@
   "former": false,
   "knownAs": [],
   "summary": {
-    "trades": 38,
+    "trades": 39,
     "distinctTickers": 14,
     "firstTx": "2024-12-20",
-    "lastTx": "2026-07-28",
-    "lastFiling": "2026-08-21",
+    "lastTx": "2026-09-08",
+    "lastFiling": "2026-10-02",
     "pctLate": 0,
     "worstLate": 0
   },
@@ -63,6 +63,17 @@
     }
   ],
   "trades": [
+    {
+      "ticker": "—",
+      "asset": "REOF XXX, LLC",
+      "side": "BUY",
+      "amountBucket": "$500K – $1M",
+      "txDate": "2026-09-08",
+      "filedDate": "2026-10-02",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035553.pdf",
+      "bond": false
+    },
     {
       "ticker": "BE",
       "asset": "Bloom Energy Corporation Class A Common Stock",
@@ -482,13 +493,13 @@
       "bond": false
     }
   ],
-  "tradesShown": 38,
+  "tradesShown": 39,
   "holdings": {
     "available": true,
     "filingDate": "2026-05-15",
     "reportYear": 2025,
     "snapDate": "2025-12-31",
-    "filingsSince": 3,
+    "filingsSince": 4,
     "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/financial-pdfs/2025/10075701.pdf",
     "totalLabel": "$153.7M",
     "positions": 27,
@@ -814,10 +825,10 @@
   "performance": {
     "available": true,
     "benchLabel": "S&P 500",
-    "asofDate": "2026-10-02",
+    "asofDate": "2026-10-05",
     "kpis": {
-      "medianPct": 29.3,
-      "medianBenchPct": 11.3,
+      "medianPct": 28.3,
+      "medianBenchPct": 12.0,
       "beat": 5,
       "beatOf": 7,
       "priced": 7,
@@ -918,7 +929,8 @@
         "2026-09-11",
         "2026-09-18",
         "2026-09-25",
-        "2026-10-02"
+        "2026-10-02",
+        "2026-10-05"
       ],
       "member": [
         100.0,
@@ -1014,7 +1026,8 @@
         131.8,
         136.0,
         138.8,
-        142.3
+        142.3,
+        143.5
       ],
       "bench": [
         100.0,
@@ -1110,7 +1123,8 @@
         117.4,
         117.0,
         118.5,
-        118.3
+        118.3,
+        119.1
       ],
       "buys": 7
     },
@@ -1118,51 +1132,51 @@
       {
         "ticker": "INTC",
         "txDate": "2026-07-24",
-        "pct": 29.3,
-        "benchPct": 4.2,
-        "excess": 25.1
+        "pct": 25.9,
+        "benchPct": 4.9,
+        "excess": 21.0
       },
       {
         "ticker": "AMZN",
         "txDate": "2026-01-16",
-        "pct": 5.2,
-        "benchPct": 11.3,
-        "excess": -6.1
+        "pct": 5.1,
+        "benchPct": 12.0,
+        "excess": -6.9
       },
       {
         "ticker": "NVDA",
         "txDate": "2026-01-16",
-        "pct": 25.6,
-        "benchPct": 11.3,
-        "excess": 14.3
+        "pct": 28.3,
+        "benchPct": 12.0,
+        "excess": 16.3
       },
       {
         "ticker": "GOOGL",
         "txDate": "2026-01-16",
-        "pct": 4.1,
-        "benchPct": 11.3,
-        "excess": -7.2
+        "pct": 5.0,
+        "benchPct": 12.0,
+        "excess": -7.0
       },
       {
         "ticker": "AVGO",
         "txDate": "2025-06-20",
-        "pct": 42.1,
-        "benchPct": 29.5,
-        "excess": 12.6
+        "pct": 45.0,
+        "benchPct": 30.4,
+        "excess": 14.6
       },
       {
         "ticker": "PANW",
         "txDate": "2024-12-20",
-        "pct": 115.9,
-        "benchPct": 30.2,
-        "excess": 85.7
+        "pct": 117.8,
+        "benchPct": 31.1,
+        "excess": 86.7
       },
       {
         "ticker": "NVDA",
         "txDate": "2024-12-20",
-        "pct": 73.7,
-        "benchPct": 30.2,
-        "excess": 43.5
+        "pct": 77.4,
+        "benchPct": 31.1,
+        "excess": 46.3
       }
     ],
     "rowsOf": 7
@@ -1171,11 +1185,11 @@
   "faq": [
     {
       "q": "What stocks does Nancy Pelosi trade?",
-      "a": "Nancy Pelosi has disclosed 38 trades across 14 tickers since December 2024. The most traded are NVDA (6), AAPL (5) and BE (4). Each trade on this page links to the official filing it came from."
+      "a": "Nancy Pelosi has disclosed 39 trades across 14 tickers since December 2024. The most traded are NVDA (6), AAPL (5) and BE (4). Each trade on this page links to the official filing it came from."
     },
     {
       "q": "Does Nancy Pelosi disclose trades on time?",
-      "a": "Yes. None of Nancy Pelosi's 38 disclosed trades was filed late: each arrived within the STOCK Act's 45-day legal maximum. The newest filing arrived on Aug 21, 2026."
+      "a": "Yes. None of Nancy Pelosi's 39 disclosed trades was filed late: each arrived within the STOCK Act's 45-day legal maximum. The newest filing arrived on Oct 2, 2026."
     },
     {
       "q": "What stocks does Nancy Pelosi own?",

@@ -1,12 +1,12 @@
 {
   "_comment": "Generated from real official disclosures by congress/landing_data.py (daily Action). Do not edit by hand. 'filedDaysLate' counts days past the STOCK Act's 45-day statutory maximum; 0 = on time.",
   "windowDays": 45,
-  "from": "2026-08-17",
-  "to": "2026-10-01",
-  "members": 20,
-  "buys": 172,
+  "from": "2026-08-18",
+  "to": "2026-10-02",
+  "members": 19,
+  "buys": 166,
   "options": 5,
-  "companies": 117,
+  "companies": 113,
   "rows": [
     {
       "ticker": "MSFT",
@@ -50,41 +50,19 @@
           "slug": null
         },
         {
-          "name": "Rick W. Allen",
-          "slug": null
-        },
-        {
           "name": "John Boozman",
           "slug": null
-        }
-      ],
-      "buys": 5,
-      "options": 0,
-      "estLabel": "$40K",
-      "est": 40002,
-      "lastFiling": "2026-09-22"
-    },
-    {
-      "ticker": "AAPL",
-      "tickerLabel": "AAPL",
-      "slug": "aapl",
-      "company": "Apple Inc.",
-      "members": 2,
-      "buyers": [
-        {
-          "name": "Cleo Fields",
-          "slug": "cleo-fields"
         },
         {
-          "name": "Ed Case",
+          "name": "Rick W. Allen",
           "slug": null
         }
       ],
-      "buys": 3,
+      "buys": 4,
       "options": 0,
-      "estLabel": "$24K",
-      "est": 24002,
-      "lastFiling": "2026-10-01"
+      "estLabel": "$32K",
+      "est": 32002,
+      "lastFiling": "2026-09-22"
     },
     {
       "ticker": "ACN",
@@ -197,10 +175,10 @@
       "lastFiling": "2026-09-14"
     },
     {
-      "ticker": "AMD",
-      "tickerLabel": "AMD",
-      "slug": "amd",
-      "company": "Advanced Micro Devices, Inc.",
+      "ticker": "GS",
+      "tickerLabel": "GS",
+      "slug": "gs",
+      "company": "Goldman Sachs Group, Inc.",
       "members": 2,
       "buyers": [
         {
@@ -208,7 +186,7 @@
           "slug": "gilbert-ray-cisneros-jr"
         },
         {
-          "name": "Rick W. Allen",
+          "name": "Michael A. Rulli",
           "slug": null
         }
       ],
@@ -216,7 +194,7 @@
       "options": 0,
       "estLabel": "$16K",
       "est": 16001,
-      "lastFiling": "2026-09-04"
+      "lastFiling": "2026-10-02"
     },
     {
       "ticker": "NVDA",
@@ -403,6 +381,24 @@
       "lastFiling": "2026-09-17"
     },
     {
+      "ticker": "AAPL",
+      "tickerLabel": "AAPL",
+      "slug": "aapl",
+      "company": "Apple Inc.",
+      "members": 1,
+      "buyers": [
+        {
+          "name": "Cleo Fields",
+          "slug": "cleo-fields"
+        }
+      ],
+      "buys": 2,
+      "options": 0,
+      "estLabel": "$16K",
+      "est": 16001,
+      "lastFiling": "2026-10-01"
+    },
+    {
       "ticker": "AEP",
       "tickerLabel": "AEP",
       "slug": null,
@@ -434,7 +430,7 @@
   "faq": [
     {
       "q": "What stocks is Congress buying?",
-      "a": "In filings from the last 45 days, to Oct 1, 2026, 20 members of Congress disclosed 172 purchases, 5 of them options, across 117 companies. The stocks bought by the most members were MSFT (4 members), AVGO (3 members) and AAPL (2 members). Filings arrive up to 45 days after the trade: this is recent disclosure, not live trading."
+      "a": "In filings from the last 45 days, to Oct 2, 2026, 19 members of Congress disclosed 166 purchases, 5 of them options, across 113 companies. The stocks bought by the most members were MSFT (4 members), AVGO (3 members) and ACN (2 members). Filings arrive up to 45 days after the trade: this is recent disclosure, not live trading."
     },
     {
       "q": "What is the largest stock purchase Congress disclosed recently?",
