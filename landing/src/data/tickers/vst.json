@@ -12,23 +12,23 @@
   },
   "indexable": false,
   "technical": {
-    "asOf": "2026-10-05",
-    "price": 144.89,
-    "chg1d": 3.48,
-    "chg1w": 4.98,
-    "chg1m": 0.46,
-    "rsi14": 55.6,
-    "sma50": 142.94,
+    "asOf": "2026-10-06",
+    "price": 160.5,
+    "chg1d": 10.77,
+    "chg1w": 13.97,
+    "chg1m": 7.5,
+    "rsi14": 71.7,
+    "sma50": 143.01,
     "sma200": 154.77,
-    "ema8": 140.82,
-    "ema21": 141.32,
-    "emaGap": -0.36,
-    "vsSma50": 1.4,
-    "vsSma200": -6.4,
-    "relVol": 1.96,
+    "ema8": 145.19,
+    "ema21": 143.07,
+    "emaGap": 1.49,
+    "vsSma50": 12.2,
+    "vsSma200": 3.7,
+    "relVol": 2.98,
     "high52w": 210.85,
     "low52w": 134.71,
-    "rangePos": 13.0,
+    "rangePos": 34.0,
     "series": [
       {
         "d": "2025-10-17",
@@ -235,25 +235,25 @@
         "c": 140.02
       },
       {
-        "d": "2026-10-05",
-        "c": 144.89
+        "d": "2026-10-06",
+        "c": 160.5
       }
     ],
     "signals": [
       {
-        "type": "reclaim_sma50",
-        "asof": "2026-10-05",
-        "label": "Reclaimed the 50-day average",
-        "dir": "bull"
+        "type": "rsi_overbought",
+        "asof": "2026-10-06",
+        "label": "RSI crossed above 70 (overbought)",
+        "dir": "neutral"
       }
     ],
     "nextEarnings": null,
     "score": {
-      "label": "Hold",
-      "buys": 3,
-      "sells": 3,
-      "holds": 1,
-      "ratio": 0.0
+      "label": "Buy",
+      "buys": 5,
+      "sells": 2,
+      "holds": 0,
+      "ratio": 0.429
     }
   },
   "summary": {
