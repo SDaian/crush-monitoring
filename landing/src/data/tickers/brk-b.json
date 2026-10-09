@@ -250,20 +250,20 @@
     }
   },
   "summary": {
-    "trades": 68,
+    "trades": 69,
     "members": 22,
     "congress": 21,
     "executive": 1,
     "whoLabel": "21 members of Congress and 1 executive-branch filer",
     "buys": 34,
-    "sells": 34,
+    "sells": 35,
     "other": 0,
     "firstTx": "2024-01-30",
-    "lastTx": "2026-08-07",
-    "lastFiling": "2026-09-09",
+    "lastTx": "2026-09-24",
+    "lastFiling": "2026-10-07",
     "estBuyLabel": "$529K",
     "estSellLabel": "$1.1M",
-    "pctLate": 18
+    "pctLate": 17
   },
   "topMembers": [
     {
@@ -333,6 +333,17 @@
       "hasPage": true
     },
     {
+      "name": "Maria Elvira Salazar",
+      "slug": "maria-elvira-salazar",
+      "party": "R",
+      "chamber": "House",
+      "trades": 4,
+      "buys": 3,
+      "sells": 1,
+      "estLabel": "$57K",
+      "hasPage": false
+    },
+    {
       "name": "Val T. Hoyle",
       "slug": "val-t-hoyle",
       "party": "D",
@@ -355,17 +366,6 @@
       "hasPage": false
     },
     {
-      "name": "Maria Elvira Salazar",
-      "slug": "maria-elvira-salazar",
-      "party": "R",
-      "chamber": "House",
-      "trades": 3,
-      "buys": 3,
-      "sells": 0,
-      "estLabel": "$49K",
-      "hasPage": false
-    },
-    {
       "name": "Scott Franklin",
       "slug": "scott-franklin",
       "party": "R",
@@ -378,6 +378,18 @@
     }
   ],
   "trades": [
+    {
+      "member": "Maria Elvira Salazar",
+      "memberSlug": "maria-elvira-salazar",
+      "hasPage": false,
+      "party": "R",
+      "side": "SELL",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-09-24",
+      "filedDate": "2026-10-07",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035562.pdf"
+    },
     {
       "member": "Maria Elvira Salazar",
       "memberSlug": "maria-elvira-salazar",
@@ -665,33 +677,21 @@
       "filedDate": "2025-12-19",
       "daysLate": 0,
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20033574.pdf"
-    },
-    {
-      "member": "Gilbert Ray Cisneros, Jr.",
-      "memberSlug": "gilbert-ray-cisneros-jr",
-      "hasPage": true,
-      "party": "D",
-      "side": "BUY",
-      "amountBucket": "$1K – $15K",
-      "txDate": "2025-11-18",
-      "filedDate": "2025-12-15",
-      "daysLate": 0,
-      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20033619.pdf"
     }
   ],
   "tradesShown": 25,
   "faq": [
     {
       "q": "Who in Congress has traded BRK.B stock?",
-      "a": "21 members of Congress and 1 executive-branch filer have disclosed 68 BRK.B trades since January 2024. The most active is Robert P. Bresnahan, Jr., with 9 trades, followed by Jerry Moran and Gilbert Ray Cisneros, Jr.. Each trade on this page links to the official filing it came from."
+      "a": "21 members of Congress and 1 executive-branch filer have disclosed 69 BRK.B trades since January 2024. The most active is Robert P. Bresnahan, Jr., with 9 trades, followed by Jerry Moran and Gilbert Ray Cisneros, Jr.. Each trade on this page links to the official filing it came from."
     },
     {
       "q": "Is Congress buying or selling BRK.B?",
-      "a": "Of the 68 disclosed BRK.B trades, 34 were buys and 34 were sells. By the midpoint of each filed amount bracket, the buying comes to about $529K and the selling to about $1.1M. Filings disclose brackets, never exact amounts, so these totals are estimates."
+      "a": "Of the 69 disclosed BRK.B trades, 34 were buys and 35 were sells. By the midpoint of each filed amount bracket, the buying comes to about $529K and the selling to about $1.1M. Filings disclose brackets, never exact amounts, so these totals are estimates."
     },
     {
       "q": "How late are BRK.B trades disclosed?",
-      "a": "18% of the disclosed BRK.B trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Aug 7, 2026, and the newest filing arrived on Sep 9, 2026."
+      "a": "17% of the disclosed BRK.B trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Sep 24, 2026, and the newest filing arrived on Oct 7, 2026."
     }
   ]
 }

@@ -250,17 +250,17 @@
     }
   },
   "summary": {
-    "trades": 212,
+    "trades": 213,
     "members": 44,
     "congress": 43,
     "executive": 1,
     "whoLabel": "43 members of Congress and 1 executive-branch filer",
     "buys": 110,
-    "sells": 102,
+    "sells": 103,
     "other": 0,
     "firstTx": "2023-03-15",
     "lastTx": "2026-09-28",
-    "lastFiling": "2026-10-02",
+    "lastFiling": "2026-10-07",
     "estBuyLabel": "$28.8M",
     "estSellLabel": "$24.9M",
     "pctLate": 14
@@ -389,6 +389,18 @@
       "filedDate": "2026-10-02",
       "daysLate": 0,
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035558.pdf"
+    },
+    {
+      "member": "Maria Elvira Salazar",
+      "memberSlug": "maria-elvira-salazar",
+      "hasPage": false,
+      "party": "R",
+      "side": "SELL",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-09-24",
+      "filedDate": "2026-10-07",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035562.pdf"
     },
     {
       "member": "Cleo Fields",
@@ -665,33 +677,21 @@
       "filedDate": "2026-06-26",
       "daysLate": 0,
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20034800.pdf"
-    },
-    {
-      "member": "Thomas H. Kean, Jr.",
-      "memberSlug": "thomas-h-kean-jr",
-      "hasPage": false,
-      "party": "R",
-      "side": "SELL",
-      "amountBucket": "$1K – $15K",
-      "txDate": "2026-06-02",
-      "filedDate": "2026-07-15",
-      "daysLate": 0,
-      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035003.pdf"
     }
   ],
   "tradesShown": 25,
   "faq": [
     {
       "q": "Who in Congress has traded MSFT stock?",
-      "a": "43 members of Congress and 1 executive-branch filer have disclosed 212 MSFT trades since March 2023. The most active is Josh Gottheimer, with 35 trades, followed by Cleo Fields and Gilbert Ray Cisneros, Jr.. Each trade on this page links to the official filing it came from."
+      "a": "43 members of Congress and 1 executive-branch filer have disclosed 213 MSFT trades since March 2023. The most active is Josh Gottheimer, with 35 trades, followed by Cleo Fields and Gilbert Ray Cisneros, Jr.. Each trade on this page links to the official filing it came from."
     },
     {
       "q": "Is Congress buying or selling MSFT?",
-      "a": "Of the 212 disclosed MSFT trades, 110 were buys and 102 were sells. By the midpoint of each filed amount bracket, the buying comes to about $28.8M and the selling to about $24.9M. Filings disclose brackets, never exact amounts, so these totals are estimates."
+      "a": "Of the 213 disclosed MSFT trades, 110 were buys and 103 were sells. By the midpoint of each filed amount bracket, the buying comes to about $28.8M and the selling to about $24.9M. Filings disclose brackets, never exact amounts, so these totals are estimates."
     },
     {
       "q": "How late are MSFT trades disclosed?",
-      "a": "14% of the disclosed MSFT trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Sep 28, 2026, and the newest filing arrived on Oct 2, 2026."
+      "a": "14% of the disclosed MSFT trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Sep 28, 2026, and the newest filing arrived on Oct 7, 2026."
     }
   ]
 }

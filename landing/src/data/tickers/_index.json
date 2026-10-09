@@ -6,12 +6,12 @@
       "ticker": "MSFT",
       "aliases": [],
       "company": "Microsoft Corporation",
-      "trades": 212,
+      "trades": 213,
       "members": 44,
       "buys": 110,
-      "sells": 102,
+      "sells": 103,
       "lastTx": "2026-09-28",
-      "lastFiling": "2026-10-02",
+      "lastFiling": "2026-10-07",
       "indexable": true,
       "industry": {
         "key": "tech",
@@ -95,12 +95,12 @@
         "FB"
       ],
       "company": "Meta Platforms, Inc.",
-      "trades": 97,
-      "members": 26,
-      "buys": 66,
-      "sells": 31,
-      "lastTx": "2026-08-20",
-      "lastFiling": "2026-09-10",
+      "trades": 100,
+      "members": 27,
+      "buys": 68,
+      "sells": 32,
+      "lastTx": "2026-09-24",
+      "lastFiling": "2026-10-07",
       "indexable": true,
       "industry": {
         "key": "tech",
@@ -112,12 +112,12 @@
       "ticker": "UNH",
       "aliases": [],
       "company": "UnitedHealth Group Incorporated",
-      "trades": 93,
+      "trades": 94,
       "members": 29,
       "buys": 45,
-      "sells": 48,
-      "lastTx": "2026-09-10",
-      "lastFiling": "2026-09-25",
+      "sells": 49,
+      "lastTx": "2026-09-24",
+      "lastFiling": "2026-10-07",
       "indexable": true,
       "industry": {
         "key": "health",
@@ -159,6 +159,23 @@
       }
     },
     {
+      "slug": "brk-b",
+      "ticker": "BRK.B",
+      "aliases": [],
+      "company": "Berkshire Hathaway Inc. New",
+      "trades": 69,
+      "members": 22,
+      "buys": 34,
+      "sells": 35,
+      "lastTx": "2026-09-24",
+      "lastFiling": "2026-10-07",
+      "indexable": true,
+      "industry": {
+        "key": "finance",
+        "label": "Banks & finance"
+      }
+    },
+    {
       "slug": "jnj",
       "ticker": "JNJ",
       "aliases": [],
@@ -186,23 +203,6 @@
       "sells": 37,
       "lastTx": "2026-09-04",
       "lastFiling": "2026-10-01",
-      "indexable": true,
-      "industry": {
-        "key": "finance",
-        "label": "Banks & finance"
-      }
-    },
-    {
-      "slug": "brk-b",
-      "ticker": "BRK.B",
-      "aliases": [],
-      "company": "Berkshire Hathaway Inc. New",
-      "trades": 68,
-      "members": 22,
-      "buys": 34,
-      "sells": 34,
-      "lastTx": "2026-08-07",
-      "lastFiling": "2026-09-09",
       "indexable": true,
       "industry": {
         "key": "finance",
@@ -248,12 +248,12 @@
       "ticker": "GS",
       "aliases": [],
       "company": "Goldman Sachs Group, Inc.",
-      "trades": 63,
+      "trades": 64,
       "members": 20,
       "buys": 35,
-      "sells": 28,
-      "lastTx": "2026-09-03",
-      "lastFiling": "2026-10-02",
+      "sells": 29,
+      "lastTx": "2026-09-24",
+      "lastFiling": "2026-10-07",
       "indexable": true,
       "industry": {
         "key": "finance",
@@ -333,12 +333,29 @@
       "ticker": "IBM",
       "aliases": [],
       "company": "International Business Machines Corporation",
-      "trades": 52,
+      "trades": 54,
       "members": 15,
       "buys": 29,
-      "sells": 23,
+      "sells": 25,
       "lastTx": "2026-09-10",
-      "lastFiling": "2026-10-05",
+      "lastFiling": "2026-10-07",
+      "indexable": true,
+      "industry": {
+        "key": "tech",
+        "label": "Technology"
+      }
+    },
+    {
+      "slug": "crm",
+      "ticker": "CRM",
+      "aliases": [],
+      "company": "Salesforce, Inc.",
+      "trades": 53,
+      "members": 19,
+      "buys": 24,
+      "sells": 29,
+      "lastTx": "2026-09-24",
+      "lastFiling": "2026-10-07",
       "indexable": true,
       "industry": {
         "key": "tech",
@@ -377,23 +394,6 @@
       "industry": {
         "key": "defense",
         "label": "Defense & aerospace"
-      }
-    },
-    {
-      "slug": "crm",
-      "ticker": "CRM",
-      "aliases": [],
-      "company": "Salesforce, Inc.",
-      "trades": 52,
-      "members": 19,
-      "buys": 24,
-      "sells": 28,
-      "lastTx": "2026-06-02",
-      "lastFiling": "2026-08-24",
-      "indexable": true,
-      "industry": {
-        "key": "tech",
-        "label": "Technology"
       }
     },
     {
@@ -499,6 +499,23 @@
       }
     },
     {
+      "slug": "cvx",
+      "ticker": "CVX",
+      "aliases": [],
+      "company": "Chevron Corporation",
+      "trades": 45,
+      "members": 21,
+      "buys": 19,
+      "sells": 25,
+      "lastTx": "2026-09-02",
+      "lastFiling": "2026-10-07",
+      "indexable": true,
+      "industry": {
+        "key": "energy",
+        "label": "Energy & utilities"
+      }
+    },
+    {
       "slug": "intc",
       "ticker": "INTC",
       "aliases": [],
@@ -516,33 +533,16 @@
       }
     },
     {
-      "slug": "cvx",
-      "ticker": "CVX",
-      "aliases": [],
-      "company": "Chevron Corporation",
-      "trades": 44,
-      "members": 20,
-      "buys": 18,
-      "sells": 25,
-      "lastTx": "2026-07-02",
-      "lastFiling": "2026-08-17",
-      "indexable": true,
-      "industry": {
-        "key": "energy",
-        "label": "Energy & utilities"
-      }
-    },
-    {
       "slug": "mrk",
       "ticker": "MRK",
       "aliases": [],
       "company": "Merck & Company, Inc.",
-      "trades": 43,
+      "trades": 44,
       "members": 17,
       "buys": 20,
-      "sells": 23,
-      "lastTx": "2026-08-19",
-      "lastFiling": "2026-09-09",
+      "sells": 24,
+      "lastTx": "2026-09-24",
+      "lastFiling": "2026-10-07",
       "indexable": true,
       "industry": {
         "key": "health",
@@ -839,6 +839,23 @@
       }
     },
     {
+      "slug": "ba",
+      "ticker": "BA",
+      "aliases": [],
+      "company": "Boeing Company",
+      "trades": 35,
+      "members": 14,
+      "buys": 17,
+      "sells": 18,
+      "lastTx": "2026-09-24",
+      "lastFiling": "2026-10-07",
+      "indexable": true,
+      "industry": {
+        "key": "defense",
+        "label": "Defense & aerospace"
+      }
+    },
+    {
       "slug": "ttd",
       "ticker": "TTD",
       "aliases": [],
@@ -907,6 +924,23 @@
       }
     },
     {
+      "slug": "mcd",
+      "ticker": "MCD",
+      "aliases": [],
+      "company": "McDonald's Corporation",
+      "trades": 34,
+      "members": 16,
+      "buys": 14,
+      "sells": 20,
+      "lastTx": "2026-09-25",
+      "lastFiling": "2026-10-07",
+      "indexable": true,
+      "industry": {
+        "key": "consumer",
+        "label": "Consumer & retail"
+      }
+    },
+    {
       "slug": "payx",
       "ticker": "PAYX",
       "aliases": [],
@@ -958,23 +992,6 @@
       }
     },
     {
-      "slug": "ba",
-      "ticker": "BA",
-      "aliases": [],
-      "company": "Boeing Company",
-      "trades": 34,
-      "members": 14,
-      "buys": 17,
-      "sells": 17,
-      "lastTx": "2026-08-13",
-      "lastFiling": "2026-09-01",
-      "indexable": true,
-      "industry": {
-        "key": "defense",
-        "label": "Defense & aerospace"
-      }
-    },
-    {
       "slug": "asml",
       "ticker": "ASML",
       "aliases": [],
@@ -985,6 +1002,23 @@
       "sells": 12,
       "lastTx": "2026-03-31",
       "lastFiling": "2026-08-05",
+      "indexable": true,
+      "industry": {
+        "key": "tech",
+        "label": "Technology"
+      }
+    },
+    {
+      "slug": "amat",
+      "ticker": "AMAT",
+      "aliases": [],
+      "company": "Applied Materials, Inc.",
+      "trades": 33,
+      "members": 14,
+      "buys": 22,
+      "sells": 11,
+      "lastTx": "2026-09-15",
+      "lastFiling": "2026-10-07",
       "indexable": true,
       "industry": {
         "key": "tech",
@@ -1026,23 +1060,6 @@
       }
     },
     {
-      "slug": "mcd",
-      "ticker": "MCD",
-      "aliases": [],
-      "company": "McDonald's Corporation",
-      "trades": 33,
-      "members": 16,
-      "buys": 14,
-      "sells": 19,
-      "lastTx": "2026-08-26",
-      "lastFiling": "2026-09-17",
-      "indexable": true,
-      "industry": {
-        "key": "consumer",
-        "label": "Consumer & retail"
-      }
-    },
-    {
       "slug": "dash",
       "ticker": "DASH",
       "aliases": [],
@@ -1077,16 +1094,16 @@
       }
     },
     {
-      "slug": "amat",
-      "ticker": "AMAT",
+      "slug": "csco",
+      "ticker": "CSCO",
       "aliases": [],
-      "company": "Applied Materials, Inc.",
+      "company": "Cisco Systems, Inc.",
       "trades": 32,
-      "members": 14,
-      "buys": 22,
-      "sells": 10,
-      "lastTx": "2026-08-06",
-      "lastFiling": "2026-09-14",
+      "members": 18,
+      "buys": 14,
+      "sells": 18,
+      "lastTx": "2026-09-24",
+      "lastFiling": "2026-10-07",
       "indexable": true,
       "industry": {
         "key": "tech",
@@ -1125,6 +1142,23 @@
       "industry": {
         "key": "consumer",
         "label": "Consumer & retail"
+      }
+    },
+    {
+      "slug": "hon",
+      "ticker": "HON",
+      "aliases": [],
+      "company": "Honeywell International Inc.",
+      "trades": 31,
+      "members": 19,
+      "buys": 9,
+      "sells": 22,
+      "lastTx": "2026-09-24",
+      "lastFiling": "2026-10-07",
+      "indexable": true,
+      "industry": {
+        "key": "industrial",
+        "label": "Manufacturing"
       }
     },
     {
@@ -1210,23 +1244,6 @@
       "industry": {
         "key": "finance",
         "label": "Banks & finance"
-      }
-    },
-    {
-      "slug": "hon",
-      "ticker": "HON",
-      "aliases": [],
-      "company": "Honeywell International Inc.",
-      "trades": 30,
-      "members": 19,
-      "buys": 9,
-      "sells": 21,
-      "lastTx": "2026-08-31",
-      "lastFiling": "2026-09-25",
-      "indexable": true,
-      "industry": {
-        "key": "industrial",
-        "label": "Manufacturing"
       }
     },
     {
@@ -1332,23 +1349,6 @@
       }
     },
     {
-      "slug": "csco",
-      "ticker": "CSCO",
-      "aliases": [],
-      "company": "Cisco Systems, Inc.",
-      "trades": 29,
-      "members": 18,
-      "buys": 14,
-      "sells": 15,
-      "lastTx": "2026-07-30",
-      "lastFiling": "2026-08-14",
-      "indexable": true,
-      "industry": {
-        "key": "tech",
-        "label": "Technology"
-      }
-    },
-    {
       "slug": "mck",
       "ticker": "MCK",
       "aliases": [],
@@ -1363,6 +1363,23 @@
       "industry": {
         "key": "health",
         "label": "Health care & pharma"
+      }
+    },
+    {
+      "slug": "ge",
+      "ticker": "GE",
+      "aliases": [],
+      "company": "GE Aerospace",
+      "trades": 28,
+      "members": 13,
+      "buys": 11,
+      "sells": 17,
+      "lastTx": "2026-09-24",
+      "lastFiling": "2026-10-07",
+      "indexable": true,
+      "industry": {
+        "key": "defense",
+        "label": "Defense & aerospace"
       }
     },
     {
@@ -1499,23 +1516,6 @@
       "industry": {
         "key": "transport",
         "label": "Transport & logistics"
-      }
-    },
-    {
-      "slug": "ge",
-      "ticker": "GE",
-      "aliases": [],
-      "company": "GE Aerospace",
-      "trades": 27,
-      "members": 13,
-      "buys": 11,
-      "sells": 16,
-      "lastTx": "2026-06-16",
-      "lastFiling": "2026-07-21",
-      "indexable": true,
-      "industry": {
-        "key": "defense",
-        "label": "Defense & aerospace"
       }
     },
     {
@@ -1723,6 +1723,23 @@
       }
     },
     {
+      "slug": "snow",
+      "ticker": "SNOW",
+      "aliases": [],
+      "company": "Snowflake Inc.",
+      "trades": 14,
+      "members": 6,
+      "buys": 11,
+      "sells": 3,
+      "lastTx": "2026-09-24",
+      "lastFiling": "2026-10-07",
+      "indexable": false,
+      "industry": {
+        "key": "tech",
+        "label": "Technology"
+      }
+    },
+    {
       "slug": "vrt",
       "ticker": "VRT",
       "aliases": [],
@@ -1808,23 +1825,6 @@
       }
     },
     {
-      "slug": "snow",
-      "ticker": "SNOW",
-      "aliases": [],
-      "company": "Snowflake Inc.",
-      "trades": 11,
-      "members": 5,
-      "buys": 9,
-      "sells": 2,
-      "lastTx": "2026-08-07",
-      "lastFiling": "2026-09-10",
-      "indexable": false,
-      "industry": {
-        "key": "tech",
-        "label": "Technology"
-      }
-    },
-    {
       "slug": "klac",
       "ticker": "KLAC",
       "aliases": [],
@@ -1846,12 +1846,12 @@
       "ticker": "SPCX",
       "aliases": [],
       "company": "Space Exploration Technologies Corp.",
-      "trades": 9,
+      "trades": 10,
       "members": 7,
       "buys": 9,
-      "sells": 0,
-      "lastTx": "2026-08-12",
-      "lastFiling": "2026-09-09",
+      "sells": 1,
+      "lastTx": "2026-09-24",
+      "lastFiling": "2026-10-07",
       "indexable": false,
       "industry": {
         "key": "defense",

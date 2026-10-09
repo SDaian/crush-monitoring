@@ -250,20 +250,20 @@
     }
   },
   "summary": {
-    "trades": 44,
-    "members": 20,
-    "congress": 19,
+    "trades": 45,
+    "members": 21,
+    "congress": 20,
     "executive": 1,
-    "whoLabel": "19 members of Congress and 1 executive-branch filer",
-    "buys": 18,
+    "whoLabel": "20 members of Congress and 1 executive-branch filer",
+    "buys": 19,
     "sells": 25,
     "other": 1,
     "firstTx": "2024-05-07",
-    "lastTx": "2026-07-02",
-    "lastFiling": "2026-08-17",
-    "estBuyLabel": "$309K",
+    "lastTx": "2026-09-02",
+    "lastFiling": "2026-10-07",
+    "estBuyLabel": "$317K",
     "estSellLabel": "$347K",
-    "pctLate": 25
+    "pctLate": 24
   },
   "topMembers": [
     {
@@ -378,6 +378,18 @@
     }
   ],
   "trades": [
+    {
+      "member": "Maria Elvira Salazar",
+      "memberSlug": "maria-elvira-salazar",
+      "hasPage": false,
+      "party": "R",
+      "side": "BUY",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-09-02",
+      "filedDate": "2026-10-07",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035562.pdf"
+    },
     {
       "member": "John Boozman",
       "memberSlug": "john-boozman",
@@ -665,33 +677,21 @@
       "filedDate": "2025-08-14",
       "daysLate": 0,
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20030909.pdf"
-    },
-    {
-      "member": "Lisa C. McClain",
-      "memberSlug": "lisa-c-mcclain",
-      "hasPage": false,
-      "party": "R",
-      "side": "SELL",
-      "amountBucket": "$1K – $15K",
-      "txDate": "2025-06-24",
-      "filedDate": "2025-08-13",
-      "daysLate": 5,
-      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20030891.pdf"
     }
   ],
   "tradesShown": 25,
   "faq": [
     {
       "q": "Who in Congress has traded CVX stock?",
-      "a": "19 members of Congress and 1 executive-branch filer have disclosed 44 CVX trades since May 2024. The most active is Julie Johnson, with 7 trades, followed by Gilbert Ray Cisneros, Jr. and David J. Taylor. Each trade on this page links to the official filing it came from."
+      "a": "20 members of Congress and 1 executive-branch filer have disclosed 45 CVX trades since May 2024. The most active is Julie Johnson, with 7 trades, followed by Gilbert Ray Cisneros, Jr. and David J. Taylor. Each trade on this page links to the official filing it came from."
     },
     {
       "q": "Is Congress buying or selling CVX?",
-      "a": "Of the 44 disclosed CVX trades, 18 were buys and 25 were sells. By the midpoint of each filed amount bracket, the buying comes to about $309K and the selling to about $347K. Filings disclose brackets, never exact amounts, so these totals are estimates."
+      "a": "Of the 45 disclosed CVX trades, 19 were buys and 25 were sells. By the midpoint of each filed amount bracket, the buying comes to about $317K and the selling to about $347K. Filings disclose brackets, never exact amounts, so these totals are estimates."
     },
     {
       "q": "How late are CVX trades disclosed?",
-      "a": "25% of the disclosed CVX trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Jul 2, 2026, and the newest filing arrived on Aug 17, 2026."
+      "a": "24% of the disclosed CVX trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Sep 2, 2026, and the newest filing arrived on Oct 7, 2026."
     }
   ]
 }

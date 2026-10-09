@@ -257,19 +257,19 @@
     }
   },
   "summary": {
-    "trades": 52,
+    "trades": 53,
     "members": 19,
     "congress": 18,
     "executive": 1,
     "whoLabel": "18 members of Congress and 1 executive-branch filer",
     "buys": 24,
-    "sells": 28,
+    "sells": 29,
     "other": 0,
     "firstTx": "2024-09-26",
-    "lastTx": "2026-06-02",
-    "lastFiling": "2026-08-24",
+    "lastTx": "2026-09-24",
+    "lastFiling": "2026-10-07",
     "estBuyLabel": "$290K",
-    "estSellLabel": "$371K",
+    "estSellLabel": "$379K",
     "pctLate": 21
   },
   "topMembers": [
@@ -340,6 +340,17 @@
       "hasPage": false
     },
     {
+      "name": "Maria Elvira Salazar",
+      "slug": "maria-elvira-salazar",
+      "party": "R",
+      "chamber": "House",
+      "trades": 3,
+      "buys": 2,
+      "sells": 1,
+      "estLabel": "$73K",
+      "hasPage": false
+    },
+    {
       "name": "Donald J. Trump",
       "slug": "donald-j-trump",
       "party": "R",
@@ -349,17 +360,6 @@
       "sells": 2,
       "estLabel": "$24K",
       "hasPage": true
-    },
-    {
-      "name": "Maria Elvira Salazar",
-      "slug": "maria-elvira-salazar",
-      "party": "R",
-      "chamber": "House",
-      "trades": 2,
-      "buys": 2,
-      "sells": 0,
-      "estLabel": "$65K",
-      "hasPage": false
     },
     {
       "name": "Robert P. Bresnahan, Jr.",
@@ -385,6 +385,18 @@
     }
   ],
   "trades": [
+    {
+      "member": "Maria Elvira Salazar",
+      "memberSlug": "maria-elvira-salazar",
+      "hasPage": false,
+      "party": "R",
+      "side": "SELL",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-09-24",
+      "filedDate": "2026-10-07",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035562.pdf"
+    },
     {
       "member": "Maria Elvira Salazar",
       "memberSlug": "maria-elvira-salazar",
@@ -672,33 +684,21 @@
       "filedDate": "2025-09-12",
       "daysLate": 33,
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20032070.pdf"
-    },
-    {
-      "member": "Lisa C. McClain",
-      "memberSlug": "lisa-c-mcclain",
-      "hasPage": false,
-      "party": "R",
-      "side": "BUY",
-      "amountBucket": "$1K – $15K",
-      "txDate": "2025-06-17",
-      "filedDate": "2025-08-13",
-      "daysLate": 12,
-      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20030891.pdf"
     }
   ],
   "tradesShown": 25,
   "faq": [
     {
       "q": "Who in Congress has traded CRM stock?",
-      "a": "18 members of Congress and 1 executive-branch filer have disclosed 52 CRM trades since September 2024. The most active is David J. Taylor, with 8 trades, followed by Julia Letlow and Josh Gottheimer. Each trade on this page links to the official filing it came from."
+      "a": "18 members of Congress and 1 executive-branch filer have disclosed 53 CRM trades since September 2024. The most active is David J. Taylor, with 8 trades, followed by Julia Letlow and Josh Gottheimer. Each trade on this page links to the official filing it came from."
     },
     {
       "q": "Is Congress buying or selling CRM?",
-      "a": "Of the 52 disclosed CRM trades, 24 were buys and 28 were sells. By the midpoint of each filed amount bracket, the buying comes to about $290K and the selling to about $371K. Filings disclose brackets, never exact amounts, so these totals are estimates."
+      "a": "Of the 53 disclosed CRM trades, 24 were buys and 29 were sells. By the midpoint of each filed amount bracket, the buying comes to about $290K and the selling to about $379K. Filings disclose brackets, never exact amounts, so these totals are estimates."
     },
     {
       "q": "How late are CRM trades disclosed?",
-      "a": "21% of the disclosed CRM trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Jun 2, 2026, and the newest filing arrived on Aug 24, 2026."
+      "a": "21% of the disclosed CRM trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Sep 24, 2026, and the newest filing arrived on Oct 7, 2026."
     }
   ]
 }

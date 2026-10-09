@@ -250,19 +250,19 @@
     }
   },
   "summary": {
-    "trades": 33,
+    "trades": 34,
     "members": 16,
     "congress": 15,
     "executive": 1,
     "whoLabel": "15 members of Congress and 1 executive-branch filer",
     "buys": 14,
-    "sells": 19,
+    "sells": 20,
     "other": 0,
     "firstTx": "2023-03-15",
-    "lastTx": "2026-08-26",
-    "lastFiling": "2026-09-17",
+    "lastTx": "2026-09-25",
+    "lastFiling": "2026-10-07",
     "estBuyLabel": "$302K",
-    "estSellLabel": "$658K",
+    "estSellLabel": "$666K",
     "pctLate": 18
   },
   "topMembers": [
@@ -366,18 +366,30 @@
       "hasPage": true
     },
     {
-      "name": "George Whitesides",
-      "slug": "george-whitesides",
+      "name": "Josh Gottheimer",
+      "slug": "josh-gottheimer",
       "party": "D",
       "chamber": "House",
-      "trades": 1,
+      "trades": 2,
       "buys": 0,
-      "sells": 1,
-      "estLabel": "$175K",
-      "hasPage": false
+      "sells": 2,
+      "estLabel": "$16K",
+      "hasPage": true
     }
   ],
   "trades": [
+    {
+      "member": "Josh Gottheimer",
+      "memberSlug": "josh-gottheimer",
+      "hasPage": true,
+      "party": "D",
+      "side": "SELL",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-09-25",
+      "filedDate": "2026-10-07",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035590.pdf"
+    },
     {
       "member": "Scott Franklin",
       "memberSlug": "scott-franklin",
@@ -665,33 +677,21 @@
       "filedDate": "2025-07-14",
       "daysLate": 0,
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20030670.pdf"
-    },
-    {
-      "member": "Robert P. Bresnahan, Jr.",
-      "memberSlug": "robert-p-bresnahan-jr",
-      "hasPage": false,
-      "party": "R",
-      "side": "SELL",
-      "amountBucket": "$15K – $50K",
-      "txDate": "2025-06-02",
-      "filedDate": "2025-06-23",
-      "daysLate": 0,
-      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20030546.pdf"
     }
   ],
   "tradesShown": 25,
   "faq": [
     {
       "q": "Who in Congress has traded MCD stock?",
-      "a": "15 members of Congress and 1 executive-branch filer have disclosed 33 MCD trades since March 2023. The most active is Lisa C. McClain, with 4 trades, followed by Cleo Fields and Jefferson Shreve. Each trade on this page links to the official filing it came from."
+      "a": "15 members of Congress and 1 executive-branch filer have disclosed 34 MCD trades since March 2023. The most active is Lisa C. McClain, with 4 trades, followed by Cleo Fields and Jefferson Shreve. Each trade on this page links to the official filing it came from."
     },
     {
       "q": "Is Congress buying or selling MCD?",
-      "a": "Of the 33 disclosed MCD trades, 14 were buys and 19 were sells. By the midpoint of each filed amount bracket, the buying comes to about $302K and the selling to about $658K. Filings disclose brackets, never exact amounts, so these totals are estimates."
+      "a": "Of the 34 disclosed MCD trades, 14 were buys and 20 were sells. By the midpoint of each filed amount bracket, the buying comes to about $302K and the selling to about $666K. Filings disclose brackets, never exact amounts, so these totals are estimates."
     },
     {
       "q": "How late are MCD trades disclosed?",
-      "a": "18% of the disclosed MCD trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Aug 26, 2026, and the newest filing arrived on Sep 17, 2026."
+      "a": "18% of the disclosed MCD trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Sep 25, 2026, and the newest filing arrived on Oct 7, 2026."
     }
   ]
 }

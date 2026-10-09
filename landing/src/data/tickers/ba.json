@@ -250,20 +250,20 @@
     }
   },
   "summary": {
-    "trades": 34,
+    "trades": 35,
     "members": 14,
     "congress": 13,
     "executive": 1,
     "whoLabel": "13 members of Congress and 1 executive-branch filer",
     "buys": 17,
-    "sells": 17,
+    "sells": 18,
     "other": 0,
     "firstTx": "2024-10-23",
-    "lastTx": "2026-08-13",
-    "lastFiling": "2026-09-01",
+    "lastTx": "2026-09-24",
+    "lastFiling": "2026-10-07",
     "estBuyLabel": "$210K",
     "estSellLabel": "$1.0M",
-    "pctLate": 24
+    "pctLate": 23
   },
   "topMembers": [
     {
@@ -297,6 +297,17 @@
       "buys": 1,
       "sells": 2,
       "estLabel": "$73K",
+      "hasPage": false
+    },
+    {
+      "name": "Maria Elvira Salazar",
+      "slug": "maria-elvira-salazar",
+      "party": "R",
+      "chamber": "House",
+      "trades": 3,
+      "buys": 2,
+      "sells": 1,
+      "estLabel": "$49K",
       "hasPage": false
     },
     {
@@ -344,17 +355,6 @@
       "hasPage": false
     },
     {
-      "name": "Maria Elvira Salazar",
-      "slug": "maria-elvira-salazar",
-      "party": "R",
-      "chamber": "House",
-      "trades": 2,
-      "buys": 2,
-      "sells": 0,
-      "estLabel": "$41K",
-      "hasPage": false
-    },
-    {
       "name": "Bruce Westerman",
       "slug": "bruce-westerman",
       "party": "R",
@@ -378,6 +378,18 @@
     }
   ],
   "trades": [
+    {
+      "member": "Maria Elvira Salazar",
+      "memberSlug": "maria-elvira-salazar",
+      "hasPage": false,
+      "party": "R",
+      "side": "SELL",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-09-24",
+      "filedDate": "2026-10-07",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035562.pdf"
+    },
     {
       "member": "Kevin Hern",
       "memberSlug": "kevin-hern",
@@ -665,33 +677,21 @@
       "filedDate": "2025-05-14",
       "daysLate": 0,
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20030296.pdf"
-    },
-    {
-      "member": "Gilbert Ray Cisneros, Jr.",
-      "memberSlug": "gilbert-ray-cisneros-jr",
-      "hasPage": true,
-      "party": "D",
-      "side": "BUY",
-      "amountBucket": "$1K – $15K",
-      "txDate": "2025-03-31",
-      "filedDate": "2025-04-07",
-      "daysLate": 0,
-      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20029026.pdf"
     }
   ],
   "tradesShown": 25,
   "faq": [
     {
       "q": "Who in Congress has traded BA stock?",
-      "a": "13 members of Congress and 1 executive-branch filer have disclosed 34 BA trades since October 2024. The most active is Julie Johnson, with 6 trades, followed by Gilbert Ray Cisneros, Jr. and Robert P. Bresnahan, Jr.. Each trade on this page links to the official filing it came from."
+      "a": "13 members of Congress and 1 executive-branch filer have disclosed 35 BA trades since October 2024. The most active is Julie Johnson, with 6 trades, followed by Gilbert Ray Cisneros, Jr. and Robert P. Bresnahan, Jr.. Each trade on this page links to the official filing it came from."
     },
     {
       "q": "Is Congress buying or selling BA?",
-      "a": "Of the 34 disclosed BA trades, 17 were buys and 17 were sells. By the midpoint of each filed amount bracket, the buying comes to about $210K and the selling to about $1.0M. Filings disclose brackets, never exact amounts, so these totals are estimates."
+      "a": "Of the 35 disclosed BA trades, 17 were buys and 18 were sells. By the midpoint of each filed amount bracket, the buying comes to about $210K and the selling to about $1.0M. Filings disclose brackets, never exact amounts, so these totals are estimates."
     },
     {
       "q": "How late are BA trades disclosed?",
-      "a": "24% of the disclosed BA trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Aug 13, 2026, and the newest filing arrived on Sep 1, 2026."
+      "a": "23% of the disclosed BA trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Sep 24, 2026, and the newest filing arrived on Oct 7, 2026."
     }
   ]
 }

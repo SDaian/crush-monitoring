@@ -4,9 +4,9 @@
   "from": "2026-08-23",
   "to": "2026-10-07",
   "members": 18,
-  "buys": 151,
+  "buys": 160,
   "options": 2,
-  "companies": 107,
+  "companies": 111,
   "rows": [
     {
       "ticker": "MSFT",
@@ -33,6 +33,28 @@
       "estLabel": "$1.2M",
       "est": 1206003,
       "lastFiling": "2026-10-01"
+    },
+    {
+      "ticker": "SNOW",
+      "tickerLabel": "SNOW",
+      "slug": "snow",
+      "company": "Snowflake Inc.",
+      "members": 2,
+      "buyers": [
+        {
+          "name": "Maria Elvira Salazar",
+          "slug": null
+        },
+        {
+          "name": "Gilbert Ray Cisneros, Jr.",
+          "slug": "gilbert-ray-cisneros-jr"
+        }
+      ],
+      "buys": 3,
+      "options": 0,
+      "estLabel": "$49K",
+      "est": 48502,
+      "lastFiling": "2026-10-07"
     },
     {
       "ticker": "ACN",
@@ -393,24 +415,6 @@
       "estLabel": "$16K",
       "est": 16001,
       "lastFiling": "2026-09-05"
-    },
-    {
-      "ticker": "AORT",
-      "tickerLabel": "AORT",
-      "slug": null,
-      "company": "Artivion, Inc.",
-      "members": 1,
-      "buyers": [
-        {
-          "name": "Gilbert Ray Cisneros, Jr.",
-          "slug": "gilbert-ray-cisneros-jr"
-        }
-      ],
-      "buys": 2,
-      "options": 0,
-      "estLabel": "$16K",
-      "est": 16001,
-      "lastFiling": "2026-09-10"
     }
   ],
   "largest": {
@@ -428,7 +432,7 @@
   "faq": [
     {
       "q": "What stocks is Congress buying?",
-      "a": "In filings from the last 45 days, to Oct 7, 2026, 18 members of Congress disclosed 151 purchases, 2 of them options, across 107 companies. The stocks bought by the most members were MSFT (3 members), ACN (2 members) and AVGO (2 members). Filings arrive up to 45 days after the trade: this is recent disclosure, not live trading."
+      "a": "In filings from the last 45 days, to Oct 7, 2026, 18 members of Congress disclosed 160 purchases, 2 of them options, across 111 companies. The stocks bought by the most members were MSFT (3 members), SNOW (2 members) and ACN (2 members). Filings arrive up to 45 days after the trade: this is recent disclosure, not live trading."
     },
     {
       "q": "What is the largest stock purchase Congress disclosed recently?",

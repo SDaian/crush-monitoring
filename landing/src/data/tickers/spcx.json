@@ -114,22 +114,33 @@
     }
   },
   "summary": {
-    "trades": 9,
+    "trades": 10,
     "members": 7,
     "congress": 7,
     "executive": 0,
     "whoLabel": "7 members of Congress",
     "buys": 9,
-    "sells": 0,
+    "sells": 1,
     "other": 0,
     "firstTx": "2026-06-12",
-    "lastTx": "2026-08-12",
-    "lastFiling": "2026-09-09",
+    "lastTx": "2026-09-24",
+    "lastFiling": "2026-10-07",
     "estBuyLabel": "$255K",
-    "estSellLabel": "$0",
+    "estSellLabel": "$8K",
     "pctLate": 0
   },
   "topMembers": [
+    {
+      "name": "Maria Elvira Salazar",
+      "slug": "maria-elvira-salazar",
+      "party": "R",
+      "chamber": "House",
+      "trades": 3,
+      "buys": 2,
+      "sells": 1,
+      "estLabel": "$24K",
+      "hasPage": false
+    },
     {
       "name": "William R. Timmons IV",
       "slug": "william-r-timmons-iv",
@@ -139,17 +150,6 @@
       "buys": 2,
       "sells": 0,
       "estLabel": "$150K",
-      "hasPage": false
-    },
-    {
-      "name": "Maria Elvira Salazar",
-      "slug": "maria-elvira-salazar",
-      "party": "R",
-      "chamber": "House",
-      "trades": 2,
-      "buys": 2,
-      "sells": 0,
-      "estLabel": "$16K",
       "hasPage": false
     },
     {
@@ -209,6 +209,18 @@
     }
   ],
   "trades": [
+    {
+      "member": "Maria Elvira Salazar",
+      "memberSlug": "maria-elvira-salazar",
+      "hasPage": false,
+      "party": "R",
+      "side": "SELL",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-09-24",
+      "filedDate": "2026-10-07",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035562.pdf"
+    },
     {
       "member": "Maria Elvira Salazar",
       "memberSlug": "maria-elvira-salazar",
@@ -318,19 +330,19 @@
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20034949.pdf"
     }
   ],
-  "tradesShown": 9,
+  "tradesShown": 10,
   "faq": [
     {
       "q": "Who in Congress has traded SPCX stock?",
-      "a": "7 members of Congress have disclosed 9 SPCX trades since June 2026. The most active is William R. Timmons IV, with 2 trades, followed by Maria Elvira Salazar and Daniel Meuser. Each trade on this page links to the official filing it came from."
+      "a": "7 members of Congress have disclosed 10 SPCX trades since June 2026. The most active is Maria Elvira Salazar, with 3 trades, followed by William R. Timmons IV and Daniel Meuser. Each trade on this page links to the official filing it came from."
     },
     {
       "q": "Is Congress buying or selling SPCX?",
-      "a": "Of the 9 disclosed SPCX trades, 9 were buys and 0 were sells. By the midpoint of each filed amount bracket, the buying comes to about $255K and the selling to about $0. Filings disclose brackets, never exact amounts, so these totals are estimates."
+      "a": "Of the 10 disclosed SPCX trades, 9 were buys and 1 were sells. By the midpoint of each filed amount bracket, the buying comes to about $255K and the selling to about $8K. Filings disclose brackets, never exact amounts, so these totals are estimates."
     },
     {
       "q": "How late are SPCX trades disclosed?",
-      "a": "None of the 9 disclosed SPCX trades was filed late: each arrived within the STOCK Act's 45-day legal maximum. The newest trade is dated Aug 12, 2026, and the newest filing arrived on Sep 9, 2026."
+      "a": "None of the 10 disclosed SPCX trades was filed late: each arrived within the STOCK Act's 45-day legal maximum. The newest trade is dated Sep 24, 2026, and the newest filing arrived on Oct 7, 2026."
     }
   ]
 }

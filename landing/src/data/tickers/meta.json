@@ -252,20 +252,20 @@
     }
   },
   "summary": {
-    "trades": 97,
-    "members": 26,
-    "congress": 25,
+    "trades": 100,
+    "members": 27,
+    "congress": 26,
     "executive": 1,
-    "whoLabel": "25 members of Congress and 1 executive-branch filer",
-    "buys": 66,
-    "sells": 31,
+    "whoLabel": "26 members of Congress and 1 executive-branch filer",
+    "buys": 68,
+    "sells": 32,
     "other": 0,
     "firstTx": "2024-01-02",
-    "lastTx": "2026-08-20",
-    "lastFiling": "2026-09-10",
+    "lastTx": "2026-09-24",
+    "lastFiling": "2026-10-07",
     "estBuyLabel": "$2.0M",
-    "estSellLabel": "$656K",
-    "pctLate": 21
+    "estSellLabel": "$664K",
+    "pctLate": 20
   },
   "topMembers": [
     {
@@ -380,6 +380,42 @@
     }
   ],
   "trades": [
+    {
+      "member": "Maria Elvira Salazar",
+      "memberSlug": "maria-elvira-salazar",
+      "hasPage": false,
+      "party": "R",
+      "side": "SELL",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-09-24",
+      "filedDate": "2026-10-07",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035562.pdf"
+    },
+    {
+      "member": "Maria Elvira Salazar",
+      "memberSlug": "maria-elvira-salazar",
+      "hasPage": false,
+      "party": "R",
+      "side": "BUY",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-09-22",
+      "filedDate": "2026-10-07",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035562.pdf"
+    },
+    {
+      "member": "Maria Elvira Salazar",
+      "memberSlug": "maria-elvira-salazar",
+      "hasPage": false,
+      "party": "R",
+      "side": "BUY",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-09-22",
+      "filedDate": "2026-10-07",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035562.pdf"
+    },
     {
       "member": "Gilbert Ray Cisneros, Jr.",
       "memberSlug": "gilbert-ray-cisneros-jr",
@@ -643,57 +679,21 @@
       "filedDate": "2025-12-04",
       "daysLate": 0,
       "sourceUrl": "https://efdsearch.senate.gov/search/view/ptr/1f88d468-fa98-4064-bc40-05cc6f58b555/"
-    },
-    {
-      "member": "Jonathan L. Jackson",
-      "memberSlug": "jonathan-l-jackson",
-      "hasPage": false,
-      "party": "D",
-      "side": "SELL",
-      "amountBucket": "$1K – $15K",
-      "txDate": "2025-11-11",
-      "filedDate": "2025-12-05",
-      "daysLate": 0,
-      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20033566.pdf"
-    },
-    {
-      "member": "Lisa C. McClain",
-      "memberSlug": "lisa-c-mcclain",
-      "hasPage": false,
-      "party": "R",
-      "side": "SELL",
-      "amountBucket": "$1K – $15K",
-      "txDate": "2025-10-31",
-      "filedDate": "2025-11-21",
-      "daysLate": 0,
-      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20033446.pdf"
-    },
-    {
-      "member": "John Boozman",
-      "memberSlug": "john-boozman",
-      "hasPage": false,
-      "party": "R",
-      "side": "BUY",
-      "amountBucket": "$1K – $15K",
-      "txDate": "2025-10-31",
-      "filedDate": "2025-11-15",
-      "daysLate": 0,
-      "sourceUrl": "https://efdsearch.senate.gov/search/view/ptr/97a4172e-e2d9-4dea-9014-d8aa2134d628/"
     }
   ],
   "tradesShown": 25,
   "faq": [
     {
       "q": "Who in Congress has traded META stock?",
-      "a": "25 members of Congress and 1 executive-branch filer have disclosed 97 META trades since January 2024. The most active is Cleo Fields, with 13 trades, followed by Robert P. Bresnahan, Jr. and John Boozman. Each trade on this page links to the official filing it came from."
+      "a": "26 members of Congress and 1 executive-branch filer have disclosed 100 META trades since January 2024. The most active is Cleo Fields, with 13 trades, followed by Robert P. Bresnahan, Jr. and John Boozman. Each trade on this page links to the official filing it came from."
     },
     {
       "q": "Is Congress buying or selling META?",
-      "a": "Of the 97 disclosed META trades, 66 were buys and 31 were sells. By the midpoint of each filed amount bracket, the buying comes to about $2.0M and the selling to about $656K. Filings disclose brackets, never exact amounts, so these totals are estimates."
+      "a": "Of the 100 disclosed META trades, 68 were buys and 32 were sells. By the midpoint of each filed amount bracket, the buying comes to about $2.0M and the selling to about $664K. Filings disclose brackets, never exact amounts, so these totals are estimates."
     },
     {
       "q": "How late are META trades disclosed?",
-      "a": "21% of the disclosed META trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Aug 20, 2026, and the newest filing arrived on Sep 10, 2026."
+      "a": "20% of the disclosed META trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Sep 24, 2026, and the newest filing arrived on Oct 7, 2026."
     }
   ]
 }
