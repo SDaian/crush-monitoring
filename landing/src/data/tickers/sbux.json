@@ -12,23 +12,23 @@
   },
   "indexable": true,
   "technical": {
-    "asOf": "2026-10-08",
-    "price": 90.09,
-    "chg1d": -3.73,
-    "chg1w": -5.05,
-    "chg1m": -9.95,
-    "rsi14": 28.0,
-    "sma50": 101.5,
-    "sma200": 98.88,
-    "ema8": 93.75,
-    "ema21": 96.05,
-    "emaGap": -2.39,
-    "vsSma50": -11.2,
-    "vsSma200": -8.9,
-    "relVol": 0.12,
+    "asOf": "2026-10-09",
+    "price": 90.75,
+    "chg1d": -2.64,
+    "chg1w": -4.18,
+    "chg1m": -8.54,
+    "rsi14": 28.8,
+    "sma50": 101.26,
+    "sma200": 98.92,
+    "ema8": 93.63,
+    "ema21": 95.83,
+    "emaGap": -2.3,
+    "vsSma50": -10.4,
+    "vsSma200": -8.3,
+    "relVol": 1.43,
     "high52w": 108.55,
     "low52w": 78.46,
-    "rangePos": 39.0,
+    "rangePos": 41.0,
     "series": [
       {
         "d": "2025-10-17",
@@ -235,14 +235,14 @@
         "c": 94.71
       },
       {
-        "d": "2026-10-08",
-        "c": 90.09
+        "d": "2026-10-09",
+        "c": 90.75
       }
     ],
     "signals": [
       {
         "type": "rsi_oversold",
-        "asof": "2026-10-08",
+        "asof": "2026-10-09",
         "label": "RSI crossed below 30 (oversold)",
         "dir": "neutral"
       }

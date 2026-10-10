@@ -12,23 +12,23 @@
   },
   "indexable": true,
   "technical": {
-    "asOf": "2026-10-08",
-    "price": 199.5,
-    "chg1d": 2.77,
-    "chg1w": 4.98,
-    "chg1m": 17.68,
-    "rsi14": 70.5,
-    "sma50": 175.26,
-    "sma200": 152.26,
-    "ema8": 192.09,
-    "ema21": 186.01,
-    "emaGap": 3.27,
-    "vsSma50": 13.8,
-    "vsSma200": 31.0,
-    "relVol": 0.03,
-    "high52w": 207.18,
+    "asOf": "2026-10-09",
+    "price": 209.05,
+    "chg1d": 5.17,
+    "chg1w": 10.75,
+    "chg1m": 26.04,
+    "rsi14": 76.3,
+    "sma50": 176.98,
+    "sma200": 152.33,
+    "ema8": 195.73,
+    "ema21": 188.04,
+    "emaGap": 4.09,
+    "vsSma50": 18.1,
+    "vsSma200": 37.2,
+    "relVol": 1.56,
+    "high52w": 209.05,
     "low52w": 107.27,
-    "rangePos": 92.0,
+    "rangePos": 100.0,
     "series": [
       {
         "d": "2025-10-17",
@@ -235,16 +235,22 @@
         "c": 188.75
       },
       {
-        "d": "2026-10-08",
-        "c": 199.5
+        "d": "2026-10-09",
+        "c": 209.05
       }
     ],
     "signals": [
       {
         "type": "rsi_overbought",
-        "asof": "2026-10-08",
+        "asof": "2026-10-09",
         "label": "RSI crossed above 70 (overbought)",
         "dir": "neutral"
+      },
+      {
+        "type": "new_52w_high",
+        "asof": "2026-10-09",
+        "label": "New 52-week high",
+        "dir": "bull"
       }
     ],
     "nextEarnings": null,
