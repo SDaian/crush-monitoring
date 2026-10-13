@@ -3477,10 +3477,10 @@
   "performance": {
     "available": true,
     "benchLabel": "S&P 500",
-    "asofDate": "2026-10-09",
+    "asofDate": "2026-10-12",
     "kpis": {
-      "medianPct": 40.8,
-      "medianBenchPct": 32.1,
+      "medianPct": 42.6,
+      "medianBenchPct": 32.0,
       "beat": 100,
       "beatOf": 179,
       "priced": 179,
@@ -3580,7 +3580,7 @@
         "2026-09-23",
         "2026-09-30",
         "2026-10-07",
-        "2026-10-09"
+        "2026-10-12"
       ],
       "member": [
         100.0,
@@ -3675,7 +3675,7 @@
         182.4,
         181.4,
         184.7,
-        182.9
+        181.0
       ],
       "bench": [
         100.0,
@@ -3770,7 +3770,7 @@
         131.0,
         130.1,
         132.6,
-        132.9
+        132.8
       ],
       "buys": 179
     },
@@ -3778,86 +3778,86 @@
       {
         "ticker": "PAYX",
         "txDate": "2025-11-12",
-        "pct": -6.4,
+        "pct": -5.8,
         "benchPct": 13.9,
-        "excess": -20.3
+        "excess": -19.7
       },
       {
         "ticker": "PG",
         "txDate": "2025-11-06",
-        "pct": 3.5,
-        "benchPct": 16.2,
-        "excess": -12.7
+        "pct": 4.8,
+        "benchPct": 16.1,
+        "excess": -11.3
       },
       {
         "ticker": "MELI",
         "txDate": "2025-10-24",
-        "pct": -12.6,
-        "benchPct": 15.0,
-        "excess": -27.6
+        "pct": -12.4,
+        "benchPct": 14.9,
+        "excess": -27.3
       },
       {
         "ticker": "HD",
         "txDate": "2025-10-24",
         "pct": -24.8,
-        "benchPct": 15.0,
-        "excess": -39.8
+        "benchPct": 14.9,
+        "excess": -39.7
       },
       {
         "ticker": "CVX",
         "txDate": "2025-10-24",
-        "pct": 36.3,
-        "benchPct": 15.0,
-        "excess": 21.3
+        "pct": 38.2,
+        "benchPct": 14.9,
+        "excess": 23.3
       },
       {
         "ticker": "BRK.B",
         "txDate": "2025-10-24",
-        "pct": 4.8,
-        "benchPct": 15.0,
-        "excess": -10.2
+        "pct": 5.2,
+        "benchPct": 14.9,
+        "excess": -9.7
       },
       {
         "ticker": "PANW",
         "txDate": "2025-10-24",
-        "pct": 92.9,
-        "benchPct": 15.0,
-        "excess": 77.9
+        "pct": 86.0,
+        "benchPct": 14.9,
+        "excess": 71.1
       },
       {
         "ticker": "NFLX",
         "txDate": "2025-10-24",
-        "pct": -35.8,
-        "benchPct": 15.0,
-        "excess": -50.8
+        "pct": -35.5,
+        "benchPct": 14.9,
+        "excess": -50.4
       },
       {
         "ticker": "MSFT",
         "txDate": "2025-10-24",
-        "pct": 2.2,
-        "benchPct": 15.0,
-        "excess": -12.8
+        "pct": 3.3,
+        "benchPct": 14.9,
+        "excess": -11.6
       },
       {
         "ticker": "AMGN",
         "txDate": "2025-10-24",
-        "pct": 42.2,
-        "benchPct": 15.0,
-        "excess": 27.2
+        "pct": 43.1,
+        "benchPct": 14.9,
+        "excess": 28.2
       },
       {
         "ticker": "AMZN",
         "txDate": "2025-10-24",
-        "pct": 17.0,
-        "benchPct": 15.0,
-        "excess": 2.0
+        "pct": 15.8,
+        "benchPct": 14.9,
+        "excess": 0.9
       },
       {
         "ticker": "TSLA",
         "txDate": "2025-10-15",
-        "pct": -12.1,
+        "pct": -13.1,
         "benchPct": 17.0,
-        "excess": -29.1
+        "excess": -30.1
       }
     ],
     "rowsOf": 179
