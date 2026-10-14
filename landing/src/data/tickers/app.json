@@ -12,20 +12,20 @@
   },
   "indexable": true,
   "technical": {
-    "asOf": "2026-10-12",
-    "price": 270.87,
-    "chg1d": -2.23,
-    "chg1w": -3.94,
-    "chg1m": -16.39,
-    "rsi14": 33.2,
-    "sma50": 315.67,
-    "sma200": 443.51,
-    "ema8": 280.89,
-    "ema21": 295.55,
-    "emaGap": -4.96,
-    "vsSma50": -14.2,
-    "vsSma200": -38.9,
-    "relVol": 0.68,
+    "asOf": "2026-10-13",
+    "price": 272.28,
+    "chg1d": 0.52,
+    "chg1w": -2.33,
+    "chg1m": -18.54,
+    "rsi14": 34.2,
+    "sma50": 312.99,
+    "sma200": 441.23,
+    "ema8": 278.98,
+    "ema21": 293.43,
+    "emaGap": -4.93,
+    "vsSma50": -13.0,
+    "vsSma200": -38.3,
+    "relVol": 0.73,
     "high52w": 733.6,
     "low52w": 268.22,
     "rangePos": 1.0,
@@ -235,8 +235,8 @@
         "c": 277.04
       },
       {
-        "d": "2026-10-12",
-        "c": 270.87
+        "d": "2026-10-13",
+        "c": 272.28
       }
     ],
     "signals": [],
@@ -250,20 +250,20 @@
     }
   },
   "summary": {
-    "trades": 26,
+    "trades": 27,
     "members": 6,
     "congress": 6,
     "executive": 0,
     "whoLabel": "6 members of Congress",
-    "buys": 14,
+    "buys": 15,
     "sells": 12,
     "other": 0,
     "firstTx": "2025-02-24",
-    "lastTx": "2026-08-18",
-    "lastFiling": "2026-09-10",
-    "estBuyLabel": "$161K",
+    "lastTx": "2026-09-18",
+    "lastFiling": "2026-10-12",
+    "estBuyLabel": "$169K",
     "estSellLabel": "$170K",
-    "pctLate": 8
+    "pctLate": 7
   },
   "topMembers": [
     {
@@ -271,10 +271,10 @@
       "slug": "gilbert-ray-cisneros-jr",
       "party": "D",
       "chamber": "House",
-      "trades": 13,
-      "buys": 8,
+      "trades": 14,
+      "buys": 9,
       "sells": 5,
-      "estLabel": "$129K",
+      "estLabel": "$137K",
       "hasPage": true
     },
     {
@@ -334,6 +334,18 @@
     }
   ],
   "trades": [
+    {
+      "member": "Gilbert Ray Cisneros, Jr.",
+      "memberSlug": "gilbert-ray-cisneros-jr",
+      "hasPage": true,
+      "party": "D",
+      "side": "BUY",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-09-18",
+      "filedDate": "2026-10-12",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035622.pdf"
+    },
     {
       "member": "Gilbert Ray Cisneros, Jr.",
       "memberSlug": "gilbert-ray-cisneros-jr",
@@ -621,33 +633,21 @@
       "filedDate": "2025-03-27",
       "daysLate": 0,
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20029034.pdf"
-    },
-    {
-      "member": "Robert P. Bresnahan, Jr.",
-      "memberSlug": "robert-p-bresnahan-jr",
-      "hasPage": false,
-      "party": "R",
-      "side": "SELL",
-      "amountBucket": "$1K – $15K",
-      "txDate": "2025-02-25",
-      "filedDate": "2025-03-27",
-      "daysLate": 0,
-      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20029034.pdf"
     }
   ],
   "tradesShown": 25,
   "faq": [
     {
       "q": "Who in Congress has traded APP stock?",
-      "a": "6 members of Congress have disclosed 26 APP trades since February 2025. The most active is Gilbert Ray Cisneros, Jr., with 13 trades, followed by Jefferson Shreve and Josh Gottheimer. Each trade on this page links to the official filing it came from."
+      "a": "6 members of Congress have disclosed 27 APP trades since February 2025. The most active is Gilbert Ray Cisneros, Jr., with 14 trades, followed by Jefferson Shreve and Josh Gottheimer. Each trade on this page links to the official filing it came from."
     },
     {
       "q": "Is Congress buying or selling APP?",
-      "a": "Of the 26 disclosed APP trades, 14 were buys and 12 were sells. By the midpoint of each filed amount bracket, the buying comes to about $161K and the selling to about $170K. Filings disclose brackets, never exact amounts, so these totals are estimates."
+      "a": "Of the 27 disclosed APP trades, 15 were buys and 12 were sells. By the midpoint of each filed amount bracket, the buying comes to about $169K and the selling to about $170K. Filings disclose brackets, never exact amounts, so these totals are estimates."
     },
     {
       "q": "How late are APP trades disclosed?",
-      "a": "8% of the disclosed APP trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Aug 18, 2026, and the newest filing arrived on Sep 10, 2026."
+      "a": "7% of the disclosed APP trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Sep 18, 2026, and the newest filing arrived on Oct 12, 2026."
     }
   ]
 }

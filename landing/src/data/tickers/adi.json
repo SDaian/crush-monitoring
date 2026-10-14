@@ -12,23 +12,23 @@
   },
   "indexable": true,
   "technical": {
-    "asOf": "2026-10-12",
-    "price": 406.25,
-    "chg1d": 0.01,
-    "chg1w": -3.07,
-    "chg1m": 7.25,
-    "rsi14": 60.4,
-    "sma50": 380.9,
-    "sma200": 363.62,
-    "ema8": 406.83,
-    "ema21": 396.49,
-    "emaGap": 2.61,
-    "vsSma50": 6.7,
-    "vsSma200": 11.7,
-    "relVol": 0.87,
+    "asOf": "2026-10-13",
+    "price": 414.7,
+    "chg1d": 2.08,
+    "chg1w": -1.39,
+    "chg1m": 14.87,
+    "rsi14": 65.1,
+    "sma50": 381.96,
+    "sma200": 364.3,
+    "ema8": 408.58,
+    "ema21": 398.15,
+    "emaGap": 2.62,
+    "vsSma50": 8.6,
+    "vsSma200": 13.8,
+    "relVol": 0.89,
     "high52w": 445.48,
     "low52w": 225.2,
-    "rangePos": 82.0,
+    "rangePos": 86.0,
     "series": [
       {
         "d": "2025-10-24",
@@ -235,8 +235,8 @@
         "c": 406.19
       },
       {
-        "d": "2026-10-12",
-        "c": 406.25
+        "d": "2026-10-13",
+        "c": 414.7
       }
     ],
     "signals": [],
@@ -250,20 +250,20 @@
     }
   },
   "summary": {
-    "trades": 26,
-    "members": 11,
-    "congress": 11,
+    "trades": 27,
+    "members": 12,
+    "congress": 12,
     "executive": 0,
-    "whoLabel": "11 members of Congress",
-    "buys": 9,
+    "whoLabel": "12 members of Congress",
+    "buys": 10,
     "sells": 17,
     "other": 0,
     "firstTx": "2023-03-15",
-    "lastTx": "2026-09-04",
-    "lastFiling": "2026-10-01",
-    "estBuyLabel": "$97K",
+    "lastTx": "2026-10-08",
+    "lastFiling": "2026-10-12",
+    "estBuyLabel": "$105K",
     "estSellLabel": "$252K",
-    "pctLate": 8
+    "pctLate": 7
   },
   "topMembers": [
     {
@@ -378,6 +378,18 @@
     }
   ],
   "trades": [
+    {
+      "member": "Rick Larsen",
+      "memberSlug": "rick-larsen",
+      "hasPage": false,
+      "party": "D",
+      "side": "BUY",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-10-08",
+      "filedDate": "2026-10-12",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035635.pdf"
+    },
     {
       "member": "Sheldon Whitehouse",
       "memberSlug": "sheldon-whitehouse",
@@ -665,33 +677,21 @@
       "filedDate": "2025-04-11",
       "daysLate": 0,
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20029038.pdf"
-    },
-    {
-      "member": "Thomas H. Kean, Jr.",
-      "memberSlug": "thomas-h-kean-jr",
-      "hasPage": false,
-      "party": "R",
-      "side": "BUY",
-      "amountBucket": "$1K – $15K",
-      "txDate": "2024-12-13",
-      "filedDate": "2025-01-22",
-      "daysLate": 0,
-      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20026591.pdf"
     }
   ],
   "tradesShown": 25,
   "faq": [
     {
       "q": "Who in Congress has traded ADI stock?",
-      "a": "11 members of Congress have disclosed 26 ADI trades since March 2023. The most active is Richard McCormick, with 7 trades, followed by Thomas H. Kean, Jr. and Jefferson Shreve. Each trade on this page links to the official filing it came from."
+      "a": "12 members of Congress have disclosed 27 ADI trades since March 2023. The most active is Richard McCormick, with 7 trades, followed by Thomas H. Kean, Jr. and Jefferson Shreve. Each trade on this page links to the official filing it came from."
     },
     {
       "q": "Is Congress buying or selling ADI?",
-      "a": "Of the 26 disclosed ADI trades, 9 were buys and 17 were sells. By the midpoint of each filed amount bracket, the buying comes to about $97K and the selling to about $252K. Filings disclose brackets, never exact amounts, so these totals are estimates."
+      "a": "Of the 27 disclosed ADI trades, 10 were buys and 17 were sells. By the midpoint of each filed amount bracket, the buying comes to about $105K and the selling to about $252K. Filings disclose brackets, never exact amounts, so these totals are estimates."
     },
     {
       "q": "How late are ADI trades disclosed?",
-      "a": "8% of the disclosed ADI trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Sep 4, 2026, and the newest filing arrived on Oct 1, 2026."
+      "a": "7% of the disclosed ADI trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Oct 8, 2026, and the newest filing arrived on Oct 12, 2026."
     }
   ]
 }

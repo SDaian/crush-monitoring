@@ -12,23 +12,23 @@
   },
   "indexable": true,
   "technical": {
-    "asOf": "2026-10-12",
-    "price": 42.78,
-    "chg1d": 2.71,
-    "chg1w": -6.7,
-    "chg1m": -15.47,
-    "rsi14": 30.2,
-    "sma50": 48.04,
-    "sma200": 46.55,
-    "ema8": 44.66,
-    "ema21": 46.26,
-    "emaGap": -3.47,
-    "vsSma50": -11.0,
-    "vsSma200": -8.1,
-    "relVol": 1.09,
+    "asOf": "2026-10-13",
+    "price": 43.53,
+    "chg1d": 1.75,
+    "chg1w": -5.33,
+    "chg1m": -15.13,
+    "rsi14": 35.2,
+    "sma50": 47.97,
+    "sma200": 46.56,
+    "ema8": 44.41,
+    "ema21": 46.01,
+    "emaGap": -3.49,
+    "vsSma50": -9.3,
+    "vsSma200": -6.5,
+    "relVol": 1.12,
     "high52w": 51.45,
     "low52w": 38.4,
-    "rangePos": 34.0,
+    "rangePos": 39.0,
     "series": [
       {
         "d": "2025-10-24",
@@ -235,8 +235,8 @@
         "c": 41.65
       },
       {
-        "d": "2026-10-12",
-        "c": 42.78
+        "d": "2026-10-13",
+        "c": 43.53
       }
     ],
     "signals": [],
@@ -250,18 +250,18 @@
     }
   },
   "summary": {
-    "trades": 35,
+    "trades": 36,
     "members": 17,
     "congress": 16,
     "executive": 1,
     "whoLabel": "16 members of Congress and 1 executive-branch filer",
-    "buys": 13,
+    "buys": 14,
     "sells": 22,
     "other": 0,
     "firstTx": "2025-01-06",
-    "lastTx": "2026-07-17",
-    "lastFiling": "2026-09-04",
-    "estBuyLabel": "$485K",
+    "lastTx": "2026-09-18",
+    "lastFiling": "2026-10-12",
+    "estBuyLabel": "$493K",
     "estSellLabel": "$584K",
     "pctLate": 11
   },
@@ -304,10 +304,10 @@
       "slug": "gilbert-ray-cisneros-jr",
       "party": "D",
       "chamber": "House",
-      "trades": 2,
-      "buys": 1,
+      "trades": 3,
+      "buys": 2,
       "sells": 1,
-      "estLabel": "$16K",
+      "estLabel": "$24K",
       "hasPage": true
     },
     {
@@ -378,6 +378,18 @@
     }
   ],
   "trades": [
+    {
+      "member": "Gilbert Ray Cisneros, Jr.",
+      "memberSlug": "gilbert-ray-cisneros-jr",
+      "hasPage": true,
+      "party": "D",
+      "side": "BUY",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-09-18",
+      "filedDate": "2026-10-12",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035622.pdf"
+    },
     {
       "member": "Gilbert Ray Cisneros, Jr.",
       "memberSlug": "gilbert-ray-cisneros-jr",
@@ -665,33 +677,21 @@
       "filedDate": "2025-09-11",
       "daysLate": 0,
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20032066.pdf"
-    },
-    {
-      "member": "Tim Moore",
-      "memberSlug": "tim-moore",
-      "hasPage": false,
-      "party": "R",
-      "side": "SELL",
-      "amountBucket": "$15K – $50K",
-      "txDate": "2025-08-01",
-      "filedDate": "2025-09-03",
-      "daysLate": 0,
-      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20031020.pdf"
     }
   ],
   "tradesShown": 25,
   "faq": [
     {
       "q": "Who in Congress has traded VZ stock?",
-      "a": "16 members of Congress and 1 executive-branch filer have disclosed 35 VZ trades since January 2025. The most active is Tim Moore, with 9 trades, followed by Julie Johnson and Donald J. Trump. Each trade on this page links to the official filing it came from."
+      "a": "16 members of Congress and 1 executive-branch filer have disclosed 36 VZ trades since January 2025. The most active is Tim Moore, with 9 trades, followed by Julie Johnson and Donald J. Trump. Each trade on this page links to the official filing it came from."
     },
     {
       "q": "Is Congress buying or selling VZ?",
-      "a": "Of the 35 disclosed VZ trades, 13 were buys and 22 were sells. By the midpoint of each filed amount bracket, the buying comes to about $485K and the selling to about $584K. Filings disclose brackets, never exact amounts, so these totals are estimates."
+      "a": "Of the 36 disclosed VZ trades, 14 were buys and 22 were sells. By the midpoint of each filed amount bracket, the buying comes to about $493K and the selling to about $584K. Filings disclose brackets, never exact amounts, so these totals are estimates."
     },
     {
       "q": "How late are VZ trades disclosed?",
-      "a": "11% of the disclosed VZ trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Jul 17, 2026, and the newest filing arrived on Sep 4, 2026."
+      "a": "11% of the disclosed VZ trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Sep 18, 2026, and the newest filing arrived on Oct 12, 2026."
     }
   ]
 }

@@ -6,12 +6,12 @@
       "ticker": "MSFT",
       "aliases": [],
       "company": "Microsoft Corporation",
-      "trades": 213,
+      "trades": 214,
       "members": 44,
-      "buys": 110,
+      "buys": 111,
       "sells": 103,
-      "lastTx": "2026-09-28",
-      "lastFiling": "2026-10-07",
+      "lastTx": "2026-09-30",
+      "lastFiling": "2026-10-12",
       "indexable": true,
       "industry": {
         "key": "tech",
@@ -129,12 +129,12 @@
       "ticker": "AVGO",
       "aliases": [],
       "company": "Broadcom Inc.",
-      "trades": 90,
+      "trades": 91,
       "members": 24,
       "buys": 52,
-      "sells": 38,
-      "lastTx": "2026-08-26",
-      "lastFiling": "2026-09-22",
+      "sells": 39,
+      "lastTx": "2026-09-16",
+      "lastFiling": "2026-10-12",
       "indexable": true,
       "industry": {
         "key": "tech",
@@ -146,12 +146,12 @@
       "ticker": "HD",
       "aliases": [],
       "company": "Home Depot, Inc.",
-      "trades": 87,
-      "members": 24,
+      "trades": 88,
+      "members": 25,
       "buys": 46,
-      "sells": 41,
-      "lastTx": "2026-09-22",
-      "lastFiling": "2026-10-05",
+      "sells": 42,
+      "lastTx": "2026-10-08",
+      "lastFiling": "2026-10-12",
       "indexable": true,
       "industry": {
         "key": "consumer",
@@ -363,6 +363,23 @@
       }
     },
     {
+      "slug": "tsm",
+      "ticker": "TSM",
+      "aliases": [],
+      "company": "Taiwan Semiconductor Manufacturing Company Ltd.",
+      "trades": 52,
+      "members": 12,
+      "buys": 36,
+      "sells": 16,
+      "lastTx": "2026-09-22",
+      "lastFiling": "2026-10-12",
+      "indexable": true,
+      "industry": {
+        "key": "tech",
+        "label": "Technology"
+      }
+    },
+    {
       "slug": "amd",
       "ticker": "AMD",
       "aliases": [],
@@ -397,20 +414,20 @@
       }
     },
     {
-      "slug": "tsm",
-      "ticker": "TSM",
+      "slug": "abt",
+      "ticker": "ABT",
       "aliases": [],
-      "company": "Taiwan Semiconductor Manufacturing Company Ltd.",
+      "company": "Abbott Laboratories",
       "trades": 51,
-      "members": 12,
-      "buys": 35,
-      "sells": 16,
-      "lastTx": "2026-08-12",
-      "lastFiling": "2026-09-22",
+      "members": 20,
+      "buys": 21,
+      "sells": 29,
+      "lastTx": "2026-09-18",
+      "lastFiling": "2026-10-12",
       "indexable": true,
       "industry": {
-        "key": "tech",
-        "label": "Technology"
+        "key": "health",
+        "label": "Health care & pharma"
       }
     },
     {
@@ -445,23 +462,6 @@
       "industry": {
         "key": "transport",
         "label": "Transport & logistics"
-      }
-    },
-    {
-      "slug": "abt",
-      "ticker": "ABT",
-      "aliases": [],
-      "company": "Abbott Laboratories",
-      "trades": 50,
-      "members": 20,
-      "buys": 20,
-      "sells": 29,
-      "lastTx": "2026-07-30",
-      "lastFiling": "2026-08-18",
-      "indexable": true,
-      "industry": {
-        "key": "health",
-        "label": "Health care & pharma"
       }
     },
     {
@@ -720,6 +720,23 @@
       }
     },
     {
+      "slug": "intu",
+      "ticker": "INTU",
+      "aliases": [],
+      "company": "Intuit Inc.",
+      "trades": 38,
+      "members": 14,
+      "buys": 16,
+      "sells": 22,
+      "lastTx": "2026-09-18",
+      "lastFiling": "2026-10-12",
+      "indexable": true,
+      "industry": {
+        "key": "tech",
+        "label": "Technology"
+      }
+    },
+    {
       "slug": "abbv",
       "ticker": "ABBV",
       "aliases": [],
@@ -754,23 +771,6 @@
       }
     },
     {
-      "slug": "intu",
-      "ticker": "INTU",
-      "aliases": [],
-      "company": "Intuit Inc.",
-      "trades": 37,
-      "members": 14,
-      "buys": 16,
-      "sells": 21,
-      "lastTx": "2026-08-18",
-      "lastFiling": "2026-09-10",
-      "indexable": true,
-      "industry": {
-        "key": "tech",
-        "label": "Technology"
-      }
-    },
-    {
       "slug": "tmo",
       "ticker": "TMO",
       "aliases": [],
@@ -785,6 +785,40 @@
       "industry": {
         "key": "health",
         "label": "Health care & pharma"
+      }
+    },
+    {
+      "slug": "ttd",
+      "ticker": "TTD",
+      "aliases": [],
+      "company": "The Trade Desk, Inc.",
+      "trades": 36,
+      "members": 7,
+      "buys": 18,
+      "sells": 18,
+      "lastTx": "2026-09-18",
+      "lastFiling": "2026-10-12",
+      "indexable": true,
+      "industry": {
+        "key": "tech",
+        "label": "Technology"
+      }
+    },
+    {
+      "slug": "vz",
+      "ticker": "VZ",
+      "aliases": [],
+      "company": "Verizon Communications Inc.",
+      "trades": 36,
+      "members": 17,
+      "buys": 14,
+      "sells": 22,
+      "lastTx": "2026-09-18",
+      "lastFiling": "2026-10-12",
+      "indexable": true,
+      "industry": {
+        "key": "telecom",
+        "label": "Telecom & media"
       }
     },
     {
@@ -853,40 +887,6 @@
       "industry": {
         "key": "defense",
         "label": "Defense & aerospace"
-      }
-    },
-    {
-      "slug": "ttd",
-      "ticker": "TTD",
-      "aliases": [],
-      "company": "The Trade Desk, Inc.",
-      "trades": 35,
-      "members": 7,
-      "buys": 18,
-      "sells": 17,
-      "lastTx": "2026-08-18",
-      "lastFiling": "2026-09-10",
-      "indexable": true,
-      "industry": {
-        "key": "tech",
-        "label": "Technology"
-      }
-    },
-    {
-      "slug": "vz",
-      "ticker": "VZ",
-      "aliases": [],
-      "company": "Verizon Communications Inc.",
-      "trades": 35,
-      "members": 17,
-      "buys": 13,
-      "sells": 22,
-      "lastTx": "2026-07-17",
-      "lastFiling": "2026-09-04",
-      "indexable": true,
-      "industry": {
-        "key": "telecom",
-        "label": "Telecom & media"
       }
     },
     {
@@ -1009,6 +1009,23 @@
       }
     },
     {
+      "slug": "zts",
+      "ticker": "ZTS",
+      "aliases": [],
+      "company": "Zoetis Inc.",
+      "trades": 33,
+      "members": 10,
+      "buys": 15,
+      "sells": 18,
+      "lastTx": "2026-09-18",
+      "lastFiling": "2026-10-12",
+      "indexable": true,
+      "industry": {
+        "key": "health",
+        "label": "Health care & pharma"
+      }
+    },
+    {
       "slug": "amat",
       "ticker": "AMAT",
       "aliases": [],
@@ -1108,23 +1125,6 @@
       "industry": {
         "key": "tech",
         "label": "Technology"
-      }
-    },
-    {
-      "slug": "zts",
-      "ticker": "ZTS",
-      "aliases": [],
-      "company": "Zoetis Inc.",
-      "trades": 32,
-      "members": 10,
-      "buys": 14,
-      "sells": 18,
-      "lastTx": "2026-07-17",
-      "lastFiling": "2026-09-04",
-      "indexable": true,
-      "industry": {
-        "key": "health",
-        "label": "Health care & pharma"
       }
     },
     {
@@ -1485,6 +1485,40 @@
       }
     },
     {
+      "slug": "app",
+      "ticker": "APP",
+      "aliases": [],
+      "company": "Applovin Corporation",
+      "trades": 27,
+      "members": 6,
+      "buys": 15,
+      "sells": 12,
+      "lastTx": "2026-09-18",
+      "lastFiling": "2026-10-12",
+      "indexable": true,
+      "industry": {
+        "key": "tech",
+        "label": "Technology"
+      }
+    },
+    {
+      "slug": "adi",
+      "ticker": "ADI",
+      "aliases": [],
+      "company": "Analog Devices, Inc.",
+      "trades": 27,
+      "members": 12,
+      "buys": 10,
+      "sells": 17,
+      "lastTx": "2026-10-08",
+      "lastFiling": "2026-10-12",
+      "indexable": true,
+      "industry": {
+        "key": "tech",
+        "label": "Technology"
+      }
+    },
+    {
       "slug": "ph",
       "ticker": "PH",
       "aliases": [],
@@ -1536,40 +1570,6 @@
       }
     },
     {
-      "slug": "adi",
-      "ticker": "ADI",
-      "aliases": [],
-      "company": "Analog Devices, Inc.",
-      "trades": 26,
-      "members": 11,
-      "buys": 9,
-      "sells": 17,
-      "lastTx": "2026-09-04",
-      "lastFiling": "2026-10-01",
-      "indexable": true,
-      "industry": {
-        "key": "tech",
-        "label": "Technology"
-      }
-    },
-    {
-      "slug": "app",
-      "ticker": "APP",
-      "aliases": [],
-      "company": "Applovin Corporation",
-      "trades": 26,
-      "members": 6,
-      "buys": 14,
-      "sells": 12,
-      "lastTx": "2026-08-18",
-      "lastFiling": "2026-09-10",
-      "indexable": true,
-      "industry": {
-        "key": "tech",
-        "label": "Technology"
-      }
-    },
-    {
       "slug": "dis",
       "ticker": "DIS",
       "aliases": [],
@@ -1597,6 +1597,23 @@
       "sells": 16,
       "lastTx": "2026-07-20",
       "lastFiling": "2026-07-21",
+      "indexable": true,
+      "industry": {
+        "key": "finance",
+        "label": "Banks & finance"
+      }
+    },
+    {
+      "slug": "fis",
+      "ticker": "FIS",
+      "aliases": [],
+      "company": "Fidelity National Information Services, Inc.",
+      "trades": 25,
+      "members": 8,
+      "buys": 11,
+      "sells": 14,
+      "lastTx": "2026-09-18",
+      "lastFiling": "2026-10-12",
       "indexable": true,
       "industry": {
         "key": "finance",

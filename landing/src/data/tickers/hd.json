@@ -12,23 +12,23 @@
   },
   "indexable": true,
   "technical": {
-    "asOf": "2026-10-12",
-    "price": 290.62,
-    "chg1d": -0.04,
-    "chg1w": 3.37,
-    "chg1m": -5.87,
-    "rsi14": 41.2,
-    "sma50": 316.85,
-    "sma200": 337.2,
-    "ema8": 289.44,
-    "ema21": 295.17,
-    "emaGap": -1.94,
-    "vsSma50": -8.3,
-    "vsSma200": -13.8,
-    "relVol": 0.83,
+    "asOf": "2026-10-13",
+    "price": 293.92,
+    "chg1d": 1.14,
+    "chg1w": 2.52,
+    "chg1m": -5.45,
+    "rsi14": 45.2,
+    "sma50": 315.93,
+    "sma200": 336.94,
+    "ema8": 290.43,
+    "ema21": 295.06,
+    "emaGap": -1.57,
+    "vsSma50": -7.0,
+    "vsSma200": -12.8,
+    "relVol": 0.81,
     "high52w": 391.9,
     "low52w": 281.15,
-    "rangePos": 9.0,
+    "rangePos": 12.0,
     "series": [
       {
         "d": "2025-10-24",
@@ -235,8 +235,8 @@
         "c": 290.74
       },
       {
-        "d": "2026-10-12",
-        "c": 290.62
+        "d": "2026-10-13",
+        "c": 293.92
       }
     ],
     "signals": [],
@@ -250,19 +250,19 @@
     }
   },
   "summary": {
-    "trades": 87,
-    "members": 24,
-    "congress": 23,
+    "trades": 88,
+    "members": 25,
+    "congress": 24,
     "executive": 1,
-    "whoLabel": "23 members of Congress and 1 executive-branch filer",
+    "whoLabel": "24 members of Congress and 1 executive-branch filer",
     "buys": 46,
-    "sells": 41,
+    "sells": 42,
     "other": 0,
     "firstTx": "2023-03-15",
-    "lastTx": "2026-09-22",
-    "lastFiling": "2026-10-05",
+    "lastTx": "2026-10-08",
+    "lastFiling": "2026-10-12",
     "estBuyLabel": "$466K",
-    "estSellLabel": "$941K",
+    "estSellLabel": "$949K",
     "pctLate": 10
   },
   "topMembers": [
@@ -378,6 +378,18 @@
     }
   ],
   "trades": [
+    {
+      "member": "Rick Larsen",
+      "memberSlug": "rick-larsen",
+      "hasPage": false,
+      "party": "D",
+      "side": "SELL",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-10-08",
+      "filedDate": "2026-10-12",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035635.pdf"
+    },
     {
       "member": "David J. Taylor",
       "memberSlug": "david-j-taylor",
@@ -665,33 +677,21 @@
       "filedDate": "2026-05-19",
       "daysLate": 0,
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20034585.pdf"
-    },
-    {
-      "member": "Jared Moskowitz",
-      "memberSlug": "jared-moskowitz",
-      "hasPage": false,
-      "party": "D",
-      "side": "BUY",
-      "amountBucket": "$1K – $15K",
-      "txDate": "2026-03-31",
-      "filedDate": "2026-04-30",
-      "daysLate": 0,
-      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20034274.pdf"
     }
   ],
   "tradesShown": 25,
   "faq": [
     {
       "q": "Who in Congress has traded HD stock?",
-      "a": "23 members of Congress and 1 executive-branch filer have disclosed 87 HD trades since March 2023. The most active is Kevin Hern, with 10 trades, followed by David J. Taylor and Lloyd Doggett. Each trade on this page links to the official filing it came from."
+      "a": "24 members of Congress and 1 executive-branch filer have disclosed 88 HD trades since March 2023. The most active is Kevin Hern, with 10 trades, followed by David J. Taylor and Lloyd Doggett. Each trade on this page links to the official filing it came from."
     },
     {
       "q": "Is Congress buying or selling HD?",
-      "a": "Of the 87 disclosed HD trades, 46 were buys and 41 were sells. By the midpoint of each filed amount bracket, the buying comes to about $466K and the selling to about $941K. Filings disclose brackets, never exact amounts, so these totals are estimates."
+      "a": "Of the 88 disclosed HD trades, 46 were buys and 42 were sells. By the midpoint of each filed amount bracket, the buying comes to about $466K and the selling to about $949K. Filings disclose brackets, never exact amounts, so these totals are estimates."
     },
     {
       "q": "How late are HD trades disclosed?",
-      "a": "10% of the disclosed HD trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Sep 22, 2026, and the newest filing arrived on Oct 5, 2026."
+      "a": "10% of the disclosed HD trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Oct 8, 2026, and the newest filing arrived on Oct 12, 2026."
     }
   ]
 }

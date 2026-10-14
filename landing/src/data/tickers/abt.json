@@ -12,23 +12,23 @@
   },
   "indexable": true,
   "technical": {
-    "asOf": "2026-10-12",
-    "price": 101.82,
-    "chg1d": 2.23,
-    "chg1w": 1.72,
-    "chg1m": -0.13,
-    "rsi14": 49.9,
-    "sma50": 106.09,
-    "sma200": 103.23,
-    "ema8": 99.77,
-    "ema21": 101.19,
-    "emaGap": -1.4,
-    "vsSma50": -4.0,
-    "vsSma200": -1.4,
-    "relVol": 0.76,
+    "asOf": "2026-10-13",
+    "price": 102.61,
+    "chg1d": 0.78,
+    "chg1w": 4.53,
+    "chg1m": -0.47,
+    "rsi14": 52.4,
+    "sma50": 106.0,
+    "sma200": 103.12,
+    "ema8": 100.4,
+    "ema21": 101.32,
+    "emaGap": -0.9,
+    "vsSma50": -3.2,
+    "vsSma200": -0.5,
+    "relVol": 1.04,
     "high52w": 133.27,
     "low52w": 82.56,
-    "rangePos": 38.0,
+    "rangePos": 40.0,
     "series": [
       {
         "d": "2025-10-24",
@@ -235,8 +235,8 @@
         "c": 99.6
       },
       {
-        "d": "2026-10-12",
-        "c": 101.82
+        "d": "2026-10-13",
+        "c": 102.61
       }
     ],
     "signals": [],
@@ -250,22 +250,33 @@
     }
   },
   "summary": {
-    "trades": 50,
+    "trades": 51,
     "members": 20,
     "congress": 19,
     "executive": 1,
     "whoLabel": "19 members of Congress and 1 executive-branch filer",
-    "buys": 20,
+    "buys": 21,
     "sells": 29,
     "other": 1,
     "firstTx": "2023-03-15",
-    "lastTx": "2026-07-30",
-    "lastFiling": "2026-08-18",
-    "estBuyLabel": "$160K",
+    "lastTx": "2026-09-18",
+    "lastFiling": "2026-10-12",
+    "estBuyLabel": "$168K",
     "estSellLabel": "$373K",
     "pctLate": 10
   },
   "topMembers": [
+    {
+      "name": "Gilbert Ray Cisneros, Jr.",
+      "slug": "gilbert-ray-cisneros-jr",
+      "party": "D",
+      "chamber": "House",
+      "trades": 6,
+      "buys": 3,
+      "sells": 3,
+      "estLabel": "$48K",
+      "hasPage": true
+    },
     {
       "name": "Josh Gottheimer",
       "slug": "josh-gottheimer",
@@ -287,17 +298,6 @@
       "sells": 1,
       "estLabel": "$48K",
       "hasPage": false
-    },
-    {
-      "name": "Gilbert Ray Cisneros, Jr.",
-      "slug": "gilbert-ray-cisneros-jr",
-      "party": "D",
-      "chamber": "House",
-      "trades": 5,
-      "buys": 2,
-      "sells": 3,
-      "estLabel": "$40K",
-      "hasPage": true
     },
     {
       "name": "Byron Donalds",
@@ -378,6 +378,18 @@
     }
   ],
   "trades": [
+    {
+      "member": "Gilbert Ray Cisneros, Jr.",
+      "memberSlug": "gilbert-ray-cisneros-jr",
+      "hasPage": true,
+      "party": "D",
+      "side": "BUY",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-09-18",
+      "filedDate": "2026-10-12",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035622.pdf"
+    },
     {
       "member": "Richard McCormick",
       "memberSlug": "richard-mccormick",
@@ -665,33 +677,21 @@
       "filedDate": "2025-12-15",
       "daysLate": 0,
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20033619.pdf"
-    },
-    {
-      "member": "Julie Johnson",
-      "memberSlug": "julie-johnson",
-      "hasPage": false,
-      "party": "D",
-      "side": "SELL",
-      "amountBucket": "$1K – $15K",
-      "txDate": "2025-11-13",
-      "filedDate": "2025-12-11",
-      "daysLate": 0,
-      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20033611.pdf"
     }
   ],
   "tradesShown": 25,
   "faq": [
     {
       "q": "Who in Congress has traded ABT stock?",
-      "a": "19 members of Congress and 1 executive-branch filer have disclosed 50 ABT trades since March 2023. The most active is Josh Gottheimer, with 6 trades, followed by Richard McCormick and Gilbert Ray Cisneros, Jr.. Each trade on this page links to the official filing it came from."
+      "a": "19 members of Congress and 1 executive-branch filer have disclosed 51 ABT trades since March 2023. The most active is Gilbert Ray Cisneros, Jr., with 6 trades, followed by Josh Gottheimer and Richard McCormick. Each trade on this page links to the official filing it came from."
     },
     {
       "q": "Is Congress buying or selling ABT?",
-      "a": "Of the 50 disclosed ABT trades, 20 were buys and 29 were sells. By the midpoint of each filed amount bracket, the buying comes to about $160K and the selling to about $373K. Filings disclose brackets, never exact amounts, so these totals are estimates."
+      "a": "Of the 51 disclosed ABT trades, 21 were buys and 29 were sells. By the midpoint of each filed amount bracket, the buying comes to about $168K and the selling to about $373K. Filings disclose brackets, never exact amounts, so these totals are estimates."
     },
     {
       "q": "How late are ABT trades disclosed?",
-      "a": "10% of the disclosed ABT trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Jul 30, 2026, and the newest filing arrived on Aug 18, 2026."
+      "a": "10% of the disclosed ABT trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Sep 18, 2026, and the newest filing arrived on Oct 12, 2026."
     }
   ]
 }

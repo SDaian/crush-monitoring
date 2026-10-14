@@ -1,19 +1,19 @@
 {
   "_comment": "Generated from real official disclosures by congress/landing_data.py (daily Action). Do not edit by hand. 'filedDaysLate' counts days past the STOCK Act's 45-day statutory maximum; 0 = on time.",
   "windowDays": 45,
-  "from": "2026-08-23",
-  "to": "2026-10-07",
-  "members": 18,
-  "buys": 160,
+  "from": "2026-08-28",
+  "to": "2026-10-12",
+  "members": 19,
+  "buys": 196,
   "options": 2,
-  "companies": 111,
+  "companies": 136,
   "rows": [
     {
       "ticker": "MSFT",
       "tickerLabel": "MSFT",
       "slug": "msft",
       "company": "Microsoft Corporation",
-      "members": 3,
+      "members": 4,
       "buyers": [
         {
           "name": "Cleo Fields",
@@ -26,13 +26,17 @@
         {
           "name": "Josh Gottheimer",
           "slug": "josh-gottheimer"
+        },
+        {
+          "name": "Lisa C. McClain",
+          "slug": null
         }
       ],
-      "buys": 6,
+      "buys": 7,
       "options": 2,
       "estLabel": "$1.2M",
-      "est": 1206003,
-      "lastFiling": "2026-10-01"
+      "est": 1214004,
+      "lastFiling": "2026-10-12"
     },
     {
       "ticker": "SNOW",
@@ -145,28 +149,6 @@
       "lastFiling": "2026-10-01"
     },
     {
-      "ticker": "AMAT",
-      "tickerLabel": "AMAT",
-      "slug": "amat",
-      "company": "Applied Materials, Inc.",
-      "members": 2,
-      "buyers": [
-        {
-          "name": "Jared Moskowitz",
-          "slug": null
-        },
-        {
-          "name": "Josh Gottheimer",
-          "slug": "josh-gottheimer"
-        }
-      ],
-      "buys": 2,
-      "options": 0,
-      "estLabel": "$16K",
-      "est": 16001,
-      "lastFiling": "2026-09-14"
-    },
-    {
       "ticker": "GS",
       "tickerLabel": "GS",
       "slug": "gs",
@@ -255,6 +237,28 @@
       "lastFiling": "2026-09-17"
     },
     {
+      "ticker": "TSM",
+      "tickerLabel": "TSM",
+      "slug": "tsm",
+      "company": "Taiwan Semiconductor Manufacturing Company Ltd.",
+      "members": 2,
+      "buyers": [
+        {
+          "name": "Gilbert Ray Cisneros, Jr.",
+          "slug": "gilbert-ray-cisneros-jr"
+        },
+        {
+          "name": "Rick W. Allen",
+          "slug": null
+        }
+      ],
+      "buys": 2,
+      "options": 0,
+      "estLabel": "$16K",
+      "est": 16001,
+      "lastFiling": "2026-10-12"
+    },
+    {
       "ticker": "CHRW",
       "tickerLabel": "CHRW",
       "slug": null,
@@ -327,6 +331,24 @@
       "lastFiling": "2026-09-09"
     },
     {
+      "ticker": "EPAC",
+      "tickerLabel": "EPAC",
+      "slug": null,
+      "company": "Enerpac Tool Group Corp.",
+      "members": 1,
+      "buyers": [
+        {
+          "name": "Gilbert Ray Cisneros, Jr.",
+          "slug": "gilbert-ray-cisneros-jr"
+        }
+      ],
+      "buys": 3,
+      "options": 0,
+      "estLabel": "$24K",
+      "est": 24002,
+      "lastFiling": "2026-10-12"
+    },
+    {
       "ticker": "ESE",
       "tickerLabel": "ESE",
       "slug": null,
@@ -363,80 +385,63 @@
       "lastFiling": "2026-09-09"
     },
     {
-      "ticker": "WMB",
-      "tickerLabel": "WMB",
+      "ticker": "ALKS",
+      "tickerLabel": "ALKS",
       "slug": null,
-      "company": "Williams Companies, Inc. Common Stock Option Type: Call Strike price: $75.00 Expires: 2026-08-21",
+      "company": "Alkermes plc",
       "members": 1,
       "buyers": [
         {
-          "name": "Alan Armstrong",
-          "slug": "alan-armstrong"
+          "name": "Gilbert Ray Cisneros, Jr.",
+          "slug": "gilbert-ray-cisneros-jr"
         }
       ],
       "buys": 2,
       "options": 0,
       "estLabel": "$41K",
       "est": 40501,
-      "lastFiling": "2026-09-17"
+      "lastFiling": "2026-10-12"
     },
     {
-      "ticker": "AAPL",
-      "tickerLabel": "AAPL",
-      "slug": "aapl",
-      "company": "Apple Inc.",
-      "members": 1,
-      "buyers": [
-        {
-          "name": "Cleo Fields",
-          "slug": "cleo-fields"
-        }
-      ],
-      "buys": 2,
-      "options": 0,
-      "estLabel": "$16K",
-      "est": 16001,
-      "lastFiling": "2026-10-01"
-    },
-    {
-      "ticker": "AEP",
-      "tickerLabel": "AEP",
+      "ticker": "GMED",
+      "tickerLabel": "GMED",
       "slug": null,
-      "company": "American Electric Power Company, Inc.",
+      "company": "Globus Medical, Inc.",
       "members": 1,
       "buyers": [
         {
-          "name": "David J. Taylor",
-          "slug": null
+          "name": "Gilbert Ray Cisneros, Jr.",
+          "slug": "gilbert-ray-cisneros-jr"
         }
       ],
       "buys": 2,
       "options": 0,
-      "estLabel": "$16K",
-      "est": 16001,
-      "lastFiling": "2026-09-05"
+      "estLabel": "$41K",
+      "est": 40501,
+      "lastFiling": "2026-10-12"
     }
   ],
   "largest": {
     "ticker": "MSFT",
     "estLabel": "$1.2M",
-    "buys": 6,
+    "buys": 7,
     "options": 2,
     "company": "Microsoft Corporation",
     "buyers": [
       "Cleo Fields",
       "Gilbert Ray Cisneros, Jr.",
-      "Josh Gottheimer"
+      "Josh Gottheimer",
+      "Lisa C. McClain"
     ]
   },
   "faq": [
     {
       "q": "What stocks is Congress buying?",
-      "a": "In filings from the last 45 days, to Oct 7, 2026, 18 members of Congress disclosed 160 purchases, 2 of them options, across 111 companies. The stocks bought by the most members were MSFT (3 members), SNOW (2 members) and ACN (2 members). Filings arrive up to 45 days after the trade: this is recent disclosure, not live trading."
+      "a": "In filings from the last 45 days, to Oct 12, 2026, 19 members of Congress disclosed 196 purchases, 2 of them options, across 136 companies. The stocks bought by the most members were MSFT (4 members), SNOW (2 members) and ACN (2 members). Filings arrive up to 45 days after the trade: this is recent disclosure, not live trading."
     },
     {
       "q": "What is the largest stock purchase Congress disclosed recently?",
-      "a": "By the midpoint of each filed amount bracket, the largest recent buying was in Microsoft Corporation (MSFT): about $1.2M across 6 purchases (2 of them options), by Cleo Fields and Gilbert Ray Cisneros, Jr. and others. Filings disclose brackets, never exact amounts, so this is an estimate."
+      "a": "By the midpoint of each filed amount bracket, the largest recent buying was in Microsoft Corporation (MSFT): about $1.2M across 7 purchases (2 of them options), by Cleo Fields and Gilbert Ray Cisneros, Jr. and others. Filings disclose brackets, never exact amounts, so this is an estimate."
     },
     {
       "q": "Does this include the President's trades?",
