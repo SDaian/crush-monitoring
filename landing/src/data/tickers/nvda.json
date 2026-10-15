@@ -12,23 +12,23 @@
   },
   "indexable": true,
   "technical": {
-    "asOf": "2026-10-13",
-    "price": 228.52,
-    "chg1d": 0.97,
-    "chg1w": -4.48,
-    "chg1m": 8.32,
-    "rsi14": 52.0,
-    "sma50": 223.03,
-    "sma200": 202.54,
-    "ema8": 230.39,
-    "ema21": 228.25,
-    "emaGap": 0.94,
-    "vsSma50": 2.5,
-    "vsSma200": 12.8,
-    "relVol": 0.79,
+    "asOf": "2026-10-14",
+    "price": 221.3,
+    "chg1d": -3.16,
+    "chg1w": -6.81,
+    "chg1m": 4.3,
+    "rsi14": 43.9,
+    "sma50": 223.21,
+    "sma200": 202.69,
+    "ema8": 228.37,
+    "ema21": 227.62,
+    "emaGap": 0.33,
+    "vsSma50": -0.9,
+    "vsSma200": 9.2,
+    "relVol": 1.1,
     "high52w": 239.24,
     "low52w": 165.17,
-    "rangePos": 86.0,
+    "rangePos": 76.0,
     "series": [
       {
         "d": "2025-10-24",
@@ -235,32 +235,39 @@
         "c": 229.28
       },
       {
-        "d": "2026-10-13",
-        "c": 228.52
+        "d": "2026-10-14",
+        "c": 221.3
       }
     ],
-    "signals": [],
+    "signals": [
+      {
+        "type": "lose_sma50",
+        "asof": "2026-10-14",
+        "label": "Lost the 50-day average",
+        "dir": "bear"
+      }
+    ],
     "nextEarnings": null,
     "score": {
-      "label": "Strong Buy",
-      "buys": 5,
-      "sells": 1,
+      "label": "Buy",
+      "buys": 4,
+      "sells": 2,
       "holds": 1,
-      "ratio": 0.571
+      "ratio": 0.286
     }
   },
   "summary": {
-    "trades": 182,
+    "trades": 183,
     "members": 34,
     "congress": 33,
     "executive": 1,
     "whoLabel": "33 members of Congress and 1 executive-branch filer",
     "buys": 117,
-    "sells": 65,
+    "sells": 66,
     "other": 0,
     "firstTx": "2024-01-02",
-    "lastTx": "2026-08-18",
-    "lastFiling": "2026-09-10",
+    "lastTx": "2026-08-31",
+    "lastFiling": "2026-10-14",
     "estBuyLabel": "$11.2M",
     "estSellLabel": "$10.7M",
     "pctLate": 16
@@ -311,6 +318,17 @@
       "hasPage": false
     },
     {
+      "name": "Daniel Meuser",
+      "slug": "daniel-meuser",
+      "party": "R",
+      "chamber": "House",
+      "trades": 10,
+      "buys": 0,
+      "sells": 10,
+      "estLabel": "$1.6M",
+      "hasPage": false
+    },
+    {
       "name": "Gilbert Ray Cisneros, Jr.",
       "slug": "gilbert-ray-cisneros-jr",
       "party": "D",
@@ -320,17 +338,6 @@
       "sells": 5,
       "estLabel": "$129K",
       "hasPage": true
-    },
-    {
-      "name": "Daniel Meuser",
-      "slug": "daniel-meuser",
-      "party": "R",
-      "chamber": "House",
-      "trades": 9,
-      "buys": 0,
-      "sells": 9,
-      "estLabel": "$1.5M",
-      "hasPage": false
     },
     {
       "name": "Jared Moskowitz",
@@ -378,6 +385,18 @@
     }
   ],
   "trades": [
+    {
+      "member": "Daniel Meuser",
+      "memberSlug": "daniel-meuser",
+      "hasPage": false,
+      "party": "R",
+      "side": "SELL",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-08-31",
+      "filedDate": "2026-10-14",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035487.pdf"
+    },
     {
       "member": "Gilbert Ray Cisneros, Jr.",
       "memberSlug": "gilbert-ray-cisneros-jr",
@@ -665,33 +684,21 @@
       "filedDate": "2026-07-21",
       "daysLate": 71,
       "sourceUrl": "https://efdsearch.senate.gov/search/view/ptr/fda235b3-bad7-4637-8fa1-053f354d929c/"
-    },
-    {
-      "member": "Daniel Meuser",
-      "memberSlug": "daniel-meuser",
-      "hasPage": false,
-      "party": "R",
-      "side": "SELL",
-      "amountBucket": "$1K – $15K",
-      "txDate": "2026-03-25",
-      "filedDate": "2026-04-21",
-      "daysLate": 0,
-      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20034359.pdf"
     }
   ],
   "tradesShown": 25,
   "faq": [
     {
       "q": "Who in Congress has traded NVDA stock?",
-      "a": "33 members of Congress and 1 executive-branch filer have disclosed 182 NVDA trades since January 2024. The most active is Cleo Fields, with 47 trades, followed by Robert P. Bresnahan, Jr. and Sheldon Whitehouse. Each trade on this page links to the official filing it came from."
+      "a": "33 members of Congress and 1 executive-branch filer have disclosed 183 NVDA trades since January 2024. The most active is Cleo Fields, with 47 trades, followed by Robert P. Bresnahan, Jr. and Sheldon Whitehouse. Each trade on this page links to the official filing it came from."
     },
     {
       "q": "Is Congress buying or selling NVDA?",
-      "a": "Of the 182 disclosed NVDA trades, 117 were buys and 65 were sells. By the midpoint of each filed amount bracket, the buying comes to about $11.2M and the selling to about $10.7M. Filings disclose brackets, never exact amounts, so these totals are estimates."
+      "a": "Of the 183 disclosed NVDA trades, 117 were buys and 66 were sells. By the midpoint of each filed amount bracket, the buying comes to about $11.2M and the selling to about $10.7M. Filings disclose brackets, never exact amounts, so these totals are estimates."
     },
     {
       "q": "How late are NVDA trades disclosed?",
-      "a": "16% of the disclosed NVDA trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Aug 18, 2026, and the newest filing arrived on Sep 10, 2026."
+      "a": "16% of the disclosed NVDA trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Aug 31, 2026, and the newest filing arrived on Oct 14, 2026."
     }
   ]
 }

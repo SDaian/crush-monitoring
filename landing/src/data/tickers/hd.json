@@ -12,23 +12,23 @@
   },
   "indexable": true,
   "technical": {
-    "asOf": "2026-10-13",
-    "price": 293.92,
-    "chg1d": 1.14,
-    "chg1w": 2.52,
-    "chg1m": -5.45,
-    "rsi14": 45.2,
-    "sma50": 315.93,
-    "sma200": 336.94,
-    "ema8": 290.43,
-    "ema21": 295.06,
-    "emaGap": -1.57,
-    "vsSma50": -7.0,
-    "vsSma200": -12.8,
-    "relVol": 0.81,
+    "asOf": "2026-10-14",
+    "price": 295.51,
+    "chg1d": 0.54,
+    "chg1w": 3.41,
+    "chg1m": -3.26,
+    "rsi14": 47.0,
+    "sma50": 314.87,
+    "sma200": 336.66,
+    "ema8": 291.56,
+    "ema21": 295.1,
+    "emaGap": -1.2,
+    "vsSma50": -6.1,
+    "vsSma200": -12.2,
+    "relVol": 0.82,
     "high52w": 391.9,
     "low52w": 281.15,
-    "rangePos": 12.0,
+    "rangePos": 13.0,
     "series": [
       {
         "d": "2025-10-24",
@@ -235,8 +235,8 @@
         "c": 290.74
       },
       {
-        "d": "2026-10-13",
-        "c": 293.92
+        "d": "2026-10-14",
+        "c": 295.51
       }
     ],
     "signals": [],
@@ -250,19 +250,19 @@
     }
   },
   "summary": {
-    "trades": 88,
+    "trades": 89,
     "members": 25,
     "congress": 24,
     "executive": 1,
     "whoLabel": "24 members of Congress and 1 executive-branch filer",
     "buys": 46,
-    "sells": 42,
+    "sells": 43,
     "other": 0,
     "firstTx": "2023-03-15",
     "lastTx": "2026-10-08",
-    "lastFiling": "2026-10-12",
+    "lastFiling": "2026-10-13",
     "estBuyLabel": "$466K",
-    "estSellLabel": "$949K",
+    "estSellLabel": "$957K",
     "pctLate": 10
   },
   "topMembers": [
@@ -271,10 +271,10 @@
       "slug": "kevin-hern",
       "party": "R",
       "chamber": "House",
-      "trades": 10,
+      "trades": 11,
       "buys": 1,
-      "sells": 9,
-      "estLabel": "$270K",
+      "sells": 10,
+      "estLabel": "$278K",
       "hasPage": false
     },
     {
@@ -389,6 +389,18 @@
       "filedDate": "2026-10-12",
       "daysLate": 0,
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035635.pdf"
+    },
+    {
+      "member": "Kevin Hern",
+      "memberSlug": "kevin-hern",
+      "hasPage": false,
+      "party": "R",
+      "side": "SELL",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-09-23",
+      "filedDate": "2026-10-13",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035588.pdf"
     },
     {
       "member": "David J. Taylor",
@@ -665,33 +677,21 @@
       "filedDate": "2026-05-07",
       "daysLate": 0,
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20034489.pdf"
-    },
-    {
-      "member": "Josh Gottheimer",
-      "memberSlug": "josh-gottheimer",
-      "hasPage": true,
-      "party": "D",
-      "side": "SELL",
-      "amountBucket": "$15K – $50K",
-      "txDate": "2026-04-09",
-      "filedDate": "2026-05-19",
-      "daysLate": 0,
-      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20034585.pdf"
     }
   ],
   "tradesShown": 25,
   "faq": [
     {
       "q": "Who in Congress has traded HD stock?",
-      "a": "24 members of Congress and 1 executive-branch filer have disclosed 88 HD trades since March 2023. The most active is Kevin Hern, with 10 trades, followed by David J. Taylor and Lloyd Doggett. Each trade on this page links to the official filing it came from."
+      "a": "24 members of Congress and 1 executive-branch filer have disclosed 89 HD trades since March 2023. The most active is Kevin Hern, with 11 trades, followed by David J. Taylor and Lloyd Doggett. Each trade on this page links to the official filing it came from."
     },
     {
       "q": "Is Congress buying or selling HD?",
-      "a": "Of the 88 disclosed HD trades, 46 were buys and 42 were sells. By the midpoint of each filed amount bracket, the buying comes to about $466K and the selling to about $949K. Filings disclose brackets, never exact amounts, so these totals are estimates."
+      "a": "Of the 89 disclosed HD trades, 46 were buys and 43 were sells. By the midpoint of each filed amount bracket, the buying comes to about $466K and the selling to about $957K. Filings disclose brackets, never exact amounts, so these totals are estimates."
     },
     {
       "q": "How late are HD trades disclosed?",
-      "a": "10% of the disclosed HD trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Oct 8, 2026, and the newest filing arrived on Oct 12, 2026."
+      "a": "10% of the disclosed HD trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Oct 8, 2026, and the newest filing arrived on Oct 13, 2026."
     }
   ]
 }
