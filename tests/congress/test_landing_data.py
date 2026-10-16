@@ -1048,6 +1048,18 @@ class TestTechnicalBlock(unittest.TestCase):
         self.assertEqual(len(b["series"]), 1)
         self.assertEqual(len(b["signals"]), 1)
 
+    def test_panel_carries_each_reading_s_vote(self):
+        # The page tags every card from this map; it must be the shared
+        # function's output and agree with the headline tally.
+        b = ld.technical_block("NVDA", dict(self.READINGS, NVDA=dict(
+            self.READINGS["NVDA"], ema8=210.0, ema21=205.0)))
+        self.assertEqual(set(b["votes"]), {"ema_cross", "vs_sma50", "vs_sma200",
+                                           "sma50_vs_200", "rsi", "chg_1m",
+                                           "chg_1w"})
+        cast = [v["vote"] for v in b["votes"].values()]
+        self.assertEqual(b["score"]["buys"], cast.count(1))
+        self.assertEqual(b["score"]["sells"], cast.count(-1))
+
     def test_unfeatured_ticker_has_no_panel(self):
         self.assertIsNone(ld.technical_block("LMT", self.READINGS))
         self.assertIsNone(ld.technical_block("NVDA", {}))

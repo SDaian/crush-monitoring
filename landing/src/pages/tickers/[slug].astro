@@ -143,22 +143,48 @@ function buildChart(w: number, h: number, fs: number) {
 const chartDesk = buildChart(1000, 300, 14);
 const chartMob = buildChart(520, 340, 19);
 
+const maGap =
+  tech && tech.sma50 != null && tech.sma200
+    ? Math.round((tech.sma50 / tech.sma200 - 1) * 10000) / 100
+    : null;
+// The vote tag under each reading, from indicators.votes via the payload:
+// the same function the label counts, so a tag and the tally cannot disagree.
+// A reading that casts no vote says so, so the seven that do are countable.
+const voteTag = (key?: string) => {
+  if (!key) return { text: "No vote", cls: "none" };
+  const v = tech?.votes?.[key];
+  if (!v) return null;
+  if (v.muted) {
+    const side = tech.price > tech.sma200 ? "above" : "below";
+    return { mark: "●", text: "Hold vote", cls: "", note: `muted: price is ${side} its 200-day` };
+  }
+  return v.vote > 0
+    ? { mark: "▲", text: "Buy vote", cls: "up" }
+    : v.vote < 0
+      ? { mark: "▼", text: "Sell vote", cls: "down" }
+      : { mark: "●", text: "Hold vote", cls: "" };
+};
 const cells = tech
   ? [
       { k: "Price", v: num(tech.price), x: `as of ${tech.asOf}` },
       { k: "1 day", v: signed(tech.chg1d), cls: dirClass(tech.chg1d) },
-      { k: "1 week", v: signed(tech.chg1w), cls: dirClass(tech.chg1w) },
-      { k: "1 month", v: signed(tech.chg1m), cls: dirClass(tech.chg1m) },
-      { k: "RSI (14)", v: num(tech.rsi14, "", 1),
+      { k: "1 week", v: signed(tech.chg1w), cls: dirClass(tech.chg1w), vote: "chg_1w" },
+      { k: "1 month", v: signed(tech.chg1m), cls: dirClass(tech.chg1m), vote: "chg_1m" },
+      { k: "RSI (14)", v: num(tech.rsi14, "", 1), vote: "rsi",
         x: tech.rsi14 == null ? "" : tech.rsi14 < 30 ? "oversold" : tech.rsi14 > 70 ? "overbought" : "neutral" },
       // The 8/21 EMA pair votes in the score, so it has to be visible: the
       // panel's promise is a tally of the readings shown, not of hidden ones.
-      { k: "8d vs 21d EMA", v: signed(tech.emaGap), cls: dirClass(tech.emaGap),
+      { k: "8d vs 21d EMA", v: signed(tech.emaGap), cls: dirClass(tech.emaGap), vote: "ema_cross",
         x: tech.ema8 == null ? "" : `${num(tech.ema8)} vs ${num(tech.ema21)}` },
-      { k: "vs 50-day", v: signed(tech.vsSma50), cls: dirClass(tech.vsSma50),
+      { k: "vs 50-day", v: signed(tech.vsSma50), cls: dirClass(tech.vsSma50), vote: "vs_sma50",
         x: `avg ${num(tech.sma50)}` },
-      { k: "vs 200-day", v: signed(tech.vsSma200), cls: dirClass(tech.vsSma200),
+      { k: "vs 200-day", v: signed(tech.vsSma200), cls: dirClass(tech.vsSma200), vote: "vs_sma200",
         x: `avg ${num(tech.sma200)}` },
+      // The 50-vs-200 vote had no reading of its own: it could only be worked
+      // out from two other cards. Every vote gets a card, so the tally is of
+      // what the page shows.
+      { k: "50-day vs 200-day", v: signed(maGap), cls: dirClass(maGap), vote: "sma50_vs_200",
+        x: tech.sma50 == null || tech.sma200 == null ? "" : `${num(tech.sma50)} vs ${num(tech.sma200)}` },
       { k: "52-week range", v: tech.rangePos == null ? "—" : `${tech.rangePos}%`,
         x: `${num(tech.low52w)} – ${num(tech.high52w)}` },
       { k: "Rel. volume", v: tech.relVol == null ? "—" : `${num(tech.relVol)}x`,
@@ -514,14 +540,23 @@ const schema = [
             </figure>
           )}
 
-          <div class="mt-7 grid gap-3 [grid-template-columns:repeat(auto-fit,minmax(11rem,1fr))]">
-            {cells.map((c: any) => (
-              <div class="indcell">
-                <div class="k">{c.k}</div>
-                <div class={`v ${c.cls ?? ""}`}>{c.v}</div>
-                {c.x && <div class="x">{c.x}</div>}
-              </div>
-            ))}
+          <div class="mt-7 grid gap-3 [grid-template-columns:repeat(auto-fit,minmax(9rem,1fr))]">
+            {cells.map((c: any) => {
+              const tag = voteTag(c.vote);
+              return (
+                <div class="indcell">
+                  <div class="k">{c.k}</div>
+                  <div class={`v ${c.cls ?? ""}`}>{c.v}</div>
+                  {c.x && <div class="x">{c.x}</div>}
+                  {tag && (
+                    <div class={`vt ${tag.cls}`}>
+                      {tag.mark && <span aria-hidden="true">{tag.mark} </span>}{tag.text}
+                      {tag.note && <span class="vtn">{tag.note}</span>}
+                    </div>
+                  )}
+                </div>
+              );
+            })}
           </div>
 
           <div class="mt-7 border border-rule p-5">
@@ -534,10 +569,10 @@ const schema = [
               </span>
             </p>
             <p class="fineprint mt-3 max-w-[80ch]">
-              A rule-based tally of the indicators shown above — each casts one
-              buy/hold/sell vote (the 8-day vs 21-day trend, confirmed against
-              the 200-day; price vs. its 50-day and 200-day averages; the
-              50-vs-200 cross; RSI; and the 1-week and 1-month changes). It is
+              A rule-based tally of the seven readings tagged above — each casts
+              one buy/hold/sell vote (the 8-day vs 21-day trend, confirmed against
+              the 200-day; price vs. its 50-day and 200-day averages; the 50-day
+              vs the 200-day; RSI; and the 1-week and 1-month changes). It is
               reproducible and blind to fundamentals, news and your own goals.
               <b class="text-ink"> Not a recommendation.</b>
             </p>
@@ -1021,6 +1056,39 @@ const schema = [
     font-size: 1.15rem;
     font-weight: 700;
     margin-top: 0.25rem;
+  }
+  .indcell {
+    display: flex;
+    flex-direction: column;
+  }
+  /* The vote tag sits at the foot of the card, so tags line up across a row
+     whatever the reading above them holds. */
+  .indcell .vt {
+    margin-top: auto;
+    padding-top: 0.5rem;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--color-ink-soft);
+  }
+  .indcell .vt.up {
+    color: var(--color-buy);
+  }
+  .indcell .vt.down {
+    color: var(--color-sell);
+  }
+  /* A reading that does not vote steps back, so the seven that do read as
+     the tally. */
+  .indcell .vt.none {
+    font-weight: 400;
+  }
+  .indcell .vt .vtn {
+    display: block;
+    font-weight: 400;
+    letter-spacing: 0;
+    text-transform: none;
   }
   .indcell .x {
     font-family: var(--font-mono);

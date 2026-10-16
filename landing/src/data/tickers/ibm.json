@@ -254,6 +254,36 @@
       "sells": 3,
       "holds": 2,
       "ratio": -0.143
+    },
+    "votes": {
+      "ema_cross": {
+        "vote": 0,
+        "muted": true
+      },
+      "vs_sma50": {
+        "vote": 1,
+        "muted": false
+      },
+      "vs_sma200": {
+        "vote": -1,
+        "muted": false
+      },
+      "sma50_vs_200": {
+        "vote": -1,
+        "muted": false
+      },
+      "rsi": {
+        "vote": 0,
+        "muted": false
+      },
+      "chg_1m": {
+        "vote": -1,
+        "muted": false
+      },
+      "chg_1w": {
+        "vote": 1,
+        "muted": false
+      }
     }
   },
   "summary": {

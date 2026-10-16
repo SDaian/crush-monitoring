@@ -254,6 +254,45 @@ class TestAgreement(unittest.TestCase):
         self.assertEqual((a["agree"], a["votes"]), (6, 7))
 
 
+class TestVotes(unittest.TestCase):
+    """indicators.votes is where every vote is decided; ai_score only counts.
+    The ticker page tags each reading from it, so the two must agree."""
+
+    # INTC on 2026-10-15: a bearish 8/21 pair while the price is above its
+    # 200-day, which the macro filter mutes to hold.
+    INTC = {"price": 95.37, "ema8": 103.53, "ema21": 107.57, "sma50": 103.37,
+            "sma200": 84.29, "rsi14": 35.6, "chg_1m": -5.62, "chg_1w": -10.94}
+
+    def test_one_vote_per_check_with_stable_keys(self):
+        v = {x["key"]: x["vote"] for x in ind.votes(self.INTC)}
+        self.assertEqual(v, {"ema_cross": 0, "vs_sma50": -1, "vs_sma200": 1,
+                             "sma50_vs_200": 1, "rsi": 0, "chg_1m": -1,
+                             "chg_1w": -1})
+
+    def test_a_filtered_ema_pair_is_marked_muted(self):
+        by = {x["key"]: x for x in ind.votes(self.INTC)}
+        self.assertTrue(by["ema_cross"]["muted"])
+        # A genuinely flat RSI hold is not "muted".
+        self.assertFalse(by["rsi"]["muted"])
+        # The same pair agreeing with the 200-day is a plain vote.
+        agreeing = dict(self.INTC, ema8=110.0)
+        e = next(x for x in ind.votes(agreeing) if x["key"] == "ema_cross")
+        self.assertEqual((e["vote"], e["muted"]), (1, False))
+
+    def test_the_score_counts_exactly_these_votes(self):
+        sc = ind.ai_score(self.INTC)
+        cast = [x["vote"] for x in ind.votes(self.INTC)]
+        self.assertEqual((sc["buys"], sc["holds"], sc["sells"]),
+                         (cast.count(1), cast.count(0), cast.count(-1)))
+        self.assertEqual(sc["label"], "Hold")
+
+    def test_missing_inputs_cast_no_vote_rather_than_a_hold(self):
+        short = {"price": 10, "ema8": 11, "ema21": 10, "rsi14": 50,
+                 "chg_1m": 1, "chg_1w": 1}
+        keys = [x["key"] for x in ind.votes(short)]
+        self.assertEqual(keys, ["ema_cross", "rsi", "chg_1m", "chg_1w"])
+
+
 class TestAiScore(unittest.TestCase):
     def test_all_bullish_strong_buy(self):
         # 8 over 21 confirmed by the 200-day, price above every MA, golden

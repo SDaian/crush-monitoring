@@ -1408,8 +1408,9 @@ def technical_block(ticker: str, readings: dict) -> dict | None:
     rec = readings.get(ticker)
     if not rec:
         return None
-    from .indicators import ai_score
+    from .indicators import ai_score, votes
 
+    score = ai_score(rec)
     return {
         "asOf": rec.get("asof_date"),
         "price": rec.get("price"),
@@ -1431,7 +1432,12 @@ def technical_block(ticker: str, readings: dict) -> dict | None:
         "series": rec.get("series") or [],
         "signals": rec.get("signals") or [],
         "nextEarnings": rec.get("nextEarnings"),
-        "score": ai_score(rec),
+        "score": score,
+        # Each reading's own vote, keyed as in indicators.votes, so the page
+        # tags every card with the vote it cast (and says when the 200-day
+        # muted the EMA pair). Counted by the same function as the label.
+        "votes": {v["key"]: {"vote": v["vote"], "muted": v["muted"]}
+                  for v in votes(rec)},
     }
 
 
