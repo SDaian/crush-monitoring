@@ -250,18 +250,18 @@
     }
   },
   "summary": {
-    "trades": 35,
+    "trades": 36,
     "members": 15,
     "congress": 14,
     "executive": 1,
     "whoLabel": "14 members of Congress and 1 executive-branch filer",
-    "buys": 18,
+    "buys": 19,
     "sells": 17,
     "other": 0,
     "firstTx": "2024-10-23",
-    "lastTx": "2026-08-14",
-    "lastFiling": "2026-08-20",
-    "estBuyLabel": "$309K",
+    "lastTx": "2026-10-09",
+    "lastFiling": "2026-10-15",
+    "estBuyLabel": "$317K",
     "estSellLabel": "$326K",
     "pctLate": 17
   },
@@ -271,10 +271,10 @@
       "slug": "david-j-taylor",
       "party": "R",
       "chamber": "House",
-      "trades": 10,
-      "buys": 8,
+      "trades": 11,
+      "buys": 9,
       "sells": 2,
-      "estLabel": "$80K",
+      "estLabel": "$88K",
       "hasPage": false
     },
     {
@@ -378,6 +378,18 @@
     }
   ],
   "trades": [
+    {
+      "member": "David J. Taylor",
+      "memberSlug": "david-j-taylor",
+      "hasPage": false,
+      "party": "R",
+      "side": "BUY",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-10-09",
+      "filedDate": "2026-10-15",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035660.pdf"
+    },
     {
       "member": "Tim Moore",
       "memberSlug": "tim-moore",
@@ -665,33 +677,21 @@
       "filedDate": "2025-09-02",
       "daysLate": 1,
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20030782.pdf"
-    },
-    {
-      "member": "Lisa C. McClain",
-      "memberSlug": "lisa-c-mcclain",
-      "hasPage": false,
-      "party": "R",
-      "side": "SELL",
-      "amountBucket": "$1K – $15K",
-      "txDate": "2025-07-10",
-      "filedDate": "2025-08-13",
-      "daysLate": 0,
-      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20030891.pdf"
     }
   ],
   "tradesShown": 25,
   "faq": [
     {
       "q": "Who in Congress has traded T stock?",
-      "a": "14 members of Congress and 1 executive-branch filer have disclosed 35 T trades since October 2024. The most active is David J. Taylor, with 10 trades, followed by Tim Moore and Julia Letlow. Each trade on this page links to the official filing it came from."
+      "a": "14 members of Congress and 1 executive-branch filer have disclosed 36 T trades since October 2024. The most active is David J. Taylor, with 11 trades, followed by Tim Moore and Julia Letlow. Each trade on this page links to the official filing it came from."
     },
     {
       "q": "Is Congress buying or selling T?",
-      "a": "Of the 35 disclosed T trades, 18 were buys and 17 were sells. By the midpoint of each filed amount bracket, the buying comes to about $309K and the selling to about $326K. Filings disclose brackets, never exact amounts, so these totals are estimates."
+      "a": "Of the 36 disclosed T trades, 19 were buys and 17 were sells. By the midpoint of each filed amount bracket, the buying comes to about $317K and the selling to about $326K. Filings disclose brackets, never exact amounts, so these totals are estimates."
     },
     {
       "q": "How late are T trades disclosed?",
-      "a": "17% of the disclosed T trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Aug 14, 2026, and the newest filing arrived on Aug 20, 2026."
+      "a": "17% of the disclosed T trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Oct 9, 2026, and the newest filing arrived on Oct 15, 2026."
     }
   ]
 }

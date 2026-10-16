@@ -265,12 +265,12 @@
       "ticker": "PG",
       "aliases": [],
       "company": "Procter & Gamble Company",
-      "trades": 62,
+      "trades": 63,
       "members": 28,
       "buys": 29,
-      "sells": 33,
-      "lastTx": "2026-09-08",
-      "lastFiling": "2026-09-17",
+      "sells": 34,
+      "lastTx": "2026-10-12",
+      "lastFiling": "2026-10-15",
       "indexable": true,
       "industry": {
         "key": "consumer",
@@ -788,6 +788,23 @@
       }
     },
     {
+      "slug": "t",
+      "ticker": "T",
+      "aliases": [],
+      "company": "AT&T Inc.",
+      "trades": 36,
+      "members": 15,
+      "buys": 19,
+      "sells": 17,
+      "lastTx": "2026-10-09",
+      "lastFiling": "2026-10-15",
+      "indexable": true,
+      "industry": {
+        "key": "telecom",
+        "label": "Telecom & media"
+      }
+    },
+    {
       "slug": "ttd",
       "ticker": "TTD",
       "aliases": [],
@@ -887,23 +904,6 @@
       "industry": {
         "key": "defense",
         "label": "Defense & aerospace"
-      }
-    },
-    {
-      "slug": "t",
-      "ticker": "T",
-      "aliases": [],
-      "company": "AT&T Inc.",
-      "trades": 35,
-      "members": 15,
-      "buys": 18,
-      "sells": 17,
-      "lastTx": "2026-08-14",
-      "lastFiling": "2026-08-20",
-      "indexable": true,
-      "industry": {
-        "key": "telecom",
-        "label": "Telecom & media"
       }
     },
     {
