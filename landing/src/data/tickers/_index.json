@@ -163,12 +163,12 @@
       "ticker": "BRK.B",
       "aliases": [],
       "company": "Berkshire Hathaway Inc. New",
-      "trades": 69,
+      "trades": 70,
       "members": 22,
-      "buys": 34,
+      "buys": 35,
       "sells": 35,
       "lastTx": "2026-09-24",
-      "lastFiling": "2026-10-07",
+      "lastFiling": "2026-10-14",
       "indexable": true,
       "industry": {
         "key": "finance",
@@ -1009,6 +1009,23 @@
       }
     },
     {
+      "slug": "cost",
+      "ticker": "COST",
+      "aliases": [],
+      "company": "Costco Wholesale Corporation",
+      "trades": 33,
+      "members": 16,
+      "buys": 16,
+      "sells": 17,
+      "lastTx": "2026-09-18",
+      "lastFiling": "2026-10-14",
+      "indexable": true,
+      "industry": {
+        "key": "consumer",
+        "label": "Consumer & retail"
+      }
+    },
+    {
       "slug": "zts",
       "ticker": "ZTS",
       "aliases": [],
@@ -1176,23 +1193,6 @@
       "industry": {
         "key": "tech",
         "label": "Technology"
-      }
-    },
-    {
-      "slug": "cost",
-      "ticker": "COST",
-      "aliases": [],
-      "company": "Costco Wholesale Corporation",
-      "trades": 32,
-      "members": 15,
-      "buys": 16,
-      "sells": 16,
-      "lastTx": "2026-07-30",
-      "lastFiling": "2026-08-14",
-      "indexable": true,
-      "industry": {
-        "key": "consumer",
-        "label": "Consumer & retail"
       }
     },
     {
