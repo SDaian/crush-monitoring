@@ -156,13 +156,13 @@ const voteTag = (key?: string) => {
   if (!v) return null;
   if (v.muted) {
     const side = tech.price > tech.sma200 ? "above" : "below";
-    return { mark: "●", text: "Hold vote", cls: "", note: `muted: price is ${side} its 200-day` };
+    return { mark: "●", text: "Hold", cls: "", note: `Muted: price is ${side} its 200-day` };
   }
   return v.vote > 0
-    ? { mark: "▲", text: "Buy vote", cls: "up" }
+    ? { mark: "▲", text: "Buy", cls: "up" }
     : v.vote < 0
-      ? { mark: "▼", text: "Sell vote", cls: "down" }
-      : { mark: "●", text: "Hold vote", cls: "" };
+      ? { mark: "▼", text: "Sell", cls: "down" }
+      : { mark: "●", text: "Hold", cls: "" };
 };
 const cells = tech
   ? [
@@ -174,7 +174,7 @@ const cells = tech
         x: tech.rsi14 == null ? "" : tech.rsi14 < 30 ? "oversold" : tech.rsi14 > 70 ? "overbought" : "neutral" },
       // The 8/21 EMA pair votes in the score, so it has to be visible: the
       // panel's promise is a tally of the readings shown, not of hidden ones.
-      { k: "8d vs 21d EMA", v: signed(tech.emaGap), cls: dirClass(tech.emaGap), vote: "ema_cross",
+      { k: "EMA 8/21", v: signed(tech.emaGap), cls: dirClass(tech.emaGap), vote: "ema_cross",
         x: tech.ema8 == null ? "" : `${num(tech.ema8)} vs ${num(tech.ema21)}` },
       { k: "vs 50-day", v: signed(tech.vsSma50), cls: dirClass(tech.vsSma50), vote: "vs_sma50",
         x: `avg ${num(tech.sma50)}` },
@@ -183,11 +183,11 @@ const cells = tech
       // The 50-vs-200 vote had no reading of its own: it could only be worked
       // out from two other cards. Every vote gets a card, so the tally is of
       // what the page shows.
-      { k: "50-day vs 200-day", v: signed(maGap), cls: dirClass(maGap), vote: "sma50_vs_200",
+      { k: "50d vs 200d", v: signed(maGap), cls: dirClass(maGap), vote: "sma50_vs_200",
         x: tech.sma50 == null || tech.sma200 == null ? "" : `${num(tech.sma50)} vs ${num(tech.sma200)}` },
-      { k: "52-week range", v: tech.rangePos == null ? "—" : `${tech.rangePos}%`,
+      { k: "52w range", v: tech.rangePos == null ? "—" : `${tech.rangePos}%`,
         x: `${num(tech.low52w)} – ${num(tech.high52w)}` },
-      { k: "Rel. volume", v: tech.relVol == null ? "—" : `${num(tech.relVol)}x`,
+      { k: "Rel. vol", v: tech.relVol == null ? "—" : `${num(tech.relVol)}x`,
         x: "vs 20-day average" },
     ]
   : [];
@@ -545,15 +545,20 @@ const schema = [
               const tag = voteTag(c.vote);
               return (
                 <div class="indcell">
-                  <div class="k">{c.k}</div>
+                  {/* The vote sits top-right, beside the reading's name, so it
+                      is the first thing read with it. */}
+                  <div class="khead">
+                    <div class="k">{c.k}</div>
+                    {tag && (
+                      <div class={`vt ${tag.cls}`}>
+                        {tag.mark && <span aria-hidden="true">{tag.mark} </span>}
+                        {tag.text}{tag.mark && <span class="sr-only"> vote</span>}
+                      </div>
+                    )}
+                  </div>
                   <div class={`v ${c.cls ?? ""}`}>{c.v}</div>
                   {c.x && <div class="x">{c.x}</div>}
-                  {tag && (
-                    <div class={`vt ${tag.cls}`}>
-                      {tag.mark && <span aria-hidden="true">{tag.mark} </span>}{tag.text}
-                      {tag.note && <span class="vtn">{tag.note}</span>}
-                    </div>
-                  )}
+                  {tag?.note && <div class="vtn">{tag.note}</div>}
                 </div>
               );
             })}
@@ -1057,21 +1062,31 @@ const schema = [
     font-weight: 700;
     margin-top: 0.25rem;
   }
-  .indcell {
+  /* Name left, vote right. When a long name leaves no room on a narrow
+     card, the vote wraps to its own line and stays right-aligned. */
+  .indcell .khead {
     display: flex;
-    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.15rem 0.5rem;
   }
-  /* The vote tag sits at the foot of the card, so tags line up across a row
-     whatever the reading above them holds. */
   .indcell .vt {
-    margin-top: auto;
-    padding-top: 0.5rem;
+    margin-left: auto;
+    white-space: nowrap;
     font-family: var(--font-mono);
     font-size: 0.75rem;
     font-weight: 600;
     letter-spacing: 0.06em;
     text-transform: uppercase;
     color: var(--color-ink-soft);
+  }
+  /* Two-up cards on a 360px phone are ~4px short of fitting a name and its
+     vote on one line; a little less side padding keeps the vote top-right. */
+  @media (max-width: 26rem) {
+    .indcell {
+      padding-inline: 0.7rem;
+    }
   }
   .indcell .vt.up {
     color: var(--color-buy);
@@ -1084,11 +1099,11 @@ const schema = [
   .indcell .vt.none {
     font-weight: 400;
   }
-  .indcell .vt .vtn {
-    display: block;
-    font-weight: 400;
-    letter-spacing: 0;
-    text-transform: none;
+  .indcell .vtn {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--color-ink-soft);
+    margin-top: 0.35rem;
   }
   .indcell .x {
     font-family: var(--font-mono);

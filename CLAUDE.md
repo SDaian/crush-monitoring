@@ -447,8 +447,10 @@ sites. Full details in `congress/README.md`. Conventions:
     decided once, in `indicators.votes` (one `{key, vote, muted}` per check);
     `ai_score` only counts them, and `technical_block` ships the same map, so
     a card's tag and the headline can never disagree. Each of the seven
-    voting cards carries "Buy / Sell / Hold vote", the 8/21 pair says when
-    the 200-day muted it (a red gap that votes hold reads as a bug
+    voting cards carries "Buy / Sell / Hold" in its top-right corner, beside
+    the reading's name (names are kept short — "EMA 8/21", "50d vs 200d" —
+    so the vote shares their line down to a 320px phone), the 8/21 pair
+    says when the 200-day muted it (a red gap that votes hold reads as a bug
     otherwise), and the four readings that do not vote say "No vote". The
     50-vs-200 vote has its own card for the same reason: the panel promises
     a tally of what it shows.
