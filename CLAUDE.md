@@ -443,6 +443,15 @@ sites. Full details in `congress/README.md`. Conventions:
     The email, the GitHub issue and `/report` all render it from the one
     `build_report` payload, and the footnote on each states what the fraction
     counts and what ★ means — a bare "5/7" makes the reader guess.
+  - **Every reading on the ticker page says what it voted.** The votes are
+    decided once, in `indicators.votes` (one `{key, vote, muted}` per check);
+    `ai_score` only counts them, and `technical_block` ships the same map, so
+    a card's tag and the headline can never disagree. Each of the seven
+    voting cards carries "Buy / Sell / Hold vote", the 8/21 pair says when
+    the 200-day muted it (a red gap that votes hold reads as a bug
+    otherwise), and the four readings that do not vote say "No vote". The
+    50-vs-200 vote has its own card for the same reason: the panel promises
+    a tally of what it shows.
   - **Changing the vote set bumps `indicators.SCORE_VERSION`.** A changed set
     moves many ratings on one morning for a reason that is not the market, so
     `daily_report.main` drops the flip baseline for the single run that first

@@ -317,6 +317,62 @@ def ema_cross_vote(t: dict) -> int | None:
     return raw
 
 
+def votes(t: dict) -> list[dict]:
+    """Every vote the score counts, one entry per check that could be cast.
+
+    Each entry is ``{"key", "vote", "muted"}``: ``vote`` is +1 / 0 / -1, and
+    ``muted`` is True only for the 8/21 EMA pair when its 200-day filter
+    turned a directional reading into a hold. The keys are stable names the
+    ticker page uses to tag each reading with the vote it cast:
+
+      ema_cross, vs_sma50, vs_sma200, sma50_vs_200, rsi, chg_1m, chg_1w
+
+    This is the ONE place the votes are decided. ``ai_score`` only counts
+    them, so a reading's tag and the headline label can never disagree.
+    A check whose inputs are missing is absent, not a hold.
+    """
+    def cmp(x, y):
+        return 1 if x > y else -1 if x < y else 0
+
+    out: list[dict] = []
+
+    def cast(key: str, vote: int, muted: bool = False) -> None:
+        out.append({"key": key, "vote": vote, "muted": muted})
+
+    p = t.get("price")
+    cross = ema_cross_vote(t)
+    if cross is not None:
+        raw = cmp(t["ema8"], t["ema21"])
+        cast("ema_cross", cross, muted=cross == 0 and raw != 0)
+    if p is not None and t.get("sma50") is not None:
+        cast("vs_sma50", cmp(p, t["sma50"]))
+    if p is not None and t.get("sma200") is not None:
+        cast("vs_sma200", cmp(p, t["sma200"]))
+    if t.get("sma50") is not None and t.get("sma200") is not None:
+        cast("sma50_vs_200", cmp(t["sma50"], t["sma200"]))
+    r = t.get("rsi14")
+    if r is not None:
+        cast("rsi", 1 if r < 30 else -1 if r > 70 else 0)
+    if t.get("chg_1m") is not None:
+        cast("chg_1m", cmp(t["chg_1m"], 0))
+    if t.get("chg_1w") is not None:
+        cast("chg_1w", cmp(t["chg_1w"], 0))
+    return out
+
+
+def label_for(ratio: float) -> str:
+    """The headline read for a net vote ratio (buys - sells) / votes cast."""
+    if ratio >= 0.5:
+        return "Strong Buy"
+    if ratio >= 0.15:
+        return "Buy"
+    if ratio <= -0.5:
+        return "Strong Sell"
+    if ratio <= -0.15:
+        return "Sell"
+    return "Hold"
+
+
 def ai_score(t: dict) -> dict:
     """Mechanical buy/hold/sell tally from one ticker's indicators.
 
@@ -332,45 +388,14 @@ def ai_score(t: dict) -> dict:
     compressing the scale until Hold is rare and "Strong Buy" stops meaning
     broad agreement. Bump SCORE_VERSION whenever this set changes.
     """
-    def cmp(x, y):
-        return 1 if x > y else -1 if x < y else 0
-
-    votes: list[int] = []
-    p = t.get("price")
-    cross = ema_cross_vote(t)
-    if cross is not None:
-        votes.append(cross)
-    if p is not None and t.get("sma50") is not None:
-        votes.append(cmp(p, t["sma50"]))
-    if p is not None and t.get("sma200") is not None:
-        votes.append(cmp(p, t["sma200"]))
-    if t.get("sma50") is not None and t.get("sma200") is not None:
-        votes.append(cmp(t["sma50"], t["sma200"]))
-    r = t.get("rsi14")
-    if r is not None:
-        votes.append(1 if r < 30 else -1 if r > 70 else 0)
-    if t.get("chg_1m") is not None:
-        votes.append(cmp(t["chg_1m"], 0))
-    if t.get("chg_1w") is not None:
-        votes.append(cmp(t["chg_1w"], 0))
-
-    buys = sum(1 for v in votes if v > 0)
-    sells = sum(1 for v in votes if v < 0)
-    holds = sum(1 for v in votes if v == 0)
-    total = len(votes) or 1
+    cast = [v["vote"] for v in votes(t)]
+    buys = sum(1 for v in cast if v > 0)
+    sells = sum(1 for v in cast if v < 0)
+    holds = sum(1 for v in cast if v == 0)
+    total = len(cast) or 1
     ratio = (buys - sells) / total
-    if ratio >= 0.5:
-        label = "Strong Buy"
-    elif ratio >= 0.15:
-        label = "Buy"
-    elif ratio <= -0.5:
-        label = "Strong Sell"
-    elif ratio <= -0.15:
-        label = "Sell"
-    else:
-        label = "Hold"
-    return {"label": label, "buys": buys, "sells": sells, "holds": holds,
-            "ratio": round(ratio, 3)}
+    return {"label": label_for(ratio), "buys": buys, "sells": sells,
+            "holds": holds, "ratio": round(ratio, 3)}
 
 
 def agreement(score: dict) -> dict:
