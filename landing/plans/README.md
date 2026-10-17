@@ -9,7 +9,7 @@ From the `improve-animations` audit (commit 9217479), refined against the
 | 002 | Press feedback on the CTA buttons | MEDIUM | DONE |
 | 003 | Reduced motion: remove movement, keep comprehension | MEDIUM | DONE |
 | 004 | Delight pair: success entrance + underline stamp-in | LOW | DONE |
-| 005 | Phone menu: an overlay that animates transform and opacity only | HIGH | TODO |
+| 005 | Phone menu: an overlay that animates transform and opacity only | HIGH | DONE |
 | 006 | Hamburger icon: the middle bar fades with the morph | MEDIUM | TODO |
 | 007 | Phone menu under reduced motion: a short fade, not a snap | LOW | TODO |
 

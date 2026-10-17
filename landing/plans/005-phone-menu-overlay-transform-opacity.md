@@ -1,6 +1,6 @@
 # 005 — Phone menu: an overlay that animates transform and opacity only
 
-- **Status**: TODO
+- **Status**: DONE
 - **Commit**: c0a93bc
 - **Severity**: HIGH
 - **Category**: Performance (also covers a keyboard-initiated close and a snapping border)

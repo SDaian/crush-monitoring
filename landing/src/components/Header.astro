@@ -173,20 +173,36 @@ const cta =
     transform: translateY(-0.375rem) rotate(-45deg);
   }
 
-  /* The panel expands downward from under the header rule. */
-  .mobile-menu {
-    display: grid;
-    grid-template-rows: 0fr;
-    overflow: hidden;
-    transition: grid-template-rows 0.28s ease;
+  /* The panel lies over the page under the header rule; only opacity and
+     transform move. */
+  .site-head {
+    position: relative;
   }
-  .mm-inner {
-    display: grid;
-    min-height: 0; /* let the row collapse; a grid item floors at auto */
+  .mobile-menu {
+    position: absolute;
+    inset-inline: 0;
+    top: 100%;
+    z-index: 50;
+    background: var(--color-paper);
+    border-bottom: 1px solid var(--color-rule);
+    opacity: 0;
+    transform: translateY(-0.5rem);
+    visibility: hidden;
+    transition:
+      opacity 150ms var(--ease-out),
+      transform 150ms var(--ease-out),
+      visibility 0s linear 150ms;
   }
   .mobile-menu.open {
-    grid-template-rows: 1fr;
-    border-bottom: 1px solid var(--color-rule);
+    opacity: 1;
+    transform: none;
+    visibility: visible;
+    transition-duration: 200ms, 200ms, 0s;
+    transition-delay: 0s;
+  }
+  /* Esc closes with no animation: a keyboard action lands at once. */
+  .mobile-menu.instant {
+    transition: none;
   }
   .mm-link {
     padding: 1rem 5vw;
@@ -248,12 +264,23 @@ const cta =
     menu.addEventListener("click", (e) => {
       if ((e.target as HTMLElement).closest("a")) setOpen(false);
     });
-    // Esc closes and returns focus to the trigger.
+    // Esc closes with no animation (a keyboard action lands at once) and
+    // returns focus to the trigger. Reading offsetHeight commits the closed
+    // style while transitions are off, so removing the class starts nothing.
     document.addEventListener("keydown", (e) => {
       if (e.key === "Escape" && btn.getAttribute("aria-expanded") === "true") {
+        menu.classList.add("instant");
         setOpen(false);
+        void menu.offsetHeight;
+        menu.classList.remove("instant");
         btn.focus();
       }
+    });
+    // An overlay is dismissed by tapping away from it.
+    document.addEventListener("pointerdown", (e) => {
+      if (btn.getAttribute("aria-expanded") !== "true") return;
+      const t = e.target as Node;
+      if (!menu.contains(t) && !btn.contains(t)) setOpen(false);
     });
   }
 </script>
