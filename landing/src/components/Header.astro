@@ -145,10 +145,10 @@ const cta =
     display: block;
     width: 1.25rem;
     height: 2px;
-    background: currentColor;
+    background-color: currentColor;
     transition:
-      transform 0.2s ease,
-      opacity 0.2s ease;
+      transform 200ms var(--ease-out),
+      background-color 200ms var(--ease-out);
   }
   .menu-ico {
     position: relative;
@@ -164,7 +164,7 @@ const cta =
     top: 0.375rem;
   }
   .menu-btn[aria-expanded="true"] .menu-ico {
-    background: transparent;
+    background-color: transparent;
   }
   .menu-btn[aria-expanded="true"] .menu-ico::before {
     transform: translateY(0.375rem) rotate(45deg);

@@ -10,7 +10,7 @@ From the `improve-animations` audit (commit 9217479), refined against the
 | 003 | Reduced motion: remove movement, keep comprehension | MEDIUM | DONE |
 | 004 | Delight pair: success entrance + underline stamp-in | LOW | DONE |
 | 005 | Phone menu: an overlay that animates transform and opacity only | HIGH | DONE |
-| 006 | Hamburger icon: the middle bar fades with the morph | MEDIUM | TODO |
+| 006 | Hamburger icon: the middle bar fades with the morph | MEDIUM | DONE |
 | 007 | Phone menu under reduced motion: a short fade, not a snap | LOW | TODO |
 
 **Execution order**: 001 → 002 → 003 → 004 (001 defines the `--ease-out`

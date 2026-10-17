@@ -1,6 +1,6 @@
 # 006 — Hamburger icon: the middle bar fades with the morph, on the house curve
 
-- **Status**: TODO
+- **Status**: DONE
 - **Commit**: c0a93bc
 - **Severity**: MEDIUM
 - **Category**: Interruptibility & cohesion; Easing & duration
