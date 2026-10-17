@@ -110,8 +110,11 @@ away).
 1. In `Header.astro`'s `<style>`, add `.site-head { position: relative; }`
    above the `.mobile-menu` rule.
 2. Replace the `.mobile-menu`, `.mm-inner` and `.mobile-menu.open` rules
-   (lines 176-190) with the target CSS above. Delete the `.mm-inner` rule
-   entirely: the `min-height: 0` existed only for the grid-row collapse.
+   (lines 176-190) with the target CSS above. In the `.mm-inner` rule, keep
+   `display: grid;` (it stacks the links one per row) and delete only
+   `min-height: 0`, which existed for the grid-row collapse.
+   *(Corrected after execution: the first version of this step deleted the
+   whole rule, and the links wrapped inline into a 49px panel.)*
    Keep the comment above `.mobile-menu`, reworded to: "The panel lies over
    the page under the header rule; only opacity and transform move."
 3. In the `<script>`, replace the Esc handler with:
