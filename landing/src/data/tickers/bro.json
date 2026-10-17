@@ -12,23 +12,23 @@
   },
   "indexable": true,
   "technical": {
-    "asOf": "2026-10-15",
-    "price": 67.98,
-    "chg1d": 4.91,
-    "chg1w": 6.64,
-    "chg1m": 3.19,
-    "rsi14": 63.2,
-    "sma50": 67.24,
-    "sma200": 67.15,
-    "ema8": 64.29,
-    "ema21": 63.93,
-    "emaGap": 0.56,
-    "vsSma50": 1.1,
-    "vsSma200": 1.2,
-    "relVol": 0.98,
-    "high52w": 93.97,
+    "asOf": "2026-10-16",
+    "price": 69.4,
+    "chg1d": 2.09,
+    "chg1w": 10.37,
+    "chg1m": 6.57,
+    "rsi14": 66.6,
+    "sma50": 67.2,
+    "sma200": 67.1,
+    "ema8": 65.42,
+    "ema21": 64.43,
+    "emaGap": 1.54,
+    "vsSma50": 3.3,
+    "vsSma200": 3.4,
+    "relVol": 0.96,
+    "high52w": 89.2,
     "low52w": 54.38,
-    "rangePos": 34.0,
+    "rangePos": 43.0,
     "series": [
       {
         "d": "2025-10-24",
@@ -235,18 +235,11 @@
         "c": 62.88
       },
       {
-        "d": "2026-10-15",
-        "c": 67.98
+        "d": "2026-10-16",
+        "c": 69.4
       }
     ],
-    "signals": [
-      {
-        "type": "reclaim_sma50",
-        "asof": "2026-10-15",
-        "label": "Reclaimed the 50-day average",
-        "dir": "bull"
-      }
-    ],
+    "signals": [],
     "nextEarnings": null,
     "score": {
       "label": "Strong Buy",

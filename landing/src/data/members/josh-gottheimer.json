@@ -6489,11 +6489,11 @@
   "performance": {
     "available": true,
     "benchLabel": "S&P 500",
-    "asofDate": "2026-10-15",
+    "asofDate": "2026-10-16",
     "kpis": {
-      "medianPct": 19.0,
-      "medianBenchPct": 28.2,
-      "beat": 33,
+      "medianPct": 18.4,
+      "medianBenchPct": 26.8,
+      "beat": 35,
       "beatOf": 86,
       "priced": 86,
       "pricedOf": 174
@@ -6598,7 +6598,7 @@
         "2026-09-29",
         "2026-10-06",
         "2026-10-13",
-        "2026-10-15"
+        "2026-10-16"
       ],
       "member": [
         100.0,
@@ -6699,7 +6699,7 @@
         129.4,
         131.9,
         130.4,
-        129.7
+        127.7
       ],
       "bench": [
         100.0,
@@ -6800,7 +6800,7 @@
         126.0,
         128.5,
         128.3,
-        127.3
+        125.9
       ],
       "buys": 86
     },
@@ -6808,86 +6808,86 @@
       {
         "ticker": "AMAT",
         "txDate": "2026-08-06",
-        "pct": -18.5,
-        "benchPct": 0.4,
-        "excess": -18.9
+        "pct": -22.4,
+        "benchPct": -0.7,
+        "excess": -21.7
       },
       {
         "ticker": "PANW",
         "txDate": "2026-07-16",
-        "pct": 4.6,
-        "benchPct": 2.8,
-        "excess": 1.8
+        "pct": -3.4,
+        "benchPct": 1.7,
+        "excess": -5.1
       },
       {
         "ticker": "CRWD",
         "txDate": "2026-07-15",
-        "pct": 18.3,
-        "benchPct": 2.2,
-        "excess": 16.1
+        "pct": 10.0,
+        "benchPct": 1.1,
+        "excess": 8.9
       },
       {
         "ticker": "MU",
         "txDate": "2026-05-21",
-        "pct": 22.2,
-        "benchPct": 3.9,
-        "excess": 18.3
+        "pct": 15.3,
+        "benchPct": 2.8,
+        "excess": 12.5
       },
       {
         "ticker": "PANW",
         "txDate": "2026-05-14",
-        "pct": 55.4,
-        "benchPct": 3.2,
-        "excess": 52.2
+        "pct": 43.6,
+        "benchPct": 2.0,
+        "excess": 41.6
       },
       {
         "ticker": "AMD",
         "txDate": "2026-05-05",
-        "pct": 58.3,
-        "benchPct": 6.6,
-        "excess": 51.7
+        "pct": 48.8,
+        "benchPct": 5.5,
+        "excess": 43.3
       },
       {
         "ticker": "AMD",
         "txDate": "2026-04-27",
-        "pct": 68.0,
-        "benchPct": 7.9,
-        "excess": 60.1
+        "pct": 58.0,
+        "benchPct": 6.7,
+        "excess": 51.3
       },
       {
         "ticker": "AMD",
         "txDate": "2026-04-23",
-        "pct": 84.1,
-        "benchPct": 8.9,
-        "excess": 75.2
+        "pct": 73.2,
+        "benchPct": 7.7,
+        "excess": 65.5
       },
       {
         "ticker": "GS",
         "txDate": "2026-04-16",
-        "pct": -1.0,
-        "benchPct": 10.0,
-        "excess": -11.0
+        "pct": -2.1,
+        "benchPct": 8.8,
+        "excess": -10.9
       },
       {
         "ticker": "NOW",
         "txDate": "2026-03-06",
-        "pct": 19.5,
-        "benchPct": 14.8,
-        "excess": 4.7
+        "pct": 14.2,
+        "benchPct": 13.5,
+        "excess": 0.7
       },
       {
         "ticker": "UNH",
         "txDate": "2026-02-05",
-        "pct": 51.4,
-        "benchPct": 13.9,
-        "excess": 37.5
+        "pct": 49.5,
+        "benchPct": 12.6,
+        "excess": 36.9
       },
       {
         "ticker": "XOM",
         "txDate": "2026-02-04",
-        "pct": 18.4,
-        "benchPct": 12.5,
-        "excess": 5.9
+        "pct": 21.3,
+        "benchPct": 11.2,
+        "excess": 10.1
       }
     ],
     "rowsOf": 86
