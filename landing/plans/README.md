@@ -11,7 +11,7 @@ From the `improve-animations` audit (commit 9217479), refined against the
 | 004 | Delight pair: success entrance + underline stamp-in | LOW | DONE |
 | 005 | Phone menu: an overlay that animates transform and opacity only | HIGH | DONE |
 | 006 | Hamburger icon: the middle bar fades with the morph | MEDIUM | DONE |
-| 007 | Phone menu under reduced motion: a short fade, not a snap | LOW | TODO |
+| 007 | Phone menu under reduced motion: a short fade, not a snap | LOW | DONE |
 
 **Execution order**: 001 → 002 → 003 → 004 (001 defines the `--ease-out`
 token the others use; 003's reduced-motion rules reference 004's elements).

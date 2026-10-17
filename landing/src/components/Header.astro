@@ -236,8 +236,13 @@ const cta =
     }
   }
 
+  /* Reduced motion: the panel keeps its fade and drops the movement; the
+     icon snaps (DESIGN.md §6). */
   @media (prefers-reduced-motion: reduce) {
     .mobile-menu,
+    .mobile-menu.open {
+      transform: none;
+    }
     .menu-ico,
     .menu-ico::before,
     .menu-ico::after {

@@ -1,6 +1,6 @@
 # 007 — Phone menu under reduced motion: a short fade, not a snap
 
-- **Status**: TODO
+- **Status**: DONE
 - **Commit**: c0a93bc
 - **Severity**: LOW
 - **Category**: Accessibility
