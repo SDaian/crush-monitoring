@@ -99,7 +99,19 @@ const { kind, id, name } = Astro.props;
     cursor: pointer;
     transition:
       color 0.15s,
-      border-color 0.15s;
+      border-color 0.15s,
+      transform 160ms var(--ease-out);
+  }
+  /* Feedback on press, like .btn: the press snaps in at 100ms and the
+     release relaxes at 160ms. */
+  .starbtn:active {
+    transform: scale(0.97);
+    transition-duration: 0.15s, 0.15s, 100ms;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .starbtn:active {
+      transform: none;
+    }
   }
   .starbtn:hover,
   .starbtn:focus-visible {

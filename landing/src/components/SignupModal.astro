@@ -79,20 +79,36 @@ const {
   .cl-modal::backdrop {
     background: color-mix(in oklch, var(--color-ink) 55%, transparent);
   }
-  .cl-modal[open] {
-    animation: modal-in 200ms var(--ease-out) both;
+  /* Entrance and exit are one transition, so the exit can start from where
+     the entrance left off: a keyframe entrance kept holding opacity, and the
+     browser then ran no exit at all. In: a 200ms rise from 0.75rem below.
+     Out: a faster 150ms fade in place. display and overlay transition
+     discretely so the closing dialog stays in the top layer until the fade
+     ends; a browser without allow-discrete closes instantly, as before. */
+  .cl-modal,
+  .cl-modal::backdrop {
+    transition:
+      opacity 150ms var(--ease-out),
+      transform 150ms var(--ease-out),
+      display 150ms allow-discrete,
+      overlay 150ms allow-discrete;
   }
+  .cl-modal:not([open]),
+  .cl-modal:not([open])::backdrop {
+    opacity: 0;
+  }
+  .cl-modal[open],
   .cl-modal[open]::backdrop {
-    animation: fade-in 200ms ease both;
+    opacity: 1;
+    transition-duration: 200ms;
   }
-  @keyframes modal-in {
-    from {
+  @starting-style {
+    .cl-modal[open] {
       opacity: 0;
       transform: translateY(0.75rem);
     }
-    to {
-      opacity: 1;
-      transform: none;
+    .cl-modal[open]::backdrop {
+      opacity: 0;
     }
   }
   .cl-modal-h {
@@ -152,8 +168,10 @@ const {
   /* Reduced motion is a first-class path (DESIGN.md §6): the dialog still
      opens and lands in the same place, it just fades. */
   @media (prefers-reduced-motion: reduce) {
-    .cl-modal[open] {
-      animation: fade-in 0.2s ease both;
+    @starting-style {
+      .cl-modal[open] {
+        transform: none;
+      }
     }
   }
 </style>
