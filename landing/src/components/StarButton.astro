@@ -113,7 +113,14 @@ const { kind, id, name } = Astro.props;
       transform: none;
     }
   }
-  .starbtn:hover,
+  /* Hover only where a pointer hovers: on touch, :hover sticks after a
+     tap, and an un-starred button kept looking starred. */
+  @media (hover: hover) and (pointer: fine) {
+    .starbtn:hover {
+      color: var(--color-ink);
+      border-color: var(--color-ink);
+    }
+  }
   .starbtn:focus-visible {
     color: var(--color-ink);
     border-color: var(--color-ink);

@@ -667,7 +667,9 @@ const schema = [
         // `moved` marks a switch the reader made: only those fade in, so a
         // #technical deep link still opens on a settled panel.
         const show = (tech: boolean, focus = false, moved = false) => {
-          if (moved) root.classList.add("tab-moved");
+          // Set on every switch, not only added: after a click, an arrow
+          // key must still switch without the fade.
+          root.classList.toggle("tab-moved", moved);
           root.classList.toggle("t-tech", tech);
           tabs.forEach((tab, i) => {
             const on = i === (tech ? 1 : 0);
@@ -685,7 +687,9 @@ const schema = [
           const key = (e as KeyboardEvent).key;
           if (key !== "ArrowRight" && key !== "ArrowLeft") return;
           e.preventDefault();
-          show(!root.classList.contains("t-tech"), true, true);
+          // No fade: a key press is a keyboard action, and those never
+          // animate — the panel must be there the moment the key lands.
+          show(!root.classList.contains("t-tech"), true);
         });
         // A #technical link followed while already on the page. The browser
         // tried to scroll to a target that was still hidden, so the jump has
@@ -774,15 +778,26 @@ const schema = [
     display: none;
   }
   /* A switch replaces nearly the whole lower page, so the new panel fades
-     in rather than appearing in one frame. Opacity only: the panel holds
-     data, and data does not move for style. 150ms is already the reduced
-     path (DESIGN.md §6), so reduced motion keeps it. */
+     in and rises 4px rather than appearing in one frame. Kept that small
+     because the panel holds data. Only a click or a followed link fades;
+     arrow keys switch at once. Reduced motion keeps the fade, drops the
+     rise (DESIGN.md §6). */
   :root.tab-moved .tkpanel {
-    transition: opacity 150ms var(--ease-out);
+    transition:
+      opacity 150ms var(--ease-out),
+      transform 150ms var(--ease-out);
   }
   @starting-style {
     :root.tab-moved .tkpanel {
       opacity: 0;
+      transform: translateY(4px);
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    @starting-style {
+      :root.tab-moved .tkpanel {
+        transform: none;
+      }
     }
   }
   @media (max-width: 26rem) {
