@@ -664,7 +664,12 @@ const schema = [
       ].filter(Boolean) as HTMLButtonElement[];
 
       if (tabs.length === 2) {
-        const show = (tech: boolean, focus = false) => {
+        // `moved` marks a switch the reader made: only those fade in, so a
+        // #technical deep link still opens on a settled panel.
+        const show = (tech: boolean, focus = false, moved = false) => {
+          // Set on every switch, not only added: after a click, an arrow
+          // key must still switch without the fade.
+          root.classList.toggle("tab-moved", moved);
           root.classList.toggle("t-tech", tech);
           tabs.forEach((tab, i) => {
             const on = i === (tech ? 1 : 0);
@@ -677,11 +682,13 @@ const schema = [
         };
 
         show(root.classList.contains("t-tech"));
-        tabs.forEach((tab, i) => tab.addEventListener("click", () => show(i === 1)));
+        tabs.forEach((tab, i) => tab.addEventListener("click", () => show(i === 1, false, true)));
         document.querySelector(".tktabs")?.addEventListener("keydown", (e) => {
           const key = (e as KeyboardEvent).key;
           if (key !== "ArrowRight" && key !== "ArrowLeft") return;
           e.preventDefault();
+          // No fade: a key press is a keyboard action, and those never
+          // animate — the panel must be there the moment the key lands.
           show(!root.classList.contains("t-tech"), true);
         });
         // A #technical link followed while already on the page. The browser
@@ -689,7 +696,7 @@ const schema = [
         // to happen after the panel opens.
         addEventListener("hashchange", () => {
           const tech = /^#(technical|market)$/.test(location.hash);
-          show(tech);
+          show(tech, false, true);
           if (tech) document.getElementById("technical")?.scrollIntoView();
         });
       }
@@ -769,6 +776,29 @@ const schema = [
   }
   :root.js.t-tech #panel-trades {
     display: none;
+  }
+  /* A switch replaces nearly the whole lower page, so the new panel fades
+     in and rises 4px rather than appearing in one frame. Kept that small
+     because the panel holds data. Only a click or a followed link fades;
+     arrow keys switch at once. Reduced motion keeps the fade, drops the
+     rise (DESIGN.md §6). */
+  :root.tab-moved .tkpanel {
+    transition:
+      opacity 150ms var(--ease-out),
+      transform 150ms var(--ease-out);
+  }
+  @starting-style {
+    :root.tab-moved .tkpanel {
+      opacity: 0;
+      transform: translateY(4px);
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    @starting-style {
+      :root.tab-moved .tkpanel {
+        transform: none;
+      }
+    }
   }
   @media (max-width: 26rem) {
     .tktab {
