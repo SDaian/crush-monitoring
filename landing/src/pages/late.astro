@@ -109,9 +109,9 @@ const schema = [
               <div role="cell">{r.ticker}</div>
               <div
                 role="cell"
-                class={`font-semibold ${r.side === "BUY" ? "text-buy" : "text-sell"}`}
+                class="tside"
               >
-                {r.side}
+                <span class={`side-badge ${r.side === "BUY" ? "buy" : "sell"}`}>{r.side}</span>
               </div>
               <div role="cell" class="amt">
                 {r.amountBucket}

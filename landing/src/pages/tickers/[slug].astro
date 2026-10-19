@@ -422,9 +422,9 @@ const schema = [
                 </div>
                 <div
                   role="cell"
-                  class={`tside font-semibold ${r.side === "BUY" ? "text-buy" : "text-sell"}`}
+                  class="tside"
                 >
-                  {r.side}
+                  <span class={`side-badge ${r.side === "BUY" ? "buy" : "sell"}`}>{r.side}</span>
                 </div>
                 <div role="cell" class="tamt">{r.amountBucket}</div>
                 <div role="cell" class="tdate">

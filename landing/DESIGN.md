@@ -384,6 +384,13 @@ shared Astro components in `src/components/`.
   review card, FAQ clause, leaderboard row. All share: mono for data,
   `buy`/`sell`/`late` semantic colors, `min-width:0` cells that wrap rather than
   overflow, and real data behind every value.
+- **Side badge** — BUY / SELL in a record table (ticker, member and `/late`
+  tables) is a solid block: paper text on `buy` or `sell` (5.07:1 and
+  6.31:1), mono 12px uppercase, zero radius (`.side-badge` in
+  `global.css`). It makes a long list scannable by side at a glance. It is
+  data, the functional red §3 allows, so it never uses stamp and never
+  appears outside a trade row. The email previews keep the coloured word:
+  their side column is too narrow at 320px for a padded block.
 - **Live dot** — the one circle; pulses only to mean "live."
 - **Section tabs** — a mono, uppercase bar over a **hairline rule**, the
   active tab marked by a stamp underline. The rule is a hairline and not the

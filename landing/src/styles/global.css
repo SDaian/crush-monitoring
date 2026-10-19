@@ -272,6 +272,25 @@
     min-width:min(17.5rem, 100%); /* never wider than the form row */
     max-width: 100%;
   }
+  /* BUY / SELL in a record table: a solid block, paper on the data colour
+     (5.07:1 buy, 6.31:1 sell), zero radius. It is data, the functional red
+     DESIGN.md §3 allows, and it never uses stamp (DESIGN.md §8). */
+  .side-badge {
+    display: inline-block;
+    padding: 0.125rem 0.5rem;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    line-height: 1.5;
+    color: var(--color-paper);
+  }
+  .side-badge.buy {
+    background: var(--color-buy);
+  }
+  .side-badge.sell {
+    background: var(--color-sell);
+  }
   /* Contact-form fields:the signup input's look at full width. */
   .contact-field {
     font-family: var(--font-mono);
