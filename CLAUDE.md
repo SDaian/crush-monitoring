@@ -885,7 +885,10 @@ Conventions:
   (no flash), and **with JavaScript off both panels show** — the page the
   tabs replaced. `#technical` still deep-links from the tracker: it opens tab
   2, and a switch writes the hash back. Cross-linked with member pages
-  in both directions (member chips carry `hasPage`/`slug`), and deep-linked from
+  in both directions (member chips carry `hasPage`/`slug`; every ticker in a
+  member's trades table and holdings list, and on `/late`, links its page
+  through `landing_data.page_link`, which returns a slug only when the page
+  exists — a test fails on any generated link to a missing page), and deep-linked from
   the morning email via `daily_report.ticker_links` with UTM tags so Vercel
   analytics attributes the email as a traffic source. Scaling to all ~1,400
   tickers fires storage stage 1.
