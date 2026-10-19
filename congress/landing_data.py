@@ -391,10 +391,7 @@ def feed_payload(trades: list[dict],
             "chamber": chamber,
             "district": district,
             "ticker": t["ticker"],
-            "tickerSlug": (
-                ticker_slug(page_ticker(t["ticker"]))
-                if page_ticker(t["ticker"]) in ticker_pages else None
-            ),
+            "tickerSlug": page_link(t["ticker"], ticker_pages),
             "side": t["type"].upper(),
             "amountBucket": compact_bucket(t.get("amount_lo"), t.get("amount_hi")),
             "filedDaysLate": days_late(t),
@@ -591,7 +588,8 @@ def buying_faq(p: dict) -> list[dict]:
 LATE_BOARD_SIZE = 10
 
 
-def late_payload(trades: list[dict], today: date, count: int = LATE_BOARD_SIZE) -> dict:
+def late_payload(trades: list[dict], today: date, count: int = LATE_BOARD_SIZE,
+                 ticker_pages: set[str] | None = None) -> dict:
     """The /late leaderboard: worst delays among filings that arrived this
     year (filing-year scope, same reasoning as ``pctFiledLate``), one row per
     member — their single worst filing — ranked by days late. ``lateCount``
@@ -619,6 +617,7 @@ def late_payload(trades: list[dict], today: date, count: int = LATE_BOARD_SIZE) 
         "chamber": "Senate" if t.get("chamber") == "senate" else "House",
         "district": t.get("district") or t.get("state") or "",
         "ticker": t["ticker"],
+        "tickerSlug": page_link(t["ticker"], ticker_pages or set()),
         "side": t["type"].upper(),
         "amountBucket": compact_bucket(t.get("amount_lo"), t.get("amount_hi")),
         "daysLate": days_late(t),
@@ -886,6 +885,10 @@ def member_payload(name: str, trades: list[dict], holdings: dict,
         # Assets filter must never guess bond-ness from a missing ticker
         # (an unresolved equity also lacks one).
         "bond": is_bond(t),
+        # Set only when the symbol has its own page; absent otherwise, so a
+        # long record does not carry thousands of nulls.
+        **({"tickerSlug": slug}
+           if (slug := page_link(t.get("ticker"), has_ticker_page)) else {}),
     } for t in ts]
 
     # Estimated CURRENT holdings: the annual snapshot rolled forward with every
@@ -987,6 +990,7 @@ def member_payload(name: str, trades: list[dict], holdings: dict,
             "expiration": x.get("expiration"),
             "contracts": x.get("contracts"),
             "firstBuy": x.get("firstBuy"),
+            "tickerSlug": page_link(x["ticker"], has_ticker_page),
         } for x in ranked[:MEMBER_HOLDINGS_CAP]],
         # `shares` is contracts x 100 — the standard US equity contract size,
         # and a fact of the disclosed position rather than a valuation. It is
@@ -1257,6 +1261,14 @@ def page_ticker(ticker: str | None) -> str | None:
     if not ticker or ticker not in SAME_COMPANY:
         return ticker
     return SAME_COMPANY[ticker]["page"]
+
+
+def page_link(ticker: str | None, ticker_pages: set[str]) -> str | None:
+    """The /tickers/<slug> a mention of ``ticker`` links to, or None when no
+    page exists — so a table can link without ever minting a dead link.
+    Resolves through ``page_ticker``, so a GOOG trade links the GOOGL page."""
+    page = page_ticker(ticker)
+    return ticker_slug(page) if page and page in ticker_pages else None
 
 
 def ticker_slug(ticker: str) -> str:
@@ -1691,7 +1703,8 @@ def write_files(trades: list[dict], out_dir: Path, today: date) -> tuple[int, di
         encoding="utf-8",
     )
     (out_dir / "late.json").write_text(
-        json.dumps({"_comment": comment, **late_payload(trades, today)},
+        json.dumps({"_comment": comment, **late_payload(
+            trades, today, ticker_pages=set(select_ticker_pages(trades)))},
                    indent=2, ensure_ascii=False) + "\n",
         encoding="utf-8",
     )

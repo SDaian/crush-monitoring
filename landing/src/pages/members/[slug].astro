@@ -378,7 +378,13 @@ const schema = [
           <div class="mt-9 grid grid-cols-2 gap-x-12 gap-y-1 max-[720px]:grid-cols-1">
             {m.holdings.ranked.map((h: any) => (
               <div class="hrow">
-                <span class="htick">{h.ticker}</span>
+                <span class="htick">
+                  {h.tickerSlug ? (
+                    <a href={`/tickers/${h.tickerSlug}`} class="tklink">{h.ticker}</a>
+                  ) : (
+                    h.ticker
+                  )}
+                </span>
                 <span class="hname">
                   <span class="hline">
                   {/* An option row names its CONTRACT, not just the company:
@@ -564,7 +570,11 @@ const schema = [
                 data-b={t.bond ? "1" : ""}
               >
                 <div role="cell" class="ttick">
-                  {t.ticker}
+                  {t.tickerSlug ? (
+                    <a href={`/tickers/${t.tickerSlug}`} class="tklink">{t.ticker}</a>
+                  ) : (
+                    t.ticker
+                  )}
                   <small>{t.asset}</small>
                 </div>
                 <div

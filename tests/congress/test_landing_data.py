@@ -211,8 +211,9 @@ class TestLatePayload(unittest.TestCase):
             today=self.TODAY)
         r = p["worst"][0]
         self.assertEqual(set(r), {"member", "chamber", "district", "ticker",
-                                  "side", "amountBucket", "daysLate",
-                                  "tradeDate", "filedDate", "lateCount"})
+                                  "tickerSlug", "side", "amountBucket",
+                                  "daysLate", "tradeDate", "filedDate",
+                                  "lateCount"})
         self.assertEqual(r["member"], "N. Pelosi")
         self.assertEqual(r["daysLate"], 45)  # 90-day gap, 45 past the max
         self.assertEqual(r["amountBucket"], "$1M – $5M")
@@ -668,6 +669,45 @@ class TestFeedLinks(unittest.TestCase):
     def test_no_ticker_pages_argument_means_no_ticker_links(self):
         rows = ld.feed_payload(self._pool())
         self.assertTrue(all(r["tickerSlug"] is None for r in rows))
+
+
+class TestTableTickerLinks(unittest.TestCase):
+    """Member trades, holdings and /late link each ticker to its page, and
+    only when the page exists: a link must never be dead."""
+
+    def test_page_link_resolves_aliases_and_refuses_missing_pages(self):
+        self.assertEqual(ld.page_link("NVDA", {"NVDA"}), "nvda")
+        # GOOG trades live on the GOOGL page.
+        self.assertEqual(ld.page_link("GOOG", {"GOOGL"}), "googl")
+        self.assertIsNone(ld.page_link("ZZZQ", {"NVDA"}))
+        self.assertIsNone(ld.page_link(None, {"NVDA"}))
+
+    def test_member_rows_link_only_paged_tickers(self):
+        pool = [
+            T(member="Nancy Pelosi", ticker="NVDA", id="a", tx="2026-06-01", filed="2026-06-20"),
+            T(member="Nancy Pelosi", ticker="ZZZQ", id="b", tx="2026-06-02", filed="2026-06-20"),
+        ]
+        m = ld.member_payload("Nancy Pelosi", pool, {}, ticker_pages={"NVDA"})
+        by = {t["ticker"]: t for t in m["trades"]}
+        self.assertEqual(by["NVDA"]["tickerSlug"], "nvda")
+        self.assertNotIn("tickerSlug", by["ZZZQ"])
+
+    def test_generated_links_all_point_at_generated_pages(self):
+        data = Path(__file__).resolve().parents[2] / "landing" / "src" / "data"
+        pages = {f.stem for f in (data / "tickers").glob("*.json")
+                 if not f.name.startswith("_")}
+        dead = set()
+        for f in (data / "members").glob("*.json"):
+            if f.name.startswith("_"):
+                continue
+            m = json.loads(f.read_text())
+            rows = m["trades"] + ((m.get("holdings") or {}).get("ranked") or [])
+            dead |= {r["tickerSlug"] for r in rows
+                     if r.get("tickerSlug") and r["tickerSlug"] not in pages}
+        late = json.loads((data / "late.json").read_text())
+        dead |= {r["tickerSlug"] for r in late["worst"]
+                 if r.get("tickerSlug") and r["tickerSlug"] not in pages}
+        self.assertEqual(dead, set())
 
 
 class TestLastFiling(unittest.TestCase):

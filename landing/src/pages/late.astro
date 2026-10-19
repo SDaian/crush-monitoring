@@ -106,7 +106,13 @@ const schema = [
                     : ""}
                 </small>
               </div>
-              <div role="cell">{r.ticker}</div>
+              <div role="cell">
+                {r.tickerSlug ? (
+                  <a href={`/tickers/${r.tickerSlug}`} class="tklink">{r.ticker}</a>
+                ) : (
+                  r.ticker
+                )}
+              </div>
               <div
                 role="cell"
                 class="tside"
