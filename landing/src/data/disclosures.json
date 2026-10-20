@@ -2,6 +2,17 @@
   "_comment": "Generated from real official disclosures by congress/landing_data.py (daily Action). Do not edit by hand. 'filedDaysLate' counts days past the STOCK Act's 45-day statutory maximum; 0 = on time.",
   "disclosures": [
     {
+      "member": "L. Lee",
+      "memberSlug": null,
+      "chamber": "House",
+      "district": "FL-15",
+      "ticker": "BAC",
+      "tickerSlug": "bac",
+      "side": "SELL",
+      "amountBucket": "$50K – $100K",
+      "filedDaysLate": 8
+    },
+    {
       "member": "R. Allen",
       "memberSlug": null,
       "chamber": "House",
@@ -18,17 +29,6 @@
       "chamber": "House",
       "district": "CA-31",
       "ticker": "BHE",
-      "tickerSlug": null,
-      "side": "BUY",
-      "amountBucket": "$15K – $50K",
-      "filedDaysLate": 0
-    },
-    {
-      "member": "L. McClain",
-      "memberSlug": null,
-      "chamber": "House",
-      "district": "MI-9",
-      "ticker": "RIG",
       "tickerSlug": null,
       "side": "BUY",
       "amountBucket": "$15K – $50K",
