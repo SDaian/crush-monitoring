@@ -42,12 +42,12 @@
         "GOOG"
       ],
       "company": "Alphabet Inc.",
-      "trades": 169,
+      "trades": 170,
       "members": 42,
       "buys": 91,
-      "sells": 78,
-      "lastTx": "2026-09-14",
-      "lastFiling": "2026-10-01",
+      "sells": 79,
+      "lastTx": "2026-10-16",
+      "lastFiling": "2026-10-19",
       "indexable": true,
       "industry": {
         "key": "tech",
@@ -567,6 +567,23 @@
       }
     },
     {
+      "slug": "wmt",
+      "ticker": "WMT",
+      "aliases": [],
+      "company": "Walmart Inc.",
+      "trades": 42,
+      "members": 19,
+      "buys": 23,
+      "sells": 19,
+      "lastTx": "2026-09-28",
+      "lastFiling": "2026-10-19",
+      "indexable": true,
+      "industry": {
+        "key": "consumer",
+        "label": "Consumer & retail"
+      }
+    },
+    {
       "slug": "bsx",
       "ticker": "BSX",
       "aliases": [],
@@ -632,23 +649,6 @@
       "industry": {
         "key": "energy",
         "label": "Energy & utilities"
-      }
-    },
-    {
-      "slug": "wmt",
-      "ticker": "WMT",
-      "aliases": [],
-      "company": "Walmart Inc.",
-      "trades": 41,
-      "members": 19,
-      "buys": 23,
-      "sells": 18,
-      "lastTx": "2026-08-27",
-      "lastFiling": "2026-09-25",
-      "indexable": true,
-      "industry": {
-        "key": "consumer",
-        "label": "Consumer & retail"
       }
     },
     {

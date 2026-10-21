@@ -12,23 +12,23 @@
   },
   "indexable": true,
   "technical": {
-    "asOf": "2026-10-19",
-    "price": 1855.84,
-    "chg1d": 0.31,
-    "chg1w": 3.66,
-    "chg1m": 4.48,
-    "rsi14": 69.0,
-    "sma50": 1789.16,
-    "sma200": 1907.81,
-    "ema8": 1810.62,
-    "ema21": 1785.28,
-    "emaGap": 1.42,
-    "vsSma50": 3.7,
-    "vsSma200": -2.7,
-    "relVol": 0.89,
+    "asOf": "2026-10-20",
+    "price": 1884.1,
+    "chg1d": 1.52,
+    "chg1w": 5.3,
+    "chg1m": 6.17,
+    "rsi14": 73.1,
+    "sma50": 1790.04,
+    "sma200": 1906.58,
+    "ema8": 1826.95,
+    "ema21": 1794.26,
+    "emaGap": 1.82,
+    "vsSma50": 5.3,
+    "vsSma200": -1.2,
+    "relVol": 0.78,
     "high52w": 2191.9,
     "low52w": 1712.45,
-    "rangePos": 30.0,
+    "rangePos": 36.0,
     "series": [
       {
         "d": "2025-10-31",
@@ -235,18 +235,25 @@
         "c": 1850.13
       },
       {
-        "d": "2026-10-19",
-        "c": 1855.84
+        "d": "2026-10-20",
+        "c": 1884.1
       }
     ],
-    "signals": [],
+    "signals": [
+      {
+        "type": "rsi_overbought",
+        "asof": "2026-10-20",
+        "label": "RSI crossed above 70 (overbought)",
+        "dir": "neutral"
+      }
+    ],
     "nextEarnings": null,
     "score": {
       "label": "Hold",
       "buys": 3,
-      "sells": 2,
-      "holds": 2,
-      "ratio": 0.143
+      "sells": 3,
+      "holds": 1,
+      "ratio": 0.0
     },
     "votes": {
       "ema_cross": {
@@ -266,7 +273,7 @@
         "muted": false
       },
       "rsi": {
-        "vote": 0,
+        "vote": -1,
         "muted": false
       },
       "chg_1m": {

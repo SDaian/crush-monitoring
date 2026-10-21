@@ -14,23 +14,23 @@
   },
   "indexable": true,
   "technical": {
-    "asOf": "2026-10-19",
-    "price": 344.18,
-    "chg1d": 1.05,
-    "chg1w": -2.42,
-    "chg1m": -1.53,
-    "rsi14": 48.1,
-    "sma50": 344.38,
-    "sma200": 341.06,
-    "ema8": 346.66,
-    "ema21": 346.3,
-    "emaGap": 0.1,
-    "vsSma50": -0.1,
-    "vsSma200": 0.9,
-    "relVol": 0.8,
+    "asOf": "2026-10-20",
+    "price": 340.28,
+    "chg1d": -1.13,
+    "chg1w": -3.82,
+    "chg1m": -4.14,
+    "rsi14": 44.7,
+    "sma50": 344.03,
+    "sma200": 341.18,
+    "ema8": 345.24,
+    "ema21": 345.75,
+    "emaGap": -0.15,
+    "vsSma50": -1.1,
+    "vsSma200": -0.3,
+    "relVol": 0.76,
     "high52w": 402.62,
     "low52w": 250.46,
-    "rangePos": 62.0,
+    "rangePos": 59.0,
     "series": [
       {
         "d": "2025-10-31",
@@ -237,22 +237,22 @@
         "c": 340.59
       },
       {
-        "d": "2026-10-19",
-        "c": 344.18
+        "d": "2026-10-20",
+        "c": 340.28
       }
     ],
     "signals": [],
     "nextEarnings": null,
     "score": {
-      "label": "Hold",
-      "buys": 3,
-      "sells": 3,
+      "label": "Strong Sell",
+      "buys": 1,
+      "sells": 5,
       "holds": 1,
-      "ratio": 0.0
+      "ratio": -0.571
     },
     "votes": {
       "ema_cross": {
-        "vote": 1,
+        "vote": -1,
         "muted": false
       },
       "vs_sma50": {
@@ -260,7 +260,7 @@
         "muted": false
       },
       "vs_sma200": {
-        "vote": 1,
+        "vote": -1,
         "muted": false
       },
       "sma50_vs_200": {
@@ -282,20 +282,20 @@
     }
   },
   "summary": {
-    "trades": 169,
+    "trades": 170,
     "members": 42,
     "congress": 41,
     "executive": 1,
     "whoLabel": "41 members of Congress and 1 executive-branch filer",
     "buys": 91,
-    "sells": 78,
+    "sells": 79,
     "other": 0,
     "firstTx": "2024-08-07",
-    "lastTx": "2026-09-14",
-    "lastFiling": "2026-10-01",
+    "lastTx": "2026-10-16",
+    "lastFiling": "2026-10-19",
     "estBuyLabel": "$4.6M",
-    "estSellLabel": "$8.2M",
-    "pctLate": 17
+    "estSellLabel": "$8.3M",
+    "pctLate": 16
   },
   "topMembers": [
     {
@@ -410,6 +410,18 @@
     }
   ],
   "trades": [
+    {
+      "member": "Michael A. Rulli",
+      "memberSlug": "michael-a-rulli",
+      "hasPage": false,
+      "party": "R",
+      "side": "SELL",
+      "amountBucket": "$50K – $100K",
+      "txDate": "2026-10-16",
+      "filedDate": "2026-10-19",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035671.pdf"
+    },
     {
       "member": "Cleo Fields",
       "memberSlug": "cleo-fields",
@@ -697,33 +709,21 @@
       "filedDate": "2026-05-28",
       "daysLate": 0,
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20034650.pdf"
-    },
-    {
-      "member": "David J. Taylor",
-      "memberSlug": "david-j-taylor",
-      "hasPage": false,
-      "party": "R",
-      "side": "SELL",
-      "amountBucket": "$1K – $15K",
-      "txDate": "2026-05-15",
-      "filedDate": "2026-05-28",
-      "daysLate": 0,
-      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20034650.pdf"
     }
   ],
   "tradesShown": 25,
   "faq": [
     {
       "q": "Who in Congress has traded GOOGL and GOOG stock?",
-      "a": "41 members of Congress and 1 executive-branch filer have disclosed 169 GOOGL and GOOG trades since August 2024. The most active is Cleo Fields, with 28 trades, followed by David J. Taylor and Lisa C. McClain. Each trade on this page links to the official filing it came from."
+      "a": "41 members of Congress and 1 executive-branch filer have disclosed 170 GOOGL and GOOG trades since August 2024. The most active is Cleo Fields, with 28 trades, followed by David J. Taylor and Lisa C. McClain. Each trade on this page links to the official filing it came from."
     },
     {
       "q": "Is Congress buying or selling GOOGL and GOOG?",
-      "a": "Of the 169 disclosed GOOGL and GOOG trades, 91 were buys and 78 were sells. By the midpoint of each filed amount bracket, the buying comes to about $4.6M and the selling to about $8.2M. Filings disclose brackets, never exact amounts, so these totals are estimates."
+      "a": "Of the 170 disclosed GOOGL and GOOG trades, 91 were buys and 79 were sells. By the midpoint of each filed amount bracket, the buying comes to about $4.6M and the selling to about $8.3M. Filings disclose brackets, never exact amounts, so these totals are estimates."
     },
     {
       "q": "How late are GOOGL and GOOG trades disclosed?",
-      "a": "17% of the disclosed GOOGL and GOOG trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Sep 14, 2026, and the newest filing arrived on Oct 1, 2026."
+      "a": "16% of the disclosed GOOGL and GOOG trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Oct 16, 2026, and the newest filing arrived on Oct 19, 2026."
     }
   ]
 }
