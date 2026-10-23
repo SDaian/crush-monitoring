@@ -10,19 +10,19 @@
   "former": false,
   "knownAs": [],
   "summary": {
-    "trades": 707,
+    "trades": 708,
     "distinctTickers": 345,
     "firstTx": "2026-03-24",
-    "lastTx": "2026-08-20",
-    "lastFiling": "2026-09-17",
+    "lastTx": "2026-09-08",
+    "lastFiling": "2026-10-22",
     "pctLate": 99,
     "worstLate": 74
   },
   "topTickers": [
     {
       "ticker": "WMB",
-      "count": 4,
-      "asset": "Williams Companies, Inc. (The) Common Stock Option Type: Call Strike price: $75.00 Expires: 2026-08-21",
+      "count": 5,
+      "asset": "Williams Companies, Inc. (The) Common Stock Option Type: Call Strike price: $80.00 Expires: 2026-12-18",
       "slug": "wmb",
       "hasPage": false
     },
@@ -63,6 +63,17 @@
     }
   ],
   "trades": [
+    {
+      "ticker": "WMB",
+      "asset": "Williams Companies, Inc. (The) Common Stock Option Type: Call Strike price: $80.00 Expires: 2026-12-18",
+      "side": "SELL",
+      "amountBucket": "$250K – $500K",
+      "txDate": "2026-09-08",
+      "filedDate": "2026-10-22",
+      "daysLate": 0,
+      "sourceUrl": "https://efdsearch.senate.gov/search/view/ptr/6aa5ccb2-ff27-491a-9314-778b9ab37964/",
+      "bond": false
+    },
     {
       "ticker": "WMB",
       "asset": "Williams Companies, Inc. (The) Common Stock Option Type: Call Strike price: $75.00 Expires: 2026-08-21",
@@ -7946,7 +7957,7 @@
       "bond": false
     }
   ],
-  "tradesShown": 707,
+  "tradesShown": 708,
   "holdings": {
     "available": true,
     "filingDate": "2026-07-21",
@@ -8205,10 +8216,10 @@
   "performance": {
     "available": true,
     "benchLabel": "S&P 500",
-    "asofDate": "2026-10-21",
+    "asofDate": "2026-10-22",
     "kpis": {
-      "medianPct": 20.9,
-      "medianBenchPct": 21.9,
+      "medianPct": 17.4,
+      "medianBenchPct": 20.5,
       "beat": 33,
       "beatOf": 71,
       "priced": 71,
@@ -8246,7 +8257,7 @@
         "2026-10-02",
         "2026-10-09",
         "2026-10-16",
-        "2026-10-21"
+        "2026-10-22"
       ],
       "member": [
         100.0,
@@ -8279,7 +8290,7 @@
         129.2,
         129.6,
         124.5,
-        126.7
+        124.9
       ],
       "bench": [
         100.0,
@@ -8312,7 +8323,7 @@
         121.4,
         122.8,
         120.4,
-        121.9
+        120.5
       ],
       "buys": 71
     },
@@ -8320,86 +8331,86 @@
       {
         "ticker": "ASML",
         "txDate": "2026-03-31",
-        "pct": 26.9,
-        "benchPct": 18.9,
-        "excess": 8.0
+        "pct": 18.1,
+        "benchPct": 17.5,
+        "excess": 0.6
       },
       {
         "ticker": "TSLA",
         "txDate": "2026-03-30",
-        "pct": 8.8,
-        "benchPct": 22.3,
-        "excess": -13.5
+        "pct": 5.4,
+        "benchPct": 20.9,
+        "excess": -15.5
       },
       {
         "ticker": "UBER",
         "txDate": "2026-03-30",
-        "pct": -3.3,
-        "benchPct": 22.3,
-        "excess": -25.6
+        "pct": -1.2,
+        "benchPct": 20.9,
+        "excess": -22.1
       },
       {
         "ticker": "GOOG",
         "txDate": "2026-03-30",
-        "pct": 21.2,
-        "benchPct": 22.3,
-        "excess": -1.1
+        "pct": 17.4,
+        "benchPct": 20.9,
+        "excess": -3.5
       },
       {
         "ticker": "AAPL",
         "txDate": "2026-03-30",
-        "pct": 39.5,
-        "benchPct": 22.3,
-        "excess": 17.2
+        "pct": 41.2,
+        "benchPct": 20.9,
+        "excess": 20.3
       },
       {
         "ticker": "ASML",
         "txDate": "2026-03-30",
-        "pct": 33.7,
-        "benchPct": 22.3,
-        "excess": 11.4
+        "pct": 24.4,
+        "benchPct": 20.9,
+        "excess": 3.5
       },
       {
         "ticker": "GS",
         "txDate": "2026-03-30",
-        "pct": 12.0,
-        "benchPct": 22.3,
-        "excess": -10.3
+        "pct": 10.4,
+        "benchPct": 20.9,
+        "excess": -10.5
       },
       {
         "ticker": "JNJ",
         "txDate": "2026-03-30",
-        "pct": 6.3,
-        "benchPct": 22.3,
-        "excess": -16.0
+        "pct": 10.4,
+        "benchPct": 20.9,
+        "excess": -10.5
       },
       {
         "ticker": "MSFT",
         "txDate": "2026-03-30",
-        "pct": 48.5,
-        "benchPct": 22.3,
-        "excess": 26.2
+        "pct": 45.2,
+        "benchPct": 20.9,
+        "excess": 24.3
       },
       {
         "ticker": "NVO",
         "txDate": "2026-03-30",
-        "pct": 10.7,
-        "benchPct": 22.3,
-        "excess": -11.6
+        "pct": 11.7,
+        "benchPct": 20.9,
+        "excess": -9.2
       },
       {
         "ticker": "NVDA",
         "txDate": "2026-03-30",
-        "pct": 34.4,
-        "benchPct": 22.3,
-        "excess": 12.1
+        "pct": 28.5,
+        "benchPct": 20.9,
+        "excess": 7.6
       },
       {
         "ticker": "ABBV",
         "txDate": "2026-03-27",
-        "pct": 36.0,
-        "benchPct": 21.9,
-        "excess": 14.1
+        "pct": 36.2,
+        "benchPct": 20.5,
+        "excess": 15.7
       }
     ],
     "rowsOf": 71
@@ -8485,11 +8496,11 @@
   "faq": [
     {
       "q": "What stocks does Alan Armstrong trade?",
-      "a": "Alan Armstrong has disclosed 707 trades across 345 tickers since March 2026. The most traded are WMB (4), NVS (2) and SAN (2). Each trade on this page links to the official filing it came from."
+      "a": "Alan Armstrong has disclosed 708 trades across 345 tickers since March 2026. The most traded are WMB (5), NVS (2) and SAN (2). Each trade on this page links to the official filing it came from."
     },
     {
       "q": "Does Alan Armstrong disclose trades on time?",
-      "a": "Not always. 99% of Alan Armstrong's disclosed trades were filed late, past the STOCK Act's 45-day legal maximum. The worst was 74 days late. The newest filing arrived on Sep 17, 2026."
+      "a": "Not always. 99% of Alan Armstrong's disclosed trades were filed late, past the STOCK Act's 45-day legal maximum. The worst was 74 days late. The newest filing arrived on Oct 22, 2026."
     },
     {
       "q": "What stocks does Alan Armstrong own?",

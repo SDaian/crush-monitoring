@@ -2,6 +2,17 @@
   "_comment": "Generated from real official disclosures by congress/landing_data.py (daily Action). Do not edit by hand. 'filedDaysLate' counts days past the STOCK Act's 45-day statutory maximum; 0 = on time.",
   "disclosures": [
     {
+      "member": "A. Armstrong",
+      "memberSlug": "alan-armstrong",
+      "chamber": "Senate",
+      "district": "OK",
+      "ticker": "WMB",
+      "tickerSlug": null,
+      "side": "SELL",
+      "amountBucket": "$250K – $500K",
+      "filedDaysLate": 0
+    },
+    {
       "member": "M. Rulli",
       "memberSlug": null,
       "chamber": "House",
@@ -22,17 +33,6 @@
       "side": "BUY",
       "amountBucket": "$50K – $100K",
       "filedDaysLate": 0
-    },
-    {
-      "member": "L. Lee",
-      "memberSlug": null,
-      "chamber": "House",
-      "district": "FL-15",
-      "ticker": "BAC",
-      "tickerSlug": "bac",
-      "side": "SELL",
-      "amountBucket": "$50K – $100K",
-      "filedDaysLate": 8
     },
     {
       "member": "K. Hern",

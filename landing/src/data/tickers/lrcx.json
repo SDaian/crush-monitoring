@@ -12,23 +12,23 @@
   },
   "indexable": true,
   "technical": {
-    "asOf": "2026-10-21",
-    "price": 260.81,
-    "chg1d": -1.0,
-    "chg1w": -9.1,
-    "chg1m": -16.13,
-    "rsi14": 31.8,
-    "sma50": 306.45,
-    "sma200": 283.18,
-    "ema8": 278.75,
-    "ema21": 295.91,
-    "emaGap": -5.8,
-    "vsSma50": -14.9,
-    "vsSma200": -7.9,
-    "relVol": 1.81,
+    "asOf": "2026-10-22",
+    "price": 230.15,
+    "chg1d": -11.76,
+    "chg1w": -17.05,
+    "chg1m": -25.1,
+    "rsi14": 24.6,
+    "sma50": 304.53,
+    "sma200": 283.29,
+    "ema8": 267.95,
+    "ema21": 289.93,
+    "emaGap": -7.58,
+    "vsSma50": -24.4,
+    "vsSma200": -18.8,
+    "relVol": 2.42,
     "high52w": 433.33,
     "low52w": 139.59,
-    "rangePos": 41.0,
+    "rangePos": 31.0,
     "series": [
       {
         "d": "2025-10-31",
@@ -235,18 +235,25 @@
         "c": 263.94
       },
       {
-        "d": "2026-10-21",
-        "c": 260.81
+        "d": "2026-10-22",
+        "c": 230.15
       }
     ],
-    "signals": [],
+    "signals": [
+      {
+        "type": "rsi_oversold",
+        "asof": "2026-10-22",
+        "label": "RSI crossed below 30 (oversold)",
+        "dir": "neutral"
+      }
+    ],
     "nextEarnings": null,
     "score": {
-      "label": "Strong Sell",
-      "buys": 1,
+      "label": "Sell",
+      "buys": 2,
       "sells": 5,
-      "holds": 1,
-      "ratio": -0.571
+      "holds": 0,
+      "ratio": -0.429
     },
     "votes": {
       "ema_cross": {
@@ -266,7 +273,7 @@
         "muted": false
       },
       "rsi": {
-        "vote": 0,
+        "vote": 1,
         "muted": false
       },
       "chg_1m": {

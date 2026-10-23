@@ -12,23 +12,23 @@
   },
   "indexable": true,
   "technical": {
-    "asOf": "2026-10-21",
-    "price": 304.37,
-    "chg1d": -0.73,
-    "chg1w": 5.11,
-    "chg1m": 11.19,
-    "rsi14": 69.2,
-    "sma50": 280.41,
-    "sma200": 280.78,
-    "ema8": 296.79,
-    "ema21": 287.45,
-    "emaGap": 3.25,
-    "vsSma50": 8.5,
-    "vsSma200": 8.4,
-    "relVol": 0.8,
-    "high52w": 309.18,
+    "asOf": "2026-10-22",
+    "price": 315.88,
+    "chg1d": 3.78,
+    "chg1w": 5.71,
+    "chg1m": 17.75,
+    "rsi14": 75.1,
+    "sma50": 281.18,
+    "sma200": 280.94,
+    "ema8": 301.04,
+    "ema21": 290.04,
+    "emaGap": 3.79,
+    "vsSma50": 12.3,
+    "vsSma200": 12.4,
+    "relVol": 0.98,
+    "high52w": 315.88,
     "low52w": 244.41,
-    "rangePos": 93.0,
+    "rangePos": 100.0,
     "series": [
       {
         "d": "2025-10-31",
@@ -235,18 +235,37 @@
         "c": 302.3
       },
       {
-        "d": "2026-10-21",
-        "c": 304.37
+        "d": "2026-10-22",
+        "c": 315.88
       }
     ],
-    "signals": [],
+    "signals": [
+      {
+        "type": "golden_cross",
+        "asof": "2026-10-22",
+        "label": "Golden cross (50-day above 200-day)",
+        "dir": "bull"
+      },
+      {
+        "type": "rsi_overbought",
+        "asof": "2026-10-22",
+        "label": "RSI crossed above 70 (overbought)",
+        "dir": "neutral"
+      },
+      {
+        "type": "new_52w_high",
+        "asof": "2026-10-22",
+        "label": "New 52-week high",
+        "dir": "bull"
+      }
+    ],
     "nextEarnings": null,
     "score": {
       "label": "Strong Buy",
-      "buys": 5,
+      "buys": 6,
       "sells": 1,
-      "holds": 1,
-      "ratio": 0.571
+      "holds": 0,
+      "ratio": 0.714
     },
     "votes": {
       "ema_cross": {
@@ -262,11 +281,11 @@
         "muted": false
       },
       "sma50_vs_200": {
-        "vote": -1,
+        "vote": 1,
         "muted": false
       },
       "rsi": {
-        "vote": 0,
+        "vote": -1,
         "muted": false
       },
       "chg_1m": {
