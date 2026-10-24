@@ -4597,102 +4597,26 @@
   ],
   "tradesShown": 413,
   "holdings": {
-    "available": true,
-    "filingDate": "2026-08-13",
-    "reportYear": 2025,
-    "snapDate": "2025-12-31",
-    "filingsSince": 9,
-    "sourceUrl": "https://efdsearch.senate.gov/search/view/annual/3e2b0cca-3ab7-428e-b2ce-f08691f27dd1/",
-    "totalLabel": "$55.2M",
-    "positions": 8,
+    "available": false,
+    "filingDate": null,
+    "reportYear": null,
+    "snapDate": null,
+    "filingsSince": 0,
+    "sourceUrl": null,
+    "totalLabel": null,
+    "positions": 0,
     "optionsCount": 0,
-    "positionsTotal": 5,
-    "ranked": [
-      {
-        "kind": "stock",
-        "ticker": "BITB",
-        "asset": "Bitwise Bitcoin ETF",
-        "estLabel": "$3.0M",
-        "pctPortfolio": 5.4,
-        "isNew": false,
-        "hasOptions": false,
-        "optType": null,
-        "strike": null,
-        "expiration": null,
-        "contracts": null,
-        "firstBuy": "2025-02-25",
-        "tickerSlug": null
-      },
-      {
-        "kind": "stock",
-        "ticker": "ETHW",
-        "asset": "Bitwise Ethereum ETF",
-        "estLabel": "$375K",
-        "pctPortfolio": 0.7,
-        "isNew": false,
-        "hasOptions": false,
-        "optType": null,
-        "strike": null,
-        "expiration": null,
-        "contracts": null,
-        "firstBuy": null,
-        "tickerSlug": null
-      },
-      {
-        "kind": "stock",
-        "ticker": "DGRW",
-        "asset": "WisdomTree U.S. Quality Dividend Growth Fund",
-        "estLabel": "$75K",
-        "pctPortfolio": 0.1,
-        "isNew": false,
-        "hasOptions": false,
-        "optType": null,
-        "strike": null,
-        "expiration": null,
-        "contracts": null,
-        "firstBuy": null,
-        "tickerSlug": null
-      },
-      {
-        "kind": "stock",
-        "ticker": "—",
-        "asset": "SmithEllis Inc.Company: SmithEllisItems, Inc. (Delaware, DE) Description: Private Company Filer comment: Publishing Firm",
-        "estLabel": "$33K",
-        "pctPortfolio": 0.1,
-        "isNew": false,
-        "hasOptions": false,
-        "optType": null,
-        "strike": null,
-        "expiration": null,
-        "contracts": null,
-        "firstBuy": null,
-        "tickerSlug": null
-      },
-      {
-        "kind": "stock",
-        "ticker": "RUM",
-        "asset": "Rumble IncFiler comment: No longer held",
-        "estLabel": "$500",
-        "pctPortfolio": 0.0,
-        "isNew": false,
-        "hasOptions": false,
-        "optType": null,
-        "strike": null,
-        "expiration": null,
-        "contracts": null,
-        "firstBuy": null,
-        "tickerSlug": null
-      }
-    ],
+    "positionsTotal": 0,
+    "ranked": [],
     "options": []
   },
   "performance": {
     "available": true,
     "benchLabel": "S&P 500",
-    "asofDate": "2026-10-22",
+    "asofDate": "2026-10-23",
     "kpis": {
-      "medianPct": -4.7,
-      "medianBenchPct": 31.9,
+      "medianPct": -5.0,
+      "medianBenchPct": 31.2,
       "beat": 0,
       "beatOf": 24,
       "priced": 24,
@@ -4787,7 +4711,7 @@
         "2026-10-06",
         "2026-10-13",
         "2026-10-20",
-        "2026-10-22"
+        "2026-10-23"
       ],
       "member": [
         100.0,
@@ -4877,7 +4801,7 @@
         100.3,
         97.5,
         96.6,
-        95.3
+        95.1
       ],
       "bench": [
         100.0,
@@ -4967,7 +4891,7 @@
         133.4,
         133.2,
         131.7,
-        130.8
+        130.1
       ],
       "buys": 24
     },
@@ -4975,86 +4899,86 @@
       {
         "ticker": "BITB",
         "txDate": "2025-11-28",
-        "pct": -10.5,
-        "benchPct": 11.8,
-        "excess": -22.3
+        "pct": -10.7,
+        "benchPct": 11.2,
+        "excess": -21.9
       },
       {
         "ticker": "BITB",
         "txDate": "2025-11-26",
-        "pct": -9.6,
-        "benchPct": 12.4,
-        "excess": -22.0
+        "pct": -9.8,
+        "benchPct": 11.8,
+        "excess": -21.6
       },
       {
         "ticker": "BITB",
         "txDate": "2025-11-25",
-        "pct": -7.0,
-        "benchPct": 13.2,
-        "excess": -20.2
+        "pct": -7.2,
+        "benchPct": 12.6,
+        "excess": -19.8
       },
       {
         "ticker": "BITB",
         "txDate": "2025-11-24",
-        "pct": -8.9,
-        "benchPct": 14.2,
-        "excess": -23.1
+        "pct": -9.1,
+        "benchPct": 13.6,
+        "excess": -22.7
       },
       {
         "ticker": "BITB",
         "txDate": "2025-04-09",
-        "pct": -1.4,
-        "benchPct": 39.3,
-        "excess": -40.7
+        "pct": -1.6,
+        "benchPct": 38.5,
+        "excess": -40.1
       },
       {
         "ticker": "BITB",
         "txDate": "2025-04-07",
-        "pct": 4.1,
-        "benchPct": 51.5,
-        "excess": -47.4
+        "pct": 3.8,
+        "benchPct": 50.7,
+        "excess": -46.9
       },
       {
         "ticker": "BITB",
         "txDate": "2025-04-03",
-        "pct": -1.0,
-        "benchPct": 42.3,
-        "excess": -43.3
+        "pct": -1.2,
+        "benchPct": 41.6,
+        "excess": -42.8
       },
       {
         "ticker": "BITB",
         "txDate": "2025-04-02",
-        "pct": -6.7,
-        "benchPct": 35.3,
-        "excess": -42.0
-      },
-      {
-        "ticker": "BITB",
-        "txDate": "2025-03-31",
-        "pct": -1.6,
-        "benchPct": 36.6,
-        "excess": -38.2
-      },
-      {
-        "ticker": "BITB",
-        "txDate": "2025-03-27",
-        "pct": -6.8,
-        "benchPct": 34.7,
+        "pct": -6.9,
+        "benchPct": 34.6,
         "excess": -41.5
       },
       {
         "ticker": "BITB",
+        "txDate": "2025-03-31",
+        "pct": -1.8,
+        "benchPct": 35.9,
+        "excess": -37.7
+      },
+      {
+        "ticker": "BITB",
+        "txDate": "2025-03-27",
+        "pct": -7.0,
+        "benchPct": 34.0,
+        "excess": -41.0
+      },
+      {
+        "ticker": "BITB",
         "txDate": "2025-03-25",
-        "pct": -8.0,
-        "benchPct": 32.8,
-        "excess": -40.8
+        "pct": -8.2,
+        "benchPct": 32.1,
+        "excess": -40.3
       },
       {
         "ticker": "BITB",
         "txDate": "2025-03-24",
-        "pct": -8.1,
-        "benchPct": 33.1,
-        "excess": -41.2
+        "pct": -8.3,
+        "benchPct": 32.4,
+        "excess": -40.7
       }
     ],
     "rowsOf": 24
@@ -5139,10 +5063,6 @@
     {
       "q": "Does David McCormick disclose trades on time?",
       "a": "Yes. None of David McCormick's 413 disclosed trades was filed late: each arrived within the STOCK Act's 45-day legal maximum. The newest filing arrived on Aug 27, 2026."
-    },
-    {
-      "q": "What stocks does David McCormick own?",
-      "a": "An estimate from David McCormick's 2025 annual financial disclosure, rolled forward with every trade filed since, puts the listed stocks and options at about $55.2M across 5 positions. The largest is BITB, at about $3.0M. These are bracket midpoints, not share counts or a live valuation."
     }
   ]
 }

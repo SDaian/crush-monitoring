@@ -2598,267 +2598,26 @@
   ],
   "tradesShown": 222,
   "holdings": {
-    "available": true,
-    "filingDate": "2026-08-11",
-    "reportYear": 2025,
-    "snapDate": "2025-12-31",
-    "filingsSince": 1,
-    "sourceUrl": "https://efdsearch.senate.gov/search/view/annual/d4f1a4cf-d450-4f9f-bfaf-c98e41066c2b/",
-    "totalLabel": "$887K",
-    "positions": 31,
+    "available": false,
+    "filingDate": null,
+    "reportYear": null,
+    "snapDate": null,
+    "filingsSince": 0,
+    "sourceUrl": null,
+    "totalLabel": null,
+    "positions": 0,
     "optionsCount": 0,
-    "positionsTotal": 30,
-    "ranked": [
-      {
-        "kind": "stock",
-        "ticker": "ABNFX",
-        "asset": "The Bond Fund of America Class F2",
-        "estLabel": "$175K",
-        "pctPortfolio": 19.7,
-        "isNew": false,
-        "hasOptions": false,
-        "optType": null,
-        "strike": null,
-        "expiration": null,
-        "contracts": null,
-        "firstBuy": "2024-08-26",
-        "tickerSlug": null
-      },
-      {
-        "kind": "stock",
-        "ticker": "C",
-        "asset": "Citigroup Inc.",
-        "estLabel": "$75K",
-        "pctPortfolio": 8.5,
-        "isNew": false,
-        "hasOptions": false,
-        "optType": null,
-        "strike": null,
-        "expiration": null,
-        "contracts": null,
-        "firstBuy": null,
-        "tickerSlug": null
-      },
-      {
-        "kind": "stock",
-        "ticker": "NUE",
-        "asset": "Nucor Corporation",
-        "estLabel": "$75K",
-        "pctPortfolio": 8.5,
-        "isNew": false,
-        "hasOptions": false,
-        "optType": null,
-        "strike": null,
-        "expiration": null,
-        "contracts": null,
-        "firstBuy": null,
-        "tickerSlug": null
-      },
-      {
-        "kind": "stock",
-        "ticker": "RSP",
-        "asset": "Invesco S&P 500 Equal Weight ETF",
-        "estLabel": "$75K",
-        "pctPortfolio": 8.5,
-        "isNew": false,
-        "hasOptions": false,
-        "optType": null,
-        "strike": null,
-        "expiration": null,
-        "contracts": null,
-        "firstBuy": null,
-        "tickerSlug": null
-      },
-      {
-        "kind": "stock",
-        "ticker": "DHS",
-        "asset": "Wisdomtree U.S. High Dividend Fund",
-        "estLabel": "$75K",
-        "pctPortfolio": 8.5,
-        "isNew": false,
-        "hasOptions": false,
-        "optType": null,
-        "strike": null,
-        "expiration": null,
-        "contracts": null,
-        "firstBuy": null,
-        "tickerSlug": null
-      },
-      {
-        "kind": "stock",
-        "ticker": "GOOGL",
-        "asset": "Alphabet Inc.",
-        "estLabel": "$33K",
-        "pctPortfolio": 3.7,
-        "isNew": false,
-        "hasOptions": false,
-        "optType": null,
-        "strike": null,
-        "expiration": null,
-        "contracts": null,
-        "firstBuy": null,
-        "tickerSlug": "googl"
-      },
-      {
-        "kind": "stock",
-        "ticker": "AAPL",
-        "asset": "Apple Inc.",
-        "estLabel": "$33K",
-        "pctPortfolio": 3.7,
-        "isNew": false,
-        "hasOptions": false,
-        "optType": null,
-        "strike": null,
-        "expiration": null,
-        "contracts": null,
-        "firstBuy": null,
-        "tickerSlug": "aapl"
-      },
-      {
-        "kind": "stock",
-        "ticker": "PM",
-        "asset": "Philip Morris International Inc.",
-        "estLabel": "$33K",
-        "pctPortfolio": 3.7,
-        "isNew": false,
-        "hasOptions": false,
-        "optType": null,
-        "strike": null,
-        "expiration": null,
-        "contracts": null,
-        "firstBuy": null,
-        "tickerSlug": null
-      },
-      {
-        "kind": "stock",
-        "ticker": "VZ",
-        "asset": "Verizon Communications Inc.",
-        "estLabel": "$33K",
-        "pctPortfolio": 3.7,
-        "isNew": false,
-        "hasOptions": false,
-        "optType": null,
-        "strike": null,
-        "expiration": null,
-        "contracts": null,
-        "firstBuy": null,
-        "tickerSlug": "vz"
-      },
-      {
-        "kind": "stock",
-        "ticker": "WMT",
-        "asset": "Walmart Inc.",
-        "estLabel": "$33K",
-        "pctPortfolio": 3.7,
-        "isNew": false,
-        "hasOptions": false,
-        "optType": null,
-        "strike": null,
-        "expiration": null,
-        "contracts": null,
-        "firstBuy": null,
-        "tickerSlug": "wmt"
-      },
-      {
-        "kind": "stock",
-        "ticker": "ABBV",
-        "asset": "AbbVie Inc.",
-        "estLabel": "$33K",
-        "pctPortfolio": 3.7,
-        "isNew": false,
-        "hasOptions": false,
-        "optType": null,
-        "strike": null,
-        "expiration": null,
-        "contracts": null,
-        "firstBuy": null,
-        "tickerSlug": "abbv"
-      },
-      {
-        "kind": "stock",
-        "ticker": "GS",
-        "asset": "The Goldman Sachs Group, Inc.",
-        "estLabel": "$33K",
-        "pctPortfolio": 3.7,
-        "isNew": false,
-        "hasOptions": false,
-        "optType": null,
-        "strike": null,
-        "expiration": null,
-        "contracts": null,
-        "firstBuy": null,
-        "tickerSlug": "gs"
-      },
-      {
-        "kind": "stock",
-        "ticker": "MSFT",
-        "asset": "Microsoft Corporation",
-        "estLabel": "$33K",
-        "pctPortfolio": 3.7,
-        "isNew": false,
-        "hasOptions": false,
-        "optType": null,
-        "strike": null,
-        "expiration": null,
-        "contracts": null,
-        "firstBuy": null,
-        "tickerSlug": "msft"
-      },
-      {
-        "kind": "stock",
-        "ticker": "ORCL",
-        "asset": "Oracle Corporation",
-        "estLabel": "$33K",
-        "pctPortfolio": 3.7,
-        "isNew": false,
-        "hasOptions": false,
-        "optType": null,
-        "strike": null,
-        "expiration": null,
-        "contracts": null,
-        "firstBuy": null,
-        "tickerSlug": "orcl"
-      },
-      {
-        "kind": "stock",
-        "ticker": "QCOM",
-        "asset": "QUALCOMM Incorporated",
-        "estLabel": "$33K",
-        "pctPortfolio": 3.7,
-        "isNew": false,
-        "hasOptions": false,
-        "optType": null,
-        "strike": null,
-        "expiration": null,
-        "contracts": null,
-        "firstBuy": null,
-        "tickerSlug": "qcom"
-      },
-      {
-        "kind": "stock",
-        "ticker": "TSCO",
-        "asset": "Tractor Supply Company",
-        "estLabel": "$24K",
-        "pctPortfolio": 2.8,
-        "isNew": false,
-        "hasOptions": false,
-        "optType": null,
-        "strike": null,
-        "expiration": null,
-        "contracts": null,
-        "firstBuy": null,
-        "tickerSlug": "tsco"
-      }
-    ],
+    "positionsTotal": 0,
+    "ranked": [],
     "options": []
   },
   "performance": {
     "available": true,
     "benchLabel": "S&P 500",
-    "asofDate": "2026-10-22",
+    "asofDate": "2026-10-23",
     "kpis": {
-      "medianPct": 138.3,
-      "medianBenchPct": 47.3,
+      "medianPct": 136.6,
+      "medianBenchPct": 46.5,
       "beat": 6,
       "beatOf": 8,
       "priced": 8,
@@ -2995,7 +2754,7 @@
         "2026-10-06",
         "2026-10-13",
         "2026-10-20",
-        "2026-10-22"
+        "2026-10-23"
       ],
       "member": [
         100.0,
@@ -3127,7 +2886,7 @@
         243.5,
         234.3,
         226.6,
-        219.7
+        221.2
       ],
       "bench": [
         100.0,
@@ -3259,7 +3018,7 @@
         150.1,
         149.9,
         148.2,
-        147.2
+        146.5
       ],
       "buys": 8
     },
@@ -3267,58 +3026,58 @@
       {
         "ticker": "GILD",
         "txDate": "2024-05-10",
-        "pct": 138.3,
-        "benchPct": 46.7,
-        "excess": 91.6
+        "pct": 136.6,
+        "benchPct": 45.9,
+        "excess": 90.7
       },
       {
         "ticker": "GILD",
         "txDate": "2024-05-10",
-        "pct": 138.3,
-        "benchPct": 46.7,
-        "excess": 91.6
+        "pct": 136.6,
+        "benchPct": 45.9,
+        "excess": 90.7
       },
       {
         "ticker": "GILD",
         "txDate": "2024-05-10",
-        "pct": 138.3,
-        "benchPct": 46.7,
-        "excess": 91.6
+        "pct": 136.6,
+        "benchPct": 45.9,
+        "excess": 90.7
       },
       {
         "ticker": "INTC",
         "txDate": "2024-05-09",
-        "pct": 184.1,
-        "benchPct": 46.9,
-        "excess": 137.2
+        "pct": 189.0,
+        "benchPct": 46.1,
+        "excess": 142.9
       },
       {
         "ticker": "INTC",
         "txDate": "2024-05-08",
-        "pct": 185.0,
-        "benchPct": 47.7,
-        "excess": 137.3
+        "pct": 189.9,
+        "benchPct": 46.9,
+        "excess": 143.0
       },
       {
         "ticker": "ADBE",
         "txDate": "2024-05-08",
-        "pct": -44.6,
-        "benchPct": 47.7,
-        "excess": -92.3
+        "pct": -45.9,
+        "benchPct": 46.9,
+        "excess": -92.8
       },
       {
         "ticker": "INTC",
         "txDate": "2024-05-07",
-        "pct": 178.7,
-        "benchPct": 47.7,
-        "excess": 131.0
+        "pct": 183.4,
+        "benchPct": 47.0,
+        "excess": 136.4
       },
       {
         "ticker": "CVX",
         "txDate": "2024-05-07",
-        "pct": 39.3,
-        "benchPct": 47.7,
-        "excess": -8.4
+        "pct": 43.4,
+        "benchPct": 47.0,
+        "excess": -3.6
       }
     ],
     "rowsOf": 8
@@ -3493,10 +3252,6 @@
     {
       "q": "Does Tommy Tuberville disclose trades on time?",
       "a": "Not always. 80% of Tommy Tuberville's disclosed trades were filed late, past the STOCK Act's 45-day legal maximum. The worst was 835 days late. The newest filing arrived on Aug 5, 2026."
-    },
-    {
-      "q": "What stocks does Tommy Tuberville own?",
-      "a": "An estimate from Tommy Tuberville's 2025 annual financial disclosure, rolled forward with every trade filed since, puts the listed stocks and options at about $887K across 30 positions. The largest is ABNFX, at about $175K. These are bracket midpoints, not share counts or a live valuation."
     }
   ]
 }

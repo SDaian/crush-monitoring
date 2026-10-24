@@ -23,12 +23,12 @@
       "ticker": "NVDA",
       "aliases": [],
       "company": "NVIDIA Corporation",
-      "trades": 183,
+      "trades": 186,
       "members": 34,
-      "buys": 117,
+      "buys": 120,
       "sells": 66,
-      "lastTx": "2026-08-31",
-      "lastFiling": "2026-10-14",
+      "lastTx": "2026-10-01",
+      "lastFiling": "2026-10-22",
       "indexable": true,
       "industry": {
         "key": "tech",
@@ -346,6 +346,23 @@
       }
     },
     {
+      "slug": "tsm",
+      "ticker": "TSM",
+      "aliases": [],
+      "company": "Taiwan Semiconductor Manufacturing Company Ltd.",
+      "trades": 53,
+      "members": 12,
+      "buys": 37,
+      "sells": 16,
+      "lastTx": "2026-10-09",
+      "lastFiling": "2026-10-22",
+      "indexable": true,
+      "industry": {
+        "key": "tech",
+        "label": "Technology"
+      }
+    },
+    {
       "slug": "crm",
       "ticker": "CRM",
       "aliases": [],
@@ -356,23 +373,6 @@
       "sells": 29,
       "lastTx": "2026-09-24",
       "lastFiling": "2026-10-07",
-      "indexable": true,
-      "industry": {
-        "key": "tech",
-        "label": "Technology"
-      }
-    },
-    {
-      "slug": "tsm",
-      "ticker": "TSM",
-      "aliases": [],
-      "company": "Taiwan Semiconductor Manufacturing Company Ltd.",
-      "trades": 52,
-      "members": 12,
-      "buys": 36,
-      "sells": 16,
-      "lastTx": "2026-09-22",
-      "lastFiling": "2026-10-12",
       "indexable": true,
       "industry": {
         "key": "tech",

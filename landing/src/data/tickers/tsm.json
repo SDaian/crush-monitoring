@@ -12,23 +12,23 @@
   },
   "indexable": true,
   "technical": {
-    "asOf": "2026-10-22",
-    "price": 412.35,
-    "chg1d": -4.52,
-    "chg1w": -2.34,
-    "chg1m": -7.66,
-    "rsi14": 37.9,
-    "sma50": 434.36,
-    "sma200": 397.13,
-    "ema8": 427.28,
-    "ema21": 437.09,
-    "emaGap": -2.24,
-    "vsSma50": -5.1,
-    "vsSma200": 3.8,
-    "relVol": 1.46,
+    "asOf": "2026-10-23",
+    "price": 418.51,
+    "chg1d": 1.49,
+    "chg1w": 1.43,
+    "chg1m": -7.23,
+    "rsi14": 41.4,
+    "sma50": 434.12,
+    "sma200": 397.63,
+    "ema8": 425.33,
+    "ema21": 435.4,
+    "emaGap": -2.31,
+    "vsSma50": -3.6,
+    "vsSma200": 5.3,
+    "relVol": 0.83,
     "high52w": 485.8,
     "low52w": 275.06,
-    "rangePos": 65.0,
+    "rangePos": 68.0,
     "series": [
       {
         "d": "2025-10-31",
@@ -235,18 +235,18 @@
         "c": 412.61
       },
       {
-        "d": "2026-10-22",
-        "c": 412.35
+        "d": "2026-10-23",
+        "c": 418.51
       }
     ],
     "signals": [],
     "nextEarnings": null,
     "score": {
       "label": "Hold",
-      "buys": 2,
-      "sells": 3,
+      "buys": 3,
+      "sells": 2,
       "holds": 2,
-      "ratio": -0.143
+      "ratio": 0.143
     },
     "votes": {
       "ema_cross": {
@@ -274,24 +274,24 @@
         "muted": false
       },
       "chg_1w": {
-        "vote": -1,
+        "vote": 1,
         "muted": false
       }
     }
   },
   "summary": {
-    "trades": 52,
+    "trades": 53,
     "members": 12,
     "congress": 12,
     "executive": 0,
     "whoLabel": "12 members of Congress",
-    "buys": 36,
+    "buys": 37,
     "sells": 16,
     "other": 0,
     "firstTx": "2024-03-11",
-    "lastTx": "2026-09-22",
-    "lastFiling": "2026-10-12",
-    "estBuyLabel": "$1.8M",
+    "lastTx": "2026-10-09",
+    "lastFiling": "2026-10-22",
+    "estBuyLabel": "$1.9M",
     "estSellLabel": "$262K",
     "pctLate": 23
   },
@@ -301,8 +301,8 @@
       "slug": "cleo-fields",
       "party": "D",
       "chamber": "House",
-      "trades": 13,
-      "buys": 13,
+      "trades": 14,
+      "buys": 14,
       "sells": 0,
       "estLabel": "$1.3M",
       "hasPage": true
@@ -408,6 +408,18 @@
     }
   ],
   "trades": [
+    {
+      "member": "Cleo Fields",
+      "memberSlug": "cleo-fields",
+      "hasPage": true,
+      "party": "D",
+      "side": "BUY",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-10-09",
+      "filedDate": "2026-10-22",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035669.pdf"
+    },
     {
       "member": "Gilbert Ray Cisneros, Jr.",
       "memberSlug": "gilbert-ray-cisneros-jr",
@@ -695,33 +707,21 @@
       "filedDate": "2025-09-12",
       "daysLate": 0,
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20030932.pdf"
-    },
-    {
-      "member": "Cleo Fields",
-      "memberSlug": "cleo-fields",
-      "hasPage": true,
-      "party": "D",
-      "side": "BUY",
-      "amountBucket": "$15K – $50K",
-      "txDate": "2025-08-15",
-      "filedDate": "2025-09-03",
-      "daysLate": 0,
-      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20031017.pdf"
     }
   ],
   "tradesShown": 25,
   "faq": [
     {
       "q": "Who in Congress has traded TSM stock?",
-      "a": "12 members of Congress have disclosed 52 TSM trades since March 2024. The most active is Cleo Fields, with 13 trades, followed by Lisa C. McClain and Gilbert Ray Cisneros, Jr.. Each trade on this page links to the official filing it came from."
+      "a": "12 members of Congress have disclosed 53 TSM trades since March 2024. The most active is Cleo Fields, with 14 trades, followed by Lisa C. McClain and Gilbert Ray Cisneros, Jr.. Each trade on this page links to the official filing it came from."
     },
     {
       "q": "Is Congress buying or selling TSM?",
-      "a": "Of the 52 disclosed TSM trades, 36 were buys and 16 were sells. By the midpoint of each filed amount bracket, the buying comes to about $1.8M and the selling to about $262K. Filings disclose brackets, never exact amounts, so these totals are estimates."
+      "a": "Of the 53 disclosed TSM trades, 37 were buys and 16 were sells. By the midpoint of each filed amount bracket, the buying comes to about $1.9M and the selling to about $262K. Filings disclose brackets, never exact amounts, so these totals are estimates."
     },
     {
       "q": "How late are TSM trades disclosed?",
-      "a": "23% of the disclosed TSM trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Sep 22, 2026, and the newest filing arrived on Oct 12, 2026."
+      "a": "23% of the disclosed TSM trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Oct 9, 2026, and the newest filing arrived on Oct 22, 2026."
     }
   ]
 }

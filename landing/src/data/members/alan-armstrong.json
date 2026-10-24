@@ -7959,267 +7959,26 @@
   ],
   "tradesShown": 708,
   "holdings": {
-    "available": true,
-    "filingDate": "2026-07-21",
-    "reportYear": 2026,
-    "snapDate": "2026-12-31",
+    "available": false,
+    "filingDate": null,
+    "reportYear": null,
+    "snapDate": null,
     "filingsSince": 0,
-    "sourceUrl": "https://efdsearch.senate.gov/search/view/annual/37264946-5291-4f15-aea8-c23453c027c3/",
-    "totalLabel": "$23.3M",
-    "positions": 86,
+    "sourceUrl": null,
+    "totalLabel": null,
+    "positions": 0,
     "optionsCount": 0,
-    "positionsTotal": 86,
-    "ranked": [
-      {
-        "kind": "stock",
-        "ticker": "WMB",
-        "asset": "Williams Companies, Inc. (The) Common StockFiler comment: Performance Stock Units",
-        "estLabel": "$15.0M",
-        "pctPortfolio": 64.3,
-        "isNew": false,
-        "hasOptions": false,
-        "optType": null,
-        "strike": null,
-        "expiration": null,
-        "contracts": null,
-        "firstBuy": "2026-08-19",
-        "tickerSlug": null
-      },
-      {
-        "kind": "stock",
-        "ticker": "CAT",
-        "asset": "Caterpillar, Inc. Common Stock",
-        "estLabel": "$3.0M",
-        "pctPortfolio": 12.9,
-        "isNew": false,
-        "hasOptions": false,
-        "optType": null,
-        "strike": null,
-        "expiration": null,
-        "contracts": null,
-        "firstBuy": null,
-        "tickerSlug": null
-      },
-      {
-        "kind": "stock",
-        "ticker": "COP",
-        "asset": "ConocoPhillips Common Stock",
-        "estLabel": "$750K",
-        "pctPortfolio": 3.2,
-        "isNew": false,
-        "hasOptions": false,
-        "optType": null,
-        "strike": null,
-        "expiration": null,
-        "contracts": null,
-        "firstBuy": null,
-        "tickerSlug": "cop"
-      },
-      {
-        "kind": "stock",
-        "ticker": "BOKF",
-        "asset": "BOK Financial Corporation - Common Stock",
-        "estLabel": "$375K",
-        "pctPortfolio": 1.6,
-        "isNew": false,
-        "hasOptions": false,
-        "optType": null,
-        "strike": null,
-        "expiration": null,
-        "contracts": null,
-        "firstBuy": null,
-        "tickerSlug": null
-      },
-      {
-        "kind": "stock",
-        "ticker": "GOOGL",
-        "asset": "Alphabet Inc. - Class A Common Stock",
-        "estLabel": "$175K",
-        "pctPortfolio": 0.8,
-        "isNew": false,
-        "hasOptions": false,
-        "optType": null,
-        "strike": null,
-        "expiration": null,
-        "contracts": null,
-        "firstBuy": null,
-        "tickerSlug": "googl"
-      },
-      {
-        "kind": "stock",
-        "ticker": "AMZN",
-        "asset": "Amazon.com, Inc. - Common Stock",
-        "estLabel": "$175K",
-        "pctPortfolio": 0.8,
-        "isNew": false,
-        "hasOptions": false,
-        "optType": null,
-        "strike": null,
-        "expiration": null,
-        "contracts": null,
-        "firstBuy": "2026-03-27",
-        "tickerSlug": "amzn"
-      },
-      {
-        "kind": "stock",
-        "ticker": "AAPL",
-        "asset": "Apple Inc. - Common Stock",
-        "estLabel": "$175K",
-        "pctPortfolio": 0.8,
-        "isNew": false,
-        "hasOptions": false,
-        "optType": null,
-        "strike": null,
-        "expiration": null,
-        "contracts": null,
-        "firstBuy": "2026-03-27",
-        "tickerSlug": "aapl"
-      },
-      {
-        "kind": "stock",
-        "ticker": "AVGO",
-        "asset": "Broadcom Inc. - Common Stock",
-        "estLabel": "$175K",
-        "pctPortfolio": 0.8,
-        "isNew": false,
-        "hasOptions": false,
-        "optType": null,
-        "strike": null,
-        "expiration": null,
-        "contracts": null,
-        "firstBuy": null,
-        "tickerSlug": "avgo"
-      },
-      {
-        "kind": "stock",
-        "ticker": "GLW",
-        "asset": "Corning Incorporated Common Stock",
-        "estLabel": "$175K",
-        "pctPortfolio": 0.8,
-        "isNew": false,
-        "hasOptions": false,
-        "optType": null,
-        "strike": null,
-        "expiration": null,
-        "contracts": null,
-        "firstBuy": null,
-        "tickerSlug": null
-      },
-      {
-        "kind": "stock",
-        "ticker": "GEV",
-        "asset": "GE Vernova Inc. Common Stock",
-        "estLabel": "$175K",
-        "pctPortfolio": 0.8,
-        "isNew": false,
-        "hasOptions": false,
-        "optType": null,
-        "strike": null,
-        "expiration": null,
-        "contracts": null,
-        "firstBuy": null,
-        "tickerSlug": null
-      },
-      {
-        "kind": "stock",
-        "ticker": "HD",
-        "asset": "Home Depot, Inc. (The) Common Stock",
-        "estLabel": "$175K",
-        "pctPortfolio": 0.8,
-        "isNew": false,
-        "hasOptions": false,
-        "optType": null,
-        "strike": null,
-        "expiration": null,
-        "contracts": null,
-        "firstBuy": null,
-        "tickerSlug": "hd"
-      },
-      {
-        "kind": "stock",
-        "ticker": "JPM",
-        "asset": "JP Morgan Chase & Co. Common Stock",
-        "estLabel": "$175K",
-        "pctPortfolio": 0.8,
-        "isNew": false,
-        "hasOptions": false,
-        "optType": null,
-        "strike": null,
-        "expiration": null,
-        "contracts": null,
-        "firstBuy": null,
-        "tickerSlug": "jpm"
-      },
-      {
-        "kind": "stock",
-        "ticker": "MSFT",
-        "asset": "Microsoft Corporation - Common Stock",
-        "estLabel": "$175K",
-        "pctPortfolio": 0.8,
-        "isNew": false,
-        "hasOptions": false,
-        "optType": null,
-        "strike": null,
-        "expiration": null,
-        "contracts": null,
-        "firstBuy": "2026-03-27",
-        "tickerSlug": "msft"
-      },
-      {
-        "kind": "stock",
-        "ticker": "NVDA",
-        "asset": "NVIDIA Corporation - Common Stock",
-        "estLabel": "$175K",
-        "pctPortfolio": 0.8,
-        "isNew": false,
-        "hasOptions": false,
-        "optType": null,
-        "strike": null,
-        "expiration": null,
-        "contracts": null,
-        "firstBuy": "2026-03-27",
-        "tickerSlug": "nvda"
-      },
-      {
-        "kind": "stock",
-        "ticker": "AMGN",
-        "asset": "Amgen Inc. - Common Stock",
-        "estLabel": "$75K",
-        "pctPortfolio": 0.3,
-        "isNew": false,
-        "hasOptions": false,
-        "optType": null,
-        "strike": null,
-        "expiration": null,
-        "contracts": null,
-        "firstBuy": null,
-        "tickerSlug": "amgn"
-      },
-      {
-        "kind": "stock",
-        "ticker": "CDNS",
-        "asset": "Cadence Design Systems, Inc. - Common Stock",
-        "estLabel": "$75K",
-        "pctPortfolio": 0.3,
-        "isNew": false,
-        "hasOptions": false,
-        "optType": null,
-        "strike": null,
-        "expiration": null,
-        "contracts": null,
-        "firstBuy": null,
-        "tickerSlug": null
-      }
-    ],
+    "positionsTotal": 0,
+    "ranked": [],
     "options": []
   },
   "performance": {
     "available": true,
     "benchLabel": "S&P 500",
-    "asofDate": "2026-10-22",
+    "asofDate": "2026-10-23",
     "kpis": {
-      "medianPct": 17.4,
-      "medianBenchPct": 20.5,
+      "medianPct": 16.2,
+      "medianBenchPct": 19.9,
       "beat": 33,
       "beatOf": 71,
       "priced": 71,
@@ -8257,7 +8016,7 @@
         "2026-10-02",
         "2026-10-09",
         "2026-10-16",
-        "2026-10-22"
+        "2026-10-23"
       ],
       "member": [
         100.0,
@@ -8290,7 +8049,7 @@
         129.2,
         129.6,
         124.5,
-        124.9
+        124.5
       ],
       "bench": [
         100.0,
@@ -8323,7 +8082,7 @@
         121.4,
         122.8,
         120.4,
-        120.5
+        119.9
       ],
       "buys": 71
     },
@@ -8331,86 +8090,86 @@
       {
         "ticker": "ASML",
         "txDate": "2026-03-31",
-        "pct": 18.1,
-        "benchPct": 17.5,
-        "excess": 0.6
+        "pct": 19.0,
+        "benchPct": 16.9,
+        "excess": 2.1
       },
       {
         "ticker": "TSLA",
         "txDate": "2026-03-30",
-        "pct": 5.4,
-        "benchPct": 20.9,
+        "pct": 4.8,
+        "benchPct": 20.3,
         "excess": -15.5
       },
       {
         "ticker": "UBER",
         "txDate": "2026-03-30",
-        "pct": -1.2,
-        "benchPct": 20.9,
-        "excess": -22.1
+        "pct": -4.6,
+        "benchPct": 20.3,
+        "excess": -24.9
       },
       {
         "ticker": "GOOG",
         "txDate": "2026-03-30",
-        "pct": 17.4,
-        "benchPct": 20.9,
-        "excess": -3.5
+        "pct": 16.2,
+        "benchPct": 20.3,
+        "excess": -4.1
       },
       {
         "ticker": "AAPL",
         "txDate": "2026-03-30",
-        "pct": 41.2,
-        "benchPct": 20.9,
-        "excess": 20.3
+        "pct": 41.0,
+        "benchPct": 20.3,
+        "excess": 20.7
       },
       {
         "ticker": "ASML",
         "txDate": "2026-03-30",
-        "pct": 24.4,
-        "benchPct": 20.9,
-        "excess": 3.5
+        "pct": 25.3,
+        "benchPct": 20.3,
+        "excess": 5.0
       },
       {
         "ticker": "GS",
         "txDate": "2026-03-30",
-        "pct": 10.4,
-        "benchPct": 20.9,
-        "excess": -10.5
+        "pct": 8.4,
+        "benchPct": 20.3,
+        "excess": -11.9
       },
       {
         "ticker": "JNJ",
         "txDate": "2026-03-30",
-        "pct": 10.4,
-        "benchPct": 20.9,
-        "excess": -10.5
+        "pct": 8.8,
+        "benchPct": 20.3,
+        "excess": -11.5
       },
       {
         "ticker": "MSFT",
         "txDate": "2026-03-30",
-        "pct": 45.2,
-        "benchPct": 20.9,
-        "excess": 24.3
+        "pct": 46.1,
+        "benchPct": 20.3,
+        "excess": 25.8
       },
       {
         "ticker": "NVO",
         "txDate": "2026-03-30",
-        "pct": 11.7,
-        "benchPct": 20.9,
-        "excess": -9.2
+        "pct": 10.7,
+        "benchPct": 20.3,
+        "excess": -9.6
       },
       {
         "ticker": "NVDA",
         "txDate": "2026-03-30",
-        "pct": 28.5,
-        "benchPct": 20.9,
-        "excess": 7.6
+        "pct": 27.7,
+        "benchPct": 20.3,
+        "excess": 7.4
       },
       {
         "ticker": "ABBV",
         "txDate": "2026-03-27",
-        "pct": 36.2,
-        "benchPct": 20.5,
-        "excess": 15.7
+        "pct": 36.4,
+        "benchPct": 19.9,
+        "excess": 16.5
       }
     ],
     "rowsOf": 71
@@ -8501,10 +8260,6 @@
     {
       "q": "Does Alan Armstrong disclose trades on time?",
       "a": "Not always. 99% of Alan Armstrong's disclosed trades were filed late, past the STOCK Act's 45-day legal maximum. The worst was 74 days late. The newest filing arrived on Oct 22, 2026."
-    },
-    {
-      "q": "What stocks does Alan Armstrong own?",
-      "a": "An estimate from Alan Armstrong's 2026 annual financial disclosure, rolled forward with every trade filed since, puts the listed stocks and options at about $23.3M across 86 positions. The largest is WMB, at about $15.0M. These are bracket midpoints, not share counts or a live valuation."
     }
   ]
 }

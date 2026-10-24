@@ -10,18 +10,18 @@
   "former": false,
   "knownAs": [],
   "summary": {
-    "trades": 238,
+    "trades": 242,
     "distinctTickers": 33,
     "firstTx": "2025-02-05",
-    "lastTx": "2026-09-14",
-    "lastFiling": "2026-10-01",
+    "lastTx": "2026-10-09",
+    "lastFiling": "2026-10-22",
     "pctLate": 0,
     "worstLate": 0
   },
   "topTickers": [
     {
       "ticker": "NVDA",
-      "count": 47,
+      "count": 50,
       "asset": "NVIDIA Corporation - Common Stock",
       "slug": "nvda",
       "hasPage": true
@@ -56,13 +56,61 @@
     },
     {
       "ticker": "TSM",
-      "count": 13,
+      "count": 14,
       "asset": "Taiwan Semiconductor Manufacturing Company Ltd.",
       "slug": "tsm",
       "hasPage": true
     }
   ],
   "trades": [
+    {
+      "ticker": "TSM",
+      "asset": "Taiwan Semiconductor Manufacturing Company Ltd.",
+      "side": "BUY",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-10-09",
+      "filedDate": "2026-10-22",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035669.pdf",
+      "bond": false,
+      "tickerSlug": "tsm"
+    },
+    {
+      "ticker": "NVDA",
+      "asset": "NVIDIA Corporation - Common Stock",
+      "side": "BUY",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-10-01",
+      "filedDate": "2026-10-22",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035669.pdf",
+      "bond": false,
+      "tickerSlug": "nvda"
+    },
+    {
+      "ticker": "NVDA",
+      "asset": "NVIDIA Corporation - Common Stock",
+      "side": "BUY",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-10-01",
+      "filedDate": "2026-10-22",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035669.pdf",
+      "bond": false,
+      "tickerSlug": "nvda"
+    },
+    {
+      "ticker": "NVDA",
+      "asset": "NVIDIA Corporation - Common Stock",
+      "side": "BUY",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-10-01",
+      "filedDate": "2026-10-22",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035669.pdf",
+      "bond": false,
+      "tickerSlug": "nvda"
+    },
     {
       "ticker": "GOOG",
       "asset": "Alphabet Inc. - Class C Capital Stock",
@@ -2886,7 +2934,7 @@
       "tickerSlug": "nvda"
     }
   ],
-  "tradesShown": 238,
+  "tradesShown": 242,
   "holdings": {
     "available": false,
     "filingDate": "2026-05-14",
@@ -2904,14 +2952,14 @@
   "performance": {
     "available": true,
     "benchLabel": "S&P 500",
-    "asofDate": "2026-10-22",
+    "asofDate": "2026-10-23",
     "kpis": {
-      "medianPct": 17.9,
-      "medianBenchPct": 20.3,
+      "medianPct": 16.8,
+      "medianBenchPct": 19.5,
       "beat": 103,
-      "beatOf": 200,
-      "priced": 200,
-      "pricedOf": 224
+      "beatOf": 204,
+      "priced": 204,
+      "pricedOf": 228
     },
     "series": {
       "dates": [
@@ -2988,7 +3036,7 @@
         "2026-10-06",
         "2026-10-13",
         "2026-10-20",
-        "2026-10-22"
+        "2026-10-23"
       ],
       "member": [
         100.0,
@@ -3061,10 +3109,10 @@
         124.2,
         131.0,
         129.1,
-        133.5,
-        131.9,
-        126.5,
-        123.6
+        133.1,
+        131.3,
+        125.9,
+        122.6
       ],
       "bench": [
         100.0,
@@ -3137,100 +3185,100 @@
         117.5,
         120.0,
         118.6,
-        120.9,
-        120.7,
-        119.4,
-        118.6
+        120.6,
+        120.4,
+        119.0,
+        117.6
       ],
-      "buys": 200
+      "buys": 204
     },
     "rows": [
       {
+        "ticker": "TSM",
+        "txDate": "2026-10-09",
+        "pct": -7.7,
+        "benchPct": -2.4,
+        "excess": -5.3
+      },
+      {
+        "ticker": "NVDA",
+        "txDate": "2026-10-01",
+        "pct": -8.6,
+        "benchPct": -0.5,
+        "excess": -8.1
+      },
+      {
+        "ticker": "NVDA",
+        "txDate": "2026-10-01",
+        "pct": -8.6,
+        "benchPct": -0.5,
+        "excess": -8.1
+      },
+      {
+        "ticker": "NVDA",
+        "txDate": "2026-10-01",
+        "pct": -8.6,
+        "benchPct": -0.5,
+        "excess": -8.1
+      },
+      {
         "ticker": "NFLX",
         "txDate": "2026-09-14",
-        "pct": -16.5,
-        "benchPct": 0.4,
-        "excess": -16.9
+        "pct": -18.0,
+        "benchPct": -0.1,
+        "excess": -17.9
       },
       {
         "ticker": "GOOG",
         "txDate": "2026-09-14",
-        "pct": -7.2,
-        "benchPct": 0.4,
-        "excess": -7.6
+        "pct": -8.2,
+        "benchPct": -0.1,
+        "excess": -8.1
       },
       {
         "ticker": "MSFT",
         "txDate": "2026-09-10",
-        "pct": 5.8,
-        "benchPct": 0.8,
-        "excess": 5.0
+        "pct": 6.5,
+        "benchPct": 0.3,
+        "excess": 6.2
       },
       {
         "ticker": "MSFT",
         "txDate": "2026-09-10",
-        "pct": 5.8,
-        "benchPct": 0.8,
-        "excess": 5.0
+        "pct": 6.5,
+        "benchPct": 0.3,
+        "excess": 6.2
       },
       {
         "ticker": "AAPL",
         "txDate": "2026-09-08",
-        "pct": 10.1,
-        "benchPct": -0.3,
-        "excess": 10.4
+        "pct": 10.0,
+        "benchPct": -0.8,
+        "excess": 10.8
       },
       {
         "ticker": "AAPL",
         "txDate": "2026-08-13",
-        "pct": 14.1,
-        "benchPct": -1.8,
-        "excess": 15.9
+        "pct": 13.9,
+        "benchPct": -2.3,
+        "excess": 16.2
       },
       {
         "ticker": "TSM",
         "txDate": "2026-07-10",
-        "pct": -5.0,
-        "benchPct": 1.2,
-        "excess": -6.2
+        "pct": -3.6,
+        "benchPct": 0.7,
+        "excess": -4.3
       },
       {
         "ticker": "NVDA",
         "txDate": "2026-06-26",
-        "pct": 10.2,
-        "benchPct": 4.8,
+        "pct": 9.6,
+        "benchPct": 4.2,
         "excess": 5.4
-      },
-      {
-        "ticker": "NVDA",
-        "txDate": "2026-06-26",
-        "pct": 10.2,
-        "benchPct": 4.8,
-        "excess": 5.4
-      },
-      {
-        "ticker": "NVDA",
-        "txDate": "2026-06-26",
-        "pct": 10.2,
-        "benchPct": 4.8,
-        "excess": 5.4
-      },
-      {
-        "ticker": "GOOG",
-        "txDate": "2026-06-15",
-        "pct": -12.6,
-        "benchPct": 1.2,
-        "excess": -13.8
-      },
-      {
-        "ticker": "MSFT",
-        "txDate": "2026-06-11",
-        "pct": 33.5,
-        "benchPct": 3.6,
-        "excess": 29.9
       }
     ],
-    "rowsOf": 200
+    "rowsOf": 204
   },
   "committees": {
     "reason": "assigned",
@@ -3276,11 +3324,11 @@
   "faq": [
     {
       "q": "What stocks does Cleo Fields trade?",
-      "a": "Cleo Fields has disclosed 238 trades across 33 tickers since February 2025. The most traded are NVDA (47), AAPL (23) and GOOG (20). Each trade on this page links to the official filing it came from."
+      "a": "Cleo Fields has disclosed 242 trades across 33 tickers since February 2025. The most traded are NVDA (50), AAPL (23) and GOOG (20). Each trade on this page links to the official filing it came from."
     },
     {
       "q": "Does Cleo Fields disclose trades on time?",
-      "a": "Yes. None of Cleo Fields's 238 disclosed trades was filed late: each arrived within the STOCK Act's 45-day legal maximum. The newest filing arrived on Oct 1, 2026."
+      "a": "Yes. None of Cleo Fields's 242 disclosed trades was filed late: each arrived within the STOCK Act's 45-day legal maximum. The newest filing arrived on Oct 22, 2026."
     }
   ]
 }
