@@ -4597,17 +4597,93 @@
   ],
   "tradesShown": 413,
   "holdings": {
-    "available": false,
-    "filingDate": null,
-    "reportYear": null,
-    "snapDate": null,
-    "filingsSince": 0,
-    "sourceUrl": null,
-    "totalLabel": null,
-    "positions": 0,
+    "available": true,
+    "filingDate": "2026-08-13",
+    "reportYear": 2025,
+    "snapDate": "2025-12-31",
+    "filingsSince": 9,
+    "sourceUrl": "https://efdsearch.senate.gov/search/view/annual/3e2b0cca-3ab7-428e-b2ce-f08691f27dd1/",
+    "totalLabel": "$55.2M",
+    "positions": 8,
     "optionsCount": 0,
-    "positionsTotal": 0,
-    "ranked": [],
+    "positionsTotal": 5,
+    "ranked": [
+      {
+        "kind": "stock",
+        "ticker": "BITB",
+        "asset": "Bitwise Bitcoin ETF",
+        "estLabel": "$3.0M",
+        "pctPortfolio": 5.4,
+        "isNew": false,
+        "hasOptions": false,
+        "optType": null,
+        "strike": null,
+        "expiration": null,
+        "contracts": null,
+        "firstBuy": "2025-02-25",
+        "tickerSlug": null
+      },
+      {
+        "kind": "stock",
+        "ticker": "ETHW",
+        "asset": "Bitwise Ethereum ETF",
+        "estLabel": "$375K",
+        "pctPortfolio": 0.7,
+        "isNew": false,
+        "hasOptions": false,
+        "optType": null,
+        "strike": null,
+        "expiration": null,
+        "contracts": null,
+        "firstBuy": null,
+        "tickerSlug": null
+      },
+      {
+        "kind": "stock",
+        "ticker": "DGRW",
+        "asset": "WisdomTree U.S. Quality Dividend Growth Fund",
+        "estLabel": "$75K",
+        "pctPortfolio": 0.1,
+        "isNew": false,
+        "hasOptions": false,
+        "optType": null,
+        "strike": null,
+        "expiration": null,
+        "contracts": null,
+        "firstBuy": null,
+        "tickerSlug": null
+      },
+      {
+        "kind": "stock",
+        "ticker": "—",
+        "asset": "SmithEllis Inc.Company: SmithEllisItems, Inc. (Delaware, DE) Description: Private Company Filer comment: Publishing Firm",
+        "estLabel": "$33K",
+        "pctPortfolio": 0.1,
+        "isNew": false,
+        "hasOptions": false,
+        "optType": null,
+        "strike": null,
+        "expiration": null,
+        "contracts": null,
+        "firstBuy": null,
+        "tickerSlug": null
+      },
+      {
+        "kind": "stock",
+        "ticker": "RUM",
+        "asset": "Rumble IncFiler comment: No longer held",
+        "estLabel": "$500",
+        "pctPortfolio": 0.0,
+        "isNew": false,
+        "hasOptions": false,
+        "optType": null,
+        "strike": null,
+        "expiration": null,
+        "contracts": null,
+        "firstBuy": null,
+        "tickerSlug": null
+      }
+    ],
     "options": []
   },
   "performance": {
@@ -5063,6 +5139,10 @@
     {
       "q": "Does David McCormick disclose trades on time?",
       "a": "Yes. None of David McCormick's 413 disclosed trades was filed late: each arrived within the STOCK Act's 45-day legal maximum. The newest filing arrived on Aug 27, 2026."
+    },
+    {
+      "q": "What stocks does David McCormick own?",
+      "a": "An estimate from David McCormick's 2025 annual financial disclosure, rolled forward with every trade filed since, puts the listed stocks and options at about $55.2M across 5 positions. The largest is BITB, at about $3.0M. These are bracket midpoints, not share counts or a live valuation."
     }
   ]
 }

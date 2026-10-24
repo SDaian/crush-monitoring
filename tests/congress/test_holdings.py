@@ -168,3 +168,27 @@ class TestHoldingsCoverageReason(unittest.TestCase):
     def test_every_reason_has_human_text(self):
         for r in holdings.NEEDS_REVIEW:
             self.assertIn(r, holdings.REASON_TEXT)
+
+
+class TestKeepPrior(unittest.TestCase):
+    PRIOR = {"chamber": "senate", "available": True, "reason": "ok",
+             "stocks": [{"ticker": "AAPL"}]}
+
+    def test_error_keeps_published_record(self):
+        rec = {"chamber": "senate", "available": False, "stocks": [],
+               "reason": holdings.REASON_ERROR, "error": "HTTP 403"}
+        kept = holdings.keep_prior(rec, self.PRIOR)
+        self.assertTrue(kept["available"])
+        self.assertEqual(kept["stocks"], [{"ticker": "AAPL"}])
+        self.assertEqual(kept["error"], "HTTP 403")
+
+    def test_real_finding_replaces_prior(self):
+        rec = {"available": False, "stocks": [],
+               "reason": holdings.REASON_SCANNED}
+        self.assertIs(holdings.keep_prior(rec, self.PRIOR), rec)
+
+    def test_error_without_usable_prior_stays_an_error(self):
+        rec = {"available": False, "stocks": [],
+               "reason": holdings.REASON_ERROR, "error": "x"}
+        self.assertIs(holdings.keep_prior(rec, None), rec)
+        self.assertIs(holdings.keep_prior(rec, {"available": False}), rec)

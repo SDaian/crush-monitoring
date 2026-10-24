@@ -392,6 +392,13 @@ def _cmd_holdings(args: argparse.Namespace) -> int:
     years = [today.year, today.year - 1, today.year - 2]
     senate_ready = False
     out: dict = {}
+    prior: dict = {}
+    try:
+        prior = json.loads(Path(args.output).read_text(encoding="utf-8"))[
+            "holdings"
+        ]
+    except (OSError, ValueError, KeyError):
+        pass  # no published file yet: nothing to keep
 
     for name in featured:
         entry = roster.find(name) or {}
@@ -432,6 +439,7 @@ def _cmd_holdings(args: argparse.Namespace) -> int:
         except Exception as exc:  # one member must not abort the whole run
             rec["error"] = str(exc)
             rec["reason"] = holdings.REASON_ERROR
+            rec = holdings.keep_prior(rec, prior.get(display))
         out[display] = rec
         print(
             f"{display}: {chamber or '?'} "
@@ -474,7 +482,7 @@ def _cmd_holdings(args: argparse.Namespace) -> int:
     # be opened and read by hand instead of being silently absorbed.
     gaps = [
         (name, rec) for name, rec in out.items()
-        if rec.get("reason") in holdings.NEEDS_REVIEW
+        if rec.get("reason") in holdings.NEEDS_REVIEW or rec.get("error")
     ]
     funds_only = [
         name for name, rec in out.items()
@@ -488,6 +496,8 @@ def _cmd_holdings(args: argparse.Namespace) -> int:
         print(f"\nholdings needing review — {len(gaps)}:")
         for name, rec in gaps:
             why = holdings.REASON_TEXT.get(rec["reason"], rec["reason"])
+            if rec.get("error") and rec.get("available"):
+                why = "fetch failed; kept the published holdings"
             print(f"  {name}: {why}")
             if rec.get("error"):
                 print(f"      error: {rec['error']}")
