@@ -417,6 +417,20 @@ REASON_TEXT = {
 }
 
 
+def keep_prior(rec: dict, prior: dict | None) -> dict:
+    """A fetch that raised is an outage, not a finding: keep the published
+    record. Pure, so it is tested.
+
+    An annual report changes once a year, so yesterday's parse is still the
+    best data we have; overwriting it with an empty error record wiped three
+    senators' holdings the day the Senate eFD started refusing the runner.
+    The error rides along so the coverage audit still reports the outage.
+    """
+    if rec.get("reason") != REASON_ERROR or not (prior or {}).get("available"):
+        return rec
+    return {**prior, "error": rec.get("error", "")}
+
+
 def classify(*, has_text: bool, parsed: int, kept: int) -> str:
     """Why did this member end up with `kept` stocks? Pure, so it is tested.
 
