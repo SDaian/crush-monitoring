@@ -249,6 +249,8 @@ def _cmd_fetch(args: argparse.Namespace) -> int:
         f"paper={result.paper_skips} parse_errors={result.parse_errors} "
         f"recovered={result.recovered_errors} pruned={result.pruned_trades} "
         f"changed={result.changed}"
+        + (f" failed_sources={','.join(result.failed_sources)}"
+           if result.failed_sources else "")
     )
     if not args.dry_run:
         fixed, refused = retick_executive(Path(args.output))
@@ -257,6 +259,12 @@ def _cmd_fetch(args: argparse.Namespace) -> int:
         for name in sorted(set(refused)):
             print(f"::warning::no ticker resolved for 278-T asset "
                   f"{name!r} — add it to congress/tickermatch.py")
+    # One failed source is an outage to report, not a reason to stop the
+    # run. EVERY source failing means nothing could be fetched at all, which
+    # is worth a red run.
+    if sources and len(result.failed_sources) == len(sources):
+        print("::error::every source failed to list filings")
+        return 1
     return 0
 
 

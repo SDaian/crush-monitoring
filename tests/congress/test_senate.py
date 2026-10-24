@@ -119,3 +119,26 @@ class TestPtrHtml(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class TestRefusalDetail(unittest.TestCase):
+    """The disclaimer POST's refusal names its cause in one log line."""
+
+    def test_django_csrf_page(self):
+        from congress.senate import refusal_detail
+        line = refusal_detail(403, {"Server": "nginx"},
+                              "<h1>Forbidden <span>(403)</span></h1>"
+                              "<p>CSRF verification failed. Request aborted.</p>")
+        self.assertIn("HTTP 403", line)
+        self.assertIn("server=nginx", line)
+        self.assertIn("CSRF verification failed", line)
+        self.assertNotIn("<", line)
+
+    def test_firewall_block_names_its_headers(self):
+        from congress.senate import refusal_detail
+        line = refusal_detail(403, {"Server": "AkamaiGHost", "X-Akamai-Request-ID": "1a2b"},
+                              "<HTML><BODY>Access Denied</BODY></HTML>")
+        self.assertIn("server=AkamaiGHost", line)
+        self.assertIn("x-akamai-request-id=1a2b", line)
+        self.assertIn("Access Denied", line)
+
