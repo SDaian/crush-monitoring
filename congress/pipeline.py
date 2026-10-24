@@ -61,6 +61,10 @@ class RunResult:
     parse_errors: int = 0
     recovered_errors: int = 0
     pruned_trades: int = 0
+    # Chambers whose LISTING failed this run (a site outage or a refused
+    # session). Their published filings stay as they are and the next run
+    # retries; the other chambers still update.
+    failed_sources: list[str] = field(default_factory=list)
     notes: list[str] = field(default_factory=list)
 
 
@@ -205,9 +209,20 @@ def run(
 
     for source in sources:
         processed = state["processed"].setdefault(source.chamber, {})
+        # One government site failing must not take the others down: a
+        # refused Senate session once stopped the House and OGE fetches too,
+        # and nothing was published for two runs. Keep this chamber's data,
+        # say so in the Action log, and retry on the next run.
+        try:
+            listed = source.list_filings()
+        except Exception as exc:  # network or protocol failure, not a parse error
+            result.failed_sources.append(source.chamber)
+            log(f"::warning::{source.chamber}: listing failed, keeping its "
+                f"published filings and retrying next run — {exc}")
+            continue
         refs = [
             r
-            for r in source.list_filings()
+            for r in listed
             if source.ref_filing_date(r) >= cutoff
             and source.ref_id(r) not in processed
         ]

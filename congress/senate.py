@@ -70,6 +70,19 @@ def _snippet(text: str, limit: int = 500) -> str:
     return re.sub(r"\s+", " ", text)[:limit]
 
 
+def refusal_detail(status: int, headers, body: str) -> str:
+    """One line naming what refused the disclaimer POST: the status, the
+    server and firewall headers, and the start of the page without its
+    markup. A Django CSRF rejection and a firewall block differ in all three."""
+    seen = {k.lower(): v for k, v in (headers or {}).items()}
+    keep = ("server", "cf-ray", "x-akamai-request-id", "x-cache", "via")
+    named = ", ".join(f"{k}={seen[k]}" for k in keep if k in seen)
+    text = re.sub(r"<[^>]+>", " ", body or "")
+    return (f"eFD disclaimer POST refused: HTTP {status}"
+            + (f" ({named})" if named else "")
+            + f"; page: {_snippet(text, 300)}")
+
+
 # ---------------------------------------------------------------------------
 # Session dance + search (network)
 # ---------------------------------------------------------------------------
@@ -85,15 +98,26 @@ def accept_disclaimer(session) -> None:
             "eFD disclaimer page had no csrfmiddlewaretoken; body: "
             + _snippet(resp.text)
         )
-    resp = polite_post(
-        session,
-        HOME_URL,
-        data={
-            "csrfmiddlewaretoken": match.group(1),
-            "prohibition_agreement": "1",
-        },
-        headers={"Referer": HOME_URL},
-    )
+    try:
+        resp = polite_post(
+            session,
+            HOME_URL,
+            data={
+                "csrfmiddlewaretoken": match.group(1),
+                "prohibition_agreement": "1",
+            },
+            # A browser sends Origin on a form POST, and Django checks it
+            # when present. Sent so the session matches a browser's.
+            headers={"Referer": HOME_URL, "Origin": BASE},
+        )
+    except Exception as exc:
+        # The site has refused this POST (HTTP 403 since 23 Oct 2026). Say
+        # what refused it, so one run tells a Django CSRF page apart from a
+        # firewall block.
+        resp = getattr(exc, "response", None)
+        if resp is None:
+            raise
+        raise EfdError(refusal_detail(resp.status_code, resp.headers, resp.text)) from exc
     if "csrftoken" not in session.cookies:
         raise EfdError(
             "eFD disclaimer POST did not set a csrftoken cookie; body: "

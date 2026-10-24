@@ -294,3 +294,49 @@ class TestFutureDateInvariant(unittest.TestCase):
         rows = [{"chamber": "house", "tx_date": "2026-12-26",
                  "filing_date": "2026-08-01"}]
         self.assertEqual(pipeline.invalid_trades(rows), [])
+
+
+class TestFailedSource(unittest.TestCase):
+    """A source whose listing fails is skipped for the run; the others still
+    update and its published filings stay untouched."""
+
+    def setUp(self):
+        self.dir = tempfile.TemporaryDirectory()
+        base = Path(self.dir.name)
+        self.output = base / "congress-trades.json"
+        self.state = base / "state.json"
+
+    def tearDown(self):
+        self.dir.cleanup()
+
+    def _run(self, sources):
+        logs = []
+        result = run(sources, today=TODAY, output_path=self.output,
+                     state_path=self.state, generated_at="2026-07-02T00:00:00Z",
+                     log=logs.append)
+        return result, logs
+
+    def test_one_failing_source_does_not_stop_the_others(self):
+        def refused():
+            raise RuntimeError("HTTP 403 Forbidden")
+        senate = _source([], lambda r: [], chamber="senate")
+        senate.list_filings = refused
+        house = _source([StubRef("h1")], lambda r: [_trade(r.fid)], chamber="house")
+        result, logs = self._run([senate, house])
+        self.assertEqual(result.failed_sources, ["senate"])
+        self.assertEqual(result.new_trades, 1)
+        self.assertTrue(any(m.startswith("::warning::senate: listing failed")
+                            for m in logs))
+
+    def test_failed_source_keeps_its_published_filings(self):
+        senate = _source([StubRef("s1")], lambda r: [_trade(r.fid)], chamber="senate")
+        self._run([senate])
+        before = json.loads(self.output.read_text())["trades"]
+        def refused():
+            raise RuntimeError("HTTP 403 Forbidden")
+        senate.list_filings = refused
+        result, _ = self._run([senate])
+        self.assertEqual(result.failed_sources, ["senate"])
+        self.assertEqual(json.loads(self.output.read_text())["trades"], before)
+        self.assertIn("s1", load_state(self.state)["processed"]["senate"])
+
