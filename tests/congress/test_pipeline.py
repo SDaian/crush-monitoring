@@ -340,3 +340,19 @@ class TestFailedSource(unittest.TestCase):
         self.assertEqual(json.loads(self.output.read_text())["trades"], before)
         self.assertIn("s1", load_state(self.state)["processed"]["senate"])
 
+
+
+class TestUnreadable(unittest.TestCase):
+    def test_glyph_codes_are_a_scan(self):
+        # The 12-Aug-2026 278-T: a signature, then unmapped glyph codes.
+        text = ("KEITH SONDERLING Digitally signed by KEITH SONDERLING\n"
+                "8/20/26\nDate: 2026.08.20 16:24:34 -04'00'\n"
+                + "(cid:50)(cid:42)(cid:40)(cid:3)(cid:53)" * 5)
+        self.assertTrue(pipeline.unreadable(text))
+
+    def test_stray_code_in_a_real_report_is_readable(self):
+        text = "Apple Inc (AAPL) [ST] P 01/02/2026 01/09/2026 $1,001 - $15,000 (cid:149)\n" * 3
+        self.assertFalse(pipeline.unreadable(text))
+
+    def test_plain_text_is_readable(self):
+        self.assertFalse(pipeline.unreadable("no codes here at all"))

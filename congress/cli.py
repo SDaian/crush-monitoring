@@ -100,7 +100,7 @@ def make_house_source(
     def fetch_trades(ref):
         pdf = house.fetch_ptr_pdf(session, ref)
         text = house.extract_pdf_text(pdf)
-        if not text:
+        if not text or pipeline.unreadable(text):
             raise pipeline.PaperFiling(ref.url)
         _dump(debug_dir, f"house-{ref.doc_id}.txt", text)
         return house.parse_ptr_text(text, ref)
@@ -133,7 +133,7 @@ def make_executive_source(
             session, ref.url, headers={"User-Agent": oge.BROWSER_UA}
         )
         text = oge.extract_pdf_text(resp.content)
-        if not text.strip():
+        if not text.strip() or pipeline.unreadable(text):
             raise pipeline.PaperFiling(ref.url)
         _dump(debug_dir, f"executive-{ref.unid}.txt", text)
         rows = oge.parse_transactions(
