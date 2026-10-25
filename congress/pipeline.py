@@ -12,6 +12,7 @@ readable per-trade diffs while staying valid JSON.
 from __future__ import annotations
 
 import json
+import re
 from dataclasses import dataclass, field
 from datetime import date, datetime, timezone
 from pathlib import Path
@@ -35,6 +36,23 @@ DEFAULT_STATE = PACKAGE_DIR / "state.json"
 
 class PaperFiling(Exception):
     """Raised by a fetcher when the filing is a scan with no parseable text."""
+
+
+_CID = re.compile(r"\(cid:\d+\)")
+
+
+def unreadable(text: str) -> bool:
+    """A text layer made of unmapped glyph codes is a scan for our purposes.
+
+    pdfplumber writes "(cid:50)" for a glyph whose font carries no Unicode
+    map. A page of them has text, so the scan test let it through as a parse
+    error, retried every run for ever (Trump's 12-Aug-2026 278-T: a signature
+    line and ~200 chars of codes). A real report with a stray code or two has
+    hundreds of words, so the codes must at least match the words to count.
+    """
+    codes = len(_CID.findall(text))
+    words = len(_CID.sub(" ", text).split())
+    return codes > 0 and codes >= words
 
 
 @dataclass

@@ -303,5 +303,14 @@ def parse_ptr_text(text: str, ref: HouseFilingRef) -> list[Trade]:
             )
         )
     if not trades:
-        raise HouseError(f"house PTR {ref.doc_id}: no transaction rows parsed")
+        # Say WHY the row regex matched nothing: the lines that carry a date
+        # are where rows should be, so they show the layout that broke it.
+        dated = [l.strip() for l in text.splitlines()
+                 if re.search(r"\d{2}/\d{2}/\d{4}", l)]
+        sample = " | ".join(l[:90] for l in dated[:3]) or text.strip()[:200]
+        raise HouseError(
+            f"house PTR {ref.doc_id}: no transaction rows parsed "
+            f"({len(text)} chars of text, {len(dated)} dated lines; "
+            f"sample: {sample!r})"
+        )
     return trades

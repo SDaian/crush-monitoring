@@ -135,6 +135,13 @@ class TestPtrText(unittest.TestCase):
         with self.assertRaises(HouseError):
             parse_ptr_text("PERIODIC TRANSACTION REPORT\nno rows here\n", _ref())
 
+    def test_unparseable_text_names_the_dated_lines(self):
+        text = "PERIODIC TRANSACTION REPORT\nAcme Corp 01/02/2026 odd layout\n"
+        with self.assertRaises(HouseError) as cm:
+            parse_ptr_text(text, _ref())
+        self.assertIn("1 dated lines", str(cm.exception))
+        self.assertIn("Acme Corp 01/02/2026 odd layout", str(cm.exception))
+
     def test_nul_padded_metadata_not_appended_to_asset(self):
         # Live regression: pdfplumber renders some glyph gaps as NUL bytes,
         # so the metadata markers arrive as "F\x00\x00 S\x00: New".
