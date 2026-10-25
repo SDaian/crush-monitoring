@@ -579,7 +579,8 @@ const schema = [
         const p1 =
       `Analyze the current trends in the stock market, focusing on ${a.name} ($${tk}). `
       + `Identify any emerging patterns and suggest possible investment opportunities. `
-      + `Take into account the latest earnings reports and sector news in your analysis.\n\n`
+      + `Take into account the latest earnings reports and sector news in your analysis. `
+      + `Also give a bear, base and bull scenario for the next 10 years, with the assumptions behind each.\n\n`
       + `For reference — $${tk} daily close as of ${asof}: price ${fmtPrice(a.price)}, `
       + `1-week ${a.chg_1w ?? "—"}%, 1-month ${a.chg_1m ?? "—"}%, RSI(14) ${a.rsi14 ?? "—"}, `
       + `50-day avg ${fmtPrice(a.sma50)}, 200-day avg ${fmtPrice(a.sma200)}, `
