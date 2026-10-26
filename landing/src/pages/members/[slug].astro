@@ -81,6 +81,30 @@ const fmtMonth = (iso: string | null) =>
       })
     : "—";
 
+// The trades table is grouped by the month of the TRADE, newest first (the
+// payload's own order). People search a member's trades by month ("tommy
+// tuberville stock trades executed january 2026" is the site's top query),
+// so each month gets a real <h3> that names it and counts its trades.
+const monthKey = (iso: string | null) => (iso ? iso.slice(0, 7) : "none");
+const monthLabel = (key: string) =>
+  key === "none"
+    ? "Trade date not stated"
+    : new Date(`${key}-01T00:00:00Z`).toLocaleDateString("en-US", {
+        month: "long",
+        year: "numeric",
+        timeZone: "UTC",
+      });
+const monthCounts = new Map<string, number>();
+for (const t of m.trades as any[]) {
+  const k = monthKey(t.txDate);
+  monthCounts.set(k, (monthCounts.get(k) ?? 0) + 1);
+}
+const tradeRows = (m.trades as any[]).map((t, i, all) => ({
+  t,
+  month: monthKey(t.txDate),
+  opens: i === 0 || monthKey(all[i - 1].txDate) !== monthKey(t.txDate),
+}));
+
 // "<1%" when a late filing exists but rounds to 0 — never "0%" beside a
 // non-zero worst delay (that reads as a contradiction).
 const pctLateLabel =
@@ -560,10 +584,24 @@ const schema = [
             <span role="columnheader">Filing</span>
           </div>
           {
-            m.trades.map((t: any) => (
+            tradeRows.map(({ t, month, opens }) => (
+              <>
+              {opens && (
+                <div role="row" class="tmonth" data-m={month}>
+                  <div role="cell">
+                    <h3 class="tmonth-head">
+                      {monthLabel(month)}{" "}
+                      <span class="tmonth-n" data-total={monthCounts.get(month)}>
+                        {monthCounts.get(month)} {monthCounts.get(month) === 1 ? "trade" : "trades"}
+                      </span>
+                    </h3>
+                  </div>
+                </div>
+              )}
               <div
                 role="row"
                 class="trow"
+                data-m={month}
                 data-t={(t.ticker || "").toLowerCase()}
                 data-c={(t.asset || "").toLowerCase()}
                 data-s={t.side.startsWith("SELL") ? "SELL" : t.side}
@@ -606,6 +644,7 @@ const schema = [
                   )}
                 </div>
               </div>
+              </>
             ))
           }
         </div>
@@ -671,6 +710,8 @@ const schema = [
 
         var rows = Array.prototype.slice.call(
           document.querySelectorAll(".trow:not(.thead)"));
+        var months = Array.prototype.slice.call(
+          document.querySelectorAll(".tmonth"));
         var total = rows.length;
         var COLLAPSE_AT = 25;
         // Collapsed by default only when the table is long; filtering always
@@ -697,6 +738,19 @@ const schema = [
                 (wantAsset === "bond") === (row.getAttribute("data-b") === "1"));
             if (hit) shown++;
             row.hidden = !hit || (!showAll && shown > COLLAPSE_AT);
+          });
+          // A month heading shows only while one of its rows does, and its
+          // count follows the filter, so it never counts hidden rows.
+          months.forEach(function (head) {
+            var key = head.getAttribute("data-m");
+            var visible = rows.filter(function (row) {
+              return row.getAttribute("data-m") === key && !row.hidden;
+            }).length;
+            head.hidden = visible === 0;
+            var n = head.querySelector(".tmonth-n");
+            var all = Number(n.getAttribute("data-total"));
+            var c = filtering() ? visible : all;
+            n.textContent = c + (c === 1 ? " trade" : " trades");
           });
           empty.hidden = shown !== 0;
           count.textContent =
@@ -1201,6 +1255,30 @@ const schema = [
   }
   .trow > * {
     min-width: 0;
+  }
+  /* A month heading inside the trades table. Sticky to the left edge so it
+     stays readable while a phone scrolls the table sideways. */
+  .tmonth {
+    padding: 1.6rem 0.25rem 0.5rem;
+    border-bottom: 1px solid var(--color-ink);
+  }
+  .tmonth > [role="cell"] {
+    position: sticky;
+    left: 0;
+    width: max-content;
+  }
+  .tmonth-head {
+    font-family: var(--font-sans);
+    font-weight: 800;
+    font-size: 1.05rem;
+    letter-spacing: -0.01em;
+  }
+  .tmonth-n {
+    margin-left: 0.5rem;
+    font-family: var(--font-mono);
+    font-weight: 400;
+    font-size: 0.75rem;
+    color: var(--color-ink-soft);
   }
   .ttick {
     font-family: var(--font-sans);
