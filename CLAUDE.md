@@ -454,6 +454,13 @@ sites. Full details in `congress/README.md`. Conventions:
     otherwise), and the four readings that do not vote say "No vote". The
     50-vs-200 vote has its own card for the same reason: the panel promises
     a tally of what it shows.
+  - **Volatility is shown, never voted.** `vol_1y` is the stock's annualised
+    1-year volatility (`market.realized_vol`, the same formula as the market
+    line), and the "Vol. (1y)" card compares it with SPY's `vol1y` from
+    `market.json` ("4.1x the S&P 500"). Size of move is not direction, so it
+    stays out of `ai_score` for the reason market volatility does. On the VIX
+    path no SPY series is fetched, so the card drops the comparison and keeps
+    the stock's own number.
   - **Changing the vote set bumps `indicators.SCORE_VERSION`.** A changed set
     moves many ratings on one morning for a reason that is not the market, so
     `daily_report.main` drops the flip baseline for the single run that first

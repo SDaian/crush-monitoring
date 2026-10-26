@@ -1438,6 +1438,7 @@ def technical_block(ticker: str, readings: dict) -> dict | None:
         "vsSma50": rec.get("vs_sma50"),
         "vsSma200": rec.get("vs_sma200"),
         "relVol": rec.get("rel_vol"),
+        "vol1y": rec.get("vol_1y"),
         "high52w": rec.get("high_52w"),
         "low52w": rec.get("low_52w"),
         "rangePos": rec.get("range_pos"),

@@ -1088,6 +1088,11 @@ class TestTechnicalBlock(unittest.TestCase):
         self.assertEqual(len(b["series"]), 1)
         self.assertEqual(len(b["signals"]), 1)
 
+    def test_panel_carries_one_year_volatility(self):
+        b = ld.technical_block("NVDA", dict(self.READINGS, NVDA=dict(
+            self.READINGS["NVDA"], vol_1y=48.3)))
+        self.assertEqual(b["vol1y"], 48.3)
+
     def test_panel_carries_each_reading_s_vote(self):
         # The page tags every card from this map; it must be the shared
         # function's output and agree with the headline tally.

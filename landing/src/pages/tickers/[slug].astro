@@ -189,6 +189,15 @@ const cells = tech
         x: `${num(tech.low52w)} – ${num(tech.high52w)}` },
       { k: "Rel. vol", v: tech.relVol == null ? "—" : `${num(tech.relVol)}x`,
         x: "vs 20-day average" },
+      // How much the stock moves, beside the S&P 500 measured the same way.
+      // No vote: size of move is not direction. Without the index's number
+      // (VIX path, or an outage) the card keeps the stock's own reading.
+      // The name stays at 9 characters: "No vote" is the longest tag, and a
+      // longer name pushes it onto a second line at 375px.
+      { k: "Vol. (1y)", v: tech.vol1y == null ? "—" : `${num(tech.vol1y, "%", 0)}`,
+        x: tech.vol1y == null ? "" : market?.vol1y
+          ? `${num(tech.vol1y / market.vol1y, "x", 1)} the S&P 500`
+          : "annualised" },
     ]
   : [];
 const scoreClass = tech
