@@ -137,7 +137,14 @@ def from_benchmark(rows: list[dict], window: int = REALIZED_WINDOW):
         return None
     # Yesterday's reading, so the line can show which way volatility moved.
     prev = realized_vol(closes[:-1], window)
-    return _reading(SOURCE_REALIZED, level, prev, rows[-1]["date"])
+    reading = _reading(SOURCE_REALIZED, level, prev, rows[-1]["date"])
+    # The ticker pages compare each stock's 1-year volatility with this one,
+    # measured the same way. Absent on the VIX path (no SPY series is fetched
+    # then); the pages drop the comparison and keep the stock's own number.
+    year = realized_vol(closes, YEAR)
+    if reading and year is not None:
+        reading["vol1y"] = round(year, 1)
+    return reading
 
 
 def build(vix_rows: list[dict] | None = None,

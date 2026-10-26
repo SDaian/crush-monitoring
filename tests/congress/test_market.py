@@ -98,6 +98,16 @@ class TestFromBenchmark(unittest.TestCase):
     def test_not_enough_history(self):
         self.assertIsNone(market.from_benchmark(series([100.0, 101.0])))
 
+    def test_carries_the_index_one_year_volatility(self):
+        closes = [100.0 * (1.01 ** (i % 2)) for i in range(300)]
+        r = market.from_benchmark(series(closes))
+        self.assertEqual(r["vol1y"],
+                         round(market.realized_vol(closes, market.YEAR), 1))
+
+    def test_short_history_omits_the_one_year_number(self):
+        r = market.from_benchmark(series([100.0 + i for i in range(40)]))
+        self.assertNotIn("vol1y", r)
+
 
 class TestBuild(unittest.TestCase):
     def test_prefers_the_vix(self):

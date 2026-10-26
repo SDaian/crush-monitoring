@@ -102,6 +102,22 @@ class TestComputeIndicators(unittest.TestCase):
         self.assertIsNone(out["sma50"])
         self.assertIsNone(out["sma200"])
         self.assertIsNone(out["vs_sma200"])
+        self.assertIsNone(out["vol_1y"])  # a year of returns, or nothing
+
+    def test_one_year_volatility(self):
+        # Alternating +1% / -1% days: the same formula as the market reading,
+        # so a stock's number and the S&P 500's are directly comparable.
+        from congress import market
+        closes = [100.0 * (1.01 ** (i % 2)) for i in range(300)]
+        out = ind.compute_indicators(ind.parse_series(td_body(closes)))
+        self.assertEqual(out["vol_1y"],
+                         round(market.realized_vol(closes, ind.YEAR), 1))
+        self.assertGreater(out["vol_1y"], 0)
+
+    def test_volatility_casts_no_vote(self):
+        closes = [100.0 * (1.01 ** (i % 2)) for i in range(300)]
+        out = ind.compute_indicators(ind.parse_series(td_body(closes)))
+        self.assertNotIn("vol_1y", {v["key"] for v in ind.votes(out)})
 
 
 class TestSignals(unittest.TestCase):

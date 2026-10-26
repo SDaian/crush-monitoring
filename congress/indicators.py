@@ -23,6 +23,8 @@ import json
 import re
 from datetime import date
 
+from .market import realized_vol
+
 # The featured stock universe (ticker → display name). Order drives the card
 # strip on the page: chip / foundry names first, then hyperscalers & big-tech,
 # then the data-center / power / server build-out. Any of these can be traded
@@ -525,6 +527,12 @@ def compute_indicators(rows: list[dict]) -> dict | None:
         "volume": int(vol) if vol is not None else None,
         "avg_vol_20": int(avg_vol) if avg_vol is not None else None,
         "rel_vol": _round(vol / avg_vol if avg_vol else None, 2),
+        # Annualised volatility of daily returns over the last year: how much
+        # the stock moves, not which way. It casts no vote — the score reads
+        # direction, and a size-of-move reading would flip ratings for a
+        # reason that is not a trend (the same rule that keeps the market's
+        # volatility out of ai_score). Same formula as market.realized_vol.
+        "vol_1y": _round(realized_vol(closes, YEAR), 1),
         "high_52w": round(high52, 2),
         "low_52w": round(low52, 2),
         # Where the price sits in its 52-week range, 0 (low) → 100 (high).
