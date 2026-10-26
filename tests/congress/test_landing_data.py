@@ -167,6 +167,16 @@ class TestPayloads(unittest.TestCase):
             self.assertEqual(st["tradesThisYear"], 1)
             late = json.loads((out / "late.json").read_text())
             self.assertIn("worst", late)
+            self.assertEqual(st["paused"], [])
+
+    def test_write_files_carries_paused_sources(self):
+        paused = [{"chamber": "senate", "label": "Senate",
+                   "since": "2026-10-27", "newest": "2026-10-22"}]
+        with TemporaryDirectory() as d:
+            ld.write_files([T()], Path(d), today=date(2026, 10, 28),
+                           paused=paused)
+            st = json.loads((Path(d) / "stats.json").read_text())
+            self.assertEqual(st["paused"], paused)
 
 
 class TestLatePayload(unittest.TestCase):

@@ -707,6 +707,16 @@ sites. Full details in `congress/README.md`. Conventions:
   flagged `indexable: false`, the same flag the sitemap filter and the page's
   own `noindex` read. It once pushed 13 hidden ticker stubs every morning —
   telling Bing to crawl pages we tell every robot to ignore.
+- **A source that stops answering is said out loud.** `pipeline.run` keeps
+  a failing source's published filings and moves on, which is right for one
+  bad morning and wrong for three weeks of silence. `track_sources` records
+  the first day each listing failed in `state.json` (`sources`, absent while
+  all work); `paused_sources` reports any source failing on two different
+  days, with the newest filing still shown for it. Three surfaces read that
+  one function: the morning report (first section, email and issue), the
+  dateline on every summary page (`NewestFiling.astro`, via `stats.paused`),
+  and a note under the tracker's intro. Each says when the fetch began
+  failing and how current the data is, both facts; none guesses the cause.
 - **A parser fix does not reach data already published.** `congress/state.json`
   records every processed `filing_id`, so a document is never read twice —
   which means a bad row stays live forever unless the filing is forgotten.

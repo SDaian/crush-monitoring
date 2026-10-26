@@ -544,7 +544,10 @@ def _cmd_landing(args: argparse.Namespace) -> int:
     returns = _optional_json(args.returns).get("returns") or {}
     perf = _optional_json(args.performance)
     today = datetime.now(timezone.utc).date()
-    rows, stats = landing_data.write_files(trades, Path(args.output), today)
+    paused = pipeline.paused_sources(
+        pipeline.load_state(pipeline.DEFAULT_STATE), trades, today)
+    rows, stats = landing_data.write_files(trades, Path(args.output), today,
+                                           paused=paused)
     members = landing_data.write_member_files(
         trades, holdings, Path(args.output), today_iso=today.isoformat(),
         returns=returns, perf=perf)

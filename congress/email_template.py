@@ -467,11 +467,19 @@ def render_html(*, date_label: str, disclaimer: str, scorecard: list[dict],
                 tracker_url: str, preheader: str, report_url: str = "",
                 bond_count: int = 0, market: dict | None = None,
                 coverage: list[str] | None = None,
+                paused: list[str] | None = None,
                 standalone: bool = True) -> str:
     """The daily trade/scorecard digest email (traffic is a separate email)."""
     pad = PAD if standalone else PAD_EMBED
     # Disclosures lead — they are the product; the scorecard supports.
     body_rows = "".join([
+        # A source that stopped updating leads: it changes how every section
+        # below reads. Rendered only while one is paused.
+        (_section("Data paused", "A source is not updating",
+                  "".join(
+                      f"<p style='margin:0 0 6px;{_f('13px', '1.5', SANS)}"
+                      f"color:{INK}'>{_esc(line)}</p>" for line in paused), pad)
+         if paused else ""),
         _section("Congress", f"New disclosures "
                  f"<span style='font-weight:400;font-size:13px;color:{INK_SOFT}'>"
                  f"(filed since {_esc(cutoff)})</span>",

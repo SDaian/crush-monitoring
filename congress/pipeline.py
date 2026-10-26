@@ -34,6 +34,62 @@ DEFAULT_OUTPUT = REPO_ROOT / "docs" / "data" / "congress-trades.json"
 DEFAULT_STATE = PACKAGE_DIR / "state.json"
 
 
+# A source whose listing has failed on two different days is paused, not a
+# blip: the site says so and the morning report flags it. One bad morning
+# stays in the Action log only.
+PAUSE_DAYS = 1
+SOURCE_LABELS = {"senate": "Senate", "house": "House",
+                 "executive": "Executive branch"}
+
+
+def track_sources(state: dict, attempted: list[str], failed: list[str],
+                  today: date) -> None:
+    """Record in ``state["sources"]`` the first day each source's listing
+    failed; a success clears it. Pure on ``state``.
+
+    A failure is otherwise a warning in one run's log, and a source can stay
+    dark for weeks without anyone reading it (the Senate eFD began refusing
+    the runner on 23 Oct 2026). The key is absent while every source works,
+    so a healthy run leaves state.json unchanged.
+    """
+    status = state.setdefault("sources", {})
+    for chamber in attempted:
+        if chamber in failed:
+            status.setdefault(chamber, {"failing_since": today.isoformat()})
+        else:
+            status.pop(chamber, None)
+    if not status:
+        del state["sources"]
+
+
+def paused_sources(state: dict, trades: list[dict], today: date,
+                   min_days: int = PAUSE_DAYS) -> list[dict]:
+    """The sources failing for at least ``min_days`` days, with the newest
+    filing we still show for each. Pure, so every surface states the same
+    two facts: when the fetch began failing, and how current the data is."""
+    out = []
+    for chamber, s in sorted((state.get("sources") or {}).items()):
+        since = s.get("failing_since")
+        if not since or (today - date.fromisoformat(since)).days < min_days:
+            continue
+        newest = max((t["filing_date"] for t in trades
+                      if t.get("chamber") == chamber and t.get("filing_date")),
+                     default=None)
+        out.append({"chamber": chamber,
+                    "label": SOURCE_LABELS.get(chamber, chamber.title()),
+                    "since": since, "newest": newest})
+    return out
+
+
+def pause_line(p: dict) -> str:
+    """One sentence for the report: the outage and what it leaves showing."""
+    line = (f"{p['label']}: our daily fetch from the official site has failed "
+            f"since {p['since']}.")
+    if p.get("newest"):
+        line += f" The newest {p['label']} filing shown is {p['newest']}."
+    return line
+
+
 class PaperFiling(Exception):
     """Raised by a fetcher when the filing is a scan with no parseable text."""
 
@@ -302,6 +358,9 @@ def run(
             i: d for i, d in state["processed"][chamber].items() if d >= cutoff
         }
 
+    if not dry_run:
+        track_sources(state, [s.chamber for s in sources],
+                      result.failed_sources, today)
     output["trades"] = sorted(trades.values(), key=trade_sort_key)
     output["skipped_filings"] = sorted(
         skipped.values(), key=lambda s: (s["filing_date"], s["filing_id"]), reverse=True

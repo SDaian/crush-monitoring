@@ -562,6 +562,21 @@ class TestHoldingsGaps(unittest.TestCase):
         self.assertIn("Alan Armstrong", r["markdown"])
         self.assertIn("Holdings we could not parse", r["html"])
 
+    def test_paused_source_leads_email_and_markdown(self):
+        r = daily_report.build_report(
+            [], {}, [], {}, "2026-10-28",
+            paused=[{"label": "Senate", "since": "2026-10-27",
+                     "newest": "2026-10-22"}])
+        self.assertIn("Data paused", r["markdown"])
+        self.assertLess(r["markdown"].index("Data paused"),
+                        r["markdown"].index("## 🏛 New disclosures"))
+        self.assertIn("newest Senate filing shown is 2026-10-22", r["html"])
+
+    def test_no_pause_renders_no_section(self):
+        r = daily_report.build_report([], {}, [], {}, "2026-10-28")
+        self.assertNotIn("Data paused", r["markdown"])
+        self.assertNotIn("Data paused", r["html"])
+
     def test_clean_day_renders_no_coverage_section(self):
         r = daily_report.build_report([], {}, [], {}, "2026-08-02",
                                       coverage_gaps=[])

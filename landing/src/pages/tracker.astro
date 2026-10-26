@@ -19,6 +19,17 @@ import SignupModal from "../components/SignupModal.astro";
 import { seoDescription, seoTitle, branded, dataset, abs, RECORD_ID, WEBSITE_ID } from "../lib/seo";
 import memberIndex from "../data/members/_index.json";
 import tickerIndex from "../data/tickers/_index.json";
+import stats from "../data/stats.json";
+
+// A source whose daily fetch keeps failing is named under the intro, with
+// the newest filing still shown for it (pipeline.paused_sources). Empty while
+// every source works, so the note costs nothing on a normal day.
+const paused: { label: string; since: string; newest: string | null }[] =
+  (stats as any).paused ?? [];
+const day = (d: string) =>
+  new Date(`${d}T00:00:00Z`).toLocaleDateString("en-US", {
+    month: "short", day: "numeric", year: "numeric", timeZone: "UTC",
+  });
 
 // Which member/ticker pages exist, resolved at BUILD time from the same
 // generated indexes that build those pages — so a feed row can deep-link
@@ -97,6 +108,14 @@ const schema = [
         Disclosures arrive 30–45 days after the trade and amounts are brackets,
         never exact. Not investment advice.
       </p>
+      {paused.map((p) => (
+        <p class="mt-4 max-w-[60ch] border-l-2 border-stamp pl-3 text-[0.95rem] leading-[1.6] text-ink">
+          <b>{p.label} updates are paused.</b> Our daily fetch from the official
+          {" "}{p.label} site has failed since {day(p.since)}{p.newest
+            ? `, so the newest ${p.label} filing shown is ${day(p.newest)}`
+            : ""}. Every other source is current.
+        </p>
+      ))}
     </section>
 
     <div class="tracker mx-auto max-w-[85rem] px-[5vw] pb-[10vh]">
