@@ -1,245 +1,188 @@
-# congress/ — congressional stock-trade fetcher
+# congress/ — the Capitol Ledger pipeline
 
-Scrapes Periodic Transaction Reports (PTRs) from the two official sources,
-normalizes them into one schema, and accumulates them into
-`docs/data/congress-trades.json` for the Pages tracker (`docs/trades.html`).
+Fetches trade disclosures from the three official sources, normalizes them
+into one schema, and writes every data file the site and the morning email
+read. Run as `python3 -m congress <command>`; `--help` lists them all.
+
+The rules behind each choice below, with the incident that set each one,
+are in [`CLAUDE.md`](../CLAUDE.md). This file says what each part does and
+how to run it.
 
 ## Sources (official only)
 
 | Chamber | Listing | Filing documents |
 |---|---|---|
-| Senate | `efdsearch.senate.gov` — disclaimer POST (CSRF) then the DataTables-style JSON search (`/search/report/data/`, report type 11 = PTR) | Electronic PTRs are HTML tables; paper filings (`/search/view/paper/…`) are scans |
-| House | `disclosures-clerk.house.gov` — yearly index ZIP `public_disc/financial-pdfs/<YEAR>FD.zip` (TSV; FilingType `P` = PTR) | `public_disc/ptr-pdfs/<YEAR>/<DocID>.pdf`; e-filed PTRs are text PDFs, paper ones are scans |
-| Executive (President) | `extapps2.oge.gov/201/Presiden.nsf` — OGE Form 278-T Periodic Transaction Reports. The President is **not** in OGE's browsable PAS Index view (appointees only) and the app exposes no search, so his filings are curated by stable document UNID in `oge_filings.json` | `.../PAS+Index/<UNID>/$FILE/<name>.pdf` — **scanned** PDFs with an OCR text layer |
+| Senate | `efdsearch.senate.gov`: a disclaimer POST (CSRF), then the JSON search (`/search/report/data/`, report type 11 = PTR) | Electronic PTRs are HTML tables; paper filings (`/search/view/paper/…`) are scans |
+| House | `disclosures-clerk.house.gov`: the yearly index ZIP `public_disc/financial-pdfs/<YEAR>FD.zip` (TSV; FilingType `P` = PTR) | `public_disc/ptr-pdfs/<YEAR>/<DocID>.pdf`; e-filed PTRs are text PDFs, paper ones are scans |
+| Executive (President) | `extapps2.oge.gov/201/Presiden.nsf`, OGE Form 278-T. The President is in no browsable OGE view, so his filings are listed by document UNID in `oge_filings.json` | `.../PAS+Index/<UNID>/$FILE/<name>.pdf`, scanned PDFs with an OCR text layer |
+
+A source that fails to list is skipped for the run and keeps its published
+filings; the others carry on. `pipeline.track_sources` records the first day
+of a failure in `state.json`, and a source failing on two different days is
+named on the site and at the top of the morning email.
+
+Scanned filings, and text layers made only of unmapped glyph codes
+(`(cid:N)`), are recorded as paper in `skipped_filings` with a link and never
+retried. A filing with readable text that yields no rows is a parse error: it
+is listed as skipped and **retried on every run**, so a parser fix heals it.
+A fix does not reach rows already published; `fetch --reparse-invalid`
+re-downloads the filings whose rows break an invariant.
+
+Known limit: an amended filing is treated as a new filing, so an amended
+trade can appear twice, once per document, each linked to its own filing.
 
 ## Executive 278-T (`oge.py` → chamber `executive`)
 
-The President discloses trades on OGE Form 278-T. Unlike the House e-filed PDFs,
-these are **scanned images with a noisy OCR text layer** (digits misread as
-letters: `5`→`S`, `0`→`D`/`O`, `1`→`l`), so `oge.parse_transactions` anchors on
-the regular `<type> <date> No <amount>` tail of each row and **snaps the amount
-to the fixed STOCK Act brackets**, which corrects residual OCR errors. The
-President's disclosed transactions are managed-account **purchases of corporate
-& municipal bonds** (plus the odd bond ETF), so these rows carry **no equity
-ticker** and therefore no "return since buy".
+The 278-T is a scanned form with a noisy OCR layer (`5`→`S`, `0`→`O`,
+`1`→`l`). `oge.parse_transactions` anchors on the regular
+`<type> <date> No <amount>` tail of each row and snaps the amount to the
+STOCK Act brackets, which corrects most OCR damage.
 
-Because he is not listed in any browsable OGE view, the filings to ingest are
-curated in **`congress/oge_filings.json`** (one entry per 278-T PDF: its stable
-`unid` + attachment `filename`; the report date is parsed from the filename).
-The daily job re-fetches and re-parses each seeded UNID. **To add a newly posted
-278-T**, append its `unid` and `filename` to that file. Only `oge.fetch_trades`
-(the PDF GET) and `oge.extract_pdf_text` (pdfplumber) touch the network/binary
-deps; the parsing is pure and fixture-tested offline.
+The early filings held only bonds; since June 2026 they also list stocks and
+ETFs. The form has no ticker column, so `tickermatch.py` resolves each equity
+name **exactly or not at all**: from the curated `OVERRIDES` map, then from
+the name–ticker pairs in the House and Senate rows. A miss prints a
+`::warning::`; add the name to `OVERRIDES` and the next run's retick pass
+fills the ticker in, with no re-download.
 
-Paper/scanned filings are never parsed: they are recorded in
-`skipped_filings` with a link and surfaced on the page. Parse-error filings
-are also skipped-with-link but are **retried on every run** (they are not
-marked processed), so they self-heal after a parser fix.
+To track a newly posted 278-T, append its `unid` and `filename` to
+`oge_filings.json`.
 
-## Return since buy (`prices.py` → `docs/data/returns.json`)
+## Holdings (`holdings.py` → `docs/data/holdings.json`)
 
-For every disclosed **buy** of a listed US equity, `congress prices` estimates
-how the stock has performed since the trade date, using Twelve Data (free tier, key via the CONGRESS_PRICES_KEY secret). Per buy it stores the
-entry close (the trade date's close, or the prior session), and the % change to
-the latest available close.
+A PTR discloses trades; positions live in the **annual** report. `congress
+holdings` parses the individual stocks and options from each featured
+member's latest annual report:
 
-This is a **stock-performance follow-through, not the member's realized
-profit** — holding period, later sells, dividends and position size are all
-unknown, and the STOCK Act discloses a trade *date*, not a fill price. Only
-listed US equities price; options, bonds, foreign and delisted names are left
-out (the page shows "—"). The number is intentionally an estimate.
+- **House**: the Schedule A text PDF (`[ST]` stock, `[OP]` option).
+- **Senate**: the eFD annual report's Assets table (HTML).
+- **Executive**: the OGE 278 is a scanned image, so it is link-only.
 
-Only `prices.fetch_raw` touches the network; parsing and the return math are
-pure stdlib, so `tests/congress/test_prices.py` runs offline against a JSON
-fixture. Run standalone with `python3 -m congress prices` (add `--limit N` to
-price only the first N tickers while testing).
+Each member carries a `reason` (`holdings.classify`): parsed, scanned, no
+assets parsed, funds only, no filing, or error. "Funds only" is correct data,
+not a gap. A fetch that fails keeps the member's published holdings.
 
-**Live feed: Twelve Data.** The daily Action reads the `CONGRESS_PRICES_KEY` repo secret and prices the featured + ~100 most-traded tickers (free tier is 800 calls/day, 8/min), which covers where the buy volume is; the long tail shows “—”. The key is passed only as an env var and never written to any file, log or committed URL. On a total miss (missing key / outage) the writer keeps the existing `returns.json` rather than clobbering it.
+The member pages roll the snapshot forward with every later trade
+(`landing_data.rolled_holdings`): buys add, sells subtract, options expire.
+Values are bracket midpoints, never share counts.
 
+## Prices and returns (`prices.py` → `returns.json`, `performance.json`)
 
+For every disclosed **buy** of a listed US equity, `congress prices` records
+the stock's change since the trade date, beside the S&P 500's change over the
+same window (`bench_pct`). `performance.py` turns that into each featured
+member's "$1 in every buy vs $1 in the S&P" series. This is the stock's
+move, **not** the member's profit: holding period, sells and position size
+are unknown, and the entry is the trade date's close, not the fill price.
 
-**Option context.** For option trades we also capture the filer's free-text Description (House) / Comment (Senate) verbatim into `comment`, and parse out `option` = {type, strike, expiration, contracts} when disclosed (e.g. "Purchased 200 call options with a strike price of $50 and an expiration date of 3/19/27."). Disclosure is inconsistent — the page shows what the filer gave and "details not specified in filing" otherwise; quantity is only shown when the filer wrote it (it is not a required field).
+Data comes from Twelve Data (`CONGRESS_PRICES_KEY`, 800 calls/day, 8/min).
+Only `prices.fetch_raw` touches the network. A total miss keeps the previous
+files.
 
-## Real holdings (`holdings.py` → `docs/data/holdings.json`)
+## Technical readings (`indicators.py`, `market.py` → `ai-indicators.json`)
 
-The PTRs above disclose *trades*, not positions. A member's actual **holdings**
-live in their **annual** financial-disclosure report, which lists each asset
-with a year-end value bracket. `congress holdings` parses the **individual
-stocks and options** out of each featured member's latest annual report and
-writes `docs/data/holdings.json` for the page's "Holdings" tab. The page then
-shows an **estimated current** portfolio: it takes the annual report as a
-baseline and **rolls it forward** with every PTR trade dated after the snapshot
-(buys add, sells subtract, new tickers appear, fully-sold names drop off;
-options past expiry are dropped). Parsing:
+`congress ai` computes a reading for every symbol that has a ticker page:
+RSI(14), the 8/21 EMA pair, the 20/50/200-day averages, period returns,
+relative volume, the 52-week range, 1-year volatility, and (when the plan
+serves it) the next earnings date. Records flagged `featured` feed the
+morning scorecard and the tracker's "Featured stocks" tab.
 
-- **House**: annual FD (`FilingType == 'O'` in the same yearly index ZIP), a
-  text PDF whose "Schedule A" lists `<name> (<TICKER>) [ST|OP] <owner> $lo - …`.
-  The asset-type code (`[ST]` stock / `[OP]` option) can wrap to the next line;
-  the value's upper bound wraps too, so the bracket is resolved from its
-  (unique) lower bound. Option strike/expiry come from the row's `D:` note.
-- **Senate**: the eFD "Annual Report" (`/search/view/annual/<uuid>/`), a
-  structured HTML page whose Assets table has
-  `# | Asset | Asset Type | Owner | Value | Income Type | Income`.
-- **Executive (Trump)**: the annual OGE 278 is a ~250-page **scanned image** —
-  not machine-readable — so it's shown "link only", and the page falls back to
-  an inferred net-trading estimate.
+- **Seven votes.** `indicators.votes` decides one buy/hold/sell vote per
+  check; `ai_score` counts them into a label; every surface shows the
+  breakdown and "not investment advice". Volatility and the market reading
+  never vote. Changing the vote set bumps `SCORE_VERSION`.
+- **Named signals** (golden/death cross, RSI crossing 30/70, new 52-week
+  high/low) on featured symbols go to `meta.new_signals`;
+  `python3 -m congress.notify_signals` opens a GitHub issue for each (more
+  than eight at once become one summary issue).
+- **Market context** (`market.py`): the VIX when the plan serves it,
+  otherwise our own 20-day realized volatility of SPY, labelled as such.
+- `--skip-if-closed` skips the paced fetch when no new session has closed.
 
-Only individual company stocks (`[ST]` / "…Stock") are kept — ETFs, funds,
-bonds, bank/retirement accounts, real estate and private business are excluded.
-It is a **yearly snapshot**, values are **brackets**, and scanned/paper annual
-reports can't be parsed (that member is marked `available: false`). Only the
-listing/fetch helpers touch the network; the two parsers are pure and
-fixture-tested offline (`tests/congress/test_holdings.py`).
+## Site data (`landing_data.py` → `landing/src/data/`)
 
-## Featured-stock technical indicators (`indicators.py` → `docs/data/ai-indicators.json`)
+`congress landing` writes everything the Astro site builds from: the feed
+and stats, `/late`, `/what-congress-is-buying`, one JSON per member page and
+ticker page (with their FAQ answers, holdings, committee seats and technical
+read), `market.json`, and the indexes. A page file the run did not write is
+deleted. `sectors.py` + `sectors.json` badge each stock with an industry and
+list a member's trades in industries their committees oversee
+(`committees.py`).
 
-The page's **"⭐ Featured stocks"** tab shows *mechanical* daily technical readings
-for a fixed AI-adjacent universe (chips, hyperscalers, data-center build-out —
-see `AI_TICKERS`): latest close, RSI(14, Wilder), 20/50/200-day moving
-averages, period returns, volume vs. its 20-day average, and the 52-week range.
-`congress ai` fetches each ticker's daily history (reusing the Twelve Data
-key/session from `prices.py`) and writes `docs/data/ai-indicators.json`.
+## Morning report (`daily_report.py`, `email_template.py`)
 
-- **Mechanical summary, never advice.** The Python module emits only numbers;
-  the page's `aiScore` derives a **transparent buy/sell/hold tally** from those
-  indicators (each votes buy/hold/sell, full breakdown shown, labelled "not
-  investment advice"). It is a reproducible rule-based read, not an opaque
-  recommendation. Each ticker also carries two **copy-paste prompts** pre-filled
-  with the readings (and that mechanical read) for a deeper, fundamentals-aware
-  analysis in the user's *own* AI assistant.
-- **Named signals + notification.** `compute_signals` detects events that fire
-  on the latest bar — golden/death cross, RSI crossing 30/70, reclaiming/losing
-  the 50-day, new 52-week high/low. New signals (deduped via
-  `meta.emitted_signal_keys`) are surfaced in `meta.new_signals`;
-  `notify_signals.py` opens a GitHub **issue** per new signal (which emails repo
-  watchers). Runs as `python3 -m congress.notify_signals` — module form, so the
-  package's `http.py` doesn't shadow stdlib `http`. A burst (> 8) collapses into
-  one summary issue.
-- **Snapshot, not real-time; not advice.** Values are the previous session's
-  daily close. The indicator math and signal detection are pure stdlib and
-  fixture-tested offline (`tests/congress/test_indicators.py`,
-  `test_ai_cli.py`). The committed `ai-indicators.json` ships as clearly-labelled
-  `_sample` data until the first live refresh overwrites it.
+`python3 -m congress.daily_report` builds one payload and delivers it as:
 
-## Morning report (`daily_report.py` → GitHub issue email)
+- an email to the owner over SMTP (`SMTP_USER`, `SMTP_PASS`),
+- the same email to subscribers through Buttondown (`buttondown.py`),
+- a dated GitHub issue, assigned to the owner,
+- `landing/src/data/report.json` and a dated copy, for `/report`.
 
-`congress daily_report` (run as `python3 -m congress.daily_report`) composes a
-short morning digest and delivers it **(1) by direct email via SMTP** (primary
-— set `SMTP_USER`/`SMTP_PASS` secrets, e.g. a Gmail address + App Password;
-optional `SMTP_HOST`/`SMTP_PORT`/`REPORT_EMAIL_TO` default to Gmail:587 and the
-sender) and **(2) as a dated GitHub issue** (archive + flip state, assigned to
-the owner). The digest has three sections: the AI **buy/sell/hold scorecard**
-(`indicators.ai_score`, mirroring the page's `aiScore`), **signals overnight**
-(new mechanical signals + tickers whose rating flipped vs. yesterday), and
-**new congressional disclosures** (filed in the last few days). It closes the
-previous day's report issue and records the issue number + ratings in
-`congress/report_state.json` for the next run's diff. The daily Action runs it
-before the slow price step (guarded to the schedule or the `report` dispatch
-input), timed via the `06:50 UTC` cron to land near **9am Madrid** (UTC cron
-ignores DST, so the local time drifts ±1h). Pure stdlib except the GitHub API
-call; `build_report` is fixture-tested offline. It is **not investment advice** —
-the disclaimer rides at the top of every issue.
+Disclosures lead, then the featured scorecard, then overnight signals and
+rating flips. "New" means not yet reported, inside a 45-day lookback. The
+report sends once a day, and skips quiet days (no new close and no new
+filing). Two separate traffic emails, daily and on Mondays weekly, come from
+Vercel Web Analytics (`analytics.py`).
 
-## Data-honesty constraints (by law, not by us)
+## Social drafts (`social.py`, `typefully.py`)
 
-- Filings may lag the trade by **30–45 days**.
-- Amounts are **brackets** ($1,001–$15,000 … $50,000,001+), never exact.
-- Trades may belong to a spouse (SP), joint account (JT) or dependent child (DC).
+`congress social` turns notable new filings (a featured member, a bracket
+floor of $1M or more, or more than 90 days late) into a card image and post
+copy, and creates **unpublished** Typefully drafts for the owner to approve.
+Live needs both `TYPEFULLY_API_KEY` and the variable `SOCIAL_LIVE=true`;
+otherwise the run renders the cards as the `social-cards` artifact and writes
+nothing. The card is attached automatically; if the upload fails the draft
+carries an `[attach card: …]` note instead.
 
-## Layout
+- Design: `social/card_template.html`; wording: `social/copy_template.txt`.
+- State: `social_state.json` maps `chamber:filing_id` to its draft. Delete an
+  entry to re-draft that filing.
 
-- `normalize.py` — `Trade` schema, bracket/type/date parsing, name
-  canonicalization, roster join. Pure stdlib.
-- `senate.py` / `house.py` / `oge.py` — listing + parsing per chamber
-  (`oge.py` covers the executive-branch 278-T). Parsers are pure functions of
-  `str`/`bytes` (fixture-testable offline).
-- `holdings.py` — annual-report **holdings** (real portfolio) parser for the
-  featured members: House Schedule A (text PDF) + Senate annual report (HTML).
-- `oge_filings.json` — curated list of the President's 278-T PDFs by UNID
-  (he is not in any browsable OGE view). Append new filings here.
-- `http.py` — the only module importing `requests`: shared UA, retries,
-  ≥1 s spacing between requests.
-- `pipeline.py` — incremental orchestration: diff filings against
-  `state.json`, fetch only new ones, dedupe by trade id, prune to the
-  current + previous calendar year, write diff-friendly JSON (one trade per
-  line).
-- `cli.py` — `python3 -m congress …` entry point.
-- `members.json` — roster (party/state/district + filer-name aliases).
-  Regenerate the full chamber roster with `python3 -m congress roster`
-  (downloads `unitedstates/congress-legislators`); hand-curated aliases are
-  preserved.
-- `featured.json` — the watchlist strip on the page.
-- `state.json` — processed filing IDs (generated; do not hand-edit).
+## Search push (`indexnow.py`)
+
+`congress indexnow` sends the day's changed, indexable pages to IndexNow
+(Bing, Yandex and the engines they feed). The key in `landing/public/` is
+public by design.
+
+## Files in this folder
+
+| File | Kind |
+|---|---|
+| `members.json` | Roster with filer-name aliases. `congress roster` rebuilds it and keeps the aliases. |
+| `featured.json` | The featured members. Hand-maintained. |
+| `oge_filings.json` | The President's 278-T documents. Hand-maintained. |
+| `sectors.json` | Committee → industries and ticker → industry. Hand-maintained. |
+| `state.json` | Processed filing ids and failing sources. Generated. |
+| `report_state.json` | The last report: date, ratings, reported ids. Generated. |
+| `social_state.json` | Drafted filings. Generated. |
+
+Only `http.py` imports `requests`, and only the two `extract_pdf_text`
+functions import `pdfplumber`. Every parser is stdlib-only, so the tests run
+offline.
 
 ## Usage
 
 ```bash
-# offline tests — no network, no third-party deps
+# offline tests: no network, no third-party packages
 python3 -m unittest discover -s tests/congress -p 'test_*.py'
 
-# live fetch (pip install -r congress/requirements.txt first)
-python3 -m congress fetch                 # full incremental run
-python3 -m congress fetch --limit 25      # cautious capped run
-python3 -m congress fetch --dry-run       # list what would be fetched
-python3 -m congress senate --debug-dump d # one chamber, save raw payloads
-python3 -m congress parse-ptr file.html   # parse a local filing, no network
+# live commands (pip install -r congress/requirements.txt first)
+python3 -m congress fetch --dry-run          # list what would be fetched
+python3 -m congress fetch --limit 25         # a capped run
+python3 -m congress senate --debug-dump d    # one source, save raw payloads
+python3 -m congress parse-ptr file.html      # parse a local filing, no network
+python3 -m congress landing                  # rebuild the site's data files
 ```
 
-## The daily Action & live iteration
+The development sandbox cannot reach the government sites, so parsers are
+written against `tests/congress/fixtures/`. When a live run surprises us,
+dispatch the workflow with a `limit`: that saves the extracted text of each
+fetched filing to the run's `congress-fetch-debug` artifact. Fix the parser,
+add the text as a fixture, and push.
 
-`.github/workflows/congress-trades.yml` runs the offline tests, then
-`python3 -m congress fetch`, and commits `docs/data/congress-trades.json` +
-`state.json` only when they changed. `workflow_dispatch` accepts a `limit`
-input for cautious runs; failed runs upload `fetch.log` and the
-`--debug-dump` payloads as artifacts.
+## Data limits (by law, not by us)
 
-The dev sandbox used to build this cannot reach the government domains, so
-the parsers were written against `tests/congress/fixtures/`. When a live run
-surprises us (eFD CSRF details, House PDF layout variance), the loop is:
-grab the run's debug artifacts → fix the parser → update the fixtures so the
-tests encode reality → push. For that loop, temporarily add a `push` trigger
-for the development branch to the workflow (capped with `--limit 25`) and
-remove it again before merging to `main`.
-
-Known simplification: amendment filings are treated as separate filings
-(deduped by filing id only), so an amended trade can appear twice — once per
-filing — each linked to its own official document.
-
-## Social drafts (X via Typefully)
-
-`python3 -m congress social` turns notable NEW filings into branded card
-images + tweet copy and creates **unpublished drafts** in Typefully, where
-the owner approves each one before it can reach X. Runs daily from the
-Action; a filing is notable when the filer is a featured member, any trade's
-bracket floor is ≥ $1M, or a trade arrived > 90 days past the deadline.
-
-**Setup (one time):**
-
-1. In Typefully: Settings → API → create a key (check the plan requirement).
-2. Add it as the `TYPEFULLY_API_KEY` repository secret.
-3. Set the repository **variable** `SOCIAL_LIVE=true` when ready — until
-   then every run is a dry-run that renders the cards as workflow artifacts
-   (`social-cards`) and writes nothing. `SOCIAL_CAP` (variable, default 5)
-   caps drafts per run.
-
-**Dry-run on demand:** run the workflow manually with `social_dry_run=true`,
-then download the `social-cards` artifact to inspect the PNGs.
-
-**Editing the design/copy:** the card is
-`congress/social/card_template.html` (open it directly in a browser to
-iterate; placeholders documented in the file) and the wording is
-`congress/social/copy_template.txt`. Preview locally:
-
-    CARD_CHROMIUM=<path-to-chromium> python3 -m congress social --dry-run \
-        --cap 3 --out-dir /tmp/cards
-
-**State / re-drafting:** `congress/social_state.json` maps
-`chamber:filing_id` → draft info. Delete an entry and the next run re-drafts
-exactly that filing; `--seed` marks every currently-notable filing as seen
-(run once at setup so the backlog is never posted as if it were news).
-A failed record is *not* recorded, so it retries next run.
-
-**Image attach:** the Typefully media API is deliberately not called yet
-(unverified — see `congress/typefully.py`). Each draft ends with an
-`[attach card: …]` marker; drag the matching PNG from the `social-cards`
-artifact into the draft during approval and delete the marker line.
+- A filing may arrive 30 to 45 days after the trade.
+- Amounts are brackets ($1,001–$15,000 … $50,000,001+), never exact.
+- A trade may belong to a spouse (SP), a joint account (JT) or a dependent
+  child (DC).
