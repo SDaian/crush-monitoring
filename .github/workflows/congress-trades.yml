@@ -282,9 +282,10 @@ jobs:
           # report simply omits the traffic section.
           # PROJECT_ID / TEAM_ID aren't sensitive, but accept them as a secret
           # OR a variable so they work wherever they were added.
-          # Where the email's ticker deep-links point. Set this to the live
-          # deployment (e.g. https://<project>.vercel.app) until the apex
-          # domain is registered — otherwise the links 404.
+          # Where the email's links point. Leave it unset: the code defaults to
+          # https://capitolledger.io, the one host that serves the site (www
+          # and the vercel.app domain 308 to it). Set it only to aim a run at
+          # a preview deployment.
           SITE_URL: ${{ vars.SITE_URL }}
           # Buttondown (optional) — broadcasts the same digest to confirmed
           # subscribers. Unset → only the owner's SMTP copy goes out.
