@@ -1213,7 +1213,7 @@ def build_parser() -> argparse.ArgumentParser:
 
     prices_p = sub.add_parser(
         "prices",
-        help="Estimate return-since-buy from Stooq daily closes.",
+        help="Estimate return-since-buy from Twelve Data daily closes.",
     )
     prices_p.add_argument("--trades", default=str(pipeline.DEFAULT_OUTPUT))
     prices_p.add_argument("--output", default=str(DEFAULT_RETURNS))

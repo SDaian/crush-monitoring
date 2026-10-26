@@ -1,224 +1,102 @@
-# crush-monitoring
+# Capitol Ledger
 
-Synthetic monitoring for Crush Software. Two layers run from a single
-Playwright project:
+What members of Congress and the President buy and sell, from the official
+filings, one morning at a time. Live at
+**[capitolledger.io](https://capitolledger.io)**.
 
-- **API checks** (`tests/api/`) — hit REST endpoints and validate every JSON
-  response against a saved JSON Schema in `schemas/`. Schemas use
-  `additionalProperties: false` plus a `required` list, so they catch **added,
-  renamed, removed, and retyped** fields, not just outright failures.
-- **UI checks** (`tests/ui/`) — drive Chromium through critical journeys:
-  landing-page render, a page-health check (no JS errors / no failed requests),
-  the login surface (form render, auth-guard redirect, username-format
-  validation, and an invalid-credentials rejection through the real auth
-  backend), and the forgot-password page. An opt-in happy-path login runs when
-  test credentials are supplied.
+Every trade on the site comes from a government source: the
+[Senate eFD](https://efdsearch.senate.gov), the
+[House Clerk](https://disclosures-clerk.house.gov) and
+[OGE](https://extapps2.oge.gov/201/Presiden.nsf) (the President's Form
+278-T). Each row links to the filing it came from.
 
-Stack: [Playwright](https://playwright.dev) + [Ajv](https://ajv.js.org),
-ES modules, Node 20.
+## How the data moves
 
-## Setup
-
-```bash
-npm install
-npx playwright install --with-deps chromium
+```
+Senate eFD ─┐
+House Clerk ├─► congress/  ──► docs/data/*.json ──► landing/ ──► Vercel
+OGE 278-T  ─┘   (Python)       (generated,          (Astro      capitolledger.io
+                                committed daily)     static site)
+                    │
+                    └─► morning email (SMTP + Buttondown), GitHub issue,
+                        X drafts (Typefully), IndexNow ping
 ```
 
-## Usage
+One GitHub Action, [`congress-trades.yml`](.github/workflows/congress-trades.yml),
+runs the whole chain once a day. A Raspberry Pi starts it at 09:00
+Europe/Madrid ([`scripts/capitol-ledger-dispatch.sh`](scripts/capitol-ledger-dispatch.sh));
+a GitHub cron at 08:20 UTC is the fallback and does nothing when the Pi
+already ran. The Action commits the regenerated data, and Vercel rebuilds
+the site from the commit.
 
-Pick the target environment with `TARGET_ENV` (defaults to `dev`):
+The optional steps (holdings, prices, indicators, the emails, social drafts,
+IndexNow) are non-fatal: a missing key or an outage skips the step and keeps
+the previous file. One failing source does not stop the others, and a source
+that keeps failing is named on the site and at the top of the morning email.
 
-| `TARGET_ENV` | Base URL                       |
-| ------------ | ------------------------------ |
-| `dev`        | https://dev.crushsoftware.com  |
-| `stg`        | https://stg.crushsoftware.com  |
-| `prod`       | https://crush.crushsoftware.com |
+## What is where
 
-```bash
-# Everything against dev
-npm test
+| Path | What it holds |
+|---|---|
+| [`congress/`](congress/README.md) | The pipeline: fetchers, parsers, holdings, prices, technical indicators, the morning report, social drafts. Parsers are stdlib-only. |
+| `docs/data/` | Generated data: trades, holdings, returns, performance, indicators, committees. Never edited by hand. |
+| [`landing/`](landing/README.md) | The Astro + Tailwind site: home, `/tracker`, member and ticker pages, `/late`, `/report`. Pages build from `landing/src/data/`, which the pipeline writes. |
+| `tests/congress/` | Offline tests for the pipeline. No network, no third-party packages. |
+| [`ROADMAP.md`](ROADMAP.md) | The staged plan: storage, email tooling, follows. Stages wait for a trigger, not a date. |
+| [`PRODUCT.md`](PRODUCT.md) | Who the product is for and what it must never claim. |
+| [`CLAUDE.md`](CLAUDE.md) | The project rules and the reasons behind them. Read it before a change. |
 
-# Just the API layer against staging
-TARGET_ENV=stg npm run test:api
-
-# Just the UI layer against prod
-TARGET_ENV=prod npm run test:ui
-
-# UI layer with a visible browser (debugging)
-npm run test:headed
-
-# Open the HTML report from the last run
-npm run report
-```
-
-### Scripts
-
-| Script              | Description                                  |
-| ------------------- | -------------------------------------------- |
-| `npm test`          | Run all checks (api + ui)                    |
-| `npm run test:api`  | Run only the API project                     |
-| `npm run test:ui`   | Run only the UI project                      |
-| `npm run test:headed` | Run the UI project with a headed browser   |
-| `npm run report`    | Open the last HTML report                    |
-
-Reporters: `line` (console), `html` (`reports/html`), and `json`
-(`results.json`). Traces, screenshots, and video are retained on failure.
-
-## Adding an API endpoint check
-
-1. Save the expected response shape as `schemas/<name>.schema.json`. Use
-   `additionalProperties: false` and a `required` list covering every expected
-   field so drift in any direction is caught.
-2. Add a test in `tests/api/`:
-
-   ```js
-   import { test } from '@playwright/test';
-   import { checkEndpoint } from '../../helpers/validator.js';
-
-   test('GET /api/widgets matches the widgets schema', async ({ request }) => {
-     await checkEndpoint(request, '/api/widgets', 'widgets');
-   });
-   ```
-
-   `checkEndpoint` fetches the URL with Playwright's request context, asserts a
-   2xx status, and validates the body against `schemas/widgets.schema.json`.
-   For endpoints that contract on a non-2xx status (e.g. an endpoint that is
-   supposed to `401`), pass `{ expectStatus: 401 }` — see
-   `tests/api/login-refresh.api.spec.js`. `validateSchema(data, name)` is also
-   exported for validating payloads you already have in hand.
-
-## Adding a UI journey
-
-1. Add a spec in `tests/ui/`. Keep journeys high-value — render checks,
-   health checks, and authenticated flows that matter to users.
-2. Prefer credential-free signals where possible — `tests/ui/login.spec.js`
-   checks the login surface, the auth-guard redirect, client-side validation,
-   and an invalid-credentials rejection through the real backend without any
-   account. For an authenticated happy path, that same file has an opt-in test
-   that runs only when credentials are supplied:
-
-   ```bash
-   # Crush login IDs are username@companycode, not email addresses.
-   TEST_USER_USERNAME=...  TEST_USER_PASSWORD=...  TARGET_ENV=dev  npm run test:ui
-   ```
-
-## Network access (Claude Code on the web)
-
-When running this suite from a Claude Code on the web cloud session, the
-environment's **network egress allowlist** must permit the monitored hosts in
-addition to the default trusted package registries (npm, etc. — needed for
-`npm install` and the Playwright browser download).
-
-Add the following to the environment's **Custom** allowed domains (configured
-in the cloud environment UI under **Network access**, not in this repo):
-
-| Domain                | Covers                                                        |
-| --------------------- | ------------------------------------------------------------- |
-| `*.crushsoftware.com` | `dev`, `stg`, and `prod` base URLs (see the `TARGET_ENV` table above) |
-
-With **None** or default **Trusted** access the API and UI checks cannot reach
-the target environments and will fail.
-
-To verify the allowlist is in effect, probe all three base URLs:
+## Quick start
 
 ```bash
-npm run check:connectivity
-```
-
-It reports each host as reachable or blocked, and calls out an egress-proxy
-denial (`host_not_allowed`) distinctly from the site being down. Exit code is
-non-zero if any host is unreachable, so it doubles as a CI/setup gate.
-
-The browser-based UI checks see the egress proxy's TLS-interception certificate
-rather than the site's, so Chromium rejects it with `ERR_CERT_AUTHORITY_INVALID`
-from a cloud session. To run the UI project locally from behind the proxy, set
-`PLAYWRIGHT_IGNORE_HTTPS_ERRORS=1`:
-
-```bash
-PLAYWRIGHT_IGNORE_HTTPS_ERRORS=1 npm run test:ui
-```
-
-Leave it unset in CI — there is no intercepting proxy there, and certificate
-validation is part of what monitoring should catch.
-
-## Continuous monitoring (GitHub Actions)
-
-Two workflows in `.github/workflows/` run on a schedule across all three
-environments (`dev`, `stg`, `prod`) and can also be triggered manually via
-**workflow_dispatch**:
-
-- **`api-checks.yml`** — every 15 minutes. Slack alert on failure.
-- **`ui-checks.yml`** — hourly. Uploads the Playwright HTML report as an
-  artifact on failure, plus Slack alert on failure.
-
-### Required secrets
-
-| Secret                    | Used by         | Purpose                                         |
-| ------------------------- | --------------- | ----------------------------------------------- |
-| `SLACK_WEBHOOK_URL`       | both workflows  | Incoming webhook for failure alerts             |
-| `TEST_USER_USERNAME_DEV`  | `ui-checks.yml` | Login ID (`username@companycode`) for **dev**   |
-| `TEST_USER_PASSWORD_DEV`  | `ui-checks.yml` | Password for the **dev** login user             |
-| `TEST_USER_USERNAME_STG`  | `ui-checks.yml` | Login ID for **stg**                            |
-| `TEST_USER_PASSWORD_STG`  | `ui-checks.yml` | Password for the **stg** login user             |
-
-The opt-in happy-path login test runs per environment: `ui-checks.yml` routes
-the matching `*_DEV` / `*_STG` secret into `TEST_USER_USERNAME` /
-`TEST_USER_PASSWORD` for that matrix leg, and the test skips wherever they are
-empty. dev and stg are wired today; **prod** is intentionally not — add
-`TEST_USER_USERNAME_PROD` / `TEST_USER_PASSWORD_PROD` and the corresponding
-`matrix.env == 'prod'` branch in `ui-checks.yml` when a prod test account
-exists. The credential-free login checks run on every environment regardless.
-
-> Note: scheduled GitHub Actions only run from the repository's default
-> branch.
-
-## Congress stock-trades tracker (`congress/` + `docs/trades.html`)
-
-A separate GitHub Pages section that tracks stock buys/sells disclosed under the
-STOCK Act by US members of Congress — and the President's OGE Form 278-T
-periodic transaction reports — sourced **only from the official government
-sites**: the [Senate eFD system](https://efdsearch.senate.gov), the
-[House Clerk](https://disclosures-clerk.house.gov) financial disclosures, and
-[OGE](https://extapps2.oge.gov/201/Presiden.nsf) (executive 278-T). The
-President's disclosures are managed-account **bond** purchases from scanned,
-OCR-read 278-T PDFs, curated by document id in `congress/oge_filings.json`
-(he is not listed in any browsable OGE view); they carry no ticker or return
-estimate.
-
-- `congress/` — Python fetcher/normalizer (see `congress/README.md`). Parsers
-  are stdlib-only; the two scraper deps (`requests`, `pdfplumber`) live in
-  `congress/requirements.txt` and are installed only by the Action.
-- `docs/data/congress-trades.json` — generated dataset (never hand-edited).
-- `docs/trades.html` — the tracker page: featured-member watchlist,
-  most-traded tickers, a per-ticker "Ticker focus" tab, a **"Holdings" tab**
-  showing each featured member's **estimated current portfolio** — their latest
-  **annual** disclosure report (real stock + option holdings with year-end value
-  brackets) **rolled forward** with every transaction report filed since — an
-  estimated "return since buy" per disclosed buy, and a filterable table with
-  every row linked to the official filing.
-- `docs/data/holdings.json` — real annual-report stock + option holdings per
-  featured member (generated by `congress/holdings.py`), used as the baseline
-  the page rolls forward with later trades.
-- `docs/data/returns.json` — per-buy stock performance since the trade date,
-  estimated from Twelve Data (free tier, via a repo secret). A stock-performance
-  follow-through, **not** the member's realized profit.
-- `.github/workflows/congress-trades.yml` — daily refresh; auto-commits only
-  when there are new filings.
-
-Honest-data caveats (shown on the page too): the law allows filings to lag
-trades by 30–45 days; amounts are legal brackets, never exact; paper/scanned
-filings cannot be parsed and are listed as skipped with a link. Educational
-tracker, not investment advice.
-
-```bash
-# offline tests (no network, no third-party deps)
+# Pipeline tests (offline, Python 3.11, no installs needed)
 python3 -m unittest discover -s tests/congress -p 'test_*.py'
 
-# incremental fetch (needs pip install -r congress/requirements.txt)
+# Fetch new filings without writing anything
+pip install -r congress/requirements.txt
 python3 -m congress fetch --limit 25 --dry-run
+
+# Rebuild the site's data files from the committed trades
+python3 -m congress landing
+
+# Run the site locally (Node 20)
+cd landing && npm install && npm run dev
 ```
 
-The tracker's marketing site is the Capitol Ledger landing (`landing/`,
-deployed on Vercel; see `landing/README.md`). The staged evolution plan for
-the whole app — storage, email tooling, member pages, follows — lives in
-[`ROADMAP.md`](./ROADMAP.md).
+`python3 -m congress --help` lists every command: `fetch`, `holdings`,
+`prices`, `ai`, `landing`, `committees`, `social`, `indexnow`, `analytics`
+and the rest.
+
+## Secrets and variables
+
+Set in GitHub under Settings → Secrets and variables → Actions. Everything is
+optional except where noted; an unset value turns its feature off and the
+run continues.
+
+| Name | Kind | Turns on |
+|---|---|---|
+| `CONGRESS_PRICES_KEY` | secret | Twelve Data prices: return since buy, technical indicators, the volatility reading. |
+| `SMTP_USER`, `SMTP_PASS` | secret | The morning email to the owner (Gmail address and app password). |
+| `SMTP_HOST`, `SMTP_PORT`, `REPORT_EMAIL_TO`, `REPORT_EMAIL_FROM` | variable | Override the Gmail defaults and the recipient. |
+| `BUTTONDOWN_API_KEY` | secret | The same email to confirmed subscribers. |
+| `TYPEFULLY_API_KEY` + `SOCIAL_LIVE=true` | secret + variable | Unpublished X drafts for notable filings. Both are needed. |
+| `SOCIAL_CAP` | variable | The most drafts in one run. |
+| `VERCEL_TOKEN`, `VERCEL_PROJECT_ID`, `VERCEL_TEAM_ID` | secret or variable | The daily and weekly traffic emails. |
+| `EARNINGS_DATES` | variable | On by default; `false` stops the next-earnings call. |
+| `SITE_URL` | variable | Leave unset. Only to point the email's links at a preview deployment. |
+
+The site itself reads `PUBLIC_SIGNUP_ENDPOINT` (and the contact form's
+`PUBLIC_CONTACT_ENDPOINT` / `PUBLIC_CONTACT_KEY`) from the Vercel project;
+see [`landing/README.md`](landing/README.md).
+
+## What the data can and cannot say
+
+- The law lets a filing arrive 30 to 45 days after the trade. Nothing here is
+  real-time.
+- Amounts are the legal brackets ("$15K–$50K"), never exact values.
+- Scanned paper filings cannot be read; the tracker lists them as skipped,
+  with a link.
+- Holdings are an estimate: the latest annual report, rolled forward with
+  later trades, at bracket midpoints.
+- The technical readings are a mechanical tally of public price data. Not
+  investment advice.
