@@ -217,6 +217,10 @@ jobs:
           CONGRESS_PRICES_KEY: ${{ secrets.CONGRESS_PRICES_KEY || vars.CONGRESS_PRICES_KEY }}
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           REPO: ${{ github.repository }}
+          # Next earnings date per ticker: on unless the variable says
+          # "false". One extra call per ticker; a plan without the endpoint
+          # logs one warning and the line is simply absent.
+          EARNINGS_DATES: ${{ vars.EARNINGS_DATES || 'true' }}
         run: |
           # Daily mechanical indicators (RSI / moving averages / volume / 52w)
           # for the AI universe + named signals. Reuses the Twelve Data key.
