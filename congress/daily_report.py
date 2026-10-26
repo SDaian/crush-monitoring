@@ -186,7 +186,8 @@ def build_report(trades: list[dict], ai_tickers: dict, new_signals: list[dict],
                  ticker_urls: dict | None = None,
                  coverage_gaps: list[str] | None = None,
                  market_reading: dict | None = None,
-                 reported_ids: set[str] | list[str] | None = None) -> dict:
+                 reported_ids: set[str] | list[str] | None = None,
+                 paused: list[dict] | None = None) -> dict:
     """Compose the trade/scorecard digest in markdown (GitHub issue) and HTML
     (email). Site traffic is delivered in its own email — see
     ``build_traffic_email``. Pure — no I/O. Returns
@@ -333,9 +334,17 @@ def build_report(trades: list[dict], ai_tickers: dict, new_signals: list[dict],
                        + "\n".join(f"- {g}" for g in coverage_gaps)
                        + "\n\n")
 
+    # --- Paused sources (pipeline.paused_sources) ---
+    # First in the issue: a source that stopped updating changes how every
+    # section below should be read, and a warning in a run log is too quiet.
+    pause_lines = [pipeline.pause_line(p) for p in paused or []]
+    paused_md = ("## ⚠️ Data paused\n\n"
+                 + "\n".join(f"- {line}" for line in pause_lines)
+                 + "\n\n") if pause_lines else ""
+
     # Disclosures lead — they are the product; the scorecard supports.
     markdown = (
-        f"_{DISCLAIMER}_\n\n"
+        f"_{DISCLAIMER}_\n\n{paused_md}"
         f"{disclosures_md}\n{scorecard}\n\n{signals_md}{coverage_md}"
         f"---\n_Full tracker: [Featured stocks & trades]({TRACKER_URL})._"
     )
@@ -352,7 +361,7 @@ def build_report(trades: list[dict], ai_tickers: dict, new_signals: list[dict],
         bond_count=bond_count, market=market_reading,
         tracker_url=TRACKER_URL, preheader=preheader,
         report_url=report_url(today_iso),
-        coverage=coverage_gaps or [])
+        coverage=coverage_gaps or [], paused=pause_lines)
     # Two renderings of the same email. `html` is a complete document, for the
     # SMTP copy where we are the sender. `html_embed` is just the card, for a
     # newsletter provider that wraps content in its own template — handing one
@@ -673,6 +682,9 @@ def main() -> int:
                           today_iso, ticker_urls=ticker_urls,
                           coverage_gaps=gaps,
                           market_reading=ai.get("market"),
+                          paused=pipeline.paused_sources(
+                              pipeline.load_state(pipeline.DEFAULT_STATE),
+                              trades, date.fromisoformat(today_iso)),
                           reported_ids=(
                               state["reported_ids"]
                               if "reported_ids" in state

@@ -1676,16 +1676,21 @@ def write_ticker_files(trades: list[dict], out_dir: Path,
     return written
 
 
-def write_files(trades: list[dict], out_dir: Path, today: date) -> tuple[int, dict]:
+def write_files(trades: list[dict], out_dir: Path, today: date,
+                paused: list[dict] | None = None) -> tuple[int, dict]:
     """Write disclosures.json + stats.json + late.json; returns (rows, stats)
-    for logging. Member pages are written separately (write_member_files)."""
+    for logging. Member pages are written separately (write_member_files).
+
+    ``paused`` (``pipeline.paused_sources``) rides in stats.json, so every
+    page that dates its figures also says when a source stopped updating —
+    a dateline that silently goes stale reads as current."""
     comment = (
         "Generated from real official disclosures by congress/landing_data.py "
         "(daily Action). Do not edit by hand. 'filedDaysLate' counts days past "
         "the STOCK Act's 45-day statutory maximum; 0 = on time."
     )
     rows = feed_payload(trades, set(select_ticker_pages(trades)))
-    stats = stats_payload(trades, today)
+    stats = {**stats_payload(trades, today), "paused": paused or []}
     out_dir.mkdir(parents=True, exist_ok=True)
     (out_dir / "disclosures.json").write_text(
         json.dumps({"_comment": comment, "disclosures": rows},

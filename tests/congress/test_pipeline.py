@@ -340,6 +340,56 @@ class TestFailedSource(unittest.TestCase):
         self.assertEqual(json.loads(self.output.read_text())["trades"], before)
         self.assertIn("s1", load_state(self.state)["processed"]["senate"])
 
+    def test_failure_is_recorded_and_cleared(self):
+        def refused():
+            raise RuntimeError("HTTP 403 Forbidden")
+        senate = _source([], lambda r: [], chamber="senate")
+        senate.list_filings = refused
+        self._run([senate])
+        self.assertEqual(load_state(self.state)["sources"],
+                         {"senate": {"failing_since": TODAY.isoformat()}})
+        senate.list_filings = lambda: []
+        self._run([senate])
+        self.assertNotIn("sources", load_state(self.state))
+
+
+class TestPausedSources(unittest.TestCase):
+    TRADES = [{"chamber": "senate", "filing_date": "2026-10-21"},
+              {"chamber": "senate", "filing_date": "2026-10-22"},
+              {"chamber": "house", "filing_date": "2026-10-26"}]
+
+    def _state(self, since):
+        return {"sources": {"senate": {"failing_since": since}}}
+
+    def test_first_failure_day_tracks_the_failing_since_date(self):
+        state = {}
+        pipeline.track_sources(state, ["senate", "house"], ["senate"],
+                               date(2026, 10, 27))
+        pipeline.track_sources(state, ["senate", "house"], ["senate"],
+                               date(2026, 10, 28))
+        self.assertEqual(state, self._state("2026-10-27"))
+
+    def test_one_bad_morning_is_not_a_pause(self):
+        self.assertEqual(pipeline.paused_sources(
+            self._state("2026-10-27"), self.TRADES, date(2026, 10, 27)), [])
+
+    def test_second_day_is_a_pause_with_the_newest_filing(self):
+        self.assertEqual(
+            pipeline.paused_sources(self._state("2026-10-27"), self.TRADES,
+                                    date(2026, 10, 28)),
+            [{"chamber": "senate", "label": "Senate", "since": "2026-10-27",
+              "newest": "2026-10-22"}])
+
+    def test_pause_line_states_both_facts(self):
+        line = pipeline.pause_line({"label": "Senate", "since": "2026-10-27",
+                                    "newest": "2026-10-22"})
+        self.assertIn("failed since 2026-10-27", line)
+        self.assertIn("newest Senate filing shown is 2026-10-22", line)
+
+    def test_healthy_state_pauses_nothing(self):
+        self.assertEqual(pipeline.paused_sources({}, self.TRADES,
+                                                 date(2026, 10, 28)), [])
+
 
 
 class TestUnreadable(unittest.TestCase):

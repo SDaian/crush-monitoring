@@ -2,19 +2,26 @@
 // The dateline a summary page carries: when the newest record in it was
 // filed. A `<time>` element, so a crawler reads the date as a date rather
 // than guessing it out of prose. Renders nothing without a date.
+//
+// A source that stopped updating is named beside the date, because a
+// dateline that quietly goes stale reads as current (pipeline.paused_sources,
+// carried in stats.json; empty while every source works).
+import stats from "../data/stats.json";
+
 interface Props {
   iso: string | null | undefined;
   label?: string;
 }
 const { iso, label = "Newest filing" } = Astro.props;
-const text = iso
-  ? new Date(`${iso}T00:00:00Z`).toLocaleDateString("en-US", {
-      month: "short",
-      day: "numeric",
-      year: "numeric",
-      timeZone: "UTC",
-    })
-  : "";
+const day = (d: string, year = true) =>
+  new Date(`${d}T00:00:00Z`).toLocaleDateString("en-US", {
+    month: "short",
+    day: "numeric",
+    ...(year ? { year: "numeric" } : {}),
+    timeZone: "UTC",
+  });
+const text = iso ? day(iso) : "";
+const paused: { label: string; since: string }[] = (stats as any).paused ?? [];
 ---
 
 {iso && (
@@ -22,5 +29,13 @@ const text = iso
     {/* An explicit space: Astro trims the one between an expression and a
          tag, which printed "NEWEST FILINGSEP 21, 2026". */}
     {label}{" "}<b class="font-semibold whitespace-nowrap text-ink"><time datetime={iso}>{text}</time></b>
+    {paused.map((p) => (
+      <>
+        {" · "}
+        <span class="whitespace-nowrap text-stamp">
+          {p.label} updates paused since {day(p.since, false)}
+        </span>
+      </>
+    ))}
   </span>
 )}
