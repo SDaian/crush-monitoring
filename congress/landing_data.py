@@ -91,6 +91,8 @@ def compact_bucket(lo, hi) -> str:
         return "—"
     if hi is None:
         return f"{one(lo)}+"
+    if lo == hi:  # an exact sum the filer stated, not a bracket
+        return f"${lo:,}"
     return f"{one(lo)} – {one(hi)}"
 
 

@@ -153,15 +153,21 @@ def extract_pdf_text(pdf_bytes: bytes) -> str:
 # ---------------------------------------------------------------------------
 
 # A transaction row as pdfplumber lays it out: optional owner code, asset
-# name, type code, transaction date, notification date, amount bracket (which
-# may wrap onto the next line, leaving a trailing "-").
+# name, type code, transaction date, notification date, amount. The amount is
+# a bracket (which may wrap onto the next line, leaving a trailing "-"), an
+# exact value with cents ("$2,761.57" — some filers state the sum), or the
+# spouse/dependent top category, whose "$1,000,000" usually wraps
+# ("Spouse/DC Over" ends the line).
 _ROW = re.compile(
     r"^(?:(?P<owner>SP|JT|DC)\s+)?"
     r"(?P<asset>.+?)\s+"
     r"(?P<type>S \(partial\)|P|S|E)\s+"
     r"(?P<d1>\d{2}/\d{2}/\d{4})\s+"
     r"(?P<d2>\d{2}/\d{2}/\d{4})\s+"
-    r"(?P<amount>\$[\d,]+(?:\s*[-–]\s*\$?[\d,]*)?|None)\s*$"
+    r"(?P<amount>\$[\d,]+\.\d{2}"
+    r"|\$[\d,]+(?:\s*[-–]\s*\$?[\d,]*)?"
+    r"|Spouse/DC Over(?:\s*\$[\d,]+)?"
+    r"|None)\s*$"
 )
 # Per-row metadata continuations from the e-filing system (ignored). The
 # PDF layout pads the markers with wide runs of spaces ("F      S     : New",
@@ -235,6 +241,16 @@ def parse_ptr_text(text: str, ref: HouseFilingRef) -> list[Trade]:
                     pending["desc"] = desc
             pending["closed"] = True
             continue
+        if pending["amount"].rstrip() == "Spouse/DC Over":
+            # The category's bound wrapped: "$1,000,000" opens the next line,
+            # and anything after it is the rest of the asset name.
+            m = _MONEY_TOKEN.search(line)
+            if m:
+                pending["amount"] += " " + m.group(0)
+                rest = (line[: m.start()] + line[m.end():]).strip()
+                if rest and not pending.get("closed"):
+                    pending["extra"].append(rest)
+                continue
         if pending["amount"].rstrip().endswith(("-", "–")):
             # A wrapped amount lands at the end of the continuation line
             # ("Market ETF (ITOT) [EF] $15,000") — the rest is asset name.

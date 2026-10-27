@@ -1762,3 +1762,11 @@ class TestOptionBoughtDate(unittest.TestCase):
                                "expiration": "2027-01-15"}}
         h = self.payload([], SNAP(stocks=[snap_opt]))
         self.assertIsNone(h["options"][0]["bought"])
+
+
+class TestCompactBucketExact(unittest.TestCase):
+    def test_exact_sum_shows_the_sum(self):
+        self.assertEqual(ld.compact_bucket(2761, 2761), "$2,761")
+
+    def test_bracket_unchanged(self):
+        self.assertEqual(ld.compact_bucket(15001, 50000), "$15K – $50K")

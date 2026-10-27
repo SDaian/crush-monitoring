@@ -153,6 +153,45 @@ class TestPtrText(unittest.TestCase):
         trades = parse_ptr_text(text, _ref())
         self.assertEqual(trades[0].asset, "US Treasury Bill")
 
+    def test_exact_amount_with_cents(self):
+        # Live sample (Wasserman Schultz, PTR 20032230): the filer stated the
+        # sum instead of a bracket, and the row failed on the cents.
+        text = (
+            "Berry Corporation (BRY) [ST] S 09/15/2025 09/16/2025 $1,972.55\n"
+            "F S: New\n"
+            "Digitally Signed: Hon. Debbie Wasserman Schultz , 10/06/2025\n"
+        )
+        t = parse_ptr_text(text, _ref())[0]
+        self.assertEqual(t.ticker, "BRY")
+        self.assertEqual((t.amount_lo, t.amount_hi), (1972, 1972))
+        self.assertEqual(t.amount_label, "$1,972.55")
+
+    def test_exact_amount_rows_beside_a_wrapped_name(self):
+        # Live sample (PTR 20032087): two exact-sum rows, the second with a
+        # name that wraps onto the next line.
+        text = (
+            "DC Berry Corporation (BRY) [ST] S 09/15/2025 09/16/2025 $2,761.57\n"
+            "F S: New\n"
+            "DC Controladora Vuela Compania de S 09/29/2025 09/30/2025 $1,118.07\n"
+            "Aviacion, S.A.B. de C.V. (VLRS) [ST]\n"
+            "F S: New\n"
+        )
+        trades = parse_ptr_text(text, _ref())
+        self.assertEqual([t.ticker for t in trades], ["BRY", "VLRS"])
+        self.assertEqual(trades[1].amount_label, "$1,118.07")
+
+    def test_spouse_top_category_wrapped(self):
+        # Live sample (Matsui, PTR 20033695): "Spouse/DC Over" ends the row
+        # and its "$1,000,000" opens the next line.
+        text = (
+            "SP U.S. Treasury Note due 2/28/2029 P 12/15/2025 12/16/2025 Spouse/DC Over\n"
+            "$1,000,000\n"
+            "F S: New\n"
+        )
+        t = parse_ptr_text(text, _ref())[0]
+        self.assertEqual(t.asset, "U.S. Treasury Note due 2/28/2029")
+        self.assertEqual((t.amount_lo, t.amount_hi), (1_000_000, None))
+
     def test_wide_space_metadata_not_appended_to_asset(self):
         # Live regression: the PDF pads metadata markers with wide spacing
         # ("F      S     : New", "S          O : ..."), which must be treated
