@@ -4,6 +4,8 @@ What members of Congress and the President buy and sell, from the official
 filings, one morning at a time. Live at
 **[capitolledger.io](https://capitolledger.io)**.
 
+![The Capitol Ledger home page](.github/readme/home.jpg)
+
 Every trade on the site comes from a government source: the
 [Senate eFD](https://efdsearch.senate.gov), the
 [House Clerk](https://disclosures-clerk.house.gov) and
@@ -33,6 +35,16 @@ The optional steps (holdings, prices, indicators, the emails, social drafts,
 IndexNow) are non-fatal: a missing key or an outage skips the step and keeps
 the previous file. One failing source does not stop the others, and a source
 that keeps failing is named on the site and at the top of the morning email.
+
+## What it looks like
+
+| Member pages | Ticker pages (phone) | The morning email |
+|---|---|---|
+| ![Nancy Pelosi's estimated holdings](.github/readme/member.jpg) | ![NVDA's technical readings, each with its vote](.github/readme/ticker-phone.jpg) | ![The morning email's new disclosures](.github/readme/email.jpg) |
+| Estimated holdings: the annual report rolled forward with later trades, at bracket midpoints. | Seven mechanical readings, each tagged with its vote, plus volatility against the S&P 500. | New disclosures first, then the featured scorecard. |
+
+Screenshots of real data, made by `node scripts/readme_shots.mjs` after a
+site build.
 
 ## What is where
 

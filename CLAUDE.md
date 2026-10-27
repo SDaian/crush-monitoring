@@ -1084,6 +1084,11 @@ Conventions:
   checkout), and `check-seo.mjs` fails a page whose `og:image` points at a
   card that was never rendered — a broken preview is worse than the fallback
   it replaced.
+- **The README shows the product, so a redesign replaces its images.**
+  `.github/readme/*.jpg` are screenshots of real pages and the real email,
+  made by `scripts/readme_shots.mjs` from a fresh `landing` build. Re-run it
+  in the same PR as any visible design change; a README that shows the old
+  look misleads the first reader who opens the repository.
 - **The icon set is generated, not hand-made.** `landing/scripts/make-icons.py`
   (stdlib only, run it manually) writes `favicon.svg`, a real multi-size
   `favicon.ico` (16/32/48, the file Google's separate favicon crawler wants at
