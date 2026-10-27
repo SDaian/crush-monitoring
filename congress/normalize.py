@@ -56,6 +56,13 @@ def parse_amount(label: str) -> tuple[int | None, int | None, str]:
         return lo, hi, canonical
     if len(amounts) == 1:
         amt = amounts[0]
+        # An exact sum with cents ("$2,761.57"): some House filers state the
+        # value instead of a bracket. Both bounds are that sum (cents dropped,
+        # the bounds are whole dollars); the label keeps what was filed.
+        exact = re.fullmatch(r"\$\s*([\d,]+\.\d{2})", clean)
+        if exact:
+            value = float(exact.group(1).replace(",", ""))
+            return amt, amt, f"${value:,.2f}"
         if "less" in lowered:  # "$15,000 or less"
             return 0, amt, f"${amt:,} or less"
         if "over" in lowered or "+" in clean or "more" in lowered:
