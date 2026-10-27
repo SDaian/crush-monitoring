@@ -12,29 +12,25 @@
   },
   "indexable": true,
   "technical": {
-    "asOf": "2026-10-23",
-    "price": 285.64,
-    "chg1d": -2.69,
-    "chg1w": -8.98,
-    "chg1m": -10.68,
-    "rsi14": 25.9,
-    "sma50": 323.55,
-    "sma200": 323.24,
-    "ema8": 298.94,
-    "ema21": 307.12,
-    "emaGap": -2.66,
-    "vsSma50": -11.7,
-    "vsSma200": -11.6,
-    "relVol": 1.38,
-    "vol1y": null,
+    "asOf": "2026-10-26",
+    "price": 288.43,
+    "chg1d": 0.98,
+    "chg1w": -7.34,
+    "chg1m": -11.82,
+    "rsi14": 29.7,
+    "sma50": 321.95,
+    "sma200": 323.11,
+    "ema8": 296.6,
+    "ema21": 305.42,
+    "emaGap": -2.89,
+    "vsSma50": -10.4,
+    "vsSma200": -10.7,
+    "relVol": 1.37,
+    "vol1y": 33.1,
     "high52w": 381.22,
     "low52w": 273.25,
-    "rangePos": 11.0,
+    "rangePos": 14.0,
     "series": [
-      {
-        "d": "2025-10-31",
-        "c": 308.95
-      },
       {
         "d": "2025-11-07",
         "c": 307.27
@@ -238,23 +234,27 @@
       {
         "d": "2026-10-23",
         "c": 285.64
+      },
+      {
+        "d": "2026-10-26",
+        "c": 288.43
       }
     ],
     "signals": [
       {
-        "type": "rsi_oversold",
-        "asof": "2026-10-23",
-        "label": "RSI crossed below 30 (oversold)",
-        "dir": "neutral"
+        "type": "death_cross",
+        "asof": "2026-10-26",
+        "label": "Death cross (50-day below 200-day)",
+        "dir": "bear"
       }
     ],
     "nextEarnings": null,
     "score": {
-      "label": "Sell",
-      "buys": 2,
-      "sells": 5,
+      "label": "Strong Sell",
+      "buys": 1,
+      "sells": 6,
       "holds": 0,
-      "ratio": -0.429
+      "ratio": -0.714
     },
     "votes": {
       "ema_cross": {
@@ -270,7 +270,7 @@
         "muted": false
       },
       "sma50_vs_200": {
-        "vote": 1,
+        "vote": -1,
         "muted": false
       },
       "rsi": {
