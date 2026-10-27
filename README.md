@@ -82,7 +82,7 @@ run continues.
 | `TYPEFULLY_API_KEY` + `SOCIAL_LIVE=true` | secret + variable | Unpublished X drafts for notable filings. Both are needed. |
 | `SOCIAL_CAP` | variable | The most drafts in one run. |
 | `VERCEL_TOKEN`, `VERCEL_PROJECT_ID`, `VERCEL_TEAM_ID` | secret or variable | The daily and weekly traffic emails. |
-| `EARNINGS_DATES` | variable | On by default; `false` stops the next-earnings call. |
+| `EARNINGS_DATES` | variable | `true` turns on the next-earnings date. Off by default: our Twelve Data plan does not serve that endpoint. |
 | `SITE_URL` | variable | Leave unset. Only to point the email's links at a preview deployment. |
 
 The site itself reads `PUBLIC_SIGNUP_ENDPOINT` (and the contact form's

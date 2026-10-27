@@ -217,10 +217,11 @@ jobs:
           CONGRESS_PRICES_KEY: ${{ secrets.CONGRESS_PRICES_KEY || vars.CONGRESS_PRICES_KEY }}
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           REPO: ${{ github.repository }}
-          # Next earnings date per ticker: on unless the variable says
-          # "false". One extra call per ticker; a plan without the endpoint
-          # logs one warning and the line is simply absent.
-          EARNINGS_DATES: ${{ vars.EARNINGS_DATES || 'true' }}
+          # Next earnings date per ticker: off unless the variable says
+          # "true". Our Twelve Data plan does not serve the earnings endpoint
+          # (HTTPError on the first call, 27 Oct 2026); set the variable once
+          # the plan does. A failing call logs one warning and stops.
+          EARNINGS_DATES: ${{ vars.EARNINGS_DATES || 'false' }}
         run: |
           # Daily mechanical indicators (RSI / moving averages / volume / 52w)
           # for the AI universe + named signals. Reuses the Twelve Data key.
