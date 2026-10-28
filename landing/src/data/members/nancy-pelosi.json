@@ -874,10 +874,10 @@
   "performance": {
     "available": true,
     "benchLabel": "S&P 500",
-    "asofDate": "2026-10-26",
+    "asofDate": "2026-10-27",
     "kpis": {
-      "medianPct": 16.0,
-      "medianBenchPct": 10.7,
+      "medianPct": 17.0,
+      "medianBenchPct": 11.3,
       "beat": 4,
       "beatOf": 7,
       "priced": 7,
@@ -982,7 +982,7 @@
         "2026-10-09",
         "2026-10-16",
         "2026-10-23",
-        "2026-10-26"
+        "2026-10-27"
       ],
       "member": [
         100.0,
@@ -1082,7 +1082,7 @@
         141.7,
         127.7,
         128.2,
-        130.7
+        133.6
       ],
       "bench": [
         100.0,
@@ -1182,7 +1182,7 @@
         119.6,
         117.3,
         116.8,
-        117.6
+        118.3
       ],
       "buys": 7
     },
@@ -1190,51 +1190,51 @@
       {
         "ticker": "INTC",
         "txDate": "2026-07-24",
-        "pct": -2.0,
-        "benchPct": 3.6,
-        "excess": -5.6
+        "pct": 1.5,
+        "benchPct": 4.2,
+        "excess": -2.7
       },
       {
         "ticker": "AMZN",
         "txDate": "2026-01-16",
-        "pct": 4.2,
-        "benchPct": 10.7,
-        "excess": -6.5
+        "pct": 5.8,
+        "benchPct": 11.3,
+        "excess": -5.5
       },
       {
         "ticker": "NVDA",
         "txDate": "2026-01-16",
-        "pct": 16.0,
-        "benchPct": 10.7,
-        "excess": 5.3
+        "pct": 17.0,
+        "benchPct": 11.3,
+        "excess": 5.7
       },
       {
         "ticker": "GOOGL",
         "txDate": "2026-01-16",
-        "pct": -4.0,
-        "benchPct": 10.7,
-        "excess": -14.7
+        "pct": -2.9,
+        "benchPct": 11.3,
+        "excess": -14.2
       },
       {
         "ticker": "AVGO",
         "txDate": "2025-06-20",
-        "pct": 31.7,
-        "benchPct": 28.8,
-        "excess": 2.9
+        "pct": 36.9,
+        "benchPct": 29.5,
+        "excess": 7.4
       },
       {
         "ticker": "PANW",
         "txDate": "2024-12-20",
-        "pct": 109.0,
-        "benchPct": 29.5,
-        "excess": 79.5
+        "pct": 115.1,
+        "benchPct": 30.2,
+        "excess": 84.9
       },
       {
         "ticker": "NVDA",
         "txDate": "2024-12-20",
-        "pct": 60.4,
-        "benchPct": 29.5,
-        "excess": 30.9
+        "pct": 61.8,
+        "benchPct": 30.2,
+        "excess": 31.6
       }
     ],
     "rowsOf": 7

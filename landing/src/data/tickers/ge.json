@@ -12,24 +12,24 @@
   },
   "indexable": true,
   "technical": {
-    "asOf": "2026-10-26",
-    "price": 288.43,
-    "chg1d": 0.98,
-    "chg1w": -7.34,
-    "chg1m": -11.82,
-    "rsi14": 29.7,
-    "sma50": 321.95,
-    "sma200": 323.11,
-    "ema8": 296.6,
-    "ema21": 305.42,
-    "emaGap": -2.89,
-    "vsSma50": -10.4,
-    "vsSma200": -10.7,
+    "asOf": "2026-10-27",
+    "price": 297.66,
+    "chg1d": 3.2,
+    "chg1w": -0.74,
+    "chg1m": -6.47,
+    "rsi14": 40.7,
+    "sma50": 320.51,
+    "sma200": 322.99,
+    "ema8": 296.84,
+    "ema21": 304.71,
+    "emaGap": -2.58,
+    "vsSma50": -7.1,
+    "vsSma200": -7.8,
     "relVol": 1.37,
-    "vol1y": 33.1,
+    "vol1y": 33.3,
     "high52w": 381.22,
     "low52w": 273.25,
-    "rangePos": 14.0,
+    "rangePos": 23.0,
     "series": [
       {
         "d": "2025-11-07",
@@ -236,25 +236,18 @@
         "c": 285.64
       },
       {
-        "d": "2026-10-26",
-        "c": 288.43
+        "d": "2026-10-27",
+        "c": 297.66
       }
     ],
-    "signals": [
-      {
-        "type": "death_cross",
-        "asof": "2026-10-26",
-        "label": "Death cross (50-day below 200-day)",
-        "dir": "bear"
-      }
-    ],
+    "signals": [],
     "nextEarnings": null,
     "score": {
       "label": "Strong Sell",
-      "buys": 1,
+      "buys": 0,
       "sells": 6,
-      "holds": 0,
-      "ratio": -0.714
+      "holds": 1,
+      "ratio": -0.857
     },
     "votes": {
       "ema_cross": {
@@ -274,7 +267,7 @@
         "muted": false
       },
       "rsi": {
-        "vote": 1,
+        "vote": 0,
         "muted": false
       },
       "chg_1m": {

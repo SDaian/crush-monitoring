@@ -12,24 +12,24 @@
   },
   "indexable": true,
   "technical": {
-    "asOf": "2026-10-26",
-    "price": 371.92,
-    "chg1d": 1.59,
-    "chg1w": -5.0,
-    "chg1m": -15.47,
-    "rsi14": 34.2,
-    "sma50": 414.85,
-    "sma200": 395.82,
-    "ema8": 384.17,
-    "ema21": 402.4,
-    "emaGap": -4.53,
-    "vsSma50": -10.3,
-    "vsSma200": -6.0,
-    "relVol": 0.85,
-    "vol1y": 40.2,
+    "asOf": "2026-10-27",
+    "price": 384.2,
+    "chg1d": 3.3,
+    "chg1w": 0.58,
+    "chg1m": -10.94,
+    "rsi14": 40.9,
+    "sma50": 413.43,
+    "sma200": 396.11,
+    "ema8": 384.18,
+    "ema21": 400.74,
+    "emaGap": -4.13,
+    "vsSma50": -7.1,
+    "vsSma200": -3.0,
+    "relVol": 1.14,
+    "vol1y": 40.3,
     "high52w": 459.96,
     "low52w": 315.82,
-    "rangePos": 39.0,
+    "rangePos": 47.0,
     "series": [
       {
         "d": "2025-11-07",
@@ -236,18 +236,18 @@
         "c": 366.11
       },
       {
-        "d": "2026-10-26",
-        "c": 371.92
+        "d": "2026-10-27",
+        "c": 384.2
       }
     ],
     "signals": [],
     "nextEarnings": null,
     "score": {
-      "label": "Strong Sell",
-      "buys": 1,
-      "sells": 5,
+      "label": "Sell",
+      "buys": 2,
+      "sells": 4,
       "holds": 1,
-      "ratio": -0.571
+      "ratio": -0.286
     },
     "votes": {
       "ema_cross": {
@@ -275,7 +275,7 @@
         "muted": false
       },
       "chg_1w": {
-        "vote": -1,
+        "vote": 1,
         "muted": false
       }
     }

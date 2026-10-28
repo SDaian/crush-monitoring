@@ -5139,11 +5139,11 @@
   "performance": {
     "available": true,
     "benchLabel": "S&P 500",
-    "asofDate": "2026-10-26",
+    "asofDate": "2026-10-27",
     "kpis": {
-      "medianPct": 13.0,
-      "medianBenchPct": 3.5,
-      "beat": 18,
+      "medianPct": 12.5,
+      "medianBenchPct": 4.1,
+      "beat": 17,
       "beatOf": 33,
       "priced": 33,
       "pricedOf": 99
@@ -5183,7 +5183,7 @@
         "2026-10-08",
         "2026-10-15",
         "2026-10-22",
-        "2026-10-26"
+        "2026-10-27"
       ],
       "member": [
         100.0,
@@ -5219,7 +5219,7 @@
         106.8,
         108.4,
         109.1,
-        109.6
+        109.2
       ],
       "bench": [
         100.0,
@@ -5255,7 +5255,7 @@
         106.4,
         106.1,
         105.0,
-        105.2
+        105.8
       ],
       "buys": 33
     },
@@ -5263,86 +5263,86 @@
       {
         "ticker": "PGR",
         "txDate": "2026-05-22",
-        "pct": 14.9,
-        "benchPct": 2.6,
-        "excess": 12.3
+        "pct": 13.1,
+        "benchPct": 3.2,
+        "excess": 9.9
       },
       {
         "ticker": "MCD",
         "txDate": "2026-05-20",
-        "pct": -10.5,
-        "benchPct": 3.3,
-        "excess": -13.8
+        "pct": -11.0,
+        "benchPct": 3.8,
+        "excess": -14.8
       },
       {
         "ticker": "TMO",
         "txDate": "2026-05-18",
-        "pct": 55.0,
-        "benchPct": 3.6,
-        "excess": 51.4
+        "pct": 56.8,
+        "benchPct": 4.2,
+        "excess": 52.6
       },
       {
         "ticker": "PANW",
         "txDate": "2026-05-18",
-        "pct": 57.7,
-        "benchPct": 3.6,
-        "excess": 54.1
+        "pct": 62.3,
+        "benchPct": 4.2,
+        "excess": 58.1
       },
       {
         "ticker": "PANW",
         "txDate": "2026-05-18",
-        "pct": 57.7,
-        "benchPct": 3.6,
-        "excess": 54.1
+        "pct": 62.3,
+        "benchPct": 4.2,
+        "excess": 58.1
       },
       {
         "ticker": "NXPI",
         "txDate": "2026-05-18",
-        "pct": -15.7,
-        "benchPct": 3.6,
-        "excess": -19.3
+        "pct": -13.1,
+        "benchPct": 4.2,
+        "excess": -17.3
       },
       {
         "ticker": "MSFT",
         "txDate": "2026-05-18",
-        "pct": 25.7,
-        "benchPct": 3.6,
-        "excess": 22.1
+        "pct": 25.4,
+        "benchPct": 4.2,
+        "excess": 21.2
       },
       {
         "ticker": "BSX",
         "txDate": "2026-05-18",
-        "pct": -18.5,
-        "benchPct": 3.6,
-        "excess": -22.1
+        "pct": -19.4,
+        "benchPct": 4.2,
+        "excess": -23.6
       },
       {
         "ticker": "BA",
         "txDate": "2026-05-18",
-        "pct": -14.6,
-        "benchPct": 3.6,
-        "excess": -18.2
+        "pct": -23.8,
+        "benchPct": 4.2,
+        "excess": -28.0
       },
       {
         "ticker": "BLK",
         "txDate": "2026-05-18",
-        "pct": 3.8,
-        "benchPct": 3.6,
-        "excess": 0.2
+        "pct": 4.6,
+        "benchPct": 4.2,
+        "excess": 0.4
       },
       {
         "ticker": "T",
         "txDate": "2026-05-18",
-        "pct": -14.7,
-        "benchPct": 3.6,
-        "excess": -18.3
+        "pct": -14.3,
+        "benchPct": 4.2,
+        "excess": -18.5
       },
       {
         "ticker": "ABT",
         "txDate": "2026-05-18",
-        "pct": 19.3,
-        "benchPct": 3.6,
-        "excess": 15.7
+        "pct": 17.3,
+        "benchPct": 4.2,
+        "excess": 13.1
       }
     ],
     "rowsOf": 33
