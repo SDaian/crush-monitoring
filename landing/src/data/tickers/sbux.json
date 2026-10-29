@@ -12,24 +12,24 @@
   },
   "indexable": true,
   "technical": {
-    "asOf": "2026-10-27",
-    "price": 103.04,
-    "chg1d": 0.34,
-    "chg1w": 3.69,
-    "chg1m": 8.16,
-    "rsi14": 65.9,
-    "sma50": 99.31,
-    "sma200": 99.64,
-    "ema8": 100.32,
-    "ema21": 98.12,
-    "emaGap": 2.24,
-    "vsSma50": 3.8,
-    "vsSma200": 3.4,
-    "relVol": 0.61,
+    "asOf": "2026-10-28",
+    "price": 103.2,
+    "chg1d": 0.16,
+    "chg1w": 4.16,
+    "chg1m": 8.14,
+    "rsi14": 66.2,
+    "sma50": 99.25,
+    "sma200": 99.71,
+    "ema8": 100.96,
+    "ema21": 98.58,
+    "emaGap": 2.41,
+    "vsSma50": 4.0,
+    "vsSma200": 3.5,
+    "relVol": 0.81,
     "vol1y": 27.5,
     "high52w": 108.55,
     "low52w": 79.6,
-    "rangePos": 81.0,
+    "rangePos": 82.0,
     "series": [
       {
         "d": "2025-11-07",
@@ -236,8 +236,8 @@
         "c": 100.8
       },
       {
-        "d": "2026-10-27",
-        "c": 103.04
+        "d": "2026-10-28",
+        "c": 103.2
       }
     ],
     "signals": [],
@@ -281,20 +281,20 @@
     }
   },
   "summary": {
-    "trades": 32,
-    "members": 18,
-    "congress": 17,
+    "trades": 33,
+    "members": 19,
+    "congress": 18,
     "executive": 1,
-    "whoLabel": "17 members of Congress and 1 executive-branch filer",
+    "whoLabel": "18 members of Congress and 1 executive-branch filer",
     "buys": 8,
-    "sells": 24,
+    "sells": 25,
     "other": 0,
     "firstTx": "2024-01-30",
-    "lastTx": "2026-09-23",
-    "lastFiling": "2026-10-13",
+    "lastTx": "2026-10-02",
+    "lastFiling": "2026-10-27",
     "estBuyLabel": "$89K",
-    "estSellLabel": "$315K",
-    "pctLate": 22
+    "estSellLabel": "$347K",
+    "pctLate": 21
   },
   "topMembers": [
     {
@@ -409,6 +409,18 @@
     }
   ],
   "trades": [
+    {
+      "member": "Pete Sessions",
+      "memberSlug": "pete-sessions",
+      "hasPage": false,
+      "party": "R",
+      "side": "SELL",
+      "amountBucket": "$15K – $50K",
+      "txDate": "2026-10-02",
+      "filedDate": "2026-10-27",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035563.pdf"
+    },
     {
       "member": "Kevin Hern",
       "memberSlug": "kevin-hern",
@@ -696,33 +708,21 @@
       "filedDate": "2025-05-14",
       "daysLate": 0,
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20030338.pdf"
-    },
-    {
-      "member": "Jefferson Shreve",
-      "memberSlug": "jefferson-shreve",
-      "hasPage": false,
-      "party": "R",
-      "side": "SELL",
-      "amountBucket": "$15K – $50K",
-      "txDate": "2025-04-07",
-      "filedDate": "2025-05-08",
-      "daysLate": 0,
-      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20030231.pdf"
     }
   ],
   "tradesShown": 25,
   "faq": [
     {
       "q": "Who in Congress has traded SBUX stock?",
-      "a": "17 members of Congress and 1 executive-branch filer have disclosed 32 SBUX trades since January 2024. The most active is Sheldon Whitehouse, with 5 trades, followed by Jared Moskowitz and Josh Gottheimer. Each trade on this page links to the official filing it came from."
+      "a": "18 members of Congress and 1 executive-branch filer have disclosed 33 SBUX trades since January 2024. The most active is Sheldon Whitehouse, with 5 trades, followed by Jared Moskowitz and Josh Gottheimer. Each trade on this page links to the official filing it came from."
     },
     {
       "q": "Is Congress buying or selling SBUX?",
-      "a": "Of the 32 disclosed SBUX trades, 8 were buys and 24 were sells. By the midpoint of each filed amount bracket, the buying comes to about $89K and the selling to about $315K. Filings disclose brackets, never exact amounts, so these totals are estimates."
+      "a": "Of the 33 disclosed SBUX trades, 8 were buys and 25 were sells. By the midpoint of each filed amount bracket, the buying comes to about $89K and the selling to about $347K. Filings disclose brackets, never exact amounts, so these totals are estimates."
     },
     {
       "q": "How late are SBUX trades disclosed?",
-      "a": "22% of the disclosed SBUX trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Sep 23, 2026, and the newest filing arrived on Oct 13, 2026."
+      "a": "21% of the disclosed SBUX trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Oct 2, 2026, and the newest filing arrived on Oct 27, 2026."
     }
   ]
 }

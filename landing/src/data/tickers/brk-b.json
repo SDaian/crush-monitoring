@@ -12,24 +12,24 @@
   },
   "indexable": true,
   "technical": {
-    "asOf": "2026-10-27",
-    "price": 542.99,
-    "chg1d": -1.02,
-    "chg1w": 0.59,
-    "chg1m": 7.93,
-    "rsi14": 68.8,
-    "sma50": 512.6,
-    "sma200": 495.05,
-    "ema8": 539.41,
-    "ema21": 527.59,
-    "emaGap": 2.24,
-    "vsSma50": 5.9,
-    "vsSma200": 9.7,
-    "relVol": 0.69,
-    "vol1y": 14.8,
+    "asOf": "2026-10-28",
+    "price": 540.34,
+    "chg1d": -0.49,
+    "chg1w": 0.25,
+    "chg1m": 7.56,
+    "rsi14": 65.3,
+    "sma50": 513.35,
+    "sma200": 495.26,
+    "ema8": 539.62,
+    "ema21": 528.75,
+    "emaGap": 2.05,
+    "vsSma50": 5.3,
+    "vsSma200": 9.1,
+    "relVol": 0.77,
+    "vol1y": 14.7,
     "high52w": 548.56,
     "low52w": 465.4,
-    "rangePos": 93.0,
+    "rangePos": 90.0,
     "series": [
       {
         "d": "2025-11-07",
@@ -236,8 +236,8 @@
         "c": 542.19
       },
       {
-        "d": "2026-10-27",
-        "c": 542.99
+        "d": "2026-10-28",
+        "c": 540.34
       }
     ],
     "signals": [],
@@ -281,17 +281,17 @@
     }
   },
   "summary": {
-    "trades": 70,
-    "members": 22,
-    "congress": 21,
+    "trades": 71,
+    "members": 23,
+    "congress": 22,
     "executive": 1,
-    "whoLabel": "21 members of Congress and 1 executive-branch filer",
+    "whoLabel": "22 members of Congress and 1 executive-branch filer",
     "buys": 35,
-    "sells": 35,
+    "sells": 36,
     "other": 0,
     "firstTx": "2024-01-30",
-    "lastTx": "2026-09-24",
-    "lastFiling": "2026-10-14",
+    "lastTx": "2026-10-15",
+    "lastFiling": "2026-10-27",
     "estBuyLabel": "$537K",
     "estSellLabel": "$1.1M",
     "pctLate": 17
@@ -409,6 +409,18 @@
     }
   ],
   "trades": [
+    {
+      "member": "Pete Sessions",
+      "memberSlug": "pete-sessions",
+      "hasPage": false,
+      "party": "R",
+      "side": "SELL",
+      "amountBucket": "$15K – $50K",
+      "txDate": "2026-10-15",
+      "filedDate": "2026-10-27",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035563.pdf"
+    },
     {
       "member": "Maria Elvira Salazar",
       "memberSlug": "maria-elvira-salazar",
@@ -696,33 +708,21 @@
       "filedDate": "2026-01-30",
       "daysLate": 0,
       "sourceUrl": "https://efdsearch.senate.gov/search/view/ptr/a8f2bab8-0feb-49cf-b80f-9826cb4a7a4c/"
-    },
-    {
-      "member": "Gilbert Ray Cisneros, Jr.",
-      "memberSlug": "gilbert-ray-cisneros-jr",
-      "hasPage": true,
-      "party": "D",
-      "side": "SELL",
-      "amountBucket": "$1K – $15K",
-      "txDate": "2025-12-24",
-      "filedDate": "2026-01-12",
-      "daysLate": 0,
-      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20033762.pdf"
     }
   ],
   "tradesShown": 25,
   "faq": [
     {
       "q": "Who in Congress has traded BRK.B stock?",
-      "a": "21 members of Congress and 1 executive-branch filer have disclosed 70 BRK.B trades since January 2024. The most active is Robert P. Bresnahan, Jr., with 9 trades, followed by Jerry Moran and Gilbert Ray Cisneros, Jr.. Each trade on this page links to the official filing it came from."
+      "a": "22 members of Congress and 1 executive-branch filer have disclosed 71 BRK.B trades since January 2024. The most active is Robert P. Bresnahan, Jr., with 9 trades, followed by Jerry Moran and Gilbert Ray Cisneros, Jr.. Each trade on this page links to the official filing it came from."
     },
     {
       "q": "Is Congress buying or selling BRK.B?",
-      "a": "Of the 70 disclosed BRK.B trades, 35 were buys and 35 were sells. By the midpoint of each filed amount bracket, the buying comes to about $537K and the selling to about $1.1M. Filings disclose brackets, never exact amounts, so these totals are estimates."
+      "a": "Of the 71 disclosed BRK.B trades, 35 were buys and 36 were sells. By the midpoint of each filed amount bracket, the buying comes to about $537K and the selling to about $1.1M. Filings disclose brackets, never exact amounts, so these totals are estimates."
     },
     {
       "q": "How late are BRK.B trades disclosed?",
-      "a": "17% of the disclosed BRK.B trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Sep 24, 2026, and the newest filing arrived on Oct 14, 2026."
+      "a": "17% of the disclosed BRK.B trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Oct 15, 2026, and the newest filing arrived on Oct 27, 2026."
     }
   ]
 }

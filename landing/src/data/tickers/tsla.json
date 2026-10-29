@@ -12,24 +12,24 @@
   },
   "indexable": true,
   "technical": {
-    "asOf": "2026-10-27",
-    "price": 407.46,
-    "chg1d": 4.04,
-    "chg1w": 9.03,
-    "chg1m": 13.99,
-    "rsi14": 65.5,
-    "sma50": 366.12,
-    "sma200": 385.94,
-    "ema8": 383.88,
-    "ema21": 375.74,
-    "emaGap": 2.17,
-    "vsSma50": 11.3,
-    "vsSma200": 5.6,
-    "relVol": 1.2,
-    "vol1y": 45.7,
+    "asOf": "2026-10-28",
+    "price": 404.22,
+    "chg1d": -0.8,
+    "chg1w": 4.59,
+    "chg1m": 14.56,
+    "rsi14": 63.6,
+    "sma50": 367.47,
+    "sma200": 385.72,
+    "ema8": 388.4,
+    "ema21": 378.33,
+    "emaGap": 2.66,
+    "vsSma50": 10.0,
+    "vsSma200": 4.8,
+    "relVol": 0.95,
+    "vol1y": 45.5,
     "high52w": 489.88,
     "low52w": 298.32,
-    "rangePos": 57.0,
+    "rangePos": 55.0,
     "series": [
       {
         "d": "2025-11-07",
@@ -236,8 +236,8 @@
         "c": 372.22
       },
       {
-        "d": "2026-10-27",
-        "c": 407.46
+        "d": "2026-10-28",
+        "c": 404.22
       }
     ],
     "signals": [],
@@ -281,19 +281,19 @@
     }
   },
   "summary": {
-    "trades": 60,
-    "members": 13,
-    "congress": 12,
+    "trades": 61,
+    "members": 14,
+    "congress": 13,
     "executive": 1,
-    "whoLabel": "12 members of Congress and 1 executive-branch filer",
+    "whoLabel": "13 members of Congress and 1 executive-branch filer",
     "buys": 37,
-    "sells": 23,
+    "sells": 24,
     "other": 0,
     "firstTx": "2024-10-29",
-    "lastTx": "2026-08-18",
-    "lastFiling": "2026-09-10",
+    "lastTx": "2026-10-02",
+    "lastFiling": "2026-10-27",
     "estBuyLabel": "$345K",
-    "estSellLabel": "$400K",
+    "estSellLabel": "$433K",
     "pctLate": 10
   },
   "topMembers": [
@@ -386,6 +386,17 @@
       "hasPage": false
     },
     {
+      "name": "Pete Sessions",
+      "slug": "pete-sessions",
+      "party": "R",
+      "chamber": "House",
+      "trades": 1,
+      "buys": 0,
+      "sells": 1,
+      "estLabel": "$33K",
+      "hasPage": false
+    },
+    {
       "name": "Adam Smith",
       "slug": "adam-smith",
       "party": "D",
@@ -395,20 +406,21 @@
       "sells": 1,
       "estLabel": "$8K",
       "hasPage": false
-    },
-    {
-      "name": "Dan Newhouse",
-      "slug": "dan-newhouse",
-      "party": "R",
-      "chamber": "House",
-      "trades": 1,
-      "buys": 0,
-      "sells": 1,
-      "estLabel": "$8K",
-      "hasPage": false
     }
   ],
   "trades": [
+    {
+      "member": "Pete Sessions",
+      "memberSlug": "pete-sessions",
+      "hasPage": false,
+      "party": "R",
+      "side": "SELL",
+      "amountBucket": "$15K – $50K",
+      "txDate": "2026-10-02",
+      "filedDate": "2026-10-27",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035563.pdf"
+    },
     {
       "member": "Gilbert Ray Cisneros, Jr.",
       "memberSlug": "gilbert-ray-cisneros-jr",
@@ -696,33 +708,21 @@
       "filedDate": "2025-06-11",
       "daysLate": 0,
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20030462.pdf"
-    },
-    {
-      "member": "Josh Gottheimer",
-      "memberSlug": "josh-gottheimer",
-      "hasPage": true,
-      "party": "D",
-      "side": "BUY",
-      "amountBucket": "$1K – $15K",
-      "txDate": "2025-05-27",
-      "filedDate": "2025-06-11",
-      "daysLate": 0,
-      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20030462.pdf"
     }
   ],
   "tradesShown": 25,
   "faq": [
     {
       "q": "Who in Congress has traded TSLA stock?",
-      "a": "12 members of Congress and 1 executive-branch filer have disclosed 60 TSLA trades since October 2024. The most active is Josh Gottheimer, with 13 trades, followed by Gilbert Ray Cisneros, Jr. and Robert P. Bresnahan, Jr.. Each trade on this page links to the official filing it came from."
+      "a": "13 members of Congress and 1 executive-branch filer have disclosed 61 TSLA trades since October 2024. The most active is Josh Gottheimer, with 13 trades, followed by Gilbert Ray Cisneros, Jr. and Robert P. Bresnahan, Jr.. Each trade on this page links to the official filing it came from."
     },
     {
       "q": "Is Congress buying or selling TSLA?",
-      "a": "Of the 60 disclosed TSLA trades, 37 were buys and 23 were sells. By the midpoint of each filed amount bracket, the buying comes to about $345K and the selling to about $400K. Filings disclose brackets, never exact amounts, so these totals are estimates."
+      "a": "Of the 61 disclosed TSLA trades, 37 were buys and 24 were sells. By the midpoint of each filed amount bracket, the buying comes to about $345K and the selling to about $433K. Filings disclose brackets, never exact amounts, so these totals are estimates."
     },
     {
       "q": "How late are TSLA trades disclosed?",
-      "a": "10% of the disclosed TSLA trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Aug 18, 2026, and the newest filing arrived on Sep 10, 2026."
+      "a": "10% of the disclosed TSLA trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Oct 2, 2026, and the newest filing arrived on Oct 27, 2026."
     }
   ]
 }
