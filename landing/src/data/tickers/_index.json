@@ -771,6 +771,23 @@
       }
     },
     {
+      "slug": "txn",
+      "ticker": "TXN",
+      "aliases": [],
+      "company": "Texas Instruments Incorporated",
+      "trades": 37,
+      "members": 15,
+      "buys": 17,
+      "sells": 20,
+      "lastTx": "2026-10-14",
+      "lastFiling": "2026-10-28",
+      "indexable": true,
+      "industry": {
+        "key": "tech",
+        "label": "Technology"
+      }
+    },
+    {
       "slug": "vz",
       "ticker": "VZ",
       "aliases": [],
@@ -873,23 +890,6 @@
       }
     },
     {
-      "slug": "txn",
-      "ticker": "TXN",
-      "aliases": [],
-      "company": "Texas Instruments Incorporated",
-      "trades": 36,
-      "members": 15,
-      "buys": 17,
-      "sells": 19,
-      "lastTx": "2026-05-15",
-      "lastFiling": "2026-08-05",
-      "indexable": true,
-      "industry": {
-        "key": "tech",
-        "label": "Technology"
-      }
-    },
-    {
       "slug": "anet",
       "ticker": "ANET",
       "aliases": [],
@@ -900,6 +900,23 @@
       "sells": 18,
       "lastTx": "2026-07-10",
       "lastFiling": "2026-07-21",
+      "indexable": true,
+      "industry": {
+        "key": "tech",
+        "label": "Technology"
+      }
+    },
+    {
+      "slug": "asml",
+      "ticker": "ASML",
+      "aliases": [],
+      "company": "ASML Holding N.V. - New York Registry Shares",
+      "trades": 35,
+      "members": 12,
+      "buys": 22,
+      "sells": 13,
+      "lastTx": "2026-10-23",
+      "lastFiling": "2026-10-28",
       "indexable": true,
       "industry": {
         "key": "tech",
@@ -1006,23 +1023,6 @@
       "industry": {
         "key": "finance",
         "label": "Banks & finance"
-      }
-    },
-    {
-      "slug": "asml",
-      "ticker": "ASML",
-      "aliases": [],
-      "company": "ASML Holding N.V. - New York Registry Shares",
-      "trades": 34,
-      "members": 11,
-      "buys": 22,
-      "sells": 12,
-      "lastTx": "2026-03-31",
-      "lastFiling": "2026-08-05",
-      "indexable": true,
-      "industry": {
-        "key": "tech",
-        "label": "Technology"
       }
     },
     {

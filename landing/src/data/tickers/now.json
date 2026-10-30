@@ -12,24 +12,24 @@
   },
   "indexable": true,
   "technical": {
-    "asOf": "2026-10-28",
-    "price": 150.13,
-    "chg1d": -3.0,
-    "chg1w": -1.95,
-    "chg1m": 15.54,
-    "rsi14": 56.5,
-    "sma50": 139.53,
-    "sma200": 115.28,
-    "ema8": 152.28,
-    "ema21": 146.69,
-    "emaGap": 3.81,
-    "vsSma50": 7.6,
-    "vsSma200": 30.2,
-    "relVol": 2.23,
-    "vol1y": 58.4,
-    "high52w": 187.58,
+    "asOf": "2026-10-29",
+    "price": 109.67,
+    "chg1d": -26.95,
+    "chg1w": -30.15,
+    "chg1m": -18.16,
+    "rsi14": 28.5,
+    "sma50": 139.18,
+    "sma200": 115.13,
+    "ema8": 142.81,
+    "ema21": 143.32,
+    "emaGap": -0.35,
+    "vsSma50": -21.2,
+    "vsSma200": -4.7,
+    "relVol": 4.81,
+    "vol1y": 66.2,
+    "high52w": 186.94,
     "low52w": 83.0,
-    "rangePos": 64.0,
+    "rangePos": 26.0,
     "series": [
       {
         "d": "2025-11-07",
@@ -236,30 +236,43 @@
         "c": 158.96
       },
       {
-        "d": "2026-10-28",
-        "c": 150.13
+        "d": "2026-10-29",
+        "c": 109.67
       }
     ],
-    "signals": [],
+    "signals": [
+      {
+        "type": "lose_sma50",
+        "asof": "2026-10-29",
+        "label": "Lost the 50-day average",
+        "dir": "bear"
+      },
+      {
+        "type": "rsi_oversold",
+        "asof": "2026-10-29",
+        "label": "RSI crossed below 30 (oversold)",
+        "dir": "neutral"
+      }
+    ],
     "nextEarnings": null,
     "score": {
-      "label": "Strong Buy",
-      "buys": 5,
-      "sells": 1,
-      "holds": 1,
-      "ratio": 0.571
+      "label": "Sell",
+      "buys": 2,
+      "sells": 5,
+      "holds": 0,
+      "ratio": -0.429
     },
     "votes": {
       "ema_cross": {
-        "vote": 1,
+        "vote": -1,
         "muted": false
       },
       "vs_sma50": {
-        "vote": 1,
+        "vote": -1,
         "muted": false
       },
       "vs_sma200": {
-        "vote": 1,
+        "vote": -1,
         "muted": false
       },
       "sma50_vs_200": {
@@ -267,11 +280,11 @@
         "muted": false
       },
       "rsi": {
-        "vote": 0,
+        "vote": 1,
         "muted": false
       },
       "chg_1m": {
-        "vote": 1,
+        "vote": -1,
         "muted": false
       },
       "chg_1w": {
