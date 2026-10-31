@@ -231,12 +231,12 @@
       "ticker": "V",
       "aliases": [],
       "company": "Visa Inc.",
-      "trades": 66,
+      "trades": 67,
       "members": 25,
       "buys": 38,
-      "sells": 28,
-      "lastTx": "2026-10-02",
-      "lastFiling": "2026-10-27",
+      "sells": 29,
+      "lastTx": "2026-10-15",
+      "lastFiling": "2026-10-29",
       "indexable": true,
       "industry": {
         "key": "finance",
@@ -550,6 +550,23 @@
       }
     },
     {
+      "slug": "lrcx",
+      "ticker": "LRCX",
+      "aliases": [],
+      "company": "Lam Research Corporation",
+      "trades": 43,
+      "members": 15,
+      "buys": 14,
+      "sells": 29,
+      "lastTx": "2026-10-15",
+      "lastFiling": "2026-10-29",
+      "indexable": true,
+      "industry": {
+        "key": "tech",
+        "label": "Technology"
+      }
+    },
+    {
       "slug": "wmt",
       "ticker": "WMT",
       "aliases": [],
@@ -615,23 +632,6 @@
       "industry": {
         "key": "health",
         "label": "Health care & pharma"
-      }
-    },
-    {
-      "slug": "lrcx",
-      "ticker": "LRCX",
-      "aliases": [],
-      "company": "Lam Research Corporation",
-      "trades": 42,
-      "members": 15,
-      "buys": 13,
-      "sells": 29,
-      "lastTx": "2026-08-13",
-      "lastFiling": "2026-09-02",
-      "indexable": true,
-      "industry": {
-        "key": "tech",
-        "label": "Technology"
       }
     },
     {
@@ -771,6 +771,23 @@
       }
     },
     {
+      "slug": "t",
+      "ticker": "T",
+      "aliases": [],
+      "company": "AT&T Inc.",
+      "trades": 37,
+      "members": 15,
+      "buys": 20,
+      "sells": 17,
+      "lastTx": "2026-10-15",
+      "lastFiling": "2026-10-29",
+      "indexable": true,
+      "industry": {
+        "key": "telecom",
+        "label": "Telecom & media"
+      }
+    },
+    {
       "slug": "txn",
       "ticker": "TXN",
       "aliases": [],
@@ -836,23 +853,6 @@
       "industry": {
         "key": "consumer",
         "label": "Consumer & retail"
-      }
-    },
-    {
-      "slug": "t",
-      "ticker": "T",
-      "aliases": [],
-      "company": "AT&T Inc.",
-      "trades": 36,
-      "members": 15,
-      "buys": 19,
-      "sells": 17,
-      "lastTx": "2026-10-09",
-      "lastFiling": "2026-10-15",
-      "indexable": true,
-      "industry": {
-        "key": "telecom",
-        "label": "Telecom & media"
       }
     },
     {

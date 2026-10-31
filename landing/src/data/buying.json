@@ -1,39 +1,13 @@
 {
   "_comment": "Generated from real official disclosures by congress/landing_data.py (daily Action). Do not edit by hand. 'filedDaysLate' counts days past the STOCK Act's 45-day statutory maximum; 0 = on time.",
   "windowDays": 45,
-  "from": "2026-09-13",
-  "to": "2026-10-28",
-  "members": 19,
+  "from": "2026-09-14",
+  "to": "2026-10-29",
+  "members": 18,
   "buys": 104,
-  "options": 2,
-  "companies": 83,
+  "options": 0,
+  "companies": 82,
   "rows": [
-    {
-      "ticker": "MSFT",
-      "tickerLabel": "MSFT",
-      "slug": "msft",
-      "company": "Microsoft Corporation",
-      "members": 3,
-      "buyers": [
-        {
-          "name": "Cleo Fields",
-          "slug": "cleo-fields"
-        },
-        {
-          "name": "Josh Gottheimer",
-          "slug": "josh-gottheimer"
-        },
-        {
-          "name": "Lisa C. McClain",
-          "slug": null
-        }
-      ],
-      "buys": 5,
-      "options": 2,
-      "estLabel": "$1.1M",
-      "est": 1149002,
-      "lastFiling": "2026-10-12"
-    },
     {
       "ticker": "TSM",
       "tickerLabel": "TSM",
@@ -81,6 +55,28 @@
       "estLabel": "$24K",
       "est": 24002,
       "lastFiling": "2026-10-05"
+    },
+    {
+      "ticker": "MSFT",
+      "tickerLabel": "MSFT",
+      "slug": "msft",
+      "company": "Microsoft Corporation",
+      "members": 2,
+      "buyers": [
+        {
+          "name": "Cleo Fields",
+          "slug": "cleo-fields"
+        },
+        {
+          "name": "Lisa C. McClain",
+          "slug": null
+        }
+      ],
+      "buys": 3,
+      "options": 0,
+      "estLabel": "$24K",
+      "est": 24002,
+      "lastFiling": "2026-10-12"
     },
     {
       "ticker": "NFLX",
@@ -285,6 +281,60 @@
       "lastFiling": "2026-09-17"
     },
     {
+      "ticker": "PLD",
+      "tickerLabel": "PLD",
+      "slug": null,
+      "company": "Prologis, Inc.",
+      "members": 1,
+      "buyers": [
+        {
+          "name": "David J. Taylor",
+          "slug": null
+        }
+      ],
+      "buys": 2,
+      "options": 0,
+      "estLabel": "$16K",
+      "est": 16001,
+      "lastFiling": "2026-10-29"
+    },
+    {
+      "ticker": "RPM",
+      "tickerLabel": "RPM",
+      "slug": null,
+      "company": "RPM International Inc.",
+      "members": 1,
+      "buyers": [
+        {
+          "name": "David J. Taylor",
+          "slug": null
+        }
+      ],
+      "buys": 2,
+      "options": 0,
+      "estLabel": "$16K",
+      "est": 16001,
+      "lastFiling": "2026-10-29"
+    },
+    {
+      "ticker": "T",
+      "tickerLabel": "T",
+      "slug": "t",
+      "company": "AT&T Inc.",
+      "members": 1,
+      "buyers": [
+        {
+          "name": "David J. Taylor",
+          "slug": null
+        }
+      ],
+      "buys": 2,
+      "options": 0,
+      "estLabel": "$16K",
+      "est": 16001,
+      "lastFiling": "2026-10-29"
+    },
+    {
       "ticker": "DDOG",
       "tickerLabel": "DDOG",
       "slug": null,
@@ -337,82 +387,26 @@
       "estLabel": "$33K",
       "est": 32500,
       "lastFiling": "2026-10-12"
-    },
-    {
-      "ticker": "CACI",
-      "tickerLabel": "CACI",
-      "slug": null,
-      "company": "CACI International, Inc.",
-      "members": 1,
-      "buyers": [
-        {
-          "name": "Lisa C. McClain",
-          "slug": null
-        }
-      ],
-      "buys": 1,
-      "options": 0,
-      "estLabel": "$33K",
-      "est": 32500,
-      "lastFiling": "2026-10-12"
-    },
-    {
-      "ticker": "GH",
-      "tickerLabel": "GH",
-      "slug": null,
-      "company": "Guardant Health, Inc.",
-      "members": 1,
-      "buyers": [
-        {
-          "name": "Jonathan L. Jackson",
-          "slug": null
-        }
-      ],
-      "buys": 1,
-      "options": 0,
-      "estLabel": "$33K",
-      "est": 32500,
-      "lastFiling": "2026-10-19"
-    },
-    {
-      "ticker": "NOKBF",
-      "tickerLabel": "NOKBF",
-      "slug": null,
-      "company": "NOKIA A SHS",
-      "members": 1,
-      "buyers": [
-        {
-          "name": "Laurel M. Lee",
-          "slug": null
-        }
-      ],
-      "buys": 1,
-      "options": 0,
-      "estLabel": "$33K",
-      "est": 32500,
-      "lastFiling": "2026-10-16"
     }
   ],
   "largest": {
-    "ticker": "MSFT",
-    "estLabel": "$1.1M",
-    "buys": 5,
-    "options": 2,
-    "company": "Microsoft Corporation",
+    "ticker": "EL",
+    "estLabel": "$75K",
+    "buys": 1,
+    "options": 0,
+    "company": "Estee Lauder Companies, Inc.",
     "buyers": [
-      "Cleo Fields",
-      "Josh Gottheimer",
-      "Lisa C. McClain"
+      "Jonathan L. Jackson"
     ]
   },
   "faq": [
     {
       "q": "What stocks is Congress buying?",
-      "a": "In filings from the last 45 days, to Oct 28, 2026, 19 members of Congress disclosed 104 purchases, 2 of them options, across 83 companies. The stocks bought by the most members were MSFT (3 members), TSM (3 members) and HD (2 members). Filings arrive up to 45 days after the trade: this is recent disclosure, not live trading."
+      "a": "In filings from the last 45 days, to Oct 29, 2026, 18 members of Congress disclosed 104 purchases across 82 companies. The stocks bought by the most members were TSM (3 members), HD (2 members) and MSFT (2 members). Filings arrive up to 45 days after the trade: this is recent disclosure, not live trading."
     },
     {
       "q": "What is the largest stock purchase Congress disclosed recently?",
-      "a": "By the midpoint of each filed amount bracket, the largest recent buying was in Microsoft Corporation (MSFT): about $1.1M across 5 purchases (2 of them options), by Cleo Fields and Josh Gottheimer and others. Filings disclose brackets, never exact amounts, so this is an estimate."
+      "a": "By the midpoint of each filed amount bracket, the largest recent buying was in Estee Lauder Companies, Inc. (EL): about $75K across 1 purchase, by Jonathan L. Jackson. Filings disclose brackets, never exact amounts, so this is an estimate."
     },
     {
       "q": "Does this include the President's trades?",

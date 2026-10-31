@@ -12,24 +12,24 @@
   },
   "indexable": true,
   "technical": {
-    "asOf": "2026-10-29",
-    "price": 20.92,
-    "chg1d": 1.06,
-    "chg1w": -8.0,
-    "chg1m": -14.26,
-    "rsi14": 33.0,
-    "sma50": 24.43,
-    "sma200": 25.0,
-    "ema8": 21.47,
-    "ema21": 22.6,
-    "emaGap": -5.02,
-    "vsSma50": -14.4,
-    "vsSma200": -16.3,
-    "relVol": 0.83,
+    "asOf": "2026-10-30",
+    "price": 21.41,
+    "chg1d": 2.34,
+    "chg1w": 2.29,
+    "chg1m": -11.89,
+    "rsi14": 38.1,
+    "sma50": 24.35,
+    "sma200": 24.99,
+    "ema8": 21.46,
+    "ema21": 22.5,
+    "emaGap": -4.62,
+    "vsSma50": -12.1,
+    "vsSma200": -14.3,
+    "relVol": 0.93,
     "vol1y": 29.3,
     "high52w": 29.1,
     "low52w": 20.48,
-    "rangePos": 5.0,
+    "rangePos": 11.0,
     "series": [
       {
         "d": "2025-11-07",
@@ -236,18 +236,18 @@
         "c": 20.93
       },
       {
-        "d": "2026-10-29",
-        "c": 20.92
+        "d": "2026-10-30",
+        "c": 21.41
       }
     ],
     "signals": [],
     "nextEarnings": null,
     "score": {
       "label": "Strong Sell",
-      "buys": 0,
-      "sells": 6,
+      "buys": 1,
+      "sells": 5,
       "holds": 1,
-      "ratio": -0.857
+      "ratio": -0.571
     },
     "votes": {
       "ema_cross": {
@@ -275,26 +275,26 @@
         "muted": false
       },
       "chg_1w": {
-        "vote": -1,
+        "vote": 1,
         "muted": false
       }
     }
   },
   "summary": {
-    "trades": 36,
+    "trades": 37,
     "members": 15,
     "congress": 14,
     "executive": 1,
     "whoLabel": "14 members of Congress and 1 executive-branch filer",
-    "buys": 19,
+    "buys": 20,
     "sells": 17,
     "other": 0,
     "firstTx": "2024-10-23",
-    "lastTx": "2026-10-09",
-    "lastFiling": "2026-10-15",
-    "estBuyLabel": "$317K",
+    "lastTx": "2026-10-15",
+    "lastFiling": "2026-10-29",
+    "estBuyLabel": "$325K",
     "estSellLabel": "$326K",
-    "pctLate": 17
+    "pctLate": 16
   },
   "topMembers": [
     {
@@ -302,10 +302,10 @@
       "slug": "david-j-taylor",
       "party": "R",
       "chamber": "House",
-      "trades": 11,
-      "buys": 9,
+      "trades": 12,
+      "buys": 10,
       "sells": 2,
-      "estLabel": "$88K",
+      "estLabel": "$96K",
       "hasPage": false
     },
     {
@@ -409,6 +409,18 @@
     }
   ],
   "trades": [
+    {
+      "member": "David J. Taylor",
+      "memberSlug": "david-j-taylor",
+      "hasPage": false,
+      "party": "R",
+      "side": "BUY",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-10-15",
+      "filedDate": "2026-10-29",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035727.pdf"
+    },
     {
       "member": "David J. Taylor",
       "memberSlug": "david-j-taylor",
@@ -696,33 +708,21 @@
       "filedDate": "2025-09-02",
       "daysLate": 1,
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20030782.pdf"
-    },
-    {
-      "member": "David J. Taylor",
-      "memberSlug": "david-j-taylor",
-      "hasPage": false,
-      "party": "R",
-      "side": "BUY",
-      "amountBucket": "$1K – $15K",
-      "txDate": "2025-07-18",
-      "filedDate": "2025-09-02",
-      "daysLate": 1,
-      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20030782.pdf"
     }
   ],
   "tradesShown": 25,
   "faq": [
     {
       "q": "Who in Congress has traded T stock?",
-      "a": "14 members of Congress and 1 executive-branch filer have disclosed 36 T trades since October 2024. The most active is David J. Taylor, with 11 trades, followed by Tim Moore and Julia Letlow. Each trade on this page links to the official filing it came from."
+      "a": "14 members of Congress and 1 executive-branch filer have disclosed 37 T trades since October 2024. The most active is David J. Taylor, with 12 trades, followed by Tim Moore and Julia Letlow. Each trade on this page links to the official filing it came from."
     },
     {
       "q": "Is Congress buying or selling T?",
-      "a": "Of the 36 disclosed T trades, 19 were buys and 17 were sells. By the midpoint of each filed amount bracket, the buying comes to about $317K and the selling to about $326K. Filings disclose brackets, never exact amounts, so these totals are estimates."
+      "a": "Of the 37 disclosed T trades, 20 were buys and 17 were sells. By the midpoint of each filed amount bracket, the buying comes to about $325K and the selling to about $326K. Filings disclose brackets, never exact amounts, so these totals are estimates."
     },
     {
       "q": "How late are T trades disclosed?",
-      "a": "17% of the disclosed T trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Oct 9, 2026, and the newest filing arrived on Oct 15, 2026."
+      "a": "16% of the disclosed T trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Oct 15, 2026, and the newest filing arrived on Oct 29, 2026."
     }
   ]
 }
