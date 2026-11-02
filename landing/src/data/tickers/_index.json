@@ -129,12 +129,12 @@
       "ticker": "AVGO",
       "aliases": [],
       "company": "Broadcom Inc.",
-      "trades": 91,
-      "members": 24,
+      "trades": 92,
+      "members": 25,
       "buys": 52,
-      "sells": 39,
-      "lastTx": "2026-09-16",
-      "lastFiling": "2026-10-12",
+      "sells": 40,
+      "lastTx": "2026-09-24",
+      "lastFiling": "2026-11-01",
       "indexable": true,
       "industry": {
         "key": "tech",
@@ -180,12 +180,12 @@
       "ticker": "JNJ",
       "aliases": [],
       "company": "Johnson & Johnson",
-      "trades": 68,
+      "trades": 69,
       "members": 24,
       "buys": 31,
-      "sells": 37,
-      "lastTx": "2026-09-08",
-      "lastFiling": "2026-10-05",
+      "sells": 38,
+      "lastTx": "2026-09-30",
+      "lastFiling": "2026-10-30",
       "indexable": true,
       "industry": {
         "key": "health",
@@ -346,6 +346,23 @@
       }
     },
     {
+      "slug": "abt",
+      "ticker": "ABT",
+      "aliases": [],
+      "company": "Abbott Laboratories",
+      "trades": 53,
+      "members": 21,
+      "buys": 21,
+      "sells": 31,
+      "lastTx": "2026-10-02",
+      "lastFiling": "2026-10-30",
+      "indexable": true,
+      "industry": {
+        "key": "health",
+        "label": "Health care & pharma"
+      }
+    },
+    {
       "slug": "tsm",
       "ticker": "TSM",
       "aliases": [],
@@ -394,23 +411,6 @@
       "industry": {
         "key": "agriculture",
         "label": "Agriculture & food"
-      }
-    },
-    {
-      "slug": "abt",
-      "ticker": "ABT",
-      "aliases": [],
-      "company": "Abbott Laboratories",
-      "trades": 52,
-      "members": 21,
-      "buys": 21,
-      "sells": 30,
-      "lastTx": "2026-10-02",
-      "lastFiling": "2026-10-27",
-      "indexable": true,
-      "industry": {
-        "key": "health",
-        "label": "Health care & pharma"
       }
     },
     {
@@ -720,6 +720,23 @@
       }
     },
     {
+      "slug": "txn",
+      "ticker": "TXN",
+      "aliases": [],
+      "company": "Texas Instruments Incorporated",
+      "trades": 38,
+      "members": 15,
+      "buys": 18,
+      "sells": 20,
+      "lastTx": "2026-10-14",
+      "lastFiling": "2026-10-30",
+      "indexable": true,
+      "industry": {
+        "key": "tech",
+        "label": "Technology"
+      }
+    },
+    {
       "slug": "intu",
       "ticker": "INTU",
       "aliases": [],
@@ -788,23 +805,6 @@
       }
     },
     {
-      "slug": "txn",
-      "ticker": "TXN",
-      "aliases": [],
-      "company": "Texas Instruments Incorporated",
-      "trades": 37,
-      "members": 15,
-      "buys": 17,
-      "sells": 20,
-      "lastTx": "2026-10-14",
-      "lastFiling": "2026-10-28",
-      "indexable": true,
-      "industry": {
-        "key": "tech",
-        "label": "Technology"
-      }
-    },
-    {
       "slug": "vz",
       "ticker": "VZ",
       "aliases": [],
@@ -836,6 +836,23 @@
       "industry": {
         "key": "health",
         "label": "Health care & pharma"
+      }
+    },
+    {
+      "slug": "mu",
+      "ticker": "MU",
+      "aliases": [],
+      "company": "Micron Technology, Inc.",
+      "trades": 36,
+      "members": 18,
+      "buys": 17,
+      "sells": 19,
+      "lastTx": "2026-10-01",
+      "lastFiling": "2026-11-01",
+      "indexable": true,
+      "industry": {
+        "key": "tech",
+        "label": "Technology"
       }
     },
     {
@@ -1040,23 +1057,6 @@
       "industry": {
         "key": "consumer",
         "label": "Consumer & retail"
-      }
-    },
-    {
-      "slug": "mu",
-      "ticker": "MU",
-      "aliases": [],
-      "company": "Micron Technology, Inc.",
-      "trades": 33,
-      "members": 17,
-      "buys": 14,
-      "sells": 19,
-      "lastTx": "2026-09-24",
-      "lastFiling": "2026-10-21",
-      "indexable": true,
-      "industry": {
-        "key": "tech",
-        "label": "Technology"
       }
     },
     {
@@ -1618,6 +1618,23 @@
       "industry": {
         "key": "finance",
         "label": "Banks & finance"
+      }
+    },
+    {
+      "slug": "syk",
+      "ticker": "SYK",
+      "aliases": [],
+      "company": "Stryker Corporation",
+      "trades": 25,
+      "members": 8,
+      "buys": 8,
+      "sells": 17,
+      "lastTx": "2026-09-30",
+      "lastFiling": "2026-10-30",
+      "indexable": true,
+      "industry": {
+        "key": "health",
+        "label": "Health care & pharma"
       }
     },
     {

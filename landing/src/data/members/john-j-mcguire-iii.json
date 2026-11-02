@@ -10,15 +10,22 @@
   "former": false,
   "knownAs": [],
   "summary": {
-    "trades": 22,
-    "distinctTickers": 13,
+    "trades": 26,
+    "distinctTickers": 15,
     "firstTx": "2025-04-10",
-    "lastTx": "2026-08-18",
-    "lastFiling": "2026-09-02",
+    "lastTx": "2026-10-01",
+    "lastFiling": "2026-11-01",
     "pctLate": 0,
     "worstLate": 0
   },
   "topTickers": [
+    {
+      "ticker": "MU",
+      "count": 3,
+      "asset": "Micron Technology, Inc. - Common Stock",
+      "slug": "mu",
+      "hasPage": true
+    },
     {
       "ticker": "NVDA",
       "count": 3,
@@ -53,16 +60,57 @@
       "asset": "Meta Platforms, Inc. - Class A Common Stock",
       "slug": "meta",
       "hasPage": true
-    },
-    {
-      "ticker": "NOW",
-      "count": 2,
-      "asset": "ServiceNow, Inc. Common Stock",
-      "slug": "now",
-      "hasPage": true
     }
   ],
   "trades": [
+    {
+      "ticker": "MU",
+      "asset": "Micron Technology, Inc. - Common Stock",
+      "side": "BUY",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-10-01",
+      "filedDate": "2026-11-01",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035484.pdf",
+      "bond": false,
+      "tickerSlug": "mu"
+    },
+    {
+      "ticker": "MU",
+      "asset": "Micron Technology, Inc. - Common Stock",
+      "side": "BUY",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-09-25",
+      "filedDate": "2026-11-01",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035484.pdf",
+      "bond": false,
+      "tickerSlug": "mu"
+    },
+    {
+      "ticker": "AVGO",
+      "asset": "Broadcom Inc. - Common Stock",
+      "side": "SELL",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-09-24",
+      "filedDate": "2026-11-01",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035484.pdf",
+      "bond": false,
+      "tickerSlug": "avgo"
+    },
+    {
+      "ticker": "MU",
+      "asset": "Micron Technology, Inc. - Common Stock",
+      "side": "BUY",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-09-24",
+      "filedDate": "2026-11-01",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035484.pdf",
+      "bond": false,
+      "tickerSlug": "mu"
+    },
     {
       "ticker": "AAPL",
       "asset": "Apple Inc. - Common Stock",
@@ -328,7 +376,7 @@
       "tickerSlug": "unh"
     }
   ],
-  "tradesShown": 22,
+  "tradesShown": 26,
   "holdings": {
     "available": false,
     "filingDate": null,
@@ -353,7 +401,7 @@
       "beat": 3,
       "beatOf": 13,
       "priced": 13,
-      "pricedOf": 13
+      "pricedOf": 16
     },
     "series": {
       "dates": [
@@ -743,18 +791,18 @@
       }
     ],
     "coverage": {
-      "classified": 13,
-      "total": 13
+      "classified": 15,
+      "total": 15
     }
   },
   "faq": [
     {
       "q": "What stocks does John J. McGuire III trade?",
-      "a": "John J. McGuire III has disclosed 22 trades across 13 tickers since April 2025. The most traded are NVDA (3), BLK (3) and MSFT (3). Each trade on this page links to the official filing it came from."
+      "a": "John J. McGuire III has disclosed 26 trades across 15 tickers since April 2025. The most traded are MU (3), NVDA (3) and BLK (3). Each trade on this page links to the official filing it came from."
     },
     {
       "q": "Does John J. McGuire III disclose trades on time?",
-      "a": "Yes. None of John J. McGuire III's 22 disclosed trades was filed late: each arrived within the STOCK Act's 45-day legal maximum. The newest filing arrived on Sep 2, 2026."
+      "a": "Yes. None of John J. McGuire III's 26 disclosed trades was filed late: each arrived within the STOCK Act's 45-day legal maximum. The newest filing arrived on Nov 1, 2026."
     }
   ]
 }
