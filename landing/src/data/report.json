@@ -7,8 +7,8 @@
     "tickers": 35,
     "new_signals": 6,
     "flips": 0,
-    "disclosures": 0,
-    "bonds": 0
+    "disclosures": 12,
+    "bonds": 1
   },
   "scorecard": [
     {
@@ -506,8 +506,141 @@
     }
   ],
   "flips": [],
-  "disclosures": [],
-  "bondCount": 0,
+  "disclosures": [
+    {
+      "filingDate": "2026-11-01",
+      "txDate": "2026-10-07",
+      "member": "Donald S. Beyer, Jr.",
+      "party": "D",
+      "ticker": null,
+      "asset": "California CMNTY VAR 11/01/54",
+      "type": "buy",
+      "amount": "$15,001 - $50,000",
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035743.pdf"
+    },
+    {
+      "filingDate": "2026-11-01",
+      "txDate": "2026-10-01",
+      "member": "John J. McGuire III",
+      "party": "R",
+      "ticker": "MU",
+      "asset": "Micron Technology, Inc. - Common Stock",
+      "type": "buy",
+      "amount": "$1,001 - $15,000",
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035484.pdf"
+    },
+    {
+      "filingDate": "2026-11-01",
+      "txDate": "2026-09-25",
+      "member": "John J. McGuire III",
+      "party": "R",
+      "ticker": "MU",
+      "asset": "Micron Technology, Inc. - Common Stock",
+      "type": "buy",
+      "amount": "$1,001 - $15,000",
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035484.pdf"
+    },
+    {
+      "filingDate": "2026-11-01",
+      "txDate": "2026-09-24",
+      "member": "John J. McGuire III",
+      "party": "R",
+      "ticker": "AVGO",
+      "asset": "Broadcom Inc. - Common Stock",
+      "type": "sell",
+      "amount": "$1,001 - $15,000",
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035484.pdf"
+    },
+    {
+      "filingDate": "2026-11-01",
+      "txDate": "2026-09-24",
+      "member": "John J. McGuire III",
+      "party": "R",
+      "ticker": "MU",
+      "asset": "Micron Technology, Inc. - Common Stock",
+      "type": "buy",
+      "amount": "$1,001 - $15,000",
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035484.pdf"
+    },
+    {
+      "filingDate": "2026-10-30",
+      "txDate": "2026-09-30",
+      "member": "Thomas H. Kean, Jr.",
+      "party": "R",
+      "ticker": "JNJ",
+      "asset": "Johnson & Johnson Common Stock",
+      "type": "sell",
+      "amount": "$1,001 - $15,000",
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035591.pdf"
+    },
+    {
+      "filingDate": "2026-10-30",
+      "txDate": "2026-09-30",
+      "member": "Thomas H. Kean, Jr.",
+      "party": "R",
+      "ticker": "SYK",
+      "asset": "Stryker Corporation Common Stock",
+      "type": "sell",
+      "amount": "$1,001 - $15,000",
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035591.pdf"
+    },
+    {
+      "filingDate": "2026-10-30",
+      "txDate": "2026-09-29",
+      "member": "Carol D. Miller",
+      "party": "R",
+      "ticker": "HONA",
+      "asset": "Honeywell Aerospace Inc. - Common Stock",
+      "type": "sell",
+      "amount": "$710.52",
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035734.pdf"
+    },
+    {
+      "filingDate": "2026-10-30",
+      "txDate": "2026-09-29",
+      "member": "Thomas H. Kean, Jr.",
+      "party": "R",
+      "ticker": "ESAB",
+      "asset": "ESAB Corporation Common Stock",
+      "type": "buy",
+      "amount": "$1,001 - $15,000",
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035591.pdf"
+    },
+    {
+      "filingDate": "2026-10-30",
+      "txDate": "2026-09-23",
+      "member": "Thomas H. Kean, Jr.",
+      "party": "R",
+      "ticker": "MDLZ",
+      "asset": "Mondelez International, Inc. - Class A Common Stock",
+      "type": "sell",
+      "amount": "$1,001 - $15,000",
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035591.pdf"
+    },
+    {
+      "filingDate": "2026-10-30",
+      "txDate": "2026-09-17",
+      "member": "Thomas H. Kean, Jr.",
+      "party": "R",
+      "ticker": "ABT",
+      "asset": "Abbott Laboratories Common Stock",
+      "type": "sell",
+      "amount": "$1,001 - $15,000",
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035591.pdf"
+    },
+    {
+      "filingDate": "2026-10-30",
+      "txDate": "2026-09-17",
+      "member": "Thomas H. Kean, Jr.",
+      "party": "R",
+      "ticker": "TXN",
+      "asset": "Texas Instruments Incorporated - Common Stock",
+      "type": "buy",
+      "amount": "$1,001 - $15,000",
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035591.pdf"
+    }
+  ],
+  "bondCount": 1,
   "market": {
     "source": "realized",
     "label": "S&P 500 volatility",
@@ -520,5 +653,5 @@
     "chg_1d": 1.53,
     "vol1y": 12.8
   },
-  "emailShown": 0
+  "emailShown": 11
 }
