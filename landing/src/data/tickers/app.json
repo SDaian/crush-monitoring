@@ -12,24 +12,24 @@
   },
   "indexable": true,
   "technical": {
-    "asOf": "2026-11-04",
-    "price": 271.75,
-    "chg1d": 10.69,
-    "chg1w": 4.53,
-    "chg1m": -2.52,
-    "rsi14": 50.8,
-    "sma50": 290.82,
-    "sma200": 410.84,
-    "ema8": 253.43,
-    "ema21": 264.3,
-    "emaGap": -4.11,
-    "vsSma50": -6.6,
-    "vsSma200": -33.9,
-    "relVol": 3.27,
-    "vol1y": 75.0,
+    "asOf": "2026-11-05",
+    "price": 356.1,
+    "chg1d": 31.04,
+    "chg1w": 39.7,
+    "chg1m": 26.6,
+    "rsi14": 71.8,
+    "sma50": 291.78,
+    "sma200": 409.96,
+    "ema8": 276.25,
+    "ema21": 272.65,
+    "emaGap": 1.32,
+    "vsSma50": 22.0,
+    "vsSma200": -13.1,
+    "relVol": 4.31,
+    "vol1y": 79.8,
     "high52w": 733.6,
     "low52w": 228.5,
-    "rangePos": 9.0,
+    "rangePos": 25.0,
     "series": [
       {
         "d": "2025-11-14",
@@ -236,26 +236,39 @@
         "c": 228.5
       },
       {
-        "d": "2026-11-04",
-        "c": 271.75
+        "d": "2026-11-05",
+        "c": 356.1
       }
     ],
-    "signals": [],
+    "signals": [
+      {
+        "type": "reclaim_sma50",
+        "asof": "2026-11-05",
+        "label": "Reclaimed the 50-day average",
+        "dir": "bull"
+      },
+      {
+        "type": "rsi_overbought",
+        "asof": "2026-11-05",
+        "label": "RSI crossed above 70 (overbought)",
+        "dir": "neutral"
+      }
+    ],
     "nextEarnings": null,
     "score": {
-      "label": "Strong Sell",
-      "buys": 1,
-      "sells": 5,
+      "label": "Hold",
+      "buys": 3,
+      "sells": 3,
       "holds": 1,
-      "ratio": -0.571
+      "ratio": 0.0
     },
     "votes": {
       "ema_cross": {
-        "vote": -1,
-        "muted": false
+        "vote": 0,
+        "muted": true
       },
       "vs_sma50": {
-        "vote": -1,
+        "vote": 1,
         "muted": false
       },
       "vs_sma200": {
@@ -267,11 +280,11 @@
         "muted": false
       },
       "rsi": {
-        "vote": 0,
+        "vote": -1,
         "muted": false
       },
       "chg_1m": {
-        "vote": -1,
+        "vote": 1,
         "muted": false
       },
       "chg_1w": {

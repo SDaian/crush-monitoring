@@ -12,24 +12,24 @@
   },
   "indexable": true,
   "technical": {
-    "asOf": "2026-11-04",
-    "price": 200.13,
-    "chg1d": -3.17,
-    "chg1w": -7.08,
-    "chg1m": -16.35,
-    "rsi14": 34.5,
-    "sma50": 221.2,
-    "sma200": 204.67,
-    "ema8": 207.83,
-    "ema21": 214.54,
-    "emaGap": -3.13,
-    "vsSma50": -9.5,
-    "vsSma200": -2.2,
-    "relVol": 1.43,
-    "vol1y": 37.4,
+    "asOf": "2026-11-05",
+    "price": 181.6,
+    "chg1d": -9.26,
+    "chg1w": -15.01,
+    "chg1m": -23.53,
+    "rsi14": 25.4,
+    "sma50": 220.64,
+    "sma200": 204.66,
+    "ema8": 202.0,
+    "ema21": 211.55,
+    "emaGap": -4.51,
+    "vsSma50": -17.7,
+    "vsSma200": -11.3,
+    "relVol": 2.69,
+    "vol1y": 38.4,
     "high52w": 239.24,
     "low52w": 165.17,
-    "rangePos": 47.0,
+    "rangePos": 22.0,
     "series": [
       {
         "d": "2025-11-14",
@@ -236,18 +236,25 @@
         "c": 204.64
       },
       {
-        "d": "2026-11-04",
-        "c": 200.13
+        "d": "2026-11-05",
+        "c": 181.6
       }
     ],
-    "signals": [],
+    "signals": [
+      {
+        "type": "rsi_oversold",
+        "asof": "2026-11-05",
+        "label": "RSI crossed below 30 (oversold)",
+        "dir": "neutral"
+      }
+    ],
     "nextEarnings": null,
     "score": {
-      "label": "Strong Sell",
-      "buys": 1,
+      "label": "Sell",
+      "buys": 2,
       "sells": 5,
-      "holds": 1,
-      "ratio": -0.571
+      "holds": 0,
+      "ratio": -0.429
     },
     "votes": {
       "ema_cross": {
@@ -267,7 +274,7 @@
         "muted": false
       },
       "rsi": {
-        "vote": 0,
+        "vote": 1,
         "muted": false
       },
       "chg_1m": {
@@ -281,17 +288,17 @@
     }
   },
   "summary": {
-    "trades": 187,
-    "members": 35,
-    "congress": 34,
+    "trades": 190,
+    "members": 36,
+    "congress": 35,
     "executive": 1,
-    "whoLabel": "34 members of Congress and 1 executive-branch filer",
-    "buys": 120,
-    "sells": 67,
+    "whoLabel": "35 members of Congress and 1 executive-branch filer",
+    "buys": 122,
+    "sells": 68,
     "other": 0,
     "firstTx": "2024-01-02",
-    "lastTx": "2026-10-02",
-    "lastFiling": "2026-10-27",
+    "lastTx": "2026-10-23",
+    "lastFiling": "2026-11-05",
     "estBuyLabel": "$11.3M",
     "estSellLabel": "$10.7M",
     "pctLate": 16
@@ -346,9 +353,9 @@
       "slug": "daniel-meuser",
       "party": "R",
       "chamber": "House",
-      "trades": 10,
+      "trades": 11,
       "buys": 0,
-      "sells": 10,
+      "sells": 11,
       "estLabel": "$1.6M",
       "hasPage": false
     },
@@ -410,6 +417,30 @@
   ],
   "trades": [
     {
+      "member": "Maria Elvira Salazar",
+      "memberSlug": "maria-elvira-salazar",
+      "hasPage": false,
+      "party": "R",
+      "side": "BUY",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-10-23",
+      "filedDate": "2026-11-05",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035778.pdf"
+    },
+    {
+      "member": "Maria Elvira Salazar",
+      "memberSlug": "maria-elvira-salazar",
+      "hasPage": false,
+      "party": "R",
+      "side": "BUY",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-10-23",
+      "filedDate": "2026-11-05",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035778.pdf"
+    },
+    {
       "member": "Pete Sessions",
       "memberSlug": "pete-sessions",
       "hasPage": false,
@@ -456,6 +487,18 @@
       "filedDate": "2026-10-22",
       "daysLate": 0,
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035669.pdf"
+    },
+    {
+      "member": "Daniel Meuser",
+      "memberSlug": "daniel-meuser",
+      "hasPage": false,
+      "party": "R",
+      "side": "SELL",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-09-25",
+      "filedDate": "2026-11-05",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035662.pdf"
     },
     {
       "member": "Daniel Meuser",
@@ -672,57 +715,21 @@
       "filedDate": "2026-06-02",
       "daysLate": 0,
       "sourceUrl": "https://efdsearch.senate.gov/search/view/ptr/4aa0094d-d9da-4a05-aa13-6d9f5d376105/"
-    },
-    {
-      "member": "Sheldon Whitehouse",
-      "memberSlug": "sheldon-whitehouse",
-      "hasPage": false,
-      "party": "D",
-      "side": "SELL",
-      "amountBucket": "$100K – $250K",
-      "txDate": "2026-05-08",
-      "filedDate": "2026-06-02",
-      "daysLate": 0,
-      "sourceUrl": "https://efdsearch.senate.gov/search/view/ptr/4aa0094d-d9da-4a05-aa13-6d9f5d376105/"
-    },
-    {
-      "member": "Daniel Meuser",
-      "memberSlug": "daniel-meuser",
-      "hasPage": false,
-      "party": "R",
-      "side": "SELL",
-      "amountBucket": "$1K – $15K",
-      "txDate": "2026-04-24",
-      "filedDate": "2026-05-21",
-      "daysLate": 0,
-      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20034547.pdf"
-    },
-    {
-      "member": "John J. McGuire III",
-      "memberSlug": "john-j-mcguire-iii",
-      "hasPage": true,
-      "party": "R",
-      "side": "BUY",
-      "amountBucket": "$1K – $15K",
-      "txDate": "2026-04-15",
-      "filedDate": "2026-05-13",
-      "daysLate": 0,
-      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20034521.pdf"
     }
   ],
   "tradesShown": 25,
   "faq": [
     {
       "q": "Who in Congress has traded NVDA stock?",
-      "a": "34 members of Congress and 1 executive-branch filer have disclosed 187 NVDA trades since January 2024. The most active is Cleo Fields, with 50 trades, followed by Robert P. Bresnahan, Jr. and Sheldon Whitehouse. Each trade on this page links to the official filing it came from."
+      "a": "35 members of Congress and 1 executive-branch filer have disclosed 190 NVDA trades since January 2024. The most active is Cleo Fields, with 50 trades, followed by Robert P. Bresnahan, Jr. and Sheldon Whitehouse. Each trade on this page links to the official filing it came from."
     },
     {
       "q": "Is Congress buying or selling NVDA?",
-      "a": "Of the 187 disclosed NVDA trades, 120 were buys and 67 were sells. By the midpoint of each filed amount bracket, the buying comes to about $11.3M and the selling to about $10.7M. Filings disclose brackets, never exact amounts, so these totals are estimates."
+      "a": "Of the 190 disclosed NVDA trades, 122 were buys and 68 were sells. By the midpoint of each filed amount bracket, the buying comes to about $11.3M and the selling to about $10.7M. Filings disclose brackets, never exact amounts, so these totals are estimates."
     },
     {
       "q": "How late are NVDA trades disclosed?",
-      "a": "16% of the disclosed NVDA trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Oct 2, 2026, and the newest filing arrived on Oct 27, 2026."
+      "a": "16% of the disclosed NVDA trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Oct 23, 2026, and the newest filing arrived on Nov 5, 2026."
     }
   ]
 }

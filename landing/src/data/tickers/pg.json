@@ -12,24 +12,24 @@
   },
   "indexable": true,
   "technical": {
-    "asOf": "2026-11-04",
-    "price": 167.32,
-    "chg1d": 3.25,
-    "chg1w": 5.72,
-    "chg1m": 12.74,
-    "rsi14": 68.4,
-    "sma50": 151.11,
-    "sma200": 149.21,
-    "ema8": 162.37,
-    "ema21": 158.44,
-    "emaGap": 2.48,
-    "vsSma50": 10.7,
-    "vsSma200": 12.1,
-    "relVol": 1.33,
+    "asOf": "2026-11-05",
+    "price": 167.1,
+    "chg1d": -0.13,
+    "chg1w": 4.05,
+    "chg1m": 13.04,
+    "rsi14": 67.9,
+    "sma50": 151.56,
+    "sma200": 149.31,
+    "ema8": 163.42,
+    "ema21": 159.23,
+    "emaGap": 2.63,
+    "vsSma50": 10.3,
+    "vsSma200": 11.9,
+    "relVol": 1.52,
     "vol1y": 21.0,
     "high52w": 167.32,
     "low52w": 138.04,
-    "rangePos": 100.0,
+    "rangePos": 99.0,
     "series": [
       {
         "d": "2025-11-14",
@@ -236,18 +236,11 @@
         "c": 161.57
       },
       {
-        "d": "2026-11-04",
-        "c": 167.32
+        "d": "2026-11-05",
+        "c": 167.1
       }
     ],
-    "signals": [
-      {
-        "type": "new_52w_high",
-        "asof": "2026-11-04",
-        "label": "New 52-week high",
-        "dir": "bull"
-      }
-    ],
+    "signals": [],
     "nextEarnings": null,
     "score": {
       "label": "Strong Buy",
@@ -288,20 +281,20 @@
     }
   },
   "summary": {
-    "trades": 64,
-    "members": 29,
-    "congress": 28,
+    "trades": 66,
+    "members": 30,
+    "congress": 29,
     "executive": 1,
-    "whoLabel": "28 members of Congress and 1 executive-branch filer",
-    "buys": 29,
+    "whoLabel": "29 members of Congress and 1 executive-branch filer",
+    "buys": 31,
     "sells": 35,
     "other": 0,
     "firstTx": "2024-05-03",
-    "lastTx": "2026-10-12",
-    "lastFiling": "2026-10-27",
-    "estBuyLabel": "$281K",
+    "lastTx": "2026-10-23",
+    "lastFiling": "2026-11-05",
+    "estBuyLabel": "$297K",
     "estSellLabel": "$820K",
-    "pctLate": 16
+    "pctLate": 15
   },
   "topMembers": [
     {
@@ -416,6 +409,30 @@
     }
   ],
   "trades": [
+    {
+      "member": "Maria Elvira Salazar",
+      "memberSlug": "maria-elvira-salazar",
+      "hasPage": false,
+      "party": "R",
+      "side": "BUY",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-10-23",
+      "filedDate": "2026-11-05",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035778.pdf"
+    },
+    {
+      "member": "Maria Elvira Salazar",
+      "memberSlug": "maria-elvira-salazar",
+      "hasPage": false,
+      "party": "R",
+      "side": "BUY",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-10-23",
+      "filedDate": "2026-11-05",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035778.pdf"
+    },
     {
       "member": "David J. Taylor",
       "memberSlug": "david-j-taylor",
@@ -691,45 +708,21 @@
       "filedDate": "2026-01-21",
       "daysLate": 0,
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20033845.pdf"
-    },
-    {
-      "member": "Gilbert Ray Cisneros, Jr.",
-      "memberSlug": "gilbert-ray-cisneros-jr",
-      "hasPage": true,
-      "party": "D",
-      "side": "SELL",
-      "amountBucket": "$1K – $15K",
-      "txDate": "2025-12-24",
-      "filedDate": "2026-01-12",
-      "daysLate": 0,
-      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20033762.pdf"
-    },
-    {
-      "member": "Julie Johnson",
-      "memberSlug": "julie-johnson",
-      "hasPage": false,
-      "party": "D",
-      "side": "SELL",
-      "amountBucket": "$1K – $15K",
-      "txDate": "2025-12-18",
-      "filedDate": "2026-01-15",
-      "daysLate": 0,
-      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20033789.pdf"
     }
   ],
   "tradesShown": 25,
   "faq": [
     {
       "q": "Who in Congress has traded PG stock?",
-      "a": "28 members of Congress and 1 executive-branch filer have disclosed 64 PG trades since May 2024. The most active is David J. Taylor, with 14 trades, followed by Lloyd Doggett and Gilbert Ray Cisneros, Jr.. Each trade on this page links to the official filing it came from."
+      "a": "29 members of Congress and 1 executive-branch filer have disclosed 66 PG trades since May 2024. The most active is David J. Taylor, with 14 trades, followed by Lloyd Doggett and Gilbert Ray Cisneros, Jr.. Each trade on this page links to the official filing it came from."
     },
     {
       "q": "Is Congress buying or selling PG?",
-      "a": "Of the 64 disclosed PG trades, 29 were buys and 35 were sells. By the midpoint of each filed amount bracket, the buying comes to about $281K and the selling to about $820K. Filings disclose brackets, never exact amounts, so these totals are estimates."
+      "a": "Of the 66 disclosed PG trades, 31 were buys and 35 were sells. By the midpoint of each filed amount bracket, the buying comes to about $297K and the selling to about $820K. Filings disclose brackets, never exact amounts, so these totals are estimates."
     },
     {
       "q": "How late are PG trades disclosed?",
-      "a": "16% of the disclosed PG trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Oct 12, 2026, and the newest filing arrived on Oct 27, 2026."
+      "a": "15% of the disclosed PG trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Oct 23, 2026, and the newest filing arrived on Nov 5, 2026."
     }
   ]
 }

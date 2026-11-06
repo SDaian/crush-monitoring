@@ -23,12 +23,12 @@
       "ticker": "NVDA",
       "aliases": [],
       "company": "NVIDIA Corporation",
-      "trades": 187,
-      "members": 35,
-      "buys": 120,
-      "sells": 67,
-      "lastTx": "2026-10-02",
-      "lastFiling": "2026-10-27",
+      "trades": 190,
+      "members": 36,
+      "buys": 122,
+      "sells": 68,
+      "lastTx": "2026-10-23",
+      "lastFiling": "2026-11-05",
       "indexable": true,
       "industry": {
         "key": "tech",
@@ -248,12 +248,12 @@
       "ticker": "PG",
       "aliases": [],
       "company": "Procter & Gamble Company",
-      "trades": 64,
-      "members": 29,
-      "buys": 29,
+      "trades": 66,
+      "members": 30,
+      "buys": 31,
       "sells": 35,
-      "lastTx": "2026-10-12",
-      "lastFiling": "2026-10-27",
+      "lastTx": "2026-10-23",
+      "lastFiling": "2026-11-05",
       "indexable": true,
       "industry": {
         "key": "consumer",
@@ -992,6 +992,23 @@
       }
     },
     {
+      "slug": "csco",
+      "ticker": "CSCO",
+      "aliases": [],
+      "company": "Cisco Systems, Inc.",
+      "trades": 34,
+      "members": 18,
+      "buys": 15,
+      "sells": 19,
+      "lastTx": "2026-10-23",
+      "lastFiling": "2026-11-05",
+      "indexable": true,
+      "industry": {
+        "key": "tech",
+        "label": "Technology"
+      }
+    },
+    {
       "slug": "payx",
       "ticker": "PAYX",
       "aliases": [],
@@ -1057,23 +1074,6 @@
       "industry": {
         "key": "consumer",
         "label": "Consumer & retail"
-      }
-    },
-    {
-      "slug": "csco",
-      "ticker": "CSCO",
-      "aliases": [],
-      "company": "Cisco Systems, Inc.",
-      "trades": 33,
-      "members": 18,
-      "buys": 15,
-      "sells": 18,
-      "lastTx": "2026-09-24",
-      "lastFiling": "2026-10-21",
-      "indexable": true,
-      "industry": {
-        "key": "tech",
-        "label": "Technology"
       }
     },
     {

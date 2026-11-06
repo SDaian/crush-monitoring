@@ -12,23 +12,23 @@
   },
   "indexable": true,
   "technical": {
-    "asOf": "2026-11-04",
-    "price": 29.76,
-    "chg1d": -23.67,
-    "chg1w": -18.42,
-    "chg1m": -10.95,
-    "rsi14": 31.9,
-    "sma50": 36.7,
-    "sma200": 43.33,
-    "ema8": 36.18,
-    "ema21": 36.26,
-    "emaGap": -0.23,
-    "vsSma50": -18.9,
-    "vsSma200": -31.3,
-    "relVol": 4.89,
+    "asOf": "2026-11-05",
+    "price": 29.39,
+    "chg1d": -1.24,
+    "chg1w": -21.16,
+    "chg1m": -13.1,
+    "rsi14": 31.2,
+    "sma50": 36.47,
+    "sma200": 43.17,
+    "ema8": 34.67,
+    "ema21": 35.64,
+    "emaGap": -2.71,
+    "vsSma50": -19.4,
+    "vsSma200": -31.9,
+    "relVol": 2.26,
     "vol1y": 43.5,
     "high52w": 67.54,
-    "low52w": 29.76,
+    "low52w": 29.39,
     "rangePos": 0.0,
     "series": [
       {
@@ -236,20 +236,14 @@
         "c": 38.55
       },
       {
-        "d": "2026-11-04",
-        "c": 29.76
+        "d": "2026-11-05",
+        "c": 29.39
       }
     ],
     "signals": [
       {
-        "type": "lose_sma50",
-        "asof": "2026-11-04",
-        "label": "Lost the 50-day average",
-        "dir": "bear"
-      },
-      {
         "type": "new_52w_low",
-        "asof": "2026-11-04",
+        "asof": "2026-11-05",
         "label": "New 52-week low",
         "dir": "bear"
       }

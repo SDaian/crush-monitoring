@@ -12,24 +12,24 @@
   },
   "indexable": true,
   "technical": {
-    "asOf": "2026-11-04",
-    "price": 109.7,
-    "chg1d": 4.71,
-    "chg1w": 6.3,
-    "chg1m": 14.14,
-    "rsi14": 74.2,
-    "sma50": 99.23,
-    "sma200": 100.04,
-    "ema8": 104.68,
-    "ema21": 101.32,
-    "emaGap": 3.31,
-    "vsSma50": 10.6,
-    "vsSma200": 9.7,
-    "relVol": 1.0,
-    "vol1y": 27.7,
+    "asOf": "2026-11-05",
+    "price": 106.16,
+    "chg1d": -3.23,
+    "chg1w": 0.62,
+    "chg1m": 13.44,
+    "rsi14": 62.3,
+    "sma50": 99.18,
+    "sma200": 100.09,
+    "ema8": 105.01,
+    "ema21": 101.76,
+    "emaGap": 3.19,
+    "vsSma50": 7.0,
+    "vsSma200": 6.1,
+    "relVol": 1.45,
+    "vol1y": 27.8,
     "high52w": 109.7,
-    "low52w": 79.6,
-    "rangePos": 100.0,
+    "low52w": 82.22,
+    "rangePos": 87.0,
     "series": [
       {
         "d": "2025-11-14",
@@ -236,31 +236,18 @@
         "c": 103.67
       },
       {
-        "d": "2026-11-04",
-        "c": 109.7
+        "d": "2026-11-05",
+        "c": 106.16
       }
     ],
-    "signals": [
-      {
-        "type": "rsi_overbought",
-        "asof": "2026-11-04",
-        "label": "RSI crossed above 70 (overbought)",
-        "dir": "neutral"
-      },
-      {
-        "type": "new_52w_high",
-        "asof": "2026-11-04",
-        "label": "New 52-week high",
-        "dir": "bull"
-      }
-    ],
+    "signals": [],
     "nextEarnings": null,
     "score": {
-      "label": "Buy",
+      "label": "Strong Buy",
       "buys": 5,
-      "sells": 2,
-      "holds": 0,
-      "ratio": 0.429
+      "sells": 1,
+      "holds": 1,
+      "ratio": 0.571
     },
     "votes": {
       "ema_cross": {
@@ -280,7 +267,7 @@
         "muted": false
       },
       "rsi": {
-        "vote": -1,
+        "vote": 0,
         "muted": false
       },
       "chg_1m": {
