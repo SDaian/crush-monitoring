@@ -12,24 +12,24 @@
   },
   "indexable": true,
   "technical": {
-    "asOf": "2026-11-05",
-    "price": 356.1,
-    "chg1d": 31.04,
-    "chg1w": 39.7,
-    "chg1m": 26.6,
-    "rsi14": 71.8,
-    "sma50": 291.78,
-    "sma200": 409.96,
-    "ema8": 276.25,
-    "ema21": 272.65,
-    "emaGap": 1.32,
-    "vsSma50": 22.0,
-    "vsSma200": -13.1,
-    "relVol": 4.31,
-    "vol1y": 79.8,
+    "asOf": "2026-11-06",
+    "price": 391.22,
+    "chg1d": 9.86,
+    "chg1w": 71.21,
+    "chg1m": 39.66,
+    "rsi14": 76.3,
+    "sma50": 293.36,
+    "sma200": 409.3,
+    "ema8": 301.8,
+    "ema21": 283.43,
+    "emaGap": 6.48,
+    "vsSma50": 33.4,
+    "vsSma200": -4.4,
+    "relVol": 2.1,
+    "vol1y": 80.4,
     "high52w": 733.6,
     "low52w": 228.5,
-    "rangePos": 25.0,
+    "rangePos": 32.0,
     "series": [
       {
         "d": "2025-11-14",
@@ -236,24 +236,11 @@
         "c": 228.5
       },
       {
-        "d": "2026-11-05",
-        "c": 356.1
+        "d": "2026-11-06",
+        "c": 391.22
       }
     ],
-    "signals": [
-      {
-        "type": "reclaim_sma50",
-        "asof": "2026-11-05",
-        "label": "Reclaimed the 50-day average",
-        "dir": "bull"
-      },
-      {
-        "type": "rsi_overbought",
-        "asof": "2026-11-05",
-        "label": "RSI crossed above 70 (overbought)",
-        "dir": "neutral"
-      }
-    ],
+    "signals": [],
     "nextEarnings": null,
     "score": {
       "label": "Hold",

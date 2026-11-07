@@ -10,11 +10,11 @@
   "former": false,
   "knownAs": [],
   "summary": {
-    "trades": 562,
-    "distinctTickers": 227,
+    "trades": 565,
+    "distinctTickers": 228,
     "firstTx": "2024-03-18",
-    "lastTx": "2026-09-25",
-    "lastFiling": "2026-10-07",
+    "lastTx": "2026-10-26",
+    "lastFiling": "2026-11-05",
     "pctLate": 0,
     "worstLate": 343
   },
@@ -63,6 +63,40 @@
     }
   ],
   "trades": [
+    {
+      "ticker": "AMAT",
+      "asset": "Applied Materials, Inc. - Common Stock",
+      "side": "BUY",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-10-26",
+      "filedDate": "2026-11-05",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035770.pdf",
+      "bond": false,
+      "tickerSlug": "amat"
+    },
+    {
+      "ticker": "TLK",
+      "asset": "PT Telekomunikasi Indonesia, Tbk",
+      "side": "SELL",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-10-15",
+      "filedDate": "2026-11-05",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035770.pdf",
+      "bond": false
+    },
+    {
+      "ticker": "BHE",
+      "asset": "Benchmark Electronics, Inc. Common Stock",
+      "side": "BUY",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-10-12",
+      "filedDate": "2026-11-05",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035770.pdf",
+      "bond": false
+    },
     {
       "ticker": "MCD",
       "asset": "McDonald's Corporation Common Stock",
@@ -6518,25 +6552,25 @@
       "bond": false
     }
   ],
-  "tradesShown": 562,
+  "tradesShown": 565,
   "holdings": {
     "available": true,
     "filingDate": "2026-08-10",
     "reportYear": 2025,
     "snapDate": "2025-12-31",
-    "filingsSince": 9,
+    "filingsSince": 10,
     "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/financial-pdfs/2025/10074410.pdf",
-    "totalLabel": "$297K",
-    "positions": 29,
+    "totalLabel": "$313K",
+    "positions": 31,
     "optionsCount": 0,
-    "positionsTotal": 29,
+    "positionsTotal": 31,
     "ranked": [
       {
         "kind": "stock",
         "ticker": "WPP",
         "asset": "WPP plc American Depositary Shares",
         "estLabel": "$33K",
-        "pctPortfolio": 11.0,
+        "pctPortfolio": 10.4,
         "isNew": false,
         "hasOptions": false,
         "optType": null,
@@ -6551,7 +6585,7 @@
         "ticker": "AMD",
         "asset": "Advanced Micro Devices, Inc.",
         "estLabel": "$24K",
-        "pctPortfolio": 8.1,
+        "pctPortfolio": 7.7,
         "isNew": true,
         "hasOptions": false,
         "optType": null,
@@ -6566,7 +6600,7 @@
         "ticker": "GOOGN",
         "asset": "Alphabet Inc. - Depositary Shares representing a 1/20th Interest in a Share of Series B Mandatory Convertible Preferred Stock",
         "estLabel": "$16K",
-        "pctPortfolio": 5.4,
+        "pctPortfolio": 5.1,
         "isNew": true,
         "hasOptions": false,
         "optType": null,
@@ -6581,7 +6615,7 @@
         "ticker": "MNST",
         "asset": "Monster Beverage Corporation - Common Stock",
         "estLabel": "$16K",
-        "pctPortfolio": 5.4,
+        "pctPortfolio": 5.1,
         "isNew": true,
         "hasOptions": false,
         "optType": null,
@@ -6596,7 +6630,7 @@
         "ticker": "XOM",
         "asset": "Exxon Mobil Corporation Common Stock",
         "estLabel": "$16K",
-        "pctPortfolio": 5.4,
+        "pctPortfolio": 5.1,
         "isNew": true,
         "hasOptions": false,
         "optType": null,
@@ -6608,10 +6642,40 @@
       },
       {
         "kind": "stock",
+        "ticker": "AMAT",
+        "asset": "Applied Materials, Inc. - Common Stock",
+        "estLabel": "$8K",
+        "pctPortfolio": 2.6,
+        "isNew": true,
+        "hasOptions": false,
+        "optType": null,
+        "strike": null,
+        "expiration": null,
+        "contracts": null,
+        "firstBuy": "2026-08-06",
+        "tickerSlug": "amat"
+      },
+      {
+        "kind": "stock",
+        "ticker": "BHE",
+        "asset": "Benchmark Electronics, Inc. Common Stock",
+        "estLabel": "$8K",
+        "pctPortfolio": 2.6,
+        "isNew": true,
+        "hasOptions": false,
+        "optType": null,
+        "strike": null,
+        "expiration": null,
+        "contracts": null,
+        "firstBuy": "2026-10-12",
+        "tickerSlug": null
+      },
+      {
+        "kind": "stock",
         "ticker": "RSG",
         "asset": "Republic Services, Inc. Common $200? Stock",
         "estLabel": "$8K",
-        "pctPortfolio": 2.7,
+        "pctPortfolio": 2.6,
         "isNew": true,
         "hasOptions": false,
         "optType": null,
@@ -6626,7 +6690,7 @@
         "ticker": "QSR",
         "asset": "Restaurant Brands International Inc. Common Shares",
         "estLabel": "$8K",
-        "pctPortfolio": 2.7,
+        "pctPortfolio": 2.6,
         "isNew": true,
         "hasOptions": false,
         "optType": null,
@@ -6641,7 +6705,7 @@
         "ticker": "GOOGM",
         "asset": "Alphabet Inc. - Depositary Shares representing a 1/20th Interest in a Share of Series A Mandatory Convertible Preferred Stock",
         "estLabel": "$8K",
-        "pctPortfolio": 2.7,
+        "pctPortfolio": 2.6,
         "isNew": true,
         "hasOptions": false,
         "optType": null,
@@ -6656,7 +6720,7 @@
         "ticker": "NICE",
         "asset": "NICE Ltd - American Depositary Shares each representing one Ordinary Share",
         "estLabel": "$8K",
-        "pctPortfolio": 2.7,
+        "pctPortfolio": 2.6,
         "isNew": true,
         "hasOptions": false,
         "optType": null,
@@ -6671,7 +6735,7 @@
         "ticker": "SAIL",
         "asset": "SailPoint Technologies Holdings, Inc.",
         "estLabel": "$8K",
-        "pctPortfolio": 2.7,
+        "pctPortfolio": 2.6,
         "isNew": true,
         "hasOptions": false,
         "optType": null,
@@ -6686,7 +6750,7 @@
         "ticker": "PANW",
         "asset": "Palo Alto Networks, Inc.",
         "estLabel": "$8K",
-        "pctPortfolio": 2.7,
+        "pctPortfolio": 2.6,
         "isNew": true,
         "hasOptions": false,
         "optType": null,
@@ -6701,7 +6765,7 @@
         "ticker": "CRWD",
         "asset": "CrowdStrike Holdings, Inc. - Class A Common Stock",
         "estLabel": "$8K",
-        "pctPortfolio": 2.7,
+        "pctPortfolio": 2.6,
         "isNew": true,
         "hasOptions": false,
         "optType": null,
@@ -6716,7 +6780,7 @@
         "ticker": "FN",
         "asset": "Fabrinet Ordinary Shares",
         "estLabel": "$8K",
-        "pctPortfolio": 2.7,
+        "pctPortfolio": 2.6,
         "isNew": true,
         "hasOptions": false,
         "optType": null,
@@ -6731,7 +6795,7 @@
         "ticker": "LITE",
         "asset": "Lumentum Holdings Inc. - Common Stock",
         "estLabel": "$8K",
-        "pctPortfolio": 2.7,
+        "pctPortfolio": 2.6,
         "isNew": true,
         "hasOptions": false,
         "optType": null,
@@ -6740,36 +6804,6 @@
         "contracts": null,
         "firstBuy": "2026-05-22",
         "tickerSlug": null
-      },
-      {
-        "kind": "stock",
-        "ticker": "MU",
-        "asset": "Micron Technology, Inc. - Common Stock",
-        "estLabel": "$8K",
-        "pctPortfolio": 2.7,
-        "isNew": true,
-        "hasOptions": false,
-        "optType": null,
-        "strike": null,
-        "expiration": null,
-        "contracts": null,
-        "firstBuy": "2026-05-21",
-        "tickerSlug": "mu"
-      },
-      {
-        "kind": "stock",
-        "ticker": "ADI",
-        "asset": "Analog Devices, Inc. - Common Stock",
-        "estLabel": "$8K",
-        "pctPortfolio": 2.7,
-        "isNew": true,
-        "hasOptions": false,
-        "optType": null,
-        "strike": null,
-        "expiration": null,
-        "contracts": null,
-        "firstBuy": "2026-05-19",
-        "tickerSlug": "adi"
       }
     ],
     "options": []
@@ -6777,14 +6811,14 @@
   "performance": {
     "available": true,
     "benchLabel": "S&P 500",
-    "asofDate": "2026-11-05",
+    "asofDate": "2026-11-06",
     "kpis": {
-      "medianPct": 21.7,
-      "medianBenchPct": 21.8,
-      "beat": 45,
-      "beatOf": 86,
-      "priced": 86,
-      "pricedOf": 174
+      "medianPct": 22.9,
+      "medianBenchPct": 22.2,
+      "beat": 46,
+      "beatOf": 87,
+      "priced": 87,
+      "pricedOf": 176
     },
     "series": {
       "dates": [
@@ -6889,7 +6923,7 @@
         "2026-10-20",
         "2026-10-27",
         "2026-11-03",
-        "2026-11-05"
+        "2026-11-06"
       ],
       "member": [
         100.0,
@@ -6991,9 +7025,9 @@
         131.9,
         130.4,
         128.8,
-        130.1,
-        128.8,
-        123.8
+        129.8,
+        128.5,
+        124.7
       ],
       "bench": [
         100.0,
@@ -7095,99 +7129,99 @@
         128.5,
         128.3,
         126.8,
-        126.9,
-        124.4,
-        120.9
+        126.6,
+        124.1,
+        121.0
       ],
-      "buys": 86
+      "buys": 87
     },
     "rows": [
       {
         "ticker": "AMAT",
+        "txDate": "2026-10-26",
+        "pct": -14.2,
+        "benchPct": -3.9,
+        "excess": -10.3
+      },
+      {
+        "ticker": "AMAT",
         "txDate": "2026-08-06",
-        "pct": -39.5,
-        "benchPct": -4.6,
-        "excess": -34.9
+        "pct": -36.9,
+        "benchPct": -4.3,
+        "excess": -32.6
       },
       {
         "ticker": "PANW",
         "txDate": "2026-07-16",
-        "pct": -11.1,
-        "benchPct": -2.4,
-        "excess": -8.7
+        "pct": -11.3,
+        "benchPct": -2.1,
+        "excess": -9.2
       },
       {
         "ticker": "CRWD",
         "txDate": "2026-07-15",
-        "pct": 5.0,
-        "benchPct": -2.9,
-        "excess": 7.9
+        "pct": 4.9,
+        "benchPct": -2.6,
+        "excess": 7.5
       },
       {
         "ticker": "MU",
         "txDate": "2026-05-21",
-        "pct": -13.9,
-        "benchPct": -1.3,
-        "excess": -12.6
+        "pct": -9.5,
+        "benchPct": -1.0,
+        "excess": -8.5
       },
       {
         "ticker": "PANW",
         "txDate": "2026-05-14",
-        "pct": 32.1,
-        "benchPct": -2.0,
-        "excess": 34.1
+        "pct": 31.7,
+        "benchPct": -1.7,
+        "excess": 33.4
       },
       {
         "ticker": "AMD",
         "txDate": "2026-05-05",
-        "pct": 13.8,
-        "benchPct": 1.3,
-        "excess": 12.5
+        "pct": 26.4,
+        "benchPct": 1.6,
+        "excess": 24.8
       },
       {
         "ticker": "AMD",
         "txDate": "2026-04-27",
-        "pct": 20.8,
-        "benchPct": 2.5,
-        "excess": 18.3
+        "pct": 34.2,
+        "benchPct": 2.8,
+        "excess": 31.4
       },
       {
         "ticker": "AMD",
         "txDate": "2026-04-23",
-        "pct": 32.4,
-        "benchPct": 3.5,
-        "excess": 28.9
+        "pct": 47.1,
+        "benchPct": 3.8,
+        "excess": 43.3
       },
       {
         "ticker": "GS",
         "txDate": "2026-04-16",
-        "pct": -3.4,
-        "benchPct": 4.5,
-        "excess": -7.9
+        "pct": -3.8,
+        "benchPct": 4.8,
+        "excess": -8.6
       },
       {
         "ticker": "NOW",
         "txDate": "2026-03-06",
-        "pct": -17.7,
-        "benchPct": 9.0,
-        "excess": -26.7
+        "pct": -18.0,
+        "benchPct": 9.4,
+        "excess": -27.4
       },
       {
         "ticker": "UNH",
         "txDate": "2026-02-05",
-        "pct": 47.4,
-        "benchPct": 8.2,
-        "excess": 39.2
-      },
-      {
-        "ticker": "XOM",
-        "txDate": "2026-02-04",
-        "pct": 12.0,
-        "benchPct": 6.8,
-        "excess": 5.2
+        "pct": 46.8,
+        "benchPct": 8.5,
+        "excess": 38.3
       }
     ],
-    "rowsOf": 86
+    "rowsOf": 87
   },
   "committees": {
     "reason": "assigned",
@@ -7296,21 +7330,21 @@
     ],
     "coverage": {
       "classified": 143,
-      "total": 227
+      "total": 228
     }
   },
   "faq": [
     {
       "q": "What stocks does Josh Gottheimer trade?",
-      "a": "Josh Gottheimer has disclosed 562 trades across 227 tickers since March 2024. The most traded are MSFT (35), V (18) and TSLA (13). Each trade on this page links to the official filing it came from."
+      "a": "Josh Gottheimer has disclosed 565 trades across 228 tickers since March 2024. The most traded are MSFT (35), V (18) and TSLA (13). Each trade on this page links to the official filing it came from."
     },
     {
       "q": "Does Josh Gottheimer disclose trades on time?",
-      "a": "Yes. None of Josh Gottheimer's 562 disclosed trades was filed late: each arrived within the STOCK Act's 45-day legal maximum. The newest filing arrived on Oct 7, 2026."
+      "a": "Yes. None of Josh Gottheimer's 565 disclosed trades was filed late: each arrived within the STOCK Act's 45-day legal maximum. The newest filing arrived on Nov 5, 2026."
     },
     {
       "q": "What stocks does Josh Gottheimer own?",
-      "a": "An estimate from Josh Gottheimer's 2025 annual financial disclosure, rolled forward with every trade filed since, puts the listed stocks and options at about $297K across 29 positions. The largest is WPP, at about $33K. These are bracket midpoints, not share counts or a live valuation."
+      "a": "An estimate from Josh Gottheimer's 2025 annual financial disclosure, rolled forward with every trade filed since, puts the listed stocks and options at about $313K across 31 positions. The largest is WPP, at about $33K. These are bracket midpoints, not share counts or a live valuation."
     }
   ]
 }
