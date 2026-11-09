@@ -281,19 +281,19 @@
     }
   },
   "summary": {
-    "trades": 36,
+    "trades": 37,
     "members": 17,
     "congress": 16,
     "executive": 1,
     "whoLabel": "16 members of Congress and 1 executive-branch filer",
     "buys": 17,
-    "sells": 19,
+    "sells": 20,
     "other": 0,
     "firstTx": "2024-08-07",
-    "lastTx": "2026-09-22",
-    "lastFiling": "2026-10-01",
+    "lastTx": "2026-10-15",
+    "lastFiling": "2026-11-02",
     "estBuyLabel": "$210K",
-    "estSellLabel": "$275K",
+    "estSellLabel": "$307K",
     "pctLate": 19
   },
   "topMembers": [
@@ -328,6 +328,17 @@
       "buys": 2,
       "sells": 1,
       "estLabel": "$98K",
+      "hasPage": false
+    },
+    {
+      "name": "Sheldon Whitehouse",
+      "slug": "sheldon-whitehouse",
+      "party": "D",
+      "chamber": "Senate",
+      "trades": 3,
+      "buys": 0,
+      "sells": 3,
+      "estLabel": "$49K",
       "hasPage": false
     },
     {
@@ -386,17 +397,6 @@
       "hasPage": false
     },
     {
-      "name": "Sheldon Whitehouse",
-      "slug": "sheldon-whitehouse",
-      "party": "D",
-      "chamber": "Senate",
-      "trades": 2,
-      "buys": 0,
-      "sells": 2,
-      "estLabel": "$16K",
-      "hasPage": false
-    },
-    {
       "name": "Alan Armstrong",
       "slug": "alan-armstrong",
       "party": "R",
@@ -409,6 +409,18 @@
     }
   ],
   "trades": [
+    {
+      "member": "Sheldon Whitehouse",
+      "memberSlug": "sheldon-whitehouse",
+      "hasPage": false,
+      "party": "D",
+      "side": "SELL",
+      "amountBucket": "$15K – $50K",
+      "txDate": "2026-10-15",
+      "filedDate": "2026-11-02",
+      "daysLate": 0,
+      "sourceUrl": "https://efdsearch.senate.gov/search/view/ptr/02b5fe88-e8e1-4ef3-b6b5-6a46b420fb3c/"
+    },
     {
       "member": "David J. Taylor",
       "memberSlug": "david-j-taylor",
@@ -696,33 +708,21 @@
       "filedDate": "2025-05-09",
       "daysLate": 0,
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20030282.pdf"
-    },
-    {
-      "member": "Jared Moskowitz",
-      "memberSlug": "jared-moskowitz",
-      "hasPage": false,
-      "party": "D",
-      "side": "BUY",
-      "amountBucket": "$1K – $15K",
-      "txDate": "2025-04-16",
-      "filedDate": "2025-05-09",
-      "daysLate": 0,
-      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20030282.pdf"
     }
   ],
   "tradesShown": 25,
   "faq": [
     {
       "q": "Who in Congress has traded AMGN stock?",
-      "a": "16 members of Congress and 1 executive-branch filer have disclosed 36 AMGN trades since August 2024. The most active is David J. Taylor, with 9 trades, followed by Marjorie Taylor Greene and Jefferson Shreve. Each trade on this page links to the official filing it came from."
+      "a": "16 members of Congress and 1 executive-branch filer have disclosed 37 AMGN trades since August 2024. The most active is David J. Taylor, with 9 trades, followed by Marjorie Taylor Greene and Jefferson Shreve. Each trade on this page links to the official filing it came from."
     },
     {
       "q": "Is Congress buying or selling AMGN?",
-      "a": "Of the 36 disclosed AMGN trades, 17 were buys and 19 were sells. By the midpoint of each filed amount bracket, the buying comes to about $210K and the selling to about $275K. Filings disclose brackets, never exact amounts, so these totals are estimates."
+      "a": "Of the 37 disclosed AMGN trades, 17 were buys and 20 were sells. By the midpoint of each filed amount bracket, the buying comes to about $210K and the selling to about $307K. Filings disclose brackets, never exact amounts, so these totals are estimates."
     },
     {
       "q": "How late are AMGN trades disclosed?",
-      "a": "19% of the disclosed AMGN trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Sep 22, 2026, and the newest filing arrived on Oct 1, 2026."
+      "a": "19% of the disclosed AMGN trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Oct 15, 2026, and the newest filing arrived on Nov 2, 2026."
     }
   ]
 }

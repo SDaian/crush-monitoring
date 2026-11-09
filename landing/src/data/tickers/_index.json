@@ -6,12 +6,12 @@
       "ticker": "MSFT",
       "aliases": [],
       "company": "Microsoft Corporation",
-      "trades": 215,
+      "trades": 217,
       "members": 45,
       "buys": 111,
-      "sells": 104,
-      "lastTx": "2026-10-02",
-      "lastFiling": "2026-10-27",
+      "sells": 106,
+      "lastTx": "2026-10-21",
+      "lastFiling": "2026-11-04",
       "indexable": true,
       "industry": {
         "key": "tech",
@@ -59,12 +59,12 @@
       "ticker": "AAPL",
       "aliases": [],
       "company": "Apple Inc.",
-      "trades": 156,
+      "trades": 157,
       "members": 45,
       "buys": 75,
-      "sells": 81,
-      "lastTx": "2026-10-02",
-      "lastFiling": "2026-10-27",
+      "sells": 82,
+      "lastTx": "2026-10-21",
+      "lastFiling": "2026-11-04",
       "indexable": true,
       "industry": {
         "key": "tech",
@@ -95,12 +95,12 @@
         "FB"
       ],
       "company": "Meta Platforms, Inc.",
-      "trades": 100,
+      "trades": 101,
       "members": 27,
       "buys": 68,
-      "sells": 32,
-      "lastTx": "2026-09-24",
-      "lastFiling": "2026-10-07",
+      "sells": 33,
+      "lastTx": "2026-10-21",
+      "lastFiling": "2026-11-04",
       "indexable": true,
       "industry": {
         "key": "tech",
@@ -788,6 +788,23 @@
       }
     },
     {
+      "slug": "amgn",
+      "ticker": "AMGN",
+      "aliases": [],
+      "company": "Amgen Inc.",
+      "trades": 37,
+      "members": 17,
+      "buys": 17,
+      "sells": 20,
+      "lastTx": "2026-10-15",
+      "lastFiling": "2026-11-02",
+      "indexable": true,
+      "industry": {
+        "key": "health",
+        "label": "Health care & pharma"
+      }
+    },
+    {
       "slug": "t",
       "ticker": "T",
       "aliases": [],
@@ -887,23 +904,6 @@
       "industry": {
         "key": "tech",
         "label": "Technology"
-      }
-    },
-    {
-      "slug": "amgn",
-      "ticker": "AMGN",
-      "aliases": [],
-      "company": "Amgen Inc.",
-      "trades": 36,
-      "members": 17,
-      "buys": 17,
-      "sells": 19,
-      "lastTx": "2026-09-22",
-      "lastFiling": "2026-10-01",
-      "indexable": true,
-      "industry": {
-        "key": "health",
-        "label": "Health care & pharma"
       }
     },
     {
@@ -1026,6 +1026,23 @@
       }
     },
     {
+      "slug": "zts",
+      "ticker": "ZTS",
+      "aliases": [],
+      "company": "Zoetis Inc.",
+      "trades": 34,
+      "members": 11,
+      "buys": 15,
+      "sells": 19,
+      "lastTx": "2026-10-21",
+      "lastFiling": "2026-11-04",
+      "indexable": true,
+      "industry": {
+        "key": "health",
+        "label": "Health care & pharma"
+      }
+    },
+    {
       "slug": "payx",
       "ticker": "PAYX",
       "aliases": [],
@@ -1091,23 +1108,6 @@
       "industry": {
         "key": "consumer",
         "label": "Consumer & retail"
-      }
-    },
-    {
-      "slug": "zts",
-      "ticker": "ZTS",
-      "aliases": [],
-      "company": "Zoetis Inc.",
-      "trades": 33,
-      "members": 10,
-      "buys": 15,
-      "sells": 18,
-      "lastTx": "2026-09-18",
-      "lastFiling": "2026-10-12",
-      "indexable": true,
-      "industry": {
-        "key": "health",
-        "label": "Health care & pharma"
       }
     },
     {

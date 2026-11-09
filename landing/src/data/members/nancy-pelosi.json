@@ -10,11 +10,11 @@
   "former": false,
   "knownAs": [],
   "summary": {
-    "trades": 39,
-    "distinctTickers": 14,
+    "trades": 40,
+    "distinctTickers": 15,
     "firstTx": "2024-12-20",
-    "lastTx": "2026-09-08",
-    "lastFiling": "2026-10-02",
+    "lastTx": "2026-10-07",
+    "lastFiling": "2026-11-06",
     "pctLate": 0,
     "worstLate": 0
   },
@@ -63,6 +63,17 @@
     }
   ],
   "trades": [
+    {
+      "ticker": "WBD",
+      "asset": "Warner Bros. Discovery, Inc. - Series A Common Stock",
+      "side": "SELL",
+      "amountBucket": "$50K – $100K",
+      "txDate": "2026-10-07",
+      "filedDate": "2026-11-06",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035780.pdf",
+      "bond": false
+    },
     {
       "ticker": "—",
       "asset": "REOF XXX, LLC",
@@ -526,18 +537,18 @@
       "tickerSlug": "panw"
     }
   ],
-  "tradesShown": 39,
+  "tradesShown": 40,
   "holdings": {
     "available": true,
     "filingDate": "2026-05-15",
     "reportYear": 2025,
     "snapDate": "2025-12-31",
-    "filingsSince": 4,
+    "filingsSince": 5,
     "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/financial-pdfs/2025/10075701.pdf",
-    "totalLabel": "$153.7M",
-    "positions": 27,
+    "totalLabel": "$153.6M",
+    "positions": 26,
     "optionsCount": 8,
-    "positionsTotal": 28,
+    "positionsTotal": 27,
     "ranked": [
       {
         "kind": "stock",
@@ -1246,15 +1257,15 @@
   "faq": [
     {
       "q": "What stocks does Nancy Pelosi trade?",
-      "a": "Nancy Pelosi has disclosed 39 trades across 14 tickers since December 2024. The most traded are NVDA (6), AAPL (5) and BE (4). Each trade on this page links to the official filing it came from."
+      "a": "Nancy Pelosi has disclosed 40 trades across 15 tickers since December 2024. The most traded are NVDA (6), AAPL (5) and BE (4). Each trade on this page links to the official filing it came from."
     },
     {
       "q": "Does Nancy Pelosi disclose trades on time?",
-      "a": "Yes. None of Nancy Pelosi's 39 disclosed trades was filed late: each arrived within the STOCK Act's 45-day legal maximum. The newest filing arrived on Oct 2, 2026."
+      "a": "Yes. None of Nancy Pelosi's 40 disclosed trades was filed late: each arrived within the STOCK Act's 45-day legal maximum. The newest filing arrived on Nov 6, 2026."
     },
     {
       "q": "What stocks does Nancy Pelosi own?",
-      "a": "An estimate from Nancy Pelosi's 2025 annual financial disclosure, rolled forward with every trade filed since, puts the listed stocks and options at about $153.7M across 28 positions. The largest is GOOGL, at about $16.1M. These are bracket midpoints, not share counts or a live valuation."
+      "a": "An estimate from Nancy Pelosi's 2025 annual financial disclosure, rolled forward with every trade filed since, puts the listed stocks and options at about $153.6M across 27 positions. The largest is GOOGL, at about $16.1M. These are bracket midpoints, not share counts or a live valuation."
     }
   ]
 }

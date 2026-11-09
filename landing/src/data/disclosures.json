@@ -2,6 +2,17 @@
   "_comment": "Generated from real official disclosures by congress/landing_data.py (daily Action). Do not edit by hand. 'filedDaysLate' counts days past the STOCK Act's 45-day statutory maximum; 0 = on time.",
   "disclosures": [
     {
+      "member": "N. Pelosi",
+      "memberSlug": "nancy-pelosi",
+      "chamber": "House",
+      "district": "CA-11",
+      "ticker": "WBD",
+      "tickerSlug": null,
+      "side": "SELL",
+      "amountBucket": "$50K – $100K",
+      "filedDaysLate": 0
+    },
+    {
       "member": "P. Sessions",
       "memberSlug": null,
       "chamber": "House",
@@ -44,17 +55,6 @@
       "side": "BUY",
       "amountBucket": "$50K – $100K",
       "filedDaysLate": 0
-    },
-    {
-      "member": "L. Lee",
-      "memberSlug": null,
-      "chamber": "House",
-      "district": "FL-15",
-      "ticker": "BAC",
-      "tickerSlug": "bac",
-      "side": "SELL",
-      "amountBucket": "$50K – $100K",
-      "filedDaysLate": 8
     }
   ]
 }

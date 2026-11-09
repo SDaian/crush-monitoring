@@ -10,11 +10,11 @@
   "former": false,
   "knownAs": [],
   "summary": {
-    "trades": 26,
-    "distinctTickers": 15,
+    "trades": 27,
+    "distinctTickers": 16,
     "firstTx": "2025-04-10",
-    "lastTx": "2026-10-01",
-    "lastFiling": "2026-11-01",
+    "lastTx": "2026-10-15",
+    "lastFiling": "2026-11-06",
     "pctLate": 0,
     "worstLate": 0
   },
@@ -63,6 +63,17 @@
     }
   ],
   "trades": [
+    {
+      "ticker": "WDC",
+      "asset": "Western Digital Corporation - Common Stock",
+      "side": "SELL",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-10-15",
+      "filedDate": "2026-11-06",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035775.pdf",
+      "bond": false
+    },
     {
       "ticker": "MU",
       "asset": "Micron Technology, Inc. - Common Stock",
@@ -376,7 +387,7 @@
       "tickerSlug": "unh"
     }
   ],
-  "tradesShown": 26,
+  "tradesShown": 27,
   "holdings": {
     "available": false,
     "filingDate": null,
@@ -795,17 +806,17 @@
     ],
     "coverage": {
       "classified": 15,
-      "total": 15
+      "total": 16
     }
   },
   "faq": [
     {
       "q": "What stocks does John J. McGuire III trade?",
-      "a": "John J. McGuire III has disclosed 26 trades across 15 tickers since April 2025. The most traded are MU (3), NVDA (3) and BLK (3). Each trade on this page links to the official filing it came from."
+      "a": "John J. McGuire III has disclosed 27 trades across 16 tickers since April 2025. The most traded are MU (3), NVDA (3) and BLK (3). Each trade on this page links to the official filing it came from."
     },
     {
       "q": "Does John J. McGuire III disclose trades on time?",
-      "a": "Yes. None of John J. McGuire III's 26 disclosed trades was filed late: each arrived within the STOCK Act's 45-day legal maximum. The newest filing arrived on Nov 1, 2026."
+      "a": "Yes. None of John J. McGuire III's 27 disclosed trades was filed late: each arrived within the STOCK Act's 45-day legal maximum. The newest filing arrived on Nov 6, 2026."
     }
   ]
 }

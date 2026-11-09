@@ -10,11 +10,11 @@
   "former": false,
   "knownAs": [],
   "summary": {
-    "trades": 413,
+    "trades": 432,
     "distinctTickers": 4,
     "firstTx": "2024-02-18",
-    "lastTx": "2026-08-19",
-    "lastFiling": "2026-08-27",
+    "lastTx": "2026-10-20",
+    "lastFiling": "2026-10-29",
     "pctLate": 0,
     "worstLate": 336
   },
@@ -49,6 +49,215 @@
     }
   ],
   "trades": [
+    {
+      "ticker": "—",
+      "asset": "GS Managed Structured Note Strategy MSCI EAFE Linked Note",
+      "side": "BUY",
+      "amountBucket": "$250K – $500K",
+      "txDate": "2026-10-20",
+      "filedDate": "2026-10-29",
+      "daysLate": 0,
+      "sourceUrl": "https://efdsearch.senate.gov/search/view/ptr/3ab689df-21ae-44c5-85ac-1f5e4bc8464d/",
+      "bond": false
+    },
+    {
+      "ticker": "—",
+      "asset": "FOX CHAPEL PA AREA SCH DIST GO BDS SER. 2017 Rate/Coupon: 5% Matures: 2042-02-01",
+      "side": "SELL",
+      "amountBucket": "$250K – $500K",
+      "txDate": "2026-10-19",
+      "filedDate": "2026-10-29",
+      "daysLate": 0,
+      "sourceUrl": "https://efdsearch.senate.gov/search/view/ptr/3ab689df-21ae-44c5-85ac-1f5e4bc8464d/",
+      "bond": true
+    },
+    {
+      "ticker": "—",
+      "asset": "PHILADELPHIA PA AUTH FOR INDL DEV CITY Rate/Coupon: 5% Matures: 2036-05-01",
+      "side": "SELL",
+      "amountBucket": "$50K – $100K",
+      "txDate": "2026-10-19",
+      "filedDate": "2026-10-29",
+      "daysLate": 0,
+      "sourceUrl": "https://efdsearch.senate.gov/search/view/ptr/3ab689df-21ae-44c5-85ac-1f5e4bc8464d/",
+      "bond": true
+    },
+    {
+      "ticker": "—",
+      "asset": "PITTSBURGH & ALLEGHENY CNTY PA SPORTS & EXHIB AUTH REV Rate/Coupon: 5% Matures: 2031-02-01",
+      "side": "SELL",
+      "amountBucket": "$250K – $500K",
+      "txDate": "2026-10-19",
+      "filedDate": "2026-10-29",
+      "daysLate": 0,
+      "sourceUrl": "https://efdsearch.senate.gov/search/view/ptr/3ab689df-21ae-44c5-85ac-1f5e4bc8464d/",
+      "bond": true
+    },
+    {
+      "ticker": "—",
+      "asset": "GS Managed Structured Note Strategy MSCI EAFE Linked Note",
+      "side": "BUY",
+      "amountBucket": "$100K – $250K",
+      "txDate": "2026-10-14",
+      "filedDate": "2026-10-29",
+      "daysLate": 0,
+      "sourceUrl": "https://efdsearch.senate.gov/search/view/ptr/3ab689df-21ae-44c5-85ac-1f5e4bc8464d/",
+      "bond": false
+    },
+    {
+      "ticker": "—",
+      "asset": "DAUPHIN CNTY PA GO NTS SER. 2024B Rate/Coupon: 5% Matures: 2044-11-15",
+      "side": "BUY",
+      "amountBucket": "$500K – $1M",
+      "txDate": "2026-10-13",
+      "filedDate": "2026-10-29",
+      "daysLate": 0,
+      "sourceUrl": "https://efdsearch.senate.gov/search/view/ptr/3ab689df-21ae-44c5-85ac-1f5e4bc8464d/",
+      "bond": true
+    },
+    {
+      "ticker": "—",
+      "asset": "VERMONT EDL & HEALTH BLDGS FING AGY REV Rate/Coupon: 5% Matures: 2049-11-01",
+      "side": "SELL",
+      "amountBucket": "$250K – $500K",
+      "txDate": "2026-10-13",
+      "filedDate": "2026-10-29",
+      "daysLate": 0,
+      "sourceUrl": "https://efdsearch.senate.gov/search/view/ptr/3ab689df-21ae-44c5-85ac-1f5e4bc8464d/",
+      "bond": true
+    },
+    {
+      "ticker": "—",
+      "asset": "NEW YORK ST DORM AUTH ST PERS INCOME Rate/Coupon: 5% Matures: 2036-03-15",
+      "side": "SELL",
+      "amountBucket": "$100K – $250K",
+      "txDate": "2026-10-08",
+      "filedDate": "2026-10-29",
+      "daysLate": 0,
+      "sourceUrl": "https://efdsearch.senate.gov/search/view/ptr/3ab689df-21ae-44c5-85ac-1f5e4bc8464d/",
+      "bond": true
+    },
+    {
+      "ticker": "—",
+      "asset": "UNIVERSITY CONN GO BDS SER. 2022 Rate/Coupon: 5% Matures: 2032-05-01",
+      "side": "SELL",
+      "amountBucket": "$250K – $500K",
+      "txDate": "2026-10-08",
+      "filedDate": "2026-10-29",
+      "daysLate": 0,
+      "sourceUrl": "https://efdsearch.senate.gov/search/view/ptr/3ab689df-21ae-44c5-85ac-1f5e4bc8464d/",
+      "bond": true
+    },
+    {
+      "ticker": "—",
+      "asset": "ST JOSEPH CNTY INDIANA HOSP AUTH HOSP REV HOSP REV BDS BEACON HEALTH SYSTEM SER.2013C Rate/Coupon: 5% Matures: 2036-08-15",
+      "side": "SELL",
+      "amountBucket": "$100K – $250K",
+      "txDate": "2026-10-08",
+      "filedDate": "2026-10-29",
+      "daysLate": 0,
+      "sourceUrl": "https://efdsearch.senate.gov/search/view/ptr/3ab689df-21ae-44c5-85ac-1f5e4bc8464d/",
+      "bond": true
+    },
+    {
+      "ticker": "—",
+      "asset": "DARIEN CONN GO BDS SER. 2020 Rate/Coupon: 5% Matures: 2028-08-01",
+      "side": "SELL",
+      "amountBucket": "$50K – $100K",
+      "txDate": "2026-10-08",
+      "filedDate": "2026-10-29",
+      "daysLate": 0,
+      "sourceUrl": "https://efdsearch.senate.gov/search/view/ptr/3ab689df-21ae-44c5-85ac-1f5e4bc8464d/",
+      "bond": true
+    },
+    {
+      "ticker": "—",
+      "asset": "ESSEX CONN GO BDS SER. 2017 Rate/Coupon: 3% Matures: 2029-09-15",
+      "side": "SELL",
+      "amountBucket": "$250K – $500K",
+      "txDate": "2026-10-08",
+      "filedDate": "2026-10-29",
+      "daysLate": 0,
+      "sourceUrl": "https://efdsearch.senate.gov/search/view/ptr/3ab689df-21ae-44c5-85ac-1f5e4bc8464d/",
+      "bond": true
+    },
+    {
+      "ticker": "—",
+      "asset": "HEMPFIELD PA SCH DIST LANCASTER CNTY Rate/Coupon: 5% Matures: 2051-04-15",
+      "side": "BUY",
+      "amountBucket": "$500K – $1M",
+      "txDate": "2026-10-08",
+      "filedDate": "2026-10-29",
+      "daysLate": 0,
+      "sourceUrl": "https://efdsearch.senate.gov/search/view/ptr/3ab689df-21ae-44c5-85ac-1f5e4bc8464d/",
+      "bond": true
+    },
+    {
+      "ticker": "—",
+      "asset": "MILFORD CONN GO REF BDS SER. 2021 Rate/Coupon: 5% Matures: 2031-11-01",
+      "side": "SELL",
+      "amountBucket": "$250K – $500K",
+      "txDate": "2026-10-08",
+      "filedDate": "2026-10-29",
+      "daysLate": 0,
+      "sourceUrl": "https://efdsearch.senate.gov/search/view/ptr/3ab689df-21ae-44c5-85ac-1f5e4bc8464d/",
+      "bond": true
+    },
+    {
+      "ticker": "—",
+      "asset": "PENNSYLVANIA ST TPK COMMN TPK REV BDS Rate/Coupon: 5% Matures: 2053-12-01",
+      "side": "BUY",
+      "amountBucket": "$500K – $1M",
+      "txDate": "2026-10-07",
+      "filedDate": "2026-10-29",
+      "daysLate": 0,
+      "sourceUrl": "https://efdsearch.senate.gov/search/view/ptr/3ab689df-21ae-44c5-85ac-1f5e4bc8464d/",
+      "bond": true
+    },
+    {
+      "ticker": "—",
+      "asset": "GS Managed Structured Note Strategy MSCI EAFE Linked Note",
+      "side": "BUY",
+      "amountBucket": "$250K – $500K",
+      "txDate": "2026-10-07",
+      "filedDate": "2026-10-29",
+      "daysLate": 0,
+      "sourceUrl": "https://efdsearch.senate.gov/search/view/ptr/3ab689df-21ae-44c5-85ac-1f5e4bc8464d/",
+      "bond": false
+    },
+    {
+      "ticker": "—",
+      "asset": "UNIV PITTSBURGH OF THE COMWLTH REV Rate/Coupon: 5% Matures: 2036-02-15",
+      "side": "BUY",
+      "amountBucket": "$100K – $250K",
+      "txDate": "2026-10-06",
+      "filedDate": "2026-10-29",
+      "daysLate": 0,
+      "sourceUrl": "https://efdsearch.senate.gov/search/view/ptr/3ab689df-21ae-44c5-85ac-1f5e4bc8464d/",
+      "bond": true
+    },
+    {
+      "ticker": "—",
+      "asset": "STATE COLLEGE PA AREA SCH DIST GO Rate/Coupon: 5% Matures: 2044-05-15",
+      "side": "BUY",
+      "amountBucket": "$500K – $1M",
+      "txDate": "2026-10-01",
+      "filedDate": "2026-10-29",
+      "daysLate": 0,
+      "sourceUrl": "https://efdsearch.senate.gov/search/view/ptr/3ab689df-21ae-44c5-85ac-1f5e4bc8464d/",
+      "bond": true
+    },
+    {
+      "ticker": "—",
+      "asset": "POTTSVILLE PA HOSP AUTH HOSP REV Rate/Coupon: 5% Matures: 2041-07-01",
+      "side": "SELL",
+      "amountBucket": "$100K – $250K",
+      "txDate": "2026-09-30",
+      "filedDate": "2026-10-29",
+      "daysLate": 0,
+      "sourceUrl": "https://efdsearch.senate.gov/search/view/ptr/3ab689df-21ae-44c5-85ac-1f5e4bc8464d/",
+      "bond": true
+    },
     {
       "ticker": "—",
       "asset": "GS Managed Structured Note Strategy S&P 500 Linked Note",
@@ -4595,13 +4804,13 @@
       "bond": true
     }
   ],
-  "tradesShown": 413,
+  "tradesShown": 432,
   "holdings": {
     "available": true,
     "filingDate": "2026-08-13",
     "reportYear": 2025,
     "snapDate": "2025-12-31",
-    "filingsSince": 9,
+    "filingsSince": 10,
     "sourceUrl": "https://efdsearch.senate.gov/search/view/annual/3e2b0cca-3ab7-428e-b2ce-f08691f27dd1/",
     "totalLabel": "$55.2M",
     "positions": 8,
@@ -5140,11 +5349,11 @@
   "faq": [
     {
       "q": "What stocks does David McCormick trade?",
-      "a": "David McCormick has disclosed 413 trades across 4 tickers since February 2024. The most traded are BITB (24), GS (2) and IJR (1). Each trade on this page links to the official filing it came from."
+      "a": "David McCormick has disclosed 432 trades across 4 tickers since February 2024. The most traded are BITB (24), GS (2) and IJR (1). Each trade on this page links to the official filing it came from."
     },
     {
       "q": "Does David McCormick disclose trades on time?",
-      "a": "Yes. None of David McCormick's 413 disclosed trades was filed late: each arrived within the STOCK Act's 45-day legal maximum. The newest filing arrived on Aug 27, 2026."
+      "a": "Yes. None of David McCormick's 432 disclosed trades was filed late: each arrived within the STOCK Act's 45-day legal maximum. The newest filing arrived on Oct 29, 2026."
     },
     {
       "q": "What stocks does David McCormick own?",
