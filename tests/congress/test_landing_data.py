@@ -1144,7 +1144,7 @@ class TestTechnicalBlock(unittest.TestCase):
 class TestMarketFile(unittest.TestCase):
     """One market.json, imported by every ticker page."""
 
-    READING = {"source": "vix", "label": "VIX", "level": 18.5,
+    READING = {"label": "S&P 500 volatility", "level": 18.5,
                "band": "normal", "bandLabel": "Normal"}
 
     def _indicators(self, tmp, payload):

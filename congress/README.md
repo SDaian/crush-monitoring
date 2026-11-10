@@ -96,8 +96,8 @@ morning scorecard and the tracker's "Featured stocks" tab.
 - **Named signals** (golden/death cross, RSI crossing 30/70, new 52-week
   high/low) on featured symbols go to `meta.new_signals`, which the morning
   report shows once, as its "Signals overnight" section.
-- **Market context** (`market.py`): the VIX when the plan serves it,
-  otherwise our own 20-day realized volatility of SPY, labelled as such.
+- **Market context** (`market.py`): our own 20-day realized volatility of
+  SPY, labelled "S&P 500 volatility" and never "VIX".
 - `--skip-if-closed` skips the paced fetch when no new session has closed.
 
 ## Site data (`landing_data.py` → `landing/src/data/`)

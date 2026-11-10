@@ -1,9 +1,8 @@
 ---
 // One line of market-wide volatility context, shared by /report and every
 // ticker page so the two can never disagree. The data comes from
-// congress/market.py via the indicators run: the VIX when Twelve Data serves
-// it, otherwise our own 20-day realized volatility of the S&P 500 — which is
-// labelled as ours, never as "VIX".
+// congress/market.py via the indicators run: our own 20-day realized
+// volatility of the S&P 500, labelled as ours and never as "VIX".
 //
 // It is CONTEXT, not a signal: it never votes in the mechanical read, and on
 // a ticker page it says so, because the same number appears on all of them.
