@@ -48,7 +48,7 @@ on:
         required: false
         default: "false"
       report:
-        description: "Also send the morning report issue (true to test on demand)"
+        description: "Also send the morning report email (true to test on demand)"
         required: false
         default: "false"
       report_only:
@@ -69,7 +69,6 @@ on:
         default: ""
 permissions:
   contents: write
-  issues: write # the morning report's dated issue (daily_report.py)
   actions: read # the gate job asks whether the daily run already succeeded
 
 concurrency:
@@ -270,7 +269,7 @@ jobs:
             git push
           fi
 
-      - name: Morning report → GitHub issue email (scheduled/on-demand, non-fatal)
+      - name: Morning report email (scheduled/on-demand, non-fatal)
         # report_only implies report — otherwise setting it alone would skip
         # every data step AND the report, running nothing at all.
         # `scheduled` is the external scheduler's "this IS the daily run"
@@ -284,11 +283,9 @@ jobs:
           || github.event.inputs.report == 'true'
           || github.event.inputs.report_only == 'true'
         env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          REPO: ${{ github.repository }}
-          # SMTP (optional) — primary delivery straight to the inbox, reliable
-          # regardless of GitHub notification settings. Set SMTP_USER/SMTP_PASS
-          # (e.g. a Gmail address + App Password) as repo secrets to enable.
+          # SMTP (optional) — the owner's copy, straight to the inbox. Set
+          # SMTP_USER/SMTP_PASS (e.g. a Gmail address + App Password) as repo
+          # secrets to enable.
           # SMTP_USER (your email) isn't sensitive — accept it as a secret OR a
           # variable so it works wherever you added it. SMTP_PASS stays secret.
           SMTP_USER: ${{ secrets.SMTP_USER || vars.SMTP_USER }}
@@ -300,10 +297,10 @@ jobs:
           # authenticating as SMTP_USER. Must be an address the SMTP
           # host may send for, or SPF/DKIM alignment fails.
           REPORT_EMAIL_FROM: ${{ vars.REPORT_EMAIL_FROM }}
-          # Vercel Web Analytics (optional) — adds a site-traffic block to the
-          # report. Set VERCEL_TOKEN (secret) + VERCEL_PROJECT_ID (variable);
-          # VERCEL_TEAM_ID only if the project lives under a team. Unset → the
-          # report simply omits the traffic section.
+          # Vercel Web Analytics (optional) — the traffic emails, which are
+          # separate from the digest. Set VERCEL_TOKEN (secret) +
+          # VERCEL_PROJECT_ID (variable); VERCEL_TEAM_ID only if the project
+          # lives under a team. Unset → no traffic email is sent.
           # PROJECT_ID / TEAM_ID aren't sensitive, but accept them as a secret
           # OR a variable so they work wherever they were added.
           # Where the email's links point. Leave it unset: the code defaults to
@@ -321,9 +318,9 @@ jobs:
           # report already went out today; the scheduled run stays idempotent.
           REPORT_FORCE: ${{ (github.event.inputs.report == 'true' || github.event.inputs.report_only == 'true') && 'true' || '' }}
         run: |
-          # Compose the morning digest (AI scorecard + overnight signals +
-          # rating flips + new disclosures), email it via SMTP, and open a dated
-          # issue → also notifies via GitHub.
+          # Compose the morning digest (new disclosures + scorecard +
+          # overnight signals + rating flips) and send it: the owner's copy
+          # via SMTP, the subscribers' copy via Buttondown.
           # Runs before the slow price step so it lands on time; reads the
           # fresh working-tree trades/AI files. A failure must not fail the run.
           python3 -m congress.daily_report 2>&1 | tee -a fetch.log \

@@ -463,7 +463,7 @@ sites. Full details in `congress/README.md`. Conventions:
     and a mark for conviction would say the opposite of what it is. The count
     is a second LINE inside the Read cell on every surface, never a seventh
     column: six already do not fit a 390px phone at `email_template.PAD_EMBED`.
-    The email, the GitHub issue and `/report` all render it from the one
+    The email and `/report` both render it from the one
     `build_report` payload, and the footnote on each states what the fraction
     counts and what ★ means — a bare "5/7" makes the reader guess.
   - **Every reading on the ticker page says what it voted.** The votes are
@@ -582,11 +582,15 @@ sites. Full details in `congress/README.md`. Conventions:
 - **Morning report (email digest):** `congress/daily_report.py`
   (`python3 -m congress.daily_report`) composes the AI buy/sell/hold scorecard,
   overnight signals + rating flips, and newly-filed disclosures (site traffic is
-  a **separate email**, see above), then delivers it two ways: **(1) direct email via SMTP** (primary, reliable regardless of
-  GitHub notification settings — enabled by the `SMTP_USER`/`SMTP_PASS` secrets,
-  e.g. a Gmail address + App Password; `SMTP_HOST`/`SMTP_PORT`/`REPORT_EMAIL_TO`
-  are optional `vars` defaulting to Gmail:587 and the sender), and **(2) a dated
-  GitHub issue** (archive + flip-diff state, assigned to the owner). `smtplib`
+  a **separate email**, see above), then delivers it **by email**: the
+  owner's copy over SMTP (the `SMTP_USER`/`SMTP_PASS` secrets, e.g. a Gmail
+  address + App Password; `SMTP_HOST`/`SMTP_PORT`/`REPORT_EMAIL_TO` are
+  optional `vars` defaulting to Gmail:587 and the sender) and the
+  subscribers' copy as one Buttondown broadcast. **There is no GitHub
+  issue.** Until 10 Nov 2026 each report also opened a dated issue assigned
+  to the owner; `/report/archive` is the archive now and the owner's copy
+  arrives over SMTP, so the issue was a third copy and the only reason the
+  report needed a token and the `issues: write` permission. `smtplib`
   is stdlib so no new deps. It runs from the daily Action's report step (guarded
   to `schedule` or the `scheduled` / `report` dispatch inputs) **before** the
   slow price step so it's timely.
@@ -618,12 +622,15 @@ sites. Full details in `congress/README.md`. Conventions:
     on-demand test flag and *does* force delivery — never wire a scheduler to
     it, or every quiet Sunday emails a duplicate. Early is safe,
     late/missing is the failure.
-  It **assigns the issue to the repo owner**
-  (`REPORT_ASSIGNEE` override) so email reaches them without needing to "watch"
-  the repo, is **idempotent per day** (skips if `report_state.date == today`, so
-  a manual send + a delayed scheduled run don't double-post), closes the prior
-  day's report issue, and tracks the last issue number + ratings in
-  `congress/report_state.json` (generated; do not hand-edit).
+  It is **idempotent per day** (skips if `report_state.date == today`, so
+  a manual send + a delayed scheduled run don't double-send) and tracks the
+  day, the ratings and what the reader was told in
+  `congress/report_state.json` (generated; do not hand-edit). **The state is
+  written only when an email went out, and either copy counts**: the owner's
+  or the broadcast. A broadcast that went out while the owner's SMTP was
+  down must be recorded, or the next run sends it to every subscriber again;
+  and when neither went out, nothing is recorded, `/report` keeps the last
+  edition sent, and the next run tries again.
   - **"New disclosure" means not-yet-reported, never filed-recently.** The
     section used a 3-day **filing-date** window, which silently dropped
     anything ingested late — and ingestion lags routinely (the Clerk
@@ -643,7 +650,7 @@ sites. Full details in `congress/README.md`. Conventions:
     the weekend and on holidays, so a Sunday email repeats Saturday's word for
     word. When the latest daily close has not advanced **and** no new filing
     has arrived since the last delivered report, the run skips *every* delivery
-    — digest, Buttondown broadcast, GitHub issue (the traffic emails ship
+    — digest and Buttondown broadcast (the traffic emails ship
     BEFORE this gate and are unaffected) — and **changes nothing**: no dated
     permalink, no rewritten `report.json`, and nothing recorded in
     `report_state.json` (its fingerprint keeps describing the last report that
@@ -678,8 +685,8 @@ sites. Full details in `congress/README.md`. Conventions:
     (`POST /v1/emails`, `BUTTONDOWN_API_KEY` secret); Buttondown owns the list,
     double opt-in, unsubscribe and deliverability. **Subscriber PII never
     enters this repo** — we only POST content, never read or store the list.
-    Unset key or any API error → skipped, and the owner's SMTP copy plus the
-    GitHub issue still go out. It sits inside the per-day idempotency gate, so
+    Unset key or any API error → skipped, and the owner's SMTP copy still
+    goes out. It sits inside the per-day idempotency gate, so
     subscribers can't be double-sent. Capture is the FR-1 form contract
     (`PUBLIC_SIGNUP_ENDPOINT`, set in Vercel, not in code).
   - **Web edition = `/report`** (`landing/src/pages/report.astro`), rendered
@@ -691,7 +698,7 @@ sites. Full details in `congress/README.md`. Conventions:
     links. **Disclosures lead the report** (first section — they are the
     product; the scorecard supports). **Bond/muni filings are a count in the
     email, full rows on the page** (owner's call — one senator's muni ladder
-    was drowning the inbox): the email and issue list stock/option rows only
+    was drowning the inbox): the email lists stock/option rows only
     (split with the same `landing_data.is_bond` predicate as the home-page
     stats, deliberately not widened) plus "…plus N bond & muni filings — see
     the full report" linking the dated permalink; the `/report` page shows
@@ -707,8 +714,9 @@ sites. Full details in `congress/README.md`. Conventions:
     amended not reversed: **every dated page is `noindex` and canonicalizes to
     `/report`** (`check-seo.mjs` warns if one loses it); only `/report` and
     `/report/archive` are indexable. No backfill — the archive starts the day
-    it shipped; earlier reports live in git history and the dated GitHub
-    issues. Shared markup lives in `ReportBody.astro` so the two renderings
+    it shipped (4 Aug 2026); earlier reports live in git history and in the
+    dated GitHub issues, closed, that each report opened until 10 Nov 2026.
+    Shared markup lives in `ReportBody.astro` so the two renderings
     cannot drift. The flat-file archive migrates when storage stage 1 fires.
   - **HTML email = `congress/email_template.py`** (pure, offline-tested). It is a
     hand-authored, **bulletproof** layout — table-based, inline styles, a fixed
@@ -719,8 +727,8 @@ sites. Full details in `congress/README.md`. Conventions:
     passes it *structured data* (scorecard rows, signals, flips, disclosures)
     for the digest via `render_html`; the standalone traffic email uses
     `render_traffic_html` (both share the masthead/footer chrome via
-    `_document`). The module owns all HTML/colours; markdown (the GitHub-issue
-    body) is still built in `daily_report`. Preview by rendering
+    `_document`). The module owns all HTML/colours; markdown (the email's
+    plain-text part) is still built in `daily_report`. Preview by rendering
     `build_report(...)["html"]` / `build_traffic_email(...)["html"]` to a file.
     Keep the two brands' looks in step, but the email is its own surface (not
     governed by `landing/DESIGN.md`).
@@ -767,7 +775,7 @@ sites. Full details in `congress/README.md`. Conventions:
   the first day each listing failed in `state.json` (`sources`, absent while
   all work); `paused_sources` reports any source failing on two different
   days, with the newest filing still shown for it. Three surfaces read that
-  one function: the morning report (first section, email and issue), the
+  one function: the morning report (first section of the email), the
   dateline on every summary page (`NewestFiling.astro`, via `stats.paused`),
   and a note under the tracker's intro. Each says when the fetch began
   failing and how current the data is, both facts; none guesses the cause.

@@ -1,4 +1,4 @@
-"""Compose and deliver a morning digest as a GitHub issue (→ email).
+"""Compose and deliver the morning digest by email.
 
 Run by the daily Action after the data refresh (before the slow price step, so
 it is timely and needs only the trades + AI files). It builds a short markdown
@@ -12,24 +12,28 @@ report with three sections:
      buy/sell/hold rating flipped versus the last report.
   3. **New congressional disclosures** — trades newly filed in the last few days.
 
-Delivery is twofold: (1) **direct email via SMTP** (primary — reliable
-regardless of GitHub notification settings; enabled by SMTP_USER/SMTP_PASS
-secrets, e.g. a Gmail address + App Password), and (2) a **dated GitHub issue**
-(archive + flip-diff state; assigned to the repo owner). It closes the previous
-day's issue to keep the list tidy and records the issue number + the current
-ratings in `congress/report_state.json` for tomorrow's diff.
+Delivery is by email: the owner's copy over SMTP (SMTP_USER/SMTP_PASS
+secrets, e.g. a Gmail address + App Password) and the subscribers' copy as
+one Buttondown broadcast. The same payload becomes the web edition at /report
+and its dated permalink. `congress/report_state.json` records the day, the
+current ratings (for tomorrow's flip diff) and what the reader was told.
+
+There is no GitHub issue. Until 10 Nov 2026 each report also opened a dated
+issue, assigned to the owner, as an archive. /report/archive holds that
+record now and the owner's copy arrives over SMTP, so the issue was a third
+copy, and the only reason this module needed a token and a call to GitHub.
 
 **Quiet days do not send.** The market closes at the weekend and on holidays,
 so a Sunday email repeats Saturday's word for word. When the latest daily close
 has not advanced AND no new filing has arrived since the last report, the run
-skips the digest, the subscriber broadcast and the issue, and changes nothing:
+skips the digest and the subscriber broadcast, and changes nothing:
 /report keeps the last edition that went out, no dated permalink is written,
 and the state is left alone, so the next run re-asks the question. (The
 traffic emails are a separate subject and go out first, quiet day or not.)
 See ``whats_new``.
 
-Everything except the GitHub API and SMTP calls is pure stdlib (`smtplib` is
-stdlib too); `build_report` is tested offline. Non-fatal by design — a failed
+Everything is stdlib (`smtplib` included); `build_report` is pure and tested
+offline. Non-fatal by design — a failed
 report must not fail the data refresh. Run as a module
 (`python3 -m congress.daily_report`) so the package's `http.py` does not shadow
 stdlib `http`.
@@ -42,8 +46,6 @@ import os
 import smtplib
 import ssl
 import sys
-import urllib.error
-import urllib.request
 from datetime import date, datetime, timedelta, timezone
 from email.message import EmailMessage
 from pathlib import Path
@@ -51,7 +53,6 @@ from pathlib import Path
 from . import (analytics, buttondown, email_template, indicators, market,
                pipeline)
 
-API = "https://api.github.com"
 TRADES_JSON = pipeline.REPO_ROOT / "docs" / "data" / "congress-trades.json"
 AI_JSON = pipeline.REPO_ROOT / "docs" / "data" / "ai-indicators.json"
 HOLDINGS_JSON = pipeline.REPO_ROOT / "docs" / "data" / "holdings.json"
@@ -190,8 +191,8 @@ def build_report(trades: list[dict], ai_tickers: dict, new_signals: list[dict],
                  market_reading: dict | None = None,
                  reported_ids: set[str] | list[str] | None = None,
                  paused: list[dict] | None = None) -> dict:
-    """Compose the trade/scorecard digest in markdown (GitHub issue) and HTML
-    (email). Site traffic is delivered in its own email — see
+    """Compose the trade/scorecard digest in markdown (the email's plain-text
+    part) and HTML. Site traffic is delivered in its own email — see
     ``build_traffic_email``. Pure — no I/O. Returns
     ``{markdown, html, ratings, counts}`` where ``ratings`` is ticker→label for
     the next run's flip diff."""
@@ -343,7 +344,7 @@ def build_report(trades: list[dict], ai_tickers: dict, new_signals: list[dict],
                        + "\n\n")
 
     # --- Paused sources (pipeline.paused_sources) ---
-    # First in the issue: a source that stopped updating changes how every
+    # First in the report: a source that stopped updating changes how every
     # section below should be read, and a warning in a run log is too quiet.
     pause_lines = [pipeline.pause_line(p) for p in paused or []]
     paused_md = ("## ⚠️ Data paused\n\n"
@@ -556,22 +557,6 @@ def send_traffic_emails(today_iso: str, member_names: dict | None = None) -> int
     return sent
 
 
-# --- GitHub API (network) ------------------------------------------------
-
-def _gh(method: str, url: str, token: str, payload: dict | None = None):
-    data = json.dumps(payload).encode("utf-8") if payload is not None else None
-    req = urllib.request.Request(url, data=data, method=method, headers={
-        "Authorization": f"Bearer {token}",
-        "Accept": "application/vnd.github+json",
-        "X-GitHub-Api-Version": "2022-11-28",
-        "User-Agent": "crush-monitoring-morning-report",
-        "Content-Type": "application/json",
-    })
-    with urllib.request.urlopen(req, timeout=30) as resp:
-        body = resp.read().decode("utf-8")
-        return resp.status, (json.loads(body) if body else {})
-
-
 # --- Email (SMTP, stdlib) ------------------------------------------------
 
 def send_email(subject: str, text_body: str, html_body: str) -> bool:
@@ -589,7 +574,7 @@ def send_email(subject: str, text_body: str, html_body: str) -> bool:
     user = os.environ.get("SMTP_USER", "").strip()
     password = os.environ.get("SMTP_PASS", "").strip()
     if not user or not password:
-        print("SMTP_USER/SMTP_PASS not set — skipping email (issue still posted)")
+        print("SMTP_USER/SMTP_PASS not set — skipping the owner's email")
         return False
     # GitHub renders undefined `vars.*` as empty strings, so fall back with `or`.
     host = os.environ.get("SMTP_HOST", "").strip() or "smtp.gmail.com"
@@ -680,20 +665,15 @@ def archive_report(payload: dict, counts: dict, today_iso: str) -> None:
 
 
 def main() -> int:
-    repo = os.environ.get("REPO") or os.environ.get("GITHUB_REPOSITORY", "")
-    token = os.environ.get("GH_TOKEN") or os.environ.get("GITHUB_TOKEN", "")
-    if not repo or not token:
-        print("no REPO / token — skipping morning report")
-        return 0
-
     state = _load(STATE_JSON, {})
     today_iso = datetime.now(timezone.utc).date().isoformat()
     force = os.environ.get("REPORT_FORCE", "").strip().lower() in ("1", "true", "yes")
-    # Idempotent per day: if a report was already posted today (e.g. an early
-    # cron already ran), don't post a second — UNLESS forced (an explicit
+    # Idempotent per day: the state carries a date only when a report was
+    # delivered, so today's date means today's report went out (an earlier
+    # run sent it). Do not send a second — UNLESS forced (an explicit
     # on-demand send, which should always deliver).
-    if not force and state.get("date") == today_iso and state.get("issue_number"):
-        print(f"report already posted today (#{state['issue_number']}); skipping")
+    if not force and state.get("date") == today_iso:
+        print("report already sent today; skipping")
         return 0
 
     trades = _load(TRADES_JSON, {}).get("trades", [])
@@ -730,7 +710,7 @@ def main() -> int:
 
     # A quiet day: the market printed no new close and no filing arrived, so
     # this email would repeat yesterday's word for word. Skip the trade
-    # deliveries — the digest, the subscriber broadcast and the issue — and
+    # deliveries — the digest and the subscriber broadcast — and
     # change NOTHING: /report keeps the last edition that went out, and the
     # state keeps its fingerprint, so the next run re-asks the question. The
     # traffic emails are sent first, just below: they are a different
@@ -752,48 +732,23 @@ def main() -> int:
         return 0
     print("sending: " + ("; ".join(news) if news else "forced"))
 
-    # Primary delivery: direct email via SMTP (reliable regardless of GitHub
-    # notification settings). Best-effort — no-op if creds aren't configured.
+    # The owner's copy, over SMTP. Best-effort: a no-op without credentials.
     email_ok = send_email(title, report["markdown"], report["html"])
 
     # Subscribers: the same HTML, broadcast via Buttondown (which owns the
     # list, double opt-in and unsubscribe). Gated on BUTTONDOWN_API_KEY and
     # non-fatal — the owner's copy above must land either way. Runs inside the
     # per-day idempotency gate, so subscribers can't be double-sent.
-    buttondown.send(title, report["html_embed"])
+    broadcast_ok = buttondown.send(title, report["html_embed"])
 
-    # Secondary: a dated GitHub issue as an archive + the flip-diff state. Also
-    # assign it to the repo owner (override REPORT_ASSIGNEE) so watchers/owners
-    # are notified there too. Best-effort — a failure here must not lose state.
-    assignee = os.environ.get("REPORT_ASSIGNEE") or repo.split("/")[0]
-    new_number = None
-    try:
-        status, issue = _gh("POST", f"{API}/repos/{repo}/issues", token,
-                            {"title": title, "body": report["markdown"],
-                             "assignees": [assignee] if assignee else []})
-        if 200 <= status < 300:
-            new_number = issue.get("number")
-            print(f"opened report issue #{new_number} ({report['counts']})")
-        else:
-            print(f"::warning::report issue POST returned {status}")
-    except (urllib.error.HTTPError, urllib.error.URLError, OSError) as exc:
-        print(f"::warning::report issue POST failed: {exc}")
-
-    # Close yesterday's report issue so the list stays tidy (best-effort).
-    prev_number = state.get("issue_number")
-    if new_number and prev_number and prev_number != new_number:
-        try:
-            _gh("PATCH", f"{API}/repos/{repo}/issues/{prev_number}", token,
-                {"state": "closed"})
-            print(f"closed prior report issue #{prev_number}")
-        except Exception as exc:  # noqa: BLE001 — best-effort
-            print(f"::warning::could not close #{prev_number}: {exc}")
-
-    if not (email_ok or new_number):
+    if not (email_ok or broadcast_ok):
         # Nothing was delivered — don't record today as done, so the next run
-        # retries rather than the idempotency gate skipping it.
-        print("::warning::neither email nor issue delivered — not recording state")
+        # retries rather than the idempotency gate skipping it. Either copy
+        # counts: a broadcast that went out with the owner's email down must
+        # be recorded, or the next run sends it to every subscriber again.
+        print("::warning::no email was delivered — not recording state")
         return 0
+    print(f"report delivered ({report['counts']})")
     # Publish the web version of this report for /report and archive the dated
     # copy (both committed by the Action). Best-effort: a write failure must
     # not lose the delivery state recorded below.
@@ -802,7 +757,6 @@ def main() -> int:
 
     STATE_JSON.write_text(
         json.dumps({"date": today_iso,
-                    "issue_number": new_number or state.get("issue_number"),
                     "ratings": report["ratings"],
                     "score_version": indicators.SCORE_VERSION,
                     # What the reader has now been told about. Only written on

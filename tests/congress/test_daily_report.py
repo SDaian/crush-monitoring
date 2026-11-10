@@ -288,7 +288,7 @@ class TestTrafficSchedule(unittest.TestCase):
 
 
 class TestMainDelivery(unittest.TestCase):
-    """Exercise main() with the GitHub API + files stubbed."""
+    """Exercise main() with the two email paths and the files stubbed."""
 
     def setUp(self):
         self._d = TemporaryDirectory()
@@ -300,7 +300,7 @@ class TestMainDelivery(unittest.TestCase):
         self._orig = (daily_report.TRADES_JSON, daily_report.AI_JSON,
                       daily_report.STATE_JSON, daily_report.REPORT_JSON,
                       daily_report.REPORTS_DIR, daily_report.HOLDINGS_JSON,
-                      daily_report._gh)
+                      daily_report.send_email, daily_report.buttondown.send)
         daily_report.TRADES_JSON = base / "trades.json"
         daily_report.AI_JSON = base / "ai.json"
         daily_report.STATE_JSON = self.state
@@ -313,31 +313,85 @@ class TestMainDelivery(unittest.TestCase):
         daily_report.REPORTS_DIR = self.reports_dir
         # Missing file → no coverage section; gap tests write their own.
         daily_report.HOLDINGS_JSON = base / "holdings.json"
-        self.calls = []
+        # The two deliveries: the owner's email and the subscriber broadcast.
+        # Each test may make one of them fail.
+        self.sent = []          # (subject, plain text, html)
+        self.broadcasts = []    # (subject, html)
+        self.email_ok = True
+        self.broadcast_ok = True
 
-        def fake_gh(method, url, token, payload=None):
-            self.calls.append((method, url, payload))
-            return 201, {"number": 99}
-        daily_report._gh = fake_gh
-        os.environ["REPO"] = "SDaian/crush-monitoring"
-        os.environ["GH_TOKEN"] = "x"
+        def fake_email(subject, text, html):
+            self.sent.append((subject, text, html))
+            return self.email_ok
+
+        def fake_broadcast(subject, html):
+            self.broadcasts.append((subject, html))
+            return self.broadcast_ok
+        daily_report.send_email = fake_email
+        daily_report.buttondown.send = fake_broadcast
+        # The report needs nothing from GitHub: no repository, no token.
+        for k in ("REPO", "GH_TOKEN", "GITHUB_TOKEN", "GITHUB_REPOSITORY"):
+            os.environ.pop(k, None)
 
     def tearDown(self):
         (daily_report.TRADES_JSON, daily_report.AI_JSON,
          daily_report.STATE_JSON, daily_report.REPORT_JSON,
          daily_report.REPORTS_DIR, daily_report.HOLDINGS_JSON,
-         daily_report._gh) = self._orig
-        os.environ.pop("REPO", None)
-        os.environ.pop("GH_TOKEN", None)
-        os.environ.pop("REPORT_ASSIGNEE", None)
+         daily_report.send_email, daily_report.buttondown.send) = self._orig
         self._d.cleanup()
 
-    def test_posts_and_assigns_to_owner(self):
+    @staticmethod
+    def _today():
+        from datetime import datetime, timezone
+        return datetime.now(timezone.utc).date().isoformat()
+
+    def test_delivers_to_the_owner_and_to_the_subscribers(self):
         self.assertEqual(daily_report.main(), 0)
-        post = [c for c in self.calls if c[0] == "POST"][0]
-        self.assertEqual(post[2]["assignees"], ["SDaian"])  # defaults to owner
+        subject = f"📋 Morning report — {self._today()}"
+        self.assertEqual([m[0] for m in self.sent], [subject])
+        self.assertEqual([b[0] for b in self.broadcasts], [subject])
         saved = json.loads(self.state.read_text())
-        self.assertEqual(saved["issue_number"], 99)
+        self.assertEqual(saved["date"], self._today())
+
+    def test_the_report_opens_no_github_issue(self):
+        # Until 10 Nov 2026 each report also opened a dated issue. It was a
+        # third copy, and the only reason the report called GitHub at all.
+        from urllib import request
+
+        def no_network(*a, **k):
+            raise AssertionError("the report must not call the network")
+        with mock.patch.object(request, "urlopen", no_network):
+            self.assertEqual(daily_report.main(), 0)
+        self.assertTrue(self.sent)                       # and still delivers
+        self.assertFalse(hasattr(daily_report, "_gh"))
+        self.assertNotIn("issue_number", json.loads(self.state.read_text()))
+
+    def test_a_broadcast_alone_counts_as_delivered(self):
+        # The owner's email is down and the subscribers got theirs. If that
+        # day is not recorded, the next run sends it to every one of them
+        # again.
+        self.email_ok = False
+        self.assertEqual(daily_report.main(), 0)
+        self.assertEqual(json.loads(self.state.read_text())["date"], self._today())
+        self.assertEqual(daily_report.main(), 0)
+        self.assertEqual(len(self.broadcasts), 1)        # not sent twice
+
+    def test_the_owner_copy_alone_counts_as_delivered(self):
+        self.broadcast_ok = False
+        self.assertEqual(daily_report.main(), 0)
+        self.assertEqual(json.loads(self.state.read_text())["date"], self._today())
+        self.assertTrue(self.report_json.exists())
+
+    def test_nothing_delivered_records_nothing_and_the_next_run_retries(self):
+        self.email_ok = self.broadcast_ok = False
+        self.assertEqual(daily_report.main(), 0)         # never fails the run
+        self.assertFalse(self.state.exists())
+        self.assertFalse(self.report_json.exists())      # /report: last SENT
+        self.assertFalse((self.reports_dir / f"{self._today()}.json").exists())
+        self.email_ok = True
+        self.assertEqual(daily_report.main(), 0)
+        self.assertEqual(len(self.sent), 2)              # tried again
+        self.assertEqual(json.loads(self.state.read_text())["date"], self._today())
 
     def test_writes_report_json_for_the_web_page(self):
         daily_report.main()
@@ -345,32 +399,33 @@ class TestMainDelivery(unittest.TestCase):
         for key in ("date", "scorecard", "signals", "flips", "disclosures"):
             self.assertIn(key, payload)
 
-    def test_assignee_override(self):
-        os.environ["REPORT_ASSIGNEE"] = "someone-else"
-        daily_report.main()
-        post = [c for c in self.calls if c[0] == "POST"][0]
-        self.assertEqual(post[2]["assignees"], ["someone-else"])
-
     def test_idempotent_same_day(self):
-        # A report already recorded for today → main() must not POST again.
-        from datetime import datetime, timezone
-        today = datetime.now(timezone.utc).date().isoformat()
-        self.state.write_text(json.dumps(
-            {"date": today, "issue_number": 42, "ratings": {}}))
+        # A report already recorded for today → main() must not send again.
+        self.state.write_text(json.dumps({"date": self._today(), "ratings": {}}))
         self.assertEqual(daily_report.main(), 0)
-        self.assertEqual([c for c in self.calls if c[0] == "POST"], [])
+        self.assertEqual((self.sent, self.broadcasts), ([], []))
+
+    def test_a_second_run_on_one_day_sends_nothing(self):
+        self.assertEqual(daily_report.main(), 0)
+        self.assertEqual(daily_report.main(), 0)
+        self.assertEqual((len(self.sent), len(self.broadcasts)), (1, 1))
+
+    def test_the_day_the_change_ships_does_not_send_twice(self):
+        # The state file written by the last run before the issue was removed
+        # still carries its number. Today's date alone must hold the guard.
+        self.state.write_text(json.dumps(
+            {"date": self._today(), "issue_number": 1155, "ratings": {}}))
+        self.assertEqual(daily_report.main(), 0)
+        self.assertEqual((self.sent, self.broadcasts), ([], []))
 
     def test_force_overrides_idempotency(self):
-        from datetime import datetime, timezone
-        today = datetime.now(timezone.utc).date().isoformat()
-        self.state.write_text(json.dumps(
-            {"date": today, "issue_number": 42, "ratings": {}}))
+        self.state.write_text(json.dumps({"date": self._today(), "ratings": {}}))
         os.environ["REPORT_FORCE"] = "true"
         try:
             daily_report.main()
         finally:
             os.environ.pop("REPORT_FORCE", None)
-        self.assertTrue([c for c in self.calls if c[0] == "POST"])  # posted anyway
+        self.assertTrue(self.sent)  # sent anyway
 
 
 class TestEmail(unittest.TestCase):
@@ -659,7 +714,7 @@ class TestWhatsNew(unittest.TestCase):
 
 
 class TestQuietDayDelivery(TestMainDelivery):
-    """main() on a weekend: no email, no issue, and nothing changes."""
+    """main() on a weekend: no email, no broadcast, and nothing changes."""
 
     def _quiet(self):
         """Seed yesterday's state with today's exact fingerprint."""
@@ -674,7 +729,7 @@ class TestQuietDayDelivery(TestMainDelivery):
              "meta": {"new_signals": []}}))
         self.state.write_text(json.dumps({
             "date": (today - timedelta(days=1)).isoformat(),
-            "issue_number": 42, "ratings": {"NVDA": "Strong Buy"},
+            "ratings": {"NVDA": "Strong Buy"},
             "market_date": "2026-08-07", "trades_total": 1,
             "last_filing_date": today.isoformat()}))
         return today
@@ -682,7 +737,7 @@ class TestQuietDayDelivery(TestMainDelivery):
     def test_quiet_day_sends_nothing(self):
         self._quiet()
         self.assertEqual(daily_report.main(), 0)
-        self.assertEqual(self.calls, [])  # no issue, no closing PATCH
+        self.assertEqual((self.sent, self.broadcasts), ([], []))
 
     def test_quiet_day_leaves_the_page_alone(self):
         # /report is the last edition that WENT OUT. A quiet day used to
@@ -719,7 +774,7 @@ class TestQuietDayDelivery(TestMainDelivery):
             daily_report.main()
         finally:
             os.environ.pop("REPORT_FORCE", None)
-        self.assertTrue([c for c in self.calls if c[0] == "POST"])
+        self.assertTrue(self.sent and self.broadcasts)
 
     def test_a_new_filing_sends(self):
         today = self._quiet()
@@ -729,7 +784,7 @@ class TestQuietDayDelivery(TestMainDelivery):
                        "amount_label": "$1,001 - $15,000"})
         daily_report.TRADES_JSON.write_text(json.dumps({"trades": trades}))
         daily_report.main()
-        self.assertTrue([c for c in self.calls if c[0] == "POST"])
+        self.assertTrue(self.sent and self.broadcasts)
 
     STALE = [{"ticker": "NVDA", "type": "golden_cross",
               "label": "Golden cross (50-day above 200-day)",
@@ -758,8 +813,10 @@ class TestQuietDayDelivery(TestMainDelivery):
         payload = json.loads(self.report_json.read_text())
         self.assertEqual(payload["signals"], [])
         self.assertEqual(payload["counts"]["new_signals"], 0)
-        body = [c for c in self.calls if c[0] == "POST"][0][2]["body"]
-        self.assertNotIn("Golden cross", body)
+        subject, text, html = self.sent[0]
+        self.assertNotIn("Golden cross", text)
+        self.assertNotIn("Golden cross", html)
+        self.assertNotIn("Golden cross", self.broadcasts[0][1])
 
     def test_a_new_close_carries_its_signals(self):
         self._quiet()
