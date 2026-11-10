@@ -20,7 +20,7 @@ House Clerk ├─► congress/  ──► docs/data/*.json ──► landing/ �
 OGE 278-T  ─┘   (Python)       (generated,          (Astro      capitolledger.io
                                 committed daily)     static site)
                     │
-                    └─► morning email (SMTP + Buttondown), GitHub issue,
+                    └─► morning email (SMTP + Buttondown),
                         X drafts (Typefully), IndexNow ping
 ```
 

@@ -144,8 +144,10 @@ list a member's trades in industries their committees oversee
 
 - an email to the owner over SMTP (`SMTP_USER`, `SMTP_PASS`),
 - the same email to subscribers through Buttondown (`buttondown.py`),
-- a dated GitHub issue, assigned to the owner,
 - `landing/src/data/report.json` and a dated copy, for `/report`.
+
+The run records the day only when an email went out; either copy counts. It
+opens no GitHub issue (it did until 10 Nov 2026).
 
 Disclosures lead, then the featured scorecard, then overnight signals and
 rating flips. "New" means not yet reported: a disclosure inside a 45-day
