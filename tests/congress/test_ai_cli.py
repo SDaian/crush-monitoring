@@ -6,6 +6,8 @@ featured symbols reach meta.new_signals, and that the dedup memory suppresses
 re-notification of an already-emitted signal on a second run.
 """
 
+import contextlib
+import io
 import json
 import os
 import types
@@ -31,16 +33,12 @@ class TestAiCommand(unittest.TestCase):
         self._real_fetch = prices.fetch_raw
         self._real_session = prices.make_session
         self._real_key = os.environ.get(prices.ENV_KEY)
-        self._real_index = prices.fetch_index_raw
         prices.make_session = lambda: None
         prices.fetch_raw = lambda session, tk, key: _ascending_body(hash(tk) % 30)
-        # The market reading rides along on every run; keep it offline too.
-        prices.fetch_index_raw = lambda session, sym, key: _ascending_body(17)
         os.environ[prices.ENV_KEY] = "TESTKEY"
 
     def tearDown(self):
         prices.fetch_raw = self._real_fetch
-        prices.fetch_index_raw = self._real_index
         prices.make_session = self._real_session
         if self._real_key is None:
             os.environ.pop(prices.ENV_KEY, None)
@@ -90,6 +88,51 @@ class TestAiCommand(unittest.TestCase):
             self.assertEqual(cli._cmd_ai(args), 0)
             data2 = json.loads(out.read_text())
             self.assertEqual(data2["meta"]["new_signals"], [])
+
+    def test_the_market_reading_comes_from_one_spy_fetch(self):
+        # One source: our own realized volatility of the S&P 500. No index
+        # symbol is asked for (the plan answered 404 to "VIX" on every run).
+        asked = []
+
+        def fetch(session, tk, key):
+            asked.append(tk)
+            return _ascending_body(hash(tk) % 30)
+
+        prices.fetch_raw = fetch
+        with TemporaryDirectory() as d:
+            out = Path(d) / "ai-indicators.json"
+            args = types.SimpleNamespace(output=str(out),
+                                         index=str(Path(d) / "absent.json"))
+            self.assertEqual(cli._cmd_ai(args), 0)
+            data = json.loads(out.read_text())
+        self.assertEqual(asked.count("SPY"), 1)
+        self.assertNotIn("VIX", asked)
+        self.assertEqual(asked[-1], "SPY")   # after the universe, never before
+        reading = data["market"]
+        self.assertEqual(reading["label"], "S&P 500 volatility")
+        self.assertNotIn("source", reading)
+        self.assertIn("vol1y", reading)      # 260 bars: a full year
+        self.assertNotIn("SPY", data["tickers"])   # context, not a reading
+
+    def test_a_failed_spy_fetch_costs_the_line_and_nothing_else(self):
+        def fetch(session, tk, key):
+            if tk == "SPY":
+                raise OSError("HTTP Error 500 for url ...apikey=TESTKEY")
+            return _ascending_body(hash(tk) % 30)
+
+        prices.fetch_raw = fetch
+        with TemporaryDirectory() as d:
+            out = Path(d) / "ai-indicators.json"
+            args = types.SimpleNamespace(output=str(out),
+                                         index=str(Path(d) / "absent.json"))
+            log = io.StringIO()
+            with contextlib.redirect_stdout(log):
+                self.assertEqual(cli._cmd_ai(args), 0)
+            data = json.loads(out.read_text())
+        self.assertNotIn("market", data)
+        self.assertEqual(len(data["tickers"]), len(indicators.AI_TICKERS))
+        self.assertIn("no volatility reading", log.getvalue())
+        self.assertNotIn("TESTKEY", log.getvalue())   # the key never logs
 
     def test_a_missing_index_falls_back_to_the_watchlist(self):
         # A stale or failed `landing` step costs a few readings, never the run.

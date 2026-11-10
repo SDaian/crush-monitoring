@@ -59,87 +59,93 @@ class TestRealizedVol(unittest.TestCase):
         self.assertIsNone(market.realized_vol([100.0] * 20 + [0.0], window=20))
 
 
-class TestFromVix(unittest.TestCase):
-    def test_level_move_and_band(self):
-        r = market.from_vix(series([16.0, 18.5]))
-        self.assertEqual(r["source"], market.SOURCE_VIX)
-        self.assertEqual(r["label"], "VIX")
-        self.assertEqual(r["level"], 18.5)
-        self.assertEqual(r["chg_1d"], 2.5)  # points, not percent
-        self.assertEqual(r["band"], "normal")
-        self.assertEqual(r["asofDate"], "2026-06-02")
+class TestReading(unittest.TestCase):
+    """One source: our own realized volatility of the S&P 500."""
 
-    def test_a_single_bar_has_no_move(self):
-        self.assertNotIn("chg_1d", market.from_vix(series([16.0])))
+    ALTERNATING = [100.0 * (1.01 ** (i % 2)) for i in range(40)]
 
-    def test_an_empty_series_is_no_reading(self):
-        # Exactly what parse_series returns for an unknown symbol or a plan
-        # that does not serve indices.
-        self.assertIsNone(market.from_vix([]))
-        self.assertIsNone(market.from_vix(
-            indicators.parse_series('{"status":"error","message":"nope"}')))
-
-
-class TestFromBenchmark(unittest.TestCase):
     def test_computes_our_own_reading(self):
-        closes = [100.0 * (1.01 ** (i % 2)) for i in range(40)]
-        r = market.from_benchmark(series(closes))
-        self.assertEqual(r["source"], market.SOURCE_REALIZED)
+        r = market.reading(series(self.ALTERNATING))
+        want = math.log(1.01) * math.sqrt(20 / 19) * math.sqrt(252) * 100
+        self.assertEqual(r["level"], round(want, 2))
         self.assertEqual(r["label"], "S&P 500 volatility")
-        self.assertIn("not the VIX", r["note"])
-        self.assertIsNotNone(r["chg_1d"])
+        self.assertEqual(r["band"], market.band(want)[0])
+        self.assertEqual(r["asofDate"], "2026-06-40")  # the newest bar's date
 
     def test_never_calls_itself_the_vix(self):
-        # The fallback is a different measurement. Labelling it "VIX" would
-        # be a lie a reader who knows the index would catch.
-        r = market.from_benchmark(series([100.0 + i for i in range(40)]))
+        # Realized volatility is a different measurement. Labelling it "VIX"
+        # would be a lie a reader who knows the index would catch; the note
+        # says so in plain words.
+        r = market.reading(series([100.0 + i for i in range(40)]))
         self.assertNotIn("VIX", r["label"])
+        self.assertIn("not the VIX", r["note"])
 
-    def test_not_enough_history(self):
-        self.assertIsNone(market.from_benchmark(series([100.0, 101.0])))
+    def test_the_move_is_in_points_against_the_session_before(self):
+        # Calm for 20 sessions, then one 5% day: volatility rose.
+        closes = [100.0] * 25 + [105.0]
+        r = market.reading(series(closes))
+        self.assertEqual(
+            r["chg_1d"],
+            round(market.realized_vol(closes) - market.realized_vol(closes[:-1]), 2))
+        self.assertGreater(r["chg_1d"], 0)
+
+    def test_the_first_reading_has_no_move(self):
+        # Exactly window + 1 closes: one reading exists, none before it.
+        r = market.reading(series(self.ALTERNATING[:21]))
+        self.assertIsNotNone(r)
+        self.assertNotIn("chg_1d", r)
+
+    def test_not_enough_history_is_no_reading(self):
+        self.assertIsNone(market.reading(series([100.0, 101.0])))
+        self.assertIsNone(market.reading([]))
+
+    def test_an_error_body_is_no_reading(self):
+        # What parse_series returns when the source refuses the symbol.
+        self.assertIsNone(market.reading(
+            indicators.parse_series('{"status":"error","message":"nope"}')))
+
+    def test_reads_a_real_api_body(self):
+        rows = indicators.parse_series(td_body(self.ALTERNATING))
+        self.assertEqual(market.reading(rows), market.reading(series(self.ALTERNATING)))
 
     def test_carries_the_index_one_year_volatility(self):
         closes = [100.0 * (1.01 ** (i % 2)) for i in range(300)]
-        r = market.from_benchmark(series(closes))
+        r = market.reading(series(closes))
         self.assertEqual(r["vol1y"],
                          round(market.realized_vol(closes, market.YEAR), 1))
 
     def test_short_history_omits_the_one_year_number(self):
-        r = market.from_benchmark(series([100.0 + i for i in range(40)]))
-        self.assertNotIn("vol1y", r)
+        self.assertNotIn("vol1y", market.reading(series(self.ALTERNATING)))
 
+    def test_the_reading_carries_its_own_labelling(self):
+        r = market.reading(series([100.0 + i * 0.5 for i in range(40)]))
+        for key in ("label", "note", "bandLabel", "bandNote", "asofDate"):
+            self.assertTrue(r[key], f"{key} missing")
 
-class TestBuild(unittest.TestCase):
-    def test_prefers_the_vix(self):
-        bench = series([100.0 * (1.01 ** (i % 2)) for i in range(40)])
-        r = market.build(vix_rows=series([17.0, 17.4]), bench_rows=bench)
-        self.assertEqual(r["source"], market.SOURCE_VIX)
-
-    def test_falls_back_when_the_index_is_not_served(self):
-        bench = series([100.0 * (1.01 ** (i % 2)) for i in range(40)])
-        r = market.build(vix_rows=[], bench_rows=bench)
-        self.assertEqual(r["source"], market.SOURCE_REALIZED)
-
-    def test_neither_source_means_no_line(self):
-        self.assertIsNone(market.build([], []))
-        self.assertIsNone(market.build())
-
-    def test_reads_a_real_api_body(self):
-        rows = indicators.parse_series(td_body([16.2, 15.8, 19.9]))
-        self.assertEqual(market.build(vix_rows=rows)["level"], 19.9)
-
-    def test_every_reading_carries_its_own_labelling(self):
-        for r in (market.build(vix_rows=series([17.0, 17.4])),
-                  market.build(bench_rows=series(
-                      [100.0 + i * 0.5 for i in range(40)]))):
-            for key in ("label", "note", "bandLabel", "bandNote", "asofDate"):
-                self.assertTrue(r[key], f"{key} missing from {r['source']}")
+    def test_there_is_one_source_and_no_field_to_name_it(self):
+        # The VIX path is gone (the plan never served it), so a "source"
+        # field would have one value for ever.
+        self.assertNotIn("source", market.reading(series(self.ALTERNATING)))
+        for gone in ("from_vix", "build", "VIX_SYMBOL", "SOURCE_VIX"):
+            self.assertFalse(hasattr(market, gone), gone)
 
 
 class TestSummary(unittest.TestCase):
     def test_one_sentence(self):
-        r = market.build(vix_rows=series([16.0, 18.5]))
-        self.assertEqual(market.summary(r), "VIX 18.5 (+2.5 pts) — normal")
+        r = {"label": "S&P 500 volatility", "level": 18.5, "chg_1d": 2.5,
+             "bandLabel": "Normal"}
+        self.assertEqual(market.summary(r),
+                         "S&P 500 volatility 18.5 (+2.5 pts) — normal")
+
+    def test_a_fall_carries_its_own_sign(self):
+        r = {"label": "S&P 500 volatility", "level": 14.2, "chg_1d": -0.8,
+             "bandLabel": "Calm"}
+        self.assertEqual(market.summary(r),
+                         "S&P 500 volatility 14.2 (-0.8 pts) — calm")
+
+    def test_no_move_is_left_out(self):
+        r = {"label": "S&P 500 volatility", "level": 14.2, "bandLabel": "Calm"}
+        self.assertEqual(market.summary(r), "S&P 500 volatility 14.2 — calm")
 
     def test_no_reading_is_an_empty_string(self):
         self.assertEqual(market.summary(None), "")

@@ -469,9 +469,9 @@ sites. Full details in `congress/README.md`. Conventions:
     1-year volatility (`market.realized_vol`, the same formula as the market
     line), and the "Vol. (1y)" card compares it with SPY's `vol1y` from
     `market.json` ("4.1x the S&P 500"). Size of move is not direction, so it
-    stays out of `ai_score` for the reason market volatility does. On the VIX
-    path no SPY series is fetched, so the card drops the comparison and keeps
-    the stock's own number.
+    stays out of `ai_score` for the reason market volatility does. When the
+    market reading is absent (an outage), the card drops the comparison and
+    keeps the stock's own number.
   - **Changing the vote set bumps `indicators.SCORE_VERSION`.** A changed set
     moves many ratings on one morning for a reason that is not the market, so
     `daily_report.main` drops the flip baseline for the single run that first
@@ -511,24 +511,26 @@ sites. Full details in `congress/README.md`. Conventions:
   missing, unreadable or garbled date always fetches.
 - **Market context is one number, and it never votes:** `congress/market.py`
   turns a daily series into the market-wide volatility reading the morning
-  report and **every** ticker page show. First choice is the **VIX**
-  (`prices.fetch_index_raw`, one extra call a day, no `country` filter — that
-  filter drops an index). Twelve Data's index coverage is plan-dependent and
-  the key is a secret, so the surface is probed, not assumed: an empty series
-  falls back to **our own annualised 20-day realized volatility of SPY**
-  (a second call, only then), labelled "S&P 500 volatility" and **never**
-  "VIX" — a different measurement needs a different name, which is also why a
-  VIX ETF (VIXY holds futures and decays) is not an option. Neither source →
-  no `market` key and every surface omits the line. The reading is
+  report and **every** ticker page show. The number is **our own annualised
+  20-day realized volatility of SPY** (`market.reading`, one extra call a
+  day), labelled "S&P 500 volatility" and **never** "VIX" — a different
+  measurement needs a different name, which is also why a VIX ETF (VIXY
+  holds futures and decays) is not an option. **There is one source.** The
+  VIX was the first choice until 10 Nov 2026, with this reading as its
+  fallback, but our Twelve Data plan does not serve indices: the call
+  answered 404 on every run, so the fallback was the only reading the site
+  ever showed. Do not add the VIX path back unless the plan serves it. A
+  failed SPY fetch → no `market` key and every surface omits the line. The
+  reading is
   **deliberately absent from `indicators.ai_score`**: that score is a
-  per-stock tally, and a market-wide input would flip all 23 ratings at once
+  per-stock tally, and a market-wide input would flip every rating at once
   and empty the morning report's rating-flip diff of meaning. The bands
   (<15 calm / <25 normal / <35 elevated / else stressed) are **our
   convention** and every surface says so. It reaches the site as ONE
   generated file, `landing/src/data/market.json` (written by
   `landing_data.write_files`, always written even when null because the pages
   import it at build time) — not copied into each ticker payload, which would
-  rewrite all 98 of them every morning with the same number and bury the real
+  rewrite every one of them each morning with the same number and bury the real
   trade changes. `MarketStrip.astro` renders it for `/report` and the ticker
   pages; `email_template.market_line` for the email.
 - **Site traffic — its OWN email (Vercel Web Analytics):** `congress/analytics.py`

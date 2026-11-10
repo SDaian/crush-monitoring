@@ -5,23 +5,18 @@ about the weather the whole market trades in. A 3% drop reads very differently
 in a calm tape than in a stressed one, so the morning report and every ticker
 page carry one line of market context.
 
-**The number.** First choice is the **VIX** (CBOE Volatility Index — the
-market's expected 30-day swing in the S&P 500). Twelve Data lists it as an
-index symbol, but index coverage is plan-dependent and the key lives in a
-GitHub secret, so this is UNVERIFIED from the dev sandbox in the sense of
-CLAUDE.md: probe it, and degrade instead of failing.
-
-**The fallback.** When the VIX comes back empty we compute our own reading
-from the SPY closes — annualised 20-day realized volatility. It is a
-different measurement (realized looks back, the VIX looks forward) and it
-usually prints a few points lower, so it is labelled as *our* number and
-never called "VIX". That honesty is the whole reason the fallback is
-computed rather than proxied through a VIX ETF: VIXY holds futures and
-decays, so its price is not the index level and no label can fix that.
+**The number** is our own: the annualised 20-day realized volatility of the
+S&P 500, computed from the SPY daily closes. It is not the VIX and never
+carries that name. Realized volatility looks back; the VIX looks forward and
+usually prints a few points higher. The VIX itself was the first choice
+until 10 Nov 2026, but our Twelve Data plan does not serve indices: the
+call returned 404 on every run and the reading below was always the one
+shown. A VIX ETF is no substitute either (VIXY holds futures and decays, so
+its price is not the index level).
 
 **It never votes.** The market reading is deliberately absent from
 ``indicators.ai_score``. That score is a per-stock tally; a market-wide input
-would move all 23 ratings at once and the morning report's rating-flip diff
+would move every rating at once and the morning report's rating-flip diff
 would stop saying anything about the stock.
 
 Pure stdlib, no I/O — the caller fetches, this module measures. The bands are
@@ -37,23 +32,11 @@ from datetime import date, datetime, timedelta
 YEAR = 252
 REALIZED_WINDOW = 20
 
-VIX_SYMBOL = "VIX"
 BENCH_SYMBOL = "SPY"
 
-SOURCE_VIX = "vix"
-SOURCE_REALIZED = "realized"
-
-LABELS = {
-    SOURCE_VIX: "VIX",
-    SOURCE_REALIZED: "S&P 500 volatility",
-}
-NOTES = {
-    SOURCE_VIX: ("CBOE Volatility Index — the market's expected 30-day swing "
-                 "in the S&P 500."),
-    SOURCE_REALIZED: ("Annualised 20-day realized volatility of the S&P 500, "
-                      "computed from daily closes. Our own reading, not the "
-                      "VIX."),
-}
+LABEL = "S&P 500 volatility"
+NOTE = ("Annualised 20-day realized volatility of the S&P 500, computed from "
+        "daily closes. Our own reading, not the VIX.")
 
 # Level → band. Low bound is exclusive of the band above it; the last entry
 # catches everything higher. A convention, stated as one on every surface.
@@ -94,66 +77,39 @@ def realized_vol(closes: list[float], window: int = REALIZED_WINDOW):
     return math.sqrt(var) * math.sqrt(YEAR) * 100
 
 
-def _reading(source: str, level: float | None, prev: float | None,
-             asof: str) -> dict | None:
-    if level is None:
-        return None
-    key, label = band(level)
-    reading = {
-        "source": source,
-        "label": LABELS[source],
-        "note": NOTES[source],
-        "level": round(level, 2),
-        "asofDate": asof,
-        "band": key,
-        "bandLabel": label,
-        "bandNote": BAND_NOTE,
-    }
-    # The VIX is quoted in points, so its move is a point difference — a
-    # percentage of a volatility index reads as a second-order number nobody
-    # uses. Absent when there is no prior session to compare with.
-    if prev is not None:
-        reading["chg_1d"] = round(level - prev, 2)
-    return reading
+def reading(rows: list[dict], window: int = REALIZED_WINDOW) -> dict | None:
+    """The market reading from the S&P 500 (SPY) daily series
+    (``indicators.parse_series`` rows).
 
-
-def from_vix(rows: list[dict]) -> dict | None:
-    """The reading from a VIX daily series (``indicators.parse_series`` rows).
-
-    None when the series is empty — which is exactly what the parser returns
-    for an unknown symbol or a plan that does not serve indices."""
-    closes = [r["close"] for r in rows if r.get("close") is not None]
-    if not closes:
-        return None
-    prev = closes[-2] if len(closes) > 1 else None
-    return _reading(SOURCE_VIX, closes[-1], prev, rows[-1]["date"])
-
-
-def from_benchmark(rows: list[dict], window: int = REALIZED_WINDOW):
-    """The fallback reading, computed from the S&P 500 (SPY) daily closes."""
+    None when the series is too short or a close is unusable: every surface
+    then omits the line, the same way an absent earnings date does."""
     closes = [r["close"] for r in rows if r.get("close") is not None]
     level = realized_vol(closes, window)
     if level is None:
         return None
+    key, label = band(level)
+    out = {
+        "label": LABEL,
+        "note": NOTE,
+        "level": round(level, 2),
+        "asofDate": rows[-1]["date"],
+        "band": key,
+        "bandLabel": label,
+        "bandNote": BAND_NOTE,
+    }
     # Yesterday's reading, so the line can show which way volatility moved.
+    # A point difference: a percentage of a volatility level reads as a
+    # second-order number nobody uses. Absent without a prior session.
     prev = realized_vol(closes[:-1], window)
-    reading = _reading(SOURCE_REALIZED, level, prev, rows[-1]["date"])
+    if prev is not None:
+        out["chg_1d"] = round(level - prev, 2)
     # The ticker pages compare each stock's 1-year volatility with this one,
-    # measured the same way. Absent on the VIX path (no SPY series is fetched
-    # then); the pages drop the comparison and keep the stock's own number.
+    # measured the same way. Absent while the series is shorter than a year;
+    # the pages then drop the comparison and keep the stock's own number.
     year = realized_vol(closes, YEAR)
-    if reading and year is not None:
-        reading["vol1y"] = round(year, 1)
-    return reading
-
-
-def build(vix_rows: list[dict] | None = None,
-          bench_rows: list[dict] | None = None) -> dict | None:
-    """The market reading: the VIX when it is available, else our own.
-
-    Returns None when neither source produced a number — every surface then
-    simply omits the line, the same way an absent earnings date does."""
-    return from_vix(vix_rows or []) or from_benchmark(bench_rows or [])
+    if year is not None:
+        out["vol1y"] = round(year, 1)
+    return out
 
 
 def summary(reading: dict | None) -> str:
@@ -177,8 +133,8 @@ def summary(reading: dict | None) -> str:
 # close exists, every one of those calls returns the number we already hold.
 #
 # The naive guard — "skip at the weekend" — is WRONG here, and the run log
-# says why. Our crons fire at 04:30-08:20 UTC, hours BEFORE the US close, so
-# each run captures the PREVIOUS session:
+# says why. The daily run fires in the morning UTC, hours BEFORE the US close,
+# so each run captures the PREVIOUS session:
 #
 #     Fri 05:00 UTC -> Thursday's close
 #     Sat 05:00 UTC -> Friday's close     <- Saturday earns its keep

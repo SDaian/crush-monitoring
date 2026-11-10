@@ -411,8 +411,8 @@ shared Astro components in `src/components/`.
 - **Market strip** — one `wash` band, hairline-ruled, carrying the market-wide
   volatility reading (kicker · level · day's move · band · date) with a
   fineprint note under it. Used on `/report` and on **every** ticker page, so
-  three rules hold it honest: the note **names the number** (the VIX, or our
-  own realized-volatility fallback — never the fallback under the VIX's name),
+  three rules hold it honest: the note **names the number** (our own realized
+  volatility of the S&P 500 — never under the VIX's name),
   the band is stated as **our convention**, and where the same value repeats
   across pages it says it is market-wide and **not a reading on that stock**.
   Colour follows stress, not price: calm is `buy` green, stressed is `stamp`,

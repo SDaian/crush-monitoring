@@ -759,12 +759,12 @@ class TestQuietDayDelivery(TestMainDelivery):
         self.assertEqual(saved["trades_total"], 1)
 
 
-VIX = {"source": "vix", "label": "VIX", "level": 18.5, "chg_1d": 2.5,
-       "band": "normal", "bandLabel": "Normal", "asofDate": "2026-07-07",
-       "note": "CBOE Volatility Index — the market's expected 30-day swing "
-               "in the S&P 500.",
-       "bandNote": "Bands are our own convention, not an official "
-                   "classification."}
+MARKET = {"label": "S&P 500 volatility", "level": 18.5, "chg_1d": 2.5,
+          "band": "normal", "bandLabel": "Normal", "asofDate": "2026-07-07",
+          "note": "Annualised 20-day realized volatility of the S&P 500, "
+                  "computed from daily closes. Our own reading, not the VIX.",
+          "bandNote": "Bands are our own convention, not an official "
+                      "classification."}
 
 
 class TestMarketContext(unittest.TestCase):
@@ -772,27 +772,27 @@ class TestMarketContext(unittest.TestCase):
 
     def setUp(self):
         self.r = build_report(TRADES, AI, NEW_SIGNALS, prev_ratings={},
-                              today_iso="2026-07-07", market_reading=VIX)
+                              today_iso="2026-07-07", market_reading=MARKET)
 
     def test_markdown_carries_the_reading_and_its_label(self):
         md = self.r["markdown"]
-        self.assertIn("VIX 18.5 (+2.5 pts) — normal", md)
-        self.assertIn("CBOE Volatility Index", md)
+        self.assertIn("S&P 500 volatility 18.5 (+2.5 pts) — normal", md)
+        self.assertIn("Our own reading, not the VIX.", md)
 
     def test_email_carries_the_strip(self):
         html = self.r["html"]
-        self.assertIn("VIX 18.5", html)
+        self.assertIn("S&amp;P 500 volatility 18.5", html)
         self.assertIn("Normal", html)
         self.assertIn("Bands are our own convention", html)
 
     def test_the_web_payload_carries_it_so_report_matches_the_email(self):
-        self.assertEqual(self.r["payload"]["market"], VIX)
+        self.assertEqual(self.r["payload"]["market"], MARKET)
 
     def test_no_reading_renders_no_line(self):
         plain = build_report(TRADES, AI, NEW_SIGNALS, prev_ratings={},
                              today_iso="2026-07-07")
-        self.assertNotIn("VIX", plain["markdown"])
-        self.assertNotIn("Volatility Index", plain["html"])
+        self.assertNotIn("volatility", plain["markdown"].lower())
+        self.assertNotIn("S&amp;P 500 volatility", plain["html"])
         self.assertIsNone(plain["payload"]["market"])
 
     def test_it_does_not_change_a_single_rating(self):
@@ -806,10 +806,10 @@ class TestMarketContext(unittest.TestCase):
 class TestMarketFromTheIndicatorsFile(TestMainDelivery):
     def test_main_reads_the_reading_written_by_the_indicators_run(self):
         daily_report.AI_JSON.write_text(json.dumps(
-            {"tickers": {}, "meta": {"new_signals": []}, "market": VIX}))
+            {"tickers": {}, "meta": {"new_signals": []}, "market": MARKET}))
         daily_report.main()
         self.assertEqual(
-            json.loads(self.report_json.read_text())["market"], VIX)
+            json.loads(self.report_json.read_text())["market"], MARKET)
 
 
 class TestReportedMemory(unittest.TestCase):
