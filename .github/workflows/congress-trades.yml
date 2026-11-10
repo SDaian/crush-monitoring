@@ -1,5 +1,13 @@
 name: Congress trades refresh
 
+# The Pi's dispatch is named, so the cron fallback can find it (see the gate
+# job and congress/fallback.py, whose DAILY_TITLE must equal the middle name
+# exactly). A manual dispatch is not the daily run: it sends no report.
+run-name: >-
+  ${{ (github.event_name == 'schedule' && 'Daily refresh (cron fallback)')
+   || (inputs.scheduled == 'true' && 'Daily refresh')
+   || 'Congress trades refresh (manual)' }}
+
 on:
   schedule:
     # FALLBACK ONLY. The primary trigger is now an external scheduler (a
@@ -9,10 +17,12 @@ on:
     # best-effort — frequently delayed 1–3h and sometimes DROPPED ENTIRELY.
     #
     # This single entry catches the day the Pi is off, its network is down, or
-    # its token expired. It fires AFTER the Pi's slot on purpose: if the Pi
-    # already ran, the report's per-day idempotency (report_state.date) makes
-    # this one a no-op, so the fallback costs a few runner minutes and sends
-    # nothing twice. The repo is PUBLIC (2026-08-19) so those minutes are free.
+    # its token expired. It is nominally AFTER the Pi's slot, and in practice
+    # GitHub starts it 6 to 10 hours late. When the Pi's run already succeeded,
+    # the gate job below skips the whole refresh: the fallback is a fallback,
+    # not a second daily run. (It used to run everything again each afternoon,
+    # and on a quiet Monday it sent the "morning" report in the evening.)
+    # The repo is PUBLIC (2026-08-19) so runner minutes are free.
     #
     # Runner minutes are free; the Twelve Data budget is NOT. Each paced fetch
     # is ~29 minutes of 8s sleeps, which is why the price and indicator steps
@@ -60,13 +70,36 @@ on:
 permissions:
   contents: write
   issues: write # open an issue (→ email) when a new AI technical signal fires
+  actions: read # the gate job asks whether the daily run already succeeded
 
 concurrency:
   group: congress-trades
   cancel-in-progress: false
 
 jobs:
+  # Cron only: is this run needed? When the Pi's dispatch already succeeded,
+  # it answers run=false and the refresh job below is skipped. On a dispatch
+  # this job does not run at all, so the Pi's run starts as fast as before.
+  gate:
+    if: github.event_name == 'schedule'
+    runs-on: ubuntu-latest
+    outputs:
+      run: ${{ steps.decide.outputs.run }}
+    steps:
+      - uses: actions/checkout@v4
+      - id: decide
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: python3 -m congress.fallback
+
   refresh:
+    needs: gate
+    # FAIL OPEN. The refresh runs unless the gate said run=false in so many
+    # words: a skipped gate (every dispatch) or a gate that crashed leaves the
+    # output empty, and an empty output runs. !cancelled() is what lets this
+    # job start when `gate` was skipped or failed; without a status function
+    # GitHub would skip it too.
+    if: ${{ !cancelled() && needs.gate.outputs.run != 'false' }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4

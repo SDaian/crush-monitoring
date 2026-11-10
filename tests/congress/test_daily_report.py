@@ -687,7 +687,7 @@ class TestQuietDayDelivery(TestMainDelivery):
         before = self.state.read_text()
         daily_report.main()
         # The fingerprint must keep describing the last DELIVERED report, and
-        # the date must stay yesterday's so a later cron re-asks the question.
+        # the date must stay yesterday's so the next run re-asks the question.
         self.assertEqual(self.state.read_text(), before)
         self.assertNotEqual(json.loads(before)["date"], today.isoformat())
 

@@ -581,9 +581,24 @@ sites. Full details in `congress/README.md`. Conventions:
     `scheduled=true`. GitHub cron cannot hold that time: it runs in UTC (±1h
     DST drift) and its scheduled runs are best-effort — delayed 1–3h and
     sometimes dropped entirely. Three morning crons used to paper over that;
-    **one** now remains (`20 8 * * *`) to catch the day the Pi is off, and it
-    fires *after* the Pi's slot so the per-day idempotency turns it into a
-    no-op when the Pi already ran. **`scheduled` is not `report`**: it enables
+    **one** now remains (`20 8 * * *`) to catch the day the Pi is off.
+    **The cron is a fallback and nothing else.** Its `gate` job
+    (`congress/fallback.py`) asks the Actions API whether the Pi's dispatch
+    already succeeded in the last 20 hours, and when it did, the whole
+    `refresh` job is skipped. The Pi's run is found by its `run-name`,
+    "Daily refresh" — a test fails if the workflow and `DAILY_TITLE` ever
+    disagree — because a manual dispatch refreshes data but sends no report,
+    so it must not count. Before the gate the cron re-ran the entire job every
+    day, and GitHub starts it 6–10 hours late: it was an afternoon run that
+    changed nothing on 12 days of 15, and on a quiet Monday it found the day's
+    filings and sent the "morning" report at eight in the evening. The window
+    is 20 hours, not "today", so a cron delayed past midnight UTC still finds
+    the morning's run instead of sending tomorrow's report at 2am. The gate
+    **fails open twice** — an API error answers "run", and `refresh` runs
+    unless the gate said `run=false` in so many words — because a needless
+    second run is harmless and a missing fallback is not. The price of this:
+    a green morning run with a degraded step is retried the next morning, not
+    that afternoon. **`scheduled` is not `report`**: it enables
     the report exactly as a cron does and deliberately leaves `REPORT_FORCE`
     unset, so the per-day and quiet-day guards still hold. `report` is the
     on-demand test flag and *does* force delivery — never wire a scheduler to
@@ -618,7 +633,7 @@ sites. Full details in `congress/README.md`. Conventions:
     BEFORE this gate and are unaffected) — and **changes nothing**: no dated
     permalink, no rewritten `report.json`, and nothing recorded in
     `report_state.json` (its fingerprint keeps describing the last report that
-    went out, so a later cron re-asks the question). **`/report` is the last
+    went out, so the next run re-asks the question). **`/report` is the last
     edition that went out**, dated as such. A quiet day used to rewrite it
     under the new date, and on Sunday 8 Nov 2026 the page read "0 newly filed
     disclosures" with Friday's signals, under the line "the same report that

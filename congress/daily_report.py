@@ -24,7 +24,7 @@ so a Sunday email repeats Saturday's word for word. When the latest daily close
 has not advanced AND no new filing has arrived since the last report, the run
 skips the digest, the subscriber broadcast and the issue, and changes nothing:
 /report keeps the last edition that went out, no dated permalink is written,
-and the state is left alone, so a later cron re-asks the question. (The
+and the state is left alone, so the next run re-asks the question. (The
 traffic emails are a separate subject and go out first, quiet day or not.)
 See ``whats_new``.
 
@@ -725,7 +725,7 @@ def main() -> int:
     # this email would repeat yesterday's word for word. Skip the trade
     # deliveries — the digest, the subscriber broadcast and the issue — and
     # change NOTHING: /report keeps the last edition that went out, and the
-    # state keeps its fingerprint, so a later cron re-asks the question. The
+    # state keeps its fingerprint, so the next run re-asks the question. The
     # traffic emails are sent first, just below: they are a different
     # subject, and a market holiday says nothing about who read the site.
     # Site traffic ships as its OWN email(s) so the digest stays focused on
