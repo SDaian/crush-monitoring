@@ -761,6 +761,37 @@ sites. Full details in `congress/README.md`. Conventions:
   dateline on every summary page (`NewestFiling.astro`, via `stats.paused`),
   and a note under the tracker's intro. Each says when the fetch began
   failing and how current the data is, both facts; none guesses the cause.
+- **An amended report counts once, dated when it was first filed.** A Senate
+  amendment restates the whole report with corrections (a trade date,
+  "Sale (Full)" to "Sale (Partial)", a missing ticker), and the listing names
+  it: "Periodic Transaction Report for 05/15/2025 (Amendment 1)". Treated as
+  a new filing it did two wrong things: 143 trades counted twice, and **320
+  rows showed as filed late that were filed on time**, because every row of
+  an amendment carried the day the amendment arrived. Tuberville's page said
+  80% of his trades were late, the worst by 835 days; the true figure was
+  none. `pipeline.apply_amendments` removes the rows of the earlier version,
+  keeps `filing_date` as the day the report was FIRST filed, and records the
+  amendment's own date as `amended`, which every row surface prints beside
+  "filed" (the row links the amended document, which carries the later date).
+  Three rules hold it exact:
+  - **The title is not enough to link two filings.** A member can file two
+    reports on one day (Boozman does, every time), so an earlier version must
+    also share at least half of its rows with the amendment. No match →
+    nothing is removed, and a `::warning::` names the filing on the run that
+    first reads it (once: on every later run the member's other report of
+    that day is still there and shares nothing, which is normal). Never
+    widen this to "same member, same date".
+  - **The listing's title date can be one day off** from the date on the
+    document (McCormick: listed "for 03/06/2025", the page says 03/05/2025).
+    When we hold the earlier version, its own filing date is the date used;
+    the title date is the fallback for a report whose original we never held.
+  - **A report first filed before the window leaves with its year.** Mullin,
+    Scott and Tuberville amended 2024 reports in 2025 and 2026; those rows
+    were in the record only because the amendment's date pulled them in.
+  The House index does not name amendments, and a House filing that repeats
+  a trade marks it "New" (13 rows on 10 Nov 2026): not provably duplicates,
+  so they stay. An amended report is also **never a social draft**
+  (`social.select_new_filings`): it is a correction, not news.
 - **A parser fix does not reach data already published.** `congress/state.json`
   records every processed `filing_id`, so a document is never read twice —
   which means a bad row stays live forever unless the filing is forgotten.

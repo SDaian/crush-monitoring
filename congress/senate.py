@@ -20,6 +20,7 @@ from __future__ import annotations
 import json
 import re
 from dataclasses import dataclass
+from datetime import date
 from html.parser import HTMLParser
 
 from .normalize import (
@@ -59,7 +60,7 @@ class SenateFilingRef:
     filed_date: str   # ISO
     url: str          # absolute report URL
     is_paper: bool
-    title: str        # report link text (may say "(Amendment)")
+    title: str        # report link text; names the report and its version
 
 
 class EfdError(RuntimeError):
@@ -211,6 +212,39 @@ def parse_search_rows(payload: dict) -> list[SenateFilingRef]:
             )
         )
     return refs
+
+
+_REPORT_DATE = re.compile(r"\bfor\s+(\d{1,2})/(\d{1,2})/(\d{4})\b", re.I)
+_AMENDMENT = re.compile(r"\(\s*Amendment(?:\s+(\d+))?\s*\)", re.I)
+
+
+def report_version(title: str) -> tuple[str | None, int]:
+    """The report a listing title names, and which version of it this is.
+
+    The listing has three title shapes (all 309 rows on 10 Nov 2026):
+
+      "Periodic Transaction Report for 05/15/2025"                → original
+      "Periodic Transaction Report for 05/15/2025 (Amendment 2)"  → version 2
+      "Periodic Transaction Report for 10/02/2025 (Amendment)"    → version 1
+                                                    (paper filings say this)
+
+    Returns ``(report date as ISO, version)``, version 0 being the original.
+    The date is the day the report was FIRST filed: an amendment keeps the
+    date of the report it corrects, whenever the amendment itself arrives.
+    A title that names no date returns ``(None, version)``; the caller links
+    nothing on a shape it does not know.
+    """
+    m = _REPORT_DATE.search(title or "")
+    report_date = None
+    if m:
+        try:
+            report_date = date(int(m.group(3)), int(m.group(1)),
+                               int(m.group(2))).isoformat()
+        except ValueError:
+            report_date = None
+    a = _AMENDMENT.search(title or "")
+    version = 0 if not a else int(a.group(1) or 1)
+    return report_date, version
 
 
 def fetch_ptr_html(session, ref: SenateFilingRef) -> str:

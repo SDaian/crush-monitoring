@@ -13,6 +13,7 @@ from __future__ import annotations
 
 import json
 import re
+from collections import Counter, defaultdict
 from dataclasses import dataclass, field
 from datetime import date, datetime, timezone
 from pathlib import Path
@@ -124,6 +125,10 @@ class ChamberSource:
     ref_member: Callable[[object], str]
     ref_filing_date: Callable[[object], str]      # ISO
     ref_url: Callable[[object], str]
+    # ref → (report date ISO | None, version); version 0 is the original and
+    # N is "Amendment N". Only for a source whose LISTING names the report an
+    # amendment corrects (the Senate eFD). None: filings are taken as listed.
+    ref_version: Callable[[object], tuple] | None = None
 
 
 @dataclass
@@ -135,6 +140,9 @@ class RunResult:
     parse_errors: int = 0
     recovered_errors: int = 0
     pruned_trades: int = 0
+    # Rows of an earlier version of a report, removed because a later
+    # amendment restates the whole report (see apply_amendments).
+    superseded_trades: int = 0
     # Chambers whose LISTING failed this run (a site outage or a refused
     # session). Their published filings stay as they are and the next run
     # retries; the other chambers still update.
@@ -193,6 +201,124 @@ def save_state(state: dict, path: Path) -> None:
         json.dumps(state, indent=1, sort_keys=True, ensure_ascii=False) + "\n",
         encoding="utf-8",
     )
+
+
+# ---------------------------------------------------------------------------
+# Amendments
+# ---------------------------------------------------------------------------
+
+@dataclass(frozen=True)
+class Version:
+    """One listed filing, seen as a version of a report."""
+
+    filed: str               # ISO date the source received THIS document
+    report_date: str | None  # ISO date of the report it is a version of
+    number: int              # 0 = the original, N = "Amendment N"
+
+
+# What a filer states about one trade. Two rows equal in all of these are the
+# same statement, whichever document carries them.
+_STATED = ("ticker", "asset", "asset_type", "type", "partial", "owner",
+           "tx_date", "amount_lo", "amount_hi", "comment")
+# The listing's title date can sit one day from the date on the document
+# itself (a time-zone effect: McCormick's amendment is listed "for
+# 03/06/2025" and its own page says 03/05/2025).
+_TITLE_SLACK_DAYS = 1
+
+
+def _stated(t: dict) -> tuple:
+    return tuple(t.get(k) for k in _STATED)
+
+
+def apply_amendments(trades: dict[str, dict], listed: dict[str, Version],
+                     chamber: str,
+                     log: Callable[[str], None] = print) -> tuple[int, int]:
+    """Make each amended report count once, dated when it was first filed.
+
+    An amendment is a full restatement of a report with corrections (a trade
+    date, "Sale (Full)" to "Sale (Partial)", a missing ticker). Treated as a
+    new filing it did two wrong things: every trade the correction left alone
+    counted twice, and every row of the amendment carried the day the
+    AMENDMENT arrived, so a report filed on time in May 2025 and corrected in
+    August 2026 showed all its trades as filed 400 days late.
+
+    For every amendment whose rows we hold, in ``trades`` (id → row, edited
+    in place):
+
+    * The rows of each earlier version of the same report are removed. An
+      earlier version is a filing by the same member, with a lower version
+      number, not filed later, whose title names the same report date (give
+      or take ``_TITLE_SLACK_DAYS``), AND that shares at least half of the
+      smaller document's rows with the amendment. The title alone is not
+      enough: a member can file two reports on one day (Boozman does, every
+      time), and only the content says which one an amendment corrects.
+      Exact or refused: when a candidate exists and none shares enough, the
+      rows all stay and a warning names the filing.
+    * The amendment's rows take ``filing_date`` from the earliest version we
+      held, or from the title's report date when we held none, and record the
+      day the amendment arrived as ``amended``.
+
+    The pass is idempotent: a second run finds nothing to remove and the
+    dates already in place. Returns (rows removed, rows re-dated).
+    """
+    by_filing: dict[str, list[dict]] = defaultdict(list)
+    for t in trades.values():
+        if t.get("chamber") == chamber and t.get("filing_id") in listed:
+            by_filing[t["filing_id"]].append(t)
+
+    def gap(a: str, b: str) -> int:
+        return abs((date.fromisoformat(a) - date.fromisoformat(b)).days)
+
+    removed = redated = 0
+    amendments = sorted(
+        (fid for fid in by_filing if listed[fid].number > 0),
+        key=lambda fid: (listed[fid].report_date or "", listed[fid].number,
+                         listed[fid].filed, fid))
+    for fid in amendments:
+        v, rows = listed[fid], by_filing.get(fid)
+        if not rows:
+            continue  # removed earlier in this pass by a later amendment
+        if not v.report_date:
+            log(f"::warning::{chamber}:{fid} is an amendment whose title "
+                "names no report date; left as listed")
+            continue
+        member = rows[0]["member"]
+        mine = Counter(map(_stated, rows))
+        candidates = [
+            c for c, crows in by_filing.items()
+            if c != fid and crows and crows[0]["member"] == member
+            and listed[c].number < v.number and listed[c].filed <= v.filed
+            and listed[c].report_date
+            and gap(listed[c].report_date, v.report_date) <= _TITLE_SLACK_DAYS
+        ]
+        replaced = []
+        for c in candidates:
+            shared = sum((mine & Counter(map(_stated, by_filing[c]))).values())
+            if 2 * shared >= min(len(rows), len(by_filing[c])):
+                replaced.append(c)
+        seen_before = "amended" in rows[0]  # dated by an earlier run
+        if candidates and not replaced and not seen_before:
+            # Said once, on the run that first reads the amendment. On every
+            # later run the member's OTHER report of that day is still a
+            # candidate that shares nothing, and that is the normal state.
+            log(f"::warning::{chamber}:{fid} amends a report of "
+                f"{v.report_date}, but no earlier filing by {member} for that "
+                f"date shares its rows ({', '.join(sorted(candidates))}); "
+                "nothing was removed")
+        first_dates = [t["filing_date"] for c in replaced for t in by_filing[c]]
+        if seen_before:
+            first_dates.append(rows[0]["filing_date"])
+        first = min(first_dates) if first_dates else v.report_date
+        for c in replaced:
+            for t in by_filing.pop(c):
+                del trades[t["id"]]
+                removed += 1
+        for t in rows:
+            if t["filing_date"] != first or t.get("amended") != v.filed:
+                t["filing_date"] = first
+                t["amended"] = v.filed
+                redated += 1
+    return removed, redated
 
 
 # ---------------------------------------------------------------------------
@@ -280,6 +406,9 @@ def run(
     skipped = {s["filing_id"]: s for s in output["skipped_filings"]}
     before = _content_key(output)
     state_before = json.dumps(state, sort_keys=True)
+    # chamber → {filing id → Version}, for each source that listed this run
+    # and names its amendments. Applied below, once the names are canonical.
+    versions: dict[str, dict[str, Version]] = {}
 
     for source in sources:
         processed = state["processed"].setdefault(source.chamber, {})
@@ -336,6 +465,12 @@ def run(
                 trades[trade.id] = enrich(trade, roster).to_dict()
                 result.new_trades += 1
             processed[fid] = source.ref_filing_date(ref)
+        if source.ref_version is not None:
+            versions[source.chamber] = {
+                source.ref_id(r): Version(source.ref_filing_date(r),
+                                          *source.ref_version(r))
+                for r in listed
+            }
 
     # Re-enrich every stored trade so a roster refresh fills party/state on
     # trades ingested before the member existed in members.json. Skipped
@@ -347,6 +482,18 @@ def run(
         entry = roster.find(s["member"], chamber=s["chamber"])
         if entry:
             s["member"] = entry["name"]
+
+    # An amended report counts once, dated when it was first filed. After the
+    # re-enrich above, so "the same member" compares canonical names; before
+    # the prune below, so a report first filed before the window leaves with
+    # the rest of that year however late its amendment arrived.
+    for chamber, listed_versions in versions.items():
+        removed, redated = apply_amendments(trades, listed_versions, chamber, log)
+        result.superseded_trades += removed
+        if removed or redated:
+            log(f"{chamber}: amended reports — removed {removed} rows of "
+                f"superseded versions, re-dated {redated} rows to the first "
+                "filing")
 
     # Prune everything (trades, skips, state) outside the two-year window.
     kept = {i: t for i, t in trades.items() if t["filing_date"] >= cutoff}

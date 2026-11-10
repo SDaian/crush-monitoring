@@ -180,6 +180,10 @@ const schema = [
 
         <div class="count" id="countLine">Loading disclosures…</div>
         <div class="note" id="retLegend"></div>
+        <div class="note" id="amendedLegend" hidden>
+          An amended filing replaces the filing it corrects: "Filed" is the
+          date of the first version, and the link opens the amended one.
+        </div>
 
         <div class="tblwrap">
           <table id="tbl">
@@ -410,7 +414,8 @@ const schema = [
           <td class="num">${esc(t.amount_label)}</td>
           <td class="num">${retCell(t)}</td>
           <td class="num">${esc(t.tx_date)}</td>
-          <td class="num">${esc(t.filing_date)}</td>
+          <td class="num">${esc(t.filing_date)}${t.amended
+            ? `<div class="note">amended ${esc(t.amended)}</div>` : ""}</td>
           <td><a href="${esc(t.source_url)}" target="_blank" rel="noopener" title="official filing">source ↗</a></td>
         </tr>`).join("");
         $("countLine").textContent =
@@ -806,6 +811,8 @@ const schema = [
         .then(r => r.json())
         .then(d => {
           DATA = d;
+          // The note that explains "amended" shows only when a row carries it.
+          $("amendedLegend").hidden = !d.trades.some(t => t.amended);
           renderHead();
           renderRows();
           if (Object.keys(AI).length) renderAiDetail();

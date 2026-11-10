@@ -308,12 +308,18 @@ def build_report(trades: list[dict], ai_tickers: dict, new_signals: list[dict],
         party = PARTY.get(t.get("party"))
         who = t.get("member", "?") + (f" ({party})" if party else "")
         name = t.get("ticker") or t.get("asset", "?")
+        # A row of an amended filing carries the first version's date. The
+        # reader may have seen that version already, so the line says what
+        # this one is.
+        amended = t.get("amended")
         disc_lines.append(
             f"- {t.get('filing_date', '?')} · {who} · "
-            f"**{name}** {t.get('type', '?')} · {t.get('amount_label', '—')}")
+            f"**{name}** {t.get('type', '?')} · {t.get('amount_label', '—')}"
+            + (f" · amended {amended}" if amended else ""))
         disc_data.append({
             "filing_date": t.get("filing_date", "?"), "who": who, "name": name,
             "type": t.get("type", "?"), "amount": t.get("amount_label", "—"),
+            **({"amended": amended} if amended else {}),
         })
     disclosures_md = "## 🏛 New disclosures " \
         f"(filed since {cutoff})\n\n"
@@ -398,6 +404,7 @@ def build_report(trades: list[dict], ai_tickers: dict, new_signals: list[dict],
             "type": t.get("type", "?"),
             "amount": t.get("amount_label", "—"),
             "sourceUrl": t.get("source_url"),
+            **({"amended": t["amended"]} if t.get("amended") else {}),
         } for t in window],
         "bondCount": bond_count,
         "market": market_reading,

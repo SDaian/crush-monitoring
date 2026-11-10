@@ -82,6 +82,7 @@ def make_senate_source(
         ref_member=lambda r: r.name,
         ref_filing_date=lambda r: r.filed_date,
         ref_url=lambda r: r.url,
+        ref_version=lambda r: senate.report_version(r.title),
     )
 
 

@@ -43,6 +43,9 @@ export async function getStaticPaths() {
 
 const { t } = Astro.props as { t: any };
 const s = t.summary;
+// A row of an amended filing shows two dates, so the fineprint explains them,
+// and only on a page that has such a row.
+const hasAmended = (t.trades ?? []).some((r: any) => r.amended);
 
 const fmtDate = (iso: string | null) =>
   iso
@@ -439,6 +442,7 @@ const schema = [
                 <div role="cell" class="tdate">
                   {fmtDate(r.txDate)}
                   <small>filed {fmtDate(r.filedDate)}</small>
+                  {r.amended && <small>amended {fmtMonth(r.amended)}</small>}
                 </div>
                 <div role="cell" class="tlate">
                   {r.daysLate && r.daysLate > 0 ? (
@@ -471,6 +475,12 @@ const schema = [
           class="underline underline-offset-2 hover:text-ink">how we count</a
         >). Disclosures arrive 30–45 days after the trade, so this is a public
         record — never real-time, and never investment advice.
+        {hasAmended && (
+          <>
+            {" "}An amended filing replaces the filing it corrects: "filed" is
+            the date of the first version, and the link opens the amended one.
+          </>
+        )}
       </p>
     </section>
     </div>

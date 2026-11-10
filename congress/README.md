@@ -28,8 +28,32 @@ is listed as skipped and **retried on every run**, so a parser fix heals it.
 A fix does not reach rows already published; `fetch --reparse-invalid`
 re-downloads the filings whose rows break an invariant.
 
-Known limit: an amended filing is treated as a new filing, so an amended
-trade can appear twice, once per document, each linked to its own filing.
+### Amended reports (`pipeline.apply_amendments`)
+
+An amendment is a full restatement of a report with corrections. The Senate
+listing names it in the title: "Periodic Transaction Report for 05/15/2025
+(Amendment 1)", where the date is the day the report was first filed
+(`senate.report_version`). An amended report counts once:
+
+- The rows of the earlier version are removed. The earlier version is a
+  filing by the same member for the same report date (the listing can be one
+  day off), with a lower version number, that shares at least half of its
+  rows with the amendment. The title alone is not enough: a member can file
+  two reports on one day. When no earlier filing shares the rows, nothing is
+  removed and a `::warning::` names the filing, once, on the run that first
+  reads the amendment.
+- The amendment's rows keep `filing_date` = the day the report was first
+  filed (from the version we held, else from the title) and gain `amended` =
+  the day the amendment arrived. The row links the amended document.
+- A report first filed before the window leaves with its year, whenever its
+  amendment arrived.
+
+The pass runs on every successful Senate listing, over the published rows,
+so it needs no re-download and a second run changes nothing.
+
+Known limit: the House index does not name amendments, and a House filing
+that repeats a trade of an earlier filing marks the row "New". Those rows
+(13 on 10 Nov 2026) are not provably duplicates and stay as filed.
 
 ## Executive 278-T (`oge.py` → chamber `executive`)
 

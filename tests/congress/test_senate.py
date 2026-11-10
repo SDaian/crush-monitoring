@@ -5,6 +5,7 @@ import unittest
 from pathlib import Path
 
 from congress.senate import (
+    report_version,
     EfdError,
     SenateFilingRef,
     parse_ptr_html,
@@ -48,8 +49,14 @@ class TestSearchRows(unittest.TestCase):
         self.assertTrue(ref.url.startswith("https://efdsearch.senate.gov/"))
         self.assertFalse(ref.is_paper)
 
-    def test_amendment_title_kept(self):
-        self.assertIn("(Amendment)", self.refs[1].title)
+    def test_the_title_names_the_report_and_its_version(self):
+        # The real listing's shape: the report date, then "(Amendment N)".
+        self.assertEqual(self.refs[1].title,
+                         "Periodic Transaction Report for 05/20/2026 (Amendment 1)")
+        self.assertEqual(report_version(self.refs[1].title),
+                         ("2026-05-20", 1))
+        self.assertEqual(report_version(self.refs[0].title),
+                         ("2026-06-10", 0))
 
     def test_paper_filing_detected(self):
         self.assertTrue(self.refs[2].is_paper)
