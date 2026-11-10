@@ -12,29 +12,25 @@
   },
   "indexable": true,
   "technical": {
-    "asOf": "2026-11-06",
-    "price": 224.55,
-    "chg1d": -1.18,
-    "chg1w": 7.4,
-    "chg1m": 18.9,
-    "rsi14": 68.7,
-    "sma50": 197.14,
-    "sma200": 224.64,
-    "ema8": 217.51,
-    "ema21": 206.92,
-    "emaGap": 5.11,
-    "vsSma50": 13.9,
-    "vsSma200": -0.0,
-    "relVol": 1.02,
-    "vol1y": 29.6,
+    "asOf": "2026-11-09",
+    "price": 232.1,
+    "chg1d": 3.36,
+    "chg1w": 6.39,
+    "chg1m": 24.78,
+    "rsi14": 72.6,
+    "sma50": 197.62,
+    "sma200": 224.42,
+    "ema8": 220.75,
+    "ema21": 209.21,
+    "emaGap": 5.51,
+    "vsSma50": 17.4,
+    "vsSma200": 3.4,
+    "relVol": 0.89,
+    "vol1y": 29.8,
     "high52w": 287.39,
     "low52w": 179.5,
-    "rangePos": 42.0,
+    "rangePos": 49.0,
     "series": [
-      {
-        "d": "2025-11-14",
-        "c": 227.85
-      },
       {
         "d": "2025-11-21",
         "c": 234.29
@@ -238,28 +234,39 @@
       {
         "d": "2026-11-06",
         "c": 224.55
+      },
+      {
+        "d": "2026-11-09",
+        "c": 232.1
       }
     ],
-    "signals": [],
+    "signals": [
+      {
+        "type": "rsi_overbought",
+        "asof": "2026-11-09",
+        "label": "RSI crossed above 70 (overbought)",
+        "dir": "neutral"
+      }
+    ],
     "nextEarnings": null,
     "score": {
-      "label": "Hold",
-      "buys": 3,
+      "label": "Buy",
+      "buys": 5,
       "sells": 2,
-      "holds": 2,
-      "ratio": 0.143
+      "holds": 0,
+      "ratio": 0.429
     },
     "votes": {
       "ema_cross": {
-        "vote": 0,
-        "muted": true
+        "vote": 1,
+        "muted": false
       },
       "vs_sma50": {
         "vote": 1,
         "muted": false
       },
       "vs_sma200": {
-        "vote": -1,
+        "vote": 1,
         "muted": false
       },
       "sma50_vs_200": {
@@ -267,7 +274,7 @@
         "muted": false
       },
       "rsi": {
-        "vote": 0,
+        "vote": -1,
         "muted": false
       },
       "chg_1m": {
