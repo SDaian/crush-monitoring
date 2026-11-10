@@ -221,8 +221,9 @@ class Version:
 _STATED = ("ticker", "asset", "asset_type", "type", "partial", "owner",
            "tx_date", "amount_lo", "amount_hi", "comment")
 # The listing's title date can sit one day from the date on the document
-# itself (a time-zone effect: McCormick's amendment is listed "for
-# 03/06/2025" and its own page says 03/05/2025).
+# itself: McCormick's amendment is listed "for 03/06/2025" and its own page
+# says 03/05/2025. The cause is not known, so the slack is one day and no
+# more, and a filing that far away must also share the rows.
 _TITLE_SLACK_DAYS = 1
 
 
