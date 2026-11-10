@@ -424,11 +424,16 @@ def keep_prior(rec: dict, prior: dict | None) -> dict:
     An annual report changes once a year, so yesterday's parse is still the
     best data we have; overwriting it with an empty error record wiped three
     senators' holdings the day the Senate eFD started refusing the runner.
-    The error rides along so the coverage audit still reports the outage.
+
+    The record comes back UNCHANGED. It once carried the error text, and a
+    firewall's refusal names a new reference number on every request, so the
+    published file differed on every run of a 17-day outage: two commits a
+    day that said nothing, and an internal error string in a public data
+    file. The run log reports the outage; the data does not change for it.
     """
     if rec.get("reason") != REASON_ERROR or not (prior or {}).get("available"):
         return rec
-    return {**prior, "error": rec.get("error", "")}
+    return prior
 
 
 def classify(*, has_text: bool, parsed: int, kept: int) -> str:

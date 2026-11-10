@@ -297,6 +297,15 @@ sites. Full details in `congress/README.md`. Conventions:
   command prints the ones in `NEEDS_REVIEW` with their document URL and emits a
   `::warning::` per gap, so new coverage holes surface in the Action log instead
   of being absorbed silently.
+  **The holdings file changes only when a report does.** It carries no
+  timestamp, and a fetch that raises keeps the published record UNCHANGED
+  (`holdings.keep_prior`); the error goes to the run log, never into the
+  file. A `generated_at` field, and an error text in which a firewall named a
+  new reference on every request, made 42 of the file's 44 commits in three
+  weeks carry nothing — two a day, each push a production deploy, plus an
+  internal error string in public data. `tests/congress/test_holdings_cli.py`
+  holds the rule: a later run, and a run during an outage, write the same
+  bytes. A generated file whose only change is the clock must not commit.
 - **Executive 278-T (President) is a curated seed, not a scrape:**
   `congress/oge_filings.json` lists the President's OGE Form 278-T Periodic
   Transaction Reports by stable document UNID (he is not in any browsable OGE

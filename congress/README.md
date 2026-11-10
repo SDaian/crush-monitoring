@@ -60,7 +60,9 @@ member's latest annual report:
 
 Each member carries a `reason` (`holdings.classify`): parsed, scanned, no
 assets parsed, funds only, no filing, or error. "Funds only" is correct data,
-not a gap. A fetch that fails keeps the member's published holdings.
+not a gap. A fetch that fails keeps the member's published holdings, and
+reports the error in the run log only. The file has no timestamp, so it
+changes, and commits, only when a report changes.
 
 The member pages roll the snapshot forward with every later trade
 (`landing_data.rolled_holdings`): buys add, sells subtract, options expire.
