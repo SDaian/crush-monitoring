@@ -119,10 +119,12 @@ list a member's trades in industries their committees oversee
 - `landing/src/data/report.json` and a dated copy, for `/report`.
 
 Disclosures lead, then the featured scorecard, then overnight signals and
-rating flips. "New" means not yet reported, inside a 45-day lookback. The
-report sends once a day, and skips quiet days (no new close and no new
-filing). Two separate traffic emails, daily and on Mondays weekly, come from
-Vercel Web Analytics (`analytics.py`).
+rating flips. "New" means not yet reported: a disclosure inside a 45-day
+lookback that no report has sent, and a signal from a close newer than the
+last report's. The report sends once a day, and skips quiet days (no new
+close and no new filing). A quiet day changes nothing, so `/report` is always
+the last edition that went out. Two separate traffic emails, daily and on
+Mondays weekly, come from Vercel Web Analytics (`analytics.py`).
 
 ## Social drafts (`social.py`, `typefully.py`)
 

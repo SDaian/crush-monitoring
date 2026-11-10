@@ -1,7 +1,8 @@
 ---
-// "/report" — the web edition of the morning email. One always-current URL
-// (not a dated archive: nobody searches "morning report July 24", and 365
-// near-duplicate pages a year would be an SEO liability).
+// "/report" — the web edition of the morning email: the last edition that
+// went out. One indexable URL (the dated copies under /report/<date> are
+// noindex: nobody searches "morning report July 24", and 365 near-duplicate
+// pages a year would be an SEO liability).
 //
 // It renders landing/src/data/report.json, which congress/daily_report.py
 // writes from the SAME structure it builds the email from — so the page and
