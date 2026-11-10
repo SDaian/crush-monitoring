@@ -606,11 +606,15 @@ sites. Full details in `congress/README.md`. Conventions:
     word. When the latest daily close has not advanced **and** no new filing
     has arrived since the last delivered report, the run skips *every* delivery
     — digest, Buttondown broadcast, GitHub issue (the traffic emails ship
-    BEFORE this gate and are unaffected) — and writes no
-    dated permalink, but **still publishes `report.json` so `/report` stays
-    current**, and records **nothing** in `report_state.json` (its fingerprint
-    keeps describing the last report that went out, so a later cron re-asks the
-    question). The test is a fingerprint — `market_date` (max `asof_date` across
+    BEFORE this gate and are unaffected) — and **changes nothing**: no dated
+    permalink, no rewritten `report.json`, and nothing recorded in
+    `report_state.json` (its fingerprint keeps describing the last report that
+    went out, so a later cron re-asks the question). **`/report` is the last
+    edition that went out**, dated as such. A quiet day used to rewrite it
+    under the new date, and on Sunday 8 Nov 2026 the page read "0 newly filed
+    disclosures" with Friday's signals, under the line "the same report that
+    goes out by email" — a report nobody received, and a sitemap `lastmod`
+    that moved while the content got thinner. The test is a fingerprint — `market_date` (max `asof_date` across
     the featured tickers), `trades_total`, `last_filing_date` — not the weekday:
     a market holiday is just as quiet, and ~8% of filings carry a weekend date,
     so a blanket weekend skip would hold a real disclosure until Monday. Signals
@@ -618,6 +622,16 @@ sites. Full details in `congress/README.md`. Conventions:
     indicators, so a new close already covers them, and testing them separately
     would re-send yesterday's signals off a stale file. A missing baseline and
     `REPORT_FORCE` both always send.
+  - **A signal is reported once, with the close it fired on**
+    (`daily_report.unreported_signals`). `meta.new_signals` describes the last
+    indicators RUN, and `--skip-if-closed` skips that run while no session has
+    settled, so the list can be days old. A report sent for another reason — a
+    filing that arrives on a Monday, before the close — repeated Saturday's
+    "overnight" signals: on 9 Nov 2026 subscribers got the same three twice.
+    Signals are passed to the report only while `market_date` is newer than
+    the one the last DELIVERED report recorded. The disclosure rule again: new
+    means not yet reported, never "still in the file". Any reader of
+    `new_signals` needs the same guard.
   UTC cron ignores
   DST so the Madrid clock time drifts ±1h; precise timing needs an external
   scheduler hitting the `workflow_dispatch` API.

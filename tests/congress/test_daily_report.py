@@ -638,7 +638,7 @@ class TestWhatsNew(unittest.TestCase):
 
 
 class TestQuietDayDelivery(TestMainDelivery):
-    """main() on a weekend: no email, no issue, but /report stays current."""
+    """main() on a weekend: no email, no issue, and nothing changes."""
 
     def _quiet(self):
         """Seed yesterday's state with today's exact fingerprint."""
@@ -663,11 +663,19 @@ class TestQuietDayDelivery(TestMainDelivery):
         self.assertEqual(daily_report.main(), 0)
         self.assertEqual(self.calls, [])  # no issue, no closing PATCH
 
-    def test_quiet_day_keeps_the_page_current(self):
-        today = self._quiet()
+    def test_quiet_day_leaves_the_page_alone(self):
+        # /report is the last edition that WENT OUT. A quiet day used to
+        # rewrite it under the new date with an emptied list (8 Nov 2026).
+        self._quiet()
+        self.report_json.write_text('{"date": "the last edition sent"}\n')
         daily_report.main()
-        payload = json.loads(self.report_json.read_text())
-        self.assertEqual(payload["date"], today.isoformat())
+        self.assertEqual(self.report_json.read_text(),
+                         '{"date": "the last edition sent"}\n')
+
+    def test_quiet_day_creates_no_page_file(self):
+        self._quiet()
+        daily_report.main()
+        self.assertFalse(self.report_json.exists())
 
     def test_quiet_day_writes_no_permalink(self):
         today = self._quiet()
@@ -701,6 +709,44 @@ class TestQuietDayDelivery(TestMainDelivery):
         daily_report.TRADES_JSON.write_text(json.dumps({"trades": trades}))
         daily_report.main()
         self.assertTrue([c for c in self.calls if c[0] == "POST"])
+
+    STALE = [{"ticker": "NVDA", "type": "golden_cross",
+              "label": "Golden cross (50-day above 200-day)",
+              "asof": "2026-08-07"}]
+
+    def _with_signals(self, asof):
+        daily_report.AI_JSON.write_text(json.dumps(
+            {"tickers": {"NVDA": dict(AI["NVDA"], asof_date=asof)},
+             "meta": {"new_signals": self.STALE}}))
+
+    def _add_a_filing(self, today):
+        trades = json.loads(daily_report.TRADES_JSON.read_text())["trades"]
+        trades.append({"member": "B", "ticker": "MSFT", "type": "sell",
+                       "filing_date": today.isoformat(),
+                       "amount_label": "$1,001 - $15,000"})
+        daily_report.TRADES_JSON.write_text(json.dumps({"trades": trades}))
+
+    def test_a_filing_only_send_repeats_no_signal(self):
+        # The 9 Nov 2026 defect: a Monday report sent for new filings carried
+        # Saturday's "overnight" signals again, because the indicators run
+        # was skipped and its file still listed them.
+        today = self._quiet()
+        self._with_signals("2026-08-07")      # the close already reported
+        self._add_a_filing(today)
+        daily_report.main()
+        payload = json.loads(self.report_json.read_text())
+        self.assertEqual(payload["signals"], [])
+        self.assertEqual(payload["counts"]["new_signals"], 0)
+        body = [c for c in self.calls if c[0] == "POST"][0][2]["body"]
+        self.assertNotIn("Golden cross", body)
+
+    def test_a_new_close_carries_its_signals(self):
+        self._quiet()
+        self._with_signals("2026-08-10")      # a close the reader has not seen
+        daily_report.main()
+        payload = json.loads(self.report_json.read_text())
+        self.assertEqual([s["ticker"] for s in payload["signals"]], ["NVDA"])
+        self.assertEqual(payload["counts"]["new_signals"], 1)
 
     def test_a_delivered_report_records_the_fingerprint(self):
         self._quiet()
@@ -812,6 +858,36 @@ class TestReportedMemory(unittest.TestCase):
     def test_a_filing_older_than_the_lookback_is_never_new(self):
         r = self.report([self.trade("t1", "2026-01-01")], reported=[])
         self.assertEqual(self.members(r), [])
+
+
+class TestUnreportedSignals(unittest.TestCase):
+    SIG = [{"ticker": "ROK", "label": "RSI crossed below 30 (oversold)",
+            "asof": "2026-11-06"}]
+
+    def test_the_close_already_reported_has_no_news(self):
+        self.assertEqual(daily_report.unreported_signals(
+            self.SIG, {"market_date": "2026-11-06"},
+            {"market_date": "2026-11-06"}), [])
+
+    def test_a_newer_close_reports_them(self):
+        self.assertEqual(daily_report.unreported_signals(
+            self.SIG, {"market_date": "2026-11-05"},
+            {"market_date": "2026-11-06"}), self.SIG)
+
+    def test_no_baseline_reports_them(self):
+        # A first run, or a state written before the fingerprint existed.
+        self.assertEqual(daily_report.unreported_signals(
+            self.SIG, {}, {"market_date": "2026-11-06"}), self.SIG)
+
+    def test_no_market_date_is_never_a_match(self):
+        # Two empty dates are an absent reading, not the same close.
+        self.assertEqual(daily_report.unreported_signals(
+            self.SIG, {"market_date": ""}, {"market_date": ""}), self.SIG)
+
+    def test_the_input_is_not_handed_back(self):
+        out = daily_report.unreported_signals(
+            self.SIG, {}, {"market_date": "2026-11-06"})
+        self.assertIsNot(out, self.SIG)
 
 
 class TestSeedReportedIds(unittest.TestCase):
