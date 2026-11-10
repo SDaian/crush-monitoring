@@ -178,9 +178,10 @@ class TestKeepPrior(unittest.TestCase):
         rec = {"chamber": "senate", "available": False, "stocks": [],
                "reason": holdings.REASON_ERROR, "error": "HTTP 403"}
         kept = holdings.keep_prior(rec, self.PRIOR)
-        self.assertTrue(kept["available"])
-        self.assertEqual(kept["stocks"], [{"ticker": "AAPL"}])
-        self.assertEqual(kept["error"], "HTTP 403")
+        # Unchanged, error text and all: an outage must not alter the
+        # published file (the text names a new reference on every request).
+        self.assertEqual(kept, self.PRIOR)
+        self.assertNotIn("error", kept)
 
     def test_real_finding_replaces_prior(self):
         rec = {"available": False, "stocks": [],

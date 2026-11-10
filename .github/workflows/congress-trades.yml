@@ -127,7 +127,9 @@ jobs:
         run: |
           # Real stock composition from each featured member's latest annual
           # financial-disclosure report. Rarely changes (annual), but cheap to
-          # re-check. A source outage must not fail the whole refresh.
+          # re-check. A source outage must not fail the whole refresh. The
+          # file carries no timestamp and an outage leaves it untouched, so
+          # the commit below happens only when a report really changed.
           python3 -m congress holdings 2>&1 | tee -a fetch.log \
             || echo "::warning::holdings refresh failed; keeping prior holdings.json"
           # Commit holdings here (not in the final step) so it lands even if the
