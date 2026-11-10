@@ -1031,7 +1031,7 @@ def _cmd_ai(args: argparse.Namespace) -> int:
     """Compute daily technical indicators + mechanical signals for the AI
     universe, writing docs/data/ai-indicators.json. Indicators only — never a
     buy/sell/hold verdict. New signals (not previously emitted) are surfaced in
-    meta.new_signals for the workflow's notification step."""
+    meta.new_signals for the morning report (daily_report.unreported_signals)."""
     from . import indicators, prices
 
     if getattr(args, "skip_if_fresh", False) and generated_today(args.output):
@@ -1099,9 +1099,8 @@ def _cmd_ai(args: argparse.Namespace) -> int:
         tickers[tk] = rec
         for s in sigs:
             k = indicators.signal_key(tk, s)
-            # meta.new_signals drives the notification issue and the morning
-            # report's overnight section, so only the featured watchlist
-            # enters it. A signal on any of the ~90 other page symbols still
+            # meta.new_signals drives the morning report's overnight
+            # section, so only the featured watchlist enters it. A signal on any of the ~90 other page symbols still
             # shows on that ticker's own page — it just does not email.
             if k not in prev_emitted and spec.get("featured"):
                 new_signals.append({"ticker": tk, "name": name, **s})

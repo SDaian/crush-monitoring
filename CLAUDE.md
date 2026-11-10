@@ -389,7 +389,7 @@ sites. Full details in `congress/README.md`. Conventions:
   the **morning email scorecard** (`build_report` iterates `AI_TICKERS`), the
   tracker's **"⭐ Featured stocks" tab** (`aiTickers()` returns `AI_ORDER` and
   nothing else), and **`meta.new_signals`** — a signal on a non-featured
-  symbol still shows on that ticker's page but never opens an issue or emails.
+  symbol still shows on that ticker's page but never reaches the email.
   A missing/unreadable index falls back to the featured watchlist: a failed
   `landing` step costs a few readings, never the run. Cost is one API call per
   symbol per day (8/min, 800/day tier); ~93 readings + ~122 priced tickers sits
@@ -410,10 +410,12 @@ sites. Full details in `congress/README.md`. Conventions:
   as advice or hide how it's computed. It also states named *events* (golden
   cross, RSI<30, new 52-wk high…) and offers a copy-paste prompt pre-filled with
   the readings (and the mechanical read) for deeper analysis in the user's own
-  LLM. New signals
-  open a GitHub issue (email) via `congress/notify_signals.py`
-  (`python3 -m congress.notify_signals`, module form so the package's `http.py`
-  doesn't shadow stdlib `http`); dedup lives in `meta.emitted_signal_keys`.
+  LLM. New signals go to the morning report's "Signals overnight" section
+  (`meta.new_signals`; dedup lives in `meta.emitted_signal_keys`), and
+  nowhere else: each used to open a GitHub issue as well
+  (`notify_signals.py`, removed 2026-11-10). The repository had no watchers,
+  so the issues reached nobody; and the step re-read a stale list on every
+  skipped indicators run, so 748 open issues described 268 signals.
   Values are a **daily snapshot, not real-time**. The committed JSON ships as
   `_sample` data (synthetic series, banner-flagged) until the first live refresh.
   The page's `aiScore` and Python `indicators.ai_score` **must stay in sync**
@@ -436,7 +438,7 @@ sites. Full details in `congress/README.md`. Conventions:
     confirm against and the vote stands ungated.
   - **The 8/21 cross fires no named signal, deliberately.** The pair crosses
     roughly ten times a year per symbol; across ~93 readings that would flood
-    `meta.new_signals`, which opens a GitHub issue and fills the email. The
+    `meta.new_signals`, which fills the email's overnight section. The
     golden/death cross stays the rare event worth naming.
   - **The read carries its own margin.** A bare label hides the difference
     between a clean sweep and a one-vote edge, so every scorecard row states

@@ -69,7 +69,7 @@ on:
         default: ""
 permissions:
   contents: write
-  issues: write # open an issue (→ email) when a new AI technical signal fires
+  issues: write # the morning report's dated issue (daily_report.py)
   actions: read # the gate job asks whether the daily run already succeeded
 
 concurrency:
@@ -246,12 +246,10 @@ jobs:
           if-no-files-found: ignore
           retention-days: 7
 
-      - name: Refresh AI technical indicators + notify on new signals (non-fatal)
+      - name: Refresh technical indicators (non-fatal)
         if: github.event.inputs.report_only != 'true'
         env:
           CONGRESS_PRICES_KEY: ${{ secrets.CONGRESS_PRICES_KEY || vars.CONGRESS_PRICES_KEY }}
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          REPO: ${{ github.repository }}
           # Next earnings date per ticker: off unless the variable says
           # "true". Our Twelve Data plan does not serve the earnings endpoint
           # (HTTPError on the first call, 27 Oct 2026); set the variable once
@@ -263,11 +261,6 @@ jobs:
           # A source outage must not fail the whole refresh.
           python3 -m congress ai --skip-if-fresh --skip-if-closed 2>&1 | tee -a fetch.log \
             || echo "::warning::AI indicators refresh failed; keeping prior ai-indicators.json"
-          # Open a GitHub issue (emails repo watchers) for each brand-new signal.
-          # Runs before the commit so a fresh file's new_signals are read; the
-          # dedup memory in the file prevents re-notifying next run.
-          python3 -m congress.notify_signals 2>&1 | tee -a fetch.log \
-            || echo "::warning::signal notification failed (non-fatal)"
           # Commit here (not in the final step) so it lands even if the slow
           # price step below stalls. Stage first, then test the staged diff —
           # ai-indicators.json may be brand-new/untracked.
