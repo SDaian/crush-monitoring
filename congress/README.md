@@ -94,9 +94,8 @@ morning scorecard and the tracker's "Featured stocks" tab.
   breakdown and "not investment advice". Volatility and the market reading
   never vote. Changing the vote set bumps `SCORE_VERSION`.
 - **Named signals** (golden/death cross, RSI crossing 30/70, new 52-week
-  high/low) on featured symbols go to `meta.new_signals`;
-  `python3 -m congress.notify_signals` opens a GitHub issue for each (more
-  than eight at once become one summary issue).
+  high/low) on featured symbols go to `meta.new_signals`, which the morning
+  report shows once, as its "Signals overnight" section.
 - **Market context** (`market.py`): the VIX when the plan serves it,
   otherwise our own 20-day realized volatility of SPY, labelled as such.
 - `--skip-if-closed` skips the paced fetch when no new session has closed.

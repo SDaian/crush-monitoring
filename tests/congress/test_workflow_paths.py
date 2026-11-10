@@ -13,12 +13,15 @@ the workflow stages every one. Add a new output and this fails until the
 workflow lists it.
 """
 
+import argparse
+import importlib.util
 import re
 import unittest
 from datetime import date
 from pathlib import Path
 from tempfile import TemporaryDirectory
 
+from congress import cli
 from congress import landing_data as ld
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
@@ -147,3 +150,40 @@ class TestStagedPathsNotGitignored(unittest.TestCase):
             "these workflow-staged paths are gitignored — git add will fail "
             f"the daily run: {ignored}",
         )
+
+
+class TestWorkflowCommands(unittest.TestCase):
+    """Every command a workflow step runs must exist.
+
+    Most steps are non-fatal (`... || echo "::warning::..."`), so a step that
+    calls a module or a subcommand which no longer exists does not fail the
+    run: it prints one warning a day and its work silently stops. Removing
+    code is the moment this happens, so the removal has to fail a test.
+    """
+
+    @classmethod
+    def setUpClass(cls):
+        cls.text = WORKFLOW.read_text(encoding="utf-8")
+
+    def test_every_module_the_workflow_runs_exists(self):
+        modules = set(re.findall(r"python3 -m (congress\.\w+)", self.text))
+        self.assertIn("congress.daily_report", modules)   # the pattern works
+        for mod in sorted(modules):
+            self.assertIsNotNone(
+                importlib.util.find_spec(mod),
+                f"the workflow runs `python3 -m {mod}`, which does not exist")
+
+    def test_every_subcommand_the_workflow_runs_is_registered(self):
+        used = set(re.findall(r"python3 -m congress ([a-z][a-z-]*)", self.text))
+        self.assertIn("fetch", used)                      # the pattern works
+        sub = next(a for a in cli.build_parser()._actions
+                   if isinstance(a, argparse._SubParsersAction))
+        for name in sorted(used):
+            self.assertIn(
+                name, sub.choices,
+                f"the workflow runs `python3 -m congress {name}`, "
+                "which is not a registered command")
+
+
+if __name__ == "__main__":
+    unittest.main()
