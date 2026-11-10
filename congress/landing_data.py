@@ -1457,7 +1457,6 @@ def technical_block(ticker: str, readings: dict) -> dict | None:
         "rangePos": rec.get("range_pos"),
         "series": rec.get("series") or [],
         "signals": rec.get("signals") or [],
-        "nextEarnings": rec.get("nextEarnings"),
         "score": score,
         # Each reading's own vote, keyed as in indicators.votes, so the page
         # tags every card with the vote it cast (and says when the 200-day

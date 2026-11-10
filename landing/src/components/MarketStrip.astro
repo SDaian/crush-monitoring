@@ -7,7 +7,7 @@
 // It is CONTEXT, not a signal: it never votes in the mechanical read, and on
 // a ticker page it says so, because the same number appears on all of them.
 // Renders nothing at all when the reading is absent (a source outage), the
-// same way a missing earnings date simply drops its line.
+// same way a ticker with no signals shows no signal list.
 interface Props {
   reading: any;
   /** Ticker symbol, when the strip sits on a ticker page. */

@@ -429,32 +429,6 @@ class TestWeeklyCloses(unittest.TestCase):
         self.assertEqual(ind.weekly_closes([]), [])
 
 
-class TestNextEarnings(unittest.TestCase):
-    """Optional, gated data: any doubt yields None so the page shows nothing
-    rather than a guessed date."""
-
-    BODY = ('{"earnings":[{"date":"2026-05-01","time":"post"},'
-            '{"date":"2026-11-19","time":"post"},{"date":"2026-08-20"}]}')
-
-    def test_picks_the_earliest_future_date(self):
-        got = ind.next_earnings(self.BODY, "2026-08-06")
-        self.assertEqual(got["date"], "2026-08-20")
-
-    def test_today_is_not_upcoming(self):
-        got = ind.next_earnings(self.BODY, "2026-08-20")
-        self.assertEqual(got["date"], "2026-11-19")
-
-    def test_all_past_yields_none(self):
-        self.assertIsNone(
-            ind.next_earnings('{"earnings":[{"date":"2020-01-01"}]}',
-                                     "2026-08-06"))
-
-    def test_unparseable_yields_none(self):
-        for body in ("", "not json", "{}", '{"earnings":"nope"}',
-                     '{"earnings":[{"date":"soon"}]}'):
-            self.assertIsNone(ind.next_earnings(body, "2026-08-06"))
-
-
 class TestReadingUniverse(unittest.TestCase):
     """One rule for both universes: every ticker page gets a reading."""
 

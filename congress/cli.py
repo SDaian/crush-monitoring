@@ -1078,13 +1078,8 @@ def _cmd_ai(args: argparse.Namespace) -> int:
     emitted = set(prev_emitted)
     universe = _reading_universe(Path(args.index))
     featured_n = sum(1 for spec in universe if spec.get("featured"))
-    # EARNINGS_DATES=true opts into the extra per-ticker earnings call.
-    earnings_on = os.environ.get("EARNINGS_DATES", "").strip().lower() == "true"
-    earnings_warned = False
-    today_iso = datetime.now(timezone.utc).date().isoformat()
     print(f"computing indicators for {len(universe)} tickers "
-          f"({featured_n} featured) via Twelve Data (8/min)…"
-          + (" (+earnings dates)" if earnings_on else ""))
+          f"({featured_n} featured) via Twelve Data (8/min)…")
     for spec in universe:
         tk, name = spec["ticker"], spec["name"]
         try:
@@ -1101,20 +1096,6 @@ def _cmd_ai(args: argparse.Namespace) -> int:
                **ind, "signals": sigs}
         # The read, decided here once and stored: the tracker renders it.
         rec["score"] = indicators.score_record(rec)
-        # Next earnings date — an EXTRA call per ticker on an endpoint that
-        # is not on every Twelve Data plan. Gated so it cannot silently
-        # double the run's rate budget, and any failure just leaves the
-        # field absent (the page omits the line rather than guessing).
-        if earnings_on:
-            try:
-                rec["nextEarnings"] = indicators.next_earnings(
-                    prices.fetch_earnings_raw(session, tk, key), today_iso)
-            except Exception as exc:  # noqa: BLE001 — never fatal
-                if not earnings_warned:
-                    print("  earnings endpoint unavailable "
-                          f"({type(exc).__name__}) — omitting the field")
-                    earnings_warned = True
-                earnings_on = False
         tickers[tk] = rec
         for s in sigs:
             k = indicators.signal_key(tk, s)
