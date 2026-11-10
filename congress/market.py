@@ -82,7 +82,7 @@ def reading(rows: list[dict], window: int = REALIZED_WINDOW) -> dict | None:
     (``indicators.parse_series`` rows).
 
     None when the series is too short or a close is unusable: every surface
-    then omits the line, the same way an absent earnings date does."""
+    then omits the line and shows no placeholder."""
     closes = [r["close"] for r in rows if r.get("close") is not None]
     level = realized_vol(closes, window)
     if level is None:

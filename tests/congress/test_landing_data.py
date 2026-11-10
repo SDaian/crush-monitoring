@@ -1146,9 +1146,6 @@ class TestTechnicalBlock(unittest.TestCase):
         b = ld.technical_block("NVDA", self.READINGS)
         self.assertEqual(b["score"], ai_score(self.READINGS["NVDA"]))
 
-    def test_absent_earnings_is_none_not_invented(self):
-        self.assertIsNone(ld.technical_block("NVDA", self.READINGS)["nextEarnings"])
-
     def test_payload_carries_the_panel_only_when_featured(self):
         trades = [MT(ticker="NVDA", tx="2026-06-01") for _ in range(30)]
         with_panel = ld.ticker_payload("NVDA", trades, indicators=self.READINGS)

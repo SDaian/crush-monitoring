@@ -498,12 +498,10 @@ sites. Full details in `congress/README.md`. Conventions:
   it still reads as a disclosure record first. The sparkline is `series` (52
   weekly closes downsampled from the history the indicators run already
   fetched — **no extra API call**) drawn as build-time inline SVG; an empty
-  series omits the chart. `nextEarnings` is off by default: the workflow
-  passes `EARNINGS_DATES` as `false` unless the repository variable says
-  `true`. Our plan does not serve the earnings endpoint (the first live call,
-  27 Oct 2026, failed), so turning it on costs a failed call a day for
-  nothing; set the variable once the plan includes it. Switched off or
-  failing, the line is simply absent.
+  series omits the chart. There is **no next-earnings date**: the feature
+  was removed on 10 Nov 2026, because our Twelve Data plan does not serve the
+  earnings endpoint (the one live call, 27 Oct 2026, failed) and the switch
+  that guarded it was off. Add it back only with a plan that serves it.
 - **A paced fetch that cannot return new numbers must not run.** The two
   Twelve Data steps sleep 8s between ~220 calls, so a run costs ~29 minutes of
   GitHub runner time — 88% of the daily Action bill, spent waiting. `congress

@@ -109,9 +109,9 @@ files.
 
 `congress ai` computes a reading for every symbol that has a ticker page:
 RSI(14), the 8/21 EMA pair, the 20/50/200-day averages, period returns,
-relative volume, the 52-week range, 1-year volatility, and (when the plan
-serves it) the next earnings date. Records flagged `featured` feed the
-morning scorecard and the tracker's "Featured stocks" tab.
+relative volume, the 52-week range and 1-year volatility. Records flagged
+`featured` feed the morning scorecard and the tracker's "Featured stocks"
+tab.
 
 - **Seven votes.** `indicators.votes` decides one buy/hold/sell vote per
   check; `ai_score` counts them into a label; every surface shows the

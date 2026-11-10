@@ -602,7 +602,7 @@ const schema = [
             </p>
           </div>
 
-          {(tech.signals.length > 0 || tech.nextEarnings) && (
+          {tech.signals.length > 0 && (
             <div class="mt-7">
               <div class="eyebrow">Worth keeping in mind</div>
               <ul class="mt-3 space-y-2">
@@ -612,14 +612,6 @@ const schema = [
                     <span class="text-ink-soft">· {sig.asof}</span>
                   </li>
                 ))}
-                {tech.nextEarnings && (
-                  <li class="text-sm">
-                    <b class="mono">Next earnings: {tech.nextEarnings.date}</b>
-                    {tech.nextEarnings.time && (
-                      <span class="text-ink-soft"> · {tech.nextEarnings.time}</span>
-                    )}
-                  </li>
-                )}
               </ul>
             </div>
           )}
