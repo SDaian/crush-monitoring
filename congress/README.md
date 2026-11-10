@@ -128,6 +128,14 @@ close and no new filing). A quiet day changes nothing, so `/report` is always
 the last edition that went out. Two separate traffic emails, daily and on
 Mondays weekly, come from Vercel Web Analytics (`analytics.py`).
 
+## The cron fallback (`fallback.py`)
+
+A Raspberry Pi dispatches the daily workflow; the workflow's own cron is the
+fallback for the day the Pi is off. `python3 -m congress.fallback` is the
+cron run's first job: it asks the Actions API whether the Pi's dispatch (the
+run named "Daily refresh") already succeeded in the last 20 hours, and when
+it did, the refresh job is skipped. Any error answers "run".
+
 ## Social drafts (`social.py`, `typefully.py`)
 
 `congress social` turns notable new filings (a featured member, a bracket

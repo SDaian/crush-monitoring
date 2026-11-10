@@ -27,9 +27,10 @@ OGE 278-T  ─┘   (Python)       (generated,          (Astro      capitolledge
 One GitHub Action, [`congress-trades.yml`](.github/workflows/congress-trades.yml),
 runs the whole chain once a day. A Raspberry Pi starts it at 09:00
 Europe/Madrid ([`scripts/capitol-ledger-dispatch.sh`](scripts/capitol-ledger-dispatch.sh));
-a GitHub cron at 08:20 UTC is the fallback and does nothing when the Pi
-already ran. The Action commits the regenerated data, and Vercel rebuilds
-the site from the commit.
+a GitHub cron is the fallback for the day the Pi is off. GitHub starts that
+cron hours late, and it skips the whole refresh when the Pi's run already
+succeeded ([`congress/fallback.py`](congress/fallback.py)). The Action
+commits the regenerated data, and Vercel rebuilds the site from the commit.
 
 The optional steps (holdings, prices, indicators, the emails, social drafts,
 IndexNow) are non-fatal: a missing key or an outage skips the step and keeps
