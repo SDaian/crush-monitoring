@@ -89,6 +89,91 @@ class TestAiCommand(unittest.TestCase):
             data2 = json.loads(out.read_text())
             self.assertEqual(data2["meta"]["new_signals"], [])
 
+    def test_every_record_carries_the_score_its_readings_produce(self):
+        # The tracker renders this stored score; it computes nothing itself.
+        with TemporaryDirectory() as d:
+            out = Path(d) / "ai-indicators.json"
+            args = types.SimpleNamespace(
+                output=str(out), index=str(self._index(d, ["AAPL", "NVDA"])))
+            self.assertEqual(cli._cmd_ai(args), 0)
+            tickers = json.loads(out.read_text())["tickers"]
+        self.assertGreater(len(tickers), len(indicators.AI_TICKERS))
+        for tk, rec in tickers.items():
+            readings = {k: v for k, v in rec.items() if k != "score"}
+            self.assertEqual(rec["score"], indicators.score_record(readings), tk)
+            self.assertTrue(rec["score"]["votes"], tk)
+
+    def _published_without_scores(self, d):
+        """A file as it was before the score was stored, generated today."""
+        out = Path(d) / "ai-indicators.json"
+        args = types.SimpleNamespace(output=str(out),
+                                     index=str(Path(d) / "absent.json"))
+        self.assertEqual(cli._cmd_ai(args), 0)
+        payload = json.loads(out.read_text())
+        for rec in payload["tickers"].values():
+            del rec["score"]
+        cli._write_ai(out, payload)
+        return out, payload
+
+    def _skipped_run(self, out):
+        fetched = []
+        prices.fetch_raw = lambda session, tk, key: fetched.append(tk)
+        args = types.SimpleNamespace(output=str(out), index="absent.json",
+                                     skip_if_fresh=True, skip_if_closed=True)
+        log = io.StringIO()
+        with contextlib.redirect_stdout(log):
+            self.assertEqual(cli._cmd_ai(args), 0)
+        self.assertEqual(fetched, [])       # the skip still fetches nothing
+        return log.getvalue()
+
+    def test_a_skipped_run_gives_an_old_file_its_scores(self):
+        with TemporaryDirectory() as d:
+            out, before = self._published_without_scores(d)
+            log = self._skipped_run(out)
+            after = json.loads(out.read_text())
+        self.assertIn("re-scored", log)
+        self.assertEqual(after["meta"], before["meta"])    # no new timestamp
+        for tk, rec in after["tickers"].items():
+            self.assertEqual({k: v for k, v in rec.items() if k != "score"},
+                             before["tickers"][tk], tk)    # readings untouched
+            self.assertEqual(rec["score"],
+                             indicators.score_record(before["tickers"][tk]))
+
+    def test_a_skipped_run_with_current_scores_writes_nothing(self):
+        # A generated file whose only change is the clock must not commit.
+        with TemporaryDirectory() as d:
+            out, _ = self._published_without_scores(d)
+            self._skipped_run(out)
+            first = out.read_bytes()
+            stamp = out.stat().st_mtime_ns
+            log = self._skipped_run(out)
+            self.assertNotIn("re-scored", log)
+            self.assertEqual(out.read_bytes(), first)
+            self.assertEqual(out.stat().st_mtime_ns, stamp)
+
+    def test_a_changed_rule_reaches_the_file_on_a_skipped_run(self):
+        # A rule merged on a Saturday must not wait for Tuesday's close.
+        with TemporaryDirectory() as d:
+            out, _ = self._published_without_scores(d)
+            self._skipped_run(out)
+            real = indicators.label_for
+            indicators.label_for = lambda ratio: "Hold"
+            try:
+                log = self._skipped_run(out)
+            finally:
+                indicators.label_for = real
+            labels = {rec["score"]["label"]
+                      for rec in json.loads(out.read_text())["tickers"].values()}
+        self.assertIn("re-scored", log)
+        self.assertEqual(labels, {"Hold"})
+
+    def test_a_skipped_run_survives_an_unreadable_file(self):
+        with TemporaryDirectory() as d:
+            out = Path(d) / "ai-indicators.json"
+            out.write_text("{not json", encoding="utf-8")
+            cli._rescore_file(out)                      # must not raise
+            self.assertEqual(out.read_text(), "{not json")
+
     def test_the_market_reading_comes_from_one_spy_fetch(self):
         # One source: our own realized volatility of the S&P 500. No index
         # symbol is asked for (the plan answered 404 to "VIX" on every run).

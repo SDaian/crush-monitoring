@@ -400,10 +400,10 @@ sites. Full details in `congress/README.md`. Conventions:
   `AI_TICKERS` universe (kept as the identifier for continuity, but the tab is
   now labelled **"⭐ Featured stocks"** since it includes off-theme names like
   YPF/MELI/NU) → `docs/data/ai-indicators.json`, shown on the "⭐ Featured
-  stocks" tab. The page shows a **transparent buy/sell/hold summary** (`aiScore`
-  in `landing/src/pages/tracker.astro` — `docs/trades.html` is a redirect stub
-  now and holds no copy of it) — a rule-based *tally* of the displayed
-  indicators (each votes buy/hold/sell), with the full breakdown visible and
+  stocks" tab. The page shows a **transparent buy/sell/hold summary** — a
+  rule-based *tally* of the displayed indicators (each votes buy/hold/sell),
+  decided in `indicators.ai_score` and stored in the data file, with the full
+  breakdown visible and
   labelled
   **"not investment advice"**. It is a reproducible mechanical read, **not** an
   opaque recommendation; keep the breakdown + disclaimer, and never present it
@@ -418,8 +418,20 @@ sites. Full details in `congress/README.md`. Conventions:
   skipped indicators run, so 748 open issues described 268 signals.
   Values are a **daily snapshot, not real-time**. The committed JSON ships as
   `_sample` data (synthetic series, banner-flagged) until the first live refresh.
-  The page's `aiScore` and Python `indicators.ai_score` **must stay in sync**
-  (same checks + thresholds) — the report reuses the Python one.
+  - **One scoring implementation, and it is Python.** `indicators.votes`
+    decides each vote and `ai_score` counts them; `score_record` stores the
+    result beside each ticker's readings in `ai-indicators.json` as `score`
+    (`label`, `buys`, `sells`, `holds`, `votes`). The tracker's Featured tab
+    **words** that record (`scoreView`, `VOTE_TEXT`) and decides nothing: no
+    threshold and no comparison of two readings lives in `tracker.astro`.
+    Until Nov 2026 the page held a JavaScript twin of the score (`aiScore`),
+    kept in step with Python by this note and by nothing else.
+    `tests/congress/test_landing_source.py` now fails if a decision returns
+    to the page, or if Python casts a vote the page cannot word. A run that
+    skips the fetch still **re-scores** the stored file
+    (`indicators.rescore`, writing only when a score changed), so a changed
+    rule reaches the tracker the next morning, not at the next close, and
+    the file never holds a record without a score.
   - **Seven votes, and adding an eighth is the wrong move.** Five of them
     already read trend (the 8/21 EMA pair, price vs the 50- and 200-day, the
     50/200 cross); RSI and the two momentum windows are the rest. Correlated

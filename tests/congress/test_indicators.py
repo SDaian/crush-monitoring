@@ -295,6 +295,32 @@ class TestVotes(unittest.TestCase):
         e = next(x for x in ind.votes(agreeing) if x["key"] == "ema_cross")
         self.assertEqual((e["vote"], e["muted"]), (1, False))
 
+    def test_the_stored_record_is_the_score_and_its_votes(self):
+        # What ai-indicators.json carries for the tracker: nothing decided
+        # twice, the count and the votes it counted.
+        rec = ind.score_record(self.INTC)
+        self.assertEqual({k: rec[k] for k in ("label", "buys", "sells",
+                                              "holds", "ratio")},
+                         ind.ai_score(self.INTC))
+        self.assertEqual(rec["votes"], ind.votes(self.INTC))
+        self.assertEqual(set(rec), {"label", "buys", "sells", "holds",
+                                    "ratio", "votes"})
+
+    def test_a_stored_score_does_not_feed_itself(self):
+        # The record sits beside the readings; scoring a record that already
+        # carries a score must read the readings only.
+        stale = dict(self.INTC, score={"label": "Strong Buy", "votes": []})
+        self.assertEqual(ind.score_record(stale), ind.score_record(self.INTC))
+
+    def test_rescore_fills_and_corrects_and_then_rests(self):
+        tickers = {"INTC": dict(self.INTC),
+                   "OLD": dict(self.INTC, score={"label": "Strong Buy"}),
+                   "OK": dict(self.INTC, score=ind.score_record(self.INTC))}
+        self.assertEqual(ind.rescore(tickers), 2)      # INTC filled, OLD fixed
+        for rec in tickers.values():
+            self.assertEqual(rec["score"], ind.score_record(self.INTC))
+        self.assertEqual(ind.rescore(tickers), 0)      # nothing left to do
+
     def test_the_score_counts_exactly_these_votes(self):
         sc = ind.ai_score(self.INTC)
         cast = [x["vote"] for x in ind.votes(self.INTC)]

@@ -51,6 +51,49 @@ class TestNoHtmlComments(unittest.TestCase):
             "markup or // in the frontmatter:\n  " + "\n  ".join(offenders))
 
 
+class TestTheTrackerDecidesNothing(unittest.TestCase):
+    """One scoring implementation: congress/indicators.py.
+
+    The tracker's Featured tab used to recompute the buy/sell/hold read in
+    JavaScript, a twin kept in step by a note in CLAUDE.md. It now renders the
+    score stored in ai-indicators.json. These tests fail if a decision comes
+    back to the page, or if Python casts a vote the page cannot word.
+    """
+
+    @classmethod
+    def setUpClass(cls):
+        cls.src = (SRC / "pages" / "tracker.astro").read_text(encoding="utf-8")
+
+    def test_the_twin_is_gone(self):
+        self.assertNotIn("aiScore", self.src)
+        self.assertIn("a.score", self.src)
+
+    def test_no_threshold_lives_on_the_page(self):
+        # The label cut-offs, the RSI zones and any comparison of two readings.
+        for pattern, what in (
+            (r"ratio\s*[<>]=?", "a label cut-off"),
+            (r"[<>]=?\s*-?0\.(15|5)\b", "a label cut-off"),
+            (r"rsi14\s*[<>]\s*\d", "an RSI threshold"),
+            (r"\b[<>]\s*(30|70)\b", "an RSI threshold"),
+            (r"a\.(price|sma50|sma200|ema8|ema21)\s*[<>]=?\s*a\.", "a comparison of two readings"),
+            (r"a\.chg_1[mw]\s*[<>]", "a momentum test"),
+        ):
+            found = re.search(pattern, self.src)
+            self.assertIsNone(
+                found, f"tracker.astro decides again ({what}): "
+                       f"{found.group(0) if found else ''!r}")
+
+    def test_every_vote_python_can_cast_has_its_words(self):
+        from congress import indicators
+        full = {"price": 10.0, "ema8": 11.0, "ema21": 10.5, "sma50": 9.0,
+                "sma200": 8.0, "rsi14": 50.0, "chg_1m": 1.0, "chg_1w": 1.0}
+        cast = {v["key"] for v in indicators.votes(full)}
+        block = re.search(r"const VOTE_TEXT = \{(.*?)\n      \};", self.src, re.S)
+        self.assertIsNotNone(block, "the tracker lost its VOTE_TEXT table")
+        worded = set(re.findall(r"^\s{8}(\w+):", block.group(1), re.M))
+        self.assertEqual(worded, cast)
+
+
 class TestMarkupHelpers(unittest.TestCase):
     """The exclusion must not hide a real comment sitting next to a block."""
 

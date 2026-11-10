@@ -1017,6 +1017,31 @@ def _market_reading(session, key, redact):
     return reading
 
 
+def _write_ai(path: Path, payload: dict) -> None:
+    path.write_text(
+        json.dumps(payload, separators=(",", ":"), ensure_ascii=False) + "\n",
+        encoding="utf-8",
+    )
+
+
+def _rescore_file(path: Path) -> None:
+    """On a run that fetches nothing: make the stored scores match the rules
+    as they are now. Writes only when a score changed, so an ordinary skipped
+    day leaves the file, and the commit log, alone."""
+    from . import indicators
+
+    try:
+        payload = json.loads(path.read_text(encoding="utf-8"))
+        tickers = payload["tickers"]
+    except (OSError, ValueError, KeyError, TypeError):
+        return  # nothing published yet: the next fetch writes scores
+    changed = indicators.rescore(tickers)
+    if changed:
+        _write_ai(path, payload)
+        print(f"re-scored {changed} ticker(s) under the current rules "
+              "(no prices fetched)")
+
+
 def _cmd_ai(args: argparse.Namespace) -> int:
     """Compute daily technical indicators + mechanical signals for the AI
     universe, writing docs/data/ai-indicators.json. Indicators only — never a
@@ -1026,10 +1051,12 @@ def _cmd_ai(args: argparse.Namespace) -> int:
 
     if getattr(args, "skip_if_fresh", False) and generated_today(args.output):
         print(f"indicators already generated today — skipping ({args.output})")
+        _rescore_file(Path(args.output))
         return 0
 
     if getattr(args, "skip_if_closed", False) and market_shut(args.output):
         print(f"no session since the newest close held — skipping ({args.output})")
+        _rescore_file(Path(args.output))
         return 0
 
     key = prices.api_key()
@@ -1072,6 +1099,8 @@ def _cmd_ai(args: argparse.Namespace) -> int:
         sigs = indicators.compute_signals(rows)
         rec = {"name": name, "featured": bool(spec.get("featured")),
                **ind, "signals": sigs}
+        # The read, decided here once and stored: the tracker renders it.
+        rec["score"] = indicators.score_record(rec)
         # Next earnings date — an EXTRA call per ticker on an endpoint that
         # is not on every Twelve Data plan. Gated so it cannot silently
         # double the run's rate budget, and any failure just leaves the
@@ -1134,10 +1163,7 @@ def _cmd_ai(args: argparse.Namespace) -> int:
         "tickers": tickers,
     }
     out_path.parent.mkdir(parents=True, exist_ok=True)
-    out_path.write_text(
-        json.dumps(payload, separators=(",", ":"), ensure_ascii=False) + "\n",
-        encoding="utf-8",
-    )
+    _write_ai(out_path, payload)
     print(
         f"wrote indicators for {len(tickers)}/{len(universe)} tickers "
         f"({featured_n} featured), {len(new_signals)} new featured "

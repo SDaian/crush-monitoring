@@ -378,10 +378,10 @@ def label_for(ratio: float) -> str:
 def ai_score(t: dict) -> dict:
     """Mechanical buy/hold/sell tally from one ticker's indicators.
 
-    This MUST mirror ``aiScore`` in landing/src/pages/tracker.astro exactly
-    (same checks, same thresholds) so the page and the morning report agree.
     Each check votes buy(+1)/hold(0)/sell(-1); the net ratio maps to a label.
-    It is a transparent rule-based read, NOT investment advice.
+    It is a transparent rule-based read, NOT investment advice. This is the
+    only implementation: the tracker's Featured tab reads the stored result
+    (``score_record``) and words it, and decides nothing itself.
 
     Seven votes, deliberately. The 8/21 EMA cross REPLACED the old "price vs
     the 20-day SMA" vote rather than joining it: both measure the same
@@ -398,6 +398,36 @@ def ai_score(t: dict) -> dict:
     ratio = (buys - sells) / total
     return {"label": label_for(ratio), "buys": buys, "sells": sells,
             "holds": holds, "ratio": round(ratio, 3)}
+
+
+def score_record(t: dict) -> dict:
+    """The read as it is stored beside a ticker's readings in
+    ai-indicators.json: the label, the tally and every vote.
+
+    The tracker's Featured tab renders this record. It used to recompute the
+    read in JavaScript, a twin of ``votes`` and ``ai_score`` kept in step by
+    a rule in the project notes and by nothing else: one changed threshold
+    there, and the page and the morning email would disagree about the same
+    stock on the same day.
+    """
+    return {**ai_score(t), "votes": votes(t)}
+
+
+def rescore(tickers: dict[str, dict]) -> int:
+    """Give every record the score its readings produce under the rules as
+    they are now. Returns how many records changed.
+
+    A run that skips the fetch (no new close) still calls this, so a changed
+    rule reaches the stored scores the next morning and not at the next
+    close, and the file never holds a record without a score.
+    """
+    changed = 0
+    for rec in tickers.values():
+        score = score_record(rec)
+        if rec.get("score") != score:
+            rec["score"] = score
+            changed += 1
+    return changed
 
 
 def agreement(score: dict) -> dict:
