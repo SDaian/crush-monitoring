@@ -109,8 +109,10 @@ rule wins.
   - **The historical record** — `predictor/results_log.md`, prediction lambdas
     as filed, `congress/social_state.json`, and the git audit trail
     (`ROADMAP.md` §1). Annotate history; never rewrite it.
-  - **Documented sunsets** — e.g. `docs/trades.html` serves until the apex
-    domain resolves. Retire on the stated trigger, not on sight.
+  - **Documented sunsets** — a path that serves until a stated trigger.
+    Retire on the trigger, not on sight. (`docs/trades.html` was the example:
+    its trigger, the apex domain, fired, and GitHub Pages is off, so nothing
+    serves the file now. It is a leftover; deleting it is the owner's call.)
 - **Choose the simplest implementation that fully meets the current
   requirements.** Avoid speculative abstractions, configuration, and
   indirection.
@@ -199,7 +201,10 @@ tone) is recorded in `predictor/METHODOLOGY.md`.
   (e.g. `_comment`, `_referee`); the loader ignores `_`-prefixed keys when
   constructing models, so they will not break parsing.
 
-## Web app (`docs/index.html`, deployed on GitHub Pages)
+## Web app (`docs/index.html`)
+
+**Not served today**: GitHub Pages is off for this repository, so the page
+has no public address. The rules below apply when the file is edited.
 
 A single-file vanilla-JS World Cup 2026 bracket simulator. It holds several
 **parallel data structures that must be kept in sync** — forgetting one is the
@@ -257,9 +262,10 @@ played, update **every** relevant place:
 
 ## Congress trades tracker (`congress/`, `/tracker` on the landing site)
 
-A separate Pages section tracking STOCK Act trade disclosures, sourced only
+The pipeline behind Capitol Ledger: STOCK Act trade disclosures, sourced only
 from the official Senate eFD, House Clerk, and OGE (executive-branch 278-T)
-sites. Full details in `congress/README.md`. Conventions:
+sites, published on the Vercel site (`landing/`). Full details in
+`congress/README.md`. Conventions:
 
 - **Generated files are never hand-edited:** `docs/data/congress-trades.json`,
   `docs/data/returns.json`, `docs/data/performance.json`,
@@ -283,11 +289,12 @@ sites. Full details in `congress/README.md`. Conventions:
   positions come from their **annual** report. `congress/holdings.py` parses the
   individual **stocks and options** from each featured member's latest annual FD
   (House Schedule A text PDF / Senate annual HTML) into `holdings.json`. The
-  Holdings tab shows an **estimated current** portfolio: the annual snapshot
+  member pages show an **estimated current** portfolio: the annual snapshot
   **rolled forward** with every PTR trade dated after it (buys add, sells
   subtract, new tickers appear, sold-down names drop, expired options drop).
-  Scanned annual reports (and Trump's image-only OGE 278) are marked unavailable
-  and fall back to an inferred net-trading estimate. Label it honestly — bracket
+  Scanned annual reports (and Trump's image-only OGE 278) are marked
+  unavailable, and the page then **omits the section**: no position is
+  invented from trades alone. Label it honestly — bracket
   **midpoints, not share counts**; a directional estimate, never exact/real-time.
   **An empty holdings list is not one thing.** `holdings.classify` records a
   `reason` per member, because the causes need different responses: a scanned
@@ -387,13 +394,14 @@ sites. Full details in `congress/README.md`. Conventions:
   stock in Congress, had a page with no reading**. Each record carries
   `featured: true|false`, and the surfaces that must stay short filter on it:
   the **morning email scorecard** (`build_report` iterates `AI_TICKERS`), the
-  tracker's **"⭐ Featured stocks" tab** (`aiTickers()` returns `AI_ORDER` and
-  nothing else), and **`meta.new_signals`** — a signal on a non-featured
+  tracker's **"⭐ Featured stocks" tab** (`aiTickers()` keeps the records
+  flagged `featured`; `AI_ORDER` only orders them), and
+  **`meta.new_signals`** — a signal on a non-featured
   symbol still shows on that ticker's page but never reaches the email.
   A missing/unreadable index falls back to the featured watchlist: a failed
   `landing` step costs a few readings, never the run. Cost is one API call per
-  symbol per day (8/min, 800/day tier); ~93 readings + ~122 priced tickers sits
-  well inside it.
+  symbol per day (8/min, 800/day tier); 118 readings + 103 priced tickers
+  (10 Nov 2026) sit well inside it.
 - **Featured-stocks tab is indicators + a mechanical summary, never advice:**
   `congress/indicators.py` + `congress ai` compute *mechanical* daily technical
   readings (RSI, moving averages, volume, 52-week range) for the
@@ -415,9 +423,11 @@ sites. Full details in `congress/README.md`. Conventions:
   nowhere else: each used to open a GitHub issue as well
   (`notify_signals.py`, removed 2026-11-10). The repository had no watchers,
   so the issues reached nobody; and the step re-read a stale list on every
-  skipped indicators run, so 748 open issues described 268 signals.
-  Values are a **daily snapshot, not real-time**. The committed JSON ships as
-  `_sample` data (synthetic series, banner-flagged) until the first live refresh.
+  skipped indicators run, so 748 open issues carried 272 different notices
+  (263 signals and 9 burst summaries); the other 476 were repeats.
+  Values are a **daily snapshot, not real-time**. The committed JSON holds
+  live data. A file flagged `meta.sample` (a synthetic series, as it shipped
+  before the first live refresh) makes the tab show a banner that says so.
   - **One scoring implementation, and it is Python.** `indicators.votes`
     decides each vote and `ai_score` counts them; `score_record` stores the
     result beside each ticker's readings in `ai-indicators.json` as `score`
@@ -449,8 +459,8 @@ sites. Full details in `congress/README.md`. Conventions:
     200-line on every surface. Under 200 bars there is no macro trend to
     confirm against and the vote stands ungated.
   - **The 8/21 cross fires no named signal, deliberately.** The pair crosses
-    roughly ten times a year per symbol; across ~93 readings that would flood
-    `meta.new_signals`, which fills the email's overnight section. The
+    roughly ten times a year per symbol; across the 35 featured symbols that
+    would flood `meta.new_signals`, which fills the email's overnight section. The
     golden/death cross stays the rare event worth naming.
   - **The read carries its own margin.** A bare label hides the difference
     between a clean sweep and a one-vote edge, so every scorecard row states
@@ -508,8 +518,9 @@ sites. Full details in `congress/README.md`. Conventions:
   prices` and `congress ai` take **`--skip-if-closed`**, which compares the
   newest `asof_date` the output already holds against
   `market.last_closed_session(now)`. **The test is the settled session, not
-  the weekday**, and the run log says why: the daily run fires at 07:00 UTC
-  (the Pi's 09:00 Madrid) or 08:20 UTC (the fallback cron), hours *before* the
+  the weekday**, and the run log says why: the daily run fires at 09:00
+  Europe/Madrid (07:00 UTC in summer, 08:00 in winter), and the fallback cron
+  some hours after it, both *before* the
   US close, so each run captures the PREVIOUS session (Fri → Thursday's close,
   Sat → **Friday's** close). A naive
   "skip at the weekend" would drop the Saturday run that captures Friday and
@@ -677,9 +688,6 @@ sites. Full details in `congress/README.md`. Conventions:
     the one the last DELIVERED report recorded. The disclosure rule again: new
     means not yet reported, never "still in the file". Any reader of
     `new_signals` needs the same guard.
-  UTC cron ignores
-  DST so the Madrid clock time drifts ±1h; precise timing needs an external
-  scheduler hitting the `workflow_dispatch` API.
   - **Subscribers = `congress/buttondown.py`** (gated + non-fatal). The same
     `build_report` HTML is broadcast to confirmed subscribers with one API call
     (`POST /v1/emails`, `BUTTONDOWN_API_KEY` secret); Buttondown owns the list,
@@ -851,8 +859,8 @@ sites. Full details in `congress/README.md`. Conventions:
   gitignored. Because the page injects markup at runtime, its CSS must stay
   `<style is:global>` scoped under `.tracker` — Astro's scoped styles only tag
   build-time elements, so scoping it would silently unstyle every row and card.
-  `docs/trades.html` still serves the old standalone build on GitHub Pages and
-  is retired only once the apex domain resolves.
+  `docs/trades.html` is a redirect stub to `/tracker`. GitHub Pages is off,
+  so nothing serves it; it stays in the repository until the owner deletes it.
   The tracker fetches with `cache: "no-cache"` (revalidate by ETag), never
   `"no-store"`: the file compresses to ~0.4 MB on the wire, but `no-store`
   re-downloaded it on every visit even when unchanged. A slimmer projection
@@ -967,7 +975,7 @@ Conventions:
   The `landing` Action step runs **after** the holdings refresh so pages use
   the freshest annual data. Scaling this to
   every member is the storage-stage-1 trigger — see
-  `ROADMAP.md` (deliberately deferred at 10 members). SEO helpers (canonical,
+  `ROADMAP.md` (deliberately deferred; 11 members today). SEO helpers (canonical,
   OG image, JSON-LD) live in the shared `src/components/Seo.astro`.
 - **Ticker pages** (`/tickers/<slug>` + a `/tickers` index) are the organic-
   search surface: search demand is on **entities, not dates** ("nvda congress
