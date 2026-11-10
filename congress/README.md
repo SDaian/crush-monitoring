@@ -117,6 +117,10 @@ morning scorecard and the tracker's "Featured stocks" tab.
   check; `ai_score` counts them into a label; every surface shows the
   breakdown and "not investment advice". Volatility and the market reading
   never vote. Changing the vote set bumps `SCORE_VERSION`.
+- **The score is stored.** Each record carries `score` (`score_record`: the
+  label, the tally and every vote). The tracker's Featured tab words that
+  record and decides nothing itself. A run that skips the fetch still
+  re-scores the file, and writes it only when a score changed.
 - **Named signals** (golden/death cross, RSI crossing 30/70, new 52-week
   high/low) on featured symbols go to `meta.new_signals`, which the morning
   report shows once, as its "Signals overnight" section.

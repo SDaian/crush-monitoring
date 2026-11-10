@@ -497,9 +497,15 @@ const schema = [
         const cls = x > 0 ? "up" : x < 0 ? "down" : "flat";
         return `<span class="${cls}">${x > 0 ? "+" : ""}${Number(x).toFixed(2)}%</span>`;
       }
-      function rsiZone(r){
-        if (r == null) return "—";
-        return r < 30 ? "oversold" : r > 70 ? "overbought" : "neutral";
+      // The stored vote of one check (+1 buy / 0 hold / -1 sell), or null when
+      // the check was not cast (its readings are missing).
+      function voteOf(a, key){
+        const v = a.score.votes.find(v => v.key === key);
+        return v ? v.vote : null;
+      }
+      function rsiZone(a){
+        const v = voteOf(a, "rsi");
+        return v == null ? "—" : v > 0 ? "oversold" : v < 0 ? "overbought" : "neutral";
       }
       function aiTickers(){ // the FEATURED watchlist, in its order
         // ai-indicators.json carries a reading for EVERY ticker page (~107
@@ -522,49 +528,40 @@ const schema = [
 
       // Transparent mechanical scorecard: each indicator already shown on the page
       // casts a buy(+1)/hold(0)/sell(-1) vote; the votes sum to a headline read.
-      // This is a rule-based tally, NOT investment advice — trend checks (the 8/21
-      // EMA pair, price vs the moving averages, 50d/200d alignment) dominate, with
-      // RSI (mean-reversion) and short-term momentum as oscillators.
+      // This is a rule-based tally, NOT investment advice.
       //
-      // The TWIN of congress/indicators.py ai_score(): same checks, same order,
-      // same thresholds. Change one and you must change the other, or the page
-      // and the morning email disagree about the same stock on the same day.
-      function aiScore(a){
-        const checks = [];
-        const add = (label, vote, note) => checks.push({label, vote, note});
-        const cmp = (x, y) => x > y ? 1 : x < y ? -1 : 0;
-        // The 8/21 EMA pair, confirmed against the 200-day average. It took
-        // the old "price vs the 20-day SMA" slot rather than adding an eighth
-        // vote: both read the same short-term trend, and a correlated extra
-        // vote would swing the whole tally on one move. A bullish cross while
-        // the price sits under its 200-day is a bounce inside a downtrend, so
-        // the macro filter mutes it to hold.
-        if (a.ema8 != null && a.ema21 != null) {
-          const raw = cmp(a.ema8, a.ema21);
-          const against = raw !== 0 && a.price != null && a.sma200 != null &&
-            ((raw > 0 && a.price < a.sma200) || (raw < 0 && a.price > a.sma200));
-          add("8-day vs 21-day EMA", against ? 0 : raw,
-            `${fmtPrice(a.ema8)} vs ${fmtPrice(a.ema21)}` +
-            (against ? " · against the 200-day" : ""));
-        }
-        if (a.price != null && a.sma50  != null) add("Price vs 50-day",  cmp(a.price, a.sma50),  `${fmtPrice(a.price)} vs ${fmtPrice(a.sma50)}`);
-        if (a.price != null && a.sma200 != null) add("Price vs 200-day", cmp(a.price, a.sma200), `${fmtPrice(a.price)} vs ${fmtPrice(a.sma200)}`);
-        if (a.sma50 != null && a.sma200 != null) add("50-day vs 200-day", cmp(a.sma50, a.sma200), a.sma50 >= a.sma200 ? "golden alignment" : "death alignment");
-        if (a.rsi14 != null) add("RSI (14)", a.rsi14 < 30 ? 1 : a.rsi14 > 70 ? -1 : 0, `${a.rsi14} · ${rsiZone(a.rsi14)}`);
-        if (a.chg_1m != null) add("1-month momentum", cmp(a.chg_1m, 0), `${a.chg_1m}%`);
-        if (a.chg_1w != null) add("1-week momentum",  cmp(a.chg_1w, 0), `${a.chg_1w}%`);
-        const buys  = checks.filter(c => c.vote > 0).length;
-        const sells = checks.filter(c => c.vote < 0).length;
-        const holds = checks.filter(c => c.vote === 0).length;
-        const total = checks.length || 1;
-        const ratio = (buys - sells) / total;
-        let label, cls;
-        if (ratio >= 0.5)        { label = "Strong Buy";  cls = "bull"; }
-        else if (ratio >= 0.15)  { label = "Buy";         cls = "bull"; }
-        else if (ratio <= -0.5)  { label = "Strong Sell"; cls = "bear"; }
-        else if (ratio <= -0.15) { label = "Sell";        cls = "bear"; }
-        else                     { label = "Hold";        cls = "neutral"; }
-        return {label, cls, buys, sells, holds, checks, ratio};
+      // The read is DECIDED in one place: congress/indicators.py (votes +
+      // ai_score), which stores it beside the readings as
+      //   a.score = {label, buys, sells, holds, votes: [{key, vote, muted}]}.
+      // This page only WORDS it. No threshold and no comparison of two
+      // readings lives here, so a rule changed in Python reaches the email,
+      // the ticker pages and this tab together. (A JavaScript twin of the
+      // score lived here until Nov 2026, held in step by a note and nothing
+      // else.) A vote key without an entry below fails the offline suite.
+      const VOTE_TEXT = {
+        ema_cross:    (a, v) => ["8-day vs 21-day EMA",
+          `${fmtPrice(a.ema8)} vs ${fmtPrice(a.ema21)}` + (v.muted ? " · against the 200-day" : "")],
+        vs_sma50:     a => ["Price vs 50-day",  `${fmtPrice(a.price)} vs ${fmtPrice(a.sma50)}`],
+        vs_sma200:    a => ["Price vs 200-day", `${fmtPrice(a.price)} vs ${fmtPrice(a.sma200)}`],
+        sma50_vs_200: (a, v) => ["50-day vs 200-day",
+          v.vote > 0 ? "golden alignment" : v.vote < 0 ? "death alignment" : "level"],
+        rsi:          a => ["RSI (14)", `${a.rsi14} · ${rsiZone(a)}`],
+        chg_1m:       a => ["1-month momentum", `${a.chg_1m}%`],
+        chg_1w:       a => ["1-week momentum",  `${a.chg_1w}%`],
+      };
+      function scoreView(a){
+        const s = a.score;
+        const cls = s.label.includes("Buy") ? "bull" : s.label.includes("Sell") ? "bear" : "neutral";
+        const checks = s.votes.map(v => {
+          const [label, note] = VOTE_TEXT[v.key](a, v);
+          return {label, vote: v.vote, note};
+        });
+        return {label: s.label, cls, buys: s.buys, sells: s.sells, holds: s.holds, checks};
+      }
+      // The 50-day against the 200-day, worded from its stored vote.
+      function trendOf(a){
+        const v = voteOf(a, "sma50_vs_200");
+        return v == null ? null : v > 0 ? "up" : v < 0 ? "down" : "flat";
       }
 
       function renderAiSignals(){
@@ -582,16 +579,16 @@ const schema = [
         $("aiCards").innerHTML = aiTickers().map(tk => {
           const a = AI[tk];
           const dot = (a.signals && a.signals.length) ? " •" : "";
-          const sc = aiScore(a);
+          const sc = scoreView(a);
           return `<div class="fcard ${state.aiTicker === tk ? "sel" : ""}" data-a="${esc(tk)}">
             <div class="name">${esc(tk)}${dot} <span class="scorepill ${sc.cls}" title="mechanical technical summary — not advice">${esc(sc.label)}</span></div>
             <div class="who">${esc(a.name || "")}</div>
             <div class="px">${fmtPrice(a.price)} <span style="font-size:12px">${pctSpan(a.chg_1d)}</span></div>
             <div class="metarow">
-              <span class="rsibadge">RSI ${a.rsi14 == null ? "—" : Math.round(a.rsi14)} · ${esc(rsiZone(a.rsi14))}</span>
-              <span class="note">${a.sma50 != null && a.sma200 != null
-                ? (a.sma50 >= a.sma200 ? '<span class="up">50d›200d</span>' : '<span class="down">50d‹200d</span>')
-                : ""}</span>
+              <span class="rsibadge">RSI ${a.rsi14 == null ? "—" : Math.round(a.rsi14)} · ${esc(rsiZone(a))}</span>
+              <span class="note">${{up: '<span class="up">50d›200d</span>',
+                                    down: '<span class="down">50d‹200d</span>',
+                                    flat: '<span class="flat">50d=200d</span>'}[trendOf(a)] || ""}</span>
             </div>
           </div>`;
         }).join("");
@@ -599,7 +596,7 @@ const schema = [
 
       function aiPrompts(tk, a){
         const asof = a.asof_date || "latest close";
-        const sc = aiScore(a);
+        const sc = scoreView(a);
         const p1 =
       `Analyze the current trends in the stock market, focusing on ${a.name} ($${tk}). `
       + `Identify any emerging patterns and suggest possible investment opportunities. `
@@ -650,7 +647,7 @@ const schema = [
         const cell = (k, v, x) =>
           `<div class="indcell"><div class="k">${k}</div><div class="v">${v}</div>${x?`<div class="x">${x}</div>`:""}</div>`;
 
-        const sc = aiScore(a);
+        const sc = scoreView(a);
         const voteWord = v => v > 0 ? "buy" : v < 0 ? "sell" : "hold";
         const voteCls  = v => v > 0 ? "up"  : v < 0 ? "down" : "flat";
         const scoreHtml = `<div class="scorecard ${sc.cls}">
@@ -687,10 +684,11 @@ const schema = [
            ${a.signals && a.signals.length ? `<div style="margin:2px 0 8px">${sigTags(a.signals)}</div>` : ""}
            <div class="indgrid">
              ${cell("Change 1d / 1w / 1m", `${pctSpan(a.chg_1d)} / ${pctSpan(a.chg_1w)} / ${pctSpan(a.chg_1m)}`)}
-             ${cell("RSI (14)", a.rsi14 == null ? "—" : a.rsi14, rsiZone(a.rsi14))}
-             ${cell("Trend (50d vs 200d)", a.sma50 != null && a.sma200 != null
-                ? (a.sma50 >= a.sma200 ? '<span class="up">uptrend</span>' : '<span class="down">downtrend</span>') : "—",
-                a.sma50 != null && a.sma200 != null ? `50d ${fmtPrice(a.sma50)} · 200d ${fmtPrice(a.sma200)}` : "")}
+             ${cell("RSI (14)", a.rsi14 == null ? "—" : a.rsi14, rsiZone(a))}
+             ${cell("Trend (50d vs 200d)",
+                {up: '<span class="up">uptrend</span>', down: '<span class="down">downtrend</span>',
+                 flat: '<span class="flat">flat</span>'}[trendOf(a)] || "—",
+                trendOf(a) ? `50d ${fmtPrice(a.sma50)} · 200d ${fmtPrice(a.sma200)}` : "")}
              ${cell("Price vs 50-day", a.vs_sma50 == null ? "—" : pctSpan(a.vs_sma50))}
              ${cell("Price vs 200-day", a.vs_sma200 == null ? "—" : pctSpan(a.vs_sma200))}
              ${cell("8d vs 21d EMA", a.ema_gap == null ? "—" : pctSpan(a.ema_gap),
