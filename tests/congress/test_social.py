@@ -49,6 +49,15 @@ class TestSelection(unittest.TestCase):
         bond["ticker"] = None
         self.assertEqual(social.select_new_filings([bond], {"records": {}}), [])
 
+    def test_an_amended_report_is_not_news(self):
+        # Tuberville corrected nine old reports on one day in August 2026.
+        # Each is a new document id, and none is a new disclosure.
+        fresh = T(member="Nancy Pelosi", filing="NEW", filed="2026-07-01")
+        old = T(member="Nancy Pelosi", filing="AMENDED", filed="2025-05-15")
+        old["amended"] = "2026-08-05"
+        picked = social.select_new_filings([old, fresh], {"records": {}})
+        self.assertEqual([social.record_id(r[0]) for r in picked], ["house:NEW"])
+
     def test_newest_filing_first(self):
         trades = [T(member="Nancy Pelosi", filing="OLD", filed="2026-05-01"),
                   T(member="Nancy Pelosi", filing="NEW", filed="2026-07-01")]

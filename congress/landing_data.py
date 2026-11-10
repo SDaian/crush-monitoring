@@ -60,6 +60,16 @@ def display_name(member: str) -> str:
     return f"{parts[0][0]}. {parts[-1]}"
 
 
+def _amended(t: dict) -> dict:
+    """``{"amended": <date>}`` for a row of an amended report, else nothing.
+
+    ``filing_date`` is the day the report was FIRST filed, and the row links
+    the amended document, which carries a later date. The page states both,
+    or a reader who opens the link sees a date we did not show. Absent
+    otherwise, so a long record does not carry thousands of nulls."""
+    return {"amended": t["amended"]} if t.get("amended") else {}
+
+
 def days_late(t: dict) -> int | None:
     """Days past the 45-day statutory maximum; 0 = on time; None = undatable."""
     fd, td = t.get("filing_date"), t.get("tx_date")
@@ -883,6 +893,7 @@ def member_payload(name: str, trades: list[dict], holdings: dict,
         "filedDate": t.get("filing_date"),
         "daysLate": days_late(t),
         "sourceUrl": t.get("source_url"),
+        **_amended(t),
         # Explicit, from the same predicate as the home-page stats: the
         # Assets filter must never guess bond-ness from a missing ticker
         # (an unresolved equity also lacks one).
@@ -1541,6 +1552,7 @@ def ticker_payload(ticker: str, trades: list[dict],
         "filedDate": t.get("filing_date"),
         "daysLate": days_late(t),
         "sourceUrl": t.get("source_url"),
+        **_amended(t),
     } for t in ts[:TICKER_TRADE_CAP]]
 
     payload = {

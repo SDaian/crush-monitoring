@@ -286,6 +286,19 @@ class TestMemberPayload(unittest.TestCase):
         self.assertEqual(p["topTickers"][0]["ticker"], "NVDA")
         self.assertEqual(p["topTickers"][0]["count"], 2)
 
+    def test_a_row_of_an_amended_filing_states_both_dates(self):
+        # Filed 15 May 2025, amended 5 Aug 2026: 30 days after the trade, so
+        # on time, and the page still says the linked document is later.
+        amended = MT(ticker="GS", type="sell", tx="2025-04-15")
+        amended.update(filing_date="2025-05-15", amended="2026-08-05")
+        plain = MT(ticker="NVDA", tx="2026-06-01")
+        p = ld.member_payload("Nancy Pelosi", [amended, plain], HOLDINGS)
+        rows = {r["ticker"]: r for r in p["trades"]}
+        self.assertEqual(rows["GS"]["filedDate"], "2025-05-15")
+        self.assertEqual(rows["GS"]["amended"], "2026-08-05")
+        self.assertEqual(rows["GS"]["daysLate"], 0)
+        self.assertNotIn("amended", rows["NVDA"])   # absent, never null
+
     def test_trades_sorted_desc_and_capped(self):
         trades = [MT(ticker=f"T{i}", tx=f"2026-06-{i:02d}") for i in range(1, 26)]
         p = ld.member_payload("Nancy Pelosi", trades, {})
@@ -486,6 +499,15 @@ class TestTickerPages(unittest.TestCase):
         self.assertEqual(p["tradesShown"], ld.TICKER_TRADE_CAP)
         self.assertEqual(p["trades"][0]["txDate"], "2026-06-29")  # newest first
         self.assertTrue(p["trades"][0]["sourceUrl"])              # provenance
+
+    def test_a_row_of_an_amended_filing_states_both_dates(self):
+        amended = MT(ticker="NVDA", tx="2025-04-15")
+        amended.update(filing_date="2025-05-15", amended="2026-08-05")
+        p = ld.ticker_payload("NVDA", [amended, MT(ticker="NVDA", tx="2026-06-01")])
+        by_tx = {r["txDate"]: r for r in p["trades"]}
+        self.assertEqual(by_tx["2025-04-15"]["amended"], "2026-08-05")
+        self.assertEqual(by_tx["2025-04-15"]["daysLate"], 0)
+        self.assertNotIn("amended", by_tx["2026-06-01"])
 
     def test_unfeatured_member_not_linked(self):
         p = ld.ticker_payload("NVDA", [MT(member="Random Filer", ticker="NVDA")])

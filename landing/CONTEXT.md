@@ -15,8 +15,16 @@ The report document (a Periodic Transaction Report) a member submits; one
 filing may contain many disclosures.
 _Avoid_: PTR (in user-facing copy), report
 
+**Amendment**:
+A later version of a filing that corrects it. It restates the whole filing,
+so it replaces the version before it: each disclosure counts once, keeps the
+filing date of the FIRST version, and shows the date the amendment arrived.
+_Avoid_: new filing, re-filing; counting an amendment's rows as new
+disclosures; measuring lag from the amendment's date
+
 **Filing lag**:
 The number of days between a disclosure's trade date and its filing date.
+For an amended filing, the filing date is the first version's.
 Lag up to 45 days is normal and legal — lag alone is not an accusation.
 _Avoid_: delay, late (unless past the deadline)
 

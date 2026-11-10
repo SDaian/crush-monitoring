@@ -246,7 +246,9 @@ def disclosures_block(disclosures: list[dict], extra: int,
             f"{_esc(d['filing_date'])}</span> · {_esc(d['who'])} · "
             f"<b style='font-family:{MONO}'>{_esc(d['name'])}</b> "
             f"{_esc(d['type'])} · <span style='color:{INK_SOFT}'>"
-            f"{_esc(d['amount'])}</span>")
+            f"{_esc(d['amount'])}"
+            + (f" · amended {_esc(d['amended'])}" if d.get("amended") else "")
+            + "</span>")
     html = _list_block(items)
     if extra > 0:
         # The email caps the list (clients clip long messages); the web edition

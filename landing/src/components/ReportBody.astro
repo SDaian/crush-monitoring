@@ -55,6 +55,7 @@ const fmtDate = (iso: string | null) =>
                   <small>
                     {d.party ? `${d.party} · ` : ""}filed {fmtDate(d.filingDate)}
                     {d.txDate ? ` · traded ${fmtDate(d.txDate)}` : ""}
+                    {d.amended ? ` · amended ${fmtDate(d.amended)}` : ""}
                   </small>
                 </div>
                 <div class="dtick">

@@ -94,6 +94,10 @@ def select_new_filings(trades: list[dict], state: dict) -> list[list[dict]]:
             continue
         if not any(t.get("ticker") for t in rows):
             continue  # pure-bond filing: no headline symbol
+        if any(t.get("amended") for t in rows):
+            # An amendment corrects a report filed long before. It is not
+            # news, and its rows carry the first filing's date.
+            continue
         if not is_notable(rows):
             continue
         picked.append(rows)

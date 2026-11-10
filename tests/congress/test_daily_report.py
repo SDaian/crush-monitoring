@@ -122,6 +122,27 @@ class TestBuildReport(unittest.TestCase):
         self.assertIn("see the full report", r["html"])
         self.assertNotIn("Muni Bond", r["html"])
 
+    def test_a_row_of_an_amended_filing_says_so_on_every_surface(self):
+        # Boozman, 14 June 2025: filed, then amended 25 days later. The rows
+        # carry the first date, and the reader saw them once already.
+        amended = {"id": "senate:a1:0", "member": "John Boozman", "party": "R",
+                   "ticker": "ACN", "type": "sell",
+                   "amount_label": "$1,001 - $15,000", "tx_date": "2026-06-20",
+                   "filing_date": "2026-06-30", "amended": "2026-07-06"}
+        r = build_report(TRADES + [amended], AI, NEW_SIGNALS, prev_ratings={},
+                         today_iso="2026-07-07")
+        line = next(l for l in r["markdown"].splitlines() if "**ACN**" in l)
+        self.assertTrue(line.endswith("· amended 2026-07-06"), line)
+        self.assertIn("amended 2026-07-06", r["html"])
+        row = next(d for d in r["payload"]["disclosures"] if d["ticker"] == "ACN")
+        self.assertEqual(row["amended"], "2026-07-06")
+        self.assertEqual(row["filingDate"], "2026-06-30")
+        # A filing never amended says nothing about it.
+        plain = next(l for l in r["markdown"].splitlines() if "**NVDA**" in l)
+        self.assertNotIn("amended", plain)
+        nvda = next(d for d in r["payload"]["disclosures"] if d["ticker"] == "NVDA")
+        self.assertNotIn("amended", nvda)
+
     def test_disclosures_lead_the_email(self):
         html = self.r["html"]
         self.assertLess(html.index("New disclosures"),

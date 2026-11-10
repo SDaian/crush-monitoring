@@ -135,6 +135,9 @@ const barWidth = (pct: number) =>
 // select with one meaningful option is noise (Pelosi has no bonds).
 const hasBonds = m.trades.some((t: any) => t.bond);
 const hasEquities = m.trades.some((t: any) => !t.bond);
+// A row of an amended filing shows two dates, so the fineprint explains them,
+// and only on a page that has such a row.
+const hasAmended = m.trades.some((t: any) => t.amended);
 
 const STAT_CARDS = [
   { n: s.trades.toLocaleString("en-US"), l: "trades disclosed" },
@@ -625,6 +628,7 @@ const schema = [
                 <div role="cell" class="tdate">
                   {fmtDate(t.txDate)}
                   <small>filed {fmtDate(t.filedDate)}</small>
+                  {t.amended && <small>amended {fmtMonth(t.amended)}</small>}
                 </div>
                 <div role="cell" class="tlate">
                   {t.daysLate && t.daysLate > 0 ? (
@@ -666,6 +670,12 @@ const schema = [
           href="/#feed"
           class="underline underline-offset-2 hover:text-ink">live tracker</a
         >. Source: official House and Senate disclosure portals.
+        {hasAmended && (
+          <>
+            {" "}An amended filing replaces the filing it corrects: "filed" is
+            the date of the first version, and the link opens the amended one.
+          </>
+        )}
       </p>
     </section>
 
