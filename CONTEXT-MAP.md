@@ -4,9 +4,9 @@
 
 - [Capitol Ledger Landing](./landing/CONTEXT.md) — marketing page converting
   visitors into email subscribers for trade alerts
-- Congress tracker (`congress/`, `docs/trades.html`) — pipeline and site for
-  official STOCK Act disclosures; no CONTEXT.md yet (conventions live in
-  CLAUDE.md and congress/README.md)
+- Congress tracker (`congress/`, published at `/tracker` and on the member
+  and ticker pages) — pipeline for official STOCK Act disclosures; no
+  CONTEXT.md yet (conventions live in CLAUDE.md and congress/README.md)
 - World Cup predictor (`predictor/`, `docs/index.html`) — match forecasting;
   no CONTEXT.md yet (conventions live in CLAUDE.md)
 
