@@ -12,24 +12,24 @@
   },
   "indexable": true,
   "technical": {
-    "asOf": "2026-11-10",
-    "price": 465.23,
-    "chg1d": 0.0,
-    "chg1w": 0.86,
-    "chg1m": 11.41,
-    "rsi14": 62.5,
-    "sma50": 423.79,
-    "sma200": 379.19,
-    "ema8": 462.38,
-    "ema21": 449.95,
-    "emaGap": 2.76,
-    "vsSma50": 9.8,
-    "vsSma200": 22.7,
-    "relVol": 0.75,
+    "asOf": "2026-11-11",
+    "price": 468.11,
+    "chg1d": 0.62,
+    "chg1w": -2.17,
+    "chg1m": 13.39,
+    "rsi14": 63.8,
+    "sma50": 424.39,
+    "sma200": 379.77,
+    "ema8": 463.65,
+    "ema21": 451.6,
+    "emaGap": 2.67,
+    "vsSma50": 10.3,
+    "vsSma200": 23.3,
+    "relVol": 0.71,
     "vol1y": 29.0,
     "high52w": 478.48,
     "low52w": 313.85,
-    "rangePos": 92.0,
+    "rangePos": 94.0,
     "series": [
       {
         "d": "2025-11-21",
@@ -236,17 +236,17 @@
         "c": 460.42
       },
       {
-        "d": "2026-11-10",
-        "c": 465.23
+        "d": "2026-11-11",
+        "c": 468.11
       }
     ],
     "signals": [],
     "score": {
       "label": "Strong Buy",
-      "buys": 6,
-      "sells": 0,
+      "buys": 5,
+      "sells": 1,
       "holds": 1,
-      "ratio": 0.857
+      "ratio": 0.571
     },
     "votes": {
       "ema_cross": {
@@ -274,26 +274,26 @@
         "muted": false
       },
       "chg_1w": {
-        "vote": 1,
+        "vote": -1,
         "muted": false
       }
     }
   },
   "summary": {
-    "trades": 37,
+    "trades": 36,
     "members": 17,
     "congress": 16,
     "executive": 1,
     "whoLabel": "16 members of Congress and 1 executive-branch filer",
     "buys": 17,
-    "sells": 20,
+    "sells": 19,
     "other": 0,
     "firstTx": "2024-08-07",
     "lastTx": "2026-10-15",
     "lastFiling": "2026-11-02",
     "estBuyLabel": "$210K",
-    "estSellLabel": "$307K",
-    "pctLate": 19
+    "estSellLabel": "$275K",
+    "pctLate": 17
   },
   "topMembers": [
     {
@@ -352,17 +352,6 @@
       "hasPage": false
     },
     {
-      "name": "Tommy Tuberville",
-      "slug": "tommy-tuberville",
-      "party": "R",
-      "chamber": "Senate",
-      "trades": 2,
-      "buys": 0,
-      "sells": 2,
-      "estLabel": "$65K",
-      "hasPage": true
-    },
-    {
       "name": "Jared Moskowitz",
       "slug": "jared-moskowitz",
       "party": "D",
@@ -398,6 +387,17 @@
     {
       "name": "Alan Armstrong",
       "slug": "alan-armstrong",
+      "party": "R",
+      "chamber": "Senate",
+      "trades": 1,
+      "buys": 0,
+      "sells": 1,
+      "estLabel": "$33K",
+      "hasPage": true
+    },
+    {
+      "name": "Tommy Tuberville",
+      "slug": "tommy-tuberville",
       "party": "R",
       "chamber": "Senate",
       "trades": 1,
@@ -713,15 +713,15 @@
   "faq": [
     {
       "q": "Who in Congress has traded AMGN stock?",
-      "a": "16 members of Congress and 1 executive-branch filer have disclosed 37 AMGN trades since August 2024. The most active is David J. Taylor, with 9 trades, followed by Marjorie Taylor Greene and Jefferson Shreve. Each trade on this page links to the official filing it came from."
+      "a": "16 members of Congress and 1 executive-branch filer have disclosed 36 AMGN trades since August 2024. The most active is David J. Taylor, with 9 trades, followed by Marjorie Taylor Greene and Jefferson Shreve. Each trade on this page links to the official filing it came from."
     },
     {
       "q": "Is Congress buying or selling AMGN?",
-      "a": "Of the 37 disclosed AMGN trades, 17 were buys and 20 were sells. By the midpoint of each filed amount bracket, the buying comes to about $210K and the selling to about $307K. Filings disclose brackets, never exact amounts, so these totals are estimates."
+      "a": "Of the 36 disclosed AMGN trades, 17 were buys and 19 were sells. By the midpoint of each filed amount bracket, the buying comes to about $210K and the selling to about $275K. Filings disclose brackets, never exact amounts, so these totals are estimates."
     },
     {
       "q": "How late are AMGN trades disclosed?",
-      "a": "19% of the disclosed AMGN trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Oct 15, 2026, and the newest filing arrived on Nov 2, 2026."
+      "a": "17% of the disclosed AMGN trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Oct 15, 2026, and the newest filing arrived on Nov 2, 2026."
     }
   ]
 }

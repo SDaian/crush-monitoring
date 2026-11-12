@@ -12,24 +12,24 @@
   },
   "indexable": true,
   "technical": {
-    "asOf": "2026-11-10",
-    "price": 70.05,
-    "chg1d": -1.57,
-    "chg1w": 5.18,
-    "chg1m": -2.03,
-    "rsi14": 54.3,
-    "sma50": 69.88,
-    "sma200": 72.83,
-    "ema8": 68.9,
-    "ema21": 68.58,
-    "emaGap": 0.46,
-    "vsSma50": 0.2,
-    "vsSma200": -3.8,
-    "relVol": 0.65,
-    "vol1y": 35.2,
-    "high52w": 94.1,
+    "asOf": "2026-11-11",
+    "price": 70.68,
+    "chg1d": 0.9,
+    "chg1w": 1.16,
+    "chg1m": -0.9,
+    "rsi14": 56.2,
+    "sma50": 69.79,
+    "sma200": 72.77,
+    "ema8": 69.3,
+    "ema21": 68.77,
+    "emaGap": 0.76,
+    "vsSma50": 1.3,
+    "vsSma200": -2.9,
+    "relVol": 0.82,
+    "vol1y": 35.1,
+    "high52w": 93.6,
     "low52w": 65.25,
-    "rangePos": 17.0,
+    "rangePos": 19.0,
     "series": [
       {
         "d": "2025-11-21",
@@ -236,8 +236,8 @@
         "c": 68.59
       },
       {
-        "d": "2026-11-10",
-        "c": 70.05
+        "d": "2026-11-11",
+        "c": 70.68
       }
     ],
     "signals": [],
@@ -280,20 +280,20 @@
     }
   },
   "summary": {
-    "trades": 43,
+    "trades": 44,
     "members": 16,
     "congress": 16,
     "executive": 0,
     "whoLabel": "16 members of Congress",
     "buys": 22,
-    "sells": 21,
+    "sells": 22,
     "other": 0,
     "firstTx": "2024-10-29",
-    "lastTx": "2026-07-17",
-    "lastFiling": "2026-09-04",
+    "lastTx": "2026-10-20",
+    "lastFiling": "2026-11-10",
     "estBuyLabel": "$1.1M",
-    "estSellLabel": "$302K",
-    "pctLate": 12
+    "estSellLabel": "$310K",
+    "pctLate": 11
   },
   "topMembers": [
     {
@@ -301,10 +301,10 @@
       "slug": "gilbert-ray-cisneros-jr",
       "party": "D",
       "chamber": "House",
-      "trades": 9,
+      "trades": 10,
       "buys": 5,
-      "sells": 4,
-      "estLabel": "$72K",
+      "sells": 5,
+      "estLabel": "$80K",
       "hasPage": true
     },
     {
@@ -408,6 +408,18 @@
     }
   ],
   "trades": [
+    {
+      "member": "Gilbert Ray Cisneros, Jr.",
+      "memberSlug": "gilbert-ray-cisneros-jr",
+      "hasPage": true,
+      "party": "D",
+      "side": "SELL",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-10-20",
+      "filedDate": "2026-11-10",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035788.pdf"
+    },
     {
       "member": "Gilbert Ray Cisneros, Jr.",
       "memberSlug": "gilbert-ray-cisneros-jr",
@@ -695,33 +707,21 @@
       "filedDate": "2025-08-18",
       "daysLate": 0,
       "sourceUrl": "https://efdsearch.senate.gov/search/view/ptr/218c16a3-d408-4cc0-aa89-08730d05dfc3/"
-    },
-    {
-      "member": "Cleo Fields",
-      "memberSlug": "cleo-fields",
-      "hasPage": true,
-      "party": "D",
-      "side": "BUY",
-      "amountBucket": "$15K – $50K",
-      "txDate": "2025-07-10",
-      "filedDate": "2025-08-06",
-      "daysLate": 0,
-      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20030803.pdf"
     }
   ],
   "tradesShown": 25,
   "faq": [
     {
       "q": "Who in Congress has traded UBER stock?",
-      "a": "16 members of Congress have disclosed 43 UBER trades since October 2024. The most active is Gilbert Ray Cisneros, Jr., with 9 trades, followed by Josh Gottheimer and Lisa C. McClain. Each trade on this page links to the official filing it came from."
+      "a": "16 members of Congress have disclosed 44 UBER trades since October 2024. The most active is Gilbert Ray Cisneros, Jr., with 10 trades, followed by Josh Gottheimer and Lisa C. McClain. Each trade on this page links to the official filing it came from."
     },
     {
       "q": "Is Congress buying or selling UBER?",
-      "a": "Of the 43 disclosed UBER trades, 22 were buys and 21 were sells. By the midpoint of each filed amount bracket, the buying comes to about $1.1M and the selling to about $302K. Filings disclose brackets, never exact amounts, so these totals are estimates."
+      "a": "Of the 44 disclosed UBER trades, 22 were buys and 22 were sells. By the midpoint of each filed amount bracket, the buying comes to about $1.1M and the selling to about $310K. Filings disclose brackets, never exact amounts, so these totals are estimates."
     },
     {
       "q": "How late are UBER trades disclosed?",
-      "a": "12% of the disclosed UBER trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Jul 17, 2026, and the newest filing arrived on Sep 4, 2026."
+      "a": "11% of the disclosed UBER trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Oct 20, 2026, and the newest filing arrived on Nov 10, 2026."
     }
   ]
 }

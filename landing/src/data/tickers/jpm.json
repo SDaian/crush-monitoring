@@ -12,24 +12,24 @@
   },
   "indexable": true,
   "technical": {
-    "asOf": "2026-11-10",
-    "price": 342.07,
-    "chg1d": -0.0,
-    "chg1w": 1.21,
-    "chg1m": 2.32,
-    "rsi14": 52.7,
-    "sma50": 341.24,
-    "sma200": 324.24,
-    "ema8": 340.23,
-    "ema21": 338.92,
-    "emaGap": 0.39,
-    "vsSma50": 0.2,
-    "vsSma200": 5.5,
-    "relVol": 0.7,
+    "asOf": "2026-11-11",
+    "price": 343.39,
+    "chg1d": 0.39,
+    "chg1w": -2.48,
+    "chg1m": 3.61,
+    "rsi14": 53.7,
+    "sma50": 341.01,
+    "sma200": 324.45,
+    "ema8": 340.94,
+    "ema21": 339.32,
+    "emaGap": 0.48,
+    "vsSma50": 0.7,
+    "vsSma200": 5.8,
+    "relVol": 0.65,
     "vol1y": 23.0,
     "high52w": 365.18,
     "low52w": 282.84,
-    "rangePos": 72.0,
+    "rangePos": 74.0,
     "series": [
       {
         "d": "2025-11-21",
@@ -236,17 +236,17 @@
         "c": 334.49
       },
       {
-        "d": "2026-11-10",
-        "c": 342.07
+        "d": "2026-11-11",
+        "c": 343.39
       }
     ],
     "signals": [],
     "score": {
       "label": "Strong Buy",
-      "buys": 6,
-      "sells": 0,
+      "buys": 5,
+      "sells": 1,
       "holds": 1,
-      "ratio": 0.857
+      "ratio": 0.571
     },
     "votes": {
       "ema_cross": {
@@ -274,26 +274,26 @@
         "muted": false
       },
       "chg_1w": {
-        "vote": 1,
+        "vote": -1,
         "muted": false
       }
     }
   },
   "summary": {
-    "trades": 68,
+    "trades": 66,
     "members": 28,
     "congress": 27,
     "executive": 1,
     "whoLabel": "27 members of Congress and 1 executive-branch filer",
     "buys": 31,
-    "sells": 37,
+    "sells": 35,
     "other": 0,
-    "firstTx": "2024-03-12",
+    "firstTx": "2024-08-07",
     "lastTx": "2026-09-04",
     "lastFiling": "2026-10-01",
     "estBuyLabel": "$340K",
-    "estSellLabel": "$751K",
-    "pctLate": 26
+    "estSellLabel": "$710K",
+    "pctLate": 24
   },
   "topMembers": [
     {
@@ -374,17 +374,6 @@
       "hasPage": false
     },
     {
-      "name": "Tommy Tuberville",
-      "slug": "tommy-tuberville",
-      "party": "R",
-      "chamber": "Senate",
-      "trades": 3,
-      "buys": 0,
-      "sells": 3,
-      "estLabel": "$73K",
-      "hasPage": true
-    },
-    {
       "name": "Jefferson Shreve",
       "slug": "jefferson-shreve",
       "party": "R",
@@ -403,6 +392,17 @@
       "trades": 2,
       "buys": 1,
       "sells": 1,
+      "estLabel": "$16K",
+      "hasPage": false
+    },
+    {
+      "name": "Byron Donalds",
+      "slug": "byron-donalds",
+      "party": "R",
+      "chamber": "House",
+      "trades": 2,
+      "buys": 0,
+      "sells": 2,
       "estLabel": "$16K",
       "hasPage": false
     }
@@ -713,15 +713,15 @@
   "faq": [
     {
       "q": "Who in Congress has traded JPM stock?",
-      "a": "27 members of Congress and 1 executive-branch filer have disclosed 68 JPM trades since March 2024. The most active is Lisa C. McClain, with 7 trades, followed by Marjorie Taylor Greene and David J. Taylor. Each trade on this page links to the official filing it came from."
+      "a": "27 members of Congress and 1 executive-branch filer have disclosed 66 JPM trades since August 2024. The most active is Lisa C. McClain, with 7 trades, followed by Marjorie Taylor Greene and David J. Taylor. Each trade on this page links to the official filing it came from."
     },
     {
       "q": "Is Congress buying or selling JPM?",
-      "a": "Of the 68 disclosed JPM trades, 31 were buys and 37 were sells. By the midpoint of each filed amount bracket, the buying comes to about $340K and the selling to about $751K. Filings disclose brackets, never exact amounts, so these totals are estimates."
+      "a": "Of the 66 disclosed JPM trades, 31 were buys and 35 were sells. By the midpoint of each filed amount bracket, the buying comes to about $340K and the selling to about $710K. Filings disclose brackets, never exact amounts, so these totals are estimates."
     },
     {
       "q": "How late are JPM trades disclosed?",
-      "a": "26% of the disclosed JPM trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Sep 4, 2026, and the newest filing arrived on Oct 1, 2026."
+      "a": "24% of the disclosed JPM trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Sep 4, 2026, and the newest filing arrived on Oct 1, 2026."
     }
   ]
 }

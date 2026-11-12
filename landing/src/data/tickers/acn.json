@@ -12,24 +12,24 @@
   },
   "indexable": true,
   "technical": {
-    "asOf": "2026-11-10",
-    "price": 258.51,
-    "chg1d": 1.63,
-    "chg1w": 1.55,
-    "chg1m": 20.31,
-    "rsi14": 63.1,
-    "sma50": 212.99,
-    "sma200": 190.6,
-    "ema8": 256.81,
-    "ema21": 244.17,
-    "emaGap": 5.18,
-    "vsSma50": 21.4,
-    "vsSma200": 35.6,
-    "relVol": 0.64,
-    "vol1y": 50.2,
+    "asOf": "2026-11-11",
+    "price": 253.66,
+    "chg1d": -1.88,
+    "chg1w": -4.01,
+    "chg1m": 18.78,
+    "rsi14": 59.4,
+    "sma50": 214.3,
+    "sma200": 190.49,
+    "ema8": 256.11,
+    "ema21": 245.03,
+    "emaGap": 4.52,
+    "vsSma50": 18.4,
+    "vsSma200": 33.2,
+    "relVol": 0.55,
+    "vol1y": 50.3,
     "high52w": 288.54,
     "low52w": 124.44,
-    "rangePos": 82.0,
+    "rangePos": 79.0,
     "series": [
       {
         "d": "2025-11-21",
@@ -236,17 +236,17 @@
         "c": 260.5
       },
       {
-        "d": "2026-11-10",
-        "c": 258.51
+        "d": "2026-11-11",
+        "c": 253.66
       }
     ],
     "signals": [],
     "score": {
       "label": "Strong Buy",
-      "buys": 6,
-      "sells": 0,
+      "buys": 5,
+      "sells": 1,
       "holds": 1,
-      "ratio": 0.857
+      "ratio": 0.571
     },
     "votes": {
       "ema_cross": {
@@ -274,26 +274,26 @@
         "muted": false
       },
       "chg_1w": {
-        "vote": 1,
+        "vote": -1,
         "muted": false
       }
     }
   },
   "summary": {
-    "trades": 55,
-    "members": 20,
-    "congress": 19,
+    "trades": 54,
+    "members": 19,
+    "congress": 18,
     "executive": 1,
-    "whoLabel": "19 members of Congress and 1 executive-branch filer",
+    "whoLabel": "18 members of Congress and 1 executive-branch filer",
     "buys": 15,
-    "sells": 40,
+    "sells": 39,
     "other": 0,
-    "firstTx": "2024-03-12",
+    "firstTx": "2024-08-07",
     "lastTx": "2026-08-26",
     "lastFiling": "2026-09-17",
     "estBuyLabel": "$187K",
     "estSellLabel": "$4.0M",
-    "pctLate": 18
+    "pctLate": 17
   },
   "topMembers": [
     {
@@ -550,7 +550,8 @@
       "txDate": "2026-05-15",
       "filedDate": "2026-06-16",
       "daysLate": 0,
-      "sourceUrl": "https://efdsearch.senate.gov/search/view/ptr/727b4eb6-d8c7-4792-aa5b-c651c2d72f9c/"
+      "sourceUrl": "https://efdsearch.senate.gov/search/view/ptr/727b4eb6-d8c7-4792-aa5b-c651c2d72f9c/",
+      "amended": "2026-06-16"
     },
     {
       "member": "Julie Johnson",
@@ -713,15 +714,15 @@
   "faq": [
     {
       "q": "Who in Congress has traded ACN stock?",
-      "a": "19 members of Congress and 1 executive-branch filer have disclosed 55 ACN trades since March 2024. The most active is Kelly Morrison, with 8 trades, followed by Gilbert Ray Cisneros, Jr. and Julie Johnson. Each trade on this page links to the official filing it came from."
+      "a": "18 members of Congress and 1 executive-branch filer have disclosed 54 ACN trades since August 2024. The most active is Kelly Morrison, with 8 trades, followed by Gilbert Ray Cisneros, Jr. and Julie Johnson. Each trade on this page links to the official filing it came from."
     },
     {
       "q": "Is Congress buying or selling ACN?",
-      "a": "Of the 55 disclosed ACN trades, 15 were buys and 40 were sells. By the midpoint of each filed amount bracket, the buying comes to about $187K and the selling to about $4.0M. Filings disclose brackets, never exact amounts, so these totals are estimates."
+      "a": "Of the 54 disclosed ACN trades, 15 were buys and 39 were sells. By the midpoint of each filed amount bracket, the buying comes to about $187K and the selling to about $4.0M. Filings disclose brackets, never exact amounts, so these totals are estimates."
     },
     {
       "q": "How late are ACN trades disclosed?",
-      "a": "18% of the disclosed ACN trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Aug 26, 2026, and the newest filing arrived on Sep 17, 2026."
+      "a": "17% of the disclosed ACN trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Aug 26, 2026, and the newest filing arrived on Sep 17, 2026."
     }
   ]
 }

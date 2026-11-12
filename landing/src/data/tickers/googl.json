@@ -14,24 +14,24 @@
   },
   "indexable": true,
   "technical": {
-    "asOf": "2026-11-10",
-    "price": 287.38,
-    "chg1d": -0.27,
-    "chg1w": 2.62,
-    "chg1m": -18.52,
-    "rsi14": 32.5,
-    "sma50": 330.72,
-    "sma200": 339.08,
-    "ema8": 289.71,
-    "ema21": 306.24,
-    "emaGap": -5.4,
-    "vsSma50": -13.1,
-    "vsSma200": -15.2,
-    "relVol": 0.71,
-    "vol1y": 33.9,
+    "asOf": "2026-11-11",
+    "price": 293.45,
+    "chg1d": 2.11,
+    "chg1w": 1.56,
+    "chg1m": -17.05,
+    "rsi14": 38.0,
+    "sma50": 329.89,
+    "sma200": 338.88,
+    "ema8": 290.54,
+    "ema21": 305.08,
+    "emaGap": -4.77,
+    "vsSma50": -11.0,
+    "vsSma200": -13.4,
+    "relVol": 0.64,
+    "vol1y": 33.7,
     "high52w": 402.62,
     "low52w": 273.5,
-    "rangePos": 11.0,
+    "rangePos": 15.0,
     "series": [
       {
         "d": "2025-11-21",
@@ -238,8 +238,8 @@
         "c": 284.78
       },
       {
-        "d": "2026-11-10",
-        "c": 287.38
+        "d": "2026-11-11",
+        "c": 293.45
       }
     ],
     "signals": [],
@@ -282,20 +282,20 @@
     }
   },
   "summary": {
-    "trades": 171,
+    "trades": 166,
     "members": 42,
     "congress": 41,
     "executive": 1,
     "whoLabel": "41 members of Congress and 1 executive-branch filer",
-    "buys": 91,
-    "sells": 80,
+    "buys": 89,
+    "sells": 77,
     "other": 0,
     "firstTx": "2024-08-07",
     "lastTx": "2026-10-16",
     "lastFiling": "2026-10-27",
     "estBuyLabel": "$4.6M",
     "estSellLabel": "$8.4M",
-    "pctLate": 16
+    "pctLate": 14
   },
   "topMembers": [
     {
@@ -387,17 +387,6 @@
       "hasPage": false
     },
     {
-      "name": "Tommy Tuberville",
-      "slug": "tommy-tuberville",
-      "party": "R",
-      "chamber": "Senate",
-      "trades": 6,
-      "buys": 0,
-      "sells": 6,
-      "estLabel": "$146K",
-      "hasPage": true
-    },
-    {
       "name": "Thomas H. Kean, Jr.",
       "slug": "thomas-h-kean-jr",
       "party": "R",
@@ -406,6 +395,17 @@
       "buys": 0,
       "sells": 6,
       "estLabel": "$97K",
+      "hasPage": false
+    },
+    {
+      "name": "Michael A. Rulli",
+      "slug": "michael-a-rulli",
+      "party": "R",
+      "chamber": "House",
+      "trades": 5,
+      "buys": 2,
+      "sells": 3,
+      "estLabel": "$174K",
       "hasPage": false
     }
   ],
@@ -715,15 +715,15 @@
   "faq": [
     {
       "q": "Who in Congress has traded GOOGL and GOOG stock?",
-      "a": "41 members of Congress and 1 executive-branch filer have disclosed 171 GOOGL and GOOG trades since August 2024. The most active is Cleo Fields, with 28 trades, followed by David J. Taylor and Lisa C. McClain. Each trade on this page links to the official filing it came from."
+      "a": "41 members of Congress and 1 executive-branch filer have disclosed 166 GOOGL and GOOG trades since August 2024. The most active is Cleo Fields, with 28 trades, followed by David J. Taylor and Lisa C. McClain. Each trade on this page links to the official filing it came from."
     },
     {
       "q": "Is Congress buying or selling GOOGL and GOOG?",
-      "a": "Of the 171 disclosed GOOGL and GOOG trades, 91 were buys and 80 were sells. By the midpoint of each filed amount bracket, the buying comes to about $4.6M and the selling to about $8.4M. Filings disclose brackets, never exact amounts, so these totals are estimates."
+      "a": "Of the 166 disclosed GOOGL and GOOG trades, 89 were buys and 77 were sells. By the midpoint of each filed amount bracket, the buying comes to about $4.6M and the selling to about $8.4M. Filings disclose brackets, never exact amounts, so these totals are estimates."
     },
     {
       "q": "How late are GOOGL and GOOG trades disclosed?",
-      "a": "16% of the disclosed GOOGL and GOOG trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Oct 16, 2026, and the newest filing arrived on Oct 27, 2026."
+      "a": "14% of the disclosed GOOGL and GOOG trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Oct 16, 2026, and the newest filing arrived on Oct 27, 2026."
     }
   ]
 }

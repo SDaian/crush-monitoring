@@ -12,24 +12,24 @@
   },
   "indexable": true,
   "technical": {
-    "asOf": "2026-11-10",
-    "price": 168.89,
-    "chg1d": -5.47,
-    "chg1w": -18.29,
-    "chg1m": -25.38,
-    "rsi14": 23.9,
-    "sma50": 218.0,
-    "sma200": 204.54,
-    "ema8": 188.55,
-    "ema21": 203.08,
-    "emaGap": -7.16,
-    "vsSma50": -22.5,
-    "vsSma200": -17.4,
-    "relVol": 2.76,
-    "vol1y": 38.9,
+    "asOf": "2026-11-11",
+    "price": 173.73,
+    "chg1d": 2.87,
+    "chg1w": -13.19,
+    "chg1m": -23.98,
+    "rsi14": 28.7,
+    "sma50": 217.12,
+    "sma200": 204.47,
+    "ema8": 185.25,
+    "ema21": 200.41,
+    "emaGap": -7.56,
+    "vsSma50": -20.0,
+    "vsSma200": -15.0,
+    "relVol": 1.91,
+    "vol1y": 38.6,
     "high52w": 239.24,
     "low52w": 165.17,
-    "rangePos": 5.0,
+    "rangePos": 12.0,
     "series": [
       {
         "d": "2025-11-21",
@@ -236,8 +236,8 @@
         "c": 186.64
       },
       {
-        "d": "2026-11-10",
-        "c": 168.89
+        "d": "2026-11-11",
+        "c": 173.73
       }
     ],
     "signals": [],
@@ -280,20 +280,20 @@
     }
   },
   "summary": {
-    "trades": 190,
+    "trades": 189,
     "members": 36,
     "congress": 35,
     "executive": 1,
     "whoLabel": "35 members of Congress and 1 executive-branch filer",
-    "buys": 122,
-    "sells": 68,
+    "buys": 120,
+    "sells": 69,
     "other": 0,
-    "firstTx": "2024-01-02",
+    "firstTx": "2024-03-11",
     "lastTx": "2026-10-23",
-    "lastFiling": "2026-11-05",
-    "estBuyLabel": "$11.3M",
+    "lastFiling": "2026-11-10",
+    "estBuyLabel": "$11.2M",
     "estSellLabel": "$10.7M",
-    "pctLate": 16
+    "pctLate": 15
   },
   "topMembers": [
     {
@@ -356,10 +356,10 @@
       "slug": "gilbert-ray-cisneros-jr",
       "party": "D",
       "chamber": "House",
-      "trades": 10,
+      "trades": 11,
       "buys": 5,
-      "sells": 5,
-      "estLabel": "$129K",
+      "sells": 6,
+      "estLabel": "$137K",
       "hasPage": true
     },
     {
@@ -431,6 +431,18 @@
       "filedDate": "2026-11-05",
       "daysLate": 0,
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035778.pdf"
+    },
+    {
+      "member": "Gilbert Ray Cisneros, Jr.",
+      "memberSlug": "gilbert-ray-cisneros-jr",
+      "hasPage": true,
+      "party": "D",
+      "side": "SELL",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-10-20",
+      "filedDate": "2026-11-10",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035788.pdf"
     },
     {
       "member": "Pete Sessions",
@@ -695,33 +707,21 @@
       "filedDate": "2026-06-25",
       "daysLate": 0,
       "sourceUrl": "https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/F9CA13B970439E8F85258E27002DDF15/$FILE/Donald-J-Trump-06.25.2026-278T%20%282%29.pdf"
-    },
-    {
-      "member": "Sheldon Whitehouse",
-      "memberSlug": "sheldon-whitehouse",
-      "hasPage": false,
-      "party": "D",
-      "side": "SELL",
-      "amountBucket": "$100K – $250K",
-      "txDate": "2026-05-08",
-      "filedDate": "2026-06-02",
-      "daysLate": 0,
-      "sourceUrl": "https://efdsearch.senate.gov/search/view/ptr/4aa0094d-d9da-4a05-aa13-6d9f5d376105/"
     }
   ],
   "tradesShown": 25,
   "faq": [
     {
       "q": "Who in Congress has traded NVDA stock?",
-      "a": "35 members of Congress and 1 executive-branch filer have disclosed 190 NVDA trades since January 2024. The most active is Cleo Fields, with 50 trades, followed by Robert P. Bresnahan, Jr. and Sheldon Whitehouse. Each trade on this page links to the official filing it came from."
+      "a": "35 members of Congress and 1 executive-branch filer have disclosed 189 NVDA trades since March 2024. The most active is Cleo Fields, with 50 trades, followed by Robert P. Bresnahan, Jr. and Sheldon Whitehouse. Each trade on this page links to the official filing it came from."
     },
     {
       "q": "Is Congress buying or selling NVDA?",
-      "a": "Of the 190 disclosed NVDA trades, 122 were buys and 68 were sells. By the midpoint of each filed amount bracket, the buying comes to about $11.3M and the selling to about $10.7M. Filings disclose brackets, never exact amounts, so these totals are estimates."
+      "a": "Of the 189 disclosed NVDA trades, 120 were buys and 69 were sells. By the midpoint of each filed amount bracket, the buying comes to about $11.2M and the selling to about $10.7M. Filings disclose brackets, never exact amounts, so these totals are estimates."
     },
     {
       "q": "How late are NVDA trades disclosed?",
-      "a": "16% of the disclosed NVDA trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Oct 23, 2026, and the newest filing arrived on Nov 5, 2026."
+      "a": "15% of the disclosed NVDA trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Oct 23, 2026, and the newest filing arrived on Nov 10, 2026."
     }
   ]
 }

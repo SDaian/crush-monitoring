@@ -12,24 +12,24 @@
   },
   "indexable": true,
   "technical": {
-    "asOf": "2026-11-10",
-    "price": 282.17,
-    "chg1d": 0.26,
-    "chg1w": 7.27,
-    "chg1m": 19.74,
-    "rsi14": 76.4,
-    "sma50": 249.48,
-    "sma200": 282.06,
-    "ema8": 273.45,
-    "ema21": 261.29,
-    "emaGap": 4.65,
-    "vsSma50": 13.1,
-    "vsSma200": 0.0,
-    "relVol": 0.7,
-    "vol1y": 20.7,
+    "asOf": "2026-11-11",
+    "price": 274.8,
+    "chg1d": -2.61,
+    "chg1w": -1.93,
+    "chg1m": 16.53,
+    "rsi14": 65.6,
+    "sma50": 249.75,
+    "sma200": 281.86,
+    "ema8": 273.75,
+    "ema21": 262.52,
+    "emaGap": 4.28,
+    "vsSma50": 10.0,
+    "vsSma200": -2.5,
+    "relVol": 1.19,
+    "vol1y": 20.9,
     "high52w": 341.06,
     "low52w": 230.88,
-    "rangePos": 47.0,
+    "rangePos": 40.0,
     "series": [
       {
         "d": "2025-11-21",
@@ -236,29 +236,29 @@
         "c": 276.52
       },
       {
-        "d": "2026-11-10",
-        "c": 282.17
+        "d": "2026-11-11",
+        "c": 274.8
       }
     ],
     "signals": [],
     "score": {
-      "label": "Buy",
-      "buys": 5,
-      "sells": 2,
-      "holds": 0,
-      "ratio": 0.429
+      "label": "Hold",
+      "buys": 2,
+      "sells": 3,
+      "holds": 2,
+      "ratio": -0.143
     },
     "votes": {
       "ema_cross": {
-        "vote": 1,
-        "muted": false
+        "vote": 0,
+        "muted": true
       },
       "vs_sma50": {
         "vote": 1,
         "muted": false
       },
       "vs_sma200": {
-        "vote": 1,
+        "vote": -1,
         "muted": false
       },
       "sma50_vs_200": {
@@ -266,7 +266,7 @@
         "muted": false
       },
       "rsi": {
-        "vote": -1,
+        "vote": 0,
         "muted": false
       },
       "chg_1m": {
@@ -274,26 +274,26 @@
         "muted": false
       },
       "chg_1w": {
-        "vote": 1,
+        "vote": -1,
         "muted": false
       }
     }
   },
   "summary": {
-    "trades": 36,
-    "members": 17,
-    "congress": 16,
+    "trades": 34,
+    "members": 16,
+    "congress": 15,
     "executive": 1,
-    "whoLabel": "16 members of Congress and 1 executive-branch filer",
+    "whoLabel": "15 members of Congress and 1 executive-branch filer",
     "buys": 14,
-    "sells": 22,
+    "sells": 20,
     "other": 0,
     "firstTx": "2023-03-15",
     "lastTx": "2026-10-27",
     "lastFiling": "2026-10-27",
     "estBuyLabel": "$302K",
-    "estSellLabel": "$706K",
-    "pctLate": 17
+    "estSellLabel": "$641K",
+    "pctLate": 12
   },
   "topMembers": [
     {
@@ -385,17 +385,6 @@
       "hasPage": false
     },
     {
-      "name": "Tommy Tuberville",
-      "slug": "tommy-tuberville",
-      "party": "R",
-      "chamber": "Senate",
-      "trades": 2,
-      "buys": 0,
-      "sells": 2,
-      "estLabel": "$65K",
-      "hasPage": true
-    },
-    {
       "name": "Pete Sessions",
       "slug": "pete-sessions",
       "party": "R",
@@ -405,6 +394,17 @@
       "sells": 2,
       "estLabel": "$41K",
       "hasPage": false
+    },
+    {
+      "name": "Josh Gottheimer",
+      "slug": "josh-gottheimer",
+      "party": "D",
+      "chamber": "House",
+      "trades": 2,
+      "buys": 0,
+      "sells": 2,
+      "estLabel": "$16K",
+      "hasPage": true
     }
   ],
   "trades": [
@@ -713,15 +713,15 @@
   "faq": [
     {
       "q": "Who in Congress has traded MCD stock?",
-      "a": "16 members of Congress and 1 executive-branch filer have disclosed 36 MCD trades since March 2023. The most active is Lisa C. McClain, with 4 trades, followed by Cleo Fields and Jefferson Shreve. Each trade on this page links to the official filing it came from."
+      "a": "15 members of Congress and 1 executive-branch filer have disclosed 34 MCD trades since March 2023. The most active is Lisa C. McClain, with 4 trades, followed by Cleo Fields and Jefferson Shreve. Each trade on this page links to the official filing it came from."
     },
     {
       "q": "Is Congress buying or selling MCD?",
-      "a": "Of the 36 disclosed MCD trades, 14 were buys and 22 were sells. By the midpoint of each filed amount bracket, the buying comes to about $302K and the selling to about $706K. Filings disclose brackets, never exact amounts, so these totals are estimates."
+      "a": "Of the 34 disclosed MCD trades, 14 were buys and 20 were sells. By the midpoint of each filed amount bracket, the buying comes to about $302K and the selling to about $641K. Filings disclose brackets, never exact amounts, so these totals are estimates."
     },
     {
       "q": "How late are MCD trades disclosed?",
-      "a": "17% of the disclosed MCD trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Oct 27, 2026, and the newest filing arrived on Oct 27, 2026."
+      "a": "12% of the disclosed MCD trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Oct 27, 2026, and the newest filing arrived on Oct 27, 2026."
     }
   ]
 }

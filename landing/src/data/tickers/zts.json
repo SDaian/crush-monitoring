@@ -12,20 +12,20 @@
   },
   "indexable": true,
   "technical": {
-    "asOf": "2026-11-10",
-    "price": 82.46,
-    "chg1d": 0.17,
-    "chg1w": -0.64,
-    "chg1m": 9.0,
-    "rsi14": 56.3,
-    "sma50": 75.9,
-    "sma200": 92.08,
-    "ema8": 82.03,
-    "ema21": 80.11,
-    "emaGap": 2.4,
+    "asOf": "2026-11-11",
+    "price": 82.57,
+    "chg1d": 0.13,
+    "chg1w": -7.43,
+    "chg1m": 11.13,
+    "rsi14": 56.5,
+    "sma50": 76.0,
+    "sma200": 91.87,
+    "ema8": 82.15,
+    "ema21": 80.33,
+    "emaGap": 2.26,
     "vsSma50": 8.6,
-    "vsSma200": -10.4,
-    "relVol": 1.05,
+    "vsSma200": -10.1,
+    "relVol": 0.95,
     "vol1y": 39.7,
     "high52w": 131.1,
     "low52w": 69.1,
@@ -236,8 +236,8 @@
         "c": 79.4
       },
       {
-        "d": "2026-11-10",
-        "c": 82.46
+        "d": "2026-11-11",
+        "c": 82.57
       }
     ],
     "signals": [],
@@ -280,20 +280,20 @@
     }
   },
   "summary": {
-    "trades": 34,
+    "trades": 31,
     "members": 11,
     "congress": 10,
     "executive": 1,
     "whoLabel": "10 members of Congress and 1 executive-branch filer",
-    "buys": 15,
-    "sells": 19,
+    "buys": 13,
+    "sells": 18,
     "other": 0,
-    "firstTx": "2024-01-04",
+    "firstTx": "2024-12-11",
     "lastTx": "2026-10-21",
     "lastFiling": "2026-11-04",
-    "estBuyLabel": "$236K",
-    "estSellLabel": "$275K",
-    "pctLate": 18
+    "estBuyLabel": "$220K",
+    "estSellLabel": "$267K",
+    "pctLate": 10
   },
   "topMembers": [
     {
@@ -306,17 +306,6 @@
       "sells": 4,
       "estLabel": "$72K",
       "hasPage": true
-    },
-    {
-      "name": "Markwayne Mullin",
-      "slug": "markwayne-mullin",
-      "party": "R",
-      "chamber": "Senate",
-      "trades": 6,
-      "buys": 3,
-      "sells": 3,
-      "estLabel": "$164K",
-      "hasPage": false
     },
     {
       "name": "Jefferson Shreve",
@@ -338,6 +327,17 @@
       "buys": 2,
       "sells": 2,
       "estLabel": "$32K",
+      "hasPage": false
+    },
+    {
+      "name": "Markwayne Mullin",
+      "slug": "markwayne-mullin",
+      "party": "R",
+      "chamber": "Senate",
+      "trades": 3,
+      "buys": 1,
+      "sells": 2,
+      "estLabel": "$140K",
       "hasPage": false
     },
     {
@@ -713,15 +713,15 @@
   "faq": [
     {
       "q": "Who in Congress has traded ZTS stock?",
-      "a": "10 members of Congress and 1 executive-branch filer have disclosed 34 ZTS trades since January 2024. The most active is Gilbert Ray Cisneros, Jr., with 9 trades, followed by Markwayne Mullin and Jefferson Shreve. Each trade on this page links to the official filing it came from."
+      "a": "10 members of Congress and 1 executive-branch filer have disclosed 31 ZTS trades since December 2024. The most active is Gilbert Ray Cisneros, Jr., with 9 trades, followed by Jefferson Shreve and Lisa C. McClain. Each trade on this page links to the official filing it came from."
     },
     {
       "q": "Is Congress buying or selling ZTS?",
-      "a": "Of the 34 disclosed ZTS trades, 15 were buys and 19 were sells. By the midpoint of each filed amount bracket, the buying comes to about $236K and the selling to about $275K. Filings disclose brackets, never exact amounts, so these totals are estimates."
+      "a": "Of the 31 disclosed ZTS trades, 13 were buys and 18 were sells. By the midpoint of each filed amount bracket, the buying comes to about $220K and the selling to about $267K. Filings disclose brackets, never exact amounts, so these totals are estimates."
     },
     {
       "q": "How late are ZTS trades disclosed?",
-      "a": "18% of the disclosed ZTS trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Oct 21, 2026, and the newest filing arrived on Nov 4, 2026."
+      "a": "10% of the disclosed ZTS trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Oct 21, 2026, and the newest filing arrived on Nov 4, 2026."
     }
   ]
 }

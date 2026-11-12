@@ -12,24 +12,24 @@
   },
   "indexable": true,
   "technical": {
-    "asOf": "2026-11-10",
-    "price": 270.87,
-    "chg1d": 1.48,
-    "chg1w": 8.05,
-    "chg1m": 4.37,
-    "rsi14": 61.6,
-    "sma50": 254.18,
-    "sma200": 244.24,
-    "ema8": 260.85,
-    "ema21": 256.67,
-    "emaGap": 1.63,
-    "vsSma50": 6.6,
-    "vsSma200": 10.9,
-    "relVol": 0.77,
+    "asOf": "2026-11-11",
+    "price": 266.17,
+    "chg1d": -1.74,
+    "chg1w": 0.05,
+    "chg1m": 2.94,
+    "rsi14": 57.3,
+    "sma50": 254.41,
+    "sma200": 244.35,
+    "ema8": 262.03,
+    "ema21": 257.53,
+    "emaGap": 1.75,
+    "vsSma50": 4.6,
+    "vsSma200": 8.9,
+    "relVol": 0.75,
     "vol1y": 33.5,
     "high52w": 284.02,
     "low52w": 198.79,
-    "rangePos": 85.0,
+    "rangePos": 79.0,
     "series": [
       {
         "d": "2025-11-21",
@@ -236,8 +236,8 @@
         "c": 259.3
       },
       {
-        "d": "2026-11-10",
-        "c": 270.87
+        "d": "2026-11-11",
+        "c": 266.17
       }
     ],
     "signals": [],
@@ -280,20 +280,20 @@
     }
   },
   "summary": {
-    "trades": 124,
+    "trades": 123,
     "members": 35,
     "congress": 34,
     "executive": 1,
     "whoLabel": "34 members of Congress and 1 executive-branch filer",
-    "buys": 88,
+    "buys": 87,
     "sells": 36,
     "other": 0,
     "firstTx": "2024-10-23",
     "lastTx": "2026-10-27",
     "lastFiling": "2026-10-27",
-    "estBuyLabel": "$4.3M",
+    "estBuyLabel": "$4.2M",
     "estSellLabel": "$4.1M",
-    "pctLate": 18
+    "pctLate": 17
   },
   "topMembers": [
     {
@@ -374,17 +374,6 @@
       "hasPage": false
     },
     {
-      "name": "John Boozman",
-      "slug": "john-boozman",
-      "party": "R",
-      "chamber": "Senate",
-      "trades": 5,
-      "buys": 5,
-      "sells": 0,
-      "estLabel": "$40K",
-      "hasPage": false
-    },
-    {
       "name": "Thomas H. Kean, Jr.",
       "slug": "thomas-h-kean-jr",
       "party": "R",
@@ -405,6 +394,17 @@
       "sells": 1,
       "estLabel": "$4.3M",
       "hasPage": true
+    },
+    {
+      "name": "John Boozman",
+      "slug": "john-boozman",
+      "party": "R",
+      "chamber": "Senate",
+      "trades": 4,
+      "buys": 4,
+      "sells": 0,
+      "estLabel": "$32K",
+      "hasPage": false
     }
   ],
   "trades": [
@@ -713,15 +713,15 @@
   "faq": [
     {
       "q": "Who in Congress has traded AMZN stock?",
-      "a": "34 members of Congress and 1 executive-branch filer have disclosed 124 AMZN trades since October 2024. The most active is Cleo Fields, with 16 trades, followed by Gilbert Ray Cisneros, Jr. and Marjorie Taylor Greene. Each trade on this page links to the official filing it came from."
+      "a": "34 members of Congress and 1 executive-branch filer have disclosed 123 AMZN trades since October 2024. The most active is Cleo Fields, with 16 trades, followed by Gilbert Ray Cisneros, Jr. and Marjorie Taylor Greene. Each trade on this page links to the official filing it came from."
     },
     {
       "q": "Is Congress buying or selling AMZN?",
-      "a": "Of the 124 disclosed AMZN trades, 88 were buys and 36 were sells. By the midpoint of each filed amount bracket, the buying comes to about $4.3M and the selling to about $4.1M. Filings disclose brackets, never exact amounts, so these totals are estimates."
+      "a": "Of the 123 disclosed AMZN trades, 87 were buys and 36 were sells. By the midpoint of each filed amount bracket, the buying comes to about $4.2M and the selling to about $4.1M. Filings disclose brackets, never exact amounts, so these totals are estimates."
     },
     {
       "q": "How late are AMZN trades disclosed?",
-      "a": "18% of the disclosed AMZN trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Oct 27, 2026, and the newest filing arrived on Oct 27, 2026."
+      "a": "17% of the disclosed AMZN trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Oct 27, 2026, and the newest filing arrived on Oct 27, 2026."
     }
   ]
 }

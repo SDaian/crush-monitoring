@@ -12,24 +12,24 @@
   },
   "indexable": true,
   "technical": {
-    "asOf": "2026-11-10",
-    "price": 910.19,
-    "chg1d": 0.44,
-    "chg1w": 1.57,
-    "chg1m": 1.82,
-    "rsi14": 51.1,
-    "sma50": 927.64,
-    "sma200": 956.03,
-    "ema8": 898.16,
-    "ema21": 901.17,
-    "emaGap": -0.34,
-    "vsSma50": -1.9,
-    "vsSma200": -4.8,
-    "relVol": 0.69,
+    "asOf": "2026-11-11",
+    "price": 926.81,
+    "chg1d": 1.83,
+    "chg1w": -0.13,
+    "chg1m": 3.91,
+    "rsi14": 54.6,
+    "sma50": 926.13,
+    "sma200": 956.01,
+    "ema8": 904.52,
+    "ema21": 903.51,
+    "emaGap": 0.11,
+    "vsSma50": 0.1,
+    "vsSma200": -3.1,
+    "relVol": 0.67,
     "vol1y": 33.1,
     "high52w": 1152.07,
     "low52w": 773.7,
-    "rangePos": 36.0,
+    "rangePos": 40.0,
     "series": [
       {
         "d": "2025-11-21",
@@ -236,25 +236,32 @@
         "c": 865.82
       },
       {
-        "d": "2026-11-10",
-        "c": 910.19
+        "d": "2026-11-11",
+        "c": 926.81
       }
     ],
-    "signals": [],
+    "signals": [
+      {
+        "type": "reclaim_sma50",
+        "asof": "2026-11-11",
+        "label": "Reclaimed the 50-day average",
+        "dir": "bull"
+      }
+    ],
     "score": {
-      "label": "Sell",
+      "label": "Hold",
       "buys": 2,
-      "sells": 4,
-      "holds": 1,
-      "ratio": -0.286
+      "sells": 3,
+      "holds": 2,
+      "ratio": -0.143
     },
     "votes": {
       "ema_cross": {
-        "vote": -1,
-        "muted": false
+        "vote": 0,
+        "muted": true
       },
       "vs_sma50": {
-        "vote": -1,
+        "vote": 1,
         "muted": false
       },
       "vs_sma200": {
@@ -274,26 +281,26 @@
         "muted": false
       },
       "chg_1w": {
-        "vote": 1,
+        "vote": -1,
         "muted": false
       }
     }
   },
   "summary": {
-    "trades": 64,
+    "trades": 61,
     "members": 20,
     "congress": 20,
     "executive": 0,
     "whoLabel": "20 members of Congress",
-    "buys": 35,
-    "sells": 29,
+    "buys": 33,
+    "sells": 28,
     "other": 0,
-    "firstTx": "2024-01-04",
+    "firstTx": "2024-10-23",
     "lastTx": "2026-09-24",
     "lastFiling": "2026-10-07",
-    "estBuyLabel": "$501K",
-    "estSellLabel": "$6.7M",
-    "pctLate": 19
+    "estBuyLabel": "$485K",
+    "estSellLabel": "$6.6M",
+    "pctLate": 15
   },
   "topMembers": [
     {
@@ -312,10 +319,10 @@
       "slug": "markwayne-mullin",
       "party": "R",
       "chamber": "Senate",
-      "trades": 9,
-      "buys": 6,
+      "trades": 7,
+      "buys": 4,
       "sells": 3,
-      "estLabel": "$219K",
+      "estLabel": "$203K",
       "hasPage": false
     },
     {
@@ -713,15 +720,15 @@
   "faq": [
     {
       "q": "Who in Congress has traded GS stock?",
-      "a": "20 members of Congress have disclosed 64 GS trades since January 2024. The most active is Jared Moskowitz, with 10 trades, followed by Markwayne Mullin and Julie Johnson. Each trade on this page links to the official filing it came from."
+      "a": "20 members of Congress have disclosed 61 GS trades since October 2024. The most active is Jared Moskowitz, with 10 trades, followed by Markwayne Mullin and Julie Johnson. Each trade on this page links to the official filing it came from."
     },
     {
       "q": "Is Congress buying or selling GS?",
-      "a": "Of the 64 disclosed GS trades, 35 were buys and 29 were sells. By the midpoint of each filed amount bracket, the buying comes to about $501K and the selling to about $6.7M. Filings disclose brackets, never exact amounts, so these totals are estimates."
+      "a": "Of the 61 disclosed GS trades, 33 were buys and 28 were sells. By the midpoint of each filed amount bracket, the buying comes to about $485K and the selling to about $6.6M. Filings disclose brackets, never exact amounts, so these totals are estimates."
     },
     {
       "q": "How late are GS trades disclosed?",
-      "a": "19% of the disclosed GS trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Sep 24, 2026, and the newest filing arrived on Oct 7, 2026."
+      "a": "15% of the disclosed GS trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Sep 24, 2026, and the newest filing arrived on Oct 7, 2026."
     }
   ]
 }

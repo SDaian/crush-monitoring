@@ -828,7 +828,8 @@
       "filedDate": "2025-11-12",
       "daysLate": 0,
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20033424.pdf",
-      "bond": false
+      "bond": false,
+      "tickerSlug": "cmg"
     },
     {
       "ticker": "NVDA",
@@ -1167,8 +1168,7 @@
       "filedDate": "2025-09-30",
       "daysLate": 0,
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20032106.pdf",
-      "bond": false,
-      "tickerSlug": "qcom"
+      "bond": false
     },
     {
       "ticker": "UBER",
@@ -2859,7 +2859,8 @@
       "filedDate": "2025-07-01",
       "daysLate": 0,
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20030472.pdf",
-      "bond": false
+      "bond": false,
+      "tickerSlug": "cmg"
     },
     {
       "ticker": "MSFT",
@@ -2952,11 +2953,11 @@
   "performance": {
     "available": true,
     "benchLabel": "S&P 500",
-    "asofDate": "2026-11-10",
+    "asofDate": "2026-11-11",
     "kpis": {
-      "medianPct": 7.2,
-      "medianBenchPct": 17.9,
-      "beat": 76,
+      "medianPct": 6.8,
+      "medianBenchPct": 19.5,
+      "beat": 68,
       "beatOf": 204,
       "priced": 204,
       "pricedOf": 228
@@ -3038,7 +3039,8 @@
         "2026-10-20",
         "2026-10-27",
         "2026-11-03",
-        "2026-11-10"
+        "2026-11-10",
+        "2026-11-11"
       ],
       "member": [
         100.0,
@@ -3116,7 +3118,8 @@
         125.9,
         124.8,
         117.7,
-        114.6
+        114.6,
+        116.7
       ],
       "bench": [
         100.0,
@@ -3194,7 +3197,8 @@
         119.0,
         119.1,
         116.7,
-        116.0
+        116.0,
+        117.6
       ],
       "buys": 204
     },
@@ -3202,86 +3206,86 @@
       {
         "ticker": "TSM",
         "txDate": "2026-10-09",
-        "pct": -12.5,
-        "benchPct": -3.7,
-        "excess": -8.8
+        "pct": -8.8,
+        "benchPct": -2.4,
+        "excess": -6.4
       },
       {
         "ticker": "NVDA",
         "txDate": "2026-10-01",
-        "pct": -26.8,
-        "benchPct": -1.8,
-        "excess": -25.0
+        "pct": -24.7,
+        "benchPct": -0.5,
+        "excess": -24.2
       },
       {
         "ticker": "NVDA",
         "txDate": "2026-10-01",
-        "pct": -26.8,
-        "benchPct": -1.8,
-        "excess": -25.0
+        "pct": -24.7,
+        "benchPct": -0.5,
+        "excess": -24.2
       },
       {
         "ticker": "NVDA",
         "txDate": "2026-10-01",
-        "pct": -26.8,
-        "benchPct": -1.8,
-        "excess": -25.0
+        "pct": -24.7,
+        "benchPct": -0.5,
+        "excess": -24.2
       },
       {
         "ticker": "NFLX",
         "txDate": "2026-09-14",
-        "pct": -21.2,
-        "benchPct": -1.4,
-        "excess": -19.8
+        "pct": -19.6,
+        "benchPct": -0.1,
+        "excess": -19.5
       },
       {
         "ticker": "GOOG",
         "txDate": "2026-09-14",
-        "pct": -17.6,
-        "benchPct": -1.4,
-        "excess": -16.2
+        "pct": -15.9,
+        "benchPct": -0.1,
+        "excess": -15.8
       },
       {
         "ticker": "MSFT",
         "txDate": "2026-09-10",
-        "pct": 8.3,
-        "benchPct": -1.0,
-        "excess": 9.3
+        "pct": 5.8,
+        "benchPct": 0.3,
+        "excess": 5.5
       },
       {
         "ticker": "MSFT",
         "txDate": "2026-09-10",
-        "pct": 8.3,
-        "benchPct": -1.0,
-        "excess": 9.3
+        "pct": 5.8,
+        "benchPct": 0.3,
+        "excess": 5.5
       },
       {
         "ticker": "AAPL",
         "txDate": "2026-09-08",
-        "pct": 10.2,
-        "benchPct": -2.1,
-        "excess": 12.3
+        "pct": 12.5,
+        "benchPct": -0.8,
+        "excess": 13.3
       },
       {
         "ticker": "AAPL",
         "txDate": "2026-08-13",
-        "pct": 14.2,
-        "benchPct": -3.6,
-        "excess": 17.8
+        "pct": 16.5,
+        "benchPct": -2.3,
+        "excess": 18.8
       },
       {
         "ticker": "TSM",
         "txDate": "2026-07-10",
-        "pct": -8.7,
-        "benchPct": -0.7,
-        "excess": -8.0
+        "pct": -4.8,
+        "benchPct": 0.6,
+        "excess": -5.4
       },
       {
         "ticker": "NVDA",
         "txDate": "2026-06-26",
-        "pct": -12.3,
-        "benchPct": 2.9,
-        "excess": -15.2
+        "pct": -9.8,
+        "benchPct": 4.2,
+        "excess": -14.0
       }
     ],
     "rowsOf": 204

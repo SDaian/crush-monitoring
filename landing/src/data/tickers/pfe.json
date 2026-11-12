@@ -12,24 +12,24 @@
   },
   "indexable": true,
   "technical": {
-    "asOf": "2026-11-10",
-    "price": 29.36,
-    "chg1d": 0.44,
-    "chg1w": -2.13,
-    "chg1m": 3.38,
-    "rsi14": 49.4,
-    "sma50": 28.79,
-    "sma200": 26.94,
-    "ema8": 29.71,
-    "ema21": 29.58,
-    "emaGap": 0.46,
-    "vsSma50": 2.0,
-    "vsSma200": 9.0,
-    "relVol": 0.86,
+    "asOf": "2026-11-11",
+    "price": 29.45,
+    "chg1d": 0.31,
+    "chg1w": -4.35,
+    "chg1m": 3.81,
+    "rsi14": 50.3,
+    "sma50": 28.8,
+    "sma200": 26.96,
+    "ema8": 29.65,
+    "ema21": 29.56,
+    "emaGap": 0.3,
+    "vsSma50": 2.2,
+    "vsSma200": 9.3,
+    "relVol": 0.73,
     "vol1y": 22.0,
     "high52w": 30.79,
     "low52w": 23.67,
-    "rangePos": 80.0,
+    "rangePos": 81.0,
     "series": [
       {
         "d": "2025-11-21",
@@ -236,8 +236,8 @@
         "c": 29.39
       },
       {
-        "d": "2026-11-10",
-        "c": 29.36
+        "d": "2026-11-11",
+        "c": 29.45
       }
     ],
     "signals": [],
@@ -280,20 +280,20 @@
     }
   },
   "summary": {
-    "trades": 33,
+    "trades": 32,
     "members": 16,
     "congress": 15,
     "executive": 1,
     "whoLabel": "15 members of Congress and 1 executive-branch filer",
     "buys": 11,
-    "sells": 22,
+    "sells": 21,
     "other": 0,
-    "firstTx": "2024-05-03",
+    "firstTx": "2024-11-26",
     "lastTx": "2026-06-08",
     "lastFiling": "2026-08-13",
     "estBuyLabel": "$162K",
-    "estSellLabel": "$557K",
-    "pctLate": 15
+    "estSellLabel": "$525K",
+    "pctLate": 12
   },
   "topMembers": [
     {
@@ -328,17 +328,6 @@
       "sells": 1,
       "estLabel": "$65K",
       "hasPage": false
-    },
-    {
-      "name": "Tommy Tuberville",
-      "slug": "tommy-tuberville",
-      "party": "R",
-      "chamber": "Senate",
-      "trades": 2,
-      "buys": 0,
-      "sells": 2,
-      "estLabel": "$65K",
-      "hasPage": true
     },
     {
       "name": "Carol D. Miller",
@@ -404,6 +393,17 @@
       "buys": 0,
       "sells": 1,
       "estLabel": "$75K",
+      "hasPage": true
+    },
+    {
+      "name": "Tommy Tuberville",
+      "slug": "tommy-tuberville",
+      "party": "R",
+      "chamber": "Senate",
+      "trades": 1,
+      "buys": 0,
+      "sells": 1,
+      "estLabel": "$33K",
       "hasPage": true
     }
   ],
@@ -713,15 +713,15 @@
   "faq": [
     {
       "q": "Who in Congress has traded PFE stock?",
-      "a": "15 members of Congress and 1 executive-branch filer have disclosed 33 PFE trades since May 2024. The most active is Gilbert Ray Cisneros, Jr., with 10 trades, followed by Robert P. Bresnahan, Jr. and Jefferson Shreve. Each trade on this page links to the official filing it came from."
+      "a": "15 members of Congress and 1 executive-branch filer have disclosed 32 PFE trades since November 2024. The most active is Gilbert Ray Cisneros, Jr., with 10 trades, followed by Robert P. Bresnahan, Jr. and Jefferson Shreve. Each trade on this page links to the official filing it came from."
     },
     {
       "q": "Is Congress buying or selling PFE?",
-      "a": "Of the 33 disclosed PFE trades, 11 were buys and 22 were sells. By the midpoint of each filed amount bracket, the buying comes to about $162K and the selling to about $557K. Filings disclose brackets, never exact amounts, so these totals are estimates."
+      "a": "Of the 32 disclosed PFE trades, 11 were buys and 21 were sells. By the midpoint of each filed amount bracket, the buying comes to about $162K and the selling to about $525K. Filings disclose brackets, never exact amounts, so these totals are estimates."
     },
     {
       "q": "How late are PFE trades disclosed?",
-      "a": "15% of the disclosed PFE trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Jun 8, 2026, and the newest filing arrived on Aug 13, 2026."
+      "a": "12% of the disclosed PFE trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Jun 8, 2026, and the newest filing arrived on Aug 13, 2026."
     }
   ]
 }

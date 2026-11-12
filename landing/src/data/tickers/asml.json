@@ -12,24 +12,24 @@
   },
   "indexable": true,
   "technical": {
-    "asOf": "2026-11-10",
-    "price": 1507.85,
-    "chg1d": -0.36,
-    "chg1w": -2.85,
-    "chg1m": -13.85,
-    "rsi14": 42.6,
-    "sma50": 1669.83,
-    "sma200": 1601.24,
-    "ema8": 1505.05,
-    "ema21": 1575.05,
-    "emaGap": -4.44,
-    "vsSma50": -9.7,
-    "vsSma200": -5.8,
+    "asOf": "2026-11-11",
+    "price": 1534.42,
+    "chg1d": 1.76,
+    "chg1w": 2.55,
+    "chg1m": -10.67,
+    "rsi14": 45.0,
+    "sma50": 1667.22,
+    "sma200": 1601.64,
+    "ema8": 1511.57,
+    "ema21": 1571.36,
+    "emaGap": -3.8,
+    "vsSma50": -8.0,
+    "vsSma200": -4.2,
     "relVol": 0.85,
     "vol1y": 48.6,
     "high52w": 1989.44,
     "low52w": 966.57,
-    "rangePos": 53.0,
+    "rangePos": 56.0,
     "series": [
       {
         "d": "2025-11-21",
@@ -236,17 +236,17 @@
         "c": 1424.75
       },
       {
-        "d": "2026-11-10",
-        "c": 1507.85
+        "d": "2026-11-11",
+        "c": 1534.42
       }
     ],
     "signals": [],
     "score": {
-      "label": "Strong Sell",
-      "buys": 1,
-      "sells": 5,
+      "label": "Sell",
+      "buys": 2,
+      "sells": 4,
       "holds": 1,
-      "ratio": -0.571
+      "ratio": -0.286
     },
     "votes": {
       "ema_cross": {
@@ -274,26 +274,26 @@
         "muted": false
       },
       "chg_1w": {
-        "vote": -1,
+        "vote": 1,
         "muted": false
       }
     }
   },
   "summary": {
-    "trades": 35,
-    "members": 12,
-    "congress": 12,
+    "trades": 34,
+    "members": 11,
+    "congress": 11,
     "executive": 0,
-    "whoLabel": "12 members of Congress",
+    "whoLabel": "11 members of Congress",
     "buys": 22,
-    "sells": 13,
+    "sells": 12,
     "other": 0,
-    "firstTx": "2024-05-03",
+    "firstTx": "2024-06-10",
     "lastTx": "2026-10-23",
     "lastFiling": "2026-10-28",
     "estBuyLabel": "$243K",
-    "estSellLabel": "$153K",
-    "pctLate": 29
+    "estSellLabel": "$121K",
+    "pctLate": 26
   },
   "topMembers": [
     {
@@ -713,15 +713,15 @@
   "faq": [
     {
       "q": "Who in Congress has traded ASML stock?",
-      "a": "12 members of Congress have disclosed 35 ASML trades since May 2024. The most active is Lisa C. McClain, with 9 trades, followed by Jared Moskowitz and Bruce Westerman. Each trade on this page links to the official filing it came from."
+      "a": "11 members of Congress have disclosed 34 ASML trades since June 2024. The most active is Lisa C. McClain, with 9 trades, followed by Jared Moskowitz and Bruce Westerman. Each trade on this page links to the official filing it came from."
     },
     {
       "q": "Is Congress buying or selling ASML?",
-      "a": "Of the 35 disclosed ASML trades, 22 were buys and 13 were sells. By the midpoint of each filed amount bracket, the buying comes to about $243K and the selling to about $153K. Filings disclose brackets, never exact amounts, so these totals are estimates."
+      "a": "Of the 34 disclosed ASML trades, 22 were buys and 12 were sells. By the midpoint of each filed amount bracket, the buying comes to about $243K and the selling to about $121K. Filings disclose brackets, never exact amounts, so these totals are estimates."
     },
     {
       "q": "How late are ASML trades disclosed?",
-      "a": "29% of the disclosed ASML trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Oct 23, 2026, and the newest filing arrived on Oct 28, 2026."
+      "a": "26% of the disclosed ASML trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Oct 23, 2026, and the newest filing arrived on Oct 28, 2026."
     }
   ]
 }

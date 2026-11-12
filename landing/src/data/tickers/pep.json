@@ -12,20 +12,20 @@
   },
   "indexable": true,
   "technical": {
-    "asOf": "2026-11-10",
-    "price": 143.61,
-    "chg1d": 1.22,
-    "chg1w": 4.62,
-    "chg1m": 13.36,
-    "rsi14": 65.7,
-    "sma50": 133.41,
-    "sma200": 145.83,
-    "ema8": 140.69,
-    "ema21": 137.06,
-    "emaGap": 2.65,
-    "vsSma50": 7.6,
-    "vsSma200": -1.5,
-    "relVol": 0.72,
+    "asOf": "2026-11-11",
+    "price": 143.94,
+    "chg1d": 0.23,
+    "chg1w": 1.07,
+    "chg1m": 13.07,
+    "rsi14": 66.2,
+    "sma50": 133.49,
+    "sma200": 145.8,
+    "ema8": 141.41,
+    "ema21": 137.69,
+    "emaGap": 2.71,
+    "vsSma50": 7.8,
+    "vsSma200": -1.3,
+    "relVol": 1.06,
     "vol1y": 21.6,
     "high52w": 170.49,
     "low52w": 123.73,
@@ -236,8 +236,8 @@
         "c": 141.34
       },
       {
-        "d": "2026-11-10",
-        "c": 143.61
+        "d": "2026-11-11",
+        "c": 143.94
       }
     ],
     "signals": [],
@@ -280,20 +280,20 @@
     }
   },
   "summary": {
-    "trades": 52,
+    "trades": 50,
     "members": 25,
     "congress": 24,
     "executive": 1,
     "whoLabel": "24 members of Congress and 1 executive-branch filer",
     "buys": 19,
-    "sells": 33,
+    "sells": 31,
     "other": 0,
     "firstTx": "2023-03-15",
     "lastTx": "2026-10-21",
     "lastFiling": "2026-10-27",
     "estBuyLabel": "$201K",
-    "estSellLabel": "$861K",
-    "pctLate": 12
+    "estSellLabel": "$821K",
+    "pctLate": 8
   },
   "topMembers": [
     {
@@ -352,17 +352,6 @@
       "hasPage": false
     },
     {
-      "name": "Tommy Tuberville",
-      "slug": "tommy-tuberville",
-      "party": "R",
-      "chamber": "Senate",
-      "trades": 3,
-      "buys": 0,
-      "sells": 3,
-      "estLabel": "$73K",
-      "hasPage": true
-    },
-    {
       "name": "Richard McCormick",
       "slug": "richard-mccormick",
       "party": "R",
@@ -404,6 +393,17 @@
       "buys": 1,
       "sells": 1,
       "estLabel": "$65K",
+      "hasPage": false
+    },
+    {
+      "name": "Bruce Westerman",
+      "slug": "bruce-westerman",
+      "party": "R",
+      "chamber": "House",
+      "trades": 2,
+      "buys": 1,
+      "sells": 1,
+      "estLabel": "$16K",
       "hasPage": false
     }
   ],
@@ -692,36 +692,37 @@
       "side": "SELL",
       "amountBucket": "$15K – $50K",
       "txDate": "2025-10-07",
-      "filedDate": "2026-08-05",
-      "daysLate": 257,
-      "sourceUrl": "https://efdsearch.senate.gov/search/view/ptr/1a5e6752-653a-4b11-82b6-efd51d466bb6/"
-    },
-    {
-      "member": "Tommy Tuberville",
-      "memberSlug": "tommy-tuberville",
-      "hasPage": true,
-      "party": "R",
-      "side": "SELL",
-      "amountBucket": "$15K – $50K",
-      "txDate": "2025-10-07",
       "filedDate": "2025-11-15",
       "daysLate": 0,
-      "sourceUrl": "https://efdsearch.senate.gov/search/view/ptr/c20df8d3-0160-4a0c-a515-a7b1d2956f87/"
+      "sourceUrl": "https://efdsearch.senate.gov/search/view/ptr/1a5e6752-653a-4b11-82b6-efd51d466bb6/",
+      "amended": "2026-08-05"
+    },
+    {
+      "member": "John W. Hickenlooper",
+      "memberSlug": "john-w-hickenlooper",
+      "hasPage": false,
+      "party": "D",
+      "side": "SELL",
+      "amountBucket": "$100K – $250K",
+      "txDate": "2025-09-02",
+      "filedDate": "2025-10-06",
+      "daysLate": 0,
+      "sourceUrl": "https://efdsearch.senate.gov/search/view/ptr/8a808088-5410-434a-a082-cf86637ba3d7/"
     }
   ],
   "tradesShown": 25,
   "faq": [
     {
       "q": "Who in Congress has traded PEP stock?",
-      "a": "24 members of Congress and 1 executive-branch filer have disclosed 52 PEP trades since March 2023. The most active is Julie Johnson, with 7 trades, followed by Jared Moskowitz and Lisa C. McClain. Each trade on this page links to the official filing it came from."
+      "a": "24 members of Congress and 1 executive-branch filer have disclosed 50 PEP trades since March 2023. The most active is Julie Johnson, with 7 trades, followed by Jared Moskowitz and Lisa C. McClain. Each trade on this page links to the official filing it came from."
     },
     {
       "q": "Is Congress buying or selling PEP?",
-      "a": "Of the 52 disclosed PEP trades, 19 were buys and 33 were sells. By the midpoint of each filed amount bracket, the buying comes to about $201K and the selling to about $861K. Filings disclose brackets, never exact amounts, so these totals are estimates."
+      "a": "Of the 50 disclosed PEP trades, 19 were buys and 31 were sells. By the midpoint of each filed amount bracket, the buying comes to about $201K and the selling to about $821K. Filings disclose brackets, never exact amounts, so these totals are estimates."
     },
     {
       "q": "How late are PEP trades disclosed?",
-      "a": "12% of the disclosed PEP trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Oct 21, 2026, and the newest filing arrived on Oct 27, 2026."
+      "a": "8% of the disclosed PEP trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Oct 21, 2026, and the newest filing arrived on Oct 27, 2026."
     }
   ]
 }

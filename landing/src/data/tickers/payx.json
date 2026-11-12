@@ -12,24 +12,24 @@
   },
   "indexable": true,
   "technical": {
-    "asOf": "2026-11-10",
-    "price": 116.2,
-    "chg1d": 1.25,
-    "chg1w": 0.48,
-    "chg1m": 11.05,
-    "rsi14": 56.3,
-    "sma50": 111.53,
-    "sma200": 103.73,
-    "ema8": 115.72,
-    "ema21": 113.48,
-    "emaGap": 1.97,
-    "vsSma50": 4.2,
-    "vsSma200": 12.0,
-    "relVol": 1.01,
+    "asOf": "2026-11-11",
+    "price": 115.37,
+    "chg1d": -0.71,
+    "chg1w": -2.81,
+    "chg1m": 8.58,
+    "rsi14": 54.5,
+    "sma50": 111.32,
+    "sma200": 103.78,
+    "ema8": 115.65,
+    "ema21": 113.66,
+    "emaGap": 1.75,
+    "vsSma50": 3.6,
+    "vsSma200": 11.2,
+    "relVol": 0.92,
     "vol1y": 31.0,
     "high52w": 127.34,
     "low52w": 85.57,
-    "rangePos": 73.0,
+    "rangePos": 71.0,
     "series": [
       {
         "d": "2025-11-21",
@@ -236,17 +236,17 @@
         "c": 117.06
       },
       {
-        "d": "2026-11-10",
-        "c": 116.2
+        "d": "2026-11-11",
+        "c": 115.37
       }
     ],
     "signals": [],
     "score": {
       "label": "Strong Buy",
-      "buys": 6,
-      "sells": 0,
+      "buys": 5,
+      "sells": 1,
       "holds": 1,
-      "ratio": 0.857
+      "ratio": 0.571
     },
     "votes": {
       "ema_cross": {
@@ -274,26 +274,26 @@
         "muted": false
       },
       "chg_1w": {
-        "vote": 1,
+        "vote": -1,
         "muted": false
       }
     }
   },
   "summary": {
-    "trades": 34,
-    "members": 14,
-    "congress": 13,
+    "trades": 33,
+    "members": 13,
+    "congress": 12,
     "executive": 1,
-    "whoLabel": "13 members of Congress and 1 executive-branch filer",
+    "whoLabel": "12 members of Congress and 1 executive-branch filer",
     "buys": 15,
-    "sells": 19,
+    "sells": 18,
     "other": 0,
-    "firstTx": "2024-05-03",
+    "firstTx": "2025-01-13",
     "lastTx": "2026-08-25",
     "lastFiling": "2026-09-09",
     "estBuyLabel": "$169K",
-    "estSellLabel": "$368K",
-    "pctLate": 18
+    "estSellLabel": "$360K",
+    "pctLate": 15
   },
   "topMembers": [
     {
@@ -713,15 +713,15 @@
   "faq": [
     {
       "q": "Who in Congress has traded PAYX stock?",
-      "a": "13 members of Congress and 1 executive-branch filer have disclosed 34 PAYX trades since May 2024. The most active is April McClain Delaney, with 13 trades, followed by Julie Johnson and Shelley Moore Capito. Each trade on this page links to the official filing it came from."
+      "a": "12 members of Congress and 1 executive-branch filer have disclosed 33 PAYX trades since January 2025. The most active is April McClain Delaney, with 13 trades, followed by Julie Johnson and Shelley Moore Capito. Each trade on this page links to the official filing it came from."
     },
     {
       "q": "Is Congress buying or selling PAYX?",
-      "a": "Of the 34 disclosed PAYX trades, 15 were buys and 19 were sells. By the midpoint of each filed amount bracket, the buying comes to about $169K and the selling to about $368K. Filings disclose brackets, never exact amounts, so these totals are estimates."
+      "a": "Of the 33 disclosed PAYX trades, 15 were buys and 18 were sells. By the midpoint of each filed amount bracket, the buying comes to about $169K and the selling to about $360K. Filings disclose brackets, never exact amounts, so these totals are estimates."
     },
     {
       "q": "How late are PAYX trades disclosed?",
-      "a": "18% of the disclosed PAYX trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Aug 25, 2026, and the newest filing arrived on Sep 9, 2026."
+      "a": "15% of the disclosed PAYX trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Aug 25, 2026, and the newest filing arrived on Sep 9, 2026."
     }
   ]
 }

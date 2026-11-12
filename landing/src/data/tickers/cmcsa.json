@@ -12,24 +12,24 @@
   },
   "indexable": true,
   "technical": {
-    "asOf": "2026-11-10",
-    "price": 24.75,
-    "chg1d": 0.98,
-    "chg1w": 4.56,
-    "chg1m": 19.68,
-    "rsi14": 65.1,
-    "sma50": 23.05,
-    "sma200": 25.93,
-    "ema8": 24.15,
-    "ema21": 23.3,
-    "emaGap": 3.67,
-    "vsSma50": 7.4,
-    "vsSma200": -4.5,
-    "relVol": 0.68,
+    "asOf": "2026-11-11",
+    "price": 25.02,
+    "chg1d": 1.09,
+    "chg1w": 0.68,
+    "chg1m": 19.83,
+    "rsi14": 66.8,
+    "sma50": 23.03,
+    "sma200": 25.91,
+    "ema8": 24.35,
+    "ema21": 23.46,
+    "emaGap": 3.8,
+    "vsSma50": 8.7,
+    "vsSma200": -3.4,
+    "relVol": 0.54,
     "vol1y": 33.4,
     "high52w": 32.48,
     "low52w": 20.66,
-    "rangePos": 35.0,
+    "rangePos": 37.0,
     "series": [
       {
         "d": "2025-11-21",
@@ -236,8 +236,8 @@
         "c": 24.39
       },
       {
-        "d": "2026-11-10",
-        "c": 24.75
+        "d": "2026-11-11",
+        "c": 25.02
       }
     ],
     "signals": [],
@@ -280,20 +280,20 @@
     }
   },
   "summary": {
-    "trades": 34,
+    "trades": 35,
     "members": 16,
     "congress": 15,
     "executive": 1,
     "whoLabel": "15 members of Congress and 1 executive-branch filer",
-    "buys": 9,
+    "buys": 10,
     "sells": 25,
     "other": 0,
     "firstTx": "2024-08-07",
-    "lastTx": "2026-08-05",
-    "lastFiling": "2026-09-04",
-    "estBuyLabel": "$121K",
+    "lastTx": "2026-10-20",
+    "lastFiling": "2026-11-10",
+    "estBuyLabel": "$129K",
     "estSellLabel": "$390K",
-    "pctLate": 18
+    "pctLate": 17
   },
   "topMembers": [
     {
@@ -301,10 +301,10 @@
       "slug": "gilbert-ray-cisneros-jr",
       "party": "D",
       "chamber": "House",
-      "trades": 8,
-      "buys": 2,
+      "trades": 9,
+      "buys": 3,
       "sells": 6,
-      "estLabel": "$89K",
+      "estLabel": "$97K",
       "hasPage": true
     },
     {
@@ -408,6 +408,18 @@
     }
   ],
   "trades": [
+    {
+      "member": "Gilbert Ray Cisneros, Jr.",
+      "memberSlug": "gilbert-ray-cisneros-jr",
+      "hasPage": true,
+      "party": "D",
+      "side": "BUY",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-10-20",
+      "filedDate": "2026-11-10",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035788.pdf"
+    },
     {
       "member": "Kevin Hern",
       "memberSlug": "kevin-hern",
@@ -695,33 +707,21 @@
       "filedDate": "2025-05-14",
       "daysLate": 0,
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20030296.pdf"
-    },
-    {
-      "member": "Jefferson Shreve",
-      "memberSlug": "jefferson-shreve",
-      "hasPage": false,
-      "party": "R",
-      "side": "BUY",
-      "amountBucket": "$15K – $50K",
-      "txDate": "2025-03-31",
-      "filedDate": "2025-04-11",
-      "daysLate": 0,
-      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20029038.pdf"
     }
   ],
   "tradesShown": 25,
   "faq": [
     {
       "q": "Who in Congress has traded CMCSA stock?",
-      "a": "15 members of Congress and 1 executive-branch filer have disclosed 34 CMCSA trades since August 2024. The most active is Gilbert Ray Cisneros, Jr., with 8 trades, followed by Scott Franklin and Julie Johnson. Each trade on this page links to the official filing it came from."
+      "a": "15 members of Congress and 1 executive-branch filer have disclosed 35 CMCSA trades since August 2024. The most active is Gilbert Ray Cisneros, Jr., with 9 trades, followed by Scott Franklin and Julie Johnson. Each trade on this page links to the official filing it came from."
     },
     {
       "q": "Is Congress buying or selling CMCSA?",
-      "a": "Of the 34 disclosed CMCSA trades, 9 were buys and 25 were sells. By the midpoint of each filed amount bracket, the buying comes to about $121K and the selling to about $390K. Filings disclose brackets, never exact amounts, so these totals are estimates."
+      "a": "Of the 35 disclosed CMCSA trades, 10 were buys and 25 were sells. By the midpoint of each filed amount bracket, the buying comes to about $129K and the selling to about $390K. Filings disclose brackets, never exact amounts, so these totals are estimates."
     },
     {
       "q": "How late are CMCSA trades disclosed?",
-      "a": "18% of the disclosed CMCSA trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Aug 5, 2026, and the newest filing arrived on Sep 4, 2026."
+      "a": "17% of the disclosed CMCSA trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Oct 20, 2026, and the newest filing arrived on Nov 10, 2026."
     }
   ]
 }

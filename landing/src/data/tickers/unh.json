@@ -12,24 +12,24 @@
   },
   "indexable": true,
   "technical": {
-    "asOf": "2026-11-10",
-    "price": 405.12,
-    "chg1d": 1.89,
-    "chg1w": 0.17,
-    "chg1m": 7.03,
-    "rsi14": 53.8,
-    "sma50": 391.06,
-    "sma200": 364.7,
-    "ema8": 402.15,
-    "ema21": 401.08,
+    "asOf": "2026-11-11",
+    "price": 402.94,
+    "chg1d": -0.54,
+    "chg1w": -1.57,
+    "chg1m": 6.67,
+    "rsi14": 52.2,
+    "sma50": 391.19,
+    "sma200": 365.31,
+    "ema8": 402.33,
+    "ema21": 401.25,
     "emaGap": 0.27,
-    "vsSma50": 3.6,
-    "vsSma200": 11.1,
-    "relVol": 0.79,
+    "vsSma50": 3.0,
+    "vsSma200": 10.3,
+    "relVol": 0.76,
     "vol1y": 35.8,
     "high52w": 436.35,
     "low52w": 259.02,
-    "rangePos": 82.0,
+    "rangePos": 81.0,
     "series": [
       {
         "d": "2025-11-21",
@@ -236,17 +236,17 @@
         "c": 394.15
       },
       {
-        "d": "2026-11-10",
-        "c": 405.12
+        "d": "2026-11-11",
+        "c": 402.94
       }
     ],
     "signals": [],
     "score": {
       "label": "Strong Buy",
-      "buys": 6,
-      "sells": 0,
+      "buys": 5,
+      "sells": 1,
       "holds": 1,
-      "ratio": 0.857
+      "ratio": 0.571
     },
     "votes": {
       "ema_cross": {
@@ -274,26 +274,26 @@
         "muted": false
       },
       "chg_1w": {
-        "vote": 1,
+        "vote": -1,
         "muted": false
       }
     }
   },
   "summary": {
-    "trades": 95,
+    "trades": 94,
     "members": 29,
     "congress": 29,
     "executive": 0,
     "whoLabel": "29 members of Congress",
-    "buys": 45,
+    "buys": 44,
     "sells": 50,
     "other": 0,
     "firstTx": "2023-03-15",
     "lastTx": "2026-09-24",
     "lastFiling": "2026-10-13",
-    "estBuyLabel": "$697K",
+    "estBuyLabel": "$689K",
     "estSellLabel": "$1.2M",
-    "pctLate": 18
+    "pctLate": 17
   },
   "topMembers": [
     {
@@ -396,13 +396,13 @@
       "hasPage": true
     },
     {
-      "name": "John Boozman",
-      "slug": "john-boozman",
+      "name": "Maria Elvira Salazar",
+      "slug": "maria-elvira-salazar",
       "party": "R",
-      "chamber": "Senate",
+      "chamber": "House",
       "trades": 4,
-      "buys": 3,
-      "sells": 1,
+      "buys": 2,
+      "sells": 2,
       "estLabel": "$32K",
       "hasPage": false
     }
@@ -713,15 +713,15 @@
   "faq": [
     {
       "q": "Who in Congress has traded UNH stock?",
-      "a": "29 members of Congress have disclosed 95 UNH trades since March 2023. The most active is Gilbert Ray Cisneros, Jr., with 13 trades, followed by Richard McCormick and Lisa C. McClain. Each trade on this page links to the official filing it came from."
+      "a": "29 members of Congress have disclosed 94 UNH trades since March 2023. The most active is Gilbert Ray Cisneros, Jr., with 13 trades, followed by Richard McCormick and Lisa C. McClain. Each trade on this page links to the official filing it came from."
     },
     {
       "q": "Is Congress buying or selling UNH?",
-      "a": "Of the 95 disclosed UNH trades, 45 were buys and 50 were sells. By the midpoint of each filed amount bracket, the buying comes to about $697K and the selling to about $1.2M. Filings disclose brackets, never exact amounts, so these totals are estimates."
+      "a": "Of the 94 disclosed UNH trades, 44 were buys and 50 were sells. By the midpoint of each filed amount bracket, the buying comes to about $689K and the selling to about $1.2M. Filings disclose brackets, never exact amounts, so these totals are estimates."
     },
     {
       "q": "How late are UNH trades disclosed?",
-      "a": "18% of the disclosed UNH trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Sep 24, 2026, and the newest filing arrived on Oct 13, 2026."
+      "a": "17% of the disclosed UNH trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Sep 24, 2026, and the newest filing arrived on Oct 13, 2026."
     }
   ]
 }

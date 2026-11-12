@@ -12,24 +12,24 @@
   },
   "indexable": true,
   "technical": {
-    "asOf": "2026-11-10",
-    "price": 99.61,
-    "chg1d": -3.07,
-    "chg1w": -8.75,
-    "chg1m": -29.01,
-    "rsi14": 27.1,
-    "sma50": 134.49,
-    "sma200": 114.1,
-    "ema8": 108.42,
-    "ema21": 122.32,
-    "emaGap": -11.36,
-    "vsSma50": -25.9,
-    "vsSma200": -12.7,
-    "relVol": 0.93,
+    "asOf": "2026-11-11",
+    "price": 102.76,
+    "chg1d": 3.16,
+    "chg1w": -5.56,
+    "chg1m": -25.86,
+    "rsi14": 31.0,
+    "sma50": 133.69,
+    "sma200": 113.96,
+    "ema8": 107.16,
+    "ema21": 120.54,
+    "emaGap": -11.1,
+    "vsSma50": -23.1,
+    "vsSma200": -9.8,
+    "relVol": 0.71,
     "vol1y": 66.6,
     "high52w": 173.5,
     "low52w": 83.0,
-    "rangePos": 18.0,
+    "rangePos": 22.0,
     "series": [
       {
         "d": "2025-11-21",
@@ -236,17 +236,17 @@
         "c": 101.97
       },
       {
-        "d": "2026-11-10",
-        "c": 99.61
+        "d": "2026-11-11",
+        "c": 102.76
       }
     ],
     "signals": [],
     "score": {
-      "label": "Sell",
-      "buys": 2,
+      "label": "Strong Sell",
+      "buys": 1,
       "sells": 5,
-      "holds": 0,
-      "ratio": -0.429
+      "holds": 1,
+      "ratio": -0.571
     },
     "votes": {
       "ema_cross": {
@@ -266,7 +266,7 @@
         "muted": false
       },
       "rsi": {
-        "vote": 1,
+        "vote": 0,
         "muted": false
       },
       "chg_1m": {
@@ -280,20 +280,20 @@
     }
   },
   "summary": {
-    "trades": 40,
+    "trades": 41,
     "members": 16,
     "congress": 16,
     "executive": 0,
     "whoLabel": "16 members of Congress",
-    "buys": 20,
+    "buys": 21,
     "sells": 20,
     "other": 0,
     "firstTx": "2024-12-11",
-    "lastTx": "2026-04-24",
-    "lastFiling": "2026-08-07",
-    "estBuyLabel": "$185K",
+    "lastTx": "2026-10-21",
+    "lastFiling": "2026-11-10",
+    "estBuyLabel": "$193K",
     "estSellLabel": "$252K",
-    "pctLate": 25
+    "pctLate": 24
   },
   "topMembers": [
     {
@@ -319,6 +319,17 @@
       "hasPage": true
     },
     {
+      "name": "Gilbert Ray Cisneros, Jr.",
+      "slug": "gilbert-ray-cisneros-jr",
+      "party": "D",
+      "chamber": "House",
+      "trades": 4,
+      "buys": 2,
+      "sells": 2,
+      "estLabel": "$32K",
+      "hasPage": true
+    },
+    {
       "name": "Robert P. Bresnahan, Jr.",
       "slug": "robert-p-bresnahan-jr",
       "party": "R",
@@ -328,17 +339,6 @@
       "sells": 1,
       "estLabel": "$32K",
       "hasPage": false
-    },
-    {
-      "name": "Gilbert Ray Cisneros, Jr.",
-      "slug": "gilbert-ray-cisneros-jr",
-      "party": "D",
-      "chamber": "House",
-      "trades": 3,
-      "buys": 1,
-      "sells": 2,
-      "estLabel": "$24K",
-      "hasPage": true
     },
     {
       "name": "Julie Johnson",
@@ -408,6 +408,18 @@
     }
   ],
   "trades": [
+    {
+      "member": "Gilbert Ray Cisneros, Jr.",
+      "memberSlug": "gilbert-ray-cisneros-jr",
+      "hasPage": true,
+      "party": "D",
+      "side": "BUY",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-10-21",
+      "filedDate": "2026-11-10",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035788.pdf"
+    },
     {
       "member": "Josh Gottheimer",
       "memberSlug": "josh-gottheimer",
@@ -695,33 +707,21 @@
       "filedDate": "2025-05-19",
       "daysLate": 0,
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20030389.pdf"
-    },
-    {
-      "member": "Marjorie Taylor Greene",
-      "memberSlug": "marjorie-taylor-greene",
-      "hasPage": true,
-      "party": "R",
-      "side": "BUY",
-      "amountBucket": "$1K – $15K",
-      "txDate": "2025-05-05",
-      "filedDate": "2025-05-06",
-      "daysLate": 0,
-      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20030295.pdf"
     }
   ],
   "tradesShown": 25,
   "faq": [
     {
       "q": "Who in Congress has traded NOW stock?",
-      "a": "16 members of Congress have disclosed 40 NOW trades since December 2024. The most active is Lisa C. McClain, with 7 trades, followed by Josh Gottheimer and Robert P. Bresnahan, Jr.. Each trade on this page links to the official filing it came from."
+      "a": "16 members of Congress have disclosed 41 NOW trades since December 2024. The most active is Lisa C. McClain, with 7 trades, followed by Josh Gottheimer and Gilbert Ray Cisneros, Jr.. Each trade on this page links to the official filing it came from."
     },
     {
       "q": "Is Congress buying or selling NOW?",
-      "a": "Of the 40 disclosed NOW trades, 20 were buys and 20 were sells. By the midpoint of each filed amount bracket, the buying comes to about $185K and the selling to about $252K. Filings disclose brackets, never exact amounts, so these totals are estimates."
+      "a": "Of the 41 disclosed NOW trades, 21 were buys and 20 were sells. By the midpoint of each filed amount bracket, the buying comes to about $193K and the selling to about $252K. Filings disclose brackets, never exact amounts, so these totals are estimates."
     },
     {
       "q": "How late are NOW trades disclosed?",
-      "a": "25% of the disclosed NOW trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Apr 24, 2026, and the newest filing arrived on Aug 7, 2026."
+      "a": "24% of the disclosed NOW trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Oct 21, 2026, and the newest filing arrived on Nov 10, 2026."
     }
   ]
 }

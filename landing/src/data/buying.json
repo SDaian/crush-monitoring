@@ -1,12 +1,12 @@
 {
   "_comment": "Generated from real official disclosures by congress/landing_data.py (daily Action). Do not edit by hand. 'filedDaysLate' counts days past the STOCK Act's 45-day statutory maximum; 0 = on time.",
   "windowDays": 45,
-  "from": "2026-09-25",
-  "to": "2026-11-09",
+  "from": "2026-09-26",
+  "to": "2026-11-10",
   "members": 16,
-  "buys": 98,
+  "buys": 130,
   "options": 0,
-  "companies": 76,
+  "companies": 102,
   "rows": [
     {
       "ticker": "NVDA",
@@ -53,6 +53,28 @@
       "lastFiling": "2026-10-05"
     },
     {
+      "ticker": "META",
+      "tickerLabel": "META",
+      "slug": "meta",
+      "company": "Meta Platforms, Inc.",
+      "members": 2,
+      "buyers": [
+        {
+          "name": "Maria Elvira Salazar",
+          "slug": null
+        },
+        {
+          "name": "Gilbert Ray Cisneros, Jr.",
+          "slug": "gilbert-ray-cisneros-jr"
+        }
+      ],
+      "buys": 3,
+      "options": 0,
+      "estLabel": "$24K",
+      "est": 24002,
+      "lastFiling": "2026-11-10"
+    },
+    {
       "ticker": "MSFT",
       "tickerLabel": "MSFT",
       "slug": "msft",
@@ -97,6 +119,28 @@
       "lastFiling": "2026-11-05"
     },
     {
+      "ticker": "CSCO",
+      "tickerLabel": "CSCO",
+      "slug": "csco",
+      "company": "Cisco Systems, Inc.",
+      "members": 2,
+      "buyers": [
+        {
+          "name": "Gilbert Ray Cisneros, Jr.",
+          "slug": "gilbert-ray-cisneros-jr"
+        },
+        {
+          "name": "John Boozman",
+          "slug": null
+        }
+      ],
+      "buys": 2,
+      "options": 0,
+      "estLabel": "$16K",
+      "est": 16001,
+      "lastFiling": "2026-11-10"
+    },
+    {
       "ticker": "TSM",
       "tickerLabel": "TSM",
       "slug": "tsm",
@@ -117,6 +161,24 @@
       "estLabel": "$16K",
       "est": 16001,
       "lastFiling": "2026-10-22"
+    },
+    {
+      "ticker": "ARGX",
+      "tickerLabel": "ARGX",
+      "slug": null,
+      "company": "argenx SE - American Depositary Shares",
+      "members": 1,
+      "buyers": [
+        {
+          "name": "Gilbert Ray Cisneros, Jr.",
+          "slug": "gilbert-ray-cisneros-jr"
+        }
+      ],
+      "buys": 3,
+      "options": 0,
+      "estLabel": "$49K",
+      "est": 48502,
+      "lastFiling": "2026-11-10"
     },
     {
       "ticker": "MU",
@@ -155,6 +217,24 @@
       "lastFiling": "2026-10-12"
     },
     {
+      "ticker": "ON",
+      "tickerLabel": "ON",
+      "slug": null,
+      "company": "ON Semiconductor Corporation",
+      "members": 1,
+      "buyers": [
+        {
+          "name": "Gilbert Ray Cisneros, Jr.",
+          "slug": "gilbert-ray-cisneros-jr"
+        }
+      ],
+      "buys": 2,
+      "options": 0,
+      "estLabel": "$41K",
+      "est": 40501,
+      "lastFiling": "2026-11-10"
+    },
+    {
       "ticker": "SNOW",
       "tickerLabel": "SNOW",
       "slug": "snow",
@@ -171,6 +251,24 @@
       "estLabel": "$41K",
       "est": 40501,
       "lastFiling": "2026-10-07"
+    },
+    {
+      "ticker": "BBIO",
+      "tickerLabel": "BBIO",
+      "slug": null,
+      "company": "BridgeBio Pharma, Inc.",
+      "members": 1,
+      "buyers": [
+        {
+          "name": "Gilbert Ray Cisneros, Jr.",
+          "slug": "gilbert-ray-cisneros-jr"
+        }
+      ],
+      "buys": 2,
+      "options": 0,
+      "estLabel": "$16K",
+      "est": 16001,
+      "lastFiling": "2026-11-10"
     },
     {
       "ticker": "GLW",
@@ -207,24 +305,6 @@
       "estLabel": "$16K",
       "est": 16001,
       "lastFiling": "2026-10-12"
-    },
-    {
-      "ticker": "META",
-      "tickerLabel": "META",
-      "slug": "meta",
-      "company": "Meta Platforms, Inc.",
-      "members": 1,
-      "buyers": [
-        {
-          "name": "Maria Elvira Salazar",
-          "slug": null
-        }
-      ],
-      "buys": 2,
-      "options": 0,
-      "estLabel": "$16K",
-      "est": 16001,
-      "lastFiling": "2026-10-07"
     },
     {
       "ticker": "OKTA",
@@ -315,98 +395,26 @@
       "estLabel": "$16K",
       "est": 16001,
       "lastFiling": "2026-10-29"
-    },
-    {
-      "ticker": "DDOG",
-      "tickerLabel": "DDOG",
-      "slug": null,
-      "company": "Datadog, Inc.",
-      "members": 1,
-      "buyers": [
-        {
-          "name": "Jonathan L. Jackson",
-          "slug": null
-        }
-      ],
-      "buys": 1,
-      "options": 0,
-      "estLabel": "$75K",
-      "est": 75000,
-      "lastFiling": "2026-10-19"
-    },
-    {
-      "ticker": "EL",
-      "tickerLabel": "EL",
-      "slug": null,
-      "company": "Estee Lauder Companies, Inc.",
-      "members": 1,
-      "buyers": [
-        {
-          "name": "Jonathan L. Jackson",
-          "slug": null
-        }
-      ],
-      "buys": 1,
-      "options": 0,
-      "estLabel": "$75K",
-      "est": 75000,
-      "lastFiling": "2026-10-19"
-    },
-    {
-      "ticker": "CACI",
-      "tickerLabel": "CACI",
-      "slug": null,
-      "company": "CACI International, Inc.",
-      "members": 1,
-      "buyers": [
-        {
-          "name": "Lisa C. McClain",
-          "slug": null
-        }
-      ],
-      "buys": 1,
-      "options": 0,
-      "estLabel": "$33K",
-      "est": 32500,
-      "lastFiling": "2026-10-12"
-    },
-    {
-      "ticker": "GH",
-      "tickerLabel": "GH",
-      "slug": null,
-      "company": "Guardant Health, Inc.",
-      "members": 1,
-      "buyers": [
-        {
-          "name": "Jonathan L. Jackson",
-          "slug": null
-        }
-      ],
-      "buys": 1,
-      "options": 0,
-      "estLabel": "$33K",
-      "est": 32500,
-      "lastFiling": "2026-10-19"
     }
   ],
   "largest": {
-    "ticker": "EL",
+    "ticker": "MBGL",
     "estLabel": "$75K",
     "buys": 1,
     "options": 0,
-    "company": "Estee Lauder Companies, Inc.",
+    "company": "Mobility Global Inc.",
     "buyers": [
-      "Jonathan L. Jackson"
+      "Gilbert Ray Cisneros, Jr."
     ]
   },
   "faq": [
     {
       "q": "What stocks is Congress buying?",
-      "a": "In filings from the last 45 days, to Nov 9, 2026, 16 members of Congress disclosed 98 purchases across 76 companies. The stocks bought by the most members were NVDA (2 members), HD (2 members) and MSFT (2 members). Filings arrive up to 45 days after the trade: this is recent disclosure, not live trading."
+      "a": "In filings from the last 45 days, to Nov 10, 2026, 16 members of Congress disclosed 130 purchases across 102 companies. The stocks bought by the most members were NVDA (2 members), HD (2 members) and META (2 members). Filings arrive up to 45 days after the trade: this is recent disclosure, not live trading."
     },
     {
       "q": "What is the largest stock purchase Congress disclosed recently?",
-      "a": "By the midpoint of each filed amount bracket, the largest recent buying was in Estee Lauder Companies, Inc. (EL): about $75K across 1 purchase, by Jonathan L. Jackson. Filings disclose brackets, never exact amounts, so this is an estimate."
+      "a": "By the midpoint of each filed amount bracket, the largest recent buying was in Mobility Global Inc. (MBGL): about $75K across 1 purchase, by Gilbert Ray Cisneros, Jr.. Filings disclose brackets, never exact amounts, so this is an estimate."
     },
     {
       "q": "Does this include the President's trades?",

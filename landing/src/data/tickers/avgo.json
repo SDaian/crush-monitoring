@@ -12,24 +12,24 @@
   },
   "indexable": true,
   "technical": {
-    "asOf": "2026-11-10",
-    "price": 331.98,
-    "chg1d": 3.91,
-    "chg1w": -0.05,
-    "chg1m": -6.41,
-    "rsi14": 49.4,
-    "sma50": 346.13,
-    "sma200": 367.12,
-    "ema8": 320.32,
-    "ema21": 329.9,
-    "emaGap": -2.91,
-    "vsSma50": -4.1,
-    "vsSma200": -9.6,
-    "relVol": 1.11,
-    "vol1y": 48.4,
+    "asOf": "2026-11-11",
+    "price": 345.22,
+    "chg1d": 3.99,
+    "chg1w": 6.06,
+    "chg1m": -3.38,
+    "rsi14": 53.9,
+    "sma50": 345.64,
+    "sma200": 367.19,
+    "ema8": 325.85,
+    "ema21": 331.3,
+    "emaGap": -1.64,
+    "vsSma50": -0.1,
+    "vsSma200": -6.0,
+    "relVol": 1.28,
+    "vol1y": 48.5,
     "high52w": 481.57,
     "low52w": 291.53,
-    "rangePos": 21.0,
+    "rangePos": 28.0,
     "series": [
       {
         "d": "2025-11-21",
@@ -236,17 +236,17 @@
         "c": 293.69
       },
       {
-        "d": "2026-11-10",
-        "c": 331.98
+        "d": "2026-11-11",
+        "c": 345.22
       }
     ],
     "signals": [],
     "score": {
       "label": "Strong Sell",
-      "buys": 0,
-      "sells": 6,
+      "buys": 1,
+      "sells": 5,
       "holds": 1,
-      "ratio": -0.857
+      "ratio": -0.571
     },
     "votes": {
       "ema_cross": {
@@ -274,18 +274,18 @@
         "muted": false
       },
       "chg_1w": {
-        "vote": -1,
+        "vote": 1,
         "muted": false
       }
     }
   },
   "summary": {
-    "trades": 92,
+    "trades": 91,
     "members": 25,
     "congress": 24,
     "executive": 1,
     "whoLabel": "24 members of Congress and 1 executive-branch filer",
-    "buys": 52,
+    "buys": 51,
     "sells": 40,
     "other": 0,
     "firstTx": "2024-09-26",
@@ -293,7 +293,7 @@
     "lastFiling": "2026-11-01",
     "estBuyLabel": "$3.8M",
     "estSellLabel": "$952K",
-    "pctLate": 16
+    "pctLate": 14
   },
   "topMembers": [
     {
@@ -396,13 +396,13 @@
       "hasPage": false
     },
     {
-      "name": "John Boozman",
-      "slug": "john-boozman",
+      "name": "Julia Letlow",
+      "slug": "julia-letlow",
       "party": "R",
-      "chamber": "Senate",
+      "chamber": "House",
       "trades": 4,
-      "buys": 4,
-      "sells": 0,
+      "buys": 1,
+      "sells": 3,
       "estLabel": "$32K",
       "hasPage": false
     }
@@ -713,15 +713,15 @@
   "faq": [
     {
       "q": "Who in Congress has traded AVGO stock?",
-      "a": "24 members of Congress and 1 executive-branch filer have disclosed 92 AVGO trades since September 2024. The most active is David J. Taylor, with 11 trades, followed by Jared Moskowitz and Gilbert Ray Cisneros, Jr.. Each trade on this page links to the official filing it came from."
+      "a": "24 members of Congress and 1 executive-branch filer have disclosed 91 AVGO trades since September 2024. The most active is David J. Taylor, with 11 trades, followed by Jared Moskowitz and Gilbert Ray Cisneros, Jr.. Each trade on this page links to the official filing it came from."
     },
     {
       "q": "Is Congress buying or selling AVGO?",
-      "a": "Of the 92 disclosed AVGO trades, 52 were buys and 40 were sells. By the midpoint of each filed amount bracket, the buying comes to about $3.8M and the selling to about $952K. Filings disclose brackets, never exact amounts, so these totals are estimates."
+      "a": "Of the 91 disclosed AVGO trades, 51 were buys and 40 were sells. By the midpoint of each filed amount bracket, the buying comes to about $3.8M and the selling to about $952K. Filings disclose brackets, never exact amounts, so these totals are estimates."
     },
     {
       "q": "How late are AVGO trades disclosed?",
-      "a": "16% of the disclosed AVGO trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Sep 24, 2026, and the newest filing arrived on Nov 1, 2026."
+      "a": "14% of the disclosed AVGO trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Sep 24, 2026, and the newest filing arrived on Nov 1, 2026."
     }
   ]
 }

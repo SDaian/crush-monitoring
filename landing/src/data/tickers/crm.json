@@ -12,24 +12,24 @@
   },
   "indexable": true,
   "technical": {
-    "asOf": "2026-11-10",
-    "price": 213.48,
-    "chg1d": -0.68,
-    "chg1w": -3.92,
-    "chg1m": -8.74,
-    "rsi14": 34.3,
-    "sma50": 237.8,
-    "sma200": 198.07,
-    "ema8": 221.2,
-    "ema21": 228.94,
-    "emaGap": -3.38,
-    "vsSma50": -10.2,
-    "vsSma200": 7.8,
-    "relVol": 1.09,
+    "asOf": "2026-11-11",
+    "price": 218.01,
+    "chg1d": 2.12,
+    "chg1w": -4.01,
+    "chg1m": -8.4,
+    "rsi14": 39.5,
+    "sma50": 237.0,
+    "sma200": 198.02,
+    "ema8": 220.49,
+    "ema21": 227.95,
+    "emaGap": -3.27,
+    "vsSma50": -8.0,
+    "vsSma200": 10.1,
+    "relVol": 0.86,
     "vol1y": 46.4,
     "high52w": 266.23,
     "low52w": 150.12,
-    "rangePos": 55.0,
+    "rangePos": 58.0,
     "series": [
       {
         "d": "2025-11-21",
@@ -236,8 +236,8 @@
         "c": 213.65
       },
       {
-        "d": "2026-11-10",
-        "c": 213.48
+        "d": "2026-11-11",
+        "c": 218.01
       }
     ],
     "signals": [],
@@ -280,20 +280,20 @@
     }
   },
   "summary": {
-    "trades": 53,
+    "trades": 52,
     "members": 19,
     "congress": 18,
     "executive": 1,
     "whoLabel": "18 members of Congress and 1 executive-branch filer",
     "buys": 24,
-    "sells": 29,
+    "sells": 28,
     "other": 0,
     "firstTx": "2024-09-26",
     "lastTx": "2026-09-24",
     "lastFiling": "2026-10-07",
     "estBuyLabel": "$290K",
-    "estSellLabel": "$379K",
-    "pctLate": 21
+    "estSellLabel": "$371K",
+    "pctLate": 19
   },
   "topMembers": [
     {
@@ -341,17 +341,6 @@
       "hasPage": false
     },
     {
-      "name": "John Boozman",
-      "slug": "john-boozman",
-      "party": "R",
-      "chamber": "Senate",
-      "trades": 4,
-      "buys": 1,
-      "sells": 3,
-      "estLabel": "$32K",
-      "hasPage": false
-    },
-    {
       "name": "Jefferson Shreve",
       "slug": "jefferson-shreve",
       "party": "R",
@@ -383,6 +372,17 @@
       "sells": 2,
       "estLabel": "$24K",
       "hasPage": true
+    },
+    {
+      "name": "John Boozman",
+      "slug": "john-boozman",
+      "party": "R",
+      "chamber": "Senate",
+      "trades": 3,
+      "buys": 1,
+      "sells": 2,
+      "estLabel": "$24K",
+      "hasPage": false
     },
     {
       "name": "Robert P. Bresnahan, Jr.",
@@ -584,21 +584,10 @@
       "side": "SELL",
       "amountBucket": "$1K – $15K",
       "txDate": "2025-11-13",
-      "filedDate": "2026-08-24",
-      "daysLate": 239,
-      "sourceUrl": "https://efdsearch.senate.gov/search/view/ptr/51455bcd-4966-4e77-b481-09897ada81ae/"
-    },
-    {
-      "member": "John Boozman",
-      "memberSlug": "john-boozman",
-      "hasPage": false,
-      "party": "R",
-      "side": "SELL",
-      "amountBucket": "$1K – $15K",
-      "txDate": "2025-11-13",
       "filedDate": "2025-12-08",
       "daysLate": 0,
-      "sourceUrl": "https://efdsearch.senate.gov/search/view/ptr/3a779539-8451-49d2-8419-d3eb72c7922a/"
+      "sourceUrl": "https://efdsearch.senate.gov/search/view/ptr/51455bcd-4966-4e77-b481-09897ada81ae/",
+      "amended": "2026-08-24"
     },
     {
       "member": "Val T. Hoyle",
@@ -707,21 +696,33 @@
       "filedDate": "2025-09-12",
       "daysLate": 33,
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20032070.pdf"
+    },
+    {
+      "member": "Lisa C. McClain",
+      "memberSlug": "lisa-c-mcclain",
+      "hasPage": false,
+      "party": "R",
+      "side": "BUY",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2025-06-17",
+      "filedDate": "2025-08-13",
+      "daysLate": 12,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20030891.pdf"
     }
   ],
   "tradesShown": 25,
   "faq": [
     {
       "q": "Who in Congress has traded CRM stock?",
-      "a": "18 members of Congress and 1 executive-branch filer have disclosed 53 CRM trades since September 2024. The most active is David J. Taylor, with 8 trades, followed by Julia Letlow and Josh Gottheimer. Each trade on this page links to the official filing it came from."
+      "a": "18 members of Congress and 1 executive-branch filer have disclosed 52 CRM trades since September 2024. The most active is David J. Taylor, with 8 trades, followed by Julia Letlow and Josh Gottheimer. Each trade on this page links to the official filing it came from."
     },
     {
       "q": "Is Congress buying or selling CRM?",
-      "a": "Of the 53 disclosed CRM trades, 24 were buys and 29 were sells. By the midpoint of each filed amount bracket, the buying comes to about $290K and the selling to about $379K. Filings disclose brackets, never exact amounts, so these totals are estimates."
+      "a": "Of the 52 disclosed CRM trades, 24 were buys and 28 were sells. By the midpoint of each filed amount bracket, the buying comes to about $290K and the selling to about $371K. Filings disclose brackets, never exact amounts, so these totals are estimates."
     },
     {
       "q": "How late are CRM trades disclosed?",
-      "a": "21% of the disclosed CRM trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Sep 24, 2026, and the newest filing arrived on Oct 7, 2026."
+      "a": "19% of the disclosed CRM trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Sep 24, 2026, and the newest filing arrived on Oct 7, 2026."
     }
   ]
 }

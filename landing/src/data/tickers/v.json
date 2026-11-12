@@ -12,24 +12,24 @@
   },
   "indexable": true,
   "technical": {
-    "asOf": "2026-11-10",
-    "price": 423.0,
-    "chg1d": 0.2,
-    "chg1w": 0.61,
-    "chg1m": 8.66,
-    "rsi14": 63.3,
-    "sma50": 387.53,
-    "sma200": 345.63,
-    "ema8": 420.98,
-    "ema21": 410.24,
-    "emaGap": 2.62,
-    "vsSma50": 9.2,
-    "vsSma200": 22.4,
-    "relVol": 0.76,
+    "asOf": "2026-11-11",
+    "price": 425.55,
+    "chg1d": 0.6,
+    "chg1w": -2.52,
+    "chg1m": 7.45,
+    "rsi14": 64.7,
+    "sma50": 388.58,
+    "sma200": 346.13,
+    "ema8": 421.99,
+    "ema21": 411.63,
+    "emaGap": 2.52,
+    "vsSma50": 9.5,
+    "vsSma200": 22.9,
+    "relVol": 0.62,
     "vol1y": 22.7,
     "high52w": 436.57,
     "low52w": 295.52,
-    "rangePos": 90.0,
+    "rangePos": 92.0,
     "series": [
       {
         "d": "2025-11-21",
@@ -236,17 +236,17 @@
         "c": 422.65
       },
       {
-        "d": "2026-11-10",
-        "c": 423.0
+        "d": "2026-11-11",
+        "c": 425.55
       }
     ],
     "signals": [],
     "score": {
       "label": "Strong Buy",
-      "buys": 6,
-      "sells": 0,
+      "buys": 5,
+      "sells": 1,
       "holds": 1,
-      "ratio": 0.857
+      "ratio": 0.571
     },
     "votes": {
       "ema_cross": {
@@ -274,26 +274,26 @@
         "muted": false
       },
       "chg_1w": {
-        "vote": 1,
+        "vote": -1,
         "muted": false
       }
     }
   },
   "summary": {
-    "trades": 67,
-    "members": 25,
-    "congress": 25,
+    "trades": 66,
+    "members": 24,
+    "congress": 24,
     "executive": 0,
-    "whoLabel": "25 members of Congress",
+    "whoLabel": "24 members of Congress",
     "buys": 38,
-    "sells": 29,
+    "sells": 28,
     "other": 0,
-    "firstTx": "2024-05-03",
+    "firstTx": "2024-08-07",
     "lastTx": "2026-10-15",
     "lastFiling": "2026-10-29",
     "estBuyLabel": "$353K",
-    "estSellLabel": "$638K",
-    "pctLate": 16
+    "estSellLabel": "$630K",
+    "pctLate": 15
   },
   "topMembers": [
     {
@@ -713,15 +713,15 @@
   "faq": [
     {
       "q": "Who in Congress has traded V stock?",
-      "a": "25 members of Congress have disclosed 67 V trades since May 2024. The most active is Josh Gottheimer, with 18 trades, followed by David J. Taylor and Lisa C. McClain. Each trade on this page links to the official filing it came from."
+      "a": "24 members of Congress have disclosed 66 V trades since August 2024. The most active is Josh Gottheimer, with 18 trades, followed by David J. Taylor and Lisa C. McClain. Each trade on this page links to the official filing it came from."
     },
     {
       "q": "Is Congress buying or selling V?",
-      "a": "Of the 67 disclosed V trades, 38 were buys and 29 were sells. By the midpoint of each filed amount bracket, the buying comes to about $353K and the selling to about $638K. Filings disclose brackets, never exact amounts, so these totals are estimates."
+      "a": "Of the 66 disclosed V trades, 38 were buys and 28 were sells. By the midpoint of each filed amount bracket, the buying comes to about $353K and the selling to about $630K. Filings disclose brackets, never exact amounts, so these totals are estimates."
     },
     {
       "q": "How late are V trades disclosed?",
-      "a": "16% of the disclosed V trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Oct 15, 2026, and the newest filing arrived on Oct 29, 2026."
+      "a": "15% of the disclosed V trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Oct 15, 2026, and the newest filing arrived on Oct 29, 2026."
     }
   ]
 }

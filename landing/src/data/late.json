@@ -1,21 +1,8 @@
 {
   "_comment": "Generated from real official disclosures by congress/landing_data.py (daily Action). Do not edit by hand. 'filedDaysLate' counts days past the STOCK Act's 45-day statutory maximum; 0 = on time.",
   "year": 2026,
-  "totalLateFilings": 1045,
+  "totalLateFilings": 847,
   "worst": [
-    {
-      "member": "T. Tuberville",
-      "chamber": "Senate",
-      "district": "AL",
-      "ticker": "AMAT",
-      "tickerSlug": "amat",
-      "side": "SELL",
-      "amountBucket": "$1K – $15K",
-      "daysLate": 835,
-      "tradeDate": "2024-03-08",
-      "filedDate": "2026-08-05",
-      "lateCount": 165
-    },
     {
       "member": "P. Jayapal",
       "chamber": "House",
@@ -95,19 +82,6 @@
       "lateCount": 76
     },
     {
-      "member": "J. Boozman",
-      "chamber": "Senate",
-      "district": "AR",
-      "ticker": "COLPAL",
-      "tickerSlug": null,
-      "side": "BUY",
-      "amountBucket": "$1K – $15K",
-      "daysLate": 454,
-      "tradeDate": "2025-04-08",
-      "filedDate": "2026-08-20",
-      "lateCount": 38
-    },
-    {
       "member": "T. Walberg",
       "chamber": "House",
       "district": "MI-5",
@@ -132,6 +106,32 @@
       "tradeDate": "2025-06-03",
       "filedDate": "2026-09-12",
       "lateCount": 1
+    },
+    {
+      "member": "D. Webster",
+      "chamber": "House",
+      "district": "FL-11",
+      "ticker": "REXR",
+      "tickerSlug": null,
+      "side": "SELL",
+      "amountBucket": "$15K – $50K",
+      "daysLate": 415,
+      "tradeDate": "2025-02-26",
+      "filedDate": "2026-06-01",
+      "lateCount": 1
+    },
+    {
+      "member": "J. Letlow",
+      "chamber": "House",
+      "district": "LA-5",
+      "ticker": "ABT",
+      "tickerSlug": "abt",
+      "side": "BUY",
+      "amountBucket": "$1K – $15K",
+      "daysLate": 402,
+      "tradeDate": "2024-10-23",
+      "filedDate": "2026-01-13",
+      "lateCount": 186
     }
   ]
 }

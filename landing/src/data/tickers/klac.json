@@ -12,24 +12,24 @@
   },
   "indexable": false,
   "technical": {
-    "asOf": "2026-11-10",
-    "price": 152.99,
-    "chg1d": 1.06,
-    "chg1w": -2.06,
-    "chg1m": -19.53,
-    "rsi14": 44.8,
-    "sma50": 173.9,
+    "asOf": "2026-11-11",
+    "price": 161.01,
+    "chg1d": 5.24,
+    "chg1w": 7.49,
+    "chg1m": -12.49,
+    "rsi14": 49.7,
+    "sma50": 173.71,
     "sma200": 181.88,
-    "ema8": 149.44,
-    "ema21": 158.14,
-    "emaGap": -5.5,
-    "vsSma50": -12.0,
-    "vsSma200": -15.9,
+    "ema8": 152.01,
+    "ema21": 158.4,
+    "emaGap": -4.03,
+    "vsSma50": -7.3,
+    "vsSma200": -11.5,
     "relVol": 0.75,
-    "vol1y": 64.3,
+    "vol1y": 64.5,
     "high52w": 301.71,
     "low52w": 109.71,
-    "rangePos": 23.0,
+    "rangePos": 27.0,
     "series": [
       {
         "d": "2025-11-21",
@@ -236,17 +236,17 @@
         "c": 138.49
       },
       {
-        "d": "2026-11-10",
-        "c": 152.99
+        "d": "2026-11-11",
+        "c": 161.01
       }
     ],
     "signals": [],
     "score": {
       "label": "Strong Sell",
-      "buys": 0,
-      "sells": 6,
+      "buys": 1,
+      "sells": 5,
       "holds": 1,
-      "ratio": -0.857
+      "ratio": -0.571
     },
     "votes": {
       "ema_cross": {
@@ -274,26 +274,26 @@
         "muted": false
       },
       "chg_1w": {
-        "vote": -1,
+        "vote": 1,
         "muted": false
       }
     }
   },
   "summary": {
-    "trades": 10,
-    "members": 7,
-    "congress": 7,
+    "trades": 9,
+    "members": 6,
+    "congress": 6,
     "executive": 0,
-    "whoLabel": "7 members of Congress",
+    "whoLabel": "6 members of Congress",
     "buys": 5,
-    "sells": 5,
+    "sells": 4,
     "other": 0,
-    "firstTx": "2024-05-03",
+    "firstTx": "2024-10-29",
     "lastTx": "2026-07-01",
     "lastFiling": "2026-08-07",
     "estBuyLabel": "$40K",
-    "estSellLabel": "$40K",
-    "pctLate": 50
+    "estSellLabel": "$32K",
+    "pctLate": 44
   },
   "topMembers": [
     {
@@ -350,17 +350,6 @@
       "sells": 0,
       "estLabel": "$8K",
       "hasPage": false
-    },
-    {
-      "name": "Tommy Tuberville",
-      "slug": "tommy-tuberville",
-      "party": "R",
-      "chamber": "Senate",
-      "trades": 1,
-      "buys": 0,
-      "sells": 1,
-      "estLabel": "$8K",
-      "hasPage": true
     },
     {
       "name": "William R. Keating",
@@ -482,33 +471,21 @@
       "filedDate": "2025-09-12",
       "daysLate": 273,
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20032070.pdf"
-    },
-    {
-      "member": "Tommy Tuberville",
-      "memberSlug": "tommy-tuberville",
-      "hasPage": true,
-      "party": "R",
-      "side": "SELL",
-      "amountBucket": "$1K – $15K",
-      "txDate": "2024-05-03",
-      "filedDate": "2026-08-05",
-      "daysLate": 779,
-      "sourceUrl": "https://efdsearch.senate.gov/search/view/ptr/0a25588d-a3f8-4ed6-971a-706097f78e3a/"
     }
   ],
-  "tradesShown": 10,
+  "tradesShown": 9,
   "faq": [
     {
       "q": "Who in Congress has traded KLAC stock?",
-      "a": "7 members of Congress have disclosed 10 KLAC trades since May 2024. The most active is Val T. Hoyle, with 4 trades, followed by Alan Armstrong and Elizabeth Fletcher. Each trade on this page links to the official filing it came from."
+      "a": "6 members of Congress have disclosed 9 KLAC trades since October 2024. The most active is Val T. Hoyle, with 4 trades, followed by Alan Armstrong and Elizabeth Fletcher. Each trade on this page links to the official filing it came from."
     },
     {
       "q": "Is Congress buying or selling KLAC?",
-      "a": "Of the 10 disclosed KLAC trades, 5 were buys and 5 were sells. By the midpoint of each filed amount bracket, the buying comes to about $40K and the selling to about $40K. Filings disclose brackets, never exact amounts, so these totals are estimates."
+      "a": "Of the 9 disclosed KLAC trades, 5 were buys and 4 were sells. By the midpoint of each filed amount bracket, the buying comes to about $40K and the selling to about $32K. Filings disclose brackets, never exact amounts, so these totals are estimates."
     },
     {
       "q": "How late are KLAC trades disclosed?",
-      "a": "50% of the disclosed KLAC trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Jul 1, 2026, and the newest filing arrived on Aug 7, 2026."
+      "a": "44% of the disclosed KLAC trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Jul 1, 2026, and the newest filing arrived on Aug 7, 2026."
     }
   ]
 }

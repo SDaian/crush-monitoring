@@ -12,24 +12,24 @@
   },
   "indexable": true,
   "technical": {
-    "asOf": "2026-11-10",
-    "price": 354.22,
-    "chg1d": -1.41,
-    "chg1w": -9.57,
-    "chg1m": -16.98,
-    "rsi14": 41.6,
-    "sma50": 403.45,
-    "sma200": 397.65,
-    "ema8": 358.53,
-    "ema21": 376.33,
-    "emaGap": -4.73,
-    "vsSma50": -12.2,
-    "vsSma200": -10.9,
-    "relVol": 0.7,
+    "asOf": "2026-11-11",
+    "price": 360.62,
+    "chg1d": 1.81,
+    "chg1w": 2.14,
+    "chg1m": -15.8,
+    "rsi14": 43.8,
+    "sma50": 402.85,
+    "sma200": 397.75,
+    "ema8": 359.0,
+    "ema21": 374.9,
+    "emaGap": -4.24,
+    "vsSma50": -10.5,
+    "vsSma200": -9.3,
+    "relVol": 0.72,
     "vol1y": 43.6,
     "high52w": 459.96,
     "low52w": 315.82,
-    "rangePos": 27.0,
+    "rangePos": 31.0,
     "series": [
       {
         "d": "2025-11-21",
@@ -236,17 +236,17 @@
         "c": 341.72
       },
       {
-        "d": "2026-11-10",
-        "c": 354.22
+        "d": "2026-11-11",
+        "c": 360.62
       }
     ],
     "signals": [],
     "score": {
-      "label": "Strong Sell",
-      "buys": 1,
-      "sells": 5,
+      "label": "Sell",
+      "buys": 2,
+      "sells": 4,
       "holds": 1,
-      "ratio": -0.571
+      "ratio": -0.286
     },
     "votes": {
       "ema_cross": {
@@ -274,26 +274,26 @@
         "muted": false
       },
       "chg_1w": {
-        "vote": -1,
+        "vote": 1,
         "muted": false
       }
     }
   },
   "summary": {
-    "trades": 41,
-    "members": 15,
-    "congress": 15,
+    "trades": 38,
+    "members": 14,
+    "congress": 14,
     "executive": 0,
-    "whoLabel": "15 members of Congress",
-    "buys": 21,
+    "whoLabel": "14 members of Congress",
+    "buys": 18,
     "sells": 20,
     "other": 0,
-    "firstTx": "2024-01-04",
+    "firstTx": "2024-10-29",
     "lastTx": "2026-09-10",
     "lastFiling": "2026-09-25",
-    "estBuyLabel": "$284K",
+    "estBuyLabel": "$260K",
     "estSellLabel": "$185K",
-    "pctLate": 24
+    "pctLate": 18
   },
   "topMembers": [
     {
@@ -341,17 +341,6 @@
       "hasPage": false
     },
     {
-      "name": "John Boozman",
-      "slug": "john-boozman",
-      "party": "R",
-      "chamber": "Senate",
-      "trades": 3,
-      "buys": 3,
-      "sells": 0,
-      "estLabel": "$24K",
-      "hasPage": false
-    },
-    {
       "name": "Josh Gottheimer",
       "slug": "josh-gottheimer",
       "party": "D",
@@ -374,8 +363,8 @@
       "hasPage": false
     },
     {
-      "name": "Markwayne Mullin",
-      "slug": "markwayne-mullin",
+      "name": "John Boozman",
+      "slug": "john-boozman",
       "party": "R",
       "chamber": "Senate",
       "trades": 2,
@@ -404,6 +393,17 @@
       "buys": 1,
       "sells": 0,
       "estLabel": "$75K",
+      "hasPage": false
+    },
+    {
+      "name": "Tim Walberg",
+      "slug": "tim-walberg",
+      "party": "R",
+      "chamber": "House",
+      "trades": 1,
+      "buys": 1,
+      "sells": 0,
+      "estLabel": "$33K",
       "hasPage": false
     }
   ],
@@ -656,21 +656,10 @@
       "side": "BUY",
       "amountBucket": "$1K – $15K",
       "txDate": "2025-09-12",
-      "filedDate": "2026-05-11",
-      "daysLate": 196,
-      "sourceUrl": "https://efdsearch.senate.gov/search/view/ptr/27f15751-bcec-4e3e-a0ab-d7e843c08d06/"
-    },
-    {
-      "member": "John Boozman",
-      "memberSlug": "john-boozman",
-      "hasPage": false,
-      "party": "R",
-      "side": "BUY",
-      "amountBucket": "$1K – $15K",
-      "txDate": "2025-09-12",
       "filedDate": "2025-10-10",
       "daysLate": 0,
-      "sourceUrl": "https://efdsearch.senate.gov/search/view/ptr/c8fa5a56-c0db-4cf4-8370-c81d858f9ca9/"
+      "sourceUrl": "https://efdsearch.senate.gov/search/view/ptr/27f15751-bcec-4e3e-a0ab-d7e843c08d06/",
+      "amended": "2026-05-11"
     },
     {
       "member": "Julie Johnson",
@@ -707,21 +696,33 @@
       "filedDate": "2025-08-13",
       "daysLate": 20,
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20030891.pdf"
+    },
+    {
+      "member": "Julie Johnson",
+      "memberSlug": "julie-johnson",
+      "hasPage": false,
+      "party": "D",
+      "side": "SELL",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2025-04-07",
+      "filedDate": "2025-05-14",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20030296.pdf"
     }
   ],
   "tradesShown": 25,
   "faq": [
     {
       "q": "Who in Congress has traded ETN stock?",
-      "a": "15 members of Congress have disclosed 41 ETN trades since January 2024. The most active is Julie Johnson, with 7 trades, followed by Lisa C. McClain and Gilbert Ray Cisneros, Jr.. Each trade on this page links to the official filing it came from."
+      "a": "14 members of Congress have disclosed 38 ETN trades since October 2024. The most active is Julie Johnson, with 7 trades, followed by Lisa C. McClain and Gilbert Ray Cisneros, Jr.. Each trade on this page links to the official filing it came from."
     },
     {
       "q": "Is Congress buying or selling ETN?",
-      "a": "Of the 41 disclosed ETN trades, 21 were buys and 20 were sells. By the midpoint of each filed amount bracket, the buying comes to about $284K and the selling to about $185K. Filings disclose brackets, never exact amounts, so these totals are estimates."
+      "a": "Of the 38 disclosed ETN trades, 18 were buys and 20 were sells. By the midpoint of each filed amount bracket, the buying comes to about $260K and the selling to about $185K. Filings disclose brackets, never exact amounts, so these totals are estimates."
     },
     {
       "q": "How late are ETN trades disclosed?",
-      "a": "24% of the disclosed ETN trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Sep 10, 2026, and the newest filing arrived on Sep 25, 2026."
+      "a": "18% of the disclosed ETN trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Sep 10, 2026, and the newest filing arrived on Sep 25, 2026."
     }
   ]
 }

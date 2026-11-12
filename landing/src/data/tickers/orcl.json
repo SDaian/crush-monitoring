@@ -12,24 +12,24 @@
   },
   "indexable": true,
   "technical": {
-    "asOf": "2026-11-10",
-    "price": 117.98,
-    "chg1d": -1.51,
-    "chg1w": -6.51,
-    "chg1m": -14.13,
-    "rsi14": 40.7,
-    "sma50": 137.87,
-    "sma200": 154.79,
-    "ema8": 121.46,
-    "ema21": 127.36,
-    "emaGap": -4.63,
-    "vsSma50": -14.4,
-    "vsSma200": -23.8,
-    "relVol": 0.53,
-    "vol1y": 59.1,
+    "asOf": "2026-11-11",
+    "price": 128.38,
+    "chg1d": 8.82,
+    "chg1w": 3.76,
+    "chg1m": -10.35,
+    "rsi14": 49.4,
+    "sma50": 137.61,
+    "sma200": 154.56,
+    "ema8": 123.0,
+    "ema21": 127.45,
+    "emaGap": -3.5,
+    "vsSma50": -6.7,
+    "vsSma200": -16.9,
+    "relVol": 0.89,
+    "vol1y": 59.8,
     "high52w": 248.15,
     "low52w": 114.99,
-    "rangePos": 2.0,
+    "rangePos": 10.0,
     "series": [
       {
         "d": "2025-11-21",
@@ -236,17 +236,17 @@
         "c": 116.1
       },
       {
-        "d": "2026-11-10",
-        "c": 117.98
+        "d": "2026-11-11",
+        "c": 128.38
       }
     ],
     "signals": [],
     "score": {
       "label": "Strong Sell",
-      "buys": 0,
-      "sells": 6,
+      "buys": 1,
+      "sells": 5,
       "holds": 1,
-      "ratio": -0.857
+      "ratio": -0.571
     },
     "votes": {
       "ema_cross": {
@@ -274,26 +274,26 @@
         "muted": false
       },
       "chg_1w": {
-        "vote": -1,
+        "vote": 1,
         "muted": false
       }
     }
   },
   "summary": {
-    "trades": 49,
+    "trades": 47,
     "members": 17,
     "congress": 17,
     "executive": 0,
     "whoLabel": "17 members of Congress",
-    "buys": 19,
-    "sells": 30,
+    "buys": 18,
+    "sells": 29,
     "other": 0,
     "firstTx": "2024-09-26",
     "lastTx": "2026-05-07",
-    "lastFiling": "2026-08-20",
-    "estBuyLabel": "$366K",
-    "estSellLabel": "$412K",
-    "pctLate": 16
+    "lastFiling": "2026-08-07",
+    "estBuyLabel": "$358K",
+    "estSellLabel": "$379K",
+    "pctLate": 13
   },
   "topMembers": [
     {
@@ -374,17 +374,6 @@
       "hasPage": true
     },
     {
-      "name": "John Boozman",
-      "slug": "john-boozman",
-      "party": "R",
-      "chamber": "Senate",
-      "trades": 3,
-      "buys": 2,
-      "sells": 1,
-      "estLabel": "$24K",
-      "hasPage": false
-    },
-    {
       "name": "Val T. Hoyle",
       "slug": "val-t-hoyle",
       "party": "D",
@@ -396,15 +385,26 @@
       "hasPage": false
     },
     {
-      "name": "Tommy Tuberville",
-      "slug": "tommy-tuberville",
+      "name": "Thomas H. Kean, Jr.",
+      "slug": "thomas-h-kean-jr",
       "party": "R",
-      "chamber": "Senate",
+      "chamber": "House",
       "trades": 2,
       "buys": 0,
       "sells": 2,
-      "estLabel": "$65K",
-      "hasPage": true
+      "estLabel": "$41K",
+      "hasPage": false
+    },
+    {
+      "name": "Bruce Westerman",
+      "slug": "bruce-westerman",
+      "party": "R",
+      "chamber": "House",
+      "trades": 2,
+      "buys": 1,
+      "sells": 1,
+      "estLabel": "$16K",
+      "hasPage": false
     }
   ],
   "trades": [
@@ -584,21 +584,10 @@
       "side": "SELL",
       "amountBucket": "$15K – $50K",
       "txDate": "2025-10-07",
-      "filedDate": "2026-08-05",
-      "daysLate": 257,
-      "sourceUrl": "https://efdsearch.senate.gov/search/view/ptr/1a5e6752-653a-4b11-82b6-efd51d466bb6/"
-    },
-    {
-      "member": "Tommy Tuberville",
-      "memberSlug": "tommy-tuberville",
-      "hasPage": true,
-      "party": "R",
-      "side": "SELL",
-      "amountBucket": "$15K – $50K",
-      "txDate": "2025-10-07",
       "filedDate": "2025-11-15",
       "daysLate": 0,
-      "sourceUrl": "https://efdsearch.senate.gov/search/view/ptr/c20df8d3-0160-4a0c-a515-a7b1d2956f87/"
+      "sourceUrl": "https://efdsearch.senate.gov/search/view/ptr/1a5e6752-653a-4b11-82b6-efd51d466bb6/",
+      "amended": "2026-08-05"
     },
     {
       "member": "Val T. Hoyle",
@@ -707,21 +696,33 @@
       "filedDate": "2025-08-20",
       "daysLate": 0,
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20030930.pdf"
+    },
+    {
+      "member": "Lisa C. McClain",
+      "memberSlug": "lisa-c-mcclain",
+      "hasPage": false,
+      "party": "R",
+      "side": "BUY",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2025-06-17",
+      "filedDate": "2025-08-13",
+      "daysLate": 12,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20030891.pdf"
     }
   ],
   "tradesShown": 25,
   "faq": [
     {
       "q": "Who in Congress has traded ORCL stock?",
-      "a": "17 members of Congress have disclosed 49 ORCL trades since September 2024. The most active is Gilbert Ray Cisneros, Jr., with 7 trades, followed by Jefferson Shreve and Jared Moskowitz. Each trade on this page links to the official filing it came from."
+      "a": "17 members of Congress have disclosed 47 ORCL trades since September 2024. The most active is Gilbert Ray Cisneros, Jr., with 7 trades, followed by Jefferson Shreve and Jared Moskowitz. Each trade on this page links to the official filing it came from."
     },
     {
       "q": "Is Congress buying or selling ORCL?",
-      "a": "Of the 49 disclosed ORCL trades, 19 were buys and 30 were sells. By the midpoint of each filed amount bracket, the buying comes to about $366K and the selling to about $412K. Filings disclose brackets, never exact amounts, so these totals are estimates."
+      "a": "Of the 47 disclosed ORCL trades, 18 were buys and 29 were sells. By the midpoint of each filed amount bracket, the buying comes to about $358K and the selling to about $379K. Filings disclose brackets, never exact amounts, so these totals are estimates."
     },
     {
       "q": "How late are ORCL trades disclosed?",
-      "a": "16% of the disclosed ORCL trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated May 7, 2026, and the newest filing arrived on Aug 20, 2026."
+      "a": "13% of the disclosed ORCL trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated May 7, 2026, and the newest filing arrived on Aug 7, 2026."
     }
   ]
 }

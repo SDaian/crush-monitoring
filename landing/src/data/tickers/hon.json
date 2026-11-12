@@ -12,24 +12,24 @@
   },
   "indexable": true,
   "technical": {
-    "asOf": "2026-11-10",
-    "price": 228.22,
-    "chg1d": -0.34,
-    "chg1w": 1.86,
-    "chg1m": 8.86,
-    "rsi14": 61.1,
-    "sma50": 212.65,
-    "sma200": 224.82,
-    "ema8": 223.78,
-    "ema21": 219.68,
-    "emaGap": 1.87,
-    "vsSma50": 7.3,
-    "vsSma200": 1.5,
-    "relVol": 0.57,
+    "asOf": "2026-11-11",
+    "price": 227.64,
+    "chg1d": -0.25,
+    "chg1w": -0.36,
+    "chg1m": 9.82,
+    "rsi14": 60.3,
+    "sma50": 213.01,
+    "sma200": 224.85,
+    "ema8": 224.63,
+    "ema21": 220.4,
+    "emaGap": 1.92,
+    "vsSma50": 6.9,
+    "vsSma200": 1.2,
+    "relVol": 0.55,
     "vol1y": 27.8,
     "high52w": 248.79,
     "low52w": 188.14,
-    "rangePos": 66.0,
+    "rangePos": 65.0,
     "series": [
       {
         "d": "2025-11-21",
@@ -236,17 +236,17 @@
         "c": 220.05
       },
       {
-        "d": "2026-11-10",
-        "c": 228.22
+        "d": "2026-11-11",
+        "c": 227.64
       }
     ],
     "signals": [],
     "score": {
-      "label": "Strong Buy",
-      "buys": 5,
-      "sells": 1,
+      "label": "Buy",
+      "buys": 4,
+      "sells": 2,
       "holds": 1,
-      "ratio": 0.571
+      "ratio": 0.286
     },
     "votes": {
       "ema_cross": {
@@ -274,26 +274,26 @@
         "muted": false
       },
       "chg_1w": {
-        "vote": 1,
+        "vote": -1,
         "muted": false
       }
     }
   },
   "summary": {
-    "trades": 32,
-    "members": 20,
-    "congress": 19,
+    "trades": 30,
+    "members": 19,
+    "congress": 18,
     "executive": 1,
-    "whoLabel": "19 members of Congress and 1 executive-branch filer",
+    "whoLabel": "18 members of Congress and 1 executive-branch filer",
     "buys": 9,
-    "sells": 23,
+    "sells": 21,
     "other": 0,
-    "firstTx": "2024-10-29",
+    "firstTx": "2025-02-13",
     "lastTx": "2026-10-01",
     "lastFiling": "2026-10-27",
     "estBuyLabel": "$97K",
-    "estSellLabel": "$472K",
-    "pctLate": 25
+    "estSellLabel": "$407K",
+    "pctLate": 20
   },
   "topMembers": [
     {
@@ -328,17 +328,6 @@
       "sells": 2,
       "estLabel": "$65K",
       "hasPage": false
-    },
-    {
-      "name": "Tommy Tuberville",
-      "slug": "tommy-tuberville",
-      "party": "R",
-      "chamber": "Senate",
-      "trades": 2,
-      "buys": 0,
-      "sells": 2,
-      "estLabel": "$65K",
-      "hasPage": true
     },
     {
       "name": "Donald J. Trump",
@@ -399,6 +388,17 @@
       "name": "Debbie Dingell",
       "slug": "debbie-dingell",
       "party": "D",
+      "chamber": "House",
+      "trades": 1,
+      "buys": 0,
+      "sells": 1,
+      "estLabel": "$33K",
+      "hasPage": false
+    },
+    {
+      "name": "Jefferson Shreve",
+      "slug": "jefferson-shreve",
+      "party": "R",
       "chamber": "House",
       "trades": 1,
       "buys": 0,
@@ -713,15 +713,15 @@
   "faq": [
     {
       "q": "Who in Congress has traded HON stock?",
-      "a": "19 members of Congress and 1 executive-branch filer have disclosed 32 HON trades since October 2024. The most active is Julie Johnson, with 5 trades, followed by Alan Armstrong and Sheldon Whitehouse. Each trade on this page links to the official filing it came from."
+      "a": "18 members of Congress and 1 executive-branch filer have disclosed 30 HON trades since February 2025. The most active is Julie Johnson, with 5 trades, followed by Alan Armstrong and Sheldon Whitehouse. Each trade on this page links to the official filing it came from."
     },
     {
       "q": "Is Congress buying or selling HON?",
-      "a": "Of the 32 disclosed HON trades, 9 were buys and 23 were sells. By the midpoint of each filed amount bracket, the buying comes to about $97K and the selling to about $472K. Filings disclose brackets, never exact amounts, so these totals are estimates."
+      "a": "Of the 30 disclosed HON trades, 9 were buys and 21 were sells. By the midpoint of each filed amount bracket, the buying comes to about $97K and the selling to about $407K. Filings disclose brackets, never exact amounts, so these totals are estimates."
     },
     {
       "q": "How late are HON trades disclosed?",
-      "a": "25% of the disclosed HON trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Oct 1, 2026, and the newest filing arrived on Oct 27, 2026."
+      "a": "20% of the disclosed HON trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Oct 1, 2026, and the newest filing arrived on Oct 27, 2026."
     }
   ]
 }

@@ -14,24 +14,24 @@
   },
   "indexable": true,
   "technical": {
-    "asOf": "2026-11-10",
-    "price": 641.39,
-    "chg1d": 0.0,
-    "chg1w": 3.28,
-    "chg1m": -13.67,
-    "rsi14": 46.5,
-    "sma50": 677.57,
-    "sma200": 631.7,
-    "ema8": 628.98,
-    "ema21": 647.92,
-    "emaGap": -2.92,
-    "vsSma50": -5.3,
-    "vsSma200": 1.5,
-    "relVol": 0.53,
+    "asOf": "2026-11-11",
+    "price": 628.77,
+    "chg1d": -1.97,
+    "chg1w": -0.2,
+    "chg1m": -17.54,
+    "rsi14": 43.4,
+    "sma50": 678.57,
+    "sma200": 631.48,
+    "ema8": 628.93,
+    "ema21": 646.18,
+    "emaGap": -2.67,
+    "vsSma50": -7.3,
+    "vsSma200": -0.4,
+    "relVol": 0.64,
     "vol1y": 41.3,
     "high52w": 777.59,
     "low52w": 525.72,
-    "rangePos": 46.0,
+    "rangePos": 41.0,
     "series": [
       {
         "d": "2025-11-21",
@@ -238,29 +238,29 @@
         "c": 610.15
       },
       {
-        "d": "2026-11-10",
-        "c": 641.39
+        "d": "2026-11-11",
+        "c": 628.77
       }
     ],
     "signals": [],
     "score": {
-      "label": "Hold",
-      "buys": 3,
-      "sells": 2,
-      "holds": 2,
-      "ratio": 0.143
+      "label": "Strong Sell",
+      "buys": 1,
+      "sells": 5,
+      "holds": 1,
+      "ratio": -0.571
     },
     "votes": {
       "ema_cross": {
-        "vote": 0,
-        "muted": true
+        "vote": -1,
+        "muted": false
       },
       "vs_sma50": {
         "vote": -1,
         "muted": false
       },
       "vs_sma200": {
-        "vote": 1,
+        "vote": -1,
         "muted": false
       },
       "sma50_vs_200": {
@@ -276,26 +276,26 @@
         "muted": false
       },
       "chg_1w": {
-        "vote": 1,
+        "vote": -1,
         "muted": false
       }
     }
   },
   "summary": {
-    "trades": 101,
+    "trades": 98,
     "members": 27,
     "congress": 26,
     "executive": 1,
     "whoLabel": "26 members of Congress and 1 executive-branch filer",
-    "buys": 68,
+    "buys": 65,
     "sells": 33,
     "other": 0,
-    "firstTx": "2024-01-02",
+    "firstTx": "2024-09-26",
     "lastTx": "2026-10-21",
-    "lastFiling": "2026-11-04",
+    "lastFiling": "2026-11-10",
     "estBuyLabel": "$2.0M",
     "estSellLabel": "$672K",
-    "pctLate": 20
+    "pctLate": 17
   },
   "topMembers": [
     {
@@ -321,17 +321,6 @@
       "hasPage": false
     },
     {
-      "name": "John Boozman",
-      "slug": "john-boozman",
-      "party": "R",
-      "chamber": "Senate",
-      "trades": 7,
-      "buys": 7,
-      "sells": 0,
-      "estLabel": "$56K",
-      "hasPage": false
-    },
-    {
       "name": "Lisa C. McClain",
       "slug": "lisa-c-mcclain",
       "party": "R",
@@ -341,6 +330,17 @@
       "sells": 3,
       "estLabel": "$56K",
       "hasPage": false
+    },
+    {
+      "name": "Gilbert Ray Cisneros, Jr.",
+      "slug": "gilbert-ray-cisneros-jr",
+      "party": "D",
+      "chamber": "House",
+      "trades": 6,
+      "buys": 4,
+      "sells": 2,
+      "estLabel": "$48K",
+      "hasPage": true
     },
     {
       "name": "Jonathan L. Jackson",
@@ -365,17 +365,6 @@
       "hasPage": false
     },
     {
-      "name": "Gilbert Ray Cisneros, Jr.",
-      "slug": "gilbert-ray-cisneros-jr",
-      "party": "D",
-      "chamber": "House",
-      "trades": 5,
-      "buys": 3,
-      "sells": 2,
-      "estLabel": "$40K",
-      "hasPage": true
-    },
-    {
       "name": "Julia Letlow",
       "slug": "julia-letlow",
       "party": "R",
@@ -384,6 +373,17 @@
       "buys": 3,
       "sells": 2,
       "estLabel": "$40K",
+      "hasPage": false
+    },
+    {
+      "name": "John Boozman",
+      "slug": "john-boozman",
+      "party": "R",
+      "chamber": "Senate",
+      "trades": 4,
+      "buys": 4,
+      "sells": 0,
+      "estLabel": "$32K",
       "hasPage": false
     },
     {
@@ -421,6 +421,18 @@
       "filedDate": "2026-11-04",
       "daysLate": 0,
       "sourceUrl": "https://efdsearch.senate.gov/search/view/ptr/a89c0c6b-4c12-4955-98f9-3a54ca52d8a3/"
+    },
+    {
+      "member": "Gilbert Ray Cisneros, Jr.",
+      "memberSlug": "gilbert-ray-cisneros-jr",
+      "hasPage": true,
+      "party": "D",
+      "side": "BUY",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-10-09",
+      "filedDate": "2026-11-10",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035788.pdf"
     },
     {
       "member": "Maria Elvira Salazar",
@@ -697,33 +709,21 @@
       "filedDate": "2026-01-12",
       "daysLate": 0,
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20033762.pdf"
-    },
-    {
-      "member": "Gilbert Ray Cisneros, Jr.",
-      "memberSlug": "gilbert-ray-cisneros-jr",
-      "hasPage": true,
-      "party": "D",
-      "side": "BUY",
-      "amountBucket": "$1K – $15K",
-      "txDate": "2025-11-18",
-      "filedDate": "2025-12-15",
-      "daysLate": 0,
-      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20033619.pdf"
     }
   ],
   "tradesShown": 25,
   "faq": [
     {
       "q": "Who in Congress has traded META stock?",
-      "a": "26 members of Congress and 1 executive-branch filer have disclosed 101 META trades since January 2024. The most active is Cleo Fields, with 13 trades, followed by Robert P. Bresnahan, Jr. and John Boozman. Each trade on this page links to the official filing it came from."
+      "a": "26 members of Congress and 1 executive-branch filer have disclosed 98 META trades since September 2024. The most active is Cleo Fields, with 13 trades, followed by Robert P. Bresnahan, Jr. and Lisa C. McClain. Each trade on this page links to the official filing it came from."
     },
     {
       "q": "Is Congress buying or selling META?",
-      "a": "Of the 101 disclosed META trades, 68 were buys and 33 were sells. By the midpoint of each filed amount bracket, the buying comes to about $2.0M and the selling to about $672K. Filings disclose brackets, never exact amounts, so these totals are estimates."
+      "a": "Of the 98 disclosed META trades, 65 were buys and 33 were sells. By the midpoint of each filed amount bracket, the buying comes to about $2.0M and the selling to about $672K. Filings disclose brackets, never exact amounts, so these totals are estimates."
     },
     {
       "q": "How late are META trades disclosed?",
-      "a": "20% of the disclosed META trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Oct 21, 2026, and the newest filing arrived on Nov 4, 2026."
+      "a": "17% of the disclosed META trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Oct 21, 2026, and the newest filing arrived on Nov 10, 2026."
     }
   ]
 }

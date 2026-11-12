@@ -12,24 +12,24 @@
   },
   "indexable": true,
   "technical": {
-    "asOf": "2026-11-10",
-    "price": 28.31,
-    "chg1d": -0.11,
-    "chg1w": -27.39,
-    "chg1m": -17.37,
-    "rsi14": 29.3,
-    "sma50": 35.72,
-    "sma200": 42.7,
-    "ema8": 31.37,
-    "ema21": 33.85,
-    "emaGap": -7.34,
-    "vsSma50": -20.8,
-    "vsSma200": -33.7,
-    "relVol": 1.04,
-    "vol1y": 43.5,
+    "asOf": "2026-11-11",
+    "price": 30.21,
+    "chg1d": 6.71,
+    "chg1w": 1.51,
+    "chg1m": -14.18,
+    "rsi14": 37.5,
+    "sma50": 35.51,
+    "sma200": 42.56,
+    "ema8": 31.11,
+    "ema21": 33.52,
+    "emaGap": -7.19,
+    "vsSma50": -14.9,
+    "vsSma200": -29.0,
+    "relVol": 1.55,
+    "vol1y": 44.0,
     "high52w": 67.54,
     "low52w": 28.31,
-    "rangePos": 0.0,
+    "rangePos": 5.0,
     "series": [
       {
         "d": "2025-11-21",
@@ -236,24 +236,17 @@
         "c": 28.73
       },
       {
-        "d": "2026-11-10",
-        "c": 28.31
+        "d": "2026-11-11",
+        "c": 30.21
       }
     ],
-    "signals": [
-      {
-        "type": "new_52w_low",
-        "asof": "2026-11-10",
-        "label": "New 52-week low",
-        "dir": "bear"
-      }
-    ],
+    "signals": [],
     "score": {
       "label": "Strong Sell",
       "buys": 1,
-      "sells": 6,
-      "holds": 0,
-      "ratio": -0.714
+      "sells": 5,
+      "holds": 1,
+      "ratio": -0.571
     },
     "votes": {
       "ema_cross": {
@@ -273,7 +266,7 @@
         "muted": false
       },
       "rsi": {
-        "vote": 1,
+        "vote": 0,
         "muted": false
       },
       "chg_1m": {
@@ -281,24 +274,24 @@
         "muted": false
       },
       "chg_1w": {
-        "vote": -1,
+        "vote": 1,
         "muted": false
       }
     }
   },
   "summary": {
-    "trades": 25,
+    "trades": 26,
     "members": 8,
     "congress": 7,
     "executive": 1,
     "whoLabel": "7 members of Congress and 1 executive-branch filer",
-    "buys": 11,
+    "buys": 12,
     "sells": 14,
     "other": 0,
     "firstTx": "2025-02-24",
-    "lastTx": "2026-09-18",
-    "lastFiling": "2026-10-12",
-    "estBuyLabel": "$137K",
+    "lastTx": "2026-10-20",
+    "lastFiling": "2026-11-10",
+    "estBuyLabel": "$145K",
     "estSellLabel": "$228K",
     "pctLate": 8
   },
@@ -308,10 +301,10 @@
       "slug": "gilbert-ray-cisneros-jr",
       "party": "D",
       "chamber": "House",
-      "trades": 7,
-      "buys": 4,
+      "trades": 8,
+      "buys": 5,
       "sells": 3,
-      "estLabel": "$56K",
+      "estLabel": "$64K",
       "hasPage": true
     },
     {
@@ -393,6 +386,18 @@
     }
   ],
   "trades": [
+    {
+      "member": "Gilbert Ray Cisneros, Jr.",
+      "memberSlug": "gilbert-ray-cisneros-jr",
+      "hasPage": true,
+      "party": "D",
+      "side": "BUY",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-10-20",
+      "filedDate": "2026-11-10",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035788.pdf"
+    },
     {
       "member": "Gilbert Ray Cisneros, Jr.",
       "memberSlug": "gilbert-ray-cisneros-jr",
@@ -680,33 +685,21 @@
       "filedDate": "2025-10-05",
       "daysLate": 155,
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20032149.pdf"
-    },
-    {
-      "member": "Jefferson Shreve",
-      "memberSlug": "jefferson-shreve",
-      "hasPage": false,
-      "party": "R",
-      "side": "BUY",
-      "amountBucket": "$15K – $50K",
-      "txDate": "2025-02-24",
-      "filedDate": "2025-03-09",
-      "daysLate": 0,
-      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20027879.pdf"
     }
   ],
   "tradesShown": 25,
   "faq": [
     {
       "q": "Who in Congress has traded FIS stock?",
-      "a": "7 members of Congress and 1 executive-branch filer have disclosed 25 FIS trades since February 2025. The most active is Gilbert Ray Cisneros, Jr., with 7 trades, followed by Julie Johnson and Jefferson Shreve. Each trade on this page links to the official filing it came from."
+      "a": "7 members of Congress and 1 executive-branch filer have disclosed 26 FIS trades since February 2025. The most active is Gilbert Ray Cisneros, Jr., with 8 trades, followed by Julie Johnson and Jefferson Shreve. Each trade on this page links to the official filing it came from."
     },
     {
       "q": "Is Congress buying or selling FIS?",
-      "a": "Of the 25 disclosed FIS trades, 11 were buys and 14 were sells. By the midpoint of each filed amount bracket, the buying comes to about $137K and the selling to about $228K. Filings disclose brackets, never exact amounts, so these totals are estimates."
+      "a": "Of the 26 disclosed FIS trades, 12 were buys and 14 were sells. By the midpoint of each filed amount bracket, the buying comes to about $145K and the selling to about $228K. Filings disclose brackets, never exact amounts, so these totals are estimates."
     },
     {
       "q": "How late are FIS trades disclosed?",
-      "a": "8% of the disclosed FIS trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Sep 18, 2026, and the newest filing arrived on Oct 12, 2026."
+      "a": "8% of the disclosed FIS trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Oct 20, 2026, and the newest filing arrived on Nov 10, 2026."
     }
   ]
 }

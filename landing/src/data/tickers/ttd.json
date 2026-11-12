@@ -12,24 +12,24 @@
   },
   "indexable": true,
   "technical": {
-    "asOf": "2026-11-10",
-    "price": 15.42,
-    "chg1d": 3.28,
-    "chg1w": 19.91,
-    "chg1m": 29.15,
-    "rsi14": 70.7,
-    "sma50": 13.13,
-    "sma200": 19.3,
-    "ema8": 13.77,
-    "ema21": 13.18,
-    "emaGap": 4.49,
-    "vsSma50": 17.5,
-    "vsSma200": -20.1,
-    "relVol": 3.06,
-    "vol1y": 59.3,
+    "asOf": "2026-11-11",
+    "price": 15.98,
+    "chg1d": 3.63,
+    "chg1w": 20.79,
+    "chg1m": 31.31,
+    "rsi14": 73.4,
+    "sma50": 13.17,
+    "sma200": 19.22,
+    "ema8": 14.26,
+    "ema21": 13.44,
+    "emaGap": 6.16,
+    "vsSma50": 21.3,
+    "vsSma200": -16.8,
+    "relVol": 1.4,
+    "vol1y": 59.4,
     "high52w": 44.2,
     "low52w": 11.92,
-    "rangePos": 11.0,
+    "rangePos": 13.0,
     "series": [
       {
         "d": "2025-11-21",
@@ -236,18 +236,11 @@
         "c": 12.93
       },
       {
-        "d": "2026-11-10",
-        "c": 15.42
+        "d": "2026-11-11",
+        "c": 15.98
       }
     ],
-    "signals": [
-      {
-        "type": "rsi_overbought",
-        "asof": "2026-11-10",
-        "label": "RSI crossed above 70 (overbought)",
-        "dir": "neutral"
-      }
-    ],
+    "signals": [],
     "score": {
       "label": "Hold",
       "buys": 3,
@@ -287,19 +280,19 @@
     }
   },
   "summary": {
-    "trades": 36,
+    "trades": 37,
     "members": 7,
     "congress": 7,
     "executive": 0,
     "whoLabel": "7 members of Congress",
     "buys": 18,
-    "sells": 18,
+    "sells": 19,
     "other": 0,
     "firstTx": "2024-12-11",
-    "lastTx": "2026-09-18",
-    "lastFiling": "2026-10-12",
+    "lastTx": "2026-10-20",
+    "lastFiling": "2026-11-10",
     "estBuyLabel": "$193K",
-    "estSellLabel": "$193K",
+    "estSellLabel": "$201K",
     "pctLate": 11
   },
   "topMembers": [
@@ -319,10 +312,10 @@
       "slug": "gilbert-ray-cisneros-jr",
       "party": "D",
       "chamber": "House",
-      "trades": 9,
+      "trades": 10,
       "buys": 5,
-      "sells": 4,
-      "estLabel": "$72K",
+      "sells": 5,
+      "estLabel": "$80K",
       "hasPage": true
     },
     {
@@ -382,6 +375,18 @@
     }
   ],
   "trades": [
+    {
+      "member": "Gilbert Ray Cisneros, Jr.",
+      "memberSlug": "gilbert-ray-cisneros-jr",
+      "hasPage": true,
+      "party": "D",
+      "side": "SELL",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-10-20",
+      "filedDate": "2026-11-10",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035788.pdf"
+    },
     {
       "member": "Gilbert Ray Cisneros, Jr.",
       "memberSlug": "gilbert-ray-cisneros-jr",
@@ -669,33 +674,21 @@
       "filedDate": "2025-06-22",
       "daysLate": 0,
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20030387.pdf"
-    },
-    {
-      "member": "Jefferson Shreve",
-      "memberSlug": "jefferson-shreve",
-      "hasPage": false,
-      "party": "R",
-      "side": "SELL",
-      "amountBucket": "$15K – $50K",
-      "txDate": "2025-04-07",
-      "filedDate": "2025-05-08",
-      "daysLate": 0,
-      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20030231.pdf"
     }
   ],
   "tradesShown": 25,
   "faq": [
     {
       "q": "Who in Congress has traded TTD stock?",
-      "a": "7 members of Congress have disclosed 36 TTD trades since December 2024. The most active is Byron Donalds, with 12 trades, followed by Gilbert Ray Cisneros, Jr. and Jefferson Shreve. Each trade on this page links to the official filing it came from."
+      "a": "7 members of Congress have disclosed 37 TTD trades since December 2024. The most active is Byron Donalds, with 12 trades, followed by Gilbert Ray Cisneros, Jr. and Jefferson Shreve. Each trade on this page links to the official filing it came from."
     },
     {
       "q": "Is Congress buying or selling TTD?",
-      "a": "Of the 36 disclosed TTD trades, 18 were buys and 18 were sells. By the midpoint of each filed amount bracket, the buying comes to about $193K and the selling to about $193K. Filings disclose brackets, never exact amounts, so these totals are estimates."
+      "a": "Of the 37 disclosed TTD trades, 18 were buys and 19 were sells. By the midpoint of each filed amount bracket, the buying comes to about $193K and the selling to about $201K. Filings disclose brackets, never exact amounts, so these totals are estimates."
     },
     {
       "q": "How late are TTD trades disclosed?",
-      "a": "11% of the disclosed TTD trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Sep 18, 2026, and the newest filing arrived on Oct 12, 2026."
+      "a": "11% of the disclosed TTD trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Oct 20, 2026, and the newest filing arrived on Nov 10, 2026."
     }
   ]
 }

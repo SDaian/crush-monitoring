@@ -12,24 +12,24 @@
   },
   "indexable": true,
   "technical": {
-    "asOf": "2026-11-10",
-    "price": 300.52,
-    "chg1d": 1.62,
-    "chg1w": -3.83,
-    "chg1m": 6.67,
-    "rsi14": 55.0,
-    "sma50": 280.59,
-    "sma200": 263.3,
-    "ema8": 295.75,
-    "ema21": 293.01,
-    "emaGap": 0.94,
-    "vsSma50": 7.1,
-    "vsSma200": 14.1,
-    "relVol": 0.65,
+    "asOf": "2026-11-11",
+    "price": 309.81,
+    "chg1d": 3.09,
+    "chg1w": -0.54,
+    "chg1m": 7.63,
+    "rsi14": 59.1,
+    "sma50": 281.72,
+    "sma200": 263.87,
+    "ema8": 298.87,
+    "ema21": 294.53,
+    "emaGap": 1.47,
+    "vsSma50": 10.0,
+    "vsSma200": 17.4,
+    "relVol": 0.83,
     "vol1y": 43.7,
     "high52w": 332.28,
     "low52w": 153.33,
-    "rangePos": 82.0,
+    "rangePos": 87.0,
     "series": [
       {
         "d": "2025-11-21",
@@ -236,8 +236,8 @@
         "c": 277.36
       },
       {
-        "d": "2026-11-10",
-        "c": 300.52
+        "d": "2026-11-11",
+        "c": 309.81
       }
     ],
     "signals": [],
@@ -280,20 +280,20 @@
     }
   },
   "summary": {
-    "trades": 38,
+    "trades": 36,
     "members": 15,
     "congress": 14,
     "executive": 1,
     "whoLabel": "14 members of Congress and 1 executive-branch filer",
     "buys": 18,
-    "sells": 20,
+    "sells": 18,
     "other": 0,
-    "firstTx": "2024-03-12",
+    "firstTx": "2024-09-26",
     "lastTx": "2026-10-14",
     "lastFiling": "2026-10-30",
     "estBuyLabel": "$309K",
-    "estSellLabel": "$1.4M",
-    "pctLate": 16
+    "estSellLabel": "$1.3M",
+    "pctLate": 11
   },
   "topMembers": [
     {
@@ -339,17 +339,6 @@
       "sells": 2,
       "estLabel": "$98K",
       "hasPage": false
-    },
-    {
-      "name": "Tommy Tuberville",
-      "slug": "tommy-tuberville",
-      "party": "R",
-      "chamber": "Senate",
-      "trades": 3,
-      "buys": 0,
-      "sells": 3,
-      "estLabel": "$73K",
-      "hasPage": true
     },
     {
       "name": "Julie Johnson",
@@ -404,6 +393,17 @@
       "buys": 0,
       "sells": 1,
       "estLabel": "$75K",
+      "hasPage": false
+    },
+    {
+      "name": "Sheri Biggs",
+      "slug": "sheri-biggs",
+      "party": "R",
+      "chamber": "House",
+      "trades": 1,
+      "buys": 0,
+      "sells": 1,
+      "estLabel": "$33K",
       "hasPage": false
     }
   ],
@@ -713,15 +713,15 @@
   "faq": [
     {
       "q": "Who in Congress has traded TXN stock?",
-      "a": "14 members of Congress and 1 executive-branch filer have disclosed 38 TXN trades since March 2024. The most active is Robert P. Bresnahan, Jr., with 7 trades, followed by Jefferson Shreve and Jared Moskowitz. Each trade on this page links to the official filing it came from."
+      "a": "14 members of Congress and 1 executive-branch filer have disclosed 36 TXN trades since September 2024. The most active is Robert P. Bresnahan, Jr., with 7 trades, followed by Jefferson Shreve and Jared Moskowitz. Each trade on this page links to the official filing it came from."
     },
     {
       "q": "Is Congress buying or selling TXN?",
-      "a": "Of the 38 disclosed TXN trades, 18 were buys and 20 were sells. By the midpoint of each filed amount bracket, the buying comes to about $309K and the selling to about $1.4M. Filings disclose brackets, never exact amounts, so these totals are estimates."
+      "a": "Of the 36 disclosed TXN trades, 18 were buys and 18 were sells. By the midpoint of each filed amount bracket, the buying comes to about $309K and the selling to about $1.3M. Filings disclose brackets, never exact amounts, so these totals are estimates."
     },
     {
       "q": "How late are TXN trades disclosed?",
-      "a": "16% of the disclosed TXN trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Oct 14, 2026, and the newest filing arrived on Oct 30, 2026."
+      "a": "11% of the disclosed TXN trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Oct 14, 2026, and the newest filing arrived on Oct 30, 2026."
     }
   ]
 }

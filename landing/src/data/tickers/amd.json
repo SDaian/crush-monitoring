@@ -12,24 +12,24 @@
   },
   "indexable": true,
   "technical": {
-    "asOf": "2026-11-10",
-    "price": 515.21,
-    "chg1d": 1.3,
-    "chg1w": 6.47,
-    "chg1m": -13.3,
-    "rsi14": 48.6,
-    "sma50": 548.56,
-    "sma200": 418.54,
-    "ema8": 492.0,
-    "ema21": 517.92,
-    "emaGap": -5.0,
-    "vsSma50": -6.1,
-    "vsSma200": 23.1,
-    "relVol": 1.52,
-    "vol1y": 72.9,
+    "asOf": "2026-11-11",
+    "price": 552.9,
+    "chg1d": 7.32,
+    "chg1w": 13.12,
+    "chg1m": -8.69,
+    "rsi14": 53.6,
+    "sma50": 550.43,
+    "sma200": 420.05,
+    "ema8": 505.53,
+    "ema21": 521.1,
+    "emaGap": -2.99,
+    "vsSma50": 0.4,
+    "vsSma200": 31.6,
+    "relVol": 1.4,
+    "vol1y": 73.1,
     "high52w": 649.42,
     "low52w": 190.95,
-    "rangePos": 71.0,
+    "rangePos": 79.0,
     "series": [
       {
         "d": "2025-11-21",
@@ -236,17 +236,24 @@
         "c": 449.04
       },
       {
-        "d": "2026-11-10",
-        "c": 515.21
+        "d": "2026-11-11",
+        "c": 552.9
       }
     ],
-    "signals": [],
+    "signals": [
+      {
+        "type": "reclaim_sma50",
+        "asof": "2026-11-11",
+        "label": "Reclaimed the 50-day average",
+        "dir": "bull"
+      }
+    ],
     "score": {
-      "label": "Hold",
-      "buys": 3,
-      "sells": 2,
+      "label": "Buy",
+      "buys": 4,
+      "sells": 1,
       "holds": 2,
-      "ratio": 0.143
+      "ratio": 0.429
     },
     "votes": {
       "ema_cross": {
@@ -254,7 +261,7 @@
         "muted": true
       },
       "vs_sma50": {
-        "vote": -1,
+        "vote": 1,
         "muted": false
       },
       "vs_sma200": {
@@ -280,20 +287,20 @@
     }
   },
   "summary": {
-    "trades": 52,
+    "trades": 51,
     "members": 15,
     "congress": 15,
     "executive": 0,
     "whoLabel": "15 members of Congress",
-    "buys": 39,
+    "buys": 38,
     "sells": 13,
     "other": 0,
-    "firstTx": "2024-01-02",
+    "firstTx": "2024-03-11",
     "lastTx": "2026-08-18",
     "lastFiling": "2026-09-10",
-    "estBuyLabel": "$716K",
+    "estBuyLabel": "$683K",
     "estSellLabel": "$379K",
-    "pctLate": 15
+    "pctLate": 14
   },
   "topMembers": [
     {
@@ -374,17 +381,6 @@
       "hasPage": true
     },
     {
-      "name": "Markwayne Mullin",
-      "slug": "markwayne-mullin",
-      "party": "R",
-      "chamber": "Senate",
-      "trades": 2,
-      "buys": 1,
-      "sells": 1,
-      "estLabel": "$108K",
-      "hasPage": false
-    },
-    {
       "name": "Dan Newhouse",
       "slug": "dan-newhouse",
       "party": "R",
@@ -404,6 +400,17 @@
       "buys": 2,
       "sells": 0,
       "estLabel": "$16K",
+      "hasPage": false
+    },
+    {
+      "name": "Markwayne Mullin",
+      "slug": "markwayne-mullin",
+      "party": "R",
+      "chamber": "Senate",
+      "trades": 1,
+      "buys": 0,
+      "sells": 1,
+      "estLabel": "$75K",
       "hasPage": false
     }
   ],
@@ -713,15 +720,15 @@
   "faq": [
     {
       "q": "Who in Congress has traded AMD stock?",
-      "a": "15 members of Congress have disclosed 52 AMD trades since January 2024. The most active is Gilbert Ray Cisneros, Jr., with 10 trades, followed by Marjorie Taylor Greene and Lisa C. McClain. Each trade on this page links to the official filing it came from."
+      "a": "15 members of Congress have disclosed 51 AMD trades since March 2024. The most active is Gilbert Ray Cisneros, Jr., with 10 trades, followed by Marjorie Taylor Greene and Lisa C. McClain. Each trade on this page links to the official filing it came from."
     },
     {
       "q": "Is Congress buying or selling AMD?",
-      "a": "Of the 52 disclosed AMD trades, 39 were buys and 13 were sells. By the midpoint of each filed amount bracket, the buying comes to about $716K and the selling to about $379K. Filings disclose brackets, never exact amounts, so these totals are estimates."
+      "a": "Of the 51 disclosed AMD trades, 38 were buys and 13 were sells. By the midpoint of each filed amount bracket, the buying comes to about $683K and the selling to about $379K. Filings disclose brackets, never exact amounts, so these totals are estimates."
     },
     {
       "q": "How late are AMD trades disclosed?",
-      "a": "15% of the disclosed AMD trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Aug 18, 2026, and the newest filing arrived on Sep 10, 2026."
+      "a": "14% of the disclosed AMD trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Aug 18, 2026, and the newest filing arrived on Sep 10, 2026."
     }
   ]
 }

@@ -6,10 +6,10 @@
       "ticker": "MSFT",
       "aliases": [],
       "company": "Microsoft Corporation",
-      "trades": 217,
+      "trades": 210,
       "members": 45,
-      "buys": 111,
-      "sells": 106,
+      "buys": 109,
+      "sells": 101,
       "lastTx": "2026-10-21",
       "lastFiling": "2026-11-04",
       "indexable": true,
@@ -23,12 +23,12 @@
       "ticker": "NVDA",
       "aliases": [],
       "company": "NVIDIA Corporation",
-      "trades": 190,
+      "trades": 189,
       "members": 36,
-      "buys": 122,
-      "sells": 68,
+      "buys": 120,
+      "sells": 69,
       "lastTx": "2026-10-23",
-      "lastFiling": "2026-11-05",
+      "lastFiling": "2026-11-10",
       "indexable": true,
       "industry": {
         "key": "tech",
@@ -42,10 +42,10 @@
         "GOOG"
       ],
       "company": "Alphabet Inc.",
-      "trades": 171,
+      "trades": 166,
       "members": 42,
-      "buys": 91,
-      "sells": 80,
+      "buys": 89,
+      "sells": 77,
       "lastTx": "2026-10-16",
       "lastFiling": "2026-10-27",
       "indexable": true,
@@ -59,10 +59,10 @@
       "ticker": "AAPL",
       "aliases": [],
       "company": "Apple Inc.",
-      "trades": 157,
+      "trades": 148,
       "members": 45,
-      "buys": 75,
-      "sells": 82,
+      "buys": 74,
+      "sells": 74,
       "lastTx": "2026-10-21",
       "lastFiling": "2026-11-04",
       "indexable": true,
@@ -76,9 +76,9 @@
       "ticker": "AMZN",
       "aliases": [],
       "company": "Amazon.com, Inc.",
-      "trades": 124,
+      "trades": 123,
       "members": 35,
-      "buys": 88,
+      "buys": 87,
       "sells": 36,
       "lastTx": "2026-10-27",
       "lastFiling": "2026-10-27",
@@ -95,12 +95,12 @@
         "FB"
       ],
       "company": "Meta Platforms, Inc.",
-      "trades": 101,
+      "trades": 98,
       "members": 27,
-      "buys": 68,
+      "buys": 65,
       "sells": 33,
       "lastTx": "2026-10-21",
-      "lastFiling": "2026-11-04",
+      "lastFiling": "2026-11-10",
       "indexable": true,
       "industry": {
         "key": "tech",
@@ -112,9 +112,9 @@
       "ticker": "UNH",
       "aliases": [],
       "company": "UnitedHealth Group Incorporated",
-      "trades": 95,
+      "trades": 94,
       "members": 29,
-      "buys": 45,
+      "buys": 44,
       "sells": 50,
       "lastTx": "2026-09-24",
       "lastFiling": "2026-10-13",
@@ -129,9 +129,9 @@
       "ticker": "AVGO",
       "aliases": [],
       "company": "Broadcom Inc.",
-      "trades": 92,
+      "trades": 91,
       "members": 25,
-      "buys": 52,
+      "buys": 51,
       "sells": 40,
       "lastTx": "2026-09-24",
       "lastFiling": "2026-11-01",
@@ -146,12 +146,12 @@
       "ticker": "HD",
       "aliases": [],
       "company": "Home Depot, Inc.",
-      "trades": 90,
+      "trades": 89,
       "members": 26,
-      "buys": 46,
-      "sells": 44,
+      "buys": 44,
+      "sells": 45,
       "lastTx": "2026-10-22",
-      "lastFiling": "2026-10-27",
+      "lastFiling": "2026-11-10",
       "indexable": true,
       "industry": {
         "key": "consumer",
@@ -176,16 +176,16 @@
       }
     },
     {
-      "slug": "jnj",
-      "ticker": "JNJ",
+      "slug": "lly",
+      "ticker": "LLY",
       "aliases": [],
-      "company": "Johnson & Johnson",
-      "trades": 69,
-      "members": 24,
-      "buys": 31,
-      "sells": 38,
-      "lastTx": "2026-09-30",
-      "lastFiling": "2026-10-30",
+      "company": "Eli Lilly and Company",
+      "trades": 67,
+      "members": 22,
+      "buys": 27,
+      "sells": 40,
+      "lastTx": "2026-10-20",
+      "lastFiling": "2026-11-10",
       "indexable": true,
       "industry": {
         "key": "health",
@@ -193,33 +193,16 @@
       }
     },
     {
-      "slug": "jpm",
-      "ticker": "JPM",
+      "slug": "jnj",
+      "ticker": "JNJ",
       "aliases": [],
-      "company": "JP Morgan Chase & Co.",
-      "trades": 68,
-      "members": 28,
+      "company": "Johnson & Johnson",
+      "trades": 67,
+      "members": 23,
       "buys": 31,
-      "sells": 37,
-      "lastTx": "2026-09-04",
-      "lastFiling": "2026-10-01",
-      "indexable": true,
-      "industry": {
-        "key": "finance",
-        "label": "Banks & finance"
-      }
-    },
-    {
-      "slug": "lly",
-      "ticker": "LLY",
-      "aliases": [],
-      "company": "Eli Lilly and Company",
-      "trades": 68,
-      "members": 22,
-      "buys": 26,
-      "sells": 42,
-      "lastTx": "2026-07-10",
-      "lastFiling": "2026-08-24",
+      "sells": 36,
+      "lastTx": "2026-09-30",
+      "lastFiling": "2026-10-30",
       "indexable": true,
       "industry": {
         "key": "health",
@@ -231,12 +214,29 @@
       "ticker": "V",
       "aliases": [],
       "company": "Visa Inc.",
-      "trades": 67,
-      "members": 25,
+      "trades": 66,
+      "members": 24,
       "buys": 38,
-      "sells": 29,
+      "sells": 28,
       "lastTx": "2026-10-15",
       "lastFiling": "2026-10-29",
+      "indexable": true,
+      "industry": {
+        "key": "finance",
+        "label": "Banks & finance"
+      }
+    },
+    {
+      "slug": "jpm",
+      "ticker": "JPM",
+      "aliases": [],
+      "company": "JP Morgan Chase & Co.",
+      "trades": 66,
+      "members": 28,
+      "buys": 31,
+      "sells": 35,
+      "lastTx": "2026-09-04",
+      "lastFiling": "2026-10-01",
       "indexable": true,
       "industry": {
         "key": "finance",
@@ -248,33 +248,16 @@
       "ticker": "PG",
       "aliases": [],
       "company": "Procter & Gamble Company",
-      "trades": 66,
+      "trades": 65,
       "members": 30,
       "buys": 31,
-      "sells": 35,
+      "sells": 34,
       "lastTx": "2026-10-23",
       "lastFiling": "2026-11-05",
       "indexable": true,
       "industry": {
         "key": "consumer",
         "label": "Consumer & retail"
-      }
-    },
-    {
-      "slug": "gs",
-      "ticker": "GS",
-      "aliases": [],
-      "company": "Goldman Sachs Group, Inc.",
-      "trades": 64,
-      "members": 20,
-      "buys": 35,
-      "sells": 29,
-      "lastTx": "2026-09-24",
-      "lastFiling": "2026-10-07",
-      "indexable": true,
-      "industry": {
-        "key": "finance",
-        "label": "Banks & finance"
       }
     },
     {
@@ -292,6 +275,23 @@
       "industry": {
         "key": "autos",
         "label": "Autos & mobility"
+      }
+    },
+    {
+      "slug": "gs",
+      "ticker": "GS",
+      "aliases": [],
+      "company": "Goldman Sachs Group, Inc.",
+      "trades": 61,
+      "members": 20,
+      "buys": 33,
+      "sells": 28,
+      "lastTx": "2026-09-24",
+      "lastFiling": "2026-10-07",
+      "indexable": true,
+      "industry": {
+        "key": "finance",
+        "label": "Banks & finance"
       }
     },
     {
@@ -316,10 +316,10 @@
       "ticker": "NFLX",
       "aliases": [],
       "company": "Netflix, Inc.",
-      "trades": 55,
-      "members": 23,
+      "trades": 54,
+      "members": 22,
       "buys": 31,
-      "sells": 24,
+      "sells": 23,
       "lastTx": "2026-09-14",
       "lastFiling": "2026-10-01",
       "indexable": true,
@@ -333,10 +333,10 @@
       "ticker": "ACN",
       "aliases": [],
       "company": "Accenture plc",
-      "trades": 55,
-      "members": 20,
+      "trades": 54,
+      "members": 19,
       "buys": 15,
-      "sells": 40,
+      "sells": 39,
       "lastTx": "2026-08-26",
       "lastFiling": "2026-09-17",
       "indexable": true,
@@ -384,46 +384,12 @@
       "ticker": "CRM",
       "aliases": [],
       "company": "Salesforce, Inc.",
-      "trades": 53,
+      "trades": 52,
       "members": 19,
       "buys": 24,
-      "sells": 29,
+      "sells": 28,
       "lastTx": "2026-09-24",
       "lastFiling": "2026-10-07",
-      "indexable": true,
-      "industry": {
-        "key": "tech",
-        "label": "Technology"
-      }
-    },
-    {
-      "slug": "pep",
-      "ticker": "PEP",
-      "aliases": [],
-      "company": "Pepsico, Inc.",
-      "trades": 52,
-      "members": 25,
-      "buys": 19,
-      "sells": 33,
-      "lastTx": "2026-10-21",
-      "lastFiling": "2026-10-27",
-      "indexable": true,
-      "industry": {
-        "key": "agriculture",
-        "label": "Agriculture & food"
-      }
-    },
-    {
-      "slug": "amd",
-      "ticker": "AMD",
-      "aliases": [],
-      "company": "Advanced Micro Devices, Inc.",
-      "trades": 52,
-      "members": 15,
-      "buys": 39,
-      "sells": 13,
-      "lastTx": "2026-08-18",
-      "lastFiling": "2026-09-10",
       "indexable": true,
       "industry": {
         "key": "tech",
@@ -448,33 +414,16 @@
       }
     },
     {
-      "slug": "ups",
-      "ticker": "UPS",
+      "slug": "amd",
+      "ticker": "AMD",
       "aliases": [],
-      "company": "United Parcel Service, Inc.",
+      "company": "Advanced Micro Devices, Inc.",
       "trades": 51,
-      "members": 19,
-      "buys": 19,
-      "sells": 32,
-      "lastTx": "2026-07-10",
-      "lastFiling": "2026-08-05",
-      "indexable": true,
-      "industry": {
-        "key": "transport",
-        "label": "Transport & logistics"
-      }
-    },
-    {
-      "slug": "adbe",
-      "ticker": "ADBE",
-      "aliases": [],
-      "company": "Adobe Inc.",
-      "trades": 49,
       "members": 15,
-      "buys": 23,
-      "sells": 26,
-      "lastTx": "2026-08-14",
-      "lastFiling": "2026-09-04",
+      "buys": 38,
+      "sells": 13,
+      "lastTx": "2026-08-18",
+      "lastFiling": "2026-09-10",
       "indexable": true,
       "industry": {
         "key": "tech",
@@ -482,16 +431,50 @@
       }
     },
     {
+      "slug": "pep",
+      "ticker": "PEP",
+      "aliases": [],
+      "company": "Pepsico, Inc.",
+      "trades": 50,
+      "members": 25,
+      "buys": 19,
+      "sells": 31,
+      "lastTx": "2026-10-21",
+      "lastFiling": "2026-10-27",
+      "indexable": true,
+      "industry": {
+        "key": "agriculture",
+        "label": "Agriculture & food"
+      }
+    },
+    {
+      "slug": "ups",
+      "ticker": "UPS",
+      "aliases": [],
+      "company": "United Parcel Service, Inc.",
+      "trades": 50,
+      "members": 18,
+      "buys": 19,
+      "sells": 31,
+      "lastTx": "2026-07-10",
+      "lastFiling": "2026-07-21",
+      "indexable": true,
+      "industry": {
+        "key": "transport",
+        "label": "Transport & logistics"
+      }
+    },
+    {
       "slug": "orcl",
       "ticker": "ORCL",
       "aliases": [],
       "company": "Oracle Corporation",
-      "trades": 49,
+      "trades": 47,
       "members": 17,
-      "buys": 19,
-      "sells": 30,
+      "buys": 18,
+      "sells": 29,
       "lastTx": "2026-05-07",
-      "lastFiling": "2026-08-20",
+      "lastFiling": "2026-08-07",
       "indexable": true,
       "industry": {
         "key": "tech",
@@ -503,9 +486,9 @@
       "ticker": "CVX",
       "aliases": [],
       "company": "Chevron Corporation",
-      "trades": 47,
-      "members": 23,
-      "buys": 19,
+      "trades": 45,
+      "members": 22,
+      "buys": 17,
       "sells": 27,
       "lastTx": "2026-10-14",
       "lastFiling": "2026-10-27",
@@ -516,16 +499,16 @@
       }
     },
     {
-      "slug": "intc",
-      "ticker": "INTC",
+      "slug": "uber",
+      "ticker": "UBER",
       "aliases": [],
-      "company": "Intel Corporation",
-      "trades": 45,
-      "members": 18,
-      "buys": 28,
-      "sells": 17,
-      "lastTx": "2026-07-24",
-      "lastFiling": "2026-08-21",
+      "company": "Uber Technologies, Inc.",
+      "trades": 44,
+      "members": 16,
+      "buys": 22,
+      "sells": 22,
+      "lastTx": "2026-10-20",
+      "lastFiling": "2026-11-10",
       "indexable": true,
       "industry": {
         "key": "tech",
@@ -550,23 +533,6 @@
       }
     },
     {
-      "slug": "lrcx",
-      "ticker": "LRCX",
-      "aliases": [],
-      "company": "Lam Research Corporation",
-      "trades": 43,
-      "members": 15,
-      "buys": 14,
-      "sells": 29,
-      "lastTx": "2026-10-15",
-      "lastFiling": "2026-10-29",
-      "indexable": true,
-      "industry": {
-        "key": "tech",
-        "label": "Technology"
-      }
-    },
-    {
       "slug": "wmt",
       "ticker": "WMT",
       "aliases": [],
@@ -584,16 +550,16 @@
       }
     },
     {
-      "slug": "uber",
-      "ticker": "UBER",
+      "slug": "lrcx",
+      "ticker": "LRCX",
       "aliases": [],
-      "company": "Uber Technologies, Inc.",
-      "trades": 43,
-      "members": 16,
-      "buys": 22,
-      "sells": 21,
-      "lastTx": "2026-07-17",
-      "lastFiling": "2026-09-04",
+      "company": "Lam Research Corporation",
+      "trades": 42,
+      "members": 15,
+      "buys": 13,
+      "sells": 29,
+      "lastTx": "2026-10-15",
+      "lastFiling": "2026-10-29",
       "indexable": true,
       "industry": {
         "key": "tech",
@@ -635,20 +601,37 @@
       }
     },
     {
-      "slug": "etn",
-      "ticker": "ETN",
+      "slug": "now",
+      "ticker": "NOW",
       "aliases": [],
-      "company": "Eaton Corporation, PLC",
+      "company": "ServiceNow, Inc.",
       "trades": 41,
-      "members": 15,
+      "members": 16,
       "buys": 21,
       "sells": 20,
-      "lastTx": "2026-09-10",
-      "lastFiling": "2026-09-25",
+      "lastTx": "2026-10-21",
+      "lastFiling": "2026-11-10",
       "indexable": true,
       "industry": {
-        "key": "industrial",
-        "label": "Manufacturing"
+        "key": "tech",
+        "label": "Technology"
+      }
+    },
+    {
+      "slug": "adbe",
+      "ticker": "ADBE",
+      "aliases": [],
+      "company": "Adobe Inc.",
+      "trades": 40,
+      "members": 14,
+      "buys": 20,
+      "sells": 20,
+      "lastTx": "2026-08-14",
+      "lastFiling": "2026-09-04",
+      "indexable": true,
+      "industry": {
+        "key": "tech",
+        "label": "Technology"
       }
     },
     {
@@ -656,10 +639,10 @@
       "ticker": "BRO",
       "aliases": [],
       "company": "Brown & Brown, Inc.",
-      "trades": 40,
-      "members": 11,
+      "trades": 39,
+      "members": 10,
       "buys": 19,
-      "sells": 21,
+      "sells": 20,
       "lastTx": "2026-08-25",
       "lastFiling": "2026-09-09",
       "indexable": true,
@@ -669,37 +652,20 @@
       }
     },
     {
-      "slug": "now",
-      "ticker": "NOW",
+      "slug": "intc",
+      "ticker": "INTC",
       "aliases": [],
-      "company": "ServiceNow, Inc.",
-      "trades": 40,
-      "members": 16,
-      "buys": 20,
-      "sells": 20,
-      "lastTx": "2026-04-24",
-      "lastFiling": "2026-08-07",
+      "company": "Intel Corporation",
+      "trades": 39,
+      "members": 17,
+      "buys": 25,
+      "sells": 14,
+      "lastTx": "2026-07-24",
+      "lastFiling": "2026-08-21",
       "indexable": true,
       "industry": {
         "key": "tech",
         "label": "Technology"
-      }
-    },
-    {
-      "slug": "pypl",
-      "ticker": "PYPL",
-      "aliases": [],
-      "company": "PayPal Holdings, Inc.",
-      "trades": 39,
-      "members": 17,
-      "buys": 17,
-      "sells": 22,
-      "lastTx": "2026-07-30",
-      "lastFiling": "2026-08-17",
-      "indexable": true,
-      "industry": {
-        "key": "finance",
-        "label": "Banks & finance"
       }
     },
     {
@@ -713,23 +679,6 @@
       "sells": 15,
       "lastTx": "2026-07-31",
       "lastFiling": "2026-08-10",
-      "indexable": true,
-      "industry": {
-        "key": "tech",
-        "label": "Technology"
-      }
-    },
-    {
-      "slug": "txn",
-      "ticker": "TXN",
-      "aliases": [],
-      "company": "Texas Instruments Incorporated",
-      "trades": 38,
-      "members": 15,
-      "buys": 18,
-      "sells": 20,
-      "lastTx": "2026-10-14",
-      "lastFiling": "2026-10-30",
       "indexable": true,
       "industry": {
         "key": "tech",
@@ -751,6 +700,23 @@
       "industry": {
         "key": "tech",
         "label": "Technology"
+      }
+    },
+    {
+      "slug": "etn",
+      "ticker": "ETN",
+      "aliases": [],
+      "company": "Eaton Corporation, PLC",
+      "trades": 38,
+      "members": 14,
+      "buys": 18,
+      "sells": 20,
+      "lastTx": "2026-09-10",
+      "lastFiling": "2026-09-25",
+      "indexable": true,
+      "industry": {
+        "key": "industrial",
+        "label": "Manufacturing"
       }
     },
     {
@@ -788,20 +754,20 @@
       }
     },
     {
-      "slug": "amgn",
-      "ticker": "AMGN",
+      "slug": "ttd",
+      "ticker": "TTD",
       "aliases": [],
-      "company": "Amgen Inc.",
+      "company": "The Trade Desk, Inc.",
       "trades": 37,
-      "members": 17,
-      "buys": 17,
-      "sells": 20,
-      "lastTx": "2026-10-15",
-      "lastFiling": "2026-11-02",
+      "members": 7,
+      "buys": 18,
+      "sells": 19,
+      "lastTx": "2026-10-20",
+      "lastFiling": "2026-11-10",
       "indexable": true,
       "industry": {
-        "key": "health",
-        "label": "Health care & pharma"
+        "key": "tech",
+        "label": "Technology"
       }
     },
     {
@@ -856,6 +822,23 @@
       }
     },
     {
+      "slug": "amgn",
+      "ticker": "AMGN",
+      "aliases": [],
+      "company": "Amgen Inc.",
+      "trades": 36,
+      "members": 17,
+      "buys": 17,
+      "sells": 19,
+      "lastTx": "2026-10-15",
+      "lastFiling": "2026-11-02",
+      "indexable": true,
+      "industry": {
+        "key": "health",
+        "label": "Health care & pharma"
+      }
+    },
+    {
       "slug": "mu",
       "ticker": "MU",
       "aliases": [],
@@ -873,33 +856,16 @@
       }
     },
     {
-      "slug": "mcd",
-      "ticker": "MCD",
+      "slug": "txn",
+      "ticker": "TXN",
       "aliases": [],
-      "company": "McDonald's Corporation",
+      "company": "Texas Instruments Incorporated",
       "trades": 36,
-      "members": 17,
-      "buys": 14,
-      "sells": 22,
-      "lastTx": "2026-10-27",
-      "lastFiling": "2026-10-27",
-      "indexable": true,
-      "industry": {
-        "key": "consumer",
-        "label": "Consumer & retail"
-      }
-    },
-    {
-      "slug": "ttd",
-      "ticker": "TTD",
-      "aliases": [],
-      "company": "The Trade Desk, Inc.",
-      "trades": 36,
-      "members": 7,
+      "members": 15,
       "buys": 18,
       "sells": 18,
-      "lastTx": "2026-09-18",
-      "lastFiling": "2026-10-12",
+      "lastTx": "2026-10-14",
+      "lastFiling": "2026-10-30",
       "indexable": true,
       "industry": {
         "key": "tech",
@@ -924,20 +890,37 @@
       }
     },
     {
-      "slug": "asml",
-      "ticker": "ASML",
+      "slug": "csco",
+      "ticker": "CSCO",
       "aliases": [],
-      "company": "ASML Holding N.V. - New York Registry Shares",
+      "company": "Cisco Systems, Inc.",
       "trades": 35,
-      "members": 12,
-      "buys": 22,
-      "sells": 13,
+      "members": 18,
+      "buys": 16,
+      "sells": 19,
       "lastTx": "2026-10-23",
-      "lastFiling": "2026-10-28",
+      "lastFiling": "2026-11-10",
       "indexable": true,
       "industry": {
         "key": "tech",
         "label": "Technology"
+      }
+    },
+    {
+      "slug": "cmcsa",
+      "ticker": "CMCSA",
+      "aliases": [],
+      "company": "Comcast Corporation",
+      "trades": 35,
+      "members": 16,
+      "buys": 10,
+      "sells": 25,
+      "lastTx": "2026-10-20",
+      "lastFiling": "2026-11-10",
+      "indexable": true,
+      "industry": {
+        "key": "telecom",
+        "label": "Telecom & media"
       }
     },
     {
@@ -975,6 +958,23 @@
       }
     },
     {
+      "slug": "pypl",
+      "ticker": "PYPL",
+      "aliases": [],
+      "company": "PayPal Holdings, Inc.",
+      "trades": 35,
+      "members": 17,
+      "buys": 16,
+      "sells": 19,
+      "lastTx": "2026-07-30",
+      "lastFiling": "2026-08-17",
+      "indexable": true,
+      "industry": {
+        "key": "finance",
+        "label": "Banks & finance"
+      }
+    },
+    {
       "slug": "hog",
       "ticker": "HOG",
       "aliases": [],
@@ -992,88 +992,37 @@
       }
     },
     {
-      "slug": "amat",
-      "ticker": "AMAT",
+      "slug": "asml",
+      "ticker": "ASML",
       "aliases": [],
-      "company": "Applied Materials, Inc.",
-      "trades": 34,
-      "members": 14,
-      "buys": 23,
-      "sells": 11,
-      "lastTx": "2026-10-26",
-      "lastFiling": "2026-11-05",
-      "indexable": true,
-      "industry": {
-        "key": "tech",
-        "label": "Technology"
-      }
-    },
-    {
-      "slug": "csco",
-      "ticker": "CSCO",
-      "aliases": [],
-      "company": "Cisco Systems, Inc.",
-      "trades": 34,
-      "members": 18,
-      "buys": 15,
-      "sells": 19,
-      "lastTx": "2026-10-23",
-      "lastFiling": "2026-11-05",
-      "indexable": true,
-      "industry": {
-        "key": "tech",
-        "label": "Technology"
-      }
-    },
-    {
-      "slug": "zts",
-      "ticker": "ZTS",
-      "aliases": [],
-      "company": "Zoetis Inc.",
+      "company": "ASML Holding N.V. - New York Registry Shares",
       "trades": 34,
       "members": 11,
-      "buys": 15,
-      "sells": 19,
-      "lastTx": "2026-10-21",
-      "lastFiling": "2026-11-04",
+      "buys": 22,
+      "sells": 12,
+      "lastTx": "2026-10-23",
+      "lastFiling": "2026-10-28",
       "indexable": true,
       "industry": {
-        "key": "health",
-        "label": "Health care & pharma"
+        "key": "tech",
+        "label": "Technology"
       }
     },
     {
-      "slug": "payx",
-      "ticker": "PAYX",
+      "slug": "mcd",
+      "ticker": "MCD",
       "aliases": [],
-      "company": "Paychex, Inc.",
-      "trades": 34,
-      "members": 14,
-      "buys": 15,
-      "sells": 19,
-      "lastTx": "2026-08-25",
-      "lastFiling": "2026-09-09",
-      "indexable": true,
-      "industry": {
-        "key": "business",
-        "label": "Business services"
-      }
-    },
-    {
-      "slug": "cmcsa",
-      "ticker": "CMCSA",
-      "aliases": [],
-      "company": "Comcast Corporation",
+      "company": "McDonald's Corporation",
       "trades": 34,
       "members": 16,
-      "buys": 9,
-      "sells": 25,
-      "lastTx": "2026-08-05",
-      "lastFiling": "2026-09-04",
+      "buys": 14,
+      "sells": 20,
+      "lastTx": "2026-10-27",
+      "lastFiling": "2026-10-27",
       "indexable": true,
       "industry": {
-        "key": "telecom",
-        "label": "Telecom & media"
+        "key": "consumer",
+        "label": "Consumer & retail"
       }
     },
     {
@@ -1162,37 +1111,37 @@
       }
     },
     {
-      "slug": "pfe",
-      "ticker": "PFE",
+      "slug": "payx",
+      "ticker": "PAYX",
       "aliases": [],
-      "company": "Pfizer, Inc.",
+      "company": "Paychex, Inc.",
       "trades": 33,
-      "members": 16,
-      "buys": 11,
-      "sells": 22,
-      "lastTx": "2026-06-08",
-      "lastFiling": "2026-08-13",
+      "members": 13,
+      "buys": 15,
+      "sells": 18,
+      "lastTx": "2026-08-25",
+      "lastFiling": "2026-09-09",
       "indexable": true,
       "industry": {
-        "key": "health",
-        "label": "Health care & pharma"
+        "key": "business",
+        "label": "Business services"
       }
     },
     {
-      "slug": "hon",
-      "ticker": "HON",
+      "slug": "amat",
+      "ticker": "AMAT",
       "aliases": [],
-      "company": "Honeywell International Inc.",
+      "company": "Applied Materials, Inc.",
       "trades": 32,
-      "members": 20,
-      "buys": 9,
-      "sells": 23,
-      "lastTx": "2026-10-01",
-      "lastFiling": "2026-10-27",
+      "members": 13,
+      "buys": 22,
+      "sells": 10,
+      "lastTx": "2026-10-26",
+      "lastFiling": "2026-11-05",
       "indexable": true,
       "industry": {
-        "key": "industrial",
-        "label": "Manufacturing"
+        "key": "tech",
+        "label": "Technology"
       }
     },
     {
@@ -1230,37 +1179,37 @@
       }
     },
     {
-      "slug": "ma",
-      "ticker": "MA",
+      "slug": "pfe",
+      "ticker": "PFE",
       "aliases": [],
-      "company": "Mastercard Incorporated",
-      "trades": 31,
-      "members": 15,
-      "buys": 12,
-      "sells": 19,
-      "lastTx": "2026-10-02",
-      "lastFiling": "2026-10-27",
+      "company": "Pfizer, Inc.",
+      "trades": 32,
+      "members": 16,
+      "buys": 11,
+      "sells": 21,
+      "lastTx": "2026-06-08",
+      "lastFiling": "2026-08-13",
       "indexable": true,
       "industry": {
-        "key": "finance",
-        "label": "Banks & finance"
+        "key": "health",
+        "label": "Health care & pharma"
       }
     },
     {
-      "slug": "tsco",
-      "ticker": "TSCO",
+      "slug": "zts",
+      "ticker": "ZTS",
       "aliases": [],
-      "company": "Tractor Supply Company",
+      "company": "Zoetis Inc.",
       "trades": 31,
-      "members": 6,
-      "buys": 14,
-      "sells": 17,
-      "lastTx": "2026-08-25",
-      "lastFiling": "2026-09-09",
+      "members": 11,
+      "buys": 13,
+      "sells": 18,
+      "lastTx": "2026-10-21",
+      "lastFiling": "2026-11-04",
       "indexable": true,
       "industry": {
-        "key": "agriculture",
-        "label": "Agriculture & food"
+        "key": "health",
+        "label": "Health care & pharma"
       }
     },
     {
@@ -1281,6 +1230,23 @@
       }
     },
     {
+      "slug": "hon",
+      "ticker": "HON",
+      "aliases": [],
+      "company": "Honeywell International Inc.",
+      "trades": 30,
+      "members": 19,
+      "buys": 9,
+      "sells": 21,
+      "lastTx": "2026-10-01",
+      "lastFiling": "2026-10-27",
+      "indexable": true,
+      "industry": {
+        "key": "industrial",
+        "label": "Manufacturing"
+      }
+    },
+    {
       "slug": "pwr",
       "ticker": "PWR",
       "aliases": [],
@@ -1295,6 +1261,23 @@
       "industry": {
         "key": "industrial",
         "label": "Manufacturing"
+      }
+    },
+    {
+      "slug": "tsco",
+      "ticker": "TSCO",
+      "aliases": [],
+      "company": "Tractor Supply Company",
+      "trades": 30,
+      "members": 6,
+      "buys": 14,
+      "sells": 16,
+      "lastTx": "2026-08-25",
+      "lastFiling": "2026-09-09",
+      "indexable": true,
+      "industry": {
+        "key": "agriculture",
+        "label": "Agriculture & food"
       }
     },
     {
@@ -1329,6 +1312,57 @@
       "industry": {
         "key": "energy",
         "label": "Energy & utilities"
+      }
+    },
+    {
+      "slug": "app",
+      "ticker": "APP",
+      "aliases": [],
+      "company": "Applovin Corporation",
+      "trades": 29,
+      "members": 6,
+      "buys": 15,
+      "sells": 14,
+      "lastTx": "2026-10-20",
+      "lastFiling": "2026-11-10",
+      "indexable": true,
+      "industry": {
+        "key": "tech",
+        "label": "Technology"
+      }
+    },
+    {
+      "slug": "wfc",
+      "ticker": "WFC",
+      "aliases": [],
+      "company": "Wells Fargo & Company",
+      "trades": 29,
+      "members": 14,
+      "buys": 18,
+      "sells": 11,
+      "lastTx": "2026-10-20",
+      "lastFiling": "2026-11-10",
+      "indexable": true,
+      "industry": {
+        "key": "finance",
+        "label": "Banks & finance"
+      }
+    },
+    {
+      "slug": "ma",
+      "ticker": "MA",
+      "aliases": [],
+      "company": "Mastercard Incorporated",
+      "trades": 29,
+      "members": 15,
+      "buys": 12,
+      "sells": 17,
+      "lastTx": "2026-10-02",
+      "lastFiling": "2026-10-27",
+      "indexable": true,
+      "industry": {
+        "key": "finance",
+        "label": "Banks & finance"
       }
     },
     {
@@ -1397,23 +1431,6 @@
       "industry": {
         "key": "defense",
         "label": "Defense & aerospace"
-      }
-    },
-    {
-      "slug": "wfc",
-      "ticker": "WFC",
-      "aliases": [],
-      "company": "Wells Fargo & Company",
-      "trades": 28,
-      "members": 14,
-      "buys": 17,
-      "sells": 11,
-      "lastTx": "2026-09-03",
-      "lastFiling": "2026-10-02",
-      "indexable": true,
-      "industry": {
-        "key": "finance",
-        "label": "Banks & finance"
       }
     },
     {
@@ -1536,23 +1553,6 @@
       }
     },
     {
-      "slug": "app",
-      "ticker": "APP",
-      "aliases": [],
-      "company": "Applovin Corporation",
-      "trades": 27,
-      "members": 6,
-      "buys": 15,
-      "sells": 12,
-      "lastTx": "2026-09-18",
-      "lastFiling": "2026-10-12",
-      "indexable": true,
-      "industry": {
-        "key": "tech",
-        "label": "Technology"
-      }
-    },
-    {
       "slug": "adi",
       "ticker": "ADI",
       "aliases": [],
@@ -1621,6 +1621,40 @@
       }
     },
     {
+      "slug": "fis",
+      "ticker": "FIS",
+      "aliases": [],
+      "company": "Fidelity National Information Services, Inc.",
+      "trades": 26,
+      "members": 8,
+      "buys": 12,
+      "sells": 14,
+      "lastTx": "2026-10-20",
+      "lastFiling": "2026-11-10",
+      "indexable": true,
+      "industry": {
+        "key": "finance",
+        "label": "Banks & finance"
+      }
+    },
+    {
+      "slug": "cmg",
+      "ticker": "CMG",
+      "aliases": [],
+      "company": "Chipotle Mexican Grill, Inc.",
+      "trades": 25,
+      "members": 10,
+      "buys": 9,
+      "sells": 16,
+      "lastTx": "2026-10-20",
+      "lastFiling": "2026-11-10",
+      "indexable": true,
+      "industry": {
+        "key": "consumer",
+        "label": "Consumer & retail"
+      }
+    },
+    {
       "slug": "syk",
       "ticker": "SYK",
       "aliases": [],
@@ -1635,40 +1669,6 @@
       "industry": {
         "key": "health",
         "label": "Health care & pharma"
-      }
-    },
-    {
-      "slug": "fis",
-      "ticker": "FIS",
-      "aliases": [],
-      "company": "Fidelity National Information Services, Inc.",
-      "trades": 25,
-      "members": 8,
-      "buys": 11,
-      "sells": 14,
-      "lastTx": "2026-09-18",
-      "lastFiling": "2026-10-12",
-      "indexable": true,
-      "industry": {
-        "key": "finance",
-        "label": "Banks & finance"
-      }
-    },
-    {
-      "slug": "qcom",
-      "ticker": "QCOM",
-      "aliases": [],
-      "company": "QUALCOMM Incorporated",
-      "trades": 25,
-      "members": 13,
-      "buys": 12,
-      "sells": 13,
-      "lastTx": "2026-08-19",
-      "lastFiling": "2026-09-09",
-      "indexable": true,
-      "industry": {
-        "key": "tech",
-        "label": "Technology"
       }
     },
     {
@@ -1859,23 +1859,6 @@
       }
     },
     {
-      "slug": "klac",
-      "ticker": "KLAC",
-      "aliases": [],
-      "company": "KLA Corporation",
-      "trades": 10,
-      "members": 7,
-      "buys": 5,
-      "sells": 5,
-      "lastTx": "2026-07-01",
-      "lastFiling": "2026-08-07",
-      "indexable": false,
-      "industry": {
-        "key": "tech",
-        "label": "Technology"
-      }
-    },
-    {
       "slug": "spcx",
       "ticker": "SPCX",
       "aliases": [],
@@ -1890,6 +1873,23 @@
       "industry": {
         "key": "defense",
         "label": "Defense & aerospace"
+      }
+    },
+    {
+      "slug": "klac",
+      "ticker": "KLAC",
+      "aliases": [],
+      "company": "KLA Corporation",
+      "trades": 9,
+      "members": 6,
+      "buys": 5,
+      "sells": 4,
+      "lastTx": "2026-07-01",
+      "lastFiling": "2026-08-07",
+      "indexable": false,
+      "industry": {
+        "key": "tech",
+        "label": "Technology"
       }
     },
     {

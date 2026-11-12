@@ -12,24 +12,24 @@
   },
   "indexable": true,
   "technical": {
-    "asOf": "2026-11-10",
-    "price": 658.84,
-    "chg1d": 0.46,
-    "chg1w": 1.8,
-    "chg1m": 10.71,
-    "rsi14": 65.8,
-    "sma50": 595.66,
-    "sma200": 540.11,
-    "ema8": 651.37,
-    "ema21": 631.95,
-    "emaGap": 3.07,
+    "asOf": "2026-11-11",
+    "price": 660.73,
+    "chg1d": 0.29,
+    "chg1w": -1.78,
+    "chg1m": 9.25,
+    "rsi14": 66.3,
+    "sma50": 597.26,
+    "sma200": 540.81,
+    "ema8": 653.45,
+    "ema21": 634.56,
+    "emaGap": 2.98,
     "vsSma50": 10.6,
-    "vsSma200": 22.0,
-    "relVol": 0.62,
+    "vsSma200": 22.2,
+    "relVol": 0.69,
     "vol1y": 23.4,
     "high52w": 672.68,
     "low52w": 471.55,
-    "rangePos": 93.0,
+    "rangePos": 94.0,
     "series": [
       {
         "d": "2025-11-21",
@@ -236,17 +236,17 @@
         "c": 652.7
       },
       {
-        "d": "2026-11-10",
-        "c": 658.84
+        "d": "2026-11-11",
+        "c": 660.73
       }
     ],
     "signals": [],
     "score": {
       "label": "Strong Buy",
-      "buys": 6,
-      "sells": 0,
+      "buys": 5,
+      "sells": 1,
       "holds": 1,
-      "ratio": 0.857
+      "ratio": 0.571
     },
     "votes": {
       "ema_cross": {
@@ -274,26 +274,26 @@
         "muted": false
       },
       "chg_1w": {
-        "vote": 1,
+        "vote": -1,
         "muted": false
       }
     }
   },
   "summary": {
-    "trades": 31,
+    "trades": 29,
     "members": 15,
     "congress": 14,
     "executive": 1,
     "whoLabel": "14 members of Congress and 1 executive-branch filer",
     "buys": 12,
-    "sells": 19,
+    "sells": 17,
     "other": 0,
-    "firstTx": "2024-05-03",
+    "firstTx": "2024-10-29",
     "lastTx": "2026-10-02",
     "lastFiling": "2026-10-27",
     "estBuyLabel": "$188K",
-    "estSellLabel": "$366K",
-    "pctLate": 23
+    "estSellLabel": "$326K",
+    "pctLate": 17
   },
   "topMembers": [
     {
@@ -305,17 +305,6 @@
       "buys": 2,
       "sells": 3,
       "estLabel": "$40K",
-      "hasPage": true
-    },
-    {
-      "name": "Tommy Tuberville",
-      "slug": "tommy-tuberville",
-      "party": "R",
-      "chamber": "Senate",
-      "trades": 4,
-      "buys": 0,
-      "sells": 4,
-      "estLabel": "$106K",
       "hasPage": true
     },
     {
@@ -339,6 +328,17 @@
       "sells": 2,
       "estLabel": "$108K",
       "hasPage": false
+    },
+    {
+      "name": "Tommy Tuberville",
+      "slug": "tommy-tuberville",
+      "party": "R",
+      "chamber": "Senate",
+      "trades": 2,
+      "buys": 0,
+      "sells": 2,
+      "estLabel": "$65K",
+      "hasPage": true
     },
     {
       "name": "Donald J. Trump",
@@ -608,21 +608,10 @@
       "side": "SELL",
       "amountBucket": "$15K – $50K",
       "txDate": "2025-04-15",
-      "filedDate": "2026-08-05",
-      "daysLate": 432,
-      "sourceUrl": "https://efdsearch.senate.gov/search/view/ptr/014817f0-9809-457f-8ac5-048948608e02/"
-    },
-    {
-      "member": "Tommy Tuberville",
-      "memberSlug": "tommy-tuberville",
-      "hasPage": true,
-      "party": "R",
-      "side": "SELL",
-      "amountBucket": "$15K – $50K",
-      "txDate": "2025-04-15",
       "filedDate": "2025-05-15",
       "daysLate": 0,
-      "sourceUrl": "https://efdsearch.senate.gov/search/view/ptr/63e4a2b1-5bfc-43b6-b952-ba54e377212c/"
+      "sourceUrl": "https://efdsearch.senate.gov/search/view/ptr/014817f0-9809-457f-8ac5-048948608e02/",
+      "amended": "2026-08-05"
     },
     {
       "member": "Josh Gottheimer",
@@ -707,21 +696,33 @@
       "filedDate": "2025-02-10",
       "daysLate": 0,
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20026732.pdf"
+    },
+    {
+      "member": "Josh Gottheimer",
+      "memberSlug": "josh-gottheimer",
+      "hasPage": true,
+      "party": "D",
+      "side": "BUY",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2025-01-30",
+      "filedDate": "2025-02-10",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20026732.pdf"
     }
   ],
   "tradesShown": 25,
   "faq": [
     {
       "q": "Who in Congress has traded MA stock?",
-      "a": "14 members of Congress and 1 executive-branch filer have disclosed 31 MA trades since May 2024. The most active is Josh Gottheimer, with 5 trades, followed by Tommy Tuberville and Gilbert Ray Cisneros, Jr.. Each trade on this page links to the official filing it came from."
+      "a": "14 members of Congress and 1 executive-branch filer have disclosed 29 MA trades since October 2024. The most active is Josh Gottheimer, with 5 trades, followed by Gilbert Ray Cisneros, Jr. and Jefferson Shreve. Each trade on this page links to the official filing it came from."
     },
     {
       "q": "Is Congress buying or selling MA?",
-      "a": "Of the 31 disclosed MA trades, 12 were buys and 19 were sells. By the midpoint of each filed amount bracket, the buying comes to about $188K and the selling to about $366K. Filings disclose brackets, never exact amounts, so these totals are estimates."
+      "a": "Of the 29 disclosed MA trades, 12 were buys and 17 were sells. By the midpoint of each filed amount bracket, the buying comes to about $188K and the selling to about $326K. Filings disclose brackets, never exact amounts, so these totals are estimates."
     },
     {
       "q": "How late are MA trades disclosed?",
-      "a": "23% of the disclosed MA trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Oct 2, 2026, and the newest filing arrived on Oct 27, 2026."
+      "a": "17% of the disclosed MA trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Oct 2, 2026, and the newest filing arrived on Oct 27, 2026."
     }
   ]
 }
