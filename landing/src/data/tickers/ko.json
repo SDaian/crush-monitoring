@@ -12,20 +12,20 @@
   },
   "indexable": true,
   "technical": {
-    "asOf": "2026-11-11",
-    "price": 97.57,
-    "chg1d": 0.68,
-    "chg1w": 1.85,
-    "chg1m": 8.28,
-    "rsi14": 69.6,
-    "sma50": 90.43,
-    "sma200": 83.1,
-    "ema8": 95.94,
-    "ema21": 93.96,
-    "emaGap": 2.11,
-    "vsSma50": 7.9,
-    "vsSma200": 17.4,
-    "relVol": 0.8,
+    "asOf": "2026-11-12",
+    "price": 97.44,
+    "chg1d": -0.13,
+    "chg1w": 1.79,
+    "chg1m": 6.17,
+    "rsi14": 68.8,
+    "sma50": 90.61,
+    "sma200": 83.22,
+    "ema8": 96.27,
+    "ema21": 94.28,
+    "emaGap": 2.12,
+    "vsSma50": 7.5,
+    "vsSma200": 17.1,
+    "relVol": 0.75,
     "vol1y": 18.9,
     "high52w": 97.57,
     "low52w": 67.54,
@@ -236,18 +236,11 @@
         "c": 95.67
       },
       {
-        "d": "2026-11-11",
-        "c": 97.57
+        "d": "2026-11-12",
+        "c": 97.44
       }
     ],
-    "signals": [
-      {
-        "type": "new_52w_high",
-        "asof": "2026-11-11",
-        "label": "New 52-week high",
-        "dir": "bull"
-      }
-    ],
+    "signals": [],
     "score": {
       "label": "Strong Buy",
       "buys": 6,
@@ -287,22 +280,33 @@
     }
   },
   "summary": {
-    "trades": 33,
+    "trades": 34,
     "members": 17,
     "congress": 16,
     "executive": 1,
     "whoLabel": "16 members of Congress and 1 executive-branch filer",
-    "buys": 20,
+    "buys": 21,
     "sells": 13,
     "other": 0,
     "firstTx": "2024-09-26",
-    "lastTx": "2026-08-31",
-    "lastFiling": "2026-09-25",
-    "estBuyLabel": "$209K",
+    "lastTx": "2026-10-01",
+    "lastFiling": "2026-11-11",
+    "estBuyLabel": "$217K",
     "estSellLabel": "$438K",
     "pctLate": 18
   },
   "topMembers": [
+    {
+      "name": "Lloyd Doggett",
+      "slug": "lloyd-doggett",
+      "party": "D",
+      "chamber": "House",
+      "trades": 7,
+      "buys": 7,
+      "sells": 0,
+      "estLabel": "$56K",
+      "hasPage": false
+    },
     {
       "name": "Lisa C. McClain",
       "slug": "lisa-c-mcclain",
@@ -311,17 +315,6 @@
       "trades": 6,
       "buys": 3,
       "sells": 3,
-      "estLabel": "$48K",
-      "hasPage": false
-    },
-    {
-      "name": "Lloyd Doggett",
-      "slug": "lloyd-doggett",
-      "party": "D",
-      "chamber": "House",
-      "trades": 6,
-      "buys": 6,
-      "sells": 0,
       "estLabel": "$48K",
       "hasPage": false
     },
@@ -415,6 +408,18 @@
     }
   ],
   "trades": [
+    {
+      "member": "Lloyd Doggett",
+      "memberSlug": "lloyd-doggett",
+      "hasPage": false,
+      "party": "D",
+      "side": "BUY",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-10-01",
+      "filedDate": "2026-11-11",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035826.pdf"
+    },
     {
       "member": "Kevin Hern",
       "memberSlug": "kevin-hern",
@@ -702,33 +707,21 @@
       "filedDate": "2025-05-05",
       "daysLate": 0,
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20030285.pdf"
-    },
-    {
-      "member": "George Whitesides",
-      "memberSlug": "george-whitesides",
-      "hasPage": false,
-      "party": "D",
-      "side": "SELL",
-      "amountBucket": "$100K – $250K",
-      "txDate": "2025-03-24",
-      "filedDate": "2025-04-23",
-      "daysLate": 0,
-      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20027982.pdf"
     }
   ],
   "tradesShown": 25,
   "faq": [
     {
       "q": "Who in Congress has traded KO stock?",
-      "a": "16 members of Congress and 1 executive-branch filer have disclosed 33 KO trades since September 2024. The most active is Lisa C. McClain, with 6 trades, followed by Lloyd Doggett and Josh Gottheimer. Each trade on this page links to the official filing it came from."
+      "a": "16 members of Congress and 1 executive-branch filer have disclosed 34 KO trades since September 2024. The most active is Lloyd Doggett, with 7 trades, followed by Lisa C. McClain and Josh Gottheimer. Each trade on this page links to the official filing it came from."
     },
     {
       "q": "Is Congress buying or selling KO?",
-      "a": "Of the 33 disclosed KO trades, 20 were buys and 13 were sells. By the midpoint of each filed amount bracket, the buying comes to about $209K and the selling to about $438K. Filings disclose brackets, never exact amounts, so these totals are estimates."
+      "a": "Of the 34 disclosed KO trades, 21 were buys and 13 were sells. By the midpoint of each filed amount bracket, the buying comes to about $217K and the selling to about $438K. Filings disclose brackets, never exact amounts, so these totals are estimates."
     },
     {
       "q": "How late are KO trades disclosed?",
-      "a": "18% of the disclosed KO trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Aug 31, 2026, and the newest filing arrived on Sep 25, 2026."
+      "a": "18% of the disclosed KO trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Oct 1, 2026, and the newest filing arrived on Nov 11, 2026."
     }
   ]
 }

@@ -12,24 +12,24 @@
   },
   "indexable": true,
   "technical": {
-    "asOf": "2026-11-11",
-    "price": 926.81,
-    "chg1d": 1.83,
-    "chg1w": -0.13,
-    "chg1m": 3.91,
-    "rsi14": 54.6,
-    "sma50": 926.13,
-    "sma200": 956.01,
-    "ema8": 904.52,
-    "ema21": 903.51,
-    "emaGap": 0.11,
-    "vsSma50": 0.1,
-    "vsSma200": -3.1,
-    "relVol": 0.67,
+    "asOf": "2026-11-12",
+    "price": 913.6,
+    "chg1d": -1.43,
+    "chg1w": 5.14,
+    "chg1m": 3.97,
+    "rsi14": 51.4,
+    "sma50": 924.31,
+    "sma200": 955.89,
+    "ema8": 906.54,
+    "ema21": 904.42,
+    "emaGap": 0.23,
+    "vsSma50": -1.2,
+    "vsSma200": -4.4,
+    "relVol": 0.74,
     "vol1y": 33.1,
     "high52w": 1152.07,
     "low52w": 773.7,
-    "rangePos": 40.0,
+    "rangePos": 37.0,
     "series": [
       {
         "d": "2025-11-21",
@@ -236,16 +236,16 @@
         "c": 865.82
       },
       {
-        "d": "2026-11-11",
-        "c": 926.81
+        "d": "2026-11-12",
+        "c": 913.6
       }
     ],
     "signals": [
       {
-        "type": "reclaim_sma50",
-        "asof": "2026-11-11",
-        "label": "Reclaimed the 50-day average",
-        "dir": "bull"
+        "type": "lose_sma50",
+        "asof": "2026-11-12",
+        "label": "Lost the 50-day average",
+        "dir": "bear"
       }
     ],
     "score": {
@@ -261,7 +261,7 @@
         "muted": true
       },
       "vs_sma50": {
-        "vote": 1,
+        "vote": -1,
         "muted": false
       },
       "vs_sma200": {
@@ -281,7 +281,7 @@
         "muted": false
       },
       "chg_1w": {
-        "vote": -1,
+        "vote": 1,
         "muted": false
       }
     }

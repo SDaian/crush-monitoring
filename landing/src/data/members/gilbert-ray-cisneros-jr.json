@@ -19389,11 +19389,11 @@
   "performance": {
     "available": true,
     "benchLabel": "S&P 500",
-    "asofDate": "2026-11-11",
+    "asofDate": "2026-11-12",
     "kpis": {
-      "medianPct": 4.1,
-      "medianBenchPct": 13.2,
-      "beat": 120,
+      "medianPct": 2.5,
+      "medianBenchPct": 12.8,
+      "beat": 116,
       "beatOf": 301,
       "priced": 301,
       "pricedOf": 984
@@ -19494,7 +19494,7 @@
         "2026-10-23",
         "2026-10-30",
         "2026-11-06",
-        "2026-11-11"
+        "2026-11-12"
       ],
       "member": [
         100.0,
@@ -19591,7 +19591,7 @@
         107.0,
         105.0,
         102.7,
-        106.9
+        106.1
       ],
       "bench": [
         100.0,
@@ -19688,7 +19688,7 @@
         112.0,
         111.4,
         108.3,
-        112.0
+        111.6
       ],
       "buys": 301
     },
@@ -19696,86 +19696,86 @@
       {
         "ticker": "NOW",
         "txDate": "2026-10-21",
-        "pct": -32.9,
-        "benchPct": -1.7,
-        "excess": -31.2
+        "pct": -34.3,
+        "benchPct": -2.1,
+        "excess": -32.2
       },
       {
         "ticker": "WFC",
         "txDate": "2026-10-20",
-        "pct": 4.4,
-        "benchPct": -1.2,
-        "excess": 5.6
+        "pct": 4.3,
+        "benchPct": -1.6,
+        "excess": 5.9
       },
       {
         "ticker": "FIS",
         "txDate": "2026-10-20",
-        "pct": -17.1,
-        "benchPct": -1.2,
-        "excess": -15.9
+        "pct": -22.2,
+        "benchPct": -1.6,
+        "excess": -20.6
       },
       {
         "ticker": "LLY",
         "txDate": "2026-10-20",
-        "pct": 12.0,
-        "benchPct": -1.2,
-        "excess": 13.2
+        "pct": 11.2,
+        "benchPct": -1.6,
+        "excess": 12.8
       },
       {
         "ticker": "CSCO",
         "txDate": "2026-10-20",
-        "pct": -5.6,
-        "benchPct": -1.2,
-        "excess": -4.4
+        "pct": -4.4,
+        "benchPct": -1.6,
+        "excess": -2.8
       },
       {
         "ticker": "META",
         "txDate": "2026-10-09",
-        "pct": -12.5,
-        "benchPct": -2.4,
-        "excess": -10.1
+        "pct": -13.2,
+        "benchPct": -2.8,
+        "excess": -10.4
       },
       {
         "ticker": "TSM",
         "txDate": "2026-09-22",
-        "pct": -8.6,
-        "benchPct": -1.8,
-        "excess": -6.8
+        "pct": -10.3,
+        "benchPct": -2.1,
+        "excess": -8.2
       },
       {
         "ticker": "ZTS",
         "txDate": "2026-09-18",
-        "pct": 15.6,
-        "benchPct": -0.2,
-        "excess": 15.8
+        "pct": 16.2,
+        "benchPct": -0.6,
+        "excess": 16.8
       },
       {
         "ticker": "VZ",
         "txDate": "2026-09-18",
-        "pct": -3.1,
-        "benchPct": -0.2,
-        "excess": -2.9
+        "pct": -3.2,
+        "benchPct": -0.6,
+        "excess": -2.6
       },
       {
         "ticker": "APP",
         "txDate": "2026-09-18",
-        "pct": 31.4,
-        "benchPct": -0.2,
-        "excess": 31.6
+        "pct": 27.8,
+        "benchPct": -0.6,
+        "excess": 28.4
       },
       {
         "ticker": "ABT",
         "txDate": "2026-09-18",
-        "pct": 6.5,
-        "benchPct": -0.2,
-        "excess": 6.7
+        "pct": 4.5,
+        "benchPct": -0.6,
+        "excess": 5.1
       },
       {
         "ticker": "NXPI",
         "txDate": "2026-09-17",
-        "pct": 18.2,
-        "benchPct": -0.4,
-        "excess": 18.6
+        "pct": 17.3,
+        "benchPct": -0.7,
+        "excess": 18.0
       }
     ],
     "rowsOf": 301
