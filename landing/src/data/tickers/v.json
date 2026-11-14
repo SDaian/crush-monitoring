@@ -12,24 +12,24 @@
   },
   "indexable": true,
   "technical": {
-    "asOf": "2026-11-12",
-    "price": 420.31,
-    "chg1d": -1.23,
-    "chg1w": -0.54,
-    "chg1m": 7.38,
-    "rsi14": 59.7,
-    "sma50": 389.42,
-    "sma200": 346.6,
-    "ema8": 421.62,
-    "ema21": 412.42,
-    "emaGap": 2.23,
-    "vsSma50": 7.9,
-    "vsSma200": 21.3,
-    "relVol": 0.8,
+    "asOf": "2026-11-13",
+    "price": 425.76,
+    "chg1d": 1.3,
+    "chg1w": 0.74,
+    "chg1m": 6.51,
+    "rsi14": 62.9,
+    "sma50": 390.36,
+    "sma200": 347.07,
+    "ema8": 422.54,
+    "ema21": 413.63,
+    "emaGap": 2.15,
+    "vsSma50": 9.1,
+    "vsSma200": 22.7,
+    "relVol": 0.67,
     "vol1y": 22.8,
     "high52w": 436.57,
     "low52w": 295.52,
-    "rangePos": 88.0,
+    "rangePos": 92.0,
     "series": [
       {
         "d": "2025-11-21",
@@ -236,17 +236,17 @@
         "c": 422.65
       },
       {
-        "d": "2026-11-12",
-        "c": 420.31
+        "d": "2026-11-13",
+        "c": 425.76
       }
     ],
     "signals": [],
     "score": {
       "label": "Strong Buy",
-      "buys": 5,
-      "sells": 1,
+      "buys": 6,
+      "sells": 0,
       "holds": 1,
-      "ratio": 0.571
+      "ratio": 0.857
     },
     "votes": {
       "ema_cross": {
@@ -274,25 +274,25 @@
         "muted": false
       },
       "chg_1w": {
-        "vote": -1,
+        "vote": 1,
         "muted": false
       }
     }
   },
   "summary": {
-    "trades": 66,
+    "trades": 68,
     "members": 24,
     "congress": 24,
     "executive": 0,
     "whoLabel": "24 members of Congress",
     "buys": 38,
-    "sells": 28,
+    "sells": 30,
     "other": 0,
     "firstTx": "2024-08-07",
-    "lastTx": "2026-10-15",
-    "lastFiling": "2026-10-29",
+    "lastTx": "2026-11-03",
+    "lastFiling": "2026-11-12",
     "estBuyLabel": "$353K",
-    "estSellLabel": "$630K",
+    "estSellLabel": "$646K",
     "pctLate": 15
   },
   "topMembers": [
@@ -312,10 +312,10 @@
       "slug": "david-j-taylor",
       "party": "R",
       "chamber": "House",
-      "trades": 10,
+      "trades": 12,
       "buys": 8,
-      "sells": 2,
-      "estLabel": "$80K",
+      "sells": 4,
+      "estLabel": "$96K",
       "hasPage": false
     },
     {
@@ -408,6 +408,30 @@
     }
   ],
   "trades": [
+    {
+      "member": "David J. Taylor",
+      "memberSlug": "david-j-taylor",
+      "hasPage": false,
+      "party": "R",
+      "side": "SELL",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-11-03",
+      "filedDate": "2026-11-12",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035831.pdf"
+    },
+    {
+      "member": "David J. Taylor",
+      "memberSlug": "david-j-taylor",
+      "hasPage": false,
+      "party": "R",
+      "side": "SELL",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-11-03",
+      "filedDate": "2026-11-12",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035831.pdf"
+    },
     {
       "member": "David J. Taylor",
       "memberSlug": "david-j-taylor",
@@ -683,45 +707,21 @@
       "filedDate": "2025-09-02",
       "daysLate": 0,
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20030782.pdf"
-    },
-    {
-      "member": "David J. Taylor",
-      "memberSlug": "david-j-taylor",
-      "hasPage": false,
-      "party": "R",
-      "side": "BUY",
-      "amountBucket": "$1K – $15K",
-      "txDate": "2025-08-13",
-      "filedDate": "2025-09-02",
-      "daysLate": 0,
-      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20030782.pdf"
-    },
-    {
-      "member": "Josh Gottheimer",
-      "memberSlug": "josh-gottheimer",
-      "hasPage": true,
-      "party": "D",
-      "side": "SELL",
-      "amountBucket": "$1K – $15K",
-      "txDate": "2025-08-12",
-      "filedDate": "2025-09-05",
-      "daysLate": 0,
-      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20031032.pdf"
     }
   ],
   "tradesShown": 25,
   "faq": [
     {
       "q": "Who in Congress has traded V stock?",
-      "a": "24 members of Congress have disclosed 66 V trades since August 2024. The most active is Josh Gottheimer, with 18 trades, followed by David J. Taylor and Lisa C. McClain. Each trade on this page links to the official filing it came from."
+      "a": "24 members of Congress have disclosed 68 V trades since August 2024. The most active is Josh Gottheimer, with 18 trades, followed by David J. Taylor and Lisa C. McClain. Each trade on this page links to the official filing it came from."
     },
     {
       "q": "Is Congress buying or selling V?",
-      "a": "Of the 66 disclosed V trades, 38 were buys and 28 were sells. By the midpoint of each filed amount bracket, the buying comes to about $353K and the selling to about $630K. Filings disclose brackets, never exact amounts, so these totals are estimates."
+      "a": "Of the 68 disclosed V trades, 38 were buys and 30 were sells. By the midpoint of each filed amount bracket, the buying comes to about $353K and the selling to about $646K. Filings disclose brackets, never exact amounts, so these totals are estimates."
     },
     {
       "q": "How late are V trades disclosed?",
-      "a": "15% of the disclosed V trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Oct 15, 2026, and the newest filing arrived on Oct 29, 2026."
+      "a": "15% of the disclosed V trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Nov 3, 2026, and the newest filing arrived on Nov 12, 2026."
     }
   ]
 }

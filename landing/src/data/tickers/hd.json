@@ -12,20 +12,20 @@
   },
   "indexable": true,
   "technical": {
-    "asOf": "2026-11-12",
-    "price": 348.26,
-    "chg1d": -0.87,
-    "chg1w": -0.48,
-    "chg1m": 17.85,
-    "rsi14": 63.7,
-    "sma50": 311.54,
-    "sma200": 332.81,
-    "ema8": 346.16,
-    "ema21": 332.92,
-    "emaGap": 3.98,
-    "vsSma50": 11.8,
-    "vsSma200": 4.6,
-    "relVol": 0.81,
+    "asOf": "2026-11-13",
+    "price": 348.69,
+    "chg1d": 0.12,
+    "chg1w": 1.52,
+    "chg1m": 13.12,
+    "rsi14": 63.9,
+    "sma50": 312.15,
+    "sma200": 332.69,
+    "ema8": 346.73,
+    "ema21": 334.35,
+    "emaGap": 3.7,
+    "vsSma50": 11.7,
+    "vsSma200": 4.8,
+    "relVol": 1.01,
     "vol1y": 28.0,
     "high52w": 391.05,
     "low52w": 281.15,
@@ -236,17 +236,17 @@
         "c": 343.47
       },
       {
-        "d": "2026-11-12",
-        "c": 348.26
+        "d": "2026-11-13",
+        "c": 348.69
       }
     ],
     "signals": [],
     "score": {
-      "label": "Buy",
-      "buys": 4,
-      "sells": 2,
+      "label": "Strong Buy",
+      "buys": 5,
+      "sells": 1,
       "holds": 1,
-      "ratio": 0.286
+      "ratio": 0.571
     },
     "votes": {
       "ema_cross": {
@@ -274,25 +274,25 @@
         "muted": false
       },
       "chg_1w": {
-        "vote": -1,
+        "vote": 1,
         "muted": false
       }
     }
   },
   "summary": {
-    "trades": 89,
+    "trades": 90,
     "members": 26,
     "congress": 25,
     "executive": 1,
     "whoLabel": "25 members of Congress and 1 executive-branch filer",
     "buys": 44,
-    "sells": 45,
+    "sells": 46,
     "other": 0,
     "firstTx": "2023-03-15",
-    "lastTx": "2026-10-22",
-    "lastFiling": "2026-11-10",
+    "lastTx": "2026-11-05",
+    "lastFiling": "2026-11-12",
     "estBuyLabel": "$450K",
-    "estSellLabel": "$973K",
+    "estSellLabel": "$981K",
     "pctLate": 8
   },
   "topMembers": [
@@ -312,10 +312,10 @@
       "slug": "david-j-taylor",
       "party": "R",
       "chamber": "House",
-      "trades": 10,
+      "trades": 11,
       "buys": 8,
-      "sells": 2,
-      "estLabel": "$80K",
+      "sells": 3,
+      "estLabel": "$88K",
       "hasPage": false
     },
     {
@@ -408,6 +408,18 @@
     }
   ],
   "trades": [
+    {
+      "member": "David J. Taylor",
+      "memberSlug": "david-j-taylor",
+      "hasPage": false,
+      "party": "R",
+      "side": "SELL",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-11-05",
+      "filedDate": "2026-11-12",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035831.pdf"
+    },
     {
       "member": "Pete Sessions",
       "memberSlug": "pete-sessions",
@@ -695,33 +707,21 @@
       "filedDate": "2026-05-28",
       "daysLate": 0,
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20034650.pdf"
-    },
-    {
-      "member": "David J. Taylor",
-      "memberSlug": "david-j-taylor",
-      "hasPage": false,
-      "party": "R",
-      "side": "BUY",
-      "amountBucket": "$1K – $15K",
-      "txDate": "2026-05-15",
-      "filedDate": "2026-05-28",
-      "daysLate": 0,
-      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20034650.pdf"
     }
   ],
   "tradesShown": 25,
   "faq": [
     {
       "q": "Who in Congress has traded HD stock?",
-      "a": "25 members of Congress and 1 executive-branch filer have disclosed 89 HD trades since March 2023. The most active is Kevin Hern, with 11 trades, followed by David J. Taylor and Lloyd Doggett. Each trade on this page links to the official filing it came from."
+      "a": "25 members of Congress and 1 executive-branch filer have disclosed 90 HD trades since March 2023. The most active is Kevin Hern, with 11 trades, followed by David J. Taylor and Lloyd Doggett. Each trade on this page links to the official filing it came from."
     },
     {
       "q": "Is Congress buying or selling HD?",
-      "a": "Of the 89 disclosed HD trades, 44 were buys and 45 were sells. By the midpoint of each filed amount bracket, the buying comes to about $450K and the selling to about $973K. Filings disclose brackets, never exact amounts, so these totals are estimates."
+      "a": "Of the 90 disclosed HD trades, 44 were buys and 46 were sells. By the midpoint of each filed amount bracket, the buying comes to about $450K and the selling to about $981K. Filings disclose brackets, never exact amounts, so these totals are estimates."
     },
     {
       "q": "How late are HD trades disclosed?",
-      "a": "8% of the disclosed HD trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Oct 22, 2026, and the newest filing arrived on Nov 10, 2026."
+      "a": "8% of the disclosed HD trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Nov 5, 2026, and the newest filing arrived on Nov 12, 2026."
     }
   ]
 }

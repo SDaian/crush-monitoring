@@ -14,24 +14,24 @@
   },
   "indexable": true,
   "technical": {
-    "asOf": "2026-11-12",
-    "price": 298.7,
-    "chg1d": 1.79,
-    "chg1w": 5.71,
-    "chg1m": -14.08,
-    "rsi14": 42.3,
-    "sma50": 329.12,
-    "sma200": 338.69,
-    "ema8": 292.35,
-    "ema21": 304.5,
-    "emaGap": -3.99,
-    "vsSma50": -9.2,
-    "vsSma200": -11.8,
-    "relVol": 0.87,
-    "vol1y": 33.8,
+    "asOf": "2026-11-13",
+    "price": 295.77,
+    "chg1d": -0.98,
+    "chg1w": 3.86,
+    "chg1m": -15.31,
+    "rsi14": 40.6,
+    "sma50": 328.19,
+    "sma200": 338.48,
+    "ema8": 293.11,
+    "ema21": 303.71,
+    "emaGap": -3.49,
+    "vsSma50": -9.9,
+    "vsSma200": -12.6,
+    "relVol": 0.75,
+    "vol1y": 33.7,
     "high52w": 402.62,
     "low52w": 273.5,
-    "rangePos": 20.0,
+    "rangePos": 17.0,
     "series": [
       {
         "d": "2025-11-21",
@@ -238,8 +238,8 @@
         "c": 284.78
       },
       {
-        "d": "2026-11-12",
-        "c": 298.7
+        "d": "2026-11-13",
+        "c": 295.77
       }
     ],
     "signals": [],
@@ -282,17 +282,17 @@
     }
   },
   "summary": {
-    "trades": 166,
+    "trades": 168,
     "members": 42,
     "congress": 41,
     "executive": 1,
     "whoLabel": "41 members of Congress and 1 executive-branch filer",
-    "buys": 89,
+    "buys": 91,
     "sells": 77,
     "other": 0,
     "firstTx": "2024-08-07",
-    "lastTx": "2026-10-16",
-    "lastFiling": "2026-10-27",
+    "lastTx": "2026-11-03",
+    "lastFiling": "2026-11-12",
     "estBuyLabel": "$4.6M",
     "estSellLabel": "$8.4M",
     "pctLate": 14
@@ -314,10 +314,10 @@
       "slug": "david-j-taylor",
       "party": "R",
       "chamber": "House",
-      "trades": 12,
-      "buys": 5,
+      "trades": 14,
+      "buys": 7,
       "sells": 7,
-      "estLabel": "$121K",
+      "estLabel": "$137K",
       "hasPage": false
     },
     {
@@ -410,6 +410,30 @@
     }
   ],
   "trades": [
+    {
+      "member": "David J. Taylor",
+      "memberSlug": "david-j-taylor",
+      "hasPage": false,
+      "party": "R",
+      "side": "BUY",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-11-03",
+      "filedDate": "2026-11-12",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035831.pdf"
+    },
+    {
+      "member": "David J. Taylor",
+      "memberSlug": "david-j-taylor",
+      "hasPage": false,
+      "party": "R",
+      "side": "BUY",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-11-03",
+      "filedDate": "2026-11-12",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035831.pdf"
+    },
     {
       "member": "Michael A. Rulli",
       "memberSlug": "michael-a-rulli",
@@ -685,45 +709,21 @@
       "filedDate": "2026-06-25",
       "daysLate": 0,
       "sourceUrl": "https://efdsearch.senate.gov/search/view/ptr/7caf1b69-3678-4420-8812-a1476a1a6158/"
-    },
-    {
-      "member": "Donald J. Trump",
-      "memberSlug": "donald-j-trump",
-      "hasPage": true,
-      "party": "R",
-      "side": "SELL",
-      "amountBucket": "$1K – $15K",
-      "txDate": "2026-05-18",
-      "filedDate": "2026-06-25",
-      "daysLate": 0,
-      "sourceUrl": "https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/F9CA13B970439E8F85258E27002DDF15/$FILE/Donald-J-Trump-06.25.2026-278T%20%282%29.pdf"
-    },
-    {
-      "member": "Donald J. Trump",
-      "memberSlug": "donald-j-trump",
-      "hasPage": true,
-      "party": "R",
-      "side": "SELL",
-      "amountBucket": "$1K – $15K",
-      "txDate": "2026-05-18",
-      "filedDate": "2026-06-25",
-      "daysLate": 0,
-      "sourceUrl": "https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/F9CA13B970439E8F85258E27002DDF15/$FILE/Donald-J-Trump-06.25.2026-278T%20%282%29.pdf"
     }
   ],
   "tradesShown": 25,
   "faq": [
     {
       "q": "Who in Congress has traded GOOGL and GOOG stock?",
-      "a": "41 members of Congress and 1 executive-branch filer have disclosed 166 GOOGL and GOOG trades since August 2024. The most active is Cleo Fields, with 28 trades, followed by David J. Taylor and Lisa C. McClain. Each trade on this page links to the official filing it came from."
+      "a": "41 members of Congress and 1 executive-branch filer have disclosed 168 GOOGL and GOOG trades since August 2024. The most active is Cleo Fields, with 28 trades, followed by David J. Taylor and Lisa C. McClain. Each trade on this page links to the official filing it came from."
     },
     {
       "q": "Is Congress buying or selling GOOGL and GOOG?",
-      "a": "Of the 166 disclosed GOOGL and GOOG trades, 89 were buys and 77 were sells. By the midpoint of each filed amount bracket, the buying comes to about $4.6M and the selling to about $8.4M. Filings disclose brackets, never exact amounts, so these totals are estimates."
+      "a": "Of the 168 disclosed GOOGL and GOOG trades, 91 were buys and 77 were sells. By the midpoint of each filed amount bracket, the buying comes to about $4.6M and the selling to about $8.4M. Filings disclose brackets, never exact amounts, so these totals are estimates."
     },
     {
       "q": "How late are GOOGL and GOOG trades disclosed?",
-      "a": "14% of the disclosed GOOGL and GOOG trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Oct 16, 2026, and the newest filing arrived on Oct 27, 2026."
+      "a": "14% of the disclosed GOOGL and GOOG trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Nov 3, 2026, and the newest filing arrived on Nov 12, 2026."
     }
   ]
 }

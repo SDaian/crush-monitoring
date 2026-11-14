@@ -42,12 +42,12 @@
         "GOOG"
       ],
       "company": "Alphabet Inc.",
-      "trades": 166,
+      "trades": 168,
       "members": 42,
-      "buys": 89,
+      "buys": 91,
       "sells": 77,
-      "lastTx": "2026-10-16",
-      "lastFiling": "2026-10-27",
+      "lastTx": "2026-11-03",
+      "lastFiling": "2026-11-12",
       "indexable": true,
       "industry": {
         "key": "tech",
@@ -129,12 +129,12 @@
       "ticker": "AVGO",
       "aliases": [],
       "company": "Broadcom Inc.",
-      "trades": 91,
+      "trades": 92,
       "members": 25,
-      "buys": 51,
+      "buys": 52,
       "sells": 40,
-      "lastTx": "2026-09-24",
-      "lastFiling": "2026-11-01",
+      "lastTx": "2026-11-05",
+      "lastFiling": "2026-11-12",
       "indexable": true,
       "industry": {
         "key": "tech",
@@ -146,12 +146,12 @@
       "ticker": "HD",
       "aliases": [],
       "company": "Home Depot, Inc.",
-      "trades": 89,
+      "trades": 90,
       "members": 26,
       "buys": 44,
-      "sells": 45,
-      "lastTx": "2026-10-22",
-      "lastFiling": "2026-11-10",
+      "sells": 46,
+      "lastTx": "2026-11-05",
+      "lastFiling": "2026-11-12",
       "indexable": true,
       "industry": {
         "key": "consumer",
@@ -180,16 +180,33 @@
       "ticker": "LLY",
       "aliases": [],
       "company": "Eli Lilly and Company",
-      "trades": 67,
+      "trades": 69,
       "members": 22,
       "buys": 27,
-      "sells": 40,
-      "lastTx": "2026-10-20",
-      "lastFiling": "2026-11-10",
+      "sells": 42,
+      "lastTx": "2026-11-03",
+      "lastFiling": "2026-11-12",
       "indexable": true,
       "industry": {
         "key": "health",
         "label": "Health care & pharma"
+      }
+    },
+    {
+      "slug": "v",
+      "ticker": "V",
+      "aliases": [],
+      "company": "Visa Inc.",
+      "trades": 68,
+      "members": 24,
+      "buys": 38,
+      "sells": 30,
+      "lastTx": "2026-11-03",
+      "lastFiling": "2026-11-12",
+      "indexable": true,
+      "industry": {
+        "key": "finance",
+        "label": "Banks & finance"
       }
     },
     {
@@ -210,20 +227,20 @@
       }
     },
     {
-      "slug": "v",
-      "ticker": "V",
+      "slug": "pg",
+      "ticker": "PG",
       "aliases": [],
-      "company": "Visa Inc.",
+      "company": "Procter & Gamble Company",
       "trades": 66,
-      "members": 24,
-      "buys": 38,
-      "sells": 28,
-      "lastTx": "2026-10-15",
-      "lastFiling": "2026-10-29",
+      "members": 30,
+      "buys": 31,
+      "sells": 35,
+      "lastTx": "2026-11-05",
+      "lastFiling": "2026-11-12",
       "indexable": true,
       "industry": {
-        "key": "finance",
-        "label": "Banks & finance"
+        "key": "consumer",
+        "label": "Consumer & retail"
       }
     },
     {
@@ -241,23 +258,6 @@
       "industry": {
         "key": "finance",
         "label": "Banks & finance"
-      }
-    },
-    {
-      "slug": "pg",
-      "ticker": "PG",
-      "aliases": [],
-      "company": "Procter & Gamble Company",
-      "trades": 65,
-      "members": 30,
-      "buys": 31,
-      "sells": 34,
-      "lastTx": "2026-10-23",
-      "lastFiling": "2026-11-05",
-      "indexable": true,
-      "industry": {
-        "key": "consumer",
-        "label": "Consumer & retail"
       }
     },
     {
@@ -533,6 +533,23 @@
       }
     },
     {
+      "slug": "lrcx",
+      "ticker": "LRCX",
+      "aliases": [],
+      "company": "Lam Research Corporation",
+      "trades": 43,
+      "members": 15,
+      "buys": 14,
+      "sells": 29,
+      "lastTx": "2026-11-05",
+      "lastFiling": "2026-11-12",
+      "indexable": true,
+      "industry": {
+        "key": "tech",
+        "label": "Technology"
+      }
+    },
+    {
       "slug": "wmt",
       "ticker": "WMT",
       "aliases": [],
@@ -547,23 +564,6 @@
       "industry": {
         "key": "consumer",
         "label": "Consumer & retail"
-      }
-    },
-    {
-      "slug": "lrcx",
-      "ticker": "LRCX",
-      "aliases": [],
-      "company": "Lam Research Corporation",
-      "trades": 42,
-      "members": 15,
-      "buys": 13,
-      "sells": 29,
-      "lastTx": "2026-10-15",
-      "lastFiling": "2026-10-29",
-      "indexable": true,
-      "industry": {
-        "key": "tech",
-        "label": "Technology"
       }
     },
     {
@@ -618,6 +618,23 @@
       }
     },
     {
+      "slug": "etn",
+      "ticker": "ETN",
+      "aliases": [],
+      "company": "Eaton Corporation, PLC",
+      "trades": 40,
+      "members": 14,
+      "buys": 20,
+      "sells": 20,
+      "lastTx": "2026-11-03",
+      "lastFiling": "2026-11-12",
+      "indexable": true,
+      "industry": {
+        "key": "industrial",
+        "label": "Manufacturing"
+      }
+    },
+    {
       "slug": "adbe",
       "ticker": "ADBE",
       "aliases": [],
@@ -632,6 +649,23 @@
       "industry": {
         "key": "tech",
         "label": "Technology"
+      }
+    },
+    {
+      "slug": "t",
+      "ticker": "T",
+      "aliases": [],
+      "company": "AT&T Inc.",
+      "trades": 39,
+      "members": 15,
+      "buys": 22,
+      "sells": 17,
+      "lastTx": "2026-11-03",
+      "lastFiling": "2026-11-12",
+      "indexable": true,
+      "industry": {
+        "key": "telecom",
+        "label": "Telecom & media"
       }
     },
     {
@@ -686,6 +720,23 @@
       }
     },
     {
+      "slug": "amgn",
+      "ticker": "AMGN",
+      "aliases": [],
+      "company": "Amgen Inc.",
+      "trades": 38,
+      "members": 17,
+      "buys": 17,
+      "sells": 21,
+      "lastTx": "2026-11-03",
+      "lastFiling": "2026-11-12",
+      "indexable": true,
+      "industry": {
+        "key": "health",
+        "label": "Health care & pharma"
+      }
+    },
+    {
       "slug": "intu",
       "ticker": "INTU",
       "aliases": [],
@@ -700,23 +751,6 @@
       "industry": {
         "key": "tech",
         "label": "Technology"
-      }
-    },
-    {
-      "slug": "etn",
-      "ticker": "ETN",
-      "aliases": [],
-      "company": "Eaton Corporation, PLC",
-      "trades": 38,
-      "members": 14,
-      "buys": 18,
-      "sells": 20,
-      "lastTx": "2026-09-10",
-      "lastFiling": "2026-09-25",
-      "indexable": true,
-      "industry": {
-        "key": "industrial",
-        "label": "Manufacturing"
       }
     },
     {
@@ -771,23 +805,6 @@
       }
     },
     {
-      "slug": "t",
-      "ticker": "T",
-      "aliases": [],
-      "company": "AT&T Inc.",
-      "trades": 37,
-      "members": 15,
-      "buys": 20,
-      "sells": 17,
-      "lastTx": "2026-10-15",
-      "lastFiling": "2026-10-29",
-      "indexable": true,
-      "industry": {
-        "key": "telecom",
-        "label": "Telecom & media"
-      }
-    },
-    {
       "slug": "vz",
       "ticker": "VZ",
       "aliases": [],
@@ -815,23 +832,6 @@
       "sells": 24,
       "lastTx": "2026-07-10",
       "lastFiling": "2026-08-07",
-      "indexable": true,
-      "industry": {
-        "key": "health",
-        "label": "Health care & pharma"
-      }
-    },
-    {
-      "slug": "amgn",
-      "ticker": "AMGN",
-      "aliases": [],
-      "company": "Amgen Inc.",
-      "trades": 36,
-      "members": 17,
-      "buys": 17,
-      "sells": 19,
-      "lastTx": "2026-10-15",
-      "lastFiling": "2026-11-02",
       "indexable": true,
       "industry": {
         "key": "health",

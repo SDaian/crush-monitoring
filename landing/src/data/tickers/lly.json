@@ -12,24 +12,24 @@
   },
   "indexable": true,
   "technical": {
-    "asOf": "2026-11-12",
-    "price": 1427.28,
-    "chg1d": -0.7,
-    "chg1w": 4.58,
-    "chg1m": 18.08,
-    "rsi14": 68.0,
-    "sma50": 1235.4,
-    "sma200": 1107.23,
-    "ema8": 1405.57,
-    "ema21": 1347.89,
-    "emaGap": 4.28,
-    "vsSma50": 15.5,
-    "vsSma200": 28.9,
-    "relVol": 0.8,
-    "vol1y": 35.0,
-    "high52w": 1437.29,
+    "asOf": "2026-11-13",
+    "price": 1443.5,
+    "chg1d": 1.14,
+    "chg1w": 6.61,
+    "chg1m": 15.33,
+    "rsi14": 69.7,
+    "sma50": 1241.08,
+    "sma200": 1109.32,
+    "ema8": 1414.0,
+    "ema21": 1356.59,
+    "emaGap": 4.23,
+    "vsSma50": 16.3,
+    "vsSma200": 30.1,
+    "relVol": 0.7,
+    "vol1y": 34.9,
+    "high52w": 1443.5,
     "low52w": 851.21,
-    "rangePos": 98.0,
+    "rangePos": 100.0,
     "series": [
       {
         "d": "2025-11-21",
@@ -236,11 +236,18 @@
         "c": 1354.0
       },
       {
-        "d": "2026-11-12",
-        "c": 1427.28
+        "d": "2026-11-13",
+        "c": 1443.5
       }
     ],
-    "signals": [],
+    "signals": [
+      {
+        "type": "new_52w_high",
+        "asof": "2026-11-13",
+        "label": "New 52-week high",
+        "dir": "bull"
+      }
+    ],
     "score": {
       "label": "Strong Buy",
       "buys": 6,
@@ -280,20 +287,20 @@
     }
   },
   "summary": {
-    "trades": 67,
+    "trades": 69,
     "members": 22,
     "congress": 22,
     "executive": 0,
     "whoLabel": "22 members of Congress",
     "buys": 27,
-    "sells": 40,
+    "sells": 42,
     "other": 0,
     "firstTx": "2024-10-29",
-    "lastTx": "2026-10-20",
-    "lastFiling": "2026-11-10",
+    "lastTx": "2026-11-03",
+    "lastFiling": "2026-11-12",
     "estBuyLabel": "$491K",
-    "estSellLabel": "$603K",
-    "pctLate": 15
+    "estSellLabel": "$619K",
+    "pctLate": 14
   },
   "topMembers": [
     {
@@ -308,6 +315,17 @@
       "hasPage": true
     },
     {
+      "name": "David J. Taylor",
+      "slug": "david-j-taylor",
+      "party": "R",
+      "chamber": "House",
+      "trades": 8,
+      "buys": 3,
+      "sells": 5,
+      "estLabel": "$89K",
+      "hasPage": false
+    },
+    {
       "name": "Gilbert Ray Cisneros, Jr.",
       "slug": "gilbert-ray-cisneros-jr",
       "party": "D",
@@ -317,17 +335,6 @@
       "sells": 2,
       "estLabel": "$115K",
       "hasPage": true
-    },
-    {
-      "name": "David J. Taylor",
-      "slug": "david-j-taylor",
-      "party": "R",
-      "chamber": "House",
-      "trades": 6,
-      "buys": 3,
-      "sells": 3,
-      "estLabel": "$73K",
-      "hasPage": false
     },
     {
       "name": "Jonathan L. Jackson",
@@ -408,6 +415,30 @@
     }
   ],
   "trades": [
+    {
+      "member": "David J. Taylor",
+      "memberSlug": "david-j-taylor",
+      "hasPage": false,
+      "party": "R",
+      "side": "SELL",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-11-03",
+      "filedDate": "2026-11-12",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035831.pdf"
+    },
+    {
+      "member": "David J. Taylor",
+      "memberSlug": "david-j-taylor",
+      "hasPage": false,
+      "party": "R",
+      "side": "SELL",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-11-03",
+      "filedDate": "2026-11-12",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035831.pdf"
+    },
     {
       "member": "Gilbert Ray Cisneros, Jr.",
       "memberSlug": "gilbert-ray-cisneros-jr",
@@ -684,45 +715,21 @@
       "filedDate": "2025-12-11",
       "daysLate": 0,
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20033611.pdf"
-    },
-    {
-      "member": "Shelley Moore Capito",
-      "memberSlug": "shelley-moore-capito",
-      "hasPage": false,
-      "party": "R",
-      "side": "BUY",
-      "amountBucket": "$1K – $15K",
-      "txDate": "2025-10-24",
-      "filedDate": "2025-11-04",
-      "daysLate": 0,
-      "sourceUrl": "https://efdsearch.senate.gov/search/view/ptr/defd46d8-f9db-46d6-96f9-77bebce203b6/"
-    },
-    {
-      "member": "Val T. Hoyle",
-      "memberSlug": "val-t-hoyle",
-      "hasPage": false,
-      "party": "D",
-      "side": "SELL",
-      "amountBucket": "$1K – $15K",
-      "txDate": "2025-09-23",
-      "filedDate": "2025-10-10",
-      "daysLate": 0,
-      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20032211.pdf"
     }
   ],
   "tradesShown": 25,
   "faq": [
     {
       "q": "Who in Congress has traded LLY stock?",
-      "a": "22 members of Congress have disclosed 67 LLY trades since October 2024. The most active is Josh Gottheimer, with 13 trades, followed by Gilbert Ray Cisneros, Jr. and David J. Taylor. Each trade on this page links to the official filing it came from."
+      "a": "22 members of Congress have disclosed 69 LLY trades since October 2024. The most active is Josh Gottheimer, with 13 trades, followed by David J. Taylor and Gilbert Ray Cisneros, Jr.. Each trade on this page links to the official filing it came from."
     },
     {
       "q": "Is Congress buying or selling LLY?",
-      "a": "Of the 67 disclosed LLY trades, 27 were buys and 40 were sells. By the midpoint of each filed amount bracket, the buying comes to about $491K and the selling to about $603K. Filings disclose brackets, never exact amounts, so these totals are estimates."
+      "a": "Of the 69 disclosed LLY trades, 27 were buys and 42 were sells. By the midpoint of each filed amount bracket, the buying comes to about $491K and the selling to about $619K. Filings disclose brackets, never exact amounts, so these totals are estimates."
     },
     {
       "q": "How late are LLY trades disclosed?",
-      "a": "15% of the disclosed LLY trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Oct 20, 2026, and the newest filing arrived on Nov 10, 2026."
+      "a": "14% of the disclosed LLY trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Nov 3, 2026, and the newest filing arrived on Nov 12, 2026."
     }
   ]
 }
