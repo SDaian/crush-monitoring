@@ -1,10 +1,10 @@
 {
   "_comment": "Generated from real official disclosures by congress/landing_data.py (daily Action). Do not edit by hand. 'filedDaysLate' counts days past the STOCK Act's 45-day statutory maximum; 0 = on time.",
   "windowDays": 45,
-  "from": "2026-09-28",
-  "to": "2026-11-12",
+  "from": "2026-09-29",
+  "to": "2026-11-13",
   "members": 16,
-  "buys": 140,
+  "buys": 142,
   "options": 0,
   "companies": 106,
   "rows": [
@@ -239,6 +239,42 @@
       "lastFiling": "2026-11-01"
     },
     {
+      "ticker": "DDOG",
+      "tickerLabel": "DDOG",
+      "slug": null,
+      "company": "Datadog, Inc.",
+      "members": 1,
+      "buyers": [
+        {
+          "name": "Jonathan L. Jackson",
+          "slug": null
+        }
+      ],
+      "buys": 2,
+      "options": 0,
+      "estLabel": "$83K",
+      "est": 83001,
+      "lastFiling": "2026-11-13"
+    },
+    {
+      "ticker": "EL",
+      "tickerLabel": "EL",
+      "slug": null,
+      "company": "Estee Lauder Companies, Inc.",
+      "members": 1,
+      "buyers": [
+        {
+          "name": "Jonathan L. Jackson",
+          "slug": null
+        }
+      ],
+      "buys": 2,
+      "options": 0,
+      "estLabel": "$83K",
+      "est": 83001,
+      "lastFiling": "2026-11-13"
+    },
+    {
       "ticker": "NXPI",
       "tickerLabel": "NXPI",
       "slug": null,
@@ -363,62 +399,26 @@
       "estLabel": "$16K",
       "est": 16001,
       "lastFiling": "2026-10-12"
-    },
-    {
-      "ticker": "LRCX",
-      "tickerLabel": "LRCX",
-      "slug": "lrcx",
-      "company": "Lam Research Corporation - Common Stock $200?",
-      "members": 1,
-      "buyers": [
-        {
-          "name": "David J. Taylor",
-          "slug": null
-        }
-      ],
-      "buys": 2,
-      "options": 0,
-      "estLabel": "$16K",
-      "est": 16001,
-      "lastFiling": "2026-11-12"
-    },
-    {
-      "ticker": "OKTA",
-      "tickerLabel": "OKTA",
-      "slug": null,
-      "company": "Okta, Inc.",
-      "members": 1,
-      "buyers": [
-        {
-          "name": "Maria Elvira Salazar",
-          "slug": null
-        }
-      ],
-      "buys": 2,
-      "options": 0,
-      "estLabel": "$16K",
-      "est": 16001,
-      "lastFiling": "2026-10-07"
     }
   ],
   "largest": {
-    "ticker": "MBGL",
-    "estLabel": "$75K",
-    "buys": 1,
+    "ticker": "EL",
+    "estLabel": "$83K",
+    "buys": 2,
     "options": 0,
-    "company": "Mobility Global Inc.",
+    "company": "Estee Lauder Companies, Inc.",
     "buyers": [
-      "Gilbert Ray Cisneros, Jr."
+      "Jonathan L. Jackson"
     ]
   },
   "faq": [
     {
       "q": "What stocks is Congress buying?",
-      "a": "In filings from the last 45 days, to Nov 12, 2026, 16 members of Congress disclosed 140 purchases across 106 companies. The stocks bought by the most members were NVDA (2 members), GOOGL and GOOG (2 members) and HD (2 members). Filings arrive up to 45 days after the trade: this is recent disclosure, not live trading."
+      "a": "In filings from the last 45 days, to Nov 13, 2026, 16 members of Congress disclosed 142 purchases across 106 companies. The stocks bought by the most members were NVDA (2 members), GOOGL and GOOG (2 members) and HD (2 members). Filings arrive up to 45 days after the trade: this is recent disclosure, not live trading."
     },
     {
       "q": "What is the largest stock purchase Congress disclosed recently?",
-      "a": "By the midpoint of each filed amount bracket, the largest recent buying was in Mobility Global Inc. (MBGL): about $75K across 1 purchase, by Gilbert Ray Cisneros, Jr.. Filings disclose brackets, never exact amounts, so this is an estimate."
+      "a": "By the midpoint of each filed amount bracket, the largest recent buying was in Estee Lauder Companies, Inc. (EL): about $83K across 2 purchases, by Jonathan L. Jackson. Filings disclose brackets, never exact amounts, so this is an estimate."
     },
     {
       "q": "Does this include the President's trades?",
