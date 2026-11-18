@@ -295,6 +295,23 @@
       }
     },
     {
+      "slug": "nflx",
+      "ticker": "NFLX",
+      "aliases": [],
+      "company": "Netflix, Inc.",
+      "trades": 56,
+      "members": 22,
+      "buys": 31,
+      "sells": 25,
+      "lastTx": "2026-10-02",
+      "lastFiling": "2026-11-16",
+      "indexable": true,
+      "industry": {
+        "key": "telecom",
+        "label": "Telecom & media"
+      }
+    },
+    {
       "slug": "ibm",
       "ticker": "IBM",
       "aliases": [],
@@ -309,23 +326,6 @@
       "industry": {
         "key": "tech",
         "label": "Technology"
-      }
-    },
-    {
-      "slug": "nflx",
-      "ticker": "NFLX",
-      "aliases": [],
-      "company": "Netflix, Inc.",
-      "trades": 54,
-      "members": 22,
-      "buys": 31,
-      "sells": 23,
-      "lastTx": "2026-09-14",
-      "lastFiling": "2026-10-01",
-      "indexable": true,
-      "industry": {
-        "key": "telecom",
-        "label": "Telecom & media"
       }
     },
     {
@@ -1060,6 +1060,23 @@
       }
     },
     {
+      "slug": "zts",
+      "ticker": "ZTS",
+      "aliases": [],
+      "company": "Zoetis Inc.",
+      "trades": 33,
+      "members": 11,
+      "buys": 13,
+      "sells": 20,
+      "lastTx": "2026-10-21",
+      "lastFiling": "2026-11-16",
+      "indexable": true,
+      "industry": {
+        "key": "health",
+        "label": "Health care & pharma"
+      }
+    },
+    {
       "slug": "sbux",
       "ticker": "SBUX",
       "aliases": [],
@@ -1189,23 +1206,6 @@
       "sells": 21,
       "lastTx": "2026-06-08",
       "lastFiling": "2026-08-13",
-      "indexable": true,
-      "industry": {
-        "key": "health",
-        "label": "Health care & pharma"
-      }
-    },
-    {
-      "slug": "zts",
-      "ticker": "ZTS",
-      "aliases": [],
-      "company": "Zoetis Inc.",
-      "trades": 31,
-      "members": 11,
-      "buys": 13,
-      "sells": 18,
-      "lastTx": "2026-10-21",
-      "lastFiling": "2026-11-04",
       "indexable": true,
       "industry": {
         "key": "health",

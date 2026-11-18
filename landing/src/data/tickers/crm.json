@@ -12,24 +12,24 @@
   },
   "indexable": true,
   "technical": {
-    "asOf": "2026-11-16",
-    "price": 214.83,
-    "chg1d": -1.38,
-    "chg1w": -0.05,
-    "chg1m": -10.75,
-    "rsi14": 37.1,
-    "sma50": 234.39,
-    "sma200": 198.0,
-    "ema8": 218.38,
-    "ema21": 225.14,
-    "emaGap": -3.0,
-    "vsSma50": -8.3,
-    "vsSma200": 8.5,
-    "relVol": 0.79,
-    "vol1y": 46.3,
+    "asOf": "2026-11-17",
+    "price": 194.52,
+    "chg1d": -9.45,
+    "chg1w": -8.88,
+    "chg1m": -19.77,
+    "rsi14": 25.7,
+    "sma50": 233.3,
+    "sma200": 197.92,
+    "ema8": 213.08,
+    "ema21": 222.36,
+    "emaGap": -4.17,
+    "vsSma50": -16.6,
+    "vsSma200": -1.7,
+    "relVol": 1.91,
+    "vol1y": 47.4,
     "high52w": 266.23,
     "low52w": 150.12,
-    "rangePos": 56.0,
+    "rangePos": 38.0,
     "series": [
       {
         "d": "2025-11-28",
@@ -236,29 +236,36 @@
         "c": 217.84
       },
       {
-        "d": "2026-11-16",
-        "c": 214.83
+        "d": "2026-11-17",
+        "c": 194.52
       }
     ],
-    "signals": [],
+    "signals": [
+      {
+        "type": "rsi_oversold",
+        "asof": "2026-11-17",
+        "label": "RSI crossed below 30 (oversold)",
+        "dir": "neutral"
+      }
+    ],
     "score": {
-      "label": "Hold",
+      "label": "Sell",
       "buys": 2,
-      "sells": 3,
-      "holds": 2,
-      "ratio": -0.143
+      "sells": 5,
+      "holds": 0,
+      "ratio": -0.429
     },
     "votes": {
       "ema_cross": {
-        "vote": 0,
-        "muted": true
+        "vote": -1,
+        "muted": false
       },
       "vs_sma50": {
         "vote": -1,
         "muted": false
       },
       "vs_sma200": {
-        "vote": 1,
+        "vote": -1,
         "muted": false
       },
       "sma50_vs_200": {
@@ -266,7 +273,7 @@
         "muted": false
       },
       "rsi": {
-        "vote": 0,
+        "vote": 1,
         "muted": false
       },
       "chg_1m": {
