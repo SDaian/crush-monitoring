@@ -14,24 +14,24 @@
   },
   "indexable": true,
   "technical": {
-    "asOf": "2026-11-18",
-    "price": 282.44,
-    "chg1d": 0.8,
-    "chg1w": -3.75,
-    "chg1m": -17.0,
-    "rsi14": 34.9,
-    "sma50": 324.96,
-    "sma200": 337.61,
-    "ema8": 287.25,
-    "ema21": 298.33,
-    "emaGap": -3.72,
-    "vsSma50": -13.1,
-    "vsSma200": -16.3,
-    "relVol": 0.65,
-    "vol1y": 33.7,
+    "asOf": "2026-11-19",
+    "price": 272.66,
+    "chg1d": -3.46,
+    "chg1w": -8.72,
+    "chg1m": -18.55,
+    "rsi14": 30.6,
+    "sma50": 323.76,
+    "sma200": 337.3,
+    "ema8": 284.0,
+    "ema21": 296.0,
+    "emaGap": -4.05,
+    "vsSma50": -15.8,
+    "vsSma200": -19.2,
+    "relVol": 1.14,
+    "vol1y": 33.9,
     "high52w": 402.62,
-    "low52w": 273.5,
-    "rangePos": 7.0,
+    "low52w": 272.66,
+    "rangePos": 0.0,
     "series": [
       {
         "d": "2025-11-28",
@@ -238,11 +238,18 @@
         "c": 295.77
       },
       {
-        "d": "2026-11-18",
-        "c": 282.44
+        "d": "2026-11-19",
+        "c": 272.66
       }
     ],
-    "signals": [],
+    "signals": [
+      {
+        "type": "new_52w_low",
+        "asof": "2026-11-19",
+        "label": "New 52-week low",
+        "dir": "bear"
+      }
+    ],
     "score": {
       "label": "Strong Sell",
       "buys": 0,
@@ -282,17 +289,17 @@
     }
   },
   "summary": {
-    "trades": 168,
+    "trades": 169,
     "members": 42,
     "congress": 41,
     "executive": 1,
     "whoLabel": "41 members of Congress and 1 executive-branch filer",
     "buys": 91,
-    "sells": 77,
+    "sells": 78,
     "other": 0,
     "firstTx": "2024-08-07",
-    "lastTx": "2026-11-03",
-    "lastFiling": "2026-11-12",
+    "lastTx": "2026-11-04",
+    "lastFiling": "2026-11-18",
     "estBuyLabel": "$4.6M",
     "estSellLabel": "$8.4M",
     "pctLate": 14
@@ -387,6 +394,17 @@
       "hasPage": false
     },
     {
+      "name": "Michael A. Rulli",
+      "slug": "michael-a-rulli",
+      "party": "R",
+      "chamber": "House",
+      "trades": 6,
+      "buys": 2,
+      "sells": 4,
+      "estLabel": "$182K",
+      "hasPage": false
+    },
+    {
       "name": "Thomas H. Kean, Jr.",
       "slug": "thomas-h-kean-jr",
       "party": "R",
@@ -396,20 +414,21 @@
       "sells": 6,
       "estLabel": "$97K",
       "hasPage": false
-    },
-    {
-      "name": "Michael A. Rulli",
-      "slug": "michael-a-rulli",
-      "party": "R",
-      "chamber": "House",
-      "trades": 5,
-      "buys": 2,
-      "sells": 3,
-      "estLabel": "$174K",
-      "hasPage": false
     }
   ],
   "trades": [
+    {
+      "member": "Michael A. Rulli",
+      "memberSlug": "michael-a-rulli",
+      "hasPage": false,
+      "party": "R",
+      "side": "SELL",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-11-04",
+      "filedDate": "2026-11-18",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20036855.pdf"
+    },
     {
       "member": "David J. Taylor",
       "memberSlug": "david-j-taylor",
@@ -697,33 +716,21 @@
       "filedDate": "2026-07-16",
       "daysLate": 0,
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035024.pdf"
-    },
-    {
-      "member": "Jerry Moran",
-      "memberSlug": "jerry-moran",
-      "hasPage": false,
-      "party": "R",
-      "side": "SELL",
-      "amountBucket": "$1K – $15K",
-      "txDate": "2026-05-27",
-      "filedDate": "2026-06-25",
-      "daysLate": 0,
-      "sourceUrl": "https://efdsearch.senate.gov/search/view/ptr/7caf1b69-3678-4420-8812-a1476a1a6158/"
     }
   ],
   "tradesShown": 25,
   "faq": [
     {
       "q": "Who in Congress has traded GOOGL and GOOG stock?",
-      "a": "41 members of Congress and 1 executive-branch filer have disclosed 168 GOOGL and GOOG trades since August 2024. The most active is Cleo Fields, with 28 trades, followed by David J. Taylor and Lisa C. McClain. Each trade on this page links to the official filing it came from."
+      "a": "41 members of Congress and 1 executive-branch filer have disclosed 169 GOOGL and GOOG trades since August 2024. The most active is Cleo Fields, with 28 trades, followed by David J. Taylor and Lisa C. McClain. Each trade on this page links to the official filing it came from."
     },
     {
       "q": "Is Congress buying or selling GOOGL and GOOG?",
-      "a": "Of the 168 disclosed GOOGL and GOOG trades, 91 were buys and 77 were sells. By the midpoint of each filed amount bracket, the buying comes to about $4.6M and the selling to about $8.4M. Filings disclose brackets, never exact amounts, so these totals are estimates."
+      "a": "Of the 169 disclosed GOOGL and GOOG trades, 91 were buys and 78 were sells. By the midpoint of each filed amount bracket, the buying comes to about $4.6M and the selling to about $8.4M. Filings disclose brackets, never exact amounts, so these totals are estimates."
     },
     {
       "q": "How late are GOOGL and GOOG trades disclosed?",
-      "a": "14% of the disclosed GOOGL and GOOG trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Nov 3, 2026, and the newest filing arrived on Nov 12, 2026."
+      "a": "14% of the disclosed GOOGL and GOOG trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Nov 4, 2026, and the newest filing arrived on Nov 18, 2026."
     }
   ]
 }

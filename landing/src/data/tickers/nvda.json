@@ -12,23 +12,23 @@
   },
   "indexable": true,
   "technical": {
-    "asOf": "2026-11-18",
-    "price": 150.96,
-    "chg1d": -2.89,
-    "chg1w": -13.11,
-    "chg1m": -30.26,
-    "rsi14": 21.1,
-    "sma50": 210.3,
-    "sma200": 203.72,
-    "ema8": 164.68,
-    "ema21": 184.18,
-    "emaGap": -10.59,
-    "vsSma50": -28.2,
-    "vsSma200": -25.9,
-    "relVol": 1.38,
+    "asOf": "2026-11-19",
+    "price": 145.98,
+    "chg1d": -3.3,
+    "chg1w": -12.16,
+    "chg1m": -34.23,
+    "rsi14": 19.6,
+    "sma50": 208.86,
+    "sma200": 203.58,
+    "ema8": 160.52,
+    "ema21": 180.71,
+    "emaGap": -11.17,
+    "vsSma50": -30.1,
+    "vsSma200": -28.3,
+    "relVol": 1.23,
     "vol1y": 38.9,
     "high52w": 239.24,
-    "low52w": 150.96,
+    "low52w": 145.98,
     "rangePos": 0.0,
     "series": [
       {
@@ -236,14 +236,14 @@
         "c": 162.85
       },
       {
-        "d": "2026-11-18",
-        "c": 150.96
+        "d": "2026-11-19",
+        "c": 145.98
       }
     ],
     "signals": [
       {
         "type": "new_52w_low",
-        "asof": "2026-11-18",
+        "asof": "2026-11-19",
         "label": "New 52-week low",
         "dir": "bear"
       }
@@ -287,17 +287,17 @@
     }
   },
   "summary": {
-    "trades": 189,
+    "trades": 190,
     "members": 36,
     "congress": 35,
     "executive": 1,
     "whoLabel": "35 members of Congress and 1 executive-branch filer",
     "buys": 120,
-    "sells": 69,
+    "sells": 70,
     "other": 0,
     "firstTx": "2024-03-11",
-    "lastTx": "2026-10-23",
-    "lastFiling": "2026-11-10",
+    "lastTx": "2026-10-28",
+    "lastFiling": "2026-11-18",
     "estBuyLabel": "$11.2M",
     "estSellLabel": "$10.7M",
     "pctLate": 15
@@ -415,6 +415,18 @@
     }
   ],
   "trades": [
+    {
+      "member": "Michael A. Rulli",
+      "memberSlug": "michael-a-rulli",
+      "hasPage": false,
+      "party": "R",
+      "side": "SELL",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-10-28",
+      "filedDate": "2026-11-18",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20036855.pdf"
+    },
     {
       "member": "Maria Elvira Salazar",
       "memberSlug": "maria-elvira-salazar",
@@ -702,33 +714,21 @@
       "filedDate": "2026-07-02",
       "daysLate": 0,
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20034774.pdf"
-    },
-    {
-      "member": "Donald J. Trump",
-      "memberSlug": "donald-j-trump",
-      "hasPage": true,
-      "party": "R",
-      "side": "SELL",
-      "amountBucket": "$1K – $15K",
-      "txDate": "2026-05-18",
-      "filedDate": "2026-06-25",
-      "daysLate": 0,
-      "sourceUrl": "https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/F9CA13B970439E8F85258E27002DDF15/$FILE/Donald-J-Trump-06.25.2026-278T%20%282%29.pdf"
     }
   ],
   "tradesShown": 25,
   "faq": [
     {
       "q": "Who in Congress has traded NVDA stock?",
-      "a": "35 members of Congress and 1 executive-branch filer have disclosed 189 NVDA trades since March 2024. The most active is Cleo Fields, with 50 trades, followed by Robert P. Bresnahan, Jr. and Sheldon Whitehouse. Each trade on this page links to the official filing it came from."
+      "a": "35 members of Congress and 1 executive-branch filer have disclosed 190 NVDA trades since March 2024. The most active is Cleo Fields, with 50 trades, followed by Robert P. Bresnahan, Jr. and Sheldon Whitehouse. Each trade on this page links to the official filing it came from."
     },
     {
       "q": "Is Congress buying or selling NVDA?",
-      "a": "Of the 189 disclosed NVDA trades, 120 were buys and 69 were sells. By the midpoint of each filed amount bracket, the buying comes to about $11.2M and the selling to about $10.7M. Filings disclose brackets, never exact amounts, so these totals are estimates."
+      "a": "Of the 190 disclosed NVDA trades, 120 were buys and 70 were sells. By the midpoint of each filed amount bracket, the buying comes to about $11.2M and the selling to about $10.7M. Filings disclose brackets, never exact amounts, so these totals are estimates."
     },
     {
       "q": "How late are NVDA trades disclosed?",
-      "a": "15% of the disclosed NVDA trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Oct 23, 2026, and the newest filing arrived on Nov 10, 2026."
+      "a": "15% of the disclosed NVDA trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Oct 28, 2026, and the newest filing arrived on Nov 18, 2026."
     }
   ]
 }

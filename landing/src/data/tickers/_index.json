@@ -6,12 +6,12 @@
       "ticker": "MSFT",
       "aliases": [],
       "company": "Microsoft Corporation",
-      "trades": 210,
+      "trades": 212,
       "members": 45,
-      "buys": 109,
-      "sells": 101,
-      "lastTx": "2026-10-21",
-      "lastFiling": "2026-11-04",
+      "buys": 110,
+      "sells": 102,
+      "lastTx": "2026-11-04",
+      "lastFiling": "2026-11-19",
       "indexable": true,
       "industry": {
         "key": "tech",
@@ -23,12 +23,12 @@
       "ticker": "NVDA",
       "aliases": [],
       "company": "NVIDIA Corporation",
-      "trades": 189,
+      "trades": 190,
       "members": 36,
       "buys": 120,
-      "sells": 69,
-      "lastTx": "2026-10-23",
-      "lastFiling": "2026-11-10",
+      "sells": 70,
+      "lastTx": "2026-10-28",
+      "lastFiling": "2026-11-18",
       "indexable": true,
       "industry": {
         "key": "tech",
@@ -42,12 +42,12 @@
         "GOOG"
       ],
       "company": "Alphabet Inc.",
-      "trades": 168,
+      "trades": 169,
       "members": 42,
       "buys": 91,
-      "sells": 77,
-      "lastTx": "2026-11-03",
-      "lastFiling": "2026-11-12",
+      "sells": 78,
+      "lastTx": "2026-11-04",
+      "lastFiling": "2026-11-18",
       "indexable": true,
       "industry": {
         "key": "tech",
@@ -180,12 +180,29 @@
       "ticker": "LLY",
       "aliases": [],
       "company": "Eli Lilly and Company",
-      "trades": 69,
+      "trades": 70,
       "members": 22,
       "buys": 27,
-      "sells": 42,
-      "lastTx": "2026-11-03",
-      "lastFiling": "2026-11-12",
+      "sells": 43,
+      "lastTx": "2026-11-04",
+      "lastFiling": "2026-11-18",
+      "indexable": true,
+      "industry": {
+        "key": "health",
+        "label": "Health care & pharma"
+      }
+    },
+    {
+      "slug": "jnj",
+      "ticker": "JNJ",
+      "aliases": [],
+      "company": "Johnson & Johnson",
+      "trades": 68,
+      "members": 23,
+      "buys": 31,
+      "sells": 37,
+      "lastTx": "2026-10-27",
+      "lastFiling": "2026-11-19",
       "indexable": true,
       "industry": {
         "key": "health",
@@ -207,23 +224,6 @@
       "industry": {
         "key": "finance",
         "label": "Banks & finance"
-      }
-    },
-    {
-      "slug": "jnj",
-      "ticker": "JNJ",
-      "aliases": [],
-      "company": "Johnson & Johnson",
-      "trades": 67,
-      "members": 23,
-      "buys": 31,
-      "sells": 36,
-      "lastTx": "2026-09-30",
-      "lastFiling": "2026-10-30",
-      "indexable": true,
-      "industry": {
-        "key": "health",
-        "label": "Health care & pharma"
       }
     },
     {
@@ -839,6 +839,23 @@
       }
     },
     {
+      "slug": "cost",
+      "ticker": "COST",
+      "aliases": [],
+      "company": "Costco Wholesale Corporation",
+      "trades": 36,
+      "members": 18,
+      "buys": 16,
+      "sells": 20,
+      "lastTx": "2026-11-12",
+      "lastFiling": "2026-11-18",
+      "indexable": true,
+      "industry": {
+        "key": "consumer",
+        "label": "Consumer & retail"
+      }
+    },
+    {
       "slug": "mu",
       "ticker": "MU",
       "aliases": [],
@@ -921,23 +938,6 @@
       "industry": {
         "key": "telecom",
         "label": "Telecom & media"
-      }
-    },
-    {
-      "slug": "cost",
-      "ticker": "COST",
-      "aliases": [],
-      "company": "Costco Wholesale Corporation",
-      "trades": 35,
-      "members": 17,
-      "buys": 16,
-      "sells": 19,
-      "lastTx": "2026-10-13",
-      "lastFiling": "2026-10-27",
-      "indexable": true,
-      "industry": {
-        "key": "consumer",
-        "label": "Consumer & retail"
       }
     },
     {
@@ -1621,6 +1621,23 @@
       }
     },
     {
+      "slug": "syk",
+      "ticker": "SYK",
+      "aliases": [],
+      "company": "Stryker Corporation",
+      "trades": 26,
+      "members": 8,
+      "buys": 8,
+      "sells": 18,
+      "lastTx": "2026-10-27",
+      "lastFiling": "2026-11-19",
+      "indexable": true,
+      "industry": {
+        "key": "health",
+        "label": "Health care & pharma"
+      }
+    },
+    {
       "slug": "fis",
       "ticker": "FIS",
       "aliases": [],
@@ -1669,23 +1686,6 @@
       "industry": {
         "key": "consumer",
         "label": "Consumer & retail"
-      }
-    },
-    {
-      "slug": "syk",
-      "ticker": "SYK",
-      "aliases": [],
-      "company": "Stryker Corporation",
-      "trades": 25,
-      "members": 8,
-      "buys": 8,
-      "sells": 17,
-      "lastTx": "2026-09-30",
-      "lastFiling": "2026-10-30",
-      "indexable": true,
-      "industry": {
-        "key": "health",
-        "label": "Health care & pharma"
       }
     },
     {
