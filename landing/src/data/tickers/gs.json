@@ -12,24 +12,24 @@
   },
   "indexable": true,
   "technical": {
-    "asOf": "2026-11-19",
-    "price": 847.53,
-    "chg1d": -2.94,
-    "chg1w": -7.23,
-    "chg1m": -6.32,
-    "rsi14": 37.5,
-    "sma50": 909.2,
-    "sma200": 954.56,
-    "ema8": 883.01,
-    "ema21": 894.52,
-    "emaGap": -1.29,
-    "vsSma50": -6.8,
-    "vsSma200": -11.2,
-    "relVol": 1.32,
-    "vol1y": 32.9,
+    "asOf": "2026-11-20",
+    "price": 790.69,
+    "chg1d": -6.71,
+    "chg1w": -13.73,
+    "chg1m": -11.29,
+    "rsi14": 29.3,
+    "sma50": 904.43,
+    "sma200": 954.06,
+    "ema8": 862.49,
+    "ema21": 885.08,
+    "emaGap": -2.55,
+    "vsSma50": -12.6,
+    "vsSma200": -17.1,
+    "relVol": 2.07,
+    "vol1y": 33.6,
     "high52w": 1152.07,
     "low52w": 773.7,
-    "rangePos": 20.0,
+    "rangePos": 4.0,
     "series": [
       {
         "d": "2025-11-28",
@@ -236,17 +236,24 @@
         "c": 916.56
       },
       {
-        "d": "2026-11-19",
-        "c": 847.53
+        "d": "2026-11-20",
+        "c": 790.69
       }
     ],
-    "signals": [],
+    "signals": [
+      {
+        "type": "rsi_oversold",
+        "asof": "2026-11-20",
+        "label": "RSI crossed below 30 (oversold)",
+        "dir": "neutral"
+      }
+    ],
     "score": {
       "label": "Strong Sell",
-      "buys": 0,
+      "buys": 1,
       "sells": 6,
-      "holds": 1,
-      "ratio": -0.857
+      "holds": 0,
+      "ratio": -0.714
     },
     "votes": {
       "ema_cross": {
@@ -266,7 +273,7 @@
         "muted": false
       },
       "rsi": {
-        "vote": 0,
+        "vote": 1,
         "muted": false
       },
       "chg_1m": {
@@ -280,19 +287,19 @@
     }
   },
   "summary": {
-    "trades": 61,
+    "trades": 62,
     "members": 20,
     "congress": 20,
     "executive": 0,
     "whoLabel": "20 members of Congress",
     "buys": 33,
-    "sells": 28,
+    "sells": 29,
     "other": 0,
     "firstTx": "2024-10-23",
-    "lastTx": "2026-09-24",
-    "lastFiling": "2026-10-07",
+    "lastTx": "2026-11-11",
+    "lastFiling": "2026-11-20",
     "estBuyLabel": "$485K",
-    "estSellLabel": "$6.6M",
+    "estSellLabel": "$7.0M",
     "pctLate": 15
   },
   "topMembers": [
@@ -408,6 +415,18 @@
     }
   ],
   "trades": [
+    {
+      "member": "Rafael E Cruz",
+      "memberSlug": "rafael-e-cruz",
+      "hasPage": false,
+      "party": null,
+      "side": "SELL",
+      "amountBucket": "$250K – $500K",
+      "txDate": "2026-11-11",
+      "filedDate": "2026-11-20",
+      "daysLate": 0,
+      "sourceUrl": "https://efdsearch.senate.gov/search/view/ptr/f0f7eba0-ca09-4b80-a97b-64b6dafb835e/"
+    },
     {
       "member": "Maria Elvira Salazar",
       "memberSlug": "maria-elvira-salazar",
@@ -695,33 +714,21 @@
       "filedDate": "2025-11-22",
       "daysLate": 0,
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20033421.pdf"
-    },
-    {
-      "member": "Jared Moskowitz",
-      "memberSlug": "jared-moskowitz",
-      "hasPage": false,
-      "party": "D",
-      "side": "BUY",
-      "amountBucket": "$15K – $50K",
-      "txDate": "2025-10-10",
-      "filedDate": "2025-11-22",
-      "daysLate": 0,
-      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20033421.pdf"
     }
   ],
   "tradesShown": 25,
   "faq": [
     {
       "q": "Who in Congress has traded GS stock?",
-      "a": "20 members of Congress have disclosed 61 GS trades since October 2024. The most active is Jared Moskowitz, with 10 trades, followed by Markwayne Mullin and Julie Johnson. Each trade on this page links to the official filing it came from."
+      "a": "20 members of Congress have disclosed 62 GS trades since October 2024. The most active is Jared Moskowitz, with 10 trades, followed by Markwayne Mullin and Julie Johnson. Each trade on this page links to the official filing it came from."
     },
     {
       "q": "Is Congress buying or selling GS?",
-      "a": "Of the 61 disclosed GS trades, 33 were buys and 28 were sells. By the midpoint of each filed amount bracket, the buying comes to about $485K and the selling to about $6.6M. Filings disclose brackets, never exact amounts, so these totals are estimates."
+      "a": "Of the 62 disclosed GS trades, 33 were buys and 29 were sells. By the midpoint of each filed amount bracket, the buying comes to about $485K and the selling to about $7.0M. Filings disclose brackets, never exact amounts, so these totals are estimates."
     },
     {
       "q": "How late are GS trades disclosed?",
-      "a": "15% of the disclosed GS trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Sep 24, 2026, and the newest filing arrived on Oct 7, 2026."
+      "a": "15% of the disclosed GS trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Nov 11, 2026, and the newest filing arrived on Nov 20, 2026."
     }
   ]
 }
