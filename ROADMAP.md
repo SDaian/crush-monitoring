@@ -127,8 +127,9 @@ In rough priority order; each item states its blocking dependency.
   thin auto-generated pages is an SEO liability on a young domain (a featured
   name like NU with 4 disclosed trades would be a stub). Cross-linked with
   member pages both ways, and deep-linked from the daily email with UTM tags so
-  Vercel analytics attributes the traffic. Scaling to all ~1,400 tickers fires
-  storage stage 1.
+  Vercel analytics attributes the traffic (the tags were removed in Nov 2026:
+  their tagged copies got indexed as separate pages, see CLAUDE.md). Scaling to
+  all ~1,400 tickers fires storage stage 1.
 - **Conversion surfaces** — ✅ shipped 2026-07-28. Organic traffic arrived on
   the ticker and member pages and converted at zero, because the only email
   input on the site was on the home page; every other page merely *linked* to

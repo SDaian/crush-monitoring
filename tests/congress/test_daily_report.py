@@ -164,19 +164,33 @@ class TestBuildReport(unittest.TestCase):
         self.assertIn("**BOND** buy", r["markdown"])
 
     def test_ticker_deep_links(self):
-        # Tickers with a public page link back into the site, UTM-tagged so
-        # Vercel analytics can attribute the email as a traffic source.
+        # Tickers with a public page link back into the site, at the page's
+        # own clean address.
         urls = daily_report.ticker_links(
             {"tickers": [{"ticker": "NVDA", "slug": "nvda"}]})
-        self.assertEqual(
-            urls["NVDA"],
-            "https://capitolledger.io/tickers/nvda?utm_source=email"
-            "&utm_medium=report&utm_campaign=morning")
+        self.assertEqual(urls["NVDA"], "https://capitolledger.io/tickers/nvda")
         r = build_report(TRADES, AI, NEW_SIGNALS, prev_ratings={},
                          today_iso="2026-07-07", ticker_urls=urls)
-        self.assertIn("/tickers/nvda?utm_source=email", r["html"])
+        self.assertIn('href="https://capitolledger.io/tickers/nvda"',
+                      r["html"].replace("'", '"'))
         # A ticker with no page stays plain text (no link to a 404).
         self.assertNotIn("/tickers/msft", r["html"])
+
+    def test_no_link_carries_a_tracking_tag(self):
+        # Tagged addresses leaked onto public pages, Google indexed them as
+        # separate pages, and a search visitor on one counted as an email
+        # reader (Search Console, Nov 2026). Every surface built from the
+        # report must link clean addresses only.
+        urls = daily_report.ticker_links(
+            {"tickers": [{"ticker": "NVDA", "slug": "nvda"}]})
+        r = build_report(TRADES, AI, NEW_SIGNALS, prev_ratings={},
+                         today_iso="2026-07-07", ticker_urls=urls)
+        for name in ("html", "html_embed", "markdown"):
+            self.assertNotIn("utm_", r[name], name)
+        self.assertNotIn("utm_", json.dumps(r["payload"]))
+        for url in (daily_report.report_url("2026-07-07"),
+                    daily_report.REPORT_URL, daily_report.TRACKER_URL):
+            self.assertNotIn("?", url)
 
     def test_embed_variant_for_newsletter_providers(self):
         # Providers wrap content in their own template: a full document would
@@ -205,7 +219,7 @@ class TestTickerLinkAliases(unittest.TestCase):
             {"ticker": "GOOGL", "slug": "googl", "aliases": ["GOOG"]}]},
             site="https://example.test")
         self.assertEqual(links["GOOG"], links["GOOGL"])
-        self.assertIn("/tickers/googl?", links["GOOG"])
+        self.assertEqual(links["GOOG"], "https://example.test/tickers/googl")
 
 class TestTrafficEmail(unittest.TestCase):
     TRAFFIC = {"kind": "daily", "total": 1284, "windowDays": 1,

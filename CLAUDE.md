@@ -1008,9 +1008,19 @@ Conventions:
   member's trades table and holdings list, and on `/late`, links its page
   through `landing_data.page_link`, which returns a slug only when the page
   exists — a test fails on any generated link to a missing page), and deep-linked from
-  the morning email via `daily_report.ticker_links` with UTM tags so Vercel
-  analytics attributes the email as a traffic source. Scaling to all ~1,400
-  tickers fires storage stage 1.
+  the morning email via `daily_report.ticker_links` at the page's clean
+  address. **No link carries a tracking tag** (removed Nov 2026, with
+  Buttondown's "UTM information" add-on switched off in its Email settings):
+  the tagged addresses leaked onto public pages, Google indexed them as
+  separate pages (14% of impressions in three months, and the clean `/tracker`
+  got 1 against 123 for its tagged copies), and a search visitor on one
+  counted as an email reader — the tags made the number they existed for
+  wrong. A test fails if `utm_` returns to any surface the report builds.
+  The price: email visits show as direct traffic in Vercel, because email
+  apps send no referrer. Turning on Buttondown's click tracking would measure
+  the email instead, but it records which subscriber clicked what, and
+  `/privacy` says the email address is all we hold: change that page first.
+  Scaling to all ~1,400 tickers fires storage stage 1.
 - **Every content page ends in a real signup form.** Search traffic lands on
   `/tickers/<symbol>` and `/members/<slug>`, not the home page, so a CTA that
   merely *links* to the signup elsewhere converts at ~zero — it asks an arriving

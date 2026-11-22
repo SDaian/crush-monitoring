@@ -94,18 +94,24 @@ def _pct(x) -> str:
 
 
 # Public site — the email links back into it so readers land on the ticker
-# pages (and so Vercel analytics can attribute the email as a traffic source).
-# Overridable via the SITE_URL var (handy for pointing a run at a preview
+# pages. Overridable via the SITE_URL var (handy for pointing a run at a preview
 # deployment); the apex domain is the default and the normal case.
 SITE_URL = (os.environ.get("SITE_URL", "").strip().rstrip("/")
             or "https://capitolledger.io")
 # The tracker now lives on the site itself (apex domain live 2026-07-28).
 TRACKER_URL = f"{SITE_URL}/tracker"
-EMAIL_UTM = "utm_source=email&utm_medium=report&utm_campaign=morning"
+# Every link is the page's own clean address, with no tracking tags. Until
+# Nov 2026 the email tagged its links (utm_source=email&…). The tagged
+# addresses leaked onto public pages (old GitHub issues, the Buttondown
+# archive), Google indexed them as separate pages and showed them in its
+# results, and a search visitor who clicked one counted as an email reader:
+# the tags made the number they existed for wrong. Buttondown's own "UTM
+# information" add-on is off for the same reason; it tags any link that has
+# no tag, so the two decisions go together.
 # Web edition of this email, linked from it ("view in browser"). The email
 # links the DATED permalink (see report_url()), so an old email keeps showing
 # the report it delivered instead of whatever is current.
-REPORT_URL = f"{SITE_URL}/report?{EMAIL_UTM}"
+REPORT_URL = f"{SITE_URL}/report"
 # The web version of the report, rendered by landing/src/pages/report.astro.
 REPORT_JSON = (pipeline.REPO_ROOT / "landing" / "src" / "data" / "report.json")
 # The dated archive: one JSON per day + an index, rendered as noindex'd
@@ -115,14 +121,14 @@ REPORTS_DIR = (pipeline.REPO_ROOT / "landing" / "src" / "data" / "reports")
 
 def report_url(today_iso: str) -> str:
     """The dated permalink for today's report (what the email links)."""
-    return f"{SITE_URL}/report/{today_iso}?{EMAIL_UTM}"
+    return f"{SITE_URL}/report/{today_iso}"
 # Symbols that have a /tickers/<slug> page, written by landing_data.
 TICKER_INDEX_JSON = (pipeline.REPO_ROOT / "landing" / "src" / "data"
                      / "tickers" / "_index.json")
 
 
 def ticker_links(ticker_pages: dict | None, site: str | None = None) -> dict:
-    """{SYMBOL: absolute UTM-tagged page URL} for the tickers that have a page.
+    """{SYMBOL: absolute page URL} for the tickers that have a page.
 
     A ticker folded onto another company's page (GOOG → the Alphabet page at
     GOOGL) links there too, so an email row filed as GOOG still resolves."""
@@ -131,7 +137,7 @@ def ticker_links(ticker_pages: dict | None, site: str | None = None) -> dict:
     for t in (ticker_pages or {}).get("tickers", []):
         if not (t.get("ticker") and t.get("slug")):
             continue
-        url = f"{base}/tickers/{t['slug']}?{EMAIL_UTM}"
+        url = f"{base}/tickers/{t['slug']}"
         for sym in [t["ticker"], *(t.get("aliases") or [])]:
             links[sym] = url
     return links
