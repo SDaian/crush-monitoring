@@ -12,29 +12,25 @@
   },
   "indexable": true,
   "technical": {
-    "asOf": "2026-11-20",
-    "price": 62.17,
-    "chg1d": -9.44,
-    "chg1w": -20.15,
-    "chg1m": -35.63,
-    "rsi14": 22.8,
-    "sma50": 98.47,
-    "sma200": 90.97,
-    "ema8": 71.51,
-    "ema21": 80.85,
-    "emaGap": -11.56,
-    "vsSma50": -36.9,
-    "vsSma200": -31.7,
-    "relVol": 1.32,
-    "vol1y": 71.1,
+    "asOf": "2026-11-23",
+    "price": 67.37,
+    "chg1d": 8.36,
+    "chg1w": -6.51,
+    "chg1m": -29.14,
+    "rsi14": 31.6,
+    "sma50": 97.53,
+    "sma200": 90.89,
+    "ema8": 70.59,
+    "ema21": 79.63,
+    "emaGap": -11.35,
+    "vsSma50": -30.9,
+    "vsSma200": -25.9,
+    "relVol": 0.95,
+    "vol1y": 70.8,
     "high52w": 137.08,
     "low52w": 62.17,
-    "rangePos": 0.0,
+    "rangePos": 7.0,
     "series": [
-      {
-        "d": "2025-11-28",
-        "c": 128.49
-      },
       {
         "d": "2025-12-05",
         "c": 131.95
@@ -238,22 +234,19 @@
       {
         "d": "2026-11-20",
         "c": 62.17
-      }
-    ],
-    "signals": [
+      },
       {
-        "type": "new_52w_low",
-        "asof": "2026-11-20",
-        "label": "New 52-week low",
-        "dir": "bear"
+        "d": "2026-11-23",
+        "c": 67.37
       }
     ],
+    "signals": [],
     "score": {
-      "label": "Sell",
-      "buys": 2,
+      "label": "Strong Sell",
+      "buys": 1,
       "sells": 5,
-      "holds": 0,
-      "ratio": -0.429
+      "holds": 1,
+      "ratio": -0.571
     },
     "votes": {
       "ema_cross": {
@@ -273,7 +266,7 @@
         "muted": false
       },
       "rsi": {
-        "vote": 1,
+        "vote": 0,
         "muted": false
       },
       "chg_1m": {

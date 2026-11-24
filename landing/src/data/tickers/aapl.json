@@ -12,29 +12,25 @@
   },
   "indexable": true,
   "technical": {
-    "asOf": "2026-11-20",
-    "price": 342.56,
-    "chg1d": -1.9,
-    "chg1w": -3.85,
-    "chg1m": -1.63,
-    "rsi14": 46.4,
-    "sma50": 341.81,
-    "sma200": 303.24,
-    "ema8": 349.23,
-    "ema21": 347.43,
-    "emaGap": 0.52,
-    "vsSma50": 0.2,
-    "vsSma200": 13.0,
-    "relVol": 1.62,
+    "asOf": "2026-11-23",
+    "price": 349.08,
+    "chg1d": 1.9,
+    "chg1w": -1.05,
+    "chg1m": 0.39,
+    "rsi14": 52.6,
+    "sma50": 342.13,
+    "sma200": 303.6,
+    "ema8": 349.19,
+    "ema21": 347.58,
+    "emaGap": 0.46,
+    "vsSma50": 2.0,
+    "vsSma200": 15.0,
+    "relVol": 1.16,
     "vol1y": 25.0,
     "high52w": 356.27,
     "low52w": 246.63,
-    "rangePos": 87.0,
+    "rangePos": 93.0,
     "series": [
-      {
-        "d": "2025-11-28",
-        "c": 278.85
-      },
       {
         "d": "2025-12-05",
         "c": 278.78
@@ -238,15 +234,19 @@
       {
         "d": "2026-11-20",
         "c": 342.56
+      },
+      {
+        "d": "2026-11-23",
+        "c": 349.08
       }
     ],
     "signals": [],
     "score": {
-      "label": "Buy",
-      "buys": 4,
-      "sells": 2,
+      "label": "Strong Buy",
+      "buys": 5,
+      "sells": 1,
       "holds": 1,
-      "ratio": 0.286
+      "ratio": 0.571
     },
     "votes": {
       "ema_cross": {
@@ -270,7 +270,7 @@
         "muted": false
       },
       "chg_1m": {
-        "vote": -1,
+        "vote": 1,
         "muted": false
       },
       "chg_1w": {
@@ -280,17 +280,17 @@
     }
   },
   "summary": {
-    "trades": 148,
+    "trades": 149,
     "members": 45,
     "congress": 45,
     "executive": 0,
     "whoLabel": "45 members of Congress",
-    "buys": 74,
+    "buys": 75,
     "sells": 74,
     "other": 0,
     "firstTx": "2023-03-15",
-    "lastTx": "2026-10-21",
-    "lastFiling": "2026-11-04",
+    "lastTx": "2026-11-16",
+    "lastFiling": "2026-11-21",
     "estBuyLabel": "$3.5M",
     "estSellLabel": "$48.1M",
     "pctLate": 20
@@ -312,10 +312,10 @@
       "slug": "ed-case",
       "party": "D",
       "chamber": "House",
-      "trades": 10,
-      "buys": 10,
+      "trades": 11,
+      "buys": 11,
       "sells": 0,
-      "estLabel": "$80K",
+      "estLabel": "$88K",
       "hasPage": false
     },
     {
@@ -408,6 +408,18 @@
     }
   ],
   "trades": [
+    {
+      "member": "Ed Case",
+      "memberSlug": "ed-case",
+      "hasPage": false,
+      "party": "D",
+      "side": "BUY",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-11-16",
+      "filedDate": "2026-11-21",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20036891.pdf"
+    },
     {
       "member": "Shelley Moore Capito",
       "memberSlug": "shelley-moore-capito",
@@ -695,33 +707,21 @@
       "filedDate": "2026-05-13",
       "daysLate": 0,
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20034521.pdf"
-    },
-    {
-      "member": "Elizabeth Fletcher",
-      "memberSlug": "elizabeth-fletcher",
-      "hasPage": false,
-      "party": null,
-      "side": "SELL",
-      "amountBucket": "$1K – $15K",
-      "txDate": "2026-04-08",
-      "filedDate": "2026-05-01",
-      "daysLate": 0,
-      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20034413.pdf"
     }
   ],
   "tradesShown": 25,
   "faq": [
     {
       "q": "Who in Congress has traded AAPL stock?",
-      "a": "45 members of Congress have disclosed 148 AAPL trades since March 2023. The most active is Cleo Fields, with 23 trades, followed by Ed Case and Lisa C. McClain. Each trade on this page links to the official filing it came from."
+      "a": "45 members of Congress have disclosed 149 AAPL trades since March 2023. The most active is Cleo Fields, with 23 trades, followed by Ed Case and Lisa C. McClain. Each trade on this page links to the official filing it came from."
     },
     {
       "q": "Is Congress buying or selling AAPL?",
-      "a": "Of the 148 disclosed AAPL trades, 74 were buys and 74 were sells. By the midpoint of each filed amount bracket, the buying comes to about $3.5M and the selling to about $48.1M. Filings disclose brackets, never exact amounts, so these totals are estimates."
+      "a": "Of the 149 disclosed AAPL trades, 75 were buys and 74 were sells. By the midpoint of each filed amount bracket, the buying comes to about $3.5M and the selling to about $48.1M. Filings disclose brackets, never exact amounts, so these totals are estimates."
     },
     {
       "q": "How late are AAPL trades disclosed?",
-      "a": "20% of the disclosed AAPL trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Oct 21, 2026, and the newest filing arrived on Nov 4, 2026."
+      "a": "20% of the disclosed AAPL trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Nov 16, 2026, and the newest filing arrived on Nov 21, 2026."
     }
   ]
 }

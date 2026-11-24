@@ -12,29 +12,25 @@
   },
   "indexable": true,
   "technical": {
-    "asOf": "2026-11-20",
-    "price": 46.48,
-    "chg1d": 1.62,
-    "chg1w": 0.26,
-    "chg1m": 2.83,
-    "rsi14": 55.9,
-    "sma50": 45.83,
+    "asOf": "2026-11-23",
+    "price": 46.45,
+    "chg1d": -0.06,
+    "chg1w": 0.24,
+    "chg1m": 4.01,
+    "rsi14": 55.6,
+    "sma50": 45.73,
     "sma200": 47.16,
-    "ema8": 46.12,
-    "ema21": 45.77,
-    "emaGap": 0.76,
-    "vsSma50": 1.4,
-    "vsSma200": -1.4,
-    "relVol": 1.25,
+    "ema8": 46.2,
+    "ema21": 45.84,
+    "emaGap": 0.79,
+    "vsSma50": 1.6,
+    "vsSma200": -1.5,
+    "relVol": 0.93,
     "vol1y": 27.5,
     "high52w": 51.45,
     "low52w": 38.91,
     "rangePos": 60.0,
     "series": [
-      {
-        "d": "2025-11-28",
-        "c": 41.11
-      },
       {
         "d": "2025-12-05",
         "c": 41.69
@@ -238,16 +234,13 @@
       {
         "d": "2026-11-20",
         "c": 46.48
-      }
-    ],
-    "signals": [
+      },
       {
-        "type": "reclaim_sma50",
-        "asof": "2026-11-20",
-        "label": "Reclaimed the 50-day average",
-        "dir": "bull"
+        "d": "2026-11-23",
+        "c": 46.45
       }
     ],
+    "signals": [],
     "score": {
       "label": "Hold",
       "buys": 3,
@@ -287,19 +280,19 @@
     }
   },
   "summary": {
-    "trades": 37,
+    "trades": 38,
     "members": 17,
     "congress": 16,
     "executive": 1,
     "whoLabel": "16 members of Congress and 1 executive-branch filer",
     "buys": 14,
-    "sells": 23,
+    "sells": 24,
     "other": 0,
     "firstTx": "2025-01-06",
-    "lastTx": "2026-10-02",
-    "lastFiling": "2026-10-27",
+    "lastTx": "2026-11-19",
+    "lastFiling": "2026-11-20",
     "estBuyLabel": "$493K",
-    "estSellLabel": "$616K",
+    "estSellLabel": "$691K",
     "pctLate": 11
   },
   "topMembers": [
@@ -348,6 +341,17 @@
       "hasPage": true
     },
     {
+      "name": "Jennifer L. McClellan",
+      "slug": "jennifer-l-mcclellan",
+      "party": "D",
+      "chamber": "House",
+      "trades": 2,
+      "buys": 0,
+      "sells": 2,
+      "estLabel": "$250K",
+      "hasPage": false
+    },
+    {
       "name": "Pete Sessions",
       "slug": "pete-sessions",
       "party": "R",
@@ -381,17 +385,6 @@
       "hasPage": false
     },
     {
-      "name": "Jennifer L. McClellan",
-      "slug": "jennifer-l-mcclellan",
-      "party": "D",
-      "chamber": "House",
-      "trades": 1,
-      "buys": 0,
-      "sells": 1,
-      "estLabel": "$175K",
-      "hasPage": false
-    },
-    {
       "name": "Jefferson Shreve",
       "slug": "jefferson-shreve",
       "party": "R",
@@ -415,6 +408,18 @@
     }
   ],
   "trades": [
+    {
+      "member": "Jennifer L. McClellan",
+      "memberSlug": "jennifer-l-mcclellan",
+      "hasPage": false,
+      "party": "D",
+      "side": "SELL",
+      "amountBucket": "$50K – $100K",
+      "txDate": "2026-11-19",
+      "filedDate": "2026-11-20",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20036883.pdf"
+    },
     {
       "member": "Pete Sessions",
       "memberSlug": "pete-sessions",
@@ -702,33 +707,21 @@
       "filedDate": "2025-10-03",
       "daysLate": 0,
       "sourceUrl": "https://efdsearch.senate.gov/search/view/ptr/12bfb6c8-5dbf-4f2a-994b-c936a0a0a91d/"
-    },
-    {
-      "member": "Kelly Morrison",
-      "memberSlug": "kelly-morrison",
-      "hasPage": false,
-      "party": "D",
-      "side": "SELL",
-      "amountBucket": "$1K – $15K",
-      "txDate": "2025-08-19",
-      "filedDate": "2025-09-11",
-      "daysLate": 0,
-      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20032061.pdf"
     }
   ],
   "tradesShown": 25,
   "faq": [
     {
       "q": "Who in Congress has traded VZ stock?",
-      "a": "16 members of Congress and 1 executive-branch filer have disclosed 37 VZ trades since January 2025. The most active is Tim Moore, with 9 trades, followed by Julie Johnson and Donald J. Trump. Each trade on this page links to the official filing it came from."
+      "a": "16 members of Congress and 1 executive-branch filer have disclosed 38 VZ trades since January 2025. The most active is Tim Moore, with 9 trades, followed by Julie Johnson and Donald J. Trump. Each trade on this page links to the official filing it came from."
     },
     {
       "q": "Is Congress buying or selling VZ?",
-      "a": "Of the 37 disclosed VZ trades, 14 were buys and 23 were sells. By the midpoint of each filed amount bracket, the buying comes to about $493K and the selling to about $616K. Filings disclose brackets, never exact amounts, so these totals are estimates."
+      "a": "Of the 38 disclosed VZ trades, 14 were buys and 24 were sells. By the midpoint of each filed amount bracket, the buying comes to about $493K and the selling to about $691K. Filings disclose brackets, never exact amounts, so these totals are estimates."
     },
     {
       "q": "How late are VZ trades disclosed?",
-      "a": "11% of the disclosed VZ trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Oct 2, 2026, and the newest filing arrived on Oct 27, 2026."
+      "a": "11% of the disclosed VZ trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Nov 19, 2026, and the newest filing arrived on Nov 20, 2026."
     }
   ]
 }

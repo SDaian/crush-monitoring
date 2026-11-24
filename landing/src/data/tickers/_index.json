@@ -59,12 +59,12 @@
       "ticker": "AAPL",
       "aliases": [],
       "company": "Apple Inc.",
-      "trades": 148,
+      "trades": 149,
       "members": 45,
-      "buys": 74,
+      "buys": 75,
       "sells": 74,
-      "lastTx": "2026-10-21",
-      "lastFiling": "2026-11-04",
+      "lastTx": "2026-11-16",
+      "lastFiling": "2026-11-21",
       "indexable": true,
       "industry": {
         "key": "tech",
@@ -720,6 +720,23 @@
       }
     },
     {
+      "slug": "vz",
+      "ticker": "VZ",
+      "aliases": [],
+      "company": "Verizon Communications Inc.",
+      "trades": 38,
+      "members": 17,
+      "buys": 14,
+      "sells": 24,
+      "lastTx": "2026-11-19",
+      "lastFiling": "2026-11-20",
+      "indexable": true,
+      "industry": {
+        "key": "telecom",
+        "label": "Telecom & media"
+      }
+    },
+    {
       "slug": "amgn",
       "ticker": "AMGN",
       "aliases": [],
@@ -802,23 +819,6 @@
       "industry": {
         "key": "tech",
         "label": "Technology"
-      }
-    },
-    {
-      "slug": "vz",
-      "ticker": "VZ",
-      "aliases": [],
-      "company": "Verizon Communications Inc.",
-      "trades": 37,
-      "members": 17,
-      "buys": 14,
-      "sells": 23,
-      "lastTx": "2026-10-02",
-      "lastFiling": "2026-10-27",
-      "indexable": true,
-      "industry": {
-        "key": "telecom",
-        "label": "Telecom & media"
       }
     },
     {

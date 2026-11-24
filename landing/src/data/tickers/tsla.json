@@ -12,29 +12,25 @@
   },
   "indexable": true,
   "technical": {
-    "asOf": "2026-11-20",
-    "price": 345.82,
-    "chg1d": -7.64,
-    "chg1w": -11.38,
-    "chg1m": -7.68,
-    "rsi14": 37.8,
-    "sma50": 375.64,
-    "sma200": 381.66,
-    "ema8": 373.58,
-    "ema21": 378.44,
-    "emaGap": -1.29,
-    "vsSma50": -7.9,
-    "vsSma200": -9.4,
-    "relVol": 1.25,
-    "vol1y": 46.5,
+    "asOf": "2026-11-23",
+    "price": 385.46,
+    "chg1d": 11.46,
+    "chg1w": 1.51,
+    "chg1m": 3.56,
+    "rsi14": 52.1,
+    "sma50": 376.17,
+    "sma200": 381.53,
+    "ema8": 376.22,
+    "ema21": 379.08,
+    "emaGap": -0.76,
+    "vsSma50": 2.5,
+    "vsSma200": 1.0,
+    "relVol": 1.29,
+    "vol1y": 47.7,
     "high52w": 489.88,
     "low52w": 298.32,
-    "rangePos": 25.0,
+    "rangePos": 45.0,
     "series": [
-      {
-        "d": "2025-11-28",
-        "c": 430.17
-      },
       {
         "d": "2025-12-05",
         "c": 455.0
@@ -238,27 +234,38 @@
       {
         "d": "2026-11-20",
         "c": 345.82
+      },
+      {
+        "d": "2026-11-23",
+        "c": 385.46
       }
     ],
-    "signals": [],
+    "signals": [
+      {
+        "type": "reclaim_sma50",
+        "asof": "2026-11-23",
+        "label": "Reclaimed the 50-day average",
+        "dir": "bull"
+      }
+    ],
     "score": {
-      "label": "Strong Sell",
-      "buys": 0,
-      "sells": 6,
-      "holds": 1,
-      "ratio": -0.857
+      "label": "Buy",
+      "buys": 4,
+      "sells": 1,
+      "holds": 2,
+      "ratio": 0.429
     },
     "votes": {
       "ema_cross": {
-        "vote": -1,
-        "muted": false
+        "vote": 0,
+        "muted": true
       },
       "vs_sma50": {
-        "vote": -1,
+        "vote": 1,
         "muted": false
       },
       "vs_sma200": {
-        "vote": -1,
+        "vote": 1,
         "muted": false
       },
       "sma50_vs_200": {
@@ -270,11 +277,11 @@
         "muted": false
       },
       "chg_1m": {
-        "vote": -1,
+        "vote": 1,
         "muted": false
       },
       "chg_1w": {
-        "vote": -1,
+        "vote": 1,
         "muted": false
       }
     }

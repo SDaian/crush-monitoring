@@ -1,12 +1,12 @@
 {
   "_comment": "Generated from real official disclosures by congress/landing_data.py (daily Action). Do not edit by hand. 'filedDaysLate' counts days past the STOCK Act's 45-day statutory maximum; 0 = on time.",
   "windowDays": 45,
-  "from": "2026-10-06",
-  "to": "2026-11-20",
-  "members": 17,
-  "buys": 134,
+  "from": "2026-10-07",
+  "to": "2026-11-21",
+  "members": 18,
+  "buys": 126,
   "options": 0,
-  "companies": 100,
+  "companies": 97,
   "rows": [
     {
       "ticker": "NVDA",
@@ -29,28 +29,6 @@
       "estLabel": "$40K",
       "est": 40002,
       "lastFiling": "2026-11-05"
-    },
-    {
-      "ticker": "META",
-      "tickerLabel": "META",
-      "slug": "meta",
-      "company": "Meta Platforms, Inc.",
-      "members": 2,
-      "buyers": [
-        {
-          "name": "Maria Elvira Salazar",
-          "slug": null
-        },
-        {
-          "name": "Gilbert Ray Cisneros, Jr.",
-          "slug": "gilbert-ray-cisneros-jr"
-        }
-      ],
-      "buys": 3,
-      "options": 0,
-      "estLabel": "$24K",
-      "est": 24002,
-      "lastFiling": "2026-11-10"
     },
     {
       "ticker": "BHE",
@@ -267,24 +245,6 @@
       "lastFiling": "2026-11-10"
     },
     {
-      "ticker": "SNOW",
-      "tickerLabel": "SNOW",
-      "slug": "snow",
-      "company": "Snowflake Inc.",
-      "members": 1,
-      "buyers": [
-        {
-          "name": "Maria Elvira Salazar",
-          "slug": null
-        }
-      ],
-      "buys": 2,
-      "options": 0,
-      "estLabel": "$41K",
-      "est": 40501,
-      "lastFiling": "2026-10-07"
-    },
-    {
       "ticker": "BBIO",
       "tickerLabel": "BBIO",
       "slug": null,
@@ -319,24 +279,6 @@
       "estLabel": "$16K",
       "est": 16001,
       "lastFiling": "2026-11-12"
-    },
-    {
-      "ticker": "GLW",
-      "tickerLabel": "GLW",
-      "slug": null,
-      "company": "Corning Incorporated",
-      "members": 1,
-      "buyers": [
-        {
-          "name": "Maria Elvira Salazar",
-          "slug": null
-        }
-      ],
-      "buys": 2,
-      "options": 0,
-      "estLabel": "$16K",
-      "est": 16001,
-      "lastFiling": "2026-10-07"
     },
     {
       "ticker": "GOOGL",
@@ -391,6 +333,60 @@
       "estLabel": "$16K",
       "est": 16001,
       "lastFiling": "2026-10-12"
+    },
+    {
+      "ticker": "LRCX",
+      "tickerLabel": "LRCX",
+      "slug": "lrcx",
+      "company": "Lam Research Corporation - Common Stock $200?",
+      "members": 1,
+      "buyers": [
+        {
+          "name": "David J. Taylor",
+          "slug": null
+        }
+      ],
+      "buys": 2,
+      "options": 0,
+      "estLabel": "$16K",
+      "est": 16001,
+      "lastFiling": "2026-11-12"
+    },
+    {
+      "ticker": "MBB",
+      "tickerLabel": "MBB",
+      "slug": null,
+      "company": "iShares MBS ETF",
+      "members": 1,
+      "buyers": [
+        {
+          "name": "John Boozman",
+          "slug": null
+        }
+      ],
+      "buys": 2,
+      "options": 0,
+      "estLabel": "$16K",
+      "est": 16001,
+      "lastFiling": "2026-11-17"
+    },
+    {
+      "ticker": "PG",
+      "tickerLabel": "PG",
+      "slug": "pg",
+      "company": "Procter & Gamble Company",
+      "members": 1,
+      "buyers": [
+        {
+          "name": "Maria Elvira Salazar",
+          "slug": null
+        }
+      ],
+      "buys": 2,
+      "options": 0,
+      "estLabel": "$16K",
+      "est": 16001,
+      "lastFiling": "2026-11-05"
     }
   ],
   "largest": {
@@ -406,7 +402,7 @@
   "faq": [
     {
       "q": "What stocks is Congress buying?",
-      "a": "In filings from the last 45 days, to Nov 20, 2026, 17 members of Congress disclosed 134 purchases across 100 companies. The stocks bought by the most members were NVDA (2 members), META (2 members) and BHE (2 members). Filings arrive up to 45 days after the trade: this is recent disclosure, not live trading."
+      "a": "In filings from the last 45 days, to Nov 21, 2026, 18 members of Congress disclosed 126 purchases across 97 companies. The stocks bought by the most members were NVDA (2 members), BHE (2 members) and CSCO (2 members). Filings arrive up to 45 days after the trade: this is recent disclosure, not live trading."
     },
     {
       "q": "What is the largest stock purchase Congress disclosed recently?",
