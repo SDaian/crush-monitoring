@@ -12,24 +12,24 @@
   },
   "indexable": true,
   "technical": {
-    "asOf": "2026-11-23",
-    "price": 108.51,
-    "chg1d": 2.16,
-    "chg1w": -2.96,
-    "chg1m": 7.37,
-    "rsi14": 53.2,
-    "sma50": 101.65,
-    "sma200": 104.67,
-    "ema8": 109.3,
-    "ema21": 108.02,
-    "emaGap": 1.19,
-    "vsSma50": 6.8,
-    "vsSma200": 3.7,
-    "relVol": 1.0,
-    "vol1y": 30.5,
+    "asOf": "2026-11-24",
+    "price": 110.83,
+    "chg1d": 2.14,
+    "chg1w": 0.47,
+    "chg1m": 10.48,
+    "rsi14": 57.6,
+    "sma50": 101.82,
+    "sma200": 104.63,
+    "ema8": 109.64,
+    "ema21": 108.27,
+    "emaGap": 1.27,
+    "vsSma50": 8.9,
+    "vsSma200": 5.9,
+    "relVol": 0.9,
+    "vol1y": 30.3,
     "high52w": 120.0,
     "low52w": 92.05,
-    "rangePos": 59.0,
+    "rangePos": 67.0,
     "series": [
       {
         "d": "2025-12-05",
@@ -236,17 +236,17 @@
         "c": 106.22
       },
       {
-        "d": "2026-11-23",
-        "c": 108.51
+        "d": "2026-11-24",
+        "c": 110.83
       }
     ],
     "signals": [],
     "score": {
-      "label": "Buy",
-      "buys": 4,
-      "sells": 2,
+      "label": "Strong Buy",
+      "buys": 5,
+      "sells": 1,
       "holds": 1,
-      "ratio": 0.286
+      "ratio": 0.571
     },
     "votes": {
       "ema_cross": {
@@ -274,26 +274,26 @@
         "muted": false
       },
       "chg_1w": {
-        "vote": -1,
+        "vote": 1,
         "muted": false
       }
     }
   },
   "summary": {
-    "trades": 50,
-    "members": 18,
-    "congress": 17,
+    "trades": 53,
+    "members": 19,
+    "congress": 18,
     "executive": 1,
-    "whoLabel": "17 members of Congress and 1 executive-branch filer",
-    "buys": 19,
-    "sells": 31,
+    "whoLabel": "18 members of Congress and 1 executive-branch filer",
+    "buys": 21,
+    "sells": 32,
     "other": 0,
     "firstTx": "2024-08-07",
     "lastTx": "2026-07-10",
-    "lastFiling": "2026-07-21",
-    "estBuyLabel": "$219K",
-    "estSellLabel": "$413K",
-    "pctLate": 10
+    "lastFiling": "2026-11-23",
+    "estBuyLabel": "$260K",
+    "estSellLabel": "$421K",
+    "pctLate": 15
   },
   "topMembers": [
     {
@@ -374,6 +374,17 @@
       "hasPage": false
     },
     {
+      "name": "Harriet M. Hageman",
+      "slug": "harriet-m-hageman",
+      "party": "R",
+      "chamber": "House",
+      "trades": 3,
+      "buys": 2,
+      "sells": 1,
+      "estLabel": "$49K",
+      "hasPage": false
+    },
+    {
       "name": "Dan Newhouse",
       "slug": "dan-newhouse",
       "party": "R",
@@ -393,17 +404,6 @@
       "buys": 1,
       "sells": 1,
       "estLabel": "$16K",
-      "hasPage": false
-    },
-    {
-      "name": "Scott DesJarlais",
-      "slug": "scott-desjarlais",
-      "party": "R",
-      "chamber": "House",
-      "trades": 1,
-      "buys": 0,
-      "sells": 1,
-      "estLabel": "$33K",
       "hasPage": false
     }
   ],
@@ -433,6 +433,18 @@
       "sourceUrl": "https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/F9CA13B970439E8F85258E27002DDF15/$FILE/Donald-J-Trump-06.25.2026-278T%20%282%29.pdf"
     },
     {
+      "member": "Harriet M. Hageman",
+      "memberSlug": "harriet-m-hageman",
+      "hasPage": false,
+      "party": "R",
+      "side": "SELL",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-04-29",
+      "filedDate": "2026-11-23",
+      "daysLate": 163,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035776.pdf"
+    },
+    {
       "member": "Alan Armstrong",
       "memberSlug": "alan-armstrong",
       "hasPage": true,
@@ -455,6 +467,30 @@
       "filedDate": "2026-04-07",
       "daysLate": 0,
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20034285.pdf"
+    },
+    {
+      "member": "Harriet M. Hageman",
+      "memberSlug": "harriet-m-hageman",
+      "hasPage": false,
+      "party": "R",
+      "side": "BUY",
+      "amountBucket": "$15K – $50K",
+      "txDate": "2026-02-13",
+      "filedDate": "2026-11-23",
+      "daysLate": 238,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035776.pdf"
+    },
+    {
+      "member": "Harriet M. Hageman",
+      "memberSlug": "harriet-m-hageman",
+      "hasPage": false,
+      "party": "R",
+      "side": "BUY",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-02-13",
+      "filedDate": "2026-11-23",
+      "daysLate": 238,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035776.pdf"
     },
     {
       "member": "Gilbert Ray Cisneros, Jr.",
@@ -671,57 +707,21 @@
       "filedDate": "2025-08-13",
       "daysLate": 12,
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20030891.pdf"
-    },
-    {
-      "member": "Scott Franklin",
-      "memberSlug": "scott-franklin",
-      "hasPage": false,
-      "party": "R",
-      "side": "SELL",
-      "amountBucket": "$1K – $15K",
-      "txDate": "2025-06-16",
-      "filedDate": "2025-07-14",
-      "daysLate": 0,
-      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20030670.pdf"
-    },
-    {
-      "member": "Kelly Morrison",
-      "memberSlug": "kelly-morrison",
-      "hasPage": false,
-      "party": "D",
-      "side": "SELL",
-      "amountBucket": "$1K – $15K",
-      "txDate": "2025-06-04",
-      "filedDate": "2025-06-18",
-      "daysLate": 0,
-      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20030475.pdf"
-    },
-    {
-      "member": "Kelly Morrison",
-      "memberSlug": "kelly-morrison",
-      "hasPage": false,
-      "party": "D",
-      "side": "SELL",
-      "amountBucket": "$1K – $15K",
-      "txDate": "2025-06-04",
-      "filedDate": "2025-06-18",
-      "daysLate": 0,
-      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20030475.pdf"
     }
   ],
   "tradesShown": 25,
   "faq": [
     {
       "q": "Who in Congress has traded UPS stock?",
-      "a": "17 members of Congress and 1 executive-branch filer have disclosed 50 UPS trades since August 2024. The most active is Marjorie Taylor Greene, with 9 trades, followed by Kelly Morrison and Scott Franklin. Each trade on this page links to the official filing it came from."
+      "a": "18 members of Congress and 1 executive-branch filer have disclosed 53 UPS trades since August 2024. The most active is Marjorie Taylor Greene, with 9 trades, followed by Kelly Morrison and Scott Franklin. Each trade on this page links to the official filing it came from."
     },
     {
       "q": "Is Congress buying or selling UPS?",
-      "a": "Of the 50 disclosed UPS trades, 19 were buys and 31 were sells. By the midpoint of each filed amount bracket, the buying comes to about $219K and the selling to about $413K. Filings disclose brackets, never exact amounts, so these totals are estimates."
+      "a": "Of the 53 disclosed UPS trades, 21 were buys and 32 were sells. By the midpoint of each filed amount bracket, the buying comes to about $260K and the selling to about $421K. Filings disclose brackets, never exact amounts, so these totals are estimates."
     },
     {
       "q": "How late are UPS trades disclosed?",
-      "a": "10% of the disclosed UPS trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Jul 10, 2026, and the newest filing arrived on Jul 21, 2026."
+      "a": "15% of the disclosed UPS trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Jul 10, 2026, and the newest filing arrived on Nov 23, 2026."
     }
   ]
 }

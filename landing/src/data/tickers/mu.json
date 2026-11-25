@@ -12,24 +12,24 @@
   },
   "indexable": true,
   "technical": {
-    "asOf": "2026-11-23",
-    "price": 707.7,
-    "chg1d": 19.04,
-    "chg1w": -1.57,
-    "chg1m": -19.36,
-    "rsi14": 42.5,
-    "sma50": 907.94,
-    "sma200": 774.11,
-    "ema8": 702.89,
-    "ema21": 769.63,
-    "emaGap": -8.67,
-    "vsSma50": -22.1,
-    "vsSma200": -8.6,
-    "relVol": 1.41,
-    "vol1y": 85.9,
+    "asOf": "2026-11-24",
+    "price": 629.79,
+    "chg1d": -11.01,
+    "chg1w": -11.6,
+    "chg1m": -30.31,
+    "rsi14": 37.4,
+    "sma50": 901.98,
+    "sma200": 775.34,
+    "ema8": 686.64,
+    "ema21": 756.91,
+    "emaGap": -9.28,
+    "vsSma50": -30.2,
+    "vsSma200": -18.8,
+    "relVol": 1.08,
+    "vol1y": 86.7,
     "high52w": 1213.56,
-    "low52w": 207.37,
-    "rangePos": 50.0,
+    "low52w": 223.93,
+    "rangePos": 41.0,
     "series": [
       {
         "d": "2025-12-05",
@@ -236,8 +236,8 @@
         "c": 594.51
       },
       {
-        "d": "2026-11-23",
-        "c": 707.7
+        "d": "2026-11-24",
+        "c": 629.79
       }
     ],
     "signals": [],
@@ -280,20 +280,20 @@
     }
   },
   "summary": {
-    "trades": 36,
-    "members": 18,
-    "congress": 18,
+    "trades": 37,
+    "members": 19,
+    "congress": 19,
     "executive": 0,
-    "whoLabel": "18 members of Congress",
-    "buys": 17,
+    "whoLabel": "19 members of Congress",
+    "buys": 18,
     "sells": 19,
     "other": 0,
     "firstTx": "2024-10-29",
     "lastTx": "2026-10-01",
-    "lastFiling": "2026-11-01",
-    "estBuyLabel": "$395K",
+    "lastFiling": "2026-11-23",
+    "estBuyLabel": "$403K",
     "estSellLabel": "$201K",
-    "pctLate": 17
+    "pctLate": 19
   },
   "topMembers": [
     {
@@ -479,6 +479,18 @@
       "filedDate": "2026-07-17",
       "daysLate": 0,
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20034998.pdf"
+    },
+    {
+      "member": "Harriet M. Hageman",
+      "memberSlug": "harriet-m-hageman",
+      "hasPage": false,
+      "party": "R",
+      "side": "BUY",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-07-02",
+      "filedDate": "2026-11-23",
+      "daysLate": 99,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035776.pdf"
     },
     {
       "member": "Michael A. Rulli",
@@ -695,33 +707,21 @@
       "filedDate": "2025-10-10",
       "daysLate": 0,
       "sourceUrl": "https://efdsearch.senate.gov/search/view/ptr/f87f8a40-efa5-43df-ad71-56327f5a18ce/"
-    },
-    {
-      "member": "John Boozman",
-      "memberSlug": "john-boozman",
-      "hasPage": false,
-      "party": "R",
-      "side": "SELL",
-      "amountBucket": "$1K – $15K",
-      "txDate": "2025-08-22",
-      "filedDate": "2025-09-12",
-      "daysLate": 0,
-      "sourceUrl": "https://efdsearch.senate.gov/search/view/ptr/c104f1ee-c957-4485-9807-e4798463c3b9/"
     }
   ],
   "tradesShown": 25,
   "faq": [
     {
       "q": "Who in Congress has traded MU stock?",
-      "a": "18 members of Congress have disclosed 36 MU trades since October 2024. The most active is John Boozman, with 8 trades, followed by Gilbert Ray Cisneros, Jr. and Julia Letlow. Each trade on this page links to the official filing it came from."
+      "a": "19 members of Congress have disclosed 37 MU trades since October 2024. The most active is John Boozman, with 8 trades, followed by Gilbert Ray Cisneros, Jr. and Julia Letlow. Each trade on this page links to the official filing it came from."
     },
     {
       "q": "Is Congress buying or selling MU?",
-      "a": "Of the 36 disclosed MU trades, 17 were buys and 19 were sells. By the midpoint of each filed amount bracket, the buying comes to about $395K and the selling to about $201K. Filings disclose brackets, never exact amounts, so these totals are estimates."
+      "a": "Of the 37 disclosed MU trades, 18 were buys and 19 were sells. By the midpoint of each filed amount bracket, the buying comes to about $403K and the selling to about $201K. Filings disclose brackets, never exact amounts, so these totals are estimates."
     },
     {
       "q": "How late are MU trades disclosed?",
-      "a": "17% of the disclosed MU trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Oct 1, 2026, and the newest filing arrived on Nov 1, 2026."
+      "a": "19% of the disclosed MU trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Oct 1, 2026, and the newest filing arrived on Nov 23, 2026."
     }
   ]
 }

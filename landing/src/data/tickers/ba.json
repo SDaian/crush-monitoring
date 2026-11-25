@@ -12,24 +12,24 @@
   },
   "indexable": true,
   "technical": {
-    "asOf": "2026-11-23",
-    "price": 162.39,
-    "chg1d": 4.17,
-    "chg1w": -1.71,
-    "chg1m": -13.78,
-    "rsi14": 36.2,
-    "sma50": 183.13,
-    "sma200": 211.1,
-    "ema8": 163.76,
-    "ema21": 170.58,
-    "emaGap": -4.0,
-    "vsSma50": -11.3,
-    "vsSma200": -23.1,
-    "relVol": 0.71,
-    "vol1y": 35.4,
+    "asOf": "2026-11-24",
+    "price": 163.59,
+    "chg1d": 0.74,
+    "chg1w": -0.2,
+    "chg1m": -13.13,
+    "rsi14": 38.1,
+    "sma50": 182.21,
+    "sma200": 210.7,
+    "ema8": 163.72,
+    "ema21": 169.95,
+    "emaGap": -3.66,
+    "vsSma50": -10.2,
+    "vsSma200": -22.4,
+    "relVol": 0.64,
+    "vol1y": 35.5,
     "high52w": 252.15,
     "low52w": 155.89,
-    "rangePos": 7.0,
+    "rangePos": 8.0,
     "series": [
       {
         "d": "2025-12-05",
@@ -236,8 +236,8 @@
         "c": 155.89
       },
       {
-        "d": "2026-11-23",
-        "c": 162.39
+        "d": "2026-11-24",
+        "c": 163.59
       }
     ],
     "signals": [],
@@ -280,20 +280,20 @@
     }
   },
   "summary": {
-    "trades": 35,
-    "members": 14,
-    "congress": 13,
+    "trades": 36,
+    "members": 15,
+    "congress": 14,
     "executive": 1,
-    "whoLabel": "13 members of Congress and 1 executive-branch filer",
+    "whoLabel": "14 members of Congress and 1 executive-branch filer",
     "buys": 17,
-    "sells": 18,
+    "sells": 19,
     "other": 0,
     "firstTx": "2024-10-23",
     "lastTx": "2026-09-24",
-    "lastFiling": "2026-10-07",
+    "lastFiling": "2026-11-23",
     "estBuyLabel": "$210K",
     "estSellLabel": "$1.0M",
-    "pctLate": 23
+    "pctLate": 25
   },
   "topMembers": [
     {
@@ -443,6 +443,18 @@
       "filedDate": "2026-09-01",
       "daysLate": 0,
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035326.pdf"
+    },
+    {
+      "member": "Harriet M. Hageman",
+      "memberSlug": "harriet-m-hageman",
+      "hasPage": false,
+      "party": "R",
+      "side": "SELL",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-06-01",
+      "filedDate": "2026-11-23",
+      "daysLate": 130,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035776.pdf"
     },
     {
       "member": "Donald J. Trump",
@@ -695,33 +707,21 @@
       "filedDate": "2025-04-28",
       "daysLate": 0,
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20030238.pdf"
-    },
-    {
-      "member": "Julie Johnson",
-      "memberSlug": "julie-johnson",
-      "hasPage": false,
-      "party": "D",
-      "side": "SELL",
-      "amountBucket": "$1K – $15K",
-      "txDate": "2025-04-01",
-      "filedDate": "2025-05-14",
-      "daysLate": 0,
-      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20030296.pdf"
     }
   ],
   "tradesShown": 25,
   "faq": [
     {
       "q": "Who in Congress has traded BA stock?",
-      "a": "13 members of Congress and 1 executive-branch filer have disclosed 35 BA trades since October 2024. The most active is Julie Johnson, with 6 trades, followed by Gilbert Ray Cisneros, Jr. and Robert P. Bresnahan, Jr.. Each trade on this page links to the official filing it came from."
+      "a": "14 members of Congress and 1 executive-branch filer have disclosed 36 BA trades since October 2024. The most active is Julie Johnson, with 6 trades, followed by Gilbert Ray Cisneros, Jr. and Robert P. Bresnahan, Jr.. Each trade on this page links to the official filing it came from."
     },
     {
       "q": "Is Congress buying or selling BA?",
-      "a": "Of the 35 disclosed BA trades, 17 were buys and 18 were sells. By the midpoint of each filed amount bracket, the buying comes to about $210K and the selling to about $1.0M. Filings disclose brackets, never exact amounts, so these totals are estimates."
+      "a": "Of the 36 disclosed BA trades, 17 were buys and 19 were sells. By the midpoint of each filed amount bracket, the buying comes to about $210K and the selling to about $1.0M. Filings disclose brackets, never exact amounts, so these totals are estimates."
     },
     {
       "q": "How late are BA trades disclosed?",
-      "a": "23% of the disclosed BA trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Sep 24, 2026, and the newest filing arrived on Oct 7, 2026."
+      "a": "25% of the disclosed BA trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Sep 24, 2026, and the newest filing arrived on Nov 23, 2026."
     }
   ]
 }

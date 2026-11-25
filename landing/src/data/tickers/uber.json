@@ -12,24 +12,24 @@
   },
   "indexable": true,
   "technical": {
-    "asOf": "2026-11-23",
-    "price": 64.07,
-    "chg1d": 0.95,
-    "chg1w": -8.46,
-    "chg1m": -3.94,
-    "rsi14": 36.5,
-    "sma50": 68.79,
-    "sma200": 72.35,
-    "ema8": 66.59,
-    "ema21": 67.8,
-    "emaGap": -1.79,
-    "vsSma50": -6.9,
-    "vsSma200": -11.4,
-    "relVol": 0.99,
+    "asOf": "2026-11-24",
+    "price": 64.7,
+    "chg1d": 0.98,
+    "chg1w": -5.97,
+    "chg1m": -2.16,
+    "rsi14": 39.1,
+    "sma50": 68.66,
+    "sma200": 72.3,
+    "ema8": 66.17,
+    "ema21": 67.52,
+    "emaGap": -2.0,
+    "vsSma50": -5.8,
+    "vsSma200": -10.5,
+    "relVol": 0.83,
     "vol1y": 34.9,
     "high52w": 92.57,
     "low52w": 63.47,
-    "rangePos": 2.0,
+    "rangePos": 4.0,
     "series": [
       {
         "d": "2025-12-05",
@@ -236,8 +236,8 @@
         "c": 63.47
       },
       {
-        "d": "2026-11-23",
-        "c": 64.07
+        "d": "2026-11-24",
+        "c": 64.7
       }
     ],
     "signals": [],
@@ -280,20 +280,20 @@
     }
   },
   "summary": {
-    "trades": 44,
-    "members": 16,
-    "congress": 16,
+    "trades": 45,
+    "members": 17,
+    "congress": 17,
     "executive": 0,
-    "whoLabel": "16 members of Congress",
+    "whoLabel": "17 members of Congress",
     "buys": 22,
-    "sells": 22,
+    "sells": 23,
     "other": 0,
     "firstTx": "2024-10-29",
     "lastTx": "2026-10-20",
-    "lastFiling": "2026-11-10",
+    "lastFiling": "2026-11-23",
     "estBuyLabel": "$1.1M",
-    "estSellLabel": "$310K",
-    "pctLate": 11
+    "estSellLabel": "$318K",
+    "pctLate": 13
   },
   "topMembers": [
     {
@@ -443,6 +443,18 @@
       "filedDate": "2026-07-17",
       "daysLate": 0,
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20034998.pdf"
+    },
+    {
+      "member": "Harriet M. Hageman",
+      "memberSlug": "harriet-m-hageman",
+      "hasPage": false,
+      "party": "R",
+      "side": "SELL",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-07-02",
+      "filedDate": "2026-11-23",
+      "daysLate": 99,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035776.pdf"
     },
     {
       "member": "Nancy Pelosi",
@@ -695,33 +707,21 @@
       "filedDate": "2025-09-12",
       "daysLate": 0,
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20032070.pdf"
-    },
-    {
-      "member": "Angus S. King, Jr.",
-      "memberSlug": "angus-s-king-jr",
-      "hasPage": false,
-      "party": "I",
-      "side": "BUY",
-      "amountBucket": "$1K – $15K",
-      "txDate": "2025-07-21",
-      "filedDate": "2025-08-18",
-      "daysLate": 0,
-      "sourceUrl": "https://efdsearch.senate.gov/search/view/ptr/218c16a3-d408-4cc0-aa89-08730d05dfc3/"
     }
   ],
   "tradesShown": 25,
   "faq": [
     {
       "q": "Who in Congress has traded UBER stock?",
-      "a": "16 members of Congress have disclosed 44 UBER trades since October 2024. The most active is Gilbert Ray Cisneros, Jr., with 10 trades, followed by Josh Gottheimer and Lisa C. McClain. Each trade on this page links to the official filing it came from."
+      "a": "17 members of Congress have disclosed 45 UBER trades since October 2024. The most active is Gilbert Ray Cisneros, Jr., with 10 trades, followed by Josh Gottheimer and Lisa C. McClain. Each trade on this page links to the official filing it came from."
     },
     {
       "q": "Is Congress buying or selling UBER?",
-      "a": "Of the 44 disclosed UBER trades, 22 were buys and 22 were sells. By the midpoint of each filed amount bracket, the buying comes to about $1.1M and the selling to about $310K. Filings disclose brackets, never exact amounts, so these totals are estimates."
+      "a": "Of the 45 disclosed UBER trades, 22 were buys and 23 were sells. By the midpoint of each filed amount bracket, the buying comes to about $1.1M and the selling to about $318K. Filings disclose brackets, never exact amounts, so these totals are estimates."
     },
     {
       "q": "How late are UBER trades disclosed?",
-      "a": "11% of the disclosed UBER trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Oct 20, 2026, and the newest filing arrived on Nov 10, 2026."
+      "a": "13% of the disclosed UBER trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Oct 20, 2026, and the newest filing arrived on Nov 23, 2026."
     }
   ]
 }

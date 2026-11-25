@@ -1,19 +1,19 @@
 {
   "_comment": "Generated from real official disclosures by congress/landing_data.py (daily Action). Do not edit by hand. 'filedDaysLate' counts days past the STOCK Act's 45-day statutory maximum; 0 = on time.",
   "windowDays": 45,
-  "from": "2026-10-07",
-  "to": "2026-11-21",
-  "members": 18,
-  "buys": 126,
+  "from": "2026-10-10",
+  "to": "2026-11-24",
+  "members": 19,
+  "buys": 201,
   "options": 0,
-  "companies": 97,
+  "companies": 134,
   "rows": [
     {
       "ticker": "NVDA",
       "tickerLabel": "NVDA",
       "slug": "nvda",
       "company": "NVIDIA Corporation",
-      "members": 2,
+      "members": 3,
       "buyers": [
         {
           "name": "Cleo Fields",
@@ -22,13 +22,179 @@
         {
           "name": "Maria Elvira Salazar",
           "slug": null
+        },
+        {
+          "name": "Harriet M. Hageman",
+          "slug": null
+        }
+      ],
+      "buys": 6,
+      "options": 0,
+      "estLabel": "$48K",
+      "est": 48003,
+      "lastFiling": "2026-11-23"
+    },
+    {
+      "ticker": "TSM",
+      "tickerLabel": "TSM",
+      "slug": "tsm",
+      "company": "Taiwan Semiconductor Manufacturing Company Ltd.",
+      "members": 3,
+      "buyers": [
+        {
+          "name": "Harriet M. Hageman",
+          "slug": null
+        },
+        {
+          "name": "Cleo Fields",
+          "slug": "cleo-fields"
+        },
+        {
+          "name": "Gilbert Ray Cisneros, Jr.",
+          "slug": "gilbert-ray-cisneros-jr"
+        }
+      ],
+      "buys": 4,
+      "options": 0,
+      "estLabel": "$32K",
+      "est": 32002,
+      "lastFiling": "2026-11-23"
+    },
+    {
+      "ticker": "MSFT",
+      "tickerLabel": "MSFT",
+      "slug": "msft",
+      "company": "Microsoft Corporation",
+      "members": 3,
+      "buyers": [
+        {
+          "name": "Harriet M. Hageman",
+          "slug": null
+        },
+        {
+          "name": "Lisa C. McClain",
+          "slug": null
+        },
+        {
+          "name": "Michael A. Rulli",
+          "slug": null
+        }
+      ],
+      "buys": 3,
+      "options": 0,
+      "estLabel": "$24K",
+      "est": 24002,
+      "lastFiling": "2026-11-23"
+    },
+    {
+      "ticker": "PLD",
+      "tickerLabel": "PLD",
+      "slug": null,
+      "company": "Prologis, Inc.",
+      "members": 2,
+      "buyers": [
+        {
+          "name": "Harriet M. Hageman",
+          "slug": null
+        },
+        {
+          "name": "David J. Taylor",
+          "slug": null
+        }
+      ],
+      "buys": 8,
+      "options": 0,
+      "estLabel": "$138K",
+      "est": 137504,
+      "lastFiling": "2026-11-23"
+    },
+    {
+      "ticker": "PG",
+      "tickerLabel": "PG",
+      "slug": "pg",
+      "company": "Procter & Gamble Company",
+      "members": 2,
+      "buyers": [
+        {
+          "name": "Harriet M. Hageman",
+          "slug": null
+        },
+        {
+          "name": "Maria Elvira Salazar",
+          "slug": null
+        }
+      ],
+      "buys": 6,
+      "options": 0,
+      "estLabel": "$48K",
+      "est": 48003,
+      "lastFiling": "2026-11-23"
+    },
+    {
+      "ticker": "T",
+      "tickerLabel": "T",
+      "slug": "t",
+      "company": "AT&T Inc.",
+      "members": 2,
+      "buyers": [
+        {
+          "name": "David J. Taylor",
+          "slug": null
+        },
+        {
+          "name": "Harriet M. Hageman",
+          "slug": null
         }
       ],
       "buys": 5,
       "options": 0,
       "estLabel": "$40K",
       "est": 40002,
-      "lastFiling": "2026-11-05"
+      "lastFiling": "2026-11-23"
+    },
+    {
+      "ticker": "MU",
+      "tickerLabel": "MU",
+      "slug": "mu",
+      "company": "Micron Technology, Inc.",
+      "members": 2,
+      "buyers": [
+        {
+          "name": "John J. McGuire III",
+          "slug": "john-j-mcguire-iii"
+        },
+        {
+          "name": "Harriet M. Hageman",
+          "slug": null
+        }
+      ],
+      "buys": 4,
+      "options": 0,
+      "estLabel": "$32K",
+      "est": 32002,
+      "lastFiling": "2026-11-23"
+    },
+    {
+      "ticker": "GOOGL",
+      "tickerLabel": "GOOGL and GOOG",
+      "slug": "googl",
+      "company": "Alphabet Inc.",
+      "members": 2,
+      "buyers": [
+        {
+          "name": "David J. Taylor",
+          "slug": null
+        },
+        {
+          "name": "Harriet M. Hageman",
+          "slug": null
+        }
+      ],
+      "buys": 3,
+      "options": 0,
+      "estLabel": "$24K",
+      "est": 24002,
+      "lastFiling": "2026-11-23"
     },
     {
       "ticker": "BHE",
@@ -53,6 +219,50 @@
       "lastFiling": "2026-11-05"
     },
     {
+      "ticker": "ABT",
+      "tickerLabel": "ABT",
+      "slug": "abt",
+      "company": "Abbott Laboratories",
+      "members": 2,
+      "buyers": [
+        {
+          "name": "Gilbert Ray Cisneros, Jr.",
+          "slug": "gilbert-ray-cisneros-jr"
+        },
+        {
+          "name": "Harriet M. Hageman",
+          "slug": null
+        }
+      ],
+      "buys": 2,
+      "options": 0,
+      "estLabel": "$16K",
+      "est": 16001,
+      "lastFiling": "2026-11-23"
+    },
+    {
+      "ticker": "AVGO",
+      "tickerLabel": "AVGO",
+      "slug": "avgo",
+      "company": "Broadcom Inc.",
+      "members": 2,
+      "buyers": [
+        {
+          "name": "David J. Taylor",
+          "slug": null
+        },
+        {
+          "name": "Harriet M. Hageman",
+          "slug": null
+        }
+      ],
+      "buys": 2,
+      "options": 0,
+      "estLabel": "$16K",
+      "est": 16001,
+      "lastFiling": "2026-11-23"
+    },
+    {
       "ticker": "CSCO",
       "tickerLabel": "CSCO",
       "slug": "csco",
@@ -75,58 +285,98 @@
       "lastFiling": "2026-11-10"
     },
     {
-      "ticker": "MSFT",
-      "tickerLabel": "MSFT",
-      "slug": "msft",
-      "company": "Microsoft Corporation",
+      "ticker": "NOW",
+      "tickerLabel": "NOW",
+      "slug": "now",
+      "company": "ServiceNow, Inc.",
       "members": 2,
       "buyers": [
-        {
-          "name": "Lisa C. McClain",
-          "slug": null
-        },
-        {
-          "name": "Michael A. Rulli",
-          "slug": null
-        }
-      ],
-      "buys": 2,
-      "options": 0,
-      "estLabel": "$16K",
-      "est": 16001,
-      "lastFiling": "2026-11-18"
-    },
-    {
-      "ticker": "TSM",
-      "tickerLabel": "TSM",
-      "slug": "tsm",
-      "company": "Taiwan Semiconductor Manufacturing Company Ltd.",
-      "members": 2,
-      "buyers": [
-        {
-          "name": "Cleo Fields",
-          "slug": "cleo-fields"
-        },
         {
           "name": "Gilbert Ray Cisneros, Jr.",
           "slug": "gilbert-ray-cisneros-jr"
+        },
+        {
+          "name": "Harriet M. Hageman",
+          "slug": null
         }
       ],
       "buys": 2,
       "options": 0,
       "estLabel": "$16K",
       "est": 16001,
-      "lastFiling": "2026-10-22"
+      "lastFiling": "2026-11-23"
     },
     {
-      "ticker": "T",
-      "tickerLabel": "T",
-      "slug": "t",
-      "company": "AT&T Inc.",
+      "ticker": "TXN",
+      "tickerLabel": "TXN",
+      "slug": "txn",
+      "company": "Texas Instruments Incorporated - Common Stock $200?",
+      "members": 2,
+      "buyers": [
+        {
+          "name": "Harriet M. Hageman",
+          "slug": null
+        },
+        {
+          "name": "Thomas H. Kean, Jr.",
+          "slug": null
+        }
+      ],
+      "buys": 2,
+      "options": 0,
+      "estLabel": "$16K",
+      "est": 16001,
+      "lastFiling": "2026-11-23"
+    },
+    {
+      "ticker": "VZ",
+      "tickerLabel": "VZ",
+      "slug": "vz",
+      "company": "Verizon Communications Inc.",
+      "members": 2,
+      "buyers": [
+        {
+          "name": "Gilbert Ray Cisneros, Jr.",
+          "slug": "gilbert-ray-cisneros-jr"
+        },
+        {
+          "name": "Harriet M. Hageman",
+          "slug": null
+        }
+      ],
+      "buys": 2,
+      "options": 0,
+      "estLabel": "$16K",
+      "est": 16001,
+      "lastFiling": "2026-11-23"
+    },
+    {
+      "ticker": "GIS",
+      "tickerLabel": "GIS",
+      "slug": null,
+      "company": "General Mills, Inc.",
       "members": 1,
       "buyers": [
         {
-          "name": "David J. Taylor",
+          "name": "Harriet M. Hageman",
+          "slug": null
+        }
+      ],
+      "buys": 4,
+      "options": 0,
+      "estLabel": "$57K",
+      "est": 56502,
+      "lastFiling": "2026-11-23"
+    },
+    {
+      "ticker": "ACN",
+      "tickerLabel": "ACN",
+      "slug": "acn",
+      "company": "Accenture plc",
+      "members": 1,
+      "buyers": [
+        {
+          "name": "Harriet M. Hageman",
           "slug": null
         }
       ],
@@ -134,7 +384,25 @@
       "options": 0,
       "estLabel": "$32K",
       "est": 32002,
-      "lastFiling": "2026-11-12"
+      "lastFiling": "2026-11-23"
+    },
+    {
+      "ticker": "WM",
+      "tickerLabel": "WM",
+      "slug": null,
+      "company": "Waste Management, Inc.",
+      "members": 1,
+      "buyers": [
+        {
+          "name": "Harriet M. Hageman",
+          "slug": null
+        }
+      ],
+      "buys": 4,
+      "options": 0,
+      "estLabel": "$32K",
+      "est": 32002,
+      "lastFiling": "2026-11-23"
     },
     {
       "ticker": "ARGX",
@@ -155,258 +423,43 @@
       "lastFiling": "2026-11-10"
     },
     {
-      "ticker": "MU",
-      "tickerLabel": "MU",
-      "slug": "mu",
-      "company": "Micron Technology, Inc.",
+      "ticker": "MCD",
+      "tickerLabel": "MCD",
+      "slug": "mcd",
+      "company": "McDonald's Corporation",
       "members": 1,
       "buyers": [
         {
-          "name": "John J. McGuire III",
-          "slug": "john-j-mcguire-iii"
+          "name": "Harriet M. Hageman",
+          "slug": null
         }
       ],
       "buys": 3,
       "options": 0,
       "estLabel": "$24K",
       "est": 24002,
-      "lastFiling": "2026-11-01"
-    },
-    {
-      "ticker": "DDOG",
-      "tickerLabel": "DDOG",
-      "slug": null,
-      "company": "Datadog, Inc.",
-      "members": 1,
-      "buyers": [
-        {
-          "name": "Jonathan L. Jackson",
-          "slug": null
-        }
-      ],
-      "buys": 2,
-      "options": 0,
-      "estLabel": "$83K",
-      "est": 83001,
-      "lastFiling": "2026-11-13"
-    },
-    {
-      "ticker": "EL",
-      "tickerLabel": "EL",
-      "slug": null,
-      "company": "Estee Lauder Companies, Inc.",
-      "members": 1,
-      "buyers": [
-        {
-          "name": "Jonathan L. Jackson",
-          "slug": null
-        }
-      ],
-      "buys": 2,
-      "options": 0,
-      "estLabel": "$83K",
-      "est": 83001,
-      "lastFiling": "2026-11-13"
-    },
-    {
-      "ticker": "NXPI",
-      "tickerLabel": "NXPI",
-      "slug": null,
-      "company": "NXP Semiconductors N.V.",
-      "members": 1,
-      "buyers": [
-        {
-          "name": "Gilbert Ray Cisneros, Jr.",
-          "slug": "gilbert-ray-cisneros-jr"
-        }
-      ],
-      "buys": 2,
-      "options": 0,
-      "estLabel": "$41K",
-      "est": 40501,
-      "lastFiling": "2026-10-12"
-    },
-    {
-      "ticker": "ON",
-      "tickerLabel": "ON",
-      "slug": null,
-      "company": "ON Semiconductor Corporation",
-      "members": 1,
-      "buyers": [
-        {
-          "name": "Gilbert Ray Cisneros, Jr.",
-          "slug": "gilbert-ray-cisneros-jr"
-        }
-      ],
-      "buys": 2,
-      "options": 0,
-      "estLabel": "$41K",
-      "est": 40501,
-      "lastFiling": "2026-11-10"
-    },
-    {
-      "ticker": "BBIO",
-      "tickerLabel": "BBIO",
-      "slug": null,
-      "company": "BridgeBio Pharma, Inc.",
-      "members": 1,
-      "buyers": [
-        {
-          "name": "Gilbert Ray Cisneros, Jr.",
-          "slug": "gilbert-ray-cisneros-jr"
-        }
-      ],
-      "buys": 2,
-      "options": 0,
-      "estLabel": "$16K",
-      "est": 16001,
-      "lastFiling": "2026-11-10"
-    },
-    {
-      "ticker": "ETN",
-      "tickerLabel": "ETN",
-      "slug": "etn",
-      "company": "Eaton Corporation, PLC",
-      "members": 1,
-      "buyers": [
-        {
-          "name": "David J. Taylor",
-          "slug": null
-        }
-      ],
-      "buys": 2,
-      "options": 0,
-      "estLabel": "$16K",
-      "est": 16001,
-      "lastFiling": "2026-11-12"
-    },
-    {
-      "ticker": "GOOGL",
-      "tickerLabel": "GOOGL",
-      "slug": "googl",
-      "company": "Alphabet Inc.",
-      "members": 1,
-      "buyers": [
-        {
-          "name": "David J. Taylor",
-          "slug": null
-        }
-      ],
-      "buys": 2,
-      "options": 0,
-      "estLabel": "$16K",
-      "est": 16001,
-      "lastFiling": "2026-11-12"
-    },
-    {
-      "ticker": "IBKR",
-      "tickerLabel": "IBKR",
-      "slug": null,
-      "company": "Interactive Brokers Group, Inc.",
-      "members": 1,
-      "buyers": [
-        {
-          "name": "Byron Donalds",
-          "slug": null
-        }
-      ],
-      "buys": 2,
-      "options": 0,
-      "estLabel": "$16K",
-      "est": 16001,
-      "lastFiling": "2026-11-16"
-    },
-    {
-      "ticker": "IBRX",
-      "tickerLabel": "IBRX",
-      "slug": null,
-      "company": "ImmunityBio, Inc.",
-      "members": 1,
-      "buyers": [
-        {
-          "name": "Lisa C. McClain",
-          "slug": null
-        }
-      ],
-      "buys": 2,
-      "options": 0,
-      "estLabel": "$16K",
-      "est": 16001,
-      "lastFiling": "2026-10-12"
-    },
-    {
-      "ticker": "LRCX",
-      "tickerLabel": "LRCX",
-      "slug": "lrcx",
-      "company": "Lam Research Corporation - Common Stock $200?",
-      "members": 1,
-      "buyers": [
-        {
-          "name": "David J. Taylor",
-          "slug": null
-        }
-      ],
-      "buys": 2,
-      "options": 0,
-      "estLabel": "$16K",
-      "est": 16001,
-      "lastFiling": "2026-11-12"
-    },
-    {
-      "ticker": "MBB",
-      "tickerLabel": "MBB",
-      "slug": null,
-      "company": "iShares MBS ETF",
-      "members": 1,
-      "buyers": [
-        {
-          "name": "John Boozman",
-          "slug": null
-        }
-      ],
-      "buys": 2,
-      "options": 0,
-      "estLabel": "$16K",
-      "est": 16001,
-      "lastFiling": "2026-11-17"
-    },
-    {
-      "ticker": "PG",
-      "tickerLabel": "PG",
-      "slug": "pg",
-      "company": "Procter & Gamble Company",
-      "members": 1,
-      "buyers": [
-        {
-          "name": "Maria Elvira Salazar",
-          "slug": null
-        }
-      ],
-      "buys": 2,
-      "options": 0,
-      "estLabel": "$16K",
-      "est": 16001,
-      "lastFiling": "2026-11-05"
+      "lastFiling": "2026-11-23"
     }
   ],
   "largest": {
-    "ticker": "EL",
-    "estLabel": "$83K",
-    "buys": 2,
+    "ticker": "PLD",
+    "estLabel": "$138K",
+    "buys": 8,
     "options": 0,
-    "company": "Estee Lauder Companies, Inc.",
+    "company": "Prologis, Inc.",
     "buyers": [
-      "Jonathan L. Jackson"
+      "David J. Taylor",
+      "Harriet M. Hageman"
     ]
   },
   "faq": [
     {
       "q": "What stocks is Congress buying?",
-      "a": "In filings from the last 45 days, to Nov 21, 2026, 18 members of Congress disclosed 126 purchases across 97 companies. The stocks bought by the most members were NVDA (2 members), BHE (2 members) and CSCO (2 members). Filings arrive up to 45 days after the trade: this is recent disclosure, not live trading."
+      "a": "In filings from the last 45 days, to Nov 24, 2026, 19 members of Congress disclosed 201 purchases across 134 companies. The stocks bought by the most members were NVDA (3 members), TSM (3 members) and MSFT (3 members). Filings arrive up to 45 days after the trade: this is recent disclosure, not live trading."
     },
     {
       "q": "What is the largest stock purchase Congress disclosed recently?",
-      "a": "By the midpoint of each filed amount bracket, the largest recent buying was in Estee Lauder Companies, Inc. (EL): about $83K across 2 purchases, by Jonathan L. Jackson. Filings disclose brackets, never exact amounts, so this is an estimate."
+      "a": "By the midpoint of each filed amount bracket, the largest recent buying was in Prologis, Inc. (PLD): about $138K across 8 purchases, by David J. Taylor and Harriet M. Hageman. Filings disclose brackets, never exact amounts, so this is an estimate."
     },
     {
       "q": "Does this include the President's trades?",

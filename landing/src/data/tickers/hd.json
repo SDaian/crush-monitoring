@@ -12,24 +12,24 @@
   },
   "indexable": true,
   "technical": {
-    "asOf": "2026-11-23",
-    "price": 346.06,
-    "chg1d": 2.07,
-    "chg1w": -0.42,
-    "chg1m": 8.2,
-    "rsi14": 60.1,
-    "sma50": 315.66,
-    "sma200": 331.48,
-    "ema8": 342.37,
-    "ema21": 337.23,
-    "emaGap": 1.52,
-    "vsSma50": 9.6,
-    "vsSma200": 4.4,
-    "relVol": 1.13,
-    "vol1y": 27.4,
+    "asOf": "2026-11-24",
+    "price": 353.69,
+    "chg1d": 2.2,
+    "chg1w": 4.33,
+    "chg1m": 10.74,
+    "rsi14": 64.6,
+    "sma50": 316.63,
+    "sma200": 331.34,
+    "ema8": 344.89,
+    "ema21": 338.73,
+    "emaGap": 1.82,
+    "vsSma50": 11.7,
+    "vsSma200": 6.7,
+    "relVol": 0.94,
+    "vol1y": 27.3,
     "high52w": 391.05,
     "low52w": 281.15,
-    "rangePos": 59.0,
+    "rangePos": 66.0,
     "series": [
       {
         "d": "2025-12-05",
@@ -236,17 +236,17 @@
         "c": 339.04
       },
       {
-        "d": "2026-11-23",
-        "c": 346.06
+        "d": "2026-11-24",
+        "c": 353.69
       }
     ],
     "signals": [],
     "score": {
-      "label": "Buy",
-      "buys": 4,
-      "sells": 2,
+      "label": "Strong Buy",
+      "buys": 5,
+      "sells": 1,
       "holds": 1,
-      "ratio": 0.286
+      "ratio": 0.571
     },
     "votes": {
       "ema_cross": {
@@ -274,26 +274,26 @@
         "muted": false
       },
       "chg_1w": {
-        "vote": -1,
+        "vote": 1,
         "muted": false
       }
     }
   },
   "summary": {
-    "trades": 90,
-    "members": 26,
-    "congress": 25,
+    "trades": 91,
+    "members": 27,
+    "congress": 26,
     "executive": 1,
-    "whoLabel": "25 members of Congress and 1 executive-branch filer",
-    "buys": 44,
+    "whoLabel": "26 members of Congress and 1 executive-branch filer",
+    "buys": 45,
     "sells": 46,
     "other": 0,
     "firstTx": "2023-03-15",
     "lastTx": "2026-11-05",
-    "lastFiling": "2026-11-12",
-    "estBuyLabel": "$450K",
+    "lastFiling": "2026-11-23",
+    "estBuyLabel": "$458K",
     "estSellLabel": "$981K",
-    "pctLate": 8
+    "pctLate": 9
   },
   "topMembers": [
     {
@@ -713,15 +713,15 @@
   "faq": [
     {
       "q": "Who in Congress has traded HD stock?",
-      "a": "25 members of Congress and 1 executive-branch filer have disclosed 90 HD trades since March 2023. The most active is Kevin Hern, with 11 trades, followed by David J. Taylor and Lloyd Doggett. Each trade on this page links to the official filing it came from."
+      "a": "26 members of Congress and 1 executive-branch filer have disclosed 91 HD trades since March 2023. The most active is Kevin Hern, with 11 trades, followed by David J. Taylor and Lloyd Doggett. Each trade on this page links to the official filing it came from."
     },
     {
       "q": "Is Congress buying or selling HD?",
-      "a": "Of the 90 disclosed HD trades, 44 were buys and 46 were sells. By the midpoint of each filed amount bracket, the buying comes to about $450K and the selling to about $981K. Filings disclose brackets, never exact amounts, so these totals are estimates."
+      "a": "Of the 91 disclosed HD trades, 45 were buys and 46 were sells. By the midpoint of each filed amount bracket, the buying comes to about $458K and the selling to about $981K. Filings disclose brackets, never exact amounts, so these totals are estimates."
     },
     {
       "q": "How late are HD trades disclosed?",
-      "a": "8% of the disclosed HD trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Nov 5, 2026, and the newest filing arrived on Nov 12, 2026."
+      "a": "9% of the disclosed HD trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Nov 5, 2026, and the newest filing arrived on Nov 23, 2026."
     }
   ]
 }

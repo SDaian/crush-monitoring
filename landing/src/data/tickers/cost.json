@@ -12,24 +12,24 @@
   },
   "indexable": true,
   "technical": {
-    "asOf": "2026-11-23",
-    "price": 1097.91,
-    "chg1d": -0.38,
-    "chg1w": -1.42,
-    "chg1m": 9.43,
-    "rsi14": 67.5,
-    "sma50": 990.31,
-    "sma200": 979.48,
-    "ema8": 1094.5,
-    "ema21": 1064.01,
-    "emaGap": 2.87,
-    "vsSma50": 10.9,
-    "vsSma200": 12.1,
-    "relVol": 1.22,
+    "asOf": "2026-11-24",
+    "price": 1091.71,
+    "chg1d": -0.56,
+    "chg1w": -1.65,
+    "chg1m": 8.61,
+    "rsi14": 64.6,
+    "sma50": 994.12,
+    "sma200": 979.95,
+    "ema8": 1093.88,
+    "ema21": 1066.53,
+    "emaGap": 2.56,
+    "vsSma50": 9.8,
+    "vsSma200": 11.4,
+    "relVol": 1.03,
     "vol1y": 20.3,
     "high52w": 1113.74,
     "low52w": 850.0,
-    "rangePos": 94.0,
+    "rangePos": 92.0,
     "series": [
       {
         "d": "2025-12-05",
@@ -236,8 +236,8 @@
         "c": 1102.15
       },
       {
-        "d": "2026-11-23",
-        "c": 1097.91
+        "d": "2026-11-24",
+        "c": 1091.71
       }
     ],
     "signals": [],
@@ -280,20 +280,20 @@
     }
   },
   "summary": {
-    "trades": 36,
-    "members": 18,
-    "congress": 18,
+    "trades": 37,
+    "members": 19,
+    "congress": 19,
     "executive": 0,
-    "whoLabel": "18 members of Congress",
-    "buys": 16,
+    "whoLabel": "19 members of Congress",
+    "buys": 17,
     "sells": 20,
     "other": 0,
     "firstTx": "2023-03-15",
     "lastTx": "2026-11-12",
-    "lastFiling": "2026-11-18",
-    "estBuyLabel": "$153K",
+    "lastFiling": "2026-11-23",
+    "estBuyLabel": "$161K",
     "estSellLabel": "$977K",
-    "pctLate": 28
+    "pctLate": 30
   },
   "topMembers": [
     {
@@ -505,6 +505,18 @@
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20033983.pdf"
     },
     {
+      "member": "Harriet M. Hageman",
+      "memberSlug": "harriet-m-hageman",
+      "hasPage": false,
+      "party": "R",
+      "side": "BUY",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-01-14",
+      "filedDate": "2026-11-23",
+      "daysLate": 268,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035776.pdf"
+    },
+    {
       "member": "Markwayne Mullin",
       "memberSlug": "markwayne-mullin",
       "hasPage": false,
@@ -695,33 +707,21 @@
       "filedDate": "2025-04-08",
       "daysLate": 0,
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20029084.pdf"
-    },
-    {
-      "member": "Marjorie Taylor Greene",
-      "memberSlug": "marjorie-taylor-greene",
-      "hasPage": true,
-      "party": "R",
-      "side": "BUY",
-      "amountBucket": "$1K – $15K",
-      "txDate": "2025-03-17",
-      "filedDate": "2025-03-19",
-      "daysLate": 0,
-      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20028002.pdf"
     }
   ],
   "tradesShown": 25,
   "faq": [
     {
       "q": "Who in Congress has traded COST stock?",
-      "a": "18 members of Congress have disclosed 36 COST trades since March 2023. The most active is Scott Franklin, with 4 trades, followed by Greg Landsman and Lisa C. McClain. Each trade on this page links to the official filing it came from."
+      "a": "19 members of Congress have disclosed 37 COST trades since March 2023. The most active is Scott Franklin, with 4 trades, followed by Greg Landsman and Lisa C. McClain. Each trade on this page links to the official filing it came from."
     },
     {
       "q": "Is Congress buying or selling COST?",
-      "a": "Of the 36 disclosed COST trades, 16 were buys and 20 were sells. By the midpoint of each filed amount bracket, the buying comes to about $153K and the selling to about $977K. Filings disclose brackets, never exact amounts, so these totals are estimates."
+      "a": "Of the 37 disclosed COST trades, 17 were buys and 20 were sells. By the midpoint of each filed amount bracket, the buying comes to about $161K and the selling to about $977K. Filings disclose brackets, never exact amounts, so these totals are estimates."
     },
     {
       "q": "How late are COST trades disclosed?",
-      "a": "28% of the disclosed COST trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Nov 12, 2026, and the newest filing arrived on Nov 18, 2026."
+      "a": "30% of the disclosed COST trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Nov 12, 2026, and the newest filing arrived on Nov 23, 2026."
     }
   ]
 }

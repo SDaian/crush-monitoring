@@ -12,24 +12,24 @@
   },
   "indexable": true,
   "technical": {
-    "asOf": "2026-11-23",
-    "price": 492.5,
-    "chg1d": 1.65,
-    "chg1w": -4.92,
-    "chg1m": -6.1,
-    "rsi14": 39.1,
-    "sma50": 519.58,
-    "sma200": 444.09,
-    "ema8": 504.18,
-    "ema21": 515.74,
-    "emaGap": -2.24,
-    "vsSma50": -5.2,
-    "vsSma200": 10.9,
-    "relVol": 0.99,
+    "asOf": "2026-11-24",
+    "price": 496.13,
+    "chg1d": 0.74,
+    "chg1w": -2.0,
+    "chg1m": -6.85,
+    "rsi14": 41.0,
+    "sma50": 519.56,
+    "sma200": 444.5,
+    "ema8": 502.39,
+    "ema21": 513.96,
+    "emaGap": -2.25,
+    "vsSma50": -4.5,
+    "vsSma200": 11.6,
+    "relVol": 0.75,
     "vol1y": 33.6,
     "high52w": 555.8,
     "low52w": 352.83,
-    "rangePos": 69.0,
+    "rangePos": 71.0,
     "series": [
       {
         "d": "2025-12-05",
@@ -236,8 +236,8 @@
         "c": 484.52
       },
       {
-        "d": "2026-11-23",
-        "c": 492.5
+        "d": "2026-11-24",
+        "c": 496.13
       }
     ],
     "signals": [],
@@ -280,20 +280,20 @@
     }
   },
   "summary": {
-    "trades": 212,
-    "members": 45,
-    "congress": 44,
+    "trades": 215,
+    "members": 46,
+    "congress": 45,
     "executive": 1,
-    "whoLabel": "44 members of Congress and 1 executive-branch filer",
-    "buys": 110,
-    "sells": 102,
+    "whoLabel": "45 members of Congress and 1 executive-branch filer",
+    "buys": 111,
+    "sells": 104,
     "other": 0,
     "firstTx": "2023-03-15",
     "lastTx": "2026-11-04",
-    "lastFiling": "2026-11-19",
+    "lastFiling": "2026-11-23",
     "estBuyLabel": "$28.8M",
     "estSellLabel": "$25.2M",
-    "pctLate": 10
+    "pctLate": 11
   },
   "topMembers": [
     {
@@ -455,6 +455,18 @@
       "filedDate": "2026-11-02",
       "daysLate": 0,
       "sourceUrl": "https://efdsearch.senate.gov/search/view/ptr/02b5fe88-e8e1-4ef3-b6b5-6a46b420fb3c/"
+    },
+    {
+      "member": "Harriet M. Hageman",
+      "memberSlug": "harriet-m-hageman",
+      "hasPage": false,
+      "party": "R",
+      "side": "SELL",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-10-14",
+      "filedDate": "2026-11-23",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035776.pdf"
     },
     {
       "member": "Pete Sessions",
@@ -695,33 +707,21 @@
       "filedDate": "2026-09-04",
       "daysLate": 4,
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035190.pdf"
-    },
-    {
-      "member": "Michael A. Rulli",
-      "memberSlug": "michael-a-rulli",
-      "hasPage": false,
-      "party": "R",
-      "side": "SELL",
-      "amountBucket": "$1K – $15K",
-      "txDate": "2026-06-25",
-      "filedDate": "2026-08-07",
-      "daysLate": 0,
-      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035147.pdf"
     }
   ],
   "tradesShown": 25,
   "faq": [
     {
       "q": "Who in Congress has traded MSFT stock?",
-      "a": "44 members of Congress and 1 executive-branch filer have disclosed 212 MSFT trades since March 2023. The most active is Josh Gottheimer, with 35 trades, followed by Cleo Fields and Gilbert Ray Cisneros, Jr.. Each trade on this page links to the official filing it came from."
+      "a": "45 members of Congress and 1 executive-branch filer have disclosed 215 MSFT trades since March 2023. The most active is Josh Gottheimer, with 35 trades, followed by Cleo Fields and Gilbert Ray Cisneros, Jr.. Each trade on this page links to the official filing it came from."
     },
     {
       "q": "Is Congress buying or selling MSFT?",
-      "a": "Of the 212 disclosed MSFT trades, 110 were buys and 102 were sells. By the midpoint of each filed amount bracket, the buying comes to about $28.8M and the selling to about $25.2M. Filings disclose brackets, never exact amounts, so these totals are estimates."
+      "a": "Of the 215 disclosed MSFT trades, 111 were buys and 104 were sells. By the midpoint of each filed amount bracket, the buying comes to about $28.8M and the selling to about $25.2M. Filings disclose brackets, never exact amounts, so these totals are estimates."
     },
     {
       "q": "How late are MSFT trades disclosed?",
-      "a": "10% of the disclosed MSFT trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Nov 4, 2026, and the newest filing arrived on Nov 19, 2026."
+      "a": "11% of the disclosed MSFT trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Nov 4, 2026, and the newest filing arrived on Nov 23, 2026."
     }
   ]
 }

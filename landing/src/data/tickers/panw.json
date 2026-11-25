@@ -12,20 +12,20 @@
   },
   "indexable": true,
   "technical": {
-    "asOf": "2026-11-23",
-    "price": 353.43,
-    "chg1d": 2.94,
-    "chg1w": 11.81,
-    "chg1m": -7.13,
-    "rsi14": 51.8,
-    "sma50": 367.01,
-    "sma200": 282.35,
-    "ema8": 340.51,
-    "ema21": 344.44,
-    "emaGap": -1.14,
+    "asOf": "2026-11-24",
+    "price": 352.99,
+    "chg1d": -0.12,
+    "chg1w": 14.13,
+    "chg1m": -9.6,
+    "rsi14": 51.7,
+    "sma50": 366.57,
+    "sma200": 283.29,
+    "ema8": 343.28,
+    "ema21": 345.22,
+    "emaGap": -0.56,
     "vsSma50": -3.7,
-    "vsSma200": 25.2,
-    "relVol": 1.27,
+    "vsSma200": 24.6,
+    "relVol": 0.74,
     "vol1y": 51.9,
     "high52w": 419.91,
     "low52w": 141.67,
@@ -236,8 +236,8 @@
         "c": 343.32
       },
       {
-        "d": "2026-11-23",
-        "c": 353.43
+        "d": "2026-11-24",
+        "c": 352.99
       }
     ],
     "signals": [],
@@ -280,19 +280,19 @@
     }
   },
   "summary": {
-    "trades": 39,
-    "members": 17,
-    "congress": 16,
+    "trades": 40,
+    "members": 18,
+    "congress": 17,
     "executive": 1,
-    "whoLabel": "16 members of Congress and 1 executive-branch filer",
+    "whoLabel": "17 members of Congress and 1 executive-branch filer",
     "buys": 24,
-    "sells": 15,
+    "sells": 16,
     "other": 0,
     "firstTx": "2024-12-11",
-    "lastTx": "2026-07-31",
-    "lastFiling": "2026-08-10",
+    "lastTx": "2026-10-14",
+    "lastFiling": "2026-11-23",
     "estBuyLabel": "$3.4M",
-    "estSellLabel": "$236K",
+    "estSellLabel": "$244K",
     "pctLate": 15
   },
   "topMembers": [
@@ -408,6 +408,18 @@
     }
   ],
   "trades": [
+    {
+      "member": "Harriet M. Hageman",
+      "memberSlug": "harriet-m-hageman",
+      "hasPage": false,
+      "party": "R",
+      "side": "SELL",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-10-14",
+      "filedDate": "2026-11-23",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035776.pdf"
+    },
     {
       "member": "John J. McGuire III",
       "memberSlug": "john-j-mcguire-iii",
@@ -695,33 +707,21 @@
       "filedDate": "2025-05-06",
       "daysLate": 0,
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20030295.pdf"
-    },
-    {
-      "member": "Julie Johnson",
-      "memberSlug": "julie-johnson",
-      "hasPage": false,
-      "party": "D",
-      "side": "SELL",
-      "amountBucket": "$1K – $15K",
-      "txDate": "2025-04-07",
-      "filedDate": "2025-05-14",
-      "daysLate": 0,
-      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20030296.pdf"
     }
   ],
   "tradesShown": 25,
   "faq": [
     {
       "q": "Who in Congress has traded PANW stock?",
-      "a": "16 members of Congress and 1 executive-branch filer have disclosed 39 PANW trades since December 2024. The most active is Marjorie Taylor Greene, with 5 trades, followed by Gilbert Ray Cisneros, Jr. and Josh Gottheimer. Each trade on this page links to the official filing it came from."
+      "a": "17 members of Congress and 1 executive-branch filer have disclosed 40 PANW trades since December 2024. The most active is Marjorie Taylor Greene, with 5 trades, followed by Gilbert Ray Cisneros, Jr. and Josh Gottheimer. Each trade on this page links to the official filing it came from."
     },
     {
       "q": "Is Congress buying or selling PANW?",
-      "a": "Of the 39 disclosed PANW trades, 24 were buys and 15 were sells. By the midpoint of each filed amount bracket, the buying comes to about $3.4M and the selling to about $236K. Filings disclose brackets, never exact amounts, so these totals are estimates."
+      "a": "Of the 40 disclosed PANW trades, 24 were buys and 16 were sells. By the midpoint of each filed amount bracket, the buying comes to about $3.4M and the selling to about $244K. Filings disclose brackets, never exact amounts, so these totals are estimates."
     },
     {
       "q": "How late are PANW trades disclosed?",
-      "a": "15% of the disclosed PANW trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Jul 31, 2026, and the newest filing arrived on Aug 10, 2026."
+      "a": "15% of the disclosed PANW trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Oct 14, 2026, and the newest filing arrived on Nov 23, 2026."
     }
   ]
 }

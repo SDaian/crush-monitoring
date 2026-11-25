@@ -12,24 +12,24 @@
   },
   "indexable": true,
   "technical": {
-    "asOf": "2026-11-23",
-    "price": 185.46,
-    "chg1d": 2.68,
-    "chg1w": -13.67,
-    "chg1m": -25.39,
-    "rsi14": 26.5,
-    "sma50": 228.21,
+    "asOf": "2026-11-24",
+    "price": 193.26,
+    "chg1d": 4.21,
+    "chg1w": -0.65,
+    "chg1m": -21.95,
+    "rsi14": 34.8,
+    "sma50": 226.96,
     "sma200": 197.73,
-    "ema8": 194.96,
-    "ema21": 210.44,
-    "emaGap": -7.36,
-    "vsSma50": -18.7,
-    "vsSma200": -6.2,
-    "relVol": 0.84,
-    "vol1y": 47.5,
+    "ema8": 194.58,
+    "ema21": 208.88,
+    "emaGap": -6.84,
+    "vsSma50": -14.8,
+    "vsSma200": -2.3,
+    "relVol": 1.14,
+    "vol1y": 47.7,
     "high52w": 266.23,
     "low52w": 150.12,
-    "rangePos": 30.0,
+    "rangePos": 37.0,
     "series": [
       {
         "d": "2025-12-05",
@@ -236,17 +236,17 @@
         "c": 180.62
       },
       {
-        "d": "2026-11-23",
-        "c": 185.46
+        "d": "2026-11-24",
+        "c": 193.26
       }
     ],
     "signals": [],
     "score": {
-      "label": "Sell",
-      "buys": 2,
+      "label": "Strong Sell",
+      "buys": 1,
       "sells": 5,
-      "holds": 0,
-      "ratio": -0.429
+      "holds": 1,
+      "ratio": -0.571
     },
     "votes": {
       "ema_cross": {
@@ -266,7 +266,7 @@
         "muted": false
       },
       "rsi": {
-        "vote": 1,
+        "vote": 0,
         "muted": false
       },
       "chg_1m": {
@@ -280,20 +280,20 @@
     }
   },
   "summary": {
-    "trades": 52,
-    "members": 19,
-    "congress": 18,
+    "trades": 53,
+    "members": 20,
+    "congress": 19,
     "executive": 1,
-    "whoLabel": "18 members of Congress and 1 executive-branch filer",
+    "whoLabel": "19 members of Congress and 1 executive-branch filer",
     "buys": 24,
-    "sells": 28,
+    "sells": 29,
     "other": 0,
     "firstTx": "2024-09-26",
     "lastTx": "2026-09-24",
-    "lastFiling": "2026-10-07",
+    "lastFiling": "2026-11-23",
     "estBuyLabel": "$290K",
-    "estSellLabel": "$371K",
-    "pctLate": 19
+    "estSellLabel": "$379K",
+    "pctLate": 21
   },
   "topMembers": [
     {
@@ -479,6 +479,18 @@
       "filedDate": "2026-05-08",
       "daysLate": 0,
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20034479.pdf"
+    },
+    {
+      "member": "Harriet M. Hageman",
+      "memberSlug": "harriet-m-hageman",
+      "hasPage": false,
+      "party": "R",
+      "side": "SELL",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-03-31",
+      "filedDate": "2026-11-23",
+      "daysLate": 192,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035776.pdf"
     },
     {
       "member": "Alan Armstrong",
@@ -696,33 +708,21 @@
       "filedDate": "2025-09-12",
       "daysLate": 33,
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20032070.pdf"
-    },
-    {
-      "member": "Lisa C. McClain",
-      "memberSlug": "lisa-c-mcclain",
-      "hasPage": false,
-      "party": "R",
-      "side": "BUY",
-      "amountBucket": "$1K – $15K",
-      "txDate": "2025-06-17",
-      "filedDate": "2025-08-13",
-      "daysLate": 12,
-      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20030891.pdf"
     }
   ],
   "tradesShown": 25,
   "faq": [
     {
       "q": "Who in Congress has traded CRM stock?",
-      "a": "18 members of Congress and 1 executive-branch filer have disclosed 52 CRM trades since September 2024. The most active is David J. Taylor, with 8 trades, followed by Julia Letlow and Josh Gottheimer. Each trade on this page links to the official filing it came from."
+      "a": "19 members of Congress and 1 executive-branch filer have disclosed 53 CRM trades since September 2024. The most active is David J. Taylor, with 8 trades, followed by Julia Letlow and Josh Gottheimer. Each trade on this page links to the official filing it came from."
     },
     {
       "q": "Is Congress buying or selling CRM?",
-      "a": "Of the 52 disclosed CRM trades, 24 were buys and 28 were sells. By the midpoint of each filed amount bracket, the buying comes to about $290K and the selling to about $371K. Filings disclose brackets, never exact amounts, so these totals are estimates."
+      "a": "Of the 53 disclosed CRM trades, 24 were buys and 29 were sells. By the midpoint of each filed amount bracket, the buying comes to about $290K and the selling to about $379K. Filings disclose brackets, never exact amounts, so these totals are estimates."
     },
     {
       "q": "How late are CRM trades disclosed?",
-      "a": "19% of the disclosed CRM trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Sep 24, 2026, and the newest filing arrived on Oct 7, 2026."
+      "a": "21% of the disclosed CRM trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Sep 24, 2026, and the newest filing arrived on Nov 23, 2026."
     }
   ]
 }

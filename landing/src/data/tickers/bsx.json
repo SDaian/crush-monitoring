@@ -12,24 +12,24 @@
   },
   "indexable": true,
   "technical": {
-    "asOf": "2026-11-23",
-    "price": 42.33,
-    "chg1d": 0.83,
-    "chg1w": -3.11,
-    "chg1m": -7.35,
-    "rsi14": 43.4,
+    "asOf": "2026-11-24",
+    "price": 44.14,
+    "chg1d": 4.28,
+    "chg1w": 2.58,
+    "chg1m": -3.16,
+    "rsi14": 51.6,
     "sma50": 43.79,
-    "sma200": 52.9,
-    "ema8": 43.08,
-    "ema21": 43.62,
-    "emaGap": -1.25,
-    "vsSma50": -3.3,
-    "vsSma200": -20.0,
-    "relVol": 0.66,
-    "vol1y": 41.1,
+    "sma200": 52.75,
+    "ema8": 43.31,
+    "ema21": 43.67,
+    "emaGap": -0.81,
+    "vsSma50": 0.8,
+    "vsSma200": -16.3,
+    "relVol": 0.87,
+    "vol1y": 41.4,
     "high52w": 101.58,
     "low52w": 41.58,
-    "rangePos": 1.0,
+    "rangePos": 4.0,
     "series": [
       {
         "d": "2025-12-05",
@@ -236,17 +236,24 @@
         "c": 41.98
       },
       {
-        "d": "2026-11-23",
-        "c": 42.33
+        "d": "2026-11-24",
+        "c": 44.14
       }
     ],
-    "signals": [],
+    "signals": [
+      {
+        "type": "reclaim_sma50",
+        "asof": "2026-11-24",
+        "label": "Reclaimed the 50-day average",
+        "dir": "bull"
+      }
+    ],
     "score": {
-      "label": "Strong Sell",
-      "buys": 0,
-      "sells": 6,
+      "label": "Sell",
+      "buys": 2,
+      "sells": 4,
       "holds": 1,
-      "ratio": -0.857
+      "ratio": -0.286
     },
     "votes": {
       "ema_cross": {
@@ -254,7 +261,7 @@
         "muted": false
       },
       "vs_sma50": {
-        "vote": -1,
+        "vote": 1,
         "muted": false
       },
       "vs_sma200": {
@@ -274,26 +281,26 @@
         "muted": false
       },
       "chg_1w": {
-        "vote": -1,
+        "vote": 1,
         "muted": false
       }
     }
   },
   "summary": {
-    "trades": 42,
-    "members": 10,
-    "congress": 9,
+    "trades": 43,
+    "members": 11,
+    "congress": 10,
     "executive": 1,
-    "whoLabel": "9 members of Congress and 1 executive-branch filer",
+    "whoLabel": "10 members of Congress and 1 executive-branch filer",
     "buys": 18,
-    "sells": 24,
+    "sells": 25,
     "other": 0,
     "firstTx": "2024-10-29",
     "lastTx": "2026-09-09",
-    "lastFiling": "2026-09-25",
+    "lastFiling": "2026-11-23",
     "estBuyLabel": "$169K",
-    "estSellLabel": "$400K",
-    "pctLate": 7
+    "estSellLabel": "$408K",
+    "pctLate": 9
   },
   "topMembers": [
     {
@@ -577,6 +584,18 @@
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20034713.pdf"
     },
     {
+      "member": "Harriet M. Hageman",
+      "memberSlug": "harriet-m-hageman",
+      "hasPage": false,
+      "party": "R",
+      "side": "SELL",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-04-21",
+      "filedDate": "2026-11-23",
+      "daysLate": 171,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035776.pdf"
+    },
+    {
       "member": "Donald J. Trump",
       "memberSlug": "donald-j-trump",
       "hasPage": true,
@@ -695,33 +714,21 @@
       "filedDate": "2025-11-21",
       "daysLate": 0,
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20033446.pdf"
-    },
-    {
-      "member": "Lisa C. McClain",
-      "memberSlug": "lisa-c-mcclain",
-      "hasPage": false,
-      "party": "R",
-      "side": "BUY",
-      "amountBucket": "$1K – $15K",
-      "txDate": "2025-10-30",
-      "filedDate": "2025-11-21",
-      "daysLate": 0,
-      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20033446.pdf"
     }
   ],
   "tradesShown": 25,
   "faq": [
     {
       "q": "Who in Congress has traded BSX stock?",
-      "a": "9 members of Congress and 1 executive-branch filer have disclosed 42 BSX trades since October 2024. The most active is Gilbert Ray Cisneros, Jr., with 18 trades, followed by Kevin Hern and Lisa C. McClain. Each trade on this page links to the official filing it came from."
+      "a": "10 members of Congress and 1 executive-branch filer have disclosed 43 BSX trades since October 2024. The most active is Gilbert Ray Cisneros, Jr., with 18 trades, followed by Kevin Hern and Lisa C. McClain. Each trade on this page links to the official filing it came from."
     },
     {
       "q": "Is Congress buying or selling BSX?",
-      "a": "Of the 42 disclosed BSX trades, 18 were buys and 24 were sells. By the midpoint of each filed amount bracket, the buying comes to about $169K and the selling to about $400K. Filings disclose brackets, never exact amounts, so these totals are estimates."
+      "a": "Of the 43 disclosed BSX trades, 18 were buys and 25 were sells. By the midpoint of each filed amount bracket, the buying comes to about $169K and the selling to about $408K. Filings disclose brackets, never exact amounts, so these totals are estimates."
     },
     {
       "q": "How late are BSX trades disclosed?",
-      "a": "7% of the disclosed BSX trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Sep 9, 2026, and the newest filing arrived on Sep 25, 2026."
+      "a": "9% of the disclosed BSX trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Sep 9, 2026, and the newest filing arrived on Nov 23, 2026."
     }
   ]
 }

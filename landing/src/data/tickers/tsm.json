@@ -12,24 +12,24 @@
   },
   "indexable": true,
   "technical": {
-    "asOf": "2026-11-23",
-    "price": 363.6,
-    "chg1d": 14.08,
-    "chg1w": -2.64,
-    "chg1m": -13.12,
-    "rsi14": 43.1,
-    "sma50": 421.06,
-    "sma200": 403.64,
-    "ema8": 362.4,
-    "ema21": 384.87,
-    "emaGap": -5.84,
-    "vsSma50": -13.6,
-    "vsSma200": -9.9,
-    "relVol": 1.74,
-    "vol1y": 45.6,
+    "asOf": "2026-11-24",
+    "price": 349.2,
+    "chg1d": -3.96,
+    "chg1w": -2.92,
+    "chg1m": -17.71,
+    "rsi14": 40.2,
+    "sma50": 419.77,
+    "sma200": 403.61,
+    "ema8": 359.47,
+    "ema21": 381.63,
+    "emaGap": -5.81,
+    "vsSma50": -16.8,
+    "vsSma200": -13.5,
+    "relVol": 0.93,
+    "vol1y": 45.8,
     "high52w": 485.8,
-    "low52w": 275.06,
-    "rangePos": 42.0,
+    "low52w": 276.96,
+    "rangePos": 35.0,
     "series": [
       {
         "d": "2025-12-05",
@@ -236,8 +236,8 @@
         "c": 318.71
       },
       {
-        "d": "2026-11-23",
-        "c": 363.6
+        "d": "2026-11-24",
+        "c": 349.2
       }
     ],
     "signals": [],
@@ -280,20 +280,20 @@
     }
   },
   "summary": {
-    "trades": 53,
-    "members": 12,
-    "congress": 12,
+    "trades": 55,
+    "members": 13,
+    "congress": 13,
     "executive": 0,
-    "whoLabel": "12 members of Congress",
-    "buys": 37,
+    "whoLabel": "13 members of Congress",
+    "buys": 39,
     "sells": 16,
     "other": 0,
     "firstTx": "2024-03-11",
     "lastTx": "2026-10-09",
-    "lastFiling": "2026-10-22",
+    "lastFiling": "2026-11-23",
     "estBuyLabel": "$1.9M",
     "estSellLabel": "$262K",
-    "pctLate": 23
+    "pctLate": 25
   },
   "topMembers": [
     {
@@ -396,14 +396,14 @@
       "hasPage": false
     },
     {
-      "name": "Julie Johnson",
-      "slug": "julie-johnson",
-      "party": "D",
+      "name": "Harriet M. Hageman",
+      "slug": "harriet-m-hageman",
+      "party": "R",
       "chamber": "House",
-      "trades": 1,
-      "buys": 0,
-      "sells": 1,
-      "estLabel": "$8K",
+      "trades": 2,
+      "buys": 2,
+      "sells": 0,
+      "estLabel": "$16K",
       "hasPage": false
     }
   ],
@@ -457,6 +457,18 @@
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035023.pdf"
     },
     {
+      "member": "Harriet M. Hageman",
+      "memberSlug": "harriet-m-hageman",
+      "hasPage": false,
+      "party": "R",
+      "side": "BUY",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-07-02",
+      "filedDate": "2026-11-23",
+      "daysLate": 99,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035776.pdf"
+    },
+    {
       "member": "Rick W. Allen",
       "memberSlug": "rick-w-allen",
       "hasPage": false,
@@ -479,6 +491,18 @@
       "filedDate": "2026-04-20",
       "daysLate": 0,
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20034357.pdf"
+    },
+    {
+      "member": "Harriet M. Hageman",
+      "memberSlug": "harriet-m-hageman",
+      "hasPage": false,
+      "party": "R",
+      "side": "BUY",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-03-31",
+      "filedDate": "2026-11-23",
+      "daysLate": 192,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035776.pdf"
     },
     {
       "member": "Gilbert Ray Cisneros, Jr.",
@@ -683,45 +707,21 @@
       "filedDate": "2025-11-22",
       "daysLate": 0,
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20033421.pdf"
-    },
-    {
-      "member": "Val T. Hoyle",
-      "memberSlug": "val-t-hoyle",
-      "hasPage": false,
-      "party": "D",
-      "side": "SELL",
-      "amountBucket": "$1K – $15K",
-      "txDate": "2025-09-23",
-      "filedDate": "2025-10-10",
-      "daysLate": 0,
-      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20032211.pdf"
-    },
-    {
-      "member": "Lisa C. McClain",
-      "memberSlug": "lisa-c-mcclain",
-      "hasPage": false,
-      "party": "R",
-      "side": "SELL",
-      "amountBucket": "$50K – $100K",
-      "txDate": "2025-08-28",
-      "filedDate": "2025-09-12",
-      "daysLate": 0,
-      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20030932.pdf"
     }
   ],
   "tradesShown": 25,
   "faq": [
     {
       "q": "Who in Congress has traded TSM stock?",
-      "a": "12 members of Congress have disclosed 53 TSM trades since March 2024. The most active is Cleo Fields, with 14 trades, followed by Lisa C. McClain and Gilbert Ray Cisneros, Jr.. Each trade on this page links to the official filing it came from."
+      "a": "13 members of Congress have disclosed 55 TSM trades since March 2024. The most active is Cleo Fields, with 14 trades, followed by Lisa C. McClain and Gilbert Ray Cisneros, Jr.. Each trade on this page links to the official filing it came from."
     },
     {
       "q": "Is Congress buying or selling TSM?",
-      "a": "Of the 53 disclosed TSM trades, 37 were buys and 16 were sells. By the midpoint of each filed amount bracket, the buying comes to about $1.9M and the selling to about $262K. Filings disclose brackets, never exact amounts, so these totals are estimates."
+      "a": "Of the 55 disclosed TSM trades, 39 were buys and 16 were sells. By the midpoint of each filed amount bracket, the buying comes to about $1.9M and the selling to about $262K. Filings disclose brackets, never exact amounts, so these totals are estimates."
     },
     {
       "q": "How late are TSM trades disclosed?",
-      "a": "23% of the disclosed TSM trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Oct 9, 2026, and the newest filing arrived on Oct 22, 2026."
+      "a": "25% of the disclosed TSM trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Oct 9, 2026, and the newest filing arrived on Nov 23, 2026."
     }
   ]
 }

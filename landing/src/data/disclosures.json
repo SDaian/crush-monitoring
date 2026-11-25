@@ -2,6 +2,17 @@
   "_comment": "Generated from real official disclosures by congress/landing_data.py (daily Action). Do not edit by hand. 'filedDaysLate' counts days past the STOCK Act's 45-day statutory maximum; 0 = on time.",
   "disclosures": [
     {
+      "member": "H. Hageman",
+      "memberSlug": null,
+      "chamber": "House",
+      "district": "WY-0",
+      "ticker": "LYB",
+      "tickerSlug": null,
+      "side": "BUY",
+      "amountBucket": "$15K – $50K",
+      "filedDaysLate": 163
+    },
+    {
       "member": "J. McClellan",
       "memberSlug": null,
       "chamber": "House",
@@ -30,9 +41,9 @@
       "district": "CA-31",
       "ticker": "STRC",
       "tickerSlug": null,
-      "side": "BUY",
-      "amountBucket": "$15K – $50K",
-      "filedDaysLate": 113
+      "side": "SELL",
+      "amountBucket": "$50K – $100K",
+      "filedDaysLate": 0
     },
     {
       "member": "P. Sessions",
@@ -41,17 +52,6 @@
       "district": "TX-17",
       "ticker": "COST",
       "tickerSlug": "cost",
-      "side": "SELL",
-      "amountBucket": "$250K – $500K",
-      "filedDaysLate": 0
-    },
-    {
-      "member": "A. Armstrong",
-      "memberSlug": "alan-armstrong",
-      "chamber": "Senate",
-      "district": "OK",
-      "ticker": "WMB",
-      "tickerSlug": null,
       "side": "SELL",
       "amountBucket": "$250K – $500K",
       "filedDaysLate": 0
