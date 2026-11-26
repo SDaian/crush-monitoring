@@ -1179,6 +1179,36 @@ Conventions:
   is stacking, not the dash), typographic marks (→ ★ ✕) are not emoji, and the
   AI disclosure on `/how-it-works` stays: removing it would hide something
   true.
+- **Performance budgets are checked on every build.**
+  `landing/scripts/check-performance.mjs` (npm `postbuild`, after
+  `check-copy`) reads `dist/` and warns when a page goes over its budget:
+  elements painted before any script runs (3,000), elements in the HTML
+  (25,000), and per-page HTML, JS and CSS, font preloads, and the tracker's
+  data, all as gzip sizes. It also flags render-blocking or third-party
+  scripts, a head script over 1 KB, a preload whose file is missing, and media
+  without width and height. It warns and never fails, for `check-seo`'s
+  reason, and prints the worst value of each measure on every build. It reads
+  files only, so it cannot see rows a script builds (the tracker's table),
+  layout shift, or interaction time; those still need a phone check. The
+  painted-element budget is the one that found a real problem: the longest
+  member page laid out all 1,711 disclosure rows (19,837 elements) before its
+  script folded the list, and a filter keystroke there took a phone 1.2 s.
+- **A long member trade list is folded at build time.** Past
+  `COLLAPSE_AT` (25, when a list has more than 30 rows), the rows and the
+  month headings that open past the fold carry the `tfold` class, and a head
+  script hides them with a class on `<html>` before the first paint. Every row
+  still ships in the HTML, and without JavaScript every row shows. The class
+  must come off on every path, or the folded rows would be gone with no "Show
+  all" button: the trades script removes it after `apply()` (and when it
+  bails out), and a `load` listener removes it if the trades script never ran.
+  The script reads the fold from `data-collapse-at`, so there is one number.
+  The rows also carry `content-visibility: auto`, which skips layout for rows
+  off screen; its size estimate is a row's real height (78px, 70px on phones),
+  so the scrollbar holds still. Measured on a 4x-slowed phone profile: the
+  first keystroke in the filter went from 1.2 s to 0.2 s, "Show all" from
+  1.0 s to 0.26 s, and the load event on the longest page from 1.7 s to
+  1.0 s. `tests/congress/test_landing_source.py` holds the rules, and
+  `check-performance.mjs` shares the class name (`FOLD_CLASS`).
 - **Open Graph cards are one per page, and deliberately stable.** Every
   ticker and member page shares its own 1200x630 card from `/og`
   (`congress/social/og_template.html` + `scripts/make_og.mjs`, the same
