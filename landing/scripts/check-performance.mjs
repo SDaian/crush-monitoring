@@ -40,7 +40,8 @@ const BUDGET = {
   css: 15 * 1024, // per page: stylesheets plus inline <style>
   fontPreloads: 6,
   fontPreloadBytes: 100 * 1024, // woff2 is compressed already: raw bytes
-  // A script in <head> blocks parsing; the few there set a class on <html>.
+  // A classic inline script in <head> blocks parsing while it runs; the few
+  // there set a class on <html>. A module script is deferred and does not.
   headInlineScript: 1024,
   // The three JSON files the tracker downloads on every first visit.
   trackerData: 600 * 1024,
@@ -157,7 +158,7 @@ for (const file of files) {
     else js += gz(Buffer.from(m[2]));
     if (inHead && src && !attrs.has("defer") && !attrs.has("async") && attrs.get("type") !== "module")
       problems.push(`${url} — render-blocking script in <head>: ${src}`);
-    if (inHead && !src && m[2].length > BUDGET.headInlineScript)
+    if (inHead && !src && attrs.get("type") !== "module" && m[2].length > BUDGET.headInlineScript)
       problems.push(
         `${url} — ${num(m[2].length)} B inline script in <head> (parsing waits for it; budget ${num(BUDGET.headInlineScript)} B)`,
       );

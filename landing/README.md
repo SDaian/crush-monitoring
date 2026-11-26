@@ -101,10 +101,12 @@ The Vercel project builds from `landing/` (Astro preset) on every push to
 the project's `vercel.app` domain redirect to it with a 308. `site` in
 `astro.config.mjs` is the same host, so canonical tags, the sitemap and the
 Open Graph URLs agree. Page traffic comes from Vercel Web Analytics, which is
-cookieless.
+cookieless. Real-user page speed (LCP, INP and CLS per route) comes from
+Vercel Speed Insights, which records nothing until it is switched on in the
+project's Speed Insights tab; `/privacy` describes what it records.
 
 `vercel.json` holds the ticker redirects (`/tickers/goog` → `/tickers/googl`,
-`/tickers/fb` → `/tickers/meta`).
+`/tickers/fb` → `/tickers/meta`) and the one-year cache rule for `/_astro`.
 
 ## Open items
 

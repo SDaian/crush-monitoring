@@ -1256,6 +1256,20 @@ Conventions:
   throwaway certificate (it needs `openssl`) and trusts it by its key; and
   the signup dialog can cover the button a scenario clicks, so each run
   marks it answered.
+- **Real-user speed comes from Vercel Speed Insights.** The lab scripts
+  estimate; Speed Insights reports LCP, INP and CLS per route from readers'
+  own devices. `Seo.astro` loads `@vercel/speed-insights/astro` beside Web
+  Analytics, pinned to an exact version because it runs on every page. It
+  records nothing until it is switched on in the Vercel project, and
+  `/privacy` names it and what each measurement holds (the page, browser,
+  device type, operating system, connection speed; nothing that identifies a
+  reader or links one page to the next). A test fails if a measurement
+  product in `Seo.astro` is not named on `/privacy`: that page promises to
+  say so before anything about tracking changes. The free allowance on the
+  Hobby plan is a fixed number of events per 30 days; past it, collection
+  pauses and nothing is billed. Its script is an inline module, which is
+  deferred, so `check-performance.mjs` judges only classic inline scripts
+  against its head-script budget.
 - **Hashed assets are cached for a year; nothing else is.** `vercel.json`
   sends `public, max-age=31536000, immutable` for `/_astro/*`, so a repeat
   visitor's browser uses the stylesheet, scripts and fonts without asking
