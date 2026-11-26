@@ -94,6 +94,62 @@ class TestTheTrackerDecidesNothing(unittest.TestCase):
         self.assertEqual(worded, cast)
 
 
+class TestTheFoldCanAlwaysOpen(unittest.TestCase):
+    """Member pages hide the disclosure rows past the fold from the first paint.
+
+    A class on <html>, set by a head script, hides them until the trades
+    script gives every row its own ``hidden``. If that class stayed on, the
+    folded rows would be gone with no "Show all" button to bring them back,
+    so it must come off on every path: the trades script removes it (also
+    when it bails out early), and a ``load`` listener removes it when the
+    trades script never ran at all.
+    """
+
+    @classmethod
+    def setUpClass(cls):
+        cls.src = (SRC / "pages" / "members" / "[slug].astro").read_text(
+            encoding="utf-8")
+        scripts = re.findall(r"<script is:inline>(.*?)</script>", cls.src, re.S)
+        cls.head = next((s for s in scripts if 'classList.add("tfold-on")' in s), "")
+        cls.trades = next((s for s in scripts if 'getElementById("tfilter")' in s), "")
+
+    def test_the_page_folds(self):
+        self.assertTrue(self.head, "the head script that folds the rows is gone")
+        self.assertTrue(self.trades, "the trades script is gone")
+
+    def test_the_head_script_lets_go_on_load(self):
+        self.assertRegex(
+            self.head,
+            r'addEventListener\("load",\s*function \(\) \{\s*'
+            r'r\.classList\.remove\("tfold-on"\)')
+
+    def test_the_trades_script_lets_go_on_every_path(self):
+        self.assertIn('root.classList.remove("tfold-on")', self.trades)
+        early = re.search(r"if \(!box \|\|[^)]*\) \{(.*?)\}", self.trades, re.S)
+        self.assertIsNotNone(early, "the early return lost its braces")
+        self.assertIn("unfold()", early.group(1))
+        self.assertRegex(self.trades,
+                         r"try \{\s*apply\(\);\s*\} finally \{\s*unfold\(\);")
+
+    def test_one_fold_constant(self):
+        # The build decides the first paint's fold; the script must use the
+        # same number, read from the page, never a second literal.
+        self.assertEqual(len(re.findall(r"const COLLAPSE_AT = \d+;", self.src)), 1)
+        self.assertNotRegex(self.trades, r"COLLAPSE_AT\s*=\s*\d")
+        self.assertIn('box.getAttribute("data-collapse-at")', self.trades)
+        self.assertIn("data-collapse-at={COLLAPSE_AT}", self.src)
+
+    def test_the_budget_check_knows_the_fold_class(self):
+        # check-performance counts folded rows as not painted; a renamed
+        # class would make every long member page read as over budget.
+        check = (REPO_ROOT / "landing" / "scripts" / "check-performance.mjs"
+                 ).read_text(encoding="utf-8")
+        name = re.search(r'const FOLD_CLASS = "([\w-]+)";', check)
+        self.assertIsNotNone(name, "check-performance.mjs lost FOLD_CLASS")
+        self.assertIn(f'"trow", folded && "{name.group(1)}"', self.src)
+        self.assertIn(f".{name.group(1)} {{\n    display: none;", self.src)
+
+
 class TestMarkupHelpers(unittest.TestCase):
     """The exclusion must not hide a real comment sitting next to a block."""
 

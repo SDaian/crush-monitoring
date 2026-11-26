@@ -99,10 +99,22 @@ for (const t of m.trades as any[]) {
   const k = monthKey(t.txDate);
   monthCounts.set(k, (monthCounts.get(k) ?? 0) + 1);
 }
+// A long list shows its first COLLAPSE_AT disclosures under a "Show all"
+// button. The fold is decided HERE, so the rows below it are hidden from the
+// first paint: the page used to lay out every row and let the script hide
+// them afterwards, which cost a phone 0.6–0.9 s of load on the longest pages.
+// Every row still ships in the HTML (crawlers and no-JS readers see them
+// all); the class below only hides a row while JavaScript runs. The script
+// reads COLLAPSE_AT from `data-collapse-at`, so the two cannot disagree.
+const COLLAPSE_AT = 25;
+const folds = m.trades.length > COLLAPSE_AT + 5;
 const tradeRows = (m.trades as any[]).map((t, i, all) => ({
   t,
   month: monthKey(t.txDate),
   opens: i === 0 || monthKey(all[i - 1].txDate) !== monthKey(t.txDate),
+  // A month heading folds with the row that opens it: every row after that
+  // one is past the fold too, so the heading would have nothing to head.
+  folded: folds && i >= COLLAPSE_AT,
 }));
 
 // "<1%" when a late filing exists but rounds to 0 — never "0%" beside a
@@ -215,6 +227,23 @@ const schema = [
       schema={schema}
       ogCard={`member-${m.slug}.png`}
     />
+    {/* Hides the folded disclosure rows before the body is painted. The
+         trades script takes over with `hidden` and removes the class; the
+         load listener removes it too, so a script that never ran cannot leave
+         rows hidden with no "Show all" button to bring them back. */}
+    {
+      folds && (
+        <script is:inline>
+          (function () {
+            var r = document.documentElement;
+            r.classList.add("tfold-on");
+            addEventListener("load", function () {
+              r.classList.remove("tfold-on");
+            });
+          })();
+        </script>
+      )
+    }
   </head>
   <body>
     <Header active="members" />
@@ -543,7 +572,7 @@ const schema = [
         <span class="eyebrow">Most recent first</span>
       </div>
 
-      <div id="tfilter" class="tctl" hidden>
+      <div id="tfilter" class="tctl" data-collapse-at={COLLAPSE_AT} hidden>
         <label class="tctl-search">
           <span class="sr-only">Filter the trades</span>
           <input
@@ -587,10 +616,10 @@ const schema = [
             <span role="columnheader">Filing</span>
           </div>
           {
-            tradeRows.map(({ t, month, opens }) => (
+            tradeRows.map(({ t, month, opens, folded }) => (
               <>
               {opens && (
-                <div role="row" class="tmonth" data-m={month}>
+                <div role="row" class:list={["tmonth", folded && "tfold"]} data-m={month}>
                   <div role="cell">
                     <h3 class="tmonth-head">
                       {monthLabel(month)}{" "}
@@ -603,7 +632,7 @@ const schema = [
               )}
               <div
                 role="row"
-                class="trow"
+                class:list={["trow", folded && "tfold"]}
                 data-m={month}
                 data-t={(t.ticker || "").toLowerCase()}
                 data-c={(t.asset || "").toLowerCase()}
@@ -708,6 +737,13 @@ const schema = [
       // only hides and reveals. Controls start hidden so a reader without
       // JavaScript never sees a control that cannot work.
       (function () {
+        // The head script's class hides the folded rows until `apply` gives
+        // every row its own `hidden`; it must come off on every path, or a
+        // folded row could never be shown again.
+        var root = document.documentElement;
+        function unfold() {
+          root.classList.remove("tfold-on");
+        }
         var box = document.getElementById("tfilter");
         var q = document.getElementById("tfq");
         var side = document.getElementById("tfside");
@@ -716,14 +752,18 @@ const schema = [
         var empty = document.getElementById("tfempty");
         var clear = document.getElementById("tfclear");
         var more = document.getElementById("tfmore");
-        if (!box || !q || !side || !count || !empty || !clear || !more) return;
+        if (!box || !q || !side || !count || !empty || !clear || !more) {
+          unfold();
+          return;
+        }
 
         var rows = Array.prototype.slice.call(
           document.querySelectorAll(".trow:not(.thead)"));
         var months = Array.prototype.slice.call(
           document.querySelectorAll(".tmonth"));
         var total = rows.length;
-        var COLLAPSE_AT = 25;
+        // Set at build time, where the first paint's fold is decided.
+        var COLLAPSE_AT = Number(box.getAttribute("data-collapse-at"));
         // Collapsed by default only when the table is long; filtering always
         // expands, because a filter over hidden rows lies about the record.
         var collapsed = total > COLLAPSE_AT + 5;
@@ -738,6 +778,10 @@ const schema = [
           var wantAsset = asset ? asset.value : "";
           var showAll = !collapsed || filtering();
           var shown = 0;
+          // Visible rows per month, counted in this one pass: a pass per
+          // heading read every row once per month (23 x 1,711 on the longest
+          // page) on every keystroke.
+          var visibleIn = Object.create(null);
           rows.forEach(function (row) {
             var hit =
               (!term ||
@@ -748,14 +792,15 @@ const schema = [
                 (wantAsset === "bond") === (row.getAttribute("data-b") === "1"));
             if (hit) shown++;
             row.hidden = !hit || (!showAll && shown > COLLAPSE_AT);
+            if (!row.hidden) {
+              var key = row.getAttribute("data-m");
+              visibleIn[key] = (visibleIn[key] || 0) + 1;
+            }
           });
           // A month heading shows only while one of its rows does, and its
           // count follows the filter, so it never counts hidden rows.
           months.forEach(function (head) {
-            var key = head.getAttribute("data-m");
-            var visible = rows.filter(function (row) {
-              return row.getAttribute("data-m") === key && !row.hidden;
-            }).length;
+            var visible = visibleIn[head.getAttribute("data-m")] || 0;
             head.hidden = visible === 0;
             var n = head.querySelector(".tmonth-n");
             var all = Number(n.getAttribute("data-total"));
@@ -786,7 +831,11 @@ const schema = [
           apply();
         });
         box.hidden = false;
-        apply();
+        try {
+          apply();
+        } finally {
+          unfold();
+        }
       })();
     </script>
   </body>
@@ -1266,6 +1315,20 @@ const schema = [
   .trow > * {
     min-width: 0;
   }
+  /* The browser skips layout and paint for a row off screen. A filter can
+     reveal 1,700 rows at once, and laying them all out took a phone over a
+     second per keystroke; skipped, it takes under 0.2 s. The estimate is a
+     row's real height (78px here, 70px on phones) so the scrollbar holds
+     still, and `auto` keeps each row's measured height once it has shown. */
+  .trow:not(.thead) {
+    content-visibility: auto;
+    contain-intrinsic-block-size: auto 4.9rem;
+  }
+  /* Rows past the fold, hidden from the first paint while the head script's
+     class is on <html> (see the frontmatter). */
+  :global(html.tfold-on) .tfold {
+    display: none;
+  }
   /* A month heading inside the trades table. Sticky to the left edge so it
      stays readable while a phone scrolls the table sideways. */
   .tmonth {
@@ -1382,6 +1445,9 @@ const schema = [
       grid-template-columns: 9rem 3.4rem 7.6rem 7.6rem 7rem;
       font-size: 0.76rem;
       padding: 0.9rem 0.1rem;
+    }
+    .trow:not(.thead) {
+      contain-intrinsic-block-size: auto 4.4rem;
     }
     .trow.thead {
       font-size: 0.66rem;
