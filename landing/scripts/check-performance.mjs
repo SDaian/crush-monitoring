@@ -219,6 +219,16 @@ if (existsSync(DATA))
 if (trackerData > BUDGET.trackerData)
   problems.push(`/data — tracker data ${kb(trackerData)} (budget ${kb(BUDGET.trackerData)})`);
 
+// vercel.json tells browsers to keep every /_astro file for a year without
+// asking again. That is right only while each name carries a hash of its
+// content, so a changed file gets a new name; a file without one would be
+// stale for a year after its first change.
+const ASSETS = path.join(DIST, "_astro");
+if (existsSync(ASSETS))
+  for (const name of await readdir(ASSETS))
+    if (!/\.[\w-]{8,}\.\w+$/.test(name))
+      problems.push(`/_astro/${name} — no content hash in the name, but vercel.json caches /_astro for a year`);
+
 const summary =
   `worst: ${num(worst.painted.value)} elements painted (${worst.painted.url}), ` +
   `HTML ${kb(worst.html.value)} (${worst.html.url}), JS ${kb(worst.js.value)} (${worst.js.url}), ` +

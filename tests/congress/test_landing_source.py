@@ -227,6 +227,26 @@ class TestTheTrackerHoldsItsPlace(unittest.TestCase):
         self.assertIn(release, failed.group(1))
 
 
+class TestOnlyHashedFilesAreImmutable(unittest.TestCase):
+    """vercel.json lets browsers keep /_astro files for a year, unasked.
+
+    Astro names every file there after a hash of its content, so a changed
+    file arrives under a new name and the rule is always right. On any other
+    path it would freeze the file: a page or the tracker's daily data would
+    stay a year out of date in every browser that had seen it once.
+    check-performance.mjs warns if an /_astro name ever lacks its hash.
+    """
+
+    def test_immutable_covers_only_the_hashed_folder(self):
+        import json
+        cfg = json.loads((REPO_ROOT / "landing" / "vercel.json").read_text())
+        rules = cfg.get("headers", [])
+        immutable = [r["source"] for r in rules
+                     if any("immutable" in h["value"] or "max-age=31536000" in h["value"]
+                            for h in r["headers"] if h["key"].lower() == "cache-control")]
+        self.assertEqual(immutable, ["/_astro/(.*)"])
+
+
 class TestMarkupHelpers(unittest.TestCase):
     """The exclusion must not hide a real comment sitting next to a block."""
 
