@@ -1256,6 +1256,17 @@ Conventions:
   throwaway certificate (it needs `openssl`) and trusts it by its key; and
   the signup dialog can cover the button a scenario clicks, so each run
   marks it answered.
+- **Hashed assets are cached for a year; nothing else is.** `vercel.json`
+  sends `public, max-age=31536000, immutable` for `/_astro/*`, so a repeat
+  visitor's browser uses the stylesheet, scripts and fonts without asking
+  again. Revalidating them costs a round trip before the first paint: on the
+  slow-4G phone profile a repeat visit painted at 1.3 s with revalidation and
+  0.7 s without. The rule is right only because Astro names every file there
+  after a hash of its content, so `check-performance.mjs` warns on an
+  `/_astro` name without one, and a test fails if the rule ever covers
+  another path: a page or the tracker's daily data cached for a year would
+  stay stale in every browser that saw it once. Vercel's Astro preset may
+  already send this header; the rule makes it ours either way.
 - **Open Graph cards are one per page, and deliberately stable.** Every
   ticker and member page shares its own 1200x630 card from `/og`
   (`congress/social/og_template.html` + `scripts/make_og.mjs`, the same
