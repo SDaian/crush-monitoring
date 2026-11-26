@@ -23,12 +23,12 @@
       "ticker": "NVDA",
       "aliases": [],
       "company": "NVIDIA Corporation",
-      "trades": 192,
-      "members": 37,
-      "buys": 121,
-      "sells": 71,
-      "lastTx": "2026-10-28",
-      "lastFiling": "2026-11-23",
+      "trades": 196,
+      "members": 38,
+      "buys": 124,
+      "sells": 72,
+      "lastTx": "2026-11-09",
+      "lastFiling": "2026-11-25",
       "indexable": true,
       "industry": {
         "key": "tech",
@@ -159,6 +159,23 @@
       }
     },
     {
+      "slug": "pg",
+      "ticker": "PG",
+      "aliases": [],
+      "company": "Procter & Gamble Company",
+      "trades": 71,
+      "members": 32,
+      "buys": 35,
+      "sells": 36,
+      "lastTx": "2026-11-05",
+      "lastFiling": "2026-11-24",
+      "indexable": true,
+      "industry": {
+        "key": "consumer",
+        "label": "Consumer & retail"
+      }
+    },
+    {
       "slug": "lly",
       "ticker": "LLY",
       "aliases": [],
@@ -190,23 +207,6 @@
       "industry": {
         "key": "finance",
         "label": "Banks & finance"
-      }
-    },
-    {
-      "slug": "pg",
-      "ticker": "PG",
-      "aliases": [],
-      "company": "Procter & Gamble Company",
-      "trades": 70,
-      "members": 31,
-      "buys": 35,
-      "sells": 35,
-      "lastTx": "2026-11-05",
-      "lastFiling": "2026-11-23",
-      "indexable": true,
-      "industry": {
-        "key": "consumer",
-        "label": "Consumer & retail"
       }
     },
     {
@@ -431,6 +431,23 @@
       }
     },
     {
+      "slug": "pep",
+      "ticker": "PEP",
+      "aliases": [],
+      "company": "Pepsico, Inc.",
+      "trades": 52,
+      "members": 27,
+      "buys": 20,
+      "sells": 32,
+      "lastTx": "2026-10-29",
+      "lastFiling": "2026-11-24",
+      "indexable": true,
+      "industry": {
+        "key": "agriculture",
+        "label": "Agriculture & food"
+      }
+    },
+    {
       "slug": "amd",
       "ticker": "AMD",
       "aliases": [],
@@ -445,23 +462,6 @@
       "industry": {
         "key": "tech",
         "label": "Technology"
-      }
-    },
-    {
-      "slug": "pep",
-      "ticker": "PEP",
-      "aliases": [],
-      "company": "Pepsico, Inc.",
-      "trades": 51,
-      "members": 26,
-      "buys": 20,
-      "sells": 31,
-      "lastTx": "2026-10-21",
-      "lastFiling": "2026-11-23",
-      "indexable": true,
-      "industry": {
-        "key": "agriculture",
-        "label": "Agriculture & food"
       }
     },
     {
@@ -567,6 +567,23 @@
       }
     },
     {
+      "slug": "vz",
+      "ticker": "VZ",
+      "aliases": [],
+      "company": "Verizon Communications Inc.",
+      "trades": 43,
+      "members": 19,
+      "buys": 15,
+      "sells": 28,
+      "lastTx": "2026-11-19",
+      "lastFiling": "2026-11-24",
+      "indexable": true,
+      "industry": {
+        "key": "telecom",
+        "label": "Telecom & media"
+      }
+    },
+    {
       "slug": "xom",
       "ticker": "XOM",
       "aliases": [],
@@ -618,20 +635,20 @@
       }
     },
     {
-      "slug": "vz",
-      "ticker": "VZ",
+      "slug": "etn",
+      "ticker": "ETN",
       "aliases": [],
-      "company": "Verizon Communications Inc.",
-      "trades": 42,
-      "members": 18,
-      "buys": 15,
-      "sells": 27,
-      "lastTx": "2026-11-19",
-      "lastFiling": "2026-11-23",
+      "company": "Eaton Corporation, PLC",
+      "trades": 41,
+      "members": 14,
+      "buys": 20,
+      "sells": 21,
+      "lastTx": "2026-11-10",
+      "lastFiling": "2026-11-24",
       "indexable": true,
       "industry": {
-        "key": "telecom",
-        "label": "Telecom & media"
+        "key": "industrial",
+        "label": "Manufacturing"
       }
     },
     {
@@ -645,6 +662,23 @@
       "sells": 21,
       "lastTx": "2026-08-14",
       "lastFiling": "2026-11-23",
+      "indexable": true,
+      "industry": {
+        "key": "tech",
+        "label": "Technology"
+      }
+    },
+    {
+      "slug": "intc",
+      "ticker": "INTC",
+      "aliases": [],
+      "company": "Intel Corporation",
+      "trades": 40,
+      "members": 17,
+      "buys": 25,
+      "sells": 15,
+      "lastTx": "2026-11-09",
+      "lastFiling": "2026-11-24",
       "indexable": true,
       "industry": {
         "key": "tech",
@@ -683,23 +717,6 @@
       "industry": {
         "key": "telecom",
         "label": "Telecom & media"
-      }
-    },
-    {
-      "slug": "etn",
-      "ticker": "ETN",
-      "aliases": [],
-      "company": "Eaton Corporation, PLC",
-      "trades": 40,
-      "members": 14,
-      "buys": 20,
-      "sells": 20,
-      "lastTx": "2026-11-03",
-      "lastFiling": "2026-11-12",
-      "indexable": true,
-      "industry": {
-        "key": "industrial",
-        "label": "Manufacturing"
       }
     },
     {
@@ -768,23 +785,6 @@
       "industry": {
         "key": "finance",
         "label": "Banks & finance"
-      }
-    },
-    {
-      "slug": "intc",
-      "ticker": "INTC",
-      "aliases": [],
-      "company": "Intel Corporation",
-      "trades": 39,
-      "members": 17,
-      "buys": 25,
-      "sells": 14,
-      "lastTx": "2026-07-24",
-      "lastFiling": "2026-08-21",
-      "indexable": true,
-      "industry": {
-        "key": "tech",
-        "label": "Technology"
       }
     },
     {
@@ -924,6 +924,40 @@
       }
     },
     {
+      "slug": "asml",
+      "ticker": "ASML",
+      "aliases": [],
+      "company": "ASML Holding N.V. - New York Registry Shares",
+      "trades": 36,
+      "members": 12,
+      "buys": 23,
+      "sells": 13,
+      "lastTx": "2026-11-09",
+      "lastFiling": "2026-11-24",
+      "indexable": true,
+      "industry": {
+        "key": "tech",
+        "label": "Technology"
+      }
+    },
+    {
+      "slug": "cmcsa",
+      "ticker": "CMCSA",
+      "aliases": [],
+      "company": "Comcast Corporation",
+      "trades": 36,
+      "members": 17,
+      "buys": 10,
+      "sells": 26,
+      "lastTx": "2026-10-29",
+      "lastFiling": "2026-11-24",
+      "indexable": true,
+      "industry": {
+        "key": "telecom",
+        "label": "Telecom & media"
+      }
+    },
+    {
       "slug": "ko",
       "ticker": "KO",
       "aliases": [],
@@ -972,40 +1006,6 @@
       "industry": {
         "key": "tech",
         "label": "Technology"
-      }
-    },
-    {
-      "slug": "asml",
-      "ticker": "ASML",
-      "aliases": [],
-      "company": "ASML Holding N.V. - New York Registry Shares",
-      "trades": 35,
-      "members": 12,
-      "buys": 23,
-      "sells": 12,
-      "lastTx": "2026-10-23",
-      "lastFiling": "2026-11-23",
-      "indexable": true,
-      "industry": {
-        "key": "tech",
-        "label": "Technology"
-      }
-    },
-    {
-      "slug": "cmcsa",
-      "ticker": "CMCSA",
-      "aliases": [],
-      "company": "Comcast Corporation",
-      "trades": 35,
-      "members": 16,
-      "buys": 10,
-      "sells": 25,
-      "lastTx": "2026-10-20",
-      "lastFiling": "2026-11-10",
-      "indexable": true,
-      "industry": {
-        "key": "telecom",
-        "label": "Telecom & media"
       }
     },
     {
@@ -1349,6 +1349,23 @@
       }
     },
     {
+      "slug": "dis",
+      "ticker": "DIS",
+      "aliases": [],
+      "company": "Walt Disney Company",
+      "trades": 29,
+      "members": 21,
+      "buys": 7,
+      "sells": 22,
+      "lastTx": "2026-10-29",
+      "lastFiling": "2026-11-24",
+      "indexable": true,
+      "industry": {
+        "key": "telecom",
+        "label": "Telecom & media"
+      }
+    },
+    {
       "slug": "app",
       "ticker": "APP",
       "aliases": [],
@@ -1482,23 +1499,6 @@
       "industry": {
         "key": "consumer",
         "label": "Consumer & retail"
-      }
-    },
-    {
-      "slug": "dis",
-      "ticker": "DIS",
-      "aliases": [],
-      "company": "Walt Disney Company",
-      "trades": 28,
-      "members": 20,
-      "buys": 7,
-      "sells": 21,
-      "lastTx": "2026-10-28",
-      "lastFiling": "2026-11-23",
-      "indexable": true,
-      "industry": {
-        "key": "telecom",
-        "label": "Telecom & media"
       }
     },
     {
@@ -1893,6 +1893,23 @@
       }
     },
     {
+      "slug": "rok",
+      "ticker": "ROK",
+      "aliases": [],
+      "company": "Rockwell Automation, Inc.",
+      "trades": 11,
+      "members": 4,
+      "buys": 1,
+      "sells": 10,
+      "lastTx": "2026-11-17",
+      "lastFiling": "2026-11-24",
+      "indexable": false,
+      "industry": {
+        "key": "industrial",
+        "label": "Manufacturing"
+      }
+    },
+    {
       "slug": "klac",
       "ticker": "KLAC",
       "aliases": [],
@@ -1924,23 +1941,6 @@
       "industry": {
         "key": "defense",
         "label": "Defense & aerospace"
-      }
-    },
-    {
-      "slug": "rok",
-      "ticker": "ROK",
-      "aliases": [],
-      "company": "Rockwell Automation, Inc.",
-      "trades": 8,
-      "members": 4,
-      "buys": 1,
-      "sells": 7,
-      "lastTx": "2026-09-17",
-      "lastFiling": "2026-10-13",
-      "indexable": false,
-      "industry": {
-        "key": "industrial",
-        "label": "Manufacturing"
       }
     },
     {

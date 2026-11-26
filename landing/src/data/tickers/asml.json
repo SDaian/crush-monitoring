@@ -12,24 +12,24 @@
   },
   "indexable": true,
   "technical": {
-    "asOf": "2026-11-24",
-    "price": 1336.06,
-    "chg1d": -3.45,
-    "chg1w": -3.4,
-    "chg1m": -16.02,
-    "rsi14": 38.1,
-    "sma50": 1615.81,
-    "sma200": 1600.89,
-    "ema8": 1377.46,
-    "ema21": 1460.14,
-    "emaGap": -5.66,
-    "vsSma50": -17.3,
-    "vsSma200": -16.5,
-    "relVol": 0.86,
+    "asOf": "2026-11-25",
+    "price": 1303.08,
+    "chg1d": -2.47,
+    "chg1w": -6.61,
+    "chg1m": -20.33,
+    "rsi14": 36.2,
+    "sma50": 1609.83,
+    "sma200": 1600.34,
+    "ema8": 1360.93,
+    "ema21": 1445.86,
+    "emaGap": -5.87,
+    "vsSma50": -19.1,
+    "vsSma200": -18.6,
+    "relVol": 1.06,
     "vol1y": 50.0,
     "high52w": 1989.44,
-    "low52w": 987.82,
-    "rangePos": 35.0,
+    "low52w": 1003.22,
+    "rangePos": 30.0,
     "series": [
       {
         "d": "2025-12-05",
@@ -236,8 +236,8 @@
         "c": 1266.22
       },
       {
-        "d": "2026-11-24",
-        "c": 1336.06
+        "d": "2026-11-25",
+        "c": 1303.08
       }
     ],
     "signals": [],
@@ -280,20 +280,20 @@
     }
   },
   "summary": {
-    "trades": 35,
+    "trades": 36,
     "members": 12,
     "congress": 12,
     "executive": 0,
     "whoLabel": "12 members of Congress",
     "buys": 23,
-    "sells": 12,
+    "sells": 13,
     "other": 0,
     "firstTx": "2024-06-10",
-    "lastTx": "2026-10-23",
-    "lastFiling": "2026-11-23",
+    "lastTx": "2026-11-09",
+    "lastFiling": "2026-11-24",
     "estBuyLabel": "$251K",
-    "estSellLabel": "$121K",
-    "pctLate": 29
+    "estSellLabel": "$153K",
+    "pctLate": 28
   },
   "topMembers": [
     {
@@ -385,6 +385,17 @@
       "hasPage": true
     },
     {
+      "name": "Kevin Hern",
+      "slug": "kevin-hern",
+      "party": "R",
+      "chamber": "House",
+      "trades": 2,
+      "buys": 0,
+      "sells": 2,
+      "estLabel": "$65K",
+      "hasPage": false
+    },
+    {
       "name": "Val T. Hoyle",
       "slug": "val-t-hoyle",
       "party": "D",
@@ -394,20 +405,21 @@
       "sells": 1,
       "estLabel": "$16K",
       "hasPage": false
-    },
-    {
-      "name": "Kevin Hern",
-      "slug": "kevin-hern",
-      "party": "R",
-      "chamber": "House",
-      "trades": 1,
-      "buys": 0,
-      "sells": 1,
-      "estLabel": "$33K",
-      "hasPage": false
     }
   ],
   "trades": [
+    {
+      "member": "Kevin Hern",
+      "memberSlug": "kevin-hern",
+      "hasPage": false,
+      "party": "R",
+      "side": "SELL",
+      "amountBucket": "$15K – $50K",
+      "txDate": "2026-11-09",
+      "filedDate": "2026-11-24",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20036875.pdf"
+    },
     {
       "member": "Kevin Hern",
       "memberSlug": "kevin-hern",
@@ -695,33 +707,21 @@
       "filedDate": "2025-04-11",
       "daysLate": 0,
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20029138.pdf"
-    },
-    {
-      "member": "Julie Johnson",
-      "memberSlug": "julie-johnson",
-      "hasPage": false,
-      "party": "D",
-      "side": "SELL",
-      "amountBucket": "$1K – $15K",
-      "txDate": "2025-04-07",
-      "filedDate": "2025-05-14",
-      "daysLate": 0,
-      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20030296.pdf"
     }
   ],
   "tradesShown": 25,
   "faq": [
     {
       "q": "Who in Congress has traded ASML stock?",
-      "a": "12 members of Congress have disclosed 35 ASML trades since June 2024. The most active is Lisa C. McClain, with 9 trades, followed by Jared Moskowitz and Bruce Westerman. Each trade on this page links to the official filing it came from."
+      "a": "12 members of Congress have disclosed 36 ASML trades since June 2024. The most active is Lisa C. McClain, with 9 trades, followed by Jared Moskowitz and Bruce Westerman. Each trade on this page links to the official filing it came from."
     },
     {
       "q": "Is Congress buying or selling ASML?",
-      "a": "Of the 35 disclosed ASML trades, 23 were buys and 12 were sells. By the midpoint of each filed amount bracket, the buying comes to about $251K and the selling to about $121K. Filings disclose brackets, never exact amounts, so these totals are estimates."
+      "a": "Of the 36 disclosed ASML trades, 23 were buys and 13 were sells. By the midpoint of each filed amount bracket, the buying comes to about $251K and the selling to about $153K. Filings disclose brackets, never exact amounts, so these totals are estimates."
     },
     {
       "q": "How late are ASML trades disclosed?",
-      "a": "29% of the disclosed ASML trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Oct 23, 2026, and the newest filing arrived on Nov 23, 2026."
+      "a": "28% of the disclosed ASML trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Nov 9, 2026, and the newest filing arrived on Nov 24, 2026."
     }
   ]
 }

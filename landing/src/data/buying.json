@@ -1,10 +1,10 @@
 {
   "_comment": "Generated from real official disclosures by congress/landing_data.py (daily Action). Do not edit by hand. 'filedDaysLate' counts days past the STOCK Act's 45-day statutory maximum; 0 = on time.",
   "windowDays": 45,
-  "from": "2026-10-10",
-  "to": "2026-11-24",
-  "members": 19,
-  "buys": 201,
+  "from": "2026-10-11",
+  "to": "2026-11-25",
+  "members": 20,
+  "buys": 204,
   "options": 0,
   "companies": 134,
   "rows": [
@@ -13,11 +13,15 @@
       "tickerLabel": "NVDA",
       "slug": "nvda",
       "company": "NVIDIA Corporation",
-      "members": 3,
+      "members": 4,
       "buyers": [
         {
           "name": "Cleo Fields",
           "slug": "cleo-fields"
+        },
+        {
+          "name": "Rand Paul",
+          "slug": null
         },
         {
           "name": "Maria Elvira Salazar",
@@ -28,11 +32,11 @@
           "slug": null
         }
       ],
-      "buys": 6,
+      "buys": 9,
       "options": 0,
-      "estLabel": "$48K",
-      "est": 48003,
-      "lastFiling": "2026-11-23"
+      "estLabel": "$72K",
+      "est": 72004,
+      "lastFiling": "2026-11-25"
     },
     {
       "ticker": "TSM",
@@ -455,7 +459,7 @@
   "faq": [
     {
       "q": "What stocks is Congress buying?",
-      "a": "In filings from the last 45 days, to Nov 24, 2026, 19 members of Congress disclosed 201 purchases across 134 companies. The stocks bought by the most members were NVDA (3 members), TSM (3 members) and MSFT (3 members). Filings arrive up to 45 days after the trade: this is recent disclosure, not live trading."
+      "a": "In filings from the last 45 days, to Nov 25, 2026, 20 members of Congress disclosed 204 purchases across 134 companies. The stocks bought by the most members were NVDA (4 members), TSM (3 members) and MSFT (3 members). Filings arrive up to 45 days after the trade: this is recent disclosure, not live trading."
     },
     {
       "q": "What is the largest stock purchase Congress disclosed recently?",

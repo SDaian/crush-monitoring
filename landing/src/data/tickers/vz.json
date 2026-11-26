@@ -12,24 +12,24 @@
   },
   "indexable": true,
   "technical": {
-    "asOf": "2026-11-24",
-    "price": 47.16,
-    "chg1d": 1.53,
-    "chg1w": 2.68,
-    "chg1m": 9.42,
-    "rsi14": 60.4,
-    "sma50": 45.65,
+    "asOf": "2026-11-25",
+    "price": 47.28,
+    "chg1d": 0.25,
+    "chg1w": 2.49,
+    "chg1m": 7.63,
+    "rsi14": 61.2,
+    "sma50": 45.6,
     "sma200": 47.16,
-    "ema8": 46.41,
-    "ema21": 45.96,
-    "emaGap": 0.99,
-    "vsSma50": 3.3,
-    "vsSma200": 0.0,
-    "relVol": 0.82,
-    "vol1y": 27.5,
+    "ema8": 46.6,
+    "ema21": 46.08,
+    "emaGap": 1.14,
+    "vsSma50": 3.7,
+    "vsSma200": 0.3,
+    "relVol": 0.89,
+    "vol1y": 27.4,
     "high52w": 51.45,
     "low52w": 38.91,
-    "rangePos": 66.0,
+    "rangePos": 67.0,
     "series": [
       {
         "d": "2025-12-05",
@@ -236,17 +236,17 @@
         "c": 46.48
       },
       {
-        "d": "2026-11-24",
-        "c": 47.16
+        "d": "2026-11-25",
+        "c": 47.28
       }
     ],
     "signals": [],
     "score": {
-      "label": "Buy",
-      "buys": 4,
+      "label": "Strong Buy",
+      "buys": 5,
       "sells": 1,
-      "holds": 2,
-      "ratio": 0.429
+      "holds": 1,
+      "ratio": 0.571
     },
     "votes": {
       "ema_cross": {
@@ -258,7 +258,7 @@
         "muted": false
       },
       "vs_sma200": {
-        "vote": 0,
+        "vote": 1,
         "muted": false
       },
       "sma50_vs_200": {
@@ -280,19 +280,19 @@
     }
   },
   "summary": {
-    "trades": 42,
-    "members": 18,
-    "congress": 17,
+    "trades": 43,
+    "members": 19,
+    "congress": 18,
     "executive": 1,
-    "whoLabel": "17 members of Congress and 1 executive-branch filer",
+    "whoLabel": "18 members of Congress and 1 executive-branch filer",
     "buys": 15,
-    "sells": 27,
+    "sells": 28,
     "other": 0,
     "firstTx": "2025-01-06",
     "lastTx": "2026-11-19",
-    "lastFiling": "2026-11-23",
+    "lastFiling": "2026-11-24",
     "estBuyLabel": "$501K",
-    "estSellLabel": "$740K",
+    "estSellLabel": "$748K",
     "pctLate": 19
   },
   "topMembers": [
@@ -419,6 +419,18 @@
       "filedDate": "2026-11-20",
       "daysLate": 0,
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20036883.pdf"
+    },
+    {
+      "member": "Robert F. Onder, Jr.",
+      "memberSlug": "robert-f-onder-jr",
+      "hasPage": false,
+      "party": "R",
+      "side": "SELL",
+      "amountBucket": "$1K – $15K",
+      "txDate": "2026-10-29",
+      "filedDate": "2026-11-24",
+      "daysLate": 0,
+      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20036908.pdf"
     },
     {
       "member": "Pete Sessions",
@@ -695,33 +707,21 @@
       "filedDate": "2025-12-11",
       "daysLate": 0,
       "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20033611.pdf"
-    },
-    {
-      "member": "Tim Moore",
-      "memberSlug": "tim-moore",
-      "hasPage": false,
-      "party": "R",
-      "side": "BUY",
-      "amountBucket": "$15K – $50K",
-      "txDate": "2025-11-05",
-      "filedDate": "2025-12-02",
-      "daysLate": 0,
-      "sourceUrl": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20033564.pdf"
     }
   ],
   "tradesShown": 25,
   "faq": [
     {
       "q": "Who in Congress has traded VZ stock?",
-      "a": "17 members of Congress and 1 executive-branch filer have disclosed 42 VZ trades since January 2025. The most active is Tim Moore, with 9 trades, followed by Julie Johnson and Donald J. Trump. Each trade on this page links to the official filing it came from."
+      "a": "18 members of Congress and 1 executive-branch filer have disclosed 43 VZ trades since January 2025. The most active is Tim Moore, with 9 trades, followed by Julie Johnson and Donald J. Trump. Each trade on this page links to the official filing it came from."
     },
     {
       "q": "Is Congress buying or selling VZ?",
-      "a": "Of the 42 disclosed VZ trades, 15 were buys and 27 were sells. By the midpoint of each filed amount bracket, the buying comes to about $501K and the selling to about $740K. Filings disclose brackets, never exact amounts, so these totals are estimates."
+      "a": "Of the 43 disclosed VZ trades, 15 were buys and 28 were sells. By the midpoint of each filed amount bracket, the buying comes to about $501K and the selling to about $748K. Filings disclose brackets, never exact amounts, so these totals are estimates."
     },
     {
       "q": "How late are VZ trades disclosed?",
-      "a": "19% of the disclosed VZ trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Nov 19, 2026, and the newest filing arrived on Nov 23, 2026."
+      "a": "19% of the disclosed VZ trades were filed late, past the STOCK Act's 45-day legal maximum. The newest trade is dated Nov 19, 2026, and the newest filing arrived on Nov 24, 2026."
     }
   ]
 }
