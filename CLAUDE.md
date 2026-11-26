@@ -1189,7 +1189,8 @@ Conventions:
   without width and height. It warns and never fails, for `check-seo`'s
   reason, and prints the worst value of each measure on every build. It reads
   files only, so it cannot see rows a script builds (the tracker's table),
-  layout shift, or interaction time; those still need a phone check. The
+  layout shift, or interaction time; `scripts/perf_lab.mjs` measures those
+  (below). The
   painted-element budget is the one that found a real problem: the longest
   member page laid out all 1,711 disclosure rows (19,837 elements) before its
   script folded the list, and a filter keystroke there took a phone 1.2 s.
@@ -1209,6 +1210,24 @@ Conventions:
   1.0 s to 0.26 s, and the load event on the longest page from 1.7 s to
   1.0 s. `tests/congress/test_landing_source.py` holds the rules, and
   `check-performance.mjs` shares the class name (`FOLD_CLASS`).
+- **Time what a reader waits for, by hand, before and after.**
+  `scripts/perf_lab.mjs` (run it from the repo root after `npm run build` in
+  `landing/`) serves `landing/dist` over HTTP/2 and drives Chromium on a phone
+  profile (CPU 4x slower than the machine; loads on Chrome's slow-4G preset,
+  interactions on good 4G) and a desktop one. It prints the median of each
+  measure against its budget: LCP 2,000 ms on the phone's first visit, CLS
+  0.05 on phone and desktop, and the slowest interaction in each scenario,
+  200 ms for typing, filters, sorts and tabs and 300 ms for bulk actions
+  ("Show all"). It picks the longest member and ticker pages from the build.
+  `--save` and `--baseline` keep and compare the numbers, `--only` narrows
+  the run, and it exits 1 when a measure is over budget (2 when it cannot
+  start). Compare runs made on one machine: the slowdown is relative, and the
+  header prints a fixed loop's time. It stays out of CI because timing on shared runners varies
+  too much. Two traps it avoids, both learned the hard way: an ignored
+  certificate error turns off Chromium's HTTP cache, so the script makes a
+  throwaway certificate (it needs `openssl`) and trusts it by its key; and
+  the signup dialog can cover the button a scenario clicks, so each run
+  marks it answered.
 - **Open Graph cards are one per page, and deliberately stable.** Every
   ticker and member page shares its own 1200x630 card from `/og`
   (`congress/social/og_template.html` + `scripts/make_og.mjs`, the same
@@ -1261,3 +1280,5 @@ Conventions:
      (a canvas/probe span), because a clipped placeholder or a truncated
      label still reports zero overflow.
   Prefer a shorter string over a smaller font: 375px is the real floor.
+  These checks measure layout, not speed: when a change touches a page's
+  markup, CSS or scripts, run `scripts/perf_lab.mjs` before and after as well.

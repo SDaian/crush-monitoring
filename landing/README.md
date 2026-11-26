@@ -68,15 +68,23 @@ npm run build      # static build to dist/, then the post-build checks
 npm run preview    # serve the build
 ```
 
-`npm run build` ends with two checks that warn and never fail the build:
+`npm run build` ends with three checks that warn and never fail the build:
 `scripts/check-seo.mjs` (title and description length, headings, canonical
-tags, Open Graph cards) and `scripts/check-copy.mjs` (comments, emoji or
-stacked dashes in the published HTML).
+tags, Open Graph cards), `scripts/check-copy.mjs` (comments, emoji or
+stacked dashes in the published HTML) and `scripts/check-performance.mjs`
+(elements painted before any script runs, and the size of each page's HTML,
+JS, CSS, font preloads and the tracker's data).
 
 Before you ship a UI change, check it on a phone. Serve `dist/` with
 `python3 -m http.server` and drive the page with Playwright at 320, 375 and
 414 px: no sideways scroll, no element wider than its box, no clipped text.
 `CLAUDE.md` explains why each of the three checks exists.
+
+When the change touches a page's markup, CSS or scripts, time it too. From
+the repository root, run `node scripts/perf_lab.mjs --save before.json` on
+the old build and `node scripts/perf_lab.mjs --baseline before.json` on the
+new one. It reports load (LCP), layout shift (CLS) and interaction time on
+a slowed phone against their budgets; the header of the script lists them.
 
 ## Environment (Vercel project variables)
 
