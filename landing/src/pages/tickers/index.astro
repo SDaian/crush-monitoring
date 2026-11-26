@@ -33,6 +33,18 @@ const industries = Object.entries(index.industries as Record<string, string>)
   .sort((a, b) => b.count - a.count || a.label.localeCompare(b.label));
 const classified = [...industryCount.values()].reduce((n, v) => n + v, 0);
 
+// A stock page links here as /tickers?industry=<key>. The filter script used
+// to apply it at the end of the body, after the full grid had painted, and
+// the cards below jumped into the gaps: CLS up to 0.31 on a phone. Now the
+// head script names the industry on <html> before the body is parsed, and
+// these rules hide the other stocks from the first paint. The keys are our
+// own (congress/sectors.json); only plain ones reach the CSS and the script.
+const linkable = industries.filter((i) => /^[a-z][a-z0-9-]*$/.test(i.key));
+const industryKeys = linkable.map((i) => i.key);
+const industryRules = linkable
+  .map((i) => `html[data-industry="${i.key}"] #tgrid .tcard:not([data-i="${i.key}"]){display:none}`)
+  .join("");
+
 const title = seoTitle(branded("What stocks does Congress trade?"));
 const description = seoDescription(
   `The ${plural(tickers.length, "stock")} members of Congress trade most, ` +
@@ -60,6 +72,31 @@ const schema = [
 <html lang="en">
   <head>
     <Seo title={title} description={description} path="/tickers" schema={schema} />
+    {/* Runs before the body is parsed, so the first paint already shows the
+         controls (`js`), the star toggle for a reader who has starred a stock
+         (`has-stars`) and a linked industry (`data-industry`): nothing above
+         the grid appears later and pushes it down. The filter script takes
+         over at the end of the body. If it never ran, the load listener
+         undoes all three: no control that cannot work, and no stocks hidden
+         with no way to show them. */}
+    <script is:inline define:vars={{ industryKeys }}>
+      (function () {
+        var r = document.documentElement;
+        r.classList.add("js");
+        var want = new URLSearchParams(location.search).get("industry");
+        if (industryKeys.indexOf(want) !== -1) r.setAttribute("data-industry", want);
+        try {
+          var raw = JSON.parse(localStorage.getItem("cl-stars")) || {};
+          if (Array.isArray(raw.tickers) && raw.tickers.length) r.classList.add("has-stars");
+        } catch (e) {}
+        addEventListener("load", function () {
+          r.removeAttribute("data-industry");
+          var box = document.getElementById("tfilter");
+          if (!box || !box.hasAttribute("data-ready")) r.classList.remove("js", "has-stars");
+        });
+      })();
+    </script>
+    <style is:inline set:html={industryRules}></style>
   </head>
   <body>
     <Header active="tickers" />
@@ -87,7 +124,7 @@ const schema = [
     </section>
 
     <section class="mx-auto max-w-[75rem] px-[5vw] pb-6">
-      <div id="tfilter" class="tctl" hidden>
+      <div id="tfilter" class="tctl">
         <label class="tctl-search">
           <span class="sr-only">Filter the stocks</span>
           <input
@@ -121,7 +158,6 @@ const schema = [
         <button
           id="tstars"
           class="tctl-stars"
-          hidden
           aria-pressed="false"
           title="Stars are saved in this browser only">★ Starred</button>
         <p id="tcount" class="eyebrow tctl-count" aria-live="polite" />
@@ -205,9 +241,10 @@ const schema = [
 <script is:inline>
   // Filter and sort the stock list. The page ships all 97 rows in the HTML,
   // so a crawler still reads every link; this only hides and reorders them.
-  // The controls start hidden and this script reveals them, so a reader
-  // without JavaScript never sees a control that cannot work.
+  // The controls show only when the head script ran (the `js` class), so a
+  // reader without JavaScript never sees a control that cannot work.
   (function () {
+    var root = document.documentElement;
     var box = document.getElementById("tfilter");
     var grid = document.getElementById("tgrid");
     var q = document.getElementById("tq");
@@ -216,8 +253,11 @@ const schema = [
     var starsBtn = document.getElementById("tstars");
     var count = document.getElementById("tcount");
     var empty = document.getElementById("tempty");
-    if (!box || !grid || !q || !indSel || !sortSel || !starsBtn || !count || !empty)
+    if (!box || !grid || !q || !indSel || !sortSel || !starsBtn || !count || !empty) {
+      root.classList.remove("js", "has-stars");
+      root.removeAttribute("data-industry");
       return;
+    }
 
     var rows = Array.prototype.slice.call(grid.querySelectorAll(".tcard"));
     var total = rows.length;
@@ -270,7 +310,7 @@ const schema = [
           stars.indexOf(row.getAttribute("data-t").toUpperCase()) !== -1,
         );
       });
-      starsBtn.hidden = stars.length === 0 && !starsOnly;
+      root.classList.toggle("has-stars", stars.length > 0 || starsOnly);
     }
 
     // A stock page links here as /tickers?industry=tech, so the select has to
@@ -323,10 +363,16 @@ const schema = [
       sort();
       apply();
     });
-    box.hidden = false;
-    fromQuery();
-    paintStars();
-    apply();
+    // `apply` hides the same cards the head's industry rule hid, then the
+    // rule comes off, or a later choice in the select could not show them.
+    try {
+      fromQuery();
+      paintStars();
+      apply();
+    } finally {
+      root.removeAttribute("data-industry");
+    }
+    box.setAttribute("data-ready", "");
   })();
 </script>
 
@@ -494,11 +540,21 @@ const schema = [
       content: none;
     }
   }
+  /* Without JavaScript the controls cannot work, so they never show; with
+     it they show from the first paint, so the grid below never jumps. This
+     and the star toggle below are decided by classes the head script sets,
+     not by `hidden`: Tailwind's `[hidden]` rule is `!important` inside a
+     layer, which no override can beat. */
+  :global(html:not(.js)) .tctl {
+    display: none;
+  }
   /* The star toggle and card marker (roadmap personal section, stage A).
      Marker classes are set at runtime, so they ride the global StarButton
      rules' reasoning — but these selectors exist at build time, so scoped
-     styles work: Astro tags the elements, JS only flips classes. */
+     styles work: Astro tags the elements, JS only flips classes. The toggle
+     shows only for a reader who has starred a stock (`has-stars`). */
   .tctl-stars {
+    display: none;
     border: 1px solid var(--color-rule);
     background: var(--color-paper);
     padding: 0.55rem 0.7rem;
@@ -506,6 +562,9 @@ const schema = [
     font-size: 0.85rem;
     color: var(--color-ink-soft);
     cursor: pointer;
+  }
+  :global(html.has-stars) .tctl-stars {
+    display: inline-block;
   }
   .tctl-stars:hover,
   .tctl-stars:focus-visible {

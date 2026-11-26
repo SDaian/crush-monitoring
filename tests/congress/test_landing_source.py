@@ -150,6 +150,83 @@ class TestTheFoldCanAlwaysOpen(unittest.TestCase):
         self.assertIn(f".{name.group(1)} {{\n    display: none;", self.src)
 
 
+class TestNothingAboveTheGridAppearsLate(unittest.TestCase):
+    """/tickers decides its controls and a linked industry before first paint.
+
+    The filter bar, the star toggle and a ``?industry=`` deep link used to be
+    applied by the script at the end of the body, after the grid had painted,
+    and the grid jumped (CLS up to 0.31 on a phone). A head script now sets
+    ``js``, ``has-stars`` and ``data-industry`` on <html> and CSS does the
+    rest. Two things must hold: the state comes off on every path, or a
+    linked industry would hide stocks with no way back; and the controls
+    never carry ``hidden`` again, because Tailwind's ``[hidden]`` rule is
+    ``!important`` in a layer and no class can show them over it.
+    """
+
+    @classmethod
+    def setUpClass(cls):
+        cls.src = (SRC / "pages" / "tickers" / "index.astro").read_text(
+            encoding="utf-8")
+        head = re.search(r"<head>(.*?)</head>", cls.src, re.S)
+        cls.head = head.group(1) if head else ""
+        scripts = re.findall(r"<script is:inline>(.*?)</script>", cls.src, re.S)
+        cls.grid = next((s for s in scripts if 'getElementById("tgrid")' in s), "")
+
+    def test_the_head_decides_before_first_paint(self):
+        self.assertIn('r.classList.add("js")', self.head)
+        self.assertIn('r.setAttribute("data-industry", want)', self.head)
+        self.assertIn('r.classList.add("has-stars")', self.head)
+        self.assertIn("set:html={industryRules}", self.head)
+
+    def test_the_head_lets_go_on_load(self):
+        listener = re.search(r'addEventListener\("load", function \(\) \{(.*?)\}\);',
+                             self.head, re.S)
+        self.assertIsNotNone(listener, "the head script lost its load listener")
+        self.assertIn('r.removeAttribute("data-industry")', listener.group(1))
+        self.assertIn('hasAttribute("data-ready")', listener.group(1))
+
+    def test_the_filter_script_lets_go_on_every_path(self):
+        self.assertTrue(self.grid, "the /tickers filter script is gone")
+        early = re.search(r"if \(!box \|\|[^{]*\{(.*?)\}", self.grid, re.S)
+        self.assertIsNotNone(early, "the early return lost its braces")
+        self.assertIn('root.removeAttribute("data-industry")', early.group(1))
+        self.assertRegex(self.grid, r'\} finally \{\s*root\.removeAttribute\("data-industry"\);')
+        self.assertIn('box.setAttribute("data-ready", "")', self.grid)
+
+    def test_the_controls_never_carry_hidden(self):
+        for element in ("tfilter", "tstars"):
+            tag = re.search(rf'<[a-z]+\s[^>]*id="{element}"[^>]*>', self.src, re.S)
+            self.assertIsNotNone(tag, f"#{element} is gone")
+            self.assertNotRegex(tag.group(0), r"\shidden(\s|>|=)",
+                                f"#{element} carries `hidden` again")
+
+
+class TestTheTrackerHoldsItsPlace(unittest.TestCase):
+    """The tracker's empty table holds a screen's height until its rows come.
+
+    Without it the signup band below showed, then jumped off screen when the
+    rows arrived: CLS 0.196 on a desktop's first visit, 0.263 on a repeat.
+    The held space must be released by the first render and by a failed load.
+    """
+
+    @classmethod
+    def setUpClass(cls):
+        cls.src = (SRC / "pages" / "tracker.astro").read_text(encoding="utf-8")
+
+    def test_the_wrapper_starts_pending(self):
+        self.assertIn('<div class="tblwrap tbl-pending">', self.src)
+        self.assertIn(".tracker .tblwrap.tbl-pending { min-height: 100vh; }", self.src)
+
+    def test_the_space_is_released(self):
+        release = 'closest(".tblwrap").classList.remove("tbl-pending")'
+        render = re.search(r"function renderRows\(\)\{(.*?)\n      \}", self.src, re.S)
+        self.assertIsNotNone(render, "renderRows is gone")
+        self.assertIn(release, render.group(1))
+        failed = re.search(r'\.catch\(\(\) => \{\s*\$\("countLine"\)(.*?)\}\);', self.src, re.S)
+        self.assertIsNotNone(failed, "the trades file lost its failure path")
+        self.assertIn(release, failed.group(1))
+
+
 class TestMarkupHelpers(unittest.TestCase):
     """The exclusion must not hide a real comment sitting next to a block."""
 
