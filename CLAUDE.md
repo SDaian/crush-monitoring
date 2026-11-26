@@ -1220,9 +1220,9 @@ Conventions:
   200 ms for typing, filters, sorts and tabs and 300 ms for bulk actions
   ("Show all"). It picks the longest member and ticker pages from the build.
   `--save` and `--baseline` keep and compare the numbers, `--only` narrows
-  the run, and it exits 1 when a measure is over budget. Compare runs made on
-  one machine: the slowdown is relative, and the header prints a fixed
-  loop's time. It stays out of CI because timing on shared runners varies
+  the run, and it exits 1 when a measure is over budget (2 when it cannot
+  start). Compare runs made on one machine: the slowdown is relative, and the
+  header prints a fixed loop's time. It stays out of CI because timing on shared runners varies
   too much. Two traps it avoids, both learned the hard way: an ignored
   certificate error turns off Chromium's HTTP cache, so the script makes a
   throwaway certificate (it needs `openssl`) and trusts it by its key; and

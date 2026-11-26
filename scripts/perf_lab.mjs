@@ -42,8 +42,8 @@
 // - The signup dialog is marked as already answered, so it can never cover
 //   the button a scenario clicks.
 //
-// It exits 1 when any measure is over its budget. Set PW_CHROMIUM to a
-// Chromium binary if Playwright's own is not installed.
+// It exits 1 when any measure is over its budget, 2 when it cannot start.
+// Set PW_CHROMIUM to a Chromium binary if Playwright's own is not installed.
 import { chromium } from "@playwright/test";
 import { execFileSync } from "node:child_process";
 import { X509Certificate, createHash } from "node:crypto";
@@ -77,9 +77,12 @@ const RUNS = Number(opt("--runs") ?? 3);
 const ONLY = opt("--only");
 const SAVE = opt("--save");
 const BASELINE = opt("--baseline");
-if (!(RUNS >= 1)) throw new Error("--runs takes a number of runs, 1 or more");
+// A setup problem is the reader's to fix, so it gets one line, not a stack.
+const fail = (message) => { console.error(`perf_lab: ${message}`); process.exit(2); };
+if (!(RUNS >= 1)) fail("--runs takes a number of runs, 1 or more");
 if (!existsSync(path.join(DIST, "index.html")))
-  throw new Error("no landing/dist: run `npm run build` in landing/ first");
+  fail("no landing/dist: run `npm run build` in landing/ first");
+if (BASELINE && !existsSync(BASELINE)) fail(`no baseline file at ${BASELINE}`);
 
 // ── The pages ─────────────────────────────────────────────────────────────
 // The longest member and ticker pages are the worst case for their template,
@@ -137,7 +140,7 @@ function certificate() {
     execFileSync("openssl", ["req", "-x509", "-newkey", "rsa:2048", "-nodes", "-keyout", key,
       "-out", cert, "-days", "1", "-subj", "/CN=localhost"], { stdio: "ignore" });
   } catch {
-    throw new Error("perf_lab needs `openssl` on the PATH to make its test certificate");
+    fail("needs `openssl` on the PATH to make its test certificate");
   }
   const pem = readFileSync(cert);
   const spki = new X509Certificate(pem).publicKey.export({ type: "spki", format: "der" });
