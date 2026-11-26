@@ -179,13 +179,19 @@ const schema = [
         </div>
 
         <div class="count" id="countLine">Loading disclosures…</div>
-        <div class="note" id="retLegend"></div>
+        <div class="note" id="retLegend">
+          “Since buy” is the stock's % change since the disclosed trade date —
+          an estimate from daily closes, <b>not</b> the member's realised profit
+          (holding period, sells, dividends and position size are unknown).
+        </div>
         <div class="note" id="amendedLegend" hidden>
           An amended filing replaces the filing it corrects: "Filed" is the
           date of the first version, and the link opens the amended one.
         </div>
 
-        <div class="tblwrap">
+        {/* `tbl-pending` holds the table's place until its rows arrive, so the
+             band below never shows and then jumps away (see the CSS). */}
+        <div class="tblwrap tbl-pending">
           <table id="tbl">
             <thead><tr id="headRow"></tr></thead>
             <tbody id="rows"></tbody>
@@ -432,6 +438,7 @@ const schema = [
       function renderRows(){
         const gen = ++table.gen;
         const tbody = $("rows");
+        tbody.closest(".tblwrap").classList.remove("tbl-pending");
         const key = JSON.stringify([state.q, state.chamber, state.party, state.type,
           state.range ? daysAgo(+state.range) : "", state.asset, state.sortKey, state.sortDir]);
         // RET (and PRICES, set with it) feed "Since buy" and arrive on
@@ -850,6 +857,7 @@ const schema = [
         .catch(() => {
           $("countLine").textContent =
             "Could not load the disclosure data. Please refresh.";
+          $("rows").closest(".tblwrap").classList.remove("tbl-pending");
         });
 
       fetch("/data/returns.json", {cache:"no-cache"})
@@ -858,11 +866,9 @@ const schema = [
           RET = d.returns || {};
           PRICES = d.prices || {};
           retSample = !!(d.meta && d.meta.sample);
-          $("retLegend").innerHTML =
-            "“Since buy” is the stock's % change since the disclosed trade date — an "
-            + "estimate from daily closes, <b>not</b> the member's realised profit "
-            + "(holding period, sells, dividends and position size are unknown)."
-            + (retSample ? " <b>Sample data</b> until the first live price refresh." : "");
+          // The legend's text ships in the HTML; it only gains the sample note.
+          if (retSample) $("retLegend").insertAdjacentHTML("beforeend",
+            " <b>Sample data</b> until the first live price refresh.");
           if (DATA) renderRows();
         })
         .catch(() => {});
@@ -991,6 +997,12 @@ const schema = [
 
   /* ── Table ────────────────────────────────────────────────────── */
   .tracker .tblwrap { overflow-x: auto; margin-top: 0.75rem; }
+  /* Until the rows arrive the table is empty, and on any screen taller than
+     a phone the signup band below it showed, then jumped off screen when 200
+     rows pushed it down: CLS 0.196 on a desktop's first visit, 0.263 on a
+     repeat one. Holding a screen's height keeps the band out of view until
+     the table is there to push it. The first render removes the class. */
+  .tracker .tblwrap.tbl-pending { min-height: 100vh; }
   .tracker table { width: 100%; border-collapse: collapse; }
   .tracker thead th {
     position: sticky;

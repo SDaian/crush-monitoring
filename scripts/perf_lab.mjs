@@ -98,8 +98,20 @@ function largest(section) {
 }
 const MEMBER = largest("members");
 const TICKER = largest("tickers");
-const LOAD_PAGES = ["/", "/tracker", "/tickers", TICKER, MEMBER,
-  "/what-congress-is-buying", "/report", "/late", "/how-it-works"];
+// Every stock page links to /tickers?industry=<key>, and a deep link can
+// shift on its own: the other stocks must be hidden before the first paint,
+// or the cards jump (up to 0.31 on a phone, Nov 2026). The industry with the
+// fewest stocks hides the most of them.
+function smallestIndustry() {
+  const html = readFileSync(path.join(DIST, "tickers", "index.html"), "utf8");
+  const sizes = [...html.matchAll(/<option value="([a-z][a-z0-9-]*)"[^>]*>([^<]*)<\/option>/g)]
+    .map((m) => [Number(m[2].match(/\((\d+)\)\s*$/)?.[1]), m[1]])
+    .filter(([n]) => n > 0)
+    .sort((a, b) => a[0] - b[0] || a[1].localeCompare(b[1]));
+  return sizes.length ? `/tickers?industry=${sizes[0][1]}` : null;
+}
+const LOAD_PAGES = ["/", "/tracker", "/tickers", smallestIndustry(), TICKER, MEMBER,
+  "/what-congress-is-buying", "/report", "/late", "/how-it-works"].filter(Boolean);
 
 // Each scenario returns after its last action; the slowest interaction in it
 // is its value. `kind` picks the budget.

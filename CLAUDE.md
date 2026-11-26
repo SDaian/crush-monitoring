@@ -1220,6 +1220,23 @@ Conventions:
   1.0 s to 0.26 s, and the load event on the longest page from 1.7 s to
   1.0 s. `tests/congress/test_landing_source.py` holds the rules, and
   `check-performance.mjs` shares the class name (`FOLD_CLASS`).
+- **Nothing above a page's content may appear after the first paint.** A
+  script at the end of the body can run after the browser has painted, so
+  whatever it reveals or hides above the content moves the content. Four
+  did: the `/tickers` filter bar (CLS 0.073 on a phone), a `?industry=` deep
+  link that hid the other stocks (up to 0.31), the star toggle (0.085), and
+  the tracker's empty table, whose signup band the rows then pushed off
+  screen (0.196 on a desktop, 0.263 on a repeat visit). The pattern: a
+  synchronous head script decides what the first paint needs and records it
+  on `<html>` (`js`, `has-stars` and `data-industry` on `/tickers`, as
+  `tickers/[slug].astro` and the member fold already did); CSS acts on it;
+  the end-of-body script takes over and removes the state on every path;
+  and a `load` listener undoes it if that script never ran, so a failure
+  cannot hide content with no way back. Space that data will fill is held,
+  not left empty (`tbl-pending`, a screen's height until the first render).
+  Show and hide with classes, never `hidden`, anything CSS must decide:
+  Tailwind's `[hidden]` rule is `!important` inside a layer, and no override
+  beats it. `tests/congress/test_landing_source.py` holds the rules.
 - **Time what a reader waits for, by hand, before and after.**
   `scripts/perf_lab.mjs` (run it from the repo root after `npm run build` in
   `landing/`) serves `landing/dist` over HTTP/2 and drives Chromium on a phone
@@ -1228,7 +1245,8 @@ Conventions:
   measure against its budget: LCP 2,000 ms on the phone's first visit, CLS
   0.05 on phone and desktop, and the slowest interaction in each scenario,
   200 ms for typing, filters, sorts and tabs and 300 ms for bulk actions
-  ("Show all"). It picks the longest member and ticker pages from the build.
+  ("Show all"). It picks the longest member and ticker pages from the build,
+  and loads a `/tickers?industry=` deep link to the smallest industry.
   `--save` and `--baseline` keep and compare the numbers, `--only` narrows
   the run, and it exits 1 when a measure is over budget (2 when it cannot
   start). Compare runs made on one machine: the slowdown is relative, and the
