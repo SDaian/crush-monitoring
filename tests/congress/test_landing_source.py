@@ -247,6 +247,31 @@ class TestOnlyHashedFilesAreImmutable(unittest.TestCase):
         self.assertEqual(immutable, ["/_astro/(.*)"])
 
 
+class TestPrivacyNamesWhatMeasures(unittest.TestCase):
+    """Every measurement product the pages load is named on /privacy.
+
+    The privacy page promises to say so before anything about tracking
+    changes. Seo.astro is in every page's head, so a product imported there
+    runs on every visit; the page must name it.
+    """
+
+    PRODUCTS = {
+        "@vercel/analytics": "Vercel Web Analytics",
+        "@vercel/speed-insights": "Vercel Speed Insights",
+    }
+
+    def test_each_product_in_the_head_is_named(self):
+        seo = (SRC / "components" / "Seo.astro").read_text(encoding="utf-8")
+        privacy = " ".join((SRC / "pages" / "privacy.astro").read_text(
+            encoding="utf-8").split())
+        imported = set(re.findall(r'from "(@vercel/[\w-]+)', seo))
+        self.assertTrue(imported, "Seo.astro imports no measurement product")
+        for pkg in imported:
+            self.assertIn(pkg, self.PRODUCTS,
+                          f"{pkg} runs on every page; add it here and name it on /privacy")
+            self.assertIn(self.PRODUCTS[pkg], privacy, f"/privacy does not name {pkg}")
+
+
 class TestMarkupHelpers(unittest.TestCase):
     """The exclusion must not hide a real comment sitting next to a block."""
 

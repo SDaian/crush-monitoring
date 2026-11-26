@@ -1,12 +1,18 @@
 ---
 // One place for every page's <head> boilerplate: title/description, the
 // canonical URL, Open Graph + Twitter cards (with the branded 1200x630
-// og.png), the font preloads, analytics, and JSON-LD structured data.
+// og.png), the font preloads, analytics, real-user speed measurement, and
+// JSON-LD structured data.
 // Sitewide schema (Organization + WebSite) ships on every page; pass extra
 // `schema` objects (FAQPage, Dataset, ...) per page. Change head conventions
 // here once instead of in four page files.
 import FontPreloads from "./FontPreloads.astro";
 import Analytics from "@vercel/analytics/astro";
+// Real-user page speed (LCP, INP, CLS per route), from every reader's own
+// device, where the lab scripts can only estimate. It collects nothing until
+// Speed Insights is switched on for the project in Vercel, and /privacy
+// describes what it records. Pinned: it runs on every page.
+import SpeedInsights from "@vercel/speed-insights/astro";
 import { ORG_ID, WEBSITE_ID } from "../lib/seo";
 
 interface Props {
@@ -129,3 +135,4 @@ const graph = [...sitewide, ...schema];
 }
 
 <Analytics />
+<SpeedInsights />

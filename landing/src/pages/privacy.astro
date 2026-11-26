@@ -9,7 +9,7 @@ import Footer from "../components/Footer.astro";
 import Seo from "../components/Seo.astro";
 import { seoDescription } from "../lib/seo";
 
-const LAST_UPDATED = "July 12, 2026";
+const LAST_UPDATED = "November 26, 2026";
 
 const title = "Privacy & terms — Capitol Ledger";
 const description = seoDescription(
@@ -48,8 +48,8 @@ const description = seoDescription(
           We store your email address to send you one daily digest. That's the
           whole business. Unsubscribe anytime and it's deleted. No cookies, no
           ad tech, and your address is never sold or shared for marketing —
-          just cookieless, aggregated page-view counts. Everything published
-          on this site is public record.
+          just cookieless, aggregated page-view counts and anonymous page-speed
+          measurements. Everything published on this site is public record.
         </p>
       </div>
     </section>
@@ -118,8 +118,12 @@ const description = seoDescription(
             This site sets no cookies and runs no ad pixels or cross-site
             trackers. We count page views with Vercel Web Analytics —
             cookieless and aggregated; it doesn't identify or follow you.
-            Fonts are self-hosted. If any of this changes, this page will say
-            so before it does.
+            We also measure how fast our pages load and respond on readers'
+            devices, with Vercel Speed Insights. Each measurement records the
+            page, the browser, the device type and operating system, and the
+            connection speed, and nothing that identifies you or links one
+            page you visit to the next. Fonts are self-hosted. If any of this
+            changes, this page will say so before it does.
           </p>
           <p>
             One exception worth naming: if you dismiss the signup box, your
