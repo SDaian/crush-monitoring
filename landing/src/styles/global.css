@@ -29,7 +29,8 @@
   --color-wash:oklch(0.963 0.004 100); /* #F4F3EE */
 
   /* The "* fallback" families are generated at build time by fontaine
-     (astro.config.mjs): local Arial / Courier New with size-adjust and
+     (astro.config.mjs): local Arial for the sans and Courier New for the
+     mono (each keeps its family's class), with size-adjust and
      ascent/descent overrides matching the webfont's metrics, so text that
      renders before the webfont arrives occupies the same space — no reflow
      jump on font load. The names are truncated at the first space ("Libre

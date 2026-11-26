@@ -1195,8 +1195,10 @@ Conventions:
   elements painted before any script runs (3,000), elements in the HTML
   (25,000), and per-page HTML, JS and CSS, font preloads, and the tracker's
   data, all as gzip sizes. It also flags render-blocking or third-party
-  scripts, a head script over 1 KB, a preload whose file is missing, and media
-  without width and height. It warns and never fails, for `check-seo`'s
+  scripts, a classic head script over 1 KB, a preload whose file is missing,
+  media without width and height, an `/_astro` name without a content hash,
+  and fallback font faces that stop matching `global.css` (the mono one must
+  stay Courier New: as Arial, the data columns lost their fixed width). It warns and never fails, for `check-seo`'s
   reason, and prints the worst value of each measure on every build. It reads
   files only, so it cannot see rows a script builds (the tracker's table),
   layout shift, or interaction time; `scripts/perf_lab.mjs` measures those

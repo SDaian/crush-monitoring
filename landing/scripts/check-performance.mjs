@@ -230,6 +230,28 @@ if (existsSync(ASSETS))
     if (!/\.[\w-]{8,}\.\w+$/.test(name))
       problems.push(`/_astro/${name} — no content hash in the name, but vercel.json caches /_astro for a year`);
 
+// The fallback faces fontaine writes (astro.config.mjs) are what a first
+// visit on a slow phone usually sees: font-display: optional keeps the
+// fallback when the webfont misses the first paint. global.css names them,
+// and the mono one must stay a monospace font, or the data columns lose
+// their fixed width. Each name maps to the local fonts it may use.
+const FALLBACK_FACES = { "Libre fallback": ["Arial"], "IBM fallback": ["Courier New"] };
+const faces = {};
+if (existsSync(ASSETS))
+  for (const name of await readdir(ASSETS))
+    if (name.endsWith(".css")) {
+      const css = await readFile(path.join(ASSETS, name), "utf8");
+      for (const m of css.matchAll(/@font-face\{font-family:"?([^";]+?)"?;src:local\("([^"]+)"\)/g))
+        (faces[m[1]] ??= new Set()).add(m[2]);
+    }
+for (const [family, allowed] of Object.entries(FALLBACK_FACES)) {
+  const found = [...(faces[family] ?? [])];
+  if (!found.length) problems.push(`fonts — no "${family}" faces in the built CSS; global.css names them`);
+  for (const local of found)
+    if (!allowed.includes(local))
+      problems.push(`fonts — "${family}" falls back to ${local} (expected ${allowed.join(" or ")})`);
+}
+
 const summary =
   `worst: ${num(worst.painted.value)} elements painted (${worst.painted.url}), ` +
   `HTML ${kb(worst.html.value)} (${worst.html.url}), JS ${kb(worst.js.value)} (${worst.js.url}), ` +

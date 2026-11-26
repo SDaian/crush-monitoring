@@ -104,7 +104,17 @@ export default defineConfig({
       // webfont doesn't reflow the page. Paired with the font preloads in
       // FontPreloads.astro (see global.css --font-* stacks).
       FontaineTransform.vite({
-        fallbacks: ["Arial", "Courier New"],
+        // One fallback per family. A plain list applies to every family and
+        // fontaine prefers its first entry, so ["Arial", "Courier New"] gave
+        // the mono family Arial too: a proportional face at 135%, on every
+        // device that has Arial, and the data columns lost their fixed width
+        // whenever the webfont missed the first paint (a first visit on a
+        // slow phone usually does, by font-display: optional). The keys are
+        // each family's first word, because fontsource declares font-family
+        // unquoted and fontaine reads only that word; global.css names the
+        // fallbacks to match ("Libre fallback", "IBM fallback"), and
+        // check-performance.mjs warns if the built faces stop matching.
+        fallbacks: { Libre: ["Arial"], IBM: ["Courier New"] },
         resolvePath: (id) => new URL(`./node_modules/${id}`, import.meta.url),
       }),
     ],

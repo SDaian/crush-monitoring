@@ -488,8 +488,10 @@ Not optional polish — part of "credible."
   messages use `aria-live`; the nav marks the current page. Touch targets ≥ ~44px.
 - **Type respects zoom / Dynamic Type** — `rem`/`clamp`, never layout-breaking px.
 - **No layout jump on font load:** critical fonts are **preloaded** and paired
-  with **metric-matched fallbacks** (fontaine) so the swap never reflows. Self-
-  hosted fonts only — no third-party font requests.
+  with **metric-matched fallbacks** (fontaine) so the swap never reflows. Each
+  fallback keeps its family's class: Arial for the sans, **Courier New for the
+  mono**, so data keeps its fixed width when the webfont misses the first
+  paint. Self-hosted fonts only — no third-party font requests.
 - **Static output, minimal JS** — the page works without JavaScript; the only
   client scripts are the forms and the stats count-up, and both degrade cleanly.
 
