@@ -265,7 +265,7 @@ const schema = [
       let AI_META = {};
       let retSample = false;
       let aiSample = false;
-      let state = {q:"", chamber:"", party:"", type:"", range:"", member:"", asset:"equity",
+      let state = {q:"", chamber:"", party:"", type:"", range:"", asset:"equity",
                    sortKey:"filing_date", sortDir:-1, shown:PAGE, aiTicker:"NVDA"};
 
       // Saved filters (roadmap personal section, stage A): the filter set a
@@ -312,7 +312,6 @@ const schema = [
         const q = state.q.trim().toLowerCase();
         const since = state.range ? daysAgo(+state.range) : "";
         return DATA.trades.filter(t =>
-          (!state.member || t.member === state.member) &&
           (!q || t.member.toLowerCase().includes(q) || (t.ticker||"").toLowerCase().includes(q)) &&
           (!state.chamber || t.chamber === state.chamber) &&
           (!state.party || t.party === state.party) &&
@@ -403,10 +402,8 @@ const schema = [
         }).join("");
       }
 
-      function renderRows(){
-        const rows = sorted(filtered());
-        const slice = rows.slice(0, state.shown);
-        $("rows").innerHTML = slice.map(t => `<tr>
+      function rowHtml(t){
+        return `<tr>
           <td>${memberCell(t)}</td>
           <td>${tickerCell(t)}</td>
           <td>${esc(t.asset)}${t.asset_type ? `<span class="chip">${esc(t.asset_type)}</span>` : ""}</td>
@@ -417,12 +414,53 @@ const schema = [
           <td class="num">${esc(t.filing_date)}${t.amended
             ? `<div class="note">amended ${esc(t.amended)}</div>` : ""}</td>
           <td><a href="${esc(t.source_url)}" target="_blank" rel="noopener" title="official filing">source ↗</a></td>
-        </tr>`).join("");
+        </tr>`;
+      }
+
+      // The table renders in two steps. A keystroke, filter or sort writes
+      // the first ROWS_NOW rows and returns, so the browser paints them at
+      // once; the rest follow right after that paint. Building all 200 rows
+      // inside the event took a phone 250–290 ms per keystroke, almost all of
+      // it style and layout for the table (filter and sort take 10–20 ms).
+      // "Show 200 more" appends to the rows already there: rebuilding every
+      // row shown so far made each click slower than the last (0.4, 0.6,
+      // then 1.0 s). A newer render cancels a pending one, so the finished
+      // table is the one a single step would have built.
+      const ROWS_NOW = 40;
+      const table = {gen:0, key:"", data:null, ret:null, rows:[], shown:0};
+
+      function renderRows(){
+        const gen = ++table.gen;
+        const tbody = $("rows");
+        const key = JSON.stringify([state.q, state.chamber, state.party, state.type,
+          state.range ? daysAgo(+state.range) : "", state.asset, state.sortKey, state.sortDir]);
+        // RET (and PRICES, set with it) feed "Since buy" and arrive on
+        // their own, so a new file means new rows even under the same filters.
+        const same = key === table.key && DATA === table.data && RET === table.ret;
+        let from = 0;
+        if (same && table.shown <= state.shown && tbody.children.length === table.shown) {
+          from = table.shown;   // only "shown" grew: keep the rows, add the rest
+        } else {
+          table.key = key; table.data = DATA; table.ret = RET;
+          table.rows = sorted(filtered());
+        }
+        const rows = table.rows;
+        const target = Math.min(state.shown, rows.length);
+        const now = Math.min(from + ROWS_NOW, target);
+        const html = rows.slice(from, now).map(rowHtml).join("");
+        if (from) tbody.insertAdjacentHTML("beforeend", html);
+        else tbody.innerHTML = html;
+        table.shown = now;
         $("countLine").textContent =
-          `${rows.length.toLocaleString("en-US")} trades` +
-          (state.member ? ` — ${state.member} (click their card again to clear)` : "") +
-          ` · showing ${Math.min(state.shown, rows.length).toLocaleString("en-US")}`;
+          `${rows.length.toLocaleString("en-US")} trades · showing ${target.toLocaleString("en-US")}`;
         $("moreBtn").style.display = rows.length > state.shown ? "" : "none";
+        // requestAnimationFrame runs before the next paint; the timeout it
+        // queues runs after it.
+        if (now < target) requestAnimationFrame(() => setTimeout(() => {
+          if (gen !== table.gen) return;
+          tbody.insertAdjacentHTML("beforeend", rows.slice(now, target).map(rowHtml).join(""));
+          table.shown = target;
+        }, 0));
       }
 
 
@@ -722,12 +760,6 @@ const schema = [
         renderAiDetail();
       }
 
-      function renderAll(){
-        renderHead();
-        renderRows();
-        renderAi();
-      }
-
       // ── Wiring ─────────────────────────────────────────────────────────
       function wire(){
         $("tabs").addEventListener("click", e => {
@@ -757,7 +789,7 @@ const schema = [
           // Back to the DEFAULT view — which is stocks/options, not "all".
           // Clear also forgets the saved set: "Clear" must mean clear, not
           // "clean until the next visit restores what I just removed".
-          state = {...state, q:"", chamber:"", party:"", type:"", range:"", member:"", asset:"equity", shown:PAGE};
+          state = {...state, q:"", chamber:"", party:"", type:"", range:"", asset:"equity", shown:PAGE};
           $("q").value = ""; $("fChamber").value = ""; $("fParty").value = "";
           $("fType").value = ""; $("fRange").value = ""; $("fAsset").value = "equity";
           try { localStorage.removeItem("cl-tracker-filters"); } catch(e){}

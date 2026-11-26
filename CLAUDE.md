@@ -865,6 +865,16 @@ sites, published on the Vercel site (`landing/`). Full details in
   `"no-store"`: the file compresses to ~0.4 MB on the wire, but `no-store`
   re-downloaded it on every visit even when unchanged. A slimmer projection
   was measured and rejected — the page reads all but one field.
+  **The table renders in two steps.** A keystroke, filter or sort writes the
+  first `ROWS_NOW` (40) rows inside the event and the rest after the next
+  paint; a newer render cancels a pending one, so the finished table is the
+  one a single step would build. "Show 200 more" appends to the rows already
+  there. The cost was never the filter or the sort (10–20 ms on a 4x-slowed
+  phone); it was style and layout for 200 rows of an auto-layout table, about
+  160 ms, inside every keystroke, and "Show 200 more" rebuilt every row shown
+  so far, so its third click took a second. Do not move the work back into
+  the event, and do not debounce instead: a debounce only delays the same
+  cost. `scripts/perf_lab.mjs --only tracker` measures it.
 - The `node --check` rule for inline scripts applies to the tracker's inline
   script (extract it from `tracker.astro`) and to `docs/index.html`.
 - **Honest labelling:** the page must keep the 30–45-day legal lag, the
